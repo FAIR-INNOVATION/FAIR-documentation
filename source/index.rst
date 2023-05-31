@@ -1,20 +1,24 @@
 .. FAIR documentation master file, created by
-   sphinx-quickstart on Wed May 31 11:04:26 2023.
+   sphinx-quickstart on Thu May 30 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
 Welcome to FAIR's documentation!
-==============================================
+=========================================
+
+.. figure:: _static/product_matrix.png
+    :align: center
+    :figclass: align-center
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 6
+   :caption: User manual
 
+   CobotsManual/intro
+   SDKManual/index
 
+.. toctree:: 
+   :maxdepth: 6
+   :caption: Open platform
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   ROSGuide/index
