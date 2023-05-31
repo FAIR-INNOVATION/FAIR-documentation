@@ -1,0 +1,99 @@
+a {
+    color: #ED6C00;
+}
+
+a:visited {
+    color: #ED6C00;
+}
+
+body {
+    font-family: Noto Sans SC;   /* 思源黑体 */
+    font-weight: 400;
+    color: #404040;
+    min-height: 100%;
+    background: #EDEDED
+}
+
+.wy-side-nav-search>div.version {
+    color: #404040;
+    /* color: #221714; */
+    font-weight: bold;
+}
+
+.wy-side-nav-search>a.icon-home {
+    font-size: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.wy-side-nav-search>a.icon-home img.logo {
+    width: 65%;
+    padding: 0;
+}
+
+.wy-side-nav-search input[type=text] {
+    border-radius: 0;
+    border-color: #ED6C00;
+}
+
+.wy-menu-vertical header, .wy-menu-vertical p.caption {
+    color: #ED6C00;
+}
+
+.wy-menu-vertical a {
+    padding: .2em 1.618em;
+}
+
+.wy-side-nav-search, .wy-nav-top {
+    background-color: #EDEDED;
+    /* background-color: #F2F2F2; */
+}
+
+.wy-nav-side {
+    background-color: #EDEDED;
+    /* background-color: #F2F2F2; */
+}
+
+.wy-menu-vertical a, .wy-menu-vertical a:visited {
+    color: #221714;
+}
+
+.wy-menu-vertical a:hover {
+    background-color: transparent;
+    color: #ED6C00;
+}
+
+.wy-nav-content-wrap {
+    background: #fefefe !important;
+}
+
+.ethical-rtd {
+    display: none;
+}
+
+/* override table width restrictions */
+@media screen and (min-width: 767px) {
+
+    .wy-table-responsive table td {
+       /* !important prevents the common CSS stylesheets from overriding
+          this as on RTD they are loaded after this stylesheet */
+       white-space: normal !important;
+    }
+
+    .wy-table-responsive {
+       overflow: visible !important;
+    }
+ }
+
+.rst-content section td > ul {
+    margin-bottom: 0 !important
+}
+
+.rst-content .toctree-wrapper ul li>* {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important
+}
+
+.figure-border {
+    border: 1px solid #404040;
+}
