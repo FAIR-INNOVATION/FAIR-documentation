@@ -1,105 +1,105 @@
-机器人基础
-=============
+Robotics basics
+=================
 
 .. toctree:: 
     :maxdepth: 5
 
-实例化机器人
+Instantiate the bot
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  机器人接口类构造函数
+    * @brief  Robot interface class constructor
     */
     FRRobot();
 
-与控制器建立通信
-++++++++++++++++++++++++++++++++++
+Establishes communication with the controller
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  与机器人控制器建立通信
-    * @param  [in] ip  控制器IP地址，出场默认为192.168.58.2
-    * @return 错误码
+    * @brief  Establish communication with the robot controller
+    * @param  [in] ip  Controller IP address. The default value is 192.168.58.2
+    * @return Error code
     */
     errno_t  RPC(const char *ip);
 
-查询SDK版本号
+Example Query the SDK version
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  查询SDK版本号
-    * @param  [out] version   SDK版本号
-    * @return  错误码
+    * @brief  Example Query the SDK version
+    * @param  [out] version  SDK version
+    * @return  Error code
     */  
     errno_t  GetSDKVersion(char *version);
 
-获取控制器IP
-++++++++++++++++++++++++++++++++++
+Obtaining Controller IP address
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取控制器IP
-    * @param  [out] ip  控制器IP
-    * @return  错误码
+    * @brief  Obtaining Controller IP address
+    * @param  [out] ip  Controller IP
+    * @return  Error code
     */
     errno_t  GetControllerIP(char *ip);
 
-控制机器人进入或退出拖动示教模式
-++++++++++++++++++++++++++++++++++
+Control the robot to enter or exit the drag teaching mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  控制机器人进入或退出拖动示教模式
-    * @param  [in] state 0-退出拖动示教模式，1-进入拖动示教模式
-    * @return  错误码
+    * @brief  Control the robot to enter or exit the drag teaching mode
+    * @param  [in] state 0-exit drag mode，1-enter the drag mode
+    * @return  Error code
     */
     errno_t  DragTeachSwitch(uint8_t state);
 
-查询机器人是否处于拖动模式
-++++++++++++++++++++++++++++++++++
+Queries whether the robot is in drag mode
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  查询机器人是否处于拖动示教模式
-    * @param  [out] state 0-非拖动示教模式，1-拖动示教模式
-    * @return  错误码
+    * @brief  Check whether the robot is in drag mode
+    * @param  [out] state 0-non-drag teaching mode，1-drag the teaching mode
+    * @return  Error code
     */
     errno_t  IsInDragTeach(uint8_t *state);
 
-控制机器人上使能或下使能
-++++++++++++++++++++++++++++++++++
+Enable or disable the control robot
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  控制机器人上使能或下使能，机器人上电后默认自动上使能
-    * @param  [in] state  0-下使能，1-上使能
-    * @return  错误码
+    * @brief  Enable or disable the function on or off the robot. By default, the function is enabled automatically after the robot is powered on
+    * @param  [in] state  0-down-enable，1-upper enable
+    * @return  Error code
     */
     errno_t  RobotEnable(uint8_t state);
 
-控制机器人手自动模式切换
-++++++++++++++++++++++++++++++++++
+Control the automatic mode switch of the robot hand
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 控制机器人手自动模式切换
-    * @param [in] mode 0-自动模式，1-手动模式
-    * @return 错误码
+    * @brief Control the automatic mode switch of the robot hand
+    * @param [in] mode 0-automatic mode，1-manual mode
+    * @return Error code
     */
     errno_t  Mode(int mode);
 
-代码示例
-+++++++++++++
+Code example
++++++++++++++++
 .. code-block:: c++
     :linenos:
     
@@ -115,8 +115,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         char ip[64]="";
         char version[64] = "";

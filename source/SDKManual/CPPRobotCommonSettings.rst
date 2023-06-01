@@ -1,181 +1,181 @@
-机器人常用设置
-=================
+Common Settings of robot
+==========================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置全局速度
+Set global speed
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置全局速度
-    * @param  [in]  vel  速度百分比，范围[0~100]
-    * @return  错误码
+    * @brief  Set global speed
+    * @param  [in]  vel  Percentage of velocity, range[0~100]
+    * @return  Error code
     */
     errno_t  SetSpeed(int vel);
 
-设置系统变量值
-++++++++++++++++++++++++++++++++++
+Set the value of a system variable
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置系统变量值
-    * @param  [in]  id  变量编号，范围[1~20]
-    * @param  [in]  value 变量值
-    * @return  错误码
+    * @brief  Set the value of a system variable
+    * @param  [in]  id  Variable number, range[1~20]
+    * @param  [in]  value Variable value
+    * @return  Error code
     */
     errno_t  SetSysVarValue(int id, float value);
 
-设置工具坐标系
+Set tool coordinate system
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置工具坐标系
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] coord  工具中心点相对于末端法兰中心位姿
-    * @param  [in] type  0-工具坐标系，1-传感器坐标系
-    * @param  [in] install 安装位置，0-机器人末端，1-机器人外部
-    * @return  错误码
+    * @brief  Set tool coordinate system
+    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] coord  Tool center position relative to end flange center position
+    * @param  [in] type  0- tool coordinates, 1- sensor coordinates
+    * @param  [in] install Installation position, 0- robot end, 1- robot outside
+    * @return  Error code
     */
     errno_t  SetToolCoord(int id, DescPose *coord, int type, int install);
 
-设置工具坐标系列表
+Set the tool coordinate list
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置工具坐标系列表
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] coord  工具中心点相对于末端法兰中心位姿
-    * @param  [in] type  0-工具坐标系，1-传感器坐标系
-    * @param  [in] install 安装位置，0-机器人末端，1-机器人外部
-    * @return  错误码
+    * @brief  Set the tool coordinate list
+    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] coord  Tool center position relative to end flange center position
+    * @param  [in] type  0- tool coordinates, 1- sensor coordinates
+    * @param  [in] install Installation position, 0- robot end, 1- robot outside
+    * @return  Error code
     */
     errno_t  SetToolList(int id, DescPose *coord, int type, int install);   
 
-设置外部工具坐标系
-++++++++++++++++++++++++++++++++++
+Set the external tool coordinate system
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置外部工具坐标系
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] etcp  工具中心点相对末端法兰中心位姿
-    * @param  [in] etool  待定
-    * @return  错误码
+    * @brief  Set the external tool coordinate system
+    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] etcp  Tool center position relative to end flange center position
+    * @param  [in] etool  To be determined
+    * @return  Error code
     */
     errno_t  SetExToolCoord(int id, DescPose *etcp, DescPose *etool);
 
-设置外部工具坐标系列表
-++++++++++++++++++++++++++++++++++
+Set the list of external tool coordinate systems
++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置外部工具坐标系列表
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] etcp  工具中心点相对末端法兰中心位姿
-    * @param  [in] etool  待定
-    * @return  错误码
+    * @brief  Set the list of external tool coordinate systems
+    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] etcp  Tool center position relative to end flange center position
+    * @param  [in] etool  To be determined
+    * @return  Error code
     */
     errno_t  SetExToolList(int id, DescPose *etcp, DescPose *etool);  
 
-设置工件坐标系
+Set work coordinate system
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置工件坐标系
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] coord  工件坐标系相对于末端法兰中心位姿
-    * @return  错误码
+    * @brief  Set work coordinate system
+    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] coord  Tool center position relative to end flange center position
+    * @return  Error code
     */    
     errno_t  SetWObjCoord(int id, DescPose *coord);
 
-设置工件坐标系列表
-++++++++++++++++++++++++++++++++++
+Set the list of work coordinate systems
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置工件坐标系列表
-    * @param  [in] id 坐标系编号，范围[1~15]
-    * @param  [in] coord  工件坐标系相对于末端法兰中心位姿
-    * @return  错误码
+    * @brief  Set the list of work coordinate systems
+    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] coord  Tool center position relative to end flange center position
+    * @return  Error code
     */    
     errno_t  SetWObjList(int id, DescPose *coord);  
 
-设置末端负载重量
+Set the end load weight
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置末端负载重量
-    * @param  [in] weight  负载重量，单位kg
-    * @return  错误码
+    * @brief  Set the end load weight
+    * @param  [in] weight  Load weight, unit: kg
+    * @return  Error code
     */
     errno_t  SetLoadWeight(float weight);
 
-设置末端负载质心坐标
-+++++++++++++++++++++++++++++++
+Set the end-load centroid coordinates
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置末端负载质心坐标
-    * @param  [in] coord 质心坐标，单位mm
-    * @return  错误码
+    * @brief  Set the end-load centroid coordinates
+    * @param  [in] coord Centroid coordinates, unit: mm
+    * @return  Error code
     */
     errno_t  SetLoadCoord(DescTran *coord);
 
-设置机器人安装方式
+Set the robot installation mode
 +++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置机器人安装方式
-    * @param  [in] install  安装方式，0-正装，1-侧装，2-倒装
-    * @return  错误码
+    * @brief  Set the robot installation mode
+    * @param  [in] install  Installation mode: 0- formal installation, 1- side installation, 2- inverted installation
+    * @return  Error code
     */
     errno_t  SetRobotInstallPos(uint8_t install);   
 
-设置机器人安装角度
-+++++++++++++++++++++++++++++++
+Set the robot installation Angle
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置机器人安装角度，自由安装
-    * @param  [in] yangle  倾斜角
-    * @param  [in] zangle  旋转角
-    * @return  错误码
+    * @brief  Set the robot installation Angle, free installation
+    * @param  [in] yangle  Angle of inclination
+    * @param  [in] zangle  Angle of rotation
+    * @return  Error code
     */
     errno_t  SetRobotInstallAngle(double yangle, double zangle);
 
 
-等待指定时间
-+++++++++++++++++++++++++++++++
+Wait for the specified time
++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  等待指定时间
-    * @param  [in]  t_ms  单位ms
-    * @return  错误码
+    * @brief  Wait for the specified time
+    * @param  [in]  t_ms  unit: ms
+    * @return  Error code
     */
     errno_t  WaitMs(int t_ms);
 
-代码示例
+Code example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -192,8 +192,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         int i;
         float value;

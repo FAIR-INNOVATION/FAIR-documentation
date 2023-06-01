@@ -1,83 +1,83 @@
-机器人外设
-============
+Robot peripheral
+====================
 
 .. toctree:: 
     :maxdepth: 5
 
-配置夹爪
+Configuration jaw
 ++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  配置夹爪
-    * @param  [in] company  夹爪厂商，待定
-    * @param  [in] device  设备号，暂不使用，默认为0
-    * @param  [in] softvesion  软件版本号，暂不使用，默认为0
-    * @param  [in] bus 设备挂在末端总线位置，暂不使用，默认为0
-    * @return  错误码
+    * @brief  Configuration jaw
+    * @param  [in] company  Claw manufacturer, to be determined
+    * @param  [in] device  Device number, not used yet. The default value is 0
+    * @param  [in] softvesion  Software version. The value is not used. The default value is 0
+    * @param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
+    * @return  Error code
     */
     errno_t  SetGripperConfig(int company, int device, int softvesion, int bus);
 
-获取夹爪配置
-++++++++++++++++++++++++++
+Obtain the jaw configuration
++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取夹爪配置
-    * @param  [in] company  夹爪厂商，待定
-    * @param  [in] device  设备号，暂不使用，默认为0
-    * @param  [in] softvesion  软件版本号，暂不使用，默认为0
-    * @param  [in] bus 设备挂在末端总线位置，暂不使用，默认为0
-    * @return  错误码
+    * @brief  Obtain the jaw configuration
+    * @param  [in] company  Claw manufacturer, to be determined
+    * @param  [in] device  Device number, not used yet. The default value is 0
+    * @param  [in] softvesion  Software version. The value is not used. The default value is 0
+    * @param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
+    * @return  Error code
     */
     errno_t  GetGripperConfig(int *company, int *device, int *softvesion, int *bus);
 
-激活夹爪
+Activating jaw
 ++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  激活夹爪
-    * @param  [in] index  夹爪编号
-    * @param  [in] act  0-复位，1-激活
-    * @return  错误码
+    * @brief  Activating jaw
+    * @param  [in] index  Jaw number
+    * @param  [in] act  0- reset, 1- activate
+    * @return  Error code
     */
     errno_t  ActGripper(int index, uint8_t act);
 
-控制夹爪
+Control jaw
 ++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  控制夹爪
-    * @param  [in] index  夹爪编号
-    * @param  [in] pos  位置百分比，范围[0~100]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] force  力矩百分比，范围[0~100]
-    * @param  [in] max_time  最大等待时间，范围[0~30000]，单位ms
-    * @param  [in] block  0-阻塞，1-非阻塞
-    * @return  错误码
+    * @brief  Control jaw
+    * @param  [in] index  Jaw number
+    * @param  [in] pos  Percentage of position, range[0~100]
+    * @param  [in] vel  Percentage of velocity, range[0~100]
+    * @param  [in] force  Percentage of torque, range[0~100]
+    * @param  [in] max_time  Maximum wait time, range[0~30000], unit: ms
+    * @param  [in] block  0- blocking, 1- non-blocking
+    * @return  Error code
     */
     errno_t  MoveGripper(int index, int pos, int vel, int force, int max_time, uint8_t block);
 
-获取夹爪运动状态
-++++++++++++++++++++++++++
+Obtain the jaw motion state
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取夹爪运动状态
-    * @param  [out] fault  0-无错误，1-有错误
-    * @param  [out] staus  0-运动未完成，1-运动完成
-    * @return  错误码
+    * @brief  Obtain the jaw motion state
+    * @param  [out] fault  0- no error, 1- error
+    * @param  [out] staus  0- motion incomplete, 1- motion complete
+    * @return  Error code
     */
     errno_t  GetGripperMotionDone(uint8_t *fault, uint8_t *status);
 
-代码示例
+Code example
 ++++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -94,8 +94,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         int company = 4;
         int device = 0;

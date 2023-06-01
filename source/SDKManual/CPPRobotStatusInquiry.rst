@@ -1,300 +1,300 @@
-机器人状态查询
-===============
+Robot status query
+=====================
 
 .. toctree:: 
     :maxdepth: 5
 
-获取机器人安装角度
+Obtain robot mounting Angle
 +++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取机器人安装角度
-    * @param  [out] yangle 倾斜角
-    * @param  [out] zangle 旋转角
-    * @return  错误码
+    * @brief  Obtain robot mounting Angle
+    * @param  [out] yangle Angle of inclination
+    * @param  [out] zangle Angle of rotation
+    * @return  Error code
     */
     errno_t  GetRobotInstallAngle(float *yangle, float *zangle);
 
-获取系统变量值
+Get the system variable value
 +++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取系统变量值
-    * @param  [in] id 系统变量编号，范围[1~20]
-    * @param  [out] value  系统变量值
-    * @return  错误码
+    * @brief  Get the system variable value
+    * @param  [in] id System variable number, range[1~20]
+    * @param  [out] value  System variable value
+    * @return  Error code
     */
     errno_t  GetSysVarValue(int id, float *value);
 
-获取当前关节位置(角度)
-+++++++++++++++++++++++++++++++++
+Get the current joint position (Angle)
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前关节位置(角度)
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] jPos 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Get the current joint position (Angle)
+    * @param  [in] flag 0- blocking, 1- non-blocking
+    * @param  [out] jPos Six joint positions, unit: deg
+    * @return  Error code
     */
     errno_t  GetActualJointPosDegree(uint8_t flag, JointPos *jPos);
 
-获取当前关节位置(弧度)
-+++++++++++++++++++++++++++++++++
+Get the current joint position (radians)
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前关节位置(弧度)
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] jPos 六个关节位置，单位rad
-    * @return  错误码
+    * @brief  Get the current joint position (radians)
+    * @param  [in] flag 0- blocking, 1- non-blocking
+    * @param  [out] jPos Six joint positions, unit: rad
+    * @return  Error code
     */   
     errno_t  GetActualJointPosRadian(uint8_t flag, JointPos *jPos);
 
-获取当前工具位姿
+Get the current tool pose
 +++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前工具位姿
-    * @param  [in] flag  0-阻塞，1-非阻塞
-    * @param  [out] desc_pos  工具位姿
-    * @return  错误码
+    * @brief  Get the current tool pose
+    * @param  [in] flag  0- blocking, 1- non-blocking
+    * @param  [out] desc_pos  Tool position
+    * @return  Error code
     */
     errno_t  GetActualTCPPose(uint8_t flag, DescPose *desc_pos);
 
-获取当前工具坐标系编号
-+++++++++++++++++++++++++++++++++
+Get the current tool coordinate system number
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前工具坐标系编号
-    * @param  [in] flag  0-阻塞，1-非阻塞
-    * @param  [out] id  工具坐标系编号
-    * @return  错误码
+    * @brief  Get the current tool coordinate system number
+    * @param  [in] flag  0- blocking, 1- non-blocking
+    * @param  [out] id  Tool coordinate system number
+    * @return  Error code
     */
     errno_t  GetActualTCPNum(uint8_t flag, int *id);
 
-获取当前工件坐标系编号
-+++++++++++++++++++++++++++++++++
+Gets the current workpiece coordinate system number
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前工件坐标系编号
-    * @param  [in] flag  0-阻塞，1-非阻塞
-    * @param  [out] id  工件坐标系编号
-    * @return  错误码
+    * @brief  Gets the current workpiece coordinate system number
+    * @param  [in] flag  0- blocking, 1- non-blocking
+    * @param  [out] id  Job coordinate system number
+    * @return  Error code
     */
     errno_t  GetActualWObjNum(uint8_t flag, int *id);  
 
-获取当前末端法兰位姿
+Get the current end flange pose
 +++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前末端法兰位姿
-    * @param  [in] flag  0-阻塞，1-非阻塞
-    * @param  [out] desc_pos  法兰位姿
-    * @return  错误码
+    * @brief  Get the current end flange pose
+    * @param  [in] flag  0- blocking, 1- non-blocking
+    * @param  [out] desc_pos  Flange pose
+    * @return  Error code
     */
     errno_t  GetActualToolFlangePose(uint8_t flag, DescPose *desc_pos);  
 
-逆运动学求解
+Inverse kinematics solution
 +++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  逆运动学求解
-    * @param  [in] type 0-绝对位姿(基坐标系)，1-增量位姿(基坐标系)，2-增量位姿(工具坐标系)
-    * @param  [in] desc_pos 笛卡尔位姿
-    * @param  [in] config 关节空间配置，[-1]-参考当前关节位置解算，[0~7]-依据特定关节空间配置求解
-    * @param  [out] joint_pos 关节位置
-    * @return  错误码
+    * @brief  Inverse kinematics solution
+    * @param  [in] type 0- absolute pose (base frame), 1- incremental pose (base frame), 2- incremental pose (tool frame)
+    * @param  [in] desc_pos Cartesian pose
+    * @param  [in] config Joint space configuration, [-1]- based on the current joint position, [0~7]- based on the specific joint space configuration
+    * @param  [out] joint_pos Joint position
+    * @return  Error code
     */
     errno_t  GetInverseKin(int type, DescPose *desc_pos, int config, JointPos *joint_pos);
 
-逆运动学求解
+Inverse kinematics solution
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  逆运动学求解，参考指定关节位置求解
-    * @param  [in] type 0-绝对位姿(基坐标系)，1-增量位姿(基坐标系)，2-增量位姿(工具坐标系)
-    * @param  [in] desc_pos 笛卡尔位姿
-    * @param  [in] joint_pos_ref 参考关节位置
-    * @param  [out] joint_pos 关节位置
-    * @return  错误码
+    * @brief  Inverse kinematics is solved by referring to the specified joint position
+    * @param  [in] type 0- absolute pose (base frame), 1- incremental pose (base frame), 2- incremental pose (tool frame)
+    * @param  [in] desc_pos Cartesian pose
+    * @param  [in] joint_pos_ref Reference joint position
+    * @param  [out] joint_pos Joint position
+    * @return  Error code
     */   
     errno_t  GetInverseKinRef(int type, DescPose *desc_pos, JointPos *joint_pos_ref, JointPos *joint_pos);
 
-逆运动学求解
+Inverse kinematics solution
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  逆运动学求解，参考指定关节位置判断是否有解
-    * @param  [in] type 0-绝对位姿(基坐标系)，1-增量位姿(基坐标系)，2-增量位姿(工具坐标系)
-    * @param  [in] desc_pos 笛卡尔位姿
-    * @param  [in] joint_pos_ref 参考关节位置
-    * @param  [out] result 0-无解，1-有解
-    * @return  错误码
+    * @brief  To solve the inverse kinematics, refer to the specified joint position to determine whether there is a solution
+    * @param  [in] type 0- absolute pose (base frame), 1- incremental pose (base frame), 2- incremental pose (tool frame)
+    * @param  [in] desc_pos Cartesian pose
+    * @param  [in] joint_pos_ref Reference joint position
+    * @param  [out] result 0- no solution, 1-solution
+    * @return  Error code
     */   
     errno_t  GetInverseKinHasSolution(int type, DescPose *desc_pos, JointPos *joint_pos_ref, uint8_t *result);
 
-正运动学求解
+Forward kinematics solution
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  正运动学求解
-    * @param  [in] joint_pos 关节位置
-    * @param  [out] desc_pos 笛卡尔位姿
-    * @return  错误码
+    * @brief  Forward kinematics solution
+    * @param  [in] joint_pos Joint position
+    * @param  [out] desc_pos Cartesian pose
+    * @return  Error code
     */
     errno_t  GetForwardKin(JointPos *joint_pos, DescPose *desc_pos);
 
-获取当前关节转矩
+Obtain the current joint torque
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 获取当前关节转矩
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] torques 关节转矩
-    * @return  错误码
+    * @brief Obtain the current joint torque
+    * @param  [in] flag 0- blocking, 1- non-blocking
+    * @param  [out] torques Joint torque
+    * @return  Error code
     */
     errno_t  GetJointTorques(uint8_t flag, float torques[6]);
 
-获取当前负载的重量
+Get the weight of the current load
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前负载的重量
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] weight 负载重量，单位kg
-    * @return  错误码
+    * @brief  Gets the weight of the current load
+    * @param  [in] flag 0- blocking, 1- non-blocking
+    * @param  [out] weight Load weight, unit: kg
+    * @return  Error code
     */
     errno_t  GetTargetPayload(uint8_t flag, float *weight);
 
-获取当前负载的质心
-++++++++++++++++++++++++++++++++++++
+Get the center of mass of the current load
++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前负载的质心
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] cog 负载质心，单位mm
-    * @return  错误码
+    * @brief  Get the center of mass of the current load
+    * @param  [in] flag 0- blocking, 1- non-blocking
+    * @param  [out] cog Load center of mass, unit: mm
+    * @return  Error code
     */   
     errno_t  GetTargetPayloadCog(uint8_t flag, DescTran *cog);
 
-获取当前工具坐标系
-++++++++++++++++++++++++++++++++++++
+Get the current tool coordinate system
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前工具坐标系
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] desc_pos 工具坐标系位姿
-    * @return  错误码
+    * @brief  Get the current tool coordinate system
+    * @param  [in] flag 0- blocking, 1- non-blocking
+    * @param  [out] desc_pos Tool coordinate position
+    * @return  Error code
     */
     errno_t  GetTCPOffset(uint8_t flag, DescPose *desc_pos);
 
-获取当前工件坐标系
+Get the current work frame
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前工件坐标系
-    * @param  [in] flag 0-阻塞，1-非阻塞
-    * @param  [out] desc_pos 工件坐标系位姿
-    * @return  错误码
+    * @brief  Get the current work frame
+    * @param  [in] flag 0- blocking, 1- non-blocking
+    * @param  [out] desc_pos Position of workpiece coordinate system
+    * @return  Error code
     */   
     errno_t  GetWObjOffset(uint8_t flag, DescPose *desc_pos);
 
-获取关节软限位角度
+Obtain joint soft limit Angle
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取关节软限位角度
-    * @param  [in] flag 0-阻塞，1-非阻塞    
-    * @param  [out] negative  负限位角度，单位deg
-    * @param  [out] positive  正限位角度，单位deg
-    * @return  错误码
+    * @brief  Obtain joint soft limit Angle
+    * @param  [in] flag 0- blocking, 1- non-blocking    
+    * @param  [out] negative  Negative limit Angle, unit: deg
+    * @param  [out] positive  Positive limit Angle, unit: deg
+    * @return  Error code
     */
     errno_t  GetJointSoftLimitDeg(uint8_t flag, float negative[6], float positive[6]);
 
-获取系统时间
+Get system time
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取系统时间
+    * @brief  Get system time
     * @param  [out] t_ms 单位ms
-    * @return  错误码
+    * @return  Error code
     */
     errno_t  GetSystemClock(float *t_ms);
 
-获取机器人当前关节配置
-++++++++++++++++++++++++++++++++++++
+Get the current joint configuration of the robot
++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取机器人当前关节位置
-    * @param  [out]  config  关节空间配置，范围[0~7]
-    * @return  错误码
+    * @brief  Get the current joint configuration of the robot
+    * @param  [out]  config  Joint space configuration, range [0~7]
+    * @return  Error code
     */
     errno_t  GetRobotCurJointsConfig(int *config);
 
-获取当前速度
+Get current speed
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取机器人当前速度
-    * @param  [out]  vel  速度，单位mm/s
-    * @return  错误码
+    * @brief  Get the robot's current speed
+    * @param  [out]  vel  The unit is mm/s
+    * @return  Error code
     */   
     errno_t  GetDefaultTransVel(float *vel);
 
-查询机器人运动是否完成
-++++++++++++++++++++++++++++++++++++
+Query whether the robot movement is complete
++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  查询机器人运动是否完成
-    * @param  [out]  state  0-未完成，1-完成
-    * @return  错误码
+    * @brief  Query whether the robot movement is complete
+    * @param  [out]  state  0- Incomplete, 1- completed
+    * @return  Error code
     */   
     errno_t  GetRobotMotionDone(uint8_t *state);
 
-代码示例
-+++++++++++
+Code example
+++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -310,8 +310,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         float yangle, zangle;
         int flag = 0;

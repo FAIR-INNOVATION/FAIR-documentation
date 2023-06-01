@@ -1,116 +1,116 @@
-机器人WebAPP程序使用
-======================
+Robot WebAPP program to use
+================================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置开机自动加载默认的作业程序
-+++++++++++++++++++++++++++++++++++
+Set the default job program to be automatically loaded upon startup
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置开机自动加载默认的作业程序
-    * @param  [in] flag  0-开机不自动加载默认程序，1-开机自动加载默认程序
-    * @param  [in] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为固定路径
-    * @return  错误码
+    * @brief  Set the default job program to be automatically loaded upon startup
+    * @param  [in] flag  0- boot does not automatically load the default program, 1- boot automatically load the default program
+    * @param  [in] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
+    * @return  Error code
     */
     errno_t  LoadDefaultProgConfig(uint8_t flag, char program_name[64]);
 
-加载指定的作业程序
+Load the specified job program
 +++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  加载指定的作业程序
-    * @param  [in] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为固定路径
-    * @return  错误码
+    * @brief  Load the specified job program
+    * @param  [in] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
+    * @return  Error code
     */
     errno_t  ProgramLoad(char program_name[64]);
 
-获取已加载的作业程序名
+Get the loaded job program name
 +++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取已加载的作业程序名
-    * @param  [out] program_name 作业程序名及路径，如"/fruser/movej.lua"，其中"/fruser/"为固定路径
-    * @return  错误码
+    * @brief  Get the loaded job program name
+    * @param  [out] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
+    * @return  Error code
     */
     errno_t  GetLoadedProgram(char program_name[64]);  
 
-获取当前机器人作业程序的执行行号
-+++++++++++++++++++++++++++++++++++
+Get the line number of the current robot job program
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取当前机器人作业程序执行的行号
-    * @param  [out] line  行号
-    * @return  错误码
+    * @brief  Get the line number of the current robot job program
+    * @param  [out] line  line number
+    * @return  Error code
     */   
     errno_t  GetCurrentLine(int *line);
 
-运行当前加载的作业程序
-+++++++++++++++++++++++++++++++++++
+Run the currently loaded job program
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  运行当前加载的作业程序
-    * @return  错误码
+    * @brief  Run the currently loaded job program
+    * @return  Error code
     */
     errno_t  ProgramRun();
 
-暂停当前运行的作业程序
-+++++++++++++++++++++++++++++++++++
+Pause the current running job program
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  暂停当前运行的作业程序
-    * @return  错误码
+    * @brief  Pause the current running job program
+    * @return  Error code
     */ 
     errno_t  ProgramPause();
 
-恢复当前暂停的作业程序
-+++++++++++++++++++++++++++++++++++
+Resume the currently suspended job program
++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  恢复当前暂停的作业程序
-    * @return  错误码
+    * @brief  Resume the currently suspended job program
+    * @return  Error code
     */ 
     errno_t  ProgramResume();  
 
-终止当前运行的作业程序
-+++++++++++++++++++++++++++++++++++
+Terminates the currently running job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  终止当前运行的作业程序
-    * @return  错误码
+    * @brief  Terminates the currently running job program
+    * @return  Error code
     */ 
     errno_t  ProgramStop();    
 
-获取机器人作业程序执行状态
-+++++++++++++++++++++++++++++++++++
+Get the robot job program execution state
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取机器人作业程序执行状态
-    * @param  [out]  state 1-程序停止或无程序运行，2-程序运行中，3-程序暂停
-    * @return  错误码
+    * @brief  Get the robot job program execution state
+    * @param  [out]  state 1- program stop or no program running, 2- program running, 3- program pause
+    * @return  Error code
     */
     errno_t  GetProgramState(uint8_t *state);
 
-代码示例
-++++++++++++
+Code example
+++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -126,8 +126,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         char program_name[64] = "/fruser/ptps.lua";
         char loaded_name[64] = "";

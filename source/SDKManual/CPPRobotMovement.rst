@@ -1,52 +1,52 @@
-机器人运动
-============
+Robot movement
+=================
 
 .. toctree:: 
     :maxdepth: 5
 
 
-jog点动
+Jog point movement
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  jog点动
-    * @param  [in]  ref 0-关节点动，2-基坐标系下点动，4-工具坐标系下点动，8-工件坐标系下点动
-    * @param  [in]  nb 1-关节1(或x轴)，2-关节2(或y轴)，3-关节3(或z轴)，4-关节4(或绕x轴旋转)，5-关节5(或绕y轴旋转)，6-关节6(或绕z轴旋转)
-    * @param  [in]  dir 0-负方向，1-正方向
-    * @param  [in]  vel 速度百分比，[0~100]
-    * @param  [in]  acc 加速度百分比， [0~100]
-    * @param  [in]  max_dis 单次点动最大角度，单位[°]或距离，单位[mm]
-    * @return  错误码
+    * @brief  Jog point movement
+    * @param  [in]  ref 0- node movement, 2- base coordinate system, 4- tool coordinate system, 8- workpiece coordinate system
+    * @param  [in]  nb 1-joint 1(or axis x), 2-joint 2(or axis y), 3-joint 3(or axis z), 4-joint 4(or rotation about axis x), 5-joint 5(or rotation about axis y), 6-joint 6(or rotation about axis z)
+    * @param  [in]  dir 0-minus negative, 1-minus positive
+    * @param  [in]  vel The percentage of velocity,[0~100]
+    * @param  [in]  acc The percentage of acceleration, [0~100]
+    * @param  [in]  max_dis Maximum Angle of single click, unit: [°] or distance, unit: [mm]
+    * @return  Error code
     */
     errno_t  StartJOG(uint8_t ref, uint8_t nb, uint8_t dir, float vel, float acc, float max_dis);
 
-jog点动减速停止
-+++++++++++++++++++++++++++++
+Jog point dynamic deceleration stop
+++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  jog点动减速停止
-    * @param  [in]  ref  1-关节点动停止，3-基坐标系下点动停止，5-工具坐标系下点动停止，9-工件坐标系下点动停止
-    * @return  错误码
+    * @brief  Jog point dynamic deceleration stop
+    * @param  [in]  ref  1- point stop, 3- point stop in base coordinate system, 5- point stop in tool coordinate system, 9- point stop in workpiece coordinate system
+    * @return  Error code
     */
     errno_t  StopJOG(uint8_t ref);
 
-jog点动立即停止
+The jog stops immediately
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief jog点动立即停止
-    * @return  错误码
+    * @brief The jog stops immediately
+    * @return  Error code
     */
     errno_t  ImmStopJOG(); 
 
-代码示例
-++++++++++++++
+Code example
++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -62,13 +62,13 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
-        robot.StartJOG(0,1,0,20.0,20.0,30.0);   //单关节运动，StartJOG为非阻塞指令，运动状态下接收其他运动指令（包含StartJOG）会被丢弃
+        robot.StartJOG(0,1,0,20.0,20.0,30.0);   //For single-joint motion, StartJOG is a non-blocking command. Receiving other motion commands (including StartJOG) while in motion is discarded
         sleep(1);
-        //robot.StopJOG(1)  //机器人单轴点动减速停止
-        robot.ImmStopJOG();  //机器人单轴点动立即停止
+        //robot.StopJOG(1)  //Robot single axis point deceleration stop
+        robot.ImmStopJOG();  //The single axis of the robot stops immediately
         robot.StartJOG(0,2,1,20.0,20.0,30.0);
         sleep(1);
         robot.ImmStopJOG(); 
@@ -85,10 +85,10 @@ jog点动立即停止
         sleep(1);
         robot.ImmStopJOG(); 
 
-        robot.StartJOG(2,1,0,20.0,20.0,30.0);   //基坐标系下点动
+        robot.StartJOG(2,1,0,20.0,20.0,30.0);   //Point in the base coordinate system
         sleep(1);
-        //robot.StopJOG(3)  //机器人单轴点动减速停止
-        robot.ImmStopJOG();  //机器人单轴点动立即停止
+        //robot.StopJOG(3)  //Robot single axis point deceleration stop
+        robot.ImmStopJOG();  //The single axis of the robot stops immediately
         robot.StartJOG(2,2,1,20.0,20.0,30.0);
         sleep(1);
         robot.ImmStopJOG(); 
@@ -105,10 +105,10 @@ jog点动立即停止
         sleep(1);
         robot.ImmStopJOG(); 
 
-        robot.StartJOG(4,1,0,20.0,20.0,30.0);   //工具坐标系下点动
+        robot.StartJOG(4,1,0,20.0,20.0,30.0);   //Point in the tool coordinate system
         sleep(1);
-        //robot.StopJOG(5)  //机器人单轴点动减速停止
-        robot.ImmStopJOG();  //机器人单轴点动立即停止
+        //robot.StopJOG(5)  //Robot single axis point deceleration stop
+        robot.ImmStopJOG();  //The single axis of the robot stops immediately
         robot.StartJOG(4,2,1,20.0,20.0,30.0);
         sleep(1);
         robot.ImmStopJOG(); 
@@ -125,10 +125,10 @@ jog点动立即停止
         sleep(1);
         robot.ImmStopJOG(); 
 
-        robot.StartJOG(8,1,0,20.0,20.0,30.0);   //工件坐标系下点动
+        robot.StartJOG(8,1,0,20.0,20.0,30.0);   //Point in the workpiece coordinate system
         sleep(1);
-        //robot.StopJOG(9)  //机器人单轴点动减速停止
-        robot.ImmStopJOG();  //机器人单轴点动立即停止
+        //robot.StopJOG(9)  //Robot single axis point deceleration stop
+        robot.ImmStopJOG();  //The single axis of the robot stops immediately
         robot.StartJOG(8,2,1,20.0,20.0,30.0);
         sleep(1);
         robot.ImmStopJOG(); 
@@ -148,111 +148,111 @@ jog点动立即停止
         return 0;
     }
 
-关节空间运动
+Joint space motion
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  关节空间运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  Joint space motion
+    * @param  [in] joint_pos  Target joint location, unit: deg
+    * @param  [in] desc_pos   Target Cartesian position
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Percentage of speed, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] ovl  Velocity scaling factor, range[0~100]
+    * @param  [in] epos  Position of expansion shaft, unit: mm
+    * @param  [in] blendT [-1.0]- movement in place (blocking), [0~500.0]- smoothing time (non-blocking), in ms
+    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
+    * @param  [in] offset_pos  The pose offset
+    * @return  Error code
     */
     errno_t  MoveJ(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos *epos, float blendT, uint8_t offset_flag, DescPose *offset_pos);
 
-笛卡尔空间直线运动
-+++++++++++++++++++++++++++++
+Rectilinear motion in Cartesian space
+++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间直线运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm    
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] search  0-不焊丝寻位，1-焊丝寻位
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  Rectilinear motion in Cartesian space
+    * @param  [in] joint_pos  Target joint location, unit: deg
+    * @param  [in] desc_pos   Target Cartesian position
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Percentage of speed, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] ovl  Velocity scaling factor, range[0~100]
+    * @param  [in] blendR [-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm    
+    * @param  [in] epos  Position of expansion shaft, unit: mm
+    * @param  [in] search  0- no wire seeking, 1- wire seeking
+    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
+    * @param  [in] offset_pos  The pose offset
+    * @return  Error code
     */   
     errno_t  MoveL(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos *epos, uint8_t search, uint8_t offset_flag, DescPose *offset_pos);
 
-笛卡尔空间圆弧运动
-+++++++++++++++++++++++++++++
+Circular motion in Cartesian space
+++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间圆弧运动
-    * @param  [in] joint_pos_p  路径点关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[1~15]
-    * @param  [in] puser  工件坐标号，范围[1~15]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] poffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_p  位姿偏移量
-    * @param  [in] joint_pos_t  目标点关节位置,单位deg
-    * @param  [in] desc_pos_t   目标点笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[1~15]
-    * @param  [in] tuser  工件坐标号，范围[1~15]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] toffset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos_t  位姿偏移量   
-    * @param  [in] ovl  速度缩放因子，范围[0~100]    
-    * @param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm    
-    * @return  错误码
+    * @brief  Circular motion in Cartesian space
+    * @param  [in] joint_pos_p  Waypoint joint position, unit: deg
+    * @param  [in] desc_pos_p   Waypoint Cartesian position
+    * @param  [in] ptool  Tool coordinate number, range [1~15]
+    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] pvel  Percentage of speed, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] epos_p  Position of expansion shaft, unit: mm
+    * @param  [in] poffset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
+    * @param  [in] offset_pos_p  The pose offset
+    * @param  [in] joint_pos_t  Target joint position, unit: deg
+    * @param  [in] desc_pos_t   Target point Cartesian position
+    * @param  [in] ttool  Tool coordinate number, range [1~15]
+    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] tvel  Percentage of speed, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] epos_t  Position of expansion shaft, unit: mm
+    * @param  [in] toffset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
+    * @param  [in] offset_pos_t  The pose offset   
+    * @param  [in] ovl  Velocity scaling factor, range[0~100]    
+    * @param  [in] blendR [-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm    
+    * @return  Error code
     */      
     errno_t  MoveC(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, uint8_t poffset_flag, DescPose *offset_pos_p,JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, uint8_t toffset_flag, DescPose *offset_pos_t,float ovl, float blendR);
 
-笛卡尔空间整圆运动
-+++++++++++++++++++++++++++++
+Circular motion in Cartesian space
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间整圆运动
-    * @param  [in] joint_pos_p  路径点1关节位置,单位deg
-    * @param  [in] desc_pos_p   路径点1笛卡尔位姿
-    * @param  [in] ptool  工具坐标号，范围[1~15]
-    * @param  [in] puser  工件坐标号，范围[1~15]
-    * @param  [in] pvel  速度百分比，范围[0~100]
-    * @param  [in] pacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_p  扩展轴位置，单位mm
-    * @param  [in] joint_pos_t  路径点2关节位置,单位deg
-    * @param  [in] desc_pos_t   路径点2笛卡尔位姿
-    * @param  [in] ttool  工具坐标号，范围[1~15]
-    * @param  [in] tuser  工件坐标号，范围[1~15]
-    * @param  [in] tvel  速度百分比，范围[0~100]
-    * @param  [in] tacc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos_t  扩展轴位置，单位mm
-    * @param  [in] ovl  速度缩放因子，范围[0~100]   
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量     
-    * @return  错误码
+    * @brief  Circular motion in Cartesian space
+    * @param  [in] joint_pos_p  Path point 1 joint position, unit: deg
+    * @param  [in] desc_pos_p   Waypoint 1 Cartesian position
+    * @param  [in] ptool  Tool coordinate number, range [1~15]
+    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] pvel  Percentage of speed, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] epos_p  Position of expansion shaft, unit: mm
+    * @param  [in] joint_pos_t  Joint position at waypoint 2, unit: deg
+    * @param  [in] desc_pos_t   Waypoint 2 Cartesian position
+    * @param  [in] ttool  Tool coordinate number, range [1~15]
+    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] tvel  Percentage of speed, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] epos_t  Position of expansion shaft, unit: mm
+    * @param  [in] ovl  Velocity scaling factor, range[0~100]   
+    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
+    * @param  [in] offset_pos  The pose offset     
+    * @return  Error code
     */      
     errno_t  Circle(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, float ovl, uint8_t offset_flag, DescPose *offset_pos);
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -269,8 +269,8 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         JointPos j1,j2,j3,j4;
         DescPose desc_pos1,desc_pos2,desc_pos3,desc_pos4,offset_pos;
@@ -349,29 +349,29 @@ jog点动立即停止
         return 0;
     }
 
-笛卡尔空间螺旋线运动
-+++++++++++++++++++++++++++++
+Spiral motion in Cartesian space
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间螺旋线运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] epos  扩展轴位置，单位mm
-    * @param  [in] ovl  速度缩放因子，范围[0~100]    
-    * @param  [in] offset_flag  0-不偏移，1-基坐标系/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @param  [in] spiral_param  螺旋参数
-    * @return  错误码
+    * @brief  Spiral motion in Cartesian space
+    * @param  [in] joint_pos  Target joint location, unit: deg
+    * @param  [in] desc_pos   Target Cartesian position
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Percentage of speed, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] epos  Position of expansion shaft, unit: mm
+    * @param  [in] ovl  Velocity scaling factor, range[0~100]    
+    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
+    * @param  [in] offset_pos  The pose offset
+    * @param  [in] spiral_param  Spiral parameter
+    * @return  Error code
     */
     errno_t  NewSpiral(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, ExaxisPos *epos, float ovl, uint8_t offset_flag, DescPose *offset_pos, SpiralParam spiral_param);  
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -388,8 +388,8 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         JointPos j;
         DescPose desc_pos, offset_pos1, offset_pos2;
@@ -426,7 +426,7 @@ jog点动立即停止
 
         robot.SetSpeed(20);
 
-        int ret = robot.GetForwardKin(&j, &desc_pos);  //只有关节位置的情况下，可用正运动学接口求解笛卡尔空间坐标
+        int ret = robot.GetForwardKin(&j, &desc_pos);  //The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
 
         if(ret == 0)
         {
@@ -444,24 +444,24 @@ jog点动立即停止
         return 0;
     }
 
-关节空间伺服模式运动
-+++++++++++++++++++++++++++++
+Joint space servo mode motion
++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  关节空间伺服模式运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param  [in] vel  速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param  [in] cmdT  指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param  [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param  [in] gain  目标位置的比例放大器，暂不开放，默认为0
-    * @return  错误码
+    * @brief  Joint space servo mode motion
+    * @param  [in] joint_pos  Target joint location, unit: deg
+    * @param  [in] acc  Acceleration percentage (range: 0 to 100), not open yet, default: 0
+    * @param  [in] vel  The value ranges from 0 to 100. The value is not available. The default value is 0
+    * @param  [in] cmdT Instruction delivery period, unit: s, recommended range [0.001~0.0016]
+    * @param  [in] filterT Filtering time (unit: s), temporarily disabled. The default value is 0
+    * @param  [in] gain  The proportional amplifier at the target position, not yet open, defaults to 0
+    * @return  Error code
     */
     errno_t  ServoJ(JointPos *joint_pos, float acc, float vel, float cmdT, float filterT, float gain);
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -478,8 +478,8 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         JointPos j;
 
@@ -513,26 +513,26 @@ jog点动立即停止
         return 0;
     }
 
-笛卡尔空间伺服模式运动
+Cartesian space servo mode motion
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间伺服模式运动
-    * @param  [in]  mode  0-绝对运动(基坐标系)，1-增量运动(基坐标系)，2-增量运动(工具坐标系)
-    * @param  [in]  desc_pos  目标笛卡尔位姿或位姿增量
-    * @param  [in]  pos_gain  位姿增量比例系数，仅在增量运动下生效，范围[0~1]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放，默认为0
-    * @param  [in] vel  速度百分比，范围[0~100]，暂不开放，默认为0
-    * @param  [in] cmdT  指令下发周期，单位s，建议范围[0.001~0.0016]
-    * @param  [in] filterT 滤波时间，单位s，暂不开放，默认为0
-    * @param  [in] gain  目标位置的比例放大器，暂不开放，默认为0
-    * @return  错误码
+    * @brief  Cartesian space servo mode motion
+    * @param  [in]  mode  0- absolute motion (base coordinates), 1- incremental motion (base coordinates), 2- incremental motion (tool coordinates)
+    * @param  [in]  desc_pos  Target Cartesian pose or pose increment
+    * @param  [in]  pos_gain  Proportional coefficient of pose increment, effective only for incremental motion, range [0~1]
+    * @param  [in] acc  Acceleration percentage (range: 0 to 100), not open yet, default: 0
+    * @param  [in] vel  The value ranges from 0 to 100. The value is not available. The default value is 0
+    * @param  [in] cmdT Instruction delivery period, unit: s, recommended range [0.001~0.0016]
+    * @param  [in] filterT Filtering time (unit: s), temporarily disabled. The default value is 0
+    * @param  [in] gain  The proportional amplifier at the target position, not yet open, defaults to 0
+    * @return  Error code
     */
     errno_t  ServoCart(int mode, DescPose *desc_pose, float pos_gain[6], float acc, float vel, float cmdT, float filterT, float gain);
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -549,8 +549,8 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         DescPose desc_pos_dt;
         memset(&desc_pos_dt, 0, sizeof(DescPose));
@@ -578,26 +578,26 @@ jog点动立即停止
         return 0;
     }
 
-笛卡尔空间点到点运动
-++++++++++++++++++++++++++++++++++
+Point to point motion in Cartesian space
++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  笛卡尔空间点到点运动
-    * @param  [in]  desc_pos  目标笛卡尔位姿或位姿增量
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]
-    * @param  [in] blendT [-1.0]-运动到位(阻塞)，[0~500.0]-平滑时间(非阻塞)，单位ms 
-    * @param  [in] config  关节空间配置，[-1]-参考当前关节位置解算，[0~7]-参考特定关节空间配置解算，默认为-1   
-    * @return  错误码
+    * @brief  Point to point motion in Cartesian space
+    * @param  [in]  desc_pos  Target Cartesian pose or pose increment
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Percentage of speed, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] ovl  Velocity scaling factor, range[0~100]
+    * @param  [in] blendT [-1.0]- movement in place (blocking), [0~500.0]- smoothing time (non-blocking), in ms
+    * @param  [in] config  Joint space configuration, [-1]- refer to the current joint position, [0~7]- refer to the specific joint space configuration, the default is -1 
+    * @return  Error code
     */
     errno_t  MoveCart(DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -614,8 +614,8 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         DescPose desc_pos1, desc_pos2, desc_pos3;
         memset(&desc_pos1, 0, sizeof(DescPose));
@@ -660,47 +660,47 @@ jog点动立即停止
         return 0;
     }
 
-样条运动开始
+The spline motion begins
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  样条运动开始
-    * @return  错误码
+    * @brief  The spline motion begins
+    * @return  Error code
     */
     errno_t  SplineStart();
 
-样条运动PTP
+Spline motion PTP
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  关节空间样条运动
-    * @param  [in] joint_pos  目标关节位置,单位deg
-    * @param  [in] desc_pos   目标笛卡尔位姿
-    * @param  [in] tool  工具坐标号，范围[1~15]
-    * @param  [in] user  工件坐标号，范围[1~15]
-    * @param  [in] vel  速度百分比，范围[0~100]
-    * @param  [in] acc  加速度百分比，范围[0~100],暂不开放
-    * @param  [in] ovl  速度缩放因子，范围[0~100]   
-    * @return  错误码
+    * @brief  Joint space spline movement
+    * @param  [in] joint_pos  Target joint location, unit: deg
+    * @param  [in] desc_pos   Target Cartesian position
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Percentage of speed, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
+    * @param  [in] ovl  Velocity scaling factor, range[0~100]   
+    * @return  Error code
     */
     errno_t  SplinePTP(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl);
 
-样条运动结束
+The spline movement is complete
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  样条运动结束
-    * @return  错误码
+    * @brief  The spline movement is complete
+    * @return  Error code
     */
     errno_t  SplineEnd();
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -717,8 +717,8 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         JointPos j1,j2,j3,j4;
         DescPose desc_pos1,desc_pos2,desc_pos3,desc_pos4,offset_pos;
@@ -789,42 +789,42 @@ jog点动立即停止
         return 0;
     }
 
-终止运动
+Termination motion
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 终止运动
-    * @return  错误码
+    * @brief Termination motion
+    * @return  Error code
     */
     errno_t  StopMotion();
 
-点位整体偏移开始
+The whole point shift begins
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  点位整体偏移开始
-    * @param  [in]  flag  0-基坐标系下/工件坐标系下偏移，2-工具坐标系下偏移
-    * @param  [in] offset_pos  位姿偏移量
-    * @return  错误码
+    * @brief  The whole point shift begins
+    * @param  [in]  flag 0- offset in base coordinate system/workpiece coordinate system, 2- offset in tool coordinate system
+    * @param  [in] offset_pos  The pose offset
+    * @return  Error code
     */
     errno_t  PointsOffsetEnable(int flag, DescPose *offset_pos);
 
-点位整体偏移结束
+The whole point shift ends
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  点位整体偏移结束
-    * @return  错误码
+    * @brief  The whole point shift ends
+    * @return  Error code
     */
     errno_t  PointsOffsetDisable();
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -841,8 +841,8 @@ jog点动立即停止
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         JointPos j1,j2;
         DescPose desc_pos1,desc_pos2,offset_pos,offset_pos1;

@@ -1,64 +1,64 @@
-机器人力控
-============
+Robot manual control
+=======================
 
 .. toctree:: 
     :maxdepth: 5
 
-力传感器配置
-+++++++++++++++++++++++
+Force sensor configuration
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  配置力传感器
-    * @param  [in] company  力传感器厂商，17-坤维科技
-    * @param  [in] device  设备号，暂不使用，默认为0
-    * @param  [in] softvesion  软件版本号，暂不使用，默认为0
-    * @param  [in] bus 设备挂在末端总线位置，暂不使用，默认为0
-    * @return  错误码
+    * @brief  Configured force sensor
+    * @param  [in] company  Manufacturer of force sensors, 17-Kunwei Technology
+    * @param  [in] device  Device number, not used yet. The default value is 0
+    * @param  [in] softvesion  Software version. The value is not used. The default value is 0
+    * @param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
+    * @return  Error code
     */
     errno_t  FT_SetConfig(int company, int device, int softvesion, int bus);
 
-获取力传感器配置
-+++++++++++++++++++++++
+Get the force sensor configuration
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取力传感器配置
-    * @param  [in] company  力传感器厂商，待定
-    * @param  [in] device  设备号，暂不使用，默认为0
-    * @param  [in] softvesion  软件版本号，暂不使用，默认为0
-    * @param  [in] bus 设备挂在末端总线位置，暂不使用，默认为0
-    * @return  错误码
+    * @brief  Get the force sensor configuration
+    * @param  [in] company  Force sensor manufacturer, to be determined
+    * @param  [in] device  Device number, not used yet. The default value is 0
+    * @param  [in] softvesion  Software version. The value is not used. The default value is 0
+    * @param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
+    * @return  Error code
     */
     errno_t  FT_GetConfig(int *company, int *device, int *softvesion, int *bus);
 
-力传感器激活
+Force sensor activation
 +++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  力传感器激活
-    * @param  [in] act  0-复位，1-激活
-    * @return  错误码
+    * @brief  Force sensor activation
+    * @param  [in] act  0- reset, 1- activate
+    * @return  Error code
     */
     errno_t  FT_Activate(uint8_t act);
 
-力传感器校零
-+++++++++++++++++++++++
+Force sensor calibration
+++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  力传感器校零
-    * @param  [in] act  0-去除零点，1-零点矫正
-    * @return  错误码
+    * @brief  Force sensor calibration
+    * @param  [in] act  0- zero removal, 1- zero correction
+    * @return  Error code
     */
     errno_t  FT_SetZero(uint8_t act);   
 
-代码示例
+Code example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -76,8 +76,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         int company = 17;
         int device = 0;
@@ -119,68 +119,68 @@
         return 0;
     }
 
-设置力传感器参考坐标系
-+++++++++++++++++++++++
+Set the reference coordinate system of the force sensor
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置力传感器参考坐标系
-    * @param  [in] ref  0-工具坐标系，1-基坐标系
-    * @return  错误码
+    * @brief  Set the reference coordinate system of the force sensor
+    * @param  [in] ref  0- tool frame, 1- base frame
+    * @return  Error code
     */
     errno_t  FT_SetRCS(uint8_t ref); 
 
-负载重量辨识记录
-+++++++++++++++++++++++
+Load weight identification record
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  负载重量辨识记录
-    * @param  [in] id  传感器坐标系编号，范围[1~14]
-    * @return  错误码
+    * @brief  Load weight identification record
+    * @param  [in] id  Sensor coordinate system number, range [1~14]
+    * @return  Error code
     */
     errno_t  FT_PdIdenRecord(int id);   
 
-负载重量辨识计算
-+++++++++++++++++++++++
+Load weight identification calculation
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  负载重量辨识计算
-    * @param  [out] weight  负载重量，单位kg
-    * @return  错误码
+    * @brief  Load weight identification calculation
+    * @param  [out] weight  Load weight, unit: kg
+    * @return  Error code
     */   
     errno_t  FT_PdIdenCompute(float *weight);
 
-负载质心辨识记录
-+++++++++++++++++++++++
+Load centroid identification record
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  负载质心辨识记录
-    * @param  [in] id  传感器坐标系编号，范围[1~14]
-    * @param  [in] index 点编号，范围[1~3]
-    * @return  错误码
+    * @brief  Load centroid identification record
+    * @param  [in] id  Sensor coordinate system number, range [1~14]
+    * @param  [in] index Point number, range [1~3]
+    * @return  Error code
     */
     errno_t  FT_PdCogIdenRecord(int id, int index);    
 
-负载质心辨识计算
-+++++++++++++++++++++++
+Load centroid identification calculation
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  负载质心辨识计算
-    * @param  [out] cog  负载质心，单位mm
-    * @return  错误码
+    * @brief  Load centroid identification calculation
+    * @param  [out] cog  Load center of mass, unit: mm
+    * @return  Error code
     */   
     errno_t  FT_PdCogIdenCompute(DescTran *cog); 
 
-代码示例
+Code example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -197,8 +197,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         float weight;
 
@@ -258,49 +258,49 @@
         return 0;
     }
 
-获取参考坐标系下力/扭矩数据
-+++++++++++++++++++++++++++++++++++++++++++++
+Obtain force/torque data in the reference coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取参考坐标系下力/扭矩数据
-    * @param  [out] ft  力/扭矩，fx,fy,fz,tx,ty,tz
-    * @return  错误码
+    * @brief  Obtain force/torque data in the reference coordinate system
+    * @param  [out] ft  Force/torque，fx,fy,fz,tx,ty,tz
+    * @return  Error code
     */   
     errno_t  FT_GetForceTorqueRCS(ForceTorque *ft); 
 
-获取力传感器原始力/扭矩数据
-+++++++++++++++++++++++++++++++++++++++++++++
+Obtain the raw force/torque data of the force sensor
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  获取力传感器原始力/扭矩数据
-    * @param  [out] ft  力/扭矩，fx,fy,fz,tx,ty,tz
-    * @return  错误码
+    * @brief  Obtain the raw force/torque data of the force sensor
+    * @param  [out] ft  Force/torque，fx,fy,fz,tx,ty,tz
+    * @return  Error code
     */   
     errno_t  FT_GetForceTorqueOrigin(ForceTorque *ft); 
 
-碰撞守护
+Collision guard
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  碰撞守护
-    * @param  [in] flag 0-关闭碰撞守护，1-开启碰撞守护
-    * @param  [in] sensor_id 力传感器编号
-    * @param  [in] select  选择六个自由度是否检测碰撞，0-不检测，1-检测
-    * @param  [in] ft  碰撞力/扭矩，fx,fy,fz,tx,ty,tz
-    * @param  [in] max_threshold 最大阈值
-    * @param  [in] min_threshold 最小阈值
-    * @note   力/扭矩检测范围：(ft-min_threshold, ft+max_threshold)
-    * @return  错误码
+    * @brief  Collision guard
+    * @param  [in] flag 0- Disable collision guard. 1- Enable collision guard
+    * @param  [in] sensor_id Force sensor number
+    * @param  [in] select  Select the six degrees of freedom whether to detect collision, 0- no detection, 1- detection
+    * @param  [in] ft  Impact force/torque，fx,fy,fz,tx,ty,tz
+    * @param  [in] max_threshold Maximum threshold
+    * @param  [in] min_threshold Minimum threshold
+    * @note   Force/torque detection range：(ft-min_threshold, ft+max_threshold)
+    * @return  Error code
     */   
     errno_t  FT_Guard(uint8_t flag, int sensor_id, uint8_t select[6], ForceTorque *ft, float max_threshold[6], float min_threshold[6]); 
 
-代码示例
+Code Example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -317,8 +317,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         uint8_t flag = 1;
         uint8_t sensor_id = 1;
@@ -364,27 +364,27 @@
         return 0;
     }
 
-恒力控制
+Constant force control
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  恒力控制
-    * @param  [in] flag 0-关闭恒力控制，1-开启恒力控制
-    * @param  [in] sensor_id 力传感器编号
-    * @param  [in] select  选择六个自由度是否检测碰撞，0-不检测，1-检测
-    * @param  [in] ft  碰撞力/扭矩，fx,fy,fz,tx,ty,tz
-    * @param  [in] ft_pid 力pid参数，力矩pid参数
-    * @param  [in] adj_sign 自适应启停控制，0-关闭，1-开启
-    * @param  [in] ILC_sign ILC启停控制， 0-停止，1-训练，2-实操
-    * @param  [in] 最大调整距离，单位mm
-    * @param  [in] 最大调整角度，单位deg
-    * @return  错误码
+    * @brief  Constant force control
+    * @param  [in] flag 0- turn off constant force control, 1- turn on constant force control
+    * @param  [in] sensor_id Force sensor number
+    * @param  [in] select  Select the six degrees of freedom whether to detect collision, 0- no detection, 1- detection
+    * @param  [in] ft  Impact force/torque，fx,fy,fz,tx,ty,tz
+    * @param  [in] ft_pid Force pid parameter, torque pid parameter
+    * @param  [in] adj_sign Adaptive start-stop control, 0- off, 1- on
+    * @param  [in] ILC_sign ILC start stop control, 0- stop, 1- training, 2- operation
+    * @param  [in] Maximum Adjustment distance, unit: mm
+    * @param  [in] Maximum Adjustment Angle, unit: deg
+    * @return  Error code
     */   
     errno_t  FT_Control(uint8_t flag, int sensor_id, uint8_t select[6], ForceTorque *ft, float ft_pid[6], uint8_t adj_sign, uint8_t ILC_sign, float max_dis, float max_ang);   
 
-代码示例
+Code example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -401,8 +401,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         uint8_t flag = 1;
         uint8_t sensor_id = 1;
@@ -453,58 +453,58 @@
         return 0;
     }
 
-螺旋线探索
+Spiral exploration
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  螺旋线探索
-    * @param  [in] rcs 参考坐标系，0-工具坐标系，1-基坐标系
-    * @param  [in] dr 每圈半径进给量
-    * @param  [in] ft 力/扭矩阈值，fx,fy,fz,tx,ty,tz，范围[0~100]
-    * @param  [in] max_t_ms 最大探索时间，单位ms
-    * @param  [in] max_vel 最大线速度，单位mm/s
-    * @return  错误码
+    * @brief  Spiral exploration
+    * @param  [in] rcs Reference frame, 0- tool frame, 1- base frame
+    * @param  [in] dr Feed per circle radius
+    * @param  [in] ft Force/torque threshold，fx,fy,fz,tx,ty,tz，range[0~100]
+    * @param  [in] max_t_ms Maximum exploration time, unit: ms
+    * @param  [in] max_vel Maximum linear velocity, unit: mm/s
+    * @return  Error code
     */   
     errno_t  FT_SpiralSearch(int rcs, float dr, float ft, float max_t_ms, float max_vel);  
 
-旋转插入
+Rotary insertion
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  旋转插入
-    * @param  [in] rcs 参考坐标系，0-工具坐标系，1-基坐标系
-    * @param  [in] angVelRot 旋转角速度，单位deg/s
-    * @param  [in] ft  力/扭矩阈值，fx,fy,fz,tx,ty,tz，范围[0~100]
-    * @param  [in] max_angle 最大旋转角度，单位deg
-    * @param  [in] orn 力/扭矩方向，1-沿z轴方向，2-绕z轴方向
-    * @param  [in] max_angAcc 最大旋转加速度，单位deg/s^2，暂不使用，默认为0
-    * @param  [in] rotorn  旋转方向，1-顺时针，2-逆时针
-    * @return  错误码
+    * @brief  Rotary insertion
+    * @param  [in] rcs Reference frame, 0- tool frame, 1- base frame
+    * @param  [in] angVelRot Angular velocity of rotation, unit: deg/s
+    * @param  [in] ft  Force/torque threshold，fx,fy,fz,tx,ty,tz，range[0~100]
+    * @param  [in] max_angle Maximum rotation Angle, unit: deg
+    * @param  [in] orn Force/torque direction, 1- along the z axis, 2- around the z axis
+    * @param  [in] max_angAcc Maximum rotational acceleration, in deg/s^2, not used yet, default is 0
+    * @param  [in] rotorn  Rotation direction, 1- clockwise, 2- counterclockwise
+    * @return  Error code
     */   
     errno_t  FT_RotInsertion(int rcs, float angVelRot, float ft, float max_angle, uint8_t orn, float max_angAcc, uint8_t rotorn);    
 
-直线插入
+Linear insertion
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  直线插入
-    * @param  [in] rcs 参考坐标系，0-工具坐标系，1-基坐标系
-    * @param  [in] ft  力/扭矩阈值，fx,fy,fz,tx,ty,tz，范围[0~100]
-    * @param  [in] lin_v 直线速度，单位mm/s
-    * @param  [in] lin_a 直线加速度，单位mm/s^2，暂不使用
-    * @param  [in] max_dis 最大插入距离，单位mm
-    * @param  [in] linorn  插入方向，0-负方向，1-正方向
-    * @return  错误码
+    * @brief  Linear insertion
+    * @param  [in] rcs Reference frame, 0- tool frame, 1- base frame
+    * @param  [in] ft  Force/torque threshold，fx,fy,fz,tx,ty,tz，range[0~100]
+    * @param  [in] lin_v Linear velocity, unit: mm/s
+    * @param  [in] lin_a Linear acceleration, unit: mm/s^2, not used yet
+    * @param  [in] max_dis Maximum insertion distance, unit: mm
+    * @param  [in] linorn  Insert direction, 0- negative, 1- positive
+    * @return  Error code
     */   
     errno_t  FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, uint8_t linorn);    
 
-代码示例
+Code example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -521,51 +521,51 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
-        //恒力参数
-        uint8_t status = 1;  //恒力控制开启标志，0-关，1-开
-        int sensor_num = 1; //力传感器编号
-        float gain[6] = {0.0001,0.0,0.0,0.0,0.0,0.0};  //最大阈值
-        uint8_t adj_sign = 0;  //自适应启停状态，0-关闭，1-开启
-        uint8_t ILC_sign = 0;  //ILC控制启停状态，0-停止，1-训练，2-实操
-        float max_dis = 100.0;  //最大调整距离
-        float max_ang = 5.0;  //最大调整角度
+        //Constant force parameter
+        uint8_t status = 1;  //Constant force control open sign, 0- off, 1- on
+        int sensor_num = 1; //Force sensor number
+        float gain[6] = {0.0001,0.0,0.0,0.0,0.0,0.0};  //Maximum threshold
+        uint8_t adj_sign = 0;  //Adaptive start-stop state, 0- off, 1- on
+        uint8_t ILC_sign = 0;  //ILC control start stop state, 0- stop, 1- training, 2- real operation
+        float max_dis = 100.0;  //Maximum adjustment distance
+        float max_ang = 5.0;  //Maximum adjustment Angle
 
         ForceTorque ft;
         memset(&ft, 0, sizeof(ForceTorque));
 
-        //螺旋线探索参数
-        int rcs = 0;  //参考坐标系，0-工具坐标系，1-基坐标系
-        float dr = 0.7;  //每圈半径进给量，单位mm
-        float fFinish = 1.0; //力或力矩阈值（0~100），单位N或Nm
-        float t = 60000.0; //最大探索时间，单位ms
-        float vmax = 3.0; //线速度最大值，单位mm/s
+        //Helix explore parameters
+        int rcs = 0;  //Reference frame, 0- tool frame, 1- base frame
+        float dr = 0.7;  //Radius feed per turn, unit: mm
+        float fFinish = 1.0; //Force or torque threshold (0 to 100), unit: N or Nm
+        float t = 60000.0; //Maximum exploration time, unit: ms
+        float vmax = 3.0; //The maximum linear velocity, unit: mm/s
 
-        //直线插入参数
-        float force_goal = 20.0;  //力或力矩阈值（0~100），单位N或Nm
-        float lin_v = 0.0; //直线速度，单位mm/s
-        float lin_a = 0.0; //直线加速度，单位mm/s^2,暂不使用
-        float disMax = 100.0; //最大插入距离，单位mm
-        uint8_t linorn = 1; //插入方向，1-正方向，2-负方向
+        //Linear insertion parameter
+        float force_goal = 20.0;  //Force or torque threshold (0 to 100), unit: N or Nm
+        float lin_v = 0.0; //Linear velocity, unit: mm/s
+        float lin_a = 0.0; //Linear acceleration, unit: mm/s^2, not used yet
+        float disMax = 100.0; //Maximum insertion distance, in mm
+        uint8_t linorn = 1; //Insert direction, 1- positive, 2- negative
 
-        //旋转插入参数
-        float angVelRot = 2.0;  //旋转角速度，单位°/s
-        float forceInsertion = 1.0; //力或力矩阈值（0~100），单位N或Nm
-        int angleMax= 45; //最大旋转角度，单位°
-        uint8_t orn = 1; //力的方向，1-fz,2-mz
-        float angAccmax = 0.0; //最大旋转角加速度，单位°/s^2,暂不使用
-        uint8_t rotorn = 1; //旋转方向，1-顺时针，2-逆时针
+        //Rotational insertion parameter
+        float angVelRot = 2.0;  //Angular velocity of rotation, in °/s
+        float forceInsertion = 1.0; //Force or torque threshold (0 to 100), in N or Nm
+        int angleMax= 45; //Maximum rotation Angle, unit: °
+        uint8_t orn = 1; //Direction of force，1-fz,2-mz
+        float angAccmax = 0.0; //Maximum angular acceleration of rotation, unit: °/s^2, not in use
+        uint8_t rotorn = 1; //Rotation direction, 1- clockwise, 2- counterclockwise
 
-        uint8_t select1[6] = {0,0,1,1,1,0}; //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+        uint8_t select1[6] = {0,0,1,1,1,0}; //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
         ft.fz = -10.0;
         robot.FT_Control(status,sensor_num,select1,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
         robot.FT_SpiralSearch(rcs,dr,fFinish,t,vmax);
         status = 0;
         robot.FT_Control(status,sensor_num,select1,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
 
-        uint8_t select2[6] = {1,1,1,0,0,0};  //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+        uint8_t select2[6] = {1,1,1,0,0,0};  //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
         gain[0] = 0.00005;
         ft.fz = -30.0;
         status = 1;
@@ -574,7 +574,7 @@
         status = 0;
         robot.FT_Control(status,sensor_num,select2,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
 
-        uint8_t select3[6] = {0,0,1,1,1,0};  //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+        uint8_t select3[6] = {0,0,1,1,1,0};  //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
         ft.fz = -10.0;
         gain[0] = 0.0001;
         status = 1;
@@ -583,7 +583,7 @@
         status = 0;
         robot.FT_Control(status,sensor_num,select3,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
 
-        uint8_t select4[6] = {1,1,1,0,0,0};  //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+        uint8_t select4[6] = {1,1,1,0,0,0};  //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
         ft.fz = -30.0;
         status = 1;
         robot.FT_Control(status,sensor_num,select4,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
@@ -594,48 +594,48 @@
         return 0;
     }
 
-表面定位
+Surface positioning
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  表面定位
-    * @param  [in] rcs 参考坐标系，0-工具坐标系，1-基坐标系
-    * @param  [in] dir  移动方向，1-正方向，2-负方向 
-    * @param  [in] axis 移动轴，1-x轴，2-y轴，3-z轴
-    * @param  [in] lin_v 探索直线速度，单位mm/s
-    * @param  [in] lin_a 探索直线加速度，单位mm/s^2，暂不使用，默认为0
-    * @param  [in] max_dis 最大探索距离，单位mm
-    * @param  [in] ft  动作终止力/扭矩阈值，fx,fy,fz,tx,ty,tz  
-    * @return  错误码
+    * @brief  Surface positioning
+    * @param  [in] rcs Reference frame, 0- tool frame, 1- base frame
+    * @param  [in] dir  The direction of travel, 1- positive, 2- negative
+    * @param  [in] axis Axis of movement, 1-x axis, 2-y axis, 3-z axis
+    * @param  [in] lin_v Explore the linear velocity in mm/s
+    * @param  [in] lin_a Explore linear acceleration, in mm/s^2, not used yet, default to 0
+    * @param  [in] max_dis Maximum exploration distance, in mm
+    * @param  [in] ft  Action termination force/torque threshold，fx,fy,fz,tx,ty,tz  
+    * @return  Error code
     */   
     errno_t  FT_FindSurface(int rcs, uint8_t dir, uint8_t axis, float lin_v, float lin_a, float max_dis, float ft);   
 
-计算中间平面位置开始
+Start calculating the middle plane position
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  计算中间平面位置开始
-    * @return  错误码
+    * @brief  Start calculating the middle plane position
+    * @return  Error code
     */   
     errno_t  FT_CalCenterStart();
 
-计算中间平面位置结束
+The middle plane position is calculated
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  计算中间平面位置结束
-    * @param  [out] pos 中间平面位姿
-    * @return  错误码
+    * @brief  The middle plane position is calculated
+    * @param  [out] pos Intermediate plane position
+    * @return  Error code
     */      
     errno_t  FT_CalCenterEnd(DescPose *pos);
 
-代码示例
+Code example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -652,8 +652,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         int rcs = 0;
         uint8_t dir = 1;
@@ -710,31 +710,31 @@
         return 0;
     }
 
-柔顺控制开启
+Compliant control on
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  柔顺控制开启
-    * @param  [in] p 位置调节系数或柔顺系数
-    * @param  [in] force 柔顺开启力阈值，单位N
-    * @return  错误码
+    * @brief  Compliant control on
+    * @param  [in] p Coefficient of position adjustment or compliance
+    * @param  [in] force Compliant opening force threshold, unit: N
+    * @return  Error code
     */   
     errno_t  FT_ComplianceStart(float p, float force); 
 
-柔顺控制关闭
+Compliant control off
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  柔顺控制关闭
-    * @return  错误码
+    * @brief  Compliant control off
+    * @return  Error code
     */   
     errno_t  FT_ComplianceStop(); 
 
-代码示例
+Code example
 +++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -751,8 +751,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         uint8_t flag = 1;
         int sensor_id = 1;

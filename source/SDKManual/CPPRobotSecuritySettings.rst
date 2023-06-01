@@ -1,131 +1,131 @@
-机器人安全设置
-=================
+Robot safety setting
+========================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置碰撞等级
+Set collision level
 ++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief 设置碰撞等级
-    * @param  [in]  mode  0-等级，1-百分比
-    * @param  [in]  level 碰撞阈值，等级对应范围[],百分比对应范围[0~1]
-    * @param  [in]  config 0-不更新配置文件，1-更新配置文件
-    * @return  错误码
+    * @brief Set collision level
+    * @param  [in]  mode  0- grade, 1- percentage
+    * @param  [in]  level Collision threshold, grade range [], percentage range [0~1]
+    * @param  [in]  config 0- Do not update the configuration file. 1- Update the configuration file
+    * @return  Error code
     */
     errno_t  SetAnticollision(int mode, float level[6], int config);
 
-设置碰撞后策略
+Set the post-collision policy
 ++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置碰撞后策略
-    * @param  [in] strategy  0-报错停止，1-继续运行
-    * @return  错误码  
+    * @brief  Set the post-collision policy
+    * @param  [in] strategy  0- Error stop, 1- Continue running
+    * @return  Error code  
     */
     errno_t  SetCollisionStrategy(int strategy);
 
-设置正限位
+Set the positive limit
 ++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置正限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Set the positive limit
+    * @param  [in] limit Six joint positions, unit: deg
+    * @return  Error code
     */
     errno_t  SetLimitPositive(float limit[6]);
 
-设置负限位
+Set the negative limit
 ++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置负限位
-    * @param  [in] limit 六个关节位置，单位deg
-    * @return  错误码
+    * @brief  Set the negative limit
+    * @param  [in] limit Six joint positions, unit: deg
+    * @return  Error code
     */
     errno_t  SetLimitNegative(float limit[6]);   
 
-错误状态清除
+Error status clearing
 ++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  错误状态清除
-    * @return  错误码
+    * @brief  Error status clearing
+    * @return  Error code
     */
     errno_t  ResetAllError();
 
-关节摩擦力补偿开关
-++++++++++++++++++++++++++++++++
+Joint friction compensation switch
++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  关节摩擦力补偿开关
-    * @param  [in]  state  0-关，1-开
-    * @return  错误码
+    * @brief  Joint friction compensation switch
+    * @param  [in]  state  0- off, 1- on
+    * @return  Error code
     */
     errno_t  FrictionCompensationOnOff(uint8_t state);
 
-设置关节摩擦力补偿系数-正装
-++++++++++++++++++++++++++++++++
+Set joint friction compensation coefficient - formal
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-正装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief  Set joint friction compensation coefficient - formal
+    * @param  [in]  coeff Six joint compensation coefficients, range [0~1]
+    * @return  Error code
     */
     errno_t  SetFrictionValue_level(float coeff[6]);
 
-设置关节摩擦力补偿系数-侧装
-++++++++++++++++++++++++++++++++
+Set joint friction compensation coefficient - side mount
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-侧装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief  Set joint friction compensation coefficient - side mount
+    * @param  [in]  coeff Six joint compensation coefficients, range [0~1]
+    * @return  Error code
     */
     errno_t  SetFrictionValue_wall(float coeff[6]);
 
-设置关节摩擦力补偿系数-倒装
-++++++++++++++++++++++++++++++++
+Set joint friction compensation coefficient - inverted
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-倒装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief  Set joint friction compensation coefficient - inverted
+    * @param  [in]  coeff Six joint compensation coefficients, range [0~1]
+    * @return  Error code
     */
     errno_t  SetFrictionValue_ceiling(float coeff[6]);
 
-设置关节摩擦力补偿系数-自由安装
-++++++++++++++++++++++++++++++++
+Set joint friction compensation coefficient - free mounting
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置关节摩擦力补偿系数-自由安装
-    * @param  [in]  coeff 六个关节补偿系数，范围[0~1]
-    * @return  错误码
+    * @brief  Set joint friction compensation coefficient - free mounting
+    * @param  [in]  coeff Six joint compensation coefficients, range [0~1]
+    * @return  Error code
     */
     errno_t  SetFrictionValue_freedom(float coeff[6]);
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -142,8 +142,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         int mode = 0;
         int config = 1;

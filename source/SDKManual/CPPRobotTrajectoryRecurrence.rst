@@ -1,65 +1,65 @@
-机器人轨迹复现
-=================
+Robot trajectory reappears
+==============================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置轨迹记录参数
-++++++++++++++++++++++++++++
+Set track recording parameters
+++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  设置轨迹记录参数
-    * @param  [in] type  记录数据类型，1-关节位置
-    * @param  [in] name  轨迹文件名
-    * @param  [in] period_ms  数据采样周期，固定值2ms或4ms或8ms
-    * @param  [in] di_choose  DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    * @param  [in] do_choose  DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择
-    * @return  错误码
+    * @brief  Set track recording parameters
+    * @param  [in] type  Record data type, 1- joint position
+    * @param  [in] name  Track file name
+    * @param  [in] period_ms  Data sampling period, fixed value 2ms or 4ms or 8ms
+    * @param  [in] di_choose  DI Select,bit0 to bit7 corresponds to control box DI0 to DI7, bit8 to bit9 corresponds to end DI0 to DI1, 0- do not select, 1- select
+    * @param  [in] do_choose  DO select,bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0- do not select, 1- select
+    * @return  Error code
     */
     errno_t  SetTPDParam(int type, char name[30], int period_ms, uint16_t di_choose, uint16_t do_choose);
 
-开始轨迹记录
+Start track recording
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  开始轨迹记录
-    * @param  [in] type  记录数据类型，1-关节位置
-    * @param  [in] name  轨迹文件名
-    * @param  [in] period_ms  数据采样周期，固定值2ms或4ms或8ms
-    * @param  [in] di_choose  DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    * @param  [in] do_choose  DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择
-    * @return  错误码
+    * @brief  Start track recording
+    * @param  [in] type  Record data type, 1- joint position
+    * @param  [in] name  Track file name
+    * @param  [in] period_ms  Data sampling period, fixed value 2ms or 4ms or 8ms
+    * @param  [in] di_choose  DI Select,bit0 to bit7 corresponds to control box DI0 to DI7, bit8 to bit9 corresponds to end DI0 to DI1, 0- do not select, 1- select
+    * @param  [in] do_choose  DO select,bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0- do not select, 1- select
+    * @return  Error code
     */
     errno_t  SetTPDStart(int type, char name[30], int period_ms, uint16_t di_choose, uint16_t do_choose); 
 
-停止轨迹记录
+Stop track recording
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  停止轨迹记录
-    * @return  错误码
+    * @brief  Stop track recording
+    * @return  Error code
     */
     errno_t  SetWebTPDStop();
 
-删除轨迹记录
+Delete track record
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  删除轨迹记录
-    * @param  [in] name  轨迹文件名
-    * @return  错误码
+    * @brief  Delete track record
+    * @param  [in] name  Track file name
+    * @return  Error code
     */   
     errno_t  SetTPDDelete(char name[30]);
 
-代码示例
+Code example
 ++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -76,8 +76,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         int type = 1;
         char name[30] = "tpd2023";
@@ -100,33 +100,33 @@
         return 0;
     }
 
-轨迹预加载
+Trajectory preloading
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  轨迹预加载
-    * @param  [in] name  轨迹文件名
-    * @return  错误码
+    * @brief  Trajectory preloading
+    * @param  [in] name  Track file name
+    * @return  Error code
     */      
     errno_t  LoadTPD(char name[30]);
 
-轨迹复现
+Trajectory reappearance
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  轨迹复现
-    * @param  [in] name  轨迹文件名
-    * @param  [in] blend 0-不平滑，1-平滑
-    * @param  [in] ovl  速度缩放百分比，范围[0~100]
-    * @return  错误码
+    * @brief  Trajectory reappearance
+    * @param  [in] name  Track file name
+    * @param  [in] blend 0- not smooth, 1- smooth
+    * @param  [in] ovl  Speed scaling percentage, range [0~100]
+    * @return  Error code
     */
     errno_t  MoveTPD(char name[30], uint8_t blend, float ovl);
 
-代码示例
+Code example
 ++++++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -143,8 +143,8 @@
 
     int main(void)
     {
-        FRRobot robot;                 //实例化机器人对象
-        robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+        FRRobot robot;                 //Instantiate the robot object
+        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
         char name[30] = "tpd2023";
         int tool = 1;
