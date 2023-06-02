@@ -1,143 +1,143 @@
-机器人WebAPP程序使用
-======================
+Robot WebAPP program usage
+==============================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置开机自动加载默认的作业程序
-++++++++++++++++++++++++++++++++
+Set the default job program to automatically load upon start up
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``LoadDefaultProgConfig(flag,program_name)``"
-    "描述", "设置开机自动加载默认的作业程序"
-    "参数", "- ``flag``：1-开机自动加载默认程序，0-不自动加载默认程序
-    - ``program_name``：作业程序名及路径，如“/fruser/movej.lua”，其中“/fruser/”为固定路径"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``LoadDefaultProgConfig(flag,program_name)``"
+    "Description", "Set the default job program to automatically load upon start up"
+    "Parameter", "- ``flag``：1-automatically load the default program upon startup, 0-do not automatically load the default program
+    - ``program_name``：The name and path of the homework program, such as “/fraser/movej.lua”, where “/fraser/” is a fixed path"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    robot.LoadDefaultProgConfig(1, "/fruser/splineptp.lua")  # 设置开机自动加载默认的作业程序
+    robot.LoadDefaultProgConfig(1, "/fruser/splineptp.lua")  # Set the default job program to automatically load upon start up
 
-加载指定的作业程序
+Load the specified job program
 ++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramLoad(program_name)``"
-    "描述", "加载指定的作业程序"
-    "参数", "- ``program_name``：作业程序名及路径，如“/fruser/movej.lua”，其中“/fruser/”为固定路径"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``ProgramLoad(program_name)``"
+    "Description", "Load the specified job program"
+    "Parameter", "- ``program_name``：The name and path of the homework program, such as “/fraser/movej.lua”, where “/fraser/” is a fixed path"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 6
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    #机器人webapp程序使用接口
-    robot.Mode(0)   #机器人切入自动运行模式
-    robot.ProgramLoad('/fruser/testPTP.lua')   #加载要执行的机器人程序，testPTP.lua程序需要先在webapp上编写好
+    #The robot webapp program uses the interface
+    robot.Mode(0)   #The robot goes into automatic operation mode
+    robot.ProgramLoad('/fruser/testPTP.lua')   #To load the robot program to execute, the testPTP.lua program needs to be written on webapp first
 
-获取当前机器人作业程序的执行行号
-++++++++++++++++++++++++++++++++
+Obtain the execution line number of the current robot job program
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetCurrentLine()``"
-    "描述", "获取当前机器人作业程序的执行行号"
-    "参数", "无"
-    "返回值", "- 成功：[0,line_num]
-    - 失败：[errcode]"
+    "Prototype", "``GetCurrentLine()``"
+    "Description", "Obtain the execution line number of the current robot job program"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,line_num]
+    - Failed：[errcode]"
 
-运行当前加载的作业程序
-++++++++++++++++++++++++++++++++
+Run the currently loaded job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramRun()``"
-    "描述", "运行当前加载的作业程序"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``ProgramRun()``"
+    "Description", "Run the currently loaded job program"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-暂停当前运行的作业程序
-++++++++++++++++++++++++++++++++
+Pause the currently running job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramPause()``"
-    "描述", "暂停当前运行的作业程序"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``ProgramPause()``"
+    "Description", "Pause the currently running job program"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-恢复当前暂停的作业程序
-++++++++++++++++++++++++++++++++
+Resume the currently paused job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramResume()``"
-    "描述", "恢复当前暂停的作业程序"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``ProgramResume()``"
+    "Description", "Resume the currently paused job program"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-终止当前运行的作业程序
-++++++++++++++++++++++++++++++++
+Terminate the currently running job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ProgramStop()``"
-    "描述", "终止当前运行的作业程序"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``ProgramStop()``"
+    "Description", "Terminate the currently running job program"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-获取机器人作业程序执行状态
-++++++++++++++++++++++++++++++++
+Obtain the execution status of robot job programs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetProgramState()``"
-    "描述", "获取机器人作业程序执行状态"
-    "参数", "无"
-    "返回值", "- 成功：[0,state],state:1-程序停止或无程序运行，2-程序运行中，3-程序暂停
-    - 失败：[errcode]"
+    "Prototype", "``GetProgramState()``"
+    "Description", "Obtain the execution status of robot job programs"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,state],state:1-program stopped or no program running, 2-program running, 3-program paused
+    - Failed：[errcode]"
 
-获取已加载的作业程序名
-++++++++++++++++++++++++++++++++
+Obtain the name of the loaded job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetLoadedProgram()``"
-    "描述", "获取已加载的作业程序名"
-    "参数", "无"
-    "返回值", "- 成功：[0,program_name]
-    - 失败：[errcode]"
+    "Prototype", "``GetLoadedProgram()``"
+    "Description", "Obtain the name of the loaded job program"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,program_name]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
@@ -148,24 +148,24 @@
     import _thread
     def print_program_state(name,rb):
         while(1):
-            pstate = robot.GetProgramState()    #查询程序运行状态,1-程序停止或无程序运行，2-程序运行中，3-程序暂停
-            linenum = robot.GetCurrentLine()    #查询当前作业程序执行的行号
-            name = robot.GetLoadedProgram()     #查询已加载的作业程序名
+            pstate = robot.GetProgramState()    #Query program running status,1-program stopped or Nothing program running, 2-program running, 3-program suspended
+            linenum = robot.GetCurrentLine()    #Query the line number of the current job program
+            name = robot.GetLoadedProgram()     #Queries the name of the loaded job program
             print("the robot program state is:",pstate[1])
             print("the robot program line number is:",linenum[1])
             print("the robot program name is:",name[1])
             time.sleep(1)
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    #机器人webapp程序使用接口
-    robot.Mode(0)   #机器人切入自动运行模式
-    robot.ProgramLoad('/fruser/testPTP.lua')   #加载要执行的机器人程序，testPTP.lua程序需要先在webapp上编写好
-    robot.ProgramRun()     #执行机器人程序
+    #The robot webapp program uses the interface
+    robot.Mode(0)   #The robot entered automatic operation mode
+    robot.ProgramLoad('/fruser/testPTP.lua')   #To load the robot program to execute, the testPTP.lua program needs to be written on webapp first
+    robot.ProgramRun()     #Executive robot program
     _thread.start_new_thread(print_program_state,("print_state",robot))
-    time.sleep(5)         #休息10s
-    robot.ProgramPause()   #暂停正在执行的机器人程序
+    time.sleep(5)         #10s rest
+    robot.ProgramPause()   #Pause the robot program in progress
     time.sleep(5)
-    robot.ProgramResume()  #恢复暂停执行的机器人程序
+    robot.ProgramResume()  #Resume the suspended robot program
     time.sleep(5)
-    robot.ProgramStop()    #停止正在执行的机器人程序
+    robot.ProgramStop()    #Stop the robot program in progress
     time.sleep(2)

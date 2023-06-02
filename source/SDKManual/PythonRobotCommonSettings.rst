@@ -1,332 +1,332 @@
-机器人常用设置
-=================
+Common settings for robots
+===============================
 
 .. toctree:: 
     :maxdepth: 5
 
-设置全局速度
+Set global speed
 +++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetSpeed(vel)``"
-    "描述", "设置全局速度"
-    "参数", "- ``vel``:速度百分比，范围[0~100]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetSpeed(vel)``"
+    "Description", "Set global speed"
+    "Parameter", "- ``vel``:Speed percentage, range[0~100]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    robot.SetSpeed(20)   # 设置全局速度，手动模式与自动模式独立设置
+    robot.SetSpeed(20)   # Set the global speed. Manual mode and automatic mode are set independently
 
 
-设置系统变量值
-+++++++++++++++++
+Setting System Variable Values
++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetSysVarValue(id,value)``"
-    "描述", "设置系统变量"
-    "参数", "- ``id``：变量编号，范围[1~20];
-    - ``value``：变量值"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetSysVarValue(id,value)``"
+    "Description", "Setting System Variable Values"
+    "Parameter", "- ``id``：Variable number, range[1~20];
+    - ``value``：Variable value"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 5,8
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     for i in range(1,21):
-        robot.SetSysVarValue(i,i+0.5)    #  设置系统变量值
+        robot.SetSysVarValue(i,i+0.5)    #  Setting System Variable Values
     robot.WaitMs(1000)
     for i in range(1,21):
-        sys_var = robot.GetSysVarValue(i)  #  查询系统变量值
+        sys_var = robot.GetSysVarValue(i)  #  Example Query the values of system variables
         print(sys_var)
 
-设置工具坐标系
-+++++++++++++++++
+Set Tool Coordinate System
++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetToolCoord(id,t_coord,type,install)``"
-    "描述", "设置工具坐标系"
-    "参数", "- ``id``:坐标系编号，范围[0~14]；
-    - ``t_coord``:工具中心点相对末端法兰中心位姿，单位[mm][°]；
-    - ``type``:0-工具坐标系，1-传感器坐标系；
-    - ``install``:安装位置，0-机器人末端，1-机器人外部"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetToolCoord(id,t_coord,type,install)``"
+    "Description", "Set Tool Coordinate System"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
+    - ``t_coord``:Position of tool center point relative to end flange center, unit[mm][°]；
+    - ``type``:0-Tool coordinate system，1-Sensor coordinate system；
+    - ``install``:Installation position，0-Robot end，1-Robot external"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 5
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     t_coord = [1.0,2.0,3.0,4.0,5.0,6.0]
-    robot.SetToolCoord(10,t_coord,0,0)  #  设置工具坐标系
+    robot.SetToolCoord(10,t_coord,0,0)  #  Set tool coordinate system
 
-设置工具坐标系列表
-++++++++++++++++++++
+Set Tool Coordinate Series Table
+++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetToolList(id,t_coord ,type,install)``"
-    "描述", "设置工具坐标系列表"
-    "参数", "- ``id``:坐标系编号，范围[0~14]；
-    - ``t_coord``:工具中心点相对末端法兰中心位姿，单位[mm][°]；
-    - ``type``:0-工具坐标系，1-传感器坐标系；
-    - ``install``:安装位置，0-机器人末端，1-机器人外部"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetToolList(id,t_coord ,type,install)``"
+    "Description", "Set Tool Coordinate Series Table"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
+    - ``t_coord``:Position of tool center point relative to end flange center, unit[mm][°]；
+    - ``type``:0-Tool coordinate system，1-Sensor coordinate system；
+    - ``install``:Installation position，0-Robot end，1-Robot external"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 5
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     t_coord = [1.0,2.0,3.0,4.0,5.0,6.0]
-    robot.SetToolList(10,t_coord,0,0)  #  设置工具坐标系
+    robot.SetToolList(10,t_coord,0,0)  #  Set tool coordinate system
 
-设置外部工具坐标系
-++++++++++++++++++++
+Set external tool coordinate series table
++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetExToolCoord(id,etcp ,etool)``"
-    "描述", "设置外部工具坐标系"
-    "参数", "- ``id``:坐标系编号，范围[0~14]；
-    - ``etcp``:外部工具坐标系，单位[mm][°]；
-    - ``etool``:末端工具坐标系，单位[mm][°]；"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetExToolCoord(id,etcp ,etool)``"
+    "Description", "Set external tool coordinate series table"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
+    - ``etcp``:External tool coordinate system, unit[mm][°]；
+    - ``etool``:End tool coordinate system, unit[mm][°]；"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 6
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     etcp = [1.0,2.0,3.0,4.0,5.0,6.0]
     etool = [21.0,22.0,23.0,24.0,25.0,26.0]
     robot.SetExToolCoord(10,etcp,etool)
 
-设置外部工具坐标系列表
-++++++++++++++++++++++++
+Set external tool coordinate series table
+++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetExToolList(id,etcp ,etool)``"
-    "描述", "设置外部工具坐标系列表"
-    "参数", "- ``id``:坐标系编号，范围[0~14]；
-    - ``etcp``:外部工具坐标系，单位[mm][°]；
-    - ``etool``:末端工具坐标系，单位[mm][°]；"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetExToolList(id,etcp ,etool)``"
+    "Description", "Set external tool coordinate series table"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
+    - ``etcp``:External tool coordinate system, unit[mm][°]；
+    - ``etool``:End tool coordinate system, unit[mm][°]；"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 6
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     etcp = [1.0,2.0,3.0,4.0,5.0,6.0]
     etool = [21.0,22.0,23.0,24.0,25.0,26.0]
     robot.SetExToolList(10,etcp,etool)
 
-设置工件坐标系
-++++++++++++++++
+Set the workpiece coordinate system
+++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetWObjCoord(id,w_coord)``"
-    "描述", "设置工件坐标系"
-    "参数", "- ``id``:坐标系编号，范围[0~14]；
-    - ``w_coord``:坐标系相对位姿，单位[mm][°]；"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetWObjCoord(id,w_coord)``"
+    "Description", "Set the workpiece coordinate system"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
+    - ``w_coord``:Relative pose of coordinate system, unit[mm][°]；"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 5
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     w_coord = [11.0,12.0,13.0,14.0,15.0,16.0]
     robot.SetWObjCoord(11,w_coord)
 
-设置工件坐标系列表
-++++++++++++++++++++++
+Set the workpiece coordinate series table
+++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetWObjList(id,w_coord)``"
-    "描述", "设置工件坐标系列表"
-    "参数", "- ``id``:坐标系编号，范围[0~14]；
-    - ``w_coord``:坐标系相对位姿，单位[mm][°]；"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetWObjList(id,w_coord)``"
+    "Description", "Set the workpiece coordinate series table"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
+    - ``w_coord``:Relative pose of coordinate system, unit[mm][°]；"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 5
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     w_coord = [11.0,12.0,13.0,14.0,15.0,16.0]
     robot.SetWObjList(11,w_coord)
 
-设置末端负载重量
-++++++++++++++++++
+Set end load weight
++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetLoadWeight(weight)``"
-    "描述", "设置末端负载重量"
-    "参数", "- ``weight``:单位[kg]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetLoadWeight(weight)``"
+    "Description", "Set end load weight"
+    "Parameter", "- ``weight``:unit[kg]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    robot.SetLoadWeight(3.0)   # 设置负载重量
+    robot.SetLoadWeight(3.0)   # Set load weight
 
-设置机器人安装方式-固定安装
+Set the robot installation method - fixed installation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetRobotInstallPos(method)``"
+    "Description", "Set the robot installation method - fixed installation"
+    "Parameter", "- ``method``:0-Flat, 1-Side, 2-Hanging"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
+
+Code example
+---------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    import frrpc
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = frrpc.RPC('192.168.58.2')
+    robot.SetRobotInstallPos(0)    #   Set the robot installation mode
+
+Set robot installation angle - free installation
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetRobotInstallAngle(yangle,zangle)``"
+    "Description", "Set robot installation angle - free installation"
+    "Parameter", "- ``yangle``：Angle of roll
+    - ``zangle``：Rotation angle"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
+
+Code example
+---------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    import frrpc
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = frrpc.RPC('192.168.58.2')
+    robot.SetRobotInstallAngle(0.0,0.0)    #   Set the robot installation Angle
+
+Set the centroid coordinates of the end load
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLoadCoord(x,y,z)``"
+    "Description", "Set the centroid coordinates of the end load"
+    "Parameter", "- ``x``,``y``,``z``: Barycentric coordinate,unit[mm]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
+
+Code example
+---------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    import frrpc
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = frrpc.RPC('192.168.58.2')
+    robot.SetLoadCoord(3.0,4.0,5.0)    #   Set the load centroid coordinates
+
+Waiting for specified time
 ++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetRobotInstallPos(method)``"
-    "描述", "设置机器人安装方式-固定安装"
-    "参数", "- ``method``:0-平装，1-侧装，2-挂装"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``WaitMs(t_ms)``"
+    "Description", "waiting for specified time"
+    "Parameter", "- ``t_ms``:unit[ms]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+---------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    robot.SetRobotInstallPos(0)    #   设置机器人安装方式
-
-设置机器人安装角度-自由安装
-++++++++++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``SetRobotInstallAngle(yangle,zangle)``"
-    "描述", "设置机器人安装角度-自由安装"
-    "参数", "- ``yangle``：倾斜角
-    - ``zangle``：旋转角"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
-
-代码示例
-------------
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 4
-
-    import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetRobotInstallAngle(0.0,0.0)    #   设置机器人安装角度
-
-设置末端负载质心坐标
-++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``SetLoadCoord(x,y,z)``"
-    "描述", "设置末端负载质心坐标"
-    "参数", "- ``x``,``y``,``z``: 质心坐标，单位[mm]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
-
-代码示例
-------------
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 4
-
-    import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetLoadCoord(3.0,4.0,5.0)    #   设置负载质心坐标
-
-等待指定时间
-+++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``WaitMs(t_ms)``"
-    "描述", "等待指定时间"
-    "参数", "- ``t_ms``:单位[ms]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
-
-代码示例
-------------
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 4
-
-    import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
-    robot = frrpc.RPC('192.168.58.2')
-    robot.WaitMs(1000)    #  等待1000ms
+    robot.WaitMs(1000)    #  Wait 1000ms

@@ -1,70 +1,70 @@
-机器人轨迹复现
-=================
+Robot trajectory reproduction
+================================ 
 
 .. toctree:: 
     :maxdepth: 5
 
-设置轨迹记录参数
-++++++++++++++++++++
+Set trajectory recording parameters
+++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetTPDParam(type,name,period_ms,di_choose,do_choose)``"
-    "描述", "设置轨迹记录参数"
-    "参数", "- ``type``：数据类型，1-关节位置；
-    - ``name``：轨迹名；
-    - ``period_ms``：采样周期，固定值，2ms或4ms或8ms；
-    - ``di_choose``：DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    - ``do_choose``：DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetTPDParam(type,name,period_ms,di_choose,do_choose)``"
+    "Description", "Set trajectory recording parameters"
+    "Parameter", "- ``type``：Data type, 1-joint position；
+    - ``name``：Track name；
+    - ``period_ms``：Sampling period, fixed value, 2ms or 4ms or 8ms；
+    - ``di_choose``：DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
+    - ``do_choose``：DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 9
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    type = 1  # 数据类型，1-关节位置
-    name = 'tpd2023'  # 轨迹名
-    period = 4  #采样周期，2ms或4ms或8ms
-    di_choose = 0 # di输入配置
-    do_choose = 0 # do输出配置
-    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #配置TPD参数
+    type = 1  # Data type, 1-joint position
+    name = 'tpd2023'  # Track name
+    period = 4  #Sampling period, fixed value, 2ms or 4ms or 8ms
+    di_choose = 0 # di input configuration
+    do_choose = 0 # do output configuration
+    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPDParameter
 
-开始轨迹记录
-++++++++++++++++++
+Start trajectory recording
+++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetTPDStart(type,name,period_ms,di_choose,do_choose)``"
-    "描述", "开始轨迹记录"
-    "参数", "- ``type``：数据类型，1-关节位置；
-    - ``name``：轨迹名；
-    - ``period_ms``：采样周期，固定值，2ms或4ms或8ms；
-    - ``di_choose``：DI选择,bit0~bit7对应控制箱DI0~DI7，bit8~bit9对应末端DI0~DI1，0-不选择，1-选择
-    - ``do_choose``：DO选择,bit0~bit7对应控制箱DO0~DO7，bit8~bit9对应末端DO0~DO1，0-不选择，1-选择"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetTPDStart(type,name,period_ms,di_choose,do_choose)``"
+    "Description", "Start trajectory recording"
+    "Parameter", "- ``type``：Data type, 1-joint position；
+    - ``name``：Track name；
+    - ``period_ms``：Sampling period, fixed value, 2ms or 4ms or 8ms；
+    - ``di_choose``：DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
+    - ``do_choose``：DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-停止轨迹记录
-++++++++++++++
+Stop trajectory recording
+++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetWebTPDStop()``"
-    "描述", "停止轨迹记录"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetWebTPDStop()``"
+    "Description", "Stop trajectory recording"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
@@ -72,84 +72,84 @@
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    type = 1  # 数据类型，1-关节位置
-    name = 'tpd2023'  # 轨迹名
-    period = 4  #采样周期，2ms或4ms或8ms
-    di_choose = 0 # di输入配置
-    do_choose = 0 # do输出配置
-    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #配置TPD参数
-    robot.Mode(1)  # 机器人切入手动模式
+    type = 1  # Data type, 1-joint position
+    name = 'tpd2023'  # Track name
+    period = 4  #Sampling period, fixed value, 2ms or 4ms or 8ms
+    di_choose = 0 # di input configuration
+    do_choose = 0 # do output configuration
+    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPDParameter
+    robot.Mode(1)  # The robot goes into manual mode
     time.sleep(1)  
-    robot.DragTeachSwitch(1)  #机器人切入拖动示教模式
-    robot.SetTPDStart(type, name, period, di_choose, do_choose)   # 开始记录示教轨迹
+    robot.DragTeachSwitch(1)  #The robot goes into drag teaching mode
+    robot.SetTPDStart(type, name, period, di_choose, do_choose)   # Start recording the teaching track
     time.sleep(30)
-    robot.SetWebTPDStop()  # 停止记录示教轨迹
-    robot.DragTeachSwitch(0)  #机器人切入非拖动示教模式
+    robot.SetWebTPDStop()  # Stop recording instructional tracks
+    robot.DragTeachSwitch(0)  #The robot enters the non-drag teaching mode
 
-删除轨迹记录
-+++++++++++++++
+Delete Track Record
++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SetTPDDelete(name)``"
-    "描述", "删除轨迹记录"
-    "参数", "- ``name``:轨迹名"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SetTPDDelete(name)``"
+    "Description", "Delete Track Record"
+    "Parameter", "- ``name``:Track name"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    robot.SetTPDDelete('tpd2023')   # 删除TPD轨迹
+    robot.SetTPDDelete('tpd2023')   # Delete the TPD trace
 
-轨迹预加载
-+++++++++++++++++
+Trajectory preloading
++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``LoadTPD(name)``"
-    "描述", "轨迹预加载"
-    "参数", "- ``name``:轨迹名"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``LoadTPD(name)``"
+    "Description", "Trajectory preloading"
+    "Parameter", "- ``name``:Track name"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-轨迹复现
-++++++++++++
+Trajectory reproduction
+++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``MoveTPD(name,blend,ovl)``"
-    "描述", "轨迹复现"
-    "参数", "- ``name``:轨迹名
-    - ``blend``：是否平滑，0-不平滑，1-平滑
-    - ``ovl``：速度缩放因子，范围[0~100]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``MoveTPD(name,blend,ovl)``"
+    "Description", "Trajectory reproduction"
+    "Parameter", "- ``name``:Track name
+    - ``blend``：Is it smooth, 0-not smooth, 1-smooth
+    - ``ovl``：Speed scaling factor, range[0~100]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 8, 10
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     P1=[-378.9,-340.3,107.2,179.4,-1.3,125.0]
-    name = 'tpd2023'   #轨迹名
-    blend = 1   #是否平滑，1-平滑，0-不平滑
-    ovl = 100.0   #速度缩放
-    robot.LoadTPD(name)  #轨迹预加载
-    robot.MoveCart(P1,1,0,100.0,100.0,100.0,-1.0,-1)       #运动到起始点
-    robot.MoveTPD(name, blend, ovl)  #轨迹复现
+    name = 'tpd2023'   #Track name
+    blend = 1   #Is it smooth, 0-not smooth, 1-smooth
+    ovl = 100.0   #Speed scaling
+    robot.LoadTPD(name)  #Trajectory preloading
+    robot.MoveCart(P1,1,0,100.0,100.0,100.0,-1.0,-1)       #Let's go to the starting point
+    robot.MoveTPD(name, blend, ovl)  #Trajectory reproduction

@@ -1,551 +1,550 @@
-机器人状态查询
-===============
+Robot status query
+=====================
 
 .. toctree:: 
     :maxdepth: 5
 
-获取机器人安装角度
-++++++++++++++++++++
+Obtain robot installation angle
++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetRobotInstallAngle()``"
-    "描述", "获取机器人安装角度"
-    "参数", "无"
-    "返回值", "- 成功：[0,yangle,zangle],yangle-倾斜角，zangle-旋转角
-    - 失败：[errcode,]"
+    "Prototype", "``GetRobotInstallAngle()``"
+    "Description", "Obtain robot installation angle"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,yangle,zangle],yangle-angle of roll，zangle-rotation angle
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetRobotInstallAngle()  # 获取机器人安装角度
+    ret = robot.GetRobotInstallAngle()  # Obtain robot installation angle
     print(ret)
 
-获取系统变量值
-+++++++++++++++++
+Obtain system variable values
+++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetSysVarValue(id)``"
-    "描述", "获取系统变量值"
-    "参数", "- ``id``：系统变量编号，范围[1~20]"
-    "返回值", "- 成功：[0,var_value]
-    - 失败：[errcode,]"
+    "Prototype", "``GetSysVarValue(id)``"
+    "Description", "Obtain system variable values"
+    "Parameter", "- ``id``：System variable number, range[1~20]"
+    "Return value", "- Success：[0,var_value]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 8
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     for i in range(1,21):
-        robot.SetSysVarValue(i,i+0.5)    #  设置系统变量值
+        robot.SetSysVarValue(i,i+0.5)    #  Setting System Variable Values
     robot.WaitMs(1000)
     for i in range(1,21):
-        sys_var = robot.GetSysVarValue(i)  #  查询系统变量值
+        sys_var = robot.GetSysVarValue(i)  #  Query system variable values
         print(sys_var)
 
-获取当前关节位置(角度)
-++++++++++++++++++++++++
+Obtain the current joint position (angle)
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetActualJointPosDegree(flag)``"
-    "描述", "获取关节当前位置(角度)"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - 失败：[errcode,]"
+    "Prototype", "``GetActualJointPosDegree(flag)``"
+    "Description", "Obtain the current joint position (angle))"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualJointPosDegree(0)  # 获取机器人当前关节位置
+    ret = robot.GetActualJointPosDegree(0)  # Obtain the current joint position of the robot
     print(ret)
 
-获取当前关节位置(弧度)
-+++++++++++++++++++++++++
+Obtain the current joint position in radians
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetActualJointPosRadian(flag)``"
-    "描述", "获取关节当前位置(弧度)"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - 失败：[errcode,]"
+    "Prototype", "``GetActualJointPosRadian(flag)``"
+    "Description", "Obtain the current joint position in radians"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualJointPosRadian(0)  # 获取机器人当前关节位置
+    ret = robot.GetActualJointPosRadian(0)  # Obtain the current joint position of the robot
     print(ret)
 
-获取当前工具位姿
-++++++++++++++++++
+Obtain the current position of the joint in radians
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetActualTCPPose(flag)``"
-    "描述", "获取当前工具位姿"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,tcp_pose],tcp_pose=[x,y,z,rx,ry,rz]
-    - 失败：[errcode,]"
+    "Prototype", "``GetActualTCPPose(flag)``"
+    "Description", "Obtain the current position of the joint in radians"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,tcp_pose],tcp_pose=[x,y,z,rx,ry,rz]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualTCPPose(0)  # 获取机器人当前工具位姿
+    ret = robot.GetActualTCPPose(0)  # Obtain the current tool pose of the robot
     print(ret)
 
-获取当前工具坐标系编号
-+++++++++++++++++++++++++
+Obtain the current tool coordinate system number
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetActualTCPNum(flag)``"
-    "描述", "获取当前工具坐标系编号"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,tool_id]
-    - 失败：[errcode,]"
+    "Prototype", "``GetActualTCPNum(flag)``"
+    "Description", "Obtain the current tool coordinate system number"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,tool_id]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualTCPNum(0)  # 获取机器人当前工具坐标系编号
+    ret = robot.GetActualTCPNum(0)  # Obtain the current tool coordinate system number
     print(ret)
 
-获取当前工件坐标系编号
-+++++++++++++++++++++++++
+Obtain the current tool coordinate system number
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetActualWObjNum(flag)``"
-    "描述", "获取当前工件坐标系编号"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,wobj_id]
-    - 失败：[errcode,]"
+    "Prototype", "``GetActualWObjNum(flag)``"
+    "Description", "Obtain the current tool coordinate system number"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,wobj_id]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualWObjNum(0)  # 获取机器人当前工件坐标系编号
+    ret = robot.GetActualWObjNum(0)  # Obtain the current tool coordinate system number
     print(ret)
 
-获取当前末端法兰位姿
-++++++++++++++++++++++
+Obtain the current end flange pose
++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetActualToolFlangePose(flag)``"
-    "描述", "获取当前末端法兰位姿"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,flange_pose],flange_pose=[x,y,z,rx,ry,rz]
-    - 失败：[errcode,]"
+    "Prototype", "``GetActualToolFlangePose(flag)``"
+    "Description", "Obtain the current end flange pose"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,flange_pose],flange_pose=[x,y,z,rx,ry,rz]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualToolFlangePose(0)  # 获取机器人当前末端法兰位姿
+    ret = robot.GetActualToolFlangePose(0)  # Obtain the current end flange pose
     print(ret)
 
-逆运动学求解
-++++++++++++++++
+Inverse kinematics solution
++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetInverseKin(type,desc_pos,config)``"
-    "描述", "逆运动学，笛卡尔位姿求解关节位置 "
-    "参数", "- ``type``:0-绝对位姿(基坐标系)，1-相对位姿（基坐标系），2-相对位姿（工具坐标系）
-    - ``desc_pose``:[x,y,z,rx,ry,rz],工具位姿，单位[mm][°]
-    - ``config``:关节配置，[-1]-参考当前关节位置求解，[0~7]-依据关节配置求解"
-    "返回值", "- 成功：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - 失败：[errcode,]"
+    "Prototype", "``GetInverseKin(type,desc_pos,config)``"
+    "Description", "Inverse kinematics, Cartesian pose to solve joint position"
+    "Parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
+    - ``desc_pose``:[x,y,z,rx,ry,rz],tool posture，unit[mm][°]
+    - ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration"
+    "Return value", "- Success：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 5
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     ret = robot.GetInverseKin(0,P1,-1)
     print(ret)
 
-逆运动学求解-指定参考位置
-++++++++++++++++++++++++++++
+Inverse kinematics solving - specify reference position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetInverseKinRef(type,desc_pos,joint_pos_ref)``"
-    "描述", "逆运动学，工具位姿求解关节位置，参考指定关节位置求解"
-    "参数", "- ``type``:0-绝对位姿(基坐标系)，1-相对位姿（基坐标系），2-相对位姿（工具坐标系）
-    - ``desc_pos``：[x,y,z,rx,ry,rz]工具位姿，单位[mm][°]
-    - ``joint_pos_ref``：[j1,j2,j3,j4,j5,j6]，关节参考位置，单位[°]"
-    "返回值", "- 成功：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - 失败：[errcode,]"
+    "Prototype", "``GetInverseKinRef(type,desc_pos,joint_pos_ref)``"
+    "Description", "Inverse kinematics solving - specify reference position"
+    "Parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
+    - ``desc_pos``：[x,y,z,rx,ry,rz]tool posture，unit[mm][°]
+    - ``joint_pos_ref``：[j1,j2,j3,j4,j5,j6]， joint reference position，unit[°]"
+    "Return value", "- Success：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 6
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
     ret = robot.GetInverseKinRef(0,P1,J1)
     print(ret)
 
-逆运动学求解-是否有解
-++++++++++++++++++++++
+Inverse kinematics solution - whether there is a solution
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetInverseKinHasSolution(type,desc_pos,joint_pos_ref)``"
-    "描述", "逆运动学，工具位姿求解关节位置 是否有解"
-    "参数", "- ``type``:0-绝对位姿(基坐标系)，1-相对位姿（基坐标系），2-相对位姿（工具坐标系）
-    - ``desc_pos``：[x,y,z,rx,ry,rz]工具位姿，单位[mm][°]
-    - ``joint_pos_ref``：[j1,j2,j3,j4,j5,j6]，关节参考位置，单位[°]"
-    "返回值", "- 成功：[0,result],“True”-有解，“False”-无解
-    - 失败：[errcode,]"
+    "Prototype", "``GetInverseKinHasSolution(desc_pos,joint_pos_ref)``"
+    "Description", "Inverse kinematics, tool pose solution, whether joint position is solved"
+    "Parameter", "- ``desc_pos``：[x,y,z,rx,ry,rz]tool posture, unit[mm][°]
+    - ``joint_pos_ref``：[j1,j2,j3,j4,j5,j6]，joint reference position, unit[°]"
+    "Return value", "- Success：[0,result],“True”-with solution，“False”-without solution
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+----------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 6
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
     ret = robot.GetInverseKinHasSolution(0,P1,J1)
     print(ret)
 
-正运动学求解
-+++++++++++++++
+Forward kinematics solution
++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetForwardKin(joint_pos)``"
-    "描述", "正运动学，关节位置求解工具位姿"
-    "参数", "- ``joint_pos``:[j1,j2,j3,j4,j5,j6]:关节位置，单位[°]"
-    "返回值", "- 成功：[0,desc_pos],desc_pos=[x,y,z,rx,ry,rz]:工具位姿，单位[mm][°]
-    - 失败：[errcode,]"
+    "Prototype", "``GetForwardKin(joint_pos)``"
+    "Description", "Forward kinematics, joint position solving tool pose"
+    "Parameter", "- ``joint_pos``:[j1,j2,j3,j4,j5,j6]:joint Position，unit[°]"
+    "Return value", "- Success：[0,desc_pos],desc_pos=[x,y,z,rx,ry,rz]:tool posture，unit[mm][°]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+-------------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 5
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
     ret = robot.GetForwardKin(J1)
     print(ret)
 
-获取当前关节转矩
-+++++++++++++++++++
+Obtain the current joint torque
++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetJointTorques(flag)``"
-    "描述", "获取当前关节转矩"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,torques],torques=[j1,j2,j3,j4,j5,j6]
-    - 失败：[errcode,]"
+    "Prototype", "``GetJointTorques(flag)``"
+    "Description", "Obtain the current joint torque"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,torques],torques=[j1,j2,j3,j4,j5,j6]
+    - Failed：[errcode,]"
 
-代码示例
+Code example
+----------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    import frrpc
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = frrpc.RPC('192.168.58.2')
+    ret = robot.GetJointTorques(0)  # Obtain the current joint torque
+    print(ret)
+
+Obtain the weight of the current load
++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTargetPayload(flag)``"
+    "Description", "Obtain the weight of the current load"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,weight],unit[kg]
+    - Failed：[errcode,]"
+
+Code example
+-----------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    import frrpc
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = frrpc.RPC('192.168.58.2')
+    ret = robot.GetTargetPayload(0)  # Obtain the weight of the current load
+    print(ret)
+
+Obtain the centroid of the current load
+++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTargetPayloadCog(flag)``"
+    "Description", "Obtain the centroid of the current load"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,cog], cog=[x,y,z]:barycentric coordinate，unit[mm]
+    - Failed：[errcode,]"
+
+Code example
+----------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    import frrpc
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = frrpc.RPC('192.168.58.2')
+    ret = robot.GetTargetPayloadCog(0)  # Obtain the centroid of the current load
+    print(ret)
+
+Obtain the current tool coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTCPOffset(flag)``"
+    "Description", "Obtain the current tool coordinate system"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,tcp_offset], tcp_offset=[x,y,z,rx,ry,rz]:相对位姿，unit[mm][°]
+    - Failed：[errcode,]"
+
+Code example
 ------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetJointTorques(0)  # 获取机器人当前关节转矩
+    ret = robot.GetTCPOffset(0)  # Obtain the current tool coordinate system
     print(ret)
 
-获取当前负载的重量
-+++++++++++++++++++++
+Obtain the current workpiece coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetTargetPayload(flag)``"
-    "描述", "获取当前负载的质量"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,weight],单位[kg]
-    - 失败：[errcode,]"
+    "Prototype", "``GetWObjOffset(flag)``"
+    "Description", "Obtain the current workpiece coordinate system"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0,wobj_offset], wobj _offset=[x,y,z,rx,ry,rz]:relative pose，unit[mm][°]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetTargetPayload(0)  # 获取机器人当前负载重量
+    ret = robot.GetWObjOffset(0)  # Obtain the current workpiece coordinate system
     print(ret)
 
-获取当前负载的质心
-+++++++++++++++++++++
+Obtain joint soft limit angle
+++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetTargetPayloadCog(flag)``"
-    "描述", "获取当前负载的质心"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,cog], cog=[x,y,z]:质心坐标，单位[mm]
-    - 失败：[errcode,]"
+    "Prototype", "``GetJointSoftLimitDeg(flag)``"
+    "Description", "Obtain joint soft limit angle"
+    "Parameter", "- ``flag``：0-blocking, 1-non blocking"
+    "Return value", "- Success：[0, j1min,j1max,j2min,j2max,j3min,j3max,j4min,j4max,j5min,j5max,j6min,j6max] :axis 1 to axis 6 joint negative limit and positive limit，unit[mm]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetTargetPayloadCog(0)  # 获取机器人当前负载质心
+    ret = robot.GetJointSoftLimitDeg(0)  # btain joint soft limit angle
     print(ret)
 
-获取当前工具坐标系
-++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``GetTCPOffset(flag)``"
-    "描述", "获取当前工具坐标系"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,tcp_offset], tcp_offset=[x,y,z,rx,ry,rz]:相对位姿，单位[mm][°]
-    - 失败：[errcode,]"
-
-代码示例
-------------
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 4
-
-    import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetTCPOffset(0)  # 获取机器人当前工具坐标系
-    print(ret)
-
-获取当前工件坐标系
-++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``GetWObjOffset(flag)``"
-    "描述", "获取当前工件坐标系"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0,wobj_offset], wobj _offset=[x,y,z,rx,ry,rz]:相对位姿，单位[mm][°]
-    - 失败：[errcode,]"
-
-代码示例
-------------
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 4
-
-    import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetWObjOffset(0)  # 获取机器人当前工件坐标系
-    print(ret)
-
-获取关节软限位角度
-+++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``GetJointSoftLimitDeg(flag)``"
-    "描述", "获取关节软限位角度"
-    "参数", "- ``flag``：0-阻塞，1-非阻塞"
-    "返回值", "- 成功：[0, j1min,j1max,j2min,j2max,j3min,j3max,j4min,j4max,j5min,j5max,j6min,j6max] :轴1~轴6关节负限位与正限位，单位[mm]
-    - 失败：[errcode,]"
-
-代码示例
-------------
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 4
-
-    import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetJointSoftLimitDeg(0)  # 获取机器人关节软限位角度
-    print(ret)
-
-获取系统时间
+Get SysTime
 ++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetSystemClock()``"
-    "描述", "获取系统时间"
-    "参数", "无"
-    "返回值", "- 成功：[0,t_ms]:单位[ms]
-    - 失败：[errcode,]"
+    "Prototype", "``GetSystemClock()``"
+    "Description", "Get SysTime"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,t_ms]:unit[ms]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetSystemClock()  # 获取控制器系统时间
+    ret = robot.GetSystemClock()  # Obtain the system time of the controller
     print(ret)
 
-获取机器人当前关节配置
-++++++++++++++++++++++++
+Obtain the current joint configuration of the robot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetRobotCurJointsConfig()``"
-    "描述", "获取机器人当前关节配置"
-    "参数", "无"
-    "返回值", "- 成功：[0,config]:范围[0~7]
-    - 失败：[errcode,]"
+    "Prototype", "``GetRobotCurJointsConfig()``"
+    "Description", "Obtain the current joint configuration of the robot"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,config]:range[0~7]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetRobotCurJointsConfig()  # 获取机器人当前关节配置
+    ret = robot.GetRobotCurJointsConfig()  # Obtain the current joint configuration of the robot
     print(ret)
 
-获取默认速度
-+++++++++++++++
+Get default speed
+++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetDefaultTransVel()``"
-    "描述", "获取默认速度"
-    "参数", "无"
-    "返回值", "- 成功：[0,vel]:单位[mm/s]
-    - 失败：[errcode,]"
+    "Prototype", "``GetDefaultTransVel()``"
+    "Description", "Get default speed"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,vel]:unit[mm/s]
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetDefaultTransVel()  # 获取机器人当前速度
+    ret = robot.GetDefaultTransVel()  # Gets the robot's current speed
     print(ret)
 
-查询机器人运动是否完成
-++++++++++++++++++++++++
+Check if the robot motion is complete
++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``GetRobotMotionDone()``"
-    "描述", "查询机器人运动是否完成"
-    "参数", "无"
-    "返回值", "- 成功：[0,state],state:0-未完成，1-完成
-    - 失败：[errcode,]"
+    "Prototype", "``GetRobotMotionDone()``"
+    "Description", "Check if the robot motion is complete"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0,state],state:0-incomplete，1-complete
+    - Failed：[errcode,]"
 
-代码示例
-------------
+Code example
+--------------
 .. code-block:: python
     :linenos:
     :emphasize-lines: 4
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetRobotMotionDone()    #查询机器人运动完成状态
+    ret = robot.GetRobotMotionDone()    #Query the motion completion status of the robot
     if ret[0] == 0:
         print(ret[1])
     else:

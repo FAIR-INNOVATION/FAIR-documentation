@@ -1,59 +1,59 @@
-机器人运动
-============
+Robot Movement
+=================
 
 .. toctree:: 
     :maxdepth: 5
 
-机器人点动
+Robot Jog
 +++++++++++++
 
-jog点动
+jog Jog
 ---------
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``StartJOG(ref,nb,dir,vel,acc,max_dis)``"
-    "描述", "jog点动"
-    "参数", "- ``ref``：0-关节点动,2-基坐标系点动,4-工具坐标系点动,8-工件坐标系点动；
-    - ``nb``：1-1关节(x轴),2-2关节(y轴),3-3关节(z轴),4-4关节(rx),5-5关节(ry),6-6关节(rz);
-    - ``dir``：0-负方向，1-正方向;
-    - ``vel``：速度百分比，[0~100];
-    - ``acc``：加速度百分比，[0~100];
-    - ``max_dis``：单次点动最大角度/距离，单位°或mm"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``StartJOG(ref,nb,dir,vel,acc,max_dis)``"
+    "Description", "jog Jog"
+    "Parameter", "- ``ref``：0-joint jogging, 2-base coordinate system jogging, 4-tool coordinate system jogging, 8-workpiece coordinate system jogging；
+    - ``nb``：1-1joint(x-axis), 2-2joint(y-axis), 3-3join(z-axis), 4-4joint(rx), 5-5joint (ry), 6-6joint(rz);
+    - ``dir``：0-negative direction, 1-positive direction;
+    - ``vel``：Speed percentage，[0~100];
+    - ``acc``：Acceleration percentage，[0~100];
+    - ``max_dis``：Maximum angle/distance for a single jog，unit[° or mm]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-jog点动减速停止
------------------
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "原型", "``StopJOG(ref)``"
-    "描述", "jog点动减速停止"
-    "参数", "- ``ref``：1-关节点动停止,3-基坐标系点动停止,5-工具坐标系点动停止,9-工件坐标系点动停止"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
-
-
-jog点动立即停止
------------------
+jog jog immediately stops
+----------------------------
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ImmStopJOG()``"
-    "描述", "jog点动立即停止"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``StopJOG(ref)``"
+    "Description", "jog jog immediately stops"
+    "Parameter", "- ``ref``：1-joint jog stop, 3-base coordinate system jog stop, 5-tool coordinate system jog stop, 9-workpiece coordinate system jog stop"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
+
+
+jog jog immediately stops
+-----------------------------
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ImmStopJOG()``"
+    "Description", "jog jog immediately stops"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
      
-代码示例
-^^^^^^^^^^^^
+Code example
+^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
     :linenos:
@@ -61,14 +61,14 @@ jog点动立即停止
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    # 机器人单轴点动
-    robot.StartJOG(0,1,0,20.0,20.0,30.0)    # 单关节运动,StartJOG为非阻塞指令，运动状态下接收其他运动指令（包含StartJOG）会被丢弃
+    # Robot single axis point
+    robot.StartJOG(0,1,0,20.0,20.0,30.0)    # Single joint motion, StartJOG is a non blocking command, and other motion commands (including StartJOG) received during motion will be discarded
     time.sleep(1)
-    #机器人单轴点动减速停止
+    #Robot single axis jog deceleration stop
     # robot.StopJOG(1)
-    #机器人单轴点动立即停止
+    #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
     robot.StartJOG(0,2,1,20.0,20.0,30.0)
     time.sleep(1)
@@ -85,12 +85,12 @@ jog点动立即停止
     robot.StartJOG(0,6,1,20.0,20.0,30.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    # 基坐标
-    robot.StartJOG(2,1,0,20.0,20.0,100.0)  #基坐标系下点动
+    # Base coordinate
+    robot.StartJOG(2,1,0,20.0,20.0,100.0)  #Jogging in the base coordinate system
     time.sleep(1)
-    #机器人单轴点动减速停止
+    #Robot single axis jog deceleration stop
     # robot.StopJOG(2)
-    # #机器人单轴点动立即停止
+    # #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
     robot.StartJOG(2,1,1,20.0,20.0,100.0)
     time.sleep(1)
@@ -110,12 +110,12 @@ jog点动立即停止
     robot.StartJOG(2,6,1,20.0,20.0,100.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    # 工具坐标
-    robot.StartJOG(4,1,0,20.0,20.0,100.0)  #工具坐标系下点动
+    # Tool coordinate
+    robot.StartJOG(4,1,0,20.0,20.0,100.0)  #Point in the tool coordinate system
     time.sleep(1)
-    #机器人单轴点动减速停止
+    #Robot single axis jog deceleration stop
     # robot.StopJOG(5)
-    # #机器人单轴点动立即停止
+    # #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
     robot.StartJOG(4,1,1,20.0,20.0,100.0)
     time.sleep(1)
@@ -135,12 +135,12 @@ jog点动立即停止
     robot.StartJOG(4,6,1,20.0,20.0,100.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    # 工件坐标
-    robot.StartJOG(8,1,0,20.0,20.0,100.0)  #工件坐标系下点动
+    # Job coordinate
+    robot.StartJOG(8,1,0,20.0,20.0,100.0)  #Point in the workpiece coordinate system
     time.sleep(1)
-    #机器人单轴点动减速停止
+    #Robot single axis jog deceleration stop
     # robot.StopJOG(9)
-    # #机器人单轴点动立即停止
+    # #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
     robot.StartJOG(8,1,1,20.0,20.0,100.0)
     time.sleep(1)
@@ -162,31 +162,31 @@ jog点动立即停止
     robot.ImmStopJOG()
 
 
-关节空间运动
-++++++++++++++
+Joint space motion
+++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``MoveJ(joint_pos,desc_pos,tool,user,vel,acc,ovl,exaxis_pos,blendT,offset_flag,offset_pos)``"
-    "描述", "关节空间运动"
-    "参数", "- ``joint_pos``:目标关节位置，单位[°]；
-    - ``desc_pos``:目标笛卡尔位姿，单位[mm][°]；
-    - ``tool``:工具号，[0~14]；
-    - ``user``:工件号，[0~14]；
-    - ``vel``:速度百分比，[0~100]；
-    - ``acc``:加速度百分比，[0~100]，暂不开放；
-    - ``ovl``:速度缩放因子，[0~100]；
-    - ``exaxis_pos``:外部轴1位置~外部轴4位置；
-    - ``blendT``:[-1.0]-运动到位(阻塞)，[0~500]-平滑时间(非阻塞)，单位[ms]；
-    - ``offset_flag``:[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移；
-    - ``offset_pos``:位姿偏移量，单位[mm][°]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``MoveJ(joint_pos,desc_pos,tool,user,vel,acc,ovl,exaxis_pos,blendT,offset_flag,offset_pos)``"
+    "Description", "Joint space motion"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
+    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
+    - ``tool``:TOOL No，[0~14]；
+    - ``user``:Workpiece number，[0~14]；
+    - ``vel``:Speed percentage，[0~100]；
+    - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
+    - ``ovl``:Speed scaling factor，[0~100]；
+    - ``exaxis_pos``:External axis 1 position to external axis 4 position；
+    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked)，unit[ms]；
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
+    - ``offset_pos``:Pose offset，unit[mm][°]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
--------------
+Code example
+------------------
 
 .. code-block:: python
     :linenos:
@@ -194,7 +194,7 @@ jog点动立即停止
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1=[-168.847,-93.977,-93.118,-80.262,88.985,11.831]
     P1=[-558.082,27.343,208.135,-177.205,-0.450,89.288]
@@ -204,10 +204,10 @@ jog点动立即停止
     P2=[-506.436,236.053,208.133,-177.206,-0.450,67.102]
     eP2=[0.000,0.000,0.000,0.000]
     dP2=[1.000,1.000,1.000,1.000,1.000,1.000]
-    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #关节空间运动PTP,工具号1，实际测试根据现场数据及工具号使用
+    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP,TOOL No1，the actual test is based on field data and TOOL No
     robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
     time.sleep(2)
-    j1 = robot.GetInverseKin(0,P1,-1)       #只有笛卡尔空间坐标的情况下，可用逆运动学接口求解关节位置
+    j1 = robot.GetInverseKin(0,P1,-1)       #In the case of Cartesian space coordinates only, the inverse kinematic interface can be used to solve the joint position
     print(j1)
     j1 = [j1[1],j1[2],j1[3],j1[4],j1[5],j1[6]]
     robot.MoveJ(j1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1) 
@@ -216,7 +216,7 @@ jog点动立即停止
     j2 = [j2[1],j2[2],j2[3],j2[4],j2[5],j2[6]]
     robot.MoveJ(j2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
     time.sleep(2)
-    p1 = robot.GetForwardKin(J1)       #只有关节位置的情况下，可用正运动学接口求解笛卡尔空间坐标
+    p1 = robot.GetForwardKin(J1)       #The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
     print(p1)
     p1 = [p1[1],p1[2],p1[3],p1[4],p1[5],p1[6]]
     robot.MoveJ(J1,p1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1) 
@@ -225,39 +225,39 @@ jog点动立即停止
     p2 = [p2[1],p2[2],p2[3],p2[4],p2[5],p2[6]]
     robot.MoveJ(J2,p2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
 
-笛卡尔空间直线运动
-+++++++++++++++++++
+Linear motion in Cartesian space
+++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``MoveL(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,exaxis_pos,search,offset_flag,offset_pos)``"
-    "描述", "笛卡尔空间直线运动"
-    "参数", "- ``joint_pos``:目标关节位置，单位[°]；
-    - ``desc_pos``:目标笛卡尔位姿，单位[mm][°]；
-    - ``tool``:工具号，[0~14]；
-    - ``user``:工件号，[0~14]；
-    - ``vel``:速度百分比，[0~100]；
-    - ``acc``:加速度百分比，[0~100]，暂不开放；
-    - ``ovl``:速度缩放因子，[0~100]；
-    - ``blendR``:[-1.0]-运动到位(阻塞)，[0~1000]-平滑半径(非阻塞)，单位[mm]；
-    - ``exaxis_pos``:外部轴1位置~外部轴4位置；
-    - ``search``:[0]-不焊丝寻位，[1]-焊丝寻位；
-    - ``offset_flag``:[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移；
-    - ``offset_pos``:位姿偏移量，单位[mm][°]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``MoveL(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,exaxis_pos,search,offset_flag,offset_pos)``"
+    "Description", "Linear motion in Cartesian space"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
+    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
+    - ``tool``:TOOL No，[0~14]；
+    - ``user``:Workpiece number，[0~14]；
+    - ``vel``:Speed percentage，[0~100]；
+    - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
+    - ``ovl``:Speed scaling factor，[0~100]；
+    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked)，unit[mm]；
+    - ``exaxis_pos``:Position of external axis 1~position of external axis 4；
+    - ``search``:[0]-non welding wire positioning, [1]-welding wire positioning；
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
+    - ``offset_pos``:Pose offset，unit[mm][°]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-------------
+Code example
+--------------------
 
 .. code-block:: python
     :linenos:
     :emphasize-lines: 16-18
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
     P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
@@ -271,43 +271,43 @@ jog点动立即停止
     P3=[-423.044,229.703,241.080,-173.990,-5.772,123.971]
     eP3=[0.000,0.000,0.000,0.000]
     dP3=[0.000,0.000,0.000,0.000,0.000,0.000]
-    robot.MoveL(J1,P1,0,0,100.0,180.0,100.0,-1.0,eP1,0,1 ,dP1)   #笛卡尔空间直线运动
+    robot.MoveL(J1,P1,0,0,100.0,180.0,100.0,-1.0,eP1,0,1 ,dP1)   #Rectilinear motion in Cartesian space
     robot.MoveL(J2,P2,0,0,100.0,180.0,100.0,-1.0,eP2,0,0,dP2)
     robot.MoveL(J3,P3,0,0,100.0,180.0,100.0,-1.0,eP3,0,0,dP3)
 
-笛卡尔空间圆弧运动
-++++++++++++++++++++
+Circular arc motion in Cartesian space
+++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``MoveC(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,poffset_flag,offset_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t ,toffset_flag,offset_pos_t,ovl,blendR)``"
-    "描述", "笛卡尔空间圆弧运动"
-    "参数", "- ``joint_pos_p``:路径点关节位置，单位[°]；
-    - ``desc_pos_p``:路径点笛卡尔位姿，单位[mm][°]；
-    - ``ptool``:工具号，[0~14]；
-    - ``puser``:工件号，[0~14]；
-    - ``pvel``:速度百分比，[0~100]；
-    - ``pacc``:加速度百分比，[0~100]，暂不开放；
-    - ``exaxis_pos_p``:外部轴1位置~外部轴4位置；
-    - ``poffset_flag``:[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移；
-    - ``offset_pos_p``:偏移量，单位[mm][°]；
-    - ``joint_pos_t``:目标点关节位置，单位[°]；
-    - ``desc_pos_t``:目标点笛卡尔位姿，单位[mm][°]；
-    - ``ttool``:工具号，[0~14]；
-    - ``tuser``:工件号，[0~14]；
-    - ``tvel``:速度百分比，[0~100]；
-    - ``tacc``:加速度百分比，[0~100]，暂不开放；
-    - ``exaxis_pos_t``:外部轴1位置~外部轴4位置；
-    - ``toffset_flag``:[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移；
-    - ``offset_pos_t``:偏移量，单位[mm][°]。
-    - ``ovl``:速度缩放因子，[0~100]；
-    - ``blendR``:[-1.0]-运动到位(阻塞)，[0~1000]-平滑半径(非阻塞)，单位[mm]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``MoveC(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,poffset_flag,offset_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t ,toffset_flag,offset_pos_t,ovl,blendR)``"
+    "Description", "Circular arc motion in Cartesian space"
+    "Parameter", "- ``joint_pos_p``:Path point joint position，unit[°]；
+    - ``desc_pos_p``:Path point Cartesian pose，unit[mm][°]；
+    - ``ptool``:TOOL No，[0~14]；
+    - ``puser``:Workpiece number，[0~14]；
+    - ``pvel``:Speed percentage，[0~100]；
+    - ``pacc``:Acceleration percentage，[0~100]，temporarily closed；
+    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4；
+    - ``poffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
+    - ``offset_pos_p``:Offset，unit[mm][°]；
+    - ``joint_pos_t``:Target point joint position，unit[°]；
+    - ``desc_pos_t``:Cartesian pose of the target point，unit[mm][°]；
+    - ``ttool``:TOOL No，[0~14]；
+    - ``tuser``:Workpiece number，[0~14]；
+    - ``tvel``:Speed percentage，[0~100]；
+    - ``tacc``:Acceleration percentage，[0~100]，temporarily closed；
+    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4；
+    - ``toffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
+    - ``offset_pos_t``:Offset，unit[mm][°]。
+    - ``ovl``:Speed scaling factor，[0~100]；
+    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked)，unit[mm]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 -------------
 
 .. code-block:: python
@@ -315,7 +315,7 @@ jog点动立即停止
     :emphasize-lines: 19,20
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1=[121.381,-97.108,-123.768,-45.824,89.877,-47.296]
     P1=[-127.772,459.534,221.274,-177.850,-2.507,78.627]
@@ -332,39 +332,39 @@ jog点动立即停止
     dP3=[10.000,10.000,10.000,10.000,10.000,10.000]
     pa3=[0.0,0.0,100.0,180.0]
     dP=[10.000,10.000,10.000,10.000,10.000,10.000]
-    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)       #关节空间运动PTP
-    robot.MoveC(J2,P2,pa2,eP2,0,dP2,J3,P3,pa3,eP3,0,dP3,100.0,-1.0)    #笛卡尔空间圆弧运动
+    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)       #Joint space motionPTP
+    robot.MoveC(J2,P2,pa2,eP2,0,dP2,J3,P3,pa3,eP3,0,dP3,100.0,-1.0)    #Circular motion in Cartesian space
 
-笛卡尔空间整圆运动
-+++++++++++++++++++++++
+Circular motion in Cartesian space
+++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``Circle(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t,ovl,offset_flag,offset_pos)``"
-    "描述", "笛卡尔空间整圆运动"
-    "参数", "- ``joint_pos_p``:路径点关节位置，单位[°]；
-    - ``desc_pos_p``:路径点笛卡尔位姿，单位[mm][°]；
-    - ``ptool``:工具号，[0~14]；
-    - ``puser``:工件号，[0~14]；
-    - ``pvel``:速度百分比，[0~100]；
-    - ``pacc``:加速度百分比，[0~100]，暂不开放；
-    - ``exaxis_pos_p``:外部轴1位置~外部轴4位置；
-    - ``joint_pos_t``:目标点关节位置，单位[°]；
-    - ``desc_pos_t``:目标点笛卡尔位姿，单位[mm][°]；
-    - ``ttool``:工具号，[0~14]；
-    - ``tuser``:工件号，[0~14]；
-    - ``tvel``:速度百分比，[0~100]；
-    - ``tacc``:加速度百分比，[0~100]，暂不开放；
-    - ``exaxis_pos_t``:外部轴1位置~外部轴4位置；
-    - ``ovl``:速度缩放因子，[0~100%]；
-    - ``offset_flag``:[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移；
-    - ``offset_pos``:偏移量，单位[mm][°]"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``Circle(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t,ovl,offset_flag,offset_pos)``"
+    "Description", "Circular motion in Cartesian space"
+    "Parameter", "- ``joint_pos_p``:Path point joint position，unit[°]；
+    - ``desc_pos_p``:Path point Cartesian pose，unit[mm][°]；
+    - ``ptool``:TOOL No，[0~14]；
+    - ``puser``:Workpiece number，[0~14]；
+    - ``pvel``:Speed percentage，[0~100]；
+    - ``pacc``:Acceleration percentage，[0~100]，temporarily closed；
+    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4；
+    - ``joint_pos_t``:Target point joint position，unit[°]；
+    - ``desc_pos_t``:Cartesian pose of the target point，unit[mm][°]；
+    - ``ttool``:TOOL No，[0~14]；
+    - ``tuser``:Workpiece number，[0~14]；
+    - ``tvel``:Speed percentage，[0~100]；
+    - ``tacc``:Acceleration percentage，[0~100]，temporarily closed；
+    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4；
+    - ``ovl``:Speed scaling factor，[0~100%]；
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
+    - ``offset_pos``:Offset，unit[mm][°]"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 -------------
 
 .. code-block:: python
@@ -372,7 +372,7 @@ jog点动立即停止
     :emphasize-lines: 19,20
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1=[121.381,-97.108,-123.768,-45.824,89.877,-47.296]
     P1=[-127.772,459.534,221.274,-177.850,-2.507,78.627]
@@ -389,33 +389,33 @@ jog点动立即停止
     dP3=[10.000,10.000,10.000,10.000,10.000,10.000]
     pa3=[0.0,0.0,100.0,180.0]
     dP=[10.000,10.000,10.000,10.000,10.000,10.000]
-    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #关节空间运动PTP
-    robot.Circle(J2,P2,pa2,eP2,J3,P3,pa3,eP3,100.0,0,dP)    #笛卡尔空间整圆运动
+    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP
+    robot.Circle(J2,P2,pa2,eP2,J3,P3,pa3,eP3,100.0,0,dP)    #Circular motion in Cartesian space
 
-笛卡尔空间螺旋线运动
-++++++++++++++++++++++
+Spiral motion in Cartesian space
+++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``NewSpiral(joint_pos,desc_pos,tool,user,vel,acc,exaxis_pos,ovl,offset_flag,offset_pos,param)``"
-    "描述", "笛卡尔空间螺旋线运动"
-    "参数", "- ``joint_pos``:目标关节位置，单位[°]；
-    - ``desc_pos``:目标笛卡尔位姿，单位[mm][°]；
-    - ``tool``:工具号，[0~14]；
-    - ``user``:工件号，[0~14]；
-    - ``vel``:速度百分比，[0~100]；
-    - ``acc``:加速度百分比，[0~100]，暂不开放；
-    - ``exaxis_pos``:外部轴1位置~外部轴4位置；
-    - ``ovl``:速度缩放因子，[0~100]；
-    - ``offset_flag``:[0]-不偏移，[1]-工件/基坐标系下偏移，[2]-工具坐标系下偏移；
-    - ``offset_pos``:位姿偏移量，单位[mm][°]
-    - ``param``:[circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction]，circle_num:螺旋圈数，circle_angle:螺旋倾角，rad_init:螺旋初始半径，rad_add:半径增量，rotaxis_add:转轴方向增量，rot_direction:旋转方向，0-顺时针，1-逆时针"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``NewSpiral(joint_pos,desc_pos,tool,user,vel,acc,exaxis_pos,ovl,offset_flag,offset_pos,param)``"
+    "Description", "Spiral motion in Cartesian space"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
+    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
+    - ``tool``:TOOL No，[0~14]；
+    - ``user``:Workpiece number，[0~14]；
+    - ``vel``:Speed percentage，[0~100]；
+    - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
+    - ``exaxis_pos``:Position of external axis 1~position of external axis 4；
+    - ``ovl``:Speed scaling factor，[0~100]；
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
+    - ``offset_pos``:Pose offset，unit[mm][°]
+    - ``param``:[circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction]，circle_num: number of coils, circle_angle: helix angle, rad_init: initial radius of the helix, rad_add: radius increment, rotaxis_add: axis direction increment, rot_direction: rotation direction, 0-clockwise, 1-counterclockwise"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 ---------------
 
 .. code-block:: python
@@ -423,7 +423,7 @@ jog点动立即停止
     :emphasize-lines: 18
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1=[127.888,-101.535,-94.860,17.836,96.931,-61.325]
     eP1=[0.000,0.000,0.000,0.000]
@@ -432,34 +432,34 @@ jog点动立即停止
     eP2=[0.000,0.000,0.000,0.000]
     dP2=[50.0,0.0,0.0,-5.0,0.0,0.0]
     Pa = [5.0,5.0,50.0,10.0,10.0,0.0]
-    P1 = robot.GetForwardKin(J1)       #只有关节位置的情况下，可用正运动学接口求解笛卡尔空间坐标
+    P1 = robot.GetForwardKin(J1)       #The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
     print(P1)
     P1 = [P1[1],P1[2],P1[3],P1[4],P1[5],P1[6]]
     robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,0.0,2,dP1)
-    P2 = robot.GetForwardKin(J2)       #只有关节位置的情况下，可用正运动学接口求解笛卡尔空间坐标
+    P2 = robot.GetForwardKin(J2)       #The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
     print(P2)
     P2 = [P2[1],P2[2],P2[3],P2[4],P2[5],P2[6]]
-    robot.NewSpiral(J2,P2,0,0,100.0,180.0,eP2,100.0,2,dP2,Pa)   #螺旋线运动
+    robot.NewSpiral(J2,P2,0,0,100.0,180.0,eP2,100.0,2,dP2,Pa)   #Helical motion
 
-关节空间伺服模式运动
-+++++++++++++++++++++++++
+Joint space servo mode motion
+++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ServoJ(joint_pos,acc,vel,cmdT,filterT,gain)``"
-    "描述", "关节空间伺服模式运动"
-    "参数", "- ``joint_pos``:目标关节位置，单位[°]；
-    - ``acc``:加速度，范围[0~100]，暂不开放，默认为0；
-    - ``vel``:速度，范围[0~100]，暂不开放，默认为0；
-    - ``cmdT``:指令周期，单位[s]，[0.001~0.016]；
-    - ``filterT``:滤波时间，单位[s]，暂不开放；
-    - ``gain``:目标位置的比例放大器，暂不开放"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``ServoJ(joint_pos,acc,vel,cmdT,filterT,gain)``"
+    "Description", "Joint space servo mode motion"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
+    - ``cmdT``:Instruction Cycle，unit[s]，[0.001~0.016]；
+    - ``filterT``:Filtering time，unit[s]，temporarily closed；
+    - ``gain``:Proportional amplifier for target position，temporarily closed"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 --------------
 
 .. code-block:: python
@@ -468,7 +468,7 @@ jog点动立即停止
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     joint_pos = robot.GetActualJointPosDegree(0)
     print(joint_pos)
@@ -485,27 +485,27 @@ jog点动立即停止
         count = count - 1
         time.sleep(0.008)
 
-笛卡尔空间伺服模式运动
-++++++++++++++++++++++++
+Cartesian space servo mode motion
+++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``ServoCart(mode,desc_pos,pos_gain,acc,vel,cmdT,filterT,gain)``"
-    "描述", "笛卡尔空间伺服模式运动"
-    "参数", "- ``mode``:[0]-绝对运动(基坐标系)，[1]-增量运动(基坐标系)，[2]-增量运动(工具坐标系)；
-    - ``desc_pos``:目标笛卡尔位置/目标笛卡尔位置增量；
-    - ``pos_gain``:位姿增量比例系数，仅在增量运动下生效，范围[0~1]；
-    - ``acc``:加速度，范围[0~100]，暂不开放，默认为0；
-    - ``vel``:速度，范围[0~100]，暂不开放，默认为0；
-    - ``cmdT``:指令周期，单位[s]，[0.001~0.016]；
-    - ``filterT``:滤波时间，单位[s]，暂不开放；
-    - ``gain``:目标位置的比例放大器，暂不开放"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``ServoCart(mode,desc_pos,pos_gain,acc,vel,cmdT,filterT,gain)``"
+    "Description", "Cartesian space servo mode motion"
+    "Parameter", "- ``mode``:[0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system)；
+    - ``desc_pos``:Target Cartesian Position/Target Cartesian Position Increment；
+    - ``pos_gain``:Pose increment ratio coefficient, only effective in incremental motion, range[0~1]；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
+    - ``cmdT``:Instruction Cycle，unit[s]，[0.001~0.016]；
+    - ``filterT``:Filtering time，unit[s]，temporarily closed；
+    - ``gain``:Proportional amplifier for target position，temporarily closed"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 --------------
 
 .. code-block:: python
@@ -514,10 +514,10 @@ jog点动立即停止
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    mode = 2  #工具坐标系增量运动
-    n_pos = [0.0,0.0,0.5,0.0,0.0,0.0]   #笛卡尔空间位姿增量
+    mode = 2  #Tool coordinate system incremental motion
+    n_pos = [0.0,0.0,0.5,0.0,0.0,0.0]   #Incremental pose in Cartesian space
     gain = [0.0,0.0,1.0,0.0,0.0,0.0]
     acc = 0.0
     vel = 0.0
@@ -530,27 +530,27 @@ jog点动立即停止
         count = count - 1
         time.sleep(0.008)
 
-笛卡尔空间点到点运动
-++++++++++++++++++++++
+Point-to-point motion in Cartesian space
+++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``MoveCart(desc_pos,tool,user,vel,acc,ovl,blendT,config)``"
-    "描述", "笛卡尔空间点到点运动"
-    "参数", "- ``desc_pos``:目标笛卡尔位置；
-    - ``tool``:工具号，[0~14]；
-    - ``user``:工件号，[0~14]；
-    - ``vel``:速度，范围[0~100]，暂不开放，默认为0；
-    - ``acc``:加速度，范围[0~100]，暂不开放，默认为0；
-    - ``ovl``:速度缩放因子，[0~100]；
-    - ``blendT``:[-1.0]-运动到位(阻塞)，[0~500]-平滑时间(非阻塞)，单位[ms]；
-    - ``config``:关节配置，[-1]-参考当前关节位置求解，[0~7]-依据关节配置求解"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``MoveCart(desc_pos,tool,user,vel,acc,ovl,blendT,config)``"
+    "Description", "Point-to-point motion in Cartesian space"
+    "Parameter", "- ``desc_pos``:Target Cartesian position；
+    - ``tool``:TOOL No，[0~14]；
+    - ``user``:Workpiece number，[0~14]；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``ovl``:Speed scaling factor，[0~100]；
+    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked)，unit[ms]；
+    - ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 -------------
 
 .. code-block:: python
@@ -559,71 +559,71 @@ jog点动立即停止
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     P2=[-273.856,643.260,259.235,-177.972,-1.494,80.866]
     P3=[-423.044,229.703,241.080,-173.990,-5.772,123.971]
-    robot.MoveCart(P1,0,0,100.0,100.0,100.0,-1.0,-1)       #笛卡尔空间点到点运动
+    robot.MoveCart(P1,0,0,100.0,100.0,100.0,-1.0,-1)       #Point-to-point motion in Cartesian space
     robot.MoveCart(P2,0,0,100.0,100.0,100.0,-1.0,-1)
     robot.MoveCart(P3,0,0,100.0,100.0,100.0,0.0,-1)
     time.sleep(1)
-    robot.StopMotion()    #停止运动
+    robot.StopMotion()    #Stop moving
 
-机器人样条运动
-++++++++++++++++
+Robot spline motion
++++++++++++++++++++++
 
-样条运动开始
------------------
+Spline motion start
+------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SplineStart()``"
-    "描述", "样条运动开始"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SplineStart()``"
+    "Description", "Spline motion start"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-样条运动PTP
----------------
+Spline motion PTP
+-------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SplinePTP(joint_pos,desc_pos,tool,user,vel,acc,ovl)``"
-    "描述", "样条运动PTP"
-    "参数", "- ``joint_pos``:目标关节位置，单位[°]；
-    - ``desc_pos``:目标笛卡尔位姿，单位[mm][°]；
-    - ``tool``:工具号，[0~14]；
-    - ``user``:工件号，[0~14]；
-    - ``vel``:速度，范围[0~100]，暂不开放，默认为0；
-    - ``acc``:加速度，范围[0~100]，暂不开放，默认为0；
-    - ``ovl``:速度缩放因子，[0~100]；"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SplinePTP(joint_pos,desc_pos,tool,user,vel,acc,ovl)``"
+    "Description", "Spline motion PTP"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
+    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
+    - ``tool``:TOOL No，[0~14]；
+    - ``user``:Workpiece number，[0~14]；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``ovl``:Speed scaling factor，[0~100]；"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-样条运动结束
-----------------
+End of spline motion
+-----------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``SplineEnd()``"
-    "描述", "样条运动结束"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``SplineEnd()``"
+    "Description", "End of spline motion"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-^^^^^^^^^^^^
+Code example
+^^^^^^^^^^^^^^^
 
 .. code-block:: python
     :linenos:
     :emphasize-lines: 15-20
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1 = [114.578,-117.798,-97.745,-54.436,90.053,-45.216]
     P1 = [-140.418,619.351,198.369,-179.948,0.023,69.793]
@@ -636,70 +636,70 @@ jog点动立即停止
     J4 = [154.766,-87.036,-135.672,-49.045,90.739,-45.223]
     P4 = [-277.255,272.958,205.452,179.289,1.765,109.966]
     robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)
-    robot.SplineStart()    #样条运动开始
-    robot.SplinePTP(J1,P1,0,0,100.0,180.0,100.0)    #样条PTP运动
+    robot.SplineStart()    #Spline motion start
+    robot.SplinePTP(J1,P1,0,0,100.0,180.0,100.0)    #Spline motion PTP
     robot.SplinePTP(J2,P2,0,0,100.0,180.0,100.0)
     robot.SplinePTP(J3,P3,0,0,100.0,180.0,100.0)
     robot.SplinePTP(J4,P4,0,0,100.0,180.0,100.0)
-    robot.SplineEnd()     #样条运动结束
+    robot.SplineEnd()     #End of spline motion
 
-机器人新样条运动
-+++++++++++++++++++
-新样条运动开始
-------------------
+Robot New Spline Motion
+++++++++++++++++++++++++++++++++
+New spline motion begins
+-----------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``NewSplineStart(type)``"
-    "描述", "新样条运动开始"
-    "参数", "- ``type``:0-圆弧过渡，1-给定点位路径点"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``NewSplineStart(type)``"
+    "Description", "New spline motion begins"
+    "Parameter", "- ``type``:0-arc transition, 1-given point position path point"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
 
-新样条运动结束
--------------------
+End of new spline motion
+----------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
     
-    "原型", "``NewSplineEnd()``"
-    "描述", "新样条运动结束"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``NewSplineEnd()``"
+    "Description", "End of new spline motion"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
 
-新样条指令点
-----------------
+New Spline Instruction Points
+------------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "原型", "``NewSplinePoint(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,lastFlag)``"
-    "描述", "新样条指令点"
-    "参数", "- ``joint_pos``:目标关节位置，单位[°]；
-    - ``desc_pos``:目标笛卡尔位姿，单位[mm][°]；
-    - ``tool``:工具号，[0~14]；
-    - ``user``:工件号，[0~14]；
-    - ``vel``:速度，范围[0~100]，暂不开放，默认为0；
-    - ``acc``:加速度，范围[0~100]，暂不开放，默认为0；
-    - ``ovl``:速度缩放因子，[0~100]；
-    - ``blendR``: [0~1000]-平滑半径，单位[mm]；
-    - ``lastFlag``:是否为最后一个点，0-否，1-是"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``NewSplinePoint(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,lastFlag)``"
+    "Description", "New Spline Instruction Points"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
+    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
+    - ``tool``:TOOL No，[0~14]；
+    - ``user``:Workpiece number，[0~14]；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``ovl``:Speed scaling factor，[0~100]；
+    - ``blendR``: [0-1000]-smooth radius，unit[mm]；
+    - ``lastFlag``:Is it the last point, 0-No, 1-Yes"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-^^^^^^^^^^^^
+Code example
+^^^^^^^^^^^^^^^^
 
 .. code-block:: python
     :linenos:
     :emphasize-lines: 15-20
 
     import frrpc
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     J1 = [114.578,-117.798,-97.745,-54.436,90.053,-45.216]
     P1 = [-140.418,619.351,198.369,-179.948,0.023,69.793]
@@ -712,26 +712,26 @@ jog点动立即停止
     J4 = [154.766,-87.036,-135.672,-49.045,90.739,-45.223]
     P4 = [-277.255,272.958,205.452,179.289,1.765,109.966]
     robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)
-    robot.NewSplineStart(1)    #样条运动开始
-    robot.NewSplinePoint(J1,P1,0,0,50.0,50.0,50.0,0.0,0)    #样条控制点
+    robot.NewSplineStart(1)    #The spline motion begins
+    robot.NewSplinePoint(J1,P1,0,0,50.0,50.0,50.0,0.0,0)    #Spline control point
     robot.NewSplinePoint(J2,P2,0,0,50.0,50.0,50.0,0.0,0)
     robot.NewSplinePoint(J3,P3,0,0,50.0,50.0,50.0,0.0,0)
     robot.NewSplinePoint(J4,P4,0,0,50.0,50.0,50.0,0.0,1)
     robot.NewSplineEnd() 
 
-机器人终止运动
-++++++++++++++++
+Robot terminates motion
++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
     
-    "原型", "``StopMotion()``"
-    "描述", "终止运动，使用终止运动需运动指令为非阻塞状态"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``StopMotion()``"
+    "Description", "Terminate the motion, and the motion command must be in a non blocking state when terminating the motion"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
+Code example
 -------------
 
 .. code-block:: python
@@ -740,46 +740,46 @@ jog点动立即停止
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
     P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     P2=[-273.856,643.260,259.235,-177.972,-1.494,80.866]
     P3=[-423.044,229.703,241.080,-173.990,-5.772,123.971]
-    robot.MoveCart(P1,0,0,100.0,100.0,100.0,-1.0,-1)       #关节空间点到点运动
+    robot.MoveCart(P1,0,0,100.0,100.0,100.0,-1.0,-1)       #Point to point motion in joint space
     robot.MoveCart(P2,0,0,100.0,100.0,100.0,-1.0,-1)
-    robot.MoveCart(P3,0,0,100.0,100.0,100.0,0.0,-1)   #此条运动指令为非阻塞状态
+    robot.MoveCart(P3,0,0,100.0,100.0,100.0,0.0,-1)   #This motion instruction is in a non-blocking state
     time.sleep(1)
-    robot.StopMotion()    #停止运动
+    robot.StopMotion()    #Stop motion
 
-机器人点位整体偏移
-+++++++++++++++++++
-点位整体偏移开始
--------------------
+Overall displacement of robot points
++++++++++++++++++++++++++++++++++++++++++
+Starting point overall offset
+----------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
     
-    "原型", "``PointsOffsetEnable(flag,offset_pos)``"
-    "描述", "点位整体偏移开始"
-    "参数", "- ``flag``:0-基坐标或工件坐标系下偏移， 2-工具坐标系下偏移；
-    - ``offset_pos``:偏移量，单位[mm][°]。"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``PointsOffsetEnable(flag,offset_pos)``"
+    "Description", "Starting point overall offset"
+    "Parameter", "- ``flag``:0-offset under base coordinate or workpiece coordinate system, 2-offset under tool coordinate system；
+    - ``offset_pos``:Offset，unit[mm][°]。"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-点位整体偏移结束
---------------------
+The overall offset of the point ends
+----------------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
     
-    "原型", "``PointsOffsetDisable()``"
-    "描述", "点位整体偏移结束"
-    "参数", "无"
-    "返回值", "- 成功：[0]
-    - 失败：[errcode]"
+    "Prototype", "``PointsOffsetDisable()``"
+    "Description", "The overall offset of the point ends"
+    "Parameter", "Nothing"
+    "Return value", "- Success：[0]
+    - Failed：[errcode]"
 
-代码示例
-^^^^^^^^^^^^
+Code example
+^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
     :linenos:
@@ -787,9 +787,9 @@ jog点动立即停止
 
     import frrpc
     import time
-    # 与机器人控制器建立连接，连接成功返回一个机器人对象
+    # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    #机器人点位整体偏移
+    #Overall shift of robot point position
     J1=[-168.847,-93.977,-93.118,-80.262,88.985,11.831]
     P1=[-558.082,27.343,208.135,-177.205,-0.450,89.288]
     eP1=[0.000,0.000,0.000,0.000]
@@ -802,8 +802,8 @@ jog点动立即停止
     robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
     time.sleep(2)
     flag = 0
-    offset = [100.0,5.0,6.0,0.0,0.0,0.0]   #位姿偏移量
-    robot.PointsOffsetEnable(flag, offset)   #整体偏移开始
+    offset = [100.0,5.0,6.0,0.0,0.0,0.0]   #Pose offset
+    robot.PointsOffsetEnable(flag, offset)   #Global offset start
     robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)
     robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
-    robot.PointsOffsetDisable()  #整体偏移结束
+    robot.PointsOffsetDisable()  #End of global shift
