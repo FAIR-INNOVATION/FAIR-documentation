@@ -277,7 +277,7 @@ Code example
     ai = robot.GetAI(0,1)   #  Obtain control box analog input
     print(ai)
 
-Obtain tool analog inpu
+Obtain tool analog input
 ++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1

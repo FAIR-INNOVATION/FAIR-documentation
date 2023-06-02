@@ -10,7 +10,7 @@ Obtain force sensor configuration
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_GetConfig()"
+    "Prototype", "``FT_GetConfig()``"
     "Description", "Obtain force sensor configuration"
     "Parameter", "Nothing"
     "Return value", "- Success：[0, company,device,softversion,bus],company:传感器厂商
@@ -22,7 +22,7 @@ Force sensor configuration
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_SetConfig(company,device,softversion,bus)"
+    "Prototype", "``FT_SetConfig(company,device,softversion,bus)``"
     "Description", "Force sensor configuration"
     "Parameter", "- ``company``：Sensor manufacturer，17-Kunwei Technology，19-Aerospace 11th Institute，20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core；
     - ``device``：equipment number: Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongkomi Point (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A)；
@@ -54,7 +54,7 @@ Force sensor activation
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_Activate(state)"
+    "Prototype", "``FT_Activate(state)``"
     "Description", "Force sensor activation"
     "Parameter", "- ``state``：0-Reset，1-Activate"
     "Return value", "- Success：[0]
@@ -80,7 +80,7 @@ Zero calibration of force sensor
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_SetZero(state)"
+    "Prototype", "``FT_SetZero(state)``"
     "Description", "Zero calibration of force sensor"
     "Parameter", "- ``state``：0-Remove zero，1-Zero correction"
     "Return value", "- Success：[0]
@@ -106,7 +106,7 @@ Set the force sensor reference coordinate system
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_SetRCS(ref)"
+    "Prototype", "``FT_SetRCS(ref)``"
     "Description", "Set the force sensor reference coordinate system"
     "Parameter", "- ``ref``：0-Tool coordinate system，1-Base coordinate system"
     "Return value", "- Success：[0]
@@ -130,7 +130,7 @@ Load weight identification calculation
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_PdIdenCompute()"
+    "Prototype", "``FT_PdIdenCompute()``"
     "Description", "Load weight identification calculation"
     "Parameter", "Nothing"
     "Return value", "- Success：[0,weight] ,weight-Load weight，unit[kg]
@@ -142,7 +142,7 @@ Load weight identification record
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_PdIdenRecord(tool_id)"
+    "Prototype", "``FT_PdIdenRecord(tool_id)``"
     "Description", "Load weight identification record"
     "Parameter", "- ``tool_id``：Sensor coordinate number，range[0~14]"
     "Return value", "- Success：[0]
@@ -179,7 +179,7 @@ Load centroid identification calculation
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_PdCogIdenCompute ()"
+    "Prototype", "``FT_PdCogIdenCompute()``"
     "Description", "Load centroid identification calculation"
     "Parameter", "Nothing"
     "Return value", "- Success：[0,cog],cog=[cogx,cogy,cogz] ，Load centroid，unit[mm]
@@ -191,7 +191,7 @@ Load centroid identification record
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_PdCogIdenRecord(tool_id)"
+    "Prototype", "``FT_PdCogIdenRecord(tool_id)``"
     "Description", "Load centroid identification record"
     "Parameter", "- ``tool_id``：Sensor coordinate number，range[0~14]"
     "Return value", "- Success：[0]
@@ -232,7 +232,7 @@ Obtain force/torque data in the reference coordinate system
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_GetForceTorqueRCS()"
+    "Prototype", "``FT_GetForceTorqueRCS()``"
     "Description", "Obtain force/torque data in the reference coordinate system"
     "Parameter", "Nothing"
     "Return value", "- Success：[0,data] ,data=[fx,fy,fz,mx,my,mz]
@@ -256,7 +256,7 @@ Obtain raw force/torque data from the force sensor
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_GetForceTorqueOrigin()"
+    "Prototype", "``FT_GetForceTorqueOrigin()``"
     "Description", "Obtain raw force/torque data from the force sensor"
     "Parameter", "Nothing"
     "Return value", "- Success：[0,data] ,data=[fx,fy,fz,mx,my,mz]
@@ -280,7 +280,7 @@ Collision protection
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_Guard(flag,sensor_num,select,force_torque,max_threshold,min_threshold)"
+    "Prototype", "``FT_Guard(flag,sensor_num,select,force_torque,max_threshold,min_threshold)``"
     "Description", "Collision protection"
     "Parameter", "- ``flag``：0-Turn off collision protection, 1-Turn on collision protection；
     - ``sensor_num``：Force sensor number；
@@ -322,7 +322,7 @@ Constant force control
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_Control(flag,sensor_num,select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)"
+    "Prototype", "``FT_Control(flag,sensor_num,select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)``"
     "Description", "Constant force control"
     "Parameter", "- ``flag``：Constant force control open flag, 0-off, 1-on；
     - ``sensor_num``：Force sensor number；
@@ -373,7 +373,7 @@ Spiral exploration
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_SpiralSearch(rcs,dr,fFinsih,t,vmax)"
+    "Prototype", "``FT_SpiralSearch(rcs,dr,fFinsih,t,vmax)``"
     "Description", "Spiral exploration"
     "Parameter", "- ``rcs``：Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
     - ``dr``：Feed rate per circle radius, unit[mm]；
@@ -419,7 +419,7 @@ Rotate Insert
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_RotInsertion(rcs,angVelRot,forceInsertion,angleMax,orn,angAccmax,rotorn)"
+    "Prototype", "``FT_RotInsertion(rcs,angVelRot,forceInsertion,angleMax,orn,angAccmax,rotorn)``"
     "Description", "Rotate Insert"
     "Parameter", "- ``rcs``：Reference coordinate system, 0-tool coordinate system, 1-base coordinate system；
     - ``angVelRot``：Rotational angular velocity: uni[t°/s]；
@@ -472,7 +472,7 @@ Linear insertion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_LinInsertion(rcs,force_goal,lin_v,lin_a,disMax,linorn)"
+    "Prototype", "``FT_LinInsertion(rcs,force_goal,lin_v,lin_a,disMax,linorn)``"
     "Description", "Linear insertion"
     "Parameter", "- ``rcs``：Reference frame, 0-Tool frame, 1-Base frame；
     - ``force_goal``：Force or torque threshold, unit[N or Nm]；
@@ -523,7 +523,7 @@ Starting from calculating the position of the midplane
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_CalCenterStart()"
+    "Prototype", "``FT_CalCenterStart()``"
     "Description", "Starting from calculating the position of the midplane"
     "Parameter", "Nothing"
     "Return value", "- Success：[0]
@@ -535,7 +535,7 @@ End of calculating the position of the middle plane
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_CalCenterEnd()"
+    "Prototype", "``FT_CalCenterEnd()``"
     "Description", "End of calculating the position of the middle plane"
     "Parameter", "Nothing"
     "Return value", "- Success：[0,pos] ,pos=[x,y,z,rx,ry,rz]
@@ -547,7 +547,7 @@ Surface positioning
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_FindSurface (rcs,dir,axis,lin_v,lin_a,disMax,force_goal)"
+    "Prototype", "``FT_FindSurface (rcs,dir,axis,lin_v,lin_a,disMax,force_goal)``"
     "Description", "Surface positioning"
     "Parameter", "- ``rcs``： Reference frame, 0-Tool frame, 1-Base frame；
     - ``dir``：Direction of movement, 1-positive, 2-negative；
@@ -638,7 +638,7 @@ Flexibility control off
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_ComplianceStop()"
+    "Prototype", "``FT_ComplianceStop()``"
     "Description", "Flexibility control off"
     "Parameter", "Nothing"
     "Return value", "- Success：[0]
@@ -650,7 +650,7 @@ Flexibility control on
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "FT_ComplianceStart(p,force)"
+    "Prototype", "``FT_ComplianceStart(p,force)``"
     "Description", "Flexibility control on"
     "Parameter", "- ``p``: Position adjustment coefficient or compliance coefficient
     - ``force``：flexibility opening force threshold, unit[N]"

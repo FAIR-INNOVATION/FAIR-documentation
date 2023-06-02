@@ -263,7 +263,8 @@ Inverse kinematics solution - whether there is a solution
 
     "Prototype", "``GetInverseKinHasSolution(desc_pos,joint_pos_ref)``"
     "Description", "Inverse kinematics, tool pose solution, whether joint position is solved"
-    "Parameter", "- ``desc_pos``：[x,y,z,rx,ry,rz]tool posture, unit[mm][°]
+    "Parameter", "- ``type``：0-Absolute pose (base coordinate system), 1-Relative pose (base coordinate system), 2-Relative pose (tool coordinate system)
+    - ``desc_pos``：[x,y,z,rx,ry,rz]tool posture, unit[mm][°]
     - ``joint_pos_ref``：[j1,j2,j3,j4,j5,j6]，joint reference position, unit[°]"
     "Return value", "- Success：[0,result],“True”-with solution，“False”-without solution
     - Failed：[errcode,]"

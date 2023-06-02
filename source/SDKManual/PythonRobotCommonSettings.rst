@@ -293,7 +293,7 @@ Set the centroid coordinates of the end load
 
     "Prototype", "``SetLoadCoord(x,y,z)``"
     "Description", "Set the centroid coordinates of the end load"
-    "Parameter", "- ``x``,``y``,``z``: Barycentric coordinate,unit[mm]"
+    "Parameter", "- ``x``, ``y``, ``z``: Barycentric coordinate,unit[mm]"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
 
