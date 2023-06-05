@@ -34,7 +34,7 @@ Code example
     robot.SetAnticollision(1,level,1)     #  Set collision percentage
 
 Set the strategy after collision
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
