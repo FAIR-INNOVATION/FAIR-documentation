@@ -252,7 +252,7 @@ Get system time
 
     /**
     * @brief  Get system time
-    * @param  [out] t_ms 单位ms
+    * @param  [out] t_ms unit: ms
     * @return  Error code
     */
     errno_t  GetSystemClock(float *t_ms);
