@@ -1,4 +1,4 @@
-Robot safety settings
+Security settings
 =========================
 
 .. toctree:: 
@@ -33,14 +33,14 @@ Code example
     level = [50.0,20.0,30.0,40.0,50.0,60.0]
     robot.SetAnticollision(1,level,1)     #  Set collision percentage
 
-Set post collision strategy
+Set the strategy after collision
 ++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetCollisionStrategy (strategy)``"
-    "Description", "Set post collision strategy"
+    "Description", "Set the strategy after collision"
     "Parameter", "- ``strategy``：0-Error Pause, 1-Continue Running"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
@@ -150,14 +150,14 @@ Code example
     robot = frrpc.RPC('192.168.58.2')
     robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
 
-Set joint friction compensation coefficient - fixed installation - formal installation
+Set joint friction compensation coefficient formal installation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetFrictionValue_level(coeff)``"
-    "Description", "Set joint friction compensation coefficient - fixed installation - formal installation"
+    "Description", "Set joint friction compensation coefficient - formal installation"
     "Parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``：six joint compensation coefficients"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
@@ -175,14 +175,14 @@ Code example
     lcoeff = [0.9,0.9,0.9,0.9,0.9,0.9]
     robot.SetFrictionValue_level(lcoeff)   #  Set joint friction compensation coefficient
 
-Set Joint Friction Compensation Coefficient - Side Mount
+Set joint friction compensation coefficient - Side Mount
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetFrictionValue_wall(coeff)``"
-    "Description", "Set Joint Friction Compensation Coefficient - Side Mount"
+    "Description", "Set joint friction compensation coefficient - Side Mount"
     "Parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``：six joint compensation coefficients"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
@@ -198,16 +198,16 @@ Code example
     robot = frrpc.RPC('192.168.58.2')
     robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
     wcoeff = [0.4,0.4,0.4,0.4,0.4,0.4]
-    robot.SetFrictionValue_wall(wcoeff)  #  Set Joint Friction Compensation Coefficient
+    robot.SetFrictionValue_wall(wcoeff)  #  Set joint friction compensation coefficient
 
-Set Joint Friction Compensation Coefficient-Inverted
+Set joint friction compensation coefficient-Inverted
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetFrictionValue_ceiling(coeff)``"
-    "Description", "Set Joint Friction Compensation Coefficient-Inverted"
+    "Description", "Set joint friction compensation coefficient-Inverted"
     "Parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``：six joint compensation coefficients"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
@@ -223,7 +223,7 @@ Code example
     robot = frrpc.RPC('192.168.58.2')
     robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
     ccoeff = [0.6,0.6,0.6,0.6,0.6,0.6]
-    robot.SetFrictionValue_ceiling(ccoeff)  #  Set Joint Friction Compensation Coefficient
+    robot.SetFrictionValue_ceiling(ccoeff)  #  Set joint friction compensation coefficient
 
 Set joint friction compensation coefficient-free installation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

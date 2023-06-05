@@ -1,4 +1,4 @@
-Common settings for robots
+Common settings
 ===============================
 
 .. toctree:: 
@@ -111,14 +111,14 @@ Code example
     t_coord = [1.0,2.0,3.0,4.0,5.0,6.0]
     robot.SetToolList(10,t_coord,0,0)  #  Set tool coordinate system
 
-Set external tool coordinate series table
+Set the external tool coordinate system
 +++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetExToolCoord(id,etcp ,etool)``"
-    "Description", "Set external tool coordinate series table"
+    "Description", "Set the external tool coordinate system"
     "Parameter", "- ``id``:Coordinate system number, range[0~14]；
     - ``etcp``:External tool coordinate system, unit[mm][°]；
     - ``etool``:End tool coordinate system, unit[mm][°]；"

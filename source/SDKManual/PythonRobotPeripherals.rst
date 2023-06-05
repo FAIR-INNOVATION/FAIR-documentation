@@ -1,4 +1,4 @@
-Robot peripherals
+Peripheral
 =========================
 
 .. toctree:: 

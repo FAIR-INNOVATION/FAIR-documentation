@@ -1,4 +1,4 @@
-Robot Movement
+Movement
 =================
 
 .. toctree:: 
@@ -173,7 +173,7 @@ Joint space motion
     "Description", "Joint space motion"
     "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
     - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:TOOL No，[0~14]；
+    - ``tool``:Tool number，[0~14]；
     - ``user``:Workpiece number，[0~14]；
     - ``vel``:Speed percentage，[0~100]；
     - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
@@ -204,7 +204,7 @@ Code example
     P2=[-506.436,236.053,208.133,-177.206,-0.450,67.102]
     eP2=[0.000,0.000,0.000,0.000]
     dP2=[1.000,1.000,1.000,1.000,1.000,1.000]
-    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP,TOOL No1，the actual test is based on field data and TOOL No
+    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP,Tool number1，the actual test is based on field data and Tool number
     robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
     time.sleep(2)
     j1 = robot.GetInverseKin(0,P1,-1)       #In the case of Cartesian space coordinates only, the inverse kinematic interface can be used to solve the joint position
@@ -236,7 +236,7 @@ Linear motion in Cartesian space
     "Description", "Linear motion in Cartesian space"
     "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
     - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:TOOL No，[0~14]；
+    - ``tool``:Tool number，[0~14]；
     - ``user``:Workpiece number，[0~14]；
     - ``vel``:Speed percentage，[0~100]；
     - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
@@ -286,7 +286,7 @@ Circular arc motion in Cartesian space
     "Description", "Circular arc motion in Cartesian space"
     "Parameter", "- ``joint_pos_p``:Path point joint position，unit[°]；
     - ``desc_pos_p``:Path point Cartesian pose，unit[mm][°]；
-    - ``ptool``:TOOL No，[0~14]；
+    - ``ptool``:Tool number，[0~14]；
     - ``puser``:Workpiece number，[0~14]；
     - ``pvel``:Speed percentage，[0~100]；
     - ``pacc``:Acceleration percentage，[0~100]，temporarily closed；
@@ -295,7 +295,7 @@ Circular arc motion in Cartesian space
     - ``offset_pos_p``:Offset，unit[mm][°]；
     - ``joint_pos_t``:Target point joint position，unit[°]；
     - ``desc_pos_t``:Cartesian pose of the target point，unit[mm][°]；
-    - ``ttool``:TOOL No，[0~14]；
+    - ``ttool``:Tool number，[0~14]；
     - ``tuser``:Workpiece number，[0~14]；
     - ``tvel``:Speed percentage，[0~100]；
     - ``tacc``:Acceleration percentage，[0~100]，temporarily closed；
@@ -346,14 +346,14 @@ Circular motion in Cartesian space
     "Description", "Circular motion in Cartesian space"
     "Parameter", "- ``joint_pos_p``:Path point joint position，unit[°]；
     - ``desc_pos_p``:Path point Cartesian pose，unit[mm][°]；
-    - ``ptool``:TOOL No，[0~14]；
+    - ``ptool``:Tool number，[0~14]；
     - ``puser``:Workpiece number，[0~14]；
     - ``pvel``:Speed percentage，[0~100]；
     - ``pacc``:Acceleration percentage，[0~100]，temporarily closed；
     - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4；
     - ``joint_pos_t``:Target point joint position，unit[°]；
     - ``desc_pos_t``:Cartesian pose of the target point，unit[mm][°]；
-    - ``ttool``:TOOL No，[0~14]；
+    - ``ttool``:Tool number，[0~14]；
     - ``tuser``:Workpiece number，[0~14]；
     - ``tvel``:Speed percentage，[0~100]；
     - ``tacc``:Acceleration percentage，[0~100]，temporarily closed；
@@ -403,7 +403,7 @@ Spiral motion in Cartesian space
     "Description", "Spiral motion in Cartesian space"
     "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
     - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:TOOL No，[0~14]；
+    - ``tool``:Tool number，[0~14]；
     - ``user``:Workpiece number，[0~14]；
     - ``vel``:Speed percentage，[0~100]；
     - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
@@ -451,8 +451,8 @@ Joint space servo mode motion
     "Prototype", "``ServoJ(joint_pos,acc,vel,cmdT,filterT,gain)``"
     "Description", "Joint space servo mode motion"
     "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
     - ``cmdT``:Instruction Cycle，unit[s]，[0.001~0.016]；
     - ``filterT``:Filtering time，unit[s]，temporarily closed；
     - ``gain``:Proportional amplifier for target position，temporarily closed"
@@ -497,8 +497,8 @@ Cartesian space servo mode motion
     "Parameter", "- ``mode``:[0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system)；
     - ``desc_pos``:Target Cartesian Position/Target Cartesian Position Increment；
     - ``pos_gain``:Pose increment ratio coefficient, only effective in incremental motion, range[0~1]；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
     - ``cmdT``:Instruction Cycle，unit[s]，[0.001~0.016]；
     - ``filterT``:Filtering time，unit[s]，temporarily closed；
     - ``gain``:Proportional amplifier for target position，temporarily closed"
@@ -540,10 +540,10 @@ Point-to-point motion in Cartesian space
     "Prototype", "``MoveCart(desc_pos,tool,user,vel,acc,ovl,blendT,config)``"
     "Description", "Point-to-point motion in Cartesian space"
     "Parameter", "- ``desc_pos``:Target Cartesian position；
-    - ``tool``:TOOL No，[0~14]；
+    - ``tool``:Tool number，[0~14]；
     - ``user``:Workpiece number，[0~14]；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
     - ``ovl``:Speed scaling factor，[0~100]；
     - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked)，unit[ms]；
     - ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration"
@@ -595,22 +595,22 @@ Spline motion PTP
     "Description", "Spline motion PTP"
     "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
     - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:TOOL No，[0~14]；
+    - ``tool``:Tool number，[0~14]；
     - ``user``:Workpiece number，[0~14]；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
     - ``ovl``:Speed scaling factor，[0~100]；"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
 
-End of spline motion
+Spline motion end
 -----------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SplineEnd()``"
-    "Description", "End of spline motion"
+    "Description", "Spline motion end"
     "Parameter", "Nothing"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
@@ -641,31 +641,31 @@ Code example
     robot.SplinePTP(J2,P2,0,0,100.0,180.0,100.0)
     robot.SplinePTP(J3,P3,0,0,100.0,180.0,100.0)
     robot.SplinePTP(J4,P4,0,0,100.0,180.0,100.0)
-    robot.SplineEnd()     #End of spline motion
+    robot.SplineEnd()     #Spline motion end
 
 Robot New Spline Motion
 ++++++++++++++++++++++++++++++++
-New spline motion begins
+New spline motion start
 -----------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``NewSplineStart(type)``"
-    "Description", "New spline motion begins"
+    "Description", "New spline motion start"
     "Parameter", "- ``type``:0-arc transition, 1-given point position path point"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
 
 
-End of new spline motion
+New spline motion end
 ----------------------------------
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
     
     "Prototype", "``NewSplineEnd()``"
-    "Description", "End of new spline motion"
+    "Description", "New spline motion end"
     "Parameter", "Nothing"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
@@ -681,10 +681,10 @@ New Spline Instruction Points
     "Description", "New Spline Instruction Points"
     "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
     - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:TOOL No，[0~14]；
+    - ``tool``:Tool number，[0~14]；
     - ``user``:Workpiece number，[0~14]；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to0；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to0；
+    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
+    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
     - ``ovl``:Speed scaling factor，[0~100]；
     - ``blendR``: [0-1000]-smooth radius，unit[mm]；
     - ``lastFlag``:Is it the last point, 0-No, 1-Yes"
@@ -726,7 +726,7 @@ Robot terminates motion
     :widths: 10 30
     
     "Prototype", "``StopMotion()``"
-    "Description", "Terminate the motion, and the motion command must be in a non blocking state when terminating the motion"
+    "Description", "To terminate motion, use the termination motion instructions as non-blocking state"
     "Parameter", "Nothing"
     "Return value", "- Success：[0]
     - Failed：[errcode]"

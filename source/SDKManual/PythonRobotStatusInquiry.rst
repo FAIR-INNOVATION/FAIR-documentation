@@ -1,4 +1,4 @@
-Robot status query
+Status query
 =====================
 
 .. toctree:: 
@@ -261,7 +261,7 @@ Inverse kinematics solution - whether there is a solution
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetInverseKinHasSolution(desc_pos,joint_pos_ref)``"
+    "Prototype", "``GetInverseKinHasSolution(type,desc_pos,joint_pos_ref)``"
     "Description", "Inverse kinematics, tool pose solution, whether joint position is solved"
     "Parameter", "- ``type``：0-Absolute pose (base coordinate system), 1-Relative pose (base coordinate system), 2-Relative pose (tool coordinate system)
     - ``desc_pos``：[x,y,z,rx,ry,rz]tool posture, unit[mm][°]

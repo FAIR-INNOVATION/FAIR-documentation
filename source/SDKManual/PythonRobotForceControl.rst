@@ -1,4 +1,4 @@
-Robot force control
+Force control
 ======================
 
 .. toctree:: 

@@ -1,4 +1,4 @@
-Fundamentals of Robotics
+Basic
 ===========================
 
 .. toctree:: 
@@ -88,7 +88,7 @@ Code example
         print("the errcode is: ", ret[0])
 
 
-Control robot hand automatic mode switching
+Control robot manual/automatic mode switch
 +++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
@@ -96,7 +96,7 @@ Control robot hand automatic mode switching
     :widths: 10 30
 
     "Prototype", "``Mode(state)``"
-    "Description", "Control robot hand automatic mode switching"
+    "Description", "Control robot manual/automatic mode switch"
     "Parameter", "- ``state``：1-Manual mode，0-Automatic mode"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
@@ -176,15 +176,15 @@ Code example
         print("the errcode is: ", ret[0])
 
 
-Control the robot to enable up or down
-+++++++++++++++++++++++++++++++++++++++++
+Control the robot to enable or lower enable
++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``RobotEnable(state)``"
-    "Description", "Control the robot to enable up or down"
+    "Description", "Control the robot to enable or lower enable"
     "Parameter", "- ``state``：1-Upper enable，0-Lower enable"
     "Return value", "- Success：[0]
     - Failed：[errcode]"

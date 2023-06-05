@@ -1,4 +1,4 @@
-Robot trajectory reproduction
+Trajectory recurrence
 ================================ 
 
 .. toctree:: 
