@@ -1,4 +1,4 @@
-Robot trajectory reappears
+Trajectory recurrence
 ==============================
 
 .. toctree:: 
@@ -112,13 +112,13 @@ Trajectory preloading
     */      
     errno_t  LoadTPD(char name[30]);
 
-Trajectory reappearance
+Trajectory recurrence
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Trajectory reappearance
+    * @brief  Trajectory recurrence
     * @param  [in] name  Track file name
     * @param  [in] blend 0- not smooth, 1- smooth
     * @param  [in] ovl  Speed scaling percentage, range [0~100]

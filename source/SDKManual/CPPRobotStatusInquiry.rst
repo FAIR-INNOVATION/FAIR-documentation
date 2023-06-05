@@ -1,4 +1,4 @@
-Robot status query
+Status query
 =====================
 
 .. toctree:: 
@@ -82,13 +82,13 @@ Get the current tool coordinate system number
     */
     errno_t  GetActualTCPNum(uint8_t flag, int *id);
 
-Gets the current workpiece coordinate system number
+Get the current workpiece coordinate system number
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Gets the current workpiece coordinate system number
+    * @brief  Get the current workpiece coordinate system number
     * @param  [in] flag  0- blocking, 1- non-blocking
     * @param  [out] id  Job coordinate system number
     * @return  Error code
@@ -252,7 +252,7 @@ Get system time
 
     /**
     * @brief  Get system time
-    * @param  [out] t_ms 单位ms
+    * @param  [out] t_ms unit: ms
     * @return  Error code
     */
     errno_t  GetSystemClock(float *t_ms);

@@ -1,4 +1,4 @@
-Robot movement
+Movement
 =================
 
 .. toctree:: 
@@ -14,7 +14,7 @@ Jog point movement
     * @brief  Jog point movement
     * @param  [in]  ref 0- node movement, 2- base coordinate system, 4- tool coordinate system, 8- workpiece coordinate system
     * @param  [in]  nb 1-joint 1(or axis x), 2-joint 2(or axis y), 3-joint 3(or axis z), 4-joint 4(or rotation about axis x), 5-joint 5(or rotation about axis y), 6-joint 6(or rotation about axis z)
-    * @param  [in]  dir 0-minus negative, 1-minus positive
+    * @param  [in]  dir 0-negative correlation, 1-positive correlation
     * @param  [in]  vel The percentage of velocity,[0~100]
     * @param  [in]  acc The percentage of acceleration, [0~100]
     * @param  [in]  max_dis Maximum Angle of single click, unit: [°] or distance, unit: [mm]
@@ -452,7 +452,7 @@ Joint space servo mode motion
     /**
     * @brief  Joint space servo mode motion
     * @param  [in] joint_pos  Target joint location, unit: deg
-    * @param  [in] acc  Acceleration percentage (range: 0 to 100), not open yet, default: 0
+    * @param  [in] acc  Acceleration percentage range[0~100], not open yet, default: 0
     * @param  [in] vel  The value ranges from 0 to 100. The value is not available. The default value is 0
     * @param  [in] cmdT Instruction delivery period, unit: s, recommended range [0.001~0.0016]
     * @param  [in] filterT Filtering time (unit: s), temporarily disabled. The default value is 0
@@ -523,7 +523,7 @@ Cartesian space servo mode motion
     * @param  [in]  mode  0- absolute motion (base coordinates), 1- incremental motion (base coordinates), 2- incremental motion (tool coordinates)
     * @param  [in]  desc_pos  Target Cartesian pose or pose increment
     * @param  [in]  pos_gain  Proportional coefficient of pose increment, effective only for incremental motion, range [0~1]
-    * @param  [in] acc  Acceleration percentage (range: 0 to 100), not open yet, default: 0
+    * @param  [in] acc  Acceleration percentage range[0~100], not open yet, default: 0
     * @param  [in] vel  The value ranges from 0 to 100. The value is not available. The default value is 0
     * @param  [in] cmdT Instruction delivery period, unit: s, recommended range [0.001~0.0016]
     * @param  [in] filterT Filtering time (unit: s), temporarily disabled. The default value is 0

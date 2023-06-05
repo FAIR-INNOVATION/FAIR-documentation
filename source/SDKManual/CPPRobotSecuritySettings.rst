@@ -1,4 +1,4 @@
-Robot safety setting
+Security settings
 ========================
 
 .. toctree:: 
@@ -101,8 +101,8 @@ Set joint friction compensation coefficient - side mount
     */
     errno_t  SetFrictionValue_wall(float coeff[6]);
 
-Set joint friction compensation coefficient - inverted
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set joint friction compensation coefficient - reverse mount
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
@@ -113,13 +113,13 @@ Set joint friction compensation coefficient - inverted
     */
     errno_t  SetFrictionValue_ceiling(float coeff[6]);
 
-Set joint friction compensation coefficient - free mounting
+Set joint friction compensation coefficient - free mount
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set joint friction compensation coefficient - free mounting
+    * @brief  Set joint friction compensation coefficient - free mount
     * @param  [in]  coeff Six joint compensation coefficients, range [0~1]
     * @return  Error code
     */
