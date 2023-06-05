@@ -1,4 +1,4 @@
-Robot WebAPP program to use
+WebAPP program use
 ================================
 
 .. toctree:: 

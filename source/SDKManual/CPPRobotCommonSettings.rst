@@ -1,4 +1,4 @@
-Common Settings of robot
+Common Settings
 ==========================
 
 .. toctree:: 
@@ -87,13 +87,13 @@ Set the list of external tool coordinate systems
     */
     errno_t  SetExToolList(int id, DescPose *etcp, DescPose *etool);  
 
-Set work coordinate system
-++++++++++++++++++++++++++++++++++
+Set the workpiece coordinate system
+++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set work coordinate system
+    * @brief  Set the workpiece coordinate system
     * @param  [in] id Frame number, range[1~15]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @return  Error code

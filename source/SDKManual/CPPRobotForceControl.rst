@@ -1,4 +1,4 @@
-Robot manual control
+Force control
 =======================
 
 .. toctree:: 
@@ -612,24 +612,24 @@ Surface positioning
     */   
     errno_t  FT_FindSurface(int rcs, uint8_t dir, uint8_t axis, float lin_v, float lin_a, float max_dis, float ft);   
 
-Start calculating the middle plane position
+Calculation of midplane position starts
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Start calculating the middle plane position
+    * @brief  Calculation of midplane position starts
     * @return  Error code
     */   
     errno_t  FT_CalCenterStart();
 
-The middle plane position is calculated
+Calculation of midplane position ends
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  The middle plane position is calculated
+    * @brief  Calculation of midplane position ends
     * @param  [out] pos Intermediate plane position
     * @return  Error code
     */      

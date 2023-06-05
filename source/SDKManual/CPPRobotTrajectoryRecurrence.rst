@@ -1,4 +1,4 @@
-Robot trajectory reappears
+Trajectory recurrence
 ==============================
 
 .. toctree:: 

@@ -1,10 +1,10 @@
-Robotics basics
+Basics
 =================
 
 .. toctree:: 
     :maxdepth: 5
 
-Instantiate the bot
+Instantiate the robot
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -26,25 +26,25 @@ Establishes communication with the controller
     */
     errno_t  RPC(const char *ip);
 
-Example Query the SDK version
+Query the SDK version number
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Example Query the SDK version
+    * @brief  Query the SDK version number
     * @param  [out] version  SDK version
     * @return  Error code
     */  
     errno_t  GetSDKVersion(char *version);
 
-Obtaining Controller IP address
+Obtain Controller IP address
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Obtaining Controller IP address
+    * @brief  Obtain Controller IP address
     * @param  [out] ip  Controller IP
     * @return  Error code
     */
@@ -74,7 +74,7 @@ Queries whether the robot is in drag mode
     */
     errno_t  IsInDragTeach(uint8_t *state);
 
-Enable or disable the control robot
+Control up enable and down enable
 +++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -86,13 +86,13 @@ Enable or disable the control robot
     */
     errno_t  RobotEnable(uint8_t state);
 
-Control the automatic mode switch of the robot hand
+Control robot hand/automatic mode
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Control the automatic mode switch of the robot hand
+    * @brief Control robot hand/automatic mode
     * @param [in] mode 0-automatic mode，1-manual mode
     * @return Error code
     */

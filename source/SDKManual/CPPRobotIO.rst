@@ -1,4 +1,4 @@
-Robot IO
+IO
 ============
 
 .. toctree:: 
@@ -76,13 +76,13 @@ Get the control box digital input
     */   
     errno_t  GetDI(int id, uint8_t block, uint8_t *result);
 
-Gets tool numeric input
+Get tool numeric input
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Gets tool numeric input
+    * @brief  Get tool numeric input
     * @param  [in] id  I/O number, range[0~1]
     * @param  [in] block  0- blocking, 1- non-blocking
     * @param  [out] result  0- low, 1- high
@@ -150,13 +150,13 @@ Get control box analog input
     */   
     errno_t  GetAI(int id, uint8_t block, float *result); 
 
-Gets the tool analog input
+Get the tool analog input
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Gets the tool analog input
+    * @brief  Get the tool analog input
     * @param  [in] id  I/O numbers，range[0~1]
     * @param  [in] block  0- blocking, 1- non-blocking
     * @param  [out] result  Percentage of input current or voltage value, range [0-100] corresponding to current value [0-20ms] or voltage [0-10V]

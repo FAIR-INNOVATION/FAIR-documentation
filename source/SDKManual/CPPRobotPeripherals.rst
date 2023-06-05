@@ -1,16 +1,16 @@
-Robot peripheral
+Peripheral
 ====================
 
 .. toctree:: 
     :maxdepth: 5
 
-Configuration jaw
+Configure the gripper
 ++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Configuration jaw
+    * @brief  Configure the gripper
     * @param  [in] company  Claw manufacturer, to be determined
     * @param  [in] device  Device number, not used yet. The default value is 0
     * @param  [in] softvesion  Software version. The value is not used. The default value is 0
@@ -19,13 +19,13 @@ Configuration jaw
     */
     errno_t  SetGripperConfig(int company, int device, int softvesion, int bus);
 
-Obtain the jaw configuration
-+++++++++++++++++++++++++++++++
+Obtain the gripper configuration
++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Obtain the jaw configuration
+    * @brief  Obtain the gripper configuration
     * @param  [in] company  Claw manufacturer, to be determined
     * @param  [in] device  Device number, not used yet. The default value is 0
     * @param  [in] softvesion  Software version. The value is not used. The default value is 0
@@ -34,27 +34,27 @@ Obtain the jaw configuration
     */
     errno_t  GetGripperConfig(int *company, int *device, int *softvesion, int *bus);
 
-Activating jaw
+Activate gripper
 ++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Activating jaw
-    * @param  [in] index  Jaw number
+    * @brief  Activate Activate gripper
+    * @param  [in] index  gripper gripper
     * @param  [in] act  0- reset, 1- activate
     * @return  Error code
     */
     errno_t  ActGripper(int index, uint8_t act);
 
-Control jaw
+Control gripper
 ++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Control jaw
-    * @param  [in] index  Jaw number
+    * @brief  Control gripper
+    * @param  [in] index  gripper number
     * @param  [in] pos  Percentage of position, range[0~100]
     * @param  [in] vel  Percentage of velocity, range[0~100]
     * @param  [in] force  Percentage of torque, range[0~100]
@@ -64,13 +64,13 @@ Control jaw
     */
     errno_t  MoveGripper(int index, int pos, int vel, int force, int max_time, uint8_t block);
 
-Obtain the jaw motion state
-+++++++++++++++++++++++++++++
+Obtain the gripper motion state
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Obtain the jaw motion state
+    * @brief  Obtain the gripper motion state
     * @param  [out] fault  0- no error, 1- error
     * @param  [out] staus  0- motion incomplete, 1- motion complete
     * @return  Error code

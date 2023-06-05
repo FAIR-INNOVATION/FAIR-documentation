@@ -1,4 +1,4 @@
-Robot movement
+Movement
 =================
 
 .. toctree:: 
