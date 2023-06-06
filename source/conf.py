@@ -8,7 +8,7 @@
 
 project = 'FAIR'
 copyright = '2023, FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
-author = 'Zhao Jinqi, Wang Chao, Gao Jiachao, Zhao Hao, Zhang Jun'
+author = 'FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
 release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------

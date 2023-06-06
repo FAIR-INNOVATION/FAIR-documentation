@@ -1,50 +1,50 @@
-术语
+Term
 ========
 
 .. toctree:: 
 	:maxdepth: 5
 
 
-**停止类别**：
+**Shutdown Category**：
 
-- **0类停机**：当机器人的电源被切断后，机器人立刻停止工作。这是不可控的停止，由于每个关节会以最快的速度制动，因此机器人可能偏离程序设定的路径。当超过安全评定极限，或当控制系统的安全评定部分出现错误的情况下方可使用这种保护性停止。要了解更多信息，请参阅ENISO13850:2008或IEC60204-1:2006。
-- **1类停机**：当为机器人供电使其停止时，机器人就停止，当机器人实现停止后切断电源。这是可控性停止，机器人会遵循程序编制的路径。一秒钟之后或一旦机器人停稳后就将电源切断。要了解更多信息，请参阅ENISO13850:2008或IEC60204-1:2006。
-- **2类停机**：机器人通电时的可控性停止。机器人在一秒钟时间内停止所有动作。安全评定控制系统的操控可使机器人停留在停止的位置。要了解更多信息，请参阅IEC60204-1:2006。
+- **Class 0 shutdown**：When the power supply of the robot is cut off, the robot stops working immediately. This is an uncontrollable stop. Since each joint will brake at the fastest speed, the robot may deviate from the path set by the program.This protective stop can be used when the safety assessment limit is exceeded, or when an error occurs in the safety assessment part of the control system. For more information, refer to ENISO13850:2008 or IEC60204-1:2006.
+- **Class 1 shutdown**：When the robot is powered to stop, the robot will stop. When the robot stops, the power will be cut off. This is a controllable stop, and the robot will follow the programmed path.Cut off the power supply after one second or once the robot stops stably. For more information, refer to ENISO13850:2008 or IEC60204-1:2006.
+- **Class 2 shutdown**：Controllable stop when the robot is powered on. The robot stops all movements within one second.The operation of the safety assessment control system can make the robot stay at the stop position. For more information, refer to IEC60204-1:2006.
 
-**诊断覆盖率（DC）**：用于衡量为了达到评定的性能等级而实施的诊断的有效性。要了解更多信息，请参阅ENISO13849-1:2008。
+**Diagnostic coverage rate（DC）**：Used to measure the effectiveness of the diagnosis implemented to achieve the assessed performance level. For more information, see ENISO13849-1:2008.。
 
-**集成商**：集成商即设计机器人最终安装的机构。集成商负责进行最终风险评估，必须确保最终安装遵循当地的法律法规。
+**Integrator**：The integrator is the mechanism that designs the final installation of the robot. The integrator is responsible for the final risk assessment and must ensure that the final installation complies with local laws and regulations.
 
-**平均危险失效时间（MTTFd）**：平均危险失效时间（MTTFd）指的是为了达到评定的性能等级而进行计算和检测所得的值。要了解更多信息，请参阅ENISO13849-1:2008。
+**Mean time to dangerous failure（MTTFd）**：The mean time to dangerous failure (MTTFd) refers to the value calculated and detected to reach the assessed performance level. For more information, see ENISO13849-1:2008.
 
-**风险评估**：风险评估即识别所有风险并将风险降低到适当程度的整个过程。风险评估应进行记录存档。详情请参考ISO12100。
+**Risk assessment**：Risk assessment is the whole process of identifying all risks and reducing them to an appropriate level.The risk assessment shall be recorded and archived.For details, please refer to ISO12100.
 
-**性能等级**：性能等级（Performance Level,PL）是一个分离的等级，它用于说明控制系统中各个与安全相关的部分在可预测的条件下执行安全功能的能力。PLd是第二高的可信度分类，它意味着安全功能相当值得信赖。要了解更多信息，请参阅EN ISO13849-1:2008。
+**Performance Level**：Performance Level (PL) is a separate level, which is used to describe the ability of each safety related part of the control system to perform safety functions under predictable conditions. PL is the second highest reliability category, which means that the security function is quite trustworthy.For more information, refer to EN ISO13849-1:2008.
 
-**连接法兰**：用于连接外部工具的结构，一般称为法兰盘。
+**Connecting flange**：The structure used to connect external tools, generally called flange.
 
-**机器人末端**：机器人最后一个轴或连接法兰的中心点。
+**Robot end**： The center point of the last axis or connecting flange of the robot.
 
-**工具中心点（TCP）**：工具中心点即机器人工具的特征点，是机器人系统的控点，出厂时默认于最后一个运动轴或连接法兰的中心。每个工具的工具中心点都包含相对于工具输出法兰中心而设定的转换和旋转。位置坐标X、Y、Z决定了工具中心点的位置，RX、RY、RZ决定了工具中心的方向。当其值均为零时，工具中心与连接法兰中心点重合。
+**Tool center point（TCP）**：The tool center point is the characteristic point of the robot tool, which is the control point of the robot system. It defaults to the center of the last moving axis or connecting flange when leaving the factory. The tool center point of each tool contains transformations and rotations set relative to the center of the tool output flange. The position coordinates X, Y, Z determine the position of the tool center point, and RX, RY, RZ determine the direction of the tool center.When the values are all zero, the center of the tool coincides with the center of the connecting flange.
 
-**工具位姿点（TCF）**：在工具中心点TCP的基础上，反应工具坐标系相对于末端连杆坐标系的姿态。
+**Tool position and attitude point（TCF）**：Reflect the attitude of the tool coordinate system relative to the end link coordinate system on the basis of the tool center point TCP.
 
-**基坐标系**：基坐标系的原点一般定义在机器人第一轴与安装面的中心点，x轴向前，在轴向上，y轴按右手规则确定。
+**Base coordinate system**：The origin of the base coordinate system is generally defined at the center point between the first axis of the robot and the mounting surface. The x-axis is forward, and the y-axis is determined according to the right-hand rule in the axial direction.
 
-**世界坐标系**：建立在工作单元或工作站中的固定坐标系。当只有一个机器人时，该坐标系可认为与基坐标系重合；当有多个机器人或外部设备时，世界坐标系可为这些设备提供一个唯一的参考系，在满足方便标定其他设备的坐标系前提下，其具体位置可以任意指定。
+**World coordinate system**：A fixed coordinate system established in a work unit or workstation.When there is only one robot, the coordinate system can be considered to coincide with the base coordinate system;When there are multiple robots or external devices, the world coordinate system can provide a unique reference system for these devices. On the premise of satisfying the coordinate system for convenient calibration of other devices, its specific position can be arbitrarily specified.
 
-**关节坐标系**：关节坐标系是机器人关节中的坐标系，在关节坐标系下，机器人各轴均可实现在限位范围内的单独的正向或反向运动。适用于需要对机器人进行大范围的运动且不要求机器人TCP姿态。机器人手动模式下的单轴点动就是在关节坐标系下进行的。
+**Joint coordinate system**： The joint coordinate system is the coordinate system in the robot joint. Under the joint coordinate system, each axis of the robot can achieve independent forward or reverse movement within the limit range. It is applicable to the robot that needs to move in a large range and does not require the TCP posture of the robot. The single axis inching of the robot in manual mode is carried out in the joint coordinate system.
 
-**工具坐标系**：用于定义工具中心点的位置和工具姿态的坐标系，未定义时，工具坐标系默认在连接法兰的中心处。安装工具后，TCP将发生变化，变为工具末端的中心。
+**Tool coordinate system**：The coordinate system used to define the position of the tool center point and the tool attitude. If not defined, the tool coordinate system defaults to the center of the connecting flange.After installing the tool, TCP will change and become the center of the end of the tool.
 
-**外部工具坐标系**：用于定义固定在机器人外部的工具位姿的坐标系。
+**External tool coordinate system**: The coordinate system used to define the position and pose of tools fixed outside the robot.
 
-**扩展轴**：除去机器人本体上的轴，为了工作需要额外增加的轴，扩展轴主要包含滑轨，翻转台和外加伺服设备等类型。
+**Extension axis**：Remove the axis on the robot body, and add additional axis for work. The extension axis mainly includes slide rail, turntable and external servo equipment.
 
-**手动模式**：在该模式下，机器人的所有运动均由用户手动控制，并且安全光栅、安全门等外部安全设施不起作用，以便近距离调试。
+**Manual mode**： In this mode, all movements of the robot are manually controlled by the user, and external safety facilities such as safety gratings and safety doors do not work, so as to facilitate close debugging. 
 
-**自动模式**：该模式一般用于机器人运行示教程序，此时外部安全设施启用。
+**Automatic mode**：This mode is generally used for the robot to run the teaching program. At this time, the external safety facilities are enabled.
 
-**重复定位精度**：机器人在同一条件下，用同一方法操作时，重复n次所测得的位置与姿态的一致程度。
+**Repetitive positioning accuracy**：The consistency of the position and attitude measured by the robot in the same condition and the same method for n times.
 
-**示教器**：对机器人进行编程或使机器人运动，并与控制系统相连接的手持式单元。
+**Teaching pendant**：A hand-held unit that programs or moves the robot and is connected to the control system.
