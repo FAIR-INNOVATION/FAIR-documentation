@@ -58,14 +58,14 @@ Obtain gripper movement status
     "Return value", "- Success：[0,status], status:0-incomplete movement，1-exercise completion
     - Failed：[errcode]"
 
-Configuring Clamping Claws
+Configure gripper
 +++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetGripperConfig(company,device,softversion,bus)``"
-    "Description", "Configuring Clamping Claws"
+    "Description", "Configure gripper"
     "Parameter", "- ``company``：Claw manufacturers, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing；
     - ``device``：Equipment number: Robotiq(0-2F-85 series), Huiling(0-NK series, 1-Z-EFG-100), Tianji(0-TEG-110), Dahuan(0-PGI-140), Zhixing(0-CTPM2F20)
     - ``softversion``：Software version number, temporarily not used, defaults to 0；

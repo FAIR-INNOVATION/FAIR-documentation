@@ -4,14 +4,14 @@ WebAPP program use
 .. toctree:: 
     :maxdepth: 5
 
-Set the default job program to automatically load upon start up
+Set up and automatically load the default operating program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``LoadDefaultProgConfig(flag,program_name)``"
-    "Description", "Set the default job program to automatically load upon start up"
+    "Description", "Set up and automatically load the default operating program"
     "Parameter", "- ``flag``：1-automatically load the default program upon startup, 0-do not automatically load the default program
     - ``program_name``：The name and path of the homework program, such as “/fraser/movej.lua”, where “/fraser/” is a fixed path"
     "Return value", "- Success：[0]

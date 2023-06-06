@@ -88,14 +88,14 @@ Code example
     robot.SetWebTPDStop()  # Stop recording instructional tracks
     robot.DragTeachSwitch(0)  #The robot enters the non-drag teaching mode
 
-Delete Track Record
+Delete trajectory record
 +++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTPDDelete(name)``"
-    "Description", "Delete Track Record"
+    "Description", "Delete trajectory record"
     "Parameter", "- ``name``:Track name"
     "Return value", "- Success：[0]
     - Failed：[errcode]"

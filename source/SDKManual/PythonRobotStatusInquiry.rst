@@ -80,14 +80,14 @@ Code example
     ret = robot.GetActualJointPosDegree(0)  # Obtain the current joint position of the robot
     print(ret)
 
-Obtain the current joint position in radians
+Obtain the current joint position(radian)
 +++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetActualJointPosRadian(flag)``"
-    "Description", "Obtain the current joint position in radians"
+    "Description", "Obtain the current joint position(radian)"
     "Parameter", "- ``flag``：0-blocking, 1-non blocking"
     "Return value", "- Success：[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
     - Failed：[errcode,]"
@@ -104,14 +104,14 @@ Code example
     ret = robot.GetActualJointPosRadian(0)  # Obtain the current joint position of the robot
     print(ret)
 
-Obtain the current position of the joint in radians
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Obtain the current tool pose
+++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetActualTCPPose(flag)``"
-    "Description", "Obtain the current position of the joint in radians"
+    "Description", "Obtain the current tool pose"
     "Parameter", "- ``flag``：0-blocking, 1-non blocking"
     "Return value", "- Success：[0,tcp_pose],tcp_pose=[x,y,z,rx,ry,rz]
     - Failed：[errcode,]"
@@ -152,14 +152,14 @@ Code example
     ret = robot.GetActualTCPNum(0)  # Obtain the current tool coordinate system number
     print(ret)
 
-Obtain the current tool coordinate system number
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Obtain the current workpiece coordinate system number
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetActualWObjNum(flag)``"
-    "Description", "Obtain the current tool coordinate system number"
+    "Description", "Obtain the current workpiece coordinate system number"
     "Parameter", "- ``flag``：0-blocking, 1-non blocking"
     "Return value", "- Success：[0,wobj_id]
     - Failed：[errcode,]"
@@ -173,7 +173,7 @@ Code example
     import frrpc
     # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualWObjNum(0)  # Obtain the current tool coordinate system number
+    ret = robot.GetActualWObjNum(0)  # Obtain the current workpiece coordinate system number
     print(ret)
 
 Obtain the current end flange pose
@@ -227,14 +227,14 @@ Code example
     ret = robot.GetInverseKin(0,P1,-1)
     print(ret)
 
-Inverse kinematics solving - specify reference position
+Inverse kinematics solution - Specify reference location
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetInverseKinRef(type,desc_pos,joint_pos_ref)``"
-    "Description", "Inverse kinematics solving - specify reference position"
+    "Description", "Inverse kinematics solve inverse kinematics, tool pose solve joint position, and refer to specified joint position to solve"
     "Parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
     - ``desc_pos``：[x,y,z,rx,ry,rz]tool posture，unit[mm][°]
     - ``joint_pos_ref``：[j1,j2,j3,j4,j5,j6]， joint reference position，unit[°]"
@@ -452,14 +452,14 @@ Code example
     ret = robot.GetJointSoftLimitDeg(0)  # btain joint soft limit angle
     print(ret)
 
-Get SysTime
+Get system time
 ++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetSystemClock()``"
-    "Description", "Get SysTime"
+    "Description", "Get system time"
     "Parameter", "Nothing"
     "Return value", "- Success：[0,t_ms]:unit[ms]
     - Failed：[errcode,]"

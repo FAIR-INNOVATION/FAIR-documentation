@@ -284,7 +284,7 @@ Collision protection
     "Description", "Collision protection"
     "Parameter", "- ``flag``：0-Turn off collision protection, 1-Turn on collision protection；
     - ``sensor_num``：Force sensor number；
-    - ``select``：Do the six degrees of freedom detect collisions[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective；
+    - ``select``：Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective；
     - ``force_torque``：Collision detection force/moment，unit[N or Nm]；
     - ``max_threshold``：Maximum threshold；
     - ``min_threshold``：Minimum Threshold；
@@ -302,7 +302,7 @@ Code example
     robot = frrpc.RPC('192.168.58.2')
     actFlag = 1   #Enable flag, 0-Disable collision guard, 1-Enable collision guard
     sensor_num = 1  #Force sensor number
-    is_select = [1,1,1,1,1,1]  #Do the six degrees of freedom detect collisions[fx,fy,fz,mx,my,mz],0-Ineffective, 1-Effective
+    is_select = [1,1,1,1,1,1]  #Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz],0-Ineffective, 1-Effective
     force_torque = [0.0,0.0,0.0,0.0,0.0,0.0]  #Collision detection force/moment,detection range（force_torque-min_threshold,force_torque+max_threshold）
     max_threshold = [10.0,10.0,10.0,10.0,10.0,10.0]  #Maximum threshold
     min_threshold = [5.0,5.0,5.0,5.0,5.0,5.0]   #Minimum Threshold
@@ -367,14 +367,14 @@ Code example
     status = 0
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
 
-Spiral exploration
+Spiral line exploration
 ++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_SpiralSearch(rcs,dr,fFinsih,t,vmax)``"
-    "Description", "Spiral exploration"
+    "Description", "Spiral line exploration"
     "Parameter", "- ``rcs``：Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
     - ``dr``：Feed rate per circle radius, unit[mm]；
     - ``fFinish``：Force or torque threshold (0-100), unit[N/Nm]；
@@ -517,26 +517,26 @@ Code example
     status = 0
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
 
-Starting from calculating the position of the midplane
+Calculate the middle plane position to start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_CalCenterStart()``"
-    "Description", "Starting from calculating the position of the midplane"
+    "Description", "Calculate the middle plane position to start"
     "Parameter", "Nothing"
     "Return value", "- Success：[0]
     - Failed：[errcode]"
 
-End of calculating the position of the middle plane
+Calculate the end of the middle plane position
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_CalCenterEnd()``"
-    "Description", "End of calculating the position of the middle plane"
+    "Description", "Calculate the end of the middle plane position"
     "Parameter", "Nothing"
     "Return value", "- Success：[0,pos] ,pos=[x,y,z,rx,ry,rz]
     - Failed：[errcode]"
