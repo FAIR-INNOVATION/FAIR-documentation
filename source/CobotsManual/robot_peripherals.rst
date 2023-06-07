@@ -21,7 +21,7 @@ Gripper program teaching steps
 .. important:: 
 	The corresponding gripper should be inactive before clicking Clear Configuration.
 
-**Step2**：After the gripper configuration is completed, the user can view the corresponding gripper information in the gripper information table at the bottom of the page. If configuration errors are found, click the "Clear" button to reconfigure the grippers;
+**Step2**：After the gripper configuration is completed, the user can view the corresponding gripper information in the gripper information table at the bottom of the page. If configuration errors are found, click the "Reset" button to reconfigure the grippers;
 
 .. figure:: robot_peripherals/002.png
    :align: center
@@ -529,7 +529,7 @@ Extended IO device peripheral configuration
 Extended IO device configuration steps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：Select the "End Peripheral Configuration" button in the user peripheral configuration interface, and select "Extended IO Device" for the device type. The configuration information of the extended IO device is divided into manufacturer, type, software version and mounting location. Users can select according to specific production needs. To configure the corresponding device information. If the user needs to change the configuration, he can first select the corresponding number, click the "clear" button to clear the corresponding information, and reconfigure according to the needs;
+**Step1**：Select the "End Peripheral Configuration" button in the user peripheral configuration interface, and select "Extended IO Device" for the device type. The configuration information of the extended IO device is divided into manufacturer, type, software version and mounting location. Users can select according to specific production needs. To configure the corresponding device information. If the user needs to change the configuration, he can first select the corresponding number, click the "Clear" button to clear the corresponding information, and reconfigure according to the needs;
 
 .. figure:: robot_peripherals/054.png
    :align: center
