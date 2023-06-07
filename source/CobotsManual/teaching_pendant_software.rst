@@ -243,9 +243,9 @@ The menu bar is as shown in Table 3.2-1 Teaching Pendant Menu Columns
 Operating area
 ~~~~~~~~~~~~~~~~~
 
-IO settings can refer to \ `4.5.1 I/O settings <#id26>`__\  in 4.5 Control Box I/O.
+IO settings can refer to \ `4.5.1 I/O settings <#i-o-settings>`__\  in 4.5 Control Box I/O.
 
-Joint, Base and other functions can refer to \ `4.6 Robot operation <#id30>`__\.
+Joint, Base and other functions can refer to \ `4.6 Robot operation <#robot-operation>`__\.
 
 3D simulation robot
 ---------------------
