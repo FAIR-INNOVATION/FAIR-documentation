@@ -13,8 +13,8 @@ Obtain force sensor configuration
     "Prototype", "``FT_GetConfig()``"
     "Description", "Obtain force sensor configuration"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0, company,device,softversion,bus],company:传感器厂商
-    - Failed：[errcode]"
+    "Return value", "- Success:[0, company,device,softversion,bus],company:传感器厂商
+    - Failed:[errcode]"
 
 Force sensor configuration
 ++++++++++++++++++++++++++++++
@@ -24,12 +24,12 @@ Force sensor configuration
 
     "Prototype", "``FT_SetConfig(company,device,softversion,bus)``"
     "Description", "Force sensor configuration"
-    "Parameter", "- ``company``：Sensor manufacturer，17-Kunwei Technology，19-Aerospace 11th Institute，20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core；
-    - ``device``：equipment number: Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongkomi Point (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A)；
-    - ``softversion``：software version number, temporarily not used, defaults to 0;；
-    - ``bus``：device mounted terminal bus position, temporarily not used, defaults to 0;"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``company``:Sensor manufacturer,17-Kunwei Technology,19-Aerospace 11th Institute,20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core;
+    - ``device``:equipment number: Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongkomi Point (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A);
+    - ``softversion``:software version number, temporarily not used, defaults to 0;;
+    - ``bus``:device mounted terminal bus position, temporarily not used, defaults to 0;"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -40,7 +40,7 @@ Code example
     import frrpc
     # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    company = 17    #Sensor manufacturer，17-Kunwei Technology，
+    company = 17    #Sensor manufacturer,17-Kunwei Technology,
     device = 0      #Sensor equipment number
     softversion = 0 #software version number
     bus = 1         #End bus position
@@ -56,9 +56,9 @@ Force sensor activation
 
     "Prototype", "``FT_Activate(state)``"
     "Description", "Force sensor activation"
-    "Parameter", "- ``state``：0-Reset，1-Activate"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``state``:0-Reset,1-Activate"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -82,9 +82,9 @@ Zero calibration of force sensor
 
     "Prototype", "``FT_SetZero(state)``"
     "Description", "Zero calibration of force sensor"
-    "Parameter", "- ``state``：0-Remove zero，1-Zero correction"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``state``:0-Remove zero,1-Zero correction"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -108,9 +108,9 @@ Set the force sensor reference coordinate system
 
     "Prototype", "``FT_SetRCS(ref)``"
     "Description", "Set the force sensor reference coordinate system"
-    "Parameter", "- ``ref``：0-Tool coordinate system，1-Base coordinate system"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``ref``:0-Tool coordinate system,1-Base coordinate system"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -133,8 +133,8 @@ Load weight identification calculation
     "Prototype", "``FT_PdIdenCompute()``"
     "Description", "Load weight identification calculation"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,weight] ,weight-Load weight，unit[kg]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0,weight] ,weight-Load weight,unit[kg]
+    - Failed:[errcode]"
 
 Load weight identification record
 +++++++++++++++++++++++++++++++++++++
@@ -144,9 +144,9 @@ Load weight identification record
 
     "Prototype", "``FT_PdIdenRecord(tool_id)``"
     "Description", "Load weight identification record"
-    "Parameter", "- ``tool_id``：Sensor coordinate number，range[0~14]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -169,7 +169,7 @@ Code example
     time.sleep(1)
     robot.FT_PdIdenRecord(tool_id)   #Record identification data
     time.sleep(1)
-    weight = robot.FT_PdIdenCompute()  #Calculated load weight，unit[kg]
+    weight = robot.FT_PdIdenCompute()  #Calculated load weight,unit[kg]
     print(weight)
 
 
@@ -182,8 +182,8 @@ Load centroid identification calculation
     "Prototype", "``FT_PdCogIdenCompute()``"
     "Description", "Load centroid identification calculation"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,cog],cog=[cogx,cogy,cogz] ，Load centroid，unit[mm]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0,cog],cog=[cogx,cogy,cogz] ,Load centroid,unit[mm]
+    - Failed:[errcode]"
 
 Load centroid identification record
 ++++++++++++++++++++++++++++++++++++++
@@ -193,9 +193,9 @@ Load centroid identification record
 
     "Prototype", "``FT_PdCogIdenRecord(tool_id)``"
     "Description", "Load centroid identification record"
-    "Parameter", "- ``tool_id``：Sensor coordinate number，range[0~14]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -235,8 +235,8 @@ Obtain force/torque data in the reference coordinate system
     "Prototype", "``FT_GetForceTorqueRCS()``"
     "Description", "Obtain force/torque data in the reference coordinate system"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,data] ,data=[fx,fy,fz,mx,my,mz]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0,data] ,data=[fx,fy,fz,mx,my,mz]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -259,8 +259,8 @@ Obtain raw force/torque data from the force sensor
     "Prototype", "``FT_GetForceTorqueOrigin()``"
     "Description", "Obtain raw force/torque data from the force sensor"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,data] ,data=[fx,fy,fz,mx,my,mz]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0,data] ,data=[fx,fy,fz,mx,my,mz]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -282,15 +282,15 @@ Collision protection
 
     "Prototype", "``FT_Guard(flag,sensor_num,select,force_torque,max_threshold,min_threshold)``"
     "Description", "Collision protection"
-    "Parameter", "- ``flag``：0-Turn off collision protection, 1-Turn on collision protection；
-    - ``sensor_num``：Force sensor number；
-    - ``select``：Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective；
-    - ``force_torque``：Collision detection force/moment，unit[N or Nm]；
-    - ``max_threshold``：Maximum threshold；
-    - ``min_threshold``：Minimum Threshold；
+    "Parameter", "- ``flag``:0-Turn off collision protection, 1-Turn on collision protection;
+    - ``sensor_num``:Force sensor number;
+    - ``select``:Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective;
+    - ``force_torque``:Collision detection force/moment,unit[N or Nm];
+    - ``max_threshold``:Maximum threshold;
+    - ``min_threshold``:Minimum Threshold;
     - Force/torque detection range:(force_torque-min_threshold,force_torque+max_threshold)"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -324,17 +324,17 @@ Constant force control
 
     "Prototype", "``FT_Control(flag,sensor_num,select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)``"
     "Description", "Constant force control"
-    "Parameter", "- ``flag``：Constant force control open flag, 0-off, 1-on；
-    - ``sensor_num``：Force sensor number；
-    - ``select``：Are the six degrees of freedom detected [fx,fy,fz,mx,my,mz],0-ineffective, 1-effective;
-    - ``force_torque``：Detection force/torque, unit[N or Nm]；
-    - ``gain``：[f_p,f_i,f_d,m_p,m_i,m_d],Force PID parameters, Torque PID parameters；
-    - ``adj_sign``：Adaptive start stop status, 0-off, 1-on；
-    - ``ILC_sign``: ILC control start stop status, 0-stop, 1-training, 2-practical operation；
-    - ``max_dis``：Maximum adjustment distance；
-    - ``max_ang``：Maximum adjustment angle；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``flag``:Constant force control open flag, 0-off, 1-on;
+    - ``sensor_num``:Force sensor number;
+    - ``select``:Are the six degrees of freedom detected [fx,fy,fz,mx,my,mz],0-ineffective, 1-effective;
+    - ``force_torque``:Detection force/torque, unit[N or Nm];
+    - ``gain``:[f_p,f_i,f_d,m_p,m_i,m_d],Force PID parameters, Torque PID parameters;
+    - ``adj_sign``:Adaptive start stop status, 0-off, 1-on;
+    - ``ILC_sign``: ILC control start stop status, 0-stop, 1-training, 2-practical operation;
+    - ``max_dis``:Maximum adjustment distance;
+    - ``max_ang``:Maximum adjustment angle;"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -346,7 +346,7 @@ Code example
     robot = frrpc.RPC('192.168.58.2')
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     gain = [0.0005,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
@@ -375,13 +375,13 @@ Spiral line exploration
 
     "Prototype", "``FT_SpiralSearch(rcs,dr,fFinsih,t,vmax)``"
     "Description", "Spiral line exploration"
-    "Parameter", "- ``rcs``：Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
-    - ``dr``：Feed rate per circle radius, unit[mm]；
-    - ``fFinish``：Force or torque threshold (0-100), unit[N/Nm]；
-    - ``t``：Maximum exploration time，unit[ms]；
-    - ``vmax``：Maximum linear speed，unit[mm/s]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
+    - ``dr``:Feed rate per circle radius, unit[mm];
+    - ``fFinish``:Force or torque threshold (0-100), unit[N/Nm];
+    - ``t``:Maximum exploration time,unit[ms];
+    - ``vmax``:Maximum linear speed,unit[mm/s]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -394,7 +394,7 @@ Code example
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
@@ -403,11 +403,11 @@ Code example
     max_ang = 5.0  #Maximum adjustment angle
     #Helix explore parameters
     rcs = 0  #Reference frame, 0-Tool frame, 1-Base frame
-    dr = 0.7  #Feed per circle radius，unit[mm]
-    fFinish = 1.0 #Force or moment threshold（0~100），unit[N or Nm]
-    t = 60000.0 #Maximum exploration time，unit[ms]
+    dr = 0.7  #Feed per circle radius,unit[mm]
+    fFinish = 1.0 #Force or moment threshold（0~100）,unit[N or Nm]
+    t = 60000.0 #Maximum exploration time,unit[ms]
     vmax = 3.0 #The maximum linear velocity, unit[mm/s]
-    is_select = [0,0,1,1,1,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [0,0,1,1,1,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
     robot.FT_SpiralSearch(rcs,dr,fFinish,t,vmax)
     status = 0
@@ -421,15 +421,15 @@ Rotate Insert
 
     "Prototype", "``FT_RotInsertion(rcs,angVelRot,forceInsertion,angleMax,orn,angAccmax,rotorn)``"
     "Description", "Rotate Insert"
-    "Parameter", "- ``rcs``：Reference coordinate system, 0-tool coordinate system, 1-base coordinate system；
-    - ``angVelRot``：Rotational angular velocity: uni[t°/s]；
-    - ``forceInsertion``：Force or torque threshold(0~100)，unit[N or Nm]；
-    - ``angleMax``：maximum rotation angle, unit[°]；
-    - ``orn``：Direction of force, 1-fz,2-mz；
-    - ``angAccmax``：Maximum rotational acceleration, unit[°/s^2]，not used temporarily
-    - ``rotorn``：Rotation direction, 1-clockwise, 2-counterclockwise"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system;
+    - ``angVelRot``:Rotational angular velocity: uni[t°/s];
+    - ``forceInsertion``:Force or torque threshold(0~100),unit[N or Nm];
+    - ``angleMax``:maximum rotation angle, unit[°];
+    - ``orn``:Direction of force, 1-fz,2-mz;
+    - ``angAccmax``:Maximum rotational acceleration, unit[°/s^2],not used temporarily
+    - ``rotorn``:Rotation direction, 1-clockwise, 2-counterclockwise"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -442,7 +442,7 @@ Code example
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
@@ -451,13 +451,13 @@ Code example
     max_ang = 5.0  #Maximum adjustment angle
     #Rotational insertion parameter
     rcs = 0  #Reference frame, 0-Tool frame, 1-Base frame
-    angVelRot = 2.0  #Rotational angular velocity，unit[°/s]
-    forceInsertion = 1.0 #Force or moment threshold（0~100），unit[N or Nm]
-    angleMax= 45 #Maximum rotation Angle，unit[°]
-    orn = 1 #Direction of force，1-fz,2-mz
-    angAccmax = 0.0 #Maximum rotational acceleration, unit[°/s^2]，not used temporarily
+    angVelRot = 2.0  #Rotational angular velocity,unit[°/s]
+    forceInsertion = 1.0 #Force or moment threshold（0~100）,unit[N or Nm]
+    angleMax= 45 #Maximum rotation Angle,unit[°]
+    orn = 1 #Direction of force,1-fz,2-mz
+    angAccmax = 0.0 #Maximum rotational acceleration, unit[°/s^2],not used temporarily
     rotorn = 1 #Rotation direction, 1-clockwise, 2-counterclockwise
-    s_select = [0,0,1,1,1,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    s_select = [0,0,1,1,1,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     status = 1
@@ -474,14 +474,14 @@ Linear insertion
 
     "Prototype", "``FT_LinInsertion(rcs,force_goal,lin_v,lin_a,disMax,linorn)``"
     "Description", "Linear insertion"
-    "Parameter", "- ``rcs``：Reference frame, 0-Tool frame, 1-Base frame；
-    - ``force_goal``：Force or torque threshold, unit[N or Nm]；
-    - ``lin_v``：Linear velocity, unit[mm/s]；
-    - ``lin_a``：Linear acceleration, unit[mm/s^2]，not used temporarily；
-    - ``disMax``：Maximum insertion distance，unit[mm]；
-    - ``linorn``：Insertion direction, 1-positive direction, 2-negative direction；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``rcs``:Reference frame, 0-Tool frame, 1-Base frame;
+    - ``force_goal``:Force or torque threshold, unit[N or Nm];
+    - ``lin_v``:Linear velocity, unit[mm/s];
+    - ``lin_a``:Linear acceleration, unit[mm/s^2],not used temporarily;
+    - ``disMax``:Maximum insertion distance,unit[mm];
+    - ``linorn``:Insertion direction, 1-positive direction, 2-negative direction;"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -494,7 +494,7 @@ Code example
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
@@ -503,12 +503,12 @@ Code example
     max_ang = 5.0  #Maximum adjustment angle
     #Linear insertion parameter
     rcs = 0  #Reference frame, 0-Tool frame, 1-Base frame
-    force_goal = 20.0  #Force or moment threshold（0~100），unit[N or Nm]
-    lin_v = 0.0 #Linear velocity，unit[mm/s]
-    lin_a = 0.0 #Linear acceleration, unit[mm/s^2]，not used temporarily
-    disMax = 100.0 #Maximum insertion distance，unit[mm]
+    force_goal = 20.0  #Force or moment threshold（0~100）,unit[N or Nm]
+    lin_v = 0.0 #Linear velocity,unit[mm/s]
+    lin_a = 0.0 #Linear acceleration, unit[mm/s^2],not used temporarily
+    disMax = 100.0 #Maximum insertion distance,unit[mm]
     linorn = 1 #Insertion direction, 1-positive direction, 2-negative direction
-    is_select = [1,1,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [1,1,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     gain = [0.00005,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     force_torque = [0.0,0.0,-30.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     status = 1
@@ -526,8 +526,8 @@ Calculate the middle plane position to start
     "Prototype", "``FT_CalCenterStart()``"
     "Description", "Calculate the middle plane position to start"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Calculate the end of the middle plane position
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -538,8 +538,8 @@ Calculate the end of the middle plane position
     "Prototype", "``FT_CalCenterEnd()``"
     "Description", "Calculate the end of the middle plane position"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,pos] ,pos=[x,y,z,rx,ry,rz]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0,pos] ,pos=[x,y,z,rx,ry,rz]
+    - Failed:[errcode]"
 
 Surface positioning
 ++++++++++++++++++++++++++++++++++
@@ -549,15 +549,15 @@ Surface positioning
 
     "Prototype", "``FT_FindSurface (rcs,dir,axis,lin_v,lin_a,disMax,force_goal)``"
     "Description", "Surface positioning"
-    "Parameter", "- ``rcs``： Reference frame, 0-Tool frame, 1-Base frame；
-    - ``dir``：Direction of movement, 1-positive, 2-negative；
-    - ``axis``：Move Axis，1-x，2-y，3-z；
-    - ``lin_v``：Exploring Linear Speed，unit[mm/s]；
-    - ``lin_a``：Exploring Linear Acceleration，unit[mm/s^2]；
-    - ``disMax``：Maximum exploration distance，unit[mm]
-    - ``force_goal``：Action termination force threshold，unit[N]；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``rcs``: Reference frame, 0-Tool frame, 1-Base frame;
+    - ``dir``:Direction of movement, 1-positive, 2-negative;
+    - ``axis``:Move Axis,1-x,2-y,3-z;
+    - ``lin_v``:Exploring Linear Speed,unit[mm/s];
+    - ``lin_a``:Exploring Linear Acceleration,unit[mm/s^2];
+    - ``disMax``:Maximum exploration distance,unit[mm]
+    - ``force_goal``:Action termination force threshold,unit[N];"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -570,7 +570,7 @@ Code example
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
-    is_select = [1,0,0,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [1,0,0,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     force_torque = [-2.0,0.0,0.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     gain = [0.0002,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
@@ -579,12 +579,12 @@ Code example
     max_ang = 5.0  #Maximum adjustment angle
     #Surface positioning parameter
     rcs = 0 #Reference frame, 0-Tool frame, 1-Base frame
-    direction = 1 #Direction of movement，1-positive direction, 2-negative direction
-    axis = 1 #Axis of movement，1-X,2-Y,3-Z
-    lin_v = 3.0  #Exploring straight-line velocity，unit[mm/s]
-    lin_a = 0.0  #Exploration linear acceleration，unit[mm/s^2]
-    disMax = 50.0 #Maximum exploration distance，unit[mm]
-    force_goal = 2.0 #Action termination force threshold，unit[N]
+    direction = 1 #Direction of movement,1-positive direction, 2-negative direction
+    axis = 1 #Axis of movement,1-X,2-Y,3-Z
+    lin_v = 3.0  #Exploring straight-line velocity,unit[mm/s]
+    lin_a = 0.0  #Exploration linear acceleration,unit[mm/s^2]
+    disMax = 50.0 #Maximum exploration distance,unit[mm]
+    force_goal = 2.0 #Action termination force threshold,unit[N]
     P1=[-230.959,-364.017,226.179,-179.004,0.002,89.999]
     robot.MoveCart(P1,9,0,100.0,100.0,100.0,-1.0,-1)       #Point to point motion in joint space
     #Look for the center in the x direction
@@ -598,7 +598,7 @@ Code example
     robot.WaitMs(1000)
     #The second surface
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    direction = 2 #Direction of movement，1-positive direction, 2-negative direction
+    direction = 2 #Direction of movement,1-positive direction, 2-negative direction
     robot.FT_FindSurface(rcs,direction,axis,lin_v,lin_a,disMax,force_goal)
     status = 0
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
@@ -611,10 +611,10 @@ Code example
     #The first surface
     robot.FT_CalCenterStart()
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    direction = 1 #Direction of movement，1-positive direction, 2-negative direction
-    axis = 2 #Axis of movement，1-X,2-Y,3-Z
-    disMax = 150.0 #Maximum exploration distance，unit[mm]
-    lin_v = 6.0  #Exploring straight-line velocity，unit[mm/s]
+    direction = 1 #Direction of movement,1-positive direction, 2-negative direction
+    axis = 2 #Axis of movement,1-X,2-Y,3-Z
+    disMax = 150.0 #Maximum exploration distance,unit[mm]
+    lin_v = 6.0  #Exploring straight-line velocity,unit[mm/s]
     robot.FT_FindSurface(rcs,direction,axis,lin_v,lin_a,disMax,force_goal)
     status = 0
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
@@ -622,7 +622,7 @@ Code example
     robot.WaitMs(1000)
     #The second surface
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    direction = 2 #Direction of movement，1-positive direction, 2-negative direction
+    direction = 2 #Direction of movement,1-positive direction, 2-negative direction
     robot.FT_FindSurface(rcs,direction,axis,lin_v,lin_a,disMax,force_goal)
     status = 0
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
@@ -641,8 +641,8 @@ Flexibility control off
     "Prototype", "``FT_ComplianceStop()``"
     "Description", "Flexibility control off"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Flexibility control on
 ++++++++++++++++++++++++++++++++++
@@ -653,9 +653,9 @@ Flexibility control on
     "Prototype", "``FT_ComplianceStart(p,force)``"
     "Description", "Flexibility control on"
     "Parameter", "- ``p``: Position adjustment coefficient or compliance coefficient
-    - ``force``：flexibility opening force threshold, unit[N]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    - ``force``:flexibility opening force threshold, unit[N]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ----------------
@@ -676,7 +676,7 @@ Code example
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
-    is_select = [1,0,0,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz]，0-ineffective, 1-effective
+    is_select = [1,0,0,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
     force_torque = [-2.0,0.0,0.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
     gain = [0.0002,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
     adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
@@ -686,7 +686,7 @@ Code example
     #Compliance control
     robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
     p = 0.00005  #Coefficient of position adjustment or compliance
-    force = 30.0 #Compliant opening force threshold，unit[N]
+    force = 30.0 #Compliant opening force threshold,unit[N]
     robot.FT_ComplianceStart(p,force)
     count = 15  #Number of cycles
     while(count):

@@ -12,13 +12,13 @@ Set trajectory recording parameters
 
     "Prototype", "``SetTPDParam(type,name,period_ms,di_choose,do_choose)``"
     "Description", "Set trajectory recording parameters"
-    "Parameter", "- ``type``：Data type, 1-joint position；
-    - ``name``：Track name；
-    - ``period_ms``：Sampling period, fixed value, 2ms or 4ms or 8ms；
-    - ``di_choose``：DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
-    - ``do_choose``：DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``type``:Data type, 1-joint position;
+    - ``name``:Track name;
+    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;
+    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
+    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 --------------
@@ -44,13 +44,13 @@ Start trajectory recording
 
     "Prototype", "``SetTPDStart(type,name,period_ms,di_choose,do_choose)``"
     "Description", "Start trajectory recording"
-    "Parameter", "- ``type``：Data type, 1-joint position；
-    - ``name``：Track name；
-    - ``period_ms``：Sampling period, fixed value, 2ms or 4ms or 8ms；
-    - ``di_choose``：DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
-    - ``do_choose``：DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``type``:Data type, 1-joint position;
+    - ``name``:Track name;
+    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;
+    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
+    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Stop trajectory recording
 ++++++++++++++++++++++++++
@@ -61,8 +61,8 @@ Stop trajectory recording
     "Prototype", "``SetWebTPDStop()``"
     "Description", "Stop trajectory recording"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ------------
@@ -97,8 +97,8 @@ Delete trajectory record
     "Prototype", "``SetTPDDelete(name)``"
     "Description", "Delete trajectory record"
     "Parameter", "- ``name``:Track name"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ------------
@@ -120,8 +120,8 @@ Trajectory preloading
     "Prototype", "``LoadTPD(name)``"
     "Description", "Trajectory preloading"
     "Parameter", "- ``name``:Track name"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Trajectory reproduction
 ++++++++++++++++++++++++
@@ -132,10 +132,10 @@ Trajectory reproduction
     "Prototype", "``MoveTPD(name,blend,ovl)``"
     "Description", "Trajectory reproduction"
     "Parameter", "- ``name``:Track name
-    - ``blend``：Is it smooth, 0-not smooth, 1-smooth
-    - ``ovl``：Speed scaling factor, range[0~100]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    - ``blend``:Is it smooth, 0-not smooth, 1-smooth
+    - ``ovl``:Speed scaling factor, range[0~100]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ------------

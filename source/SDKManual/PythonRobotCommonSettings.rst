@@ -13,8 +13,8 @@ Set global speed
     "Prototype", "``SetSpeed(vel)``"
     "Description", "Set global speed"
     "Parameter", "- ``vel``:Speed percentage, range[0~100]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -36,10 +36,10 @@ Setting System Variable Values
 
     "Prototype", "``SetSysVarValue(id,value)``"
     "Description", "Setting System Variable Values"
-    "Parameter", "- ``id``：Variable number, range[1~20];
-    - ``value``：Variable value"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``id``:Variable number, range[1~20];
+    - ``value``:Variable value"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -65,12 +65,12 @@ Set Tool Coordinate System
 
     "Prototype", "``SetToolCoord(id,t_coord,type,install)``"
     "Description", "Set Tool Coordinate System"
-    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
-    - ``t_coord``:Position of tool center point relative to end flange center, unit[mm][°]；
-    - ``type``:0-Tool coordinate system，1-Sensor coordinate system；
-    - ``install``:Installation position，0-Robot end，1-Robot external"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14];
+    - ``t_coord``:Position of tool center point relative to end flange center, unit[mm][°];
+    - ``type``:0-Tool coordinate system,1-Sensor coordinate system;
+    - ``install``:Installation position,0-Robot end,1-Robot external"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -92,12 +92,12 @@ Set Tool Coordinate Series Table
 
     "Prototype", "``SetToolList(id,t_coord ,type,install)``"
     "Description", "Set Tool Coordinate Series Table"
-    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
-    - ``t_coord``:Position of tool center point relative to end flange center, unit[mm][°]；
-    - ``type``:0-Tool coordinate system，1-Sensor coordinate system；
-    - ``install``:Installation position，0-Robot end，1-Robot external"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14];
+    - ``t_coord``:Position of tool center point relative to end flange center, unit[mm][°];
+    - ``type``:0-Tool coordinate system,1-Sensor coordinate system;
+    - ``install``:Installation position,0-Robot end,1-Robot external"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -119,11 +119,11 @@ Set the external tool coordinate system
 
     "Prototype", "``SetExToolCoord(id,etcp ,etool)``"
     "Description", "Set the external tool coordinate system"
-    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
-    - ``etcp``:External tool coordinate system, unit[mm][°]；
-    - ``etool``:End tool coordinate system, unit[mm][°]；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14];
+    - ``etcp``:External tool coordinate system, unit[mm][°];
+    - ``etool``:End tool coordinate system, unit[mm][°];"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -146,11 +146,11 @@ Set external tool coordinate series table
 
     "Prototype", "``SetExToolList(id,etcp ,etool)``"
     "Description", "Set external tool coordinate series table"
-    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
-    - ``etcp``:External tool coordinate system, unit[mm][°]；
-    - ``etool``:End tool coordinate system, unit[mm][°]；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14];
+    - ``etcp``:External tool coordinate system, unit[mm][°];
+    - ``etool``:End tool coordinate system, unit[mm][°];"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -173,10 +173,10 @@ Set the workpiece coordinate system
 
     "Prototype", "``SetWObjCoord(id,w_coord)``"
     "Description", "Set the workpiece coordinate system"
-    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
-    - ``w_coord``:Relative pose of coordinate system, unit[mm][°]；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14];
+    - ``w_coord``:Relative pose of coordinate system, unit[mm][°];"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -198,10 +198,10 @@ Set the workpiece coordinate series table
 
     "Prototype", "``SetWObjList(id,w_coord)``"
     "Description", "Set the workpiece coordinate series table"
-    "Parameter", "- ``id``:Coordinate system number, range[0~14]；
-    - ``w_coord``:Relative pose of coordinate system, unit[mm][°]；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``id``:Coordinate system number, range[0~14];
+    - ``w_coord``:Relative pose of coordinate system, unit[mm][°];"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -224,8 +224,8 @@ Set end load weight
     "Prototype", "``SetLoadWeight(weight)``"
     "Description", "Set end load weight"
     "Parameter", "- ``weight``:unit[kg]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -247,8 +247,8 @@ Set the robot installation method - fixed installation
     "Prototype", "``SetRobotInstallPos(method)``"
     "Description", "Set the robot installation method - fixed installation"
     "Parameter", "- ``method``:0-Flat, 1-Side, 2-Hanging"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -269,10 +269,10 @@ Set robot installation angle - free installation
 
     "Prototype", "``SetRobotInstallAngle(yangle,zangle)``"
     "Description", "Set robot installation angle - free installation"
-    "Parameter", "- ``yangle``：Angle of roll
-    - ``zangle``：Rotation angle"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``yangle``:Angle of roll
+    - ``zangle``:Rotation angle"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -294,8 +294,8 @@ Set the centroid coordinates of the end load
     "Prototype", "``SetLoadCoord(x,y,z)``"
     "Description", "Set the centroid coordinates of the end load"
     "Parameter", "- ``x``, ``y``, ``z``: Barycentric coordinate,unit[mm]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -317,8 +317,8 @@ Waiting for specified time
     "Prototype", "``WaitMs(t_ms)``"
     "Description", "waiting for specified time"
     "Parameter", "- ``t_ms``:unit[ms]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------

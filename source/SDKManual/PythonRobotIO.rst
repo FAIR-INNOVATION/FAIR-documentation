@@ -12,12 +12,12 @@ Set the digital output of the control box
 
     "Prototype", "``SetDO(id,status,smooth,block)``"
     "Description", "Set the digital output of the control box"
-    "Parameter", "-  ``id``:IO number，range[0~15]；
-    - ``status``:0-off, 1-on；
-    - ``smooth``:0-unsmooth, 1-smooth；
+    "Parameter", "-  ``id``:IO number,range[0~15];
+    - ``status``:0-off, 1-on;
+    - ``smooth``:0-unsmooth, 1-smooth;
     - ``block``:0-blocking, 1-non blocking."
     "Return value", "- success:[0]
-    - Failed：[errcode]"
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -44,12 +44,12 @@ Set tool digital output
 
     "Prototype", "``SetToolDO(id,status,smooth,block)``"
     "Description", "Set tool digital output"
-    "Parameter", "-  ``id``:IO number，range[0~15]；
-    - ``status``:0-off, 1-on；
-    - ``smooth``:0-unsmooth, 1-smooth；
+    "Parameter", "-  ``id``:IO number,range[0~15];
+    - ``status``:0-off, 1-on;
+    - ``smooth``:0-unsmooth, 1-smooth;
     - ``block``:0-blocking, 1-non blocking."
     "Return value", "- Success:[0]
-    - Failed：[errcode]"
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -76,11 +76,11 @@ Set the analog output of the control box
 
     "Prototype", "``SetAO(id,value,block)``"
     "Description", "Set the analog output of the control box"
-    "Parameter", "- ``id``:IO number，range[0~1]；
-    - ``value``:electricity or voltage value percentage, range [0-100%] corresponds to electricity value [0-20mA] or voltage [0-10V]；
+    "Parameter", "- ``id``:IO number,range[0~1];
+    - ``value``:electricity or voltage value percentage, range [0-100%] corresponds to electricity value [0-20mA] or voltage [0-10V];
     - ``block``:[0]-blocking, [1]-non blocking"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -103,11 +103,11 @@ Set tool analog output
 
     "Prototype", "``SetToolAO(id,value,block)``"
     "Description", "Set tool analog output"
-    "Parameter", "- ``id``:IO number，range[0]；
-    - ``value``:electricity or voltage value percentage, range [0-100%] corresponds to electricity value [0-20mA] or voltage [0-10V]；
+    "Parameter", "- ``id``:IO number,range[0];
+    - ``value``:electricity or voltage value percentage, range [0-100%] corresponds to electricity value [0-20mA] or voltage [0-10V];
     - ``block``:[0]-blocking, [1]-non blocking"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -130,10 +130,10 @@ Obtain the digital input of the control box
 
     "Prototype", "``GetDI(id,block)``"
     "Description", "Obtain the digital input of the control box"
-    "Parameter", "- ``id``:IO number，range[0~15]；
+    "Parameter", "- ``id``:IO number,range[0~15];
     - ``block``:[0]-blocking, [1]-non blocking"
-    "Return value", "- Success：[0,di],di: 0-Low level，1-High level
-    - Failed：[errcode,]"
+    "Return value", "- Success:[0,di],di: 0-Low level,1-High level
+    - Failed:[errcode,]"
 
 Code example
 ---------------
@@ -155,10 +155,10 @@ Obtain tool digital input
 
     "Prototype", "``GetToolDI(id,block)``"
     "Description", "Obtain tool digital input"
-    "Parameter", "- ``id``:IO number，range[0~1]；
+    "Parameter", "- ``id``:IO number,range[0~1];
     - ``block``:[0]-blocking, [1]-non blocking"
-    "Return value", "- Success：[0,di],di: 0-Low level，1-High level
-    - Failed：[errcode,]"
+    "Return value", "- Success:[0,di],di: 0-Low level,1-High level
+    - Failed:[errcode,]"
 
 Code example
 ---------------
@@ -180,12 +180,12 @@ Waiting for digital input from the control box
 
     "Prototype", "``WaitDI(id,status,maxtime,opt)``"
     "Description", "Waiting for digital input from the control box"
-    "Parameter", "- ``id``:IO number，range[0~15]；
-    - ``status``:0-off，1-on；
-    - ``maxtime``:Maximum waiting time, unit[ms]；
+    "Parameter", "- ``id``:IO number,range[0~15];
+    - ``status``:0-off,1-on;
+    - ``maxtime``:Maximum waiting time, unit[ms];
     - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -207,13 +207,13 @@ Waiting for multiple digital inputs from the control box
 
     "Prototype", "``WaitMultiDI(mode,id,status,maxtime,opt)``"
     "Description", "Waiting for multiple digital inputs from the control box"
-    "Parameter", "- ``mode``:[0]-Multiplex AND, [1]-Multiplex OR；
-    - ``id``:IO number, bit0~bit7 corresponds to DI0~DI7, bit8~bit15 corresponds to CI0~CI7；
-    - ``status(uint16_t)``:bit0~bit7 corresponds to DI0~DI7 status, bit8~bit15 corresponds to the states of the CI0~CI7 status bits [0]-off, [1]-on；
-    - ``maxtime``:Maximum waiting time, unit[ms]；
+    "Parameter", "- ``mode``:[0]-Multiplex AND, [1]-Multiplex OR;
+    - ``id``:IO number, bit0~bit7 corresponds to DI0~DI7, bit8~bit15 corresponds to CI0~CI7;
+    - ``status(uint16_t)``:bit0~bit7 corresponds to DI0~DI7 status, bit8~bit15 corresponds to the states of the CI0~CI7 status bits [0]-off, [1]-on;
+    - ``maxtime``:Maximum waiting time, unit[ms];
     - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting。"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -234,12 +234,12 @@ Waiting for tool digital input
 
     "Prototype", "``WaitToolDI(id,status,maxtime,opt)``"
     "Description", "Waiting for the end digital input"
-    "Parameter", "- ``id``:IO number，range[0~1]；
-    - ``status``:0-off，1-on；
-    - ``maxtime``:Maximum waiting time, unit[ms]；
+    "Parameter", "- ``id``:IO number,range[0~1];
+    - ``status``:0-off,1-on;
+    - ``maxtime``:Maximum waiting time, unit[ms];
     - ``opt``:after timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -260,10 +260,10 @@ Waiting for terminal digital input
 
     "Prototype", "``GetAI(id,block)``"
     "Description", "Waiting for terminal digital input"
-    "Parameter", "- ``id``:IO number，range[0~1]；
+    "Parameter", "- ``id``:IO number,range[0~1];
     - ``block``:[0]-blocking, [1]-non blocking。"
-    "Return value", "- Success：[0,value], value:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V]；
-    - Failed：[errcode,]"
+    "Return value", "- Success:[0,value], value:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];
+    - Failed:[errcode,]"
 
 Code example
 ---------------
@@ -285,10 +285,10 @@ Obtain tool analog input
 
     "Prototype", "``GetToolAI(id,block)``"
     "Description", "Obtain terminal analog input"
-    "Parameter", "- ``id``:IO number，range[0]；
+    "Parameter", "- ``id``:IO number,range[0];
     - ``block``:[0]-blocking, [1]-non blocking"
-    "Return value", "- Success：[0,value], value:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V]；
-    - Failed：[errcode,]"
+    "Return value", "- Success:[0,value], value:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];
+    - Failed:[errcode,]"
 
 Code example
 ---------------
@@ -310,13 +310,13 @@ Waiting for the control box simulation input
 
     "Prototype", "``WaitAI(id,sign,value,maxtime,opt)``"
     "Description", "Waiting for the control box simulation input"
-    "Parameter", "- ``id``:IO number，range[0~1]；
-    - ``sign``:0-Greater than，1-Less than
-    - ``value``:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V]；
-    - ``maxtime``:Maximum waiting time, unit[ms]；
+    "Parameter", "- ``id``:IO number,range[0~1];
+    - ``sign``:0-Greater than,1-Less than
+    - ``value``:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];
+    - ``maxtime``:Maximum waiting time, unit[ms];
     - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -337,13 +337,13 @@ Waiting for tool analog input
 
     "Prototype", "``WaitToolAI(id,sign,value,maxtime,opt)``"
     "Description", "Waiting for the end analog input"
-    "Parameter", "- ``id``:IO number，range[0]；
-    - ``sign``:0-Greater than，1-Less than
-    - ``value``: Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V]；
-    - ``maxtime``:Maximum waiting time, unit[ms]；
+    "Parameter", "- ``id``:IO number,range[0];
+    - ``sign``:0-Greater than,1-Less than
+    - ``value``: Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];
+    - ``maxtime``:Maximum waiting time, unit[ms];
     - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------

@@ -13,8 +13,8 @@ Obtain gripper configuration
     "Prototype", "``GetGripperConfig()``"
     "Description", "Obtain gripper configuration"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0, company,device,softversion,bus],company:夹爪厂商
-    - Failed：[errcode]"
+    "Return value", "- Success:[0, company,device,softversion,bus],company:夹爪厂商
+    - Failed:[errcode]"
 
 Activate gripper
 ++++++++++++++++++++
@@ -24,10 +24,10 @@ Activate gripper
 
     "Prototype", "``ActGripper(index,action)``"
     "Description", "Activate gripper"
-    "Parameter", "- ``index``:Claw number；
+    "Parameter", "- ``index``:Claw number;
     - ``action``: 0-reset, 1-activate"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Control gripper
 ++++++++++++++++++++
@@ -37,14 +37,14 @@ Control gripper
 
     "Prototype", "``MoveGripper(index,pos,speed,force,maxtime,block)``"
     "Description", "Control gripper"
-    "Parameter", "- ``index``:Claw number；
-    - ``pos``:Position percentage, range[0~100]；
+    "Parameter", "- ``index``:Claw number;
+    - ``pos``:Position percentage, range[0~100];
     - ``speed``:Speed percentage, range[0~100];
-    - ``force``:Moment percentage, range[0~100]；
-    - ``maxtime``:Maximum waiting time, range[0~30000]，unit[ms]；
+    - ``force``:Moment percentage, range[0~100];
+    - ``maxtime``:Maximum waiting time, range[0~30000],unit[ms];
     - ``block``:0-blocking, 1-non blocking"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Obtain gripper movement status
 ++++++++++++++++++++++++++++++++++
@@ -55,8 +55,8 @@ Obtain gripper movement status
     "Prototype", "``GetGripperMotionDone()``"
     "Description", "Obtain gripper movement status"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,status], status:0-incomplete movement，1-exercise completion
-    - Failed：[errcode]"
+    "Return value", "- Success:[0,status], status:0-incomplete movement,1-exercise completion
+    - Failed:[errcode]"
 
 Configure gripper
 +++++++++++++++++++++++++++++++
@@ -66,12 +66,12 @@ Configure gripper
 
     "Prototype", "``SetGripperConfig(company,device,softversion,bus)``"
     "Description", "Configure gripper"
-    "Parameter", "- ``company``：Claw manufacturers, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing；
-    - ``device``：Equipment number: Robotiq(0-2F-85 series), Huiling(0-NK series, 1-Z-EFG-100), Tianji(0-TEG-110), Dahuan(0-PGI-140), Zhixing(0-CTPM2F20)
-    - ``softversion``：Software version number, temporarily not used, defaults to 0；
-    - ``bus``：Device mounted terminal bus position, temporarily not used, defaults to 0；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``company``:Claw manufacturers, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing;
+    - ``device``:Equipment number: Robotiq(0-2F-85 series), Huiling(0-NK series, 1-Z-EFG-100), Tianji(0-TEG-110), Dahuan(0-PGI-140), Zhixing(0-CTPM2F20)
+    - ``softversion``:Software version number, temporarily not used, defaults to 0;
+    - ``bus``:Device mounted terminal bus position, temporarily not used, defaults to 0;"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 --------------

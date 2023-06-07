@@ -16,14 +16,14 @@ jog Jog
 
     "Prototype", "``StartJOG(ref,nb,dir,vel,acc,max_dis)``"
     "Description", "jog Jog"
-    "Parameter", "- ``ref``：0-joint jogging, 2-base coordinate system jogging, 4-tool coordinate system jogging, 8-workpiece coordinate system jogging；
-    - ``nb``：1-1joint(x-axis), 2-2joint(y-axis), 3-3join(z-axis), 4-4joint(rx), 5-5joint (ry), 6-6joint(rz);
-    - ``dir``：0-negative direction, 1-positive direction;
-    - ``vel``：Speed percentage，[0~100];
-    - ``acc``：Acceleration percentage，[0~100];
-    - ``max_dis``：Maximum angle/distance for a single jog，unit[° or mm]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``ref``:0-joint jogging, 2-base coordinate system jogging, 4-tool coordinate system jogging, 8-workpiece coordinate system jogging;
+    - ``nb``:1-1joint(x-axis), 2-2joint(y-axis), 3-3join(z-axis), 4-4joint(rx), 5-5joint (ry), 6-6joint(rz);
+    - ``dir``:0-negative direction, 1-positive direction;
+    - ``vel``:Speed percentage,[0~100];
+    - ``acc``:Acceleration percentage,[0~100];
+    - ``max_dis``:Maximum angle/distance for a single jog,unit[° or mm]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 jog jog immediately stops
 ----------------------------
@@ -34,9 +34,9 @@ jog jog immediately stops
 
     "Prototype", "``StopJOG(ref)``"
     "Description", "jog jog immediately stops"
-    "Parameter", "- ``ref``：1-joint jog stop, 3-base coordinate system jog stop, 5-tool coordinate system jog stop, 9-workpiece coordinate system jog stop"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``ref``:1-joint jog stop, 3-base coordinate system jog stop, 5-tool coordinate system jog stop, 9-workpiece coordinate system jog stop"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 
 jog jog immediately stops
@@ -49,8 +49,8 @@ jog jog immediately stops
     "Prototype", "``ImmStopJOG()``"
     "Description", "jog jog immediately stops"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
      
 Code example
 ^^^^^^^^^^^^^^^^^
@@ -171,19 +171,19 @@ Joint space motion
 
     "Prototype", "``MoveJ(joint_pos,desc_pos,tool,user,vel,acc,ovl,exaxis_pos,blendT,offset_flag,offset_pos)``"
     "Description", "Joint space motion"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
-    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:Tool number，[0~14]；
-    - ``user``:Workpiece number，[0~14]；
-    - ``vel``:Speed percentage，[0~100]；
-    - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
-    - ``ovl``:Speed scaling factor，[0~100]；
-    - ``exaxis_pos``:External axis 1 position to external axis 4 position；
-    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked)，unit[ms]；
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
-    - ``offset_pos``:Pose offset，unit[mm][°]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
+    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    - ``tool``:Tool number,[0~14];
+    - ``user``:Workpiece number,[0~14];
+    - ``vel``:Speed percentage,[0~100];
+    - ``acc``:Acceleration percentage,[0~100],temporarily closed;
+    - ``ovl``:Speed scaling factor,[0~100];
+    - ``exaxis_pos``:External axis 1 position to external axis 4 position;
+    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked),unit[ms];
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
+    - ``offset_pos``:Pose offset,unit[mm][°]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ------------------
@@ -204,7 +204,7 @@ Code example
     P2=[-506.436,236.053,208.133,-177.206,-0.450,67.102]
     eP2=[0.000,0.000,0.000,0.000]
     dP2=[1.000,1.000,1.000,1.000,1.000,1.000]
-    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP,Tool number1，the actual test is based on field data and Tool number
+    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP,Tool number1,the actual test is based on field data and Tool number
     robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
     time.sleep(2)
     j1 = robot.GetInverseKin(0,P1,-1)       #In the case of Cartesian space coordinates only, the inverse kinematic interface can be used to solve the joint position
@@ -234,20 +234,20 @@ Linear motion in Cartesian space
 
     "Prototype", "``MoveL(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,exaxis_pos,search,offset_flag,offset_pos)``"
     "Description", "Linear motion in Cartesian space"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
-    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:Tool number，[0~14]；
-    - ``user``:Workpiece number，[0~14]；
-    - ``vel``:Speed percentage，[0~100]；
-    - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
-    - ``ovl``:Speed scaling factor，[0~100]；
-    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked)，unit[mm]；
-    - ``exaxis_pos``:Position of external axis 1~position of external axis 4；
-    - ``search``:[0]-non welding wire positioning, [1]-welding wire positioning；
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
-    - ``offset_pos``:Pose offset，unit[mm][°]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
+    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    - ``tool``:Tool number,[0~14];
+    - ``user``:Workpiece number,[0~14];
+    - ``vel``:Speed percentage,[0~100];
+    - ``acc``:Acceleration percentage,[0~100],temporarily closed;
+    - ``ovl``:Speed scaling factor,[0~100];
+    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked),unit[mm];
+    - ``exaxis_pos``:Position of external axis 1~position of external axis 4;
+    - ``search``:[0]-non welding wire positioning, [1]-welding wire positioning;
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
+    - ``offset_pos``:Pose offset,unit[mm][°]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 --------------------
@@ -284,28 +284,28 @@ Circular arc motion in Cartesian space
 
     "Prototype", "``MoveC(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,poffset_flag,offset_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t ,toffset_flag,offset_pos_t,ovl,blendR)``"
     "Description", "Circular arc motion in Cartesian space"
-    "Parameter", "- ``joint_pos_p``:Path point joint position，unit[°]；
-    - ``desc_pos_p``:Path point Cartesian pose，unit[mm][°]；
-    - ``ptool``:Tool number，[0~14]；
-    - ``puser``:Workpiece number，[0~14]；
-    - ``pvel``:Speed percentage，[0~100]；
-    - ``pacc``:Acceleration percentage，[0~100]，temporarily closed；
-    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4；
-    - ``poffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
-    - ``offset_pos_p``:Offset，unit[mm][°]；
-    - ``joint_pos_t``:Target point joint position，unit[°]；
-    - ``desc_pos_t``:Cartesian pose of the target point，unit[mm][°]；
-    - ``ttool``:Tool number，[0~14]；
-    - ``tuser``:Workpiece number，[0~14]；
-    - ``tvel``:Speed percentage，[0~100]；
-    - ``tacc``:Acceleration percentage，[0~100]，temporarily closed；
-    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4；
-    - ``toffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
-    - ``offset_pos_t``:Offset，unit[mm][°]。
-    - ``ovl``:Speed scaling factor，[0~100]；
-    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked)，unit[mm]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``joint_pos_p``:Path point joint position,unit[°];
+    - ``desc_pos_p``:Path point Cartesian pose,unit[mm][°];
+    - ``ptool``:Tool number,[0~14];
+    - ``puser``:Workpiece number,[0~14];
+    - ``pvel``:Speed percentage,[0~100];
+    - ``pacc``:Acceleration percentage,[0~100],temporarily closed;
+    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4;
+    - ``poffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
+    - ``offset_pos_p``:Offset,unit[mm][°];
+    - ``joint_pos_t``:Target point joint position,unit[°];
+    - ``desc_pos_t``:Cartesian pose of the target point,unit[mm][°];
+    - ``ttool``:Tool number,[0~14];
+    - ``tuser``:Workpiece number,[0~14];
+    - ``tvel``:Speed percentage,[0~100];
+    - ``tacc``:Acceleration percentage,[0~100],temporarily closed;
+    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4;
+    - ``toffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
+    - ``offset_pos_t``:Offset,unit[mm][°]。
+    - ``ovl``:Speed scaling factor,[0~100];
+    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked),unit[mm]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 -------------
@@ -344,25 +344,25 @@ Circular motion in Cartesian space
 
     "Prototype", "``Circle(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t,ovl,offset_flag,offset_pos)``"
     "Description", "Circular motion in Cartesian space"
-    "Parameter", "- ``joint_pos_p``:Path point joint position，unit[°]；
-    - ``desc_pos_p``:Path point Cartesian pose，unit[mm][°]；
-    - ``ptool``:Tool number，[0~14]；
-    - ``puser``:Workpiece number，[0~14]；
-    - ``pvel``:Speed percentage，[0~100]；
-    - ``pacc``:Acceleration percentage，[0~100]，temporarily closed；
-    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4；
-    - ``joint_pos_t``:Target point joint position，unit[°]；
-    - ``desc_pos_t``:Cartesian pose of the target point，unit[mm][°]；
-    - ``ttool``:Tool number，[0~14]；
-    - ``tuser``:Workpiece number，[0~14]；
-    - ``tvel``:Speed percentage，[0~100]；
-    - ``tacc``:Acceleration percentage，[0~100]，temporarily closed；
-    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4；
-    - ``ovl``:Speed scaling factor，[0~100%]；
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
-    - ``offset_pos``:Offset，unit[mm][°]"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``joint_pos_p``:Path point joint position,unit[°];
+    - ``desc_pos_p``:Path point Cartesian pose,unit[mm][°];
+    - ``ptool``:Tool number,[0~14];
+    - ``puser``:Workpiece number,[0~14];
+    - ``pvel``:Speed percentage,[0~100];
+    - ``pacc``:Acceleration percentage,[0~100],temporarily closed;
+    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4;
+    - ``joint_pos_t``:Target point joint position,unit[°];
+    - ``desc_pos_t``:Cartesian pose of the target point,unit[mm][°];
+    - ``ttool``:Tool number,[0~14];
+    - ``tuser``:Workpiece number,[0~14];
+    - ``tvel``:Speed percentage,[0~100];
+    - ``tacc``:Acceleration percentage,[0~100],temporarily closed;
+    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4;
+    - ``ovl``:Speed scaling factor,[0~100%];
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
+    - ``offset_pos``:Offset,unit[mm][°]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 -------------
@@ -401,19 +401,19 @@ Spiral motion in Cartesian space
 
     "Prototype", "``NewSpiral(joint_pos,desc_pos,tool,user,vel,acc,exaxis_pos,ovl,offset_flag,offset_pos,param)``"
     "Description", "Spiral motion in Cartesian space"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
-    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:Tool number，[0~14]；
-    - ``user``:Workpiece number，[0~14]；
-    - ``vel``:Speed percentage，[0~100]；
-    - ``acc``:Acceleration percentage，[0~100]，temporarily closed；
-    - ``exaxis_pos``:Position of external axis 1~position of external axis 4；
-    - ``ovl``:Speed scaling factor，[0~100]；
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system；
-    - ``offset_pos``:Pose offset，unit[mm][°]
-    - ``param``:[circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction]，circle_num: number of coils, circle_angle: helix angle, rad_init: initial radius of the helix, rad_add: radius increment, rotaxis_add: axis direction increment, rot_direction: rotation direction, 0-clockwise, 1-counterclockwise"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
+    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    - ``tool``:Tool number,[0~14];
+    - ``user``:Workpiece number,[0~14];
+    - ``vel``:Speed percentage,[0~100];
+    - ``acc``:Acceleration percentage,[0~100],temporarily closed;
+    - ``exaxis_pos``:Position of external axis 1~position of external axis 4;
+    - ``ovl``:Speed scaling factor,[0~100];
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
+    - ``offset_pos``:Pose offset,unit[mm][°]
+    - ``param``:[circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction],circle_num: number of coils, circle_angle: helix angle, rad_init: initial radius of the helix, rad_add: radius increment, rotaxis_add: axis direction increment, rot_direction: rotation direction, 0-clockwise, 1-counterclockwise"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
@@ -450,14 +450,14 @@ Joint space servo mode motion
 
     "Prototype", "``ServoJ(joint_pos,acc,vel,cmdT,filterT,gain)``"
     "Description", "Joint space servo mode motion"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
-    - ``cmdT``:Instruction Cycle，unit[s]，[0.001~0.016]；
-    - ``filterT``:Filtering time，unit[s]，temporarily closed；
-    - ``gain``:Proportional amplifier for target position，temporarily closed"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
+    - ``cmdT``:Instruction Cycle,unit[s],[0.001~0.016];
+    - ``filterT``:Filtering time,unit[s],temporarily closed;
+    - ``gain``:Proportional amplifier for target position,temporarily closed"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 --------------
@@ -494,16 +494,16 @@ Cartesian space servo mode motion
 
     "Prototype", "``ServoCart(mode,desc_pos,pos_gain,acc,vel,cmdT,filterT,gain)``"
     "Description", "Cartesian space servo mode motion"
-    "Parameter", "- ``mode``:[0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system)；
-    - ``desc_pos``:Target Cartesian Position/Target Cartesian Position Increment；
-    - ``pos_gain``:Pose increment ratio coefficient, only effective in incremental motion, range[0~1]；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
-    - ``cmdT``:Instruction Cycle，unit[s]，[0.001~0.016]；
-    - ``filterT``:Filtering time，unit[s]，temporarily closed；
-    - ``gain``:Proportional amplifier for target position，temporarily closed"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``mode``:[0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system);
+    - ``desc_pos``:Target Cartesian Position/Target Cartesian Position Increment;
+    - ``pos_gain``:Pose increment ratio coefficient, only effective in incremental motion, range[0~1];
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
+    - ``cmdT``:Instruction Cycle,unit[s],[0.001~0.016];
+    - ``filterT``:Filtering time,unit[s],temporarily closed;
+    - ``gain``:Proportional amplifier for target position,temporarily closed"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 --------------
@@ -539,16 +539,16 @@ Point-to-point motion in Cartesian space
 
     "Prototype", "``MoveCart(desc_pos,tool,user,vel,acc,ovl,blendT,config)``"
     "Description", "Point-to-point motion in Cartesian space"
-    "Parameter", "- ``desc_pos``:Target Cartesian position；
-    - ``tool``:Tool number，[0~14]；
-    - ``user``:Workpiece number，[0~14]；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
-    - ``ovl``:Speed scaling factor，[0~100]；
-    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked)，unit[ms]；
+    "Parameter", "- ``desc_pos``:Target Cartesian position;
+    - ``tool``:Tool number,[0~14];
+    - ``user``:Workpiece number,[0~14];
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
+    - ``ovl``:Speed scaling factor,[0~100];
+    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked),unit[ms];
     - ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 -------------
@@ -582,8 +582,8 @@ Spline motion start
     "Prototype", "``SplineStart()``"
     "Description", "Spline motion start"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Spline motion PTP
 -------------------------
@@ -593,15 +593,15 @@ Spline motion PTP
 
     "Prototype", "``SplinePTP(joint_pos,desc_pos,tool,user,vel,acc,ovl)``"
     "Description", "Spline motion PTP"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
-    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:Tool number，[0~14]；
-    - ``user``:Workpiece number，[0~14]；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
-    - ``ovl``:Speed scaling factor，[0~100]；"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
+    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    - ``tool``:Tool number,[0~14];
+    - ``user``:Workpiece number,[0~14];
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
+    - ``ovl``:Speed scaling factor,[0~100];"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Spline motion end
 -----------------------------
@@ -612,8 +612,8 @@ Spline motion end
     "Prototype", "``SplineEnd()``"
     "Description", "Spline motion end"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ^^^^^^^^^^^^^^^
@@ -654,8 +654,8 @@ New spline motion start
     "Prototype", "``NewSplineStart(type)``"
     "Description", "New spline motion start"
     "Parameter", "- ``type``:0-arc transition, 1-given point position path point"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 
 New spline motion end
@@ -667,8 +667,8 @@ New spline motion end
     "Prototype", "``NewSplineEnd()``"
     "Description", "New spline motion end"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 
 New Spline Instruction Points
@@ -679,17 +679,17 @@ New Spline Instruction Points
 
     "Prototype", "``NewSplinePoint(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,lastFlag)``"
     "Description", "New Spline Instruction Points"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°]；
-    - ``desc_pos``:Target Cartesian pose，unit[mm][°]；
-    - ``tool``:Tool number，[0~14]；
-    - ``user``:Workpiece number，[0~14]；
-    - ``vel``: Speed, range[0~100]，temporarily closed，default to 0；
-    - ``acc``:Acceleration, range[0~100]，temporarily closed，default to 0；
-    - ``ovl``:Speed scaling factor，[0~100]；
-    - ``blendR``: [0-1000]-smooth radius，unit[mm]；
+    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
+    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    - ``tool``:Tool number,[0~14];
+    - ``user``:Workpiece number,[0~14];
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
+    - ``ovl``:Speed scaling factor,[0~100];
+    - ``blendR``: [0-1000]-smooth radius,unit[mm];
     - ``lastFlag``:Is it the last point, 0-No, 1-Yes"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ^^^^^^^^^^^^^^^^
@@ -728,8 +728,8 @@ Robot terminates motion
     "Prototype", "``StopMotion()``"
     "Description", "To terminate motion, use the termination motion instructions as non-blocking state"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 -------------
@@ -761,10 +761,10 @@ Starting point overall offset
     
     "Prototype", "``PointsOffsetEnable(flag,offset_pos)``"
     "Description", "Starting point overall offset"
-    "Parameter", "- ``flag``:0-offset under base coordinate or workpiece coordinate system, 2-offset under tool coordinate system；
-    - ``offset_pos``:Offset，unit[mm][°]。"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``flag``:0-offset under base coordinate or workpiece coordinate system, 2-offset under tool coordinate system;
+    - ``offset_pos``:Offset,unit[mm][°]。"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 The overall offset of the point ends
 ----------------------------------------
@@ -775,8 +775,8 @@ The overall offset of the point ends
     "Prototype", "``PointsOffsetDisable()``"
     "Description", "The overall offset of the point ends"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ^^^^^^^^^^^^^^^^^

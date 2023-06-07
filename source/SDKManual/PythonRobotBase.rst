@@ -13,7 +13,7 @@ Instantiating robots
 
     "Prototype", "``RPC(ip)``"
     "Description", "Instantiating a robot object"
-    "Parameter", "- ``ip``：The IP address of the robot, with a default factory IP of “192.168.58.2”"
+    "Parameter", "- ``ip``:The IP address of the robot, with a default factory IP of “192.168.58.2”"
     "Return value", "- Success: Returns a robot object
     - Failed: The created object will be destroyed"
      
@@ -38,8 +38,8 @@ Query SDK version number
     "Prototype", "``GetSDKVersion()``"
     "Description", "Query SDK version number"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,version]
-    - Failed：[errcode,]"
+    "Return value", "- Success:[0,version]
+    - Failed:[errcode,]"
 
 Code example
 --------------
@@ -53,7 +53,7 @@ Code example
     robot = frrpc.RPC('192.168.58.2')
     ret = robot.GetSDKVersion()    # Query SDK version number
     if ret[0] == 0:  
-        # 0-No fault, return format：[errcode,data],errcode-Fault code，data-Data
+        # 0-No fault, return format:[errcode,data],errcode-Fault code,data-Data
         print("SDK version is:",ret[1])
     else:
         print("the errcode is: ", ret[0])
@@ -68,8 +68,8 @@ Obtain Controller IP
     "Prototype", "``GetControllerIP()``"
     "Description", "Obtain Controller IP"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,IP]
-    - Failed：[errcode,]"
+    "Return value", "- Success:[0,IP]
+    - Failed:[errcode,]"
 
 Code example
 --------------
@@ -97,9 +97,9 @@ Control robot manual/automatic mode switch
 
     "Prototype", "``Mode(state)``"
     "Description", "Control robot manual/automatic mode switch"
-    "Parameter", "- ``state``：1-Manual mode，0-Automatic mode"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``state``:1-Manual mode,0-Automatic mode"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 --------------
@@ -129,9 +129,9 @@ Control the robot to enter or exit the drag teaching mode
 
     "Prototype", "``DragTeachSwitch(state)``"
     "Description", "Control the robot to enter or exit the drag teaching mode"
-    "Parameter", "- ``state``：1-Enter drag teaching mode，0-Exit drag teaching mode"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``state``:1-Enter drag teaching mode,0-Exit drag teaching mode"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Check if the robot is in drag mode
 -------------------------------------
@@ -143,8 +143,8 @@ Check if the robot is in drag mode
     "Prototype", "``IsInDragTeach()``"
     "Description", "Check if the robot is in drag mode"
     "Parameter", "Nothing"
-    "Return value", "- Success：[0,state]，state:0-Non drag teaching mode，1-Drag teaching mode
-    - Failed：[errcode]"
+    "Return value", "- Success:[0,state],state:0-Non drag teaching mode,1-Drag teaching mode
+    - Failed:[errcode]"
 
 Code example
 ^^^^^^^^^^^^^^^
@@ -185,9 +185,9 @@ Control the robot to enable or lower enable
 
     "Prototype", "``RobotEnable(state)``"
     "Description", "Control the robot to enable or lower enable"
-    "Parameter", "- ``state``：1-Upper enable，0-Lower enable"
-    "Return value", "- Success：[0]
-    - Failed：[errcode]"
+    "Parameter", "- ``state``:1-Upper enable,0-Lower enable"
+    "Return value", "- Success:[0]
+    - Failed:[errcode]"
 
 Code example
 ---------------
