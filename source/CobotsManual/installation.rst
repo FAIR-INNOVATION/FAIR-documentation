@@ -13,7 +13,7 @@ Brief introduction
 This manual will use the following warnings. The role of these warnings is to ensure the safety of personal and equipment. When you read this manual, you must comply with and execute all the assembly instructions and guidelines in other chapters in this manual. This is very important. Pay special attention to text related to warning signs.
 
 .. important:: 
-    - If the robot (robot body, control box, oscilloscope, or button box) is damaged, changed or modified due to human reasons, FAIR INNOVATION refuses to bear all responsibilities；
+    - If the robot (robot body, control box, oscilloscope, or button box) is damaged, changed or modified due to anthropogenic causes, FAIR INNOVATION refuses to bear all responsibilities；
     - FAIR INNOVATION is not responsible for any damage caused by the robot or any other device due to errors written by customers or any other device.
 
 Personnel safety
@@ -21,11 +21,11 @@ Personnel safety
 
 When running the robot system, we must first ensure the safety of the operators. The general precautions are listed below. Please take corresponding measures to ensure the safety of the operator.
 
-1. All operators who use the robot system should be trained through training courses sponsored by the Fouville (Suzhou) Robot System Co., Ltd. Users need to ensure that they fully grasp the safe and standardized operating processes and have the qualifications for robotic operations. For training details, please check with our company, the mailbox is jiling@frtech.fr。
+1. All operators who use the robot system should be trained through training courses sponsored by the FAIR INNOVATION (Suzhou) ROBOTIC SYSTEM COMPANY. Users need to ensure that they fully grasp the safe and standardized operating processes and have the qualifications for robotic operations. For training details, please check with our company, the mailbox is jiling@frtech.fr。
 
 2. All operators who use the robot system, please do not wear loose clothes or jewelry. Make sure the long hair beam is behind the head when operating the robot.
 
-3. In the operation of the device, even if the robot has stopped, it may be because the robot is waiting to start the signal and is in a state of motion. Even in such a state, the robot should be regarded as in action.
+3. During the operation of the device, even if the robot seems to have stopped, it may be because the robot is waiting to start the signal and is in a state of motion. Even in such a state, the robot should be regarded as in action.
 
 4. The lines should be drawn on the floor to mark the scope of the robot, so that the operator understands the action range of the robot includes holding tools (robotics, tools, etc.).
 
@@ -33,12 +33,12 @@ When running the robot system, we must first ensure the safety of the operators.
 
 6. When using the operating panel and oscilloscope, because you may have an operational error in wearing gloves, you must work after taking off the gloves.
 
-7. Under the emergency and abnormalities of people being pinched or wrapped inside by a robot, pushing or pulling the robot arm by force (at least 700 n) to force joint movements. With a power -free driver, the arm of the manual mobile robot is limited to emergency and may damage the joint.
+7. Under the emergency and abnormalities of people being pinched or wrapped inside by a robot, pushing or pulling the robot arm by force (at least 700 N) to force joint movements. With a power-free driver, the arm of the manual mobile robot is limited to emergency and may damage the joint.
 
 Security Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the "Safety Settings" menu bar in "Auxiliary Application", click "Safety Stop Settings" to enter the safe stop setting function interface.
+Under the "Safety Settings" menu bar in "Auxiliary Application", click "Safety stop mode" to enter the safe stop setting function interface.
 
 Enable the security stop mode. When the robot is reported or warned, the robot will automatically enable and play a role in safe protection.
 
@@ -48,7 +48,7 @@ Enable the security stop mode. When the robot is reported or warned, the robot w
 
 .. centered::  Figure 1.1-1 Safety stop setting
 
--  **Speed reduction**：After this mode is activated, the speed of the robotic arm in the joint space will be limited. The setting range of 1, 2, and 3 joints is 15 ~ 150 °/s, 4, 5, and 6 joints is 15 ~ 180 °/s; the motion speed limit of the robotic arm in the Descartes space is the TCP speed limit value, and the set range is 0 ~ 80mm/s.
+-  **Speed reduction**:After this mode is activated, the speed of the robotic arm in the joint space will be limited. The value in the corresponding text box is the limit value of the speed of the joints of each joint, the setting range of 1, 2, and 3 joints is 15 ~ 150 °/s, 4, 5, and 6 joints is 15 ~ 180 °/s; the motion speed limit of the robotic arm in the Descartes space is the TCP speed limit value, and the set range is 0 ~ 80mm/s.
 
 Danger recognition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,16 +63,16 @@ Risk assessment should consider all potential contact between operators and robo
 
 -  The danger of collision by robots;
 
--  The risk of robots or tools connected to the end is not in place;
+-  The danger of robots or tools connected to the end not being fixed in place;
 
 -  The risk of the impact between the effective load and the strong surface of the robot.
 
 Integrates must measure such dangers and related risk levels through risk assessment, and determine and implement corresponding measures to reduce the risk to acceptable levels. Please note that there may be other major dangers in specific robots.
 
 By combining the inherent security design measures used by FR robots with the safety specifications or risk assessment implemented by integrated and end users, the risks related to FR collaborative operations will be reduced to a reasonable and feasible level. Through this document, any remaining risk of the robot can be conveyed to the integrated and end users before installation. If the risk assessment of the integrator determines that the existence of a specific application that may have unacceptable risks that may constitute unacceptable risks, integrators must
-Appropriate risk reduction measures must be taken to eliminate or minimize these dangers until the risk is reduced to acceptable levels. It is not safe to use before taking appropriate risk reduction measures (if necessary).
+appropriate risk reduction measures must be taken to eliminate or minimize these dangers until the risk is reduced to acceptable levels. It is not safe to use before taking appropriate risk reduction measures (if necessary).
 
-If the robot is installed in non -synergistic installation (for example, when using a hazardous tool), risk assessment may infer the integrated provider to connect additional safety equipment (such as safety startup equipment) to ensure personnel and equipment safety when programming.
+If the robot is installed in non-synergistic installation (for example, when using a hazardous tool), risk assessment may infer the integrated provider to connect additional safety equipment (such as safety startup equipment) to ensure personnel and equipment safety when programming.
 
 Nameplate information
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,9 +124,9 @@ The integrated integrator of FAIR INNOVATION is responsible for ensuring that it
 
 -  Confirm that the design and installation of the entire robot system is accurate
 
--  Clear instructions
+-  Clear instructions for use
 
--  See the relevant signs and contact information of the integrated dealer on the robot
+-  Kark the relevant signs and contact information of integrators on the robot
 
 -  Collect all the documents in the technical file, including this manual
 
@@ -168,7 +168,7 @@ The following flag defines the explanation of the danger level provisions contai
 Pre-use evaluation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-After using a robot or any modification for the first time, the robot's default speed is less than 250mm/s. Do not log in to the administrator to modify the speed to enter the high -speed mode. After that, the following test must be performed. It is confirmed that all security input and output are correct and the connection is correct. Test whether all connected security input and output (including the joint equipment shared by multiple machines or robots) are normal. So you must:
+After using a robot or any modification for the first time, the robot's default speed is less than 250mm/s. Do not log in to the administrator to modify the speed to enter the high-speed mode. After that, the following test must be performed. It is confirmed that all security input and output are correct and the connection is correct. Test whether all connected security input and output (including multiple machines or robots shared equipments) are normal. So you must:
 
 -  Test whether the emergency stop button and input can stop the robot and start the brake.
 
@@ -176,16 +176,16 @@ After using a robot or any modification for the first time, the robot's default 
 
 -  The test operation mode can switch the operation mode, see the icon in the upper right corner of the user interface.
 
--  Test whether the dynamic device must be pressed to start the action in the manual mode, and the robot is under deceleration control (the robot software version v3.0 does not support this function).
+-  Test whether the 3rd gear actuation device must be pressed to activate in manual mode, and the robot is under deceleration control (the robot software version V3.0 does not support this function).
 
--  The test system emergency stop output can bring the entire system to a safe state.
+-  Test whether the system emergency stop output can bring the entire system to a safe state.
 
 Emergency stop
 ~~~~~~~~~~~~~~
 
-The emergency stop button is 0. Press the emergency stop button to stop all the movements of the robot immediately.
+The emergency stop button is type 0 stop. Press the emergency stop button to stop all the movements of the robot immediately.
 
-The following table shows the stop distance and stop time of the trigger 0. These measurement results correspond to the following configuration of the robot:
+The following table shows the stop distance and stop time of the type 0 stop. These measurement results correspond to the following configuration of the robot:
 
 -  Extension: 100%(the robotic arm is fully expanded)
 
@@ -258,7 +258,7 @@ Equipment transportation
 Transportation
 ~~~~~~~~~~~~~~~~~~
 
-Robot and control boxes have been calibrated as complete equipment. Do not separate them, so it will need to be re -calibrated.
+Robot and control boxes have been calibrated as complete equipment. Do not separate them, that would require recalibration.
 
 You can only transport the robot in the original packaging. If you want to move the robot in the future, save the packaging material in a dry place.
 
@@ -267,7 +267,7 @@ When the robot moves from the packaging to the installation space, the two arms 
 Carry
 ~~~~~~
 
-According to different models, the total quality (including packaging) is 15kg-80 kg depending on the model. When manpower transports or transfers the collaborative robot, multiple people need to help lift it. Avoid equipment tilt or slipping.
+According to different models, the total quality (including packaging) is 15kg-80 kg depending on the model. When manpower transports or transfers the collaborative robot, multiple people need to help lift it, don’t recommend single-person handling, it must be stable during transportation. Avoid equipment tilt or slipping.
 
 .. warning:: 
 	- If you use professional equipment for handling, be sure to use a crane or forklift to transport or carry the collaborative robot by using a crane or forklift, otherwise it may cause personnel damage or other accidents;
@@ -359,8 +359,8 @@ Control cabinet installation space:
 
 .. centered:: Figure 1.4-6 FR20 model collaboration robot movement range
 
-机器人坐标系
-~~~~~~~~~~~~~~~~
+Robot coordinate system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 .. figure:: installation/023.png
@@ -377,15 +377,15 @@ Control cabinet installation space:
 
 .. centered:: Figure 1.4-8 French -endframe coordinate system
 
-Specification
----------------
+Installation specifications
+---------------------------------
 
 Robot arm installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The robotic arm uses 4 M8 bolts with a strength of no less than 8.8 -level intensity to install the robot arm. The bolt must be tightened with 20nm torque.
 
-Use the reserved two 孔8 sales holes to accurately regain the robotic arm.
+Use the reserved two Ø8 pin holes to accurately reposition the robot arm.
 
 .. note:: 
 	You can purchase accurate bases as attachments. FIGURE 1.5-1 ~ 1.5-5 shows the position of the sales hole and the location of the screw.
@@ -463,13 +463,13 @@ When installing and using a collaborative robot, make sure to meet the following
 
 -  Environmental temperature 0-45 ℃
 
--  Humidity 20-80rh is not exposed
+-  Humidity 20-80RH is not exposed
 
 -  No mechanical impact and shock
 
 -  Altitude requires less than 2000M
 
--  No corrosive gases, no liquid, no explosive gases, no oil pollution, no salt fog, no dust or metal powder, no radioactive material, no electromagnetic noise, non -flammable items
+-  No corrosive gases, no liquid, no explosive gases, no oil pollution, no salt fog, no dust or metal powder, no radioactive material, no electromagnetic noise, non-flammable items
 
 -  Avoid the device from working under the unstable conditions of the current
 
@@ -526,7 +526,7 @@ Control connection
 Controller interface
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This series of robots use the TN-S single-phase 220V AC power supply. The equipment comes with a 5-meter power line, and the three-foot plug-to-end is inserted into the AC 220V socket provided by the site, and the robot is electrical.
+This series of robots adopts TN-S single-phase 220V AC power supply, and the equipment comes with a 5-meter power cord. The three pin plug end is inserted into the on-site AC 220V socket, and the robot is electrically grounded
 
 -  Rating input voltage: 6A/220VAC
 
@@ -677,7 +677,7 @@ Safety I/O
 
 This section describes the electrical specifications of security I/O, and must abide by the general electrical specifications in Section 1.6.6.
 
-Safety devices and equipment must be installed in accordance with the safety description and risk assessment, see 1.1. All security I/O is paired (redundant) and must be stored as two independent branches. Single failures should not cause loss of security function.
+Safety devices and equipment must be installed in accordance with the safety description and risk assessment, see section 1.1. All security I/O is paired (redundant) and must be stored as two independent branches. Single failures should not cause loss of security function.
 
 Safety I/O includes emergency stop and security stop. Urgent stop input is only used for emergency stop equipment, and safely stops input for various security -related protection equipment. Functional differences are shown in Sheet 1.6-3:
 
@@ -723,7 +723,7 @@ An example of a safe stop device is the door switch that the robot stops when th
 .. centered:: Figure 1.6-12 Safety protection schematic diagram 03
 
 Universal digital amount I/O
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This section describes the electrical specifications of the general digital I/O, and must abide by the general electrical specifications in Section 1.6.6.
 
@@ -817,15 +817,15 @@ The first version of the button box
 
 .. centered:: Figure 1.7-1 The first version of the button box
 
-**Emergency stop switch:**\ When pressing the emergency stop switch, the robot enters the state of emergency stop.
+**Emergency stop switch:**\  When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
-**Type-c interface：**\ Connect the port of the web oscilloscope.
+**Type-c:**\ Connect the port of the web oscilloscope.
 
-**Button 1：**\ Short press automatic/manual mode switch, long press and enter/exit the drag mode.
+**Button 1:**\ Short press automatic/manual mode switch, long press and enter/exit the drag mode.
 
-**Button 2：**\ Short press the record to show the teaching point, long press and enter/exit the state of no demonstrator.
+**Button 2:**\ Short press the record to show the teaching point, long press and enter/exit the state of no demonstrator.
 
-**Button 3：**\ Start/stop running program.
+**Button 3:**\ Start/stop running program.
 
 The second version of the button box
 

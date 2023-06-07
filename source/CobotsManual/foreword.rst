@@ -6,7 +6,7 @@ Foreword
 
 First of all, thank you very much for buying our company's FR series collaborative robot products. Our products have been carefully designed and tested many times to ensure that they can meet your needs in all aspects.
 
-Please read this product user manual carefully to ensure that you can use our products correctly and get the best experience. If you encounter any problems during use, please refer to the fault exclusion part in the manual, or contact our after -salesperson. We thank you very much for your support and trust, and look forward to providing you with better services and products.
+Please read this product user manual carefully to ensure that you can use our products correctly and get the best experience. If you encounter any problems during use, please refer to the fault exclusion part in the manual, or contact our after-salesperson. We thank you very much for your support and trust, and look forward to providing you with better services and products.
 
 What is installed in the box
 -------------------------------
@@ -28,9 +28,9 @@ How to use this manual
 This manual contains the guidance information of robot installation programming. Manual includes:
 
 -  **Hardware installation part**：Machinery installation and electrical installation of robots
--  **Analysis of the teachor software**：Robotics and programming
+-  **Analysis of the teachor software**：Robot teaching and programming
 
-This manual is a robotic integrator, and integrators should receive basic mechanical and electrical training and be familiar with primary programming concepts.
+This manual is aimed at robot integrators, and integrators should receive basic mechanical and electrical training and be familiar with primary programming concepts.
 
 Follow the relevant standards
 --------------------------------
