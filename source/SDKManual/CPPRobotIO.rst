@@ -69,7 +69,7 @@ Get the control box digital input
 
     /**
     * @brief  Get the control box digital input
-    * @param  [in] id  I/O number (range: 0 to 15)
+    * @param  [in] id  I/O number range[0~15]
     * @param  [in] block  0- blocking, 1- non-blocking
     * @param  [out] result  0- low, 1- high
     * @return  Error code

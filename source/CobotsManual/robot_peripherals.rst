@@ -1,596 +1,595 @@
-机器人外设
+Peripheral
 =============
 
 .. toctree:: 
   :maxdepth: 5
 
-夹爪外设配置
--------------------
+Gripper Peripheral Configuration
+------------------------------------
 
-夹爪程序示教步骤
-~~~~~~~~~~~~~~~~~~~
+Gripper program teaching steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“末端外设配置”按钮，设备类型选择“夹爪设备”，夹爪的配置信息分为夹爪厂商、夹爪类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的夹爪信息。若用户需要更改配置，可先选择相应的夹爪编号，点击“清除”按钮，来清除相应的按钮，并重新根据需求配置；
+**Step1**：Select the "End Peripheral Configuration" button in the user peripheral configuration interface, and select "Gripper Device" for the device type. The configuration information of the gripper is divided into gripper manufacturer, gripper type, software version and mounting location. Specific production requirements to configure the corresponding jaw information. If the user needs to change the configuration, first select the corresponding gripper number, click the "Clear" button to clear the corresponding button, and reconfigure according to the needs;
 
 .. figure:: robot_peripherals/001.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.1‑1 夹爪配置
+.. centered:: Figure 4.1-1 Gripper Jaw Configuration
 
 .. important:: 
-	点击清除配置前，相应的夹爪应处于未激活状态。
+	The corresponding gripper should be inactive before clicking Clear Configuration.
 
-**Step2**：夹爪配置完成后，用户可在页面下方的夹爪信息表中查看相应的夹爪信息，若发现配置错误，可点击“清除”按钮，重新配置夹爪；
+**Step2**：After the gripper configuration is completed, the user can view the corresponding gripper information in the gripper information table at the bottom of the page. If configuration errors are found, click the "Clear" button to reconfigure the grippers;
 
 .. figure:: robot_peripherals/002.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.1‑2 夹爪配置信息
+.. centered:: Figure 4.1-2 Gripper configuration information
 
-**Step3**：选择配置完成的夹爪，点击“复位”按钮，页面弹出命令发送成功后，再点击“激活”按钮，可查看夹爪信息表中的激活状态，来判断是否激活成功；
+**Step3**：Select the configured gripper and click the "Reset" button. After the page pops up and the command is successfully sent, click the "Activate" button to check the activation status in the gripper information table to determine whether the activation is successful;
 
 .. important::
-	激活夹爪时，夹爪不可有夹持物
+	When the gripper is activated, the gripper must not have a gripping object
 
-**Step4**：程序示教命令界面中选择“Gripper”命令。在夹爪命令界面中，用户可以选择想要控制的夹爪编号（已经完成配置并且被激活的夹爪），设置相应的开闭状态、开闭速度、开闭力矩已经等待夹爪动作的最大时间。完成设置后点击添加应用即可。此外还可以添加夹爪激活和复位指令，以便于在运行程序时去激活/复位夹爪。
+**Step4**：Select the "Gripper" command in the program teaching command interface. In the gripper command interface, the user can select the number of the gripper to be controlled (the gripper that has been configured and activated), and set the corresponding opening and closing state, opening and closing speed, and the maximum opening and closing torque that have been waiting for the gripper to move. time. After completing the settings, click Add Application. Additionally, gripper activation and reset commands can be added to deactivate/reset the gripper while running a program.
 
 .. figure:: robot_peripherals/003.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.1‑3 夹爪指令编辑
+.. centered:: Figure 4.1-3 Gripper Command Edit
 
-夹爪程序示教
-~~~~~~~~~~~~~~~
+Gripper program teaching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/004.png
    :align: center
    :width: 6in
 
-喷枪外设配置
--------------
+Spray gun peripheral configuration
+-------------------------------------
 
-喷枪外设配置步骤
-~~~~~~~~~~~~~~~~~~
+Spray gun peripheral configuration steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“喷枪配置”按钮，用户可以通过喷涂功能一键配置按键，对喷涂所需DO进行快速配置（默认配置DO10为喷涂启停，DO11为喷涂清枪）。 用户也可以根据自己的需求在“IO配置”界面，自定义配置DO；
+**Step1**：Select the "Spray Gun Configuration" button in the user peripheral configuration interface, and the user can quickly configure the DO required for spraying through the one-key configuration button of the spraying function (the default configuration DO10 is spraying start and stop, and DO11 is spraying cleaning gun). Users can also customize DO according to their own needs in the "IO Configuration" interface;
 
 .. important:: 
-	使用喷涂功能之前，需要先建立相应的工具坐标系，并在程序示教时应用建立好的工具坐标系。
+	Before using the spraying function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching.
 
-**Step2**：配置完成后，点击“开始喷涂”、“停止喷涂”、“开始清枪”和“停止清枪”四个按钮，进行喷枪调试；
+**Step2**：After the configuration is complete, click the four buttons "Start Spraying", "Stop Spraying", "Start Cleaning the Gun" and "Stop Cleaning the Gun" to debug the spray gun;
 
 .. figure:: robot_peripherals/005.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.2‑1 喷枪配置
+.. centered:: Figure 4.2-1 Gun Configuration
 
-**Step3**：在程序示教命令界面选择“spray”命令。根据具体的程序示教需求，在相应的地方添加应用“开始喷涂”、“停止喷涂”、“开始清枪”和“停止清枪”四个指令。
+**Step3**：Select the "spray" command on the program teaching command interface. According to the specific program teaching requirements, add and apply four commands "start spraying", "stop spraying", "start cleaning the gun" and "stop cleaning the gun" in the corresponding places.
 
 .. figure:: robot_peripherals/006.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.2‑2 喷枪指令编辑
+.. centered:: Figure 4.2-2 Spray Gun Command Editing
 
-喷涂程序示教
-~~~~~~~~~~~~~~
+Spray program teaching
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/007.png
    :align: center
    :width: 6in
 
-焊机外设配置
--------------
+Peripheral configuration of welding machine
+---------------------------------------------
 
-焊机外设配置步骤
-~~~~~~~~~~~~~~~~~~
+Peripheral configuration of welding machine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“焊机配置”按钮，用户可以通过配置焊机IO按键，对焊机所需DI和DO进行快速配置（默认配置DI12 起弧成功信号，DO9 送气信号，DO10 起弧信号，DO11 点动送丝，DO12 反向送丝，DO13 JOB选择1，DO14 JOB选择2，DO15 JOB选择3）。 用户也可以根据自己的需求在“IO配置”界面，自定义配置；
+**Step1**：In the user peripherals configuration interface, select the "welding machine configuration" button, and the user can quickly configure the DI and DO required by the welding machine by configuring the IO button of the welding machine (the default configuration is DI12 for arc start success signal, DO9 for gas supply signal, and DO10 for gas supply signal). Arc signal, DO11 jog wire feeding, DO12 reverse wire feeding, DO13 JOB selection 1, DO14 JOB selection 2, DO15 JOB selection 3). Users can also customize the configuration in the "IO Configuration" interface according to their own needs;
 
 .. important:: 
-	使用焊机功能之前，需要先建立相应的工具坐标系，并在程序示教时应用建立好的工具坐标系。焊机功能通常与激光跟踪传感器配合使用。
+	Before using the welding machine function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is often used in conjunction with a laser tracking sensor.
 
-**Step2**：配置完成后，选择编号，设定等待时间，点击“收弧”、“起弧”、“送气”、“关气”、“正向送丝”和“反向送丝”六个按钮，进行焊机调试；
+**Step2**：After the configuration is complete, select the number, set the waiting time, and click the six buttons of "arc end", "arc start", "gas", "gas off", "forward wire feed" and "reverse wire feed" to proceed welding machine debugging;
 
 .. figure:: robot_peripherals/008.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.3‑1 焊机配置
+.. centered:: Figure 4.3-1 Welding machine configuration
 
-**Step3**：在程序示教命令界面选择“Weld”命令。根据具体的程序示教需求，在相应的地方添加应用“起弧”和“收弧”指令。
+**Step3**：Select the "Weld" command on the program teaching command interface. According to the specific program teaching requirements, add and apply the "arc start" and "arc end" instructions in the corresponding places.
 
 .. figure:: robot_peripherals/009.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.3‑2 焊机指令编辑
+.. centered:: Figure 4.3-2 Welding Machine Command Editing
 
-焊机程序示教
-~~~~~~~~~~~~~~~
+Welding program teaching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/010.png
    :align: center
    :width: 6in
 
-传感器外设配置
----------------
+Sensor Peripheral Configuration
+---------------------------------
 
-传感器外设配置步骤
-~~~~~~~~~~~~~~~~~~~~
+Sensor Peripheral Configuration Steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“传感器配置”按钮，本小节以机器人末端为例说明，用户首先对最大差值进行设置，传感器扫描偏差点数最大差值建议默认设置为4，数据处理根据实际使用场景选择原始数据或者YZ数据。控制器IP默认为192.168.57.2，传感器IP配置为同一网段即可，端口为5020，采样周期建议值25，通信协议目前适配为睿牛通信协议，加载对应协议即可。加载完成后，可通过“打开传感器”和“关闭传感器”按键测试传感器。
+**Step1**：Select the "Sensor Configuration" button in the user peripheral configuration interface. This section takes the end of the robot as an example. The user first sets the maximum difference. The maximum difference of the sensor scanning deviation points is recommended to be set to 4 by default. Data processing is based on actual use. The scene selects raw data or YZ data. The controller IP defaults to 192.168.57.2, the sensor IP can be configured on the same network segment, the port is 5020, and the sampling period is recommended to be 25. The communication protocol is currently adapted to the Ruiniu communication protocol, just load the corresponding protocol. After the loading is complete, the sensor can be tested by pressing the "Sensor On" and "Sensor Off" buttons.
 
 .. figure:: robot_peripherals/011.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.4‑1 激光跟踪传感器IP配置
+.. centered:: Figure 4.4-1 Laser tracking sensor IP configuration
 
 .. important:: 
-	使用传感器功能之前，需要先建立相应的工具坐标系，并在程序示教时应用建立好的工具坐标系。焊机功能通常与传感器配合使用。
+	Before using the sensor function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is usually used with sensors.
 
-**Step2**：标定传感器参考点。
+**Step2**：Calibration sensor reference point.
 
-在工具坐标系设置功能中，我们标定传感器类型工具，使用六点法配置传感器坐标系。在机器人工作空间中选择一个固定的点，将传感器中心点从三个不同的角度移至所选点上，分别设置点1，2，3。将传感器中心点垂直移至所选点正上方，记录点4。将传感器中心点由固定点移至传感器坐标系的X轴方向上一点，设置点5。回到固定点，垂直向上移动，将传感器中心点由固定点移至传感器坐标系的Z轴方向上一点，设置为点6。点击计算，得到传感器工具的位姿，点击应用，即可完成。
+In the tool coordinate system setting function, we calibrate the sensor type tool and use the six-point method to configure the sensor coordinate system. Select a fixed point in the robot workspace, move the sensor center point to the selected point from three different angles, and set points 1, 2, and 3 respectively. Move the sensor center point vertically directly above the selected point and record point 4. Move the sensor center point from a fixed point to a point in the X-axis direction of the sensor coordinate system, and set point 5. Return to the fixed point, move vertically upwards, and move the sensor center point from the fixed point to a point in the Z-axis direction of the sensor coordinate system, and set it as point 6. Click Calculate to get the pose of the sensor tool, and click Apply to complete.
 
 .. figure:: robot_peripherals/012.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.4‑2 参考点配置-六点法
+.. centered:: Figure 4.4-2 Reference Point Configuration - Six Point Method
 
-**八点法**：在工具坐标系设置功能中，我们标定传感器类型工具，使用八点法配置传感器坐标系，选择八点法，移动传感器激光线使其与标定板上的标定线重合，尽量使得传感器与标定线保持较近距离且识别到标定点，记录点1，移动-y/+y方向20mm左右,调整机器人使激光识别到标定点，记录点2，移动-x/+x方向20mm左右，调整机器人使激光识别到标定点，记录点3，移动-y/+y方向20mm左右，调整机器人使激光识别到标定点，记录点4，移动-rx方向5mm左右，调整机器人使激光识别到标定点，记录点5。移动-ry方向5mm左右，调整机器人使激光识别到标定点，记录点6，移动-rz方向5mm左右，调整机器人使传感器识别到标定点，记录点7，移动-rz方向5mm左右，调整机器人使激光识别到标定点，记录点8。点击计算，得到传感器位姿，点击应用，即可完成。
+**Eight point method**：In the tool coordinate system setting function, we calibrate the sensor type tool, use the eight-point method to configure the sensor coordinate system, select the eight-point method, move the sensor laser line to coincide with the calibration line on the calibration board, and keep the sensor and the calibration line as close as possible Closer distance and the calibration point is recognized, record point 1, move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 2, move about 20mm in the -x/+x direction, and adjust the robot so that the laser Recognize the calibration point, record point 3, move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 4, move about 5mm in the -rx direction, adjust the robot so that the laser recognizes the calibration point, and record the point 5. Move about 5mm in the -ry direction, adjust the robot so that the laser recognizes the calibration point, record point 6, move about 5mm in the -rz direction, adjust the robot so that the sensor recognizes the calibration point, record point 7, move about 5mm in the -rz direction, and adjust the robot so that Laser recognition to the calibration point, record point 8. Click Calculate to get the sensor pose, click Apply to complete.
 
 .. figure:: robot_peripherals/013.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.4‑3 参考点配置-八点法
+.. centered:: Figure 4.4-3 Reference Point Configuration - Eight Points Method
 
-**五点法**：在工具坐标系设置功能中，我们标定传感器类型工具，使用五点法配置传感器坐标系，首先确定一个固定点，将工具末端对准该点，记录点1，接着调整机器人姿态，使得激光识别到记录的固定点，分别记录点2至点5，注意姿态变化需要尽可能大。点击计算，得到传感器位姿，点击应用，即可完成。
+**Five point method**：In the tool coordinate system setting function, we calibrate the sensor type tool and use the five-point method to configure the sensor coordinate system. First, determine a fixed point, align the end of the tool with this point, record point 1, and then adjust the posture of the robot so that the laser recognizes Record fixed points, respectively record points 2 to 5, and note that the attitude change needs to be as large as possible. Click Calculate to get the sensor pose, click Apply to complete.
 
 .. figure:: robot_peripherals/014.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.4‑4 参考点配置-五点法
+.. centered:: Figure 4.4-4 Reference Point Configuration - Five Points Method
 
-激光传感器跟踪功能
-~~~~~~~~~~~~~~~~~~~
+Laser sensor tracking function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：在程序示教命令界面选择“Laser”命令。里面集成了激光的相关指令，根据具体的程序示教需求，在相应的地方添加指令，参考下方的程序示例。
+Command description: Select the "Laser" command on the program teaching command interface. It integrates laser-related instructions. According to the specific program teaching requirements, add instructions in the corresponding places. Refer to the program example below.
 
 .. figure:: robot_peripherals/015.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.4‑5 激光跟踪指令编辑
+.. centered:: Figure 4.4-5 Laser Tracking Command Editing
 
-程序示例：
+program example：
 
 .. figure:: robot_peripherals/016.png
    :align: center
    :width: 6in
 
-激光传感器轨迹复现功能
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-指令说明：在程序示教命令界面选择“LT-Rec”命令。该指令主要用于激光识别路径起点终点获取以及轨迹复现，根据具体的程序示教需求，在相应的地方添加指令，参考下方的程序示例。
+Laser sensor trajectory reproduction function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Command description: Select the "LT-Rec" command on the program teaching command interface. This instruction is mainly used for obtaining the starting point and end point of the laser recognition path and reappearing the trajectory. According to the specific program teaching requirements, add instructions in the corresponding places. Refer to the program example below.
 
 .. figure:: robot_peripherals/017.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.4‑6 轨迹复现指令编辑
+.. centered:: Figure 4.4-6 Editing of track reappearance command
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/018.png
    :align: center
    :width: 6in
 
-扩展轴外设配置
-----------------
+Extended Axis Peripheral Configuration
+-----------------------------------------
 
-扩展轴外设配置步骤
-~~~~~~~~~~~~~~~~~~~~~~~~
+Extended Axis Peripheral Configuration Steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“扩展轴”按钮，进入扩展轴界面，选择扩展轴编号1，点击“参数配置”按键进入右侧界面。设置轴类型，轴方向，运行速度，加速度，正方向限位，反方向限位，导程，编码器分辨率，起点偏置，厂家，型号和模式，点击配置即可配置完成。
+**Step1**：Select the "Extended Axis" button in the user peripheral configuration interface to enter the extended axis interface, select the extended axis number 1, and click the "Parameter Configuration" button to enter the right interface. Set the axis type, axis direction, running speed, acceleration, forward limit, reverse limit, lead, encoder resolution, starting point offset, manufacturer, model and mode, and click Configure to complete the configuration.
 
 .. figure:: robot_peripherals/019.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.5-1 扩展轴参数配置
+.. centered:: Figure 4.5-1 Extended axis parameter configuration
 	
 .. important:: 
-	使用扩展轴功能之前，需要先建立相应的扩展轴标系，并在程序示教时应用建立好的工具坐标系。扩展轴功能主要与焊机功能和激光跟踪传感器功能配合使用。
+	Before using the extended axis function, it is necessary to establish the corresponding extended axis coordinate system, and apply the established tool coordinate system during program teaching. The extended axis function is mainly used in conjunction with the welder function and the laser tracking sensor function.
 
-**Step2**：使点击“零点设置”按键进入零点设置弹窗，如右侧图片所示。设定回零方式，寻零速度，零点箍位速度和轴方向，点击“设置”按键，扩展轴开始回零，回零状态会显示在轴方向下方空白处，当出现“回零已完成”提示表明扩展轴零点设置成功。
+**Step2**：Click the "Zero Setting" button to enter the zero setting pop-up window, as shown in the picture on the right. Set the zero return method, zero search speed, zero hoop speed and axis direction, click the "Setting" button, the extended axis will start to return to zero, the zero return status will be displayed in the blank space below the axis direction, when "zero return completed" appears The prompt indicates that the zero point of the extension axis is set successfully.
 
 .. figure:: robot_peripherals/020.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.5‑2 扩展轴零点设置
+.. centered:: Figure 4.5-2 Extended axis zero point setting
 
-**Step3**：选择已经配置好参数的扩展轴编号，点击“伺服使能”后，设置运行速度，加速度和单次运行最大距离，可以进行正向转动和反向转动测试扩展轴。
+**Step3**：Select the number of the extended axis whose parameters have been configured, click "Servo Enable", set the running speed, acceleration and the maximum distance of a single run, and test the extended axis for forward rotation and reverse rotation.
 
 .. figure:: robot_peripherals/021.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.5‑3 扩展轴测试
+.. centered:: Figure 4.5-3 Extended Axis Test
 
-**Step4**：扩展轴通常于激光传感器配合使用，此时激光传感器通常采用外部安装方式，传感器参考点配置需要采用三点法标定，而不是之前使用的六点法标定。将工具中心对准右侧横截面底部中间点（靠近相机那一侧）设定点1，将工具中心点对准另一截面即左侧横截面底部中间点，设定点2，将工具中心点移至传感器右侧横截面上边缘中间点，设定点3，计算并保存，点击应用完成三点法标定。
+**Step4**：The extension axis is usually used in conjunction with the laser sensor. At this time, the laser sensor is usually installed externally. The sensor reference point configuration needs to be calibrated by the three-point method instead of the six-point method used before. Align the center of the tool with the middle point of the bottom of the right cross-section (the side close to the camera), set point 1, align the center of the tool with the middle point of the bottom of the other cross-section, which is the middle point of the left cross-section, set point 2, and set the center of the tool with Move the point to the middle point of the upper edge of the cross-section on the right side of the sensor, set point 3, calculate and save, and click Apply to complete the three-point calibration.
 
 .. figure:: robot_peripherals/022.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.5‑4 传感器三点法标定
+.. centered:: Figure 4.5-4 Three-point sensor calibration
 
-**Step5**：在程序示教命令界面选择“EAxis”命令。根据具体的程序示教需求，在相应的地方添加指令。
+**Step5**：Select the "EAxis" command on the program teaching command interface. According to the specific program teaching requirements, add instructions in the corresponding places.
 
 .. figure:: robot_peripherals/023.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.5‑5 扩展轴指令编辑
+.. centered:: Figure 4.5-5 Extended axis command editing
 
-扩展轴配合激光跟踪焊接示教程序
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Extended axis with laser tracking welding teaching program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/024.png
    :align: center
    :width: 6in
 
-传送带跟踪配置
------------------
+Conveyor Tracking Configuration
+-----------------------------------
 
-传送带跟踪配置步骤
-~~~~~~~~~~~~~~~~~~~~~
+Conveyor Tracking Configuration Steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“传送带跟踪”按钮，进入传送带跟踪配置界面，点击“配置传送带IO”按键快速配置传送带功能所需IO，之后根据实际使用功能情况配置对应的参数，此处以无视觉跟踪抓取功能为例，需要配置传送带编码器通道，分辨率，导程，视觉搭配选择否，点击配置。
+**Step1**：Select the "Conveyor Belt Tracking" button in the user peripheral configuration interface to enter the conveyor belt tracking configuration interface, click the "Configure Conveyor Belt IO" button to quickly configure the IO required for the conveyor belt function, and then configure the corresponding parameters according to the actual use of the function. Here, there is no visual Take the tracking and grabbing function as an example, you need to configure the conveyor belt encoder channel, resolution, lead, visual matching, select No, and click Configure.
 
 .. figure:: robot_peripherals/025.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.6‑1 传送带配置
+.. centered:: Figure 4.6-1 Conveyor configuration
 
-**Step2**：接下来设置抓取点补偿值，为X,Y,Z三个方向上的补偿距离，可在调试过程中根据实际情况设置。
+**Step2**：Next, set the grab point compensation value, which is the compensation distance in the three directions of X, Y, and Z, which can be set according to the actual situation during the debugging process.
 
 .. figure:: robot_peripherals/026.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.6‑2 传送带抓取点补偿配置
+.. centered:: Figure 4.6-2 Conveyor Grab Point Compensation Configuration
 
-**Step3**：开启传送带，将标定的物体移动到定义的A点位置，停止传送带。移动机器人，将机器人末端的标定杆尖点与所标定的物体尖点对齐，点击起始点A按键，跳出对话框，显示当前编码器值和机器人位姿，点击标定完成起始点A标定。
+**Step3**：Turn on the conveyor belt, move the calibrated object to the defined point A, and stop the conveyor belt. Move the robot, align the sharp point of the calibration rod at the end of the robot with the sharp point of the object to be calibrated, click the start point A button, a dialog box will pop up, displaying the current encoder value and robot pose, and click Calibrate to complete the start point A calibration.
 
 .. figure:: robot_peripherals/027.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.6‑3 起始点A配置
+.. centered:: Figure 4.6-3 Starting Point A Configuration
 
-**Step4**：点击参考点按键，进入参考点标定，记录参考点时记录机器人抓取时的高度和姿态，每次跟踪时都会以记录参考点的高度和姿态区跟踪抓取，可以和AB点不在一个高度，点击标定完成参考点标定。
+**Step4**：Click the reference point button to enter the reference point calibration. When recording the reference point, record the height and attitude of the robot when it is grasping. Every time it tracks, it will track and grasp with the height and attitude area of the recorded reference point. It can be different from the AB point. Click Calibrate to complete the reference point calibration.
 
 .. figure:: robot_peripherals/028.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.6‑4 参考点配置
+.. centered:: Figure 4.6-4 Reference point configuration
 
-**Step5**：开启传送带，将标定的物体移动到定义的B点位置，停止传送带。移动机器人，将机器人末端的标定杆尖点与所标定的物体尖点对齐，点击终点B按键，弹出对话框，显示当前编码器值和机器人位姿，点击标定完成终点B标定。
+**Step5**：Turn on the conveyor belt, move the calibrated object to the defined point B, and stop the conveyor belt. Move the robot, align the sharp point of the calibration rod at the end of the robot with the sharp point of the object to be calibrated, click the end point B button, a dialog box will pop up, displaying the current encoder value and robot pose, click the calibration to complete the end point B calibration.
 
 .. figure:: robot_peripherals/029.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.6‑5 终点B配置
+.. centered:: Figure 4.6-5 Terminal B configuration
 
-传送带跟踪示教程序
-~~~~~~~~~~~~~~~~~~~~~~~
+Conveyor belt tracking teaching program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/030.png
    :align: center
    :width: 6in
 
-姿态自适应配置
-----------------
+Attitude Adaptive Configuration
+----------------------------------
 
-姿态自适应配置步骤
-~~~~~~~~~~~~~~~~~~~~~~
+Attitude adaptive configuration steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“跟踪姿态配置”按钮，进入姿态调整配置界面，选择板材类型和机器人实际工作运动方向，调整机器人姿态，分别设置姿态点A，姿态点B和姿态点C，通常A为平面姿态点，B为上升沿姿态点，C为下降沿姿态点。
+**Step1**：Select the "Tracking attitude configuration" button in the user peripherals configuration interface to enter the attitude adjustment configuration interface, select the plate type and the actual working direction of the robot, adjust the robot attitude, and set the attitude point A, attitude point B and attitude point C respectively, usually A is the attitude point of the plane, B is the attitude point of the rising edge, and C is the attitude point of the falling edge.
 
 .. figure:: robot_peripherals/031.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.7‑1 姿态调整配置
+.. centered:: Figure 4.7-1 Attitude Adjustment Configuration
 
 .. important:: 
-	A姿态和B姿态，A姿态和C姿态之间的姿态变化在满足应用需求下姿态变化越小越好。姿态自适应功能为辅助应用功能，通常配合焊缝跟踪使用。
+	The attitude change between A posture and B posture, A posture and C posture is as small as possible under the condition that the application requirements are met. The posture adaptive function is an auxiliary application function, usually used in conjunction with seam tracking.
 
-**Step2**：在程序示教命令界面选择“Adjust”命令。根据具体的程序示教需求，在相应的地方添加指令。
+**Step2**：Select the "Adjust" command on the program teaching command interface. According to the specific program teaching requirements, add instructions in the corresponding places.
 
 .. figure:: robot_peripherals/032.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.7‑2 姿态调整指令编辑
+.. centered:: Figure 4.7-2 Attitude Adjustment Command Edit
 
-姿态自适应配合扩展轴和激光跟踪焊接示教程序
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Attitude self-adaptive with extended axis and laser tracking welding teaching program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: robot_peripherals/033.png
    :align: center
    :width: 6in
 
-力/扭矩传感器外设配置
--------------------------
+Force/Torque Sensor Peripheral Configuration
+-----------------------------------------------
 
-力/扭矩传感器配置步骤
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Sensor Configuration Steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“末端外设配置”按钮，设备类型选择“力传感器设备”，力传感器配置信息分为厂商、类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的力传感器信息。若用户需要更改配置，可先选择相应的编号，点击“清除”按钮，来清除相应的信息，并重新根据需求配置；
+**Step1**：Select the "End Peripheral Configuration" button in the user peripheral configuration interface, and select "Force Sensor Device" for the device type. The force sensor configuration information is divided into manufacturer, type, software version and mounting location. Configure the corresponding force sensor information. If the user needs to change the configuration, he can first select the corresponding number, click the "Clear" button to clear the corresponding information, and reconfigure according to the needs;
 
 .. figure:: robot_peripherals/034.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑1 力/矩传感器配置
+.. centered:: Figure 4.8-1 Force/Torque Sensor Configuration
 
 .. important:: 
-	点击清除配置前，相应的传感器应处于未激活状态。
+	The corresponding sensor should be inactive before clicking Clear Configuration.
 
-**Step2**：力传感器配置完成后，用户可在页面下方的信息表中查看相应的力传感器信息，若发现配置错误，可点击“清除”按钮，重新配置。
+**Step2**：After the configuration of the force sensor is completed, the user can view the corresponding force sensor information in the information table at the bottom of the page. If a configuration error is found, the user can click the "Reset" button to reconfigure.
 
 .. figure:: robot_peripherals/035.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑2 力/矩传感器配置信息
+.. centered:: Figure 4.8-2 Force/Torque Sensor Configuration Information
 
-**Step3**：选择配置完成的力传感器编号，点击“复位”按钮，页面弹出命令发送成功后，再点击“激活”按钮，可查看力传感器信息表中的激活状态，来判断是否激活成功；此外，力传感器会有初始值，用户根据使用需求选择“零点矫正”和“去除零点”。力传感器零点矫正需要确保力传感器水平垂直向下，且机器人未配置负载。
+**Step3**：Select the configured force sensor number and click the "Reset" button. After the page pops up and the command is sent successfully, click the "Activate" button to check the activation status in the force sensor information table to determine whether the activation is successful; in addition, the force sensor will There is an initial value, and the user can select "zero point correction" and "zero point removal" according to the usage requirements. The force sensor zero point correction needs to ensure that the force sensor is horizontal and vertical, and the robot is not equipped with a load.
 
-**Step4**：力传感器配置完成后，需要配置传感器类型工具坐标系，可根据传感器与末端工具中心的距离直接输入传感器工具坐标系值并应用。
+**Step4**：After the configuration of the force sensor is completed, the sensor type tool coordinate system needs to be configured, and the value of the sensor tool coordinate system can be directly input and applied according to the distance between the sensor and the center of the end tool.
 
-力/扭矩传感器负载辨识
-~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Sensor Load Identification
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-特定姿态辨识：清除末端负载数据，配置好力传感器后，建立传感器坐标系，将机器人末端姿态调整为垂直向下，进行“零点矫正”后安装末端负载。首先选择对应传感器工具坐标系，调整机器人，使得传感器及工具垂直向下，记录数据，计算质量。接着，调整机器人3个不同姿态，分别记录三组数据，计算出质心，确认无误后点击应用。
+Specific attitude recognition: clear the end load data, configure the force sensor, establish the sensor coordinate system, adjust the end attitude of the robot to be vertically downward, perform "zero point correction" and install the end load. First, select the corresponding sensor tool coordinate system, adjust the robot so that the sensor and tool are vertically downward, record data, and calculate the quality. Next, adjust the three different postures of the robot, record three sets of data respectively, calculate the center of mass, and click Apply after confirming that it is correct.
 
-**动态辨识**：清除末端负载数据，配置好力传感器后，建立传感器坐标系，将机器人末端姿态调整为垂直向下，进行“零点矫正”后安装末端负载。点击“辨识开启”，拖动机器人进行运动，接着点击“辨识关闭”，即可自动将负载结果应用到机器人中。
+**Dynamic identification**：After clearing the end load data and configuring the force sensor, establish the sensor coordinate system, adjust the end posture of the robot to be vertically downward, perform "zero point correction" and install the end load. Click "Identification On", drag the robot to move, and then click "Identification Off", the load result can be automatically applied to the robot.
 
 .. figure:: robot_peripherals/036.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑4 力/扭矩传感器负载辨识
+.. centered:: Figure 4.8-4 Force/Torque Sensor Load Identification
 
-力/扭矩传感器辅助拖动
-~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Sensor Assisted Drag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-配置好传感器后，可以搭配传感器对拖动机器人进行更好的辅助。第一次使用时可以按照右侧图片的数据进行配置，应用完成后，此时无需进入拖动模式，直接对末端力传感器进行拖拽，即可控制机器人在固定姿态进行移动。
+After the sensor is configured, it can be used with the sensor to better assist the dragging robot. When using it for the first time, you can configure it according to the data in the picture on the right. After the application is completed, you don’t need to enter the drag mode at this time, and you can directly drag the end force sensor to control the robot to move in a fixed posture.
 
 .. figure:: robot_peripherals/037.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑4 力/扭矩传感器拖动锁定
+.. centered:: Figure 4.8-4 Force/Torque Sensor Drag Lock
 
-力/扭矩传感器碰撞检测
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Sensor Collision Detection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Guard”指令为碰撞检测指令。选择对应的传感器坐标系，勾选生效的力矩方向检测，设置当前值，碰撞最大阈值和碰撞最小阈值三项，碰撞检测条件正常范围为（当前值-最小阈值，当前值+最大阈值），将“开启”和“关闭”指令加入到程序中在。
+Command description: "FT_Guard" command is a collision detection command. Select the corresponding sensor coordinate system, check the effective torque direction detection, set the current value, the maximum collision threshold and the minimum collision threshold. The normal range of the collision detection condition is (current value-minimum threshold, current value+maximum threshold), set "Open" and "Close" commands are added to the program.
 
 .. figure:: robot_peripherals/038.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑5 FT_Guard指令编辑
+.. centered:: Figure 4.8-5 FT_Guard Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/039.png
    :align: center
    :width: 6in
 
-力/扭矩传感器力控运动
-~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Sensor Force Control Motion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Control”指令为力控运动指令，可以使机器人在设定力的附近运动，常用于打磨场景中。选择对应的传感器坐标系，勾选生效的力矩方向检测，设置检测阈值，以及各个方向上PID比例系数(一般设置p为0.001)，设置最大调整距离（对应X,Y,Z）和最大调整角度（对应RX,RY,RZ），将“开启”和“关闭”指令加入到程序中在。
+Instruction description: The "FT_Control" instruction is a force control motion instruction, which can make the robot move near the set force, and is often used in grinding scenes. Select the corresponding sensor coordinate system, check the effective torque direction detection, set the detection threshold, and the PID proportional coefficient in each direction (generally set p to 0.001), set the maximum adjustment distance (corresponding to X, Y, Z) and maximum adjustment angle (corresponding to RX, RY, RZ), add the "open" and "close" instructions to the program.
 
 .. figure:: robot_peripherals/040.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑6 FT_Control指令编辑
+.. centered:: Figure 4.8-6 FT_Control Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/041.png
    :align: center
    :width: 6in
 
-力/扭矩传感器螺旋插入
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Transducer Screw Insertion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Spiral”指令为螺旋线探索插入，一般用于圆柱轴的轴孔装配动作。在运行动作之前，需要将机器人末端拖动至孔位的大致位置，根据当前场景，设定指令的参数，添加到程序中，运行后，机器人会以螺旋形的运动进行探索。
+Instruction description: The "FT_Spiral" instruction is a spiral line exploration and insertion, which is generally used for the shaft hole assembly action of a cylindrical shaft. Before running the action, you need to drag the end of the robot to the approximate position of the hole. According to the current scene, set the parameters of the command and add it to the program. After running, the robot will explore in a spiral motion.
 
 .. figure:: robot_peripherals/042.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑7 FT_Spiral指令编辑
+.. centered:: Figure 4.8-7 FT_Spiral Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/043.png
    :align: center
    :width: 6in
 
-力/扭矩传感器旋转插入
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Transducer Rotary Insertion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Rot”指令为旋转探索插入，一般用于承接螺旋线插入动作，用于键轴的轴孔装配。在运行动作之前，需要将机器人末端移动至螺旋线探索找到的孔位或者完全对齐的示教孔位，根据当前场景，设定指令的参数，添加到程序中，运行后，机器人会以缓慢的旋转进行探索。
+Instruction description: The "FT_Rot" instruction is a rotation exploration insertion, which is generally used to undertake the helical insertion action, and is used for the shaft hole assembly of the key shaft. Before running the action, you need to move the end of the robot to the hole found by the helical exploration or the fully aligned teaching hole. According to the current scene, set the parameters of the command and add it to the program. After running, the robot will slowly Spin to explore.
 
 .. figure:: robot_peripherals/044.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑8 FT_Rot指令编辑
+.. centered:: Figure 4.8-8 FT_Rot Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/045.png
    :align: center
    :width: 6in
 
-力/扭矩传感器直线插入
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Transducer Straight Insertion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Lin”指令为旋转探索插入，一般用于承接螺旋线插入动作或旋转插入动作，用于键轴的轴孔装配。在运行动作之前，需要将机器人末端移动至螺旋线探索找到的孔位，旋转插入动作结束的位置或者完全对齐的示教孔位，根据当前场景，设定指令的参数，添加到程序中，运行后，机器人会以设定的方向进行直线运动。
+Instruction description: "FT_Lin" instruction is rotation exploration insertion, generally used to undertake helical insertion action or rotation insertion action, and is used for shaft hole assembly of key shaft. Before running the action, you need to move the end of the robot to the hole found by the helical exploration, rotate the end of the insertion action or the fully aligned teaching hole, set the parameters of the command according to the current scene, add it to the program, and run After that, the robot will move in a straight line in the set direction.
 
 .. figure:: robot_peripherals/046.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑9 FT_Lin指令编辑
+.. centered:: Figure 4.8-9 FT_Lin Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/047.png
    :align: center
    :width: 6in
 
-力/扭矩传感器表面定位
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Sensor Surface Orientation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_FindSurface”指令为表面定位，一般用于寻找物体表面。根据当前场景，设置对应坐标系，移动方向、移动轴、探索直线速度、探索直线加速度、最大探索距离、动作终止力阈值等参数，添加到程序中，运行程序，动作开始执行，机器人末端开始缓慢向表面所在方向移动。
+Instruction description: The "FT_FindSurface" instruction is for surface positioning, and is generally used to find the surface of an object. According to the current scene, set the corresponding coordinate system, moving direction, moving axis, exploring linear speed, exploring linear acceleration, maximum exploring distance, action termination force threshold and other parameters, add them to the program, run the program, the action starts to execute, and the end of the robot starts to slow down Move in the direction of the surface.
 
 .. figure:: robot_peripherals/048.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑10 FT_FindSurface指令编辑
+.. centered:: Figure 4.8-10 FT_FindSurface Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/049.png
    :align: center
    :width: 6in
 
-力/扭矩传感器中心定位
-~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Transducer Centering
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_CalCenter”指令为中心定位，一般用于寻找两表面的中间平面表面。根据当前场景，设置对应坐标系，移动方向、移动轴、探索直线速度、探索直线加速度、最大探索距离、动作终止力阈值等参数，分别寻找A平面和B平面，添加到程序中，运行程序，动作开始执行，机器人缓慢向表面A所在方向移动，定位到A面后，机器人缓慢向表面B所在方向移动，定位到B面后，即可算出中心平面位置。
+Instruction description: The "FT_CalCenter" instruction is for center positioning, and is generally used to find the middle plane surface of two surfaces. According to the current scene, set the corresponding coordinate system, moving direction, moving axis, exploring linear speed, exploring linear acceleration, maximum exploring distance, action termination force threshold and other parameters, find the A plane and B plane respectively, add them to the program, and run the program. The action starts to execute, and the robot slowly moves towards the direction of surface A. After positioning on surface A, the robot slowly moves towards the direction of surface B. After positioning on surface B, the position of the center plane can be calculated.
 
 .. figure:: robot_peripherals/050.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑11 FT_CalCenter指令编辑
+.. centered:: Figure 4.8-11 FT_CalCenter Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/051.png
    :align: center
    :width: 6in
 
-力/扭矩传感器点按力探测
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Force/Torque Sensor Tap Force Detection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-指令说明：“FT_Click”指令为点按力探测，点按力探测用于探测一个点按力，通常和表面定位动作配合使用。设置好参数后，添加到程序中，运行程序，末端开始沿工具坐标系Z方向向目标移动，当Z正方向上的力达到点按力数值，则点按力探测完成。
+Instruction description: The "FT_Click" command is click force detection, which is used to detect a click force, and is usually used in conjunction with the surface positioning action. After setting the parameters, add it to the program, run the program, and the end starts to move toward the target along the Z direction of the tool coordinate system. When the force in the positive Z direction reaches the value of the click force, the click force detection is completed.
 
 .. figure:: robot_peripherals/052.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.8‑12 FT_Click指令编辑
+.. centered:: Figure 4.8-12 FT_Click Command Edit
 
-程序示例：
+Program example:
 
 .. figure:: robot_peripherals/053.png
    :align: center
    :width: 6in
 
-扩展IO设备外设配置
-------------------------
+Extended IO device peripheral configuration
+--------------------------------------------
 
-扩展IO设备配置步骤
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Extended IO device configuration steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“末端外设配置”按钮，设备类型选择“扩展IO设备”，扩展IO设备配置信息分为厂商、类型、软件版本和挂载位置，用户可根据具体的生产需求来配置相应的设备信息。若用户需要更改配置，可先选择相应的编号，点击“清除”按钮，来清除相应的信息，并重新根据需求配置；
+**Step1**：Select the "End Peripheral Configuration" button in the user peripheral configuration interface, and select "Extended IO Device" for the device type. The configuration information of the extended IO device is divided into manufacturer, type, software version and mounting location. Users can select according to specific production needs. To configure the corresponding device information. If the user needs to change the configuration, he can first select the corresponding number, click the "clear" button to clear the corresponding information, and reconfigure according to the needs;
 
 .. figure:: robot_peripherals/054.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.9‑1 扩展IO设备配置
+.. centered:: Figure 4.9-1 Extended IO device configuration
 
 .. important:: 
-	点击清除配置前，相应的设备应处于未激活状态。
+	The corresponding device should be inactive before clicking Clear Configuration.
 
-**Step2**：扩展IO设备配置完成后，用户可在辅助应用中点击“Smart Tool”功能菜单，进入此功能配置页面，用户可以对末端手柄上的各个按键功能进行自定义，包括（新建程序，保持程序，PTP，Lin，ARC，摆焊开始，摆焊结束，IO端口）。
+**Step2**：After the configuration of the extended IO device is completed, the user can click the "Smart Tool" function menu in the auxiliary application to enter the function configuration page, and the user can customize the functions of each button on the end handle, including (new program, hold program, PTP , Lin, ARC, start of weaving, end of weaving, IO port).
 
 .. figure:: robot_peripherals/055.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.9‑2 扩展IO设备功能配置
+.. centered:: Figure 4.9-2 Extended IO device function configuration
 
-码垛系统配置
----------------
+Palletizing system configuration
+---------------------------------------
 
-码垛系统配置步骤
-~~~~~~~~~~~~~~~~~~~~~~
+Palletizing system configuration steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：在用户外设配置界面中选择“码垛系统配置”按钮，第一次使用，需要首先进行配方创建，点击“配方创建”，输入配方名称，点击“创建”，创建成功后点击“开始配置”进入码垛配置页面。
+**Step1**：Select the "Palletizing System Configuration" button in the user peripheral configuration interface. For the first time use, you need to create a recipe first. Click "Create Recipe", enter the name of the recipe, click "Create", and click "Start Configuration" after the creation is successful. Enter the palletizing configuration page.
 
 .. figure:: robot_peripherals/056.png
    :align: center
-   :width: 6in
+   :width: 3in
 
-.. centered:: 图表 4.10‑1 码垛配方配置
+.. centered:: Figure 4.10-1 Palletizing recipe configuration
 
-**Step2**：在工件配置栏中点击“配置”进入工件配置弹窗，设置工件的“长度”，“宽度”，“高度”以及工件的抓取点，点击“确认配置”完成工件信息设置。
+**Step2**： Click "Configure" in the workpiece configuration bar to enter the workpiece configuration pop-up window, set the "length", "width", "height" of the workpiece and the grabbing point of the workpiece, click "confirm configuration" to complete the workpiece information setting.
 
 .. figure:: robot_peripherals/057.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.10‑2 码垛工件配置
+.. centered:: Figure 4.10-2 Palletizing workpiece configuration
 
-**Step3**：在托盘配置栏中点击“配置”进入托盘配置弹窗，设置托盘“前边”，“侧边”和“高度”，接着设置工位和工位过渡点，点击“确认配置”完成托盘信息设置。
+**Step3**：Click "Configure" in the tray configuration bar to enter the tray configuration pop-up window, set the tray "front", "side" and "height", then set the station and station transition point, click "confirm configuration" to complete the tray information setting.
 
 .. figure:: robot_peripherals/058.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.10‑3 码垛托盘配置
+.. centered:: Figure 4.10-3 Palletizing pallet configuration
 
-**Step4**：在模式配置栏中点击“配置”进入模式配置弹窗，设置工件间隔，右侧框框为模拟工件放置方式，可以单个添加也可以批量添加。接着设置码垛层数和各层的模式，点击“确认配置”完成模式信息设置。
+**Step4**：Click "Configure" in the mode configuration bar to enter the mode configuration pop-up window, set the workpiece interval, and the right frame is the simulation workpiece placement method, which can be added individually or in batches. Then set the number of palletizing layers and the mode of each layer, click "confirm configuration" to complete the mode information setting.
 
 .. figure:: robot_peripherals/059.png
    :align: center
    :width: 3in
 
-.. centered:: 图表 4.10‑4 码垛模式配置
+.. centered:: Figure 4.10-4 Palletizing mode configuration
 
-**Step4**：点击“生成程序”，打开“码垛监控页”，在此页面可以对“生成信息”，“报警信息”和“码垛程序”显示和查看。
+**Step4**：Click "Generate Program" to open the "Palletizing Monitoring Page", where you can display and view the "Generation Information", "Alarm Information" and "Palletizing Program".
 
 .. figure:: robot_peripherals/060.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 4.10‑5 码垛系统监控
+.. centered:: Figure 4.10-5 Palletizing system monitoring
