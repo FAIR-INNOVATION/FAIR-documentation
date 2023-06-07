@@ -1,162 +1,162 @@
-快速启动机器人
-===================
+Quickly start the robot
+============================
 
 .. toctree:: 
    :maxdepth: 5
 
-安装机器人手臂和控制箱
-----------------------------
+Install the robot arm and control box
+------------------------------------------
 
-根据 2.硬件安装 中的 2.5 和 2.6 安装连接机器人手臂和控制箱。
+Install the robot arm and control box according to the 2.5 and 2.6 in the hardware installation of Chapter 2.
 
--  开箱取出机器人手臂，使用4颗强度不低于8.8级强度的M8螺栓安装机器人手臂。将机器人手臂安装在一个坚固且防震的表面，若用铝板固定，铝板厚度不小于16mm，若用铁板固定，铁板厚度不小于8mm；
+-  Take out the robotic arm and use 4 M8 bolts with a strength of not less than 8.8 levels to install the robot arm. Install the robot arm on a strong and shock -proof surface. If it is fixed with aluminum plate, the thickness of the aluminum plate is not less than 16mm. If the iron plate is fixed, the thickness of the iron plate is not less than 8mm;
 
--  将控制箱放置在其支脚上；
+-  Place the control box on its feet;
 
--  将机器人手臂本体重载线缆连接到控制箱重载接口；
+-  Connect the robot arm ontology to the heavy load interface of the control box;
 
--  将按钮盒航空插头插到控制箱示教器接口，若配备有触摸屏版示教器，还需要使用一根两端都为Type-c接口的数据线，分别插入按钮盒与示教器的Type-c接口；
+-  Plug the button box aviation plug into the control box exemporary instrument interface. If you are equipped with a touch-screen version of the teenter, you also need to use the data cable of both ends as the Type-C interface, insert the Type of the button box and the instructor, respectively. -c interface;
 
--  确保控制箱电源按钮关闭情况下（按钮打到0）将220V电源线接到电源插口；
+-  Make sure that the control box power button is closed (the button is hit to 0) to receive the 220V power cord to the power socket;
 
--  插上电源控制箱插头。
+-  Plug in the power control box plug.
 
 .. warning:: 
-   如果机器人没有安全地放置在坚固的表面上，机器人有可能会倾倒并造成伤害。
+   If the robot is placed on a strong surface, the robot may dump and cause damage.
 
-示教器启动控制机器人
----------------------------
+Demonstrate startup control robot
+-------------------------------------
 
-控制箱连接机器人手臂、示教盒和任何周边设备的物理电气输入/输出端。必须打开控制箱才能给机器人手臂通电。
+The control box is connected to the robot arm, the teaching box, and the physical electrical input/output terminal of any peripheral equipment. You must open the control box to power the robot's arm.
 
--  按下控制箱的电源按钮开启控制箱；
+-  Press the power button of the control box to open the control box;
 
--  启动机器人后，此时机器人为手动模式且未使能，若需要在手动模式下操作机器人，需要按压示教器上三位使能开关OFF（放开）⇒ ON ⇒ OFF（按压），当开关处于 ON 状态时，拖动或控制机器人运动。
+-  After starting the robot, at this time the robot is manual mode and has not enabled. If the robot needs to be operated in the manual mode, you need to press the three bits on the oscilloscopy to switch off (let go) ⇒ OFF (press) as the switch as a switch Drag or control the robot movement when you are on your state.
 
--  若无需在手动模式操作机器人，可用示教器上钥匙开关旋转按钮切换机器人工作模式：自动、手动、自定义；
+-  If you do not need to operate the robot in the manual mode, you can use the key switch to switch the robot working mode on the key to switch the button: automatic, manual, custom;
 
--  当切换机器人手动状态时，应检查安全空间内外是否存在异常并谨慎操作机器运行；
+-  When switching the robot's manual state, check whether there is abnormal abnormality inside and outside the safety space and to operate the machine's operation carefully;
 
--  当切换机器人自动状态时，应检查安全措施并恢复到正常状态下并谨慎操作机器运行；
+-  When switching the robot's automatic state, check the safety measures and return to the normal state and operate the machine operation carefully;
 
--  当无法正常打开示教器时，请查看设备连接是否正常。
+-  When the oscilloscope cannot be opened normally, please check whether the device connection is normal.
 
-按钮盒控制机器人运动
-----------------------
+Button box control robot movement
+---------------------------------------
 
-参照 2.硬件安装 的 2.7.3.末端LED定义 来控制机器人
+Refer to the 2.7.3 of the hardware installation of Chapter 2. The end LED definition of the end to control the robot
 
-未搭配示教器
-~~~~~~~~~~~~~~~
+Not paired with teaching pendant
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Step1**：打开机器人控制箱电源开关，启动机器人，等待末端LED长显绿色后，方可操作机器人如图表2.3-1。
+-  **Step1**：Turn on the power switch of the robot control box, start the robot, wait for the end LED to display green for a long time before operating the robot, as shown in Figure 2.3-1.
 
 .. figure:: quick_start_robot/001.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 2.3-1 末端LED绿色示意图
+.. centered:: Figure 2.3-1 Green Schematic Diagram of End LED
 
--  **Step2**：长按按钮盒“按键2”，进入未搭配示教器模式，末端LED青蓝色闪烁三下，如图表2.3-2。
+-  **Step2**：Long press the button box "button 2" to enter the mode without teaching pendant, and the end LED flashes blue three times, as shown in Figure 2.3-2.
 
 .. figure:: quick_start_robot/002.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 2.3-2 末端LED青蓝色示意图
+.. centered:: Figure 2.3-2 end LED blue blue schematic diagram
 
--  **Step3**：长按按钮盒“按键1”切换机器人到拖动模式，此时末端LED为白青色，如图表2.3-3。移动机器人至任意位置，长按“按键1”退出拖动模式，短按按钮盒“按键2”记录P1点，末端LED紫色闪烁三下，如图表2.3-4。
+-  **Step3**：Long press button "button 1" Switch the robot to the drag mode. At this time, the end LED is white and blue, as shown in Figure 2.3-3. To any position of the mobile robot, long press the "button 1" to exit the drag mode, the short-press button box "button 2" records P1 point, the end LED purple flashes three times, as shown in Figure 2.3-4.
 
--  **Step4**：移动机器人，短按按钮盒“按键2”记录P2点，末端LED紫色闪烁三下，如图表2.3-4。
+-  **Step4**：Mobile robot, short press button box "button 2" record P2 point, the end LED purple flashes three times, as shown in Figure 2.3-4.
 
 .. figure:: quick_start_robot/003.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 2.3-3 末端LED白青色示意图
+.. centered:: Figure 2.3-3 end LED white green schematic diagram
 
 .. figure:: quick_start_robot/004.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 2.3-4 末端LED紫色示意图
+.. centered:: Figure 2.3-4 end LED purple schematic diagram
 
--  **Step5**：长按按钮盒“按键1”退出拖动模式，此时为手动模式，末端LED为绿色，如图表2.3-5。短按“按键1”切换机器人到自动模式，此时末端LED为蓝色，如图表2.3-6。
+-  **Step5**：The long press button "button 1" exit the drag mode. At this time, it is a manual mode. The end LED is green, as shown in Figure 2.3-5. Short press "Key 1" to switch the robot to the automatic mode. At this time, the end LED is blue, as shown in Figure 2.3-6.
 
--  **Step6**：短按按钮盒“按键3”运行该程序，末端LED蓝色闪烁两下，如图表2.3-6。
+-  **Step6**：The short press button "button 3" runs the program, the end LED blue flashes twice, as shown in Figure 2.3-6.
 
 .. figure:: quick_start_robot/005.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 2.3-5 末端LED绿色示意图
+.. centered:: Figure 2.3-5 end LED green schematic diagram
 
 .. figure:: quick_start_robot/006.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 2.3-6 末端LED蓝色示意图
+.. centered:: Figure 2.3-6 end LED blue schematic diagram
 
--  **Step7**：短按按钮盒“按键3”停止运行该程序，末端LED红色闪烁三下，如图表2.3-7。
+-  **Step7**：Short press the button box "button 3" to stop running the program, and the red LED at the end flashes three times, as shown in Figure 2.3-7.
 
 .. figure:: quick_start_robot/007.png
    :align: center
    :width: 4in
 
-.. centered:: 图表 2.3-7 末端LED红色示意图
+.. centered:: Figure 2.3-7 end LED red schematic diagram
 
-搭配示教器
-~~~~~~~~~~~~~~
+Matching the oscilloscopy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Step1**：启动机器人，等待末端LED绿色停止闪烁，方可操作机器人。
+-  **Step1**：Start the robot and wait for the end LED green to stop flashing before operating the robot.
 
--  **Step2**：打开示教器进入到程序编辑界面。
+-  **Step2**：Open the oscilloscope and enter the program editing interface.
 
--  **Step3**：选择空白模板新建一个程序文件。
+-  **Step3**：Select the blank template to create a new program file.
 
--  **Step4**：短按按钮盒按键1切换机器人到手动模式，此时末端LED为绿色。
+-  **Step4**：Short -press button box button 1 Switch the robot to the manual mode. At this time, the end LED is green.
 
--  **Step5**：长按按钮盒按键1切换机器人到拖动模式，此时末端LED为白青色，移动机器人至任意位置，短按按钮盒按键2记录P1点，末端LED紫色闪烁三下，手动添加“PTP:P1”指令到程序文件中。
+-  **Step5**：Long press the button box button 1 to switch the robot to the drag mode. At this time, the end LED is white and green, the mobile robot to any position, the short press button box button 2 records P1, the end LED purple flashes three times, manually add "PTP: P1 "The instructions to the program file.
 
 .. figure:: quick_start_robot/008.png
    :align: center
    :width: 4in
    :class: figure-border
 
-.. centered:: 图表 2.3-8 记录并添加点P1
+.. centered:: Figure 2.3-8 record and add some P1
 
--  **Step6**：移动机器人，短按按钮盒按键2记录P2点，末端LED紫色闪烁三下，手动添加“PTP：P2”指令到程序中。
+-  **Step6**：Mobile robot, short -press button box button 2 records P2 point, end LED purple flashes three times, and manually add the "PTP: P2" instruction to the program.
 
 .. figure:: quick_start_robot/009.png
    :align: center
    :width: 4in
    :class: figure-border
 
-.. centered:: 图表 2.3-9 记录并添加点P2  
+.. centered:: Figure 2.3-9 record and add some P2
 
--  **Step7**：保存程序文件内容。
+-  **Step7**：Save the program file content.
 
--  **Step8**：长按按钮盒按键1退出拖动模式，此时为手动模式，末端LED为绿色，短按按钮盒按键1切换机器人到自动模式，此时末端LED为蓝色。
+-  **Step8**：Long press the button box button 1 to exit the drag mode. At this time, it is a manual mode. The end LED is green. The short press button box button 1 switch the robot to the automatic mode. At this time, the end LED is blue.
 
--  **Step9**：短按按钮盒按键3运行该程序，末端LED蓝色闪烁两下。
+-  **Step9**：Short pressing button box button 3 Run the program, the end LED blue flashes twice.
 
 
-示教器控制机器人运动
-------------------------
+Dempermaster control robot movement
+--------------------------------------
 
-点击示教器左侧一级菜单中的“示教模拟”按钮，点击其子菜单“程序示教”进入程序示教界面，该界面中主要实现机器人示教程序的编写以及修改。
+Click the "Promotional Simulation" button in the first -level menu on the left side of the oscilloscopy, and click the sub -menu "Program Demonstration" to enter the program demonstration interface. The interface mainly implements the writing and modification of the robot teaching program.
 
-点击“新建”图标按钮后，用户命名该文件，并选择一个模板作为该新建文件的内容，点击新建即可创建成功并打开该程序文件。
+After clicking the "New" icon button, the user names the file and selects a template as the content of the new file. Click the newly created to create a successful and open the program file.
 
 .. figure:: quick_start_robot/010.png
    :align: center
    :width: 6in
    
-.. centered:: 图表 2.4-1 示教程序运行示意图
+.. centered:: Figure 2.4-1 Demonstration of teaching program running schematic diagram
 
 .. warning:: 
-   您的头和躯干不能位于机器人可接触到的范围（工作区）。请不要将您的手指放在机器人可抓住的地方。
+   Your head and trunk cannot be located in the range (work area) that the robot can reach. Please do not put your fingers in the place where the robot can grasp.
 
 .. important:: 
-   - 不要让机器人移到自身或其他物体中，因为这会对机器人造成损害。
-   - 这只是一个快速启动指南，教您如何轻松地使用FR协作机器人。该指南的前提是环境安全无害，用户谨慎小心。请不要将速度或者加速度上调至默认值之上。在使机器人进入操作之前，始终进行风险评估。
+   - Don't let the robot move to yourself or other objects, because it will cause damage to the robot.
+   - This is just a quick start guide to teach you how to easily use FR collaborative robots. The premise of this guide is that the environment is safe and harmless, and users are cautious. Do not increase the speed or acceleration to the default value. Before the robot enters the operation, risk assessment is always carried out.

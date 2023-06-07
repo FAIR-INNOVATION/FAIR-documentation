@@ -1,144 +1,144 @@
-硬件安装
-===================
+Hardware installation
+========================
 
 .. toctree:: 
 	:maxdepth: 5
 
-安全须知
-------------
+Instructions for security
+----------------------------
 
-简介
-~~~~~
+Brief introduction
+~~~~~~~~~~~~~~~~~~~~~
 
-本说明书会使用到以下警示，这些警示的作用是确保人身及设备的安全，当您在阅读本说明书时，必须遵守并执行本手册其他章节中的所有组装说明和指南，这一点非常重要。应特别注意与警告标志相关的文本。
+This manual will use the following warnings. The role of these warnings is to ensure the safety of personal and equipment. When you read this manual, you must comply with and execute all the assembly instructions and guidelines in other chapters in this manual. This is very important. Pay special attention to text related to warning signs.
 
 .. important:: 
-    - 如果机器人（机器人本体、控制箱、示教器或按钮盒）因人为原因被损坏、更改或修改，法奥意威拒绝承担所有责任；
-    - 法奥意威对由于客户编写的程序出错而对机器人或任何其他设备造成的任何损坏概不负责。
+    - If the robot (robot body, control box, oscilloscope, or button box) is damaged, changed or modified due to human reasons, FAIR INNOVATION refuses to bear all responsibilities；
+    - FAIR INNOVATION is not responsible for any damage caused by the robot or any other device due to errors written by customers or any other device.
 
-人员安全
+Personnel safety
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在运行机器人系统时，首先必须要确保作业人员的安全，下面列出一般性的注意事项，请妥善采取确保作业人员安全的相应措施。
+When running the robot system, we must first ensure the safety of the operators. The general precautions are listed below. Please take corresponding measures to ensure the safety of the operator.
 
-1. 使用机器人系统的各作业人员，应通过法奥意威（苏州）机器人系统有限公司主办的培训课程接受培训。用户需确保其充分掌握安全、规范的操作流程，具备机器人操作资格。培训详情请向我公司查询，邮箱为 jiling@frtech.fr。
+1. All operators who use the robot system should be trained through training courses sponsored by the Fouville (Suzhou) Robot System Co., Ltd. Users need to ensure that they fully grasp the safe and standardized operating processes and have the qualifications for robotic operations. For training details, please check with our company, the mailbox is jiling@frtech.fr。
 
-2. 使用机器人系统的各作业人员请不要穿宽松的衣服，不要佩戴珠宝。操作机器人时请确保长头发束在脑后。
+2. All operators who use the robot system, please do not wear loose clothes or jewelry. Make sure the long hair beam is behind the head when operating the robot.
 
-3. 在设备运转之中，即使机器人看上去已经停止，也有可能是因为机器人在等待启动信号而处在即将动作的状态。即使在这样的状态下，也应该将机器人视为正在动作中。
+3. In the operation of the device, even if the robot has stopped, it may be because the robot is waiting to start the signal and is in a state of motion. Even in such a state, the robot should be regarded as in action.
 
-4. 应在地板上画上线条来标清机器人的动作范围，使操作者了解机器人包含握持工具（机械手、工具等）的动作范围。
+4. The lines should be drawn on the floor to mark the scope of the robot, so that the operator understands the action range of the robot includes holding tools (robotics, tools, etc.).
 
-5. 确保在机器人操作区域附近建立安全措施（例如，护栏、绳索、或防护屏幕），保护操作者及周边人群。应根据需要设置锁具，使得负责操作的作业人员以外者不能接触机器人电源。
+5. Ensure safety measures (such as guardrails, ropes, or protective screens) near the robotic operation area to protect operators and surrounding people. Locks should be set up as needed, so that those who are responsible for operations cannot reach the power supply of the robot.
 
-6. 在使用操作面板和示教器时，由于戴上手套可能会出现操作上的失误，务必在摘下手套后进行作业。
+6. When using the operating panel and oscilloscope, because you may have an operational error in wearing gloves, you must work after taking off the gloves.
 
-7. 在人被机器人夹住或围在里面等紧急和异常情况下，通过用力（至少700 N）推动或拉动机器人手臂，迫使关节移动。无电力驱动情况下手动移动机器人手臂仅限于紧急情况，并且可能会损坏关节。
+7. Under the emergency and abnormalities of people being pinched or wrapped inside by a robot, pushing or pulling the robot arm by force (at least 700 n) to force joint movements. With a power -free driver, the arm of the manual mobile robot is limited to emergency and may damage the joint.
 
-安全设置
+Security Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“安全性设置”的菜单栏下，点击“安全停止设置”进入安全停止设置功能界面。
+Under the "Safety Settings" menu bar in "Auxiliary Application", click "Safety Stop Settings" to enter the safe stop setting function interface.
 
-启用安全停止模式，当机器人报错或警告停止后，机器人会自动去使能，起到安全防护的作用。
+Enable the security stop mode. When the robot is reported or warned, the robot will automatically enable and play a role in safe protection.
 
 .. figure:: installation/001.png
 	:align: center
 	:class: figure-border
 
-.. centered::  图表 1.1-1 安全停止设置
+.. centered::  Figure 1.1-1 Safety stop setting
 
--  **降速模式**：该模式被激活后，机械臂在关节空间中的运动速度将受到限制，相应文本框中的数值即为各关节运动速度的极限值，其中1，2，3关节的设定范围为15~150°/s，4，5，6关节的设定范围为15~180°/s；机械臂在笛卡尔空间的运动速度极限即为TCP速度限制值，设定范围为0~80mm/s。
+-  **Speed reduction**：After this mode is activated, the speed of the robotic arm in the joint space will be limited. The setting range of 1, 2, and 3 joints is 15 ~ 150 °/s, 4, 5, and 6 joints is 15 ~ 180 °/s; the motion speed limit of the robotic arm in the Descartes space is the TCP speed limit value, and the set range is 0 ~ 80mm/s.
 
-危险识别
+Danger recognition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-风险评估应考虑正常使用期间操作人员与机器人之间所有潜在的接触以及可预见的误操作。操作人员的颈部、脸部和头部不应暴露，以免发生碰触。在不使用外围安全防护装置的情况下使用机器人需要首先进行风险评估，以判断相关危险是否会构成不可接受的风险，例如
+Risk assessment should consider all potential contact between operators and robots during normal use and foreseeable misunderstandings. The operator's neck, face, and head should not be exposed to avoid touch. Using robots without using peripheral safety protection devices requires the first risk assessment to determine whether the relevant hazards will constitute an unacceptable risk, such as
 
--  使用尖锐的末端执行器或工具连接器可能存在危险；
+-  There may be danger of using a sharp end actuator or tool connector;
 
--  处理毒性或其他有害物质可能存在危险；
+-  There may be danger of treatment of toxicity or other harmful substances;
 
--  操作人员手指有被机器人底座或关节夹住的危险；
+-  The operator's finger has the danger of being clamped by a robot base or joint;
 
--  被机器人碰撞发生的危险；
+-  The danger of collision by robots;
 
--  机器人或连接到末端的工具固定不到位存在的危险；
+-  The risk of robots or tools connected to the end is not in place;
 
--  机器人有效负载与坚固表面之间的冲击造成的危险。
+-  The risk of the impact between the effective load and the strong surface of the robot.
 
-集成商必须通过风险评估来衡量此类危险及其相关的风险等级，并且确定和实施相应的措施，以将风险降低至可接受的水平。请注意，特定机器人设备可能还存在其他重大危险。
+Integrates must measure such dangers and related risk levels through risk assessment, and determine and implement corresponding measures to reduce the risk to acceptable levels. Please note that there may be other major dangers in specific robots.
 
-通过将FR机器人所应用的固有安全设计措施与集成商和最终用户所实施的安全规范或风险评估相结合，将与FR协作性操作相关的风险尽可能降低至合理可行的水平。通过此文档可将机器人在安装前存在的任何剩余风险传达给集成商和最终用户。如果集成商的风险评估测定其特定应用中存在可能对用户构成不可接受风险的危险，集成商必
-须采取适当的风险降低措施，以消除或最大限度降低这些危险，直至将风险降低至可接受的水平为止。在采取适当的风险降低措施（如有需要）之前使用是不安全的。
+By combining the inherent security design measures used by FR robots with the safety specifications or risk assessment implemented by integrated and end users, the risks related to FR collaborative operations will be reduced to a reasonable and feasible level. Through this document, any remaining risk of the robot can be conveyed to the integrated and end users before installation. If the risk assessment of the integrator determines that the existence of a specific application that may have unacceptable risks that may constitute unacceptable risks, integrators must
+Appropriate risk reduction measures must be taken to eliminate or minimize these dangers until the risk is reduced to acceptable levels. It is not safe to use before taking appropriate risk reduction measures (if necessary).
 
-如果对机器人进行非协同性安装（例如，当使用危险工具时），风险评估可能推断集成商需要在其编程时连接额外的安全设备（例如，安全启动设备）确保人员及设备安全。
+If the robot is installed in non -synergistic installation (for example, when using a hazardous tool), risk assessment may infer the integrated provider to connect additional safety equipment (such as safety startup equipment) to ensure personnel and equipment safety when programming.
 
-铭牌信息
-~~~~~~~~~~~~~~
+Nameplate information
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: installation/002.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.1-2 FR3型号协作机器人
+.. centered:: Figure 1.1-2 FR3 model collaborative robot
 
 .. figure:: installation/003.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.1-3 FR5型号协作机器人
+.. centered:: Figure 1.1-3 FR5 model collaborative robot
 
 .. figure:: installation/004.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.1-4 FR10型号协作机器人
+.. centered:: Figure 1.1-4 FR10 model collaborative robot
 
 .. figure:: installation/005.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.1-5 FR16型号协作机器人
+.. centered:: Figure 1.1-5 FR16 model collaborative robot
 
 .. figure:: installation/006.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.1-6 FR20型号协作机器人
+.. centered:: Figure 1.1-6 FR20 model collaborative robot
 
-有效性和责任
-~~~~~~~~~~~~~~~~
+Effectiveness and responsibility
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本手册中的信息不包含设计、安装和操作一个完整的机器人应用，也不包含所有可能对这一完整的系统的安全造成影响的周边设备。该完整系统的设计和安装需符合该机器人安装所在国的标准和规范中确立的安全要求。
+The information in this manual does not include a complete robot application in design, installation and operation, nor does it contain all peripheral equipment that may affect the security of this complete system. The design and installation of this complete system must meet the safety requirements established in the standards and specifications of the country's installation.
 
-法奥意威的集成商有责任确保遵循相关国家的法律法规，确保完整的机器人应用中不存在任何重大危险。这包括但不限于以下内容：
+The integrated integrator of FAIR INNOVATION is responsible for ensuring that it follows the laws and regulations of relevant countries, and there is no major danger in the complete robotic application. This includes but not limited to the following:
 
--  对完整的机器人系统做一个风险评估
+-  Do a risk assessment of the complete robot system
 
--  将风险评估定义的其他机械和附加安全设备连接在一起
+-  Connect other machinery and additional safety equipment defined by risk assessment and definition
 
--  在软件中建立适当的安全设置
+-  Establish appropriate security settings in software
 
--  确保用户不会对任何安全措施加以修改
+-  Make sure that users will not modify any security measures
 
--  确认整个机器人系统的设计和安装准确无误
+-  Confirm that the design and installation of the entire robot system is accurate
 
--  明确使用说明
+-  Clear instructions
 
--  在机器人上标明集成商的相关标志和联系信息
+-  See the relevant signs and contact information of the integrated dealer on the robot
 
--  收集技术文件中的所有文档，包括本手册
+-  Collect all the documents in the technical file, including this manual
 
-责任有限
-~~~~~~~~~~~~~~
+Limited responsibility
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-本手册所包含的任何安全信息都不得视为通用的机器人安全保证，即使遵守所有安全说明，依然有可能引起人员伤害或设备损坏。
+Any security information contained in this manual shall not be regarded as a general robot safety guarantee. Even if you comply with all security descriptions, it may still cause personnel damage or equipment damage.
 
-该手册中的警告标志
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The warning signs in this manual
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-下面的标志定义了本手册中所包含的危险等级规定说明。产品上也使用了同样的警告标志。
+The following flag defines the explanation of the danger level provisions contained in this manual. The product also uses the same warning signs.
 
 .. important:: 
 	.. figure:: installation/008.png
@@ -146,7 +146,7 @@
 		:height: 50
 		:align: left
 
-	危险：这指的是即将引发危险的用电情况，如果不避免，可导致人员死亡或严重伤害。
+	Danger: This refers to the power consumption that is about to cause danger. If it is not avoided, it can lead to death or severe damage.
 
 .. important:: 
 	.. figure:: installation/009.png
@@ -154,7 +154,7 @@
 		:height: 50
 		:align: left
 
-	触电危险：这指的是即将引发危险的触电情况，如果不避免，可导致人员触电死亡或严重伤害。
+	Electric shock danger: This refers to the upcoming electric shock situation that is about to cause danger.
 
 .. important:: 
 	.. figure:: installation/010.png
@@ -162,202 +162,202 @@
 		:height: 50
 		:align: left
 
-	烫伤危险：这指的是可能引发危险的热表面，如果不避免接触了，可造成人员伤害。
+	Dangerous burns: This refers to the hot surface that may cause danger. If you do not avoid contact, it can cause personnel to hurt.
 	
 
-使用前评估
-~~~~~~~~~~~~~~~
+Pre-use evaluation
+~~~~~~~~~~~~~~~~~~~~~~~
 
-首次使用机器人或进行任何修改之后，机器人默认速度低于250mm/s，请勿登录管理员修改速度进入高速模式，之后必须进行以下测试。确认所有安全输入和输出是正确的，并且连接正确。测试所有连接的安全输入和输出（包括多台机器或机器人共有的设备）是否功能正常。因此您必须：
+After using a robot or any modification for the first time, the robot's default speed is less than 250mm/s. Do not log in to the administrator to modify the speed to enter the high -speed mode. After that, the following test must be performed. It is confirmed that all security input and output are correct and the connection is correct. Test whether all connected security input and output (including the joint equipment shared by multiple machines or robots) are normal. So you must:
 
--  测试紧急停止按钮和输入是否可以停止机器人并启动刹车。
+-  Test whether the emergency stop button and input can stop the robot and start the brake.
 
--  测试防护输入是否可以停止机器人的运动。如果配置了防护重置，请在恢复运动之前检查是否需要激活。
+-  Test whether the protection input can stop the robot movement. If the protection reset is configured, check if you need activation before recovery.
 
--  测试操作模式是否可以切换操作模式，参见用户界面右上角的图标。
+-  The test operation mode can switch the operation mode, see the icon in the upper right corner of the user interface.
 
--  测试3 档位使动装置是否必须按下才能在手动模式下启动动作，并且机器人处于减速控制下（机器人软件版本V3.0前不支持该功能）。
+-  Test whether the dynamic device must be pressed to start the action in the manual mode, and the robot is under deceleration control (the robot software version v3.0 does not support this function).
 
--  测试系统紧急停止输出是否能够将整个系统带到安全状态。
+-  The test system emergency stop output can bring the entire system to a safe state.
 
-紧急停止
+Emergency stop
 ~~~~~~~~~~~~~~
 
-紧急停止按钮为0类停机，按下紧急停止按钮，立即停止机器人的一切运动。
+The emergency stop button is 0. Press the emergency stop button to stop all the movements of the robot immediately.
 
-下表显示触发0类停机的停止距离和停止时间。这些测量结果对应于机器人的以下配置：
+The following table shows the stop distance and stop time of the trigger 0. These measurement results correspond to the following configuration of the robot:
 
--  延伸：100%（机器人手臂完全水平展开）
+-  Extension: 100%(the robotic arm is fully expanded)
 
--  速度：100%（机器人一般速度设为100%，以180°/s的关节速度移动）
+-  Speed: 100%(Robot general speed is set to 100%, moved at a joint speed of 180 °/s)
 
--  有效负载：最大有效负载
+-  Effective load: Maximum effective load
 
-关节1，关节6测试机器人水平移动，旋转轴垂直于地面。关节2，关节3，关节4，关节5测试机器人遵循垂直轨迹，旋转轴平行于地面，并在机器人向下移动时停止。
+Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to the ground. Joint 2, joint 3, joint 4, joint 5 testing robots follow the vertical trajectory, the rotating shaft is parallel to the ground, and stops when the robot moves down.
 
 .. figure:: installation/011.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.1-1 0类停止距离(rad)
+.. centered:: Sheet 1.1-1 Category 0 stop distance(rad)
 
 .. figure:: installation/012.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.1-2 0类停止时间(ms)
+.. centered:: Sheet 1.1-2 Category 0 stop time (ms)
 
-紧急停止后，关闭电源，旋转紧急停止按钮，打开电源即可重新启动机器人。
+After the emergency stop, turn off the power, rotate the emergency stop button, and turn on the power to restart the robot.
 
-同时机器人安全停止和软限位停止的停止时间和停止距离，见下表。这些测量结果对应于机器人的以下配置：
+At the same time, the stop time and stop distance of the robot safety stop and soft limit stop are shown in the table below. These measurement results correspond to the following configuration of the robot:
 
--  延伸：100%（机器人手臂完全水平展开）
+-  Extension: 100%(the robotic arm is fully expanded)
 
--  速度：100%（机器人一般速度设为100%，以180°/s的关节速度移动）
+-  Speed: 100%(Robot general speed is set to 100%, moved at a joint speed of 180 °/s)
 
--  有效负载：最大有效负载
+-  Effective load: Maximum effective load
 
-关节1，关节6测试机器人水平移动，旋转轴垂直于地面。关节2，关节3，关节4，关节5测试机器人遵循垂直轨迹，旋转轴平行于地面，并在机器人向下移动时停止。
+Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to the ground. Joint 2, joint 3, joint 4, joint 5 testing robots follow the vertical trajectory, the rotating shaft is parallel to the ground, and stops when the robot moves down.
 
 
 .. figure:: installation/013.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.1-3 安全停止距离(rad)
+.. centered:: Sheet 1.1-3 Safety stop distance(rad)
 
 .. figure:: installation/014.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.1-4 安全停止时间(ms)
+.. centered:: Sheet 1.1-4 Safety stop time(ms)
 
 .. figure:: installation/015.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.1-5 软限位停止距离(rad)
+.. centered:: Sheet 1.1-5 Soft limit stop distance(rad)
 
 .. figure:: installation/016.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.1-6 软限位停止时间(ms)
+.. centered:: Sheet 1.1-6 Soft limit stop time(ms)
 
 .. important:: 
-	根据IEC 60204-1 和ISO 13850，紧急停止设备不是安全防护装置。它们是补充性防护措施，并不用于防止伤害。
+	According to IEC 60204-1 and ISO 13850, emergency stop device is not a safe protection device. They are supplementary protection measures and do not need to prevent damage.
 
-无电力驱动的移动
+Power-free movement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-如果发生必须移动机器人关节但无法为机器人供电或者其他紧急情况，请联系机器人经销商，必要时可以使用暴力手段强制移动机器人以解救被困人员。
+If you must move the robot joint but cannot power the robot or other emergencies, please contact the robot dealer. If necessary, you can use violent means to force mobile robots to rescue the trapped persons.
 
-设备运输
----------
+Equipment transportation
+----------------------------
 
-运输
+Transportation
+~~~~~~~~~~~~~~~~~~
+
+Robot and control boxes have been calibrated as complete equipment. Do not separate them, so it will need to be re -calibrated.
+
+You can only transport the robot in the original packaging. If you want to move the robot in the future, save the packaging material in a dry place.
+
+When the robot moves from the packaging to the installation space, the two arms of the robot are held at the same time. Hold the robot until all the installation bolts of the robot seat are tight.
+
+Carry
 ~~~~~~
 
-机器人和控制箱已作为成套设备校准。请勿将它们分开，那样将需要重新校准。
-
-只能将机器人放在原包装中运输。如果今后要搬运机器人的话，请将包装材料保存在干燥处。
-
-将机器人从包装移动到安装空间时，同时托住机器人的两个臂体。扶住机器人直至机器人机座的所有安装螺栓全部紧固好。
-
-搬运
-~~~~~~
-
-协作机器人根据型号不同，总质量（含包装）范围在15kg-80 kg，当人力对协作机器人进行搬运或转移时，需要多人协助抬起，不推荐单人搬运，在运输过程中务必平稳，避免设备倾翻或者滑落。
+According to different models, the total quality (including packaging) is 15kg-80 kg depending on the model. When manpower transports or transfers the collaborative robot, multiple people need to help lift it. Avoid equipment tilt or slipping.
 
 .. warning:: 
-	- 若采用专业设备进行搬运，请务必由具有相应操作资格的专业人员使用吊车或者叉车对协作机器人进行运输或者搬运，否则有可能会引起人员伤害或者其他事故。
-	- 若采用人工搬运，请注意搬运途中人身安全；
-	- 协作机器人包含精密零部件，在运输或者搬运过程中应该避免剧烈的振动或者晃动，否则有可能降低设备的性能。
+	- If you use professional equipment for handling, be sure to use a crane or forklift to transport or carry the collaborative robot by using a crane or forklift, otherwise it may cause personnel damage or other accidents;
+	- If you use manual handling, please pay attention to the personal safety on the way to handle;
+	- The collaborative robot contains precision components, which should avoid severe vibration or shaking during transportation or transportation, otherwise it may reduce the performance of the equipment.
 
-存放
-~~~~~~~
+Storage
+~~~~~~~~~
 
-协作机器人应在-25~60℃，无凝霜环境下存放。
+The collaborative robot should be stored in -25 ~ 60 ° C, and there is no frost-free environment.
 
-维护、报废处理
---------------
+Maintenance and scrap treatment
+---------------------------------
 
-维护处置
-~~~~~~~~~~~~~~
+Maintenance disposal
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-请用户间隔1个月对急停和保护性停止进行检测。判断安全功能是否有效。
+Please check the emergency stop and protection stop for 1 month. Determine whether the security function is effective.
 
-急停和保护性停止接线请参考接线章节。
+Please refer to the wiring chapter for emergency stop and protective stop wiring.
 
-废弃处置
-~~~~~~~~~~~~~~
+Robot waste disposal
+~~~~~~~~~~~~~~~~~~~~~~
 
-FR机器人需要根据适用的国家法律法规及国家标准处置，详情可联系厂商。
+FR robots need to be disposed of according to the applicable national laws and regulations and national standards. For details, you can contact manufacturers.
 
-机器人简介
--------------
+Robot introduction
+---------------------
 
-基本参数
-~~~~~~~~~~~~~~
+Basic parameters
+~~~~~~~~~~~~~~~~~~
 
 .. figure:: installation/017.png
 	:align: center
 	:width: 8in
 
-.. centered:: 表格 1.4-1 机器人基本参数
+.. centered:: Sheet 1.4-1 Basic parameters of robotics
 
-运动范围
+Motion
 ~~~~~~~~~~~~~~
 
-机械臂安装空间：
+Robotic arm installation space:
 
-机器人本体安装需要3m×3m×2m（长×宽×高）的空间，以满足机器人最大臂展下的运动；若用户自行增加末端负载，请确保安装空间留有最少500mm间隙。
+The installation of the robot body requires a space of 3m × 3m × 2m (length × width × height) to meet the motion under the maximum wingspan of the robot; if the user increases the end load by itself, make sure that there is a minimum 500mm gap in the installation space.
 
 .. note:: 
-	高度空间受安装底座高度的影响，此处2m是指高出安装基准面的距离
+	The height space is affected by the height of the installation base, where 2m refers to the distance above the installation reference plane
 
-控制柜安装空间：
+Control cabinet installation space:
 
-1.控制箱应放在易于操作，防止水淹触电，距离地面0.6m-1.5m。
+1.The control box should be placed in easy operation to prevent water flooding, 0.6m-1.5m from the ground.
 
-2.柜体必须远离热源。
+2.The cabinet must be far away from the heat source.
 
-3.控制箱重载线一侧应满足150mm以内无遮挡，其余侧满足100mm以内无遮挡，便于散热和取放。
+3.On one side of the control box's heavy load line, there should be no obstruction within 150mm, and the remaining side shall be not covered within 100mm, which is convenient for heat dissipation and extraction.
 
 .. figure:: installation/018.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.4-2 FR3型号协作机器人运动范围
+.. centered:: Figure 1.4-2 FR3 model collaboration robot movement range
 
 .. figure:: installation/019.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.4-3 FR5型号协作机器人运动范围
+.. centered:: Figure 1.4-3 FR5 model collaboration robot movement range
 
 .. figure:: installation/020.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.4-4 FR10型号协作机器人运动范围
+.. centered:: Figure 1.4-4 FR10 model collaboration robot movement range
 
 .. figure:: installation/021.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.4-5 FR16型号协作机器人运动范围
+.. centered:: Figure 1.4-5 FR16 model collaboration robot movement range
 
 .. figure:: installation/022.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.4-6 FR20型号协作机器人运动范围
+.. centered:: Figure 1.4-6 FR20 model collaboration robot movement range
 
 机器人坐标系
 ~~~~~~~~~~~~~~~~
@@ -368,29 +368,29 @@ FR机器人需要根据适用的国家法律法规及国家标准处置，详情
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.4-7 机器人DH参数坐标系
+.. centered:: Figure 1.4-7 Robot DH parameter coordinate system
 
 .. figure:: installation/024.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.4-8 机器人末端法兰坐标系
+.. centered:: Figure 1.4-8 French -endframe coordinate system
 
-安装规范
-----------
+Specification
+---------------
 
-机器人手臂安装
-~~~~~~~~~~~~~~~~~
+Robot arm installation
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-机器人手臂使用4颗强度不低于8.8级强度的M8螺栓安装机器人手臂。螺栓必须使用20Nm扭矩拧紧。
+The robotic arm uses 4 M8 bolts with a strength of no less than 8.8 -level intensity to install the robot arm. The bolt must be tightened with 20nm torque.
 
-使用预留的两个Ø8销孔来准确地重新定位机器人手臂。
+Use the reserved two 孔8 sales holes to accurately regain the robotic arm.
 
 .. note:: 
-	可以采购精确的基座作为附件来使用。图表1.5-1 ~ 1.5-5显示了销孔位置和螺丝安装位置。
+	You can purchase accurate bases as attachments. FIGURE 1.5-1 ~ 1.5-5 shows the position of the sales hole and the location of the screw.
 
-将机器人安装在一个坚固、无震动的表面，该表面应当足以承受至少10倍的基座关节的完全扭转力，以及至少5倍的机器人手臂的重量。如果机器人安装在线性轴上或是活动的平台上，则活动性安装基座的加速度非常低。高加速度会导致机器人发生安全停机。
+Installing the robot on a strong, no shock surface, the surface should be sufficient to withstand the complete twisting force of the base joints at least 10 times, and the weight of the robotic arm at least 5 times. If the robot is installed on the linear axis or on the platform of activity, the acceleration of the base installation base is very low. High acceleration can cause a safe stop for robots.
 
 
 .. figure:: installation/025.png
@@ -398,43 +398,43 @@ FR机器人需要根据适用的国家法律法规及国家标准处置，详情
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.5-1 FR3型号协作机器人安装尺寸
+.. centered:: Figure 1.5-1 FR3 model collaborative robot installation size
 
 .. figure:: installation/026.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.5-2 FR5型号协作机器人安装尺寸
+.. centered:: Figure 1.5-2 FR5 model collaborative robot installation size
 
 .. figure:: installation/027.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.5-3 FR10型号协作机器人安装尺寸
+.. centered:: Figure 1.5-3 FR10 model collaborative robot installation size
 
 .. figure:: installation/028.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.5-4 FR16型号协作机器人安装尺寸
+.. centered:: Figure 1.5-4 FR16 model collaborative robot installation size
 
 .. figure:: installation/029.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.5-5 FR20型号协作机器人安装尺寸
+.. centered:: Figure 1.5-5 FR20 model collaborative robot installation size
 
 .. important:: 
-	确保机器人手臂正确并安全地安装到位。安装不稳定会导致事故。
+	Make sure the robot arm is installed correctly and safely. Unstable installation will cause accidents.
 
-工具末端安装
-~~~~~~~~~~~~~~~~
+Tool end installation
+~~~~~~~~~~~~~~~~~~~~~~~
 
-机器人工具法兰有四个M6螺纹孔，可用于将工具连接到机器人。M6螺栓必须使用8Nm的扭矩拧紧，其强度等级不低于8.8级。为了准确地重新定位工具，请在预留的Ø6销孔中使用销钉。
+There are four M6 thread holes in the robot tool, which can be used to connect the tool to the robot. The M6 bolt must be tightened with 8nm torque, and its strength level is not less than 8.8. In order to accurately regain the tools, please use the nails in the reserved ø6 sales holes.
 
 
 .. figure:: installation/030.png
@@ -442,417 +442,417 @@ FR机器人需要根据适用的国家法律法规及国家标准处置，详情
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.5-6 FR3/FR5/FR10/FR16型号机器人末端法兰图纸
+.. centered:: Figure 1.5-6 FR3/FR5/FR10/FR16 model robot end flange drawing
 
 .. figure:: installation/031.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.5-7 FR20型号机器人末端法兰图纸
+.. centered:: Figure 1.5-7 FR20 model robot end flange drawing
 
 .. important:: 
-	- 确保工具正确并安全地安装到位。
-	- 确保工具安全架构，不会有零件意外坠落造成危险。
-	- 在机器人上法兰上安装长度超过8毫米的M6螺栓可能会破坏工具法兰并造成无法修复的损坏，从而导致必须更换工具法兰。
+	- Make sure the tools are installed correctly and safely.
+	- Ensure the safety architecture of the tools, and no parts of parts fall into danger.
+	- Installing M6 bolts with a length of more than 8mm on the robot flange may destroy tool flanges and cause damage that cannot be repaired, causing a tool to change tools.
 
-安装环境
-~~~~~~~~~~~~~~
+Installation environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在安装及使用协作机器人时，确保满足以下要求：
+When installing and using a collaborative robot, make sure to meet the following requirements:
 
--  环境温度0-45℃
+-  Environmental temperature 0-45 ℃
 
--  湿度20-80RH不结露
+-  Humidity 20-80rh is not exposed
 
--  无机械冲击和震动
+-  No mechanical impact and shock
 
--  海拔要求2000m以下
+-  Altitude requires less than 2000M
 
--  无腐蚀性气体，无液体，无爆炸性气体，无油污，无盐雾，无尘埃或金属粉末，无放射性材料，无电磁噪声，无易燃物品
+-  No corrosive gases, no liquid, no explosive gases, no oil pollution, no salt fog, no dust or metal powder, no radioactive material, no electromagnetic noise, non -flammable items
 
--  避免设备在电流的不稳定条件下工作
+-  Avoid the device from working under the unstable conditions of the current
 
--  用户需要在机器人电源前增加不小于10A/250V关断能力的空气开关。
+-  Users need to increase the air switch with a capability of not less than 10A/250V in front of the robot power.
 
 .. note:: 
-	如果要将协作机器人吊装或者装到竖直面时，请联系我们。
+	If you want to hang or install the collaborative robot, please contact us.
 
-地板承载能力
-~~~~~~~~~~~~~~~~
+Floor carrier capacity
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-将机器人安装在一个坚固的表面，该表面应足以承受至少5倍的机器人手臂的重量，而且该表面不能有震动。
+Installing the robot on a strong surface, the surface should be sufficient to withstand the weight of the robotic arm at least 5 times, and the surface cannot be vibrated.
 
-最大有效载荷
-~~~~~~~~~~~~~~~~
+Maximum valid load
+~~~~~~~~~~~~~~~~~~~~~~
 
-机器人手臂的最大允许有效载荷取决于重心偏移。当负载重心距离变远，机器人承受的负载会变小。
+The maximum allowable valid load of the robotic arm depends on the center of gravity. When the center of gravity of the load becomes farther, the load that the robot will suffer will become smaller.
 
 
 .. figure:: installation/032.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.5-8 FR3型号协作机器人负载曲线
+.. centered:: Figure 1.5-8 FR3 model collaborative robot load curve
 
 .. figure:: installation/033.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.5-9 FR5型号协作机器人负载曲线
+.. centered:: Figure 1.5-9 FR5 model collaborative robot load curve
 
 .. figure:: installation/034.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.5-10 FR10型号协作机器人负载曲线
+.. centered:: Figure 1.5-10 FR10 model collaborative robot load curve
 
 .. figure:: installation/035.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.5-11 FR16型号协作机器人负载曲线
+.. centered:: Figure 1.5-11 FR16 model collaborative robot load curve
 
 .. figure:: installation/036.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.5-12 FR20型号协作机器人负载曲线
+.. centered:: Figure 1.5-12 FR20 model collaborative robot load curve
 
 
-控制连接
-----------
+Control connection
+------------------------
 
-控制器接口
-~~~~~~~~~~~~~~~
+Controller interface
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-本系列机器人采用TN-S单相220V交流电源供电，设备自带5米电源线，三脚插头端插入现场提供的交流220V插座，机器人电气接地。
+This series of robots use the TN-S single-phase 220V AC power supply. The equipment comes with a 5-meter power line, and the three-foot plug-to-end is inserted into the AC 220V socket provided by the site, and the robot is electrical.
 
--  额定输入电压：6A/220VAC
+-  Rating input voltage: 6A/220VAC
 
--  额定输出电压：48V/21A
+-  Rated output voltage: 48V/21A
 
--  相数：单相
+-  Number of phase: single phase
 
--  频率：50Hz
+-  Frequency: 50Hz
 
--  输出短路额定值：48V/22A
+-  Output short-circuit rating: 48V/22A
 
 .. warning:: 
-	在接线前，请务必确保电源处于关闭状态，并在旁边挂放安全警示牌。
+	Before wiring, please ensure that the power supply is turned off and hang a safety warning sign next to it.
 
-本系列机械手控制系统的外部连线均使用可插拔可快速安装的插头进行连接。协作机器人接线面板如图表1.6-1所示。
+The external wiring of this series of robotic arm control systems is connected using pluggable and quickly installable plugs. The wiring panel of the collaborative robot is shown in Figure 1.6-1.
 
--  确保控制箱电源按钮关闭情况下（按钮打到0）将220V电源线接到电源插口(满载输入电压为6A/220VAC~7A/210VAC)
+-  Ensure that the 220V power cord is connected to the power socket with the control box power button turned off (button turned to 0) (full load input voltage is 6A/220VAC~7A/210VAC)
 
--  将机器人本体重载线缆连接到控制箱重载接口
+-  Connect the robot body overload cable to the control box overload interface
 
--  将按钮盒航空插头插到控制箱示教器接口
+-  Insert the button box aviation plug into the control box teaching device interface
 
--  控制箱两侧散热口，间隔距离不少于15CM
+-  The heat dissipation ports on both sides of the control box should be spaced at least 15CM apart
 
--  控制箱正面（用户钣金，开关电源键、重载与示教器线束）处，间隔距离不少于25CM
+-  At the front of the control box (user sheet metal, switch power button, heavy load and teaching pendant wiring harness), the spacing distance should not be less than 25CM
 
--  控制箱距离地面0.6-1.5m
+-  The control box is 0.6-1.5m above the ground
 
--  不允许用户自行更换电源线缆
+-  Do not allow users to replace power cables on their own
 
 .. figure:: installation/037.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.6-1 机器人接线示意图
+.. centered:: Figure 1.6-1 Robot wiring schematic diagram
 
-控制器I/O面板
+Controller I/O panel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-您可以使用控制箱内的I/O 来控制各种设备，包括气动继电器、PLC 和紧限位装置止按钮。图表1.6-2显示了控制箱的电气接口组，图表1.6-3显示了易制造控制箱的电气接口组。
+You can use the I/O in the control box to control various devices, including the stop button of pneumatic relay, PLC, and tight limit device. Figure 1.6-2 shows the electrical interface group of the control box. Figure 1.6-3 shows the electrical interface group that is easy to manufacture control box.
 
 .. figure:: installation/038.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.6-2 控制箱电气接口示意图
+.. centered:: Figure 1.6-2 Control box electrical interface schematic diagram
 
 .. figure:: installation/039.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.6-3 易制造控制箱电气接口示意图
+.. centered:: Figure 1.6-3 Easy to manufacture control box electrical interface schematic diagram
 
-RJ45网络接口组
+RJ45 network interface group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-控制箱内的网络接口组地址如图表1.6-3所示，注意该图与控制箱内部网口地址顺序对应，机器人默认端口禁止插拔。用户网口可以用来与相机等设备通信，IP地址为192.168.57.2。按钮盒接口默认为示教器控制端口，IP地址为192.168.58.2，使用网线连接按钮盒接口与电脑，电脑IP地址设为192.168.58.10或与之同一网段，打开谷歌浏览器输入192.168.58.2即可访问示教器页面。易制造控制箱通过连接按钮盒的网口，访问示教器页面。
+The network interface group address in the control box is shown in FIGURE 1.6-3. Note that the graph corresponds to the sequence of the address order of the internal network port of the control box, and the default port of the robot is prohibited from insertion. The user's network port can be used to communicate with the camera and other devices. The IP address is 192.168.57.2. The button box interface is default to the faculty control port, and the IP address is 192.168.58.2. Use the network cable connection button box interface and computer. The computer IP address is set to 192.168.58.10 or the same network segment as it. You can access the oscilloscope page. Easy to manufacture control boxes to access the pages of the oscillator through the network port of the connection button box.
 
 .. figure:: installation/040.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-4 网络接口组示意图
+.. centered:: Figure 1.6-4 Significant diagram of network interface group
 
-末端板
+End plate
 ~~~~~~~~~~~~~
 
-您可以使用末端板的I/O和485通讯接口来控制各种设备，包括气动继电器、PLC和紧急停止按钮。Pin脚分布及其pin脚说明如图表1.6-4所示。I/O连接器型号为M12连接器8芯母头。
+You can use the end -panel's I/O and 485 communication interfaces to control various devices, including pneumatic relay, PLC and emergency stop buttons. The PIN foot distribution and its PIN foot explanation is shown in Figure 1.6-4. The I/O connector model is M12 connector 8 cores.
 
 .. figure:: installation/041.png
 	:align: center
 	:width: 3in
 	:class: figure-border
 
-.. centered:: 图表 1.6-5 末端版电气接口示意图
+.. centered:: Figure 1.6-5 The schematic diagram of the end version of the electrical interface
 
-接地说明
+Ground
 ~~~~~~~~~~~~~~
 
-1. 控制箱接地位于电源开关左上方M4组合螺钉处，如图表1.6-5所示。
+1. The control box is located at the M4 combination screw in the upper left of the power switch, as shown in Figure 1.6-5.
 
 .. figure:: installation/042.png
 	:align: center
 	:width: 8in
 	:class: figure-border
 
-.. centered:: 图表 1.6-6 控制箱接地示意图
+.. centered:: Figure 1.6-6 Demonstration diagram of the control box
 
-2. 本体接地位于基座出线处的右侧位置，如如图表1.6-6所示。
+2. The body is located on the right side of the base of the base, as shown in Figure 1.6-6.
 
 .. figure:: installation/043.png
 	:align: center
 	:width: 4in
 	:class: figure-border
 
-.. centered:: 图表 1.6-7 本体接地示意图
+.. centered:: Figure 1.6-7 Dragon schematic diagram of the body
 
-单独使用的保护导线，截面积不应小于：
+The protective wire used alone, the cross -sectional area should not be less than:
 
-- 2.5mm\ :sup:`2` 铜或16mm\ :sup:`2` 铝，如果提供机械损伤防护（导线管、管道等）
-- 4mm\ :sup:`2` 铜或16mm\ :sup:`2` 铝，如果没有提供机械损伤防护
+- 2.5mm\ :sup:`2` copper or 16mm\ :sup:`2` aluminum，if mechanical injury protection is provided (wire pipe, pipeline, etc.)
+- 4mm\ :sup:`2` copper or 16mm\ :sup:`2` aluminum，if no mechanical damage protection is provided
 
-所有数字I/O 的通用规范
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The common specifications of all digital I/O
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本节规定了下列控制箱24伏数字输入/输出的电气规范：
+This section stipulates the electrical specifications of the following control box 24 volt digital input/output:
 
--  安全I/O
+-  Safety I/O
 
--  通用数字量I/O
+-  Universal digital amount I/O
 
-机器人必须按照电气规范进行安装。
+Robots must be installed in accordance with electrical specifications.
 
-通过配置“电源通讯”接口，可以使用内部或外部24V电源为数字I/O供电。该接口中上面两个端子（ex24V和exon）为外部电源的24V和地，下面两个端子（24V和GND）为内部电源的24V和地。默认配置是使用内部电源，如图表1.6-7所示。
+By configured the "Power Communication" interface, you can use the internal or external 24V power supply to power the digital I/O. The above two terminals (EX24V and EXON) in the interface are 24V and ground with external power supply, and the two terminals (24V and GND) below are 24V and land of internal power supply. The default configuration uses internal power, as shown in Figure 1.6-7.
 
 .. figure:: installation/044.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-8 电源通信示意图01
+.. centered:: Figure 1.6-8 Power communication schematic diagram 01
 
-如果负载功率较大，可以按如图1.6-8连接外部电源。
+If the load power is large, you can connect the external power supply as shown in Figure 1.6-8.
 
 .. figure:: installation/045.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-9 电源通信示意图02
+.. centered:: Figure 1.6-9 Power communication schematic diagram 02
 
-内部和外部电源的电气规格如表格1.6-1内外部电气规格所示：
+The electrical specifications of internal and external power are shown in Sheet 1.6-1 Internal and external electrical specifications:
 
 .. figure:: installation/046.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.6‑1 内外部电源电气规格
+.. centered:: Sheet 1.6‑1 Internal and external power supply electrical specifications
 
-数字量I/O的电气规格如表格1.6-2数字量I/O电气规格所示：
+The electrical specifications of digital I/O are shown in Sheet 1.6-2 Digital I/O Electric Specifications:
 
 .. figure:: installation/047.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.6‑2 数字量I/O电气规格
+.. centered:: Sheet 1.6‑2 Digital I/O Electric Specification
 
-安全I/O
+Safety I/O
 ~~~~~~~~~~~~~~~
 
-本节描述了安全I/O的电气规范，必须遵守第1.6.6节中的通用电气规范。
+This section describes the electrical specifications of security I/O, and must abide by the general electrical specifications in Section 1.6.6.
 
-安全装置和设备必须按照安全说明和风险评估进行安装，见第1.1。所有安全I/O都是成对的（冗余），必须作为两个独立的分支保存。单一故障不应导致安全功能丧失。
+Safety devices and equipment must be installed in accordance with the safety description and risk assessment, see 1.1. All security I/O is paired (redundant) and must be stored as two independent branches. Single failures should not cause loss of security function.
 
-安全I/O包括紧急停止和安全停止。紧急停止输入仅用于紧急停止设备，安全停止输入用于各种安全相关保护设备。功能差异如表格1.6-3所示：
+Safety I/O includes emergency stop and security stop. Urgent stop input is only used for emergency stop equipment, and safely stops input for various security -related protection equipment. Functional differences are shown in Sheet 1.6-3:
 
 .. figure:: installation/048.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.6-3 功能差异
+.. centered:: Sheet 1.6-3 Functional difference
 
 .. warning:: 
-	- 切勿将安全信号连接到不具有正确安全级别的PLC。如果不遵守此警告，则可能导致严重伤害或死亡，因为其中一个安全停止功能可能被覆盖。必须将安全接口信号与正常I/O接口信号分开。
-	- 所有与安全相关的I/O都是冗余构建的（两个独立通道）。必须保持两个通道分开，以便单个故障不会导致安全功能丧失。
-	- 在将机器人投入运行之前，必须验证急停安全功能（机器人通电使能，按下急停按钮，机器人断电停止，关闭电源，旋转急停按钮，打开电源，机器人重新上电使能）。必须定期测试安全功能。
-	- 机器人安装应符合这些规范。否则可能导致严重伤害或死亡，因为安全停止功能可能被越过。
+	- Do not connect the security signal to a PLC that does not have the correct and safe level. If this warning does not follow, it may cause serious damage or death because one of the security stop function may be covered. Security interface signals must be separated from normal I/O interface signals.
+	- All I/O is a redundant -related I/O built (two independent channels). Two channels must be kept separately so that a single failure will not cause security function.
+	- Before the robot is put into operation, it is necessary to verify the emergency stop safety function (the robot is powered on, press the emergency stop button, the robot is disconnected, the power is turned off, the rotating emergency stop button, the power is turned on, and the robot is re -power to enable it). Safety functions must be tested regularly.
+	- Robot installation should comply with these specifications. Otherwise, it may lead to severe damage or death, because the safety stop function may be over.
 
-以下小节给出了一些如何使用安全I/O的示例。
+The following sections are given some examples of how to use security I/O.
 
-**默认安全配置**
-机器人出厂时带有默认配置，无需任何附加安全设备即可进行操作，请参见图表1.6-9。
+**Default safety configuration**
+When the robot leaves the factory, it has the default configuration. It can be operated without any additional safety devices. Please refer to Figure 1.6-9.
 
 .. figure:: installation/049.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-10 安全防护示意图01
+.. centered:: Figure 1.6-10 Safety protection schematic diagram 01
 
-**连接紧急停止按钮**
-在大多数应用中，需要使用一个或多个额外的紧急停止按钮。见图表1.6-10。
+**Connect the emergency stop button**
+In most applications, one or more additional emergency stop buttons need to be used. See Figure 1.6-10.
 
 .. figure:: installation/050.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-11 安全防护示意图02
+.. centered:: Figure 1.6-11 Safety protection schematic diagram 02
 
-**连接安全停止按钮**
-安全停止装置的一个例子是当门打开时机器人停止的门开关，见图表1.6-11。
+**Connect the security stop button**
+An example of a safe stop device is the door switch that the robot stops when the door is turned on. See Figure 1.6-11.
 
 .. figure:: installation/051.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-12 安全防护示意图03
+.. centered:: Figure 1.6-12 Safety protection schematic diagram 03
 
-通用数字量I/O
+Universal digital amount I/O
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本节描述了通用数字量 I/O的电气规范，必须遵守第1.6.6节中的通用电气规范。
+This section describes the electrical specifications of the general digital I/O, and must abide by the general electrical specifications in Section 1.6.6.
 
-通用数字量I/O可用于驱动继电器、电磁阀等设备或与其他PLC进行交互。
+The general digital amount I/O can be used to drive relays, solenoid valves and other devices or interact with other PLCs.
 
-**数字量输出控制负载**
+**Digital quantity output control load**
 
-此示例演示如何连接数字量输出从而控制负载，请参见图表1.6-12。
+This example demonstrates how to connect the digital quantity output to control the load, see Figure 1.6-12.
 
 .. figure:: installation/052.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-13 通用数字量输出示意图01
+.. centered:: Figure 1.6-13 Great digital quantity output schematic diagram 01
 
-从按钮进行的数字输入
+Digital input from the button
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-下面的示例演示如何将简单按钮连接到数字量输入。
+The following example demonstrates how to connect the simple button to the digital quantity input.
 
 .. figure:: installation/053.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-14 通用数字量输出示意图02
+.. centered:: Figure 1.6-14 Great digital quantity output schematic diagram 02
 
-与其他设备或PLC交互
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Interact with other devices or PLC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-下面的示例演示如何与其他设备或PLC进行数字量输入输出交互。
+The following example demonstrates how to interact with other devices or PLC digital input output.
 
 .. figure:: installation/054.png
 	:align: center
 	:width: 6in
 
-.. centered:: 图表 1.6-15 与其他设备或PLC交互示意图
+.. centered:: Figure 1.6-15 Interactive diagram with other devices or PLC
 
-模拟量I/O
+Simulation I/O
 ~~~~~~~~~~~~~~~~
 
 .. figure:: installation/055.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.6-4 模拟量电流电压
+.. centered:: Sheet 1.6-4 Simulation current voltage
 
-模拟量I/O用来设置或测量其它设备的电压（0-10V）或电流（0-20mA）。
+The simulation I/O is used to set or measure the voltage (0-10V) or current (0-20mA) of other devices.
 
-为了达到高精度，建议采用以下方法。
+In order to achieve high precision, the following methods are recommended.
 
--  设备和控制箱使用相同的地（GND）。
+-  The equipment and control box use the same ground (GND).
 
--  使用屏蔽电缆或双绞线。
+-  Use shielding cables or twisted wires.
 
-下面的示例演示如何使用模拟量I/O。
+The following example demonstrates how to use analog I/O.
 
-**使用模拟量输出**
+**Use analog output**
 
-下面的示例是演示使用模拟量输出控制传送带。
+The following example is to demonstrate the use of analog output control conveyor belt.
 
 .. figure:: installation/056.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-16 模拟量输出示意图
+.. centered:: Figure 1.6-16 Simulation output schematic diagram
 
-**使用模拟量输入**
+**Use analog input**
 
-下面的示例是演示使用模拟量输入连接模拟传感器。
+The following example is to demonstrate the simulation input connection simulation sensor.
 
 .. figure:: installation/057.png
 	:align: center
 	:width: 3in
 
-.. centered:: 图表 1.6-17 模拟量输入示意图
+.. centered:: Figure 1.6-17 Simulation input schematic diagram
 
-示教器及末端LED
-------------------
+Demonstrate and end LED
+---------------------------
 
-机器人示教器可以使用一台电脑或者平板访问并控制机器人，连接方式可参考1.6.3节说明，此外用户也可以使用我们的FR-HMI示教器，该款示教器是选配件。
+The robotic oscilloscope can use a computer or tablet to access and control the robot. The connection method can refer to Section 1.6.3 to explain. In addition, users can also use our FR-HMI osteter.
 
-按钮盒简介
-~~~~~~~~~~~~~~~
+Introduction to the button box
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-第一版按钮盒
+The first version of the button box
 
 .. figure:: installation/058.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.7-1 第一版按钮盒
+.. centered:: Figure 1.7-1 The first version of the button box
 
-**急停开关：**\ 当按下急停开关，机器人进入紧急停止状态。
+**Emergency stop switch:**\ When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
-**Type-c接口：**\ 连接web示教器的端口。
+**Type-c interface：**\ Connect the port of the web oscilloscope.
 
-**按键1：**\ 短按自动/手动模式切换，长按进入/退出拖动模式。
+**Button 1：**\ Short press automatic/manual mode switch, long press and enter/exit the drag mode.
 
-**按键2：**\ 短按记录示教点，长按进入/退出不搭配示教器状态。
+**Button 2：**\ Short press the record to show the teaching point, long press and enter/exit the state of no demonstrator.
 
-**按键3：**\ 短按开始/停止运行程序。
+**Button 3：**\ Start/stop running program.
 
-第二版按钮盒
+The second version of the button box
 
 .. figure:: installation/059.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.7-2 第二版按钮盒
+.. centered:: Figure 1.7-2 The second version of the button box
 
-**急停开关：**\ 当按下急停开关，机器人进入紧急停止状态。
+**Emergency stop switch:**\ When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
-**开始停止：**\ 开始/停止运行程序。
+**Start stop:**\ Start/stop running program.
 
-**网口：**\ 连接web示教器。
+**Intra port:**\ Connect to the web oscilloscope.
 
-**关机：**\ 暂未启用。
+**Shut off:**\ No enabled.
 
-**记录点：**\ 记录示教点。
+**Record point:**\ Record the teaching point.
 
-**示教模式：**\ 进入/退出搭配示教器状态。
+**Demonstration mode:**\ Enter/exit the missionary state.
 
-**运行模式：**\ 自动/手动模式切换。
+**Run mode:**\ Automatic/manual mode switch.
 
-**拖动模式：**\ 进入/退出拖动模式。
+**Drag mode:**\ Enter/exit drag mode.
 
-FR-HMI示教器简介
+Introduction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: installation/060.png
@@ -860,36 +860,36 @@ FR-HMI示教器简介
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.7-3 FR-HMI示教器正面
+.. centered:: Figure 1.7-3 FR-HMI teaching pendant front
 
 .. figure:: installation/061.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: 图表 1.7-4 FR-HMI示教器背面
+.. centered:: Figure 1.7-4 FR-HMI teaching pendant back
 
-**显示屏：**\ 示教器的触摸操作与显示界面。
+**Display:**\ Touch operation and display interface of the teaching pendant.
 
-**启动键：**\ 启动程序。
+**Start key:**\ Start the program.
 
-**停止键：**\ 停止当前运行的程序。
+**Stop key:**\ Stop the currently running program.
 
-**F4按键：**\ 输入键盘调用按键。
+**F4 button:**\ Enter the keyboard to call the keys.
 
-**Joint按键：**\ 机器人关节点动。
+**Joint button:**\ The joint node of the robot.
 
-**三位使能：**\ 手动模式使能机器人
+**Three -bit enable:**\ Manual mode enable robots
 
-**急停开关：**\ 当按下急停开关，机器人进入紧急停止状态。
+**Emergency stop switch:**\ When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
-**模式键：**\ 旋转按钮切换手自动模式。
+**Mode key:**\ Rotate the button to switch the automatic mode.
 
-末端LED定义
-~~~~~~~~~~~~~~~~~
+End LED definition
+~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: installation/062.png
 	:align: center
 	:width: 6in
 
-.. centered:: 表格 1.7‑1 末端LED定义表
+.. centered:: Sheet 1.7‑1 The end LED definition table

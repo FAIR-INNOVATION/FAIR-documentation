@@ -1,46 +1,46 @@
-前言
-=======
+Foreword
+===========
 
 .. toctree:: 
 	:maxdepth: 5
 
-首先，非常感谢您选购我们公司的FR系列协作机器人产品。我们的产品是经过多次精心设计和测试，以确保能够满足您各方面的需求。
+First of all, thank you very much for buying our company's FR series collaborative robot products. Our products have been carefully designed and tested many times to ensure that they can meet your needs in all aspects.
 
-请您仔细阅读本产品用户手册，以确保您能够正确地使用我们的产品并获得最佳的使用体验。如果您在使用过程中遇到任何问题，请参阅使用手册中的故障排除部分，或与我们的售后人员联系。我们非常感谢您的支持和信任，期待为您提供更好的服务和产品。
+Please read this product user manual carefully to ensure that you can use our products correctly and get the best experience. If you encounter any problems during use, please refer to the fault exclusion part in the manual, or contact our after -salesperson. We thank you very much for your support and trust, and look forward to providing you with better services and products.
 
-箱子里面装的什么
-------------------
+What is installed in the box
+-------------------------------
 
-当您订购一个FR系列协作机器人后，您会收到一个箱子。里面包含：
+When you order a FR series collaborative robot, you will receive a box. Contains:
 
-- **协作机器人一台**
-- **按钮盒一个**
-- **控制箱一个（含控制箱线缆一根）**
+- **One collaborative robot**
+- **One button box**
+- **One control box (including one control box cable)**
 
-重要安全说明
------------------
+Important security description
+----------------------------------
 
-机器人是一种涉及人身安全的设备，因此每次安装机器人后都必须执行安全评估。您必须遵守第1章中的所有安全说明。
+Robots are a device involving personal safety, so a safety assessment must be performed after each installation of the robot. You must follow all the security descriptions in Chapter 1.
 
-如何使用本手册
-------------------
+How to use this manual
+-------------------------
 
-本手册包含机器人安装编程的指导信息。手册包括：
+This manual contains the guidance information of robot installation programming. Manual includes:
 
--  **硬件安装部分**：机器人的机械安装和电气安装
--  **示教器软件解析部分**：机器人示教及编程
+-  **Hardware installation part**：Machinery installation and electrical installation of robots
+-  **Analysis of the teachor software**：Robotics and programming
 
-本手册面向的机器人集成商，集成商应接受过基本的机械电气培训，并熟悉初级编程概念。
+This manual is a robotic integrator, and integrators should receive basic mechanical and electrical training and be familiar with primary programming concepts.
 
-遵循的相关标准
------------------
+Follow the relevant standards
+--------------------------------
 
 .. list-table::
    :widths: 30 70
    :header-rows: 0
 
-   * - **标准**
-     - **定义**
+   * - **Standard**
+     - **Definition**
 
    * - 2006/42/EC:2006
      - Machinery Directive:  Directive 2006/42/EC of the European Parliament and of the Council of 17 May 2006 on machinery, and amending Directive
