@@ -199,13 +199,13 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.1-1 Category 0 stop distance(rad)
+.. centered:: Table 1.1-1 Category 0 stop distance(rad)
 
 .. figure:: installation/012.png
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.1-2 Category 0 stop time (ms)
+.. centered:: Table 1.1-2 Category 0 stop time (ms)
 
 After the emergency stop, turn off the power, rotate the emergency stop button, and turn on the power to restart the robot.
 
@@ -224,25 +224,25 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.1-3 Safety stop distance(rad)
+.. centered:: Table 1.1-3 Safety stop distance(rad)
 
 .. figure:: installation/014.png
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.1-4 Safety stop time(ms)
+.. centered:: Table 1.1-4 Safety stop time(ms)
 
 .. figure:: installation/015.png
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.1-5 Soft limit stop distance(rad)
+.. centered:: Table 1.1-5 Soft limit stop distance(rad)
 
 .. figure:: installation/016.png
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.1-6 Soft limit stop time(ms)
+.. centered:: Table 1.1-6 Soft limit stop time(ms)
 
 .. important:: 
 	According to IEC 60204-1 and ISO 13850, emergency stop device is not a safe protection device. They are supplementary protection measures and do not need to prevent damage.
@@ -304,7 +304,7 @@ Basic parameters
 	:align: center
 	:width: 8in
 
-.. centered:: Sheet 1.4-1 Basic parameters of robotics
+.. centered:: Table 1.4-1 Basic parameters of robotics
 
 Motion
 ~~~~~~~~~~~~~~
@@ -551,7 +551,7 @@ The external wiring of this series of robotic arm control systems is connected u
 
 -  The heat dissipation ports on both sides of the control box should be spaced at least 15CM apart
 
--  At the front of the control box (user sheet metal, switch power button, heavy load and teaching pendant wiring harness), the spacing distance should not be less than 25CM
+-  At the front of the control box (user Table metal, switch power button, heavy load and teaching pendant wiring harness), the spacing distance should not be less than 25CM
 
 -  The control box is 0.6-1.5m above the ground
 
@@ -656,21 +656,21 @@ If the load power is large, you can connect the external power supply as shown i
 
 .. centered:: Figure 1.6-9 Power communication schematic diagram 02
 
-The electrical specifications of internal and external power are shown in Sheet 1.6-1 Internal and external electrical specifications:
+The electrical specifications of internal and external power are shown in Table 1.6-1 Internal and external electrical specifications:
 
 .. figure:: installation/046.png
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.6‑1 Internal and external power supply electrical specifications
+.. centered:: Table 1.6‑1 Internal and external power supply electrical specifications
 
-The electrical specifications of digital I/O are shown in Sheet 1.6-2 Digital I/O Electric Specifications:
+The electrical specifications of digital I/O are shown in Table 1.6-2 Digital I/O Electric Specifications:
 
 .. figure:: installation/047.png
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.6‑2 Digital I/O Electric Specification
+.. centered:: Table 1.6‑2 Digital I/O Electric Specification
 
 Safety I/O
 ~~~~~~~~~~~~~~~
@@ -679,13 +679,13 @@ This section describes the electrical specifications of security I/O, and must a
 
 Safety devices and equipment must be installed in accordance with the safety description and risk assessment, see section 1.1. All security I/O is paired (redundant) and must be stored as two independent branches. Single failures should not cause loss of security function.
 
-Safety I/O includes emergency stop and security stop. Urgent stop input is only used for emergency stop equipment, and safely stops input for various security -related protection equipment. Functional differences are shown in Sheet 1.6-3:
+Safety I/O includes emergency stop and security stop. Urgent stop input is only used for emergency stop equipment, and safely stops input for various security -related protection equipment. Functional differences are shown in Table 1.6-3:
 
 .. figure:: installation/048.png
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.6-3 Functional difference
+.. centered:: Table 1.6-3 Functional difference
 
 .. warning:: 
 	- Do not connect the security signal to a PLC that does not have the correct and safe level. If this warning does not follow, it may cause serious damage or death because one of the security stop function may be covered. Security interface signals must be separated from normal I/O interface signals.
@@ -768,7 +768,7 @@ Simulation I/O
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.6-4 Simulation current voltage
+.. centered:: Table 1.6-4 Simulation current voltage
 
 The simulation I/O is used to set or measure the voltage (0-10V) or current (0-20mA) of other devices.
 
@@ -892,4 +892,4 @@ End LED definition
 	:align: center
 	:width: 6in
 
-.. centered:: Sheet 1.7‑1 The end LED definition table
+.. centered:: Table 1.7‑1 The end LED definition table
