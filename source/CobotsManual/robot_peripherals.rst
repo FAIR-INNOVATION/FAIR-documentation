@@ -45,9 +45,34 @@ Gripper program teaching steps
 Gripper program teaching
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/004.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - PTP(template2,100,-1,0)
+     - #Waiting for pinch point
+   * - 2
+     - PTP(template1,100,-1,0)
+     - #Pinch point
+   * - 3
+     - MoveGripper(1,255,255,0,1000,0)
+     - #Clamping jaws closed
+   * - 4
+     - PTP(template2,100, -1,0)
+     - /
+   * - 5
+     - PTP(template3,100, -1,0)
+     - #Waiting for placement point
+   * - 6
+     - PTP(template3,100, -1,0)
+     - #Placement point
+   * - 7
+     - MoveGripper(1,0,255,0,1000,0)
+     - #Clamping jaws open
 
 Spray gun peripheral configuration
 -------------------------------------
@@ -79,9 +104,40 @@ Spray gun peripheral configuration steps
 Spray program teaching
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/007.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - Lin(template1,100,-1,0,0)
+     - #Start spraying point
+   * - 2
+     - SprayStart()
+     - #Start painting
+   * - 3
+     - Lin(template2,100,-1,0,0)
+     - #Spray path
+   * - 4
+     - Lin(template3,100,-1,0,0)
+     - #Stop spraying point
+   * - 5
+     - SprayStop()
+     - #Stop spraying
+   * - 6
+     - Lin(template4,100,-1,0,0)
+     - #Gun cleaning point
+   * - 7
+     - PowerCleanStart()
+     - #Start to clean the gun
+   * - 8
+     - WaitTime(5000)
+     - #Cleaning time ms
+   * - 9
+     - PowerCleanStop()
+     - #Stop gun cleaning
 
 Peripheral configuration of welding machine
 ---------------------------------------------
@@ -113,9 +169,25 @@ Peripheral configuration of welding machine
 Welding program teaching
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/010.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - Lin(template1,100,-1,0,0)
+     - #Start arc starting point
+   * - 2
+     - ARCStart(0,1000)
+     - #Start arcing
+   * - 3
+     - Lin(template2,100,-1,0,0)
+     - #Stop arc starting point
+   * - 4
+     - ARCEnd(0,1000)
+     - #Stop arcing
 
 Sensor Peripheral Configuration
 ---------------------------------
@@ -173,9 +245,46 @@ Command description: Select the "Laser" command on the program teaching command 
 
 program example：
 
-.. figure:: robot_peripherals/016.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - LTLaserOn(2)
+     - #Turn on the sensor
+   * - 2
+     - PTP(template1,100,-1,0)
+     - #Sensor starting point
+   * - 3
+     - LTSearchStart(1,20,100,10000,2)
+     - #Start searching
+   * - 4
+     - LTSearchStop()
+     - #Stop searching
+   * - 5
+     - Lin(seamPos,20,-1,0,0,0)
+     - #Start of weld
+   * - 6
+     - LTTrackOn(2)
+     - #Laser tracking
+   * - 7
+     - ARCStart(0,10000)
+     - #Arc striking of welder
+   * - 8
+     - Lin(SeamEnd11,10-1,0,0)
+     - #End of weld
+   * - 9
+     - ARCEnd(0,10000)
+     - #Arc extinguishing of welder
+   * - 10
+     - LTTrackOff()
+     - #Sensor tracking off
+   * - 11
+     - LTLaserOff()
+     - #Turn off the sensor
 
 Laser sensor trajectory reproduction function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -189,9 +298,49 @@ Command description: Select the "LT-Rec" command on the program teaching command
 
 Program example:
 
-.. figure:: robot_peripherals/018.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - PTP(template1,100,-1,0)
+     - #Move to starting point
+   * - 2
+     - LaserSensorRecord(2,0,30)
+     - #Sensor start recording
+   * - 3
+     - Lin(template2,100,-1,0,0)
+     - #Move to the end
+   * - 4
+     - LaserSensorRecord(0,0,30)
+     - #Stop recording
+   * - 5
+     - pos={}
+     - #Initialize array
+   * - 6
+     - pos=GetWeldTrackingRecordStartPos(0,30)
+     - #Start point for obtaining laser record
+   * - 7
+     - If type(pos) == “table” then
+     - #Judge data type
+   * - 8
+     - LaserPTP(#pos,pos)
+     - #Move to the starting point of the laser track
+   * - 9
+     - end
+     - /
+   * - 10
+     - LaserSensorRecord(3,0,30)
+     - #Set Recurrence Track
+   * - 11
+     - MoveLTR()
+     - #Start reproducing track
+   * - 12
+     - LaserSensorRecord(0,0,30)
+     - #End
 
 Extended Axis Peripheral Configuration
 -----------------------------------------
@@ -245,9 +394,49 @@ Extended Axis Peripheral Configuration Steps
 Extended axis with laser tracking welding teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/024.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - EXT_AXIS_PTP(1,1,laserstart)
+     - #External axis movement laser sensor starting point
+   * - 2
+     - PTP(laserstart,10,-1,0)
+     - #Starting point of robot motion laser sensor
+   * - 3
+     - LTSearchStart(3,20,10,10000)
+     - #Start searching
+   * - 4
+     - LTSearchStop()
+     - #Stop searching
+   * - 5
+     - EXT_AXIS_PTP(1,1,seamPos)
+     - #Start point of external axis movement weld
+   * - 6
+     - Lin(seamPos,20,-1,0,0,0)
+     - #Start point of robot moving weld
+   * - 7
+     - LTTrackOn()
+     - #Laser tracking
+   * - 8
+     - ARCStart(0,10000)
+     - #Arc striking of welder
+   * - 9
+     - EXT_AXIS_PTP(1,1,laserend)
+     - #End point of external axis movement weld
+   * - 10
+     - Lin( laserend,10,-1,0,0)
+     - #End point of robot moving weld
+   * - 11
+     - ARCEnd(0,10000)
+     - #Arc extinguishing of welder
+   * - 12
+     - LTTrackOff
+     - #Laser tracking off
 
 Conveyor Tracking Configuration
 -----------------------------------
@@ -298,10 +487,56 @@ Conveyor Tracking Configuration Steps
 Conveyor belt tracking teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/030.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
 
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - PTP(conveyorstart,30,-1,0)
+     - #Robot grabbing starting point
+   * - 2
+     - While(1) do
+     - #Loop Grab
+   * - 3
+     - ConveyorIODetect(10000)
+     - #IO real-time detection of objects
+   * - 4
+     - ConveyorGetTrackData(1)
+     - #Object position acquisition
+   * - 5
+     - ConveyorTrackStart(1)
+     - #Conveyor tracking start
+   * - 6
+     - Lin(cvrCatchPoint,10,-1,0,0)
+     - #Robot reaches the grab point
+   * - 7
+     - MoveGripper(1,255,255,0,10000)
+     - #Gripper claw grabs objects
+   * - 8
+     - Lin(cvrRaisePoint,10,-1,0,0)
+     - #Robot lifting
+   * - 9
+     - ConveyorTrackEnd()
+     - #End of belt tracking
+   * - 10
+     - PTP(conveyorraise,30,-1,0)
+     - #Robot arrives at holding point
+   * - 11
+     - PTP(conveyorend,30,-1,0)
+     - #Robot reaches the placement point
+   * - 12
+     - MoveGripper(1,0,255,0,10000)
+     - #Gripper release
+   * - 13
+     - PTP(conveyorstart,50,-1,0)
+     - #The robot returns to the starting point again and waits for the next capture
+   * - 14
+     - end
+     - #End
+  
 Attitude Adaptive Configuration
 ----------------------------------
 
@@ -330,9 +565,55 @@ Attitude adaptive configuration steps
 Attitude self-adaptive with extended axis and laser tracking welding teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/033.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - EXT_AXIS_PTP(1,1,laserstart)
+     - #External axis movement laser sensor starting point
+   * - 2
+     - PTP(laserstart,10,-1,0)
+     - #Starting point of robot motion laser sensor
+   * - 3
+     - LTSearchStart(3,20,10,10000)
+     - #Start searching
+   * - 4
+     - LTSearchStop()
+     - #Stop searching
+   * - 5
+     - EXT_AXIS_PTP(1,1,seamPos)
+     - #Start point of external axis movement weld
+   * - 6
+     - Lin(seamPos,20,-1,0,0,0)
+     - #Start point of robot moving weld
+   * - 7
+     - LTTrackOn()
+     - #Laser tracking
+   * - 8
+     - ARCStart(0,10000)
+     - #Arc striking of welder
+   * - 9
+     - PostureAdjustOn(0,PosA,PosC,PosB,1000)
+     - #Attitude adaptive adjustment on
+   * - 10
+     - EXT_AXIS_PTP(1,1,laserend)
+     - #End point of external axis movement weld
+   * - 11
+     - Lin( laserend,10,-1,0,0)
+     - #End point of robot moving weld
+   * - 12
+     - ARCEnd(0,10000)
+     - #Arc extinguishing of welder
+   * - 13
+     - PostureAdjustOff(0)
+     - #Attitude adaptive adjustment off
+   * - 14
+     - LTTrackOff
+     - #Laser tracking off
 
 Force/Torque Sensor Peripheral Configuration
 -----------------------------------------------
@@ -400,9 +681,22 @@ Command description: "FT_Guard" command is a collision detection command. Select
 
 Program example:
 
-.. figure:: robot_peripherals/039.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 15 70
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - FT_Guard(1,1,1,1,1,0,0,0,5,0,0,0,0,0,10,0,0,0,0,0,5,0,0,0,0,0)
+     - #Force/moment collision detection on                                  
+   * - 2
+     - PTP(template1,100,-1,0)
+     - #Motion command
+   * - 3
+     - FT_Guard(0,1,1,1,1,0,0,0,5,0,0,0,0,0,10,0,0,0,0,0,5,0,0,0,0,0)
+     - #Force/moment collision detection off
 
 Force/Torque Sensor Force Control Motion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -417,9 +711,22 @@ Instruction description: The "FT_Control" instruction is a force control motion 
 
 Program example:
 
-.. figure:: robot_peripherals/041.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - FT_Control(1,11,1,0,1,0,0,0,10,0,5,0,0,0,0.001,0,0,0,0,0,0,0,0,10,5)
+     - #Force/torque motion control ON
+   * - 2
+     - Lin(template3,100,-1,0,0)
+     - #Motion command
+   * - 3
+     - FT_Control(0,11,1,0,1,0,0,0,10,0,5,0,0,0,0.001,0,0,0,0,0,0,0,10,5)
+     - #Force/torque motion control off 
 
 Force/Torque Transducer Screw Insertion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -434,9 +741,22 @@ Instruction description: The "FT_Spiral" instruction is a spiral line exploratio
 
 Program example:
 
-.. figure:: robot_peripherals/043.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - FT_Control(1,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
+     - #Force/torque motion control ON
+   * - 2
+     - FT_SpiralSearch(0,0.7,0,60000,5)
+     - #Spiral insertion
+   * - 3
+     - FT_Control(0,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
+     - #Force/torque motion control off 
 
 Force/Torque Transducer Rotary Insertion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -451,9 +771,22 @@ Instruction description: The "FT_Rot" instruction is a rotation exploration inse
 
 Program example:
 
-.. figure:: robot_peripherals/045.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - FT_Control(1,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
+     - #Force/torque motion control ON
+   * - 2
+     - FT_RotInsertion(0,3,0,5,1,0,1)
+     - #Rotate Insert
+   * - 3
+     - FT_Control(0,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
+     - #Force/torque motion control off 
 
 Force/Torque Transducer Straight Insertion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -468,9 +801,22 @@ Instruction description: "FT_Lin" instruction is rotation exploration insertion,
 
 Program example:
 
-.. figure:: robot_peripherals/047.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - FT_Control(1,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
+     - #Force/torque motion control ON
+   * - 2
+     - FT_LinInsertion(0,50,1,0,100,1)
+     - #Line insertion
+   * - 3
+     - FT_Control(0,10,0,0,1,0,0,0,0,0,5,0,0,0,0.0005,0,0,0,0,0,0,10,0)
+     - #Force/torque motion control off
 
 Force/Torque Sensor Surface Orientation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -485,9 +831,19 @@ Instruction description: The "FT_FindSurface" instruction is for surface positio
 
 Program example:
 
-.. figure:: robot_peripherals/049.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - PTP(1,30,-1,0)
+     - #Initial position
+   * - 2
+     - FT_FindSurface(0,1,3,1,0,100,5)
+     - #Plane positioning
 
 Force/Torque Transducer Centering
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -502,9 +858,49 @@ Instruction description: The "FT_CalCenter" instruction is for center positionin
 
 Program example:
 
-.. figure:: robot_peripherals/051.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 1 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - PTP(1,30,-1,0)
+     - #Initial position
+   * - 2
+     - FT_CalCenterStart()
+     - #Surface positioning start
+   * - 3
+     - FT_Control(1,10,0,0,1,0,0,0,0,0,-10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
+     - #Force/torque motion control ON
+   * - 4
+     - FT_FindSurface(1,2,2,10,0,200,5)
+     - #Positioning plane A
+   * - 5
+     - FT_Control(0,10,0,0,1,0,0,0,0,0,-10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
+     - #Force/torque motion control off
+   * - 6
+     - PTP (1,30, - 1,0) -- initial position
+     - #Initial position
+   * - 7
+     - FT_Control(1,10,0,0,1,0,0,0,0,0,-10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
+     - #Force/torque motion control ON
+   * - 8
+     - FT_FindSurface(1,1,2,20,0,200,5)
+     - #Positioning plane B
+   * - 9
+     - FT_Control(0,10,0,0,1,0,0,0,0,0,-10,0,0,0,0.00001,0,0,0,0,0,0,100,0)
+     - #Force/torque motion control off
+   * - 10
+     - pos = {}
+     - #Acquire Cartesian pose of positioning center
+   * - 11
+     - pos = FT_CalCenterEnd()
+     - #Acquire Cartesian pose of positioning center
+   * - 12
+     - MoveCart(pos,GetActualTCPNum(),GetActualWObjNum(),30,10,100,-1,0)
+     - #Move to the center of positioning
 
 Force/Torque Sensor Tap Force Detection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -519,9 +915,19 @@ Instruction description: The "FT_Click" command is click force detection, which 
 
 Program example:
 
-.. figure:: robot_peripherals/053.png
-   :align: center
-   :width: 6in
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - PTP(1,30,-1,0)
+     - #Initial position
+   * - 2
+     - FT_Click(0,5,5,0,100,0)
+     - #Spot force detection
 
 Extended IO device peripheral configuration
 --------------------------------------------
