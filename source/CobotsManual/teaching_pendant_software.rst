@@ -1,68 +1,68 @@
-示教器软件解析
-=========================
+Teaching pendant software analysis
+=====================================
 
 .. toctree:: 
    :maxdepth: 6
 
-基础信息
------------
+Basic information
+-------------------
 
-系统简介
-~~~~~~~~~~~
+Introduction
+~~~~~~~~~~~~~~
 
-示教器软件是针对机器人开发的配套软件，运行于示教器操作系统中，其主要功能和技术特点如下：
+The teaching pendant software is the supporting software developed for the robot and runs on the teaching pendant operating system. Its main functions and technical characteristics are as follows:
 
--  能够对机器人进行示教程序的编写；
--  能够实时显示机器人位置坐标，三维模拟实体机器人，并能控制机器人运动；
--  能够实现对机器人的单轴点动以及各轴联动操作；
--  能够查看控制IO状态；
--  用户可以修改密码、查看系统信息等。
+-  Ability to write teaching programs for robots;
+-  It can display the coordinates of the robot's position in real time, simulate the physical robot in three dimensions, and control the movement of the robot;
+-  It can realize single-axis inching and linkage operation of each axis of the robot;
+-  Able to view control IO status;
+-  Users can modify passwords, view system information, etc.
 
-启动软件
-~~~~~~~~~~~
+Start software
+~~~~~~~~~~~~~~~~
 
-1. 控制箱上电；
-2. 示教器打开浏览器访问目标网址192.168.58.2；
-3. 输入用户名和密码点击登录即可登录系统。
+1. Power on the control box;
+2. The teach pendant opens a browser to access the target website 192.168.58.2;
+3. Enter the user name and password and click Login to log in to the system.
 
-用户登录及权限管理
-~~~~~~~~~~~~~~~~~~~~
+User login and authority management
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  操作员（初始用户名：operator，密码：123）
--  程序员（初始用户名：programmer，密码：123）
--  管理员（初始用户名：admin，密码：123）
+-  Operator (initial username: operator, password: 123)
+-  Programmer (initial username: programmer, password: 123)
+-  Administrator (initial username: admin, password: 123)
 
-用户账户主要分为三个等级，操作员少部分功能可以使用，程序员部分功能限制，管理员无功能限制。其中手动高速功能作为比较重要的安全保护功能，只有程序员和管理员可以使用，操作员没有手动高速功能，即操作员在手动模式下控制机器人运动，机器人可以达到的最高速度为250mm/s，以起到保护的作用，具体权限如下表所示。
+The user account is mainly divided into three levels, the operator can use a few functions, the programmer has some function restrictions, and the administrator has no function restrictions. Among them, the manual high-speed function is an important safety protection function, which can only be used by programmers and administrators. The operator does not have manual high-speed function, that is, the operator controls the movement of the robot in manual mode, and the maximum speed that the robot can reach is 250mm/s. To play a protective role, the specific permissions are shown in the table below.
 
 .. figure:: teaching_pendant_software/001.png
    :width: 6in
    :align: center
 
-.. centered:: 表格 3.1‑1 权限管理
+.. centered:: Table 3.1-1 authority management
 
-登录界面如图表3.1‑1登录界面所示。
+The login interface is shown in Figure 3.1-1 login interface.
 
 .. figure:: teaching_pendant_software/002.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.1‑1 登录界面
+.. centered:: Figure 3.1-1 Login Interface
 
-登录成功后，系统会加载模型等数据，加载完毕后进入初始页面。
+After the login is successful, the system will load the model and other data, and enter the initial page after loading.
 
-系统初始界面
-------------------
+System initial interface
+----------------------------
 
-登录成功后系统进入“初始界面”，初始界面展示了示教器主要包含法奥LOGO及返回初始页面按钮、菜单栏、菜单栏缩放按钮、机器人操作区、控制区、状态区、三维模拟机器人以及位姿及IO信息区，一共八个区域。如图表3.2‑1系统初始界面示意图所示。
+After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAAO LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. As shown in Figure 3.2-1 system initial interface schematic diagram.
 
 .. image:: teaching_pendant_software/003.png
    :align: center
    :width: 6in
 
-.. centered:: 图表 3.2‑1 系统初始界面示意图
+.. centered:: Figure 3.2-1 Schematic diagram of the initial interface of the system
 
-控制区
-~~~~~~~~~
+Control area
+~~~~~~~~~~~~~~~
 
 .. note:: 
    .. image:: teaching_pendant_software/004.png
@@ -70,9 +70,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**使能按钮**
+   name：**Enable button**
    
-   作用：使能机器人
+   effect：Enable the robot
 
 .. note:: 
    .. image:: teaching_pendant_software/005.png
@@ -80,9 +80,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**开始按钮**
+   name：**Start button**
    
-   作用：上传并开始运行示教程序
+   effect：Upload and start running the teaching program
 
 .. note:: 
    .. image:: teaching_pendant_software/006.png
@@ -90,9 +90,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**停止按钮**
+   name：**Stop button**
    
-   作用：停止当前示教程序运行
+   effect：Stop the current teaching program running
 
 .. note:: 
    .. image:: teaching_pendant_software/007.png
@@ -100,11 +100,11 @@
       :height: 0.75in
       :align: left
 
-   名称：**暂停/恢复按钮**
+   name：**Pause/Resume button**
    
-   作用：暂停和恢复当前示教程序
+   effect：Pause and resume the current teaching program
 
-状态栏
+Status Bar
 ~~~~~~~~~~~~
 
 .. note:: 
@@ -113,9 +113,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**机器人状态**
+   name：**robot status**
    
-   作用：Stopped-停止，Running-运行，Pause-暂停，Drag-拖动
+   effect：Stopped-stop，Running-run，Pause-pause，Drag-drag
 
 .. note:: 
    .. image:: teaching_pendant_software/009.png
@@ -123,9 +123,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**工具坐标系编号**
+   name：**Tool coordinate system number**
    
-   作用：展示当前应用的工具坐标系编号
+   effect：Display the tool coordinate system number of the current application
    
 .. note:: 
    .. image:: teaching_pendant_software/010.png
@@ -133,9 +133,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**运行速度百分比**
+   name：**Running speed percentage**
    
-   作用：机器人当前模式运行时速度
+   effect：The speed of the robot when it is running in the current mode
 
 .. note:: 
    .. image:: teaching_pendant_software/011.png
@@ -143,9 +143,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**机器人运行正常状态**
+   name：**Runn normally**
    
-   作用：当前机器人正常运行
+   effect：The current robot is running normally
 
 .. note:: 
    .. image:: teaching_pendant_software/012.png
@@ -153,9 +153,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**机器人运行错误状态**
+   name：**Error state**
    
-   作用：当前机器人运行有错误
+   effect：There is an error in the current robot operation
 
 .. note:: 
    .. image:: teaching_pendant_software/013.png
@@ -163,9 +163,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**自动模式**
+   name：**automatic mode**
    
-   作用：机器人自动运行模式
+   effect：Robot automatic operation mode
 
 .. note:: 
    .. image:: teaching_pendant_software/014.png
@@ -173,9 +173,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**示教模式**
+   name：**Teach mode**
    
-   作用：机器人示教运行模式
+   effect：Robot teaching operation mode
 
 .. note:: 
    .. image:: teaching_pendant_software/015.png
@@ -183,9 +183,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**机器人拖动状态**
+   name：**Drag state**
    
-   作用：当前机器人可拖动
+   effect：The current robot can drag
 
 .. note:: 
    .. image:: teaching_pendant_software/016.png
@@ -193,9 +193,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**机器人拖动状态**
+   name：**Drag state**
    
-   作用：当前机器人不可拖动
+   effect：The current robot is not draggable
 
 .. note:: 
    .. image:: teaching_pendant_software/017.png
@@ -203,9 +203,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**连接状态**
+   name：**Connection status**
    
-   作用：机器人已连接
+   effect：Robot connected
 
 .. note:: 
    .. image:: teaching_pendant_software/017-1.png
@@ -213,9 +213,9 @@
       :height: 0.75in
       :align: left
 
-   名称：**未连接状态**
+   name：**Not connected status**
    
-   作用：机器人未连接
+   effect：Robot not connected
 
 .. note:: 
    .. image:: teaching_pendant_software/018.png
@@ -223,648 +223,648 @@
       :height: 0.75in
       :align: left
 
-   名称：**账户信息**
+   name：**Account information**
    
-   作用：显示用户名和权限及登出用户
+   effect：Display username and permissions and logout user
 
 
 
-菜单栏
+Menu Bar
 ~~~~~~~~~~~~
 
-菜单栏如表格3.2‑1示教器菜单分栏
+The menu bar is as shown in Table 3.2-1 Teaching Pendant Menu Columns
 
 .. image:: teaching_pendant_software/019.png
    :width: 6in
    :align: center
 
-.. centered:: 表格 3.2‑1 示教器菜单分栏
+.. centered:: Table 3.2-1 Teach pendant menu column
 
-操作区
-~~~~~~~~~~
+Operating area
+~~~~~~~~~~~~~~~~~
 
-IO设置可参考 4.5 控制箱I/O 中的\ `4.5.1 I/O设置 <#id26>`__\ 。
+IO settings can refer to \ `4.5.1 I/O settings <#i-o-settings>`__\  in 4.5 Control Box I/O.
 
-Joint、Base等功能可参考\ `4.6 机器人操作 <#id30>`__\ 。
+Joint, Base and other functions can refer to \ `4.6 Robot operation <#robot-operation>`__\.
 
-三维模拟机器人
-----------------
+3D simulation robot
+---------------------
 
-三维虚拟轨迹和导入工具模型
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3D virtual trajectory and import tool model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**轨迹绘制**：运行示教程序时，打开轨迹绘制功能，机器人三维模型会描绘机器人运动的轨迹路线。
+**Trajectory drawing**：When running the teaching program, turn on the trajectory drawing function, and the 3D model of the robot will describe the trajectory of the robot movement.
 
-**导入工具模型**：点击“导入”按钮，导入工具模型后即可在机器人末端进行工具模型展示，目前支持的工具模型文件格式有STL和DAE。
+**Import tool model**：Click the "Import" button, and the tool model can be displayed on the end of the robot after the tool model is imported. Currently, the tool model file formats supported are STL and DAE.
 
 .. image:: teaching_pendant_software/020.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.3‑1 虚拟轨迹绘制及工具模型导入
+.. centered:: Figure 3.3-1 Virtual trajectory drawing and tool model import
 
-机器人坐标系系统三维可视化展示
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3D visualization display of robot coordinate system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在WebAPP机器人三维虚拟区域中创建各类三维虚拟坐标系，以基坐标系展示为例，如下图所示。其中X轴红色，Y轴绿色，Z轴蓝色。
+Create various 3D virtual coordinate systems in the 3D virtual area of the WebAPP robot, taking the display of the base coordinate system as an example, as shown in the figure below. Among them, the X axis is red, the Y axis is green, and the Z axis is blue.
 
-**基坐标系**：基坐标系WebAPP中系统机器人三维虚拟区域中进行默认开启展示，固定标记在机器人基座底部中心。三维虚拟基坐标系可进行手动关闭展示。
+**Base coordinate system**：In the base coordinate system WebAPP, the system robot is displayed in the three-dimensional virtual area by default, and the fixed mark is at the bottom center of the robot base. The 3D virtual base coordinate system can be displayed manually.
 
 .. image:: teaching_pendant_software/021.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.3‑2 基坐标系显示关闭与打开
+.. centered:: Figure 3.3-2 Base coordinate system display off and on
 
-**工具坐标系**：工具坐标系默认开启展示,可手动关闭。在WebAPP启动并且用户登录成功后，获取当前应用的工具坐标系名称和对应参数数据，初始化当前工具坐标系。
+**Tool coordinate system**：The display of the tool coordinate system is enabled by default and can be manually disabled. After the WebAPP starts and the user logs in successfully, obtain the tool coordinate system name and corresponding parameter data of the current application, and initialize the current tool coordinate system.
 
-使用的过程中应用其他工具坐标系时，当应用工具坐标系指令成功后，先将机器人三维虚拟区域中已有的工具坐标系清除，再将新应用的工具坐标系参数数据传入三维坐标系生成API进行工具坐标系生成，生成后完成在机器人三维虚拟区域中进行对应展示。
+When applying other tool coordinate systems during use, after the application tool coordinate system command succeeds, first clear the existing tool coordinate system in the robot's 3D virtual area, and then transfer the newly applied tool coordinate system parameter data into the 3D coordinate system The API is generated to generate the tool coordinate system, and after the generation is completed, it is displayed in the three-dimensional virtual area of the robot.
 
 .. image:: teaching_pendant_software/022.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.3‑3 工具坐标系显示
+.. centered:: Figure 3.3-3 Tool coordinate system display
 
-**工件坐标系**：工件坐标系默认关闭，可以进行手动开启展示。流程与工具坐标系一致。
+**Workpiece coordinate system**：The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
 
 .. image:: teaching_pendant_software/023.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.3‑4 工件坐标系显示
+.. centered:: Figure 3.3-4 Workpiece coordinate system display
 
-**外部轴坐标系**：外部轴坐标系默认关闭，可以进行手动开启展示。流程与工具坐标系一致。
+**External Axis Coordinate System**：The external axis coordinate system is turned off by default, and it can be manually turned on and displayed. The process is consistent with the tool coordinate system.
 
 .. image:: teaching_pendant_software/024.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.3‑5 外部轴坐标系显示
+.. centered:: Figure 3.3-5 External axis coordinate system display
 
-机器人安装方式设置和展示
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Robot installation method setting and display
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-机器人默认安装方式为水平安装，当机器人安装方式更改时，需及时在此页面设置机器人的实际安装方式，以保证机器人正常工作。
+The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set on this page in time to ensure the normal operation of the robot.
 
-用户点击机器人三维虚拟展示区域中的“固定安装”选项卡，进入机器人固定安装方式设置页面，选择“正装”、“倒装”或者“侧装”，点击点击“应用”按钮完成机器人安装方式设置。
+The user clicks the "Fixed Installation" tab in the robot's 3D virtual display area to enter the robot's fixed installation mode setting page, select "Front Mount", "Flip Mount" or "Side Mount", and click the "Apply" button to complete the robot installation mode setting .
 
 .. image:: teaching_pendant_software/025.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.3‑6 固定安装
+.. centered:: Figure 3.3-6 Fixed installation
 
-考虑到更加灵活丰富的机器人部署场景，我们提供了自由安装功能，用户点击机器人三维虚拟展示区域中的“360度自由安装”选项卡，进入机器人自由安装方式设置页面。手动调整“基座倾斜”和“基座旋转”角度，三维模型会对应展示安装效果。修改后点击“应用”按钮即可完成机器人安装方式设置。
+Considering more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "360-degree free installation" tab in the robot's 3D virtual display area to enter the robot free installation mode setting page. Manually adjust the "base tilt" and "base rotation" angles, and the 3D model will show the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation method setting.
 
 .. image:: teaching_pendant_software/026.png
    :width: 6in
    :align: center
    
-.. centered:: 图表 3.3‑7 360度自由安装
+.. centered:: Figure 3.3-7 360 degree free installation
 
-机器人设置
---------------
+Robot settings
+----------------
 
-工具坐标
-~~~~~~~~~~~~~~~~
+Tool coordinates
+~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“工具坐标”进入工具坐标界面。工具坐标可实现工具坐标的修改、清空与应用。工具坐标系的下拉列表中共有15个编号，选择对应的坐标系（坐标系名称可自定义）后会在下方显示对应坐标值，工具类型以及安装位置（仅在传感器类型工具下显示），选择某一坐标系后点击“应用”按钮，当前使用的工具坐标系变为所选择的坐标，如图表3.4-1所示。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Tool Coordinates" to enter the tool coordinates interface. Tool coordinates can realize the modification, clearing and application of tool coordinates. There are 15 numbers in the drop-down list of the tool coordinate system. After selecting the corresponding coordinate system (the name of the coordinate system can be customized), the corresponding coordinate value, tool type and installation position will be displayed below (displayed only under the sensor type tool), select Click the "Apply" button after a certain coordinate system, and the currently used tool coordinate system will change to the selected coordinates, as shown in Figure3.4-1.
 
 .. image:: teaching_pendant_software/027.png
    :width: 3in
    :align: center
    
-.. centered:: 图表 3.4‑1 设置工具坐标
+.. centered:: Figure 3.4-1 Set tool coordinates
 
-点击“修改”可根据提示对该编号的工具坐标系进行重新设置。工具标定方法分为四点法和六点法，四点法只标定工具TCP，即工具中心点的位置，其姿态默认与末端姿态一致，六点法则在四点法的基础上增加了两点，用于标定工具的姿态，这里我们以六点法为例进行讲解。
+Click "Modify" to reset the tool coordinate system of the number according to the prompt. Tool calibration methods are divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the center point of the tool. Its posture defaults to be consistent with the end posture. The six-point method adds two points to the four-point method. , used to calibrate the attitude of the tool, here we take the six-point method as an example to explain.
 
 .. image:: teaching_pendant_software/028.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑2 设置工具坐标
+.. centered:: Figure 3.4-2 Set tool coordinates
 
-在机器人空间选择一个固定的点，将工具以三个不同的姿态移至固定点，依次设置1-3点。如图3.4-3左上方所示。将工具垂直移至固定点设置点4，如图3.4-3右上方所示。保持该姿态不变，利用基坐标移动，在水平方向移动一段距离，设定点5，该方向即设定的工具坐标系X轴方向。回到固定点，垂直往上移动一段距离，设定点6，该方向即工具坐标系Z轴方向。点击计算按钮计算工具位姿，若需重新设置，点击取消按修改钮重新进行新建工具坐标系步骤。
+Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of Figure 3.4-3. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of Figure 3.4-3. Keep this posture unchanged, use base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the X-axis direction of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6, which is the Z-axis direction of the tool coordinate system. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
 
 .. image:: teaching_pendant_software/029.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.4‑3 六点法示意图
+.. centered:: Figure 3.4-3 Schematic diagram of the six-point method
 
-完成最后步骤后，点击“完成”可返回工具坐标界面，点击“保存”即可存储刚才建立的工具坐标系。
+After completing the last step, click "Finish" to return to the tool coordinate interface, and click "Save" to store the tool coordinate system just created.
 
-外部工具坐标
-~~~~~~~~~~~~~~~~
+External tool coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“外部工具坐标系”进入外部工具坐标系界面。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "External Tool Coordinate System" to enter the external tool coordinate system interface.
 
-外部工具坐标系设置界面中可实现外部工具坐标的修改、清空与应用。
+The modification, clearing and application of external tool coordinates can be realized in the external tool coordinate system setting interface.
 
-外部工具坐标系的下拉列表中共有15个编号，从etoolcoord0~etoolcoord14，选择对应的坐标系后会在下方显示对应坐标值，选择某一坐标系后点击“应用”按钮，当前使用的工具坐标系变为所选择的坐标，如图3.4-4所示。
+There are 15 numbers in the drop-down list of the external tool coordinate system, from etoolcoord0~etoolcoord14, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used tool coordinate system Change to the selected coordinates, as shown in Figure 3.4-4.
 
 .. image:: teaching_pendant_software/030.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑4 外部工具坐标
+.. centered:: Figure 3.4-4 外部工具坐标
 
-点击“修改”可根据提示对该编号的工具坐标系进行重新设置，如图3.4-5所示。
+Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in Figure 3.4-5.
 
 .. image:: teaching_pendant_software/031.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑5 六点法示意图
+.. centered:: Figure 3.4-5 Schematic diagram of the six-point method
 
-**1.三点法确定外部TCP**
+**1. Three-point method to determine the external TCP**
 
-1. **设置点1**：已测量工具的TCP移动至外部TCP，点击设置点1按钮；
+1. **Set point 1**：The TCP of the measured tool is moved to the external TCP, click the Setpoint 1 button;
 
-2. **设置点2**：由点1沿外部TCF坐标系X轴移动一段距离，点击设置点2按钮；
+2. **Set point 2**：Move a certain distance from point 1 along the X axis of the external TCF coordinate system, and click the button to set point 2;
 
-3. **设置点3**：回到点1，由点1沿外部TCF坐标系Z轴移动一段距离，点击设置点3按钮；
+3. **Set point 3**：Go back to point 1, move from point 1 along the Z axis of the external TCF coordinate system for a certain distance, and click the button to set point 3;
 
-4. **计算**：点击计算按钮得到外部TCF；
+4. **Calculate**：Click the calculate button to get the external TCF;
 
-**2.六点法确定工具TCF**
+**2.Six-point method to determine the tool TCF**
 
-1. **设置点1-4**：在机器人空间选择一个固定的点，将工具从四个不同的角度移至所选的点上，依次设置1-4点；
+1. **Set points 1-4**：Select a fixed point in the robot space, move the tool to the selected point from four different angles, and set points 1-4 in sequence;
 
-2. **设置点5**：回到固定的点沿工具TCF坐标系X轴移动一段距离，点击设置点5按钮；
+2. **Set point 5**：Go back to the fixed point and move a certain distance along the X axis of the tool TCF coordinate system, and click the Set Point 5 button;
 
-3. **设置点6**：回到固定的点沿工具TCF坐标系Y轴移动一段距离，点击设置点6按钮；
+3. **Set point 6**：Go back to the fixed point and move a certain distance along the Y axis of the tool TCF coordinate system, and click the set point 6 button;
 
-4. **计算**：点击计算按钮得到工具TCF；
+4. **Calculate**：Click the calculate button to get the tool TCF;
 
-若需重新设置，点击取消按钮重新进去新建工具坐标系步骤。
+If you need to reset, click the Cancel button to go back to the step of creating a new tool coordinate system.
 
-完成最后步骤后，点击“完成”可返回工具坐标界面，点击“保存”即可存储刚才建立的工具坐标系。
+After completing the last step, click "Finish" to return to the tool coordinate interface, and click "Save" to store the tool coordinate system just created.
 
-工件坐标
-~~~~~~~~~~~
+Workpiece coordinates
+~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“工件坐标”进入工件坐标界面。工件坐标可实现工件坐标的修改、清空与应用。工件坐标系的下拉列表中共有15个编号，选择对应的坐标系（wobjcoord0~
-wobjcoord14），后会在下方的“坐标系坐标”中显示对应坐标值，选择某一坐标系后点击“应用”按钮，当前使用的工件坐标系变为所选择的坐标，如图表3.4-6所示。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Workpiece Coordinates" to enter the workpiece coordinates interface. Workpiece coordinates can realize the modification, clearing and application of workpiece coordinates. There are 15 numbers in the drop-down list of the workpiece coordinate system, select the corresponding coordinate system (wobjcoord0~
+wobjcoord14), and then the corresponding coordinate value will be displayed in the "Coordinate System Coordinates" below. After selecting a certain coordinate system, click the "Apply" button, and the currently used workpiece coordinate system will change to the selected coordinates, as shown in Figure3.4-6 shown.
 
 .. image:: teaching_pendant_software/032.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑6 设置工件坐标
+.. centered:: Figure 3.4-6 Set workpiece coordinates
 
-工件坐标系一般是基于工具基础上进行标定的，需要在已建立工具坐标系的基础上进行工件坐标系的建立。点击“修改”可根据提示对该编号的工件坐标系进行重新设置。固定好工件，选择标定方法“原点-X轴-Z轴”或“原点-X轴-XY+平面”，两种标定方法前两点的选取都是一致的，第三点有所区别，选第一种方法标定的是工件坐标系的Z方向，选第二种方法标定的是XY+平面上一点，根据图示标定即可。点击计算按钮计算工件位姿，若需重新设置，点击取消按修改钮重新进行新建工件坐标系步骤。
+The workpiece coordinate system is generally calibrated based on the tool, and the workpiece coordinate system needs to be established on the basis of the established tool coordinate system. Click "Modify" to reset the workpiece coordinate system of the number according to the prompt. Fix the workpiece and select the calibration method "origin-X-axis-Z-axis" or "origin-X-axis-XY+plane". The selection of the first two points of the two calibration methods is the same, and the third point is different. One method is to calibrate the Z direction of the workpiece coordinate system, and the second method is to calibrate a point on the XY+ plane, just calibrate according to the diagram. Click the Calculate button to calculate the workpiece pose. If you need to reset it, click Cancel and press the Modify button to re-create the workpiece coordinate system.
 
 .. image:: teaching_pendant_software/033.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑7 三点法示意图
+.. centered:: Figure 3.4-7 Schematic diagram of the three-point method
 
-完成最后步骤后，点击“完成”可返回工件坐标界面，点击“保存”即可存储刚才建立的工件坐标系。
+After completing the last step, click "Finish" to return to the workpiece coordinate interface, and click "Save" to store the workpiece coordinate system just created.
 
-扩展轴坐标
-~~~~~~~~~~~~~~
+Extended Axis Coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“扩展轴坐标系”进入扩展轴坐标系界面。扩展轴坐标系设置界面中可实现扩展轴坐标的修改、清空与应用。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Extended Axis Coordinate System" to enter the extended axis coordinate system interface. In the extended axis coordinate system setting interface, the modification, clearing and application of the extended axis coordinates can be realized.
 
-扩展轴坐标系的下拉列表中共有5个编号，从eaxis0~eaxis4，选择对应的坐标系后会在下方显示对应坐标值，选择某一坐标系后点击“应用”按钮，当前使用的扩展轴坐标系变为所选择的坐标，如图3.4-8所示。
+There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in Figure 3.4-8.
 
 .. image:: teaching_pendant_software/034.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑8 扩展轴坐标
+.. centered:: Figure 3.4-8 Extended Axis Coordinates
 
-点击“修改”可根据提示对该编号的扩展轴标系进行重新设置，如图3.4-9所示。标定之前先清空需要标定的扩展轴坐标系，应用此扩展轴坐标系。先看第一种扩展轴方案-直线导轨的标定方法。选择扩展轴的编号，获取信息可以获取对应扩展轴的驱动器信息，我们可以根据该信息进行参数配置。配置完后设置DH参数，直线导轨方案默认为0。设置机器人相对扩展轴位置，直线导轨为扩展轴上。若不标定，点击保存即可，此时扩展轴只能异步运动。
+Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in Figure 3.4-9. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. Let’s first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/035.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑9 直线导轨配置
+.. centered:: Figure 3.4-9 Linear guide configuration
 
-若需跟机器人同步运动，点击标定，进入标定界面，在扩展轴零点处，点击操作区Eaxis使能扩展轴，将机器人末端中心（应用工具坐标系下用工具末端点）以两个不同姿势对准扩展轴上固定一点，分别设定点1和点2。去除使能，将扩展轴移动一段距离，使能后，同样将机器人末端中心点对准之前固定点，设定点3。去除使能，将扩展轴移至零点，使能扩展轴。将机器人末端中心点移至固定点垂直往上空间一点，设定点4，计算坐标系并保存。
+If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, and align the end center of the robot (using the tool end point in the application tool coordinate system) with two different postures. Fix a point on the quasi-expansion axis, set point 1 and point 2 respectively. Remove the enable, and move the extension axis for a certain distance. After enabling, also align the center point of the end of the robot with the previous fixed point, and set point 3. Remove the enable, move the expansion axis to the zero point, and enable the expansion axis. Move the center point of the end of the robot to the fixed point and vertically upward space, set point 4, calculate the coordinate system and save it.
 
 .. image:: teaching_pendant_software/036.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑10 直线导轨标定
+.. centered:: Figure 3.4-10 Linear guide calibration
 
-接下来看第二种扩展轴方案-变位机的标定方法。变位机由两个扩展轴组成，选择扩展轴的编号，获取信息可以获取对应扩展轴的驱动器信息，我们可以根据该信息进行参数配置。配置完后设置DH参数，根据图示测量出变位机的DH参数，输入到输入框中。设置机器人相对扩展轴位置，变位机为扩展轴外。若不标定，点击保存即可，此时扩展轴只能异步运动。
+Next, let's look at the second expansion axis scheme - the calibration method of the positioner. The positioner is composed of two extension axes. Select the number of the extension axis and get the information to get the driver information of the corresponding extension axis. We can configure parameters according to this information. After configuration, set the DH parameters, measure the DH parameters of the positioner according to the diagram, and input them into the input box. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/037.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑11 变位机配置
+.. centered:: Figure 3.4-11 Positioner configuration
 
-若需跟机器人同步运动，点击标定，进入标定界面，在扩展轴零点处，点击操作区Eaxis使能扩展轴，在变位机上建立坐标系，选择一点，输入该点在该坐标系下的笛卡尔位姿，比如选择Y正向一点，测出Y为100mm，则输入如图所示数值，点击参考点，即可设定参考点。后续四个标定点都需将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点。
+If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. Carl pose, for example, select a point in the positive direction of Y, and measure Y to be 100mm, then input the value as shown in the figure, click the reference point, and the reference point can be set. The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point.
 
 .. image:: teaching_pendant_software/038.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑12 变位机参考点配置
+.. centered:: Figure 3.4-12 Positioner reference point configuration
 
-将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点，设定点1，点击操作区Eaxis点动两个轴一小段距离，将机器人末端中心对准参考点，设定点2，继续点动两个轴，机器人末端中心对准参考点，设定点3，最后继续点动两个轴，将机器人末端中心对准参考点，设定点4，点击计算，得到坐标系结果，点击保存，应用即可。
+Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the two axes for a short distance, align the center of the end of the robot to the reference point, and set Point 2, continue to jog the two axes, the center of the robot end is aligned with the reference point, set point 3, and finally continue to jog the two axes, align the center of the robot end with the reference point, set point 4, click Calculate, and get the coordinates Click the save button to apply the result.
 
 .. image:: teaching_pendant_software/039.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑13 变位机标定
+.. centered:: Figure 3.4-13 Positioner calibration
 
-接下来看第三种扩展轴方案-单轴变位机的标定方法。该变位机由一个旋转扩展轴组成，选择扩展轴的编号，获取信息可以获取对应扩展轴的驱动器信息，我们可以根据该信息进行参数配置。DH参数设置为0。设置机器人相对扩展轴位置，变位机为扩展轴外。若不标定，点击保存即可，此时扩展轴只能异步运动。
+Next, let's look at the third extended axis solution - the calibration method of the single-axis positioner. The positioner is composed of a rotating extension shaft. Select the number of the extension shaft and get the information to get the driver information of the corresponding extension shaft. We can configure parameters according to this information. The DH parameter is set to 0. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/040.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑14 单轴变位机配置
+.. centered:: Figure 3.4-14 Single axis positioner configuration
 
-若需跟机器人同步运动，点击标定，进入标定界面，在扩展轴零点处，点击操作区Eaxis使能扩展轴，在变位机上建立坐标系，选择一点，输入该点在该坐标系下的笛卡尔位姿，点击“参考点”，即可设定参考点。后续四个标定点都需将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点。将机器人末端中心（应用工具坐标系下用工具末端点）对准该参考点，设定点1，点击操作区Eaxis点动旋转轴一小段距离，将机器人末端中心对准参考点，设定点2，继续点动旋转轴，机器人末端中心对准参考点，设定点3，最后继续点动旋转轴，将机器人末端中心对准参考点，设定点4，点击计算，得到坐标系结果，点击保存，应用即可。
+If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. Carl pose, click "Reference Point" to set the reference point. The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point. Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the rotation axis for a short distance, align the center of the end of the robot to the reference point, and set the point 2. Continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 3, and finally continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 4, click Calculate, and get the result of the coordinate system, Click Save to apply.
 
 .. image:: teaching_pendant_software/041.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑15 单轴变位机标定
+.. centered:: Figure 3.4-15 Single axis positioner calibration
 
-碰撞等级
-~~~~~~~~~~
+Collision level
+~~~~~~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“碰撞等级”进入碰撞等级界面。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Collision Level" to enter the collision level interface.
 
-碰撞等级分为一到十级，一到三级检测比较灵敏，机器人需要在推荐速度下运行。同时可以选择自定义百分比设置，100%即对应十级。碰撞策略可以设置机器人碰撞后的处理方式，分为报错停止和继续运动，用户可以根据具体使用需求来设定。如图表3.4-16。
+The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 3.4-16.
 
 .. image:: teaching_pendant_software/042.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑16 碰撞等级示意图
+.. centered:: Figure 3.4-16 Schematic diagram of collision level
 
-软限位
-~~~~~~~~~
+Soft limit
+~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“软限位”进入软限位界面。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Soft Limits" to enter the soft limit interface.
 
-机器人行程内可能存在其它设备，限位角度可对机器人进行软限位，使机器人运动不超过某个坐标值，防止机器人碰撞。触发软限位机器人停止为机器人自动触发，无停止距离。
+There may be other equipment in the robot's stroke, and the limit angle can softly limit the robot so that the robot's movement does not exceed a certain coordinate value and prevent the robot from colliding. Triggering the soft limit to stop the robot is automatically triggered by the robot, and there is no stopping distance.
 
-管理员可使用默认值也可输入角度值。输入角度值，可分别对机器人关节正负角度进行限位，当输入值超出\ `表1.4-1 机器人基本参数 <installation.html#id22>`__\ 节所列出的机器人关节软限位角度值，会将限位角度调整为所能设定最大值。当机器人报出超出指令超限时，需要进入拖动模式，将机器人关节拖动至限位角度之内。界面如3.4-17所示。
+Administrators can use the default values or enter angle values. Input the angle value to limit the positive and negative angles of the robot joints respectively. When the input value exceeds the soft limit angle of the robot joints listed in \ `Table 1.4-1 Robot Basic Parameters <installation.html#id22>`__\ value, the limit angle will be adjusted to the maximum value that can be set. When the robot reports that the command exceeds the limit, it needs to enter the drag mode and drag the robot joints to within the limit angle. The interface is shown in 3.4-17.
 
 .. image:: teaching_pendant_software/043.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑17 机器人限位示意图
+.. centered:: Figure 3.4-17 Schematic diagram of robot limit
 
-末端负载
+End load
 ~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“末端负载”进入末端负载界面。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "End Load" to enter the end load interface.
 
-用户可以根据所使用工具的参数设定对应参数，负载重量为0~5kg，质心坐标的范围为0~1000，如3.4-18所示。
+The user can set the corresponding parameters according to the parameters of the tool used. The load weight is 0~5kg, and the range of the center of mass coordinates is 0~1000, as shown in 3.4-18.
 
 .. image:: teaching_pendant_software/044.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑18 负载设定示意图
+.. centered:: Figure 3.4-18 Schematic diagram of load setting
 
-用户对工具质量或质心不确定的情况下，可以通过负载辨识功能对工具数据测定。
+If the user is uncertain about the tool quality or center of mass, the tool data can be determined through the load identification function.
 
-在进行测定之前，确保负载已安装。点击“工具数据测定”按键，进入负载运动测试界面。
+Make sure the load is installed before making measurements. Click the "Tool Data Measurement" button to enter the load motion test interface.
 
 .. image:: teaching_pendant_software/045.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑19 负载辨识关节设置
+.. centered:: Figure 3.4-19 Load Identification Joint Setup
 
-点击“负载辨识启动”进行测试，如遇紧急情况请及时停止运动。
+Click "Load Identification Start" to test. In case of emergency, please stop the movement in time.
 
 .. image:: teaching_pendant_software/046.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑20 负载辨识启动
+.. centered:: Figure 3.4-20 load identification start
 
-运动结束后，点击“获取辨识结果”按键，获取计算出的工具数据，并显示在页面上，如需应用到负载数据中，点击应用即可
+After the exercise is over, click the "Get Identification Result" button to obtain the calculated tool data and display it on the page. If you want to apply it to the load data, click Apply
 
 .. image:: teaching_pendant_software/047.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4‑21 负载辨识结果
+.. centered:: Figure 3.4-21 Load Identification Results
 
-摩擦力补偿
-~~~~~~~~~~~
+Friction compensation
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“摩擦力补偿”进入摩擦力补偿设置界面。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Friction Compensation" to enter the friction compensation setting interface.
 
-**摩擦力补偿系数**：摩擦力补偿所针对的使用场景仅在拖动模式下，摩擦力补偿系数可设置范围为0~1，数值越高，拖动时补偿的力就越大。摩擦力补偿系数根据安装方式的不同需要单独设置每个轴的补偿系数。
+**Friction compensation coefficient**：The usage scenario for friction compensation is only in the dragging mode. The friction compensation coefficient can be set from 0 to 1. The higher the value, the greater the compensation force when dragging. The friction compensation coefficient needs to be set separately for each axis according to the different installation methods.
 
-**摩擦力补偿开关**：用户可根据实际机器人及使用习惯开启或关闭摩擦力补偿。
+**Friction compensation switch**：Users can turn on or off friction compensation according to the actual robot and usage habits.
 
 .. image:: teaching_pendant_software/048.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4-22 摩擦力补偿设置
+.. centered:: Figure 3.4-22 Friction Compensation Settings
 
-速度缩放
+Speed scaling
 ~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“速度缩放设置”进入速度缩放设置界面。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Speed Scaling Settings" to enter the speed scaling setting interface.
 
-该功能是设置手动/自动下机器人运行的速度，若当前为自动运行模式，则设置的速度为机器人自动运行速度，若当前为手动运行模式，则设置的速度为机器人手动运行速度。设置数值为机器人标准速度百分比，若设置100，即标准速度的百分之百（标准速度请翻阅\ `表格1.4-1 机器人基本参数 <installation.html#id22>`__\ ）。
+This function is to set the running speed of the robot under manual/automatic mode. If the current running mode is automatic, the set speed is the automatic running speed of the robot. If the current running mode is manual, the set speed is the manual running speed of the robot. The setting value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (for standard speed, please refer to  \ `Table 1.4-1 Basic parameters of the robot <installation.html#id22>`__\ ).
 
 .. image:: teaching_pendant_software/049.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4-23 速度缩放设置
+.. centered:: Figure 3.4-23 Velocity scaling settings
 
-速度设置成功后，相应的速度状态栏会更改为设置的数值，速度值设置的范围是0~100。
+After the speed is set successfully, the corresponding speed status bar will change to the set value, and the range of speed value setting is 0~100.
 
-配置导入导出
-~~~~~~~~~~~~~~~
+Configuration import and export
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“初始设置”中的“机器人设置”的菜单栏下，点击“配置导入导出”进入配置导入导出界面。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Configuration Import and Export" to enter the configuration import and export interface.
 
-**导入机器人配置文件**：用户导入文件名为user.config的机器人配置文件，该文件包含机器人设置功能中的各个参数。点击“选择文件”按钮，选中修改完且内容符合规范的配置文件，点击“导入”按钮，当出现导入完成的提示时，文件中的参数即被成功设置。
+**Import robot configuration files**：The user imports a robot configuration file named user.config, which contains various parameters in the robot setting function. Click the "Select File" button, select the configuration file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
 
-**导出机器人配置文件**：点击“导出”按钮，即可将机器人配置文件user.config导出到本地。
+**Export robot configuration file**：Click the "Export" button to export the robot configuration file user.config to the local.
 
-**导入控制器数据库**：用户导入文件名为fr_controller_data.db的控制器数据库文件。点击“选择文件”按钮，选中修改完且内容符合规范的数据库文件，点击“导入”按钮，当出现导入完成的提示时，文件中的参数即被成功设置。
+**Import controller database**：The user imports the controller database file named fr_controller_data.db. Click the "Select File" button, select the database file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
 
-**控制器数据库**：点击“导出”按钮，即可将机器人控制器数据库文件导出到本地。
+**Controller database**：Click the "Export" button to export the robot controller database file to the local.
 
 .. image:: teaching_pendant_software/050.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.4-24 配置导入导出
+.. centered:: Figure 3.4-24 Configuration import and export
 
-控制箱I/O
------------
+Control box I/O
+--------------------
 
-I/O设置
-~~~~~~~~~~~
+I/O settings
+~~~~~~~~~~~~~~~
 
-点击三维模型左侧操作区“IO”按钮可进入IO设置界面，如图表3.5-1所示，该界面中可实现对机器人控制箱中数字输出、模拟输出（0-10v）和末端工具数字输出、模拟输出（0-10v）进行手动控制：
+Click the "IO" button in the operation area on the left side of the 3D model to enter the IO setting interface, as shown in Figure 3.5-1. In this interface, the digital output, analog output (0-10v) and end tool digital output in the robot control box can be realized. Output, analog output (0-10v) for manual control:
 
 .. image:: teaching_pendant_software/051.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.5‑1 I/O设置界面
+.. centered:: Figure 3.5-1 I/O setting interface
 
-- DO操作：选择端口号，若该DO为低电平，则右侧操作按键显示ON，点击按键即设置该DO为高电平。
+- DO operation: select the port number, if the DO is low level, the right operation button will display ON, click the button to set the DO to high level.
 
-- AO操作：选择端口号，右侧输入框输入值（0-100），该数值为百分比，设置100即表示设置该AO端口为10v。
+- AO operation: Select the port number, enter a value (0-100) in the input box on the right, the value is a percentage, setting 100 means setting the AO port to 10v.
 
 
-I/O状态显示
-~~~~~~~~~~~~~
+I/O status display
+~~~~~~~~~~~~~~~~~~~~
 
-三维模型右侧状态显示区会显示当前IO的状态，数字输入与数字输出中，若该端口电平为高，则该点显示为绿色，若为低，则显示为白色；模拟输入和模拟输出显示值为0-100，100即表示10v。
+The status display area on the right side of the 3D model will display the current IO status. In digital input and digital output, if the port level is high, the point will be displayed in green, and if it is low, it will be displayed in white; analog input and analog output The display value is 0-100, and 100 means 10v.
 
 .. image:: teaching_pendant_software/052.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.5‑2 状态显示界面
+.. centered:: Figure 3.5-2 Status display interface
 
-I/O滤波
-~~~~~~~~~~
+I/O filtering
+~~~~~~~~~~~~~~~~
 
-点击左侧菜单栏“初始设置”中“机器人设置”，点击“IO滤波”子菜单进入IO滤波时间设置界面，滤波时间设置界面包括：控制箱DI滤波时间，末端板DI滤波时间、控制箱AI0滤波时间、控制箱AI1滤波时间、末端板AI0滤波时间，如图表3.5-3所示。用户可以根据自己的需求来设定对应的参数，点击相应的设置按钮即可。
+Click "Robot Settings" in "Initial Settings" in the left menu bar, and click the "IO Filter" submenu to enter the IO filter time setting interface. The filter time setting interface includes: control box DI filter time, end board DI filter time, control box AI0 Filtering time, AI1 filtering time of the control box, AI0 filtering time of the end board, as shown in Figure3.5-3. Users can set the corresponding parameters according to their needs, just click the corresponding setting button.
 
 .. image:: teaching_pendant_software/053.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.5‑3 滤波界面
+.. centered:: Figure 3.5-3 Filter interface
 
-I/O配置
-~~~~~~~~~
+I/O configuration
+~~~~~~~~~~~~~~~~~~
 
-点击左侧菜单栏“初始设置”中“机器人设置”，分别点击“DI配置”和“DO配置”子菜单进入DI和DO配置界面。其中控制箱CI0-CI7和CO0-CO7可配置，末端DI0和DI1可配置。在生产中协作机器人需要连接外设时或因故障或者其它因素突然停止，需要输出DO信号，实现声光报警提示，输入可配置功能如表格3.5‑1控制箱输入可配置功能所示。
+Click "Robot Settings" in "Initial Settings" on the left menu bar, and click the "DI Configuration" and "DO Configuration" submenus respectively to enter the DI and DO configuration interface. Among them, the control box CI0-CI7 and CO0-CO7 are configurable, and the terminal DI0 and DI1 are configurable. In production, when the collaborative robot needs to connect peripherals or stops suddenly due to failure or other factors, it needs to output DO signal to realize sound and light alarm prompt. The input configurable functions are shown in Table 3.5-1 Control Box Input Configurable Functions.
 
 .. image:: teaching_pendant_software/054.png
    :width: 6in
    :align: center
 
-.. centered:: 表格 3.5‑1 控制箱输入可配置功能
+.. centered:: Table 3.5-1 Control box input configurable functions
 
-输出可配置功能如表3.5-2和表3.5-3所示。
+The output configurable functions are shown in Table 3.5-2 and Table 3.5-3.
 
 .. image:: teaching_pendant_software/055.png
    :width: 6in
    :align: center
 
-.. centered:: 表格 3.5‑2 控制箱输出可配置功能
+.. centered:: Table 3.5-2 Control box output configurable function
 
 .. image:: teaching_pendant_software/056.png
    :width: 6in
    :align: center
 
-.. centered:: 表格 3.5‑3 末端输入可配置功能
+.. centered:: Table 3.5-3 Terminal input configurable function
 
-其中控制箱默认配置：CO0为1-机器人报错，CO1为2-机器人运动中。
+Among them, the default configuration of the control box: CO0 is 1-the robot is reporting an error, and CO1 is 2-the robot is in motion.
 
 .. image:: teaching_pendant_software/057.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.5‑4 控制箱DI和DO配置
+.. centered:: Figure 3.5-4 Control box DI and DO configuration
 
-末端DI默认配置：DI0拖动示教，DI1示教点记录。
+The default configuration of terminal DI: DI0 drag teaching, DI1 teaching point recording.
 
 .. image:: teaching_pendant_software/058.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.5‑5 末端DI配置
+.. centered:: Figure 3.5-5 Terminal DI configuration
 
-配置完成后，可在对应状态下，于控制箱I/O页面中查看相应的输出DO状态。（注意：已配置DI、DO不能出现于示教编程页面）
+After the configuration is complete, you can view the corresponding output DO status on the I/O page of the control box under the corresponding status. (Note: configured DI and DO cannot appear on the teaching programming page)
 
-机器人操作
-------------
+Robot operation
+-----------------
 
-示教点记录
-~~~~~~~~~~~~~~
+Teaching point record
+~~~~~~~~~~~~~~~~~~~~~~~
 
-手动示教控制区主要是在示教模式中对考坐标系进行设定，并实时显示机器人各轴角度与坐标值，并可对示教点进行命名保存。
+The manual teaching control area is mainly to set the test coordinate system in the teaching mode, and display the angle and coordinate values of each axis of the robot in real time, and can name and save the teaching points.
 
-保存示教点时，该示教点的坐标系为当前机器人应用的坐标系。在该操作区上方可以对示教点速度，加速度设置，设置数值为机器人标准速度百分比，若设置100，即标准速度的百分之百（标准速度请翻阅\ `表1.4-1 机器人基本参数 <installation.html#id22>`__\）。
+When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.4-1 Robot Basic Parameters <installation.html#id22>`__\）。
 
-传感器示教点，选择已经标定的传感器类型工具，输入点名称，点击添加，保存的点的位置为传感器识别到点的位置。
+For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
 
 .. image:: teaching_pendant_software/059.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑1 手动操作区示意图
+.. centered:: Figure 3.6-1 Schematic diagram of manual operation area
 
 .. important:: 
-   第一次使用时，请设置30这样较小的速度值，熟悉机器人运动，以免发生意外情况。
+   When using it for the first time, please set a small speed value like 30 to familiarize yourself with the movement of the robot to avoid accidents
 
-Joint运动
+Joint Jog
 ~~~~~~~~~~~
 
-Joint运作下，中间的6个滑块条分别表示对应轴的角度，joint运动分单轴点动和多轴联动
+Under Joint operation, the 6 slider bars in the middle represent the angles of the corresponding axes respectively, and the joint movement is divided into single-axis inching and multi-axis linkage
 
-**单轴点动**：用户可通过操作左右两边圆形按钮来控制机器人运动，如图表3.6-2。在手动模式和关节坐标系下，对机器人某一关节进行转动操作。当机器人超出运动范围（软限位）而停止时，可以利用单轴点动进行手动操作，将机器人移出超限位置。单轴点动在进行粗略定位和较大幅度移动时，会比其他操作模式更快捷方便。
+**single axis jog**：The user can control the movement of the robot by operating the left and right circular buttons, as shown in Figure3.6-2. In the manual mode and the joint coordinate system, perform a rotation operation on a joint of the robot. When the robot stops beyond the range of motion (soft limit), you can use single-axis jogging for manual operation to move the robot out of the overrun position. Single-axis jogging is faster and more convenient than other operation modes for rough positioning and large-scale movement.
 
-设置“长按运动阈值”（长按按钮时，机器人运行的最大距离，输入值得范围0~300）参数，长按圆形按钮控制机器人运行，若在机器人运行中松开按钮，机器人会立即停止运动，若一直按住不松开按钮，机器人会运行长按运动阈值所设置的值后停止运动。
+Set the "long press movement threshold" (the maximum distance the robot can run when the button is long pressed, and the input value range is 0~300) parameters, long press the round button to control the robot running, if the button is released during the robot running, the robot will stop immediately Movement, if you keep pressing the button without releasing it, the robot will run and stop moving after long pressing the value set by the movement threshold.
 
-**多轴联动**：用户可操作中间六个滑块来调整机器人相应的目标位置，如图表3.6-3，可通过观察三维虚拟机器人来确定目标位置，若调整的位置不符合自己的预期，点击“还原”按钮，使得三维虚拟机器人回到初始的位置。当用户确定目标位置后，可点击“应用”按钮，实体机器人便会进行相应的运动。
+**Multi-axis linkage**：The user can operate the six sliders in the middle to adjust the corresponding target position of the robot, as shown in Figure3.6-3. The target position can be determined by observing the 3D virtual robot. If the adjusted position does not meet your expectations, click the "Restore" button. Make the 3D virtual robot return to the initial position. After the user determines the target position, he can click the "Apply" button, and the physical robot will perform corresponding movements.
 
 .. image:: teaching_pendant_software/060.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑2 单轴点动和多轴联动示意图
+.. centered:: Figure 3.6-2 Schematic diagram of single-axis jogging and multi-axis linkage
 
-Base点动
+Base Jog
 ~~~~~~~~~~
 
-在基坐标系下，可以操作左右两边圆形按钮控制机器人，在X，Y，Z轴上直线移动或绕着RX，RY，RZ旋转，中间的6个滑块条分别表示在对应坐标轴上的位置与运动范围，如图表3.6-3。Base点动的功能与Joint运动中单轴点动的功能相似。
+In the base coordinate system, you can operate the circular buttons on the left and right sides to control the robot, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ, and the six slider bars in the middle are respectively represented on the corresponding coordinate axes The position and range of motion, as shown in Figure3.6-3. The function of Base jogging is similar to that of single-axis jogging in Joint motion.
 
 .. image:: teaching_pendant_software/061.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑3 Base点动示意图
-
+.. centered:: Figure 3.6-3 Base jog diagram
+   
 .. important:: 
-   可随时释放该按钮，使机器人停止运动。在必要情况下，按急停按钮使机器人停止。
+   The button can be released at any time to stop the robot. If necessary, press the emergency stop button to stop the robot.
 
-Tool点动
-~~~~~~~~~~
+Tool Jog
+~~~~~~~~~~~~~~~~
 
-选择工具坐标系，可以操作左右两边圆形按钮控制机器人，在X，Y，Z轴上直线移动或绕着RX，RY，RZ旋转，中间的6个滑块条分别表示在对应坐标轴上的位置与运动范围，如图表3.6-4。Tool点动的功能与Joint运动中单轴点动的功能相似。
+Select the tool coordinate system, you can operate the circular buttons on the left and right sides to control the robot, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ, and the six slider bars in the middle represent the positions on the corresponding coordinate axes. Position and range of motion, as shown in Figure3.6-4. The function of Tool jogging is similar to that of single-axis jogging in Joint motion.
 
 .. image:: teaching_pendant_software/062.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑4 Tool点动示意图
+.. centered:: Figure 3.6-4 Tool Jogging Schematic Diagram
 
-Wobj点动
+Wobj jog
 ~~~~~~~~~~
 
-选择工件点动，可以操作左右两边圆形按钮控制机器人，在工件坐标系下，沿着X，Y，Z轴上直线移动或绕着RX，RY，RZ旋转，中间的6个滑块条分别表示在对应坐标轴上的位置与运动范围，如图表3.6-5。Wobj点动的功能与Joint运动中单轴点动的功能相似。
+Select workpiece jogging, you can operate the circular buttons on the left and right to control the robot. In the workpiece coordinate system, move along the X, Y, Z axis in a straight line or rotate around RX, RY, RZ. The six slider bars in the middle are respectively Indicates the position and motion range on the corresponding coordinate axis, as shown in Figure3.6-5. The function of Wobj jogging is similar to that of single-axis jogging in Joint motion.
 
 .. image:: teaching_pendant_software/063.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑5 Wobj点动示意图
+.. centered:: Figure 3.6-5 Wobj jogging diagram
 
-Move移动
+Move
 ~~~~~~~~~~
 
-选择Move移动，可以直接输入笛卡尔坐标值，点击“计算关节位置”，关节位置显示为计算后结果，确认无危险，可以点击“移至该点”控制机器人运动至输入的笛卡尔位姿。
+Select Move, you can directly input the Cartesian coordinate value, click "Calculate joint position", the joint position is displayed as the calculated result, confirm that there is no danger, you can click "Move to this point" to control the robot to move to the input Cartesian pose.
 
 .. image:: teaching_pendant_software/064.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑6 Move移动示意图
+.. centered:: Figure 3.6-6 Move mobile diagram
 
-Eaxis移动
+Eaxis move
 ~~~~~~~~~~~~
 
-选择Eaxis移动，该功能为扩展轴的点动功能，需要在配置好扩展轴的前提下，使用该点动功能控制扩展轴，详见“第四章机-器人外设-扩展轴外设配置”。
+Select Eaxis to move, this function is the jog function of the extension axis, it needs to be configured to configure the extension axis, use this jog function to control the extension axis, see "Chapter 4 Machine-Robot Peripherals-Extended Axis Peripherals" for details configuration".
 
 .. image:: teaching_pendant_software/065.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑7 Eaxis移动示意图
+.. centered:: Figure 3.6-7 Eaxis Mobile Diagram
 
-TPD（示教编程）
-~~~~~~~~~~~~~~~~~
+TPD (Teach-in programming)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-示教编程（TPD）功能操作步骤如下：
+The operation steps of teach programming (TPD) function are as follows:
 
-- **Step1记录初始位置**：进入三维模型左侧操作区，记录机器人当前位置。在编辑框内设定好点的名称，点击“保存”按钮，若保存成功，则提示“保存点成功”；
+- **Step1 record initial position**：Enter the operation area on the left side of the 3D model and record the current position of the robot. Set the name of the point in the edit box, click the "Save" button, if the save is successful, it will prompt "Save point successful";
 
-- **Step2配置轨迹记录参数**：点击TPD进入“TPD”功能项配置轨迹记录参数，设定好轨迹文件的名称、位姿类型以及采样周期，配置DI和DO，可以在记录TPD轨迹的过程中，通过触发DI来记录对应需要输出的DO，如图表3.6-8；
+- **Step2 Configure track recording parameters**：Click TPD to enter the "TPD" function item to configure trajectory recording parameters, set the name of the trajectory file, pose type and sampling period, configure DI and DO, and record the corresponding output by triggering DI during the process of recording the TPD trajectory DO, as Figure3.6-8;
 
 .. image:: teaching_pendant_software/066.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑8 TPD轨迹记录
+.. centered:: Figure 3.6-8 TPD track record
 
-- **Step3检查机器人模式**：检查机器人模式是否处于手动模式下，若不处于则切换至手动模式，在手动模式下可通过两种方式切换到托动示教模式，一种是长按末端按钮，一种是界面拖动模式切换按键，在TPD记录是推荐从界面切换机器人进入托动示教模式。如图表3.6-9所示；
+- **Step3 Check robot mode**：Check whether the robot mode is in manual mode. If not, switch to manual mode. In manual mode, there are two ways to switch to drag teaching mode, one is long press the end button, and the other is interface dragging mode It is recommended to switch the robot from the interface to the drag teaching mode in the TPD record. As shown in Figure 3.6-9;
 
 .. image:: teaching_pendant_software/067.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.6‑9 机器人模式
+.. centered:: Figure 3.6-9 robot mode
 
-- **Step4开始记录**：点击“开始记录”按钮开始轨迹记录，拖动机器人进行动作示教。此外，末端DI配置中有“TPD记录启动/停止”功能配置项，通过配置此功能，用户可以通过外部信号触发“开始记录”轨迹功能，需要注意的是，通过外部信号开始记录轨迹，首先得在页面先进行TPD轨迹的信息配置。
+- **Step4 start recording**：Click the "Start Recording" button to start track recording, and drag the robot to teach actions. In addition, there is a "TPD recording start/stop" function configuration item in the terminal DI configuration. By configuring this function, the user can trigger the "start recording" trace function through an external signal. It should be noted that to start recording a trace through an external signal, first Configure the TPD track information on the page first.
 
-- **Step5停止记录**：动作示教完成后，点击“停止记录”按钮，停止轨迹记录，然后通过拖动示教切换按键使机器人退出拖动示教模式。示教器接收到“停止轨迹记录成功”即表示轨迹记录成功。同步骤4，在配置“TPD记录启动/停止”功能后，可以通过外部信号触发停止记录。
+- **Step5 stop recording**：After the action teaching is completed, click the "Stop Recording" button to stop the track recording, and then drag the teaching switch button to make the robot exit the drag teaching mode. When the teach pendant receives "stop track recording successful", it means the track recording is successful. Same as step 4, after configuring the "TPD recording start/stop" function, you can trigger the recording to stop by an external signal.
 
-- **Step6示教编程**：点击新建，选择空白模板，点击进入PTP功能编程项，选择刚保存的初始位置点，点击“添加”按钮，应用完成后，在程序文件中会显示一条PTP指令；然后点击进入TPD功能编程项，选择刚刚记录的轨迹，设定是否平滑以及速度缩放比例，点击“添加”按钮，应用完成后，在程序文件中会显示一条MoveTPD指令，如图表3.6-10所示；
+- **Step6 teach programming**：Click New, select a blank template, click to enter the PTP function programming item, select the initial position point just saved, click the "Add" button, after the application is completed, a PTP instruction will be displayed in the program file; then click to enter the TPD function programming item, Select the track just recorded, set whether it is smooth and the speed scaling, click the "Add" button, after the application is completed, a MoveTPD instruction will be displayed in the program file, as shown in Figure3.6-10;
 
 .. image:: teaching_pendant_software/068.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.6‑10 TPD编程
+.. centered:: Figure 3.6-10 TPD programming
 
-- **Step7轨迹复现**：示教程序编辑完成后，切换至自动运行模式，点击界面上方”开始运行”图标开始运行程序，机器人开始复现示教的动作。
+- **Step7 Trajectory recurrence**：After editing the teaching program, switch to the automatic operation mode, click the "start running" icon on the top of the interface to start running the program, and the robot will start to reproduce the teaching action.
 
-- **Step8轨迹编辑**：TPD轨迹编辑区可对轨迹可视化展示和编辑裁切，以达到TPD轨迹预分析和精简。选择对应轨迹获取点，那么用户记录的轨迹点会展示在机器人三维空间内，其次用户可以拖动“Start”和“End”滚动条对轨迹的起点和终点进行模拟复现和剪辑。
+- **Step8 track edit**：The TPD track editing area can visually display and edit the track to achieve pre-analysis and streamlining of the TPD track. Select the corresponding track acquisition point, then the track points recorded by the user will be displayed in the three-dimensional space of the robot, and then the user can drag the "Start" and "End" scroll bars to simulate and reproduce and edit the start and end points of the track.
 
-TPD文件删除与异常处理：
+TPD file deletion and exception handling：
 
-- **轨迹文件删除**：点击进入TPD功能项，选择需要删除的轨迹文件，点击”删除轨迹”按钮，若删除成功，则会收到删除成功提示。
+- **Trajectory file deletion**：Click to enter the TPD function item, select the track file to be deleted, and click the "Delete Track" button. If the deletion is successful, you will receive a successful deletion prompt.
 
-- **异常处理：**
+- **Exception handling：**
 
-  +  **指令点数超限**：一条轨迹最多可记录2万个点数，当超过2万个点时，控制器不再记录超过的点数，并向示教器发出“指令点数超限”告警提示，此时需点击停止记录；
+  +  **Command points exceeded**：A track can record up to 20,000 points. When the number exceeds 20,000 points, the controller will no longer record the exceeded points, and will send a warning to the teach pendant that the number of command points exceeds the limit. At this time, you need to click to stop recording;
 
-  +  **TPD指令间隔过大**：若示教器报错TPD指令间隔过大，则应检查机器人是否回到了记录前的初始位置，若机器人回到了初始位置依然报错TPD指令间隔过大，则删除当前轨迹重新记录一条新的轨迹；
+  +  **TPD instruction interval is too large**：If the teaching pendant reports an error that the TPD command interval is too large, check whether the robot has returned to the initial position before recording. If the robot returns to the initial position and still reports an error that the TPD command interval is too large, delete the current track and record a new one;
 
-  +  TPD操作过程中若出现其他异常情况，则应通过示教器或急停按钮立即停止机器人操作，检查原因。
+  +  If other abnormal conditions occur during TPD operation, the robot operation should be stopped immediately through the teach pendant or the emergency stop button to check the cause.
 
 .. important:: 
-   TPD功能操作过程中应严格按照示教器上相应的提示进行操作。
+   During the operation of the TPD function, you should strictly follow the corresponding prompts on the teach pendant.
 
-示教模拟
-----------
+Teaching simulation
+-----------------------
+ 
+Introduction
+~~~~~~~~~~~~~~
 
-简介
-~~~~~~~
+Click the command on the left to add a program node to the program tree.
 
-点击左侧命令可以向程序树添加程序节点。
+When the program is running, the currently executing program node is highlighted in gray.
 
-程序运行时，当前执行的程序节点灰色高亮显示。
-
-在手动模式下，点击节点右侧第一个图标可以使机器人单独执行该指令，第二个图标为编辑该节点内容。
+In manual mode, click the first icon on the right side of the node to make the robot execute the instruction alone, and the second icon is to edit the content of the node.
 
 .. image:: teaching_pendant_software/069.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑1 程序树界面
+.. centered:: Figure 3.7-1 Program tree interface
 
-工具栏
+Tool bar
 ~~~~~~~~~~
 
-使用程序树底部的工具栏修改程序树。
+Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: teaching_pendant_software/070.png
@@ -872,9 +872,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**打开**
+   name：**Open**
    
-   作用：打开用户程序文件
+   effect：Open user program file
 
 .. note:: 
    .. image:: teaching_pendant_software/071.png
@@ -882,9 +882,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**新建**
+   name：**New build**
    
-   作用：选择模板新建程序文件
+   effect：Select a template to create a new program file
    
 .. note:: 
    .. image:: teaching_pendant_software/072.png
@@ -892,9 +892,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**导入**
+   name：**Import**
    
-   作用：导入文件到用户程序文件夹中
+   effect：Import the file into the user program folder
 
 .. note:: 
    .. image:: teaching_pendant_software/073.png
@@ -902,9 +902,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**导出**
+   name：**Export**
    
-   作用：导出用户程序文件到本地点。
+   effect：Export user program files to a local point.
 
 .. note:: 
    .. image:: teaching_pendant_software/074.png
@@ -912,9 +912,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**保存**
+   name：**Save**
    
-   作用：保存文件编辑内容
+   effect：Save file edits
 
 .. note:: 
    .. image:: teaching_pendant_software/075.png
@@ -922,9 +922,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**另存为**
+   name：**Save as**
    
-   作用：给文件重命名存放到用户程序或模板程序文件夹中。
+   effect：Rename the file and store it in the user program or template program folder.
 
 .. note:: 
    .. image:: teaching_pendant_software/076.png
@@ -932,9 +932,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**复制**
+   name：**Copy**
    
-   作用：复制一个节点，并允许将其用于其他操作（例如：将其粘贴到程序树的其他位置）。
+   effect：Duplicates a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
 
 .. note:: 
    .. image:: teaching_pendant_software/077.png
@@ -942,9 +942,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**粘贴**
+   name：**Paste**
    
-   作用：允许您粘贴之前剪切或复制的节点。
+   effect：Allows you to paste previously cut or copied nodes.
 
 .. note:: 
    .. image:: teaching_pendant_software/078.png
@@ -952,9 +952,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**剪切**
+   name：**To cut**
    
-   作用：剪切一个节点，并允许将其用于其他操作（例如：将其粘贴到程序树的其他位置）。
+   effect：Cuts a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
 
 .. note:: 
    .. image:: teaching_pendant_software/079.png
@@ -962,9 +962,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**删除**
+   name：**Delete**
    
-   作用：从程序树中删除一个节点。
+   effect：Deletes a node from the program tree.
 
 .. note:: 
    .. image:: teaching_pendant_software/080.png
@@ -972,9 +972,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**上移**
+   name：**Move up**
    
-   作用：向上移动该节点。
+   effect：Move the node up.
 
 .. note:: 
    .. image:: teaching_pendant_software/081.png
@@ -982,9 +982,9 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**下移**
+   name：**Move down**
    
-   作用：向下移动该节点。
+   effect：Move the node down.
 
 .. note:: 
    .. image:: teaching_pendant_software/082.png
@@ -992,49 +992,49 @@ TPD文件删除与异常处理：
       :height: 0.75in
       :align: left
 
-   名称：**切换编辑模式**
+   name：**Toggle edit mode**
    
-   作用：程序树模式和lua编辑模式互相切换。
+   effect：The program tree mode and lua editing mode switch each other.
 
 
-程序命令
-~~~~~~~~~~~
+Program command
+~~~~~~~~~~~~~~~~~~
 
-左侧主要是程序命令的添加，点击各关键字上方图标进入详细界面，程序命令添加到文件中的操作主要分为两种，一种方式打开相关指令点击应用按键即可将该指令添加到程序中，另一种方式为先点击“添加”按键，此时命令并未保存到程序文件中，需要再点击“应用”方可将命令保存到文件中。第二种方式多出现在同类型指令多条下发的
-情况，我们对该类型命令增加添加按键和显示已添加指令内容功能，点击添加按键可添加一条指令，已添加指令显示所有已添加的指令，点击“应用”即可将添加的指令保存到右侧已打开的文件中。
+The left side is mainly for adding program commands. Click the icon above each keyword to enter the detailed interface. There are two main operations for adding program commands to the file. One way is to open the relevant command and click the Apply button to add the command to the program. , another way is to click the "Add" button first, at this time the command is not saved in the program file, and you need to click "Apply" again to save the command in the file. 
+The second method often occurs when multiple commands of the same type are issued. We add an add button and display the content of the added command to this type of command. Click the Add button to add a command, and the added command displays all the added commands. , click "Apply" to save the added command to the opened file on the right.
 
-PTP命令
+PTP command
 ++++++++++++++++
 
-点击“PTP”图标进入PTP命令编辑界面。
+Click the "PTP" icon to enter the PTP command editing interface.
 
-可以选择需要到达的点，平滑过渡时间设置可以实现该点到下一点的运动是连续的，是否偏移设置，可以选择基于基坐标系偏移和基于工具坐标偏移，并弹出x,y,z,rx,ry,rz偏移量设置，PTP具体路径为运动控制器自动规划的最优路径，点击“添加”、“应用”后可保存该条指令。
+You can choose the point to be reached, and the smooth transition time setting can realize that the movement from this point to the next point is continuous. Whether to set the offset, you can choose to offset based on the base coordinate system and based on the tool coordinates, and pop up x, y, z, rx, ry, rz offset settings, PTP specific path is the optimal path automatically planned by the motion controller, click "Add" and "Apply" to save this command.
 
 .. image:: teaching_pendant_software/083.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑2 PTP指令界面
+.. centered:: Figure 3.7-2 PTP command interface
 
-Lin命令
+Lin command
 ++++++++++++++++
 
-点击“Lin”图标进入Lin命令编辑界面。
+Click the "Lin" icon to enter the Lin command editing interface.
 
-该指令功能与“PTP”指令相似，但该指令所到达点的路径为直线。
+The function of this command is similar to the "PTP" command, but the path of the point reached by this command is a straight line.
 
 .. image:: teaching_pendant_software/084.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑3 Lin指令界面
+.. centered:: Figure 3.7-3 Lin command interface
 
-Arc命令
+Arc command
 ++++++++++++++++
 
-点击“Arc”图标进入Arc命令编辑界面。
+Click the "Arc" icon to enter the Arc command editing interface.
 
-“Arc”指令为圆弧运动，包含两个点，第一点为圆弧中间过渡点，第二点为终点，过渡点和终点都可以对是否偏移进行设置，可以选择基于基坐标系偏移和基于工具坐标偏移，并弹出x,y,z,rx,ry,rz偏移量设置，终点可以设置平滑过渡半径，实现运动连续效果。
+The "Arc" command is arc movement, which includes two points. The first point is the transition point in the middle of the arc, and the second point is the end point. Both the transition point and the end point can be set to offset, and you can choose to base coordinate system offset Shift and offset based on tool coordinates, and pop up x, y, z, rx, ry, rz offset settings, and the end point can set a smooth transition radius to achieve continuous motion effect.
 
 .. image:: teaching_pendant_software/085.png
    :width: 6in
@@ -1044,14 +1044,14 @@ Arc命令
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑4 Arc指令界面
+.. centered:: Figure 3.7-4 Arc command interface
 
-Circle命令
+Circle command
 ++++++++++++++++
 
-点击“Circle”图标进入Circle命令编辑界面。
+Click the "Circle" icon to enter the Circle command editing interface.
 
-“Circle”指令为整圆运动，包含两个点，第一点为整圆中间过渡点1，第二点为整圆中间过渡点2，过渡点2可以设置是否偏移，该偏移量同时生效于过渡点1和过渡点2。
+The "Circle" command is a full circle movement, including two points. The first point is the middle transition point 1 of the full circle, and the second point is the middle transition point 2 of the full circle. The transition point 2 can be set to be offset. Effective at transition point 1 and transition point 2.
 
 .. image:: teaching_pendant_software/087.png
    :width: 6in
@@ -1061,1145 +1061,1145 @@ Circle命令
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑5 Circle指令界面
+.. centered:: Figure 3.7-5 Circle command interface
 
-Spiral命令
+Spiral command
 ++++++++++++++++
 
-点击“Spiral”图标进入Spiral命令编辑界面
+Click the "Spiral" icon to enter the Spiral command editing interface
 
-“Spiral”指令为螺旋线运动，包含三个点，该三个点组成一个圆，在第三点设置页面，包含螺旋圈数，姿态修正角，半径增量和转轴方向增量这几个参数设置，螺旋圈数即该螺旋线的运动圈数，姿态修正角修正的是螺旋线结束时的姿态与螺旋线第一点的姿态，半径增量即每一圈半径的增量，转轴方向增量即螺旋轴方向的增量。设置
-是否偏移，该偏移量生效于整个螺旋线的轨迹。
+The "Spiral" command is a spiral motion, which includes three points, which form a circle. On the third point setting page, there are several parameters including the number of spiral turns, attitude correction angle, radius increment and rotation axis direction increment. Setting, the number of helix circles is the number of motion circles of the helix, the attitude correction angle is the attitude at the end of the helix and the attitude of the first point of the helix, the radius increment is the increment of the radius of each circle, and the direction of the rotation axis is increased. The amount is the increment in the direction of the screw axis. set up
+Whether to offset, the offset takes effect on the trajectory of the entire helix.
 
 .. image:: teaching_pendant_software/089.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑6 Spiral指令界面
+.. centered:: Figure 3.7-6 Spiral command interface
 
-N-Spiral命令
+N-Spiral command
 ++++++++++++++++
 
-点击“N-Spiral”图标进入N-Spiral命令编辑界面
+Click the "N-Spiral" icon to enter the N-Spiral command editing interface
 
-“N-Spiral”指令为优化版螺旋线运动，该指令只需要一个点加各参数的配置实现螺旋线运动。机器人以当前位置作为起点，用户设置调试速度，是否偏移，螺旋圈数，螺旋倾角，初始半径，半径增量，转轴方向增量和旋转方向这几个参数，螺旋圈数即该螺旋线的运动圈数，螺旋倾角即工具Z轴与水平方向的夹角，姿态修正角修正的是螺旋线结束时的姿态与螺旋线第一点的姿态，初始半径即第一圈半径大小，半径增量即每一圈半径的增量，转轴方向增量即螺旋轴方向的增量，旋转方向即顺时针和逆时针。
+The "N-Spiral" command is an optimized version of the spiral motion. This command only needs one point plus the configuration of various parameters to realize the spiral motion. The robot takes the current position as the starting point, and the user sets the debugging speed, whether to offset, the number of spiral turns, the spiral inclination, the initial radius, the radius increment, the rotation axis direction increment and the rotation direction. The number of spiral turns is the helix. The number of motion circles, the helix inclination is the angle between the Z axis of the tool and the horizontal direction, the attitude correction angle is the attitude at the end of the helix and the attitude of the first point of the helix, the initial radius is the radius of the first circle, and the radius increment That is, the increment of the radius of each circle, the increment in the direction of the rotation axis is the increment in the direction of the screw axis, and the direction of rotation is clockwise and counterclockwise.
 
 .. image:: teaching_pendant_software/090.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑7 N-Spiral指令界面
+.. centered:: Figure 3.7-7 N-Spiral command interface
 
-Spline命令
+Spline command
 ++++++++++++++++
 
-点击“Spline”图标进入Spline命令编辑界面
+Click the "Spline" icon to enter the Spline command editing interface
 
-该指令分为样条组起始，样条段和样条组结束三部分，样条组开始是样条运动的起始标志，样条段包含SPL、SLIN和SCIRC段，点击对应图标进入指令添加界面，样条组结束是样条运动的结束标志。
+The command is divided into three parts: the start of the spline group, the spline segment and the end of the spline group. The start of the spline group is the start mark of the spline movement. The spline segment includes SPL, SLIN and SCIRC segments. Click the corresponding icon to enter the command Add interface, the end of spline group is the end sign of spline movement.
 
 .. image:: teaching_pendant_software/091.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑8 Spline指令界面
+.. centered:: Figure 3.7-8 Spline command interface
 
-N-Spline命令
-++++++++++++++++
+N-Spline command
++++++++++++++++++++
 
-点击“N-Spline”图标进入N-Spline命令编辑界面
+Click the "N-Spline" icon to enter the N-Spline command editing interface
 
-该指令为Spline指令算法优化指令，后续会替代现有的Spline指令，该指令分为多点轨迹起始，多点轨迹段和多点轨迹结束三部分，多点轨迹开始是多点轨迹运动的起始标志，多点轨迹段即设置各个轨迹点，点击图标进入点位添加界面，多点轨迹结束是多点轨迹运动的结束标志，在此可以设置控制模式和调试速度，控制模式分
-为给定控制点和给定路径点。
+This instruction is an optimization instruction for the Spline instruction algorithm, and will replace the existing Spline instruction in the future. This instruction is divided into three parts: the start of the multi-point trajectory, the segment of the multi-point trajectory and the end of the multi-point trajectory. The start mark, the multi-point track segment is to set each track point, click the icon to enter the point adding interface, the end of the multi-point track is the end mark of the multi-point track movement, here you can set the control mode and debugging speed, the control mode is divided into
+For the given control point and the given waypoint.
 
 .. image:: teaching_pendant_software/092.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑9 N-Spline指令界面
+.. centered:: Figure 3.7-9 N-Spline command interface
 
-IO命令
+IO command
 ++++++++++++++++
 
-点击“IO”图标进入IO命令编辑界面
+Click the "IO" icon to enter the IO command editing interface
 
-“IO”指令分为设置IO（SetDO/SPLCSetDO）和获取IO（GetDI/SPLCGetDI）两部分。
+The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and getting IO (GetDI/SPLCGetDI).
 
-“SetDO/SPLCSetDO”该指令可设定指定的输出DO状态，包括16路控制箱数字输出和2路工具数字输出，状态选项“False”为闭，“True”为开，是否阻塞选项选择“阻塞”表示运动停止后设置DO状态，选择“非阻塞”选项表示在上一条运动过程中设置DO状态。平滑轨迹选项选择“Break”表示在平滑过渡半径结束后设置DO状态，选择“Serious”表示在平滑过渡半径运动过程中设置DO状态。当该指令是添加在辅助线程中，是否应用线程需要选择是，其他地方使用该指令选择否。点击“添加”、“应用”即可。
+"SetDO/SPLCSetDO" This command can set the specified output DO state, including 16 digital outputs of the control box and 2 digital outputs of the tool. The state option "False" is closed, "True" is open, and whether to block the option selects "blocked". "Indicates that the DO state is set after the movement stops, and selecting the "non-blocking" option means that the DO state is set during the last movement. Selecting "Break" for the smooth trajectory option means setting the DO state after the smooth transition radius ends, and selecting "Serious" means setting the DO state during the smooth transition radius movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
 .. image:: teaching_pendant_software/093.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑10 SetDO指令界面
+.. centered:: Figure 3.7-10 SetDO command interface
 
-在“GetDI/SPLCGetDI”指令中，选择想要获取端口号的数值，是否阻塞选项选择“阻塞”表示运动停止后获取DI状态，选择“非阻塞”选项表示在上一条运动过程中获取DI状态。当该指令是添加在辅助线程中，是否应用线程需要选择是，其他地方使用该指令选择否。选择完毕后点击“添加”、“应用”按钮即可。
+In the "GetDI/SPLCGetDI" command, select the value of the port number you want to get, whether to block or not, select "block" to get the DI status after the movement stops, and select the "non-blocking" option to get the DI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. After selection, click the "Add" and "Apply" buttons.
 
 .. image:: teaching_pendant_software/094.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑11 GetDI指令界面
+.. centered:: Figure 3.7-11 GetDI command interface
 
-AI命令
+AI command
 ++++++++++++++++
 
-点击“AI”图标进入AI命令编辑界面
+Click the "AI" icon to enter the AI command editing interface
 
-在该指令中，分为设置模拟输出（SetAO/SPLCSetAO）和获取模拟输入（GetAI/SPLCGetAI）两部分功能。
+In this instruction, it is divided into two functions: setting analog output (SetAO/SPLCSetAO) and obtaining analog input (GetAI/SPLCGetAI).
 
-“SetAO/SPLCSetAO”选择需要设置的模拟输出，输入需要设置的值，范围为0-10，是否阻塞选项选择“阻塞”表示运动停止后设置AO状态，选择“非阻塞”选项表示在上一条运动过程中设置AO状态。当该指令是添加在辅助线程中，是否应用线程需要选择是，其他地方使用该指令选择否。点击“添加”、“应用”即可。
+"SetAO/SPLCSetAO" select the analog output that needs to be set, input the value that needs to be set, the range is 0-10, whether to block or not select "block" means to set the AO state after the movement stops, select "non-block" means to set the AO state after the last movement Set the AO state in the process. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
 .. image:: teaching_pendant_software/095.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑12 SetAO指令界面
+.. centered:: Figure 3.7-12 SetAO command interface
 
-“GetAI/SPLCGetAI”选择需要获取的模拟输入，是否阻塞选项选择“阻塞”表示运动停止后获取AI状态，选择“非阻塞”选项表示在上一条运动过程中获取AI状态。当该指令是添加在辅助线程中，是否应用线程需要选择是，其他地方使用该指令选择否。点击“添加”、“应用”即可。
+"GetAI/SPLCGetAI" selects the analog input that needs to be obtained, whether to block or not selects "blocked" to obtain the AI state after the movement stops, and selects the "non-blocked" option to obtain the AI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
 .. image:: teaching_pendant_software/096.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑13 GetAI指令界面
+.. centered:: Figure 3.7-13 GetAI command interface
 
-TPD命令
+TPD command
 ++++++++++++++++
 
-点击“TPD”按钮进入TPD命令编辑界面
+Click the "TPD" button to enter the TPD command editing interface
 
-在该指令中，用户首先需要有记录好的轨迹。
+In this command, the user first needs to have a recorded track.
 
-关于轨迹记录：在准备记录轨迹之前，先保存下轨迹的起始点。在机器人处于拖动模式下，输入文件名，选择周期（假设数值为x，即每隔x毫秒记录一个点，推荐4毫秒记录一个点），点开始记录，用户可以根据需求拖动机器人进行指定运动，记录完成后，点击停止记录，即可保存之前机器人的运动轨迹。当一条运动无法完全记录，会提
-示记录点数超限提示，用户需要将运动分几次进行记录。
+About track recording: Before preparing to record the track, first save the starting point of the track. When the robot is in the dragging mode, input the file name, select the period (assuming the value is x, that is, record a point every x milliseconds, it is recommended to record a point every 4 milliseconds), the point starts recording, and the user can drag the robot to specify Movement, after the recording is completed, click to stop recording, and the previous movement track of the robot can be saved. When a movement cannot be fully recorded, a
+A reminder that the number of recording points exceeds the limit is displayed, and the user needs to record the exercise in several times.
 
-进行程序编程时，首先用PTP指令到达对应轨迹起始点，然后在TPD轨迹复现指令中选择轨迹，选择是否平滑，设置调试速度，依次点击“添加”、“应用”，即可插入程序。轨迹加载指令主要用于预先读取轨迹文件，提取成轨迹指令，更好的应用于传送带跟踪场景。
+When programming, first use the PTP instruction to reach the starting point of the corresponding trajectory, then select the trajectory in the TPD trajectory reproduction instruction, select whether it is smooth, set the debugging speed, and click "Add" and "Apply" in sequence to insert the program. The trajectory loading command is mainly used to pre-read the trajectory file and extract it into a trajectory command, which is better applied to the conveyor belt tracking scene.
 
 .. note:: 
-   关于TPD详细操作可见示教编程（TPD）功能操作说明模块。
+   For the detailed operation of TPD, please refer to the teaching programming (TPD) function operation instruction module.
 
 .. image:: teaching_pendant_software/097.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑14 TPD指令界面
+.. centered:: Figure 3.7-14 TPD command interface
 
-ToolList命令
-++++++++++++++++
+ToolList command
++++++++++++++++++++
 
-点击“ToolList”图标进入ToolList命令编辑界面
+Click the "ToolList" icon to enter the ToolList command editing interface
 
-选择工具坐标系名称，点击“应用”添加该指令到程序中，当程序运行该语句，会设定机器人的工具坐标系。
+Select the tool coordinate system name and click "Apply" to add this command to the program. When the program runs this statement, the tool coordinate system of the robot will be set.
 
 .. image:: teaching_pendant_software/098.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑15 ToolList指令界面
+.. centered:: Figure 3.7-15 ToolList command interface
 
-Mode命令
+Mode command
 ++++++++++++++++
 
-点击“Mode”图标进入Mode命令编辑界面
+Click the "Mode" icon to enter the Mode command editing interface
 
-该指令可切换机器人到手动模式，通常在一个程序结尾处添加，以便用户在程序运行结束后，使机器人自动切换到手动模式，拖动机器人。
+This command can switch the robot to manual mode, and is usually added at the end of a program so that the user can automatically switch the robot to manual mode and drag the robot after the program runs.
 
 .. image:: teaching_pendant_software/099.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑16 Mode指令界面
+.. centered:: Figure 3.7-16 Mode command interface
 
-Var命令
+Var command
 ++++++++++++++++
 
-点击“Var”图标进入Var命令编辑界面
+Click the "Var" icon to enter the Var command editing interface
 
-该指令为变量系统指令，分为Lua变量定义，变量查询和Sys变量重命名，获取值，设置值两部分，Lua变量定义可以声明一个变量并赋予初始值，与while，if-else等指令配合使用，Lua变量查询指令可以实时查询输入的变量名称的值，显示在状态栏。Sys变量个数是固定的，可以对其重命名，获取变量值以及设置变量值，该变量保存的值不随系统关机而清零。
+This command is a variable system command, which is divided into two parts: Lua variable definition, variable query and Sys variable renaming, getting value, and setting value. Lua variable definition can declare a variable and assign an initial value, and cooperate with while, if-else and other commands Use the Lua variable query command to query the value of the input variable name in real time and display it in the status bar. The number of Sys variables is fixed, and you can rename them, get variable values, and set variable values. The values stored in this variable will not be cleared when the system is turned off.
 
 .. image:: teaching_pendant_software/100.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑17 Var指令界面
+.. centered:: Figure 3.7-17 Var command interface
 
-While命令
+While command
 ++++++++++++++++
 
-点击“While”图标进入While命令编辑界面
+Click the "While" icon to enter the While command editing interface
 
-在While后方的输入框中输入等待条件，在do后方的输入框中输入循环期间的动作指令，点击保存即可。（为方便操作，可任意输入do内容，在程序中编辑其他指令插入代替）
+Enter the waiting condition in the input box behind While, input the action command during the loop in the input box behind do, and click Save. (For the convenience of operation, you can enter do content arbitrarily, and edit other instructions in the program to insert instead)
 
 .. image:: teaching_pendant_software/101.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑18 While指令界面
+.. centered:: Figure 3.7-18 While command interface
 
-if…else命令
+if…else command
 ++++++++++++++++
 
-点击“if…else”按钮进入if…else命令编辑界面
+Click the "if...else" button to enter the if...else command editing interface
 
-在右侧输入框中输入语句，编辑完毕后点击“添加”、“应用”即可。（该指令需要一定编程基础，如需帮助，请联系我们）
+Enter the statement in the input box on the right, and click "Add" and "Apply" after editing. (This instruction requires a certain programming foundation, if you need help, please contact us)
 
 .. image:: teaching_pendant_software/102.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑19 if…else指令界面
+.. centered:: Figure 3.7-19 if…else command interface
 
-Goto命令
+Goto command
 ++++++++++++++++
 
-点击“Goto”按钮进入Goto命令编辑界面
+Click the "Goto" button to enter the Goto command editing interface
 
-Goto指令为跳转指令，在右侧输入框中输入语句，编辑完毕后点击“添加”、“应用”即可。（该指令需要一定编程基础，如需帮助，请联系我们）
+The Goto instruction is a jump instruction, enter the statement in the input box on the right, and click "Add" and "Apply" after editing. (This instruction requires a certain programming foundation, if you need help, please contact us)
 
 .. image:: teaching_pendant_software/103.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑20 Goto指令界面
+.. centered:: Figure 3.7-20 Goto command interface
 
-Wait 命令
+Wait command
 ++++++++++++++++
 
-点击“Wait”图标进入Wait命令编辑界面
+Click the "Wait" icon to enter the Wait command editing interface
 
-该指令为延时指令，分为“WaitMs”、“WaitDI”和“WaitAI”三部分。
+This instruction is a delay instruction, which is divided into three parts: "WaitMs", "WaitDI" and "WaitAI".
 
-“WaitTime”指令延时等待时间单位为毫秒，输入需要等待的毫秒数，点击“添加”、“应用”即可。
+"WaitTime" command delay waiting time unit is milliseconds, input the number of milliseconds to wait, click "Add", "Apply".
 
 .. image:: teaching_pendant_software/104.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑21 WaitTime指令界面
+.. centered:: Figure 3.7-21 WaitTime command interface
 
-“WaitDI”指令，即单DI等待，选择需要等待的IO端口号、等待状态、等待最大时间和等待超时处理方式，点击“添加”、“应用”即可。
+"WaitDI" command, that is, single DI waiting, select the IO port number to be waited for, wait state, wait maximum time and wait timeout processing method, and click "Add" and "Apply".
 
 .. image:: teaching_pendant_software/105.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑22 WaitDI指令界面
+.. centered:: Figure 3.7-22 WaitDI command interface
 
-“WaitMultiDI”指令，即多DI等待，首先选择多DI成立条件，其次勾选需要等待的DI端口和状态，最后设置等待最大时间和等待超时处理方式，点击“添加”、“应用”即可。
+"WaitMultiDI" command, that is, multi-DI waiting, first select the multi-DI establishment conditions, then check the DI port and status that need to wait, and finally set the maximum waiting time and waiting timeout processing method, click "Add" and "Apply".
 
 .. image:: teaching_pendant_software/106.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑23 WaitMultiDI指令界面
+.. centered:: Figure 3.7-23 WaitMultiDI command interface
 
-“WaitAI”指令，选择需要等待的模拟量、数值、等待的最大时间以及等待超时处理方式，点击“添加”、“应用”即可。
+"WaitAI" command, select the analog quantity to be waited for, the value, the maximum waiting time and the waiting timeout processing method, and click "Add" and "Apply".
 
 .. image:: teaching_pendant_software/107.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑24 WaitAI指令界面
+.. centered:: Figure 3.7-24 WaitAI command interface
 
-Pause 命令
+Pause command
 ++++++++++++++++
 
-点击“Pause”图标进入Pause命令编辑界面
+Click the "Pause" icon to enter the Pause command editing interface
 
-该指令为暂停指令，在程序中插入该指令，当程序执行到该指令时，机器人会处于暂停状态，若想继续运行，点击控制区“暂停/恢复”按键即可。
+This instruction is a pause instruction. Insert this instruction into the program. When the program executes this instruction, the robot will be in a pause state. If you want to continue running, click the "Pause/Resume" button in the control area.
 
 .. image:: teaching_pendant_software/108.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑25 Pause指令界面
+.. centered:: Figure 3.7-25 Pause command interface
 
-Dofile 命令
+Dofile command
 ++++++++++++++++
 
-点击“Dofile”图标进入Dofile命令编辑界面
+Click the "Dofile" icon to enter the Dofile command editing interface
 
-Dofile指令调用的是控制器内部程序，使用Dofile指令需要保存被调用的子程序，而主程序若未改变可不用再次保存。Dofile指令支持二级调用，需要注意两个参数设置，一是该调用处于第几层，二是该调用的ID编号，ID编号原则上同一程序不能出现相同ID。
+The Dofile command calls the internal program of the controller. When using the Dofile command, the called subroutine needs to be saved, and the main program does not need to be saved again if it has not changed. The Dofile command supports two-level calls, and two parameter settings need to be paid attention to. One is the level of the call, and the other is the ID number of the call. In principle, the same ID number cannot appear in the same program.
 
 .. image:: teaching_pendant_software/109.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑26 Dofile指令界面
+.. centered:: Figure 3.7-26 Dofile command interface
 
-Weave命令
+Weave command
 ++++++++++++++++
 
-点击“Weave”图标进入Weave命令编辑界面
+Click the "Weave" icon to enter the Weave command editing interface
 
-“Weave”指令包含两部分，第一部分选择配置好参数的摆焊编号，点击“开始摆焊”和“停止摆焊”并应用可将相关指令添加到程序中。
+The "Weave" command consists of two parts. In the first part, select the weaving number with configured parameters, click "Start Weaving" and "Stop Weaving" and apply to add related commands to the program.
 
 .. image:: teaching_pendant_software/110.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑27 Weave指令界面
+.. centered:: Figure 3.7-27 Weave command interface
 
-点击“配置与测试”，可以对摆焊的参数进行配置，配置完成后可通过开始摆焊测试和停止摆焊测试按键测试该摆焊轨迹。
+Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
 
 .. image:: teaching_pendant_software/111.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑28 Weave配置与测试指令界面
+.. centered:: Figure 3.7-28 Weave configuration and testing command interface
 
-Segment命令
+Segment command
 ++++++++++++++++
 
-点击“Segment”图标进入Segment命令编辑界面
+Click the "Segment" icon to enter the Segment command editing interface
 
-该指令为焊接专用指令，主要用于一段焊，一段不焊的循环间断焊接场景。在起点与终点之间，使用该指令，选择起点和终点，设置调试速度，设置起弧的DO端口，执行长度，非执行长度，根据实际应用场景设置功能模式，摆动选择和取整规则即可实现段焊功能。
+This instruction is a special instruction for welding, mainly used in the intermittent welding scene where one section is welded and one section is not welded. Between the start point and the end point, use this command to select the start point and end point, set the debugging speed, set the DO port for arc start, the execution length, the non-execution length, set the function mode according to the actual application scene, swing selection and rounding rules. Realize segment welding function.
 
 .. image:: teaching_pendant_software/112.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑29 Segment指令界面
+.. centered:: Figure 3.7-29 Segment command interface
 
-Adjust命令
+Adjust command
 ++++++++++++++++
 
-点击“Adjust”图标进入Adjust命令编辑界面
+Click the "Adjust" icon to enter the Adjust command editing interface
 
-该指令针对焊接跟踪自适应调整焊枪姿态场景，记录好三个对应的姿态点后，根据机器人实际运动方向，添加姿态自适应调整指令。详见机器人外设章节。
+This command adaptively adjusts the posture of the welding torch for the scene of welding tracking. After recording the three corresponding posture points, add the posture adaptive adjustment command according to the actual direction of the robot's movement. See Robot Peripherals chapter for details.
 
 .. image:: teaching_pendant_software/113.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑30 Adjust指令界面
+.. centered:: Figure 3.7-30 Adjust command interface
 
-Gripper命令
-++++++++++++++++
+Gripper command
+++++++++++++++++++
 
-点击“Gripper”图标进入Gripper命令编辑界面
+Click the "Gripper" icon to enter the Gripper command editing interface
 
-在该指令中，分为夹爪运动控制指令和夹爪激活/复位指令，夹爪控制指令中，显示完成配置并且已被激活的夹爪编号，用户可以通过编辑框编辑，或者滑动条滑动至所需的值来完成对夹爪开闭、开闭速度和开闭力矩的设置，数值为百分比，是否阻塞功能选项，选择阻塞即夹爪运动需等待上一条运动指令执行完才执行，选择非阻塞即夹爪运动与上一条运动指令并行。点击“添加”、“应用”按钮，即可将设置的值保存至示教文件中。夹爪复位/激活指令，显示已经配置的夹爪编号，可以添加复位/激活指令到程序中。
+In this command, it is divided into the gripper motion control command and the gripper activation/reset command. In the gripper control command, the number of the gripper that has been configured and activated is displayed. The user can edit through the edit box, or slide the slider to The required value is used to complete the setting of jaw opening and closing, opening and closing speed and opening and closing torque. Blocking means that the gripper moves in parallel with the previous movement command. Click the "Add" and "Apply" buttons to save the set value to the teaching file. The gripper reset/activation command displays the number of the grippers that have been configured, and the reset/activation command can be added to the program.
 
 .. image:: teaching_pendant_software/114.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑31 Gripper指令界面
+.. centered:: Figure 3.7-31 Gripper command interface
 
-Spray命令
+Spray command
 ++++++++++++++++
 
-点击“Spray”图标进入Spray命令编辑界面
+Click the "Spray" icon to enter the Spray command editing interface
 
-该指令为喷涂相关指令，控制喷枪“开始喷涂”、“停止喷涂”、“开始清枪”和“停止轻枪”。在编辑该程序命令时，需确认已经配置好喷枪外设，详见机器人外设章节。
+This command is a spraying-related command, which controls the spray gun to "start spraying", "stop spraying", "start cleaning the gun" and "stop the light gun". When editing the program command, it is necessary to confirm that the peripherals of the spray gun have been configured. For details, see the chapter on peripherals of the robot.
 
 .. image:: teaching_pendant_software/115.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑32 Spray指令界面
+.. centered:: Figure 3.7-32 Spray command interface
 
-EAxis命令
+EAxis command
 ++++++++++++++++
 
-点击“EAxis”图标进入EAxis命令编辑界面
+Click the "EAxis" icon to enter the EAxis command editing interface
 
-该指令针对使用外部轴的场景，与PTP指令组合使用，可将空间上一点X轴方向上的移动分解到外部轴运动。选择外部轴编号，运动方式选同步，选择需要到达的点，点击“添加”、“应用”后可保存该条指令。。
+This command is used in combination with the PTP command for scenarios using external axes, and can decompose the movement of a point in space in the X-axis direction to the movement of external axes. Select the external axis number, select synchronous motion mode, select the point to be reached, and click "Add" and "Apply" to save the command.
 
 .. image:: teaching_pendant_software/116.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑33 EAxis指令界面
+.. centered:: Figure 3.7-33 EAxis command interface
 
-Weld命令
+Weld command
 ++++++++++++++++
 
-点击“Weld”图标进入Weld命令编辑界面
+Click the "Weld" icon to enter the Weld command editing interface
 
-该指令主要用于焊机外设，在添加该指令前请确认在用户外设中焊机配置是否完成，详见机器人外设章节。
+This command is mainly used for welding machine peripherals. Before adding this command, please confirm whether the welding machine configuration is completed in the user peripherals. For details, see the chapter on robot peripherals.
 
 .. image:: teaching_pendant_software/117.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑34 Weld指令界面
+.. centered:: Figure 3.7-34 Weld command interface
 
-Laser命令
+Laser command
 ++++++++++++++++
 
-点击“Laser”图标进入Laser命令编辑界面
+Click the "Laser" icon to enter the Laser command editing interface
 
-该指令包含激光命令、跟踪命令和寻位命令三部分，在添加该指令前，请确认用户外设中激光跟踪传感器是否已经配置成功。详见机器人外设章节。
+This command includes three parts: laser command, tracking command and positioning command. Before adding this command, please confirm whether the laser tracking sensor in the user peripheral has been configured successfully. See Robot Peripherals chapter for details.
 
 .. image:: teaching_pendant_software/118.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑35 Laser指令界面
+.. centered:: Figure 3.7-35 Laser command interface
 
-Convey命令
+Convey command
 ++++++++++++++++
 
-点击“Convey”图标进入Convey命令编辑界面
+Click the "Convey" icon to enter the Convey command editing interface
 
-该指令包含位置实时检测，IO实时检测，跟踪开启和跟踪关闭四条命令。详见机器人外设章节。
+This command includes four commands: position real-time detection, IO real-time detection, tracking on and tracking off. See Robot Peripherals chapter for details.
 
 .. image:: teaching_pendant_software/119.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑36 Conveyor指令界面
+.. centered:: Figure 3.7-36 Conveyor command interface
 
-F/T命令
+F/T command
 ++++++++++++++++
 
-点击“F/T”图标进入F/T命令编辑界面
+Click the "F/T" icon to enter the F/T command editing interface
 
-该指令包含FT_Guard(碰撞检测)，FT_Control(恒力控制)，FT_Spiral(螺旋插入)，FT_Rot(旋转插入)，FT_Lin(直线插入)，FT_FindSurface(表面定位) ，FT_CalCenter(中心定位)七个指令，详见机器人外设章节。
+The instruction includes FT_Guard (collision detection), FT_Control (constant force control), FT_Spiral (spiral insertion), FT_Rot (rotation insertion), FT_Lin (linear insertion), FT_FindSurface (surface positioning), FT_CalCenter (center positioning) seven instructions, detailed See Robot Peripherals chapter.
 
 .. image:: teaching_pendant_software/120.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑37 F/T指令界面
+.. centered:: Figure 3.7-37 F/T command interface
 
-3D命令
+3D command
 ++++++++++++++++
 
-点击“3D”图标进入3D命令编辑界面
+Click the "3D" icon to enter the 3D command editing interface
 
-该指令为3D视觉程序实例生成指令，用户可以根据生成的程序进行参考，与其他视觉设备进行通讯工作，包含相机标定和相机抓取两个程序案例参考。
+This command generates commands for 3D vision program examples. Users can refer to the generated programs and communicate with other vision devices, including two program case references of camera calibration and camera capture.
 
 .. image:: teaching_pendant_software/121.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑38 3D指令界面
+.. centered:: Figure 3.7-38 3D command interface
 
-Pallet命令
+Pallet command
 ++++++++++++++++
 
-点击“Pallet”图标进入Pallet命令编辑界面
+Click the "Pallet" icon to enter the Pallet command editing interface
 
-该指令为码垛程序生成指令，与3.9.6节矩阵移动功能是一致的，详细说明参考那一章节。
+This instruction generates instructions for the palletizing program, which is consistent with the matrix movement function in Section 3.9.6. For details, refer to that chapter.
 
 .. image:: teaching_pendant_software/122.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑39 Pallet指令界面
+.. centered:: Figure 3.7-39 Pallet command interface
 
-Offset命令
+Offset command
 ++++++++++++++++
 
-点击“Offset”图标进入Offset命令编辑界面
+Click the "Offset" icon to enter the Offset command editing interface
 
-该指令为整体偏移指令，输入各个偏移量，将开启指令和关闭指令添加到程序中，在开始和关闭中间的运动指令会基于基坐标（或工件坐标）进行偏移。
+This command is an overall offset command. Input each offset, add the opening command and closing command to the program, and the motion command between the start and close will be offset based on the base coordinates (or workpiece coordinates).
 
 .. image:: teaching_pendant_software/123.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑40 Offset指令界面
+.. centered:: Figure 3.7-40 Offset command interface
 
-W-Search命令
+W-Search command
 ++++++++++++++++
 
-点击“W-Search”图标进入W-Search命令编辑界面
+Click the "W-Search" icon to enter the W-Search command editing interface
 
-该指令为焊丝寻位指令，包含寻位开始，寻位结束和计算偏移量三个指令，该指令一般应用于焊接场景中，需要焊机与机器人IO和运动指令相结合使用。
+This command is a welding wire positioning command, including three commands of start of positioning, end of positioning and calculation of offset. This command is generally used in welding scenes and requires the combination of welding machine and robot IO and motion commands.
 
 .. image:: teaching_pendant_software/124.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑41 W-Search指令界面
+.. centered:: Figure 3.7-41 W-Search command interface
 
-在编写程序中，通常先设置寻位开始指令，之后添加两条LIN指令，确定寻位的方向，寻位成功后，获取计算出来的偏移量，将该偏移量通过整体偏移指令，生效到真正的焊接运动指令中，程序示例如下。
+In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
 
 .. image:: teaching_pendant_software/125.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑42 W-Search示例（1D）
+.. centered:: Figure 3.7-42 W-Search示例(1D)
 
-Vir-IO命令
+Vir-IO command
 ++++++++++++++++
 
-点击“Vir-IO”图标进入Vir-IO命令编辑界面
+Click the "Vir-IO" icon to enter the Vir-IO command editing interface
 
-该指令虚拟的IO控制指令，可以实现设置模拟外部DI和AI状态，获取模拟DI和AI状态。
+This command is a virtual IO control command, which can realize the setting of the simulated external DI and AI status, and obtain the simulated DI and AI status.
 
 .. image:: teaching_pendant_software/126.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑43 Vir-IO指令界面
+.. centered:: Figure 3.7-43 Vir-IO command interface
 
-Thread命令
+Thread command
 ++++++++++++++++
 
-点击“Thread”图标进入Thread命令编辑界面
+Click the "Thread" icon to enter the Thread command editing interface
 
-Thread命令为辅助线程功能，用户可以定义一个辅助线程与主线程同时运行，辅助线程主要与外部设备进行数据交互，支持socket通信，机器人DI状态获取，机器人DO状态设置，机器人状态信息获取，与主线程数据交互，主线程通过辅助线程获取的数据用于控制机器人运动逻辑的判断，用户程序示例截图：
+The Thread command is an auxiliary thread function. Users can define an auxiliary thread to run simultaneously with the main thread. The auxiliary thread mainly performs data interaction with external devices, supports socket communication, obtains robot DI status, robot DO status settings, and obtains robot status information. Thread data interaction, the data obtained by the main thread through the auxiliary thread is used to control the judgment of the robot's motion logic, the screenshot of the user program example:
 
 .. image:: teaching_pendant_software/127.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑44 Thread程序示例
+.. centered:: Figure 3.7-44 Thread程序示例
 
-ServoCart命令
-++++++++++++++++
+ServoCart command
+++++++++++++++++++++
 
-点击“ServoC”图标进入ServoCart命令编辑界面
+Click the "ServoC" icon to enter the ServoCart command editing interface
 
-ServoCart伺服控制（笛卡尔空间运动）指令，该指令可以通过绝对位姿控制或基于当前位姿偏移来控制机器人运动。
+ServoCart servo control (Cartesian space motion) command, which can control the robot motion through absolute pose control or based on the current pose offset.
 
 .. image:: teaching_pendant_software/128.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑45 ServoCart指令界面
+.. centered:: Figure 3.7-45 ServoCart command interface
 
-绝对位姿控制程序实例：
+Absolute pose control program example：
 
 .. image:: teaching_pendant_software/129.png
    :width: 6in
    :align: center
 
-此例中，x,y,z,rx,ry,rz（笛卡尔位置）是获取的机器人当前位置，此外，用户可以通过读取轨迹数据文件，socket通讯发送轨迹数据等方式，控制机器人运动。
+In this example, x, y, z, rx, ry, rz (Cartesian position) are the current position of the robot. In addition, the user can control the movement of the robot by reading the trajectory data file and sending the trajectory data through socket communication.
 
-基于当前位姿偏移（基坐标偏移）控制程序实例：
+Example of control program based on current pose offset (base coordinate offset):
 
 .. image:: teaching_pendant_software/130.png
    :width: 6in
    :align: center
 
-Modbus命令
+Modbus command
 ++++++++++++++++
 
-点击“Mobus”图标进入Modbus命令编辑界面
+Click the "Mobus" icon to enter the Modbus command editing interface
 
-该指令功能为基于ModbusTCP协议的总线功能，用户可以通过相关指令控制机器人与ModbusTCP client或server通讯（主站与从站通讯），对线圈，离散量，寄存器进行读写操作。
+The command function is a bus function based on the ModbusTCP protocol. The user can control the robot to communicate with the ModbusTCP client or server (the master station communicates with the slave station) through relevant instructions, and perform read and write operations on coils, discrete quantities, and registers.
 
-modbus主站读线圈实例：
+Example of modbus master reading coil：
 
 .. image:: teaching_pendant_software/131.png
    :width: 6in
    :align: center
 
-modbus主站写线圈实例：
+Example of modbus master write coil：
 
 .. image:: teaching_pendant_software/132.png
    :width: 6in
    :align: center
 
-Modbus从站读写线圈实例：
+Modbus slave read and write coil example：
 
 .. image:: teaching_pendant_software/133.png
    :width: 6in
    :align: center
 
-关于ModbusTCP更多操作功能，前请联系我们咨询。
+For more operating functions of ModbusTCP, please contact us for consultation.
 
-Function命令
+Function command
 ++++++++++++++++
 
-点击“Function”图标进入Function命令编辑界面
+Click the "Function" icon to enter the Function command editing interface
 
-该指令为调用函数接口功能，将机器人接口函数提供给客户选择，并提示客户该函数所需要的参数，方便客户编写脚本指令，更多函数陆续添加中。
+This command is to call the function interface function, provide the robot interface function to the customer to choose, and remind the customer of the parameters required by the function, which is convenient for the customer to write script commands, and more functions are being added one after another.
 
 .. image:: teaching_pendant_software/134.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑46 Function指令界面
+.. centered:: Figure 3.7-46 Function command interface
 
-Collision命令
-++++++++++++++++
+Collision command
+++++++++++++++++++++
 
-点击“Collision”图标进入Collision命令编辑界面
+Click the "Collision" icon to enter the Collision command editing interface
 
-该指令碰撞等级设置，通过该指令可以在程序运行中实时调节各轴碰撞等级，更灵活的部署应用场景。
+This command is used to set the collision level. Through this command, the collision level of each axis can be adjusted in real time during program operation, and the application scenario can be deployed more flexibly.
 
 .. image:: teaching_pendant_software/135.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑47 Collision指令界面
+.. centered:: Figure 3.7-47 Collision command interface
 
-Xmlrpc命令
+Xmlrpc command
 ++++++++++++++++
 
-点击“Xmlroc”图标进入Xmlrpc命令编辑界面
+Click the "Xmlroc" icon to enter the Xmlrpc command editing interface
 
-XML-RPC是一种通过sockets使用xml在程序之间传输数据的远程过程调用方法。通过这种方法，机器人控制器可以在远端的程序/服务调用功能函数（可带参数）并获取返回的结构性数据。机器人控制器负责处理编写XML-RPC客户端消息以及处理数据类型与XML之间转换的所有细节。
+XML-RPC is a remote procedure call method for transferring data between programs using xml over sockets. In this way, the robot controller can call the function (with parameters) in the remote program/service and obtain the returned structured data. The Robot Controller handles all the details of writing XML-RPC client messages and handling conversions between data types and XML.
 
 .. image:: teaching_pendant_software/136.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑48 Xmlrpc指令界面
+.. centered:: Figure 3.7-48 Xmlrpc command interface
 
 .. important:: 
-  1) 控制器作为客户端连接远端自定义端口；
+   1) The controller acts as a client to connect to the remote custom port;
 
-  2) 控制器作为客户端调用远端功能函数；
+   2) The controller acts as a client to call the remote function;
 
-  3) 支持调用远端不同功能函数；
+   3) Support calling different remote functions;
 
-  4) 支持字符串数组参数传入与字符数组结果返回，数组元素个数可自定义；
+   4) Support string array parameter input and character array result return, the number of array elements can be customized;
 
-  支持double型数组参数传入与double型数组结果返回，数组元素个数个数可自定义；
+   Support double-type array parameter input and double-type array result return, the number of array elements can be customized;
 
 ::
 
    XmlrpcClientCall(serverUrl,methodName,tableType,param)
 
-   serverUrl 服务端url，例如："http://192.168.58.29:50000/RPC2"
+   serverUrl server url, for example："http://192.168.58.29:50000/RPC2"
 
-   methodName 调用函数名，“example.add”
+   methodName Call function name, "example.add"
 
-   tableType 1-double型数组，2-string型数组
+   tableType 1-double array, 2-string array
 
-   param 调用函数参数
+   param call function parameters
 
 ::
 
    XmlrpcClientCall(error, result)
 
-   error 0-无错误，1-错误
+   error 0 - no error, 1 - error
 
-   result 若参数传入为double型数组，则result为double型数组，
+   result If the parameter is passed in as a double array, the result is a double array,
 
-   若参数传入为string型数组，则result为string型数组
+   If the parameter is passed in as an array of string type, the result will be an array of string type
 
-Acc命令
+Acc command
 ++++++++++++++++
 
-点击“Acc”图标进入Acc命令编辑界面
+Click the "Acc" icon to enter the Acc command editing interface
 
-Acc指令是实现机器人加速度可单独设置功能，通过调节运动指令加速度缩放因子，可以增加或减小加减速时间，实现机器人动作节拍时间可调。
+The Acc command is to realize the function that the acceleration of the robot can be set separately. By adjusting the acceleration scaling factor of the motion command, the acceleration and deceleration time can be increased or decreased, and the takt time of the robot action can be adjusted.
 
 .. image:: teaching_pendant_software/137.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑49 Acc指令界面
+.. centered:: Figure 3.7-49 Acc command interface
 
-Torque命令
+Torque command
 ++++++++++++++++
 
-点击“Torque”图标进入Torque命令编辑界面
+Click the "Torque" icon to enter the Torque command editing interface
 
-该指令为力柔顺控制指令，通过该指令可以让机器人在力控训练过程中，当力大于一定值时，机械臂能够调整自己的轨迹使力减小；力小于一定值时，返向原轨迹，继续沿原先轨迹运动。
+This command is a force compliance control command. Through this command, the robot can adjust its trajectory to reduce the force when the force is greater than a certain value during the force control training process; when the force is less than a certain value, it will return to the original trajectory. Continue to move along the original trajectory.
 
 .. image:: teaching_pendant_software/138.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑50 Torque指令界面
+.. centered:: Figure 3.7-50 Torque command interface
 
-Aux-IO命令
+Aux-IO command
 ++++++++++++++++
 
-点击“Aux-IO”图标进入Aux-IO命令编辑界面
+Click the "Aux-IO" icon to enter the Aux-IO command editing interface
 
-Aux-IO是机器人与PLC通讯控制外部扩展IO的指令功能，需要机器人与PLC建立UDP通讯，在原有的16路输入输出基础上，可以扩展128路输入输出，该指令用法与前文所讲的通用IO用法类似。使用此功能，有一定技术难度，前请联系我们咨询。
+Aux-IO is the instruction function for the robot to communicate with the PLC to control the external expansion IO. It is necessary for the robot to establish UDP communication with the PLC. On the basis of the original 16-channel input and output, 128-channel input and output can be expanded. The usage of this command is the same as that mentioned above. IO usage is similar. There are certain technical difficulties in using this function, please contact us for consultation beforehand.
 
 .. image:: teaching_pendant_software/139.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑51 Aux-IO指令界面
+.. centered:: Figure 3.7-51 Aux-IO command interface
 
-示教管理
-~~~~~~~~~~~~
+Teaching management
+~~~~~~~~~~~~~~~~~~~~~
 
-点击“示教管理”可显示所有保存的示教点信息，在该界面中可对示教点文件导入和导出，选中一个示教点后点击“删除”按钮即可将该点信息删除，示教点x,y,z,rx,ry,rz和v数值可进行修改，输入修改值，勾选左侧勾选兰，点击上方修改即可修改示教点信息。此外，用户可以通过名称搜索示教点。
+Click "Teaching Management" to display all saved teaching point information. In this interface, you can import and export teaching point files. After selecting a teaching point, click the "Delete" button to delete the point information. The values of teaching points x, y, z, rx, ry, rz and v can be modified. Enter the modified value, check the blue box on the left, and click the upper modification to modify the teaching point information. In addition, users can search for teaching points by name.
 
 .. image:: teaching_pendant_software/140.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.7‑52 示教管理界面
+.. centered:: Figure 3.7-52 Teaching management interface
 
-状态信息
-----------
+Status information
+----------------------
 
-系统日志
-~~~~~~~~~~~
+System log
+~~~~~~~~~~~~~~
 
-点击左侧菜单栏“状态信息”中“系统日志”按钮，进入日志显示界面。日志中记录着示教器的一些重要操作记录，如登录者、示教点增减等，点击进入后默认显示当天的日志记录，若要查询以前的记录，则在“日期选择”中选择目标日期，下方会实时显示当天日志记录，日志记录份数设置详见系统设置中。用户日志信息过多时，用户可以
-根据类型去查找相关日志信息。
+Click the "System Log" button in the "Status Information" on the left menu bar to enter the log display interface. The log records some important operation records of the teach pendant, such as the log-in person, the increase and decrease of the teaching point, etc. After clicking to enter, the log records of the current day are displayed by default. If you want to query the previous records, select the target in the "Date Selection" Date, the log record of the current day will be displayed in real time below, and the number of log records can be set in the system settings for details. When there is too much user log information, the user can
+Find relevant log information according to the type.
 
 .. image:: teaching_pendant_software/141.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.8‑1 系统日志界面
+.. centered:: Figure 3.8-1 系统日志界面
 
-状态查询
+Status query
 ~~~~~~~~~~~~~
 
-点击左侧菜单栏“状态信息”中“状态查询”菜单进入状态查询界面，如图表 3.8‑2状态查询。
+Click the "Status Query" menu in the left menu bar "Status Information" to enter the status query interface, as shown in Figure 3.8-2 Status Query.
 
 .. image:: teaching_pendant_software/142.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.8‑2 状态查询
+.. centered:: Figure 3.8-2 Status query
 
-状态查询操作步骤：
+Status query operation steps:
 
-**Step1**：点击“图表”按钮弹出图表设置弹出框如图表3.8‑3图表设置所示，查询类型选择图表展示查询，在图表设置中选择所需查询的参数以及参数放入的图表，点击“右移”按钮即可将参数配置到图表中。点击“设置”则下发设置图表指令。目前只能支持一张表格中最多包含四个待查参数并且最多设置一张图表；
+**Step1**：Click the "Figure" button to pop up the Figure setting pop-up box, as shown in Figure3.8-3Figure setting, select Figure display query for the query type, select the parameters to be queried and the Figure in which the parameters are placed in the Figure setting, and click the "Move Right" button The parameters can be configured in the Figure. Click "Settings" to issue the setting Figure command. At present, only one table can contain up to four parameters to be checked and one Figure can be set at most;
 
 .. image:: teaching_pendant_software/143.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.8‑3图表设置
+.. centered:: Figure 3.8-3 Figure settings
 
-**Step2**：触发功能暂时不需要设置，点击“查询”按钮即可查询数据。
+**Step2**：The trigger function does not need to be set temporarily, and the data can be queried by clicking the "Query" button.
 
-辅助应用
-----------
+Auxiliary application
+------------------------
 
-机器人校正
-~~~~~~~~~~~~
+Robot calibration
+~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“机器人校正”，进入机器人校正界面，此功能主要是对机器人进行零点位置校正。点击“去使能”按钮，拖动机器人各轴，移动到机器人到机械上的零点位置，点击“零点设定”按钮，设定机器人零点。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Robot Calibration" to enter the robot calibration interface. This function is mainly to calibrate the zero point position of the robot. Click the "Disable" button, drag each axis of the robot, move to the zero point position of the robot on the machine, and click the "Zero Set" button to set the robot zero point.
 
 .. image:: teaching_pendant_software/144.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑1 机器人校正示意图
+.. centered:: Figure 3.9-1 Schematic diagram of robot calibration
 
-**零点设定**：机器人出厂时会预设一个初始姿态，在该姿态下各个关节的角度为0。零点设定时机器人各关节运动到特定位置时所对应的机器人姿态。零点是机器人坐标系的基准，没有零点，机器人就无法判断自身的位置，所以为了获得尽可能高的绝对定位精度，就需要对机器人进行零点标定。
+**Zero setting**：When the robot leaves the factory, it will preset an initial posture, in which the angle of each joint is 0. When the zero point is set, the robot pose corresponds to when each joint of the robot moves to a specific position. The zero point is the benchmark of the robot coordinate system. Without the zero point, the robot cannot judge its own position. Therefore, in order to obtain the highest possible absolute positioning accuracy, it is necessary to calibrate the zero point of the robot.
 
-一般在以下情况下，需要对机器人进行零点标定：
+Generally, the zero point calibration of the robot is required under the following circumstances:
 
--  更换机器人机械系统零部件后；
+- After replacing parts of the robot's mechanical system;
 
--  与工件或者环境发生剧烈碰撞后；
+- After a violent collision with the workpiece or the environment;
 
--  建立坐标系等操作与实际位置相差较大时；
+- When operations such as establishing a coordinate system differ greatly from the actual position;
 
--  整个系统重新安装后；
+- After a complete system reinstallation;
 
--  编码器电池更换之后；
+- after the encoder battery has been replaced;
 
--  长途运输搬运机器人之后。
+- After long-distance transportation of the handling robot.
 
 .. important:: 
-   在机器人出厂时零点会设置好，如需再次设定零点，请联系我们提供技术支持。
+   The zero point will be set when the robot leaves the factory. If you need to set the zero point again, please contact us for technical support.
 
-系统升级
-~~~~~~~~~~~
+System Upgrade
+~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“系统升级”按钮，进入系统升级界面。系统升级分为软件升级、驱动器升级和系统关机。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click the "System Upgrade" button to enter the system upgrade interface. System upgrade is divided into software upgrade, driver upgrade and system shutdown.
 
-**软件升级**：在软件升级下点击“上传文件”，选择U盘中的software.tar.gz升级包，点击上传升级包，升级按钮旁显示“上传中…上传百分比”。
-待后台文件下载完成，界面显示“上传完成，正在升级中”，进行文件MD5和版本号检测，通过后，解密解压升级文件，并提示"升级成功，请重新启动控制箱！"，如果其中检测，解压或发生其他错误，升级按钮旁显示“升级失败”。
+**Software upgrade**：Click "Upload File" under Software Upgrade, select the software.tar.gz upgrade package in the U disk, click Upload Upgrade Package, and "Uploading...Upload Percentage" is displayed next to the upgrade button.
+After the download of the background file is completed, the interface displays "uploading completed, upgrading in progress", check the MD5 and version number of the file, after passing, decrypt and decompress the upgrade file, and prompt "Upgrade is successful, please restart the control box!", if detected , unzip or other errors occur, and "upgrade failed" is displayed next to the upgrade button.
 
 .. image:: teaching_pendant_software/145.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑2 系统升级
+.. centered:: Figure 3.9-2 System Upgrade
 
-**固件升级**：机器人进入BOOT模式后，上传升级压缩包，选择需要升级的从站（控制箱从站，本体驱动器从站1~6，末端从站），进行升级操作，并显示升级状态。
+**Firmware upgrade**：After the robot enters the BOOT mode, upload the upgrade compressed package, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
 
 .. image:: teaching_pendant_software/146.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑3 固件升级
+.. centered:: Figure 3.9-3 Firmware upgrade
 
-**从站配置文件升级**：机器人去使能后，上传升级文件，选择需要升级的从站（控制箱从站，本体驱动器从站1~6，末端从站），进行升级操作，并显示升级状态。
+**Slave configuration file upgrade**：After the robot is disabled, upload the upgrade file, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
 
 .. image:: teaching_pendant_software/147.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑4 从站配置文件升级
+.. centered:: Figure 3.9-4 Slave configuration file upgrade
 
-数据备份
-~~~~~~~~~~
+Data backup
+~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击 “数据备份”进入数据备份界面，如3.9-5所示。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Data Backup" to enter the data backup interface, as shown in 3.9-5.
 
-备份包数据中包含工具坐标系数据，系统配置文件，示教点数据，用户程序，模板程序和用户配置文件，当用户需要将本机器人相关数据移到另一台机器人上使用时，可通过此功能快速实现。
+The backup package data includes tool coordinate system data, system configuration files, teaching point data, user programs, template programs and user configuration files. When the user needs to move the relevant data of this robot to another robot, he can use this The function is realized quickly.
 
 .. image:: teaching_pendant_software/148.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑5数据备份界面
+.. centered:: Figure 3.9-5 Data backup interface
 
-10s数据记录
-~~~~~~~~~~~~~~
+10s data record
+~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“10s数据记录”进入10s数据记录功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "10s Data Recording" to enter the 10s data recording function interface.
 
-首先选择记录类型，分为默认参数记录和自选参数记录，默认参数记录为系统自动设置记录的数据，自选参数记录用户可自行选择需要记录的参数数据，参数个数最多为15个。选定参数列表后，选择记录参数，点击“右移”按钮即可将参数配置到参数列表中。点击“开始记录”机器人开始记录数据，点击“停止记录”机器人停止记录数，点击“下载数据”可下载最后10s的数据。
+First, select the record type, which is divided into default parameter record and optional parameter record. The default parameter record is the data automatically set and recorded by the system, and the optional parameter record user can choose the parameter data to be recorded. The maximum number of parameters is 15. After selecting the parameter list, select the record parameter and click the "Move Right" button to configure the parameter into the parameter list. Click "Start Recording" to start recording data, click "Stop Recording" to stop recording data, and click "Download Data" to download the data of the last 10 seconds.
 
 .. image:: teaching_pendant_software/149.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑6 10s数据记录
+.. centered:: Figure 3.9-6 10s data record
 
-示教点配置
-~~~~~~~~~~~~~
+Teach point configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“示教点配置”进入示教点配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Teaching Point Configuration" to enter the teaching point configuration interface.
 
-用户在使用按钮盒或其它IO信号记录示教点功能前，首先对示教点名称前缀，编号上限和示教方法进行配置，名称前缀支持自定义前缀和以当前程序名作为前缀两种模式。例如，自定义名称前缀“P”，编号上限“3”，示教方法“机器人示教”，记录机器人当前末端（工具）点依次为：P1、P2、P3，再次记录将覆盖之前记录点。
+Before using the button box or other IO signals to record the teaching point function, the user first configures the teaching point name prefix, the upper limit of the number and the teaching method. The name prefix supports two modes: custom prefix and current program name as the prefix. For example, customize the name prefix "P", number upper limit "3", teaching method "robot teaching", record the current end (tool) points of the robot in sequence: P1, P2, P3, and record again will overwrite the previous record points.
 
 .. image:: teaching_pendant_software/150.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑7 示教点配置
+.. centered:: Figure 3.9-7 Teach point configuration
 
-矩阵移动
-~~~~~~~~~~~~
+Matrix move
+~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“矩阵移动”进入矩阵移动配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Matrix Movement" to enter the matrix movement configuration function interface.
 
-此功能通过设定三点坐标及行列层和层高等数值，来控制机器手规则移动，适用于常见的码垛应用。第一步选择机器人运动方式，“PTP”或者“Line”，第二步设定机器人运动路径，“头到尾走法”或“弓字形走法”，第三步设定堆叠方式，“堆垛”或“卸垛”。
+This function controls the regular movement of the manipulator by setting the three-point coordinates and the values of the row and column layer and layer height, which is suitable for common palletizing applications. The first step is to select the robot movement mode, "PTP" or "Line", the second step is to set the robot movement path, "head-to-tail walking method" or "bow walking method", the third step is to set the stacking method, "stack stacking" or "unstacking".
 
 .. image:: teaching_pendant_software/151.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑8 矩阵移动
+.. centered:: Figure 3.9-8 Matrix move
 
-第四步根据路径示教三个点，第一点为第一排起点，整个运动过程手臂姿态由该点决定，第二点为第一排终点，第三点为最后一排终点。第五步设点行数和列数，第六步设定层数和每一层高度，最后一步，命名该矩阵运动程序文件，一个矩阵移动程序生成成功。
+The fourth step is to teach three points according to the path. The first point is the starting point of the first row, and the arm posture is determined by this point during the whole movement process. The second point is the end point of the first row, and the third point is the end point of the last row. The fifth step is to set the number of rows and columns. The sixth step is to set the number of layers and the height of each layer. The last step is to name the matrix motion program file, and a matrix movement program is generated successfully.
 
 .. image:: teaching_pendant_software/152.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑9 矩阵移动
+.. centered:: Figure 3.9-9 Matrix move
 
-作业原点
-~~~~~~~~~~
+Work origin
+~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“作业原点”进入作业原点配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Working Origin" to enter the working origin configuration function interface.
 
-该页面显示作业原点的名称和关节位置信息，作业原点命名为固定名pHome，点击“设置”以当前机器人位姿作为作业原点，点击“移至该点”机器人会运动到作业原点。此外DI配置中增加移动至作业原点可配置选项，DO配置中增加到达作业原点可配置选项。
+This page displays the name and joint position information of the work origin. The work origin is named pHome. Click "Set" to use the current robot pose as the work origin. Click "Move to this point" to move the robot to the work origin. In addition, the configurable option of moving to the origin of the work is added in the DI configuration, and the configurable option of reaching the origin of the work is added in the DO configuration.
 
 .. image:: teaching_pendant_software/153.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑10 作业原点
+.. centered:: Figure 3.9-10 Work origin
 
-干涉区配置
-~~~~~~~~~~~~~
+Interference zone configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“干涉区配置”进入干涉区配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Interference Area Configuration" to enter the interference area configuration function interface.
 
-首先我们需要对干涉方式和进入干涉区操作进行配置，干涉方式分为“轴干涉”和“立方体干涉”，当开启后，会显示激活标志。首先进行进入干涉区运动配置“继续运动”或者“停止”。
+First of all, we need to configure the interference mode and the operation of entering the interference area. The interference mode is divided into "axis interference" and "cube interference". When enabled, the activation sign will be displayed. First, enter the interference zone motion configuration "continue motion" or "stop".
 
 .. image:: teaching_pendant_software/154.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑11 干涉区配置
+.. centered:: Figure 3.9-11 Interference zone configuration
 
-接下来设置进入干涉区拖动配置，用户可以根据需求设置拖动模式下进入干涉区后策略，不限制拖动，阻抗回调和切换回手动模式。
+Next, set the configuration of dragging into the interference area. Users can set the strategy after entering the interference area in drag mode according to their needs, without restricting dragging, impedance callback and switching back to manual mode.
 
 .. image:: teaching_pendant_software/155.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑12 干涉区拖动配置
+.. centered:: Figure 3.9-12 Interference area drag configuration
 
-选择轴干涉，需要对轴干涉的参数进行配置，检测方法分为“指令位置”和“反馈位置”两种，干涉区模式分为“范围内干涉”和“范围外干涉”两种，接下来设置每个关节的范围以及各个关节范围是否使能，可以输入数值，也可以通过“机器人示教”按钮将当前机器人的位置记录到当中，最后点击应用即可。
+To select axis interference, you need to configure the parameters of axis interference. The detection method is divided into two types: "command position" and "feedback position". The interference area mode is divided into two types: "interference within the range" and "interference outside the range". Next Set the range of each joint and whether each joint range is enabled, you can enter the value, or you can record the current position of the robot through the "Robot Teaching" button, and finally click Apply.
 
 .. image:: teaching_pendant_software/156.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑13 轴干涉配置
+.. centered:: Figure 3.9-13 Axis interference configuration
 
-选择立方体干涉，需要对立方体干涉的参数进行配置，检测方法分为“指令位置”和“反馈位置”两种，干涉区模式分为“范围内干涉”和“范围外干涉”两种，参考坐标系分为“基坐标”和“工件坐标”，根据实际使用选择设置。接下来设进行范围设置，范围设置分为两种方法，首先看第一种方法“两点法”，即立方体的两个对角的顶点组成，我们可以通过输入或者机器人示教记录位置。最后点击应用即可。
+To choose cube interference, you need to configure the parameters of cube interference. The detection method is divided into two types: "command position" and "feedback position". The interference area mode is divided into "interference within range" and "interference outside range". The system is divided into "base coordinates" and "workpiece coordinates", which can be selected and set according to actual use. Next, set the range setting. The range setting is divided into two methods. First, look at the first method "two-point method", which is composed of two diagonal vertices of the cube. We can record the position through input or robot teaching. Finally click Apply.
 
 .. image:: teaching_pendant_software/157.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑14 立方体干涉配置
+.. centered:: Figure 3.9-14 Cube Interferometric Configuration
 
-接下来看第二种方法“中心点+边长”，即立方体的中心位置点和立方体的边长构成干涉区，我们可以通过输入或者机器人示教记录位置。最后点击应用即可。
+Next, look at the second method "center point + side length", that is, the center point of the cube and the side length of the cube form an interference area, and we can record the position through input or robot teaching. Finally click Apply.
 
 .. image:: teaching_pendant_software/158.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑15 立方体干涉配置
+.. centered:: Figure 3.9-15 Cube Interferometric Configuration
 
-末端LED配置
-~~~~~~~~~~~~~
+Terminal LED configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“末端LED配置”进入末端LED颜色配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "End LED Configuration" to enter the end LED color configuration function interface.
 
-可配置LED颜色为绿色，蓝色和白青色，用户可以根据需求对自动模式，手动模式和拖动模式的LED颜色进行配置，不同模式不可配置同一种颜色。
+The configurable LED colors are green, blue and white cyan. Users can configure the LED colors of automatic mode, manual mode and drag mode according to their needs. Different modes cannot be configured with the same color.
 
 .. image:: teaching_pendant_software/159.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑16 末端LED配置
+.. centered:: Figure 3.9-16 Terminal LED configuration
 
-外设协议
-~~~~~~~~~~
+Peripheral protocol
+~~~~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“外设协议”进入外设协议配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Peripheral Protocol" to enter the peripheral protocol configuration function interface.
 
-该页面是对外设协议的配置页面，用户可以根据当前使用的外设进行协议配置。
+This page is the configuration page for the peripheral protocol, and the user can configure the protocol according to the currently used peripheral.
 
 .. image:: teaching_pendant_software/160.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑17 外设协议配置
+.. centered:: Figure 3.9-17 Peripheral Protocol Configuration
 
-在程序示教中增加基于Modbus-rtu通讯的读写寄存器lua接口, 输入寄存器地址0x1000寄存器数量为50个，共100字节数据内容；保持寄存器地址0x2000，寄存器数量为50个，共100字节数据内容。
-
-::
-
-   ModbusRegRead（fun_code，reg_add，reg_num）：读寄存器；
-
-   fun_code： 功能码，0x03-保持寄存器，0x04-输入寄存器
-
-   reg_add： 寄存器地址
-
-   reg_num： 寄存器数量
+Add a lua interface for reading and writing registers based on Modbus-rtu communication in the program teaching, input register address 0x1000, the number of registers is 50, a total of 100 bytes of data content; hold the register address 0x2000, the number of registers is 50, a total of 100 bytes data content.
 
 ::
 
-   ModbusRegWrite（fun_code，reg_add，reg_num，reg_value）：写寄存器；
+   ModbusRegRead(fun_code, reg_add, reg_num): read register;
 
-   fun_code 功能码，0x06-单个寄存器，0x10-多个寄存器
+   fun_code: function code, 0x03-holding register, 0x04-input register
 
-   reg_add： 寄存器地址
+   reg_add: register address
 
-   reg_num： 寄存器数量
-
-   reg_value： 字节数组
+   reg_num: number of registers
 
 ::
 
-   ModbusRegGetData（reg_num）：获取寄存器数据；
+   ModbusRegWrite(fun_code, reg_add, reg_num, reg_value): write register;
 
-   reg_num： 寄存器数量
+   fun_code function code, 0x06-single register, 0x10-multiple registers
 
-   返回值说明：
+   reg_add: register address
 
-   reg_value: 数组变量
+   reg_num: number of registers
 
-程序示例截图：
+   reg_value: byte array
+
+::
+
+   ModbusRegGetData (reg_num): Get register data;
+
+   reg_num: number of registers
+
+   Return value description:
+
+   reg_value: array variable
+
+Program sample screenshot:
 
 .. image:: teaching_pendant_software/161.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.9‑18 Modbus-rtu通讯lua程序示例
+.. centered:: Figure 3.9-18 Modbus-rtu communication lua program example
 
-主程序配置
-~~~~~~~~~~~~
+Main program configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“主程序配置”进入主程序配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Main Program Configuration" to enter the main program configuration function interface.
 
-配置主程序可以与DI配置主程序启动配合使用，配置的主程序需要先试运行以确保安全，在机器人设置中配置对应DI为启动主程序信号功能后，用户可以控制该DI信号实现运行主程序。
+The configuration of the main program can be used in conjunction with the DI configuration of the main program startup. The configured main program needs to be trial run first to ensure safety. After configuring the corresponding DI in the robot settings to start the main program signal function, the user can control the DI signal to run the main program. .
 
 .. image:: teaching_pendant_software/162.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑19 主程序配置
+.. centered:: Figure 3.9-19 Main program configuration
 
-拖动锁定
-~~~~~~~~~~
+Drag lock
+~~~~~~~~~~~~
 
-在“辅助应用”中的“机器人本体”的菜单栏下，点击“拖动锁定”进入拖动示教锁定配置功能界面。
+Under the menu bar of "Robot Body" in "Auxiliary Application", click "Drag Lock" to enter the drag teaching lock configuration function interface.
 
-针对拖动示教增加了锁定自由度功能，当拖动示教功能开关设置为使能状态时，各自由度参数在用户拖动机器人时生效。例如，当参数设置为X:10，Y:0，Z:10，RX:10，RY:10，RZ:10时，在拖动模式下拖拽机器人，可以限制机器人只移动Y方向，假如需要在拖动时保持机器人姿态不变，只移动X，Y，Z方向，可以将X，Y，Z设置为0，RX，RY，RZ设置为10。
+For drag teaching, the function of locking degrees of freedom is added. When the drag teaching function switch is set to the enabled state, the parameters of each degree of freedom will take effect when the user drags the robot. For example, when the parameter is set to X:10, Y:0, Z:10, RX:10, RY:10, RZ:10, dragging the robot in the drag mode can restrict the robot to move only in the Y direction, if necessary Keep the posture of the robot unchanged while dragging, and only move in the X, Y, and Z directions. You can set X, Y, and Z to 0, and RX, RY, and RZ to 10.
 
 .. image:: teaching_pendant_software/163.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑20拖动示教锁定配置
+.. centered:: Figure 3.9-20 Drag teach lock configuration
 
-焊接专家库
-~~~~~~~~~~~~~~~
+Welding Expert Library
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击“辅助应用”中的“焊接专家库”的菜单栏，进入焊接专家库功能界面。焊接专家库分为焊件形状，零件设计，夹具结构和配置四部分功能。
+Click the menu bar of "Welding Expert Library" in "Auxiliary Application" to enter the function interface of welding expert library. The welding expert library is divided into four parts: weldment shape, part design, fixture structure and configuration.
 
-点击“焊件形状”下的“直焊”，进入直焊指导界面。在各项机器人基础设置配置完成的基础上，我们可以通过几个简单的步骤快速生成焊接示教程序。主要包含以下五个步骤，由于功能间存在互斥，所以实际生成一个焊接示教程序的步骤少于五步。
+Click "Direct Welding" under "Weldment Shape" to enter the direct welding guidance interface. On the basis of the configuration of the basic settings of the robot, we can quickly generate a welding teaching program through a few simple steps. It mainly includes the following five steps. Due to the mutual exclusion between functions, the actual steps to generate a welding teaching program are less than five steps.
 
-步骤一，是否使用扩展轴，如果使用扩展轴需要配置好扩展轴相关坐标系以及使能扩展轴。
+Step 1, whether to use the extended axis, if the extended axis is used, the related coordinate system of the extended axis needs to be configured and the extended axis should be enabled.
 
 .. image:: teaching_pendant_software/164.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑20 扩展轴配置
+.. centered:: Figure 3.9-20 Extended axis configuration
 
-步骤二，标定起点，起点安全点，终点，终点安全点。若第一步选择了扩展轴，会加载扩展轴移动功能，配合相关点的标定。
+Step 2: Calibrate the starting point, the starting point safety point, the end point, and the ending point safety point. If the extended axis is selected in the first step, the extended axis movement function will be loaded to cooperate with the calibration of relevant points.
 
 .. image:: teaching_pendant_software/165.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑21 标定相关点
+.. centered:: Figure 3.9-21 Calibration related points
 
-步骤三，选择是否需要激光，如果是的话，需要编辑激光寻位指令的参数。
+Step 3, choose whether laser is needed, if yes, edit the parameters of the laser positioning command.
 
 .. image:: teaching_pendant_software/166.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑22 激光寻位配置
+.. centered:: Figure 3.9-22 Laser positioning configuration
 
-步骤四，选择是否需要摆焊，如果需要摆焊，需要编辑摆焊相关参数。
+Step 4: Select whether weaving welding is required, and if weaving welding is required, you need to edit the relevant parameters of weaving welding.
 
 .. image:: teaching_pendant_software/167.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑23 摆焊配置
+.. centered:: Figure 3.9-23 Weaving configuration
 
-步骤五，给程序命名，并在程序示教界面中自动打开该程序。
+Step 5, name the program, and automatically open the program in the program teaching interface.
 
 .. image:: teaching_pendant_software/168.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑24 保存程序
+.. centered:: Figure 3.9-24 Save program
 
-点击“焊件形状”下的“圆弧焊”，进入圆弧焊指导界面。在各项机器人基础设置配置完成的基础上，我们可以通过两个简单的步骤快速生成焊接示教程序。主要包含以下两个步骤。
+Click "Arc Welding" under "Weldment Shape" to enter the arc welding guidance interface. On the basis of the configuration of the basic settings of the robot, we can quickly generate a welding teaching program through two simple steps. It mainly includes the following two steps.
 
-步骤一，标定起点，起点安全点，圆弧过渡点，终点和终点安全点。
+Step 1: Calibrate the starting point, the starting point safety point, the arc transition point, the end point and the end point safety point.
 
 .. image:: teaching_pendant_software/169.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑25 标定点
+.. centered:: Figure 3.9-25 Calibration point
 
-步骤二，给程序命名，并在程序示教界面中自动打开该程序。
+Step 2: Name the program and automatically open the program in the program teaching interface.
 
 .. image:: teaching_pendant_software/170.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑26 保存程序
+.. centered:: Figure 3.9-26 Save program
 
-点击“焊件形状”下的“多层多道焊”，进入多层多道焊指导界面。在各项机器人基础设置配置完成的基础上，我们可以通过四个简单的步骤快速生成焊接示教程序。主要包含以下五个步骤。
+Click "Multi-layer multi-pass welding" under "Weldment shape" to enter the multi-layer multi-pass welding guidance interface. After completing the configuration of various robot basic settings, we can quickly generate a welding teaching program through four simple steps. It mainly includes the following five steps.
 
-步骤一，根据提示设置第一组点，即焊接点，X+点，Z+点以及安全点。
+Step 1. Set the first group of points according to the prompts, namely welding point, X+ point, Z+ point and safety point.
 
 .. image:: teaching_pendant_software/171.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑27 第一组点设置
+.. centered:: Figure 3.9-27 First set of point settings
 
-步骤二，第二组点设置，可以设置路径点的类型，支持直线和圆弧路径，包括焊接点，X+点和Z+点。
+Step 2, the second group of point settings, you can set the type of path point, support straight line and arc path, including welding point, X+ point and Z+ point.
 
 .. image:: teaching_pendant_software/172.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑28 第二组点设置
+.. centered:: Figure 3.9-28 Second set of point settings
 
-步骤三，所有组点设置完成后，点击“完成”进入各个焊道偏移量设置功能页面，依次设置所需焊道的偏移量，界面如下图所示。
+Step 3: After setting all the group points, click "Finish" to enter the function page of each weld bead offset setting function, and set the offset of the required weld bead in turn. The interface is shown in the figure below.
 
 .. image:: teaching_pendant_software/173.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.9‑29 焊道偏移量设置
+.. centered:: Figure 3.9-29 Weld Bead Offset Setting
 
-步骤四，当所需设置焊道参数都设置完成后，点击“完成”跳转到程序生成页面，输入文件名，即可生成该多层多道焊程序，之后用户可在程序示教中打开该程序，进行调试，界面如下图所示。
+Step 4: After all the required weld bead parameters are set, click "Finish" to jump to the program generation page, enter the file name, and the multi-layer multi-pass welding program can be generated, and then the user can open it in the program teaching The program is debugged, and the interface is shown in the figure below.
 
 .. image:: teaching_pendant_software/174.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.9‑30 保存程序
+.. centered:: Figure 3.9-30 Save program
 
-安全速度设置
-~~~~~~~~~~~~~~~~
+Safe speed setting
+~~~~~~~~~~~~~~~~~~~~~~
 
-在“辅助应用”中的“安全性设置”的菜单栏下，点击“安全速度设置”进入安全速度设置功能界面。
+Under the menu bar of "Security Settings" in "Auxiliary App", click "Safe Speed Settings" to enter the safe speed setting function interface.
 
-启用安全速度并设置速度限制值，当用户在手动模式下调试机器人或者拖动模式下拖拽机器人，速度超过该设置阈值时，机器人会停止并警告提示用户，起到安全防护的作用。
+Enable the safe speed and set the speed limit value. When the user debugs the robot in manual mode or drags the robot in drag mode, and the speed exceeds the set threshold, the robot will stop and warn the user, which has the effect of safety protection.
 
 .. image:: teaching_pendant_software/175.png
    :width: 3in
    :align: center
 
-.. centered:: 图表 3.9‑31 安全速度设置
+.. centered:: Figure 3.9-31 Safe speed setting
 
-系统设置
+System settings
 -----------------
 
-通用设置
-~~~~~~~~~~~~~
+General settings
+~~~~~~~~~~~~~~~~~~~~
 
-点击左侧菜单栏“系统设置”，点击二级菜单栏“通用设置”，进入通用设置界面。通用设置可以根据当前电脑时间更新机器人系统时间，以便记录日志内容时间准确。
+Click "System Settings" on the left menu bar, and click "General Settings" on the secondary menu bar to enter the general settings interface. The general setting can update the robot system time according to the current computer time, so that the time of recording the log content is accurate.
 
-网络设置可以设置控制器IP，子网掩码，默认网关，DNS服务器和示教器IP(使用我们的FR-HMI示教器情况下该IP有效，在使用FR-HMI示教器情况下需要配置示教器启用状态为启用)，方便客户使用场景。
+Network settings can set controller IP, subnet mask, default gateway, DNS server and teach pendant IP (this IP is valid when using our FR-HMI teach pendant, and needs to be used when using FR-HMI teach pendant Configure the teaching pendant to be enabled), which is convenient for customers to use the scene.
 
-客户可以根据需求选择示教器语言为中文，英文，法语或日文。此外，语言可支持用户自定义，用户可以通过导出的中文语言文件，进行翻译，将翻译后语言文件导入进去，即可选择使用导入后的语言文件。
+Customers can choose the teaching pendant language as Chinese, English, French or Japanese according to their needs. In addition, the language can be customized by the user. The user can translate the exported Chinese language file, import the translated language file, and then choose to use the imported language file.
 
-用户可以对日志保留数进行设置和系统配置文件的导入导出，日志保留数最大为30，系统配置文件记录着该设置数值。
+Users can set the number of retained logs and import and export the system configuration file. The maximum number of retained logs is 30, and the system configuration file records the set value.
 
-系统恢复下恢复出厂设置可以清除用户数据，使机器人恢复到出厂配置。
+Restore factory settings under system recovery can clear user data and restore the robot to factory settings.
 
-从站日志生成和控制器日志导出功能为下载控制器一些重要的状态或报错的记录文件，方便排查机器人问题。
+The slave station log generation and controller log export functions are to download some important status or error record files of the controller, which is convenient for troubleshooting robot problems.
 
 .. image:: teaching_pendant_software/176.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.10‑1 通用设置示意图
+.. centered:: Figure 3.10-1 Schematic diagram of general settings
 
-账户设置
-~~~~~~~~~~
+Account settings account settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-点击二级菜单栏账户设置，进入账户设置界面。账户管理功能仅限管理员可使用。其中默认的管理员账户不可删除、管理员的用户名和权限不可修改。
+Click Account Settings on the secondary menu bar to enter the Account Settings interface. Account management functions are only available to administrators. The default administrator account cannot be deleted, and the administrator's user name and permissions cannot be modified.
 
--  **修改用户名、密码和用户权限**：选中需要修改数据行的选择框（即行首的白色选择框），再选择需要修改的数据，对其进行修改，修改完成后点击“保存并登出”，系统会进入登录界面，使用修改完的用户名和密码登录即可。
+-  **Modify username, password and user permissions**：Select the selection box of the data row to be modified (that is, the white selection box at the beginning of the row), and then select the data to be modified and modify it. After the modification is completed, click "Save and logout", the system will enter the login interface, and use the modified Login with username and password.
 
--  **新增用户**：点击“新增”按钮，这时账户管理弹框中的底部会出现新的一行，选中这一行行首的选择框，再点击“修改”按钮，输入新增的用户信息，选中用户权限，点击“保存并登出”，系统会重新进入登录界面，使用新用户登录即可。
+-  **Add users**：Click the "Add" button, and a new line will appear at the bottom of the account management pop-up box, select the selection box at the beginning of this line, and then click the "Modify" button, enter the new user information, select the user permission, and click "Save and log out", the system will re-enter the login interface, just log in with the new user.
 
--  **删除用户**：选中想要删除行的选择框，点击“删除”按钮，最后点击“保存并登出”按钮即可。
+-  **Delete users**：Select the selection box of the row you want to delete, click the "Delete" button, and finally click the "Save and Logout" button.
 
 .. image:: teaching_pendant_software/177.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.10‑2 通用设置示意图
+.. centered:: Figure 3.10-2 Schematic diagram of general settings
 
-关于
-~~~~~~
+About
+~~~~~~~~~
 
-点击二级菜单栏关于，进入关于界面。该页面展示了机器人的型号和序列号，机器人运行使用的Web版本和控制箱版本，硬件版本和固件版本。
+Click About on the secondary menu bar to enter the About interface. This page shows the model and serial number of the robot, the web version and control box version used by the robot, hardware version and firmware version.
 
 .. image:: teaching_pendant_software/178.png
    :width: 6in
    :align: center
 
-.. centered:: 图表 3.10‑3 关于示意图
+.. centered:: Figure 3.10-3 About Schematics
