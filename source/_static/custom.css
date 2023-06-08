@@ -101,3 +101,7 @@ body {
 .rst-content .line-block {
     margin-bottom: 0px;
 }
+
+.sheet-center {
+    text-align: center;
+}

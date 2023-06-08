@@ -195,17 +195,113 @@ The following table shows the stop distance and stop time of the type 0 stop. Th
 
 Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to the ground. Joint 2, joint 3, joint 4, joint 5 testing robots follow the vertical trajectory, the rotating shaft is parallel to the ground, and stops when the robot moves down.
 
-.. figure:: installation/011.png
-	:align: center
-	:width: 6in
-
 .. centered:: Table 1.1-1 Category 0 stop distance(rad)
+.. list-table::
+   :widths: 10 15 15 15 15 15 15
+   :header-rows: 0
+   :class: sheet-center
 
-.. figure:: installation/012.png
-	:align: center
-	:width: 6in
+   * - 
+     - **Joint 1**
+     - **Joint 2**
+     - **Joint 3**
+     - **Joint 4**
+     - **Joint 5**
+     - **Joint 6**
+
+   * - **FR3**
+     - 0.47
+     - 0.60
+     - 0.56
+     - 0.29
+     - 0.10
+     - 0.06
+
+   * - **FR5**
+     - 0.51
+     - 0.63
+     - 0.60
+     - 0.33
+     - 0.16
+     - 0.10
+
+   * - **FR10**
+     - 0.64
+     - 0.70
+     - 0.69
+     - 0.42
+     - 0.25
+     - 0.13
+
+   * - **FR16**
+     - 0.60
+     - 0.67
+     - 0.65
+     - 0.39
+     - 0.22
+     - 0.12
+
+   * - **FR20**
+     - 0.69
+     - 0.75
+     - 0.80
+     - 0.48
+     - 0.31
+     - 0.22
 
 .. centered:: Table 1.1-2 Category 0 stop time (ms)
+.. list-table::
+   :widths: 10 15 15 15 15 15 15
+   :header-rows: 0
+   :class: sheet-center
+
+   * - 
+     - **Joint 1**
+     - **Joint 2**
+     - **Joint 3**
+     - **Joint 4**
+     - **Joint 5**
+     - **Joint 6**
+
+   * - **FR3**
+     - 400
+     - 470
+     - 450
+     - 280
+     - 120
+     - 90
+
+   * - **FR5**
+     - 420
+     - 500
+     - 480
+     - 310
+     - 150
+     - 120
+
+   * - **FR10**
+     - 460
+     - 540
+     - 510
+     - 330
+     - 170
+     - 140
+
+   * - **FR16**
+     - 440
+     - 530
+     - 490
+     - 320
+     - 160
+     - 130
+
+   * - **FR20**
+     - 540
+     - 600
+     - 700
+     - 400
+     - 260
+     - 170
 
 After the emergency stop, turn off the power, rotate the emergency stop button, and turn on the power to restart the robot.
 
@@ -220,29 +316,221 @@ At the same time, the stop time and stop distance of the robot safety stop and s
 Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to the ground. Joint 2, joint 3, joint 4, joint 5 testing robots follow the vertical trajectory, the rotating shaft is parallel to the ground, and stops when the robot moves down.
 
 
-.. figure:: installation/013.png
-	:align: center
-	:width: 6in
-
 .. centered:: Table 1.1-3 Safety stop distance(rad)
+.. list-table::
+   :widths: 10 15 15 15 15 15 15
+   :header-rows: 0
+   :class: sheet-center
 
-.. figure:: installation/014.png
-	:align: center
-	:width: 6in
+   * - 
+     - **Joint 1**
+     - **Joint 2**
+     - **Joint 3**
+     - **Joint 4**
+     - **Joint 5**
+     - **Joint 6**
+
+   * - **FR3**
+     - 0.49
+     - 0.63
+     - 0.58
+     - 0.32
+     - 0.12
+     - 0.09
+
+   * - **FR5**
+     - 0.54
+     - 0.65
+     - 0.63
+     - 0.35
+     - 0.19
+     - 0.12
+
+   * - **FR10**
+     - 0.66
+     - 0.73
+     - 0.71
+     - 0.45
+     - 0.27
+     - 0.14
+
+   * - **FR16**
+     - 0.63
+     - 0.69
+     - 0.68
+     - 0.41
+     - 0.25
+     - 0.14
+
+   * - **FR20**
+     - 0.71
+     - 0.78
+     - 0.82
+     - 0.51
+     - 0.33
+     - 0.25
 
 .. centered:: Table 1.1-4 Safety stop time(ms)
+.. list-table::
+   :widths: 10 15 15 15 15 15 15
+   :header-rows: 0
+   :class: sheet-center
 
-.. figure:: installation/015.png
-	:align: center
-	:width: 6in
+   * - 
+     - **Joint 1**
+     - **Joint 2**
+     - **Joint 3**
+     - **Joint 4**
+     - **Joint 5**
+     - **Joint 6**
+
+   * - **FR3**
+     - 410
+     - 490
+     - 410
+     - 300
+     - 130
+     - 110
+
+   * - **FR5**
+     - 450
+     - 520
+     - 510
+     - 330
+     - 180
+     - 140
+
+   * - **FR10**
+     - 480
+     - 570
+     - 530
+     - 360
+     - 190
+     - 170
+
+   * - **FR16**
+     - 470
+     - 550
+     - 520
+     - 340
+     - 190
+     - 150
+
+   * - **FR20**
+     - 560
+     - 630
+     - 720
+     - 430
+     - 280
+     - 200
 
 .. centered:: Table 1.1-5 Soft limit stop distance(rad)
+.. list-table::
+   :widths: 10 15 15 15 15 15 15
+   :header-rows: 0
+   :class: sheet-center
 
-.. figure:: installation/016.png
-	:align: center
-	:width: 6in
+   * - 
+     - **Joint 1**
+     - **Joint 2**
+     - **Joint 3**
+     - **Joint 4**
+     - **Joint 5**
+     - **Joint 6**
+
+   * - **FR3**
+     - 0.52
+     - 0.65
+     - 0.61
+     - 0.34
+     - 0.15
+     - 0.11
+
+   * - **FR5**
+     - 0.56
+     - 0.68
+     - 0.65
+     - 0.38
+     - 0.21
+     - 0.15
+
+   * - **FR10**
+     - 0.69
+     - 0.75
+     - 0.74
+     - 0.47
+     - 0.30
+     - 0.18
+
+   * - **FR16**
+     - 0.65
+     - 0.72
+     - 0.70
+     - 0.44
+     - 0.27
+     - 0.17
+
+   * - **FR20**
+     - 0.74
+     - 0.80
+     - 0.85
+     - 0.53
+     - 0.36
+     - 0.27
 
 .. centered:: Table 1.1-6 Soft limit stop time(ms)
+.. list-table::
+   :widths: 10 15 15 15 15 15 15
+   :header-rows: 0
+   :class: sheet-center
+
+   * - 
+     - **Joint 1**
+     - **Joint 2**
+     - **Joint 3**
+     - **Joint 4**
+     - **Joint 5**
+     - **Joint 6**
+
+   * - **FR3**
+     - 430
+     - 500
+     - 430
+     - 310
+     - 150
+     - 120
+
+   * - **FR5**
+     - 460
+     - 540
+     - 520
+     - 350
+     - 190
+     - 160
+
+   * - **FR10**
+     - 500
+     - 580
+     - 550
+     - 370
+     - 210
+     - 180
+
+   * - **FR16**
+     - 480
+     - 570
+     - 530
+     - 360
+     - 200
+     - 170
+
+   * - **FR20**
+     - 580
+     - 640
+     - 740
+     - 440
+     - 300
+     - 210
 
 .. important:: 
 	According to IEC 60204-1 and ISO 13850, emergency stop device is not a safe protection device. They are supplementary protection measures and do not need to prevent damage.
@@ -300,11 +588,57 @@ Robot introduction
 Basic parameters
 ~~~~~~~~~~~~~~~~~~
 
-.. figure:: installation/017.png
-	:align: center
-	:width: 8in
-
 .. centered:: Table 1.4-1 Basic parameters of robotics
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+|                                    |                                FR3                                 |        FR5         |                         FR10                         |                          FR16                          |                  FR20                  |
++====================================+====================================================================+====================+======================================================+========================================================+========================================+
+| Load                               | 3kg                                                                | 5kg                | 10kg                                                 | 16kg                                                   | 20kg                                   |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Maximum operating rang             | 622mm                                                              | 922mm              | 1400mm                                               | 1034mm                                                 | 1868mm                                 |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Freedom                            | 6 rotational degrees of freedom                                                                                                                                                                                                                  |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Repeated positioning accuracy      | ±0.02mm                                                            | ±0.02mm            | ±0.05mm                                              | ±0.03mm                                                | ±0.1mm                                 |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+|                                    || 1 axis:+175, -175;                                                || 1 axis:+175, -175;                                                                                                                                                         |
+|                                    || 2 axis:+85, -265;                                                 || 2 axis:+85, -265;                                                                                                                                                          |
+|                                    || 3 axes:+150, -150;                                                || 3 axis:+160, -160;                                                                                                                                                         |
+| Joint range of motion (soft limit) || 4 axis:+85, -265;                                                 || 4 axis:+85, -265;                                                                                                                                                          |
+|                                    || 5 axis:+175, -175;                                                || 5 axis:+175, -175;                                                                                                                                                         |
+|                                    || 6 axis:+175, -175                                                 || 6 axis:+175, -175;                                                                                                                                                         |
++------------------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                    || 1 axis:+179, -179;                                                || 1 axis:+179, -179;                                                                                                                                                         |
+|                                    || 2 axis:+89, -269;                                                 || 2 axis:+89, -269;                                                                                                                                                          |
+|                                    || 3 axis:+152, -152;                                                || 3 axis:+162, -162;                                                                                                                                                         |
+| Joint range of motion (hard limit) || 4 axis:+89, -269;                                                 || 4 axis:+89, -269;                                                                                                                                                          |
+|                                    || 5 axis:+179, -179;                                                || 5 axis:+179, -179;                                                                                                                                                         |
+|                                    || 6 axis:+179, -179;                                                || 6 axis:+179, -179;                                                                                                                                                         | 
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Maximum joint speed                | 180°/s                                                             | 180°/s             || 1,2 joints 120 °/s,                                                                                          || 1,2,3 joints 120 °/s,                 |
+|                                    |                                                                    |                    || other joints 180 °/s                                                                                         || other joints                          |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Typical TCP speed                  | 1m/s                                                               | 1m/s               | 1.5m/s                                               | 1m/s                                                   | 2m/s                                   |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Protection grade                   |                                                                                                    IP54                                                                                                                                          | 
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| noise                              |                                                                                                    <65db                                                                                                                                         |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Installation direction             |                                                                                                Any direction                                                                                                                                     |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| I/O                                |                                                                      Power supply (24V, 1.5A), digital IO, analog IO, 485 communication                                                                                                          |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| communication                      |                                                                                      I/0,TCP/IP,Modbus_TCP/RTU,Profrinet                                                                                                                         |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Service temperature                |                                                                                                    0-45℃                                                                                                                                         |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Working humidity                   |                                                                                              90%RH(non-condensing)                                                                                                                               |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Overall quality                    | About 15kg                                                         | About 20.6kg       | About 40kg                                           | About 40kg                                             | About 65kg                             |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Equipment storage                  |                                                                                               -25~60 ℃ (no frost)                                                                                                                                |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
+| Mean time to repair                |                                                                                                     2h                                                                                                                                           |
++------------------------------------+--------------------------------------------------------------------+--------------------+------------------------------------------------------+--------------------------------------------------------+----------------------------------------+
 
 Motion
 ~~~~~~~~~~~~~~
@@ -658,19 +992,133 @@ If the load power is large, you can connect the external power supply as shown i
 
 The electrical specifications of internal and external power are shown in Table 1.6-1 Internal and external electrical specifications:
 
-.. figure:: installation/046.png
-	:align: center
-	:width: 6in
-
 .. centered:: Table 1.6‑1 Internal and external power supply electrical specifications
+.. list-table::
+   :widths: 50 20 6 4 6 4
+   :header-rows: 0
+
+   * - **Terminal**
+     - **Parameter**
+     - **Mininum**
+     - **Typical**
+     - **Maximum**
+     - **Unit**
+
+   * - | Internal 24V power supply
+       | [ex24V -exGND]
+       | [ex24V -exGND]
+     - | 
+       | Voltage
+       | Current
+     - | 
+       | 23
+       | 0
+     - | 
+       | 24
+       | -
+     - | 
+       | 25
+       | 2
+     - | 
+       | V
+       | A
+
+   * - | Internal 24V power supply
+       | [24V- GND]
+       | [24V- GND]
+     - | 
+       | Voltage
+       | Current
+     - | 
+       | 23
+       | 0
+     - | 
+       | 24
+       | -
+     - | 
+       | 25
+       | 1.5
+     - | 
+       | V
+       | A
 
 The electrical specifications of digital I/O are shown in Table 1.6-2 Digital I/O Electric Specifications:
 
-.. figure:: installation/047.png
-	:align: center
-	:width: 6in
-
 .. centered:: Table 1.6‑2 Digital I/O Electric Specification
+.. list-table::
+   :widths: 30 40 6 4 6 4
+   :header-rows: 0
+
+   * - **Terminal**
+     - **Parameter**
+     - **Mininum**
+     - **Typical**
+     - **Maximum**
+     - **Unit**
+
+   * - | Digital output
+       | [COx/DOx]
+       | [COx/DOx]
+       | [COx/DOx]
+     - | 
+       | Current
+       | Pressure drop
+       | Leakage current
+     - | 
+       | 0
+       | 0
+       | 0
+     - | 
+       | -
+       | -
+       | -
+     - | 
+       | 1
+       | 0.5
+       | 0.1
+     - | 
+       | A
+       | V
+       | mA
+
+   * - [COx/DOx]
+     - function
+     - | -
+     - NPN
+     - | -
+     - Type
+
+   * - | Digital output
+       | [EIx/SIx/CIx/DIx]
+       | [EIx/SIx/CIx/DIx]
+       | [EIx/SIx/CIx/DIx]
+     - | 
+       | OFF
+       | ON
+       | Current(11~30)
+     - | 
+       | -3
+       | 11
+       | 2
+     - | 
+       | -
+       | -
+       | -
+     - | 
+       | 5
+       | 30
+       | 15
+     - | 
+       | V
+       | V
+       | mA
+
+   * - [EIx/SIx/CIx/DIx]
+     - function
+     - | -
+     - NPN
+     - | -
+     - Type
 
 Safety I/O
 ~~~~~~~~~~~~~~~
@@ -681,11 +1129,43 @@ Safety devices and equipment must be installed in accordance with the safety des
 
 Safety I/O includes emergency stop and security stop. Urgent stop input is only used for emergency stop equipment, and safely stops input for various security -related protection equipment. Functional differences are shown in Table 1.6-3:
 
-.. figure:: installation/048.png
-	:align: center
-	:width: 6in
-
 .. centered:: Table 1.6-3 Functional difference
+.. list-table::
+   :widths: 100 60 60
+   :header-rows: 0
+
+   * - 
+     - **Emergency stop**
+     - **Safe stop**
+
+   * - **Robot stops moving**
+     - Yes
+     - Yes
+
+   * - **Stop Category**
+     - Category 0
+     - Category 1
+
+   * - **Program execution**
+     - Stop
+     - Pause
+
+   * - **Robot power supply**
+     - Close
+     - Open
+
+   * - **Restart**
+     - Manual
+     - Automatic or manual
+
+   * - **Frequency of use**
+     - Infrequent
+     - Often
+
+   * - **Reinitialization required**
+     - Need
+     - Needless
+
 
 .. warning:: 
 	- Do not connect the security signal to a PLC that does not have the correct and safe level. If this warning does not follow, it may cause serious damage or death because one of the security stop function may be covered. Security interface signals must be separated from normal I/O interface signals.
@@ -764,11 +1244,123 @@ The following example demonstrates how to interact with other devices or PLC dig
 Simulation I/O
 ~~~~~~~~~~~~~~~~
 
-.. figure:: installation/055.png
-	:align: center
-	:width: 6in
-
 .. centered:: Table 1.6-4 Simulation current voltage
+.. list-table::
+   :widths: 50 20 6 4 6 4
+   :header-rows: 0
+
+   * - **Terminal**
+     - **Parameter**
+     - **Mininum**
+     - **Typical**
+     - **Maximum**
+     - **Unit**
+
+   * - | Analog current input
+       | [AIx-END]
+       | [AIx-END]
+       | [AIx-END]
+     - | 
+       | Current
+       | Impedance
+       | Resolution
+     - | 
+       | 0
+       | -
+       | -
+     - | 
+       | -
+       | 500
+       | 12
+     - | 
+       | 20
+       | -
+       | -
+     - | 
+       | mA
+       | ohm
+       | bit
+
+   * - | Analog voltage input
+       | [AIx-END]
+       | [AIx-END]
+       | [AIx-END]
+     - | 
+       | Voltage
+       | Impedance
+       | Resolution
+     - | 
+       | 0
+       | -
+       | -
+     - | 
+       | -
+       | 500
+       | 12
+     - | 
+       | 10
+       | -
+       | -
+     - | 
+       | V
+       | Kohm
+       | bit
+
+   * - | Analog current input
+       | [AOx-END]
+       | [AOx-END]
+       | [AOx-END]
+     - | 
+       | Current
+       | Voltage
+       | Resolution
+     - | 
+       | 0
+       | 0
+       | -
+     - | 
+       | -
+       | -
+       | 12
+     - | 
+       | 20
+       | 10
+       | -
+     - | 
+       | mA
+       | V
+       | bit
+
+   * - | Analog voltage input
+       | [AOx-END]
+       | [AOx-END]
+       | [AOx-END]
+       | [AOx-END]
+     - | 
+       | Voltage
+       | Current
+       | Impedance
+       | Resolution
+     - | 
+       | 0
+       | 0
+       | -
+       | -
+     - | 
+       | -
+       | -
+       | 100
+       | 12
+     - | 
+       | 10
+       | 20
+       | -
+       | -
+     - | 
+       | V
+       | mA
+       | ohm
+       | bit
 
 The simulation I/O is used to set or measure the voltage (0-10V) or current (0-20mA) of other devices.
 
@@ -888,8 +1480,43 @@ Introduction
 End LED definition
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: installation/062.png
-	:align: center
-	:width: 6in
-
 .. centered:: Table 1.7‑1 The end LED definition table
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+
+   * - **Function**
+     - **LED color**
+
+   * - When communication is not established
+     - Alternating "off", "red", "green" and "blue"
+
+   * - Automatic mode
+     - Long bright blue
+
+   * - Manual mode
+     - Green light
+
+   * - Drag Mode
+     - White cyan is always bright
+
+   * - Button box record point (only when using button box)
+     - Two purple flashes
+
+   * - Start running (only when using the button box)
+     - Twinkle blue
+
+   * - Enter the state of unmatched button box (only when using the button box)
+     - Blinking blue twice
+
+   * - Stop operation (only when using the button box)
+     - Red flashes twice
+
+   * - Error reporting (only when using the button box)
+     - Red long bright
+
+   * - Zero calibration completed
+     - Three flashes of white and cyan
+
+   * - Enable
+     - Twice flashing yellow
