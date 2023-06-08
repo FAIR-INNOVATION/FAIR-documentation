@@ -682,7 +682,7 @@ Command description: "FT_Guard" command is a collision detection command. Select
 Program example:
 
 .. list-table:: 
-   :widths: 15 40 100
+   :widths: 15 15 70
    :header-rows: 1
 
    * - S/N
