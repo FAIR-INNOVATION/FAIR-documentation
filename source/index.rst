@@ -22,3 +22,9 @@ Welcome to FAIR's documentation!
    :caption: Open platform
 
    ROSGuide/index
+
+.. toctree:: 
+   :maxdepth: 6
+   :caption: Download
+
+   download

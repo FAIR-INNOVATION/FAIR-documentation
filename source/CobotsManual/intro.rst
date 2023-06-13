@@ -21,11 +21,3 @@ Manual
     robot_peripherals
     appendix
     term
-
-Download
------------------
-.. toctree:: 
-    :maxdepth: 6
-    :numbered: 5
-
-    download
