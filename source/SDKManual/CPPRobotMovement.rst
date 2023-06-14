@@ -193,13 +193,13 @@ Rectilinear motion in Cartesian space
     */   
     errno_t  MoveL(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos *epos, uint8_t search, uint8_t offset_flag, DescPose *offset_pos);
 
-Circular motion in Cartesian space
+Circular arc motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Circular motion in Cartesian space
+    * @brief  Circular arc motion in Cartesian space
     * @param  [in] joint_pos_p  Waypoint joint position, unit: deg
     * @param  [in] desc_pos_p   Waypoint Cartesian position
     * @param  [in] ptool  Tool coordinate number, range [1~15]
@@ -689,7 +689,7 @@ Spline motion PTP
     */
     errno_t  SplinePTP(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl);
 
-The spline movement is complete
+The spline movement ends
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
