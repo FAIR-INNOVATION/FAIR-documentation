@@ -13,7 +13,7 @@ Obtain force sensor configuration
     "Prototype", "``FT_GetConfig()``"
     "Description", "Obtain force sensor configuration"
     "Parameter", "Nothing"
-    "Return value", "- Success:[0, company,device,softversion,bus],company:传感器厂商
+    "Return value", "- Success:[0, company,device,softversion,bus],company:Sensor manufacturer
     - Failed:[errcode]"
 
 Force sensor configuration
