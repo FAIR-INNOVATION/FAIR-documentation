@@ -21,6 +21,8 @@ Secondary Development
 
     :download:`FRCobot ROS <https://github.com/FAIR-INNOVATION/frcobot_ros/archive/refs/heads/master.zip>`
 
+    :download:`FRCobot ROS2 <https://github.com/FAIR-INNOVATION/frcobot_ros2/archive/refs/heads/main.zip>`
+
 Ontology & Dimensional Drawings
 ---------------------------------
     :download:`FR3 Drawings <_static/_doc/FR3 Drawings.zip>`

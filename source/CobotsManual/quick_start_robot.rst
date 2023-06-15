@@ -1,4 +1,4 @@
-Quickly start the robot
+Quick start
 ============================
 
 .. toctree:: 

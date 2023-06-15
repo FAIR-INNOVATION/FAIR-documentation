@@ -105,3 +105,11 @@ body {
 .sheet-center {
     text-align: center;
 }
+
+.rst-content div.figure, 
+.rst-content figure {
+    margin-bottom: 24px !important;
+}
+.rst-content .section>a>img, .rst-content .section>img, .rst-content section>a>img, .rst-content section>img {
+    margin-bottom: 24px !important;
+}

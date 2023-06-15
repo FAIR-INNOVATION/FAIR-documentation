@@ -1,4 +1,4 @@
-Teaching pendant software analysis
+Teaching pendant software
 =====================================
 
 .. toctree:: 

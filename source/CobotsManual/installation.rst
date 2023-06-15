@@ -1,4 +1,4 @@
-Hardware installation
+Installation
 ========================
 
 .. toctree:: 
