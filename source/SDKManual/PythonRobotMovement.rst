@@ -25,7 +25,7 @@ jog Jog
     "Return value", "- Success:[0]
     - Failed:[errcode]"
 
-jog jog immediately stops
+jog jog deceleration stops
 ----------------------------
 
 .. csv-table:: 
@@ -33,7 +33,7 @@ jog jog immediately stops
     :widths: 10 30
 
     "Prototype", "``StopJOG(ref)``"
-    "Description", "jog jog immediately stops"
+    "Description", "jog jog deceleration stops"
     "Parameter", "- ``ref``:1-joint jog stop, 3-base coordinate system jog stop, 5-tool coordinate system jog stop, 9-workpiece coordinate system jog stop"
     "Return value", "- Success:[0]
     - Failed:[errcode]"

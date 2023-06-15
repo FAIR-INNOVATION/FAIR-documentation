@@ -246,7 +246,7 @@ Set the robot installation method - fixed installation
 
     "Prototype", "``SetRobotInstallPos(method)``"
     "Description", "Set the robot installation method - fixed installation"
-    "Parameter", "- ``method``:0-Flat, 1-Side, 2-Hanging"
+    "Parameter", "- ``method``:0-Flat installation, 1-Side installation, 2-Hanging installation"
     "Return value", "- Success:[0]
     - Failed:[errcode]"
 

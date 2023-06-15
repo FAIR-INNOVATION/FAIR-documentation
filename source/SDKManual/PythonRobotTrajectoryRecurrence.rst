@@ -34,7 +34,7 @@ Code example
     period = 4  #Sampling period, fixed value, 2ms or 4ms or 8ms
     di_choose = 0 # di input configuration
     do_choose = 0 # do output configuration
-    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPDParameter
+    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPD Parameter
 
 Start trajectory recording
 ++++++++++++++++++++++++++++++
@@ -79,7 +79,7 @@ Code example
     period = 4  #Sampling period, fixed value, 2ms or 4ms or 8ms
     di_choose = 0 # di input configuration
     do_choose = 0 # do output configuration
-    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPDParameter
+    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPD Parameter
     robot.Mode(1)  # The robot goes into manual mode
     time.sleep(1)  
     robot.DragTeachSwitch(1)  #The robot goes into drag teaching mode
