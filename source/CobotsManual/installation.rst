@@ -35,7 +35,7 @@ When running the robot system, we must first ensure the safety of the operators.
 
 7. Under the emergency and abnormalities of people being pinched or wrapped inside by a robot, pushing or pulling the robot arm by force (at least 700 N) to force joint movements. With a power-free driver, the arm of the manual mobile robot is limited to emergency and may damage the joint.
 
-Security Settings
+Security settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Under the "Safety Settings" menu bar in "Auxiliary Application", click "Safety stop mode" to enter the safe stop setting function interface.
@@ -1399,8 +1399,8 @@ The second version of the button box
 
 **Drag mode:**\ Enter/exit drag mode.
 
-Introduction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+FR-HMI Teach pendant introduction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: installation/060.png
 	:align: center

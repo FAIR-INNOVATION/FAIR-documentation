@@ -529,14 +529,14 @@ Calculate the middle plane position to start
     "Return value", "- Success:[0]
     - Failed:[errcode]"
 
-Calculate the end of the middle plane position
+Calculate the middle plane position to end
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_CalCenterEnd()``"
-    "Description", "Calculate the end of the middle plane position"
+    "Description", "Calculate the middle plane position to end"
     "Parameter", "Nothing"
     "Return value", "- Success:[0,pos] ,pos=[x,y,z,rx,ry,rz]
     - Failed:[errcode]"
