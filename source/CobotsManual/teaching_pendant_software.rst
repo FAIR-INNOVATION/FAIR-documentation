@@ -1912,6 +1912,70 @@ Aux-IO is the instruction function for the robot to communicate with the PLC to 
 
 .. centered:: Figure 3.7-51 Aux-IO command interface
 
+Graphical programming
+~~~~~~~~~~~~~~~~~~~~~~~
+Since the teaching pendant is generally not connected with peripherals such as a keyboard and mouse, when accessing the robot WebAPP on the teaching pendant side, the user can edit the robot teaching program through the graphical programming function. Functional standardization functions are implemented using the Blockly library, which can be integrated in the WebAPP system, and custom code blocks can be implemented as needed, and after the drag-and-drop programming is completed, it is converted into a LUA program and issued and run through the existing instruction protocol. Through the use of graphic programming, it can be simple, easy to understand, easy to operate, and the language can be operated in Chinese.
+
+.. image:: teaching_pendant_software/179.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑52 Graphical programming interface
+
+The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows
+
+.. image:: teaching_pendant_software/180.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑53 Graphical programming page layout overall design
+
+**Operation bar**：The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
+
+**Toolbox**：A code block containing all instructions and logic codes can be dragged to the workspace to create a code block and edited; the Toolbox toolbar will be further classified according to the instruction type. Logical instructions: if-else, while, print, etc.; basic motion instructions: PTP, LIN, ARC, etc.; instruction classification based on application scenarios: gluing, welding, conveyor belt, etc. You can easily find the required code block during use.
+
+**Workspace**：Graphical code blocks can be edited and displayed in the code editing area.
+
+Motion Graphical Programming Commands
++++++++++++++++++++++++++++++++++++++++
+Motion graphic programming commands include PTP, Lin, ARC and other motion commands.
+
+.. image:: teaching_pendant_software/181.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑54 Motion Graphical Programming
+
+Control graphical programming commands
+++++++++++++++++++++++++++++++++++++++++
+Control graphical programming commands include Waitms, WaitAI, WaitDI, WaitMultiDI, SetAO, GetDI and other commands.
+
+.. image:: teaching_pendant_software/182.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑55 Control graphical programming commands
+
+Advanced graphical programming commands
+++++++++++++++++++++++++++++++++++++++++++++
+Advanced graphical programming commands include dofile calling subroutines and thread multi-threading advanced commands.
+
+.. image:: teaching_pendant_software/183.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑56 Advanced graphical programming commands
+
+Custom code block conversion language process
+++++++++++++++++++++++++++++++++++++++++++++++++
+The custom code conversion target language process is shown in the figure below.
+
+.. image:: teaching_pendant_software/184.png
+   :width: 6in
+   :align: center
+
+.. centered:: 图表 3.7‑57 自定义代码块转换目标语言代码
+
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -1921,7 +1985,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-52 Teaching management interface
+.. centered:: Figure 3.7-58 Teaching management interface
 
 Status information
 ----------------------
@@ -2366,11 +2430,22 @@ Restore factory settings under system recovery can clear user data and restore t
 
 The slave station log generation and controller log export functions are to download some important status or error record files of the controller, which is convenient for troubleshooting robot problems.
 
-.. image:: teaching_pendant_software/176.png
+Network settings
+++++++++++++++++++
+
+.. image:: teaching_pendant_software/185.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-1 Schematic diagram of general settings
+.. centered:: Figure 3.10‑1 Schematic diagram of network settings
+
+-  **Set ethernet**：Enter the IP of the network card that needs to communicate, subnet mask (linked with IP, automatically filled), default gateway, and DNS server. The factory default IP of network card 0 network port: 192.168.57.2, the factory default IP of network card 1 network port: 192.168.58.2.
+
+-  **Teach pendant enabled**：Controls whether the teach pendant is enabled. By default, the teach pendant is turned off, and the device cannot be operated using the teach pendant. Click the slide switch button to enable the teach pendant to operate the device.
+  
+-  **Access IP**：Select the network card associated with WebAPP and WebRecovery. When the teach pendant is enabled, WebAPP selects network card 1 by default, and network card 0 is not optional.
+  
+-  **Set network**：Click the "Set Network" button, prompting that the configuration is in progress. After the configuration is complete, the device needs to be restarted.
 
 Account settings account settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
