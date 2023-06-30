@@ -204,7 +204,8 @@ Sensor Peripheral Configuration Steps
 .. centered:: Figure 4.4-1 Laser tracking sensor IP configuration
 
 .. important:: 
-	Before using the sensor function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is usually used with sensors.
+	1. Before using the sensor function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is usually used with sensors.
+	2. The maximum difference of the sensor is the maximum deviation between the laser scanning weld position at the previous moment and the current moment, the range is [0~10], the unit is mm, and the recommended value is 4.
 
 **Step2**：Calibration sensor reference point.
 
@@ -667,6 +668,9 @@ After the sensor is configured, it can be used with the sensor to better assist 
    :width: 3in
 
 .. centered:: Figure 4.8-4 Force/Torque Sensor Drag Lock
+
+.. important:: 
+   The adjustment coefficient is the softness coefficient, and the range is [0~3]. The larger the value, the more detailed the softness effect. It is recommended to set a reasonable coefficient according to the actual situation, and the generally recommended value is 1.
 
 Force/Torque Sensor Collision Detection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
