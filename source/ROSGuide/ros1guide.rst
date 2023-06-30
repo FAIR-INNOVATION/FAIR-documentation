@@ -23,7 +23,7 @@ The recommended environment for frcobot_ros is as follows:
     -	Ubuntu 18.04 LTS Bionic Beaver & ROS Melodic Morenia
     -	Ubuntu 20.04 LTS Focal Fossa & ROS Noetic Ninjemys
 
-The instructions below are for Ubuntu 20.04 LTS systems and ROS Noetic Ninjemys.
+The instructions below are for Ubuntu 20.04 LTS systems and ROS Noetic Ninjemys. If you are using Melodic, replace ``noetic`` in the command line with ``melodic``.
 
 ROS installation & requirements
 --------------------------------
@@ -34,6 +34,8 @@ After configuring ROS Noetic, install the required environment as follows:
 .. code-block:: shell
     :linenos:
 
+    echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+    source ~/.bashrc
     sudo apt-get install -y \
         ros-noetic-rosparam-shortcuts \
         ros-noetic-ros-control \
@@ -47,10 +49,8 @@ After ROS Noetic is properly installed and configured, create a Catkin workspace
 .. code-block:: shell
     :linenos:
 
-    cd /path/to/desired/folder
-    mkdir -p catkin_ws/src
-    cd catkin_ws
-    source /opt/ros/noetic/setup.sh
+    mkdir -p ~/catkin_ws/src
+    cd ~/catkin_ws
     catkin_init_workspace src
 
 Then clone the frcobot_ros library from Github.
@@ -66,16 +66,18 @@ Build the frcobot_ros package
 .. code-block::  shell
     :linenos:
 
-    cd ..
-    catkin make
+    cd ~/catkin_ws
+    catkin_make
+    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+    source ~/.bashrc
 
-If an error occurs, please check whether the packages in the ROS installation requirements have been installed successfully. After the compilation is complete, copy the lib library to the ROS lib environment (the path is: /opt/ros/melodic/lib), so that the program can run normally .
+If an error occurs, please check whether the packages in the ROS installation requirements have been installed successfully. After the compilation is complete, copy the lib library to the ROS lib environment (the path is: /opt/ros/noetic/lib), so that the program can run normally .
 
 .. code-block:: shell
     :linenos:
 
     # The default path of catkin_ws here is "~", if it is different, just change "~" to the actual path
-    sudo cp ~/catkin_ws/src/frcobot_ros/frcobot_hw/lib/* /opt/ros/melodic/lib
+    sudo cp ~/catkin_ws/src/frcobot_ros/frcobot_hw/lib/* /opt/ros/noetic/lib
 
 Quick start
 ++++++++++++++
