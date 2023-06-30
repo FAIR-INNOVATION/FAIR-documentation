@@ -2513,11 +2513,3 @@ This page can upload user information packages, custom robot models, and setting
 
 .. centered:: Figure 3.10-4 Custom information schematic diagram
 
-"Demonstration of Education Procedures" is displayed and set in program encryption information in the form of table forms. The right side of the form is equipped with an encrypted level instructions.
-The encryption level is divided into first-level encryption and secondary encryption. Among them, the level of first-level encryption is the highest, and the secondary is second.
-
-.. image:: teaching_pendant_software/program_encryption.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.10-5 Demonstration of teaching procedures
