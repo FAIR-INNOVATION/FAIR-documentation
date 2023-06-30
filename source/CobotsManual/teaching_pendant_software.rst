@@ -1991,16 +1991,6 @@ Advanced graphical programming commands include dofile calling subroutines and t
 
 .. centered:: Figure 3.7‑59 Advanced graphical programming commands
 
-Custom code block conversion language process
-++++++++++++++++++++++++++++++++++++++++++++++++
-The custom code conversion target language process is shown in the figure below.
-
-.. image:: teaching_pendant_software/184.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7‑60 Custom code block conversion target language code
-
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -2010,7 +2000,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-61 Teaching management interface
+.. centered:: Figure 3.7-60 Teaching management interface
 
 Status information
 ----------------------
