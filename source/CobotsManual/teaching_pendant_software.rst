@@ -1974,7 +1974,7 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
 
 Motion Graphical Programming Commands
 +++++++++++++++++++++++++++++++++++++++
-Motion graphic programming commands include PTP, Lin, ARC and other motion commands.
+Motion graphic programming commands include  \ `PTP <teaching_pendant_software.html#ptp-command>`__\、\ `Lin <teaching_pendant_software.html#lin-command>`__\、\ `ARC <teaching_pendant_software.html#arc-command>`__\  and other motion commands.
 
 .. image:: teaching_pendant_software/181.png
    :width: 6in
@@ -1984,7 +1984,7 @@ Motion graphic programming commands include PTP, Lin, ARC and other motion comma
 
 Control graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++
-Control graphical programming commands include Waitms, WaitAI, WaitDI, WaitMultiDI, SetAO, GetDI and other commands.
+Control graphical programming commands include \ `Wait <teaching_pendant_software.html#wait-command>`__\、\ `IO <teaching_pendant_software.html#io-command>`__\ and other commands.
 
 .. image:: teaching_pendant_software/182.png
    :width: 6in
@@ -1994,13 +1994,27 @@ Control graphical programming commands include Waitms, WaitAI, WaitDI, WaitMulti
 
 Advanced graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++++++
-Advanced graphical programming commands include dofile calling subroutines and thread multi-threading advanced commands.
+Advanced graphical programming commands include \ `dofile <teaching_pendant_software.html#dofile-command>`__\、\ `thread <teaching_pendant_software.html#thread-command>`__\、fold command and other advanced commands.
 
 .. image:: teaching_pendant_software/183.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 3.7‑60 Advanced graphical programming commands
+
+Example of using graphical programming commands
++++++++++++++++++++++++++++++++++++++++++++++++++
+After selecting the graphical programming type, click the graphic code block you want to use, you can drag and drop and stitch in the workspace.
+
+For example, if you select PTP and Lin motion instructions and control commands Waitms for stitching, you can also nest a folding advanced instruction on the outer layer and enter the comment name, which can realize the code block folding operation. Click the drop-down box to select the command parameter type, and the input box can fill in the command parameter data. Examples of graphical programming commands are as follows:
+
+.. image:: teaching_pendant_software/184.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑60 Example of using graphical programming commands
+
+After the graphical programming instruction splicing and parameter filling is completed, fill in the name of the workspace, and click the "Save" icon to save the program. Select the "Workspace" that has been written, click Start Run, and you can execute this program.
 
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
