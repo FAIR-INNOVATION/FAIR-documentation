@@ -1045,8 +1045,6 @@ Teaching simulation
 Introduction
 ~~~~~~~~~~~~~~
 
-The teaching procedure is divided into a state of encryption and non -encryption. The encryption level is divided into first -level encryption and secondary encryption. Among them, the level of first -level encryption is the highest, and the secondary is second.
-
 Click the command on the left to add a program node to the program tree.When the program is running, the currently executing program node is highlighted in gray.In manual mode, click the first icon on the right side of the node to make the robot execute the instruction alone, and the second icon is to edit the content of the node.
 
 .. image:: teaching_pendant_software/069.png
@@ -1055,32 +1053,6 @@ Click the command on the left to add a program node to the program tree.When the
 
 .. centered:: Figure 3.7-1 Program tree interface
 
-When the program is a first -level encryption state, after opening the program: the corresponding "export", "preservation", "existing as", "copy", "cut", "delete", "delete", "delete", "delete", "delete" The buttons such as "upward", "downward" and "editing mode switching" will be grayed.
-Click the icon to be invalid and it will prompt that the current program is in an encrypted state. The program "renamed" icon will hide. Add instruction bars and program editing areas are invisible and prompts to be locked in first -level encryption.
-
-.. image:: teaching_pendant_software/encryption1.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-2 Program first-level encryption interface
-
-When the program is second -level encryption, after opening the program on the "Program Demonstration" page: the corresponding "savings", "copy", "shear", "paste", "delete", "upper", "upper" in the operating bar The buttons such as the "Move" will turn ashes.
-Click the icon to be invalid and it will prompt that the current program is encrypted. The program "renamed" icon will hide. The adding instruction bar is not visible and prompts to be locked in a secondary encryption. The program editing area can browse the reading program normally.
-
-.. image:: teaching_pendant_software/encryption2.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-3 Program second-level encryption interface
-
-Both first -level encryption and second -level encryption can use the "export" function. Verification operations will be performed when importing.
-If the program of the same name is an encrypted file, the import operation will be interrupted and indicated that the coverage of the encryption program cannot be introduced.
-
-.. image:: teaching_pendant_software/import.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-4 Program import
 
 Tool bar
 ~~~~~~~~~~
@@ -1235,7 +1207,7 @@ You can choose the point to be reached, and the smooth transition time setting c
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5 PTP command interface
+.. centered:: Figure 3.7-2 PTP command interface
 
 Lin command
 ++++++++++++++++
@@ -1248,7 +1220,7 @@ The function of this command is similar to the "PTP" command, but the path of th
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6 Lin command interface
+.. centered:: Figure 3.7-3 Lin command interface
 
 Arc command
 ++++++++++++++++
@@ -1265,7 +1237,7 @@ The "Arc" command is arc movement, which includes two points. The first point is
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7 Arc command interface
+.. centered:: Figure 3.7-4 Arc command interface
 
 Circle command
 ++++++++++++++++
@@ -1282,7 +1254,7 @@ The "Circle" command is a full circle movement, including two points. The first 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8 Circle command interface
+.. centered:: Figure 3.7-5 Circle command interface
 
 Spiral command
 ++++++++++++++++
@@ -1296,7 +1268,7 @@ Whether to offset, the offset takes effect on the trajectory of the entire helix
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-9 Spiral command interface
+.. centered:: Figure 3.7-6 Spiral command interface
 
 N-Spiral command
 ++++++++++++++++
@@ -1309,7 +1281,7 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-10 N-Spiral command interface
+.. centered:: Figure 3.7-7 N-Spiral command interface
 
 Spline command
 ++++++++++++++++
@@ -1322,7 +1294,7 @@ The command is divided into three parts: the start of the spline group, the spli
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-11 Spline command interface
+.. centered:: Figure 3.7-8 Spline command interface
 
 N-Spline command
 +++++++++++++++++++
@@ -1336,7 +1308,7 @@ For the given control point and the given waypoint.
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-12 N-Spline command interface
+.. centered:: Figure 3.7-9 N-Spline command interface
 
 IO command
 ++++++++++++++++
@@ -1351,7 +1323,7 @@ The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and get
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-13 SetDO command interface
+.. centered:: Figure 3.7-10 SetDO command interface
 
 In the "GetDI/SPLCGetDI" command, select the value of the port number you want to get, whether to block or not, select "block" to get the DI status after the movement stops, and select the "non-blocking" option to get the DI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. After selection, click the "Add" and "Apply" buttons.
 
@@ -1359,7 +1331,7 @@ In the "GetDI/SPLCGetDI" command, select the value of the port number you want t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-14 GetDI command interface
+.. centered:: Figure 3.7-11 GetDI command interface
 
 AI command
 ++++++++++++++++
@@ -1374,7 +1346,7 @@ In this instruction, it is divided into two functions: setting analog output (Se
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-15 SetAO command interface
+.. centered:: Figure 3.7-12 SetAO command interface
 
 "GetAI/SPLCGetAI" selects the analog input that needs to be obtained, whether to block or not selects "blocked" to obtain the AI state after the movement stops, and selects the "non-blocked" option to obtain the AI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
@@ -1382,7 +1354,7 @@ In this instruction, it is divided into two functions: setting analog output (Se
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-16 GetAI command interface
+.. centered:: Figure 3.7-13 GetAI command interface
 
 TPD command
 ++++++++++++++++
@@ -1403,7 +1375,7 @@ When programming, first use the PTP instruction to reach the starting point of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-17 TPD command interface
+.. centered:: Figure 3.7-14 TPD command interface
 
 ToolList command
 +++++++++++++++++++
@@ -1416,7 +1388,7 @@ Select the tool coordinate system name and click "Apply" to add this command to 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-18 ToolList command interface
+.. centered:: Figure 3.7-15 ToolList command interface
 
 Mode command
 ++++++++++++++++
@@ -1429,7 +1401,7 @@ This command can switch the robot to manual mode, and is usually added at the en
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-19 Mode command interface
+.. centered:: Figure 3.7-16 Mode command interface
 
 Var command
 ++++++++++++++++
@@ -1442,7 +1414,7 @@ This command is a variable system command, which is divided into two parts: Lua 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-20 Var command interface
+.. centered:: Figure 3.7-17 Var command interface
 
 While command
 ++++++++++++++++
@@ -1455,7 +1427,7 @@ Enter the waiting condition in the input box behind While, input the action comm
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-21 While command interface
+.. centered:: Figure 3.7-18 While command interface
 
 if…else command
 ++++++++++++++++
@@ -1468,7 +1440,7 @@ Enter the statement in the input box on the right, and click "Add" and "Apply" a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-22 if…else command interface
+.. centered:: Figure 3.7-19 if…else command interface
 
 Goto command
 ++++++++++++++++
@@ -1481,7 +1453,7 @@ The Goto instruction is a jump instruction, enter the statement in the input box
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-23 Goto command interface
+.. centered:: Figure 3.7-20 Goto command interface
 
 Wait command
 ++++++++++++++++
@@ -1496,7 +1468,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-24 WaitTime command interface
+.. centered:: Figure 3.7-21 WaitTime command interface
 
 "WaitDI" command, that is, single DI waiting, select the IO port number to be waited for, wait state, wait maximum time and wait timeout processing method, and click "Add" and "Apply".
 
@@ -1504,7 +1476,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-25 WaitDI command interface
+.. centered:: Figure 3.7-22 WaitDI command interface
 
 "WaitMultiDI" command, that is, multi-DI waiting, first select the multi-DI establishment conditions, then check the DI port and status that need to wait, and finally set the maximum waiting time and waiting timeout processing method, click "Add" and "Apply".
 
@@ -1512,7 +1484,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-26 WaitMultiDI command interface
+.. centered:: Figure 3.7-23 WaitMultiDI command interface
 
 "WaitAI" command, select the analog quantity to be waited for, the value, the maximum waiting time and the waiting timeout processing method, and click "Add" and "Apply".
 
@@ -1520,7 +1492,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-27 WaitAI command interface
+.. centered:: Figure 3.7-24 WaitAI command interface
 
 Pause command
 ++++++++++++++++
@@ -1533,7 +1505,7 @@ This instruction is a pause instruction. Insert this instruction into the progra
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-28 Pause command interface
+.. centered:: Figure 3.7-25 Pause command interface
 
 Dofile command
 ++++++++++++++++
@@ -1546,7 +1518,7 @@ The Dofile command calls the internal program of the controller. When using the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-29 Dofile command interface
+.. centered:: Figure 3.7-26 Dofile command interface
 
 Weave command
 ++++++++++++++++
@@ -1559,7 +1531,7 @@ The "Weave" command consists of two parts. In the first part, select the weaving
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-30 Weave command interface
+.. centered:: Figure 3.7-27 Weave command interface
 
 Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
 
@@ -1567,7 +1539,7 @@ Click "Configuration and Test" to configure the parameters of the weaving weldin
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-31 Weave configuration and testing command interface
+.. centered:: Figure 3.7-28 Weave configuration and testing command interface
 
 Segment command
 ++++++++++++++++
@@ -1580,7 +1552,7 @@ This instruction is a special instruction for welding, mainly used in the interm
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-32 Segment command interface
+.. centered:: Figure 3.7-29 Segment command interface
 
 Adjust command
 ++++++++++++++++
@@ -1593,7 +1565,7 @@ This command adaptively adjusts the posture of the welding torch for the scene o
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-33 Adjust command interface
+.. centered:: Figure 3.7-30 Adjust command interface
 
 Gripper command
 ++++++++++++++++++
@@ -1606,7 +1578,7 @@ In this command, it is divided into the gripper motion control command and the g
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-34 Gripper command interface
+.. centered:: Figure 3.7-31 Gripper command interface
 
 Spray command
 ++++++++++++++++
@@ -1619,7 +1591,7 @@ This command is a spraying-related command, which controls the spray gun to "sta
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-35 Spray command interface
+.. centered:: Figure 3.7-32 Spray command interface
 
 EAxis command
 ++++++++++++++++
@@ -1632,7 +1604,7 @@ This command is used in combination with the PTP command for scenarios using ext
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-36 EAxis command interface
+.. centered:: Figure 3.7-33 EAxis command interface
 
 Weld command
 ++++++++++++++++
@@ -1645,7 +1617,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-37 Weld command interface
+.. centered:: Figure 3.7-34 Weld command interface
 
 Laser command
 ++++++++++++++++
@@ -1658,7 +1630,7 @@ This command includes three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-38 Laser command interface
+.. centered:: Figure 3.7-35 Laser command interface
 
 Convey command
 ++++++++++++++++
@@ -1671,7 +1643,7 @@ This command includes four commands: position real-time detection, IO real-time 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-39 Conveyor command interface
+.. centered:: Figure 3.7-36 Conveyor command interface
 
 F/T command
 ++++++++++++++++
@@ -1684,7 +1656,7 @@ The instruction includes FT_Guard (collision detection), FT_Control (constant fo
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-40 F/T command interface
+.. centered:: Figure 3.7-37 F/T command interface
 
 3D command
 ++++++++++++++++
@@ -1697,7 +1669,7 @@ This command generates commands for 3D vision program examples. Users can refer 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-41 3D command interface
+.. centered:: Figure 3.7-38 3D command interface
 
 Pallet command
 ++++++++++++++++
@@ -1710,7 +1682,7 @@ This instruction generates instructions for the palletizing program, which is co
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-42 Pallet command interface
+.. centered:: Figure 3.7-39 Pallet command interface
 
 Offset command
 ++++++++++++++++
@@ -1723,7 +1695,7 @@ This command is an overall offset command. Input each offset, add the opening co
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-43 Offset command interface
+.. centered:: Figure 3.7-40 Offset command interface
 
 W-Search command
 ++++++++++++++++
@@ -1736,7 +1708,7 @@ This command is a welding wire positioning command, including three commands of 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-44 W-Search command interface
+.. centered:: Figure 3.7-41 W-Search command interface
 
 In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
 
@@ -1744,7 +1716,7 @@ In writing a program, usually first set the start command of the search, and the
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-45 W-Search示例(1D)
+.. centered:: Figure 3.7-42 W-Search example(1D)
 
 Vir-IO command
 ++++++++++++++++
@@ -1757,7 +1729,7 @@ This command is a virtual IO control command, which can realize the setting of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-46 Vir-IO command interface
+.. centered:: Figure 3.7-43 Vir-IO command interface
 
 Thread command
 ++++++++++++++++
@@ -1770,7 +1742,7 @@ The Thread command is an auxiliary thread function. Users can define an auxiliar
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-47 Thread程序示例
+.. centered:: Figure 3.7-44 Thread program example
 
 ServoCart command
 ++++++++++++++++++++
@@ -1783,7 +1755,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-48 ServoCart command interface
+.. centered:: Figure 3.7-45 ServoCart command interface
 
 Absolute pose control program example：
 
@@ -1837,7 +1809,7 @@ This command is to call the function interface function, provide the robot inter
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-49 Function command interface
+.. centered:: Figure 3.7-46 Function command interface
 
 Collision command
 ++++++++++++++++++++
@@ -1850,7 +1822,7 @@ This command is used to set the collision level. Through this command, the colli
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-50 Collision command interface
+.. centered:: Figure 3.7-47 Collision command interface
 
 Xmlrpc command
 ++++++++++++++++
@@ -1863,7 +1835,7 @@ XML-RPC is a remote procedure call method for transferring data between programs
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-51 Xmlrpc command interface
+.. centered:: Figure 3.7-48 Xmlrpc command interface
 
 .. important:: 
    1) The controller acts as a client to connect to the remote custom port;
@@ -1909,7 +1881,7 @@ The Acc command is to realize the function that the acceleration of the robot ca
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-52 Acc command interface
+.. centered:: Figure 3.7-49 Acc command interface
 
 Torque command
 ++++++++++++++++
@@ -1922,7 +1894,7 @@ This command is a force compliance control command. Through this command, the ro
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-53 Torque command interface
+.. centered:: Figure 3.7-50 Torque command interface
 
 Aux-IO command
 ++++++++++++++++
@@ -1935,7 +1907,46 @@ Aux-IO is the instruction function for the robot to communicate with the PLC to 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-54 Aux-IO command interface
+.. centered:: Figure 3.7-51 Aux-IO command interface
+
+Teaching program encryption
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The teaching procedure is divided into a state of encryption and non-encryption. The encryption level is divided into first-level encryption and secondary encryption. Among them, the level of first-level encryption is the highest, and the secondary is second.
+All teaching programs are displayed and set in the form of program encryption information in "System Settings - Custom Information". Encryption level descriptions are provided to the right of the table.
+
+.. image:: teaching_pendant_software/program_encryption.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-52 Demonstration of teaching procedures
+
+When the program is a first-level encryption state, after opening the program: the corresponding "export", "preservation", "existing as", "copy", "cut", "delete", "delete", "delete", "delete", "delete" The buttons such as "upward", "downward" and "editing mode switching" will be grayed.
+Click the icon to be invalid and it will prompt that the current program is in an encrypted state. The program "renamed" icon will hide. Add instruction bars and program editing areas are invisible and prompts to be locked in first-level encryption.
+
+.. image:: teaching_pendant_software/encryption1.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-53 Program first-level encryption interface
+
+When the program is second-level encryption, after opening the program on the "Program Demonstration" page: the corresponding "savings", "copy", "shear", "paste", "delete", "upper", "upper" in the operating bar The buttons such as the "Move" will turn ashes.
+Click the icon to be invalid and it will prompt that the current program is encrypted. The program "renamed" icon will hide. The adding instruction bar is not visible and prompts to be locked in a secondary encryption. The program editing area can browse the reading program normally.
+
+.. image:: teaching_pendant_software/encryption2.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-54 Program second-level encryption interface
+
+Both first -level encryption and second -level encryption can use the "export" function. Verification operations will be performed when importing.
+If the program of the same name is an encrypted file, the import operation will be interrupted and indicated that the coverage of the encryption program cannot be introduced.
+
+.. image:: teaching_pendant_software/import.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-55 Program import
 
 Graphical programming
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1945,7 +1956,7 @@ Since the teaching pendant is generally not connected with peripherals such as a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑55 Graphical programming interface
+.. centered:: Figure 3.7‑56 Graphical programming interface
 
 The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows
 
@@ -1953,7 +1964,7 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑56 Graphical programming page layout overall design
+.. centered:: Figure 3.7‑57 Graphical programming page layout overall design
 
 **Operation bar**：The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
 
@@ -1969,7 +1980,7 @@ Motion graphic programming commands include PTP, Lin, ARC and other motion comma
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑57 Motion Graphical Programming
+.. centered:: Figure 3.7‑58 Motion Graphical Programming
 
 Control graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++
@@ -1979,7 +1990,7 @@ Control graphical programming commands include Waitms, WaitAI, WaitDI, WaitMulti
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑58 Control graphical programming commands
+.. centered:: Figure 3.7‑59 Control graphical programming commands
 
 Advanced graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -1989,7 +2000,7 @@ Advanced graphical programming commands include dofile calling subroutines and t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑59 Advanced graphical programming commands
+.. centered:: Figure 3.7‑60 Advanced graphical programming commands
 
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2000,7 +2011,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-60 Teaching management interface
+.. centered:: Figure 3.7-61 Teaching management interface
 
 Status information
 ----------------------
