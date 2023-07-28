@@ -2477,7 +2477,7 @@ Step 1, whether to use the extended axis, if the extended axis is used, the rela
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-20 Extended axis configuration
+.. centered:: Figure 3.9-21 Extended axis configuration
 
 Step 2: Calibrate the starting point, the starting point safety point, the end point, and the ending point safety point. If the extended axis is selected in the first step, the extended axis movement function will be loaded to cooperate with the calibration of relevant points.
 
@@ -2485,7 +2485,7 @@ Step 2: Calibrate the starting point, the starting point safety point, the end p
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-21 Calibration related points
+.. centered:: Figure 3.9-22 Calibration related points
 
 Step 3, choose whether laser is needed, if yes, edit the parameters of the laser positioning command.
 
@@ -2493,7 +2493,7 @@ Step 3, choose whether laser is needed, if yes, edit the parameters of the laser
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-22 Laser positioning configuration
+.. centered:: Figure 3.9-23 Laser positioning configuration
 
 Step 4: Select whether weaving welding is required, and if weaving welding is required, you need to edit the relevant parameters of weaving welding.
 
@@ -2501,7 +2501,7 @@ Step 4: Select whether weaving welding is required, and if weaving welding is re
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-23 Weaving configuration
+.. centered:: Figure 3.9-24 Weaving configuration
 
 Step 5, name the program, and automatically open the program in the program teaching interface.
 
@@ -2509,7 +2509,7 @@ Step 5, name the program, and automatically open the program in the program teac
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-24 Save program
+.. centered:: Figure 3.9-25 Save program
 
 Click "Arc Welding" under "Weldment Shape" to enter the arc welding guidance interface. On the basis of the configuration of the basic settings of the robot, we can quickly generate a welding teaching program through two simple steps. It mainly includes the following two steps.
 
@@ -2519,7 +2519,7 @@ Step 1: Calibrate the starting point, the starting point safety point, the arc t
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-25 Calibration point
+.. centered:: Figure 3.9-26 Calibration point
 
 Step 2: Name the program and automatically open the program in the program teaching interface.
 
@@ -2527,7 +2527,7 @@ Step 2: Name the program and automatically open the program in the program teach
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-26 Save program
+.. centered:: Figure 3.9-27 Save program
 
 Click "Multi-layer multi-pass welding" under "Weldment shape" to enter the multi-layer multi-pass welding guidance interface. After completing the configuration of various robot basic settings, we can quickly generate a welding teaching program through four simple steps. It mainly includes the following five steps.
 
@@ -2537,7 +2537,7 @@ Step 1. Set the first group of points according to the prompts, namely welding p
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-27 First set of point settings
+.. centered:: Figure 3.9-28 First set of point settings
 
 Step 2, the second group of point settings, you can set the type of path point, support straight line and arc path, including welding point, X+ point and Z+ point.
 
@@ -2545,7 +2545,7 @@ Step 2, the second group of point settings, you can set the type of path point, 
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-28 Second set of point settings
+.. centered:: Figure 3.9-29 Second set of point settings
 
 Step 3: After setting all the group points, click "Finish" to enter the function page of each weld bead offset setting function, and set the offset of the required weld bead in turn. The interface is shown in the figure below.
 
@@ -2553,7 +2553,7 @@ Step 3: After setting all the group points, click "Finish" to enter the function
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-29 Weld Bead Offset Setting
+.. centered:: Figure 3.9-30 Weld Bead Offset Setting
 
 Step 4: After all the required weld bead parameters are set, click "Finish" to jump to the program generation page, enter the file name, and the multi-layer multi-pass welding program can be generated, and then the user can open it in the program teaching The program is debugged, and the interface is shown in the figure below.
 
@@ -2561,7 +2561,7 @@ Step 4: After all the required weld bead parameters are set, click "Finish" to j
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-30 Save program
+.. centered:: Figure 3.9-31 Save program
 
 Safe speed setting
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2574,7 +2574,7 @@ Enable the safe speed and set the speed limit value. When the user debugs the ro
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-31 Safe speed setting
+.. centered:: Figure 3.9-32 Safe speed setting
 
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
@@ -2589,7 +2589,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑32 Security daemon
+.. centered:: Figure 3.9‑33 Security daemon
 
 System settings
 -----------------
