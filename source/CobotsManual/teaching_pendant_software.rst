@@ -408,6 +408,9 @@ Considering more flexible and rich robot deployment scenarios, we provide a free
    
 .. centered:: Figure 3.3-7 360 degree free installation
 
+.. important:: 
+   After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
+
 Robot settings
 ----------------
 
@@ -430,7 +433,7 @@ Click "Modify" to reset the tool coordinate system of the number according to th
 
 .. centered:: Figure 3.4-2 Set tool coordinates
 
-Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of Figure 3.4-3. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of Figure 3.4-3. Keep this posture unchanged, use base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the X-axis direction of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6, which is the Z-axis direction of the tool coordinate system. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
+Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of Figure 3.4-3. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of Figure 3.4-3. Keep the posture unchanged, use the base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the positive direction of the X-axis of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6. This direction is the positive direction of the Z-axis of the tool coordinate system, and the positive direction of the Y-axis of the tool coordinate system is determined by the right-hand rule. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
 
 .. image:: teaching_pendant_software/029.png
    :width: 6in
@@ -439,6 +442,11 @@ Select a fixed point in the robot space, move the tool to the fixed point in thr
 .. centered:: Figure 3.4-3 Schematic diagram of the six-point method
 
 After completing the last step, click "Finish" to return to the tool coordinate interface, and click "Save" to store the tool coordinate system just created.
+
+.. important:: 
+   1. After the tool is installed at the end, the tool coordinate system must be calibrated and applied, otherwise the position and attitude of the tool center point will not meet the expected values when the robot executes the motion command.
+   2. The tool coordinate system generally uses toolcoord1~toolcoord14, and toolcoord0 is used to indicate that the position center of the tool TCP is at the center of the end flange. When calibrating the tool coordinate system, it is first necessary to apply the tool coordinate system to toolcoord0, and then select other tool coordinate systems for calibration and application.
+
 
 External tool coordinates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -487,6 +495,11 @@ If you need to reset, click the Cancel button to go back to the step of creating
 
 After completing the last step, click "Finish" to return to the tool coordinate interface, and click "Save" to store the tool coordinate system just created.
 
+.. important:: 
+   1. The use of external tools must be calibrated and applied to the external tool coordinate system, otherwise the position and attitude of the tool center point when the robot executes motion commands will not meet the expected values.
+   2. The external tool coordinate system generally uses etoolcoord1~etoolcoord14, and the application of etoolcoord0 means that the center position of the external tool TCP is at the center of the end flange. When calibrating the tool coordinate system, the tool coordinate system must first be applied to etoolcoord0, and then other tool coordinate systems should be selected calibration.
+
+
 Workpiece coordinates
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -508,6 +521,11 @@ The workpiece coordinate system is generally calibrated based on the tool, and t
 .. centered:: Figure 3.4-7 Schematic diagram of the three-point method
 
 After completing the last step, click "Finish" to return to the workpiece coordinate interface, and click "Save" to store the workpiece coordinate system just created.
+
+.. important:: 
+   1. The workpiece coordinate system is calibrated based on the tool, and the workpiece coordinate system needs to be established on the basis of the established tool coordinate system.
+   2. The workpiece coordinate system generally uses wobjcoord1~wobjcoord14, and wobjcoord0 is used to indicate that the origin of the workpiece coordinate system is at the origin of the base coordinates. When calibrating the workpiece coordinate system, it is first necessary to apply the workpiece coordinate system to wobjcoord0, and then select other workpiece coordinate systems for calibration and application.
+
 
 Extended Axis Coordinates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -578,6 +596,11 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
 
 .. centered:: Figure 3.4-15 Single axis positioner calibration
 
+.. important:: 
+   1. The extended axis coordinate system is calibrated on the basis of the tool, and the extended axis coordinate system needs to be established on the basis of the established tool coordinate system.
+   2. The extended axis system generally uses exaxis1~exaxis4, and exaxis0 is used to represent the non-extended axis coordinate system. When calibrating the extended axis coordinate system, the extended axis coordinate system must first be applied to exaxis0, and then other extended axis coordinate systems should be selected for calibration and application.
+
+
 Collision level
 ~~~~~~~~~~~~~~~~~~
 
@@ -618,6 +641,10 @@ The user can set the corresponding parameters according to the parameters of the
    :align: center
 
 .. centered:: Figure 3.4-18 Schematic diagram of load setting
+
+.. important:: 
+   After the load is installed at the end of the robot, the weight of the end load and the coordinates of the center of mass must be set correctly, otherwise it will affect the drag function of the robot and the use of the collision detection function.
+
 
 If the user is uncertain about the tool quality or center of mass, the tool data can be determined through the load identification function.
 
@@ -660,6 +687,9 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "Friction Co
 
 .. centered:: Figure 3.4-22 Friction Compensation Settings
 
+.. important:: 
+   The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
+
 Speed scaling
 ~~~~~~~~~~~~~
 
@@ -675,24 +705,24 @@ This function is to set the running speed of the robot under manual/automatic mo
 
 After the speed is set successfully, the corresponding speed status bar will change to the set value, and the range of speed value setting is 0~100.
 
-Configuration import and export
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. Configuration import and export
+.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Robot Settings" in "Initial Settings", click "Configuration Import and Export" to enter the configuration import and export interface.
+.. Under the menu bar of "Robot Settings" in "Initial Settings", click "Configuration Import and Export" to enter the configuration import and export interface.
 
-**Import robot configuration files**：The user imports a robot configuration file named user.config, which contains various parameters in the robot setting function. Click the "Select File" button, select the configuration file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
+.. **Import robot configuration files**：The user imports a robot configuration file named user.config, which contains various parameters in the robot setting function. Click the "Select File" button, select the configuration file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
 
-**Export robot configuration file**：Click the "Export" button to export the robot configuration file user.config to the local.
+.. **Export robot configuration file**：Click the "Export" button to export the robot configuration file user.config to the local.
 
-**Import controller database**：The user imports the controller database file named fr_controller_data.db. Click the "Select File" button, select the database file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
+.. **Import controller database**：The user imports the controller database file named fr_controller_data.db. Click the "Select File" button, select the database file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
 
-**Controller database**：Click the "Export" button to export the robot controller database file to the local.
+.. **Controller database**：Click the "Export" button to export the robot controller database file to the local.
 
-.. image:: teaching_pendant_software/050.png
-   :width: 3in
-   :align: center
+.. .. image:: teaching_pendant_software/050.png
+..    :width: 3in
+..    :align: center
 
-.. centered:: Figure 3.4-24 Configuration import and export
+.. .. centered:: Figure 3.4-24 Configuration import and export
 
 Control box I/O
 --------------------
@@ -734,6 +764,9 @@ Click "Robot Settings" in "Initial Settings" in the left menu bar, and click the
    :align: center
 
 .. centered:: Figure 3.5-3 Filter interface
+
+.. important:: 
+   The I/O filter time range is [0~200], the unit is ms.
 
 I/O configuration
 ~~~~~~~~~~~~~~~~~~
@@ -889,6 +922,9 @@ The default configuration of terminal DI: DI0 drag teaching, DI1 teaching point 
 
 After the configuration is complete, you can view the corresponding output DO status on the I/O page of the control box under the corresponding status. (Note: configured DI and DO cannot appear on the teaching programming page)
 
+.. important:: 
+   Configured DI and DO are forbidden to be used in teaching programming.
+
 Robot operation
 -----------------
 
@@ -926,6 +962,9 @@ Set the "long press movement threshold" (the maximum distance the robot can run 
    :align: center
 
 .. centered:: Figure 3.6-2 Schematic diagram of single-axis jogging and multi-axis linkage
+
+.. important:: 
+   In multi-axis linkage, the setting value of the fifth joint j5 cannot be less than 0.01 degrees. If the expected value is less than 0.01 degrees, you can first set it to 0.011 degrees, and then fine-tune the fifth joint j5 through single-axis jogging.
 
 Base Jog
 ~~~~~~~~~~
@@ -974,6 +1013,9 @@ Select Move, you can directly input the Cartesian coordinate value, click "Calcu
 
 .. centered:: Figure 3.6-6 Move mobile diagram
 
+.. important:: 
+   When a given pose cannot be reached, first check whether the Cartesian space pose exceeds the working range of the robot, and then check whether there is a singular pose in the process from the current pose to the target pose, if there is a singular position, adjust the current pose or process insert a new pose in order to avoid singular poses.
+
 Eaxis move
 ~~~~~~~~~~~~
 
@@ -1007,6 +1049,9 @@ The operation steps of teach programming (TPD) function are as follows:
    :align: center
 
 .. centered:: Figure 3.6-9 robot mode
+
+.. important:: 
+   When switching to the drag mode from the interface, first confirm whether the end tool load and the center of mass are set correctly, and whether the friction compensation coefficient is set reasonably, then press and hold the end button to confirm whether the drag is normal, and then switch to the drag mode from the interface after confirming that it is correct.
 
 - **Step4 start recording**：Click the "Start Recording" button to start track recording, and drag the robot to teach actions. In addition, there is a "TPD recording start/stop" function configuration item in the terminal DI configuration. By configuring this function, the user can trigger the "start recording" trace function through an external signal. It should be noted that to start recording a trace through an external signal, first Configure the TPD track information on the page first.
 
@@ -2100,6 +2145,9 @@ Click "Teaching Management" to display all saved teaching point information. In 
 
 .. centered:: Figure 3.7‑70 Run teach point
 
+.. important:: 
+   The modified values of the teaching points x, y, z, rx, ry, rz should not exceed the working range of the robot.
+
 Status information
 ----------------------
 
@@ -2141,42 +2189,41 @@ Status query operation steps:
 Auxiliary application
 ------------------------
 
-Robot calibration
-~~~~~~~~~~~~~~~~~~~
+.. Robot calibration
+.. ~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Robot Body" in "Auxiliary Application", click "Robot Calibration" to enter the robot calibration interface. This function is mainly to calibrate the zero point position of the robot. Click the "Disable" button, drag each axis of the robot, move to the zero point position of the robot on the machine, and click the "Zero Set" button to set the robot zero point.
+.. Under the menu bar of "Robot Body" in "Auxiliary Application", click "Robot Calibration" to enter the robot calibration interface. This function is mainly to calibrate the zero point position of the robot. Click the "Disable" button, drag each axis of the robot, move to the zero point position of the robot on the machine, and click the "Zero Set" button to set the robot zero point.
 
-.. image:: teaching_pendant_software/144.png
-   :width: 3in
-   :align: center
+.. .. image:: teaching_pendant_software/144.png
+..    :width: 3in
+..    :align: center
 
-.. centered:: Figure 3.9-1 Schematic diagram of robot calibration
+.. .. centered:: Figure 3.9-1 Schematic diagram of robot calibration
 
-**Zero setting**：When the robot leaves the factory, it will preset an initial posture, in which the angle of each joint is 0. When the zero point is set, the robot pose corresponds to when each joint of the robot moves to a specific position. The zero point is the benchmark of the robot coordinate system. Without the zero point, the robot cannot judge its own position. Therefore, in order to obtain the highest possible absolute positioning accuracy, it is necessary to calibrate the zero point of the robot.
+.. **Zero setting**：When the robot leaves the factory, it will preset an initial posture, in which the angle of each joint is 0. When the zero point is set, the robot pose corresponds to when each joint of the robot moves to a specific position. The zero point is the benchmark of the robot coordinate system. Without the zero point, the robot cannot judge its own position. Therefore, in order to obtain the highest possible absolute positioning accuracy, it is necessary to calibrate the zero point of the robot.
 
-Generally, the zero point calibration of the robot is required under the following circumstances:
+.. Generally, the zero point calibration of the robot is required under the following circumstances:
 
-- After replacing parts of the robot's mechanical system;
+.. - After replacing parts of the robot's mechanical system;
 
-- After a violent collision with the workpiece or the environment;
+.. - After a violent collision with the workpiece or the environment;
 
-- When operations such as establishing a coordinate system differ greatly from the actual position;
+.. - When operations such as establishing a coordinate system differ greatly from the actual position;
 
-- After a complete system reinstallation;
+.. - After a complete system reinstallation;
 
-- after the encoder battery has been replaced;
+.. - after the encoder battery has been replaced;
 
-- After long-distance transportation of the handling robot.
+.. - After long-distance transportation of the handling robot.
 
-.. important:: 
-   The zero point will be set when the robot leaves the factory. If you need to set the zero point again, please contact us for technical support.
+..    The zero point will be set when the robot leaves the factory. If you need to set the zero point again, please contact us for technical support.
 
 System Upgrade
 ~~~~~~~~~~~~~~~~
 
 Under the menu bar of "Robot Body" in "Auxiliary Application", click the "System Upgrade" button to enter the system upgrade interface. System upgrade is divided into software upgrade, driver upgrade and system shutdown.
 
-**Software upgrade**：Click "Upload File" under Software Upgrade, select the software.tar.gz upgrade package in the U disk, click Upload Upgrade Package, and "Uploading...Upload Percentage" is displayed next to the upgrade button.
+**Software upgrade**：Click "Upload File" under Software Upgrade, select the ``software.tar.gz`` upgrade package in the U disk, click Upload Upgrade Package, and "Uploading...Upload Percentage" is displayed next to the upgrade button.
 After the download of the background file is completed, the interface displays "uploading completed, upgrading in progress", check the MD5 and version number of the file, after passing, decrypt and decompress the upgrade file, and prompt "Upgrade is successful, please restart the control box!", if detected , unzip or other errors occur, and "upgrade failed" is displayed next to the upgrade button.
 
 .. image:: teaching_pendant_software/145.png
@@ -2184,6 +2231,10 @@ After the download of the background file is completed, the interface displays "
    :align: center
 
 .. centered:: Figure 3.9-2 System Upgrade
+
+.. important:: 
+   The name of the software upgrade package is determined ``software.tar.gz``. If the name of the upgrade package is inconsistent with it, the upgrade will fail. Just change it to the determined name of the upgrade package.
+
 
 **Firmware upgrade**：After the robot enters the BOOT mode, upload the upgrade compressed package, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
 
