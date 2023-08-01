@@ -2052,7 +2052,9 @@ Users can view the corresponding program backup content by selecting a date, and
 
 Graphical programming
 ~~~~~~~~~~~~~~~~~~~~~~~
-Since the teaching pendant is generally not connected with peripherals such as a keyboard and mouse, when accessing the robot WebAPP on the teaching pendant side, the user can edit the robot teaching program through the graphical programming function. Functional standardization functions are implemented using the Blockly library, which can be integrated in the WebAPP system, and custom code blocks can be implemented as needed, and after the drag-and-drop programming is completed, it is converted into a LUA program and issued and run through the existing instruction protocol. Through the use of graphic programming, it can be simple, easy to understand, easy to operate, and the language can be operated in Chinese.
+Since the teaching pendant is generally not connected with peripherals such as a keyboard and mouse, when accessing the robot WebAPP on the teaching pendant side, the user can edit the robot teaching program through the graphical programming function. Functional standardization functions are implemented using the Blockly library, which can be integrated in the WebAPP system, and custom code blocks can be implemented as needed, and after the drag-and-drop programming is completed, it is converted into a LUA program and issued and run through the existing instruction protocol. 
+
+Through the use of graphic programming, it can be simple, easy to understand, easy to operate, and the language can be operated in Chinese.
 
 .. image:: teaching_pendant_software/179.png
    :width: 6in
@@ -2576,6 +2578,37 @@ Enable the safe speed and set the speed limit value. When the user debugs the ro
 
 .. centered:: Figure 3.9-32 Safe speed setting
 
+Security Wall Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Under the menu bar of "Security Settings" in "Auxiliary Application", click "Security Wall Configuration" to enter the security wall configuration function interface.
+
+-  **Security Wall Configuration**：Click the enable button to enable the corresponding security wall. When the security wall is not configured with a security range, an error will be prompted. Click the drop-down box, select the security wall you want to set, and automatically bring out the security distance (you can not set it, the default is 0), and then click the "Setting" button to set it successfully.
+  
+.. image:: teaching_pendant_software/190.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.9‑33 Security Wall Configuration
+
+-  **Security Wall Reference Point Configuration**：After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
+
+-  Note: If the reference point is set successfully, the green light will be on. Otherwise, the yellow light is on. It turns green until the reference point is set successfully. When the four reference points are all set successfully, the safety range can be calculated, and the safety range parameter point status will return to the default after the calculation is successful.
+
+.. image:: teaching_pendant_software/191.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.9‑34 Safe range reference point setting
+
+-  Phenomenon: The successfully configured security wall is enabled. Drag the robot, if it is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
+
+.. image:: teaching_pendant_software/192.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.9‑35 The effect picture after the security range is set successfully
+
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -2589,7 +2622,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑33 Security daemon
+.. centered:: Figure 3.9‑36 Security daemon
 
 System settings
 -----------------
@@ -2634,6 +2667,39 @@ Click Account Settings on the secondary menu bar to enter the Account Settings i
 User Management
 ++++++++++++++++++++++++
 
+User management page, used to save user information, you can add user ID, function, etc. Users can log in manually or by swiping their cards through the existing user list.
+
+.. image:: teaching_pendant_software/186.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑2 User Management
+
+-  **Add users**：Click the "Add" button, enter the job number, name, password and select the function. Note: The job number is a 10-digit integer, and both the job number and the password are uniquely checked, and the password is displayed in Braille. After the user is added successfully, you can enter the name and password to log in again.
+  
+.. image:: teaching_pendant_software/187.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑3 Add users
+  
+-  **Edit users**：When there is a user list, click the "Edit" button on the right, the job number and name cannot be modified, but the password and function can be modified, and the password also needs to be uniquely verified.
+  
+.. image:: teaching_pendant_software/188.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑4 Edit users
+
+-  **Delete users**：The deletion methods are divided into single deletion and batch deletion. 1. Click the single "Delete" button on the right side of the list, and it will prompt "Please click the delete button again to confirm deletion", and click the list again to delete successfully. 2. Click the check box on the left, select the users to be deleted, and then click the batch "Delete" button at the top of the list twice to delete. Note: The initial user 111 and the current login user cannot be deleted.
+
+.. image:: teaching_pendant_software/189.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑5 Delete users
+
+
 Authority management
 ++++++++++++++++++++++++
 
@@ -2643,7 +2709,7 @@ The default function data (function code 1-6) cannot be deleted, and the functio
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑2 Authority management
+.. centered:: Figure 3.10‑6 Authority management
 
 -  **Add function**: Click the "Add" button, enter the function code, function name and function description, click the "Save" button, and return to the list page after success. Among them, the function code can only be an integer greater than 0 and cannot be the same as the existing function code, and all input items are required.
 
@@ -2651,7 +2717,7 @@ The default function data (function code 1-6) cannot be deleted, and the functio
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑3 Add function
+.. centered:: Figure 3.10‑7 Add function
 
 -  **Edit function name and description**: Click the "Edit" icon in the table operation bar to modify the function name and function description of the current function. After the modification is completed, click the "Save" button below to confirm the modification.
 
@@ -2659,7 +2725,7 @@ The default function data (function code 1-6) cannot be deleted, and the functio
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑4 Edit function name and description
+.. centered:: Figure 3.10‑8 Edit function name and description
 
 -  **Set function permissions**: Click the "Settings" icon in the table operation bar to set the permissions of the current function. After setting, click the "Save" button below to confirm the settings.
 
@@ -2671,7 +2737,7 @@ The default function data (function code 1-6) cannot be deleted, and the functio
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑5 Set function permissions
+.. centered:: Figure 3.10‑9 Set function permissions
 
 -  **Delete function**: Click the "Delete" icon in the table operation bar, firstly, it will check whether the current function is used by a user, if no user uses it, the current function can be deleted, otherwise it cannot be deleted.
 
@@ -2679,7 +2745,7 @@ The default function data (function code 1-6) cannot be deleted, and the functio
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑6 Delete function
+.. centered:: Figure 3.10‑10 Delete function
 
 Import/Export
 ++++++++++++++++
@@ -2688,7 +2754,7 @@ Import/Export
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑7 Account settings import/export
+.. centered:: Figure 3.10‑11 Account settings import/export
 
 -  **Import**: Click the "Import" button to import user management and rights management data in batches.
 
@@ -2703,7 +2769,7 @@ Click About on the secondary menu bar to enter the About interface. This page sh
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-8 About Schematics
+.. centered:: Figure 3.10-12 About Schematics
 
 Custom information
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2715,5 +2781,24 @@ This page can upload user information packages, custom robot models, and setting
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-9 Custom information schematic diagram
+.. centered:: Figure 3.10-13 Custom information schematic diagram
+
+Parameter range configuration
+++++++++++++++++++++++++++++++++
+
+Parameter range configuration, only the administrator can adjust the parameter range, the super administrator can only read, and the parameters of other authorized members can only be set within the parameter range set by the administrator.
+
+There are two ways to set parameters: slider dragging and manual input. 
+
+Note: The maximum value of the parameter range must be greater than the minimum value. 3 seconds after the parameter range is successfully configured, it will automatically jump to the login page, and you need to log in again.
+
+.. image:: teaching_pendant_software/193.png
+   :width: 6in
+   :align: center
+
+.. image:: teaching_pendant_software/194.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑14 Schematic diagram of parameter range configuration
 
