@@ -228,7 +228,7 @@ Status Bar
 
    name：**automatic mode**
    
-   effect：Robot automatic operation mode
+   effect：Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
 
 .. note:: 
    .. image:: teaching_pendant_software/014.png
@@ -238,7 +238,7 @@ Status Bar
 
    name：**Teach mode**
    
-   effect：Robot teaching operation mode,set the global speed adjustment of manual mode to automatic mode to 1%
+   effect：Robot teaching operation mode
 
 .. note:: 
    .. image:: teaching_pendant_software/015.png
