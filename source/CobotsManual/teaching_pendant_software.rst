@@ -2645,6 +2645,14 @@ The default function data (function code 1-6) cannot be deleted, and the functio
 
 .. centered:: Figure 3.10‑2 Authority management
 
+There are six functions by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, administrators have no function restrictions, the specific default permissions are shown in the following table ( Can be modified):
+
+.. centered:: Table 3.10‑1 Permission details
+
+.. image:: teaching_pendant_software/authority_table.png
+   :width: 6in
+   :align: center
+
 -  **Add function**: Click the "Add" button, enter the function code, function name and function description, click the "Save" button, and return to the list page after success. Among them, the function code can only be an integer greater than 0 and cannot be the same as the existing function code, and all input items are required.
 
 .. image:: teaching_pendant_software/add_authority.png
