@@ -1962,6 +1962,19 @@ Aux-IO is the instruction function for the robot to communicate with the PLC to 
 
 .. centered:: Figure 3.7-52 Aux-IO command interface
 
+MoveDO command
+++++++++++++++++
+
+Click the "MoveDO" icon to enter the MoveDO command editing interface
+
+This command realizes the function of outputting DO signal continuously according to the set interval during the linear motion.
+
+.. image:: teaching_pendant_software/195.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑53 MoveDO interface
+
 Teaching program encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1972,7 +1985,7 @@ All teaching programs are displayed and set in the form of program encryption in
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-53 Demonstration of teaching procedures
+.. centered:: Figure 3.7-54 Demonstration of teaching procedures
 
 When the program is a first-level encryption state, after opening the program: the corresponding "export", "preservation", "existing as", "copy", "cut", "delete", "delete", "delete", "delete", "delete" The buttons such as "upward", "downward" and "editing mode switching" will be grayed.
 Click the icon to be invalid and it will prompt that the current program is in an encrypted state. The program "renamed" icon will hide. Add instruction bars and program editing areas are invisible and prompts to be locked in first-level encryption.
@@ -1981,7 +1994,7 @@ Click the icon to be invalid and it will prompt that the current program is in a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-54 Program first-level encryption interface
+.. centered:: Figure 3.7-55 Program first-level encryption interface
 
 When the program is second-level encryption, after opening the program on the "Program Demonstration" page: the corresponding "savings", "copy", "shear", "paste", "delete", "upper", "upper" in the operating bar The buttons such as the "Move" will turn ashes.
 Click the icon to be invalid and it will prompt that the current program is encrypted. The program "renamed" icon will hide. The adding instruction bar is not visible and prompts to be locked in a secondary encryption. The program editing area can browse the reading program normally.
@@ -1990,7 +2003,7 @@ Click the icon to be invalid and it will prompt that the current program is encr
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-55 Program second-level encryption interface
+.. centered:: Figure 3.7-56 Program second-level encryption interface
 
 Both first -level encryption and second -level encryption can use the "export" function. Verification operations will be performed when importing.
 If the program of the same name is an encrypted file, the import operation will be interrupted and indicated that the coverage of the encryption program cannot be introduced.
@@ -1999,7 +2012,7 @@ If the program of the same name is an encrypted file, the import operation will 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-56 Program import
+.. centered:: Figure 3.7-57 Program import
 
 Local teaching point
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2012,7 +2025,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑57 Add local teaching points
+.. centered:: Figure 3.7‑58 Add local teaching points
 
 **Delete**: Click the serial number column of the table to select the local teaching point to be deleted, and then click the "Delete" icon in the upper right corner of the title of the local teaching point to delete the local teaching point.
 
@@ -2020,7 +2033,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑58 Delete local teaching point
+.. centered:: Figure 3.7‑59 Delete local teaching point
 
 **Run**: Click the "Start Running" icon in the data operation bar of the local teaching point table to perform a single-step operation of the local teaching point and move the robot to the position of this point.
 
@@ -2028,7 +2041,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑59 Run local teaching point
+.. centered:: Figure 3.7‑60 Run local teaching point
 
 **Details**: Click the "Details" icon in the data operation bar of the local teaching point table to view the details of the local teaching point.
 
@@ -2036,7 +2049,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑60 Local teaching point details
+.. centered:: Figure 3.7‑61 Local teaching point details
 
 Current program backup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2048,17 +2061,19 @@ Users can view the corresponding program backup content by selecting a date, and
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑61 Current program backup
+.. centered:: Figure 3.7‑62 Current program backup
 
 Graphical programming
 ~~~~~~~~~~~~~~~~~~~~~~~
-Since the teaching pendant is generally not connected with peripherals such as a keyboard and mouse, when accessing the robot WebAPP on the teaching pendant side, the user can edit the robot teaching program through the graphical programming function. Functional standardization functions are implemented using the Blockly library, which can be integrated in the WebAPP system, and custom code blocks can be implemented as needed, and after the drag-and-drop programming is completed, it is converted into a LUA program and issued and run through the existing instruction protocol. Through the use of graphic programming, it can be simple, easy to understand, easy to operate, and the language can be operated in Chinese.
+Since the teaching pendant is generally not connected with peripherals such as a keyboard and mouse, when accessing the robot WebAPP on the teaching pendant side, the user can edit the robot teaching program through the graphical programming function. Functional standardization functions are implemented using the Blockly library, which can be integrated in the WebAPP system, and custom code blocks can be implemented as needed, and after the drag-and-drop programming is completed, it is converted into a LUA program and issued and run through the existing instruction protocol. 
+
+Through the use of graphic programming, it can be simple, easy to understand, easy to operate, and the language can be operated in Chinese.
 
 .. image:: teaching_pendant_software/179.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑62 Graphical programming interface
+.. centered:: Figure 3.7‑63 Graphical programming interface
 
 The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows
 
@@ -2066,7 +2081,7 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑63 Graphical programming page layout overall design
+.. centered:: Figure 3.7‑64 Graphical programming page layout overall design
 
 **Operation bar**：The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
 
@@ -2082,7 +2097,7 @@ Motion graphic programming commands include  \ `PTP <teaching_pendant_software.h
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑64 Motion Graphical Programming
+.. centered:: Figure 3.7‑65 Motion Graphical Programming
 
 Control graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++
@@ -2092,7 +2107,7 @@ Control graphical programming commands include \ `Wait <teaching_pendant_softwar
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑65 Control graphical programming commands
+.. centered:: Figure 3.7‑66 Control graphical programming commands
 
 Advanced graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -2102,7 +2117,7 @@ Advanced graphical programming commands include \ `dofile <teaching_pendant_soft
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑66 Advanced graphical programming commands
+.. centered:: Figure 3.7‑67 Advanced graphical programming commands
 
 Example of using graphical programming commands
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2114,7 +2129,7 @@ For example, if you select PTP and Lin motion instructions and control commands 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑67 Example of using graphical programming commands
+.. centered:: Figure 3.7‑68 Example of using graphical programming commands
 
 After the graphical programming instruction splicing and parameter filling is completed, fill in the name of the workspace, and click the "Save" icon to save the program. Select the "Workspace" that has been written, click Start Run, and you can execute this program.
 
@@ -2127,7 +2142,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-68 Teaching management interface
+.. centered:: Figure 3.7-69 Teaching management interface
 
 **Details**: Click the "Details" button to view the details of the teaching point.
 
@@ -2135,7 +2150,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑69 Teach point details
+.. centered:: Figure 3.7‑70 Teach point details
 
 **Run**: Click the "Start Run" button to perform a single-step operation of the local teaching point, and move the robot to the position of this point.
 
@@ -2143,7 +2158,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑70 Run teach point
+.. centered:: Figure 3.7‑71 Run teach point
 
 .. important:: 
    The modified values of the teaching points x, y, z, rx, ry, rz should not exceed the working range of the robot.
@@ -2576,6 +2591,37 @@ Enable the safe speed and set the speed limit value. When the user debugs the ro
 
 .. centered:: Figure 3.9-32 Safe speed setting
 
+Security Wall Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Under the menu bar of "Security Settings" in "Auxiliary Application", click "Security Wall Configuration" to enter the security wall configuration function interface.
+
+-  **Security Wall Configuration**：Click the enable button to enable the corresponding security wall. When the security wall is not configured with a security range, an error will be prompted. Click the drop-down box, select the security wall you want to set, and automatically bring out the security distance (you can not set it, the default is 0), and then click the "Setting" button to set it successfully.
+  
+.. image:: teaching_pendant_software/190.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.9‑33 Security Wall Configuration
+
+-  **Security Wall Reference Point Configuration**：After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
+
+-  Note: If the reference point is set successfully, the green light will be on. Otherwise, the yellow light is on. It turns green until the reference point is set successfully. When the four reference points are all set successfully, the safety range can be calculated, and the safety range parameter point status will return to the default after the calculation is successful.
+
+.. image:: teaching_pendant_software/191.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.9‑34 Safe range reference point setting
+
+-  Phenomenon: The successfully configured security wall is enabled. Drag the robot, if it is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
+
+.. image:: teaching_pendant_software/192.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.9‑35 The effect picture after the security range is set successfully
+
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -2589,7 +2635,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑33 Security daemon
+.. centered:: Figure 3.9‑36 Security daemon
 
 System settings
 -----------------
@@ -2634,6 +2680,39 @@ Click Account Settings on the secondary menu bar to enter the Account Settings i
 User Management
 ++++++++++++++++++++++++
 
+User management page, used to save user information, you can add user ID, function, etc. Users can log in manually or by swiping their cards through the existing user list.
+
+.. image:: teaching_pendant_software/186.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑2 User Management
+
+-  **Add users**：Click the "Add" button, enter the job number, name, password and select the function. Note: The job number is a 10-digit integer, and both the job number and the password are uniquely checked, and the password is displayed in Braille. After the user is added successfully, you can enter the name and password to log in again.
+  
+.. image:: teaching_pendant_software/187.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑3 Add users
+  
+-  **Edit users**：When there is a user list, click the "Edit" button on the right, the job number and name cannot be modified, but the password and function can be modified, and the password also needs to be uniquely verified.
+  
+.. image:: teaching_pendant_software/188.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑4 Edit users
+
+-  **Delete users**：The deletion methods are divided into single deletion and batch deletion. 1. Click the single "Delete" button on the right side of the list, and it will prompt "Please click the delete button again to confirm deletion", and click the list again to delete successfully. 2. Click the check box on the left, select the users to be deleted, and then click the batch "Delete" button at the top of the list twice to delete. Note: The initial user 111 and the current login user cannot be deleted.
+
+.. image:: teaching_pendant_software/189.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑5 Delete users
+
+
 Authority management
 ++++++++++++++++++++++++
 
@@ -2643,7 +2722,7 @@ The default function data (function code 1-6) cannot be deleted, and the functio
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑2 Authority management
+.. centered:: Figure 3.10‑6 Authority management
 
 There are six functions by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, administrators have no function restrictions, the specific default permissions are shown in the following table ( Can be modified):
 
@@ -2659,7 +2738,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑3 Add function
+.. centered:: Figure 3.10‑7 Add function
 
 -  **Edit function name and description**: Click the "Edit" icon in the table operation bar to modify the function name and function description of the current function. After the modification is completed, click the "Save" button below to confirm the modification.
 
@@ -2667,7 +2746,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑4 Edit function name and description
+.. centered:: Figure 3.10‑8 Edit function name and description
 
 -  **Set function permissions**: Click the "Settings" icon in the table operation bar to set the permissions of the current function. After setting, click the "Save" button below to confirm the settings.
 
@@ -2679,7 +2758,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑5 Set function permissions
+.. centered:: Figure 3.10‑9 Set function permissions
 
 -  **Delete function**: Click the "Delete" icon in the table operation bar, firstly, it will check whether the current function is used by a user, if no user uses it, the current function can be deleted, otherwise it cannot be deleted.
 
@@ -2687,7 +2766,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑6 Delete function
+.. centered:: Figure 3.10‑10 Delete function
 
 Import/Export
 ++++++++++++++++
@@ -2696,7 +2775,7 @@ Import/Export
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑7 Account settings import/export
+.. centered:: Figure 3.10‑11 Account settings import/export
 
 -  **Import**: Click the "Import" button to import user management and rights management data in batches.
 
@@ -2711,7 +2790,7 @@ Click About on the secondary menu bar to enter the About interface. This page sh
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-8 About Schematics
+.. centered:: Figure 3.10-12 About Schematics
 
 Custom information
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2723,5 +2802,24 @@ This page can upload user information packages, custom robot models, and setting
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-9 Custom information schematic diagram
+.. centered:: Figure 3.10-13 Custom information schematic diagram
+
+Parameter range configuration
+++++++++++++++++++++++++++++++++
+
+Parameter range configuration, only the administrator can adjust the parameter range, the super administrator can only read, and the parameters of other authorized members can only be set within the parameter range set by the administrator.
+
+There are two ways to set parameters: slider dragging and manual input. 
+
+Note: The maximum value of the parameter range must be greater than the minimum value. 3 seconds after the parameter range is successfully configured, it will automatically jump to the login page, and you need to log in again.
+
+.. image:: teaching_pendant_software/193.png
+   :width: 6in
+   :align: center
+
+.. image:: teaching_pendant_software/194.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.10‑14 Schematic diagram of parameter range configuration
 
