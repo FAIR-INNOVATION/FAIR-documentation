@@ -28,7 +28,7 @@ Start software
 User login and permission update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. centered:: Table 3.3-1 Initial user
+.. centered:: Table 3.1-1 Initial user
 
 .. list-table::
    :widths: 70 70 70 70
