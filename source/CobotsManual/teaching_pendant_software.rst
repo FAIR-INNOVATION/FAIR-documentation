@@ -25,17 +25,52 @@ Start software
 2. The teach pendant opens a browser to access the target website 192.168.58.2;
 3. Enter the user name and password and click Login to log in to the system.
 
-User login and authority management
+User login and permission update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Administrator (Initial username: admin, Password: 123)
-- ME engineer (Initial username: MEenginer, Password: 123)
-- PE&PQE engineer (Initial username: PEenginer, Password: 123)
-- Technician & team leader (Initial username: programmer, Password: 123)
-- Operator (Initial username: operator, Password: 123)
-- Monitor (Initial username: monitor, Password: 123)
+.. centered:: Table 3.3-1 Initial user
 
-Users (refer to \ `4.10.2.1 User Management <#user-management>`__\  for user management) are divided into six levels by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, management There are no functional restrictions for administrators. For specific default permissions, refer to \ `4.10.2.2 Authority management <#authority-management>`__\.
+.. list-table::
+   :widths: 70 70 70 70
+   :header-rows: 0
+   :align: center
+
+   * - **Job number**
+     - **Initial username**
+     - **Password**
+     - **Function code**
+
+   * - 111
+     - admin
+     - 123
+     - 1
+
+   * - 222
+     - MEenginer
+     - 222
+     - 2
+
+   * - 333
+     - PEenginer
+     - 333
+     - 3
+   
+   * - 444
+     - programmer
+     - 444
+     - 4
+   
+   * - 555
+     - operator
+     - 555
+     - 5
+
+   * - 666
+     - monitor
+     - 666
+     - 6
+
+Users (refer to \ `4.10.2.1 User Management <#user-management>`__\  for user management) are divided into six levels by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, management There are no functional restrictions for administrators. For specific default function code permissions, refer to \ `4.10.2.2 Authority management <#authority-management>`__\. 
 
 The login interface is shown in Figure 3.1-1 login interface.
 
@@ -171,7 +206,7 @@ Status Bar
 
    name：**Teach mode**
    
-   effect：Robot teaching operation mode
+   effect：Robot teaching operation mode, set the global speed adjustment of manual mode and automatic mode and specify the speed.
 
 .. note:: 
    .. image:: teaching_pendant_software/015.png
@@ -1031,13 +1066,29 @@ Click the command on the left to add a program node to the program tree.When the
 
 .. centered:: Figure 3.7-1 Program tree interface
 
-Click the "Popup/Hide the content on the right side of the current program" button to expand or hide the local teaching points and the backup content of the current program. After the content on the right is expanded, click the icons of "Partial teaching point" and "Current program backup" to display the corresponding content.
+Click "⇄" to switch modes, and the teaching program text can be changed to the editing state, and the editing area can be expanded and collapsed in the editing state.
 
-.. image:: teaching_pendant_software/069.png
+.. image:: teaching_pendant_software/edit_mode_1.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-2 Contents on the right side of the current program
+.. image:: teaching_pendant_software/edit_mode_2.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-2 Teaching program editing status
+
+Click the "Popup/Hide the content on the right side of the current program" button to expand or hide the local teaching points and the backup content of the current program. After the content on the right is expanded, click the icons of "Partial teaching point" and "Current program backup" to display the corresponding content.
+
+.. image:: teaching_pendant_software/program_right_1.png
+   :width: 6in
+   :align: center
+
+.. image:: teaching_pendant_software/program_right_2.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-3 Contents on the right side of the current program
 
 
 Tool bar
@@ -1193,7 +1244,7 @@ You can choose the point to be reached, and the smooth transition time setting c
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-3 PTP command interface
+.. centered:: Figure 3.7-4 PTP command interface
 
 Lin command
 ++++++++++++++++
@@ -1206,7 +1257,7 @@ The function of this command is similar to the "PTP" command, but the path of th
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4 Lin command interface
+.. centered:: Figure 3.7-5 Lin command interface
 
 Arc command
 ++++++++++++++++
@@ -1223,7 +1274,7 @@ The "Arc" command is arc movement, which includes two points. The first point is
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5 Arc command interface
+.. centered:: Figure 3.7-6 Arc command interface
 
 Circle command
 ++++++++++++++++
@@ -1240,7 +1291,7 @@ The "Circle" command is a full circle movement, including two points. The first 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6 Circle command interface
+.. centered:: Figure 3.7-7 Circle command interface
 
 Spiral command
 ++++++++++++++++
@@ -1254,7 +1305,7 @@ Whether to offset, the offset takes effect on the trajectory of the entire helix
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7 Spiral command interface
+.. centered:: Figure 3.7-8 Spiral command interface
 
 N-Spiral command
 ++++++++++++++++
@@ -1267,7 +1318,7 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8 N-Spiral command interface
+.. centered:: Figure 3.7-9 N-Spiral command interface
 
 Spline command
 ++++++++++++++++
@@ -1280,7 +1331,7 @@ The command is divided into three parts: the start of the spline group, the spli
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-9 Spline command interface
+.. centered:: Figure 3.7-10 Spline command interface
 
 N-Spline command
 +++++++++++++++++++
@@ -1294,7 +1345,7 @@ For the given control point and the given waypoint.
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-10 N-Spline command interface
+.. centered:: Figure 3.7-11 N-Spline command interface
 
 IO command
 ++++++++++++++++
@@ -1309,7 +1360,7 @@ The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and get
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-11 SetDO command interface
+.. centered:: Figure 3.7-12 SetDO command interface
 
 In the "GetDI/SPLCGetDI" command, select the value of the port number you want to get, whether to block or not, select "block" to get the DI status after the movement stops, and select the "non-blocking" option to get the DI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. After selection, click the "Add" and "Apply" buttons.
 
@@ -1317,7 +1368,7 @@ In the "GetDI/SPLCGetDI" command, select the value of the port number you want t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-12 GetDI command interface
+.. centered:: Figure 3.7-13 GetDI command interface
 
 AI command
 ++++++++++++++++
@@ -1332,7 +1383,7 @@ In this instruction, it is divided into two functions: setting analog output (Se
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-13 SetAO command interface
+.. centered:: Figure 3.7-14 SetAO command interface
 
 "GetAI/SPLCGetAI" selects the analog input that needs to be obtained, whether to block or not selects "blocked" to obtain the AI state after the movement stops, and selects the "non-blocked" option to obtain the AI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
@@ -1340,7 +1391,7 @@ In this instruction, it is divided into two functions: setting analog output (Se
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-14 GetAI command interface
+.. centered:: Figure 3.7-15 GetAI command interface
 
 TPD command
 ++++++++++++++++
@@ -1361,7 +1412,7 @@ When programming, first use the PTP instruction to reach the starting point of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-15 TPD command interface
+.. centered:: Figure 3.7-16 TPD command interface
 
 ToolList command
 +++++++++++++++++++
@@ -1374,7 +1425,7 @@ Select the tool coordinate system name and click "Apply" to add this command to 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-16 ToolList command interface
+.. centered:: Figure 3.7-17 ToolList command interface
 
 Mode command
 ++++++++++++++++
@@ -1387,7 +1438,7 @@ This command can switch the robot to manual mode, and is usually added at the en
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-17 Mode command interface
+.. centered:: Figure 3.7-18 Mode command interface
 
 Var command
 ++++++++++++++++
@@ -1400,7 +1451,7 @@ This command is a variable system command, which is divided into two parts: Lua 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-18 Var command interface
+.. centered:: Figure 3.7-19 Var command interface
 
 While command
 ++++++++++++++++
@@ -1413,7 +1464,7 @@ Enter the waiting condition in the input box behind While, input the action comm
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-19 While command interface
+.. centered:: Figure 3.7-20 While command interface
 
 if…else command
 ++++++++++++++++
@@ -1426,7 +1477,7 @@ Enter the statement in the input box on the right, and click "Add" and "Apply" a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-20 if…else command interface
+.. centered:: Figure 3.7-21 if…else command interface
 
 Goto command
 ++++++++++++++++
@@ -1439,7 +1490,7 @@ The Goto instruction is a jump instruction, enter the statement in the input box
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-21 Goto command interface
+.. centered:: Figure 3.7-22 Goto command interface
 
 Wait command
 ++++++++++++++++
@@ -1454,7 +1505,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-22 WaitTime command interface
+.. centered:: Figure 3.7-23 WaitTime command interface
 
 "WaitDI" command, that is, single DI waiting, select the IO port number to be waited for, wait state, wait maximum time and wait timeout processing method, and click "Add" and "Apply".
 
@@ -1462,7 +1513,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-23 WaitDI command interface
+.. centered:: Figure 3.7-24 WaitDI command interface
 
 "WaitMultiDI" command, that is, multi-DI waiting, first select the multi-DI establishment conditions, then check the DI port and status that need to wait, and finally set the maximum waiting time and waiting timeout processing method, click "Add" and "Apply".
 
@@ -1470,7 +1521,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-24 WaitMultiDI command interface
+.. centered:: Figure 3.7-25 WaitMultiDI command interface
 
 "WaitAI" command, select the analog quantity to be waited for, the value, the maximum waiting time and the waiting timeout processing method, and click "Add" and "Apply".
 
@@ -1478,7 +1529,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-25 WaitAI command interface
+.. centered:: Figure 3.7-26 WaitAI command interface
 
 Pause command
 ++++++++++++++++
@@ -1491,7 +1542,7 @@ This instruction is a pause instruction. Insert this instruction into the progra
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-26 Pause command interface
+.. centered:: Figure 3.7-27 Pause command interface
 
 Dofile command
 ++++++++++++++++
@@ -1504,7 +1555,7 @@ The Dofile command calls the internal program of the controller. When using the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-27 Dofile command interface
+.. centered:: Figure 3.7-28 Dofile command interface
 
 Weave command
 ++++++++++++++++
@@ -1517,7 +1568,7 @@ The "Weave" command consists of two parts. In the first part, select the weaving
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-28 Weave command interface
+.. centered:: Figure 3.7-29 Weave command interface
 
 Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
 
@@ -1525,7 +1576,7 @@ Click "Configuration and Test" to configure the parameters of the weaving weldin
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-29 Weave configuration and testing command interface
+.. centered:: Figure 3.7-30 Weave configuration and testing command interface
 
 Segment command
 ++++++++++++++++
@@ -1538,7 +1589,7 @@ This instruction is a special instruction for welding, mainly used in the interm
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-30 Segment command interface
+.. centered:: Figure 3.7-31 Segment command interface
 
 Adjust command
 ++++++++++++++++
@@ -1551,7 +1602,7 @@ This command adaptively adjusts the posture of the welding torch for the scene o
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-31 Adjust command interface
+.. centered:: Figure 3.7-32 Adjust command interface
 
 Gripper command
 ++++++++++++++++++
@@ -1564,7 +1615,7 @@ In this command, it is divided into the gripper motion control command and the g
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-32 Gripper command interface
+.. centered:: Figure 3.7-33 Gripper command interface
 
 Spray command
 ++++++++++++++++
@@ -1577,7 +1628,7 @@ This command is a spraying-related command, which controls the spray gun to "sta
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-33 Spray command interface
+.. centered:: Figure 3.7-34 Spray command interface
 
 EAxis command
 ++++++++++++++++
@@ -1590,7 +1641,7 @@ This command is used in combination with the PTP command for scenarios using ext
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-34 EAxis command interface
+.. centered:: Figure 3.7-35 EAxis command interface
 
 Weld command
 ++++++++++++++++
@@ -1603,7 +1654,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-35 Weld command interface
+.. centered:: Figure 3.7-36 Weld command interface
 
 Laser command
 ++++++++++++++++
@@ -1616,7 +1667,7 @@ This command includes three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-36 Laser command interface
+.. centered:: Figure 3.7-37 Laser command interface
 
 Convey command
 ++++++++++++++++
@@ -1629,7 +1680,7 @@ This command includes four commands: position real-time detection, IO real-time 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-37 Conveyor command interface
+.. centered:: Figure 3.7-38 Conveyor command interface
 
 F/T command
 ++++++++++++++++
@@ -1642,7 +1693,7 @@ The instruction includes FT_Guard (collision detection), FT_Control (constant fo
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-38 F/T command interface
+.. centered:: Figure 3.7-39 F/T command interface
 
 3D command
 ++++++++++++++++
@@ -1655,7 +1706,7 @@ This command generates commands for 3D vision program examples. Users can refer 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-39 3D command interface
+.. centered:: Figure 3.7-40 3D command interface
 
 Pallet command
 ++++++++++++++++
@@ -1668,7 +1719,7 @@ This instruction generates instructions for the palletizing program, which is co
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-40 Pallet command interface
+.. centered:: Figure 3.7-41 Pallet command interface
 
 Offset command
 ++++++++++++++++
@@ -1681,7 +1732,7 @@ This command is an overall offset command. Input each offset, add the opening co
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-41 Offset command interface
+.. centered:: Figure 3.7-42 Offset command interface
 
 W-Search command
 ++++++++++++++++
@@ -1694,7 +1745,7 @@ This command is a welding wire positioning command, including three commands of 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-42 W-Search command interface
+.. centered:: Figure 3.7-43 W-Search command interface
 
 In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
 
@@ -1702,7 +1753,7 @@ In writing a program, usually first set the start command of the search, and the
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-43 W-Search example(1D)
+.. centered:: Figure 3.7-44 W-Search example(1D)
 
 Vir-IO command
 ++++++++++++++++
@@ -1715,7 +1766,7 @@ This command is a virtual IO control command, which can realize the setting of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-44 Vir-IO command interface
+.. centered:: Figure 3.7-45 Vir-IO command interface
 
 Thread command
 ++++++++++++++++
@@ -1728,7 +1779,7 @@ The Thread command is an auxiliary thread function. Users can define an auxiliar
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-45 Thread program example
+.. centered:: Figure 3.7-46 Thread program example
 
 ServoCart command
 ++++++++++++++++++++
@@ -1741,7 +1792,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-46 ServoCart command interface
+.. centered:: Figure 3.7-47 ServoCart command interface
 
 Absolute pose control program example：
 
@@ -1795,7 +1846,7 @@ This command is to call the function interface function, provide the robot inter
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-47 Function command interface
+.. centered:: Figure 3.7-48 Function command interface
 
 Collision command
 ++++++++++++++++++++
@@ -1808,7 +1859,7 @@ This command is used to set the collision level. Through this command, the colli
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-48 Collision command interface
+.. centered:: Figure 3.7-49 Collision command interface
 
 Xmlrpc command
 ++++++++++++++++
@@ -1821,7 +1872,7 @@ XML-RPC is a remote procedure call method for transferring data between programs
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-49 Xmlrpc command interface
+.. centered:: Figure 3.7-50 Xmlrpc command interface
 
 .. important:: 
    1) The controller acts as a client to connect to the remote custom port;
@@ -1867,7 +1918,7 @@ The Acc command is to realize the function that the acceleration of the robot ca
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-50 Acc command interface
+.. centered:: Figure 3.7-51 Acc command interface
 
 Torque command
 ++++++++++++++++
@@ -1880,7 +1931,7 @@ This command is a force compliance control command. Through this command, the ro
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-51 Torque command interface
+.. centered:: Figure 3.7-52 Torque command interface
 
 Aux-IO command
 ++++++++++++++++
@@ -1893,7 +1944,7 @@ Aux-IO is the instruction function for the robot to communicate with the PLC to 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-52 Aux-IO command interface
+.. centered:: Figure 3.7-53 Aux-IO command interface
 
 MoveDO command
 ++++++++++++++++
@@ -1968,7 +2019,7 @@ The local teaching point is bound to the current teaching program. When adding a
 
 .. centered:: Figure 3.7‑59 Delete local teaching point
 
-**Run**: Click the "Start Running" icon in the data operation bar of the local teaching point table to perform a single-step operation of the local teaching point and move the robot to the position of this point.
+**Run**: Click the "Start Running" icon in the data operation bar of the local teaching point table to perform a single-point operation of the local teaching point and move the robot to the position of this point.
 
 .. image:: teaching_pendant_software/run_local_point.png
    :width: 6in
@@ -1987,8 +2038,8 @@ The local teaching point is bound to the current teaching program. When adding a
 Current program backup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After the user modifies the current program, the "backup" function of the current program is triggered (the backup time is 1 year), and the initial content of the current program is saved and displayed on the right side, which is convenient for the user to compare the modified content.
-Users can view the corresponding program backup content by selecting a date, and click the "Delete" icon in the upper right corner to delete the current program backup content.The content of the current program backup can only be viewed, not modified.
+After the user modifies the teaching program and clicks save, the "backup" function of the current program is triggered (the backup time is 1 year), and the initial content of the current program is saved and displayed on the right side, which is convenient for the user to compare the modified content.
+Users can view the corresponding program backup content by selecting a date, and click the "Delete" icon in the upper right corner to delete the current program backup content. The content of the current program backup can only be viewed, not modified.
 
 .. image:: teaching_pendant_software/program_backup.png
    :width: 6in
@@ -2075,7 +2126,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-69 Teaching management interface
+.. centered:: Figure 3.7-58 Teaching management interface
 
 **Details**: Click the "Details" button to view the details of the teaching point.
 
@@ -2085,7 +2136,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
 
 .. centered:: Figure 3.7‑70 Teach point details
 
-**Run**: Click the "Start Run" button to perform a single-step operation of the local teaching point, and move the robot to the position of this point.
+**Run**: Click the "Start Run" button to perform a single-point operation of the local teaching point, and move the robot to the position of this point.
 
 .. image:: teaching_pendant_software/teaching_management_run.png
    :width: 6in
@@ -2562,7 +2613,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Apps", click "Security B
 
 The user clicks the "function enabled" button to open or close the setting of the security daemon. Select "Unexpected Situation" and "Background Program", and click the "Settings" button to configure the parameters of the unexpected situation handling logic.
 
-Enable the security background program and set the unexpected scene and background program. When the user starts to run the program and the unexpected situation matches the set unexpected situation, the robot will stop the current program and immediately execute the corresponding background program to play a role The role of security protection.
+Enable the security background program and set the unexpected scene and background program. When the user starts to run the program and the unexpected situation matches the set unexpected situation, the robot will execute the corresponding background program to play a role of security protection.
 
 .. image:: teaching_pendant_software/daemon.png
    :width: 6in
@@ -2608,7 +2659,7 @@ Network settings
 Account settings account settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click Account Settings on the secondary menu bar to enter the Account Settings interface. Account management functions are only available to super administrators and administrators. The function is divided into the following three modules:
+Click Account Settings on the secondary menu bar to enter the Account Settings interface. Account management functions are only available to administrators. The function is divided into the following three modules:
 
 User Management
 ++++++++++++++++++++++++
@@ -2649,7 +2700,8 @@ User management page, used to save user information, you can add user ID, functi
 Authority management
 ++++++++++++++++++++++++
 
-The default function data (function code 1-6) cannot be deleted, and the function code cannot be modified, but the function name and function description can be modified and the authority of the function can be set.
+.. important:: 
+   The default function data (function code 1-6) cannot be deleted, and the function code cannot be modified, but the function name and function description can be modified and the authority of the function can be set.
 
 .. image:: teaching_pendant_software/authority.png
    :width: 6in
@@ -2657,7 +2709,10 @@ The default function data (function code 1-6) cannot be deleted, and the functio
 
 .. centered:: Figure 3.10‑6 Authority management
 
-There are six functions by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, administrators have no function restrictions, the specific default permissions are shown in the following table ( Can be modified):
+There are six functions by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, administrators have no function restrictions, the specific default permissions are shown in the following table:
+
+.. important:: 
+   Default permissions can be modified
 
 .. centered:: Table 3.10‑1 Permission details
 
