@@ -2580,7 +2580,7 @@ Security Wall Configuration
 
 Under the menu bar of "Security Settings" in "Auxiliary Application", click "Security Wall Configuration" to enter the security wall configuration function interface.
 
--  **Security Wall Configuration**：Click the enable button to enable the corresponding security wall. When the security wall is not configured with a security range, an error will be prompted. Click the drop-down box, select the security wall you want to set, and automatically bring out the security distance (you can not set it, the default is 0), and then click the "Setting" button to set it successfully.
+-  **Security Wall Configuration**：Click the enable button to enable the corresponding security wall. When the security wall is not configured with a security range, an error will be prompted. Click the drop-down box, select the security wall you want to set, and automatically bring out the security distance (you can not set it, the default value is 0), and then click the "Setting" button to set it successfully.
   
 .. image:: teaching_pendant_software/190.png
    :width: 6in
@@ -2590,7 +2590,8 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
 
 -  **Security Wall Reference Point Configuration**：After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
 
--  Note: If the reference point is set successfully, the green light will be on. Otherwise, the yellow light is on. It turns green until the reference point is set successfully. When the four reference points are all set successfully, the safety range can be calculated, and the safety range parameter point status will return to the default after the calculation is successful.
+.. important::
+   If the reference point is set successfully, the green light will be on. Otherwise, the yellow light is on. It turns green until the reference point is set successfully. When the four reference points are all set successfully, the safety range can be calculated, and the safety range parameter point status will return to the default after the calculation is successful.
 
 .. image:: teaching_pendant_software/191.png
    :width: 6in
@@ -2598,7 +2599,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
 
 .. centered:: Figure 3.9‑34 Safe range reference point setting
 
--  Phenomenon: The successfully configured security wall is enabled. Drag the robot, if it is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
+-  Apply effects: The successfully configured security wall is enabled. Drag the robot, if the TCP at the end of the robot is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
 
 .. image:: teaching_pendant_software/192.png
    :width: 6in
@@ -2664,7 +2665,7 @@ Click Account Settings on the secondary menu bar to enter the Account Settings i
 User Management
 ++++++++++++++++++++++++
 
-User management page, used to save user information, you can add user ID, function, etc. Users can log in manually or by swiping their cards through the existing user list.
+User management page, used to save user information, you can add user ID, function, etc. The user can log in by entering the existing user name and password in the user list.
 
 .. image:: teaching_pendant_software/186.png
    :width: 6in
@@ -2672,8 +2673,11 @@ User management page, used to save user information, you can add user ID, functi
 
 .. centered:: Figure 3.10‑2 User Management
 
--  **Add users**：Click the "Add" button, enter the job number, name, password and select the function. Note: The job number is a 10-digit integer, and both the job number and the password are uniquely checked, and the password is displayed in Braille. After the user is added successfully, you can enter the name and password to log in again.
+-  **Add users**：Click the "Add" button, enter the job number, name, password and select the function. 
   
+.. important::
+   The job number can be up to 10-digit integer, and the job number and password are uniquely checked, and the password is displayed in Braille. After the user is added successfully, you can enter the name and password to log in again.
+
 .. image:: teaching_pendant_software/187.png
    :width: 6in
    :align: center
@@ -2688,7 +2692,14 @@ User management page, used to save user information, you can add user ID, functi
 
 .. centered:: Figure 3.10‑4 Edit users
 
--  **Delete users**：The deletion methods are divided into single deletion and batch deletion. 1. Click the single "Delete" button on the right side of the list, and it will prompt "Please click the delete button again to confirm deletion", and click the list again to delete successfully. 2. Click the check box on the left, select the users to be deleted, and then click the batch "Delete" button at the top of the list twice to delete. Note: The initial user 111 and the current login user cannot be deleted.
+-  **Delete users**：The deletion methods are divided into single deletion and batch deletion. 
+ 
+   1.Click the single "Delete" button on the right side of the list, and it will prompt "Please click the delete button again to confirm deletion", and click the list again to delete successfully. 
+   
+   2.Click the check box on the left, select the users to be deleted, and then click the batch "Delete" button at the top of the list twice to delete. 
+   
+.. important::
+   The initial user 111 and the current login user cannot be deleted.
 
 .. image:: teaching_pendant_software/189.png
    :width: 6in
@@ -2795,11 +2806,12 @@ This page can upload user information packages, custom robot models, and setting
 Parameter range configuration
 ++++++++++++++++++++++++++++++++
 
-Parameter range configuration, only the administrator can adjust the parameter range, the super administrator can only read, and the parameters of other authorized members can only be set within the parameter range set by the administrator.
+Parameter range configuration, only the administrator can adjust the parameter range, and the parameters of other authorized members can only be set within the parameter range set by the administrator.
 
 There are two ways to set parameters: slider dragging and manual input. 
 
-Note: The maximum value of the parameter range must be greater than the minimum value. 3 seconds after the parameter range is successfully configured, it will automatically jump to the login page, and you need to log in again.
+.. important:: 
+   The maximum value of the parameter range must be greater than the minimum value. 3 seconds after the parameter range is successfully configured, it will automatically jump to the login page, and you need to log in again.
 
 .. image:: teaching_pendant_software/193.png
    :width: 6in
