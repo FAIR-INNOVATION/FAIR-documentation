@@ -2604,8 +2604,12 @@ Under the menu bar of "Security Settings" in "Auxiliary App", click "Safe Speed 
 
 Enable the safe speed and set the speed limit value. When the user debugs the robot in manual mode or drags the robot in drag mode, and the speed exceeds the set threshold, the robot will stop and warn the user, which has the effect of safety protection.
 
-.. image:: teaching_pendant_software/175.png
-   :width: 3in
+.. image:: teaching_pendant_software/200.png
+   :width: 6in
+   :align: center
+
+.. image:: teaching_pendant_software/201.png
+   :width: 6in
    :align: center
 
 .. centered:: Figure 3.9-32 Safe speed setting
