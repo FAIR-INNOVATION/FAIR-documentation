@@ -1233,6 +1233,141 @@ Program command
 The left side is mainly for adding program commands. Click the icon above each keyword to enter the detailed interface. There are two main operations for adding program commands to the file. One way is to open the relevant command and click the Apply button to add the command to the program. , another way is to click the "Add" button first, at this time the command is not saved in the program file, and you need to click "Apply" again to save the command in the file. 
 The second method often occurs when multiple commands of the same type are issued. We add an add button and display the content of the added command to this type of command. Click the Add button to add a command, and the added command displays all the added commands. , click "Apply" to save the added command to the opened file on the right.
 
+Logic Command Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/202.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4 Logic Command Interface
+
+While command
+++++++++++++++++
+
+Click the "While" icon to enter the While command editing interface
+
+Enter the waiting condition in the input box behind While, input the action command during the loop in the input box behind do, and click Save. (For the convenience of operation, you can enter do content arbitrarily, and edit other instructions in the program to insert instead)
+
+.. image:: teaching_pendant_software/101.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-1 While command interface
+
+if…else command
+++++++++++++++++
+
+Click the "if...else" button to enter the if...else command editing interface
+
+Enter the statement in the input box on the right, and click "Add" and "Apply" after editing. (This instruction requires a certain programming foundation, if you need help, please contact us)
+
+.. image:: teaching_pendant_software/102.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-2 if…else command interface
+
+Goto command
+++++++++++++++++
+
+Click the "Goto" button to enter the Goto command editing interface
+
+The Goto instruction is a jump instruction, enter the statement in the input box on the right, and click "Add" and "Apply" after editing. (This instruction requires a certain programming foundation, if you need help, please contact us)
+
+.. image:: teaching_pendant_software/103.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-2 Goto command interface
+
+Wait command
+++++++++++++++++
+
+Click the "Wait" icon to enter the Wait command editing interface
+
+This instruction is a delay instruction, which is divided into three parts: "WaitMs", "WaitDI" and "WaitAI".
+
+"WaitTime" command delay waiting time unit is milliseconds, input the number of milliseconds to wait, click "Add", "Apply".
+
+.. image:: teaching_pendant_software/104.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-42 WaitTime command interface
+
+"WaitDI" command, that is, single DI waiting, select the IO port number to be waited for, wait state, wait maximum time and wait timeout processing method, and click "Add" and "Apply".
+
+.. image:: teaching_pendant_software/105.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-5 WaitDI command interface
+
+"WaitMultiDI" command, that is, multi-DI waiting, first select the multi-DI establishment conditions, then check the DI port and status that need to wait, and finally set the maximum waiting time and waiting timeout processing method, click "Add" and "Apply".
+
+.. image:: teaching_pendant_software/106.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-6 WaitMultiDI command interface
+
+"WaitAI" command, select the analog quantity to be waited for, the value, the maximum waiting time and the waiting timeout processing method, and click "Add" and "Apply".
+
+.. image:: teaching_pendant_software/107.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-7 WaitAI command interface
+
+Pause command
+++++++++++++++++
+
+Click the "Pause" icon to enter the Pause command editing interface
+
+This instruction is a pause instruction. Insert this instruction into the program. When the program executes this instruction, the robot will be in a pause state. If you want to continue running, click the "Pause/Resume" button in the control area.
+
+.. image:: teaching_pendant_software/108.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-8 Pause command interface
+
+Dofile command
+++++++++++++++++
+
+Click the "Dofile" icon to enter the Dofile command editing interface
+
+The Dofile command calls the internal program of the controller. When using the Dofile command, the called subroutine needs to be saved, and the main program does not need to be saved again if it has not changed. The Dofile command supports two-level calls, and two parameter settings need to be paid attention to. One is the level of the call, and the other is the ID number of the call. In principle, the same ID number cannot appear in the same program.
+
+.. image:: teaching_pendant_software/109.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-9 Dofile command interface
+
+Var command
+++++++++++++++++
+
+Click the "Var" icon to enter the Var command editing interface
+
+This command is a variable system command, which is divided into two parts: Lua variable definition, variable query and Sys variable renaming, getting value, and setting value. Lua variable definition can declare a variable and assign an initial value, and cooperate with while, if-else and other commands Use the Lua variable query command to query the value of the input variable name in real time and display it in the status bar. The number of Sys variables is fixed, and you can rename them, get variable values, and set variable values. The values stored in this variable will not be cleared when the system is turned off.
+
+.. image:: teaching_pendant_software/100.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-4-10 Var command interface
+
+Motion command interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/203.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-5 Motion command interface
+
 PTP command
 ++++++++++++++++
 
@@ -1244,7 +1379,7 @@ You can choose the point to be reached, and the smooth transition time setting c
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4 PTP command interface
+.. centered:: Figure 3.7-5-1 PTP command interface
 
 Lin command
 ++++++++++++++++
@@ -1257,7 +1392,7 @@ The function of this command is similar to the "PTP" command, but the path of th
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5 Lin command interface
+.. centered:: Figure 3.7-5-2 Lin command interface
 
 Arc command
 ++++++++++++++++
@@ -1274,7 +1409,7 @@ The "Arc" command is arc movement, which includes two points. The first point is
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6 Arc command interface
+.. centered:: Figure 3.7-5-3.7-6 Arc command interface
 
 Circle command
 ++++++++++++++++
@@ -1291,7 +1426,7 @@ The "Circle" command is a full circle movement, including two points. The first 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7 Circle command interface
+.. centered:: Figure 3.7-5-4 Circle command interface
 
 Spiral command
 ++++++++++++++++
@@ -1305,7 +1440,7 @@ Whether to offset, the offset takes effect on the trajectory of the entire helix
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8 Spiral command interface
+.. centered:: Figure 3.7-5-5 Spiral command interface
 
 N-Spiral command
 ++++++++++++++++
@@ -1318,7 +1453,7 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-9 N-Spiral command interface
+.. centered:: Figure 3.7-5-6 N-Spiral command interface
 
 Spline command
 ++++++++++++++++
@@ -1331,7 +1466,7 @@ The command is divided into three parts: the start of the spline group, the spli
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-10 Spline command interface
+.. centered:: Figure 3.7-5-7 Spline command interface
 
 N-Spline command
 +++++++++++++++++++
@@ -1345,53 +1480,28 @@ For the given control point and the given waypoint.
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-11 N-Spline command interface
+.. centered:: Figure 3.7-5-8 N-Spline command interface
 
-IO command
+Weave command
 ++++++++++++++++
 
-Click the "IO" icon to enter the IO command editing interface
+Click the "Weave" icon to enter the Weave command editing interface
 
-The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and getting IO (GetDI/SPLCGetDI).
+The "Weave" command consists of two parts. In the first part, select the weaving number with configured parameters, click "Start Weaving" and "Stop Weaving" and apply to add related commands to the program.
 
-"SetDO/SPLCSetDO" This command can set the specified output DO state, including 16 digital outputs of the control box and 2 digital outputs of the tool. The state option "False" is closed, "True" is open, and whether to block the option selects "blocked". "Indicates that the DO state is set after the movement stops, and selecting the "non-blocking" option means that the DO state is set during the last movement. Selecting "Break" for the smooth trajectory option means setting the DO state after the smooth transition radius ends, and selecting "Serious" means setting the DO state during the smooth transition radius movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
-
-.. image:: teaching_pendant_software/093.png
+.. image:: teaching_pendant_software/110.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-12 SetDO command interface
+.. centered:: Figure 3.7-5-9 Weave command interface
 
-In the "GetDI/SPLCGetDI" command, select the value of the port number you want to get, whether to block or not, select "block" to get the DI status after the movement stops, and select the "non-blocking" option to get the DI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. After selection, click the "Add" and "Apply" buttons.
+Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
 
-.. image:: teaching_pendant_software/094.png
+.. image:: teaching_pendant_software/111.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-13 GetDI command interface
-
-AI command
-++++++++++++++++
-
-Click the "AI" icon to enter the AI command editing interface
-
-In this instruction, it is divided into two functions: setting analog output (SetAO/SPLCSetAO) and obtaining analog input (GetAI/SPLCGetAI).
-
-"SetAO/SPLCSetAO" select the analog output that needs to be set, input the value that needs to be set, the range is 0-10, whether to block or not select "block" means to set the AO state after the movement stops, select "non-block" means to set the AO state after the last movement Set the AO state in the process. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
-
-.. image:: teaching_pendant_software/095.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-14 SetAO command interface
-
-"GetAI/SPLCGetAI" selects the analog input that needs to be obtained, whether to block or not selects "blocked" to obtain the AI state after the movement stops, and selects the "non-blocked" option to obtain the AI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
-
-.. image:: teaching_pendant_software/096.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-15 GetAI command interface
+.. centered:: Figure 3.7-5-10 Weave configuration and testing command interface
 
 TPD command
 ++++++++++++++++
@@ -1412,314 +1522,7 @@ When programming, first use the PTP instruction to reach the starting point of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-16 TPD command interface
-
-ToolList command
-+++++++++++++++++++
-
-Click the "ToolList" icon to enter the ToolList command editing interface
-
-Select the tool coordinate system name and click "Apply" to add this command to the program. When the program runs this statement, the tool coordinate system of the robot will be set.
-
-.. image:: teaching_pendant_software/098.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-17 ToolList command interface
-
-Mode command
-++++++++++++++++
-
-Click the "Mode" icon to enter the Mode command editing interface
-
-This command can switch the robot to manual mode, and is usually added at the end of a program so that the user can automatically switch the robot to manual mode and drag the robot after the program runs.
-
-.. image:: teaching_pendant_software/099.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-18 Mode command interface
-
-Var command
-++++++++++++++++
-
-Click the "Var" icon to enter the Var command editing interface
-
-This command is a variable system command, which is divided into two parts: Lua variable definition, variable query and Sys variable renaming, getting value, and setting value. Lua variable definition can declare a variable and assign an initial value, and cooperate with while, if-else and other commands Use the Lua variable query command to query the value of the input variable name in real time and display it in the status bar. The number of Sys variables is fixed, and you can rename them, get variable values, and set variable values. The values stored in this variable will not be cleared when the system is turned off.
-
-.. image:: teaching_pendant_software/100.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-19 Var command interface
-
-While command
-++++++++++++++++
-
-Click the "While" icon to enter the While command editing interface
-
-Enter the waiting condition in the input box behind While, input the action command during the loop in the input box behind do, and click Save. (For the convenience of operation, you can enter do content arbitrarily, and edit other instructions in the program to insert instead)
-
-.. image:: teaching_pendant_software/101.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-20 While command interface
-
-if…else command
-++++++++++++++++
-
-Click the "if...else" button to enter the if...else command editing interface
-
-Enter the statement in the input box on the right, and click "Add" and "Apply" after editing. (This instruction requires a certain programming foundation, if you need help, please contact us)
-
-.. image:: teaching_pendant_software/102.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-21 if…else command interface
-
-Goto command
-++++++++++++++++
-
-Click the "Goto" button to enter the Goto command editing interface
-
-The Goto instruction is a jump instruction, enter the statement in the input box on the right, and click "Add" and "Apply" after editing. (This instruction requires a certain programming foundation, if you need help, please contact us)
-
-.. image:: teaching_pendant_software/103.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-22 Goto command interface
-
-Wait command
-++++++++++++++++
-
-Click the "Wait" icon to enter the Wait command editing interface
-
-This instruction is a delay instruction, which is divided into three parts: "WaitMs", "WaitDI" and "WaitAI".
-
-"WaitTime" command delay waiting time unit is milliseconds, input the number of milliseconds to wait, click "Add", "Apply".
-
-.. image:: teaching_pendant_software/104.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-23 WaitTime command interface
-
-"WaitDI" command, that is, single DI waiting, select the IO port number to be waited for, wait state, wait maximum time and wait timeout processing method, and click "Add" and "Apply".
-
-.. image:: teaching_pendant_software/105.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-24 WaitDI command interface
-
-"WaitMultiDI" command, that is, multi-DI waiting, first select the multi-DI establishment conditions, then check the DI port and status that need to wait, and finally set the maximum waiting time and waiting timeout processing method, click "Add" and "Apply".
-
-.. image:: teaching_pendant_software/106.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-25 WaitMultiDI command interface
-
-"WaitAI" command, select the analog quantity to be waited for, the value, the maximum waiting time and the waiting timeout processing method, and click "Add" and "Apply".
-
-.. image:: teaching_pendant_software/107.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-26 WaitAI command interface
-
-Pause command
-++++++++++++++++
-
-Click the "Pause" icon to enter the Pause command editing interface
-
-This instruction is a pause instruction. Insert this instruction into the program. When the program executes this instruction, the robot will be in a pause state. If you want to continue running, click the "Pause/Resume" button in the control area.
-
-.. image:: teaching_pendant_software/108.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-27 Pause command interface
-
-Dofile command
-++++++++++++++++
-
-Click the "Dofile" icon to enter the Dofile command editing interface
-
-The Dofile command calls the internal program of the controller. When using the Dofile command, the called subroutine needs to be saved, and the main program does not need to be saved again if it has not changed. The Dofile command supports two-level calls, and two parameter settings need to be paid attention to. One is the level of the call, and the other is the ID number of the call. In principle, the same ID number cannot appear in the same program.
-
-.. image:: teaching_pendant_software/109.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-28 Dofile command interface
-
-Weave command
-++++++++++++++++
-
-Click the "Weave" icon to enter the Weave command editing interface
-
-The "Weave" command consists of two parts. In the first part, select the weaving number with configured parameters, click "Start Weaving" and "Stop Weaving" and apply to add related commands to the program.
-
-.. image:: teaching_pendant_software/110.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-29 Weave command interface
-
-Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
-
-.. image:: teaching_pendant_software/111.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-30 Weave configuration and testing command interface
-
-Segment command
-++++++++++++++++
-
-Click the "Segment" icon to enter the Segment command editing interface
-
-This instruction is a special instruction for welding, mainly used in the intermittent welding scene where one section is welded and one section is not welded. Between the start point and the end point, use this command to select the start point and end point, set the debugging speed, set the DO port for arc start, the execution length, the non-execution length, set the function mode according to the actual application scene, swing selection and rounding rules. Realize segment welding function.
-
-.. image:: teaching_pendant_software/112.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-31 Segment command interface
-
-Adjust command
-++++++++++++++++
-
-Click the "Adjust" icon to enter the Adjust command editing interface
-
-This command adaptively adjusts the posture of the welding torch for the scene of welding tracking. After recording the three corresponding posture points, add the posture adaptive adjustment command according to the actual direction of the robot's movement. See Robot Peripherals chapter for details.
-
-.. image:: teaching_pendant_software/113.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-32 Adjust command interface
-
-Gripper command
-++++++++++++++++++
-
-Click the "Gripper" icon to enter the Gripper command editing interface
-
-In this command, it is divided into the gripper motion control command and the gripper activation/reset command. In the gripper control command, the number of the gripper that has been configured and activated is displayed. The user can edit through the edit box, or slide the slider to The required value is used to complete the setting of jaw opening and closing, opening and closing speed and opening and closing torque. Blocking means that the gripper moves in parallel with the previous movement command. Click the "Add" and "Apply" buttons to save the set value to the teaching file. The gripper reset/activation command displays the number of the grippers that have been configured, and the reset/activation command can be added to the program.
-
-.. image:: teaching_pendant_software/114.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-33 Gripper command interface
-
-Spray command
-++++++++++++++++
-
-Click the "Spray" icon to enter the Spray command editing interface
-
-This command is a spraying-related command, which controls the spray gun to "start spraying", "stop spraying", "start cleaning the gun" and "stop the light gun". When editing the program command, it is necessary to confirm that the peripherals of the spray gun have been configured. For details, see the chapter on peripherals of the robot.
-
-.. image:: teaching_pendant_software/115.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-34 Spray command interface
-
-EAxis command
-++++++++++++++++
-
-Click the "EAxis" icon to enter the EAxis command editing interface
-
-This command is used in combination with the PTP command for scenarios using external axes, and can decompose the movement of a point in space in the X-axis direction to the movement of external axes. Select the external axis number, select synchronous motion mode, select the point to be reached, and click "Add" and "Apply" to save the command.
-
-.. image:: teaching_pendant_software/116.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-35 EAxis command interface
-
-Weld command
-++++++++++++++++
-
-Click the "Weld" icon to enter the Weld command editing interface
-
-This command is mainly used for welding machine peripherals. Before adding this command, please confirm whether the welding machine configuration is completed in the user peripherals. For details, see the chapter on robot peripherals.
-
-.. image:: teaching_pendant_software/117.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-36 Weld command interface
-
-Laser command
-++++++++++++++++
-
-Click the "Laser" icon to enter the Laser command editing interface
-
-This command includes three parts: laser command, tracking command and positioning command. Before adding this command, please confirm whether the laser tracking sensor in the user peripheral has been configured successfully. See Robot Peripherals chapter for details.
-
-.. image:: teaching_pendant_software/118.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-37 Laser command interface
-
-Convey command
-++++++++++++++++
-
-Click the "Convey" icon to enter the Convey command editing interface
-
-This command includes four commands: position real-time detection, IO real-time detection, tracking on and tracking off. See Robot Peripherals chapter for details.
-
-.. image:: teaching_pendant_software/119.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-38 Conveyor command interface
-
-F/T command
-++++++++++++++++
-
-Click the "F/T" icon to enter the F/T command editing interface
-
-The instruction includes FT_Guard (collision detection), FT_Control (constant force control), FT_Spiral (spiral insertion), FT_Rot (rotation insertion), FT_Lin (linear insertion), FT_FindSurface (surface positioning), FT_CalCenter (center positioning) seven instructions, detailed See Robot Peripherals chapter.
-
-.. image:: teaching_pendant_software/120.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-39 F/T command interface
-
-3D command
-++++++++++++++++
-
-Click the "3D" icon to enter the 3D command editing interface
-
-This command generates commands for 3D vision program examples. Users can refer to the generated programs and communicate with other vision devices, including two program case references of camera calibration and camera capture.
-
-.. image:: teaching_pendant_software/121.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-40 3D command interface
-
-Pallet command
-++++++++++++++++
-
-Click the "Pallet" icon to enter the Pallet command editing interface
-
-This instruction generates instructions for the palletizing program, which is consistent with the matrix movement function in Section 3.9.6. For details, refer to that chapter.
-
-.. image:: teaching_pendant_software/122.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-41 Pallet command interface
+.. centered:: Figure 3.7-5-11 TPD command interface
 
 Offset command
 ++++++++++++++++
@@ -1732,54 +1535,7 @@ This command is an overall offset command. Input each offset, add the opening co
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-42 Offset command interface
-
-W-Search command
-++++++++++++++++
-
-Click the "W-Search" icon to enter the W-Search command editing interface
-
-This command is a welding wire positioning command, including three commands of start of positioning, end of positioning and calculation of offset. This command is generally used in welding scenes and requires the combination of welding machine and robot IO and motion commands.
-
-.. image:: teaching_pendant_software/124.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-43 W-Search command interface
-
-In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
-
-.. image:: teaching_pendant_software/125.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-44 W-Search example(1D)
-
-Vir-IO command
-++++++++++++++++
-
-Click the "Vir-IO" icon to enter the Vir-IO command editing interface
-
-This command is a virtual IO control command, which can realize the setting of the simulated external DI and AI status, and obtain the simulated DI and AI status.
-
-.. image:: teaching_pendant_software/126.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-45 Vir-IO command interface
-
-Thread command
-++++++++++++++++
-
-Click the "Thread" icon to enter the Thread command editing interface
-
-The Thread command is an auxiliary thread function. Users can define an auxiliary thread to run simultaneously with the main thread. The auxiliary thread mainly performs data interaction with external devices, supports socket communication, obtains robot DI status, robot DO status settings, and obtains robot status information. Thread data interaction, the data obtained by the main thread through the auxiliary thread is used to control the judgment of the robot's motion logic, the screenshot of the user program example:
-
-.. image:: teaching_pendant_software/127.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-46 Thread program example
+.. centered:: 3.7-5-12 Offset command interface
 
 ServoCart command
 ++++++++++++++++++++
@@ -1792,7 +1548,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-47 ServoCart command interface
+.. centered:: Figure 3.7-5-13 ServoCart command interface
 
 Absolute pose control program example：
 
@@ -1807,6 +1563,384 @@ Example of control program based on current pose offset (base coordinate offset)
 .. image:: teaching_pendant_software/130.png
    :width: 6in
    :align: center
+
+Control command interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/204.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6 Control command interface
+
+IO command
+++++++++++++++++
+
+Click the "IO" icon to enter the IO command editing interface
+
+The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and getting IO (GetDI/SPLCGetDI).
+
+"SetDO/SPLCSetDO" This command can set the specified output DO state, including 16 digital outputs of the control box and 2 digital outputs of the tool. The state option "False" is closed, "True" is open, and whether to block the option selects "blocked". "Indicates that the DO state is set after the movement stops, and selecting the "non-blocking" option means that the DO state is set during the last movement. Selecting "Break" for the smooth trajectory option means setting the DO state after the smooth transition radius ends, and selecting "Serious" means setting the DO state during the smooth transition radius movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
+
+.. image:: teaching_pendant_software/093.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-1 SetDO command interface
+
+In the "GetDI/SPLCGetDI" command, select the value of the port number you want to get, whether to block or not, select "block" to get the DI status after the movement stops, and select the "non-blocking" option to get the DI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. After selection, click the "Add" and "Apply" buttons.
+
+.. image:: teaching_pendant_software/094.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-2 GetDI command interface
+
+AI command
+++++++++++++++++
+
+Click the "AI" icon to enter the AI command editing interface
+
+In this instruction, it is divided into two functions: setting analog output (SetAO/SPLCSetAO) and obtaining analog input (GetAI/SPLCGetAI).
+
+"SetAO/SPLCSetAO" select the analog output that needs to be set, input the value that needs to be set, the range is 0-10, whether to block or not select "block" means to set the AO state after the movement stops, select "non-block" means to set the AO state after the last movement Set the AO state in the process. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
+
+.. image:: teaching_pendant_software/095.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-3 SetAO command interface
+
+"GetAI/SPLCGetAI" selects the analog input that needs to be obtained, whether to block or not selects "blocked" to obtain the AI state after the movement stops, and selects the "non-blocked" option to obtain the AI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
+
+.. image:: teaching_pendant_software/096.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-4 GetAI command interface
+
+Vir-IO command
+++++++++++++++++
+
+Click the "Vir-IO" icon to enter the Vir-IO command editing interface
+
+This command is a virtual IO control command, which can realize the setting of the simulated external DI and AI status, and obtain the simulated DI and AI status.
+
+.. image:: teaching_pendant_software/126.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-5 Vir-IO command interface
+
+Aux-IO command
+++++++++++++++++
+
+Click the "Aux-IO" icon to enter the Aux-IO command editing interface
+
+Aux-IO is the instruction function for the robot to communicate with the PLC to control the external expansion IO. It is necessary for the robot to establish UDP communication with the PLC. On the basis of the original 16-channel input and output, 128-channel input and output can be expanded. The usage of this command is the same as that mentioned above. IO usage is similar. There are certain technical difficulties in using this function, please contact us for consultation beforehand.
+
+.. image:: teaching_pendant_software/139.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-6 Aux-IO command interface
+
+MoveDO command
+++++++++++++++++
+
+Click the "MoveDO" icon to enter the MoveDO command editing interface
+
+This command realizes the function of outputting DO signal continuously according to the set interval during the linear motion.
+
+.. image:: teaching_pendant_software/195.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-7 MoveDO interface
+
+ToolList command
++++++++++++++++++++
+
+Click the "ToolList" icon to enter the ToolList command editing interface
+
+Select the tool coordinate system name and click "Apply" to add this command to the program. When the program runs this statement, the tool coordinate system of the robot will be set.
+
+.. image:: teaching_pendant_software/098.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-8 ToolList command interface
+
+Mode command
+++++++++++++++++
+
+Click the "Mode" icon to enter the Mode command editing interface
+
+This command can switch the robot to manual mode, and is usually added at the end of a program so that the user can automatically switch the robot to manual mode and drag the robot after the program runs.
+
+.. image:: teaching_pendant_software/099.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-9 Mode command interface
+
+Collision command
+++++++++++++++++++++
+
+Click the "Collision" icon to enter the Collision command editing interface
+
+This command is used to set the collision level. Through this command, the collision level of each axis can be adjusted in real time during program operation, and the application scenario can be deployed more flexibly.
+
+.. image:: teaching_pendant_software/135.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-10 Collision command interface
+
+Acc command
+++++++++++++++++
+
+Click the "Acc" icon to enter the Acc command editing interface
+
+The Acc command is to realize the function that the acceleration of the robot can be set separately. By adjusting the acceleration scaling factor of the motion command, the acceleration and deceleration time can be increased or decreased, and the takt time of the robot action can be adjusted.
+
+.. image:: teaching_pendant_software/137.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-6-11 Acc command interface
+
+Peripheral Command Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/205.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-7 Peripheral Command Interface
+
+Gripper command
+++++++++++++++++++
+
+Click the "Gripper" icon to enter the Gripper command editing interface
+
+In this command, it is divided into the gripper motion control command and the gripper activation/reset command. In the gripper control command, the number of the gripper that has been configured and activated is displayed. The user can edit through the edit box, or slide the slider to The required value is used to complete the setting of jaw opening and closing, opening and closing speed and opening and closing torque. Blocking means that the gripper moves in parallel with the previous movement command. Click the "Add" and "Apply" buttons to save the set value to the teaching file. The gripper reset/activation command displays the number of the grippers that have been configured, and the reset/activation command can be added to the program.
+
+.. image:: teaching_pendant_software/114.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-7-1 Gripper command interface
+
+Spray command
+++++++++++++++++
+
+Click the "Spray" icon to enter the Spray command editing interface
+
+This command is a spraying-related command, which controls the spray gun to "start spraying", "stop spraying", "start cleaning the gun" and "stop the light gun". When editing the program command, it is necessary to confirm that the peripherals of the spray gun have been configured. For details, see the chapter on peripherals of the robot.
+
+.. image:: teaching_pendant_software/115.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-7-2 Spray command interface
+
+EAxis command
+++++++++++++++++
+
+Click the "EAxis" icon to enter the EAxis command editing interface
+
+This command is used in combination with the PTP command for scenarios using external axes, and can decompose the movement of a point in space in the X-axis direction to the movement of external axes. Select the external axis number, select synchronous motion mode, select the point to be reached, and click "Add" and "Apply" to save the command.
+
+.. image:: teaching_pendant_software/116.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-7-3 EAxis command interface
+
+Convey command
+++++++++++++++++
+
+Click the "Convey" icon to enter the Convey command editing interface
+
+This command includes four commands: position real-time detection, IO real-time detection, tracking on and tracking off. See Robot Peripherals chapter for details.
+
+.. image:: teaching_pendant_software/119.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-7-4 Conveyor command interface
+
+Welding command interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/206.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8 Welding command interface 
+
+Weld command
+++++++++++++++++
+
+Click the "Weld" icon to enter the Weld command editing interface
+
+This command is mainly used for welding machine peripherals. Before adding this command, please confirm whether the welding machine configuration is completed in the user peripherals. For details, see the chapter on robot peripherals.
+
+.. image:: teaching_pendant_software/117.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-1 Weld command interface
+
+Segment command
+++++++++++++++++
+
+Click the "Segment" icon to enter the Segment command editing interface
+
+This instruction is a special instruction for welding, mainly used in the intermittent welding scene where one section is welded and one section is not welded. Between the start point and the end point, use this command to select the start point and end point, set the debugging speed, set the DO port for arc start, the execution length, the non-execution length, set the function mode according to the actual application scene, swing selection and rounding rules. Realize segment welding function.
+
+.. image:: teaching_pendant_software/112.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-2 Segment command interface
+
+Laser command
+++++++++++++++++
+
+Click the "Laser" icon to enter the Laser command editing interface
+
+This command includes three parts: laser command, tracking command and positioning command. Before adding this command, please confirm whether the laser tracking sensor in the user peripheral has been configured successfully. See Robot Peripherals chapter for details.
+
+.. image:: teaching_pendant_software/118.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-3 Laser command interface
+
+
+W-Search command
+++++++++++++++++
+
+Click the "W-Search" icon to enter the W-Search command editing interface
+
+This command is a welding wire positioning command, including three commands of start of positioning, end of positioning and calculation of offset. This command is generally used in welding scenes and requires the combination of welding machine and robot IO and motion commands.
+
+.. image:: teaching_pendant_software/124.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-4 W-Search command interface
+
+In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
+
+.. image:: teaching_pendant_software/125.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-5 W-Search example(1D)
+
+Adjust command
+++++++++++++++++
+
+Click the "Adjust" icon to enter the Adjust command editing interface
+
+This command adaptively adjusts the posture of the welding torch for the scene of welding tracking. After recording the three corresponding posture points, add the posture adaptive adjustment command according to the actual direction of the robot's movement. See Robot Peripherals chapter for details.
+
+.. image:: teaching_pendant_software/113.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-6 Adjust command interface
+
+Force control command interface 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/207.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-9 Force control command interface
+
+F/T command
+++++++++++++++++
+
+Click the "F/T" icon to enter the F/T command editing interface
+
+The instruction includes FT_Guard (collision detection), FT_Control (constant force control), FT_Spiral (spiral insertion), FT_Rot (rotation insertion), FT_Lin (linear insertion), FT_FindSurface (surface positioning), FT_CalCenter (center positioning) seven instructions, detailed See Robot Peripherals chapter.
+
+.. image:: teaching_pendant_software/120.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-9-1 F/T command interface
+
+Torque command
+++++++++++++++++
+
+Click the "Torque" icon to enter the Torque command editing interface
+
+This command is a force compliance control command. Through this command, the robot can adjust its trajectory to reduce the force when the force is greater than a certain value during the force control training process; when the force is less than a certain value, it will return to the original trajectory. Continue to move along the original trajectory.
+
+.. image:: teaching_pendant_software/138.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-9-2 Torque command interface
+
+Visual command interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/208.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-10 Visual command interface
+
+3D command
+++++++++++++++++
+
+Click the "3D" icon to enter the 3D command editing interface
+
+This command generates commands for 3D vision program examples. Users can refer to the generated programs and communicate with other vision devices, including two program case references of camera calibration and camera capture.
+
+.. image:: teaching_pendant_software/121.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-10-1 3D command interface
+
+Palletizing command interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/209.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-11 Palletizing command interface
+
+Pallet command
+++++++++++++++++
+
+Click the "Pallet" icon to enter the Pallet command editing interface
+
+This instruction generates instructions for the palletizing program, which is consistent with the matrix movement function in Section 3.9.6. For details, refer to that chapter.
+
+.. image:: teaching_pendant_software/122.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-11-1 Pallet command interface 
+
+Communication command interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: teaching_pendant_software/210.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-12 Communication command interface
 
 Modbus command
 ++++++++++++++++
@@ -1835,32 +1969,6 @@ Modbus slave read and write coil example：
 
 For more operating functions of ModbusTCP, please contact us for consultation.
 
-Function command
-++++++++++++++++
-
-Click the "Function" icon to enter the Function command editing interface
-
-This command is to call the function interface function, provide the robot interface function to the customer to choose, and remind the customer of the parameters required by the function, which is convenient for the customer to write script commands, and more functions are being added one after another.
-
-.. image:: teaching_pendant_software/134.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-48 Function command interface
-
-Collision command
-++++++++++++++++++++
-
-Click the "Collision" icon to enter the Collision command editing interface
-
-This command is used to set the collision level. Through this command, the collision level of each axis can be adjusted in real time during program operation, and the application scenario can be deployed more flexibly.
-
-.. image:: teaching_pendant_software/135.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7-49 Collision command interface
-
 Xmlrpc command
 ++++++++++++++++
 
@@ -1872,7 +1980,7 @@ XML-RPC is a remote procedure call method for transferring data between programs
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-50 Xmlrpc command interface
+.. centered:: Figure 3.7-12-1 Xmlrpc command interface
 
 .. important:: 
    1) The controller acts as a client to connect to the remote custom port;
@@ -1907,57 +2015,40 @@ XML-RPC is a remote procedure call method for transferring data between programs
 
    If the parameter is passed in as an array of string type, the result will be an array of string type
 
-Acc command
-++++++++++++++++
+Auxiliary command interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click the "Acc" icon to enter the Acc command editing interface
-
-The Acc command is to realize the function that the acceleration of the robot can be set separately. By adjusting the acceleration scaling factor of the motion command, the acceleration and deceleration time can be increased or decreased, and the takt time of the robot action can be adjusted.
-
-.. image:: teaching_pendant_software/137.png
+.. image:: teaching_pendant_software/211.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-51 Acc command interface
+.. centered:: Figure 3.7-13 Auxiliary command interface
 
-Torque command
+Thread command
 ++++++++++++++++
 
-Click the "Torque" icon to enter the Torque command editing interface
+Click the "Thread" icon to enter the Thread command editing interface
 
-This command is a force compliance control command. Through this command, the robot can adjust its trajectory to reduce the force when the force is greater than a certain value during the force control training process; when the force is less than a certain value, it will return to the original trajectory. Continue to move along the original trajectory.
+The Thread command is an auxiliary thread function. Users can define an auxiliary thread to run simultaneously with the main thread. The auxiliary thread mainly performs data interaction with external devices, supports socket communication, obtains robot DI status, robot DO status settings, and obtains robot status information. Thread data interaction, the data obtained by the main thread through the auxiliary thread is used to control the judgment of the robot's motion logic, the screenshot of the user program example:
 
-.. image:: teaching_pendant_software/138.png
+.. image:: teaching_pendant_software/127.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-52 Torque command interface
+.. centered:: Figure 3.7-13-1 Thread program example
 
-Aux-IO command
+Function command
 ++++++++++++++++
 
-Click the "Aux-IO" icon to enter the Aux-IO command editing interface
+Click the "Function" icon to enter the Function command editing interface
 
-Aux-IO is the instruction function for the robot to communicate with the PLC to control the external expansion IO. It is necessary for the robot to establish UDP communication with the PLC. On the basis of the original 16-channel input and output, 128-channel input and output can be expanded. The usage of this command is the same as that mentioned above. IO usage is similar. There are certain technical difficulties in using this function, please contact us for consultation beforehand.
+This command is to call the function interface function, provide the robot interface function to the customer to choose, and remind the customer of the parameters required by the function, which is convenient for the customer to write script commands, and more functions are being added one after another.
 
-.. image:: teaching_pendant_software/139.png
+.. image:: teaching_pendant_software/134.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-53 Aux-IO command interface
-
-MoveDO command
-++++++++++++++++
-
-Click the "MoveDO" icon to enter the MoveDO command editing interface
-
-This command realizes the function of outputting DO signal continuously according to the set interval during the linear motion.
-
-.. image:: teaching_pendant_software/195.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 3.7‑54 MoveDO interface
+.. centered:: Figure 3.7-13-2 Function command interface
 
 Teaching program encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2009,7 +2100,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑59 Add local teaching points
+.. centered:: Figure 3.7-59 Add local teaching points
 
 **Delete**: Click the serial number column of the table to select the local teaching point to be deleted, and then click the "Delete" icon in the upper right corner of the title of the local teaching point to delete the local teaching point.
 
@@ -2017,7 +2108,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑60 Delete local teaching point
+.. centered:: Figure 3.7-60 Delete local teaching point
 
 **Run**: Click the "Start Running" icon in the data operation bar of the local teaching point table to perform a single-point operation of the local teaching point and move the robot to the position of this point.
 
@@ -2025,7 +2116,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑61 Run local teaching point
+.. centered:: Figure 3.7-61 Run local teaching point
 
 **Details**: Click the "Details" icon in the data operation bar of the local teaching point table to view the details of the local teaching point.
 
@@ -2033,7 +2124,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑62 Local teaching point details
+.. centered:: Figure 3.7-62 Local teaching point details
 
 Current program backup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2045,7 +2136,7 @@ Users can view the corresponding program backup content by selecting a date, and
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑63 Current program backup
+.. centered:: Figure 3.7-63 Current program backup
 
 Graphical programming
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2057,7 +2148,7 @@ Through the use of graphic programming, it can be simple, easy to understand, ea
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑64 Graphical programming interface
+.. centered:: Figure 3.7-64 Graphical programming interface
 
 The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows
 
@@ -2065,7 +2156,7 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑65 Graphical programming page layout overall design
+.. centered:: Figure 3.7-65 Graphical programming page layout overall design
 
 **Operation bar**：The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
 
@@ -2081,7 +2172,7 @@ Motion graphic programming commands include  \ `PTP <teaching_pendant_software.h
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑66 Motion Graphical Programming
+.. centered:: Figure 3.7-66 Motion Graphical Programming
 
 Control graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++
@@ -2091,7 +2182,7 @@ Control graphical programming commands include \ `Wait <teaching_pendant_softwar
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑67 Control graphical programming commands
+.. centered:: Figure 3.7-67 Control graphical programming commands
 
 Advanced graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -2101,7 +2192,7 @@ Advanced graphical programming commands include \ `dofile <teaching_pendant_soft
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑68 Advanced graphical programming commands
+.. centered:: Figure 3.7-68 Advanced graphical programming commands
 
 Example of using graphical programming commands
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2113,7 +2204,7 @@ For example, if you select PTP and Lin motion instructions and control commands 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑69 Example of using graphical programming commands
+.. centered:: Figure 3.7-69 Example of using graphical programming commands
 
 After the graphical programming instruction splicing and parameter filling is completed, fill in the name of the workspace, and click the "Save" icon to save the program. Select the "Workspace" that has been written, click Start Run, and you can execute this program.
 
@@ -2126,7 +2217,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑70 Fold instruction code block
+.. centered:: Figure 3.7-70 Fold instruction code block
 
 - 1.Write a code block instruction, add a folding instruction code block in the outer layer, and write the remarks of the instruction in the input box.
 
@@ -2134,7 +2225,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑71 Folding instruction rendering
+.. centered:: Figure 3.7-71 Folding instruction rendering
 
 - 2.Right-click "Collapse Block" in the right-click operation bar, this section of instruction code block is folded, the code block is folded into one line and displayed, and the program can be executed correctly when folded.
 
@@ -2142,7 +2233,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑72 Effect picture after folding
+.. centered:: Figure 3.7-72 Effect picture after folding
 
 3.Roll the mouse to realize the page zoom function, the specific effect is as follows:
 
@@ -2150,7 +2241,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑73 Fold page zoom function effect diagram
+.. centered:: Figure 3.7-73 Fold page zoom function effect diagram
 
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2169,7 +2260,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑75 Teach point details
+.. centered:: Figure 3.7-75 Teach point details
 
 **Run**: Click the "Start Run" button to perform a single-point operation of the local teaching point, and move the robot to the position of this point.
 
@@ -2177,7 +2268,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑76 Run teach point
+.. centered:: Figure 3.7-76 Run teach point
 
 .. important:: 
    The modified values of the teaching points x, y, z, rx, ry, rz should not exceed the working range of the robot.
@@ -2600,9 +2691,9 @@ Step 4: After all the required weld bead parameters are set, click "Finish" to j
 Safe speed setting
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Security Settings" in "Auxiliary App", click "Safe Speed Settings" to enter the safe speed setting function interface.
+Under "DI Configuration" in "Robot Settings", click the different DI drop-down boxes to configure the reduction mode (level 1, level 2, level 3).
 
-Enable the safe speed and set the speed limit value. When the user debugs the robot in manual mode or drags the robot in drag mode, and the speed exceeds the set threshold, the robot will stop and warn the user, which has the effect of safety protection.
+The joint speed and terminal TCP speed can be configured in the first-level and second-level reduction modes, and the third-level reduction mode is to stop without configuring the speed.
 
 .. image:: teaching_pendant_software/200.png
    :width: 6in
@@ -2625,7 +2716,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑33 Security Wall Configuration
+.. centered:: Figure 3.9-33 Security Wall Configuration
 
 -  **Security Wall Reference Point Configuration**：After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
 
@@ -2636,7 +2727,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑34 Safe range reference point setting
+.. centered:: Figure 3.9-34 Safe range reference point setting
 
 -  Apply effects: The successfully configured security wall is enabled. Drag the robot, if the TCP at the end of the robot is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
 
@@ -2644,7 +2735,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑35 The effect picture after the security range is set successfully
+.. centered:: Figure 3.9-35 The effect picture after the security range is set successfully
 
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
@@ -2659,7 +2750,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑36 Security daemon
+.. centered:: Figure 3.9-36 Security daemon
 
 System settings
 -----------------
@@ -2686,7 +2777,7 @@ Network settings
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑1 Schematic diagram of network settings
+.. centered:: Figure 3.10-1 Schematic diagram of network settings
 
 -  **Set ethernet**：Enter the IP of the network card that needs to communicate, subnet mask (linked with IP, automatically filled), default gateway, and DNS server. The factory default IP of network card 0 network port: 192.168.57.2, the factory default IP of network card 1 network port: 192.168.58.2.
 
@@ -2710,7 +2801,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑2 User Management
+.. centered:: Figure 3.10-2 User Management
 
 -  **Add users**：Click the "Add" button, enter the job number, name, password and select the function. 
   
@@ -2721,7 +2812,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑3 Add users
+.. centered:: Figure 3.10-3 Add users
   
 -  **Edit users**：When there is a user list, click the "Edit" button on the right, the job number and name cannot be modified, but the password and function can be modified, and the password also needs to be uniquely verified.
   
@@ -2729,7 +2820,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑4 Edit users
+.. centered:: Figure 3.10-4 Edit users
 
 -  **Delete users**：The deletion methods are divided into single deletion and batch deletion. 
  
@@ -2744,7 +2835,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑5 Delete users
+.. centered:: Figure 3.10-5 Delete users
 
 
 Authority management
@@ -2757,14 +2848,14 @@ Authority management
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑6 Authority management
+.. centered:: Figure 3.10-6 Authority management
 
 There are six functions by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, administrators have no function restrictions, the specific default permissions are shown in the following table:
 
 .. important:: 
    Default permissions can be modified
 
-.. centered:: Table 3.10‑1 Permission details
+.. centered:: Table 3.10-1 Permission details
 
 .. image:: teaching_pendant_software/authority_table.png
    :width: 6in
@@ -2776,7 +2867,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑7 Add function
+.. centered:: Figure 3.10-7 Add function
 
 -  **Edit function name and description**: Click the "Edit" icon in the table operation bar to modify the function name and function description of the current function. After the modification is completed, click the "Save" button below to confirm the modification.
 
@@ -2784,7 +2875,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑8 Edit function name and description
+.. centered:: Figure 3.10-8 Edit function name and description
 
 -  **Set function permissions**: Click the "Settings" icon in the table operation bar to set the permissions of the current function. After setting, click the "Save" button below to confirm the settings.
 
@@ -2796,7 +2887,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑9 Set function permissions
+.. centered:: Figure 3.10-9 Set function permissions
 
 -  **Delete function**: Click the "Delete" icon in the table operation bar, firstly, it will check whether the current function is used by a user, if no user uses it, the current function can be deleted, otherwise it cannot be deleted.
 
@@ -2804,7 +2895,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑10 Delete function
+.. centered:: Figure 3.10-10 Delete function
 
 Import/Export
 ++++++++++++++++
@@ -2813,7 +2904,7 @@ Import/Export
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑11 Account settings import/export
+.. centered:: Figure 3.10-11 Account settings import/export
 
 -  **Import**: Click the "Import" button to import user management and rights management data in batches.
 
@@ -2860,5 +2951,4 @@ There are two ways to set parameters: slider dragging and manual input.
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10‑14 Schematic diagram of parameter range configuration
-
+.. centered:: Figure 3.10-14 Schematic diagram of parameter range configuration
