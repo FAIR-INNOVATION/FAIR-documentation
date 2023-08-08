@@ -85,7 +85,7 @@ After the login is successful, the system will load the model and other data, an
 System initial interface
 ----------------------------
 
-After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAAO LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. As shown in Figure 3.2-1 system initial interface schematic diagram.
+After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAIR INNOVATION LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. As shown in Figure 3.2-1 system initial interface schematic diagram.
 
 .. image:: teaching_pendant_software/003.png
    :align: center

@@ -22,7 +22,7 @@ The initial user name is admin and the password is 123.
 Simple understanding of WebApp interface
 ------------------------------------------
 
-After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAO LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. The initial interface of the system is shown in the figure below:
+After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAIR INNOVATION LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. The initial interface of the system is shown in the figure below:
 
 .. image:: teaching_pendant_software/003.png
    :align: center
