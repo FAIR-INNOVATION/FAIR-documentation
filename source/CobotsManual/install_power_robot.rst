@@ -64,7 +64,7 @@ Connect the control box
 
 This series of robots are powered by TN-S single-phase 220V AC power supply. The equipment comes with a 5-meter power cord. The three-pin plug end is inserted into the AC 220V socket provided on site, and the robot is electrically grounded. The external connections of the manipulator control system are all connected by pluggable plugs that can be quickly installed. The wiring panel of the collaborative robot is as follows:
 
-.. image:: teaching_pendant_software/control_box.png
+.. image:: installation/037.png
    :width: 6in
    :align: center
 
@@ -72,12 +72,90 @@ This series of robots are powered by TN-S single-phase 220V AC power supply. The
 
 The button box interface is the control port of the teach pendant by default, and the IP address is 192.168.58.2. Use a network cable to connect the button box interface and the computer. The computer IP address is set to 192.168.58.10 or the same network segment. Open the Google browser and enter 192.168.58.2 You can access the teach pendant page.
 
-For details, please refer to the user manual \ `2.6. Control connection <installation.html#id31>`__\ .
-
 Know the button box and end LED
 ---------------------------------
 
-Refer to User Manual - Hardware Installation \ `2.7.1. Introduction to button box <installation.html#id40>`__\ 和 \ `2.7.3. Terminal LED definition <installation.html#id41>`__\ .
+The button box
+~~~~~~~~~~~~~~~~
+
+.. centered:: Table 1.3-1 Control box wiring panel button description
+
+.. list-table::
+   :widths: 80 200
+   :header-rows: 0
+   :align: center
+
+   * - **key name**
+     - **Function**
+
+   * - Emergency stop switch
+     - When pressing the emergency stop switch, the robot enters the state of emergency stop.
+
+   * - Start stop
+     - Start/stop running program.
+
+   * - Intra port
+     - Connect to the web oscilloscope.
+
+   * - Shut off
+     - No enabled.
+
+   * - Record point
+     - Record the teaching point.
+
+   * - Demonstration mode
+     - Enter/exit the missionary state.
+
+   * - Run mode
+     - Automatic/manual mode switch.
+
+   * - Drag mode
+     - Enter/exit drag mode.
+
+The end LED
+~~~~~~~~~~~~~~~~
+
+.. centered:: Table 1.3-2 The end LED definition table
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+
+   * - **Function**
+     - **LED color**
+
+   * - When communication is not established
+     - Alternating "off", "red", "green" and "blue"
+
+   * - Automatic mode
+     - Long bright blue
+
+   * - Manual mode
+     - Green light
+
+   * - Drag Mode
+     - White cyan is always bright
+
+   * - Button box record point (only when using button box)
+     - Two purple flashes
+
+   * - Start running (only when using the button box)
+     - Twinkle blue
+
+   * - Enter the state of unmatched button box (only when using the button box)
+     - Blinking blue twice
+
+   * - Stop operation (only when using the button box)
+     - Red flashes twice
+
+   * - Error reporting (only when using the button box)
+     - Red long bright
+
+   * - Zero calibration completed
+     - Three flashes of white and cyan
+
+   * - Enable
+     - Twice flashing yellow
 
 Power on enable
 ----------------

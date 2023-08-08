@@ -11,13 +11,13 @@ Access and log in to the WebApp interface
 2. Open the chrome browser on the PC and access the target URL 192.168.58.2;
 3. Enter the user name and password and click Login to log in to the WebApp.
 
-Refer to the user manual for the initial user name and password—analysis of the teaching pendant software\ `4.1.3. User login and permission update <teaching_pendant_software.html#id5>`__\ 
+The initial user name is admin and the password is 123.
 
 .. figure:: teaching_pendant_software/002.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 2.1‑1 Login interface
+.. centered:: Figure 2.1-1 Login interface
 
 Simple understanding of WebApp interface
 ------------------------------------------
@@ -28,6 +28,170 @@ After the login is successful, the system enters the "initial interface". The in
    :align: center
    :width: 6in
 
-.. centered:: Figure 2.2‑1 Schematic diagram of the initial interface of the system
+.. centered:: Figure 2.2-1 Schematic diagram of the initial interface of the system
 
-For the control area, status bar and menu bar, please refer to the user manual - software analysis of the teaching pendant\ `4.2.1. Control area <teaching_pendant_software.html#id7>`__\ 、\ `4.2.2. Status Bar <teaching_pendant_software.html#id8>`__\ and \ `4.2.3. Menu Bar <teaching_pendant_software.html#id9>`__\ 。
+Control area
+~~~~~~~~~~~~~~~
+
+.. note:: 
+   .. image:: teaching_pendant_software/004.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Enable button**
+   
+   effect: Enable the robot
+
+.. note:: 
+   .. image:: teaching_pendant_software/005.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Start button**
+   
+   effect: Upload and start running the teaching program
+
+.. note:: 
+   .. image:: teaching_pendant_software/006.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Stop button**
+   
+   effect: Stop the current teaching program running
+
+.. note:: 
+   .. image:: teaching_pendant_software/007.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Pause/Resume button**
+   
+   effect: Pause and resume the current teaching program
+
+Status Bar
+~~~~~~~~~~~~
+
+.. note:: 
+   .. image:: teaching_pendant_software/008.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **robot status**
+   
+   effect: Stopped-stop，Running-run，Pause-pause，Drag-drag
+
+.. note:: 
+   .. image:: teaching_pendant_software/009.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Tool coordinate system number**
+   
+   effect: Display the tool coordinate system number of the current application
+   
+.. note:: 
+   .. image:: teaching_pendant_software/010.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Running speed percentage**
+   
+   effect: The speed of the robot when it is running in the current mode
+
+.. note:: 
+   .. image:: teaching_pendant_software/011.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Runn normally**
+   
+   effect: The current robot is running normally
+
+.. note:: 
+   .. image:: teaching_pendant_software/012.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Error state**
+   
+   effect: There is an error in the current robot operation
+
+.. note:: 
+   .. image:: teaching_pendant_software/013.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **automatic mode**
+   
+   effect: Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
+
+.. note:: 
+   .. image:: teaching_pendant_software/014.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Teach mode**
+   
+   effect: Robot teaching operation mode, set the global speed adjustment of manual mode and automatic mode and specify the speed.
+
+.. note:: 
+   .. image:: teaching_pendant_software/015.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Drag state**
+   
+   effect: The current robot can drag
+
+.. note:: 
+   .. image:: teaching_pendant_software/016.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Drag state**
+   
+   effect: The current robot is not draggable
+
+.. note:: 
+   .. image:: teaching_pendant_software/017.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Connection status**
+   
+   effect: Robot connected
+
+.. note:: 
+   .. image:: teaching_pendant_software/017-1.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Not connected status**
+   
+   effect: Robot not connected
+
+.. note:: 
+   .. image:: teaching_pendant_software/018.png
+      :width: 2.25in
+      :height: 0.75in
+      :align: left
+
+   name: **Account information**
+   
+   effect: Display username and permissions and logout user

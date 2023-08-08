@@ -17,6 +17,8 @@ Quick start
     install_power_robot
     access
     parameter_setting
+    manual_teaching
+    quick_programming
 
 Manual
 -----------------
