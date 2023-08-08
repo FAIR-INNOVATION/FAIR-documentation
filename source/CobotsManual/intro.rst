@@ -8,6 +8,16 @@ Product matrix
     :align: center
     :figclass: align-center
 
+Quick start
+------------
+.. toctree:: 
+    :maxdepth: 6
+    :numbered: 5
+
+    install_power_robot
+    access
+    parameter_setting
+
 Manual
 -----------------
 .. toctree:: 
