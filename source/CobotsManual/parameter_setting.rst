@@ -52,13 +52,13 @@ Click "Modify" to reset the tool coordinate system of the number according to th
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.1-1 Set tool coordinates
+.. centered:: Figure 3.3-1 Set tool coordinates
 
 .. image:: teaching_pendant_software/028.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.1-2 Set tool coordinates
+.. centered:: Figure 3.3-2 Set tool coordinates
 
 .. important:: 
    1. After the tool is installed at the end, the tool coordinate system must be calibrated and applied, otherwise the position and attitude of the tool center point will not meet the expected values when the robot executes the motion command.
