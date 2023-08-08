@@ -6,7 +6,7 @@ Set the installation method
 
 The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set on this page in time to ensure the normal operation of the robot.
 
-The user clicks the "fixed installation" tab in the robot's 3D virtual display area to enter the robot \ `Fixed installation <teaching_pendant_software.html#id14>`__\ . On the mode setting page, select "Front Mount", "Flip Mount" or "Side Mount", and click the "Apply" button to complete the robot installation mode setting.
+The user clicks the "fixed installation" tab in the robot's 3D virtual display area to enter the robot Fixed installation. On the mode setting page, select "Front Mount", "Flip Mount" or "Side Mount", and click the "Apply" button to complete the robot installation mode setting.
 
 .. image:: teaching_pendant_software/025.png
    :width: 6in
@@ -28,7 +28,7 @@ Considering more flexible and rich robot deployment scenarios, we provide a free
 Set end load
 --------------------
 
-Under the menu bar of "Robot Settings" in "Initial Settings", click "End Load" to enter \ `End load page <teaching_pendant_software.html#id22>`__\ 。
+Under the menu bar of "Robot Settings" in "Initial Settings", click "End Load" to enter End load page 。
 
 .. image:: teaching_pendant_software/044.png
    :width: 3in
@@ -44,7 +44,7 @@ The user can set the corresponding parameters according to the parameters of the
 Set tool coordinates
 --------------------
 
-Under the menu bar of "Robot Settings" in "Initial Settings", click "Tool Coordinates" to enter \ `Tool Coordinates Page <teaching_pendant_software.html#id16>`__\ 。Tool coordinates can realize the modification, clearing and application of tool coordinates. There are 15 numbers in the drop-down list of the tool coordinate system. After selecting the corresponding coordinate system (the name of the coordinate system can be customized), the corresponding coordinate value, tool type and installation position will be displayed below (displayed only under the sensor type tool), select Click the "Apply" button after a certain coordinate system, and the currently used tool coordinate system will change to the selected coordinates, as shown in Figure3.4-1.
+Under the menu bar of "Robot Settings" in "Initial Settings", click "Tool Coordinates" to enter Tool Coordinates Page. Tool coordinates can realize the modification, clearing and application of tool coordinates. There are 15 numbers in the drop-down list of the tool coordinate system. After selecting the corresponding coordinate system (the name of the coordinate system can be customized), the corresponding coordinate value, tool type and installation position will be displayed below (displayed only under the sensor type tool), select Click the "Apply" button after a certain coordinate system, and the currently used tool coordinate system will change to the selected coordinates, as shown in Figure3.4-1.
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. The tool calibration method is divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the tool center point. Its posture is consistent with the end posture by default. The six-point method adds two points to the four-point method. , used to calibrate the pose of the tool.
 
