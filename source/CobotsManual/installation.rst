@@ -1385,17 +1385,17 @@ The second version of the button box
 
 **Emergency stop switch:**\ When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
-**Start stop:**\ Start/stop running program.
+**Start/Stop:**\ Start/stop running program.
 
-**Intra port:**\ Connect to the web oscilloscope.
+**Ethernet:**\ Connect to the web oscilloscope.
 
-**Shut off:**\ No enabled.
+**Turn off:**\ No enabled.
 
 **Record point:**\ Record the teaching point.
 
-**Demonstration mode:**\ Enter/exit the missionary state.
+**Teaching mode:**\ Enter/exit with the teaching pendant state.
 
-**Run mode:**\ Automatic/manual mode switch.
+**Working mode:**\ Automatic/manual mode switch.
 
 **Drag mode:**\ Enter/exit drag mode.
 
@@ -1444,25 +1444,25 @@ End LED definition
      - **LED color**
 
    * - When communication is not established
-     - Alternating "off", "red", "green" and "blue"
+     - "Off", "Red", "Green" and "Blue" alternately
 
    * - Automatic mode
-     - Long bright blue
+     - Blue long bright
 
    * - Manual mode
-     - Green light
+     - Green long bright
 
    * - Drag Mode
-     - White cyan is always bright
+     - White cyan long bright
 
    * - Button box record point (only when using button box)
-     - Two purple flashes
+     - Purple blinks twice
 
    * - Start running (only when using the button box)
-     - Twinkle blue
+     - Cyan blue flashes twice
 
    * - Enter the state of unmatched button box (only when using the button box)
-     - Blinking blue twice
+     - Blue flashes twice
 
    * - Stop operation (only when using the button box)
      - Red flashes twice
@@ -1471,7 +1471,7 @@ End LED definition
      - Red long bright
 
    * - Zero calibration completed
-     - Three flashes of white and cyan
+     - White cyan flashes three times
 
    * - Enable
-     - Twice flashing yellow
+     - Yellow flashes twice
