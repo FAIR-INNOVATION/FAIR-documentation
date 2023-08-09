@@ -52,15 +52,15 @@ When the robot has high running precision requirements, be sure to add pins to p
    It is recommended that the robot mounting base meet the following requirements to ensure that the robot is installed firmly and stably:
 
    
-    (1) The robot mount needs to be strong enough and have sufficient load-bearing capacity. It should be able to carry at least 5 times the weight of the robot and at least 10 times the 1-axis torque.
+    (1)The robot mount needs to be strong enough and have sufficient load-bearing capacity. It should be able to carry at least 5 times the weight of the robot and at least 10 times the 1-axis torque.
 
-    (2) The surface of the robot mounting seat should be flat to ensure close contact with the contact surface of the robot;
+    (2)The surface of the robot mounting seat should be flat to ensure close contact with the contact surface of the robot;
 
-    (3) The robot mounting base should be strong enough, fixed firmly, and will not resonate with the robot;
+    (3)The robot mounting base should be strong enough, fixed firmly, and will not resonate with the robot;
 
-    (4) When the robot and other parts move at the same time, the mounting base should be isolated from other moving parts, and should not be fixed together to avoid vibration interference during the movement;
+    (4)When the robot and other parts move at the same time, the mounting base should be isolated from other moving parts, and should not be fixed together to avoid vibration interference during the movement;
 
-    (5) If the robot is installed on a mobile platform or an external axis, the acceleration of the mobile platform or external axis should be as low as possible;
+    (5)If the robot is installed on a mobile platform or an external axis, the acceleration of the mobile platform or external axis should be as low as possible;
 
 Connect the control box
 -------------------------
