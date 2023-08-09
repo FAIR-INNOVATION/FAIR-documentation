@@ -7,7 +7,9 @@ Install and power on the robot
 Install the robot arm
 ------------------------
 
-When the collaborative robot is installed on the mounting base, use a compliant number of bolts (strength not less than 8.8) to tighten and fix the robot on the mounting base; The installation accuracy of the robot prevents the robot from moving due to collisions, etc. When the robot has high running precision requirements, be sure to add pins to position the robot.
+When the collaborative robot is installed on the mounting base, use a compliant number of bolts (strength not less than 8.8) to tighten and fix the robot on the mounting base;
+it is recommended to use two compliant pin holes and pins on the mounting base for robot positioning to improve the installation accuracy of the robot and prevent the robot from moving due to collisions.
+When the robot has high running precision requirements, be sure to add pins to position the robot.
 
 .. centered:: Table 1.1-1 Robot mounting parts standard
 
@@ -47,7 +49,8 @@ When the collaborative robot is installed on the mounting base, use a compliant 
      - φ8mm
 
 .. important:: 
-   It is recommended that the robot mounting seat meet the following requirements to ensure that the robot is installed firmly and stably:
+   It is recommended that the robot mounting base meet the following requirements to ensure that the robot is installed firmly and stably:
+
    
     (1) The robot mount needs to be strong enough and have sufficient load-bearing capacity. It should be able to carry at least 5 times the weight of the robot and at least 10 times the 1-axis torque.
 
