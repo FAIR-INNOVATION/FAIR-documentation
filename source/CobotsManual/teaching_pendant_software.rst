@@ -1868,6 +1868,10 @@ LT-Rec command
 
 Click the "LT-Rec" icon to enter the LT-Rec command editing interface
 
+This command realizes the function of taking out the starting point and end point of laser tracking recording, so that the robot can automatically move to the starting point position, which is suitable for the occasion where the movement starts from the outside of the workpiece and laser tracking recording is performed. At the same time, the host computer can obtain the information of the starting point and end point in the recorded data. for follow-up exercise.
+
+Realize the adjustable function of laser tracking and reproduction speed, so that the robot can record at a very fast speed, and then reproduce according to the normal welding speed, which can improve the working efficiency.
+
 .. image:: teaching_pendant_software/216.png
    :width: 6in
    :align: center
@@ -1899,6 +1903,8 @@ Weld-Trc command
 ++++++++++++++++++
 
 Click the "Weld-Trc" icon to enter the Weld-Trc command editing interface
+
+This command realizes the robot seam tracking and uses the deviation detection of the welding seam to compensate the trajectory, and the arc sensor can be used to detect the seam deviation.
 
 .. image:: teaching_pendant_software/217.png
    :width: 6in
