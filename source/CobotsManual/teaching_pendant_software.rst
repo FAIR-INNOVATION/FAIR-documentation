@@ -1863,6 +1863,16 @@ This command includes three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 3.7-8-3 Laser command interface
 
+LT-Rec command
+++++++++++++++++
+
+Click the "LT-Rec" icon to enter the LT-Rec command editing interface
+
+.. image:: teaching_pendant_software/216.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-4 LT-Rec command interface
 
 W-Search command
 ++++++++++++++++
@@ -1875,7 +1885,7 @@ This command is a welding wire positioning command, including three commands of 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-4 W-Search command interface
+.. centered:: Figure 3.7-8-5 W-Search command interface
 
 In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
 
@@ -1883,7 +1893,18 @@ In writing a program, usually first set the start command of the search, and the
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-5 W-Search example(1D)
+.. centered:: Figure 3.7-8-6 W-Search example(1D)
+
+Weld-Trc command
+++++++++++++++++++
+
+Click the "Weld-Trc" icon to enter the Weld-Trc command editing interface
+
+.. image:: teaching_pendant_software/217.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-7 Weld-Trc command interface
 
 Adjust command
 ++++++++++++++++
@@ -1896,7 +1917,7 @@ This command adaptively adjusts the posture of the welding torch for the scene o
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-6 Adjust command interface
+.. centered:: Figure 3.7-8-8 Adjust command interface
 
 Force control command interface 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
