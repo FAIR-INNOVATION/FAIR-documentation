@@ -1564,6 +1564,50 @@ Example of control program based on current pose offset (base coordinate offset)
    :width: 6in
    :align: center
 
+Trajctory command
++++++++++++++++++++
+
+Click the "Trajctory" icon to enter the Trajctory command editing interface
+
+.. image:: teaching_pendant_software/212.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-5-14 Trajctory command interface
+
+TrajctoryJ command
+++++++++++++++++++++
+
+Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
+
+.. image:: teaching_pendant_software/213.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-5-15 TrajctoryJ command interface
+
+DMP command
+++++++++++++++++
+
+Click the "DMP" icon to enter the DMP command editing interface
+
+.. image:: teaching_pendant_software/214.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-5-16 DMP command interface
+
+WPTrsf command
+++++++++++++++++
+
+Click the "WPTrsf" icon to enter the WPTrsf command editing interface
+
+.. image:: teaching_pendant_software/215.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-5-17 WPTrsf command interface
+
 Control command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
