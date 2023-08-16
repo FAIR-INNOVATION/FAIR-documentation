@@ -1589,7 +1589,9 @@ Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
 DMP command
 ++++++++++++++++
 
-Click the "DMP" icon to enter the DMP command editing interface
+Click the "DMP" icon to enter the DMP command editing interface.
+
+DMP is a trajectory imitation learning method that requires prior planning of reference trajectories. In the command editing interface , select the teaching point as the new starting point, click "Add" and "Apply" to save the command. The DMP specific path is a new trajectory that mimics the reference trajectory with a new starting point.
 
 .. image:: teaching_pendant_software/214.png
    :width: 6in
@@ -1600,7 +1602,9 @@ Click the "DMP" icon to enter the DMP command editing interface
 WPTrsf command
 ++++++++++++++++
 
-Click the "WPTrsf" icon to enter the WPTrsf command editing interface
+Click the "WPTrsf" icon to enter the WPTrsf command editing interface.
+
+Select the workpiece coordinate system to be automatically converted, and click "Add" and "Apply" to save the instruction. This instruction realizes automatic conversion of points in the workpiece coordinate system when executing internal PTP and LIN instructions. Use the example area to show and prompt the correct combination of instructions. After adding specific instructions, you can adjust the combination according to the actual scene.
 
 .. image:: teaching_pendant_software/215.png
    :width: 6in
