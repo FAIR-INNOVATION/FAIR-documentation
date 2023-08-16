@@ -1580,6 +1580,14 @@ TrajctoryJ command
 
 Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
 
+1.Trajectory file import function: select a local computer file to import to the robot control system
+
+2.Track preloading: select the imported track file and load it by command
+
+3.Trajectory movement: Send the robot movement through the combination command of the preloaded trajectory file and the selected debugging speed
+
+4.Print the track point number: print the track point number during the robot running track, so as to check the progress of the current movement
+
 .. image:: teaching_pendant_software/213.png
    :width: 6in
    :align: center
