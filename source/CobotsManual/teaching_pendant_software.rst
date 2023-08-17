@@ -1964,7 +1964,7 @@ Torque command
 
 Click the "Torque" icon to enter the Torque command editing interface
 
-This command is a force compliance control command. Through this command, the robot can adjust its trajectory to reduce the force when the force is greater than a certain value during the force control training process; when the force is less than a certain value, it will return to the original trajectory. Continue to move along the original trajectory.
+This command is a Torque command. Through this command, the robot can adjust its trajectory to reduce the force when the force is greater than a certain value during the force control training process; when the force is less than a certain value, it will return to the original trajectory. Continue to move along the original trajectory.
 
 .. image:: teaching_pendant_software/138.png
    :width: 6in
