@@ -1964,7 +1964,7 @@ Torque command
 
 Click the "Torque" icon to enter the Torque command editing interface
 
-This command is a Torque command. Through this command, the robot can adjust its trajectory to reduce the force when the force is greater than a certain value during the force control training process; when the force is less than a certain value, it will return to the original trajectory. Continue to move along the original trajectory.
+This command is a torque recording command, which realizes the real-time torque recording collision detection function. Click the "Torque Record Start" button to continuously record the collision situation during the operation of the motion command, and the recorded real-time torque is used as the theoretical value of the collision detection judgment to reduce the probability of false alarms. When the set threshold range is exceeded, the collision detection duration is recorded. Click the "Torque Recording Stop" button to stop recording. Click "Torque Record Reset" to return the status to the default state.
 
 .. image:: teaching_pendant_software/138.png
    :width: 6in
