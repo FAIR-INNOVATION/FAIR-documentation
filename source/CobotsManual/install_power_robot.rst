@@ -19,32 +19,32 @@ When the robot has high running precision requirements, be sure to add pins to p
    :align: center
 
    * - **Collaborative robot model**
-     - **M6 bolt**
-     - **M6 bolt torque**
+     - **Bolt**
+     - **Bolt torque**
      - **Pin Hole Specifications**
 
    * - FR3
-     - 4 pieces
+     - 4 pieces of M6
      - ≥10Nm
      - φ5mm
 
    * - FR5
-     - 4 pieces
+     - 4 pieces of M8
      - ≥20Nm
      - φ8mm
 
    * - FR10
-     - 4 pieces
+     - 4 pieces of M8
      - ≥25Nm
      - φ8mm
 
    * - FR16
-     - 6 pieces
+     - 4 pieces of M8
      - ≥25Nm
      - φ8mm
 
    * - FR20
-     - 8 pieces
+     - 6 pieces of M10
      - ≥45Nm
      - φ8mm
 
