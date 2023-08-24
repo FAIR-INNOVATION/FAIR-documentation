@@ -672,73 +672,174 @@ Installation specifications
 Robot arm installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The robotic arm uses 4 M8 bolts with a strength of no less than 8.8 -level intensity to install the robot arm. The bolt must be tightened with 20nm torque.
+.. important::
+  The recommended robot installation base meets the following requirements to ensure a secure and stable installation of the robot:
+  
+  (1)The robot mounting base needs to be strong enough and have sufficient load-bearing capacity, which should be able to bear at least 5 times the weight of the robot and at least 10 times the 1-axis torque.
 
-Use the reserved two Ø8 pin holes to accurately reposition the robot arm.
+  (2)The surface of the robot mounting base should be flat to ensure close contact with the robot contact surface.
+
+  (3)The robot mounting base should have sufficient stiffness, be firmly fixed, and not resonate with the robot.
+
+  (4)When the robot and other components are moving simultaneously, the mounting base should be separated from other moving components and not fixed together to avoid vibration interference during the movement process.
+
+  (5)If the robot is installed on a mobile platform or external axis, the acceleration of the mobile platform or external axis should be as low as possible.
+
+  The following installation methods should be avoided:
+
+  (I)Avoid fixing the robot to other moving devices.
+
+  .. figure:: installation/64.png
+    :align: center
+    :width: 3in
+    :class: figure-border
+
+  .. centered:: Figure 1.5-1 Avoid installing on other sports equipment
+
+  Make sure the robot arm is installed correctly and safely. Unstable installation will cause accidents.
 
 .. note:: 
-	You can purchase accurate bases as attachments. FIGURE 1.5-1 ~ 1.5-5 shows the position of the sales hole and the location of the screw.
+	You can purchase accurate bases as attachments. Figure 1.5-2、1.5-5、1.5-8、1.5-11 show the position of the sales hole and the location of the screw.
 
-Installing the robot on a strong, no shock surface, the surface should be sufficient to withstand the complete twisting force of the base joints at least 10 times, and the weight of the robotic arm at least 5 times. If the robot is installed on the linear axis or on the platform of activity, the acceleration of the base installation base is very low. High acceleration can cause a safe stop for robots.
+Installation requirements for FR3 robot
+++++++++++++++++++++++++++++++++++++++++++++++
 
+When installing the robot on the mounting base, use four M6 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 10Nm.Suggest using two on the mounting base φ 5mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
 
 .. figure:: installation/025.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.5-1 FR3 model collaborative robot installation size
+.. centered:: Figure 1.5-2 FR3 model collaborative robot installation size
+
+.. important:: 
+  According to different application scenarios, we recommend several robot installation bases as follows
+
+  (I)For situations where the motion speed is not too fast, the running speed is not too large, the accuracy requirements are average, and it is not convenient to fix the robot on the ground, the recommended installation base for the robot is as follows.
+
+  .. figure:: installation/62.png
+    :align: center
+    :width: 3in
+    :class: figure-border
+
+  .. centered:: Figure 1.5-3 FR3 model collaborative robot low requirement mounting base
+  
+  (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
+
+  .. figure:: installation/63.png
+    :align: center
+    :width: 3in
+    :class: figure-border
+
+  .. centered:: Figure 1.5-4 FR3 Model Collaborative Robot High Demand Mounting Base
+
+Installation requirements for FR5 robot
+++++++++++++++++++++++++++++++++++++++++++++
+
+When installing the robot on the mounting base, use four M8 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 20Nm.Suggest using two on the mounting base φ 8mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
 
 .. figure:: installation/026.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.5-2 FR5 model collaborative robot installation size
+.. centered:: Figure 1.5-5 FR5 model collaborative robot installation size
+
+.. important:: 
+  According to different application scenarios, we recommend several robot installation bases as follows
+
+  (I)For situations where the motion speed is not too fast, the running speed is not too large, the accuracy requirements are average, and it is not convenient to fix the robot on the ground, the recommended installation base for the robot is as follows.
+
+  .. figure:: installation/62.png
+    :align: center
+    :width: 3in
+    :class: figure-border
+
+  .. centered:: Figure 1.5-6 FR5 Model Collaborative Robot High Demand Mounting Base
+  
+  (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
+
+  .. figure:: installation/63.png
+    :align: center
+    :width: 3in
+    :class: figure-border
+  
+  .. centered:: Figure 1.5-7 FR5 model collaborative robot low requirement mounting base
+
+Installation requirements for FR10&FR16 robot
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+When installing the robot on the mounting base, use four M8 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 25Nm.Suggest using two on the mounting base φ 8mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
 
 .. figure:: installation/027.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.5-3 FR10 model collaborative robot installation size
+.. centered:: Figure 1.5-8 FR10&FR16 model collaborative robot installation size
 
-.. figure:: installation/028.png
-	:align: center
-	:width: 6in
-	:class: figure-border
+.. important:: 
+  According to different application scenarios, we recommend several robot installation bases as follows
 
-.. centered:: Figure 1.5-4 FR16 model collaborative robot installation size
+  (I)For situations where the motion speed is not too fast, the running speed is not too large, the accuracy requirements are average, and it is not convenient to fix the robot on the ground, the recommended installation base for the robot is as follows.
+
+  .. figure:: installation/65.png
+    :align: center
+    :width: 3in
+    :class: figure-border
+
+  .. centered:: Figure 1.5-9 FR10&FR16 model collaborative robot low requirement mounting base
+  
+  (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
+
+  .. figure:: installation/63.png
+    :align: center
+    :width: 3in
+    :class: figure-border
+
+  .. centered:: Figure 1.5-10 FR10&FR16 Model Collaborative Robot High Demand Mounting Base
+
+Installation requirements for FR20 robot
+++++++++++++++++++++++++++++++++++++++++++++++
+
+When installing the robot on the mounting base, use six M10 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 45Nm.Suggest using two on the mounting base φ 8mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
 
 .. figure:: installation/029.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.5-5 FR20 model collaborative robot installation size
+.. centered:: Figure 1.5-11 FR20 model collaborative robot installation size
 
 .. important:: 
-	Make sure the robot arm is installed correctly and safely. Unstable installation will cause accidents.
+  Due to the large self weight and running inertia of the FR20 robot, it is recommended to directly fix it on the ground for use. The recommended base is as follows.
+
+  .. figure:: installation/66.png
+    :align: center
+    :width: 4in
+    :class: figure-border
+
+  .. centered:: Figure 1.5-12 FR20 model collaborative robot low requirement mounting base
 
 Tool end installation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 There are four M6 thread holes in the robot tool, which can be used to connect the tool to the robot. The M6 bolt must be tightened with 8nm torque, and its strength level is not less than 8.8. In order to accurately regain the tools, please use the nails in the reserved ø6 sales holes.
 
-
 .. figure:: installation/030.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.5-6 FR3/FR5/FR10/FR16 model robot end flange drawing
+.. centered:: Figure 1.5-13 FR3/FR5/FR10/FR16 model robot end flange drawing
 
 .. figure:: installation/031.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.5-7 FR20 model robot end flange drawing
+.. centered:: Figure 1.5-14 FR20 model robot end flange drawing
 
 .. important:: 
 	- Make sure the tools are installed correctly and safely.
@@ -782,31 +883,31 @@ The maximum allowable valid load of the robotic arm depends on the center of gra
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 1.5-8 FR3 model collaborative robot load curve
+.. centered:: Figure 1.5-15 FR3 model collaborative robot load curve
 
 .. figure:: installation/033.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 1.5-9 FR5 model collaborative robot load curve
+.. centered:: Figure 1.5-16 FR5 model collaborative robot load curve
 
 .. figure:: installation/034.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 1.5-10 FR10 model collaborative robot load curve
+.. centered:: Figure 1.5-17 FR10 model collaborative robot load curve
 
 .. figure:: installation/035.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 1.5-11 FR16 model collaborative robot load curve
+.. centered:: Figure 1.5-18 FR16 model collaborative robot load curve
 
 .. figure:: installation/036.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 1.5-12 FR20 model collaborative robot load curve
+.. centered:: Figure 1.5-19 FR20 model collaborative robot load curve
 
 
 Control connection
