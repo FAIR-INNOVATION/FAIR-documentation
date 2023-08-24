@@ -685,6 +685,7 @@ Robot arm installation
 
   (5)If the robot is installed on a mobile platform or external axis, the acceleration of the mobile platform or external axis should be as low as possible.
 
+.. warning:: 
   The following installation methods should be avoided:
 
   (I)Avoid fixing the robot to other moving devices.
