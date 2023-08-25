@@ -49,61 +49,61 @@ Refer to the 2.7.3 of the hardware installation of Chapter 2. The end LED defini
 Not paired with teaching pendant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  **Step1**：Turn on the power switch of the robot control box, start the robot, wait for the end LED to display green for a long time before operating the robot, as shown in Figure 2.3-1.
+-  **Step1**：Turn on the power switch of the robot control box, start the robot, wait for the end LED to display green for a long time before operating the robot, as shown in Figure 3.3-1.
 
 .. figure:: quick_start_robot/001.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 2.3-1 Green Schematic Diagram of End LED
+.. centered:: Figure 3.3-1 Green Schematic Diagram of End LED
 
--  **Step2**：Long press the button box "button 2" to enter the mode without teaching pendant, and the end LED flashes blue three times, as shown in Figure 2.3-2.
+-  **Step2**：Long press the button box "button 2" to enter the mode without teaching pendant, and the end LED flashes blue three times, as shown in Figure 3.3-2.
 
 .. figure:: quick_start_robot/002.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 2.3-2 end LED blue blue schematic diagram
+.. centered:: Figure 3.3-2 end LED blue blue schematic diagram
 
--  **Step3**：Long press button "button 1" Switch the robot to the drag mode. At this time, the end LED is white and blue, as shown in Figure 2.3-3. To any position of the mobile robot, long press the "button 1" to exit the drag mode, the short-press button box "button 2" records P1 point, the end LED purple flashes three times, as shown in Figure 2.3-4.
+-  **Step3**：Long press button "button 1" Switch the robot to the drag mode. At this time, the end LED is white and blue, as shown in Figure 3.3-3. To any position of the mobile robot, long press the "button 1" to exit the drag mode, the short-press button box "button 2" records P1 point, the end LED purple flashes three times, as shown in Figure 3.3-4.
 
--  **Step4**：Mobile robot, short press button box "button 2" record P2 point, the end LED purple flashes three times, as shown in Figure 2.3-4.
+-  **Step4**：Mobile robot, short press button box "button 2" record P2 point, the end LED purple flashes three times, as shown in Figure 3.3-4.
 
 .. figure:: quick_start_robot/003.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 2.3-3 end LED white green schematic diagram
+.. centered:: Figure 3.3-3 end LED white green schematic diagram
 
 .. figure:: quick_start_robot/004.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 2.3-4 end LED purple schematic diagram
+.. centered:: Figure 3.3-4 end LED purple schematic diagram
 
--  **Step5**：The long press button "button 1" exit the drag mode. At this time, it is a manual mode. The end LED is green, as shown in Figure 2.3-5. Short press "Key 1" to switch the robot to the automatic mode. At this time, the end LED is blue, as shown in Figure 2.3-6.
+-  **Step5**：The long press button "button 1" exit the drag mode. At this time, it is a manual mode. The end LED is green, as shown in Figure 3.3-5. Short press "Key 1" to switch the robot to the automatic mode. At this time, the end LED is blue, as shown in Figure 3.3-6.
 
--  **Step6**：The short press button "button 3" runs the program, the end LED blue flashes twice, as shown in Figure 2.3-6.
+-  **Step6**：The short press button "button 3" runs the program, the end LED blue flashes twice, as shown in Figure 3.3-6.
 
 .. figure:: quick_start_robot/005.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 2.3-5 end LED green schematic diagram
+.. centered:: Figure 3.3-5 end LED green schematic diagram
 
 .. figure:: quick_start_robot/006.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 2.3-6 end LED blue schematic diagram
+.. centered:: Figure 3.3-6 end LED blue schematic diagram
 
--  **Step7**：Short press the button box "button 3" to stop running the program, and the red LED at the end flashes three times, as shown in Figure 2.3-7.
+-  **Step7**：Short press the button box "button 3" to stop running the program, and the red LED at the end flashes three times, as shown in Figure 3.3-7.
 
 .. figure:: quick_start_robot/007.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 2.3-7 end LED red schematic diagram
+.. centered:: Figure 3.3-7 end LED red schematic diagram
 
 Matching the oscilloscopy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,7 +123,7 @@ Matching the oscilloscopy
    :width: 4in
    :class: figure-border
 
-.. centered:: Figure 2.3-8 record and add some P1
+.. centered:: Figure 3.3-8 record and add some P1
 
 -  **Step6**：Mobile robot, short -press button box button 2 records P2 point, end LED purple flashes three times, and manually add the "PTP: P2" instruction to the program.
 
@@ -132,7 +132,7 @@ Matching the oscilloscopy
    :width: 4in
    :class: figure-border
 
-.. centered:: Figure 2.3-9 record and add some P2
+.. centered:: Figure 3.3-9 record and add some P2
 
 -  **Step7**：Save the program file content.
 
@@ -152,7 +152,7 @@ After clicking the "New" icon button, the user names the file and selects a temp
    :align: center
    :width: 6in
    
-.. centered:: Figure 2.4-1 Demonstration of teaching program running schematic diagram
+.. centered:: Figure 3.4-1 Demonstration of teaching program running schematic diagram
 
 .. warning:: 
    Your head and trunk cannot be located in the range (work area) that the robot can reach. Please do not put your fingers in the place where the robot can grasp.

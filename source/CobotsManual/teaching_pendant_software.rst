@@ -28,7 +28,7 @@ Start software
 User login and permission update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. centered:: Table 3.1-1 Initial user
+.. centered:: Table 4.1-1 Initial user
 
 .. list-table::
    :widths: 70 70 70 70
@@ -72,25 +72,25 @@ User login and permission update
 
 Users (refer to \ `4.10.2.1 User Management <#user-management>`__\  for user management) are divided into six levels by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, management There are no functional restrictions for administrators. For specific default function code permissions, refer to \ `4.10.2.2 Authority management <#authority-management>`__\. 
 
-The login interface is shown in Figure 3.1-1 login interface.
+The login interface is shown in Figure 4.1-1 login interface.
 
 .. figure:: teaching_pendant_software/002.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.1-1 Login Interface
+.. centered:: Figure 4.1-1 Login Interface
 
 After the login is successful, the system will load the model and other data, and enter the initial page after loading.
 
 System initial interface
 ----------------------------
 
-After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAIR INNOVATION LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. As shown in Figure 3.2-1 system initial interface schematic diagram.
+After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAIR INNOVATION LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. As shown in Figure 4.2-1 system initial interface schematic diagram.
 
 .. image:: teaching_pendant_software/003.png
    :align: center
    :width: 6in
-.. centered:: Figure 3.2-1 Schematic diagram of the initial interface of the system
+.. centered:: Figure 4.2-1 Schematic diagram of the initial interface of the system
 
 Control area
 ~~~~~~~~~~~~~~~
@@ -263,9 +263,9 @@ Status Bar
 Menu Bar
 ~~~~~~~~~~~~
 
-The menu bar is as shown in Table 3.2-1 Teaching Pendant Menu Columns
+The menu bar is as shown in Table 4.2-1 Teaching Pendant Menu Columns
 
-.. centered:: Table 3.2-1 Teach pendant menu column
+.. centered:: Table 4.2-1 Teach pendant menu column
 
 +--------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |class a                                     |second level                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -314,7 +314,7 @@ Joint, Base and other functions can refer to \ `4.6 Robot operation <#robot-oper
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.3-1 Virtual trajectory drawing and tool model import
+.. centered:: Figure 4.3-1 Virtual trajectory drawing and tool model import
 
 3D visualization display of robot coordinate system
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -327,7 +327,7 @@ Create various 3D virtual coordinate systems in the 3D virtual area of the WebAP
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.3-2 Base coordinate system display off and on
+.. centered:: Figure 4.3-2 Base coordinate system display off and on
 
 **Tool coordinate system**：The display of the tool coordinate system is enabled by default and can be manually disabled. After the WebAPP starts and the user logs in successfully, obtain the tool coordinate system name and corresponding parameter data of the current application, and initialize the current tool coordinate system.
 
@@ -337,7 +337,7 @@ When applying other tool coordinate systems during use, after the application to
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.3-3 Tool coordinate system display
+.. centered:: Figure 4.3-3 Tool coordinate system display
 
 **Workpiece coordinate system**：The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
 
@@ -345,7 +345,7 @@ When applying other tool coordinate systems during use, after the application to
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.3-4 Workpiece coordinate system display
+.. centered:: Figure 4.3-4 Workpiece coordinate system display
 
 **External Axis Coordinate System**：The external axis coordinate system is turned off by default, and it can be manually turned on and displayed. The process is consistent with the tool coordinate system.
 
@@ -353,7 +353,7 @@ When applying other tool coordinate systems during use, after the application to
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.3-5 External axis coordinate system display
+.. centered:: Figure 4.3-5 External axis coordinate system display
 
 Robot installation method setting and display
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -366,7 +366,7 @@ The user clicks the "Fixed Installation" tab in the robot's 3D virtual display a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.3-6 Fixed installation
+.. centered:: Figure 4.3-6 Fixed installation
 
 Considering more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "360-degree free installation" tab in the robot's 3D virtual display area to enter the robot free installation mode setting page. Manually adjust the "base tilt" and "base rotation" angles, and the 3D model will show the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation method setting.
 
@@ -374,7 +374,7 @@ Considering more flexible and rich robot deployment scenarios, we provide a free
    :width: 6in
    :align: center
    
-.. centered:: Figure 3.3-7 360 degree free installation
+.. centered:: Figure 4.3-7 360 degree free installation
 
 .. important:: 
    After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
@@ -391,7 +391,7 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "Tool Coordi
    :width: 3in
    :align: center
    
-.. centered:: Figure 3.4-1 Set tool coordinates
+.. centered:: Figure 4.4-1 Set tool coordinates
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. Tool calibration methods are divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the center point of the tool. Its posture defaults to be consistent with the end posture. The six-point method adds two points to the four-point method. , used to calibrate the attitude of the tool, here we take the six-point method as an example to explain.
 
@@ -399,15 +399,15 @@ Click "Modify" to reset the tool coordinate system of the number according to th
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-2 Set tool coordinates
+.. centered:: Figure 4.4-2 Set tool coordinates
 
-Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of Figure 3.4-3. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of Figure 3.4-3. Keep the posture unchanged, use the base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the positive direction of the X-axis of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6. This direction is the positive direction of the Z-axis of the tool coordinate system, and the positive direction of the Y-axis of the tool coordinate system is determined by the right-hand rule. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
+Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of Figure 4.4-3. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of Figure 4.4-3. Keep the posture unchanged, use the base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the positive direction of the X-axis of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6. This direction is the positive direction of the Z-axis of the tool coordinate system, and the positive direction of the Y-axis of the tool coordinate system is determined by the right-hand rule. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
 
 .. image:: teaching_pendant_software/029.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.4-3 Schematic diagram of the six-point method
+.. centered:: Figure 4.4-3 Schematic diagram of the six-point method
 
 After completing the last step, click "Finish" to return to the tool coordinate interface, and click "Save" to store the tool coordinate system just created.
 
@@ -423,21 +423,21 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "External To
 
 The modification, clearing and application of external tool coordinates can be realized in the external tool coordinate system setting interface.
 
-There are 15 numbers in the drop-down list of the external tool coordinate system, from etoolcoord0~etoolcoord14, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used tool coordinate system Change to the selected coordinates, as shown in Figure 3.4-4.
+There are 15 numbers in the drop-down list of the external tool coordinate system, from etoolcoord0~etoolcoord14, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used tool coordinate system Change to the selected coordinates, as shown in Figure 4.4-4.
 
 .. image:: teaching_pendant_software/030.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-4 外部工具坐标
+.. centered:: Figure 4.4-4 外部工具坐标
 
-Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in Figure 3.4-5.
+Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in Figure 4.4-5.
 
 .. image:: teaching_pendant_software/031.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-5 Schematic diagram of the six-point method
+.. centered:: Figure 4.4-5 Schematic diagram of the six-point method
 
 **1. Three-point method to determine the external TCP**
 
@@ -478,7 +478,7 @@ wobjcoord14), and then the corresponding coordinate value will be displayed in t
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-6 Set workpiece coordinates
+.. centered:: Figure 4.4-6 Set workpiece coordinates
 
 The workpiece coordinate system is generally calibrated based on the tool, and the workpiece coordinate system needs to be established on the basis of the established tool coordinate system. Click "Modify" to reset the workpiece coordinate system of the number according to the prompt. Fix the workpiece and select the calibration method "origin-X-axis-Z-axis" or "origin-X-axis-XY+plane". The selection of the first two points of the two calibration methods is the same, and the third point is different. One method is to calibrate the Z direction of the workpiece coordinate system, and the second method is to calibrate a point on the XY+ plane, just calibrate according to the diagram. Click the Calculate button to calculate the workpiece pose. If you need to reset it, click Cancel and press the Modify button to re-create the workpiece coordinate system.
 
@@ -486,7 +486,7 @@ The workpiece coordinate system is generally calibrated based on the tool, and t
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-7 Schematic diagram of the three-point method
+.. centered:: Figure 4.4-7 Schematic diagram of the three-point method
 
 After completing the last step, click "Finish" to return to the workpiece coordinate interface, and click "Save" to store the workpiece coordinate system just created.
 
@@ -500,21 +500,21 @@ Extended Axis Coordinates
 
 Under the menu bar of "Robot Settings" in "Initial Settings", click "Extended Axis Coordinate System" to enter the extended axis coordinate system interface. In the extended axis coordinate system setting interface, the modification, clearing and application of the extended axis coordinates can be realized.
 
-There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in Figure 3.4-8.
+There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in Figure 4.4-8.
 
 .. image:: teaching_pendant_software/034.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-8 Extended Axis Coordinates
+.. centered:: Figure 4.4-8 Extended Axis Coordinates
 
-Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in Figure 3.4-9. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. Let’s first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
+Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in Figure 4.4-9. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. Let’s first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/035.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-9 Linear guide configuration
+.. centered:: Figure 4.4-9 Linear guide configuration
 
 If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, and align the end center of the robot (using the tool end point in the application tool coordinate system) with two different postures. Fix a point on the quasi-expansion axis, set point 1 and point 2 respectively. Remove the enable, and move the extension axis for a certain distance. After enabling, also align the center point of the end of the robot with the previous fixed point, and set point 3. Remove the enable, move the expansion axis to the zero point, and enable the expansion axis. Move the center point of the end of the robot to the fixed point and vertically upward space, set point 4, calculate the coordinate system and save it.
 
@@ -522,7 +522,7 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-10 Linear guide calibration
+.. centered:: Figure 4.4-10 Linear guide calibration
 
 Next, let's look at the second expansion axis scheme - the calibration method of the positioner. The positioner is composed of two extension axes. Select the number of the extension axis and get the information to get the driver information of the corresponding extension axis. We can configure parameters according to this information. After configuration, set the DH parameters, measure the DH parameters of the positioner according to the diagram, and input them into the input box. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
@@ -530,7 +530,7 @@ Next, let's look at the second expansion axis scheme - the calibration method of
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-11 Positioner configuration
+.. centered:: Figure 4.4-11 Positioner configuration
 
 If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. Carl pose, for example, select a point in the positive direction of Y, and measure Y to be 100mm, then input the value as shown in the figure, click the reference point, and the reference point can be set. The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point.
 
@@ -538,7 +538,7 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-12 Positioner reference point configuration
+.. centered:: Figure 4.4-12 Positioner reference point configuration
 
 Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the two axes for a short distance, align the center of the end of the robot to the reference point, and set Point 2, continue to jog the two axes, the center of the robot end is aligned with the reference point, set point 3, and finally continue to jog the two axes, align the center of the robot end with the reference point, set point 4, click Calculate, and get the coordinates Click the save button to apply the result.
 
@@ -546,7 +546,7 @@ Align the center of the end of the robot (using the end point of the tool in the
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-13 Positioner calibration
+.. centered:: Figure 4.4-13 Positioner calibration
 
 Next, let's look at the third extended axis solution - the calibration method of the single-axis positioner. The positioner is composed of a rotating extension shaft. Select the number of the extension shaft and get the information to get the driver information of the corresponding extension shaft. We can configure parameters according to this information. The DH parameter is set to 0. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
@@ -554,7 +554,7 @@ Next, let's look at the third extended axis solution - the calibration method of
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-14 Single axis positioner configuration
+.. centered:: Figure 4.4-14 Single axis positioner configuration
 
 If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. Carl pose, click "Reference Point" to set the reference point. The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point. Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the rotation axis for a short distance, align the center of the end of the robot to the reference point, and set the point 2. Continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 3, and finally continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 4, click Calculate, and get the result of the coordinate system, Click Save to apply.
 
@@ -562,7 +562,7 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-15 Single axis positioner calibration
+.. centered:: Figure 4.4-15 Single axis positioner calibration
 
 .. important:: 
    1. The extended axis coordinate system is calibrated on the basis of the tool, and the extended axis coordinate system needs to be established on the basis of the established tool coordinate system.
@@ -574,13 +574,13 @@ Collision level
 
 Under the menu bar of "Robot Settings" in "Initial Settings", click "Collision Level" to enter the collision level interface.
 
-The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 3.4-16.
+The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 4.4-16.
 
 .. image:: teaching_pendant_software/042.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-16 Schematic diagram of collision level
+.. centered:: Figure 4.4-16 Schematic diagram of collision level
 
 Soft limit
 ~~~~~~~~~~~
@@ -589,13 +589,13 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "Soft Limits
 
 There may be other equipment in the robot's stroke, and the limit angle can softly limit the robot so that the robot's movement does not exceed a certain coordinate value and prevent the robot from colliding. Triggering the soft limit to stop the robot is automatically triggered by the robot, and there is no stopping distance.
 
-Administrators can use the default values or enter angle values. Input the angle value to limit the positive and negative angles of the robot joints respectively. When the input value exceeds the soft limit angle of the robot joints listed in \ `Table 1.4-1 Robot Basic Parameters <installation.html#id22>`__\ value, the limit angle will be adjusted to the maximum value that can be set. When the robot reports that the command exceeds the limit, it needs to enter the drag mode and drag the robot joints to within the limit angle. The interface is shown in 3.4-17.
+Administrators can use the default values or enter angle values. Input the angle value to limit the positive and negative angles of the robot joints respectively. When the input value exceeds the soft limit angle of the robot joints listed in \ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\ value, the limit angle will be adjusted to the maximum value that can be set. When the robot reports that the command exceeds the limit, it needs to enter the drag mode and drag the robot joints to within the limit angle. The interface is shown in 3.4-17.
 
 .. image:: teaching_pendant_software/043.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-17 Schematic diagram of robot limit
+.. centered:: Figure 4.4-17 Schematic diagram of robot limit
 
 End load
 ~~~~~~~~~~
@@ -608,7 +608,7 @@ The user can set the corresponding parameters according to the parameters of the
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-18 Schematic diagram of load setting
+.. centered:: Figure 4.4-18 Schematic diagram of load setting
 
 .. important:: 
    After the load is installed at the end of the robot, the weight of the end load and the coordinates of the center of mass must be set correctly, otherwise it will affect the drag function of the robot and the use of the collision detection function.
@@ -622,7 +622,7 @@ Make sure the load is installed before making measurements. Click the "Tool Data
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-19 Load Identification Joint Setup
+.. centered:: Figure 4.4-19 Load Identification Joint Setup
 
 Click "Load Identification Start" to test. In case of emergency, please stop the movement in time.
 
@@ -630,7 +630,7 @@ Click "Load Identification Start" to test. In case of emergency, please stop the
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-20 load identification start
+.. centered:: Figure 4.4-20 load identification start
 
 After the exercise is over, click the "Get Identification Result" button to obtain the calculated tool data and display it on the page. If you want to apply it to the load data, click Apply
 
@@ -638,7 +638,7 @@ After the exercise is over, click the "Get Identification Result" button to obta
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-21 Load Identification Results
+.. centered:: Figure 4.4-21 Load Identification Results
 
 Friction compensation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -653,7 +653,7 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "Friction Co
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-22 Friction Compensation Settings
+.. centered:: Figure 4.4-22 Friction Compensation Settings
 
 .. important:: 
    The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
@@ -663,13 +663,13 @@ Speed scaling
 
 Under the menu bar of "Robot Settings" in "Initial Settings", click "Speed Scaling Settings" to enter the speed scaling setting interface.
 
-This function is to set the running speed of the robot under manual/automatic mode. If the current running mode is automatic, the set speed is the automatic running speed of the robot. If the current running mode is manual, the set speed is the manual running speed of the robot. The setting value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (for standard speed, please refer to  \ `Table 1.4-1 Basic parameters of the robot <installation.html#id22>`__\ ).
+This function is to set the running speed of the robot under manual/automatic mode. If the current running mode is automatic, the set speed is the automatic running speed of the robot. If the current running mode is manual, the set speed is the manual running speed of the robot. The setting value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (for standard speed, please refer to  \ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\ ).
 
 .. image:: teaching_pendant_software/049.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.4-23 Velocity scaling settings
+.. centered:: Figure 4.4-23 Velocity scaling settings
 
 After the speed is set successfully, the corresponding speed status bar will change to the set value, and the range of speed value setting is 0~100.
 
@@ -690,7 +690,7 @@ After the speed is set successfully, the corresponding speed status bar will cha
 ..    :width: 3in
 ..    :align: center
 
-.. .. centered:: Figure 3.4-24 Configuration import and export
+.. .. centered:: Figure 4.4-24 Configuration import and export
 
 Control box I/O
 --------------------
@@ -698,13 +698,13 @@ Control box I/O
 I/O settings
 ~~~~~~~~~~~~~~~
 
-Click the "IO" button in the operation area on the left side of the 3D model to enter the IO setting interface, as shown in Figure 3.5-1. In this interface, the digital output, analog output (0-10v) and end tool digital output in the robot control box can be realized. Output, analog output (0-10v) for manual control:
+Click the "IO" button in the operation area on the left side of the 3D model to enter the IO setting interface, as shown in Figure 4.5-1. In this interface, the digital output, analog output (0-10v) and end tool digital output in the robot control box can be realized. Output, analog output (0-10v) for manual control:
 
 .. image:: teaching_pendant_software/051.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.5-1 I/O setting interface
+.. centered:: Figure 4.5-1 I/O setting interface
 
 - DO operation: select the port number, if the DO is low level, the right operation button will display ON, click the button to set the DO to high level.
 
@@ -720,7 +720,7 @@ The status display area on the right side of the 3D model will display the curre
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.5-2 Status display interface
+.. centered:: Figure 4.5-2 Status display interface
 
 I/O filtering
 ~~~~~~~~~~~~~~~~
@@ -731,7 +731,7 @@ Click "Robot Settings" in "Initial Settings" in the left menu bar, and click the
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.5-3 Filter interface
+.. centered:: Figure 4.5-3 Filter interface
 
 .. important:: 
    The I/O filter time range is [0~200], the unit is ms.
@@ -739,9 +739,9 @@ Click "Robot Settings" in "Initial Settings" in the left menu bar, and click the
 I/O configuration
 ~~~~~~~~~~~~~~~~~~
 
-Click "Robot Settings" in "Initial Settings" on the left menu bar, and click the "DI Configuration" and "DO Configuration" submenus respectively to enter the DI and DO configuration interface. Among them, the control box CI0-CI7 and CO0-CO7 are configurable, and the terminal DI0 and DI1 are configurable. In production, when the collaborative robot needs to connect peripherals or stops suddenly due to failure or other factors, it needs to output DO signal to realize sound and light alarm prompt. The input configurable functions are shown in Table 3.5-1 Control Box Input Configurable Functions.
+Click "Robot Settings" in "Initial Settings" on the left menu bar, and click the "DI Configuration" and "DO Configuration" submenus respectively to enter the DI and DO configuration interface. Among them, the control box CI0-CI7 and CO0-CO7 are configurable, and the terminal DI0 and DI1 are configurable. In production, when the collaborative robot needs to connect peripherals or stops suddenly due to failure or other factors, it needs to output DO signal to realize sound and light alarm prompt. The input configurable functions are shown in Table 4.5-1 Control Box Input Configurable Functions.
 
-.. centered:: Table 3.5-1 Control box input configurable functions
+.. centered:: Table 4.5-1 Control box input configurable functions
 
 .. list-table:: 
    :widths: 15 80
@@ -790,9 +790,9 @@ Click "Robot Settings" in "Initial Settings" on the left menu bar, and click the
    * - 19
      - Laser detection signal Y
 
-The output configurable functions are shown in Table 3.5-2 and Table 3.5-3.
+The output configurable functions are shown in Table 4.5-2 and Table 4.5-3.
 
-.. centered:: Table 3.5-2 Control box output configurable function
+.. centered:: Table 4.5-2 Control box output configurable function
 
 .. list-table:: 
    :widths: 15 80
@@ -841,7 +841,7 @@ The output configurable functions are shown in Table 3.5-2 and Table 3.5-3.
    * - 19
      - Automatic manual mode
 
-.. centered:: Table 3.5-3 Terminal input configurable function
+.. centered:: Table 4.5-3 Terminal input configurable function
 
 .. list-table:: 
    :widths: 15 80
@@ -878,7 +878,7 @@ Among them, the default configuration of the control box: CO0 is 1-the robot is 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.5-4 Control box DI and DO configuration
+.. centered:: Figure 4.5-4 Control box DI and DO configuration
 
 The default configuration of terminal DI: DI0 drag teaching, DI1 teaching point recording.
 
@@ -886,7 +886,7 @@ The default configuration of terminal DI: DI0 drag teaching, DI1 teaching point 
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.5-5 Terminal DI configuration
+.. centered:: Figure 4.5-5 Terminal DI configuration
 
 After the configuration is complete, you can view the corresponding output DO status on the I/O page of the control box under the corresponding status. (Note: configured DI and DO cannot appear on the teaching programming page)
 
@@ -901,7 +901,7 @@ Teaching point record
 
 The manual teaching control area is mainly to set the test coordinate system in the teaching mode, and display the angle and coordinate values of each axis of the robot in real time, and can name and save the teaching points.
 
-When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.4-1 Robot Basic Parameters <installation.html#id22>`__\）。
+When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\）。
 
 For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
 
@@ -909,7 +909,7 @@ For the sensor teaching point, select the calibrated sensor type tool, enter the
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-1 Schematic diagram of manual operation area
+.. centered:: Figure 4.6-1 Schematic diagram of manual operation area
 
 .. important:: 
    When using it for the first time, please set a small speed value like 30 to familiarize yourself with the movement of the robot to avoid accidents
@@ -929,7 +929,7 @@ Set the "long press movement threshold" (the maximum distance the robot can run 
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-2 Schematic diagram of single-axis jogging and multi-axis linkage
+.. centered:: Figure 4.6-2 Schematic diagram of single-axis jogging and multi-axis linkage
 
 .. important:: 
    In multi-axis linkage, the setting value of the fifth joint j5 cannot be less than 0.01 degrees. If the expected value is less than 0.01 degrees, you can first set it to 0.011 degrees, and then fine-tune the fifth joint j5 through single-axis jogging.
@@ -943,7 +943,7 @@ In the base coordinate system, you can operate the circular buttons on the left 
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-3 Base jog diagram
+.. centered:: Figure 4.6-3 Base jog diagram
    
 .. important:: 
    The button can be released at any time to stop the robot. If necessary, press the emergency stop button to stop the robot.
@@ -957,7 +957,7 @@ Select the tool coordinate system, you can operate the circular buttons on the l
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-4 Tool Jogging Schematic Diagram
+.. centered:: Figure 4.6-4 Tool Jogging Schematic Diagram
 
 Wobj jog
 ~~~~~~~~~~
@@ -968,7 +968,7 @@ Select workpiece jogging, you can operate the circular buttons on the left and r
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-5 Wobj jogging diagram
+.. centered:: Figure 4.6-5 Wobj jogging diagram
 
 Move
 ~~~~~~~~~~
@@ -979,7 +979,7 @@ Select Move, you can directly input the Cartesian coordinate value, click "Calcu
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-6 Move mobile diagram
+.. centered:: Figure 4.6-6 Move mobile diagram
 
 .. important:: 
    When a given pose cannot be reached, first check whether the Cartesian space pose exceeds the working range of the robot, and then check whether there is a singular pose in the process from the current pose to the target pose, if there is a singular position, adjust the current pose or process insert a new pose in order to avoid singular poses.
@@ -993,7 +993,7 @@ Select Eaxis to move, this function is the jog function of the extension axis, i
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-7 Eaxis Mobile Diagram
+.. centered:: Figure 4.6-7 Eaxis Mobile Diagram
 
 TPD (Teach-in programming)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1008,15 +1008,15 @@ The operation steps of teach programming (TPD) function are as follows:
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-8 TPD track record
+.. centered:: Figure 4.6-8 TPD track record
 
-- **Step3 Check robot mode**：Check whether the robot mode is in manual mode. If not, switch to manual mode. In manual mode, there are two ways to switch to drag teaching mode, one is long press the end button, and the other is interface dragging mode It is recommended to switch the robot from the interface to the drag teaching mode in the TPD record. As shown in Figure 3.6-9;
+- **Step3 Check robot mode**：Check whether the robot mode is in manual mode. If not, switch to manual mode. In manual mode, there are two ways to switch to drag teaching mode, one is long press the end button, and the other is interface dragging mode It is recommended to switch the robot from the interface to the drag teaching mode in the TPD record. As shown in Figure 4.6-9;
 
 .. image:: teaching_pendant_software/067.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.6-9 robot mode
+.. centered:: Figure 4.6-9 robot mode
 
 .. important:: 
    When switching to the drag mode from the interface, first confirm whether the end tool load and the center of mass are set correctly, and whether the friction compensation coefficient is set reasonably, then press and hold the end button to confirm whether the drag is normal, and then switch to the drag mode from the interface after confirming that it is correct.
@@ -1031,7 +1031,7 @@ The operation steps of teach programming (TPD) function are as follows:
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.6-10 TPD programming
+.. centered:: Figure 4.6-10 TPD programming
 
 - **Step7 Trajectory recurrence**：After editing the teaching program, switch to the automatic operation mode, click the "start running" icon on the top of the interface to start running the program, and the robot will start to reproduce the teaching action.
 
@@ -1064,7 +1064,7 @@ Click the command on the left to add a program node to the program tree.When the
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-1 Program tree interface
+.. centered:: Figure 4.7-1 Program tree interface
 
 Click "⇄" to switch modes, and the teaching program text can be changed to the editing state, and the editing area can be expanded and collapsed in the editing state.
 
@@ -1076,7 +1076,7 @@ Click "⇄" to switch modes, and the teaching program text can be changed to the
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-2 Teaching program editing status
+.. centered:: Figure 4.7-2 Teaching program editing status
 
 Click the "Popup/Hide the content on the right side of the current program" button to expand or hide the local teaching points and the backup content of the current program. After the content on the right is expanded, click the icons of "Partial teaching point" and "Current program backup" to display the corresponding content.
 
@@ -1088,7 +1088,7 @@ Click the "Popup/Hide the content on the right side of the current program" butt
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-3 Contents on the right side of the current program
+.. centered:: Figure 4.7-3 Contents on the right side of the current program
 
 
 Tool bar
@@ -1240,7 +1240,7 @@ Logic Command Interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4 Logic Command Interface
+.. centered:: Figure 4.7-4 Logic Command Interface
 
 While command
 ++++++++++++++++
@@ -1253,7 +1253,7 @@ Enter the waiting condition in the input box behind While, input the action comm
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-1 While command interface
+.. centered:: Figure 4.7-4-1 While command interface
 
 if…else command
 ++++++++++++++++
@@ -1266,7 +1266,7 @@ Enter the statement in the input box on the right, and click "Add" and "Apply" a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-2 if…else command interface
+.. centered:: Figure 4.7-4-2 if…else command interface
 
 Goto command
 ++++++++++++++++
@@ -1279,7 +1279,7 @@ The Goto instruction is a jump instruction, enter the statement in the input box
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-2 Goto command interface
+.. centered:: Figure 4.7-4-2 Goto command interface
 
 Wait command
 ++++++++++++++++
@@ -1294,7 +1294,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-42 WaitTime command interface
+.. centered:: Figure 4.7-4-42 WaitTime command interface
 
 "WaitDI" command, that is, single DI waiting, select the IO port number to be waited for, wait state, wait maximum time and wait timeout processing method, and click "Add" and "Apply".
 
@@ -1302,7 +1302,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-5 WaitDI command interface
+.. centered:: Figure 4.7-4-5 WaitDI command interface
 
 "WaitMultiDI" command, that is, multi-DI waiting, first select the multi-DI establishment conditions, then check the DI port and status that need to wait, and finally set the maximum waiting time and waiting timeout processing method, click "Add" and "Apply".
 
@@ -1310,7 +1310,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-6 WaitMultiDI command interface
+.. centered:: Figure 4.7-4-6 WaitMultiDI command interface
 
 "WaitAI" command, select the analog quantity to be waited for, the value, the maximum waiting time and the waiting timeout processing method, and click "Add" and "Apply".
 
@@ -1318,7 +1318,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-7 WaitAI command interface
+.. centered:: Figure 4.7-4-7 WaitAI command interface
 
 Pause command
 ++++++++++++++++
@@ -1331,7 +1331,7 @@ This instruction is a pause instruction. Insert this instruction into the progra
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-8 Pause command interface
+.. centered:: Figure 4.7-4-8 Pause command interface
 
 Dofile command
 ++++++++++++++++
@@ -1344,7 +1344,7 @@ The Dofile command calls the internal program of the controller. When using the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-9 Dofile command interface
+.. centered:: Figure 4.7-4-9 Dofile command interface
 
 Var command
 ++++++++++++++++
@@ -1357,7 +1357,7 @@ This command is a variable system command, which is divided into two parts: Lua 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-4-10 Var command interface
+.. centered:: Figure 4.7-4-10 Var command interface
 
 Motion command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1366,7 +1366,7 @@ Motion command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5 Motion command interface
+.. centered:: Figure 4.7-5 Motion command interface
 
 PTP command
 ++++++++++++++++
@@ -1379,7 +1379,7 @@ You can choose the point to be reached, and the smooth transition time setting c
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-1 PTP command interface
+.. centered:: Figure 4.7-5-1 PTP command interface
 
 Lin command
 ++++++++++++++++
@@ -1392,7 +1392,7 @@ The function of this command is similar to the "PTP" command, but the path of th
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-2 Lin command interface
+.. centered:: Figure 4.7-5-2 Lin command interface
 
 Arc command
 ++++++++++++++++
@@ -1409,7 +1409,7 @@ The "Arc" command is arc movement, which includes two points. The first point is
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-3.7-6 Arc command interface
+.. centered:: Figure 4.7-5-3.7-6 Arc command interface
 
 Circle command
 ++++++++++++++++
@@ -1426,7 +1426,7 @@ The "Circle" command is a full circle movement, including two points. The first 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-4 Circle command interface
+.. centered:: Figure 4.7-5-4 Circle command interface
 
 Spiral command
 ++++++++++++++++
@@ -1440,7 +1440,7 @@ Whether to offset, the offset takes effect on the trajectory of the entire helix
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-5 Spiral command interface
+.. centered:: Figure 4.7-5-5 Spiral command interface
 
 N-Spiral command
 ++++++++++++++++
@@ -1453,7 +1453,7 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-6 N-Spiral command interface
+.. centered:: Figure 4.7-5-6 N-Spiral command interface
 
 Spline command
 ++++++++++++++++
@@ -1466,7 +1466,7 @@ The command is divided into three parts: the start of the spline group, the spli
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-7 Spline command interface
+.. centered:: Figure 4.7-5-7 Spline command interface
 
 N-Spline command
 +++++++++++++++++++
@@ -1480,7 +1480,7 @@ For the given control point and the given waypoint.
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-8 N-Spline command interface
+.. centered:: Figure 4.7-5-8 N-Spline command interface
 
 Weave command
 ++++++++++++++++
@@ -1493,7 +1493,7 @@ The "Weave" command consists of two parts. In the first part, select the weaving
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-9 Weave command interface
+.. centered:: Figure 4.7-5-9 Weave command interface
 
 Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
 
@@ -1501,7 +1501,7 @@ Click "Configuration and Test" to configure the parameters of the weaving weldin
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-10 Weave configuration and testing command interface
+.. centered:: Figure 4.7-5-10 Weave configuration and testing command interface
 
 TPD command
 ++++++++++++++++
@@ -1522,7 +1522,7 @@ When programming, first use the PTP instruction to reach the starting point of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-11 TPD command interface
+.. centered:: Figure 4.7-5-11 TPD command interface
 
 Offset command
 ++++++++++++++++
@@ -1548,7 +1548,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-13 ServoCart command interface
+.. centered:: Figure 4.7-5-13 ServoCart command interface
 
 Absolute pose control program example：
 
@@ -1573,7 +1573,7 @@ Click the "Trajctory" icon to enter the Trajctory command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-14 Trajctory command interface
+.. centered:: Figure 4.7-5-14 Trajctory command interface
 
 TrajctoryJ command
 ++++++++++++++++++++
@@ -1592,7 +1592,7 @@ Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-15 TrajctoryJ command interface
+.. centered:: Figure 4.7-5-15 TrajctoryJ command interface
 
 DMP command
 ++++++++++++++++
@@ -1605,7 +1605,7 @@ DMP is a trajectory imitation learning method that requires prior planning of re
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-16 DMP command interface
+.. centered:: Figure 4.7-5-16 DMP command interface
 
 WPTrsf command
 ++++++++++++++++
@@ -1618,7 +1618,7 @@ Select the workpiece coordinate system to be automatically converted, and click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-5-17 WPTrsf command interface
+.. centered:: Figure 4.7-5-17 WPTrsf command interface
 
 Control command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1627,7 +1627,7 @@ Control command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6 Control command interface
+.. centered:: Figure 4.7-6 Control command interface
 
 IO command
 ++++++++++++++++
@@ -1642,7 +1642,7 @@ The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and get
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-1 SetDO command interface
+.. centered:: Figure 4.7-6-1 SetDO command interface
 
 In the "GetDI/SPLCGetDI" command, select the value of the port number you want to get, whether to block or not, select "block" to get the DI status after the movement stops, and select the "non-blocking" option to get the DI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. After selection, click the "Add" and "Apply" buttons.
 
@@ -1650,7 +1650,7 @@ In the "GetDI/SPLCGetDI" command, select the value of the port number you want t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-2 GetDI command interface
+.. centered:: Figure 4.7-6-2 GetDI command interface
 
 AI command
 ++++++++++++++++
@@ -1665,7 +1665,7 @@ In this instruction, it is divided into two functions: setting analog output (Se
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-3 SetAO command interface
+.. centered:: Figure 4.7-6-3 SetAO command interface
 
 "GetAI/SPLCGetAI" selects the analog input that needs to be obtained, whether to block or not selects "blocked" to obtain the AI state after the movement stops, and selects the "non-blocked" option to obtain the AI state during the last movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
@@ -1673,7 +1673,7 @@ In this instruction, it is divided into two functions: setting analog output (Se
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-4 GetAI command interface
+.. centered:: Figure 4.7-6-4 GetAI command interface
 
 Vir-IO command
 ++++++++++++++++
@@ -1686,7 +1686,7 @@ This command is a virtual IO control command, which can realize the setting of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-5 Vir-IO command interface
+.. centered:: Figure 4.7-6-5 Vir-IO command interface
 
 Aux-IO command
 ++++++++++++++++
@@ -1699,7 +1699,7 @@ Aux-IO is the instruction function for the robot to communicate with the PLC to 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-6 Aux-IO command interface
+.. centered:: Figure 4.7-6-6 Aux-IO command interface
 
 MoveDO command
 ++++++++++++++++
@@ -1712,7 +1712,7 @@ This command realizes the function of outputting DO signal continuously accordin
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-7 MoveDO interface
+.. centered:: Figure 4.7-6-7 MoveDO interface
 
 ToolList command
 +++++++++++++++++++
@@ -1725,7 +1725,7 @@ Select the tool coordinate system name and click "Apply" to add this command to 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-8 ToolList command interface
+.. centered:: Figure 4.7-6-8 ToolList command interface
 
 Mode command
 ++++++++++++++++
@@ -1738,7 +1738,7 @@ This command can switch the robot to manual mode, and is usually added at the en
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-9 Mode command interface
+.. centered:: Figure 4.7-6-9 Mode command interface
 
 Collision command
 ++++++++++++++++++++
@@ -1751,7 +1751,7 @@ This command is used to set the collision level. Through this command, the colli
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-10 Collision command interface
+.. centered:: Figure 4.7-6-10 Collision command interface
 
 Acc command
 ++++++++++++++++
@@ -1764,7 +1764,7 @@ The Acc command is to realize the function that the acceleration of the robot ca
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-6-11 Acc command interface
+.. centered:: Figure 4.7-6-11 Acc command interface
 
 Peripheral Command Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1773,7 +1773,7 @@ Peripheral Command Interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7 Peripheral Command Interface
+.. centered:: Figure 4.7-7 Peripheral Command Interface
 
 Gripper command
 ++++++++++++++++++
@@ -1786,7 +1786,7 @@ In this command, it is divided into the gripper motion control command and the g
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7-1 Gripper command interface
+.. centered:: Figure 4.7-7-1 Gripper command interface
 
 Spray command
 ++++++++++++++++
@@ -1799,7 +1799,7 @@ This command is a spraying-related command, which controls the spray gun to "sta
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7-2 Spray command interface
+.. centered:: Figure 4.7-7-2 Spray command interface
 
 EAxis command
 ++++++++++++++++
@@ -1812,7 +1812,7 @@ This command is used in combination with the PTP command for scenarios using ext
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7-3 EAxis command interface
+.. centered:: Figure 4.7-7-3 EAxis command interface
 
 Convey command
 ++++++++++++++++
@@ -1825,7 +1825,7 @@ This command includes four commands: position real-time detection, IO real-time 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-7-4 Conveyor command interface
+.. centered:: Figure 4.7-7-4 Conveyor command interface
 
 Welding command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1834,7 +1834,7 @@ Welding command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8 Welding command interface 
+.. centered:: Figure 4.7-8 Welding command interface 
 
 Weld command
 ++++++++++++++++
@@ -1847,7 +1847,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-1 Weld command interface
+.. centered:: Figure 4.7-8-1 Weld command interface
 
 Segment command
 ++++++++++++++++
@@ -1860,7 +1860,7 @@ This instruction is a special instruction for welding, mainly used in the interm
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-2 Segment command interface
+.. centered:: Figure 4.7-8-2 Segment command interface
 
 Laser command
 ++++++++++++++++
@@ -1873,7 +1873,7 @@ This command includes three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-3 Laser command interface
+.. centered:: Figure 4.7-8-3 Laser command interface
 
 LT-Rec command
 ++++++++++++++++
@@ -1888,7 +1888,7 @@ Realize the adjustable function of laser tracking and reproduction speed, so tha
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-4 LT-Rec command interface
+.. centered:: Figure 4.7-8-4 LT-Rec command interface
 
 W-Search command
 ++++++++++++++++
@@ -1901,7 +1901,7 @@ This command is a welding wire positioning command, including three commands of 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-5 W-Search command interface
+.. centered:: Figure 4.7-8-5 W-Search command interface
 
 In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
 
@@ -1909,7 +1909,7 @@ In writing a program, usually first set the start command of the search, and the
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-6 W-Search example(1D)
+.. centered:: Figure 4.7-8-6 W-Search example(1D)
 
 Weld-Trc command
 ++++++++++++++++++
@@ -1922,7 +1922,7 @@ This command realizes the robot seam tracking and uses the deviation detection o
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-7 Weld-Trc command interface
+.. centered:: Figure 4.7-8-7 Weld-Trc command interface
 
 Adjust command
 ++++++++++++++++
@@ -1935,7 +1935,7 @@ This command adaptively adjusts the posture of the welding torch for the scene o
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-8-8 Adjust command interface
+.. centered:: Figure 4.7-8-8 Adjust command interface
 
 Force control command interface 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1944,7 +1944,7 @@ Force control command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-9 Force control command interface
+.. centered:: Figure 4.7-9 Force control command interface
 
 F/T command
 ++++++++++++++++
@@ -1957,7 +1957,7 @@ The instruction includes FT_Guard (collision detection), FT_Control (constant fo
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-9-1 F/T command interface
+.. centered:: Figure 4.7-9-1 F/T command interface
 
 Torque command
 ++++++++++++++++
@@ -1970,7 +1970,7 @@ This command is a torque recording command, which realizes the real-time torque 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-9-2 Torque command interface
+.. centered:: Figure 4.7-9-2 Torque command interface
 
 Visual command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1979,7 +1979,7 @@ Visual command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-10 Visual command interface
+.. centered:: Figure 4.7-10 Visual command interface
 
 3D command
 ++++++++++++++++
@@ -1992,7 +1992,7 @@ This command generates commands for 3D vision program examples. Users can refer 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-10-1 3D command interface
+.. centered:: Figure 4.7-10-1 3D command interface
 
 Palletizing command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2001,7 +2001,7 @@ Palletizing command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-11 Palletizing command interface
+.. centered:: Figure 4.7-11 Palletizing command interface
 
 Pallet command
 ++++++++++++++++
@@ -2014,7 +2014,7 @@ This instruction generates instructions for the palletizing program, which is co
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-11-1 Pallet command interface 
+.. centered:: Figure 4.7-11-1 Pallet command interface 
 
 Communication command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2023,7 +2023,7 @@ Communication command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-12 Communication command interface
+.. centered:: Figure 4.7-12 Communication command interface
 
 Modbus command
 ++++++++++++++++
@@ -2063,7 +2063,7 @@ XML-RPC is a remote procedure call method for transferring data between programs
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-12-1 Xmlrpc command interface
+.. centered:: Figure 4.7-12-1 Xmlrpc command interface
 
 .. important:: 
    1) The controller acts as a client to connect to the remote custom port;
@@ -2105,7 +2105,7 @@ Auxiliary command interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-13 Auxiliary command interface
+.. centered:: Figure 4.7-13 Auxiliary command interface
 
 Thread command
 ++++++++++++++++
@@ -2118,7 +2118,7 @@ The Thread command is an auxiliary thread function. Users can define an auxiliar
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-13-1 Thread program example
+.. centered:: Figure 4.7-13-1 Thread program example
 
 Function command
 ++++++++++++++++
@@ -2131,7 +2131,7 @@ This command is to call the function interface function, provide the robot inter
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-13-2 Function command interface
+.. centered:: Figure 4.7-13-2 Function command interface
 
 Teaching program encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2143,7 +2143,7 @@ All teaching programs are displayed and set in the form of program encryption in
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-55 Demonstration of teaching procedures
+.. centered:: Figure 4.7-55 Demonstration of teaching procedures
 
 When the program is a first-level encryption state, after opening the program: the corresponding "export", "preservation", "existing as", "copy", "cut", "delete", "delete", "delete", "delete", "delete" The buttons such as "upward", "downward" and "editing mode switching" will be grayed.
 Click the icon to be invalid and it will prompt that the current program is in an encrypted state. The program "renamed" icon will hide. Add instruction bars and program editing areas are invisible and prompts to be locked in first-level encryption.
@@ -2152,7 +2152,7 @@ Click the icon to be invalid and it will prompt that the current program is in a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-56 Program first-level encryption interface
+.. centered:: Figure 4.7-56 Program first-level encryption interface
 
 When the program is second-level encryption, after opening the program on the "Program Demonstration" page: the corresponding "savings", "copy", "shear", "paste", "delete", "upper", "upper" in the operating bar The buttons such as the "Move" will turn ashes.
 Click the icon to be invalid and it will prompt that the current program is encrypted. The program "renamed" icon will hide. The adding instruction bar is not visible and prompts to be locked in a secondary encryption. The program editing area can browse the reading program normally.
@@ -2161,7 +2161,7 @@ Click the icon to be invalid and it will prompt that the current program is encr
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-57 Program second-level encryption interface
+.. centered:: Figure 4.7-57 Program second-level encryption interface
 
 Both first -level encryption and second -level encryption can use the "export" function. Verification operations will be performed when importing.
 If the program of the same name is an encrypted file, the import operation will be interrupted and indicated that the coverage of the encryption program cannot be introduced.
@@ -2170,7 +2170,7 @@ If the program of the same name is an encrypted file, the import operation will 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-58 Program import
+.. centered:: Figure 4.7-58 Program import
 
 Local teaching point
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2183,7 +2183,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-59 Add local teaching points
+.. centered:: Figure 4.7-59 Add local teaching points
 
 **Delete**: Click the serial number column of the table to select the local teaching point to be deleted, and then click the "Delete" icon in the upper right corner of the title of the local teaching point to delete the local teaching point.
 
@@ -2191,7 +2191,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-60 Delete local teaching point
+.. centered:: Figure 4.7-60 Delete local teaching point
 
 **Run**: Click the "Start Running" icon in the data operation bar of the local teaching point table to perform a single-point operation of the local teaching point and move the robot to the position of this point.
 
@@ -2199,7 +2199,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-61 Run local teaching point
+.. centered:: Figure 4.7-61 Run local teaching point
 
 **Details**: Click the "Details" icon in the data operation bar of the local teaching point table to view the details of the local teaching point.
 
@@ -2207,7 +2207,7 @@ The local teaching point is bound to the current teaching program. When adding a
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-62 Local teaching point details
+.. centered:: Figure 4.7-62 Local teaching point details
 
 Current program backup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2219,7 +2219,7 @@ Users can view the corresponding program backup content by selecting a date, and
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-63 Current program backup
+.. centered:: Figure 4.7-63 Current program backup
 
 Graphical programming
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2231,7 +2231,7 @@ Through the use of graphic programming, it can be simple, easy to understand, ea
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-64 Graphical programming interface
+.. centered:: Figure 4.7-64 Graphical programming interface
 
 The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows
 
@@ -2239,7 +2239,7 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-65 Graphical programming page layout overall design
+.. centered:: Figure 4.7-65 Graphical programming page layout overall design
 
 **Operation bar**：The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
 
@@ -2255,7 +2255,7 @@ Motion graphic programming commands include  \ `PTP <teaching_pendant_software.h
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-66 Motion Graphical Programming
+.. centered:: Figure 4.7-66 Motion Graphical Programming
 
 Control graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++
@@ -2265,7 +2265,7 @@ Control graphical programming commands include \ `Wait <teaching_pendant_softwar
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-67 Control graphical programming commands
+.. centered:: Figure 4.7-67 Control graphical programming commands
 
 Advanced graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -2275,7 +2275,7 @@ Advanced graphical programming commands include \ `dofile <teaching_pendant_soft
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-68 Advanced graphical programming commands
+.. centered:: Figure 4.7-68 Advanced graphical programming commands
 
 Example of using graphical programming commands
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2287,7 +2287,7 @@ For example, if you select PTP and Lin motion instructions and control commands 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-69 Example of using graphical programming commands
+.. centered:: Figure 4.7-69 Example of using graphical programming commands
 
 After the graphical programming instruction splicing and parameter filling is completed, fill in the name of the workspace, and click the "Save" icon to save the program. Select the "Workspace" that has been written, click Start Run, and you can execute this program.
 
@@ -2300,7 +2300,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-70 Fold instruction code block
+.. centered:: Figure 4.7-70 Fold instruction code block
 
 - 1.Write a code block instruction, add a folding instruction code block in the outer layer, and write the remarks of the instruction in the input box.
 
@@ -2308,7 +2308,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-71 Folding instruction rendering
+.. centered:: Figure 4.7-71 Folding instruction rendering
 
 - 2.Right-click "Collapse Block" in the right-click operation bar, this section of instruction code block is folded, the code block is folded into one line and displayed, and the program can be executed correctly when folded.
 
@@ -2316,7 +2316,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-72 Effect picture after folding
+.. centered:: Figure 4.7-72 Effect picture after folding
 
 3.Roll the mouse to realize the page zoom function, the specific effect is as follows:
 
@@ -2324,7 +2324,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-73 Fold page zoom function effect diagram
+.. centered:: Figure 4.7-73 Fold page zoom function effect diagram
 
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2335,7 +2335,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-74 Teaching management interface
+.. centered:: Figure 4.7-74 Teaching management interface
 
 **Details**: Click the "Details" button to view the details of the teaching point.
 
@@ -2343,7 +2343,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-75 Teach point details
+.. centered:: Figure 4.7-75 Teach point details
 
 **Run**: Click the "Start Run" button to perform a single-point operation of the local teaching point, and move the robot to the position of this point.
 
@@ -2351,7 +2351,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-76 Run teach point
+.. centered:: Figure 4.7-76 Run teach point
 
 .. important:: 
    The modified values of the teaching points x, y, z, rx, ry, rz should not exceed the working range of the robot.
@@ -2369,18 +2369,18 @@ Find relevant log information according to the type.
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.8-1 System log interface
+.. centered:: Figure 4.8-1 System log interface
 
 Status query
 ~~~~~~~~~~~~~
 
-Click the "Status Query" menu in the left menu bar "Status Information" to enter the status query interface, as shown in Figure 3.8-2 Status Query.
+Click the "Status Query" menu in the left menu bar "Status Information" to enter the status query interface, as shown in Figure 4.8-2 Status Query.
 
 .. image:: teaching_pendant_software/142.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.8-2 Status query
+.. centered:: Figure 4.8-2 Status query
 
 Status query operation steps:
 
@@ -2390,7 +2390,7 @@ Status query operation steps:
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.8-3 Figure settings
+.. centered:: Figure 4.8-3 Figure settings
 
 **Step2**：The trigger function does not need to be set temporarily, and the data can be queried by clicking the "Query" button.
 
@@ -2406,7 +2406,7 @@ Auxiliary application
 ..    :width: 3in
 ..    :align: center
 
-.. .. centered:: Figure 3.9-1 Schematic diagram of robot calibration
+.. .. centered:: Figure 4.9-1 Schematic diagram of robot calibration
 
 .. **Zero setting**：When the robot leaves the factory, it will preset an initial posture, in which the angle of each joint is 0. When the zero point is set, the robot pose corresponds to when each joint of the robot moves to a specific position. The zero point is the benchmark of the robot coordinate system. Without the zero point, the robot cannot judge its own position. Therefore, in order to obtain the highest possible absolute positioning accuracy, it is necessary to calibrate the zero point of the robot.
 
@@ -2438,7 +2438,7 @@ After the download of the background file is completed, the interface displays "
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-2 System Upgrade
+.. centered:: Figure 4.9-2 System Upgrade
 
 .. important:: 
    The name of the software upgrade package is determined ``software.tar.gz``. If the name of the upgrade package is inconsistent with it, the upgrade will fail. Just change it to the determined name of the upgrade package.
@@ -2450,7 +2450,7 @@ After the download of the background file is completed, the interface displays "
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-3 Firmware upgrade
+.. centered:: Figure 4.9-3 Firmware upgrade
 
 **Slave configuration file upgrade**：After the robot is disabled, upload the upgrade file, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
 
@@ -2458,7 +2458,7 @@ After the download of the background file is completed, the interface displays "
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-4 Slave configuration file upgrade
+.. centered:: Figure 4.9-4 Slave configuration file upgrade
 
 Data backup
 ~~~~~~~~~~~~~
@@ -2471,7 +2471,7 @@ The backup package data includes tool coordinate system data, system configurati
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-5 Data backup interface
+.. centered:: Figure 4.9-5 Data backup interface
 
 10s data record
 ~~~~~~~~~~~~~~~~~~
@@ -2484,7 +2484,7 @@ First, select the record type, which is divided into default parameter record an
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-6 10s data record
+.. centered:: Figure 4.9-6 10s data record
 
 Teach point configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2497,7 +2497,7 @@ Before using the button box or other IO signals to record the teaching point fun
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-7 Teach point configuration
+.. centered:: Figure 4.9-7 Teach point configuration
 
 Matrix move
 ~~~~~~~~~~~~~
@@ -2510,7 +2510,7 @@ This function controls the regular movement of the manipulator by setting the th
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-8 Matrix move
+.. centered:: Figure 4.9-8 Matrix move
 
 The fourth step is to teach three points according to the path. The first point is the starting point of the first row, and the arm posture is determined by this point during the whole movement process. The second point is the end point of the first row, and the third point is the end point of the last row. The fifth step is to set the number of rows and columns. The sixth step is to set the number of layers and the height of each layer. The last step is to name the matrix motion program file, and a matrix movement program is generated successfully.
 
@@ -2518,7 +2518,7 @@ The fourth step is to teach three points according to the path. The first point 
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-9 Matrix move
+.. centered:: Figure 4.9-9 Matrix move
 
 Work origin
 ~~~~~~~~~~~~~~~~~
@@ -2531,7 +2531,7 @@ This page displays the name and joint position information of the work origin. T
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-10 Work origin
+.. centered:: Figure 4.9-10 Work origin
 
 Interference zone configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2544,7 +2544,7 @@ First of all, we need to configure the interference mode and the operation of en
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-11 Interference zone configuration
+.. centered:: Figure 4.9-11 Interference zone configuration
 
 Next, set the configuration of dragging into the interference area. Users can set the strategy after entering the interference area in drag mode according to their needs, without restricting dragging, impedance callback and switching back to manual mode.
 
@@ -2552,7 +2552,7 @@ Next, set the configuration of dragging into the interference area. Users can se
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-12 Interference area drag configuration
+.. centered:: Figure 4.9-12 Interference area drag configuration
 
 To select axis interference, you need to configure the parameters of axis interference. The detection method is divided into two types: "command position" and "feedback position". The interference area mode is divided into two types: "interference within the range" and "interference outside the range". Next Set the range of each joint and whether each joint range is enabled, you can enter the value, or you can record the current position of the robot through the "Robot Teaching" button, and finally click Apply.
 
@@ -2560,7 +2560,7 @@ To select axis interference, you need to configure the parameters of axis interf
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-13 Axis interference configuration
+.. centered:: Figure 4.9-13 Axis interference configuration
 
 To choose cube interference, you need to configure the parameters of cube interference. The detection method is divided into two types: "command position" and "feedback position". The interference area mode is divided into "interference within range" and "interference outside range". The system is divided into "base coordinates" and "workpiece coordinates", which can be selected and set according to actual use. Next, set the range setting. The range setting is divided into two methods. First, look at the first method "two-point method", which is composed of two diagonal vertices of the cube. We can record the position through input or robot teaching. Finally click Apply.
 
@@ -2568,7 +2568,7 @@ To choose cube interference, you need to configure the parameters of cube interf
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-14 Cube Interferometric Configuration
+.. centered:: Figure 4.9-14 Cube Interferometric Configuration
 
 Next, look at the second method "center point + side length", that is, the center point of the cube and the side length of the cube form an interference area, and we can record the position through input or robot teaching. Finally click Apply.
 
@@ -2576,7 +2576,7 @@ Next, look at the second method "center point + side length", that is, the cente
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-15 Cube Interferometric Configuration
+.. centered:: Figure 4.9-15 Cube Interferometric Configuration
 
 Terminal LED configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2589,7 +2589,7 @@ The configurable LED colors are green, blue and white cyan. Users can configure 
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-16 Terminal LED configuration
+.. centered:: Figure 4.9-16 Terminal LED configuration
 
 Peripheral protocol
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2602,7 +2602,7 @@ This page is the configuration page for the peripheral protocol, and the user ca
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-17 Peripheral Protocol Configuration
+.. centered:: Figure 4.9-17 Peripheral Protocol Configuration
 
 Add a lua interface for reading and writing registers based on Modbus-rtu communication in the program teaching, input register address 0x1000, the number of registers is 50, a total of 100 bytes of data content; hold the register address 0x2000, the number of registers is 50, a total of 100 bytes data content.
 
@@ -2644,7 +2644,7 @@ Program sample screenshot:
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-18 Modbus-rtu communication lua program example
+.. centered:: Figure 4.9-18 Modbus-rtu communication lua program example
 
 Main program configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2657,7 +2657,7 @@ The configuration of the main program can be used in conjunction with the DI con
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-19 Main program configuration
+.. centered:: Figure 4.9-19 Main program configuration
 
 Drag lock
 ~~~~~~~~~~~~
@@ -2670,7 +2670,7 @@ For drag teaching, the function of locking degrees of freedom is added. When the
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-20 Drag teach lock configuration
+.. centered:: Figure 4.9-20 Drag teach lock configuration
 
 Welding Expert Library
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2685,7 +2685,7 @@ Step 1, whether to use the extended axis, if the extended axis is used, the rela
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-21 Extended axis configuration
+.. centered:: Figure 4.9-21 Extended axis configuration
 
 Step 2: Calibrate the starting point, the starting point safety point, the end point, and the ending point safety point. If the extended axis is selected in the first step, the extended axis movement function will be loaded to cooperate with the calibration of relevant points.
 
@@ -2693,7 +2693,7 @@ Step 2: Calibrate the starting point, the starting point safety point, the end p
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-22 Calibration related points
+.. centered:: Figure 4.9-22 Calibration related points
 
 Step 3, choose whether laser is needed, if yes, edit the parameters of the laser positioning command.
 
@@ -2701,7 +2701,7 @@ Step 3, choose whether laser is needed, if yes, edit the parameters of the laser
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-23 Laser positioning configuration
+.. centered:: Figure 4.9-23 Laser positioning configuration
 
 Step 4: Select whether weaving welding is required, and if weaving welding is required, you need to edit the relevant parameters of weaving welding.
 
@@ -2709,7 +2709,7 @@ Step 4: Select whether weaving welding is required, and if weaving welding is re
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-24 Weaving configuration
+.. centered:: Figure 4.9-24 Weaving configuration
 
 Step 5, name the program, and automatically open the program in the program teaching interface.
 
@@ -2717,7 +2717,7 @@ Step 5, name the program, and automatically open the program in the program teac
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-25 Save program
+.. centered:: Figure 4.9-25 Save program
 
 Click "Arc Welding" under "Weldment Shape" to enter the arc welding guidance interface. On the basis of the configuration of the basic settings of the robot, we can quickly generate a welding teaching program through two simple steps. It mainly includes the following two steps.
 
@@ -2727,7 +2727,7 @@ Step 1: Calibrate the starting point, the starting point safety point, the arc t
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-26 Calibration point
+.. centered:: Figure 4.9-26 Calibration point
 
 Step 2: Name the program and automatically open the program in the program teaching interface.
 
@@ -2735,7 +2735,7 @@ Step 2: Name the program and automatically open the program in the program teach
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-27 Save program
+.. centered:: Figure 4.9-27 Save program
 
 Click "Multi-layer multi-pass welding" under "Weldment shape" to enter the multi-layer multi-pass welding guidance interface. After completing the configuration of various robot basic settings, we can quickly generate a welding teaching program through four simple steps. It mainly includes the following five steps.
 
@@ -2745,7 +2745,7 @@ Step 1. Set the first group of points according to the prompts, namely welding p
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-28 First set of point settings
+.. centered:: Figure 4.9-28 First set of point settings
 
 Step 2, the second group of point settings, you can set the type of path point, support straight line and arc path, including welding point, X+ point and Z+ point.
 
@@ -2753,7 +2753,7 @@ Step 2, the second group of point settings, you can set the type of path point, 
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-29 Second set of point settings
+.. centered:: Figure 4.9-29 Second set of point settings
 
 Step 3: After setting all the group points, click "Finish" to enter the function page of each weld bead offset setting function, and set the offset of the required weld bead in turn. The interface is shown in the figure below.
 
@@ -2761,7 +2761,7 @@ Step 3: After setting all the group points, click "Finish" to enter the function
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-30 Weld Bead Offset Setting
+.. centered:: Figure 4.9-30 Weld Bead Offset Setting
 
 Step 4: After all the required weld bead parameters are set, click "Finish" to jump to the program generation page, enter the file name, and the multi-layer multi-pass welding program can be generated, and then the user can open it in the program teaching The program is debugged, and the interface is shown in the figure below.
 
@@ -2769,7 +2769,7 @@ Step 4: After all the required weld bead parameters are set, click "Finish" to j
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-31 Save program
+.. centered:: Figure 4.9-31 Save program
 
 Safe speed setting
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2786,7 +2786,7 @@ The joint speed and terminal TCP speed can be configured in the first-level and 
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-32 Safe speed setting
+.. centered:: Figure 4.9-32 Safe speed setting
 
 Security Wall Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2799,7 +2799,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-33 Security Wall Configuration
+.. centered:: Figure 4.9-33 Security Wall Configuration
 
 -  **Security Wall Reference Point Configuration**：After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
 
@@ -2810,7 +2810,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-34 Safe range reference point setting
+.. centered:: Figure 4.9-34 Safe range reference point setting
 
 -  Apply effects: The successfully configured security wall is enabled. Drag the robot, if the TCP at the end of the robot is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
 
@@ -2818,7 +2818,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-35 The effect picture after the security range is set successfully
+.. centered:: Figure 4.9-35 The effect picture after the security range is set successfully
 
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
@@ -2833,7 +2833,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9-36 Security daemon
+.. centered:: Figure 4.9-36 Security daemon
 
 System settings
 -----------------
@@ -2860,7 +2860,7 @@ Network settings
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-1 Schematic diagram of network settings
+.. centered:: Figure 4.10-1 Schematic diagram of network settings
 
 -  **Set ethernet**：Enter the IP of the network card that needs to communicate, subnet mask (linked with IP, automatically filled), default gateway, and DNS server. The factory default IP of network card 0 network port: 192.168.57.2, the factory default IP of network card 1 network port: 192.168.58.2.
 
@@ -2884,7 +2884,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-2 User Management
+.. centered:: Figure 4.10-2 User Management
 
 -  **Add users**：Click the "Add" button, enter the job number, name, password and select the function. 
   
@@ -2895,7 +2895,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-3 Add users
+.. centered:: Figure 4.10-3 Add users
   
 -  **Edit users**：When there is a user list, click the "Edit" button on the right, the job number and name cannot be modified, but the password and function can be modified, and the password also needs to be uniquely verified.
   
@@ -2903,7 +2903,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-4 Edit users
+.. centered:: Figure 4.10-4 Edit users
 
 -  **Delete users**：The deletion methods are divided into single deletion and batch deletion. 
  
@@ -2918,7 +2918,7 @@ User management page, used to save user information, you can add user ID, functi
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-5 Delete users
+.. centered:: Figure 4.10-5 Delete users
 
 
 Authority management
@@ -2931,14 +2931,14 @@ Authority management
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-6 Authority management
+.. centered:: Figure 4.10-6 Authority management
 
 There are six functions by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, administrators have no function restrictions, the specific default permissions are shown in the following table:
 
 .. important:: 
    Default permissions can be modified
 
-.. centered:: Table 3.10-1 Permission details
+.. centered:: Table 4.10-1 Permission details
 
 .. image:: teaching_pendant_software/authority_table.png
    :width: 6in
@@ -2950,7 +2950,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-7 Add function
+.. centered:: Figure 4.10-7 Add function
 
 -  **Edit function name and description**: Click the "Edit" icon in the table operation bar to modify the function name and function description of the current function. After the modification is completed, click the "Save" button below to confirm the modification.
 
@@ -2958,7 +2958,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-8 Edit function name and description
+.. centered:: Figure 4.10-8 Edit function name and description
 
 -  **Set function permissions**: Click the "Settings" icon in the table operation bar to set the permissions of the current function. After setting, click the "Save" button below to confirm the settings.
 
@@ -2970,7 +2970,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-9 Set function permissions
+.. centered:: Figure 4.10-9 Set function permissions
 
 -  **Delete function**: Click the "Delete" icon in the table operation bar, firstly, it will check whether the current function is used by a user, if no user uses it, the current function can be deleted, otherwise it cannot be deleted.
 
@@ -2978,7 +2978,7 @@ There are six functions by default, administrators have no function restrictions
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-10 Delete function
+.. centered:: Figure 4.10-10 Delete function
 
 Import/Export
 ++++++++++++++++
@@ -2987,7 +2987,7 @@ Import/Export
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-11 Account settings import/export
+.. centered:: Figure 4.10-11 Account settings import/export
 
 -  **Import**: Click the "Import" button to import user management and rights management data in batches.
 
@@ -3002,7 +3002,7 @@ Click About on the secondary menu bar to enter the About interface. This page sh
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-12 About Schematics
+.. centered:: Figure 4.10-12 About Schematics
 
 Custom information
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3014,7 +3014,7 @@ This page can upload user information packages, custom robot models, and setting
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-13 Custom information schematic diagram
+.. centered:: Figure 4.10-13 Custom information schematic diagram
 
 Parameter range configuration
 ++++++++++++++++++++++++++++++++
@@ -3034,4 +3034,4 @@ There are two ways to set parameters: slider dragging and manual input.
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.10-14 Schematic diagram of parameter range configuration
+.. centered:: Figure 4.10-14 Schematic diagram of parameter range configuration

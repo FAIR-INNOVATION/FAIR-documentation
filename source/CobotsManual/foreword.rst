@@ -67,4 +67,3 @@ Follow the relevant standards
 
    * - ISO/TS 15066: 2016
      - Safety requirements for collaborative industrial robot  Robots and robotic devices —Collaborative robots
-

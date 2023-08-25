@@ -16,7 +16,7 @@ Gripper program teaching steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.1-1 Gripper Jaw Configuration
+.. centered:: Figure 5.1-1 Gripper Jaw Configuration
 
 .. important:: 
 	The corresponding gripper should be inactive before clicking Clear Configuration.
@@ -27,7 +27,7 @@ Gripper program teaching steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.1-2 Gripper configuration information
+.. centered:: Figure 5.1-2 Gripper configuration information
 
 **Step3**：Select the configured gripper and click the "Reset" button. After the page pops up and the command is successfully sent, click the "Activate" button to check the activation status in the gripper information table to determine whether the activation is successful;
 
@@ -40,7 +40,7 @@ Gripper program teaching steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.1-3 Gripper Command Edit
+.. centered:: Figure 5.1-3 Gripper Command Edit
 
 Gripper program teaching
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,7 +91,7 @@ Spray gun peripheral configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.2-1 Gun Configuration
+.. centered:: Figure 5.2-1 Gun Configuration
 
 **Step3**：Select the "spray" command on the program teaching command interface. According to the specific program teaching requirements, add and apply four commands "start spraying", "stop spraying", "start cleaning the gun" and "stop cleaning the gun" in the corresponding places.
 
@@ -99,7 +99,7 @@ Spray gun peripheral configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.2-2 Spray Gun Command Editing
+.. centered:: Figure 5.2-2 Spray Gun Command Editing
 
 Spray program teaching
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,7 +156,7 @@ Peripheral configuration of welding machine
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.3-1 Welding machine configuration
+.. centered:: Figure 5.3-1 Welding machine configuration
 
 **Step3**：Select the "Weld" command on the program teaching command interface. According to the specific program teaching requirements, add and apply the "arc start" and "arc end" instructions in the corresponding places.
 
@@ -164,7 +164,7 @@ Peripheral configuration of welding machine
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.3-2 Welding Machine Command Editing
+.. centered:: Figure 5.3-2 Welding Machine Command Editing
 
 Welding program teaching
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -201,7 +201,7 @@ Sensor Peripheral Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.4-1 Laser tracking sensor IP configuration
+.. centered:: Figure 5.4-1 Laser tracking sensor IP configuration
 
 .. important:: 
 	1. Before using the sensor function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is usually used with sensors.
@@ -215,7 +215,7 @@ In the tool coordinate system setting function, we calibrate the sensor type too
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.4-2 Reference Point Configuration - Six Point Method
+.. centered:: Figure 5.4-2 Reference Point Configuration - Six Point Method
 
 **Eight point method**：In the tool coordinate system setting function, we calibrate the sensor type tool, use the eight-point method to configure the sensor coordinate system, select the eight-point method, move the sensor laser line to coincide with the calibration line on the calibration board, and keep the sensor and the calibration line as close as possible Closer distance and the calibration point is recognized, record point 1, move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 2, move about 20mm in the -x/+x direction, and adjust the robot so that the laser Recognize the calibration point, record point 3, move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 4, move about 5mm in the -rx direction, adjust the robot so that the laser recognizes the calibration point, and record the point 5. Move about 5mm in the -ry direction, adjust the robot so that the laser recognizes the calibration point, record point 6, move about 5mm in the -rz direction, adjust the robot so that the sensor recognizes the calibration point, record point 7, move about 5mm in the -rz direction, and adjust the robot so that Laser recognition to the calibration point, record point 8. Click Calculate to get the sensor pose, click Apply to complete.
 
@@ -223,7 +223,7 @@ In the tool coordinate system setting function, we calibrate the sensor type too
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.4-3 Reference Point Configuration - Eight Points Method
+.. centered:: Figure 5.4-3 Reference Point Configuration - Eight Points Method
 
 **Five point method**：In the tool coordinate system setting function, we calibrate the sensor type tool and use the five-point method to configure the sensor coordinate system. First, determine a fixed point, align the end of the tool with this point, record point 1, and then adjust the posture of the robot so that the laser recognizes Record fixed points, respectively record points 2 to 5, and note that the attitude change needs to be as large as possible. Click Calculate to get the sensor pose, click Apply to complete.
 
@@ -231,7 +231,7 @@ In the tool coordinate system setting function, we calibrate the sensor type too
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.4-4 Reference Point Configuration - Five Points Method
+.. centered:: Figure 5.4-4 Reference Point Configuration - Five Points Method
 
 Laser sensor tracking function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -242,7 +242,7 @@ Command description: Select the "Laser" command on the program teaching command 
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.4-5 Laser Tracking Command Editing
+.. centered:: Figure 5.4-5 Laser Tracking Command Editing
 
 program example：
 
@@ -295,7 +295,7 @@ Command description: Select the "LT-Rec" command on the program teaching command
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.4-6 Editing of track reappearance command
+.. centered:: Figure 5.4-6 Editing of track reappearance command
 
 Program example:
 
@@ -355,7 +355,7 @@ Extended Axis Peripheral Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.5-1 Extended axis parameter configuration
+.. centered:: Figure 5.5-1 Extended axis parameter configuration
 	
 .. important:: 
 	Before using the extended axis function, it is necessary to establish the corresponding extended axis coordinate system, and apply the established tool coordinate system during program teaching. The extended axis function is mainly used in conjunction with the welder function and the laser tracking sensor function.
@@ -366,7 +366,7 @@ Extended Axis Peripheral Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.5-2 Extended axis zero point setting
+.. centered:: Figure 5.5-2 Extended axis zero point setting
 
 **Step3**：Select the number of the extended axis whose parameters have been configured, click "Servo Enable", set the running speed, acceleration and the maximum distance of a single run, and test the extended axis for forward rotation and reverse rotation.
 
@@ -374,7 +374,7 @@ Extended Axis Peripheral Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.5-3 Extended Axis Test
+.. centered:: Figure 5.5-3 Extended Axis Test
 
 **Step4**：The extension axis is usually used in conjunction with the laser sensor. At this time, the laser sensor is usually installed externally. The sensor reference point configuration needs to be calibrated by the three-point method instead of the six-point method used before. Align the center of the tool with the middle point of the bottom of the right cross-section (the side close to the camera), set point 1, align the center of the tool with the middle point of the bottom of the other cross-section, which is the middle point of the left cross-section, set point 2, and set the center of the tool with Move the point to the middle point of the upper edge of the cross-section on the right side of the sensor, set point 3, calculate and save, and click Apply to complete the three-point calibration.
 
@@ -382,7 +382,7 @@ Extended Axis Peripheral Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.5-4 Three-point sensor calibration
+.. centered:: Figure 5.5-4 Three-point sensor calibration
 
 **Step5**：Select the "EAxis" command on the program teaching command interface. According to the specific program teaching requirements, add instructions in the corresponding places.
 
@@ -390,7 +390,7 @@ Extended Axis Peripheral Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.5-5 Extended axis command editing
+.. centered:: Figure 5.5-5 Extended axis command editing
 
 Extended axis with laser tracking welding teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -451,7 +451,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.6-1 Conveyor configuration
+.. centered:: Figure 5.6-1 Conveyor configuration
 
 **Step2**：Next, set the grab point compensation value, which is the compensation distance in the three directions of X, Y, and Z, which can be set according to the actual situation during the debugging process.
 
@@ -459,7 +459,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.6-2 Conveyor Grab Point Compensation Configuration
+.. centered:: Figure 5.6-2 Conveyor Grab Point Compensation Configuration
 
 **Step3**：Turn on the conveyor belt, move the calibrated object to the defined point A, and stop the conveyor belt. Move the robot, align the sharp point of the calibration rod at the end of the robot with the sharp point of the object to be calibrated, click the start point A button, a dialog box will pop up, displaying the current encoder value and robot pose, and click Calibrate to complete the start point A calibration.
 
@@ -467,7 +467,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.6-3 Starting Point A Configuration
+.. centered:: Figure 5.6-3 Starting Point A Configuration
 
 **Step4**：Click the reference point button to enter the reference point calibration. When recording the reference point, record the height and attitude of the robot when it is grasping. Every time it tracks, it will track and grasp with the height and attitude area of the recorded reference point. It can be different from the AB point. Click Calibrate to complete the reference point calibration.
 
@@ -475,7 +475,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.6-4 Reference point configuration
+.. centered:: Figure 5.6-4 Reference point configuration
 
 **Step5**：Turn on the conveyor belt, move the calibrated object to the defined point B, and stop the conveyor belt. Move the robot, align the sharp point of the calibration rod at the end of the robot with the sharp point of the object to be calibrated, click the end point B button, a dialog box will pop up, displaying the current encoder value and robot pose, click the calibration to complete the end point B calibration.
 
@@ -483,7 +483,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.6-5 Terminal B configuration
+.. centered:: Figure 5.6-5 Terminal B configuration
 
 Conveyor belt tracking teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -550,7 +550,7 @@ Attitude adaptive configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.7-1 Attitude Adjustment Configuration
+.. centered:: Figure 5.7-1 Attitude Adjustment Configuration
 
 .. important:: 
 	The attitude change between A posture and B posture, A posture and C posture is as small as possible under the condition that the application requirements are met. The posture adaptive function is an auxiliary application function, usually used in conjunction with seam tracking.
@@ -561,7 +561,7 @@ Attitude adaptive configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.7-2 Attitude Adjustment Command Edit
+.. centered:: Figure 5.7-2 Attitude Adjustment Command Edit
 
 Attitude self-adaptive with extended axis and laser tracking welding teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -628,7 +628,7 @@ Force/Torque Sensor Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-1 Force/Torque Sensor Configuration
+.. centered:: Figure 5.8-1 Force/Torque Sensor Configuration
 
 .. important:: 
 	The corresponding sensor should be inactive before clicking Clear Configuration.
@@ -639,7 +639,7 @@ Force/Torque Sensor Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-2 Force/Torque Sensor Configuration Information
+.. centered:: Figure 5.8-2 Force/Torque Sensor Configuration Information
 
 **Step3**：Select the configured force sensor number and click the "Reset" button. After the page pops up and the command is sent successfully, click the "Activate" button to check the activation status in the force sensor information table to determine whether the activation is successful; in addition, the force sensor will There is an initial value, and the user can select "zero point correction" and "zero point removal" according to the usage requirements. The force sensor zero point correction needs to ensure that the force sensor is horizontal and vertical, and the robot is not equipped with a load.
 
@@ -656,7 +656,7 @@ Specific attitude recognition: clear the end load data, configure the force sens
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-4 Force/Torque Sensor Load Identification
+.. centered:: Figure 5.8-4 Force/Torque Sensor Load Identification
 
 Force/Torque Sensor Assisted Drag
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -667,7 +667,7 @@ After the sensor is configured, it can be used with the sensor to better assist 
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-4 Force/Torque Sensor Drag Lock
+.. centered:: Figure 5.8-4 Force/Torque Sensor Drag Lock
 
 .. important:: 
    The adjustment coefficient is the softness coefficient, and the range is [0~3]. The larger the value, the more detailed the softness effect. It is recommended to set a reasonable coefficient according to the actual situation, and the generally recommended value is 1.
@@ -681,7 +681,7 @@ Command description: "FT_Guard" command is a collision detection command. Select
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-5 FT_Guard Command Edit
+.. centered:: Figure 5.8-5 FT_Guard Command Edit
 
 Program example:
 
@@ -711,7 +711,7 @@ Instruction description: The "FT_Control" instruction is a force control motion 
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-6 FT_Control Command Edit
+.. centered:: Figure 5.8-6 FT_Control Command Edit
 
 Program example:
 
@@ -741,7 +741,7 @@ Instruction description: The "FT_Spiral" instruction is a spiral line exploratio
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-7 FT_Spiral Command Edit
+.. centered:: Figure 5.8-7 FT_Spiral Command Edit
 
 Program example:
 
@@ -771,7 +771,7 @@ Instruction description: The "FT_Rot" instruction is a rotation exploration inse
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-8 FT_Rot Command Edit
+.. centered:: Figure 5.8-8 FT_Rot Command Edit
 
 Program example:
 
@@ -801,7 +801,7 @@ Instruction description: "FT_Lin" instruction is rotation exploration insertion,
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-9 FT_Lin Command Edit
+.. centered:: Figure 5.8-9 FT_Lin Command Edit
 
 Program example:
 
@@ -831,7 +831,7 @@ Instruction description: The "FT_FindSurface" instruction is for surface positio
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-10 FT_FindSurface Command Edit
+.. centered:: Figure 5.8-10 FT_FindSurface Command Edit
 
 Program example:
 
@@ -858,7 +858,7 @@ Instruction description: The "FT_CalCenter" instruction is for center positionin
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-11 FT_CalCenter Command Edit
+.. centered:: Figure 5.8-11 FT_CalCenter Command Edit
 
 Program example:
 
@@ -915,7 +915,7 @@ Instruction description: The "FT_Click" command is click force detection, which 
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.8-12 FT_Click Command Edit
+.. centered:: Figure 5.8-12 FT_Click Command Edit
 
 Program example:
 
@@ -945,7 +945,7 @@ Extended IO device configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.9-1 Extended IO device configuration
+.. centered:: Figure 5.9-1 Extended IO device configuration
 
 .. important:: 
 	The corresponding device should be inactive before clicking Clear Configuration.
@@ -956,7 +956,7 @@ Extended IO device configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.9-2 Extended IO device function configuration
+.. centered:: Figure 5.9-2 Extended IO device function configuration
 
 Palletizing system configuration
 ---------------------------------------
@@ -970,7 +970,7 @@ Palletizing system configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.10-1 Palletizing recipe configuration
+.. centered:: Figure 5.10-1 Palletizing recipe configuration
 
 **Step2**： Click "Configure" in the workpiece configuration bar to enter the workpiece configuration pop-up window, set the "length", "width", "height" of the workpiece and the grabbing point of the workpiece, click "confirm configuration" to complete the workpiece information setting.
 
@@ -978,7 +978,7 @@ Palletizing system configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.10-2 Palletizing workpiece configuration
+.. centered:: Figure 5.10-2 Palletizing workpiece configuration
 
 **Step3**：Click "Configure" in the tray configuration bar to enter the tray configuration pop-up window, set the tray "front", "side" and "height", then set the station and station transition point, click "confirm configuration" to complete the tray information setting.
 
@@ -986,7 +986,7 @@ Palletizing system configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.10-3 Palletizing pallet configuration
+.. centered:: Figure 5.10-3 Palletizing pallet configuration
 
 **Step4**：Click "Configure" in the mode configuration bar to enter the mode configuration pop-up window, set the workpiece interval, and the right frame is the simulation workpiece placement method, which can be added individually or in batches. Then set the number of palletizing layers and the mode of each layer, click "confirm configuration" to complete the mode information setting.
 
@@ -994,7 +994,7 @@ Palletizing system configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 4.10-4 Palletizing mode configuration
+.. centered:: Figure 5.10-4 Palletizing mode configuration
 
 **Step4**：Click "Generate Program" to open the "Palletizing Monitoring Page", where you can display and view the "Generation Information", "Alarm Information" and "Palletizing Program".
 
@@ -1002,4 +1002,4 @@ Palletizing system configuration steps
    :align: center
    :width: 6in
 
-.. centered:: Figure 4.10-5 Palletizing system monitoring
+.. centered:: Figure 5.10-5 Palletizing system monitoring

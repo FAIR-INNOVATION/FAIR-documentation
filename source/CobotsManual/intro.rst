@@ -27,6 +27,7 @@ Manual
     :numbered: 5
 
     foreword
+    introduction
     installation
     quick_start_robot
     teaching_pendant_software
