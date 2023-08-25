@@ -236,7 +236,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0
       - link6
       - 0.36
-      - [-0.93, 0.81, -20.05]
+      - [0.93, 0.81, -20.05]
 
 .. centered:: Table 1.1-4 FR10 model collaboration robot Denavit–Hartenberg parameter
 
@@ -278,7 +278,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0
       - 0
       - link3
-      - 2.71
+      - 3.7
       - [211.22, 0.11, 54.21]
     
     * - Joint4
@@ -287,7 +287,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 159
       - π/2
       - link4
-      - 1.56
+      - 1.69
       - [0.12, -3, 12.18]
     
     * - Joint5
@@ -296,7 +296,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 114
       - -π/2
       - link5
-      - 1.56
+      - 1.69
       - [-0.12, 3, 12.18]
     
     * - Joint6
@@ -305,7 +305,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 106
       - 0
       - link6
-      - 0.36
+      - 0.35
       - [1.24, 0.85, -20.34]
 
 .. centered:: Table 1.1-5 FR16 model collaboration robot Denavit–Hartenberg parameter
@@ -436,7 +436,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 138
       - -π/2
       - link5
-      - 1.69
+      - 4.64
       - [-0.23, 2.28, 18.42]
     
     * - Joint6
