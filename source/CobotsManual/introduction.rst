@@ -450,4 +450,4 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
 DH parameter download
 ------------------------------------
-  :download:`FR Robots-DH Transformation <../_static/_doc/FR Robots DH Transformation.xlsx>`
+  :download:`FR Robots DH Transformation <../_static/_doc/FR Robots DH Transformation.xlsx>`
