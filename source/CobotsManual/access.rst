@@ -73,6 +73,9 @@ Control area
    
    effect: Pause and resume the current teaching program
 
+.. important::
+   The pause instruction is at the end of the program and cannot be judged.
+
 Status Bar
 ~~~~~~~~~~~~
 
