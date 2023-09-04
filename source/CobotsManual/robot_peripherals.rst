@@ -1046,3 +1046,23 @@ Palletizing system configuration steps
    :width: 6in
 
 .. centered:: Figure 5.10-5 Palletizing system monitoring
+
+Polishing equipment configuration
+------------------------------------
+
+Polishing equipment configuration step
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**：Enter the Polishing equipment configuration page, configure the communication information, you need to configure the IP address, port, sampling period and communication protocol. After the configuration is successful, it will be automatically displayed next time.
+
+**Step2**：After completing the communication configuration, the communication can be established by loading/unloading the grinding equipment.
+
+**Step3**：Device functions. Operations such as device enabling, error clearing, and force sensor zeroing can be performed.
+
+**Step4**：Parameter configuration. The rotation speed, contact force, reach distance and control mode of the polishing equipment can be set. After successful setting, the corresponding data and status can be displayed in the "Polish" status feedback column on the right.
+
+.. figure:: robot_peripherals/061.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 4.11-1 Polishing equipment configuration page

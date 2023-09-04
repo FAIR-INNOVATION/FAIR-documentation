@@ -1807,15 +1807,23 @@ This command is a spraying-related command, which controls the spray gun to "sta
 EAxis command
 ++++++++++++++++
 
-Click the "EAxis" icon to enter the EAxis command editing interface
+Click the "EAxis" icon to enter the EAxis command editing interface, Select the combination mode: controller + servo drive (485) / controller + PLC (UDP).
 
-This command is used in combination with the PTP command for scenarios using external axes, and can decompose the movement of a point in space in the X-axis direction to the movement of external axes. Select the external axis number, select synchronous motion mode, select the point to be reached, and click "Add" and "Apply" to save the command.
+Select controller + PLC(UDP),this command is used in combination with the PTP command for scenarios using external axes, and can decompose the movement of a point in space in the X-axis direction to the movement of external axes. Select the external axis number, select synchronous motion mode, select the point to be reached, and click "Add" and "Apply" to save the command.
 
 .. image:: teaching_pendant_software/116.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 4.7-7-3 EAxis command interface
+
+Select controller + servo drive(485),This command can configure the extended axis parameters. Set different parameters according to different control modes. The zero point of the configured expansion axis can be set.
+
+.. image:: teaching_pendant_software/218.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-7-4 Servo command interface
 
 Convey command
 ++++++++++++++++
@@ -1828,7 +1836,20 @@ This command includes four commands: position real-time detection, IO real-time 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-7-4 Conveyor command interface
+.. centered:: Figure 4.7-7-5 Conveyor command interface
+
+Polish command
+++++++++++++++++
+
+Click the "Polishing" icon to enter the Polish command editing interface
+
+This command can set the rotation speed, contact force, extension distance and control mode of the grinding equipment.
+
+.. image:: teaching_pendant_software/219.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-7-6 Polish command interface
 
 Welding command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
