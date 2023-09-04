@@ -1022,4 +1022,4 @@ Polishing equipment configuration step
    :align: center
    :width: 6in
 
-.. centered:: Figure 4.11-2 Polishing equipment configuration page
+.. centered:: Figure 4.11-1 Polishing equipment configuration page
