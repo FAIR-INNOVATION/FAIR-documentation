@@ -346,51 +346,94 @@ Program example:
 Extended Axis Peripheral Configuration
 -----------------------------------------
 
-Extended Axis Peripheral Configuration Steps
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Select the "Extended Axis" button in the user peripheral configuration interface to enter the extended axis interface, and select the combination method to configure the corresponding extended axis peripherals. Combination methods are divided into: Controller + PLC (UDP) and Controller + Servo drive (485).
 
-**Step1**：Select the "Extended Axis" button in the user peripheral configuration interface to enter the extended axis interface, select the extended axis number 1, and click the "Parameter Configuration" button to enter the right interface. Set the axis type, axis direction, running speed, acceleration, forward limit, reverse limit, lead, encoder resolution, starting point offset, manufacturer, model and mode, and click Configure to complete the configuration.
+Controller + PLC（UDP）
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/019.png
-   :align: center
-   :width: 3in
+Configuration steps
+++++++++++++++++++++++++
 
-.. centered:: Figure 5.5-1 Extended axis parameter configuration
-	
-.. important:: 
-	Before using the extended axis function, it is necessary to establish the corresponding extended axis coordinate system, and apply the established tool coordinate system during program teaching. The extended axis function is mainly used in conjunction with the welder function and the laser tracking sensor function.
-
-**Step2**：Click the "Zero Setting" button to enter the zero setting pop-up window, as shown in the picture on the right. Set the zero return method, zero search speed, zero hoop speed and axis direction, click the "Setting" button, the extended axis will start to return to zero, the zero return status will be displayed in the blank space below the axis direction, when "zero return completed" appears The prompt indicates that the zero point of the extension axis is set successfully.
-
-.. figure:: robot_peripherals/020.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.5-2 Extended axis zero point setting
-
-**Step3**：Select the number of the extended axis whose parameters have been configured, click "Servo Enable", set the running speed, acceleration and the maximum distance of a single run, and test the extended axis for forward rotation and reverse rotation.
+**Step1**：First configure the expansion axis UDP communication. Set the IP address, port number and communication cycle.
 
 .. figure:: robot_peripherals/021.png
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.5-3 Extended Axis Test
+.. centered:: Figure 5.5-1 Extended axis communication configuration
 
-**Step4**：The extension axis is usually used in conjunction with the laser sensor. At this time, the laser sensor is usually installed externally. The sensor reference point configuration needs to be calibrated by the three-point method instead of the six-point method used before. Align the center of the tool with the middle point of the bottom of the right cross-section (the side close to the camera), set point 1, align the center of the tool with the middle point of the bottom of the other cross-section, which is the middle point of the left cross-section, set point 2, and set the center of the tool with Move the point to the middle point of the upper edge of the cross-section on the right side of the sensor, set point 3, calculate and save, and click Apply to complete the three-point calibration.
+**Step2**：Select the extended axis number 1, and click the "Parameter Configuration" button to enter the right interface. Set the axis type, axis direction, running speed, acceleration, forward limit, reverse limit, lead, encoder resolution, starting point offset, manufacturer, model and mode, and click Configure to complete the configuration.
+
+.. figure:: robot_peripherals/019.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-2 Extended axis parameter configuration
+	
+.. important:: 
+	Before using the extended axis function, it is necessary to establish the corresponding extended axis coordinate system, and apply the established tool coordinate system during program teaching. The extended axis function is mainly used in conjunction with the welder function and the laser tracking sensor function.
+
+**Step3**：Click the "Zero Setting" button to enter the zero setting pop-up window, as shown in the picture on the right. Set the zero return method, zero search speed, zero hoop speed and axis direction, click the "Setting" button, the extended axis will start to return to zero, the zero return status will be displayed in the blank space below the axis direction, when "zero return completed" appears The prompt indicates that the zero point of the extension axis is set successfully.
+
+.. figure:: robot_peripherals/020.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-3 Extended axis zero point setting
+
+**Step4**：Select the number of the extended axis whose parameters have been configured, click "Servo Enable", set the running speed, acceleration and the maximum distance of a single run, and test the extended axis for forward rotation and reverse rotation.
+
+.. figure:: robot_peripherals/021.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-4 Extended Axis Test
+
+**Step5**：The extension axis is usually used in conjunction with the laser sensor. At this time, the laser sensor is usually installed externally. The sensor reference point configuration needs to be calibrated by the three-point method instead of the six-point method used before. Align the center of the tool with the middle point of the bottom of the right cross-section (the side close to the camera), set point 1, align the center of the tool with the middle point of the bottom of the other cross-section, which is the middle point of the left cross-section, set point 2, and set the center of the tool with Move the point to the middle point of the upper edge of the cross-section on the right side of the sensor, set point 3, calculate and save, and click Apply to complete the three-point calibration.
 
 .. figure:: robot_peripherals/022.png
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.5-4 Three-point sensor calibration
+.. centered:: Figure 5.5-5 Three-point sensor calibration
 
-**Step5**：Select the "EAxis" command on the program teaching command interface. According to the specific program teaching requirements, add instructions in the corresponding places.
+**Step6**：Select the "EAxis" command on the program teaching command interface. According to the specific program teaching requirements, add instructions in the corresponding places.
 
 .. figure:: robot_peripherals/023.png
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.5-5 Extended axis command editing
+.. centered:: Figure 5.5-6 Extended axis command editing
+
+Controller + Servo drive (485)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**: First configure the parameters of the servo drive. Set the servo drive serial number, servo drive manufacturer, servo drive model, servo drive software version, encoder resolution and mechanical transmission ratio. Click the "Clear" button to clear the configuration of the current servo drive number. After successful configuration, obtain the servo drive configuration list data.
+
+.. figure:: robot_peripherals/servo_table.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-7 Configure servo drive parameters
+
+**Step2**: Before debugging the servo drive, be sure to set the servo drive number first, and then set the control mode after the setting is successful. Set the homing method, homing speed and zero hoop speed. When selecting "Position Mode", set "Target Position" and "Running Speed"; select "Speed Mode" to set "Target Speed".
+
+.. important::
+  Before setting the control mode, if the servo is enabled, please disable it first, otherwise the setting will not take effect.
+
+.. figure:: robot_peripherals/servo_debugger.png
+  :align: center
+  :width: 3in
+
+.. centered:: Figure 5.5-8 Servo drive debugging
+
+**Step3**: Select the "Extended Axis" command on the program teaching command interface. According to the specific program teaching needs, add instructions in the corresponding places.
+
+.. figure:: robot_peripherals/servo_program.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-9 Extended Axis InstructionEdit
 
 Extended axis with laser tracking welding teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
