@@ -896,6 +896,69 @@ After the configuration is complete, you can view the corresponding output DO st
 .. important:: 
    Configured DI and DO are forbidden to be used in teaching programming.
 
+I/O alias configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click on the "I/O Alias Configuration" submenu to enter the configuration interface, and configure the given meaning names of the control box and end IO signals according to the actual usage scenario. After successful configuration, the modules related to IO signal content will display corresponding aliases, as follows:
+
+.. image:: teaching_pendant_software/io_config.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑6 I/O alias configuration
+
+**Robot operation**: IO signal selection boxes for IO and TPD control boxes (CtrlBox) and end (End);
+
+.. image:: teaching_pendant_software/robot_operate_io.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑7 Robot operation IO
+
+.. image:: teaching_pendant_software/robot_operate_tpd.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑8 机器人操作TPD
+
+**Robot status**: IO signal status of Robot's control box (CtrlBox) and end (End);
+
+.. image:: teaching_pendant_software/robot_status_io.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑9 Robot status IO
+
+**Teaching simulation - program teaching**: Add program commands such as "Wait", "Digital IO", and "Analog IO", and select the program command line by clicking the "Edit" icon. The IO selection box in the pop-up box will pop up;
+
+.. image:: teaching_pendant_software/add_teach_program.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑10 Program Teach Add IO
+
+.. image:: teaching_pendant_software/teach_program_edit.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑11 Program Teaching Editor IO
+
+**Teaching simulation - graphical programming**: IO dropdown selection for 'Logic' and 'Control' modules;
+
+.. image:: teaching_pendant_software/graphical_io.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑12 Graphical programming IO
+
+**Auxiliary Application - Robot Body**: IO key selection box in 'Smart Tool';
+
+.. image:: teaching_pendant_software/smart_tool_io.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5‑13 smart Tool IO
+
 Robot operation
 -----------------
 

@@ -1031,21 +1031,32 @@ Palletizing system configuration steps
 
 .. centered:: Figure 5.10-3 Palletizing pallet configuration
 
-**Step4**：Click "Configure" in the mode configuration bar to enter the mode configuration pop-up window, set the workpiece interval, and the right frame is the simulation workpiece placement method, which can be added individually or in batches. Then set the number of palletizing layers and the mode of each layer, click "confirm configuration" to complete the mode information setting.
+**Step4**：Click "Configure" in the size configuration column of the palletizing equipment to enter the size configuration pop-up window. Set the devices "X", "Y", "Z", and "Angle", and click "Confirm Configuration" to complete the size configuration information setting of the palletizing equipment.
+
+.. important:: 
+   X, Y and Z are the absolute values of the upper right corner or upper left corner of the tray relative to the robot's coordinate system. Angle is the rotation angle of the robot during installation, and it is recommended to set it to 0 during installation.
+
+.. figure:: robot_peripherals/pallent_equipment.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.10‑4 Size configuration of palletizing equipment
+
+**Step5**：Click "Configure" in the mode configuration bar to enter the mode configuration pop-up window, set the workpiece interval, and the right frame is the simulation workpiece placement method, which can be added individually or in batches. Then set the number of palletizing layers and the mode of each layer, click "confirm configuration" to complete the mode information setting.
 
 .. figure:: robot_peripherals/059.png
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.10-4 Palletizing mode configuration
+.. centered:: Figure 5.10-5 Palletizing mode configuration
 
-**Step4**：Click "Generate Program" to open the "Palletizing Monitoring Page", where you can display and view the "Generation Information", "Alarm Information" and "Palletizing Program".
+**Step6**：Click "Generate Program" to open the "Palletizing Monitoring Page", where you can display and view the "Generation Information", "Alarm Information" and "Palletizing Program".
 
 .. figure:: robot_peripherals/060.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.10-5 Palletizing system monitoring
+.. centered:: Figure 5.10-6 Palletizing system monitoring
 
 Polishing equipment configuration
 ------------------------------------
