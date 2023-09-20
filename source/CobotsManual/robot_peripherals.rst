@@ -189,6 +189,20 @@ Welding program teaching
      - ARCEnd(0,1000)
      - #Stop arcing
 
+Arc interruption parameter configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Arc interruption parameter configuration can obtain and set arc interruption detection enable and confirmation duration.
+
+Welding interruption and resumption parameter configuration can obtain and set the welding interruption and reconnection enable, the weld bead overlap distance, the speed of returning to the arc starting point from the current position, and the operating mode.
+
+.. figure:: robot_peripherals/062.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.3-3 Arc interruption parameter configuration
+
+When a welding interruption occurs, a warning prompts that the current welding has been interrupted, and "exit interruption" and "interruption recovery" operations can be performed.
+
 Sensor Peripheral Configuration
 ---------------------------------
 
