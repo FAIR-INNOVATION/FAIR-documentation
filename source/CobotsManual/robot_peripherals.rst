@@ -145,7 +145,19 @@ Peripheral configuration of welding machine
 Peripheral configuration of welding machine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**：In the user peripherals configuration interface, select the "welding machine configuration" button, and the user can quickly configure the DI and DO required by the welding machine by configuring the IO button of the welding machine (the default configuration is DI12 for arc start success signal, DO9 for gas supply signal, and DO10 for gas supply signal). Arc signal, DO11 jog wire feeding, DO12 reverse wire feeding, DO13 JOB selection 1, DO14 JOB selection 2, DO15 JOB selection 3). Users can also customize the configuration in the "IO Configuration" interface according to their own needs;
+**Step1**：In the user peripherals configuration interface, select the "welding machine configuration" button, and users can configure the IO buttons of the welding machine by selecting the IO type and "Controller I/O" to quickly configure the DI and DO required by the welding machine (the default configuration is DI12 for arc start success signal, DO9 for gas supply signal, and DO10 for gas supply signal). Arc signal, DO11 jog wire feeding, DO12 reverse wire feeding, DO13 JOB selection 1, DO14 JOB selection 2, DO15 JOB selection 3). Users can also customize the configuration in the "IO Configuration" interface according to their own needs; or select "Extended I/O", configure the "Welder preparation" and "Arc start success" of the extended DI, and the "Welder starting arc", "Gas detection", "Forward" and "Reverse" of the DO Send wire;
+
+.. figure:: robot_peripherals/008.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.3-1 I/O configuration(Controller I/O)
+
+.. figure:: robot_peripherals/extendedIO.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.3-2 I/O configuration(Extended I/O)
 
 .. important:: 
 	Before using the welding machine function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is often used in conjunction with a laser tracking sensor.
@@ -156,15 +168,15 @@ Peripheral configuration of welding machine
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.3-1 Welding machine configuration
+.. centered:: Figure 5.3-3 Welding machine configuration
 
-**Step3**：Select the "Weld" command on the program teaching command interface. According to the specific program teaching requirements, add and apply the "arc start" and "arc end" instructions in the corresponding places.
+**Step3**：Select the "Weld" command on the program teaching command interface. According to the specific program teaching requirements, add and apply the "End arc", "Arc", "Gas OFF", "Gas ON", "Stop forward", "Forward", "Stop reverse" and "Reverse" instructions in the corresponding places.
 
 .. figure:: robot_peripherals/009.png
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.3-2 Welding Machine Command Editing
+.. centered:: Figure 5.3-4 Welding Machine Command Editing
 
 Welding program teaching
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -176,18 +188,38 @@ Welding program teaching
    * - S/N
      - Instruction format
      - notes
+   
    * - 1
-     - Lin(template1,100,-1,0,0)
-     - #Start arc starting point
+     - ARCEnd(0,0,10000)
+     - End arc
+
    * - 2
-     - ARCStart(0,1000)
-     - #Start arcing
+     - ARCStart(0,0,10000)
+     - Arc
+
    * - 3
-     - Lin(template2,100,-1,0,0)
-     - #Stop arc starting point
+     - SetAspirated(0,0)
+     - Gas OFF
+
    * - 4
-     - ARCEnd(0,1000)
-     - #Stop arcing
+     - SetAspirated(0,1)
+     - Gas ON
+
+   * - 5
+     - SetForwardWireFeed(0,0)
+     - Stop forward
+
+   * - 6
+     - SetForwardWireFeed(0,1)
+     - Forward
+
+   * - 7
+     - SetReverseWireFeed(0,0)
+     - Stop reverse
+
+   * - 8
+     - SetReverseWireFeed(0,1)
+     - Reverse
 
 Arc interruption parameter configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -199,7 +231,7 @@ Welding interruption and resumption parameter configuration can obtain and set t
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.3-3 Arc interruption parameter configuration
+.. centered:: Figure 5.3-5 Arc interruption parameter configuration
 
 When a welding interruption occurs, a warning prompts that the current welding has been interrupted, and "exit interruption" and "interruption recovery" operations can be performed.
 
