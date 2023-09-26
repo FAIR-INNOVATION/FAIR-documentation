@@ -2513,6 +2513,27 @@ Auxiliary application
 
 ..    The zero point will be set when the robot leaves the factory. If you need to set the zero point again, please contact us for technical support.
 
+Robot packaging
+~~~~~~~~~~~~~~~~~~~
+Under the menu bar of "Robot Body" in "Auxiliary Applications", click the "Robot Packaging" button to enter the robot's one-click packaging interface.
+
+.. important:: 
+   Before operating the packaging function, please confirm the surrounding environment and status of the robot to prevent collisions.
+   
+   If it is shipped from the factory, go to System Settings - General Settings and restore the factory settings before leaving the factory.
+
+**Step1**：Move the robot to zero point before moving to the packing point
+
+**Step2**：Click the "Move to Zero" button to confirm that the robot's mechanical zero point is correct and that the gaps in the orange circles in the figure are aligned with each joint.
+
+**Step3**：Click the "Move to Packing Point" button, and the robot will move to the packaging point according to the angles of each axis of the packaging process.
+
+.. image:: teaching_pendant_software/220.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.9-1 Robot one-click packaging
+
 System Upgrade
 ~~~~~~~~~~~~~~~~
 
