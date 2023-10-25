@@ -617,9 +617,9 @@ The user can set the corresponding parameters according to the parameters of the
    After the load is installed at the end of the robot, the weight of the end load and the coordinates of the center of mass must be set correctly, otherwise it will affect the drag function of the robot and the use of the collision detection function.
 
 
-If the user is uncertain about the tool quality or center of mass, the tool data can be determined through the load identification function.
+If the user is unsure about the tool mass or center of mass, he can click "Automatic Identification" to enter the load identification function to measure the tool data.
 
-Make sure the load is installed before making measurements. Click the "Tool Data Measurement" button to enter the load motion test interface.
+Before taking measurements, make sure the load is installed and then select the version. Click the "Tool Data Measurement" button to enter the load motion test interface.
 
 .. image:: teaching_pendant_software/045.png
    :width: 3in
