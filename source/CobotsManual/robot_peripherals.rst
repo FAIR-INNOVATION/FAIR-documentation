@@ -752,7 +752,7 @@ Specific attitude recognition: clear the end load data, configure the force sens
 Force/Torque Sensor Assisted Drag
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After the sensor is configured, it can be used with the sensor to better assist the dragging robot. When using it for the first time, you can configure it according to the data in the picture on the right. After the application is completed, you don’t need to enter the drag mode at this time, and you can directly drag the end force sensor to control the robot to move in a fixed posture.
+After the sensor is configured, it can be used with the sensor to better assist the dragging robot. When using it for the first time, you can configure it according to the data in the picture on the right. After the application is completed, you don’t need to enter the drag mode at this time, and you can directly drag the end force sensor to control the robot to move in a fixed posture. (The data in the figure below is a reference standard.)
 
 .. figure:: robot_peripherals/037.png
    :align: center
