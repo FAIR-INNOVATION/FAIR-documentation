@@ -13,6 +13,8 @@ Basic parameters
 	:align: center
 	:width: 8in
 
+.. important::
+  When the FR series robot performs attitude or coordinate system transformation, the angle rotation sequence calculated by the homogeneous transformation matrix is "ZYX" of the floating coordinate system.
 
 Motion
 ------------------

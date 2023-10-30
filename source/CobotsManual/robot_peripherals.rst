@@ -760,8 +760,26 @@ After the sensor is configured, it can be used with the sensor to better assist 
 
 .. centered:: Figure 5.8-4 Force/Torque Sensor Drag Lock
 
+**Adaptive selection**: Turn it on when assembly is required. After turning it on, dragging becomes heavier;
+
+**Damping parameters**:
+
+-  Translation direction: It is recommended to set the parameter between [100-200];
+
+-  Rotation direction: It is recommended to set the parameters between [3-10], among which the RZ direction setting range is [0.1-5];
+
+-  Effect: When dragging with the help of a sensor, increasing the damping will make it difficult to drag, and reducing the damping will make it too easy to drag the robot (it is recommended not to be too small);
+
+-  The overall range of damping parameters: translation XYZ: [100-1000]; rotation RX, RY: [3-50], RZ: [2-10];
+
+-  The maximum drag force is 50 and the maximum drag speed is 180.
+
+**Stiffness parameter**: All are set to 0;
+
+**Drag force threshold**: Translation XYZ is [5-10]; rotation RX, RY, RZ is [0.5-5];
+
 .. important:: 
-   The adjustment coefficient is the softness coefficient, and the range is [0~3]. The larger the value, the more detailed the softness effect. It is recommended to set a reasonable coefficient according to the actual situation, and the generally recommended value is 1.
+  Locking is achieved by increasing the force threshold in the translation direction XYZ or rotation direction RX, RY, RZ.
 
 Force/Torque Sensor Collision Detection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
