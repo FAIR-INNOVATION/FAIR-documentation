@@ -7,6 +7,8 @@ Error Code Comparison Table
     :widths: 10 20 30
 
     "Errcode","Describe","Processing method"
+    "-3","Interface exception","Contact the after-sales engineer to view the controller log"
+    "-2","The communication with the controller is abnormal","Check the connection to the robot control box"
     "-1","Other errors","Contact the after-sales engineer to view the controller log"
     "0","Successful call","/"
     "3","The number of interface parameters is inconsistent","Check the number of interface parameters"
