@@ -1124,7 +1124,7 @@ Teaching simulation
 Introduction
 ~~~~~~~~~~~~~~
 
-Click the command on the left to add a program node to the program tree.When the program is running, the currently executing program node is highlighted in gray.In manual mode, click the first icon on the right side of the node to make the robot execute the instruction alone, and the second icon is to edit the content of the node.
+Click the command on the left to add a program node to the program tree.When the program is running, the currently executing program node is highlighted in green.In manual mode, click the first icon on the right side of the node to make the robot execute the instruction alone, and the second icon is to edit the content of the node.
 
 .. image:: teaching_pendant_software/069.png
    :width: 6in
@@ -2233,7 +2233,7 @@ If you click "Open", "New", "Export", "Rename" and other related file operations
 
 .. centered:: Figure 3.7-14 The current page program does not save verification
 
-**Step1**：Click the "Not Save" button to continue performing previous related file operations.
+**Step1**：Click the "Not Save" button, and the program will restore the unmodified data and continue to perform previous related file operations.
 
 **Step2**：Click the "Save" button, the unsaved Lua program is saved successfully, and the previous related file operations continue to be performed.
 
@@ -2483,7 +2483,7 @@ If you leave the graphical programming page and switch to other pages, the promp
 
 **Step1**：Click the "Not Save" button to jump to the previously selected page.
 
-**Step2**：Click the "Save" button, and the unsaved Lua program is saved successfully and jumps to the previously selected page.
+**Step2**：Click the "Save" button to save the unsusnted LUA program and jump to the previously selected page. If the preserved program name already exists, it is prompted to show that the teaching point exists and whether it is covered. After the cancellation/cover operation, jump to the page you chose before.
 
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
