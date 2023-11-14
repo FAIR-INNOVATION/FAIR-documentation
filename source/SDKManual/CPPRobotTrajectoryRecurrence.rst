@@ -172,3 +172,159 @@ Code example
 
         return 0;
     }
+
+Get the starting pose of the trajectory
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the starting pose of the trajectory
+     * @param  [in] name trajectory file name, file suffix is not required
+     * @return  error code
+     */     
+    errno_t  GetTPDStartPose(char name[30], DescPose *desc_pose);
+
+Trajectory preprocessing
+++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  trajectory preprocessing
+     * @param  [in] name  trajectory file name
+     * @param  [in] ovl speed scaling percentage, range [0~100]
+     * @param  [in] opt 1-control point, default is 1
+     * @return  error code 
+     */     
+    errno_t  LoadTrajectoryJ(char name[30], float ovl, int opt);
+
+Trajectory recurrence
+++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  trajectory recurrence
+     * @return  error code 
+     */     
+    errno_t  MoveTrajectoryJ();
+
+Get the starting pose of the trajectory
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the starting pose of the trajectory
+     * @param  [in] name trajectory file name
+     * @return  error code
+     */     
+    errno_t  GetTrajectoryStartPose(char name[30], DescPose *desc_pose);
+
+Get the track point number
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the track point number
+     * @return  error code
+     */     
+    errno_t  GetTrajectoryPointNum(int *pnum);
+
+Set the speed during trajectory running
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the speed during trajectory running
+     * @param  [in] ovl speed percentage
+     * @return  error code 
+     */     
+    errno_t  SetTrajectoryJSpeed(float ovl);
+
+Set the force and torque during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the force and torque during trajectory operation
+     * @param  [in] ft Force and torque in three directions, units N and Nm
+     * @return  error code
+     */     
+    errno_t  SetTrajectoryJForceTorque(ForceTorque *ft);
+
+Set the force along the x direction during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the force along the x direction during trajectory operation
+     * @param  [in] fx Force along the x direction, unit N
+     * @return  error code  
+     */     
+    errno_t  SetTrajectoryJForceFx(double fx);
+
+Set the force along the y direction during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the force along the y direction during trajectory operation
+     * @param  [in] fy Force along the y direction, unit N
+     * @return  error code  
+     */     
+    errno_t  SetTrajectoryJForceFy(double fy);
+
+Set the force along the z direction during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the force along the z direction during trajectory operation
+     * @param  [in] fz Force along the z direction, unit N
+     * @return  error code 
+     */     
+    errno_t  SetTrajectoryJForceFz(double fz);
+
+Set the torque around the x-axis during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the torque around the x-axis during trajectory operation
+     * @param  [in] tx Torque around the x-axis, unit Nm
+     * @return  error code
+     */     
+    errno_t  SetTrajectoryJTorqueTx(double tx);
+
+Set the torque around the y-axis during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the torque around the y-axis during trajectory operation
+     * @param  [in] ty Torque around the y-axis, unit Nm
+     * @return  error code
+     */     
+    errno_t  SetTrajectoryJTorqueTy(double ty);
+
+Set the torque around the z-axis during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Set the torque around the z-axis during trajectory operation
+     * @param  [in] tz Torque around the z-axis, unit Nm
+     * @return  error code
+     */     
+    errno_t  SetTrajectoryJTorqueTz(double tz);

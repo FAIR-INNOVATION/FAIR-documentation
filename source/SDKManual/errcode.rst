@@ -7,9 +7,9 @@ Error Code Comparison Table
     :widths: 10 20 30
 
     "Errcode","Describe","Processing method"
-    "-4","xmlrpc interface execution failed","Please contact after-sales engineering"
-    "-3","Interface exception","Contact the after-sales engineer to view the controller log"
-    "-2","The communication with the controller is abnormal","Check the connection to the robot control box"
+    "-4","xmlrpc interface execution failed","Contact the after-sales engineer to view the controller log"
+    "-3","xmlrpc communication failed","Please check whether the network connection and server IP address are correct"
+    "-2","Abnormal communication with the controller","Check the software and hardware connection with the controller"
     "-1","Other errors","Contact the after-sales engineer to view the controller log"
     "0","Successful call","/"
     "3","The number of interface parameters is inconsistent","Check the number of interface parameters"

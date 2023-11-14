@@ -734,6 +734,271 @@ Compliant control off
     */   
     errno_t  FT_ComplianceStop(); 
 
+Load identification initialization
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Load identification initialization
+     * @return Error code 
+     */
+    errno_t LoadIdentifyDynFilterInit();
+
+Load identification initialization
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Load identification initialization
+     * @return Error code 
+     */
+    errno_t LoadIdentifyDynVarInit();
+
+Load identification main program
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief load identification main program
+     * @param [in] joint_torque joint torque
+     * @param [in] joint_pos joint position
+     * @param [in] t sampling period
+     * @return Error code 
+     */
+    errno_t LoadIdentifyMain(double joint_torque[6], double joint_pos[6], double t);
+
+Get load identification results
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get load identification results
+     * @param [in] gain  
+     * @param [out] weight load weight
+     * @param [out] cog cog load center of mass
+     * @return Error code 
+     */
+    errno_t LoadIdentifyGetResult(double gain[12], double *weight, DescTran *cog);
+
+The transmission belt starts and stops
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief The transmission belt starts and stops
+     * @param [in] status status, 1-start, 0-stop
+     * @return Error code 
+     */
+    errno_t ConveyorStartEnd(uint8_t status);
+
+Records IO detection points
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief records IO detection points
+     * @return Error code 
+     */
+    errno_t ConveyorPointIORecord();
+
+Records point A
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Record point A
+     * @return Error code 
+     */
+    errno_t ConveyorPointARecord();
+
+Records reference point
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief record reference point
+     * @return Error code 
+     */
+    errno_t ConveyorRefPointRecord();
+
+Records point B
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Record point B
+     * @return Error code 
+     */
+    errno_t ConveyorPointBRecord();
+
+Conveyor belt workpiece IO detection
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Conveyor belt workpiece IO detection
+     * @param [in] max_t maximum detection time, unit ms
+     * @return Error code 
+     */
+    errno_t ConveyorIODetect(int max_t);
+
+Get the current position of the object
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get the current position of the object
+     * @param [in] mode 
+     * @return Error code 
+     */
+    errno_t ConveyorGetTrackData(int mode);
+
+Belt tracking starts
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Belt tracking starts
+     * @param [in] status status , 1-start, 0-stop
+     * @return Error code 
+     */
+    errno_t ConveyorTrackStart(uint8_t status);
+
+Drive belt tracking stopped
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Drive belt tracking stopped
+     * @return Error code 
+     */
+    errno_t ConveyorTrackEnd();
+
+Transmission belt parameter configuration
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Transmission belt parameter configuration
+     * @param [in] 
+     * @return Error code 
+     */
+    errno_t ConveyorSetParam(float param[5]);
+
+Grab point compensation
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief belt grab point compensation
+     * @param [in] cmp compensation position
+     * @return Error code 
+     */
+    errno_t ConveyorCatchPointComp(double cmp[3]);
+
+Linear motion
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief linear motion
+     * @param [in] status status, 1-start, 0-stop
+     * @return Error code 
+     */
+    errno_t TrackMoveL(char name[32], int tool, int wobj, float vel, float acc, float ovl, float blendR, uint8_t flag, uint8_t type);
+
+Get SSH public key
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get SSH public key
+     * @param [out] keygen public key
+     * @return Error code 
+     */
+    errno_t GetSSHKeygen(char keygen[1024]);
+
+Issues SCP instructions
++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief issues SCP instructions
+     * @param [in] mode 0-upload (host computer->controller), 1-download (controller->host computer)
+     * @param [in] sshname host computer user name
+     * @param [in] sship host computer ip address
+     * @param [in] usr_file_url host computer file path
+     * @param [in] robot_file_url robot controller file path
+     * @return Error code 
+     */
+    errno_t SetSSHScpCmd(int mode, char sshname[32], char sship[32], char usr_file_url[128], char robot_file_url[128]);
+
+Calculate the MD5 value of the file under the specified path
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Calculate the MD5 value of the file under the specified path
+     * @param [in] file_path The file path contains the file name. The default Traj folder path is: "/fruser/traj/", such as "/fruser/traj/trajHelix_aima_1.txt"
+     * @param [out] md5 file MD5 value
+     * @return Error code 
+     */
+    errno_t ComputeFileMD5(char file_path[256], char md5[256]);
+
+Get the emergency stop status of the robot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get the emergency stop status of the robot
+     * @param [out] state emergency stop status, 0-non-emergency stop, 1-emergency stop
+     * @return Error code   
+     */
+    errno_t GetRobotEmergencyStopState(uint8_t *state);
+
+Get the communication status between SDK and robot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get the communication status between SDK and robot
+     * @param [out]  state communication status, 0-communication is normal, 1-communication is abnormal
+     */
+    errno_t GetSDKComState(int *state);
+
+Get the safe stop signal
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get the safe stop signal
+     * @param [out]  si0_state safety stop signal SI0, 0-invalid, 1-valid
+     * @param [out]  si1_state safety stop signal SI1, 0-invalid, 1-valid
+     */
+    errno_t GetSafetyStopState(uint8_t *si0_state, uint8_t *si1_state);
+
 Code example
 +++++++++++++++
 .. code-block:: c++

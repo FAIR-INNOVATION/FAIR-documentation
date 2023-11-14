@@ -252,6 +252,28 @@ Circular motion in Cartesian space
     */      
     errno_t  Circle(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, float ovl, uint8_t offset_flag, DescPose *offset_pos);
 
+Servo movement starts
++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Servo movement starts, used with ServoJ and ServoCart instructions
+     * @return  Error code
+     */
+    errno_t ServoMoveStart();
+
+Servo movement end
++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Servo movement end, used with ServoJ and ServoCart instructions
+     * @return  Error code
+     */
+    errno_t ServoMoveEnd();
+
 Code example
 ++++++++++++++
 .. code-block:: c++
@@ -699,6 +721,70 @@ The spline movement ends
     * @return  Error code
     */
     errno_t  SplineEnd();
+
+New spline motion begins
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief New spline motion begins
+     * @param  [in] type   0-Arc transition，1-The given point is a path point
+     * @return  Error code
+     */
+    errno_t  NewSplineStart(int type);
+
+New spline motion command points
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief New spline motion command points
+     * @param  [in] joint_pos  Target joint position, unit:deg
+     * @param  [in] desc_pos   Target Cartesian pose
+     * @param  [in] tool  Tool coordinate number, range [1~15]
+     * @param  [in] user  Workpiece coordinate number, range [1~15]
+     * @param  [in] vel  speed percentage, range [0~100]
+     * @param  [in] acc  Acceleration percentage, range [0~100], not available yet
+     * @param  [in] ovl  Speed scaling factor, range [0~100]
+     * @param  [in] blendR [-1.0]- Movement in place (blocked), [0~1000.0]-smooth radius (non-blocked), unit: mm
+     * @return  Error code
+     */  
+    errno_t  NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR);
+
+New spline motion ends
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief New spline motion ends
+     * @return Error code
+     */
+    errno_t  NewSplineEnd();
+
+Pause motion
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Pause motion
+     * @return  Error code
+     */
+    errno_t  PauseMotion(); 
+
+Resume motion
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Resume motion
+     * @return  Error code
+     */
+    errno_t  ResumeMotion();
 
 Code example
 ++++++++++++++

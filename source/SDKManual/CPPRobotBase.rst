@@ -26,6 +26,17 @@ Establishes communication with the controller
     */
     errno_t  RPC(const char *ip);
 
+Close communication with robot controller
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Close communication with robot controller
+     * @return Error code
+     */
+    errno_t  CloseRPC();
+
 Query the SDK version number
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
