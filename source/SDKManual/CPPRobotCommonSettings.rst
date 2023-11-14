@@ -29,6 +29,54 @@ Set the value of a system variable
     */
     errno_t  SetSysVarValue(int id, float value);
 
+Setting tool reference points - six-point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Setting tool reference points - six-point method
+     * @param [in] point_num point number, range [1~6]
+     * @return Error code
+     */
+    errno_t SetToolPoint(int point_num);
+
+Calculation tool coordinate system
++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Calculation tool coordinate system
+     * @param [out] tcp_pose tool coordinate system
+     * @return Error code
+     */
+    errno_t ComputeTool(DescPose *tcp_pose);
+
+Setting tool reference points - four-point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Setting tool reference points - four-point method
+     * @param [in] point_num point number, range [1~4]
+     * @return Error code
+     */
+    errno_t SetTcp4RefPoint(int point_num);
+
+Calculation tool coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Calculation tool coordinate system
+     * @param [out] tcp_pose tool coordinate system
+     * @return Error code
+     */
+    errno_t ComputeTcp4(DescPose *tcp_pose);
+
 Set tool coordinate system
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
@@ -59,6 +107,30 @@ Set the tool coordinate list
     */
     errno_t  SetToolList(int id, DescPose *coord, int type, int install);   
 
+Setting External Tool Reference Points - Six-Point Method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Setting External Tool Reference Points - Six-Point Method
+     * @param [in] point_num point number, range [1~4]
+     * @return Error code
+     */
+    errno_t SetExTCPPoint(int point_num);
+
+Calculate external tool coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Calculate external tool coordinate system
+     * @param [out] tcp_pose External tool coordinate system
+     * @return Error code
+     */
+    errno_t ComputeExTCF(DescPose *tcp_pose);
+
 Set the external tool coordinate system
 +++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
@@ -86,6 +158,30 @@ Set the list of external tool coordinate systems
     * @return  Error code
     */
     errno_t  SetExToolList(int id, DescPose *etcp, DescPose *etool);  
+
+Set the workpiece reference point - three-point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Set the workpiece reference point - three-point method
+     * @param [in] point_num point number, range [1~3]
+     * @return Error code
+     */
+    errno_t SetWObjCoordPoint(int point_num);
+
+Calculate workpiece coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Calculate workpiece coordinate system
+     * @param [out] wobj_pose Workpiece coordinate system
+     * @return Error code
+     */
+    errno_t ComputeWObjCoord(DescPose *wobj_pose);
 
 Set the workpiece coordinate system
 ++++++++++++++++++++++++++++++++++++++

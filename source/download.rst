@@ -17,6 +17,8 @@ Secondary Development
 ---------------------------------
     :download:`FRCobot CPP SDK <https://github.com/FAIR-INNOVATION/frcobot_cpp_sdk/archive/refs/heads/main.zip>`
 
+    :download:`FRCobot CPP SDK-v2.0.0 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/tags/2.0.0.zip>`
+
     :download:`FRCobot C#-v1.0.0 SDK <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/archive/refs/tags/1.0.0.zip>`
 
     :download:`FRCobot Python SDK <https://github.com/FAIR-INNOVATION/frcobot_python_sdk/archive/refs/heads/main.zip>`

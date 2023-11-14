@@ -56,6 +56,86 @@ Get the current joint position (radians)
     */   
     errno_t  GetActualJointPosRadian(uint8_t flag, JointPos *jPos);
 
+Get joint feedback speed
++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get joint feedback speed-deg/s
+     * @param  [in] flag 0-blocking, 1-non-blocking
+     * @param  [out] speed Six joint speeds
+     * @return  Error code 
+     */ 
+    errno_t  GetActualJointSpeedsDegree(uint8_t flag, float speed[6]);
+
+Get joint feedback acceleration
++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get joint feedback acceleration-deg/s^2
+     * @param  [in] flag 0-blocking, 1-non-blocking
+     * @param  [out] acc speed Six joint acceleration
+     * @return  Error code 
+     */ 
+    errno_t  GetActualJointAccDegree(uint8_t flag, float acc[6]);   
+
+Get TCP command speed
++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get TCP command speed
+     * @param  [in] flag 0-blocking, 1-non-blocking
+     * @param  [out] tcp_speed Linear speed
+     * @param  [out] ori_speed posture speed
+     * @return  Error code 
+     */
+    errno_t  GetTargetTCPCompositeSpeed(uint8_t flag, float *tcp_speed, float *ori_speed);
+
+Get TCP feedback speed
++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get TCP feedback speed
+     * @param  [in] flag 0-blocking, 1-non-blocking
+     * @param  [out] tcp_speed Linear speed
+     * @param  [out] ori_speed posture speed
+     * @return  Error code  
+     */ 
+    errno_t  GetActualTCPCompositeSpeed(uint8_t flag, float *tcp_speed, float *ori_speed);
+
+Get TCP command speed
++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get TCP command speed
+     * @param  [in] flag 0-blocking, 1-non-blocking
+     * @param  [out] speed [x,y,z,rx,ry,rz]speed
+     * @return  Error code  
+     */ 
+    errno_t  GetTargetTCPSpeed(uint8_t flag, float speed[6]);
+
+Get TCP feedback speed
++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get TCP feedback speed
+     * @param  [in] flag 0-blocking, 1-non-blocking
+     * @param  [out] speed [x,y,z,rx,ry,rz]speed
+     * @return  Error code 
+     */ 
+    errno_t  GetActualTCPSpeed(uint8_t flag, float speed[6]);
+
 Get the current tool pose
 +++++++++++++++++++++++++++++++++
 .. code-block:: c++
@@ -292,6 +372,44 @@ Query whether the robot movement is complete
     * @return  Error code
     */   
     errno_t  GetRobotMotionDone(uint8_t *state);
+
+Query robot error code
++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Query robot error code
+     * @param  [out]  maincode  main error code 
+     * @param  [out]  subcode   sub main code
+     * @return  error code
+     */ 
+    errno_t  GetRobotErrorCode(int *maincode, int *subcode);
+
+Query robot teaching and management point data
++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Query robot teaching and management point data
+     * @param  [in]  name  Point name
+     * @param  [out]  data   point data
+     * @return  error code
+     */ 
+    errno_t  GetRobotTeachingPoint(char name[64], float data[20]);
+
+Query the robot motion queue cache length
++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Query the robot motion queue cache length
+     * @param  [out]  len  cache length
+     * @return  error code
+     */ 
+    errno_t  GetMotionQueueLength(int *len);
 
 Code example
 ++++++++++++++

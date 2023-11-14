@@ -70,12 +70,118 @@ Obtain the gripper motion state
     :linenos:
 
     /**
-    * @brief  Obtain the gripper motion state
-    * @param  [out] fault  0- no error, 1- error
-    * @param  [out] staus  0- motion incomplete, 1- motion complete
-    * @return  Error code
-    */
-    errno_t  GetGripperMotionDone(uint8_t *fault, uint8_t *status);
+     * @brief  Get the gripper motion status
+     * @param  [out] fault 0-no error, 1-error
+     * @param  [out] staus 0-the movement is not completed, 1-the movement is completed
+     * @return  Error code 
+     */
+    errno_t  GetGripperMotionDone(uint16_t *fault, uint8_t *status);
+
+Get the gripper activation status
++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the gripper activation status
+     * @param  [out] fault 0-no error, 1-error
+     * @param  [out] status bit0~bit15 corresponds to the gripper number 0~15, bit=0 is inactive, bit=1 is activated
+     * @return  Error code
+     */
+    errno_t  GetGripperActivateStatus(uint16_t *fault, uint16_t *status);
+
+Get the gripper position
++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the gripper position
+     * @param  [out] fault 0-no error, 1-error
+     * @param  [out] position position percentage, range 0~100%
+     * @return  Error code 
+     */
+    errno_t  GetGripperCurPosition(uint16_t *fault, uint8_t *position);
+
+Get the gripper speed
++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the gripper speed
+     * @param  [out] fault 0-no error, 1-error
+     * @param  [out] speed speed percentage, range 0~100%
+     * @return  Error code 
+     */
+    errno_t  GetGripperCurSpeed(uint16_t *fault, int8_t *speed);
+
+Get the gripper current
++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the gripper current
+     * @param  [out] fault 0-no error, 1-error
+     * @param  [out] current current percentage, range 0~100%
+     * @return  Error code 
+     */
+    errno_t  GetGripperCurCurrent(uint16_t *fault, int8_t *current);
+
+Get the gripper voltage
++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the gripper voltage
+     * @param  [out] fault 0-no error, 1-error
+     * @param  [out] voltage voltage, unit 0.1V
+     * @return  Error code 
+     */
+    errno_t  GetGripperVoltage(uint16_t *fault, int *voltage);
+
+Get the gripper temperature
++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Get the gripper temperature
+     * @param  [out] fault 0-no error, 1-error
+     * @param  [out] temp temperature, unit °C
+     * @return  Error code 
+     */
+    errno_t  GetGripperTemp(uint16_t *fault, int *temp);
+
+Calculate pre-fetch points - vision
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Calculate pre-fetch points - vision
+     * @param  [in] desc_pos grab point Cartesian pose
+     * @param  [in] zlength z-axis offset
+     * @param  [in] zangle rotation offset around z-axis
+     * @return  Error code  
+     */
+    errno_t  ComputePrePick(DescPose *desc_pos, double zlength, double zangle, DescPose *pre_pos);
+
+Calculate retreat point-visual
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Calculate retreat point-visual
+     * @param  [in] desc_pos grab point Cartesian pose
+     * @param  [in] zlength z-axis offset
+     * @param  [in] zangle rotation offset around z-axis
+     * @return  Error code  
+     */
+    errno_t  ComputePostPick(DescPose *desc_pos, double zlength, double zangle, DescPose *post_pos);
 
 Code example
 ++++++++++++++++

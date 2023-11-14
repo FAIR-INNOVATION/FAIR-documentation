@@ -164,6 +164,43 @@ Get the tool analog input
     */   
     errno_t  GetToolAI(int id, uint8_t block, float *result);   
 
+Get the robot end point record button status
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get the robot end point record button status
+     * @param [out] state button state, 0-pressed, 1-released
+     * @return Error code
+     */
+    errno_t  GetAxlePointRecordBtnState(uint8_t *state);
+
+Get the DO output status at the end of the robot
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get the DO output status at the end of the robot
+     * @param [out] do_state DO output state, do0~do1 corresponds to bit1~bit2, starting from bit0
+     * @return Error code
+     */
+    errno_t  GetToolDO(uint8_t *do_state);
+
+Get the DO output status of the robot controller
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get the DO output status of the robot controller
+     * @param [out] do_state_h DO output status, co0~co7 corresponds to bit0~bit7
+     * @param [out] do_state_l DO output status, do0~do7 correspond to bit0~bit7
+     * @return Error code
+     */
+    errno_t  GetDO(uint8_t *do_state_h, uint8_t *do_state_l);
+
 Wait for control box analog input
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
