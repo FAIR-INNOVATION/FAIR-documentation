@@ -12,9 +12,14 @@ Obtain force sensor configuration
 
     "Prototype", "``FT_GetConfig()``"
     "Description", "Obtain force sensor configuration"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0, company,device,softversion,bus],company:Sensor manufacturer
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional Parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+        - Return(if success): [number,company,device,softversion]
+        - number: sensor number, range[1]
+        - company: Sensor manufacturer,17-Kunwei Technology,19-Aerospace 11th Institute, 20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core
+        - device:equipment number: Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongkomi Point (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A)
+        - softversion:Software version number, temporarily not used, defaults to 0"
 
 Force sensor configuration
 ++++++++++++++++++++++++++++++
@@ -22,14 +27,15 @@ Force sensor configuration
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_SetConfig(company,device,softversion,bus)``"
+    "Prototype", "``FT_SetConfig(company,device,softversion=0,bus=0)``"
     "Description", "Force sensor configuration"
-    "Parameter", "- ``company``:Sensor manufacturer,17-Kunwei Technology,19-Aerospace 11th Institute,20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core;
+    "Required parameter", "- ``company``:Sensor manufacturer,17-Kunwei Technology,19-Aerospace 11th Institute,20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core;
     - ``device``:equipment number: Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongkomi Point (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A);
     - ``softversion``:software version number, temporarily not used, defaults to 0;;
     - ``bus``:device mounted terminal bus position, temporarily not used, defaults to 0;"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter",	"- softversion:software version number, temporarily not used, defaults to 0;
+        - bus:device mounted terminal bus position, temporarily not used, defaults to 0;"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -56,9 +62,9 @@ Force sensor activation
 
     "Prototype", "``FT_Activate(state)``"
     "Description", "Force sensor activation"
-    "Parameter", "- ``state``:0-Reset,1-Activate"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``state``:0-Reset,1-Activate"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -82,9 +88,9 @@ Zero calibration of force sensor
 
     "Prototype", "``FT_SetZero(state)``"
     "Description", "Zero calibration of force sensor"
-    "Parameter", "- ``state``:0-Remove zero,1-Zero correction"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``state``:0-Remove zero,1-Zero correction"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -108,9 +114,9 @@ Set the force sensor reference coordinate system
 
     "Prototype", "``FT_SetRCS(ref)``"
     "Description", "Set the force sensor reference coordinate system"
-    "Parameter", "- ``ref``:0-Tool coordinate system,1-Base coordinate system"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``ref``:0-Tool coordinate system,1-Base coordinate system"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -132,9 +138,10 @@ Load weight identification calculation
 
     "Prototype", "``FT_PdIdenCompute()``"
     "Description", "Load weight identification calculation"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,weight] ,weight-Load weight,unit[kg]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success):weight Load weight,unit[kg] "
 
 Load weight identification record
 +++++++++++++++++++++++++++++++++++++
@@ -144,9 +151,9 @@ Load weight identification record
 
     "Prototype", "``FT_PdIdenRecord(tool_id)``"
     "Description", "Load weight identification record"
-    "Parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
+    Return(if success):weight Load weight,unit[kg] 
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -181,9 +188,10 @@ Load centroid identification calculation
 
     "Prototype", "``FT_PdCogIdenCompute()``"
     "Description", "Load centroid identification calculation"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,cog],cog=[cogx,cogy,cogz] ,Load centroid,unit[mm]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): cog=[cogx,cogy,cogz],Load centroid ,unit[mm] "
 
 Load centroid identification record
 ++++++++++++++++++++++++++++++++++++++
@@ -193,9 +201,9 @@ Load centroid identification record
 
     "Prototype", "``FT_PdCogIdenRecord(tool_id)``"
     "Description", "Load centroid identification record"
-    "Parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -234,9 +242,10 @@ Obtain force/torque data in the reference coordinate system
 
     "Prototype", "``FT_GetForceTorqueRCS()``"
     "Description", "Obtain force/torque data in the reference coordinate system"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,data] ,data=[fx,fy,fz,mx,my,mz]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success):data=[fx,fy,fz,mx,my,mz] "
 
 Code example
 ----------------
@@ -258,9 +267,10 @@ Obtain raw force/torque data from the force sensor
 
     "Prototype", "``FT_GetForceTorqueOrigin()``"
     "Description", "Obtain raw force/torque data from the force sensor"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,data] ,data=[fx,fy,fz,mx,my,mz]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success):data=[fx,fy,fz,mx,my,mz] "
 
 Code example
 ----------------
@@ -282,15 +292,15 @@ Collision protection
 
     "Prototype", "``FT_Guard(flag,sensor_num,select,force_torque,max_threshold,min_threshold)``"
     "Description", "Collision protection"
-    "Parameter", "- ``flag``:0-Turn off collision protection, 1-Turn on collision protection;
+    "Required parameter", "- ``flag``:0-Turn off collision protection, 1-Turn on collision protection;
     - ``sensor_num``:Force sensor number;
     - ``select``:Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective;
     - ``force_torque``:Collision detection force/moment,unit[N or Nm];
     - ``max_threshold``:Maximum threshold;
-    - ``min_threshold``:Minimum Threshold;
+    - ``min_threshold``:Minimum Threshold;"
+    "Optional parameter", "Nothing"
     - Force/torque detection range:(force_torque-min_threshold,force_torque+max_threshold)"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -324,7 +334,7 @@ Constant force control
 
     "Prototype", "``FT_Control(flag,sensor_num,select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)``"
     "Description", "Constant force control"
-    "Parameter", "- ``flag``:Constant force control open flag, 0-off, 1-on;
+    "Required parameter", "- ``flag``:Constant force control open flag, 0-off, 1-on;
     - ``sensor_num``:Force sensor number;
     - ``select``:Are the six degrees of freedom detected [fx,fy,fz,mx,my,mz],0-ineffective, 1-effective;
     - ``force_torque``:Detection force/torque, unit[N or Nm];
@@ -333,8 +343,8 @@ Constant force control
     - ``ILC_sign``: ILC control start stop status, 0-stop, 1-training, 2-practical operation;
     - ``max_dis``:Maximum adjustment distance;
     - ``max_ang``:Maximum adjustment angle;"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -373,15 +383,14 @@ Spiral line exploration
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_SpiralSearch(rcs,dr,fFinsih,t,vmax)``"
+    "Prototype", "``FT_SpiralSearch(rcs,ft, dr = 0.7,max_t_ms = 60000, max_vel = 5)``"
     "Description", "Spiral line exploration"
-    "Parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
-    - ``dr``:Feed rate per circle radius, unit[mm];
-    - ``fFinish``:Force or torque threshold (0-100), unit[N/Nm];
-    - ``t``:Maximum exploration time,unit[ms];
-    - ``vmax``:Maximum linear speed,unit[mm/s]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
+    - ``ft``:Force or torque threshold (0-100), unit[N/Nm];"
+    "Optional parameter", "- ``dr``:Feed rate per circle radius, unit[mm], default to 0.7;
+    - ``max_t_ms``:Maximum exploration time,unit[ms] , default to 6000;
+    - ``max_vel``:Maximum linear speed,unit[mm/s] , default to 5"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -419,17 +428,16 @@ Rotate Insert
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_RotInsertion(rcs,angVelRot,forceInsertion,angleMax,orn,angAccmax,rotorn)``"
+    "Prototype", "``FT_RotInsertion(rcs,ft, orn, angVelRot = 3, angleMax = 45, angAccmax = 0, rotorn =1)``"
     "Description", "Rotate Insert"
-    "Parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system;
-    - ``angVelRot``:Rotational angular velocity: uni[t°/s];
-    - ``forceInsertion``:Force or torque threshold(0~100),unit[N or Nm];
-    - ``angleMax``:maximum rotation angle, unit[°];
-    - ``orn``:Direction of force, 1-fz,2-mz;
-    - ``angAccmax``:Maximum rotational acceleration, unit[°/s^2],not used temporarily
-    - ``rotorn``:Rotation direction, 1-clockwise, 2-counterclockwise"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system;
+    - ``ft``:Force or torque threshold (0-100), unit[N/Nm];
+    - ``orn``:Direction of force, 1-fz,2-mz;"
+    "Optional parameter", "- ``angVelRot``:Rotational angular velocity: uni[t°/s],default to 3;
+    - ``angleMax``:maximum rotation angle, unit[°] ,default to 45;
+    - ``angAccmax``:Maximum rotational acceleration, unit[°/s^2],not used temporarily, default to 0;
+    - ``rotorn``:Rotation direction, 1-clockwise, 2-counterclockwise, default to 1"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -472,16 +480,15 @@ Linear insertion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_LinInsertion(rcs,force_goal,lin_v,lin_a,disMax,linorn)``"
+    "Prototype", "``FT_LinInsertion(rcs, ft, disMax, linorn, lin_v = 1.0, lin_a = 1.0)``"
     "Description", "Linear insertion"
-    "Parameter", "- ``rcs``:Reference frame, 0-Tool frame, 1-Base frame;
-    - ``force_goal``:Force or torque threshold, unit[N or Nm];
-    - ``lin_v``:Linear velocity, unit[mm/s];
-    - ``lin_a``:Linear acceleration, unit[mm/s^2],not used temporarily;
+    "Required parameter", "- ``rcs``:Reference frame, 0-Tool frame, 1-Base frame;
+    - ``ft``:Force or torque threshold (0-100), unit[N/Nm];
     - ``disMax``:Maximum insertion distance,unit[mm];
     - ``linorn``:Insertion direction, 1-positive direction, 2-negative direction;"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "- ``lin_v``:Linear velocity, unit[mm/s] , default to 1.0;
+    - ``lin_a``:Linear acceleration, unit[mm/s^2],not used temporarily;rotorn:Rotation direction, 1-clockwise, 2-counterclockwise, default to 1.0"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -525,9 +532,9 @@ Calculate the middle plane position to start
 
     "Prototype", "``FT_CalCenterStart()``"
     "Description", "Calculate the middle plane position to start"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Calculate the middle plane position to end
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -537,9 +544,10 @@ Calculate the middle plane position to end
 
     "Prototype", "``FT_CalCenterEnd()``"
     "Description", "Calculate the middle plane position to end"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,pos] ,pos=[x,y,z,rx,ry,rz]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode
+    - Return(if success):pos=[x,y,z,rx,ry,rz] "
 
 Surface positioning
 ++++++++++++++++++++++++++++++++++
@@ -547,17 +555,15 @@ Surface positioning
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_FindSurface (rcs,dir,axis,lin_v,lin_a,disMax,force_goal)``"
+    "Prototype", "``FT_FindSurface (rcs, dir, axis, disMax, ft, lin_v = 3.0, lin_a = 0.0)``"
     "Description", "Surface positioning"
-    "Parameter", "- ``rcs``: Reference frame, 0-Tool frame, 1-Base frame;
+    "Required parameter", "- ``rcs``: Reference frame, 0-Tool frame, 1-Base frame;
     - ``dir``:Direction of movement, 1-positive, 2-negative;
     - ``axis``:Move Axis,1-x,2-y,3-z;
-    - ``lin_v``:Exploring Linear Speed,unit[mm/s];
-    - ``lin_a``:Exploring Linear Acceleration,unit[mm/s^2];
-    - ``disMax``:Maximum exploration distance,unit[mm]
-    - ``force_goal``:Action termination force threshold,unit[N];"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``disMax``:Maximum exploration distance,unit[mm]"
+    "Optional parameter", "- ``lin_v``:Exploring Linear Speed,unit[mm/s] , default to 3.0;
+    - ``lin_a``:Exploring Linear Acceleration,unit[mm/s^2] , default to 0.0"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------
@@ -640,9 +646,9 @@ Flexibility control off
 
     "Prototype", "``FT_ComplianceStop()``"
     "Description", "Flexibility control off"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Flexibility control on
 ++++++++++++++++++++++++++++++++++
@@ -654,8 +660,8 @@ Flexibility control on
     "Description", "Flexibility control on"
     "Parameter", "- ``p``: Position adjustment coefficient or compliance coefficient
     - ``force``:flexibility opening force threshold, unit[N]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 ----------------

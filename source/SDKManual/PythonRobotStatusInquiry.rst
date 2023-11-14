@@ -12,9 +12,9 @@ Obtain robot installation angle
 
     "Prototype", "``GetRobotInstallAngle()``"
     "Description", "Obtain robot installation angle"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,yangle,zangle],yangle-angle of roll,zangle-rotation angle
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode
+    - Return(if success): [yangle,zangle],yangle-angle of roll,zangle-rotation angle"
 
 Code example
 ------------
@@ -36,9 +36,10 @@ Obtain system variable values
 
     "Prototype", "``GetSysVarValue(id)``"
     "Description", "Obtain system variable values"
-    "Parameter", "- ``id``:System variable number, range[1~20]"
-    "Return value", "- Success:[0,var_value]
-    - Failed:[errcode,]"
+    "Required parameter", "- ``id``:System variable number, range[1~20]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode
+    - Return(if success): var_value"
 
 Code example
 ------------
@@ -62,11 +63,12 @@ Obtain the current joint position (angle)
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualJointPosDegree(flag)``"
-    "Description", "Obtain the current joint position (angle))"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - Failed:[errcode,]"
+    "Prototype", "``GetActualJointPosDegree(flag = 1)``"
+    "Description", "Obtain the current joint position(radian)"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
 
 Code example
 ------------
@@ -86,9 +88,9 @@ Obtain the current joint position(radian)
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualJointPosRadian(flag)``"
+    "Prototype", "``GetActualJointPosRadian(flag = 1)``"
     "Description", "Obtain the current joint position(radian)"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
+    "Required parameter", "- ``flag``:0-blocking, 1-non blocking"
     "Return value", "- Success:[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
     - Failed:[errcode,]"
 
@@ -104,17 +106,143 @@ Code example
     ret = robot.GetActualJointPosRadian(0)  # Obtain the current joint position of the robot
     print(ret)
 
+Obtain joint Actual Speed -deg/s
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetActualJointSpeedsDegree (flag = 1 )``"
+    "Description", "Obtain joint Actual Speed -deg/s"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualJointSpeedsDegree()
+    print("Obtain joint Actual Speed -deg/s ", ret)
+
+Obtain Target TCP Composite Speed
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTargetTCPCompositeSpeed (flag = 1)``"
+    "Description", "Obtain Target TCP Composite Speed"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): [tcp_speed,ori_speed]"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+    
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetTargetTCPCompositeSpeed()
+    print("Obtain Target TCP Composite Speed", ret)
+
+
+Obtain Actual TCP Composite Speed
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetActualTCPCompositeSpeed (flag = 1)``"
+    "Description", "Obtain Actual TCP Composite Speed"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): [tcp_speed,ori_speed]"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualTCPCompositeSpeed()
+    print("Obtain Actual TCP Composite Speed ", ret)
+
+Obtain Target TCP Speed
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTargetTCPSpeed (flag = 1)``"
+    "Description", "Obtain Actual TCP Composite Speed"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): speed [x,y,z,rx,ry,rz]"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetTargetTCPSpeed()
+    print("Obtain Target TCP Speed ", ret)
+
+Obtain Actual TCP Speed
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetActualTCPSpeed (flag = 1)``"
+    "Description", "Obtain Actual TCP Speed"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): speed [x,y,z,rx,ry,rz]"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualTCPSpeed()
+    print("Obtain Actual TCP Speed ", ret)
+
 Obtain the current tool pose
 ++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualTCPPose(flag)``"
+    "Prototype", "``GetActualTCPPose (flag = 1)``"
     "Description", "Obtain the current tool pose"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,tcp_pose],tcp_pose=[x,y,z,rx,ry,rz]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): tcp_pose=[x,y,z,rx,ry,rz]"
 
 Code example
 ------------
@@ -134,11 +262,12 @@ Obtain the current tool coordinate system number
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualTCPNum(flag)``"
+    "Prototype", "``GetActualTCPNum (flag = 1)``"
     "Description", "Obtain the current tool coordinate system number"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,tool_id]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): tool_id:Tool number"
 
 Code example
 ------------
@@ -158,11 +287,12 @@ Obtain the current workpiece coordinate system number
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualWObjNum(flag)``"
+    "Prototype", "``GetActualWObjNum (flag = 1)``"
     "Description", "Obtain the current workpiece coordinate system number"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,wobj_id]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): wobj_id:Workpiece number"
 
 Code example
 ------------
@@ -184,9 +314,10 @@ Obtain the current end flange pose
 
     "Prototype", "``GetActualToolFlangePose(flag)``"
     "Description", "Obtain the current end flange pose"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,flange_pose],flange_pose=[x,y,z,rx,ry,rz]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): flange_pose=[x,y,z,rx,ry,rz]"
 
 Code example
 ------------
@@ -206,13 +337,13 @@ Inverse kinematics solution
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetInverseKin(type,desc_pos,config)``"
+    "Prototype", "``GetInverseKin(type,desc_pos,config = -1)``"
     "Description", "Inverse kinematics, Cartesian pose to solve joint position"
-    "Parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
-    - ``desc_pose``:[x,y,z,rx,ry,rz],tool posture,unit[mm][°]
-    - ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration"
-    "Return value", "- Success:[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - Failed:[errcode,]"
+    "Required parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
+    - ``desc_pose``:[x,y,z,rx,ry,rz],tool posture,unit[mm][°]"
+    "Optional parameter", "- ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration, default to -1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
 
 Code example
 --------------
@@ -235,11 +366,12 @@ Inverse kinematics solution - Specify reference location
 
     "Prototype", "``GetInverseKinRef(type,desc_pos,joint_pos_ref)``"
     "Description", "Inverse kinematics solve inverse kinematics, tool pose solve joint position, and refer to specified joint position to solve"
-    "Parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
+    "Required parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
     - ``desc_pos``:[x,y,z,rx,ry,rz]tool posture,unit[mm][°]
     - ``joint_pos_ref``:[j1,j2,j3,j4,j5,j6], joint reference position,unit[°]"
-    "Return value", "- Success:[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - Failed:[errcode,]"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
 
 Code example
 --------------
@@ -263,11 +395,12 @@ Inverse kinematics solution - whether there is a solution
 
     "Prototype", "``GetInverseKinHasSolution(type,desc_pos,joint_pos_ref)``"
     "Description", "Inverse kinematics, tool pose solution, whether joint position is solved"
-    "Parameter", "- ``type``:0-Absolute pose (base coordinate system), 1-Relative pose (base coordinate system), 2-Relative pose (tool coordinate system)
+    "Required parameter", "- ``type``:0-Absolute pose (base coordinate system), 1-Relative pose (base coordinate system), 2-Relative pose (tool coordinate system)
     - ``desc_pos``:[x,y,z,rx,ry,rz]tool posture, unit[mm][°]
     - ``joint_pos_ref``:[j1,j2,j3,j4,j5,j6],joint reference position, unit[°]"
-    "Return value", "- Success:[0,result],“True”-with solution,“False”-without solution
-    - Failed:[errcode,]"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): result= “True”-with solution,“False”-without solution"
 
 Code example
 ----------------
@@ -291,9 +424,10 @@ Forward kinematics solution
 
     "Prototype", "``GetForwardKin(joint_pos)``"
     "Description", "Forward kinematics, joint position solving tool pose"
-    "Parameter", "- ``joint_pos``:[j1,j2,j3,j4,j5,j6]:joint Position,unit[°]"
-    "Return value", "- Success:[0,desc_pos],desc_pos=[x,y,z,rx,ry,rz]:tool posture,unit[mm][°]
-    - Failed:[errcode,]"
+    "Required parameter", "- ``joint_pos``:[j1,j2,j3,j4,j5,j6]:joint Position,unit[°]"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): desc_pos=[x,y,z,rx,ry,rz]:tool posture,unit[mm][°]"
 
 Code example
 -------------------
@@ -314,11 +448,12 @@ Obtain the current joint torque
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetJointTorques(flag)``"
+    "Prototype", "``GetJointTorques (flag = 1)``"
     "Description", "Obtain the current joint torque"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,torques],torques=[j1,j2,j3,j4,j5,j6]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success):  errcode =0, joint_torque =[x,y,z,rx,ry,rz]"
 
 Code example
 ----------------
@@ -338,11 +473,12 @@ Obtain the weight of the current load
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTargetPayload(flag)``"
+    "Prototype", "``GetTargetPayload (flag = 1)``"
     "Description", "Obtain the weight of the current load"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,weight],unit[kg]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): errcode =0, weight unit[kg]"
 
 Code example
 -----------------
@@ -362,11 +498,12 @@ Obtain the centroid of the current load
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTargetPayloadCog(flag)``"
+    "Prototype", "``GetTargetPayloadCog (flag = 1)``"
     "Description", "Obtain the centroid of the current load"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,cog], cog=[x,y,z]:barycentric coordinate,unit[mm]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): weight,unit[kg]"
 
 Code example
 ----------------
@@ -386,11 +523,12 @@ Obtain the current tool coordinate system
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTCPOffset(flag)``"
+    "Prototype", "``GetTCPOffset (flag = 1)``"
     "Description", "Obtain the current tool coordinate system"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,tcp_offset], tcp_offset=[x,y,z,rx,ry,rz]:相对位姿,unit[mm][°]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): tcp_offset=[x,y,z,rx,ry,rz]: Relative pose,unit[mm][°]"
 
 Code example
 ------------
@@ -410,11 +548,12 @@ Obtain the current workpiece coordinate system
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetWObjOffset(flag)``"
+    "Prototype", "``GetWObjOffset(flag = 1)``"
     "Description", "Obtain the current workpiece coordinate system"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,wobj_offset], wobj _offset=[x,y,z,rx,ry,rz]:relative pose,unit[mm][°]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): wobj _offset=[x,y,z,rx,ry,rz]:relative pose,unit[mm][°]"
 
 Code example
 --------------
@@ -436,9 +575,10 @@ Obtain joint soft limit angle
 
     "Prototype", "``GetJointSoftLimitDeg(flag)``"
     "Description", "Obtain joint soft limit angle"
-    "Parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0, j1min,j1max,j2min,j2max,j3min,j3max,j4min,j4max,j5min,j5max,j6min,j6max] :axis 1 to axis 6 joint negative limit and positive limit,unit[mm]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): [j1min,j1max,j2min,j2max,j3min,j3max,j4min,j4max,j5min,j5max, j6min, j6max] :axis 1 to axis 6 joint negative limit and positive limit,unit[mm]"
 
 Code example
 --------------
@@ -460,9 +600,10 @@ Get system time
 
     "Prototype", "``GetSystemClock()``"
     "Description", "Get system time"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,t_ms]:unit[ms]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success):  t_ms unit[ms] "
 
 Code example
 --------------
@@ -484,9 +625,10 @@ Obtain the current joint configuration of the robot
 
     "Prototype", "``GetRobotCurJointsConfig()``"
     "Description", "Obtain the current joint configuration of the robot"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,config]:range[0~7]
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): config range[0~7]"
 
 Code example
 --------------
@@ -507,10 +649,11 @@ Get default speed
     :widths: 10 30
 
     "Prototype", "``GetDefaultTransVel()``"
-    "Description", "Get default speed"
+    "Description", "Obtain default speed"
     "Parameter", "Nothing"
-    "Return value", "- Success:[0,vel]:unit[mm/s]
-    - Failed:[errcode,]"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): vel:unit[mm/s]"
 
 Code example
 --------------
@@ -532,9 +675,10 @@ Check if the robot motion is complete
 
     "Prototype", "``GetRobotMotionDone()``"
     "Description", "Check if the robot motion is complete"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,state],state:0-incomplete,1-complete
-    - Failed:[errcode,]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): state 0-incomplete,1-complete"
 
 Code example
 --------------
@@ -550,3 +694,104 @@ Code example
         print(ret[1])
     else:
         print("the errcode is: ", ret[0])
+
+Obtain the robot error code
++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotErrorCode()``"
+    "Description", "Obtain the robot error code"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): [maincode,subcode]"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetRobotErrorCode()
+    print("Obtain the robot error code ", ret)
+
+Obtain the robot teaching point data
++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotTeachingPoint(name)``"
+    "Description", "Obtain the robot teaching point data"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): [x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,tool, wobj,speed,acc,e1,e2,e3,e4]"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetRobotTeachingPoint("11")
+    print("Obtain the robot teaching point data", ret)
+
+
+Obtain SSH Keygen
++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetSSHKeygen()``"
+    "Description", "Obtain SSH Keygen"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): keygen"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetSSHKeygen() # Obtain SSH Keygen
+    print("Obtain SSH Keygen", ret)
+
+6.31Calculates the MD5 value of the file in the specified path
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ComputeFileMD5(file_path)``"
+    "Description", "Calculates the MD5 value of the file in the specified path"
+    "Required parameter", "``file_path``:The traj folder path is /fruser/traj/, such as /fruser/traj/trajHelix_aima_1.txt."
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): MD5"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+    :emphasize-lines: 4
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.ComputeFileMD5("/fruser/201.lua")   #计算指定路径下文件的MD5值
+    print("Calculates the MD5 value of the file in the specified path ", ret)

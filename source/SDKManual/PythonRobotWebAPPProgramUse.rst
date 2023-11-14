@@ -12,10 +12,10 @@ Set up and automatically load the default operating program
 
     "Prototype", "``LoadDefaultProgConfig(flag,program_name)``"
     "Description", "Set up and automatically load the default operating program"
-    "Parameter", "- ``flag``:1-automatically load the default program upon startup, 0-do not automatically load the default program
+    "Required parameter", "- ``flag``:1-automatically load the default program upon startup, 0-do not automatically load the default program
     - ``program_name``:The name and path of the homework program, such as “/fraser/movej.lua”, where “/fraser/” is a fixed path"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ------------
@@ -26,7 +26,9 @@ Code example
     import frrpc
     # A connection is established with the robot controller. A successful connection returns a robot object
     robot = frrpc.RPC('192.168.58.2')
-    robot.LoadDefaultProgConfig(1, "/fruser/splineptp.lua")  # Set the default job program to automatically load upon start up
+    flag = 1 
+    ret = robot.LoadDefaultProgConfig(flag,'/fruser/testPTP.lua')    # Set up and automatically load the default operating program
+    print("Set up and automatically load the default operating program ", ret)
 
 Load the specified job program
 ++++++++++++++++++++++++++++++++
@@ -36,9 +38,9 @@ Load the specified job program
 
     "Prototype", "``ProgramLoad(program_name)``"
     "Description", "Load the specified job program"
-    "Parameter", "- ``program_name``:The name and path of the homework program, such as “/fraser/movej.lua”, where “/fraser/” is a fixed path"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``program_name``:The name and path of the homework program, such as “/fraser/movej.lua”, where “/fraser/” is a fixed path"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ------------
@@ -61,9 +63,10 @@ Obtain the execution line number of the current robot job program
 
     "Prototype", "``GetCurrentLine()``"
     "Description", "Obtain the execution line number of the current robot job program"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,line_num]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success):line_num "
 
 Run the currently loaded job program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -73,9 +76,9 @@ Run the currently loaded job program
 
     "Prototype", "``ProgramRun()``"
     "Description", "Run the currently loaded job program"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Pause the currently running job program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -85,9 +88,9 @@ Pause the currently running job program
 
     "Prototype", "``ProgramPause()``"
     "Description", "Pause the currently running job program"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Resume the currently paused job program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -97,9 +100,9 @@ Resume the currently paused job program
 
     "Prototype", "``ProgramResume()``"
     "Description", "Resume the currently paused job program"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Terminate the currently running job program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -109,9 +112,9 @@ Terminate the currently running job program
 
     "Prototype", "``ProgramStop()``"
     "Description", "Terminate the currently running job program"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Obtain the execution status of robot job programs
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -121,9 +124,10 @@ Obtain the execution status of robot job programs
 
     "Prototype", "``GetProgramState()``"
     "Description", "Obtain the execution status of robot job programs"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,state],state:1-program stopped or no program running, 2-program running, 3-program paused
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode
+    - Return(if success):state: 1-program stopped or no program running, 2-program running, 3-program paused "
 
 Obtain the name of the loaded job program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -133,9 +137,10 @@ Obtain the name of the loaded job program
 
     "Prototype", "``GetLoadedProgram()``"
     "Description", "Obtain the name of the loaded job program"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,program_name]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): program_name "
 
 Code example
 ------------

@@ -12,9 +12,14 @@ Obtain gripper configuration
 
     "Prototype", "``GetGripperConfig()``"
     "Description", "Obtain gripper configuration"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0, company,device,softversion,bus],company:夹爪厂商
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success): [number,company,device,softversion]
+    - number: Gripper number, range[1]
+    - company:Claw manufacturers, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing
+    - device:Equipment number: Robotiq(0-2F-85 series), Huiling(0-NK series, 1-Z-EFG-100), Tianji(0-TEG-110), Dahuan(0-PGI-140), Zhixing(0-CTPM2F20)
+    - softversion:Software version number, temporarily not used, defaults to 0;"
 
 Activate gripper
 ++++++++++++++++++++
@@ -24,10 +29,10 @@ Activate gripper
 
     "Prototype", "``ActGripper(index,action)``"
     "Description", "Activate gripper"
-    "Parameter", "- ``index``:Claw number;
+    "Required parameter", "- ``index``:Claw number;
     - ``action``: 0-reset, 1-activate"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Control gripper
 ++++++++++++++++++++
@@ -37,14 +42,14 @@ Control gripper
 
     "Prototype", "``MoveGripper(index,pos,speed,force,maxtime,block)``"
     "Description", "Control gripper"
-    "Parameter", "- ``index``:Claw number;
+    "Required parameter", "- ``index``:Claw number;
     - ``pos``:Position percentage, range[0~100];
     - ``speed``:Speed percentage, range[0~100];
     - ``force``:Moment percentage, range[0~100];
     - ``maxtime``:Maximum waiting time, range[0~30000],unit[ms];
     - ``block``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Obtain gripper movement status
 ++++++++++++++++++++++++++++++++++
@@ -54,9 +59,10 @@ Obtain gripper movement status
 
     "Prototype", "``GetGripperMotionDone()``"
     "Description", "Obtain gripper movement status"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0,status], status:0-incomplete movement,1-exercise completion
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcode
+    - Return(if success):status:0-incomplete movement,1-exercise "
 
 Configure gripper
 +++++++++++++++++++++++++++++++
@@ -64,14 +70,13 @@ Configure gripper
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetGripperConfig(company,device,softversion,bus)``"
+    "Prototype", "``SetGripperConfig(company, device, softversion = 0,bus = 0)``"
     "Description", "Configure gripper"
-    "Parameter", "- ``company``:Claw manufacturers, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing;
-    - ``device``:Equipment number: Robotiq(0-2F-85 series), Huiling(0-NK series, 1-Z-EFG-100), Tianji(0-TEG-110), Dahuan(0-PGI-140), Zhixing(0-CTPM2F20)
-    - ``softversion``:Software version number, temporarily not used, defaults to 0;
-    - ``bus``:Device mounted terminal bus position, temporarily not used, defaults to 0;"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``company``:Claw manufacturers, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing;
+    - ``device``:Equipment number: Robotiq(0-2F-85 series), Huiling(0-NK series, 1-Z-EFG-100), Tianji(0-TEG-110), Dahuan(0-PGI-140), Zhixing(0-CTPM2F20)"
+    "Optional parameter", "- ``softversion``::Software version number, temporarily not used, defaults to 0;
+    - ``bus``:Device mounted terminal bus position, temporarily not used, defaults to 0"
+    "Return value", "Errcode: Success -0  Failed -errcod"
 
 Code example
 --------------
@@ -95,3 +100,34 @@ Code example
     robot.MoveGripper(1,0,50,0,30000,0)
     ret = robot.GetGripperMotionDone()    # Example Query the status of the claw movement
     print(ret)
+
+Calculate pre- pick points - Vision
++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ComputePrePick(desc_pos, zlength, zangle)``"
+    "Description", "Calculate pre- pick points - Vision"
+    "Required parameter", "- ``desc``:Grab point Cartesian pose;
+    - ``zlength``:Indicates the offset of the z axis;
+    - ``zangle``:Rotation offset about the z axis"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod
+    - Return(if success): pre_pos: Pre- pick point’s Cartesian pose"
+
+Calculate post pick points - Vision
++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ComputePostPick(desc_pos, zlength, zangle)``"
+    "Description", "Calculate post pick points - Vision"
+    "Required parameter", "- ``desc``:Grab point Cartesian pose;
+    - ``zlength``:Indicates the offset of the z axis;
+    - ``zangle``:Rotation offset about the z axis"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod
+    - Return(if success): post_pos: Post pick point’s Cartesian pose"
+

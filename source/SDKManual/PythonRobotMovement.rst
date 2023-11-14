@@ -16,14 +16,15 @@ jog Jog
 
     "Prototype", "``StartJOG(ref,nb,dir,vel,acc,max_dis)``"
     "Description", "jog Jog"
-    "Parameter", "- ``ref``:0-joint jogging, 2-base coordinate system jogging, 4-tool coordinate system jogging, 8-workpiece coordinate system jogging;
+    "Required parameter", "- ``ref``:0-joint jogging, 2-base coordinate system jogging, 4-tool coordinate system jogging, 8-workpiece coordinate system jogging;
     - ``nb``:1-1joint(x-axis), 2-2joint(y-axis), 3-3join(z-axis), 4-4joint(rx), 5-5joint (ry), 6-6joint(rz);
     - ``dir``:0-negative direction, 1-positive direction;
     - ``vel``:Speed percentage,[0~100];
     - ``acc``:Acceleration percentage,[0~100];
     - ``max_dis``:Maximum angle/distance for a single jog,unit[° or mm]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "- ``vel``:Speed percentage,[0~100], default to is 20.0;
+                           - ``acc``:Acceleration percentage,[0~100], default to is 20.0"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 jog jog deceleration stops
 ----------------------------
@@ -34,9 +35,9 @@ jog jog deceleration stops
 
     "Prototype", "``StopJOG(ref)``"
     "Description", "jog jog deceleration stops"
-    "Parameter", "- ``ref``:1-joint jog stop, 3-base coordinate system jog stop, 5-tool coordinate system jog stop, 9-workpiece coordinate system jog stop"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``ref``:1-joint jog stop, 3-base coordinate system jog stop, 5-tool coordinate system jog stop, 9-workpiece coordinate system jog stop"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 
 jog jog immediately stops
@@ -48,9 +49,9 @@ jog jog immediately stops
 
     "Prototype", "``ImmStopJOG()``"
     "Description", "jog jog immediately stops"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
      
 Code example
 ^^^^^^^^^^^^^^^^^
@@ -169,21 +170,20 @@ Joint space motion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``MoveJ(joint_pos,desc_pos,tool,user,vel,acc,ovl,exaxis_pos,blendT,offset_flag,offset_pos)``"
+    "Prototype", "``MoveJ(joint_pos, tool, user, desc_pos = [0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0, ovl = 100.0, exaxis_pos = [0.0,0.0,0.0,0.0], blendT = -1.0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0])``"
     "Description", "Joint space motion"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
-    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    "Required parameter", "- ``joint_pos``:Target joint position, unit[°];
     - ``tool``:Tool number,[0~14];
-    - ``user``:Workpiece number,[0~14];
-    - ``vel``:Speed percentage,[0~100];
-    - ``acc``:Acceleration percentage,[0~100],temporarily closed;
-    - ``ovl``:Speed scaling factor,[0~100];
-    - ``exaxis_pos``:External axis 1 position to external axis 4 position;
-    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked),unit[ms];
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
-    - ``offset_pos``:Pose offset,unit[mm][°]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``user``:Workpiece number,[0~14];"
+    "Optional parameter", "- ``desc_pos``:Target Cartesian pose,unit[mm], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls forward kinematics to solve for return value;
+    - ``vel``:Speed percentage,[0~100], default to is 20.0;
+    - ``acc``:Acceleration percentage,[0~100], default to is 0.0;
+    - ``ovl``:Speed scaling factor,[0~100], default to is 100.0;
+    - ``exaxis_pos``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0];
+    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked),unit[ms] , default to is -1.0;
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system,[2]-offset under tool coordinate system, default to is 0;
+    - ``offset_pos``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0]"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ------------------
@@ -232,22 +232,21 @@ Linear motion in Cartesian space
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``MoveL(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,exaxis_pos,search,offset_flag,offset_pos)``"
+    "Prototype", "``MoveL(desc_pos, tool, user, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0 , ovl = 100.0, blendR = -1.0, exaxis_pos = [0.0,0.0,0.0,0.0], search = 0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0] )``"
     "Description", "Linear motion in Cartesian space"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
-    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    "Required parameter", "- ``desc_pos``:Target Cartesian pose,unit[mm][°];
     - ``tool``:Tool number,[0~14];
-    - ``user``:Workpiece number,[0~14];
-    - ``vel``:Speed percentage,[0~100];
-    - ``acc``:Acceleration percentage,[0~100],temporarily closed;
-    - ``ovl``:Speed scaling factor,[0~100];
-    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked),unit[mm];
-    - ``exaxis_pos``:Position of external axis 1~position of external axis 4;
-    - ``search``:[0]-non welding wire positioning, [1]-welding wire positioning;
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
-    - ``offset_pos``:Pose offset,unit[mm][°]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``user``:Workpiece number,[0~14];"
+  - "Optional parameter", "- ``joint_pos``:Target joint position, unit[°], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    - ``vel``:Speed percentage,[0~100], default to is 20.0;;
+    - ``acc``:Acceleration percentage,[0~100], default to is 0.0;
+    - ``ovl``:Speed scaling factor,[0~100], default to is 100.0;
+    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked),unit[mm] , default to is -1.0;
+    - ``exaxis_pos``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0];
+    - ``search``:[0]-non welding wire positioning, [1]-welding wire positioning ,default to is 0;
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system, default to is 0;
+    - ``offset_pos``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0]"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 --------------------
@@ -282,30 +281,29 @@ Circular arc motion in Cartesian space
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``MoveC(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,poffset_flag,offset_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t ,toffset_flag,offset_pos_t,ovl,blendR)``"
+    "Prototype", "``MoveC(desc_pos_p, tool_p, user_p, desc_pos_t, tool_t, user_t, joint_pos_p= [0.0,0.0,0.0, 0.0,0.0,0.0],joint_pos_t=[0.0,0.0,0.0,0.0,0.0,0.0], vel_p = 20.0, acc_p= 100.0,exaxis_pos_p=[0.0,0.0,0.0,0.0],offset_flag_p=0,offset_pos_p= [0.0,0.0,0.0,0.0,0.0,0.0], vel_t= 20.0, acc_t=100.0,exaxis_pos_t=[0.0,0.0,0.0,0.0], offset_flag_t = 0, offset_pos_t = [0.0,0.0,0.0, 0.0,0.0,0.0], ovl = 100.0, blendR = -1.0)``"
     "Description", "Circular arc motion in Cartesian space"
-    "Parameter", "- ``joint_pos_p``:Path point joint position,unit[°];
-    - ``desc_pos_p``:Path point Cartesian pose,unit[mm][°];
-    - ``ptool``:Tool number,[0~14];
-    - ``puser``:Workpiece number,[0~14];
-    - ``pvel``:Speed percentage,[0~100];
-    - ``pacc``:Acceleration percentage,[0~100],temporarily closed;
-    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4;
-    - ``poffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
-    - ``offset_pos_p``:Offset,unit[mm][°];
-    - ``joint_pos_t``:Target point joint position,unit[°];
+    "Required parameter", "- ``desc_pos_p``:Path point Cartesian pose,unit[mm][°];
+    - ``tool_p``:Tool number,[0~14];
+    - ``user_p``:Workpiece number,[0~14];
     - ``desc_pos_t``:Cartesian pose of the target point,unit[mm][°];
-    - ``ttool``:Tool number,[0~14];
-    - ``tuser``:Workpiece number,[0~14];
-    - ``tvel``:Speed percentage,[0~100];
-    - ``tacc``:Acceleration percentage,[0~100],temporarily closed;
-    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4;
-    - ``toffset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
-    - ``offset_pos_t``:Offset,unit[mm][°]。
-    - ``ovl``:Speed scaling factor,[0~100];
-    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked),unit[mm]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``tool_t``:Tool number,[0~14];
+    - ``user_t``:Workpiece number,[0~14];"
+    "Optional parameter", "- ``joint_pos_p``:Path point joint position,unit[°], Default initial value is [0.0,0.0,0.0, 0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    - ``joint_pos_t``:Target point joint position,unit[°],Default initial value is [0.0,0.0,0.0, 0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    - ``vel_p``:Speed percentage,[0~100], default to is 20.0;
+    - ``acc_p``:Acceleration percentage,[0~100], default to is 0.0;
+    - ``exaxis_pos_p``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0];
+    - ``offset_flag_p``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system, default to is 0;
+    - ``offset_pos_p``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``vel_t``:Speed percentage,[0~100], default to is 20.0;
+    - ``acc_t``:Acceleration percentage,[0~100], default to is 0.0;
+    - ``exaxis_pos_t``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0];
+    - ``offset_flag_t``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system, default to is 0;
+    - ``offset_pos_t``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``ovl``:Speed scaling factor,[0~100], default to is 100.0;
+    - ``blendR``:[-1.0]-motion in place (blocked), [0-1000]-smooth radius(non blocked),unit[mm] , default to is -1.0"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 -------------
@@ -342,27 +340,27 @@ Circular motion in Cartesian space
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``Circle(joint_pos_p,desc_pos_p,ptool,puser,pvel,pacc,exaxis_pos_p,joint_pos_t,desc_pos_t,ttool,tuser,tvel,tacc,exaxis_pos_t,ovl,offset_flag,offset_pos)``"
+    "Prototype", "``Circle(desc_pos_p,tool_p,user_p,desc_pos_t,tool_t,user_t,joint_pos_p=[0.0,0.0,0.0,0.0,0.0, 0.0], joint_pos_t = [0.0,0.0,0.0,0.0,0.0,0.0], vel_p = 20.0, acc_p=0.0, exaxis_pos_p= [0.0,0.0, 0.0,0.0], vel_t=20.0, acc_t = 0.0, exaxis_pos_t =[0.0,0.0,0.0,0.0], ovl=100.0, offset_flag=0, offset_pos= [0.0,0.0,0.0,0.0,0.0,0.0])``"
     "Description", "Circular motion in Cartesian space"
-    "Parameter", "- ``joint_pos_p``:Path point joint position,unit[°];
-    - ``desc_pos_p``:Path point Cartesian pose,unit[mm][°];
-    - ``ptool``:Tool number,[0~14];
-    - ``puser``:Workpiece number,[0~14];
-    - ``pvel``:Speed percentage,[0~100];
-    - ``pacc``:Acceleration percentage,[0~100],temporarily closed;
-    - ``exaxis_pos_p``:Position of external axis 1~position of external axis 4;
-    - ``joint_pos_t``:Target point joint position,unit[°];
+    "Required parameter", "- ``desc_pos_p``:Path point Cartesian pose,unit[mm][°];
+    - ``tool_p``:Tool number,[0~14];
+    - ``user_p``:Workpiece number,[0~14];
     - ``desc_pos_t``:Cartesian pose of the target point,unit[mm][°];
-    - ``ttool``:Tool number,[0~14];
-    - ``tuser``:Workpiece number,[0~14];
-    - ``tvel``:Speed percentage,[0~100];
-    - ``tacc``:Acceleration percentage,[0~100],temporarily closed;
-    - ``exaxis_pos_t``:Position of external axis 1~position of external axis 4;
-    - ``ovl``:Speed scaling factor,[0~100%];
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
-    - ``offset_pos``:Offset,unit[mm][°]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``tool_t``:Tool number,[0~14];
+    - ``user_t``:Workpiece number,[0~14];"
+    "Optional parameter", "- ``joint_pos_p``:Path point joint position,unit[°], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    - ``joint_pos_t``:arget point joint position,unit[°],Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    - ``vel_p``:Speed percentage,[0~100], default to is 20.0;
+    - ``acc_p``:Acceleration percentage,[0~100], default to is 0.0;
+    - ``exaxis_pos_p``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0];
+    - ``desc_pos_t``:Cartesian pose of the target point,unit[mm][°];
+    - ``vel_t``:Speed percentage,[0~100], default to is 20.0;
+    - ``acc_t``:Acceleration percentage,[0~100], default to is 0.0;
+    - ``exaxis_pos_t``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0]
+    - ``ovl``:Speed scaling factor,[0~100], default to is 100.0;
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system, default to is 0;
+    - ``offset_pos``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0]"
+    "Return value", "-Errcode: Success -0  Failed -errcode"
 
 Code example
 -------------
@@ -399,21 +397,26 @@ Spiral motion in Cartesian space
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``NewSpiral(joint_pos,desc_pos,tool,user,vel,acc,exaxis_pos,ovl,offset_flag,offset_pos,param)``"
+    "Prototype", "``NewSpiral(desc_pos, tool, user, param, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0, exaxis_pos = [0.0,0.0,0.0,0.0], ovl = 100.0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0])``"
     "Description", "Spiral motion in Cartesian space"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
-    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    "Required parameter", "- ``desc_pos``:Target Cartesian pose,unit[mm][°];
     - ``tool``:Tool number,[0~14];
     - ``user``:Workpiece number,[0~14];
-    - ``vel``:Speed percentage,[0~100];
-    - ``acc``:Acceleration percentage,[0~100],temporarily closed;
-    - ``exaxis_pos``:Position of external axis 1~position of external axis 4;
+    - ``param``:[circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction]
+                circle_num: number of coils;
+                circle_angle: helix angle;
+                rad_init: initial radius of the helix;
+                rad_add: radius increment;
+                rotaxis_add: axis direction increment;
+                rot_direction: rotation direction, 0-clockwise, 1-counterclockwise;"
+    "Optional parameter", "- ``joint_pos``:Target joint position,,unit[°], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    - ``vel``:Speed percentage,[0~100], default to is 20.0;
+    - ``acc``:Acceleration percentage,[0~100], default to is 0.0;
+    - ``exaxis_pos``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0]
     - ``ovl``:Speed scaling factor,[0~100];
-    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system;
-    - ``offset_pos``:Pose offset,unit[mm][°]
-    - ``param``:[circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction],circle_num: number of coils, circle_angle: helix angle, rad_init: initial radius of the helix, rad_add: radius increment, rotaxis_add: axis direction increment, rot_direction: rotation direction, 0-clockwise, 1-counterclockwise"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system, default to is 0;
+    - ``offset_pos``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0]"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ---------------
@@ -441,6 +444,32 @@ Code example
     P2 = [P2[1],P2[2],P2[3],P2[4],P2[5],P2[6]]
     robot.NewSpiral(J2,P2,0,0,100.0,180.0,eP2,100.0,2,dP2,Pa)   #Helical motion
 
+Servo motion start
+++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoMoveStart()``"
+    "Description", "Start of servo motion, used with ServoJ and ServoCart commands"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Servo motion end
+++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoMoveEnd()``"
+    "Description", "Servo motion end, used with ServoJ and ServoCart commands"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
 Joint space servo mode motion
 ++++++++++++++++++++++++++++++++++
 
@@ -448,16 +477,15 @@ Joint space servo mode motion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoJ(joint_pos,acc,vel,cmdT,filterT,gain)``"
+    "Prototype", "``ServoJ(joint_pos, acc = 0.0, vel = 0.0, cmdT = 0.008, filterT = 0.0, gain = 0.0)``"
     "Description", "Joint space servo mode motion"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
-    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
-    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
-    - ``cmdT``:Instruction Cycle,unit[s],[0.001~0.016];
-    - ``filterT``:Filtering time,unit[s],temporarily closed;
-    - ``gain``:Proportional amplifier for target position,temporarily closed"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``joint_pos``:Target joint position, unit[°];"
+    "Optional parameter", "- ``acc``:Acceleration, range[0~100],temporarily closed,default to 0.0;
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 0.0;
+    - ``cmdT``:Instruction Cycle,unit[s],[0.001~0.016], default to 0.008;
+    - ``filterT``:Filtering time,unit[s], default to 0.0;
+    - ``gain``:Proportional amplifier for target position, default to 0.0"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 --------------
@@ -492,18 +520,17 @@ Cartesian space servo mode motion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoCart(mode,desc_pos,pos_gain,acc,vel,cmdT,filterT,gain)``"
+    "Prototype", "``ServoCart(mode, desc_pos, pos_gain = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0] , acc = 0.0, vel = 0.0, cmdT = 0.008, filterT = 0.0, gain = 0.0)``"
     "Description", "Cartesian space servo mode motion"
-    "Parameter", "- ``mode``:[0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system);
-    - ``desc_pos``:Target Cartesian Position/Target Cartesian Position Increment;
-    - ``pos_gain``:Pose increment ratio coefficient, only effective in incremental motion, range[0~1];
-    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
-    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
-    - ``cmdT``:Instruction Cycle,unit[s],[0.001~0.016];
-    - ``filterT``:Filtering time,unit[s],temporarily closed;
-    - ``gain``:Proportional amplifier for target position,temporarily closed"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``mode``:[0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system);
+    - ``desc_pos``:Target Cartesian Position/Target Cartesian Position Increment;"
+    "Optional parameter", "- ``pos_gain``:Pose increment ratio coefficient, only effective in incremental motion, range[0~1], default to[1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0.0;
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 0.0;
+    - ``cmdT``:Instruction Cycle,unit[s],[0.001~0.016], default to 0.008;
+    - ``filterT``:Filtering time,unit[s], default to 0.0;
+    - ``gain``:Proportional amplifier for target position, default to 0.0"
+    "Return value", "Success -0  Failed -errcode"
 
 Code example
 --------------
@@ -537,18 +564,17 @@ Point-to-point motion in Cartesian space
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``MoveCart(desc_pos,tool,user,vel,acc,ovl,blendT,config)``"
+    "Prototype", "``MoveCart(desc_pos, tool, user, vel = 20.0, acc = 0.0, ovl = 100.0, blendT = -1.0, config = -1)``"
     "Description", "Point-to-point motion in Cartesian space"
-    "Parameter", "- ``desc_pos``:Target Cartesian position;
+    "Required parameter", "- ``desc_pos``:Target Cartesian position;
     - ``tool``:Tool number,[0~14];
-    - ``user``:Workpiece number,[0~14];
-    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
-    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
-    - ``ovl``:Speed scaling factor,[0~100];
-    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked),unit[ms];
-    - ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``user``:Workpiece number,[0~14];"
+    "Optional parameter", "- ``vel``: Speed, range[0~100],temporarily closed,default to 20.0;
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0.0;
+    - ``ovl``:Speed scaling factor,[0~100] ,default to 100.0;
+    - ``blendT``:[-1.0]-Motion in place (blocked), [0-500]-Smoothing time (non blocked),unit[ms] ,default to -1.0;
+    - ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration,default to -1"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 -------------
@@ -581,9 +607,9 @@ Spline motion start
 
     "Prototype", "``SplineStart()``"
     "Description", "Spline motion start"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Spline motion PTP
 -------------------------
@@ -591,17 +617,16 @@ Spline motion PTP
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SplinePTP(joint_pos,desc_pos,tool,user,vel,acc,ovl)``"
+    "Prototype", "``SplinePTP(joint_pos, tool, user, desc_pos = [0.0,0.0,0.0,0.0,0.0,0.0],  vel = 20.0,  acc = 100.0, ovl = 100.0)``"
     "Description", "Spline motion PTP"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
-    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    "Required parameter", "- ``joint_pos``:Target joint position, unit[°];
     - ``tool``:Tool number,[0~14];
-    - ``user``:Workpiece number,[0~14];
-    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
-    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
-    - ``ovl``:Speed scaling factor,[0~100];"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    - ``user``:Workpiece number,[0~14];"
+    "Optional parameter", "- ``desc_pos``:arget Cartesian pose,unit[mm], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls forward kinematics to solve for return value;
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 20.0;
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 100.0;
+    - ``ovl``:Speed scaling factor,[0~100], default to 100.0"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Spline motion end
 -----------------------------
@@ -611,9 +636,9 @@ Spline motion end
 
     "Prototype", "``SplineEnd()``"
     "Description", "Spline motion end"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ^^^^^^^^^^^^^^^
@@ -653,9 +678,9 @@ New spline motion start
 
     "Prototype", "``NewSplineStart(type)``"
     "Description", "New spline motion start"
-    "Parameter", "- ``type``:0-arc transition, 1-given point position path point"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "``type``:0-arc transition, 1-given point position path point"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 
 New spline motion end
@@ -666,9 +691,9 @@ New spline motion end
     
     "Prototype", "``NewSplineEnd()``"
     "Description", "New spline motion end"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 
 New Spline Instruction Points
@@ -677,17 +702,17 @@ New Spline Instruction Points
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``NewSplinePoint(joint_pos,desc_pos,tool,user,vel,acc,ovl,blendR,lastFlag)``"
+    "Prototype", "``NewSplinePoint(desc_pos,tool,user,lastFlag,joint_pos=[0.0,0.0,0.0,0.0,0.0,0.0], vel = 0.0, acc = 0.0, ovl = 100.0 ,blendR = 0.0 )``"
     "Description", "New Spline Instruction Points"
-    "Parameter", "- ``joint_pos``:Target joint position, unit[°];
-    - ``desc_pos``:Target Cartesian pose,unit[mm][°];
+    "Required parameter", "- ``desc_pos``:Target Cartesian pose,unit[mm][°];
     - ``tool``:Tool number,[0~14];
     - ``user``:Workpiece number,[0~14];
-    - ``vel``: Speed, range[0~100],temporarily closed,default to 0;
-    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 0;
-    - ``ovl``:Speed scaling factor,[0~100];
-    - ``blendR``: [0-1000]-smooth radius,unit[mm];
     - ``lastFlag``:Is it the last point, 0-No, 1-Yes"
+    "Optional parameter", "- ``joint_pos``:Target joint position, unit[°], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    - ``vel``: Speed, range[0~100],temporarily closed,default to 20.0;
+    - ``acc``:Acceleration, range[0~100],temporarily closed,default to 100;
+    - ``ovl``:Speed scaling factor,[0~100], default to 100;
+    - ``blendR``: blendR: [0-1000]-smooth radius,unit[mm] default to 0"
     "Return value", "- Success:[0]
     - Failed:[errcode]"
 
@@ -727,9 +752,9 @@ Robot terminates motion
     
     "Prototype", "``StopMotion()``"
     "Description", "To terminate motion, use the termination motion instructions as non-blocking state"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 -------------
@@ -761,10 +786,10 @@ Starting point overall offset
     
     "Prototype", "``PointsOffsetEnable(flag,offset_pos)``"
     "Description", "Starting point overall offset"
-    "Parameter", "- ``flag``:0-offset under base coordinate or workpiece coordinate system, 2-offset under tool coordinate system;
+    "Required parameter", "- ``flag``:0-offset under base coordinate or workpiece coordinate system, 2-offset under tool coordinate system;
     - ``offset_pos``:Offset,unit[mm][°]。"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 The overall offset of the point ends
 ----------------------------------------
@@ -774,9 +799,9 @@ The overall offset of the point ends
     
     "Prototype", "``PointsOffsetDisable()``"
     "Description", "The overall offset of the point ends"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ^^^^^^^^^^^^^^^^^

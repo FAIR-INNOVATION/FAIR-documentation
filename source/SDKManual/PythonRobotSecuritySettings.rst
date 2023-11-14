@@ -13,11 +13,11 @@ Set collision level
 
     "Prototype", "``SetAnticollision (mode,level,config)``"
     "Description", "Set collision level"
-    "Parameter", "- ``mode``:0-level, 1-percentage;;
+    "Required parameter", "- ``mode``:0-level, 1-percentage;;
     - ``level=[j1,j2,j3,j4,j5,j6]``:collision threshold;
     - ``config``:0-do not update configuration file, 1-update configuration file"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ----------------
@@ -41,9 +41,9 @@ Set the strategy after collision
 
     "Prototype", "``SetCollisionStrategy (strategy)``"
     "Description", "Set the strategy after collision"
-    "Parameter", "- ``strategy``:0-Error Pause, 1-Continue Running"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``strategy``:0-Error Pause, 1-Continue Running"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ---------------------
@@ -64,9 +64,9 @@ Set positive limit
 
     "Prototype", "``SetLimitPositive(p_limit)``"
     "Description", "Set positive limit"
-    "Parameter", "- ``p_limit=[j1,j2,j3,j4,j5,j6]``:six joint positions"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``p_limit=[j1,j2,j3,j4,j5,j6]``:six joint positions"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ---------------------
@@ -88,9 +88,9 @@ Set negative limit
 
     "Prototype", "``SetLimitNegative(n_limit)``"
     "Description", "Set negative limit"
-    "Parameter", "- ``n_limit=[j1,j2,j3,j4,j5,j6]``:six joint positions"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``n_limit=[j1,j2,j3,j4,j5,j6]``:six joint positions"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 -------------------
@@ -112,9 +112,9 @@ Error status cleared
 
     "Prototype", "``ResetAllError()``"
     "Description", "Error status cleared,only resettable errors can be cleared"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 --------------------
@@ -135,9 +135,9 @@ Joint friction compensation switch
 
     "Prototype", "``FrictionCompensationOnOff(state)``"
     "Description", "Joint friction compensation switch"
-    "Parameter", "- ``state``:0-off,1-on"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``state``:0-off,1-on"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 -------------------
@@ -158,9 +158,9 @@ Set joint friction compensation coefficient formal installation
 
     "Prototype", "``SetFrictionValue_level(coeff)``"
     "Description", "Set joint friction compensation coefficient - formal installation"
-    "Parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ---------------------
@@ -183,9 +183,9 @@ Set joint friction compensation coefficient - Side Mount
 
     "Prototype", "``SetFrictionValue_wall(coeff)``"
     "Description", "Set joint friction compensation coefficient - Side Mount"
-    "Parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 --------------------
@@ -208,9 +208,9 @@ Set joint friction compensation coefficient-Inverted
 
     "Prototype", "``SetFrictionValue_ceiling(coeff)``"
     "Description", "Set joint friction compensation coefficient-Inverted"
-    "Parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ----------------
@@ -233,9 +233,9 @@ Set joint friction compensation coefficient-free installation
 
     "Prototype", "``SetFrictionValue_freedom(coeff)``"
     "Description", "Set joint friction compensation coefficient-free installation"
-    "Parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ------------------

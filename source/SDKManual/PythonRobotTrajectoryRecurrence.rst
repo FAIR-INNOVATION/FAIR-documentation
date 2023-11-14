@@ -10,15 +10,14 @@ Set trajectory recording parameters
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetTPDParam(type,name,period_ms,di_choose,do_choose)``"
+    "Prototype", "``SetTPDParam(name, period_ms, type = 1,di_choose = 0, do_choose = 0)``"
     "Description", "Set trajectory recording parameters"
-    "Parameter", "- ``type``:Data type, 1-joint position;
-    - ``name``:Track name;
-    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;
-    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
-    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``name``:Track name;
+    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;"
+    "Optional parameter", "- ``type``:Data type, 1-joint position, default to 1;
+    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected, default to 0;
+    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected, default to 0"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 --------------
@@ -42,15 +41,14 @@ Start trajectory recording
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetTPDStart(type,name,period_ms,di_choose,do_choose)``"
+    "Prototype", "``SetTPDStart(name, period_ms, type = 1,di_choose = 0, do_choose = 0)``"
     "Description", "Start trajectory recording"
-    "Parameter", "- ``type``:Data type, 1-joint position;
-    - ``name``:Track name;
-    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;
-    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected
-    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "-  ``name``:Track name;
+    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;"
+    "Optional parameter", "- ``type``:Data type, 1-joint position;
+    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected, default to 0;
+    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected, default to 0"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Stop trajectory recording
 ++++++++++++++++++++++++++
@@ -60,9 +58,9 @@ Stop trajectory recording
 
     "Prototype", "``SetWebTPDStop()``"
     "Description", "Stop trajectory recording"
-    "Parameter", "Nothing"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ------------
@@ -96,9 +94,9 @@ Delete trajectory record
 
     "Prototype", "``SetTPDDelete(name)``"
     "Description", "Delete trajectory record"
-    "Parameter", "- ``name``:Track name"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``name``:Track name"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ------------
@@ -119,9 +117,22 @@ Trajectory preloading
 
     "Prototype", "``LoadTPD(name)``"
     "Description", "Trajectory preloading"
-    "Parameter", "- ``name``:Track name"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Required parameter", "- ``name``:Track name"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+ObtainTPD start pose
++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTPDStartPose(name)``"
+    "Description", "ObtainTPD start pose"
+    "Required parameter", "- ``name``:Track name"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode
+    - Return(if success): desc_pose [x,y,z,rx,ry,rz]"
 
 Trajectory reproduction
 ++++++++++++++++++++++++
@@ -131,11 +142,11 @@ Trajectory reproduction
 
     "Prototype", "``MoveTPD(name,blend,ovl)``"
     "Description", "Trajectory reproduction"
-    "Parameter", "- ``name``:Track name
+    "Required parameter", "- ``name``:Track name
     - ``blend``:Is it smooth, 0-not smooth, 1-smooth
     - ``ovl``:Speed scaling factor, range[0~100]"
-    "Return value", "- Success:[0]
-    - Failed:[errcode]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
 ------------
@@ -153,3 +164,151 @@ Code example
     robot.LoadTPD(name)  #Trajectory preloading
     robot.MoveCart(P1,1,0,100.0,100.0,100.0,-1.0,-1)       #Let's go to the starting point
     robot.MoveTPD(name, blend, ovl)  #Trajectory reproduction
+
+Track preprocessing - Import track files
+++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LoadTrajectoryJ(name,ovl,opt = 1)``"
+    "Description", "Track preprocessing - Import track files"
+    "Required parameter", "- ``name``:Track name
+    - ``ovl``:Speed scaling factor, range[0~100]
+    - ``opt``:1- Control point, default to 1"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Trajectory reproduction - Import track files
+++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MoveTrajectoryJ()``"
+    "Description", "Trajectory reproduction - Import track files"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Obtain trajectory start pose - Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTrajectoryStartPose(name)``"
+    "Description", "Obtain trajectory start pose - Import track files"
+    "Required parameter", "``name``:Track name"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode
+    - Return(if success): desc_pose [x,y,z,rx,ry,rz]"
+
+Obtain trajectory point number - Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTrajectoryPointNum()``"
+    "Description", "Obtain trajectory point number - Import track files"
+    "Required parameter", "``name``:Track name"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode
+    - Return(if success):  pnum"
+
+Set trajectory speed - Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJSpeed(ovl)``"
+    "Description", "Set trajectory speed - Import track files"
+    "Required parameter", "``ovl``:Speed scaling percentage, range [0~100]"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set trajectory force and torque- Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJForceTorque(ft)``"
+    "Description", "Set trajectory force and torque- Import track files"
+    "Required parameter", "``ft``:[fx,fy,fz,tx,ty,tz], unit[N or Nm];"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set trajectory force Fx- Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJForceFx(fx)``"
+    "Description", "Set trajectory force Fx- Import track files"
+    "Required parameter", "``fx``:Force in the x direction, unit N"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set trajectory force Fy- Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJForceFx(fy)``"
+    "Description", "Set trajectory force Fy- Import track files"
+    "Required parameter", "``fy``:Force in the y direction, unit N"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set trajectory force Fz- Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJForceFx(fz)``"
+    "Description", "Set trajectory force Fz- Import track files"
+    "Required parameter", "``fz``:Force in the z direction, unit N"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set trajectory torqueTx- Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJTorqueTx(tx)``"
+    "Description", "Set trajectory torqueTx- Import track files"
+    "Required parameter", "``tx``:Torque around the x axis, unit Nm"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set trajectory torqueTy- Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJTorqueTx(ty)``"
+    "Description", "Set trajectory torqueTy- Import track files"
+    "Required parameter", "``ty``:Torque around the y axis, unit Nm"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set trajectory torqueTz- Import track files
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTrajectoryJTorqueTx(tz)``"
+    "Description", "Set trajectory torqueTy- Import track files"
+    "Required parameter", "``tz``:Torque around the z axis, unit Nm"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
