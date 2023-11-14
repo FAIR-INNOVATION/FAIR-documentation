@@ -23,7 +23,7 @@ Secondary Development
 
     :download:`FRCobot Python SDK <https://github.com/FAIR-INNOVATION/frcobot_python_sdk/archive/refs/heads/main.zip>`
 
-    :download:`FRCobot Python-v2.0.0 SDK <https://gitee.com/fair-innovation/fairino-python-sdk/repository/archive/v2.0.0.zip>`
+    :download:`FRCobot Python-v2.0.0 SDK <https://github.com/FAIR-INNOVATION/fairino-python-sdk/archive/refs/tags/2.0.0.zip>`
 
     :download:`FRCobot ROS <https://github.com/FAIR-INNOVATION/frcobot_ros/archive/refs/heads/master.zip>`
 
