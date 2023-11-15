@@ -13,6 +13,10 @@ This manual is the secondary development interface document of Python.
     2)	All code examples in the documentation default to no interference within the robot's workspace;
     3)	Please use the data of the on-site robot in the actual use test.
 
+.. note:: 
+    
+    The current document applies to SDK-v2.0.0 version and is backward compatible with v1.x version.
+
 
 .. toctree:: 
     :numbered: 5
