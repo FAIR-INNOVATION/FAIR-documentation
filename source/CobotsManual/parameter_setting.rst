@@ -30,13 +30,28 @@ Set end load
 
 Under the menu bar of "Robot Settings" in "Initialize", click "End Load" to enter End load page 。
 
+When configuring the end load, please enter the mass of the end tool used and the corresponding center of mass coordinates into the "Load mass" and "Load mass center coordinates X, Y and Z" input boxes and apply.
+
+.. important:: 
+   The load mass cannot exceed the maximum load range of the robot.
+
+   - FR3：3kg
+
+   - FR5：5kg
+
+   - FR10：10kg
+
+   - FR16：16kg
+   
+   - FR20：20kg
+
+   The center of mass coordinate setting range is 0-1000, unit mm.
+
 .. image:: teaching_pendant_software/044.png
    :width: 3in
    :align: center
 
 .. centered:: Figure 3.2-1 Schematic diagram of load setting
-
-The user can set the corresponding parameters according to the parameters of the tool used. The load weight is 0~5kg, and the range of the center of mass coordinates is 0~1000, as shown in Figure 3.2-1.
 
 .. important:: 
    After the load is installed at the end of the robot, the weight of the end load and the coordinates of the center of mass must be set correctly, otherwise it will affect the drag function of the robot and the use of the collision detection function.
