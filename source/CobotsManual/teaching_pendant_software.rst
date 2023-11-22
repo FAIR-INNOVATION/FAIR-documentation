@@ -2008,11 +2008,29 @@ Click the "Weld-Trc" icon to enter the Weld-Trc command editing interface
 
 This command realizes the robot seam tracking and uses the deviation detection of the welding seam to compensate the trajectory, and the arc sensor can be used to detect the seam deviation.
 
+**Step1**：Upper and lower compensation reference current setting method: feedback, set the upper and lower reference current start counting and the upper and lower reference current counting
+
 .. image:: teaching_pendant_software/217.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-8-7 Weld-Trc command interface
+.. centered:: Figure 3.7-8-7-1 Weld-Trc command interface-Feedback
+
+**Step2**：Upper and lower compensation reference current setting method: constant, set the upper and lower reference current
+
+.. image:: teaching_pendant_software/226.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-7-2 Weld-Trc command interface-constant
+
+**Step3**：Left and right compensation parameter interactive page
+
+.. image:: teaching_pendant_software/227.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-8-7-3 Weld-Trc command interface-left and right compensation parameters
 
 Adjust command
 ++++++++++++++++
