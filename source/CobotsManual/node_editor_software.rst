@@ -1065,7 +1065,7 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
 
 "Real-time detection of conveyor belt position" command node, parameters:
 
-- Working mode: Tracking capture/Tracking motion/TPD tracking
+- Operating mode: Tracking capture/Tracking motion/TPD tracking
 
 .. image:: node_editor_software/063.png
    :width: 6in
@@ -1075,7 +1075,7 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
 
 "Conveyor tracking enabled" command node, parameters:
 
-- Working mode: Tracking capture/Tracking movement/TPD tracking
+- Operating mode: Tracking capture/Tracking movement/TPD tracking
 
 .. image:: node_editor_software/064.png
    :width: 6in
