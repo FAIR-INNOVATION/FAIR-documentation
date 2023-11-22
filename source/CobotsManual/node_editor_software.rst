@@ -1063,7 +1063,7 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
 
 .. centered:: Figure 6.2.59 "Conveyor belt IO real-time detection" command node interface
 
-"Location real-time detection" command node, parameters:
+"Real-time detection of conveyor belt position" command node, parameters:
 
 - Working mode: Tracking capture/Tracking motion/TPD tracking
 
@@ -1071,9 +1071,9 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.60 "Location real-time detection" command node interface
+.. centered:: Figure 6.2.60 "Real-time detection of conveyor belt position" command node interface
 
-"Tracking on" command node, parameters:
+"Conveyor tracking enabled" command node, parameters:
 
 - Working mode: Tracking capture/Tracking movement/TPD tracking
 
@@ -1081,13 +1081,13 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.61 "Tracking on" command node interface
+.. centered:: Figure 6.2.61 "Conveyor tracking enabled" command node interface
 
 .. image:: node_editor_software/065.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.62 "Tracking off" command node interface
+.. centered:: Figure 6.2.62 "Conveyor tracking off" command node interface
 
 Polish instruction
 ++++++++++++++++++++++++++++++++++
@@ -1108,7 +1108,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
 
 "Polishing equipment enable" command node, parameters:
 
-- Device enable: enable up/enable down
+- Device enable: Present/Descend
 
 .. image:: node_editor_software/068.png
    :width: 6in
@@ -1210,7 +1210,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
 
 .. centered:: Figure 6.2.74 "Arc closing/arc starting" command node interface
 
-4. "Air supply/off air" command node, parameters:
+4. "Gas ON/OFF" command node, parameters:
 
 - I/O type: controller IO/expansion IO
 
@@ -1218,9 +1218,9 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.75 "Air supply/off air" command node interface
+.. centered:: Figure 6.2.75 "Gas on/off" command node interface
 
-5. "Forward wire feeding/stop forward wire feeding" command node, parameters:
+1. "Forward/Stop forward" command node, parameters:
 
 - I/O type: controller IO/expansion IO
 
@@ -1228,9 +1228,9 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.76 "Forward wire feeding/stop forward wire feeding" command node interface
+.. centered:: Figure 6.2.76 "Forward/Stop forward" command node interface
 
-5. "Reverse wire feed/stop reverse wire feed" command node, parameters:
+5. "Reverse wire feed/Stop reverse" command node, parameters:
 
 - I/O type: controller IO/expansion IO
 
@@ -1238,7 +1238,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.77 "Reverse wire feed/stop reverse wire feed" command node interface
+.. centered:: Figure 6.2.77 "Reverse wire feed/Stop reverse" command node interface
 
 Segment instruction
 +++++++++++++++++++++
@@ -1322,7 +1322,7 @@ This command contains three parts: laser command, tracking command and positioni
 6. "Sensor point acquisition movement" command node, parameters
 
 - Coordinate system name: Customized configuration coordinate system
-- Movement method: PTP/Lin
+- Sports mode: PTP/Lin
 - Debugging speed (%): 0 ~ 100
   
 .. image:: node_editor_software/087.png
@@ -1331,7 +1331,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 6.2.84 "Data Logging" command node interface
 
-7. "Start/End locating" command node, parameters
+1. "Start/End locating" command node, parameters
 
 - Coordinate system name: Customized configuration coordinate system
 - Direction: +x/-x/+y/-y/+z/-z/specifies the direction
@@ -1367,7 +1367,7 @@ Implementing the adjustable laser tracking reproduction speed function allows th
 
 "Get weld starting point/end point" command node, parameters:
 
-- Movement method: PTP/LIN
+- Sports mode: PTP/LIN
 - Speed (%): 0~100, default is 30
 
 .. image:: node_editor_software/090.png
