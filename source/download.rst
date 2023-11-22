@@ -46,3 +46,9 @@ Ontology & Dimensional Drawings
     :download:`FRCobots-V5.0 STEP Models <_static/_doc/FRCobots-V5.0 STEP Models.zip>`
 
     :download:`FRCobots-V6.0 STEP Models <_static/_doc/FRCobots-V6.0 STEP Models.zip>`
+
+Robot software
+---------------------------------
+    :download:`Linux V2.0.0 <_static/_doc/Linux V2.0.0.zip>`
+
+    :download:`QNX V3.6.6 <_static/_doc/QNX V3.6.6.zip>`
