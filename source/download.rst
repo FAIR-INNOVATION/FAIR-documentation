@@ -49,6 +49,6 @@ Ontology & Dimensional Drawings
 
 Robot software
 ---------------------------------
-    :download:`Linux V2.0.0 <_static/_doc/Linux V2.0.0.zip>`
+    :download:`Linux V2.0.0 <https://drive.google.com/file/d/1xps4qn5ObvRP8dFVTKFkhvl9T5-kbHr6/view?usp=sharing>`
 
-    :download:`QNX V3.6.6 <_static/_doc/QNX V3.6.6.zip>`
+    :download:`QNX V3.6.6 <https://drive.google.com/file/d/1hFCSbuZcdYnNL_JD4wDDvqLPw4SgL2C0/view?usp=drive_link>`
