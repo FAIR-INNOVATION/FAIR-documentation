@@ -2490,11 +2490,11 @@ On the graphical programming page, click "Save" after changing the workspace nam
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-35 图形化编程程序覆盖
+.. centered:: Figure 3.7-35 Graphical programming program coverage
 
 **Step1**：Click the "Cancel" button to continue with the previous operation.
 
-**Step2**：点Click the "Synchronize Update Teaching Program" check box, and then click the "Overwrite" button, then the Lua program on the current graphical programming page will overwrite the Lua program with the changed workspace file name.
+**Step2**：Click the "Synchronize Update Teaching Program" check box, and then click the "Overwrite" button, then the Lua program on the current graphical programming page will overwrite the Lua program with the changed workspace file name.
 
 Verification when graphical programming program is not saved
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
