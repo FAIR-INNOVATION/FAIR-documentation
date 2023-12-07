@@ -1428,6 +1428,8 @@ This command is a variable system command, which is divided into two parts: Lua 
 
 .. centered:: Figure 4.7-4-10 Var command interface
 
+.. important:: Variable names must start with letters or underscores, not numbers or other special characters.
+
 Motion command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1933,6 +1935,10 @@ Click the "Weld" icon to enter the Weld command editing interface
 
 This command is mainly used for welding machine peripherals. Before adding this command, please confirm whether the welding machine configuration is completed in the user peripherals. For details, see the chapter on robot peripherals.
 
+"A-V" configuration and "V-V" configuration, by configuring the corresponding relationship between the welding current, voltage and the controller's analog quantity, the controller calculates the corresponding analog quantity voltage and outputs it to the corresponding analog quantity output port.
+
+Output voltage range: 0~10V, welding voltage range: 0~700V, welding current range: 0~1000A.
+
 .. image:: teaching_pendant_software/117.png
    :width: 6in
    :align: center
@@ -2241,6 +2247,19 @@ This command is to call the function interface function, provide the robot inter
 
 .. centered:: Figure 4.7-13-2 Function command interface
 
+PT-Mode command
+++++++++++++++++
+
+Click the "PT-Mode" icon to enter the PT-Mode command editing interface
+
+This command is mainly used for mode switching between system mode and point table mode. Teaching points in different point tables can be applied by switching point tables.
+
+.. image:: teaching_pendant_software/232.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7-13-3 PT-Mode command interface
+
 Teaching program is not saved for verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2511,15 +2530,30 @@ Teaching management
 
 Click "Teaching Management" to display all saved teaching point information. In this interface, you can import and export teaching point files. After selecting a teaching point, click the "Delete" button to delete the point information. The values of teaching points x, y, z, rx, ry, rz and v can be modified. Enter the modified value, check the blue box on the left, and click the upper modification to modify the teaching point information. In addition, users can search for teaching points by name.
 
+.. important:: 
+   The modified values of the teaching points x, y, z, rx, ry, rz should not exceed the working range of the robot.
+
+Teaching management is divided into two modes: "system mode" and "point table mode". When calling the robot program, different detection schemes can be implemented by calling different point tables to complete the formula requirements. Each time a device or product is added in the future, the point table data package can be downloaded to the robot through the host computer, and the new point table data package created by the robot can also be uploaded to the host computer.
+
+**System mode**：Supports "modification, deletion, import, and export" of teaching point content.
+
 .. image:: teaching_pendant_software/140.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-38 Teaching management interface
+.. centered:: Figure 3.7‑38-1 Teaching management interface-system mode
+
+**Point table mode**：Supports "adding, applying, renaming, deleting, importing, and exporting" the point table, and "modifying and deleting" the point content in the point table.
+
+.. image:: teaching_pendant_software/228.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 3.7‑38-2 Teaching management interface-point table mode
 
 **Details**: Click the "Details" button to view the details of the teaching point.
 
-.. image:: teaching_pendant_software/teaching_management_info.png
+.. image:: teaching_pendant_software/230.png
    :width: 6in
    :align: center
 
@@ -2527,14 +2561,11 @@ Click "Teaching Management" to display all saved teaching point information. In 
 
 **Run**: Click the "Start Run" button to perform a single-point operation of the local teaching point, and move the robot to the position of this point.
 
-.. image:: teaching_pendant_software/teaching_management_run.png
+.. image:: teaching_pendant_software/231.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 4.7-40 Run teach point
-
-.. important:: 
-   The modified values of the teaching points x, y, z, rx, ry, rz should not exceed the working range of the robot.
 
 Status information
 ----------------------
@@ -2873,6 +2904,23 @@ For drag teaching, the function of locking degrees of freedom is added. When the
 
 .. centered:: Figure 4.9-20 Drag teach lock configuration
 
+Smart Tool
+~~~~~~~~~~~~
+
+Under the menu bar of "Robot Body" in "Auxiliary Applications", click "Smart Tool" to enter the Smart Tool configuration function interface.
+
+Configure the A-E keys and IO keys in sequence. After the Smart Tool configuration is completed, the task manager internally maintains the function corresponding to each button. When a button is detected to be pressed, the function corresponding to the button is automatically executed.
+
+-  **Movement instructions**：When selecting PTP, LIN, or ARC motion instructions, you need to enter the corresponding point speed. After the configuration is successful, a new relevant motion instruction is added to the teaching program. When configuring the ARC motion instruction, you need to configure the PTP/LIN instruction first.
+  
+-  **DO output**：When "DO Output" is selected, a drop-down box is displayed to select output DO0 - DO7 options.
+  
+.. image:: teaching_pendant_software/229.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 3.9-21 Smart Tool Configuration
+
 Welding Expert Library
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2886,7 +2934,7 @@ Step 1, whether to use the extended axis, if the extended axis is used, the rela
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-21 Extended axis configuration
+.. centered:: Figure 4.9-22 Extended axis configuration
 
 Step 2: Calibrate the starting point, the starting point safety point, the end point, and the ending point safety point. If the extended axis is selected in the first step, the extended axis movement function will be loaded to cooperate with the calibration of relevant points.
 
@@ -2894,7 +2942,7 @@ Step 2: Calibrate the starting point, the starting point safety point, the end p
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-22 Calibration related points
+.. centered:: Figure 4.9-23 Calibration related points
 
 Step 3, choose whether laser is needed, if yes, edit the parameters of the laser positioning command.
 
@@ -2902,7 +2950,7 @@ Step 3, choose whether laser is needed, if yes, edit the parameters of the laser
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-23 Laser positioning configuration
+.. centered:: Figure 4.9-24 Laser positioning configuration
 
 Step 4: Select whether weaving welding is required, and if weaving welding is required, you need to edit the relevant parameters of weaving welding.
 
@@ -2910,7 +2958,7 @@ Step 4: Select whether weaving welding is required, and if weaving welding is re
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-24 Weaving configuration
+.. centered:: Figure 4.9-25 Weaving configuration
 
 Step 5, name the program, and automatically open the program in the program teaching interface.
 
@@ -2918,7 +2966,7 @@ Step 5, name the program, and automatically open the program in the program teac
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-25 Save program
+.. centered:: Figure 4.9-26 Save program
 
 Click "Arc Welding" under "Weldment Shape" to enter the arc welding guidance interface. On the basis of the configuration of the basic settings of the robot, we can quickly generate a welding teaching program through two simple steps. It mainly includes the following two steps.
 
@@ -2928,7 +2976,7 @@ Step 1: Calibrate the starting point, the starting point safety point, the arc t
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-26 Calibration point
+.. centered:: Figure 4.9-27 Calibration point
 
 Step 2: Name the program and automatically open the program in the program teaching interface.
 
@@ -2936,7 +2984,7 @@ Step 2: Name the program and automatically open the program in the program teach
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-27 Save program
+.. centered:: Figure 4.9-28 Save program
 
 Click "Multi-layer multi-pass welding" under "Weldment shape" to enter the multi-layer multi-pass welding guidance interface. After completing the configuration of various robot basic settings, we can quickly generate a welding teaching program through four simple steps. It mainly includes the following five steps.
 
@@ -2946,7 +2994,7 @@ Step 1. Set the first group of points according to the prompts, namely welding p
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-28 First set of point settings
+.. centered:: Figure 4.9-29 First set of point settings
 
 Step 2, the second group of point settings, you can set the type of path point, support straight line and arc path, including welding point, X+ point and Z+ point.
 
@@ -2954,7 +3002,7 @@ Step 2, the second group of point settings, you can set the type of path point, 
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-29 Second set of point settings
+.. centered:: Figure 4.9-30 Second set of point settings
 
 Step 3: After setting all the group points, click "Finish" to enter the function page of each weld bead offset setting function, and set the offset of the required weld bead in turn. The interface is shown in the figure below.
 
@@ -2962,7 +3010,7 @@ Step 3: After setting all the group points, click "Finish" to enter the function
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-30 Weld Bead Offset Setting
+.. centered:: Figure 4.9-31 Weld Bead Offset Setting
 
 Step 4: After all the required weld bead parameters are set, click "Finish" to jump to the program generation page, enter the file name, and the multi-layer multi-pass welding program can be generated, and then the user can open it in the program teaching The program is debugged, and the interface is shown in the figure below.
 
@@ -2970,7 +3018,7 @@ Step 4: After all the required weld bead parameters are set, click "Finish" to j
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-31 Save program
+.. centered:: Figure 4.9-32 Save program
 
 Safe speed setting
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2987,7 +3035,7 @@ The joint speed and terminal TCP speed can be configured in the first-level and 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-32 Safe speed setting
+.. centered:: Figure 4.9-33 Safe speed setting
 
 Security Wall Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3000,7 +3048,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-33 Security Wall Configuration
+.. centered:: Figure 4.9-34 Security Wall Configuration
 
 -  **Security Wall Reference Point Configuration**：After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
 
@@ -3011,7 +3059,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-34 Safe range reference point setting
+.. centered:: Figure 4.9-35 Safe range reference point setting
 
 -  Apply effects: The successfully configured security wall is enabled. Drag the robot, if the TCP at the end of the robot is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
 
@@ -3019,7 +3067,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-35 The effect picture after the security range is set successfully
+.. centered:: Figure 4.9-36 The effect picture after the security range is set successfully
 
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
@@ -3034,7 +3082,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-36 Security daemon
+.. centered:: Figure 4.9-37 Security daemon
 
 System settings
 -----------------
