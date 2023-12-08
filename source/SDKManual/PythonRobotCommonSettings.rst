@@ -22,10 +22,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetSpeed(20)   # Set the global speed. Manual mode and automatic mode are set independently
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object 
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.SetSpeed(20) # Set the global speed. Manual mode and automatic mode are set independently
+    print("Set global speed:",error)
 
 Setting System Variable Values
 +++++++++++++++++++++++++++++++++
@@ -46,15 +47,15 @@ Code example
     :linenos:
     :emphasize-lines: 5,8
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     for i in range(1,21):
-        robot.SetSysVarValue(i,i+0.5)    #  Setting System Variable Values
+        error = robot.SetSysVarValue(i,10)
     robot.WaitMs(1000)
     for i in range(1,21):
-        sys_var = robot.GetSysVarValue(i)  #  Example Query the values of system variables
-        print(sys_var)
+        sys_var = robot.GetSysVarValue(i)
+        print("Variable number:",i," Variable value ",sys_var)
 
 Set tool reference point - six point method
 +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -92,7 +93,6 @@ Set tool reference point - four point method
     "Required parameter", "``point_num``:Point number, range[1~4];"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
-
 
 Code example
 --------------
@@ -149,11 +149,31 @@ Code example
     :linenos:
     :emphasize-lines: 5
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     t_coord = [1.0,2.0,3.0,4.0,5.0,6.0]
-    robot.SetToolCoord(10,t_coord,0,0)  #  Set tool coordinate system
+    for i in range(1,7):
+        robot.DragTeachSwitch(1) 
+        time.sleep(5)
+        error = robot.SetToolPoint(i) # In fact, the robot should be controlled to move to the appropriate position according to the requirements before sending the command
+        print("Set tool reference point - six point method",i,"errcode",error)
+        robot.DragTeachSwitch(0)
+        time.sleep(1)
+    error = robot.ComputeTool()
+    print("Calculation tool coordinate system - six point method ",error)
+    for i in range(1,5):
+        robot.DragTeachSwitch(1) 
+        time.sleep(5)
+        error = robot.SetTcp4RefPoint(i) # In fact, the robot should be controlled to move to the appropriate position according to the requirements before sending the command
+        print("Set tool reference point - four point method",i,"errcode",error)
+        robot.DragTeachSwitch(0)
+        time.sleep(1)
+    error,t_coord= robot.ComputeTcp4()
+    print("Calculation tool coordinate system - six point method ",error,"tool TCP",t_coord) 
+    error = robot.SetToolCoord(10,t_coord,0,0)
+    print("Set Tool Coordinate System",error)
 
 Set Tool Coordinate Series Table
 ++++++++++++++++++++++++++++++++++++
@@ -169,6 +189,19 @@ Set Tool Coordinate Series Table
     - ``install``:Installation position,0-Robot end,1-Robot external"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+---------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    t_coord = [1.0,2.0,3.0,4.0,5.0,6.0]
+    error = robot.SetToolList(10,t_coord,0,0)
+    print("Set Tool Coordinate Series Table",error)
 
 Set external tool reference point - three point method
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -237,12 +270,21 @@ Code example
     :linenos:
     :emphasize-lines: 6
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     etcp = [1.0,2.0,3.0,4.0,5.0,6.0]
     etool = [21.0,22.0,23.0,24.0,25.0,26.0]
-    robot.SetExToolCoord(10,etcp,etool)
+    for i in range(1,4):
+        error = robot.SetExTCPPoint(i) # In fact, the robot should be controlled to move to the appropriate position according to the requirements before sending the command
+        print("Set external tool reference point - three point method，point:",i,"errcode",error)
+        time.sleep(1)
+    error,etcp = robot.ComputeExTCF()
+    print("Calculation external tool coordinate system - three point method, errcode ",error," etcp: ",etcp) 
+    etool = [21.0,22.0,23.0,24.0,25.0,26.0]
+    error = robot.SetExToolCoord(10,etcp,etool)
+    print("Set the external tool coordinate system ",error)
 
 Set external tool coordinate series table
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -258,6 +300,20 @@ Set external tool coordinate series table
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
 
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    etcp = [1.0,2.0,3.0,4.0,5.0,6.0]
+    etool = [21.0,22.0,23.0,24.0,25.0,26.0]
+    error = robot.SetExToolList(10,etcp,etool)
+    print("Set external tool coordinate series table",error)
+
 Set the workpiece reference point - three point method
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
@@ -269,25 +325,6 @@ Set the workpiece reference point - three point method
     "Required parameter", "- ``point_num``:Point number, range[1~3];"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
-
-Code example
-------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object successfully.
-    robot = Robot.RPC('192.168.58.2')
-    w_coord = [11.0,12.0,13.0,14.0,15.0,16.0]
-    robot.SetToolList(0,[0,0,0,0,0,0],0,0)#Before setting the reference point, the tool and workpiece number coordinate systems should be switched to 0
-    robot.SetWObjList(0,[0,0,0,0,0,0])
-    for i in range(1,4):
-        error = robot.SetWObjCoordPoint(i) #In fact, the robot should be controlled to move to the appropriate position as required before sending instructions.
-        print("Three-point method sets the workpiece coordinate system and records points",i,"error code",error)
-        time.sleep(1)
-    error, w_coord = robot.ComputeWObjCoord(0)
-    print("Three-point method to calculate workpiece coordinate system error code",error,"Workpiece coordinate system", w_coord)
 
 Calculation of workpiece coordinate system - three point method
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -301,19 +338,6 @@ Calculation of workpiece coordinate system - three point method
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode
     - Return(if success): wobj_pose: workpiece coordinate system, [x,y,z,rx,ry,rz]"
-
-Code example
----------------
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 6
-
-    import frrpc
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    etcp = [1.0,2.0,3.0,4.0,5.0,6.0]
-    etool = [21.0,22.0,23.0,24.0,25.0,26.0]
-    robot.SetExToolList(10,etcp,etool)
 
 Set the workpiece coordinate system
 ++++++++++++++++++++++++++++++++++++++
@@ -334,11 +358,19 @@ Code example
     :linenos:
     :emphasize-lines: 5
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     w_coord = [11.0,12.0,13.0,14.0,15.0,16.0]
-    robot.SetWObjCoord(11,w_coord)
+    for i in range(1,4):
+        error = robot.SetWObjCoordPoint(i) # In fact, the robot should be controlled to move to the appropriate position according to the requirements before sending the command
+        print("Set the workpiece reference point - three point method，point",i,"errcode",error)
+        time.sleep(1)
+    error, w_coord = robot.ComputeWObjCoord(0)
+    print("Calculation of workpiece coordinate system - three point method,errcode: ",error," workpiece coordinate syste:", w_coord)
+    error = robot.SetWObjCoord(11,w_coord)
+    print("Set the workpiece coordinate system ",error)
 
 Set the workpiece coordinate series table
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -359,11 +391,13 @@ Code example
     :linenos:
     :emphasize-lines: 5
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     w_coord = [11.0,12.0,13.0,14.0,15.0,16.0]
-    robot.SetWObjList(11,w_coord)
+    error = robot.SetWObjList(11,w_coord)
+    print("Set the workpiece coordinate series table ",error)
 
 Set end load weight
 +++++++++++++++++++++
@@ -383,10 +417,10 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetLoadWeight(3.0)   # Set load weight
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.SetLoadWeight(0)#！The load weight setting should match the actual load weight setting (wrong load weight setting may cause the robot to lose control in drag mode) 
 
 Set the robot installation method - fixed installation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -406,10 +440,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetRobotInstallPos(0)    #   Set the robot installation mode
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.SetRobotInstallPos(0) #！！！The setting of the installation mode should be consistent with the actual setting (the wrong setting of the installation mode will cause the robot to lose control in drag mode)
+    print("Set the robot installation method ",error)
 
 Set robot installation angle - free installation
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -430,10 +465,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetRobotInstallAngle(0.0,0.0)    #   Set the robot installation Angle
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.SetRobotInstallAngle(0.0,0.0) #！！！The installation Angle setting should be consistent with the actual setting (the wrong installation Angle setting will cause the robot to lose control in drag mode)
+    print("Set robot installation angle - free installation ",error)
 
 Set the centroid coordinates of the end load
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -455,10 +491,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetLoadCoord(3.0,4.0,5.0)    #   Set the load centroid coordinates
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.SetLoadCoord(3.0,4.0,5.0) #！The load centroid setting should match the actual setting (wrong load centroid setting may cause the robot to lose control in drag mode)
+    print("Set the end load centroid coordinates ",error)
 
 Waiting for specified time
 ++++++++++++++++++++++++++++++
@@ -478,7 +515,8 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.WaitMs(1000)    #  Wait 1000ms
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.WaitMs(1000)
+    print("Waiting for specified time ",error)

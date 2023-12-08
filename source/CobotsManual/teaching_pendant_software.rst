@@ -2252,7 +2252,7 @@ PT-Mode command
 
 Click the "PT-Mode" icon to enter the PT-Mode command editing interface
 
-This command is mainly used for mode switching between system mode and point table mode. Teaching points in different point tables can be applied by switching point tables.
+This command is mainly used for mode switching between system mode and point table mode. Teaching points in different point tables can be applied by switching point tables.For details, see \ `Teaching management page <teaching_pendant_software.html#teaching-management>`__\
 
 .. image:: teaching_pendant_software/232.png
    :width: 6in

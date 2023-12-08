@@ -22,11 +22,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetRobotInstallAngle()  # Obtain robot installation angle
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetRobotInstallAngle()
+    print("Obtain robot installation angle", ret)
 
 Obtain system variable values
 ++++++++++++++++++++++++++++++++++++++++++
@@ -47,15 +47,13 @@ Code example
     :linenos:
     :emphasize-lines: 8
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     for i in range(1,21):
-        robot.SetSysVarValue(i,i+0.5)    #  Setting System Variable Values
-    robot.WaitMs(1000)
-    for i in range(1,21):
-        sys_var = robot.GetSysVarValue(i)  #  Query system variable values
-        print(sys_var)
+        error = robot.GetSysVarValue(i)
+        print("Obtain system variable number:",i,"value:", error)
 
 Obtain the current joint position (angle)
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -76,11 +74,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualJointPosDegree(0)  # Obtain the current joint position of the robot
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualJointPosDegree()
+    print("Obtain the current joint position (angle)", ret)
 
 Obtain the current joint position(radian)
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -100,11 +98,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualJointPosRadian(0)  # Obtain the current joint position of the robot
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualJointPosRadian()
+    print("Obtain the current joint position(radian)", ret)
 
 Obtain joint Actual Speed -deg/s
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -250,11 +248,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualTCPPose(0)  # Obtain the current tool pose of the robot
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualTCPPose()
+    print("Obtain the current tool pose", ret)
 
 Obtain the current tool coordinate system number
 ++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -275,11 +273,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualTCPNum(0)  # Obtain the current tool coordinate system number
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualTCPNum()
+    print("Obtain the current tool coordinate system number", ret)
 
 Obtain the current workpiece coordinate system number
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -300,11 +298,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualWObjNum(0)  # Obtain the current workpiece coordinate system number
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualWObjNum()
+    print("Obtain the current workpiece coordinate system number", ret)
 
 Obtain the current end flange pose
 +++++++++++++++++++++++++++++++++++++++++++++++
@@ -325,11 +323,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetActualToolFlangePose(0)  # Obtain the current end flange pose
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetActualToolFlangePose()
+    print("Obtain the current end flange pose ", ret)
 
 Inverse kinematics solution
 +++++++++++++++++++++++++++++++++++++++++
@@ -351,12 +349,13 @@ Code example
     :linenos:
     :emphasize-lines: 5
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
+    J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
     P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
-    ret = robot.GetInverseKin(0,P1,-1)
-    print(ret)
+    ret = robot.GetInverseKin(0,P1,config=-1)
+    print("Inverse kinematics, Cartesian pose to solve joint position ", ret)
 
 Inverse kinematics solution - Specify reference location
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -379,13 +378,13 @@ Code example
     :linenos:
     :emphasize-lines: 6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
+    robot = Robot.RPC('192.168.58.2')
     J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
+    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     ret = robot.GetInverseKinRef(0,P1,J1)
-    print(ret)
+    print("Inverse kinematics solve inverse kinematics, tool pose solve joint position, and refer to specified joint position to solve", ret)
 
 Inverse kinematics solution - whether there is a solution
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -408,13 +407,13 @@ Code example
     :linenos:
     :emphasize-lines: 6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
+    robot = Robot.RPC('192.168.58.2')
     J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
+    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     ret = robot.GetInverseKinHasSolution(0,P1,J1)
-    print(ret)
+    print("Inverse kinematics, tool pose solution, whether joint position is solved", ret)
 
 Forward kinematics solution
 +++++++++++++++++++++++++++++++++
@@ -435,12 +434,12 @@ Code example
     :linenos:
     :emphasize-lines: 5
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
     ret = robot.GetForwardKin(J1)
-    print(ret)
+    print("Forward kinematics, joint position solving tool pose", ret)
 
 Obtain the current joint torque
 +++++++++++++++++++++++++++++++++++
@@ -461,11 +460,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot 
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetJointTorques(0)  # Obtain the current joint torque
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetJointTorques()
+    print("Obtain the current joint torque ", ret)
 
 Obtain the weight of the current load
 +++++++++++++++++++++++++++++++++++++++++++
@@ -486,11 +485,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetTargetPayload(0)  # Obtain the weight of the current load
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetTargetPayload(0)
+    print("Obtain the weight of the current load ", ret)
 
 Obtain the centroid of the current load
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -511,11 +510,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetTargetPayloadCog(0)  # Obtain the centroid of the current load
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetTargetPayloadCog(0)
+    print("Obtain the centroid of the current load", ret)
 
 Obtain the current tool coordinate system
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -536,11 +535,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetTCPOffset(0)  # Obtain the current tool coordinate system
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetTCPOffset()
+    print("Obtain the current tool coordinate system", ret)
 
 Obtain the current workpiece coordinate system
 +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -561,11 +560,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetWObjOffset(0)  # Obtain the current workpiece coordinate system
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetWObjOffset()
+    print("Obtain the current workpiece coordinate system", ret)
 
 Obtain joint soft limit angle
 ++++++++++++++++++++++++++++++++
@@ -586,11 +585,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetJointSoftLimitDeg(0)  # btain joint soft limit angle
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetJointSoftLimitDeg()
+    print("Obtain joint soft limit angle", ret)
 
 Get system time
 ++++++++++++++++
@@ -611,11 +610,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetSystemClock()  # Obtain the system time of the controller
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetSystemClock()
+    print("Get system time", ret)
 
 Obtain the current joint configuration of the robot
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -636,11 +635,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetRobotCurJointsConfig()  # Obtain the current joint configuration of the robot
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetRobotCurJointsConfig()
+    print("Obtain the current joint configuration of the robot ", ret)
 
 Get default speed
 ++++++++++++++++++++++++++++++++++++++++
@@ -661,11 +660,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetDefaultTransVel()  # Gets the robot's current speed
-    print(ret)
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetDefaultTransVel()
+    print("Obtain default speed ", ret)
 
 Check if the robot motion is complete
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -686,14 +685,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetRobotMotionDone()    #Query the motion completion status of the robot
-    if ret[0] == 0:
-        print(ret[1])
-    else:
-        print("the errcode is: ", ret[0])
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetRobotMotionDone()
+    print("Check if the robot motion is complete ", ret)
 
 Obtain the robot error code
 +++++++++++++++++++++++++++++++++++++++++++++
