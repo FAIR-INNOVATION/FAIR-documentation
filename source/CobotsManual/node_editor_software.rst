@@ -36,7 +36,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 .. note:: 
    name：**Open**
    
-   effect：Open user program file
+   effect：Open user program file, choose to load or delete files in the pop-up box.
 
 .. note:: 
 
@@ -66,7 +66,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name：**Export**
    
-   effect：After creating/opening the node graph programming file, click the "Export" button to generate an export file (json format).
+   effect：After creating/opening the node graph programming file, click the "Export" button to pop up the "Export Node Graph Programming" pop-up box, select the workspace file name to export the file (json format).
 
 .. note:: 
 

@@ -3094,7 +3094,74 @@ Click "System Settings" on the left menu bar, and click "General Settings" on th
 
 Network settings can set controller IP, subnet mask, default gateway, DNS server and teach pendant IP (this IP is valid when using our FR-HMI teach pendant, and needs to be used when using FR-HMI teach pendant Configure the teaching pendant to be enabled), which is convenient for customers to use the scene.
 
-Customers can choose the teaching pendant language as Chinese, English, French or Japanese according to their needs. In addition, the language can be customized by the user. The user can translate the exported Chinese language file, import the translated language file, and then choose to use the imported language file.
+- The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本语).
+- The following is a language comparison table. Among the non-system built-in languages, download the language package and import it into the system after translation.
+- The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
+
+.. list-table:: 
+   :widths: 20 40 40 30
+   :header-rows: 1
+
+   * - Language
+     - Local language name
+     - Language code(ISO 639-1)
+     - Is it built-in
+   * - Chinese
+     - 中文（汉语）
+     - zh
+     - True
+   * - English
+     - en
+     - ja
+     - True
+   * - French
+     - français
+     - fr
+     - True
+   * - Japanese
+     - 日本語
+     - ja
+     - True
+   * - Spanish
+     - Español
+     - es
+     - False
+   * - Russian
+     - Pу́сский
+     - ru
+     - False
+   * - Arabic
+     - اَلْعَرَبِيَّةُ
+     - ar
+     - False
+   * - German
+     - Deutsch
+     - de
+     - False
+   * - Portuguese
+     - Deutsch
+     - pt
+     - False
+   * - Hindi
+     - हिन्दी
+     - hi
+     - False
+   * - Italian
+     - Italiano
+     - it
+     - False
+   * - Bengali
+     - বাংলা
+     - bn
+     - False
+   * - Korean
+     - 조선말
+     - ko
+     - False
+   * - Turkish
+     - Türkçe
+     - tr
+     - False
 
 Users can set the number of retained logs and import and export the system configuration file. The maximum number of retained logs is 30, and the system configuration file records the set value.
 
