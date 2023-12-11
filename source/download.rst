@@ -49,4 +49,4 @@ Ontology & Dimensional Drawings
 
 Robot software
 ---------------------------------
-    :download:`QNX V3.6.6 <https://drive.google.com/file/d/1hFCSbuZcdYnNL_JD4wDDvqLPw4SgL2C0/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-V3.6.7-Release-231208 <https://drive.google.com/file/d/1_wuAU0J3YLZTBr3UTMmZkQWQscJh-wnD/view?usp=sharing>`
