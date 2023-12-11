@@ -3096,6 +3096,7 @@ Network settings can set controller IP, subnet mask, default gateway, DNS server
 
 - The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本语).
 - The following is a language comparison table. Among the non-system built-in languages, download the language package and import it into the system after translation.
+- The language pack name must be: [Language code].json, for example: es.json.
 
 .. list-table:: 
    :widths: 20 40 40 30
