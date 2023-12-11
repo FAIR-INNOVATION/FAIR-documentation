@@ -3096,7 +3096,7 @@ Network settings can set controller IP, subnet mask, default gateway, DNS server
 
 - The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本语).
 - The following is a language comparison table. Among the non-system built-in languages, download the language package and import it into the system after translation.
-- The language pack name must be: [Language code].json, for example: es.json.
+- The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
 
 .. list-table:: 
    :widths: 20 40 40 30
@@ -3104,7 +3104,7 @@ Network settings can set controller IP, subnet mask, default gateway, DNS server
 
    * - Language
      - Local language name
-     - Language code
+     - Language code(ISO 639-1)
      - Is it built-in
    * - Chinese
      - 中文（汉语）
@@ -3157,6 +3157,10 @@ Network settings can set controller IP, subnet mask, default gateway, DNS server
    * - Korean
      - 조선말
      - ko
+     - False
+   * - Turkish
+     - Türkçe
+     - tr
      - False
 
 Users can set the number of retained logs and import and export the system configuration file. The maximum number of retained logs is 30, and the system configuration file records the set value.
