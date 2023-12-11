@@ -25,15 +25,17 @@ Code example
     :linenos:
     :emphasize-lines: 9
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    type = 1  # Data type, 1-joint position
-    name = 'tpd2023'  # Track name
-    period = 4  #Sampling period, fixed value, 2ms or 4ms or 8ms
-    di_choose = 0 # di input configuration
-    do_choose = 0 # do output configuration
-    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPD Parameter
+    robot = Robot.RPC('192.168.58.2')
+    type = 1  
+    name = 'tpd2023' 
+    period = 4  
+    di = 0 
+    do = 0 
+    ret = robot.SetTPDParam(name, period, di_choose=di)    # Set trajectory recording parameters
+    print("Set trajectory recording parameters ", ret)
 
 Start trajectory recording
 ++++++++++++++++++++++++++++++
@@ -68,23 +70,25 @@ Code example
     :linenos:
     :emphasize-lines: 14, 16
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    type = 1  # Data type, 1-joint position
-    name = 'tpd2023'  # Track name
-    period = 4  #Sampling period, fixed value, 2ms or 4ms or 8ms
-    di_choose = 0 # di input configuration
-    do_choose = 0 # do output configuration
-    robot.SetTPDParam(type, name, period, di_choose, do_choose)    #Configure TPD Parameter
-    robot.Mode(1)  # The robot goes into manual mode
+    robot = Robot.RPC('192.168.58.2')
+    type = 1 
+    name = 'tpd2023'  
+    period = 4  
+    di = 0 
+    do = 0 
+    robot.Mode(1)  # Robot goes into manual mode
     time.sleep(1)  
-    robot.DragTeachSwitch(1)  #The robot goes into drag teaching mode
-    robot.SetTPDStart(type, name, period, di_choose, do_choose)   # Start recording the teaching track
-    time.sleep(30)
-    robot.SetWebTPDStop()  # Stop recording instructional tracks
-    robot.DragTeachSwitch(0)  #The robot enters the non-drag teaching mode
+    robot.DragTeachSwitch(1)  # The robot cuts into the drag teaching mode
+    time.sleep(1)
+    ret = robot.SetTPDStart(name, period, do_choose=do)   # Start trajectory recording
+    print("Start trajectory recording", ret)
+    time.sleep(15)
+    ret = robot.SetWebTPDStop()  # Stop trajectory recording
+    print("Stop trajectory recording", ret)
+    robot.DragTeachSwitch(0)  # The robot exits drag teaching mode
 
 Delete trajectory record
 +++++++++++++++++++++++++
@@ -104,10 +108,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetTPDDelete('tpd2023')   # Delete the TPD trace
+    robot = Robot.RPC('192.168.58.2')
+    # robot.SetTPDDelete('tpd2023')   # Delete trajectory record
 
 Trajectory preloading
 +++++++++++++++++++++++++++++
@@ -154,16 +159,23 @@ Code example
     :linenos:
     :emphasize-lines: 8, 10
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    P1=[-378.9,-340.3,107.2,179.4,-1.3,125.0]
-    name = 'tpd2023'   #Track name
-    blend = 1   #Is it smooth, 0-not smooth, 1-smooth
-    ovl = 100.0   #Speed scaling
-    robot.LoadTPD(name)  #Trajectory preloading
-    robot.MoveCart(P1,1,0,100.0,100.0,100.0,-1.0,-1)       #Let's go to the starting point
-    robot.MoveTPD(name, blend, ovl)  #Trajectory reproduction
+    robot = Robot.RPC('192.168.58.2')
+    # P1=[-321.821, 125.694, 282.556, 174.106, -15.599, 152.669]
+    name = 'tpd2023'   
+    blend = 1   
+    ovl = 100.0   
+    ret = robot.LoadTPD(name)  # Trajectory preloading
+    print("Trajectory preloading",ret)
+    ret,P1 = robot.GetTPDStartPose(name)   # ObtainTPD start pose
+    print ("ObtainTPD start pose ",ret," start pose ",P1)
+    ret = robot.MoveL(P1,0,0)       # Move to the start pose
+    print("Move to the start pos",ret)
+    time.sleep(10)
+    ret = robot.MoveTPD(name, blend, ovl)  # Trajectory reproduction
+    print("Trajectory reproduction ",ret)
 
 Track preprocessing - Import track files
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -312,3 +324,53 @@ Set trajectory torqueTz- Import track files
     "Required parameter", "``tz``:Torque around the z axis, unit Nm"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    name = "/fruser/traj/trajHelix_aima_1.txt"   
+    blend = 1   
+    ovl = 50.0   
+    ft =[0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+    ret = robot.LoadTrajectoryJ(name,ovl)  #Trajectory preloading
+    print("Trajectory preloading",ret)
+    ret,P1 = robot.GetTrajectoryStartPose(name)   # Obtain trajectory start pose - Import track files
+    print ("Obtain trajectory start pose - Import track files ",ret," start pose ",P1)
+    ret = robot.MoveL(P1,1,0)       # Move to start pose
+    print("Move tostart pose ",ret)
+    ret = robot.GetTrajectoryPointNum()# Obtain trajectory point number - Import track files
+    print("Obtain trajectory point number - Import track files ",ret)
+    time.sleep(10)
+    ret = robot.MoveTrajectoryJ()  # Trajectory reproduction - Import track files
+    print("Trajectory reproduction - Import track files ",ret)
+    time.sleep(10)
+    ret = robot.SetTrajectoryJSpeed(ovl)  # Set trajectory speed - Import track files
+    print("Set trajectory speed - Import track files",ret)
+    time.sleep(1)
+    ret = robot.SetTrajectoryJForceTorque(ft)  # Set trajectory force and torque- Import track files
+    print("Set trajectory force and torque- Import track files ",ret)
+    time.sleep(1)
+    ret = robot.SetTrajectoryJForceFx(0) # Set trajectory force Fx- Import track files
+    print("Set trajectory force Fx- Import track files ",ret)
+    time.sleep(1)
+    ret = robot.SetTrajectoryJForceFy(0) # Set trajectory force Fy- Import track files
+    print("Set trajectory force Fy- Import track files ",ret)
+    time.sleep(1)
+    ret = robot.SetTrajectoryJForceFz(0) # Set trajectory force Fz- Import track files
+    print("Set trajectory force Fx- Import track files ",ret)
+    time.sleep(1)
+    ret = robot.SetTrajectoryJTorqueTx(0) # Set trajectory torqueTy- Import track files
+    print("Set trajectory torqueTy- Import track files ",ret)
+    time.sleep(1)
+    ret = robot.SetTrajectoryJTorqueTy(0) # Set trajectory torqueTy- Import track files
+    print("Set trajectory torqueTy- Import track files ",ret)
+    time.sleep(1)
+    ret = robot.SetTrajectoryJTorqueTz(0) # Set trajectory torqueTz- Import track files
+    print("Set trajectory torqueTz- Import track files ",ret)
+    time.sleep(1)

@@ -43,16 +43,16 @@ Code example
     :linenos:
     :emphasize-lines: 8, 9
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    company = 17    #Sensor manufacturer,17-Kunwei Technology,
-    device = 0      #Sensor equipment number
-    softversion = 0 #software version number
-    bus = 1         #End bus position
-    robot.FT_SetConfig(company, device, softversion, bus)   #Configured force sensor
-    config = robot.FT_GetConfig() #Obtain the configuration information of the force sensor. The manufacturer number is one larger than the feedback
-    print(config)
+    robot = Robot.RPC('192.168.58.2')
+    company = 17    
+    device = 0     
+    error = robot.FT_SetConfig(company, device)   # Force sensor configuration
+    print("Force sensor configuration",error)
+    config = robot.FT_GetConfig() # Obtain force sensor configuration
+    print(' Obtain force sensor configuration ',config)
 
 Force sensor activation
 +++++++++++++++++++++++++++
@@ -72,13 +72,15 @@ Code example
     :linenos:
     :emphasize-lines: 4,6
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FT_Activate(0)  #Sensor reset
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.FT_Activate(0)  # Reset force sensor
+    print("Reset force sensor ",error)
     time.sleep(1)
-    robot.FT_Activate(1)  #Sensor activation
-    time.sleep(1)
+    error = robot.FT_Activate(1)  # Activate force sensor 
+    print("Activate force sensor ",error)
 
 Zero calibration of force sensor
 ++++++++++++++++++++++++++++++++++++
@@ -98,13 +100,14 @@ Code example
     :linenos:
     :emphasize-lines: 4,6
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FT_SetZero(0)   #Sensor zero removal
-    time.sleep(1)
-    robot.FT_SetZero(1)   #The zero point of the sensor should be corrected. Please note that no tool can be installed at the end of the sensor.
-    time.sleep(1)
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.FT_SetZero(0)   # Sensor zero removal
+    print("Sensor zero removal ",error)
+    error = robot.FT_SetZero(1)   # The zero point of the sensor should be corrected. Please note that no tool can be installed at the end of the sensor.
+    print("Sensor zero corrected ",error)
 
 Set the force sensor reference coordinate system
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -124,10 +127,12 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FT_SetRCS(0)    #Set reference coordinate system to tool coordinate system, 0- tool coordinate system, 1- base coordinate system
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.FT_SetRCS(0)    # Set the force sensor reference coordinate system
+    print(' Set the force sensor reference coordinate system ',error)
     time.sleep(1)
 
 Load weight identification calculation
@@ -161,24 +166,16 @@ Code example
     :linenos:
     :emphasize-lines: 13, 15
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    #Load identification. At this time, the tool to be identified is installed at the end. The tool is installed under the force sensor, and the end is vertical down
-    robot.FT_SetRCS(0)    #Set reference coordinate system to tool coordinate system, 0- tool coordinate system, 1- base coordinate system
+    robot = Robot.RPC('192.168.58.2')
+    tool_id = 10  
+    error = robot.FT_PdIdenRecord(tool_id)   # Load weight identification record
+    print('Load weight identification record ',error)
     time.sleep(1)
-    tool_id = 10  #Sensor coordinate number
-    tool_coord = [0.0,0.0,35.0,0.0,0.0,0.0]   # Position of sensor relative to end flange
-    tool_type = 1  # 0-Tool, 1-Sensor
-    tool_install = 0 # 0-Mount end, 1-Outside of robot
-    robot.SetToolCoord(tool_id,tool_coord,tool_type,tool_install)     #Set sensor coordinate system, sensor relative end flange position
-    time.sleep(1)
-    robot.FT_PdIdenRecord(tool_id)   #Record identification data
-    time.sleep(1)
-    weight = robot.FT_PdIdenCompute()  #Calculated load weight,unit[kg]
-    print(weight)
-
+    error = robot.FT_PdIdenRecord()  # Load weight identification calculation
+    print('Load weight identification calculation ',error)
 
 Load centroid identification calculation
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -211,28 +208,32 @@ Code example
     :linenos:
     :emphasize-lines: 9,14,19,21
     
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
     #For load centroid identification, the robot needs to teach three different poses, then record the identification data, and finally calculate the load centroid
-    P1=[-160.619,-586.138,384.988,-170.166,-44.782,169.295]
-    robot.MoveCart(P1,9,0,100.0,100.0,100.0,-1.0,-1)         #Point to point motion in joint space
+    robot.Mode(1)
+    ret = robot.DragTeachSwitch(1)  
+    time.sleep(5)
+    ret = robot.DragTeachSwitch(0)
     time.sleep(1)
-    robot.FT_PdCogIdenRecord(tool_id,1)                               #Record identification data
+    error = robot.FT_PdCogIdenRecord(tool_id,1)
+    print(' Load centroid identification record ',error) 
+    ret = robot.DragTeachSwitch(1)   
+    time.sleep(5)
+    ret = robot.DragTeachSwitch(0)
     time.sleep(1)
-    P2=[-87.615,-606.209,556.119,-102.495,10.118,178.985]
-    robot.MoveCart(P2,9,0,100.0,100.0,100.0,-1.0,-1)
-    time.sleep(1)      
-    robot.FT_PdCogIdenRecord(tool_id,2)
+    error = robot.FT_PdCogIdenRecord(tool_id,2)
+    print('Load centroid identification record ',error)
+    ret = robot.DragTeachSwitch(1)  
+    time.sleep(5)
+    ret = robot.DragTeachSwitch(0)
     time.sleep(1)
-    P3=[41.479,-557.243,484.407,-125.174,46.995,-132.165]
-    robot.MoveCart(P3,9,0,100.0,100.0,100.0,-1.0,-1)
+    error = robot.FT_PdCogIdenRecord(tool_id,3)
+    print(' Load centroid identification record ',error)
     time.sleep(1)
-    robot.FT_PdCogIdenRecord(tool_id,3)
-    time.sleep(1)
-    cog = robot.FT_PdCogIdenCompute()   # Calculated and identified load centroid
-    print(cog)
+    error = robot.FT_PdCogIdenCompute()
+    print('Load centroid identification calculation ',error)
 
 Obtain force/torque data in the reference coordinate system
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -278,11 +279,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    origin = robot.FT_GetForceTorqueOrigin()   #Example Query the original sensor data
-    print(origin)
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.FT_GetForceTorqueOrigin()   # Obtain raw force/torque data from the force sensor
+    print("Obtain raw force/torque data from the force sensor ",error)
 
 Collision protection
 ++++++++++++++++++++++++++++++++++
@@ -307,9 +308,9 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     actFlag = 1   #Enable flag, 0-Disable collision guard, 1-Enable collision guard
     sensor_num = 1  #Force sensor number
     is_select = [1,1,1,1,1,1]  #Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz],0-Ineffective, 1-Effective
@@ -319,12 +320,17 @@ Code example
     P1=[-160.619,-586.138,384.988,-170.166,-44.782,169.295]
     P2=[-87.615,-606.209,556.119,-102.495,10.118,178.985]
     P3=[41.479,-557.243,484.407,-125.174,46.995,-132.165]
-    robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold)    #Enable collision guard
-    robot.MoveCart(P1,9,0,100.0,100.0,100.0,-1.0,-1)         #Point to point motion in joint space
-    robot.MoveCart(P2,9,0,100.0,100.0,100.0,-1.0,-1)
-    robot.MoveCart(P3,9,0,100.0,100.0,100.0,-1.0,-1)
-    actFlag = 0  
-    robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold)    #Disable collision guard
+    error = robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold)    # Turn on collision protection
+    print("Turn on collision protection ",error)
+    error = robot.MoveL(P1,1,0)         # linear motion in Cartesian space
+    print("Linear motion in Cartesian space ",error)
+    error = robot.MoveL(P2,1,0)
+    print("Linear motion in Cartesian space ",error)
+    error = robot.MoveL(P3,1,0)
+    print("Linear motion in Cartesian space ",error)
+    actFlag = 0
+    error = robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold)    # Turn off collision protection
+    print("Turn off collision protection ",error)
 
 Constant force control
 ++++++++++++++++++++++++++++++++++
@@ -351,9 +357,10 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
+    #Constant force control
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
     is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
@@ -363,19 +370,20 @@ Code example
     ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
     max_dis = 100.0  #Maximum adjustment distance
     max_ang = 0.0  #Maximum adjustment angle
-    J1=[-68.987,-96.414,-111.45,-61.105,92.884,11.089]
-    P1=[62.795,-511.979,291.697,-179.545,3.027,-170.039]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[0.000,0.000,0.000,0.000,0.000,0.000]
-    J2=[-107.596,-109.154,-104.735,-56.176,90.739,11.091]
-    P2=[-294.768,-503.708,233.158,179.799,0.713,151.309]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[0.000,0.000,0.000,0.000,0.000,0.000]
-    robot.MoveJ(J1,P1,9,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space movement PTP, tool number 9, actual test was used according to field data and tool number
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)   #Constant force control
-    robot.MoveL(J2,P2,9,0,100.0,180.0,20.0,-1.0,eP2,0,0,dP2)   #Rectilinear motion in Cartesian space
+    J1=[70.395, -46.976, 90.712, -133.442, -87.076, -27.138]
+    P2=[-123.978, -674.129, 44.308, -178.921, 2.734, -172.449]
+    P3=[123.978, -674.129, 42.308, -178.921, 2.734, -172.449]
+    error = robot.MoveJ(J1,1,0)    
+    print("Joint space motion PTP ",error)
+    error = robot.MoveL(P2,1,0)
+    print("Linear motion in Cartesian space ",error)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn on constant force control ",error)
+    error = robot.MoveL(P3,1,0)    
+    print("Linear motion in Cartesian space ",error)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn off constant force control ",error)
 
 Spiral line exploration
 ++++++++++++++++++++++++++++++++++
@@ -397,9 +405,10 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
+    P = [36.794,-675.119, 65.379, -176.938, 2.535, -179.829]
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
@@ -412,15 +421,17 @@ Code example
     max_ang = 5.0  #Maximum adjustment angle
     #Helix explore parameters
     rcs = 0  #Reference frame, 0-Tool frame, 1-Base frame
-    dr = 0.7  #Feed per circle radius,unit[mm]
     fFinish = 1.0 #Force or moment threshold（0~100）,unit[N or Nm]
-    t = 60000.0 #Maximum exploration time,unit[ms]
-    vmax = 3.0 #The maximum linear velocity, unit[mm/s]
-    is_select = [0,0,1,1,1,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    robot.FT_SpiralSearch(rcs,dr,fFinish,t,vmax)
+
+    error = robot.MoveL(P,1,0)
+    print("Linear motion in Cartesian space ",error)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign, max_dis,max_ang)
+    print("Turn on constant force control ",error)
+    error = robot.FT_SpiralSearch(rcs,fFinish,max_vel=3)
+    print("Spiral line exploration ",error)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign, max_dis,max_ang)
+    print("Turn off constant force control ",error)
 
 Rotate Insert
 ++++++++++++++++++++++++++++++++++
@@ -444,9 +455,9 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    P = [36.794,-675.119, 65.379, -176.938, 2.535, -179.829]
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
@@ -465,14 +476,15 @@ Code example
     orn = 1 #Direction of force,1-fz,2-mz
     angAccmax = 0.0 #Maximum rotational acceleration, unit[°/s^2],not used temporarily
     rotorn = 1 #Rotation direction, 1-clockwise, 2-counterclockwise
-    s_select = [0,0,1,1,1,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
-    status = 1
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    robot.FT_RotInsertion(rcs,angVelRot,forceInsertion,angleMax,orn,angAccmax,rotorn)
+    error = robot.MoveL(P,1,0) # Linear motion in Cartesian space
+    print("Linear motion in Cartesian space ",error)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn on constant force control ",error)
+    error = robot.FT_RotInsertion(rcs,1,orn)
+    print("Rotate Insert ",error)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn off constant force control ",error)
 
 Linear insertion
 ++++++++++++++++++++++++++++++++++
@@ -495,9 +507,10 @@ Code example
 .. code-block:: python
     :linenos:
     
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
+    P = [36.794,-675.119, 65.379, -176.938, 2.535, -179.829]
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
@@ -515,14 +528,15 @@ Code example
     lin_a = 0.0 #Linear acceleration, unit[mm/s^2],not used temporarily
     disMax = 100.0 #Maximum insertion distance,unit[mm]
     linorn = 1 #Insertion direction, 1-positive direction, 2-negative direction
-    is_select = [1,1,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    gain = [0.00005,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
-    force_torque = [0.0,0.0,-30.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    status = 1
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    robot.FT_LinInsertion(rcs,force_goal,lin_v,lin_a,disMax,linorn)
+    error = robot.MoveL(P,1,0) # Linear motion in Cartesian space
+    print("Linear motion in Cartesian space ",error)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn on constant force control ",error)
+    error = robot.FT_LinInsertion(rcs,force_goal,disMax,linorn)
+    print("Linear insertion",error)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn off constant force control ",error)
 
 Calculate the middle plane position to start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -570,9 +584,10 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
@@ -591,52 +606,53 @@ Code example
     lin_a = 0.0  #Exploration linear acceleration,unit[mm/s^2]
     disMax = 50.0 #Maximum exploration distance,unit[mm]
     force_goal = 2.0 #Action termination force threshold,unit[N]
-    P1=[-230.959,-364.017,226.179,-179.004,0.002,89.999]
-    robot.MoveCart(P1,9,0,100.0,100.0,100.0,-1.0,-1)       #Point to point motion in joint space
+
+    P1=[-77.24,-679.599,58.328,179.373,-0.028,-167.849]
+    Robot.MoveCart(P1,1,0)       #Point to point motion in joint space
     #Look for the center in the x direction
     #The first surface
-    robot.FT_CalCenterStart()
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    robot.FT_FindSurface(rcs,direction,axis,lin_v,lin_a,disMax,force_goal)
+    error = robot.FT_CalCenterStart()
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    robot.MoveCart(P1,9,0,100.0,100.0,100.0,-1.0,-1)       #Point to point motion in joint space
-    robot.WaitMs(1000)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    time.sleep(2)
+    error = robot.MoveCart(P1,1,0)       #Point to point motion in joint space
+    time.sleep(5)
     #The second surface
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
     direction = 2 #Direction of movement,1-positive direction, 2-negative direction
-    robot.FT_FindSurface(rcs,direction,axis,lin_v,lin_a,disMax,force_goal)
+    error = robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
     #Calculate the x-direction center position
-    xcenter= robot.FT_CalCenterEnd()
-    print(xcenter)
-    xcenter = [xcenter[1],xcenter[2],xcenter[3],xcenter[4],xcenter[5],xcenter[6]]
-    robot.MoveCart(xcenter,9,0,60.0,50.0,50.0,0.0,-1)
+    error,xcenter = robot.FT_CalCenterEnd()
+    print("xcenter",xcenter)
+    error = robot.MoveCart(xcenter,1,0)
+    time.sleep(1)
     #Look for the center in the y direction
     #The first surface
-    robot.FT_CalCenterStart()
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error =robot.FT_CalCenterStart()
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
     direction = 1 #Direction of movement,1-positive direction, 2-negative direction
     axis = 2 #Axis of movement,1-X,2-Y,3-Z
     disMax = 150.0 #Maximum exploration distance,unit[mm]
     lin_v = 6.0  #Exploring straight-line velocity,unit[mm/s]
-    robot.FT_FindSurface(rcs,direction,axis,lin_v,lin_a,disMax,force_goal)
+    error =robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    robot.MoveCart(P1,9,0,100.0,100.0,100.0,-1.0,-1)       #Point to point motion in joint space
-    robot.WaitMs(1000)
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error =robot.MoveCart(P1,1,0)       #Point to point motion in joint space
+    Robot.WaitMs(1000)
     #The second surface
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
     direction = 2 #Direction of movement,1-positive direction, 2-negative direction
-    robot.FT_FindSurface(rcs,direction,axis,lin_v,lin_a,disMax,force_goal)
+    error =robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
     #Calculate the y center position
-    ycenter=robot.FT_CalCenterEnd()
-    print(ycenter)
-    ycenter = [ycenter[1],ycenter[2],ycenter[3],ycenter[4],ycenter[5],ycenter[6]]
-    robot.MoveCart(ycenter,9,0,60.0,50.0,50.0,-1.0,-1)
+    error,ycenter=robot.FT_CalCenterEnd()
+    print("y center position",ycenter)
+    error =robot.MoveCart(ycenter,1,0)
 
 Flexibility control off
 ++++++++++++++++++++++++++++++++++
@@ -668,37 +684,38 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1=[-105.3,-68.0,-127.9,-75.5,90.8,77.8]
-    P1=[-208.9,-274.5,334.6,178.8,-1.3,86.7]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[0.000,0.000,0.000,0.000,0.000,0.000]
-    J2=[-105.3,-97.9,-101.5,-70.3,90.8,77.8]
-    P2=[-264.8,-480.5,341.8,179.2,0.3,86.7]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[0.000,0.000,0.000,0.000,0.000,0.000]
+    robot = Robot.RPC('192.168.58.2')
+    J1=[75.005,-46.434,90.687,-133.708,-90.315,-27.139]
+    P2=[-77.24,-679.599,38.328,179.373,-0.028,-167.849]
+    P3=[77.24,-679.599,38.328,179.373,-0.028,-167.849]
     #Constant force parameter
     status = 1  #Constant force control open flag, 0-off, 1-on
     sensor_num = 1 #Force sensor number
-    is_select = [1,0,0,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [-2.0,0.0,0.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0002,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
+    is_select = [1,1,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
+    force_torque = [-10.0,-10.0,-10.0,0.0,0.0,0.0] #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
+    gain = [0.0005,0.0,0.0,0.0,0.0,0.0]  # 
     adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
     ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
-    max_dis = 100.0  #Maximum adjustment distance
-    max_ang = 5.0  #Maximum adjustment angle
+    max_dis = 1000.0  #Maximum adjustment distanc
+    max_ang = 0.0  #Maximum adjustment angle
+    error = robot.MoveJ(J1,1,0)
     #Compliance control
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    p = 0.00005  #Coefficient of position adjustment or compliance
-    force = 30.0 #Compliant opening force threshold,unit[N]
-    robot.FT_ComplianceStart(p,force)
-    count = 15  #Number of cycles
-    while(count):
-        robot.MoveL(J1,P1,9,0,100.0,180.0,100.0,-1.0,eP1,0,1,dP1)   #Rectilinear motion in Cartesian space
-        robot.MoveL(J2,P2,9,0,100.0,180.0,100.0,-1.0,eP2,0,0,dP2)
-        count = count - 1
-    robot.FT_ComplianceStop()
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn on constant force control ",error)
+    p = 0.00005  # Coefficient of position adjustment or compliance
+    force = 30.0 # Compliant opening force threshold,unit[N]
+    error = robot.FT_ComplianceStart(p,force)
+    print("Turn on flexibility control ",error)
+    error = robot.MoveL(P2,1,0,vel =10)   # Rectilinear motion in Cartesian space
+    print("Rectilinear motion in Cartesian space ", error)
+    error = robot.MoveL(P3,1,0,vel =10)
+    print("Rectilinear motion in Cartesian space ", error)
+    time.sleep(1)
+    error = robot.FT_ComplianceStop()
+    print("Turn off flexibility control ",error)
     status = 0
-    robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Turn off constant force control ",error)

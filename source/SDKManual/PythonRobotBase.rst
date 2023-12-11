@@ -25,9 +25,9 @@ Code example
     :linenos:
     :emphasize-lines: 3
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
 
 Query SDK version number
 ++++++++++++++++++++++++++++
@@ -50,15 +50,14 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetSDKVersion()    # Query SDK version number
-    if ret[0] == 0:  
-        # 0-No fault, return format:[errcode,data],errcode-Fault code,data-Data
-        print("SDK version is:",ret[1])
+    robot = Robot.RPC('192.168.58.2')
+    ret,version  = robot.GetSDKVersion()    # Query SDK version numbe
+    if ret ==0:
+        print("SDK version is", version )
     else:
-        print("the errcode is: ", ret[0])
+        print("The query failed with the error code is",ret)
 
 Obtain Controller IP
 ++++++++++++++++++++++
@@ -81,15 +80,14 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ret = robot.GetControllerIP()    #Obtain Controller IP
-    if ret[0] == 0:
-        print("controller ip is:",ret[1])
+    robot = Robot.RPC('192.168.58.2')
+    ret,ip = robot.GetControllerIP()    # Obtain Controller IP
+    if ret ==0:
+        print("controller ip is ", ip)
     else:
-        print("the errcode is: ", ret[0])
-
+        print("the errcode is ",ret)
 
 Control robot manual/automatic mode switch
 +++++++++++++++++++++++++++++++++++++++++++++++
@@ -111,14 +109,15 @@ Code example
     :linenos:
     :emphasize-lines: 5, 7
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.Mode(0)   #The robot goes into automatic operation mode
-    time.sleep(1)  
-    robot.Mode(1)   #The robot goes into manual mode
-
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.Mode(0)   # The robot goes into automatic operation mode
+    print("The robot goes into automatic operation mode ", ret)
+    time.sleep(1)
+    ret = robot.Mode(1)   # The robot goes into manual mode
+    print("The robot goes into manual mode ", ret)
 
 Robot drag mode
 +++++++++++++++++
@@ -150,34 +149,35 @@ Check if the robot is in drag mode
     "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example
-^^^^^^^^^^^^^^^
+-------------
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 7, 9, 15, 17
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.Mode(1) #The robot goes into manual mode
+    robot = Robot.RPC('192.168.58.2') 
+    robot.Mode(1) # The robot goes into manual mode
+    print("The robot goes into manual mode ", ret)
     time.sleep(1)
-    robot.DragTeachSwitch(1)  #When the robot enters the drag teaching mode, it can only enter the drag teaching mode in manual mode
+    ret = robot.DragTeachSwitch(1)  # When the robot enters the drag teaching mode, it can only enter the drag teaching mode in manual mode
+    print("the robot enters the drag teaching mode ", ret)
     time.sleep(1)
-    ret = robot.IsInDragTeach()    #Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode
-    if ret[0] == 0:
-        print("drag state is:",ret[1])
+    ret,state = robot.IsInDragTeach()    # Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode
+    if ret == 0:
+        print("drag state is：", state)
     else:
-        print("the errcode is: ", ret[0])
+        print("the errcode is：",ret)
     time.sleep(3)
-    robot.DragTeachSwitch(0)  #When the robot enters the non-drag teaching mode, it can only enter the non-drag teaching mode in manual mode
+    ret = robot.DragTeachSwitch(0)  # When the robot enters the non-drag teaching mode, it can only enter the non-drag teaching mode in manual mode
+    print("the robot enters the non-drag teaching mode ", ret)
     time.sleep(1)
-    ret = robot.IsInDragTeach()    #Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode)
-    if ret[0] == 0:
-        print("drag state is:",ret[1])
+    ret,state = robot.IsInDragTeach()    # Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode
+    if ret == 0:
+        print("drag state is：", state)
     else:
-        print("the errcode is: ", ret[0])
-
+        print("the errcode is：",ret)
 
 Control the robot to enable or lower enable
 +++++++++++++++++++++++++++++++++++++++++++++++
@@ -199,10 +199,12 @@ Code example
     :linenos:
     :emphasize-lines: 5, 7
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.RobotEnable(0)   #Enable the robot
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.RobotEnable(0)   # Unable the robot
+    print("Unable the robot", ret)
     time.sleep(3)
-    robot.RobotEnable(1)   #This function is enabled on the robot. After the robot is powered on, it is automatically enabled by default
+    ret = robot.RobotEnable(1)   # This function is enabled on the robot. After the robot is powered on, it is automatically enabled by default
+    print("Enabled on the robot ", ret)
