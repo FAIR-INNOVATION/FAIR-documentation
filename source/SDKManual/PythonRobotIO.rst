@@ -24,15 +24,15 @@ Code example
     :linenos:
     :emphasize-lines: 5,8
 
-    import frrpc
+    from fairino import Robot
+    import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     for i in range(0,16):
-        robot.SetDO(i,1,0,0)   #Open the control box DO
-    robot.WaitMs(1000)
+        error = robot.SetDO(i,1)      #Open the control box DO
+    time.sleep(1)
     for i in range(0,16):
-        robot.SetDO(i,0,0,0)   #Close the control box DO
-    robot.WaitMs(1000)
+        robot.SetDO(i,0)      #Close the control box DO
 
 
 Set tool digital output
@@ -55,16 +55,15 @@ Code example
     :linenos:
     :emphasize-lines: 5,8
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
+    error_tooldo = 0
     for i in range(0,2):
-        robot.SetToolDO(i,1,0,0)    #Open the control box DO
-    robot.WaitMs(1000)
+        error = robot.SetToolDO(i,1)    # Open the tool DO
     robot.WaitMs(1000)
     for i in range(0,2):
-        robot.SetToolDO(i,0,0,0)    #Close the control box DO
-
+        error = robot.SetToolDO(i,0)    # Close the tool DOO
 
 Set the analog output of the control box
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -85,12 +84,13 @@ Code example
     :linenos:
     :emphasize-lines: 4,6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetAO(0,0.0,0)    # Set control box analog output
-    robot.WaitMs(1000)
-    robot.SetAO(1,100.0,0)
+    robot = Robot.RPC('192.168.58.2') 
+    error = robot.SetAO(0,100.0)
+    print("Set the AO0 of the control box ", error)
+    error = robot.SetAO(1,100.0)
+    print("Set the AO1 of the control box ", error)
 
 Set tool analog output
 +++++++++++++++++++++++++
@@ -111,12 +111,14 @@ Code example
     :linenos:
     :emphasize-lines: 4,6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetToolAO(0,100.0,0)   # Set tool analog output
-    robot.WaitMs(1000)
-    robot.SetToolAO(0,0.0,0)
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.SetToolAO(0,100.0)
+    print("Set tool analog output ", error)
+    Robot.WaitMs(1000)
+    error = robot.SetToolAO(0,0.0)
+    print("Set tool analog output ", error)
 
 Obtain the digital input of the control box
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -137,11 +139,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    di = robot.GetDI(0,0)   # Obtain the digital input of the control box
-    print(di)
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.GetDI(0,0)
+    print("Obtain the di0 of the control box",error)
 
 Obtain tool digital input
 +++++++++++++++++++++++++++++
@@ -163,11 +165,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    tool_di = robot.GetToolDI(1,0)   # Obtain tool digital input
-    print(tool_di)
+    robot = Robot.RPC('192.168.58.2')
+    tool_di = robot.GetToolDI(1,0)
+    print("Obtain tool di1 ",tool_di)
 
 Waiting for digital input from the control box
 +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -190,10 +192,12 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.WaitDI(0,1,0,2)    # Waiting for the control box digital input
+    robot = Robot.RPC('192.168.58.2')
+    max_waittime = 2000 
+    error = robot.WaitDI(0,1,max_waittime,0)
+    print("WaitDI ",error)
 
 
 Waiting for multiple digital inputs from the control box
@@ -218,10 +222,12 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.WaitMultiDI(1,3,3,10000,2)   #  Waiting for control box multiplex digital input
+    robot = Robot.RPC('192.168.58.2')
+    max_waittime = 2000
+    error = robot.WaitMultiDI(1,3,1,max_waittime,0)
+    print("WaitMultiDI",error)
 
 Waiting for tool digital input
 ++++++++++++++++++++++++++++++++++
@@ -244,10 +250,12 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.WaitToolDI(1,1,0,2)    #  Wait for the tool number to enter
+    robot = Robot.RPC('192.168.58.2')
+    max_waittime = 2000
+    error = robot.WaitToolDI(1,1,max_waittime,0)
+    print("WaitToolDI",error)
 
 Waiting for terminal digital input
 +++++++++++++++++++++++++++++++++++++++
@@ -268,11 +276,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    ai = robot.GetAI(0,1)   #  Obtain control box analog input
-    print(ai)
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.GetAI(0)
+    print("Obtain AI0",error)
 
 Obtain tool analog input
 ++++++++++++++++++++++++++++
@@ -293,11 +301,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    tool_ai = robot.GetToolAI(0,1)    #   Obtain tool analog input
-    print(tool_ai)
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.GetToolAI(0)
+    print("Obtain ToolAI0",error)
 
 Waiting for the control box simulation input
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -321,10 +329,12 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.WaitAI(0,0,50,0,2)   # Always waiting for tool analog input
+    robot = Robot.RPC('192.168.58.2')
+    max_waittime = 2000
+    error = robot.WaitAI(0,0,50,max_waittime,1)          
+    print("WaitAI ",error)
 
 Waiting for tool analog input
 ++++++++++++++++++++++++++++++++
@@ -348,7 +358,9 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.WaitToolAI(0,0,50,0,2)   #  Always waiting for tool analog input
+    robot = Robot.RPC('192.168.58.2')
+    max_waittime = 2000
+    error = robot.WaitToolAI(0,0,50,max_waittime,0)
+    print("WaitToolAI ",error)

@@ -25,13 +25,15 @@ Code example
     :linenos:
     :emphasize-lines: 5,7
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     level = [1.0,2.0,3.0,4.0,5.0,6.0]
-    robot.SetAnticollision(0,level,1)     #  Set collision level
+    error = robot.SetAnticollision(0,level,1)
+    print("Set collision level:",error)
     level = [50.0,20.0,30.0,40.0,50.0,60.0]
-    robot.SetAnticollision(1,level,1)     #  Set collision percentage
+    error = robot.SetAnticollision(1,level,1)
+    print("Set collision level:",error)
 
 Set the strategy after collision
 +++++++++++++++++++++++++++++++++++
@@ -51,10 +53,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.SetCollisionStrategy(1)    # Set post collision strategy,1-Continue Running
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.SetCollisionStrategy(1)
+    print("Set the strategy after collision:",error)
 
 Set positive limit
 +++++++++++++++++++++++
@@ -74,11 +77,12 @@ Code example
     :linenos:
     :emphasize-lines: 5
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     p_limit = [170.0,80.0,150.0,80.0,170.0,160.0]
-    robot.SetLimitPositive(p_limit)   #  Set positive limit
+    error = robot.SetLimitPositive(p_limit)
+    print("Set positive limit:",error)
 
 Set negative limit
 ++++++++++++++++++++++++
@@ -98,11 +102,12 @@ Code example
     :linenos:
     :emphasize-lines: 5
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     n_limit = [-170.0,-260.0,-150.0,-260.0,-170.0,-160.0]
-    robot.SetLimitNegative(n_limit)   # Set negative limit
+    error = robot.SetLimitNegative(n_limit)
+    print("Set negative limit:",error)
 
 Error status cleared
 +++++++++++++++++++++++
@@ -122,10 +127,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.ResetAllError()    #  Error status cleared
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.ResetAllError()
+    print("Error status cleared:",error)
 
 Joint friction compensation switch
 ++++++++++++++++++++++++++++++++++++++++
@@ -145,10 +151,11 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.FrictionCompensationOnOff(1)
+    print("Joint friction compensation switch:",error)
 
 Set joint friction compensation coefficient formal installation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -168,12 +175,12 @@ Code example
     :linenos:
     :emphasize-lines: 6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
+    robot = Robot.RPC('192.168.58.2')
     lcoeff = [0.9,0.9,0.9,0.9,0.9,0.9]
-    robot.SetFrictionValue_level(lcoeff)   #  Set joint friction compensation coefficient
+    error = robot.SetFrictionValue_level(lcoeff)
+    print("Set joint friction compensation coefficient formal installation:",error)
 
 Set joint friction compensation coefficient - Side Mount
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -193,12 +200,12 @@ Code example
     :linenos:
     :emphasize-lines: 6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
+    robot = Robot.RPC('192.168.58.2')
     wcoeff = [0.4,0.4,0.4,0.4,0.4,0.4]
-    robot.SetFrictionValue_wall(wcoeff)  #  Set joint friction compensation coefficient
+    error = robot.SetFrictionValue_wall(wcoeff)
+    print("Set joint friction compensation coefficient - Side Mount:",error)
 
 Set joint friction compensation coefficient-Inverted
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -218,12 +225,12 @@ Code example
     :linenos:
     :emphasize-lines: 6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
+    robot = Robot.RPC('192.168.58.2')
     ccoeff = [0.6,0.6,0.6,0.6,0.6,0.6]
-    robot.SetFrictionValue_ceiling(ccoeff)  #  Set joint friction compensation coefficient
+    error =robot.SetFrictionValue_ceiling(ccoeff)
+    print("Set joint friction compensation coefficient-Inverted:",error)
 
 Set joint friction compensation coefficient-free installation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -243,9 +250,9 @@ Code example
     :linenos:
     :emphasize-lines: 6
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    robot.FrictionCompensationOnOff(1)   #  Joint friction compensation open
+    robot = Robot.RPC('192.168.58.2')
     fcoeff = [0.5,0.5,0.5,0.5,0.5,0.5]
-    robot.SetFrictionValue_freedom(fcoeff)   #  Set joint friction compensation coefficient
+    error =robot.SetFrictionValue_freedom(fcoeff)
+    print("Set joint friction compensation coefficient-free installation:",error)

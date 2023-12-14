@@ -39,7 +39,6 @@ jog jog deceleration stops
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
 
-
 jog jog immediately stops
 -----------------------------
 
@@ -60,80 +59,83 @@ Code example
     :linenos:
     :emphasize-lines: 6,9,11
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
+
     # Robot single axis point
-    robot.StartJOG(0,1,0,20.0,20.0,30.0)    # Single joint motion, StartJOG is a non blocking command, and other motion commands (including StartJOG) received during motion will be discarded
+    robot.StartJOG(0,1,0,20.0,20.0,30.0)     # Single joint motion, StartJOG is a non blocking command, and other motion commands (including StartJOG) received during motion will be discarded
     time.sleep(1)
     #Robot single axis jog deceleration stop
-    # robot.StopJOG(1)
+    # ret = robot.StopJOG(1)
+    # print(ret)
     #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
-    robot.StartJOG(0,2,1,20.0,20.0,30.0)
+    robot.StartJOG(0,2,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(0,3,1,20.0,20.0,30.0)
+    robot.StartJOG(0,3,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(0,4,1,20.0,20.0,30.0)
+    robot.StartJOG(0,4,1,20.0,vel=40)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(0,5,1,20.0,20.0,30.0)
+    robot.StartJOG(0,5,1,20.0,acc=50)
     time.sleep(1)
     robot.ImmStopJOG()
     robot.StartJOG(0,6,1,20.0,20.0,30.0)
     time.sleep(1)
     robot.ImmStopJOG()
     # Base coordinate
-    robot.StartJOG(2,1,0,20.0,20.0,100.0)  #Jogging in the base coordinate system
+    robot.StartJOG(2,1,0,20.0)  #Jogging in the base coordinate system
     time.sleep(1)
     #Robot single axis jog deceleration stop
-    # robot.StopJOG(2)
-    # #Immediate stop of robot single axis jog
+    # robot.StopJOG(3)
+    #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
-    robot.StartJOG(2,1,1,20.0,20.0,100.0)
+    robot.StartJOG(2,1,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(2,2,1,20.0,20.0,100.0)
+    robot.StartJOG(2,2,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(2,3,1,20.0,20.0,100.0)
+    robot.StartJOG(2,3,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(2,4,1,20.0,20.0,100.0)
+    robot.StartJOG(2,4,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(2,5,1,20.0,20.0,100.0)
+    robot.StartJOG(2,5,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(2,6,1,20.0,20.0,100.0)
+    robot.StartJOG(2,6,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
+
     # Tool coordinate
     robot.StartJOG(4,1,0,20.0,20.0,100.0)  #Point in the tool coordinate system
     time.sleep(1)
     #Robot single axis jog deceleration stop
     # robot.StopJOG(5)
-    # #Immediate stop of robot single axis jog
+    #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
-    robot.StartJOG(4,1,1,20.0,20.0,100.0)
+    robot.StartJOG(4,1,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(4,2,1,20.0,20.0,100.0)
+    robot.StartJOG(4,2,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(4,3,1,20.0,20.0,100.0)
+    robot.StartJOG(4,3,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
     robot.StartJOG(4,4,1,20.0,20.0,100.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(4,5,1,20.0,20.0,100.0)
+    robot.StartJOG(4,5,1,20.0,vel=10.0,acc=20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(4,6,1,20.0,20.0,100.0)
+    robot.StartJOG(4,6,1,20.0,acc=40.0)
     time.sleep(1)
     robot.ImmStopJOG()
     # Job coordinate
@@ -143,25 +145,24 @@ Code example
     # robot.StopJOG(9)
     # #Immediate stop of robot single axis jog
     robot.ImmStopJOG()
-    robot.StartJOG(8,1,1,20.0,20.0,100.0)
+    robot.StartJOG(8,1,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(8,2,1,20.0,20.0,100.0)
+    robot.StartJOG(8,2,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(8,3,1,20.0,20.0,100.0)
+    robot.StartJOG(8,3,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(8,4,1,20.0,20.0,100.0)
+    robot.StartJOG(8,4,1,20.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(8,5,1,20.0,20.0,100.0)
+    robot.StartJOG(8,5,1,20.0,vel=30.0)
     time.sleep(1)
     robot.ImmStopJOG()
-    robot.StartJOG(8,6,1,20.0,20.0,100.0)
+    robot.StartJOG(8,6,1,20.0,20.0,acc=90.0)
     time.sleep(1)
     robot.ImmStopJOG()
-
 
 Joint space motion
 ++++++++++++++++++++++++++
@@ -192,38 +193,21 @@ Code example
     :linenos:
     :emphasize-lines: 13,14
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1=[-168.847,-93.977,-93.118,-80.262,88.985,11.831]
-    P1=[-558.082,27.343,208.135,-177.205,-0.450,89.288]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[1.000,1.000,1.000,1.000,1.000,1.000]
-    J2=[168.968,-93.977,-93.118,-80.262,88.986,11.831]
-    P2=[-506.436,236.053,208.133,-177.206,-0.450,67.102]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[1.000,1.000,1.000,1.000,1.000,1.000]
-    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP,Tool number1,the actual test is based on field data and Tool number
-    robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
-    time.sleep(2)
-    j1 = robot.GetInverseKin(0,P1,-1)       #In the case of Cartesian space coordinates only, the inverse kinematic interface can be used to solve the joint position
-    print(j1)
-    j1 = [j1[1],j1[2],j1[3],j1[4],j1[5],j1[6]]
-    robot.MoveJ(j1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1) 
-    j2 = robot.GetInverseKin(0,P2,-1)
-    print(j2)
-    j2 = [j2[1],j2[2],j2[3],j2[4],j2[5],j2[6]]
-    robot.MoveJ(j2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
-    time.sleep(2)
-    p1 = robot.GetForwardKin(J1)       #The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
-    print(p1)
-    p1 = [p1[1],p1[2],p1[3],p1[4],p1[5],p1[6]]
-    robot.MoveJ(J1,p1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1) 
-    p2 = robot.GetForwardKin(J2)
-    print(p2)
-    p2 = [p2[1],p2[2],p2[3],p2[4],p2[5],p2[6]]
-    robot.MoveJ(J2,p2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
+    robot = Robot.RPC('192.168.58.2')
+    joint_pos4 = [-83.24, -96.476, 93.688, -114.079, -62, -100]
+    joint_pos5 = [-43.24, -70.476, 93.688, -114.079, -62, -80]
+    joint_pos6 = [-83.24, -96.416, 43.188, -74.079, -80, -10]
+    tool = 0 # Tool number
+    user = 0 # Workpiece number
+    ret = robot.MoveJ(joint_pos4, tool, user, vel=30)   # Joint space motionPTP, the actual test is based on field data ,Tool number and Workpiece number
+    print("Joint space motion, Point4:errcode", ret)
+    ret = robot.MoveJ(joint_pos5, tool, user)
+    print("Joint space motion, Point5:errcode ", ret)
+    robot.MoveJ(joint_pos6, tool, user, offset_flag=1, offset_pos=[10,10,10,0,0,0])
+    print("Joint space motion, Point6:errcode ", ret)
 
 Linear motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++
@@ -255,24 +239,21 @@ Code example
     :linenos:
     :emphasize-lines: 16-18
 
-    import frrpc
+    from fairino import Robot
+    import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[10.000,10.000,10.000,0.000,0.000,0.000]
-    J2=[123.709,-121.190,-82.838,-63.499,90.471,-47.174]
-    P2=[-273.856,643.260,259.235,-177.972,-1.494,80.866]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[0.000,0.000,0.000,0.000,0.000,0.000]
-    J3=[167.066,-95.700,-123.494,-42.493,90.466,-47.174]
-    P3=[-423.044,229.703,241.080,-173.990,-5.772,123.971]
-    eP3=[0.000,0.000,0.000,0.000]
-    dP3=[0.000,0.000,0.000,0.000,0.000,0.000]
-    robot.MoveL(J1,P1,0,0,100.0,180.0,100.0,-1.0,eP1,0,1 ,dP1)   #Rectilinear motion in Cartesian space
-    robot.MoveL(J2,P2,0,0,100.0,180.0,100.0,-1.0,eP2,0,0,dP2)
-    robot.MoveL(J3,P3,0,0,100.0,180.0,100.0,-1.0,eP3,0,0,dP3)
+    robot = Robot.RPC('192.168.58.2')
+    desc_pos1 = [36.794,-475.119, 65.379, -176.938, 2.535, -179.829]
+    desc_pos2 = [136.794,-475.119, 65.379, -176.938, 2.535, -179.829]
+    desc_pos3 = [236.794,-475.119, 65.379, -176.938, 2.535, -179.829]
+    tool = 0 # Tool number
+    user = 0 # Workpiece number
+    ret = robot.MoveL(desc_pos1, tool, user)   # Rectilinear motion in Cartesian space
+    print("Rectilinear motion in Cartesian space, Point1:errcode ", ret) 
+    robot.MoveL(desc_pos2, tool, user, vel=20, acc=100)
+    print("Rectilinear motion in Cartesian space, Point 2:errcode ", ret) 
+    robot.MoveL(desc_pos3, tool, user, offset_flag=1, offset_pos=[10,10,10,0,0,0])
+    print("Rectilinear motion in Cartesian space, Point 3:errcode ", ret)
 
 Circular arc motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++++++++
@@ -312,26 +293,18 @@ Code example
     :linenos:
     :emphasize-lines: 19,20
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1=[121.381,-97.108,-123.768,-45.824,89.877,-47.296]
-    P1=[-127.772,459.534,221.274,-177.850,-2.507,78.627]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[10.000,10.000,10.000,10.000,10.000,10.000]
-    J2=[138.884,-114.522,-103.933,-49.694,90.688,-47.291]
-    P2=[-360.468,485.600,196.363,-178.239,-0.893,96.172]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[10.000,10.000,10.000,10.000,10.000,10.000]
-    pa2=[0.0,0.0,100.0,180.0]
-    J3=[159.164,-96.105,-128.653,-41.170,90.704,-47.290]
-    P3=[-360.303,274.911,203.968,-176.720,-2.514,116.407]
-    eP3=[0.000,0.000,0.000,0.000]
-    dP3=[10.000,10.000,10.000,10.000,10.000,10.000]
-    pa3=[0.0,0.0,100.0,180.0]
-    dP=[10.000,10.000,10.000,10.000,10.000,10.000]
-    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)       #Joint space motionPTP
-    robot.MoveC(J2,P2,pa2,eP2,0,dP2,J3,P3,pa3,eP3,0,dP3,100.0,-1.0)    #Circular motion in Cartesian space
+    robot = Robot.RPC('192.168.58.2')
+    desc_pos1 = [236.794,-475.119, 65.379, -176.938, 2.535, -179.829]
+    desc_posc1 = [266.794,-455.119, 65.379, -176.938, 2.535, -179.829] #MoveC Path point
+    desc_posc2 = [286.794,-475.119, 65.379, -176.938, 2.535, -179.829] #MoveC Target point
+    tool = 0 # Tool number
+    user = 0 # Workpiece number
+    ret = robot.MoveL(desc_pos1, tool, user, vel=30, acc=100)
+    print("Linear motion in Cartesian space: errorcode ", ret) 
+    ret = robot.MoveC(desc_posc1, tool, user, desc_posc2,tool, user)  # Circular arc motion in Cartesian space
+    print("Circular ar motion in Cartesian space:errorcode", ret)
 
 Circular motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++++
@@ -369,26 +342,18 @@ Code example
     :linenos:
     :emphasize-lines: 19,20
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1=[121.381,-97.108,-123.768,-45.824,89.877,-47.296]
-    P1=[-127.772,459.534,221.274,-177.850,-2.507,78.627]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[10.000,10.000,10.000,10.000,10.000,10.000]
-    J2=[138.884,-114.522,-103.933,-49.694,90.688,-47.291]
-    P2=[-360.468,485.600,196.363,-178.239,-0.893,96.172]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[10.000,10.000,10.000,10.000,10.000,10.000]
-    pa2=[0.0,0.0,100.0,180.0]
-    J3=[159.164,-96.105,-128.653,-41.170,90.704,-47.290]
-    P3=[-360.303,274.911,203.968,-176.720,-2.514,116.407]
-    eP3=[0.000,0.000,0.000,0.000]
-    dP3=[10.000,10.000,10.000,10.000,10.000,10.000]
-    pa3=[0.0,0.0,100.0,180.0]
-    dP=[10.000,10.000,10.000,10.000,10.000,10.000]
-    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)    #Joint space motionPTP
-    robot.Circle(J2,P2,pa2,eP2,J3,P3,pa3,eP3,100.0,0,dP)    #Circular motion in Cartesian space
+    robot = Robot.RPC('192.168.58.2')
+    desc_pos2 = [236.794,-475.119, 65.379, -176.938, 2.535, -179.829]
+    desc_posc3 = [256.794,-435.119, 65.379, -176.938, 2.535, -179.829]   #Circle Path point
+    desc_posc4 = [286.794,-475.119, 65.379, -176.938, 2.535, -179.829]  #Circle Target point
+    tool = 0 # Tool number
+    user = 0 # Workpiece number
+    robot.MoveL(desc_pos2, tool, user, vel=40, acc=100)
+    print("Linear motion in Cartesian space: errorcode ", ret) 
+    ret = robot.Circle(desc_posc3, tool, user, desc_posc4, tool, user, vel_t=40, offset_flag=1, offset_pos=[5,10,15,0,0,1])  # Circular motion in Cartesian space
+    print("Circular motion in Cartesian space:errcode", ret)    #Circular motion in Cartesian space
 
 Spiral motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++
@@ -425,24 +390,16 @@ Code example
     :linenos:
     :emphasize-lines: 18
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1=[127.888,-101.535,-94.860,17.836,96.931,-61.325]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[50.0,0.0,0.0,-30.0,0.0,0.0]
-    J2=[127.888,-101.535,-94.860,17.836,96.931,-61.325]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[50.0,0.0,0.0,-5.0,0.0,0.0]
-    Pa = [5.0,5.0,50.0,10.0,10.0,0.0]
-    P1 = robot.GetForwardKin(J1)       #The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
-    print(P1)
-    P1 = [P1[1],P1[2],P1[3],P1[4],P1[5],P1[6]]
-    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,0.0,2,dP1)
-    P2 = robot.GetForwardKin(J2)       #The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
-    print(P2)
-    P2 = [P2[1],P2[2],P2[3],P2[4],P2[5],P2[6]]
-    robot.NewSpiral(J2,P2,0,0,100.0,180.0,eP2,100.0,2,dP2,Pa)   #Helical motion
+    robot = Robot.RPC('192.168.58.2')
+    desc_pos_spiral= [236.794,-475.119, -65.379, -176.938, 2.535, -179.829]#Spiral target point
+    # Spiral param [circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction]
+    param = [5.0,10,30,10,5,0]
+    tool = 0 # Tool number
+    user = 0 # Workpiece number
+    ret = robot.NewSpiral(desc_pos_spiral, tool, user, param,vel=40 )  # Spiral motion in Cartesian space
+    print("Spiral motion in Cartesian space:errcode", ret)
 
 Servo motion start
 ++++++++++++++++++++++++++++++++++
@@ -487,32 +444,6 @@ Joint space servo mode motion
     - ``gain``:Proportional amplifier for target position, default to 0.0"
     "Return value", "Errcode: Success -0  Failed -errcode"
 
-Code example
---------------
-
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 15
-
-    import frrpc
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    joint_pos = robot.GetActualJointPosDegree(0)
-    print(joint_pos)
-    joint_pos = [joint_pos[1],joint_pos[2],joint_pos[3],joint_pos[4],joint_pos[5],joint_pos[6]]
-    acc = 0.0
-    vel = 0.0
-    t = 0.008
-    lookahead_time = 0.0
-    P = 0.0
-    count = 100
-    while(count):
-        robot.ServoJ(joint_pos, acc, vel, t, lookahead_time, P)
-        joint_pos[0] = joint_pos[0] + 0.1
-        count = count - 1
-        time.sleep(0.008)
-
 Cartesian space servo mode motion
 ++++++++++++++++++++++++++++++++++++
 
@@ -539,23 +470,44 @@ Code example
     :linenos:
     :emphasize-lines: 15
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    mode = 2  #Tool coordinate system incremental motion
-    n_pos = [0.0,0.0,0.5,0.0,0.0,0.0]   #Incremental pose in Cartesian space
-    gain = [0.0,0.0,1.0,0.0,0.0,0.0]
-    acc = 0.0
-    vel = 0.0
-    t = 0.008
-    lookahead_time = 0.0
-    P = 0.0
-    count = 100
+    robot = Robot.RPC('192.168.58.2')
+    error,joint_pos = robot.GetActualJointPosDegree()
+    print("Current joint position of robot :",joint_pos)
+    joint_pos = [joint_pos[0],joint_pos[1],joint_pos[2],joint_pos[3],joint_pos[4],joint_pos[5]]
+    error_joint = 0
+    count =100
+    error = robot.ServoMoveStart()  #Servo motion start
+    print("The errcode of Servo motion start",error)
     while(count):
-        robot.ServoCart(mode, n_pos, gain, acc, vel, t, lookahead_time, P)
+        error = robot.ServoJ(joint_pos)   # Joint space servo mode motion
+        if error!=0:
+            error_joint =error
+        joint_pos[0] = joint_pos[0] + 0.1  # 1 axis movement 0.1 degrees each time, movement 100 times
         count = count - 1
         time.sleep(0.008)
+    print("The errcode of joint space servo mode motion ",error_joint)
+    error = robot.ServoMoveEnd()  #Servo motion end
+    print("Servo motion end",error) 
+    mode = 2  
+    n_pos = [0.0,0.0,0.5,0.0,0.0,0.0]   # Target Cartesian Position Increment;
+    error,desc_pos = robot.GetActualTCPPose()
+    print("Current Cartesian position of robot ",desc_pos)
+    count = 100
+    error_cart =0
+    error = robot.ServoMoveStart()  #Servo motion start
+    print("The errcode of Servo motion start",error)
+    while(count):
+        error = robot.ServoCart(mode, n_pos, vel=40)   # Cartesian space servo mode motion
+        if error!=0:
+            error_cart =error
+        count = count - 1
+        time.sleep(0.008)
+    print("The errcode of cartesian space servo mode motion", error_cart)
+    error = robot.ServoMoveEnd()  #Servo motion end
+    print("The errcode of servo motion end",error)
 
 Point-to-point motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -583,18 +535,21 @@ Code example
     :linenos:
     :emphasize-lines: 8-10
 
-    import frrpc
+    from fairino import Robot
     import time
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
-    P2=[-273.856,643.260,259.235,-177.972,-1.494,80.866]
-    P3=[-423.044,229.703,241.080,-173.990,-5.772,123.971]
-    robot.MoveCart(P1,0,0,100.0,100.0,100.0,-1.0,-1)       #Point-to-point motion in Cartesian space
-    robot.MoveCart(P2,0,0,100.0,100.0,100.0,-1.0,-1)
-    robot.MoveCart(P3,0,0,100.0,100.0,100.0,0.0,-1)
-    time.sleep(1)
-    robot.StopMotion()    #Stop moving
+    robot = Robot.RPC('192.168.58.2')
+    desc_pos7 = [236.794,-475.119, 65.379, -176.938, 2.535, -179.829]
+    desc_pos8 = [236.794,-575.119, 165.379, -176.938, 2.535, -179.829]
+    desc_pos9 = [236.794,-475.119, 265.379, -176.938, 2.535, -179.829]
+    tool = 0 #Tool number
+    user = 0 #Workpiece number
+    robot.MoveCart(desc_pos7, tool, user)
+    print("Point-to-point motion in Cartesian space: ", ret) 
+    robot.MoveCart(desc_pos8, tool, user, vel=30)
+    print("Point-to-point motion in Cartesian space: ", ret) 
+    robot.MoveCart(desc_pos9, tool, user,)
+    print("Point-to-point motion in Cartesian space: ", ret)
 
 Robot spline motion
 +++++++++++++++++++++
@@ -647,26 +602,24 @@ Code example
     :linenos:
     :emphasize-lines: 15-20
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1 = [114.578,-117.798,-97.745,-54.436,90.053,-45.216]
-    P1 = [-140.418,619.351,198.369,-179.948,0.023,69.793]
-    eP1 = [0.000,0.000,0.000,0.000]
-    dP1 = [0.000,0.000,0.000,0.000,0.000,0.000]
-    J2 = [115.401,-105.206,-117.959,-49.727,90.054,-45.222]
-    P2 = [-95.586,504.143,186.880,178.001,2.091,70.585]
-    J3 = [135.609,-103.249,-120.211,-49.715,90.058,-45.219]
-    P3 = [-252.429,428.903,188.492,177.804,2.294,90.782]
-    J4 = [154.766,-87.036,-135.672,-49.045,90.739,-45.223]
-    P4 = [-277.255,272.958,205.452,179.289,1.765,109.966]
-    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)
-    robot.SplineStart()    #Spline motion start
-    robot.SplinePTP(J1,P1,0,0,100.0,180.0,100.0)    #Spline motion PTP
-    robot.SplinePTP(J2,P2,0,0,100.0,180.0,100.0)
-    robot.SplinePTP(J3,P3,0,0,100.0,180.0,100.0)
-    robot.SplinePTP(J4,P4,0,0,100.0,180.0,100.0)
-    robot.SplineEnd()     #Spline motion end
+    robot = Robot.RPC('192.168.58.2')
+    tool = 0 #Tool number
+    user = 0 #Workpiece number
+    joint_pos1 = [116.489,-85.278,111.501,-112.486,-85.561,24.693]
+    joint_pos2 = [86.489,-65.278,101.501,-112.486,-85.561,24.693]
+    joint_pos3 = [116.489,-45.278,91.501,-82.486,-85.561,24.693]
+    ret = robot.SplineStart() #	Spline motion start
+    print(" Spline motion start: errcode ", ret)
+    ret = robot.SplinePTP(joint_pos1, tool, user)   # Spline motion PTP
+    print("Spline motion PTP: errcode ", ret) 
+    ret = robot.SplinePTP(joint_pos2, tool, user)   # Spline motion PTP
+    print("Spline motion PTP: errcode ", ret) 
+    ret = robot.SplinePTP(joint_pos3, tool, user)   # Spline motion PTP
+    print("Spline motion PTP: errcode ", ret)
+    ret = robot.SplineEnd() # Spline motion end
+    print("Spline motion end", ret)
 
 Robot New Spline Motion
 ++++++++++++++++++++++++++++++++
@@ -723,26 +676,26 @@ Code example
     :linenos:
     :emphasize-lines: 15-20
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    J1 = [114.578,-117.798,-97.745,-54.436,90.053,-45.216]
-    P1 = [-140.418,619.351,198.369,-179.948,0.023,69.793]
-    eP1 = [0.000,0.000,0.000,0.000]
-    dP1 = [0.000,0.000,0.000,0.000,0.000,0.000]
-    J2 = [115.401,-105.206,-117.959,-49.727,90.054,-45.222]
-    P2 = [-95.586,504.143,186.880,178.001,2.091,70.585]
-    J3 = [135.609,-103.249,-120.211,-49.715,90.058,-45.219]
-    P3 = [-252.429,428.903,188.492,177.804,2.294,90.782]
-    J4 = [154.766,-87.036,-135.672,-49.045,90.739,-45.223]
-    P4 = [-277.255,272.958,205.452,179.289,1.765,109.966]
-    robot.MoveJ(J1,P1,0,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)
-    robot.NewSplineStart(1)    #The spline motion begins
-    robot.NewSplinePoint(J1,P1,0,0,50.0,50.0,50.0,0.0,0)    #Spline control point
-    robot.NewSplinePoint(J2,P2,0,0,50.0,50.0,50.0,0.0,0)
-    robot.NewSplinePoint(J3,P3,0,0,50.0,50.0,50.0,0.0,0)
-    robot.NewSplinePoint(J4,P4,0,0,50.0,50.0,50.0,0.0,1)
-    robot.NewSplineEnd() 
+    robot = Robot.RPC('192.168.58.2')
+    tool = 0 #Tool number
+    user = 0 #Workpiece number
+    lastFlag= 0 # Is it the last point, 0-No, 1-Yes;
+    desc_pos4 = [236.794,-375.119, 65.379, -176.938, 2.535, -179.829]
+    desc_pos5 = [236.794,-275.119, 165.379, -176.938, 2.535, -179.829]
+    desc_pos6 = [286.794,-375.119, 265.379, -176.938, 2.535, -179.829]
+    ret = robot.NewSplineStart(1) # New spline motion start
+    print("New spline motion start:errcode", ret)
+    ret = robot.NewSplinePoint(desc_pos4, tool, user, lastFlag)# New Spline Instruction Points
+    print("New Spline Instruction Points:errcode ", ret) 
+    ret = robot.NewSplinePoint(desc_pos5, tool, user, lastFlag, vel=30)# New Spline Instruction Points
+    print("New Spline Instruction Points:errcode ", ret) 
+    lastFlag = 1
+    ret = robot.NewSplinePoint(desc_pos6, tool, user, lastFlag, vel=30)# New Spline Instruction Points
+    print("New Spline Instruction Points:errcode ", ret) 
+    ret = robot.NewSplineEnd() # New spline motion end
+    print("New spline motion end:errcode ", ret)
 
 Robot terminates motion
 +++++++++++++++++++++++++++++++
@@ -763,18 +716,20 @@ Code example
     :linenos:
     :emphasize-lines: 12
 
-    import frrpc
-    import time
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
-    P2=[-273.856,643.260,259.235,-177.972,-1.494,80.866]
-    P3=[-423.044,229.703,241.080,-173.990,-5.772,123.971]
-    robot.MoveCart(P1,0,0,100.0,100.0,100.0,-1.0,-1)       #Point to point motion in joint space
-    robot.MoveCart(P2,0,0,100.0,100.0,100.0,-1.0,-1)
-    robot.MoveCart(P3,0,0,100.0,100.0,100.0,0.0,-1)   #This motion instruction is in a non-blocking state
-    time.sleep(1)
-    robot.StopMotion()    #Stop motion
+    robot = Robot.RPC('192.168.58.2')
+    desc_pos1 = [-187.519, 319.248, 397, -157.278, -31.188, 107.199]
+    desc_pos2 = [-187.519, 310.248, 297, -157.278, -31.188, 107.199]
+    joint_pos1 = [-83.24, -96.476, 93.688, -114.079, -62, -100]
+    tool = 0 #Tool number
+    user = 0 #Workpiece number
+    ret = robot.MoveL(desc_pos1, tool, user, joint_pos=joint_pos1)   # Linear motion in Cartesian space
+    print("Linear motion in Cartesian space:errcode", ret)
+    ret = robot.StopMotion()  # Stop Motion
+    print("Stop Motion: errcode ", ret) 
+    robot.MoveL(desc_pos2, tool, user, vel=40, acc=100)
+    print("Linear motion in Cartesian space:errcode", ret)
 
 Overall displacement of robot points
 +++++++++++++++++++++++++++++++++++++++++
@@ -810,25 +765,24 @@ Code example
     :linenos:
     :emphasize-lines: 19,22
 
-    import frrpc
-    import time
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
-    #Overall shift of robot point position
-    J1=[-168.847,-93.977,-93.118,-80.262,88.985,11.831]
-    P1=[-558.082,27.343,208.135,-177.205,-0.450,89.288]
-    eP1=[0.000,0.000,0.000,0.000]
-    dP1=[10.000,10.000,10.000,0.000,0.000,0.000]
-    J2=[168.968,-93.977,-93.118,-80.262,88.986,11.831]
-    P2=[-506.436,236.053,208.133,-177.206,-0.450,67.102]
-    eP2=[0.000,0.000,0.000,0.000]
-    dP2=[0.000,0.000,0.000,0.000,0.000,0.000]
-    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)
-    robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
-    time.sleep(2)
-    flag = 0
-    offset = [100.0,5.0,6.0,0.0,0.0,0.0]   #Pose offset
-    robot.PointsOffsetEnable(flag, offset)   #Global offset start
-    robot.MoveJ(J1,P1,1,0,100.0,180.0,100.0,eP1,-1.0,0,dP1)
-    robot.MoveJ(J2,P2,1,0,100.0,180.0,100.0,eP2,-1.0,0,dP2)
-    robot.PointsOffsetDisable()  #End of global shift
+    robot = Robot.RPC('192.168.58.2')
+    desc_pos3 = [-127.519, 256.248, 312, -147.278, -51.588, 107.199]
+    desc_pos4 = [-140.519, 219.248, 300, -137.278, -11.188, 127.199]
+    desc_pos5 = [-187.519, 319.248, 397, -157.278, -31.188, 107.199]
+    desc_pos6 = [-207.519, 229.248, 347, -157.278, -31.188, 107.199]
+    tool = 0 #Tool number
+    user = 0 #Workpiece number
+    flag = 1 
+    offset_pos = [10,20,30,0,0,0]  
+    ret = robot.PointsOffsetEnable(flag,offset_pos)
+    print("Starting point overall offset:errcode", ret)
+    robot.MoveL(desc_pos3, tool, user, offset_flag=1, offset_pos=[10,10,10,0,0,0])
+    print("Linear motion in Cartesian space:errcode ", ret) 
+    robot.MoveL(desc_pos4, tool, user, vel=30, acc=100)
+    print("Linear motion in Cartesian space:errcode ", ret) 
+    robot.MoveL(desc_pos5, tool, user)
+    print("Linear motion in Cartesian space:errcode ", ret) 
+    ret = robot.PointsOffsetDisable()
+    print("The overall offset of the point ends:errcode ", ret)
