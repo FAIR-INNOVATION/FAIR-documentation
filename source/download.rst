@@ -15,19 +15,19 @@ Qualification Certification
 
 Secondary Development
 ---------------------------------
-    :download:`FRCobot CPP SDK <https://github.com/FAIR-INNOVATION/frcobot_cpp_sdk/archive/refs/heads/main.zip>`
+    :download:`FAIRINO CPP SDK-v1 <https://github.com/FAIR-INNOVATION/frcobot_cpp_sdk/archive/refs/heads/main.zip>`
 
-    :download:`FRCobot CPP SDK-v2.0.0 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/tags/2.0.0.zip>`
+    :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
 
-    :download:`FRCobot C#-v1.0.0 SDK <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/archive/refs/tags/1.0.0.zip>`
+    :download:`FAIRINO C# SDK-v1 <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/archive/refs/heads/main.zip>`
 
-    :download:`FRCobot Python SDK <https://github.com/FAIR-INNOVATION/frcobot_python_sdk/archive/refs/heads/main.zip>`
+    :download:`FAIRINO Python SDK-v1 <https://github.com/FAIR-INNOVATION/frcobot_python_sdk/archive/refs/heads/main.zip>`
 
-    :download:`FRCobot Python-v2.0.0 SDK <https://github.com/FAIR-INNOVATION/fairino-python-sdk/archive/refs/tags/2.0.0.zip>`
+    :download:`FAIRINO Python SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-python-sdk/archive/refs/heads/main.zip>`
 
-    :download:`FRCobot ROS <https://github.com/FAIR-INNOVATION/frcobot_ros/archive/refs/heads/master.zip>`
+    :download:`FAIRINO ROS1 <https://github.com/FAIR-INNOVATION/frcobot_ros/archive/refs/heads/master.zip>`
 
-    :download:`FRCobot ROS2 <https://github.com/FAIR-INNOVATION/frcobot_ros2/archive/refs/heads/main.zip>`
+    :download:`FAIRINO ROS2 <https://github.com/FAIR-INNOVATION/frcobot_ros2/archive/refs/heads/main.zip>`
 
 Ontology & Dimensional Drawings
 ---------------------------------
@@ -46,3 +46,9 @@ Ontology & Dimensional Drawings
     :download:`FRCobots-V5.0 STEP Models <_static/_doc/FRCobots-V5.0 STEP Models.zip>`
 
     :download:`FRCobots-V6.0 STEP Models <_static/_doc/FRCobots-V6.0 STEP Models.zip>`
+
+Robot software
+---------------------------------
+    :download:`Linux V2.0.0 <_static/_doc/Linux V2.0.0.zip>`
+
+    :download:`QNX V3.6.6 <_static/_doc/QNX V3.6.6.zip>`
