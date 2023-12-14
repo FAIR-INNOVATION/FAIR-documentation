@@ -280,6 +280,18 @@ Obtain a safe stop signal
     */
     int GetSafetyStopState(ref byte si0_state, ref byte si1_state)
 
+Obtain the compensation value of robot DH parameter
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Obtain the compensation value of robot DH parameter 
+    * @param [out] dhCompensation The compensation value of robot DH parameter(mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]
+    * @return Error code 
+    */
+    int GetDHCompensation(ref double[] dhCompensation)
+
 Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -290,6 +302,9 @@ Code Example
         Robot robot = new Robot();
         robot.RPC("192.168.58.2");
         int rtn = -1;
+        double[] dhCompensation = new double[6]{0,0,0,0,0,0};
+        rtn = robot.GetDHCompensation(ref dhCompensation);
+        Console.WriteLine($"GetDHCompensation:  rtn :{rtn}    {dhCompensation[0]}  {dhCompensation[1]}  {dhCompensation[2]}  {dhCompensation[3]}  {dhCompensation[4]}  {dhCompensation[5]}");
         string ssh = "";
         rtn = robot.GetSSHKeygen(ref ssh);
         Console.WriteLine($"GetSSHKeygen:  ssh {ssh}  rtn  {rtn}");
@@ -310,4 +325,63 @@ Code Example
 
         rtn = robot.GetSafetyStopState(ref si0_state, ref si1_state);
         Console.WriteLine($"GetSafetyStopState:  rtn  {rtn}   si0_state  {si0_state}   si1_state  {si1_state}");
+    }
+
+UpLoad Point Table
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Upload the point table from the local computer to the robot controller
+    * @param [in] pointTableFilePath The absolute path of the point table on the local computer is C://test/pointTabl e1.db
+    * @return Error code 
+    */
+    int PointTableUpLoad(string pointTableFilePath)
+
+DownLoad Point Table
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Download the point table from the robot controller to the local computer 
+    * @param [in] pointTableName point table name：pointTable1.db
+    * @param [in] saveFilePath save path： C://test/
+    * @return Error code 
+    */
+    int PointTableDownLoad(string pointTableName, string saveFilePath);
+
+Point table update Lua program
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Point table update Lua program
+    * @param [in] pointTableName point table name："pointTable1.db", When the point table is empty, that is, "", the lua program is updated to the original program that did not apply the point table
+    * @param [in] luaFileName Lua program name   "test.lua"
+    * @param [out] errorStr error string  
+    * @return Error code 
+    */
+    int PointTableUpdateLua(string pointTableName, string luaFileName, ref string errorStr);
+
+example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void btnUpload_Click(object sender, EventArgs e)
+    {
+        Robot robot = new Robot();
+        robot.RPC("192.168.58.2");
+        int rtn = -1;
+        rtn = robot.PointTableUpLoad("C://point_table_test.db");
+        Thread.Sleep(2000);
+        rtn = robot.PointTableDownLoad("point_table_test.db", "D://zDOWN/");
+        string errorStr = "";
+        rtn = robot.PointTableUpdateLua("point_table_test.db", "test.lua", ref errorStr);
+        Console.WriteLine($"PointTableSwitch rtn  is {rtn}" + errorStr);
+        rtn = robot.ProgramLoad("/fruser/test.lua");
+        rtn = robot.ProgramRun();
     }
