@@ -922,7 +922,7 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑8 机器人操作TPD
+.. centered:: Figure 4.5‑8 Robot operation TPD
 
 **Robot status**: IO signal status of Robot's control box (CtrlBox) and end (End);
 
@@ -3094,7 +3094,7 @@ Click "System Settings" on the left menu bar, and click "General Settings" on th
 
 Network settings can set controller IP, subnet mask, default gateway, DNS server and teach pendant IP (this IP is valid when using our FR-HMI teach pendant, and needs to be used when using FR-HMI teach pendant Configure the teaching pendant to be enabled), which is convenient for customers to use the scene.
 
-- The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本语).
+- The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本語).
 - The following is a language comparison table. Among the non-system built-in languages, download the language package and import it into the system after translation.
 - The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
 
