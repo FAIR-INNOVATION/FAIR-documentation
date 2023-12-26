@@ -2535,7 +2535,7 @@ Click "Teaching Management" to display all saved teaching point information. In 
 
 Teaching management is divided into two modes: "system mode" and "point table mode". When calling the robot program, different detection schemes can be implemented by calling different point tables to complete the formula requirements. Each time a device or product is added in the future, the point table data package can be downloaded to the robot through the host computer, and the new point table data package created by the robot can also be uploaded to the host computer.
 
-**System mode**：Supports "modification, deletion, import, and export" of teaching point content.
+**System mode**：Supports "modifiy, delete, import, and export" of teaching point content.
 
 .. image:: teaching_pendant_software/140.png
    :width: 6in
