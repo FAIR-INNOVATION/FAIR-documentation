@@ -432,7 +432,7 @@ There are 15 numbers in the drop-down list of the external tool coordinate syste
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-4 外部工具坐标
+.. centered:: Figure 4.4-4 External tool coordinates
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in Figure 4.4-5.
 
@@ -3155,7 +3155,7 @@ Network settings can set controller IP, subnet mask, default gateway, DNS server
      - bn
      - False
    * - Korean
-     - 조선말
+     - 한국어
      - ko
      - False
    * - Turkish
