@@ -7,6 +7,9 @@ Error Code Comparison Table
     :widths: 10 20 30
 
     "Errcode","Describe","Processing method"
+    "-7","Upload file does not exist","Check that the file name is correct"
+    "-6","The save file path does not exist","Check whether the file path is correct"
+    "-5","The LUA file does not exist","Check that the lua file name is correct"
     "-4","xmlrpc interface execution failed","Contact the after-sales engineer to view the controller log"
     "-3","xmlrpc communication failed","Please check whether the network connection and server IP address are correct"
     "-2","Abnormal communication with the controller","Check the software and hardware connection with the controller"
@@ -49,3 +52,4 @@ Error Code Comparison Table
     "95","Spline parameter error","Check whether the spline parameters are reasonable"
     "108","Wrong starting point for helix command","Check whether the starting point data is correct"
     "112","The given pose cannot be reached","Check if the target pose is reasonable"
+    "130","The point table does not exist","Check that the point table name is correct"
