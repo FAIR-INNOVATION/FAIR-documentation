@@ -42,10 +42,9 @@ Obtain system variable values
     - Return(if success): var_value"
 
 Code example
-------------
+------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 8
 
     from fairino import Robot
     import time
@@ -789,5 +788,5 @@ Code example
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
     robot = Robot.RPC('192.168.58.2')
-    ret = robot.ComputeFileMD5("/fruser/201.lua")   #计算指定路径下文件的MD5值
+    ret = robot.ComputeFileMD5("/fruser/201.lua")   #Calculate the MD5 value of the file in the specified path
     print("Calculates the MD5 value of the file in the specified path ", ret)

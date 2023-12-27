@@ -94,13 +94,13 @@ Code example
                 
         robot.SetLoadCoord(coord);
         Thread.Sleep(1000);
-        robot.FT_SetZero(0);//0去除零点  1零点矫正
+        robot.FT_SetZero(0);//0-Remove Zero, 1-Zero Correction
         Thread.Sleep(1000);
 
         ForceTorque ft = new ForceTorque(0, 0, 0, 0, 0, 0);
         int rtn = robot.FT_GetForceTorqueOrigin(1, ref ft);
         Console.WriteLine($"ft origin : {ft.fx}, {ft.fy}, { ft.fz}, { ft.tx}, { ft.ty}, { ft.tz}    rtn   {rtn}");
-        rtn = robot.FT_SetZero(1);//零点矫正
+        rtn = robot.FT_SetZero(1);//Zero Correction
         //Console.WriteLine($"set zero rtn {rtn}");
 
         Thread.Sleep(2000);
@@ -293,7 +293,7 @@ Code Example
 
         byte flag = 1;
         byte sensor_id = 1;
-        int[] select = new int[6]{ 1, 0, 0, 0, 0, 0 };//只启用x轴碰撞守护
+        int[] select = new int[6]{ 1, 0, 0, 0, 0, 0 };//Only enable x-axis collision protection
         double[] max_threshold = new double[6]{ 5.0f, 0.01f, 0.01f, 0.01f, 0.01f, 0.01f };
         double[] min_threshold = new double[6]{ 3.0f, 0.01f, 0.01f, 0.01f, 0.01f, 0.01f };
 

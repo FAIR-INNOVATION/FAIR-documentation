@@ -11,7 +11,7 @@ The conveyor starts and stops
 
     /** 
     * @brief The conveyor starts and stops
-    * @param [in] status 状态，1-starts ，0-stops
+    * @param [in] status 1-starts ，0-stops
     * @return Error code
     */ 
     int ConveyorStartEnd(byte status); 
