@@ -101,9 +101,9 @@ Control area
       :height: 0.75in
       :align: left
 
-   name：**Enable button**
+   name:**Enable button**
    
-   effect：Enable the robot
+   effect:Enable the robot
 
 .. note:: 
    .. image:: teaching_pendant_software/005.png
@@ -111,9 +111,9 @@ Control area
       :height: 0.75in
       :align: left
 
-   name：**Start button**
+   name:**Start button**
    
-   effect：Upload and start running the teaching program
+   effect:Upload and start running the teaching program
 
 .. note:: 
    .. image:: teaching_pendant_software/006.png
@@ -121,9 +121,9 @@ Control area
       :height: 0.75in
       :align: left
 
-   name：**Stop button**
+   name:**Stop button**
    
-   effect：Stop the current teaching program running
+   effect:Stop the current teaching program running
 
 .. note:: 
    .. image:: teaching_pendant_software/007.png
@@ -131,9 +131,9 @@ Control area
       :height: 0.75in
       :align: left
 
-   name：**Pause/Resume button**
+   name:**Pause/Resume button**
    
-   effect：Pause and resume the current teaching program
+   effect:Pause and resume the current teaching program
 
 .. important::
    The pause instruction is at the end of the program and cannot be judged.
@@ -147,9 +147,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**robot status**
+   name:**robot status**
    
-   effect：Stopped-stop，Running-run，Pause-pause，Drag-drag
+   effect:Stopped-stop,Running-run,Pause-pause,Drag-drag
 
 .. note:: 
    .. image:: teaching_pendant_software/009.png
@@ -157,9 +157,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Tool coordinate system number**
+   name:**Tool coordinate system number**
    
-   effect：Display the tool coordinate system number of the current application
+   effect:Display the tool coordinate system number of the current application
    
 .. note:: 
    .. image:: teaching_pendant_software/010.png
@@ -167,9 +167,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Running speed percentage**
+   name:**Running speed percentage**
    
-   effect：The speed of the robot when it is running in the current mode
+   effect:The speed of the robot when it is running in the current mode
 
 .. note:: 
    .. image:: teaching_pendant_software/011.png
@@ -177,9 +177,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Runn normally**
+   name:**Runn normally**
    
-   effect：The current robot is running normally
+   effect:The current robot is running normally
 
 .. note:: 
    .. image:: teaching_pendant_software/012.png
@@ -187,9 +187,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Error state**
+   name:**Error state**
    
-   effect：There is an error in the current robot operation
+   effect:There is an error in the current robot operation
 
 .. note:: 
    .. image:: teaching_pendant_software/013.png
@@ -197,9 +197,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**automatic mode**
+   name:**automatic mode**
    
-   effect：Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
+   effect:Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
 
 .. note:: 
    .. image:: teaching_pendant_software/014.png
@@ -207,9 +207,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Teach mode**
+   name:**Teach mode**
    
-   effect：Robot teaching operation mode, set the global speed adjustment of manual mode and automatic mode and specify the speed.
+   effect:Robot teaching operation mode, set the global speed adjustment of manual mode and automatic mode and specify the speed.
 
 .. note:: 
    .. image:: teaching_pendant_software/015.png
@@ -217,9 +217,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Drag state**
+   name:**Drag state**
    
-   effect：The current robot can drag
+   effect:The current robot can drag
 
 .. note:: 
    .. image:: teaching_pendant_software/016.png
@@ -227,9 +227,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Drag state**
+   name:**Drag state**
    
-   effect：The current robot is not draggable
+   effect:The current robot is not draggable
 
 .. note:: 
    .. image:: teaching_pendant_software/017.png
@@ -237,9 +237,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Connection status**
+   name:**Connection status**
    
-   effect：Robot connected
+   effect:Robot connected
 
 .. note:: 
    .. image:: teaching_pendant_software/017-1.png
@@ -247,9 +247,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Not connected status**
+   name:**Not connected status**
    
-   effect：Robot not connected
+   effect:Robot not connected
 
 .. note:: 
    .. image:: teaching_pendant_software/018.png
@@ -257,9 +257,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name：**Account information**
+   name:**Account information**
    
-   effect：Display username and permissions and logout user
+   effect:Display username and permissions and logout user
 
 
 
@@ -309,9 +309,9 @@ Joint, Base and other functions can refer to \ `4.6 Robot operation <#robot-oper
 3D virtual trajectory and import tool model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Trajectory drawing**：When running the teaching program, turn on the trajectory drawing function, and the 3D model of the robot will describe the trajectory of the robot movement.
+**Trajectory drawing**:When running the teaching program, turn on the trajectory drawing function, and the 3D model of the robot will describe the trajectory of the robot movement.
 
-**Import tool model**：Click the "Import" button, and the tool model can be displayed on the end of the robot after the tool model is imported. Currently, the tool model file formats supported are STL and DAE.
+**Import tool model**:Click the "Import" button, and the tool model can be displayed on the end of the robot after the tool model is imported. Currently, the tool model file formats supported are STL and DAE.
 
 .. image:: teaching_pendant_software/020.png
    :width: 3in
@@ -324,7 +324,7 @@ Joint, Base and other functions can refer to \ `4.6 Robot operation <#robot-oper
 
 Create various 3D virtual coordinate systems in the 3D virtual area of the WebAPP robot, taking the display of the base coordinate system as an example, as shown in the figure below. Among them, the X axis is red, the Y axis is green, and the Z axis is blue.
 
-**Base coordinate system**：In the base coordinate system WebAPP, the system robot is displayed in the three-dimensional virtual area by default, and the fixed mark is at the bottom center of the robot base. The 3D virtual base coordinate system can be displayed manually.
+**Base coordinate system**:In the base coordinate system WebAPP, the system robot is displayed in the three-dimensional virtual area by default, and the fixed mark is at the bottom center of the robot base. The 3D virtual base coordinate system can be displayed manually.
 
 .. image:: teaching_pendant_software/021.png
    :width: 6in
@@ -332,7 +332,7 @@ Create various 3D virtual coordinate systems in the 3D virtual area of the WebAP
 
 .. centered:: Figure 4.3-2 Base coordinate system display off and on
 
-**Tool coordinate system**：The display of the tool coordinate system is enabled by default and can be manually disabled. After the WebAPP starts and the user logs in successfully, obtain the tool coordinate system name and corresponding parameter data of the current application, and initialize the current tool coordinate system.
+**Tool coordinate system**:The display of the tool coordinate system is enabled by default and can be manually disabled. After the WebAPP starts and the user logs in successfully, obtain the tool coordinate system name and corresponding parameter data of the current application, and initialize the current tool coordinate system.
 
 When applying other tool coordinate systems during use, after the application tool coordinate system command succeeds, first clear the existing tool coordinate system in the robot's 3D virtual area, and then transfer the newly applied tool coordinate system parameter data into the 3D coordinate system The API is generated to generate the tool coordinate system, and after the generation is completed, it is displayed in the three-dimensional virtual area of the robot.
 
@@ -342,7 +342,7 @@ When applying other tool coordinate systems during use, after the application to
 
 .. centered:: Figure 4.3-3 Tool coordinate system display
 
-**Workpiece coordinate system**：The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
+**Workpiece coordinate system**:The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
 
 .. image:: teaching_pendant_software/023.png
    :width: 6in
@@ -350,7 +350,7 @@ When applying other tool coordinate systems during use, after the application to
 
 .. centered:: Figure 4.3-4 Workpiece coordinate system display
 
-**External Axis Coordinate System**：The external axis coordinate system is turned off by default, and it can be manually turned on and displayed. The process is consistent with the tool coordinate system.
+**External Axis Coordinate System**:The external axis coordinate system is turned off by default, and it can be manually turned on and displayed. The process is consistent with the tool coordinate system.
 
 .. image:: teaching_pendant_software/024.png
    :width: 6in
@@ -444,23 +444,23 @@ Click "Modify" to reset the tool coordinate system of the number according to th
 
 **1. Three-point method to determine the external TCP**
 
-1. **Set point 1**：The TCP of the measured tool is moved to the external TCP, click the Setpoint 1 button;
+1. **Set point 1**:The TCP of the measured tool is moved to the external TCP, click the Setpoint 1 button;
 
-2. **Set point 2**：Move a certain distance from point 1 along the X axis of the external TCF coordinate system, and click the button to set point 2;
+2. **Set point 2**:Move a certain distance from point 1 along the X axis of the external TCF coordinate system, and click the button to set point 2;
 
-3. **Set point 3**：Go back to point 1, move from point 1 along the Z axis of the external TCF coordinate system for a certain distance, and click the button to set point 3;
+3. **Set point 3**:Go back to point 1, move from point 1 along the Z axis of the external TCF coordinate system for a certain distance, and click the button to set point 3;
 
-4. **Calculate**：Click the calculate button to get the external TCF;
+4. **Calculate**:Click the calculate button to get the external TCF;
 
 **2.Six-point method to determine the tool TCF**
 
-1. **Set points 1-4**：Select a fixed point in the robot space, move the tool to the selected point from four different angles, and set points 1-4 in sequence;
+1. **Set points 1-4**:Select a fixed point in the robot space, move the tool to the selected point from four different angles, and set points 1-4 in sequence;
 
-2. **Set point 5**：Go back to the fixed point and move a certain distance along the X axis of the tool TCF coordinate system, and click the Set Point 5 button;
+2. **Set point 5**:Go back to the fixed point and move a certain distance along the X axis of the tool TCF coordinate system, and click the Set Point 5 button;
 
-3. **Set point 6**：Go back to the fixed point and move a certain distance along the Y axis of the tool TCF coordinate system, and click the set point 6 button;
+3. **Set point 6**:Go back to the fixed point and move a certain distance along the Y axis of the tool TCF coordinate system, and click the set point 6 button;
 
-4. **Calculate**：Click the calculate button to get the tool TCF;
+4. **Calculate**:Click the calculate button to get the tool TCF;
 
 If you need to reset, click the Cancel button to go back to the step of creating a new tool coordinate system.
 
@@ -651,9 +651,9 @@ Friction compensation
 
 Under the menu bar of "Robot Settings" in "Initial Settings", click "Friction Compensation" to enter the friction compensation setting interface.
 
-**Friction compensation coefficient**：The usage scenario for friction compensation is only in the dragging mode. The friction compensation coefficient can be set from 0 to 1. The higher the value, the greater the compensation force when dragging. The friction compensation coefficient needs to be set separately for each axis according to the different installation methods.
+**Friction compensation coefficient**:The usage scenario for friction compensation is only in the dragging mode. The friction compensation coefficient can be set from 0 to 1. The higher the value, the greater the compensation force when dragging. The friction compensation coefficient needs to be set separately for each axis according to the different installation methods.
 
-**Friction compensation switch**：Users can turn on or off friction compensation according to the actual robot and usage habits.
+**Friction compensation switch**:Users can turn on or off friction compensation according to the actual robot and usage habits.
 
 .. image:: teaching_pendant_software/048.png
    :width: 3in
@@ -684,13 +684,13 @@ After the speed is set successfully, the corresponding speed status bar will cha
 
 .. Under the menu bar of "Robot Settings" in "Initial Settings", click "Configuration Import and Export" to enter the configuration import and export interface.
 
-.. **Import robot configuration files**：The user imports a robot configuration file named user.config, which contains various parameters in the robot setting function. Click the "Select File" button, select the configuration file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
+.. **Import robot configuration files**:The user imports a robot configuration file named user.config, which contains various parameters in the robot setting function. Click the "Select File" button, select the configuration file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
 
-.. **Export robot configuration file**：Click the "Export" button to export the robot configuration file user.config to the local.
+.. **Export robot configuration file**:Click the "Export" button to export the robot configuration file user.config to the local.
 
-.. **Import controller database**：The user imports the controller database file named fr_controller_data.db. Click the "Select File" button, select the database file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
+.. **Import controller database**:The user imports the controller database file named fr_controller_data.db. Click the "Select File" button, select the database file that has been modified and the content meets the specifications, and click the "Import" button. When the prompt of import completion appears, the parameters in the file are successfully set.
 
-.. **Controller database**：Click the "Export" button to export the robot controller database file to the local.
+.. **Controller database**:Click the "Export" button to export the robot controller database file to the local.
 
 .. .. image:: teaching_pendant_software/050.png
 ..    :width: 3in
@@ -908,7 +908,7 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑6 I/O alias configuration
+.. centered:: Figure 4.5-6 I/O alias configuration
 
 **Robot operation**: IO signal selection boxes for IO and TPD control boxes (CtrlBox) and end (End);
 
@@ -916,13 +916,13 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑7 Robot operation IO
+.. centered:: Figure 4.5-7 Robot operation IO
 
 .. image:: teaching_pendant_software/robot_operate_tpd.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑8 机器人操作TPD
+.. centered:: Figure 4.5-8 机器人操作TPD
 
 **Robot status**: IO signal status of Robot's control box (CtrlBox) and end (End);
 
@@ -930,7 +930,7 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑9 Robot status IO
+.. centered:: Figure 4.5-9 Robot status IO
 
 **Teaching simulation - program teaching**: Add program commands such as "Wait", "Digital IO", and "Analog IO", and select the program command line by clicking the "Edit" icon. The IO selection box in the pop-up box will pop up;
 
@@ -938,13 +938,13 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑10 Program Teach Add IO
+.. centered:: Figure 4.5-10 Program Teach Add IO
 
 .. image:: teaching_pendant_software/teach_program_edit.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑11 Program Teaching Editor IO
+.. centered:: Figure 4.5-11 Program Teaching Editor IO
 
 **Teaching simulation - graphical programming**: IO dropdown selection for 'Logic' and 'Control' modules;
 
@@ -952,7 +952,7 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑12 Graphical programming IO
+.. centered:: Figure 4.5-12 Graphical programming IO
 
 **Auxiliary Application - Robot Body**: IO key selection box in 'Smart Tool';
 
@@ -960,7 +960,7 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5‑13 smart Tool IO
+.. centered:: Figure 4.5-13 smart Tool IO
 
 Robot operation
 -----------------
@@ -970,7 +970,7 @@ Teaching point record
 
 The manual teaching control area is mainly to set the test coordinate system in the teaching mode, and display the angle and coordinate values of each axis of the robot in real time, and can name and save the teaching points.
 
-When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\）。
+When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\)。
 
 For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
 
@@ -988,11 +988,11 @@ Joint Jog
 
 Under Joint operation, the 6 slider bars in the middle represent the angles of the corresponding axes respectively, and the joint movement is divided into single-axis inching and multi-axis linkage
 
-**single axis jog**：The user can control the movement of the robot by operating the left and right circular buttons, as shown in Figure3.6-2. In the manual mode and the joint coordinate system, perform a rotation operation on a joint of the robot. When the robot stops beyond the range of motion (soft limit), you can use single-axis jogging for manual operation to move the robot out of the overrun position. Single-axis jogging is faster and more convenient than other operation modes for rough positioning and large-scale movement.
+**single axis jog**:The user can control the movement of the robot by operating the left and right circular buttons, as shown in Figure3.6-2. In the manual mode and the joint coordinate system, perform a rotation operation on a joint of the robot. When the robot stops beyond the range of motion (soft limit), you can use single-axis jogging for manual operation to move the robot out of the overrun position. Single-axis jogging is faster and more convenient than other operation modes for rough positioning and large-scale movement.
 
 Set the "long press movement threshold" (the maximum distance the robot can run when the button is long pressed, and the input value range is 0~300) parameters, long press the round button to control the robot running, if the button is released during the robot running, the robot will stop immediately Movement, if you keep pressing the button without releasing it, the robot will run and stop moving after long pressing the value set by the movement threshold.
 
-**Multi-axis linkage**：The user can operate the six sliders in the middle to adjust the corresponding target position of the robot, as shown in Figure3.6-3. The target position can be determined by observing the 3D virtual robot. If the adjusted position does not meet your expectations, click the "Restore" button. Make the 3D virtual robot return to the initial position. After the user determines the target position, he can click the "Apply" button, and the physical robot will perform corresponding movements.
+**Multi-axis linkage**:The user can operate the six sliders in the middle to adjust the corresponding target position of the robot, as shown in Figure3.6-3. The target position can be determined by observing the 3D virtual robot. If the adjusted position does not meet your expectations, click the "Restore" button. Make the 3D virtual robot return to the initial position. After the user determines the target position, he can click the "Apply" button, and the physical robot will perform corresponding movements.
 
 .. image:: teaching_pendant_software/060.png
    :width: 3in
@@ -1069,9 +1069,9 @@ TPD (Teach-in programming)
 
 The operation steps of teach programming (TPD) function are as follows:
 
-- **Step1 record initial position**：Enter the operation area on the left side of the 3D model and record the current position of the robot. Set the name of the point in the edit box, click the "Save" button, if the save is successful, it will prompt "Save point successful";
+- **Step1 record initial position**:Enter the operation area on the left side of the 3D model and record the current position of the robot. Set the name of the point in the edit box, click the "Save" button, if the save is successful, it will prompt "Save point successful";
 
-- **Step2 Configure track recording parameters**：Click TPD to enter the "TPD" function item to configure trajectory recording parameters, set the name of the trajectory file, pose type and sampling period, configure DI and DO, and record the corresponding output by triggering DI during the process of recording the TPD trajectory DO, as Figure3.6-8;
+- **Step2 Configure track recording parameters**:Click TPD to enter the "TPD" function item to configure trajectory recording parameters, set the name of the trajectory file, pose type and sampling period, configure DI and DO, and record the corresponding output by triggering DI during the process of recording the TPD trajectory DO, as Figure3.6-8;
 
 .. image:: teaching_pendant_software/066.png
    :width: 3in
@@ -1079,7 +1079,7 @@ The operation steps of teach programming (TPD) function are as follows:
 
 .. centered:: Figure 4.6-8 TPD track record
 
-- **Step3 Check robot mode**：Check whether the robot mode is in manual mode. If not, switch to manual mode. In manual mode, there are two ways to switch to drag teaching mode, one is long press the end button, and the other is interface dragging mode It is recommended to switch the robot from the interface to the drag teaching mode in the TPD record. As shown in Figure 4.6-9;
+- **Step3 Check robot mode**:Check whether the robot mode is in manual mode. If not, switch to manual mode. In manual mode, there are two ways to switch to drag teaching mode, one is long press the end button, and the other is interface dragging mode It is recommended to switch the robot from the interface to the drag teaching mode in the TPD record. As shown in Figure 4.6-9;
 
 .. image:: teaching_pendant_software/067.png
    :width: 3in
@@ -1090,11 +1090,11 @@ The operation steps of teach programming (TPD) function are as follows:
 .. important:: 
    When switching to the drag mode from the interface, first confirm whether the end tool load and the center of mass are set correctly, and whether the friction compensation coefficient is set reasonably, then press and hold the end button to confirm whether the drag is normal, and then switch to the drag mode from the interface after confirming that it is correct.
 
-- **Step4 start recording**：Click the "Start Recording" button to start track recording, and drag the robot to teach actions. In addition, there is a "TPD recording start/stop" function configuration item in the terminal DI configuration. By configuring this function, the user can trigger the "start recording" trace function through an external signal. It should be noted that to start recording a trace through an external signal, first Configure the TPD track information on the page first.
+- **Step4 start recording**:Click the "Start Recording" button to start track recording, and drag the robot to teach actions. In addition, there is a "TPD recording start/stop" function configuration item in the terminal DI configuration. By configuring this function, the user can trigger the "start recording" trace function through an external signal. It should be noted that to start recording a trace through an external signal, first Configure the TPD track information on the page first.
 
-- **Step5 stop recording**：After the action teaching is completed, click the "Stop Recording" button to stop the track recording, and then drag the teaching switch button to make the robot exit the drag teaching mode. When the teach pendant receives "stop track recording successful", it means the track recording is successful. Same as step 4, after configuring the "TPD recording start/stop" function, you can trigger the recording to stop by an external signal.
+- **Step5 stop recording**:After the action teaching is completed, click the "Stop Recording" button to stop the track recording, and then drag the teaching switch button to make the robot exit the drag teaching mode. When the teach pendant receives "stop track recording successful", it means the track recording is successful. Same as step 4, after configuring the "TPD recording start/stop" function, you can trigger the recording to stop by an external signal.
 
-- **Step6 teach programming**：Click New, select a blank template, click to enter the PTP function programming item, select the initial position point just saved, click the "Add" button, after the application is completed, a PTP instruction will be displayed in the program file; then click to enter the TPD function programming item, Select the track just recorded, set whether it is smooth and the speed scaling, click the "Add" button, after the application is completed, a MoveTPD instruction will be displayed in the program file, as shown in Figure3.6-10;
+- **Step6 teach programming**:Click New, select a blank template, click to enter the PTP function programming item, select the initial position point just saved, click the "Add" button, after the application is completed, a PTP instruction will be displayed in the program file; then click to enter the TPD function programming item, Select the track just recorded, set whether it is smooth and the speed scaling, click the "Add" button, after the application is completed, a MoveTPD instruction will be displayed in the program file, as shown in Figure3.6-10;
 
 .. image:: teaching_pendant_software/068.png
    :width: 6in
@@ -1102,19 +1102,19 @@ The operation steps of teach programming (TPD) function are as follows:
 
 .. centered:: Figure 4.6-10 TPD programming
 
-- **Step7 Trajectory recurrence**：After editing the teaching program, switch to the automatic operation mode, click the "start running" icon on the top of the interface to start running the program, and the robot will start to reproduce the teaching action.
+- **Step7 Trajectory recurrence**:After editing the teaching program, switch to the automatic operation mode, click the "start running" icon on the top of the interface to start running the program, and the robot will start to reproduce the teaching action.
 
-- **Step8 track edit**：The TPD track editing area can visually display and edit the track to achieve pre-analysis and streamlining of the TPD track. Select the corresponding track acquisition point, then the track points recorded by the user will be displayed in the three-dimensional space of the robot, and then the user can drag the "Start" and "End" scroll bars to simulate and reproduce and edit the start and end points of the track.
+- **Step8 track edit**:The TPD track editing area can visually display and edit the track to achieve pre-analysis and streamlining of the TPD track. Select the corresponding track acquisition point, then the track points recorded by the user will be displayed in the three-dimensional space of the robot, and then the user can drag the "Start" and "End" scroll bars to simulate and reproduce and edit the start and end points of the track.
 
-TPD file deletion and exception handling：
+TPD file deletion and exception handling:
 
-- **Trajectory file deletion**：Click to enter the TPD function item, select the track file to be deleted, and click the "Delete Track" button. If the deletion is successful, you will receive a successful deletion prompt.
+- **Trajectory file deletion**:Click to enter the TPD function item, select the track file to be deleted, and click the "Delete Track" button. If the deletion is successful, you will receive a successful deletion prompt.
 
-- **Exception handling：**
+- **Exception handling:**
 
-  +  **Command points exceeded**：A track can record up to 20,000 points. When the number exceeds 20,000 points, the controller will no longer record the exceeded points, and will send a warning to the teach pendant that the number of command points exceeds the limit. At this time, you need to click to stop recording;
+  +  **Command points exceeded**:A track can record up to 20,000 points. When the number exceeds 20,000 points, the controller will no longer record the exceeded points, and will send a warning to the teach pendant that the number of command points exceeds the limit. At this time, you need to click to stop recording;
 
-  +  **TPD instruction interval is too large**：If the teaching pendant reports an error that the TPD command interval is too large, check whether the robot has returned to the initial position before recording. If the robot returns to the initial position and still reports an error that the TPD command interval is too large, delete the current track and record a new one;
+  +  **TPD instruction interval is too large**:If the teaching pendant reports an error that the TPD command interval is too large, check whether the robot has returned to the initial position before recording. If the robot returns to the initial position and still reports an error that the TPD command interval is too large, delete the current track and record a new one;
 
   +  If other abnormal conditions occur during TPD operation, the robot operation should be stopped immediately through the teach pendant or the emergency stop button to check the cause.
 
@@ -1171,9 +1171,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Open**
+   name:**Open**
    
-   effect：Open user program file
+   effect:Open user program file
 
 .. note:: 
    .. image:: teaching_pendant_software/071.png
@@ -1181,9 +1181,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**New build**
+   name:**New build**
    
-   effect：Select a template to create a new program file
+   effect:Select a template to create a new program file
    
 .. note:: 
    .. image:: teaching_pendant_software/072.png
@@ -1191,9 +1191,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Import**
+   name:**Import**
    
-   effect：Import the file into the user program folder
+   effect:Import the file into the user program folder
 
 .. note:: 
    .. image:: teaching_pendant_software/073.png
@@ -1201,9 +1201,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Export**
+   name:**Export**
    
-   effect：Export user program files to a local point.
+   effect:Export user program files to a local point.
 
 .. note:: 
    .. image:: teaching_pendant_software/074.png
@@ -1211,9 +1211,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Save**
+   name:**Save**
    
-   effect：Save file edits
+   effect:Save file edits
 
 .. note:: 
    .. image:: teaching_pendant_software/075.png
@@ -1221,9 +1221,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Save as**
+   name:**Save as**
    
-   effect：Rename the file and store it in the user program or template program folder.
+   effect:Rename the file and store it in the user program or template program folder.
 
 .. note:: 
    .. image:: teaching_pendant_software/076.png
@@ -1231,9 +1231,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Copy**
+   name:**Copy**
    
-   effect：Duplicates a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
+   effect:Duplicates a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
 
 .. note:: 
    .. image:: teaching_pendant_software/077.png
@@ -1241,9 +1241,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Paste**
+   name:**Paste**
    
-   effect：Allows you to paste previously cut or copied nodes.
+   effect:Allows you to paste previously cut or copied nodes.
 
 .. note:: 
    .. image:: teaching_pendant_software/078.png
@@ -1251,9 +1251,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**To cut**
+   name:**To cut**
    
-   effect：Cuts a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
+   effect:Cuts a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
 
 .. note:: 
    .. image:: teaching_pendant_software/079.png
@@ -1261,9 +1261,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Delete**
+   name:**Delete**
    
-   effect：Deletes a node from the program tree.
+   effect:Deletes a node from the program tree.
 
 .. note:: 
    .. image:: teaching_pendant_software/080.png
@@ -1271,9 +1271,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Move up**
+   name:**Move up**
    
-   effect：Move the node up.
+   effect:Move the node up.
 
 .. note:: 
    .. image:: teaching_pendant_software/081.png
@@ -1281,9 +1281,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Move down**
+   name:**Move down**
    
-   effect：Move the node down.
+   effect:Move the node down.
 
 .. note:: 
    .. image:: teaching_pendant_software/082.png
@@ -1291,9 +1291,9 @@ Modify the program tree using the toolbar at the bottom of the program tree.
       :height: 0.75in
       :align: left
 
-   name：**Toggle edit mode**
+   name:**Toggle edit mode**
    
-   effect：The program tree mode and lua editing mode switch each other.
+   effect:The program tree mode and lua editing mode switch each other.
 
 
 Program command
@@ -1621,7 +1621,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
 
 .. centered:: Figure 4.7-5-13 ServoCart command interface
 
-Absolute pose control program example：
+Absolute pose control program example:
 
 .. image:: teaching_pendant_software/129.png
    :width: 6in
@@ -2014,7 +2014,7 @@ Click the "Weld-Trc" icon to enter the Weld-Trc command editing interface
 
 This command realizes the robot seam tracking and uses the deviation detection of the welding seam to compensate the trajectory, and the arc sensor can be used to detect the seam deviation.
 
-**Step1**：Upper and lower compensation reference current setting method: feedback, set the upper and lower reference current start counting and the upper and lower reference current counting
+**Step1**:Upper and lower compensation reference current setting method: feedback, set the upper and lower reference current start counting and the upper and lower reference current counting
 
 .. image:: teaching_pendant_software/217.png
    :width: 6in
@@ -2022,7 +2022,7 @@ This command realizes the robot seam tracking and uses the deviation detection o
 
 .. centered:: Figure 3.7-8-7-1 Weld-Trc command interface-Feedback
 
-**Step2**：Upper and lower compensation reference current setting method: constant, set the upper and lower reference current
+**Step2**:Upper and lower compensation reference current setting method: constant, set the upper and lower reference current
 
 .. image:: teaching_pendant_software/226.png
    :width: 6in
@@ -2030,7 +2030,7 @@ This command realizes the robot seam tracking and uses the deviation detection o
 
 .. centered:: Figure 3.7-8-7-2 Weld-Trc command interface-constant
 
-**Step3**：Left and right compensation parameter interactive page
+**Step3**:Left and right compensation parameter interactive page
 
 .. image:: teaching_pendant_software/227.png
    :width: 6in
@@ -2146,19 +2146,19 @@ Click the "Mobus" icon to enter the Modbus command editing interface
 
 The command function is a bus function based on the ModbusTCP protocol. The user can control the robot to communicate with the ModbusTCP client or server (the master station communicates with the slave station) through relevant instructions, and perform read and write operations on coils, discrete quantities, and registers.
 
-Example of modbus master reading coil：
+Example of modbus master reading coil:
 
 .. image:: teaching_pendant_software/131.png
    :width: 6in
    :align: center
 
-Example of modbus master write coil：
+Example of modbus master write coil:
 
 .. image:: teaching_pendant_software/132.png
    :width: 6in
    :align: center
 
-Modbus slave read and write coil example：
+Modbus slave read and write coil example:
 
 .. image:: teaching_pendant_software/133.png
    :width: 6in
@@ -2194,7 +2194,7 @@ XML-RPC is a remote procedure call method for transferring data between programs
 
    XmlrpcClientCall(serverUrl,methodName,tableType,param)
 
-   serverUrl server url, for example："http://192.168.58.29:50000/RPC2"
+   serverUrl server url, for example:"http://192.168.58.29:50000/RPC2"
 
    methodName Call function name, "example.add"
 
@@ -2273,9 +2273,9 @@ If you click "Open", "New", "Export", "Rename" and other related file operations
 
 .. centered:: Figure 3.7-14 The current page program does not save verification
 
-**Step1**：Click the "Not Save" button, and the program will restore the unmodified data and continue to perform previous related file operations.
+**Step1**:Click the "Not Save" button, and the program will restore the unmodified data and continue to perform previous related file operations.
 
-**Step2**：Click the "Save" button, the unsaved Lua program is saved successfully, and the previous related file operations continue to be performed.
+**Step2**:Click the "Save" button, the unsaved Lua program is saved successfully, and the previous related file operations continue to be performed.
 
 If you leave the program teaching page and switch to other pages, the prompt "Do you want to save this program" will also be triggered, and you will still stay on the current teaching program page, as shown below.
 
@@ -2285,9 +2285,9 @@ If you leave the program teaching page and switch to other pages, the prompt "Do
 
 .. centered:: Figure 3.7-15 Switch page program does not save verification
 
-**Step1**：Click the "Not Save" button to jump to the previously selected page.
+**Step1**:Click the "Not Save" button to jump to the previously selected page.
 
-**Step2**：Click the "Save" button, and the unsaved Lua program is saved successfully and jumps to the previously selected page.
+**Step2**:Click the "Save" button, and the unsaved Lua program is saved successfully and jumps to the previously selected page.
 
 Teaching program encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2377,6 +2377,43 @@ Users can view the corresponding program backup content by selecting a date, and
 
 .. centered:: Figure 4.7-24 Current program backup
 
+Modbus TCP settings
+~~~~~~~~~~~~~~~~~~~~~
+
+Before using Modbus TCP, users need to configure the master and slave data on the Modbus TCP settings page.
+
+**1.Modbus master station settings**:Configure the master station and the corresponding master station register address on the page. Operations related to "adding Modbus master station and adding master station register" can be performed.
+
+**Master station information**:The master station information includes the master station name, slave station IP, port number, slave station number and communication cycle, and can be edited, refreshed and deleted.
+
+**Master station register information**:The master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI, AI type cannot be input), and can be edited and deleted.
+
+.. image:: teaching_pendant_software/233.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25 Modbus master configuration page
+
+.. important:: The maximum number of master stations is 8, and the maximum number of master station registers is 128. At the same time, the aliases of the master station and the slave station cannot have the same name.
+
+**2.Modbus slave station settings**:Digital input, digital output, analog input, analog output and alias modification operations can be performed.
+
+.. image:: teaching_pendant_software/234.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-26 Modbus slave configuration page
+
+**Digital input/output**:The digital input DI is read-only, and the digital output DO can control the indicator light switch after being clicked, and the number is 128.
+
+**Analog input**:Analog input AI is divided into unsigned, signed and floating point models (three decimal places), all of which are read-only. Among them, the number of unsigned and signed is 16, and the number of floating point is 32.
+
+**Analog output**:Analog output AO is divided into unsigned, signed and floating point models (three decimal places). The parameter range is: unsigned: 0~65535, signed: -32767~32768, floating point type: up to three decimal places. Among them, the number of unsigned and signed is 16, and the number of floating point is 32.
+
+**3.Slave alias settings**:Click the slave station alias to perform editing operations and modify the slave station alias.
+
+.. important:: The aliases of slave stations of the same type cannot have the same name.
+
 Graphical programming
 ~~~~~~~~~~~~~~~~~~~~~~~
 Since the teaching pendant is generally not connected with peripherals such as a keyboard and mouse, when accessing the robot WebAPP on the teaching pendant side, the user can edit the robot teaching program through the graphical programming function. Functional standardization functions are implemented using the Blockly library, which can be integrated in the WebAPP system, and custom code blocks can be implemented as needed, and after the drag-and-drop programming is completed, it is converted into a LUA program and issued and run through the existing instruction protocol. 
@@ -2387,7 +2424,7 @@ Through the use of graphic programming, it can be simple, easy to understand, ea
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-25 Graphical programming interface
+.. centered:: Figure 4.7-27 Graphical programming interface
 
 The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows
 
@@ -2395,13 +2432,13 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-26 Graphical programming page layout overall design
+.. centered:: Figure 4.7-28 Graphical programming page layout overall design
 
-**Operation bar**：The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
+**Operation bar**:The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
 
-**Toolbox**：A code block containing all instructions and logic codes can be dragged to the workspace to create a code block and edited; the Toolbox toolbar will be further classified according to the instruction type. Logical instructions: if-else, while, print, etc.; basic motion instructions: PTP, LIN, ARC, etc.; instruction classification based on application scenarios: gluing, welding, conveyor belt, etc. You can easily find the required code block during use.
+**Toolbox**:A code block containing all instructions and logic codes can be dragged to the workspace to create a code block and edited; the Toolbox toolbar will be further classified according to the instruction type. Logical instructions: if-else, while, print, etc.; basic motion instructions: PTP, LIN, ARC, etc.; instruction classification based on application scenarios: gluing, welding, conveyor belt, etc. You can easily find the required code block during use.
 
-**Workspace**：Graphical code blocks can be edited and displayed in the code editing area.
+**Workspace**:Graphical code blocks can be edited and displayed in the code editing area.
 
 Motion Graphical Programming Commands
 +++++++++++++++++++++++++++++++++++++++
@@ -2411,7 +2448,7 @@ Motion graphic programming commands include  \ `PTP <teaching_pendant_software.h
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-27 Motion Graphical Programming
+.. centered:: Figure 4.7-29 Motion Graphical Programming
 
 Control graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++
@@ -2421,7 +2458,7 @@ Control graphical programming commands include \ `Wait <teaching_pendant_softwar
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-28 Control graphical programming commands
+.. centered:: Figure 4.7-30 Control graphical programming commands
 
 Advanced graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -2431,7 +2468,7 @@ Advanced graphical programming commands include \ `dofile <teaching_pendant_soft
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-29 Advanced graphical programming commands
+.. centered:: Figure 4.7-31 Advanced graphical programming commands
 
 Example of using graphical programming commands
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2443,7 +2480,7 @@ For example, if you select PTP and Lin motion instructions and control commands 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-30 Example of using graphical programming commands
+.. centered:: Figure 4.7-32 Example of using graphical programming commands
 
 After the graphical programming instruction splicing and parameter filling is completed, fill in the name of the workspace, and click the "Save" icon to save the program. Select the "Workspace" that has been written, click Start Run, and you can execute this program.
 
@@ -2456,7 +2493,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-31 Fold instruction code block
+.. centered:: Figure 4.7-33 Fold instruction code block
 
 - 1.Write a code block instruction, add a folding instruction code block in the outer layer, and write the remarks of the instruction in the input box.
 
@@ -2464,7 +2501,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-32 Folding instruction rendering
+.. centered:: Figure 4.7-34 Folding instruction rendering
 
 - 2.Right-click "Collapse Block" in the right-click operation bar, this section of instruction code block is folded, the code block is folded into one line and displayed, and the program can be executed correctly when folded.
 
@@ -2472,7 +2509,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-33 Effect picture after folding
+.. centered:: Figure 4.7-35 Effect picture after folding
 
 3.Roll the mouse to realize the page zoom function, the specific effect is as follows:
 
@@ -2480,7 +2517,7 @@ In order to improve the readability of graphical programming codes, the modulari
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-34 Fold page zoom function effect diagram
+.. centered:: Figure 4.7-36 Fold page zoom function effect diagram
 
 Graphical programming coverage of the same name
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2490,11 +2527,11 @@ On the graphical programming page, click "Save" after changing the workspace nam
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-35 Graphical programming program coverage
+.. centered:: Figure 4.7-37 Graphical programming program coverage
 
-**Step1**：Click the "Cancel" button to continue with the previous operation.
+**Step1**:Click the "Cancel" button to continue with the previous operation.
 
-**Step2**：Click the "Synchronize Update Teaching Program" check box, and then click the "Overwrite" button, then the Lua program on the current graphical programming page will overwrite the Lua program with the changed workspace file name.
+**Step2**:Click the "Synchronize Update Teaching Program" check box, and then click the "Overwrite" button, then the Lua program on the current graphical programming page will overwrite the Lua program with the changed workspace file name.
 
 Verification when graphical programming program is not saved
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2507,11 +2544,11 @@ If you click the "Open" file operation, the "Do you want to save this program" p
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-36 The current page program does not save verification
+.. centered:: Figure 4.7-38 The current page program does not save verification
 
-**Step1**：Click the "Not Save" button to continue the previous "Open" file operation.
+**Step1**:Click the "Not Save" button to continue the previous "Open" file operation.
 
-**Step2**：Click the "Save" button, the unsaved Lua program is saved successfully, and the previous "open" file operation continues.
+**Step2**:Click the "Save" button, the unsaved Lua program is saved successfully, and the previous "open" file operation continues.
 
 If you leave the graphical programming page and switch to other pages, the prompt "Do you want to save this program" will also be triggered, and you will still stay on the current graphical programming page, as shown below.
 
@@ -2519,11 +2556,11 @@ If you leave the graphical programming page and switch to other pages, the promp
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-37 Switch page program does not save verification
+.. centered:: Figure 4.7-39 Switch page program does not save verification
 
-**Step1**：Click the "Not Save" button to jump to the previously selected page.
+**Step1**:Click the "Not Save" button to jump to the previously selected page.
 
-**Step2**：Click the "Save" button to save the unsusnted LUA program and jump to the previously selected page. If the preserved program name already exists, it is prompted to show that the teaching point exists and whether it is covered. After the cancellation/cover operation, jump to the page you chose before.
+**Step2**:Click the "Save" button to save the unsusnted LUA program and jump to the previously selected page. If the preserved program name already exists, it is prompted to show that the teaching point exists and whether it is covered. After the cancellation/cover operation, jump to the page you chose before.
 
 Teaching management
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2535,21 +2572,21 @@ Click "Teaching Management" to display all saved teaching point information. In 
 
 Teaching management is divided into two modes: "system mode" and "point table mode". When calling the robot program, different detection schemes can be implemented by calling different point tables to complete the formula requirements. Each time a device or product is added in the future, the point table data package can be downloaded to the robot through the host computer, and the new point table data package created by the robot can also be uploaded to the host computer.
 
-**System mode**：Supports "modifiy, delete, import, and export" of teaching point content.
+**System mode**:Supports "modifiy, delete, import, and export" of teaching point content.
 
 .. image:: teaching_pendant_software/140.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑38-1 Teaching management interface-system mode
+.. centered:: Figure 4.7-40-1 Teaching management interface-system mode
 
-**Point table mode**：Supports "adding, applying, renaming, deleting, importing, and exporting" the point table, and "modifying and deleting" the point content in the point table.
+**Point table mode**:Supports "adding, applying, renaming, deleting, importing, and exporting" the point table, and "modifying and deleting" the point content in the point table.
 
 .. image:: teaching_pendant_software/228.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7‑38-2 Teaching management interface-point table mode
+.. centered:: Figure 4.7-40-2 Teaching management interface-point table mode
 
 **Details**: Click the "Details" button to view the details of the teaching point.
 
@@ -2557,7 +2594,7 @@ Teaching management is divided into two modes: "system mode" and "point table mo
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-39 Teach point details
+.. centered:: Figure 4.7-41 Teach point details
 
 **Run**: Click the "Start Run" button to perform a single-point operation of the local teaching point, and move the robot to the position of this point.
 
@@ -2565,7 +2602,7 @@ Teaching management is divided into two modes: "system mode" and "point table mo
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-40 Run teach point
+.. centered:: Figure 4.7-42 Run teach point
 
 Status information
 ----------------------
@@ -2595,7 +2632,7 @@ Click the "Status Query" menu in the left menu bar "Status Information" to enter
 
 Status query operation steps:
 
-**Step1**：Click the "Figure" button to pop up the Figure setting pop-up box, as shown in Figure3.8-3Figure setting, select Figure display query for the query type, select the parameters to be queried and the Figure in which the parameters are placed in the Figure setting, and click the "Move Right" button The parameters can be configured in the Figure. Click "Settings" to issue the setting Figure command. At present, only one table can contain up to four parameters to be checked and one Figure can be set at most;
+**Step1**:Click the "Figure" button to pop up the Figure setting pop-up box, as shown in Figure3.8-3Figure setting, select Figure display query for the query type, select the parameters to be queried and the Figure in which the parameters are placed in the Figure setting, and click the "Move Right" button The parameters can be configured in the Figure. Click "Settings" to issue the setting Figure command. At present, only one table can contain up to four parameters to be checked and one Figure can be set at most;
 
 .. image:: teaching_pendant_software/143.png
    :width: 3in
@@ -2603,7 +2640,7 @@ Status query operation steps:
 
 .. centered:: Figure 4.8-3 Figure settings
 
-**Step2**：The trigger function does not need to be set temporarily, and the data can be queried by clicking the "Query" button.
+**Step2**:The trigger function does not need to be set temporarily, and the data can be queried by clicking the "Query" button.
 
 Auxiliary application
 ------------------------
@@ -2619,7 +2656,7 @@ Auxiliary application
 
 .. .. centered:: Figure 4.9-1 Schematic diagram of robot calibration
 
-.. **Zero setting**：When the robot leaves the factory, it will preset an initial posture, in which the angle of each joint is 0. When the zero point is set, the robot pose corresponds to when each joint of the robot moves to a specific position. The zero point is the benchmark of the robot coordinate system. Without the zero point, the robot cannot judge its own position. Therefore, in order to obtain the highest possible absolute positioning accuracy, it is necessary to calibrate the zero point of the robot.
+.. **Zero setting**:When the robot leaves the factory, it will preset an initial posture, in which the angle of each joint is 0. When the zero point is set, the robot pose corresponds to when each joint of the robot moves to a specific position. The zero point is the benchmark of the robot coordinate system. Without the zero point, the robot cannot judge its own position. Therefore, in order to obtain the highest possible absolute positioning accuracy, it is necessary to calibrate the zero point of the robot.
 
 .. Generally, the zero point calibration of the robot is required under the following circumstances:
 
@@ -2646,11 +2683,11 @@ Under the menu bar of "Robot Body" in "Auxiliary Applications", click the "Robot
    
    If it is shipped from the factory, go to System Settings - General Settings and restore the factory settings before leaving the factory.
 
-**Step1**：Move the robot to zero point before moving to the packing point
+**Step1**:Move the robot to zero point before moving to the packing point
 
-**Step2**：Click the "Move to Zero" button to confirm that the robot's mechanical zero point is correct and that the gaps in the orange circles in the figure are aligned with each joint.
+**Step2**:Click the "Move to Zero" button to confirm that the robot's mechanical zero point is correct and that the gaps in the orange circles in the figure are aligned with each joint.
 
-**Step3**：Click the "Move to Packing Point" button, and the robot will move to the packaging point according to the angles of each axis of the packaging process.
+**Step3**:Click the "Move to Packing Point" button, and the robot will move to the packaging point according to the angles of each axis of the packaging process.
 
 .. image:: teaching_pendant_software/220.png
    :width: 3in
@@ -2663,7 +2700,7 @@ System Upgrade
 
 Under the menu bar of "Robot Body" in "Auxiliary Application", click the "System Upgrade" button to enter the system upgrade interface. System upgrade is divided into software upgrade, driver upgrade and system shutdown.
 
-**Software upgrade**：Click "Upload File" under Software Upgrade, select the ``software.tar.gz`` upgrade package in the U disk, click Upload Upgrade Package, and "Uploading...Upload Percentage" is displayed next to the upgrade button.
+**Software upgrade**:Click "Upload File" under Software Upgrade, select the ``software.tar.gz`` upgrade package in the U disk, click Upload Upgrade Package, and "Uploading...Upload Percentage" is displayed next to the upgrade button.
 After the download of the background file is completed, the interface displays "uploading completed, upgrading in progress", check the MD5 and version number of the file, after passing, decrypt and decompress the upgrade file, and prompt "Upgrade is successful, please restart the control box!", if detected , unzip or other errors occur, and "upgrade failed" is displayed next to the upgrade button.
 
 .. image:: teaching_pendant_software/145.png
@@ -2676,7 +2713,7 @@ After the download of the background file is completed, the interface displays "
    The name of the software upgrade package is determined ``software.tar.gz``. If the name of the upgrade package is inconsistent with it, the upgrade will fail. Just change it to the determined name of the upgrade package.
 
 
-**Firmware upgrade**：After the robot enters the BOOT mode, upload the upgrade compressed package, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
+**Firmware upgrade**:After the robot enters the BOOT mode, upload the upgrade compressed package, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
 
 .. image:: teaching_pendant_software/146.png
    :width: 3in
@@ -2684,7 +2721,7 @@ After the download of the background file is completed, the interface displays "
 
 .. centered:: Figure 4.9-3 Firmware upgrade
 
-**Slave configuration file upgrade**：After the robot is disabled, upload the upgrade file, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
+**Slave configuration file upgrade**:After the robot is disabled, upload the upgrade file, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
 
 .. image:: teaching_pendant_software/147.png
    :width: 3in
@@ -2911,9 +2948,9 @@ Under the menu bar of "Robot Body" in "Auxiliary Applications", click "Smart Too
 
 Configure the A-E keys and IO keys in sequence. After the Smart Tool configuration is completed, the task manager internally maintains the function corresponding to each button. When a button is detected to be pressed, the function corresponding to the button is automatically executed.
 
--  **Movement instructions**：When selecting PTP, LIN, or ARC motion instructions, you need to enter the corresponding point speed. After the configuration is successful, a new relevant motion instruction is added to the teaching program. When configuring the ARC motion instruction, you need to configure the PTP/LIN instruction first.
+-  **Movement instructions**:When selecting PTP, LIN, or ARC motion instructions, you need to enter the corresponding point speed. After the configuration is successful, a new relevant motion instruction is added to the teaching program. When configuring the ARC motion instruction, you need to configure the PTP/LIN instruction first.
   
--  **DO output**：When "DO Output" is selected, a drop-down box is displayed to select output DO0 - DO7 options.
+-  **DO output**:When "DO Output" is selected, a drop-down box is displayed to select output DO0 - DO7 options.
   
 .. image:: teaching_pendant_software/229.png
    :width: 3in
@@ -3042,7 +3079,7 @@ Security Wall Configuration
 
 Under the menu bar of "Security Settings" in "Auxiliary Application", click "Security Wall Configuration" to enter the security wall configuration function interface.
 
--  **Security Wall Configuration**：Click the enable button to enable the corresponding security wall. When the security wall is not configured with a security range, an error will be prompted. Click the drop-down box, select the security wall you want to set, and automatically bring out the security distance (you can not set it, the default value is 0), and then click the "Setting" button to set it successfully.
+-  **Security Wall Configuration**:Click the enable button to enable the corresponding security wall. When the security wall is not configured with a security range, an error will be prompted. Click the drop-down box, select the security wall you want to set, and automatically bring out the security distance (you can not set it, the default value is 0), and then click the "Setting" button to set it successfully.
   
 .. image:: teaching_pendant_software/190.png
    :width: 6in
@@ -3050,7 +3087,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
 
 .. centered:: Figure 4.9-34 Security Wall Configuration
 
--  **Security Wall Reference Point Configuration**：After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
+-  **Security Wall Reference Point Configuration**:After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
 
 .. important::
    If the reference point is set successfully, the green light will be on. Otherwise, the yellow light is on. It turns green until the reference point is set successfully. When the four reference points are all set successfully, the safety range can be calculated, and the safety range parameter point status will return to the default after the calculation is successful.
@@ -3107,7 +3144,7 @@ Network settings can set controller IP, subnet mask, default gateway, DNS server
      - Language code(ISO 639-1)
      - Is it built-in
    * - Chinese
-     - 中文（汉语）
+     - 中文(汉语)
      - zh
      - True
    * - English
@@ -3178,13 +3215,13 @@ Network settings
 
 .. centered:: Figure 4.10-1 Schematic diagram of network settings
 
--  **Set ethernet**：Enter the IP of the network card that needs to communicate, subnet mask (linked with IP, automatically filled), default gateway, and DNS server. The factory default IP of network card 0 network port: 192.168.57.2, the factory default IP of network card 1 network port: 192.168.58.2.
+-  **Set ethernet**:Enter the IP of the network card that needs to communicate, subnet mask (linked with IP, automatically filled), default gateway, and DNS server. The factory default IP of network card 0 network port: 192.168.57.2, the factory default IP of network card 1 network port: 192.168.58.2.
 
--  **Teach pendant enabled**：Controls whether the teach pendant is enabled. By default, the teach pendant is turned off, and the device cannot be operated using the teach pendant. Click the slide switch button to enable the teach pendant to operate the device.
+-  **Teach pendant enabled**:Controls whether the teach pendant is enabled. By default, the teach pendant is turned off, and the device cannot be operated using the teach pendant. Click the slide switch button to enable the teach pendant to operate the device.
   
--  **Access IP**：Select the network card associated with WebAPP and WebRecovery. When the teach pendant is enabled, WebAPP selects network card 1 by default, and network card 0 is not optional.
+-  **Access IP**:Select the network card associated with WebAPP and WebRecovery. When the teach pendant is enabled, WebAPP selects network card 1 by default, and network card 0 is not optional.
   
--  **Set network**：Click the "Set Network" button, prompting that the configuration is in progress. After the configuration is complete, the device needs to be restarted.
+-  **Set network**:Click the "Set Network" button, prompting that the configuration is in progress. After the configuration is complete, the device needs to be restarted.
 
 Account settings account settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3202,7 +3239,7 @@ User management page, used to save user information, you can add user ID, functi
 
 .. centered:: Figure 4.10-2 User Management
 
--  **Add users**：Click the "Add" button, enter the job number, name, password and select the function. 
+-  **Add users**:Click the "Add" button, enter the job number, name, password and select the function. 
   
 .. important::
    The job number can be up to 10-digit integer, and the job number and password are uniquely checked, and the password is displayed in Braille. After the user is added successfully, you can enter the name and password to log in again.
@@ -3213,7 +3250,7 @@ User management page, used to save user information, you can add user ID, functi
 
 .. centered:: Figure 4.10-3 Add users
   
--  **Edit users**：When there is a user list, click the "Edit" button on the right, the job number and name cannot be modified, but the password and function can be modified, and the password also needs to be uniquely verified.
+-  **Edit users**:When there is a user list, click the "Edit" button on the right, the job number and name cannot be modified, but the password and function can be modified, and the password also needs to be uniquely verified.
   
 .. image:: teaching_pendant_software/188.png
    :width: 6in
@@ -3221,7 +3258,7 @@ User management page, used to save user information, you can add user ID, functi
 
 .. centered:: Figure 4.10-4 Edit users
 
--  **Delete users**：The deletion methods are divided into single deletion and batch deletion. 
+-  **Delete users**:The deletion methods are divided into single deletion and batch deletion. 
  
    1.Click the single "Delete" button on the right side of the list, and it will prompt "Please click the delete button again to confirm deletion", and click the list again to delete successfully. 
    
