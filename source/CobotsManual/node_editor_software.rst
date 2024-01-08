@@ -1712,7 +1712,7 @@ Modbus instruction
 
 This instruction function is a bus function based on the ModbusTCP protocol. Users can control the robot to communicate with the ModbusTCP client or server (master station and slave station communication) through relevant instructions, and read and write coils, discrete quantities, and registers. For more operating functions of ModbusTCP, please contact us for consultation.
 
-Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station maître, la station esclave et les noms DI, DO, AI et AO dans la configuration ModbusTCP du programme d'enseignement.
+Master station register information: Master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI and AI types cannot be entered), which can be edited and deleted.
 
 1. Master station coil settings, parameters:
 

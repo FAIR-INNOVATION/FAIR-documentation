@@ -2146,23 +2146,17 @@ Click the "Mobus" icon to enter the Modbus command editing interface
 
 The command function is a bus function based on the ModbusTCP protocol. The user can control the robot to communicate with the ModbusTCP client or server (the master station communicates with the slave station) through relevant instructions, and perform read and write operations on coils, discrete quantities, and registers.
 
-Example of modbus master reading coil:
-
 .. image:: teaching_pendant_software/131.png
    :width: 6in
    :align: center
 
-Example of modbus master write coil:
+.. centered:: Figure 4.7-12-1 modbus command master interface
 
 .. image:: teaching_pendant_software/132.png
    :width: 6in
    :align: center
 
-Modbus slave read and write coil example:
-
-.. image:: teaching_pendant_software/133.png
-   :width: 6in
-   :align: center
+.. centered:: Figure 4.7-12-2 modbus command slave interface
 
 For more operating functions of ModbusTCP, please contact us for consultation.
 
@@ -2177,7 +2171,7 @@ XML-RPC is a remote procedure call method for transferring data between programs
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-12-1 Xmlrpc command interface
+.. centered:: Figure 4.7-12-3 Xmlrpc command interface
 
 .. important:: 
    1) The controller acts as a client to connect to the remote custom port;
@@ -2434,7 +2428,7 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
 
 .. centered:: Figure 4.7-28 Graphical programming page layout overall design
 
-**Operation bar**:The "Load" button is responsible for reloading the workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
+**Operation bar**:The "Load" button is responsible for reloading the workspace, the "Import" button is responsible for importing related graphical programming programs, and the "Export" button is responsible for exporting the graphical programming programs in the saved workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
 
 **Toolbox**:A code block containing all instructions and logic codes can be dragged to the workspace to create a code block and edited; the Toolbox toolbar will be further classified according to the instruction type. Logical instructions: if-else, while, print, etc.; basic motion instructions: PTP, LIN, ARC, etc.; instruction classification based on application scenarios: gluing, welding, conveyor belt, etc. You can easily find the required code block during use.
 
