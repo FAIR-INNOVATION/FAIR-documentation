@@ -2381,11 +2381,6 @@ Before using Modbus TCP, users need to configure the master and slave data on th
 1) Master station information:The master station information includes the master station name, slave station IP, port number, slave station number and communication cycle, and can be edited, refreshed and deleted.
    
    - Master station name: Custom name, such as Modbus_1, cannot have the same name, up to 8 master stations
-  
-      + Unsigned: 0~65535, the number is 16
-      + Signed: -32767~32768, the number is 16
-      + Floating point type: up to three decimal places, the number is 32
-
    - Slave IP: integer type, for example 192.168.57.3
    - Port number: integer, for example 2021
    - Slave station number: integer type For example: 1
@@ -2393,10 +2388,15 @@ Before using Modbus TCP, users need to configure the master and slave data on th
 
 2) Master station register information:The master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI, AI type cannot be input), and can be edited and deleted.
 
-   - Master station register type: DI, DO, AI (unsigned, signed, floating point), AO (unsigned, signed, floating point)
-   - Address number: integer type For example: 2000,
-   - Master station register name: Register_1, cannot have the same name, up to 128 master station registers
-   - Address value: Integer type. DI and AI types cannot be input.
+ - Master station register type: DI, DO, AI (unsigned, signed, floating point), AO (unsigned, signed, floating point)
+     
+     + Unsigned: 0~65535, the number is 16
+     + Signed: -32767~32768, the number is 16
+     + Floating point type: up to three decimal places, the number is 32
+  
+ - Address number: integer type For example: 2000
+ - Master station register name: Register_1, cannot have the same name, up to 128 master station registers
+ - Address value: Integer type. DI and AI types cannot be input
 
 .. image:: teaching_pendant_software/233.png
    :width: 6in
@@ -2417,13 +2417,13 @@ Before using Modbus TCP, users need to configure the master and slave data on th
 1) Digital input/output
    
     - Digital input DI read only
-    - The digital output DO can be clicked to control the indicator light switch, and the number is 128.
+    - The digital output DO can be clicked to control the indicator light switch, and the number is 128
 
 2) Analog input
    
-    - Analog input AI is divided into unsigned,
-    - Signed and floating point models (three decimal places), both read-only.
-    - Among them, the number of unsigned and signed is 16, and the number of floating point is 32.
+    - Analog input AI is divided into unsigned
+    - Signed and floating point models (three decimal places), both read-only
+    - Among them, the number of unsigned and signed is 16, and the number of floating point is 32
 
 3) Analog output, analog output AO is divided into unsigned, signed and floating point models (three decimal places)
    
@@ -2483,7 +2483,7 @@ Motion graphic programming commands include  \ `PTP <teaching_pendant_software.h
 
 Control graphical programming commands
 ++++++++++++++++++++++++++++++++++++++++
-Control graphical programming commands include \ `Wait <teaching_pendant_software.html#wait-command>`__\、\ `IO <teaching_pendant_software.html#io-command>`__\ and other commands.
+Control graphical programming commands include \ `Wait <teaching_pendant_software.html#wait-command>`__\、\ `IO <teaching_pendant_software.html#io-command>`__\  and other commands.
 
 .. image:: teaching_pendant_software/182.png
    :width: 6in

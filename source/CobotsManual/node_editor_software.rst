@@ -1708,7 +1708,7 @@ Click the "Torque Record Stop" button to stop recording. Click "Torque Record Re
 Modbus instruction
 --------------------
 
-点Click the "Mobus" related command node to enter the node graph programming interface.
+Click the "Mobus" related command node to enter the node graph programming interface.
 
 This instruction function is a bus function based on the ModbusTCP protocol. Users can control the robot to communicate with the ModbusTCP client or server (master station and slave station communication) through relevant instructions, and read and write coils, discrete quantities, and registers. For more operating functions of ModbusTCP, please contact us for consultation.
 
