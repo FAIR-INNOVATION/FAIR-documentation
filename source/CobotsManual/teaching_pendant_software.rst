@@ -962,6 +962,17 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
 
 .. centered:: Figure 4.5-13 smart Tool IO
 
+Output reset configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click "Robot Settings" in "Initial Settings" on the left menu bar, click the "Output Reset Configuration" submenu to enter the configuration interface, and configure whether different outputs need to be reset after stopping/pausing according to the actual need for reset during use. The current output includes control box DO, control box AO, End plate DO, End plate AO, Expand DO, Expand AO and SmartTool DO.
+
+.. image:: teaching_pendant_software/out_put_reset.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.5-14 Output reset configuration
+
 Robot operation
 -----------------
 
@@ -1526,6 +1537,24 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
 
 .. centered:: Figure 4.7-5-6 N-Spiral command interface
 
+H-Spiral command
++++++++++++++++++++
+
+Click the "H-Spiral" icon to enter the H-Spiral command editing interface
+
+The "H-Spiral" command is a horizontal space spiral motion. This command is set after the single-segment motion (straight line) command. 
+
+   - Spiral radius: 0~100mm
+   - Helix angular speed: 0~2rev/s
+   - Direction of rotation: spiral clockwise/counterclockwise
+   - Helix inclination angle: 0~40°
+
+.. image:: teaching_pendant_software/H-spiral.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-5-7 H-Spiral command interface
+
 Spline command
 ++++++++++++++++
 
@@ -1537,7 +1566,7 @@ The command is divided into three parts: the start of the spline group, the spli
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-7 Spline command interface
+.. centered:: Figure 4.7-5-8 Spline command interface
 
 N-Spline command
 +++++++++++++++++++
@@ -1551,7 +1580,7 @@ For the given control point and the given waypoint.
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-8 N-Spline command interface
+.. centered:: Figure 4.7-5-9 N-Spline command interface
 
 Weave command
 ++++++++++++++++
@@ -1564,7 +1593,7 @@ The "Weave" command consists of two parts. In the first part, select the weaving
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-9 Weave command interface
+.. centered:: Figure 4.7-5-10 Weave command interface
 
 Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
 
@@ -1572,7 +1601,7 @@ Click "Configuration and Test" to configure the parameters of the weaving weldin
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-10 Weave configuration and testing command interface
+.. centered:: Figure 4.7-5-11 Weave configuration and testing command interface
 
 TPD command
 ++++++++++++++++
@@ -1593,7 +1622,7 @@ When programming, first use the PTP instruction to reach the starting point of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-11 TPD command interface
+.. centered:: Figure 4.7-5-12 TPD command interface
 
 Offset command
 ++++++++++++++++
@@ -1606,7 +1635,7 @@ This command is an overall offset command. Input each offset, add the opening co
    :width: 6in
    :align: center
 
-.. centered:: 3.7-5-12 Offset command interface
+.. centered:: Figure 4.7-5-13 Offset command interface
 
 ServoCart command
 ++++++++++++++++++++
@@ -1619,7 +1648,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-13 ServoCart command interface
+.. centered:: Figure 4.7-5-14 ServoCart command interface
 
 Absolute pose control program example:
 
@@ -1644,7 +1673,7 @@ Click the "Trajctory" icon to enter the Trajctory command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-14 Trajctory command interface
+.. centered:: Figure 4.7-5-15 Trajctory command interface
 
 TrajctoryJ command
 ++++++++++++++++++++
@@ -1663,7 +1692,7 @@ Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-15 TrajctoryJ command interface
+.. centered:: Figure 4.7-5-16 TrajctoryJ command interface
 
 DMP command
 ++++++++++++++++
@@ -1676,7 +1705,7 @@ DMP is a trajectory imitation learning method that requires prior planning of re
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-16 DMP command interface
+.. centered:: Figure 4.7-5-17 DMP command interface
 
 WPTrsf command
 ++++++++++++++++
@@ -1689,7 +1718,7 @@ Select the workpiece coordinate system to be automatically converted, and click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-17 WPTrsf command interface
+.. centered:: Figure 4.7-5-18 WPTrsf command interface
 
 Control command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
