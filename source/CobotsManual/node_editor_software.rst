@@ -1708,17 +1708,17 @@ Click the "Torque Record Stop" button to stop recording. Click "Torque Record Re
 Modbus instruction
 --------------------
 
-点Click the "Mobus" related command node to enter the node graph programming interface.
+Click the "Mobus" related command node to enter the node graph programming interface.
 
 This instruction function is a bus function based on the ModbusTCP protocol. Users can control the robot to communicate with the ModbusTCP client or server (master station and slave station communication) through relevant instructions, and read and write coils, discrete quantities, and registers. For more operating functions of ModbusTCP, please contact us for consultation.
 
-Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station maître, la station esclave et les noms DI, DO, AI et AO dans la configuration ModbusTCP du programme d'enseignement.
+Master station register information: Master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI and AI types cannot be entered), which can be edited and deleted.
 
 1. Master station coil settings, parameters:
 
 - Modbus master station name: configured according to actual situation
 - DO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/110.png
@@ -1731,7 +1731,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 
 - Modbus master station name: configured according to actual situation
 - DI name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 
 .. image:: node_editor_software/111.png
    :width: 6in
@@ -1743,7 +1743,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 
 - Modbus master station name: configured according to actual situation
 - AO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/112.png
@@ -1756,7 +1756,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 
 - Modbus master station name: configured according to actual situation
 - AI name: Configure according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
   
 .. image:: node_editor_software/113.png
    :width: 6in
@@ -1782,7 +1782,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 - Modbus master station name: configured according to actual situation
 - AI name: Configure according to actual situation
 - Waiting status: greater than/less than
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered.
   
 .. image:: node_editor_software/115.png
@@ -1794,7 +1794,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 7. Slave coil settings, parameters:
    
 - DO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/116.png
@@ -1806,7 +1806,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 8. Slave station discrete setting, parameters:
 
 - DI name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 
 .. image:: node_editor_software/117.png
    :width: 6in
@@ -1817,7 +1817,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 9. Slave station analog output settings, parameters:
 
 - AO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/118.png
@@ -1842,7 +1842,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 
 - AI name: Configure according to actual situation
 - Waiting status: greater than/less than
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered.
   
 .. image:: node_editor_software/127.png
@@ -1854,7 +1854,7 @@ Avant d'utiliser la fonction de nœud Modbus, vous devez configurer la station m
 12. Slave station analog input settings, parameters:
 
 - AI name: Configure according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 
 .. image:: node_editor_software/128.png
    :width: 6in

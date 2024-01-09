@@ -316,3 +316,89 @@ Code example
         robot.GetToolAI(0, block, ref tool_ai);
         Console.WriteLine($"tool_ai0 : {tool_ai}");
     }
+
+    
+Get robot software version 
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Get robot software version
+    * @param [out] robotModel robot Model
+    * @param [out] webVersion web version
+    * @param [out] controllerVersion controller version
+    * @return Error code
+    */ 
+    int GetSoftwareVersion(ref string robotModel, ref string webVersion, ref string controllerVersion);
+    
+Get robot hardware version 
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Get robot hardware version
+    * @param [out] ctrlBoxBoardVersion Control box hardware version
+    * @param [out] driver1Version Driver 1 Hardware version
+    * @param [out] driver1Version Driver 2 Hardware version
+    * @param [out] driver1Version Driver 3 Hardware version
+    * @param [out] driver1Version Driver 4 Hardware version
+    * @param [out] driver1Version Driver 5 Hardware version
+    * @param [out] driver1Version Driver 6 Hardware version
+    * @param [out] endBoardVersion End board hardware version
+    * @return Error code
+    */ 
+    int GetHardwareVersion(ref string ctrlBoxBoardVersion, ref string driver1Version, ref string driver2Version, ref string driver3Version,ref string driver4Version, ref string driver5Version, ref string driver6Version, ref string endBoardVersion);
+
+Get robot firmware version
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Get robot firmware version
+    * @param [out] ctrlBoxBoardVersion Control box firmware version
+    * @param [out] driver1Version Driver 1 firmware version
+    * @param [out] driver1Version Driver 2 firmware version
+    * @param [out] driver1Version Driver 3 firmware version
+    * @param [out] driver1Version Driver 4 firmware version
+    * @param [out] driver1Version Driver 5 firmware version
+    * @param [out] driver1Version Driver 6 firmware version
+    * @param [out] endBoardVersion End board firmware version
+    * @return Error code
+    */ 
+    int GetFirmwareVersion(ref string ctrlBoxBoardVersion, ref string driver1Version, ref string driver2Version, ref string driver3Version,ref string driver4Version, ref string driver5Version, ref string driver6Version, ref string endBoardVersion);
+
+Code example
+++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void btnGetVersions_Click(object sender, EventArgs e)
+    {
+        string[] ver = new string[20];
+        int rtn = 0;
+        rtn = robot.GetSoftwareVersion(ref ver[0], ref ver[1], ref ver[2]);
+        rtn = robot.GetHardwareVersion(ref ver[3], ref ver[4], ref ver[5], ref ver[6], ref ver[7], ref ver[8], ref ver[9], ref ver[10]);
+        rtn = robot.GetFirmwareVersion(ref ver[11], ref ver[12], ref ver[13], ref ver[14], ref ver[15], ref ver[16], ref ver[17], ref ver[18]);
+        Console.WriteLine($"robotmodel  is: {ver[0]}");
+        Console.WriteLine($"webVersion  is: {ver[1]}");
+        Console.WriteLine($"controllerVersion  is: {ver[2]}");
+        Console.WriteLine($"Hard ctrlBox Version  is: {ver[3]}");
+        Console.WriteLine($"Hard driver1 Version  is: {ver[4]}");
+        Console.WriteLine($"Hard driver2 Version  is: {ver[5]}");
+        Console.WriteLine($"Hard driver3 Version  is: {ver[6]}");
+        Console.WriteLine($"Hard driver4 Version  is: {ver[7]}");
+        Console.WriteLine($"Hard driver5 Version  is: {ver[8]}");
+        Console.WriteLine($"Hard driver6 Version  is: {ver[9]}");
+        Console.WriteLine($"Hard end Version  is: {ver[10]}");
+        Console.WriteLine($"Firm ctrlBox Version  is: {ver[11]}");
+        Console.WriteLine($"Firm driver1 Version  is: {ver[12]}");
+        Console.WriteLine($"Firm driver2 Version  is: {ver[13]}");
+        Console.WriteLine($"Firm driver3 Version  is: {ver[14]}");
+        Console.WriteLine($"Firm driver4 Version  is: {ver[15]}");
+        Console.WriteLine($"Firm driver5 Version  is: {ver[16]}");
+        Console.WriteLine($"Firm driver6 Version  is: {ver[17]}");
+        Console.WriteLine($"Firm end Version  is: {ver[18]}");
+    }
