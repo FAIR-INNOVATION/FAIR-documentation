@@ -2376,11 +2376,27 @@ Modbus TCP settings
 
 Before using Modbus TCP, users need to configure the master and slave data on the Modbus TCP settings page.
 
-**1.Modbus master station settings**:Configure the master station and the corresponding master station register address on the page. Operations related to "adding Modbus master station and adding master station register" can be performed.
+**Modbus master station settings**:Configure the master station and the corresponding master station register address on the page. Operations related to "adding Modbus master station and adding master station register" can be performed.
 
-**Master station information**:The master station information includes the master station name, slave station IP, port number, slave station number and communication cycle, and can be edited, refreshed and deleted.
+1) Master station information:The master station information includes the master station name, slave station IP, port number, slave station number and communication cycle, and can be edited, refreshed and deleted.
+   
+   - Master station name: Custom name, such as Modbus_1, cannot have the same name, up to 8 master stations
+  
+      + Unsigned: 0~65535, the number is 16
+      + Signed: -32767~32768, the number is 16
+      + Floating point type: up to three decimal places, the number is 32
 
-**Master station register information**:The master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI, AI type cannot be input), and can be edited and deleted.
+   - Slave IP: integer type, for example 192.168.57.3
+   - Port number: integer, for example 2021
+   - Slave station number: integer type For example: 1
+   - Communication cycle: integer type, for example 200 ms
+
+2) Master station register information:The master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI, AI type cannot be input), and can be edited and deleted.
+
+   - Master station register type: DI, DO, AI (unsigned, signed, floating point), AO (unsigned, signed, floating point)
+   - Address number: integer type For example: 2000,
+   - Master station register name: Register_1, cannot have the same name, up to 128 master station registers
+   - Address value: Integer type. DI and AI types cannot be input.
 
 .. image:: teaching_pendant_software/233.png
    :width: 6in
@@ -2390,7 +2406,7 @@ Before using Modbus TCP, users need to configure the master and slave data on th
 
 .. important:: The maximum number of master stations is 8, and the maximum number of master station registers is 128. At the same time, the aliases of the master station and the slave station cannot have the same name.
 
-**2.Modbus slave station settings**:Digital input, digital output, analog input, analog output and alias modification operations can be performed.
+**Modbus slave station settings**:Digital input, digital output, analog input, analog output and alias modification operations can be performed.
 
 .. image:: teaching_pendant_software/234.png
    :width: 6in
@@ -2398,13 +2414,24 @@ Before using Modbus TCP, users need to configure the master and slave data on th
 
 .. centered:: Figure 4.7-26 Modbus slave configuration page
 
-**Digital input/output**:The digital input DI is read-only, and the digital output DO can control the indicator light switch after being clicked, and the number is 128.
+1) Digital input/output
+   
+    - Digital input DI read only
+    - The digital output DO can be clicked to control the indicator light switch, and the number is 128.
 
-**Analog input**:Analog input AI is divided into unsigned, signed and floating point models (three decimal places), all of which are read-only. Among them, the number of unsigned and signed is 16, and the number of floating point is 32.
+2) Analog input
+   
+    - Analog input AI is divided into unsigned,
+    - Signed and floating point models (three decimal places), both read-only.
+    - Among them, the number of unsigned and signed is 16, and the number of floating point is 32.
 
-**Analog output**:Analog output AO is divided into unsigned, signed and floating point models (three decimal places). The parameter range is: unsigned: 0~65535, signed: -32767~32768, floating point type: up to three decimal places. Among them, the number of unsigned and signed is 16, and the number of floating point is 32.
+3) Analog output, analog output AO is divided into unsigned, signed and floating point models (three decimal places)
+   
+    - Unsigned: 0~65535, the number is 16
+    - Signed: -32767~32768, the number is 16
+    - Floating point type: up to three decimal places, the number is 32
 
-**3.Slave alias settings**:Click the slave station alias to perform editing operations and modify the slave station alias.
+**Slave alias settings**:Click the slave station alias to perform editing operations and modify the slave station alias.
 
 .. important:: The aliases of slave stations of the same type cannot have the same name.
 
@@ -2428,9 +2455,19 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
 
 .. centered:: Figure 4.7-28 Graphical programming page layout overall design
 
-**Operation bar**:The "Load" button is responsible for reloading the workspace, the "Import" button is responsible for importing related graphical programming programs, and the "Export" button is responsible for exporting the graphical programming programs in the saved workspace, the function of the "Save" button is to save the code block as the corresponding teaching program after editing, and the "Clear button" is responsible for quickly clearing the code editing area;
+**Option Bar**
 
-**Toolbox**:A code block containing all instructions and logic codes can be dragged to the workspace to create a code block and edited; the Toolbox toolbar will be further classified according to the instruction type. Logical instructions: if-else, while, print, etc.; basic motion instructions: PTP, LIN, ARC, etc.; instruction classification based on application scenarios: gluing, welding, conveyor belt, etc. You can easily find the required code block during use.
+1) The "Load" button is responsible for reloading the workspace
+2) The "Import" button is responsible for importing related graphical programming programs
+3) The "Export" button is responsible for exporting the graphical programming program in the saved workspace. The "Save" button function is to save the code block as the corresponding teaching program after editing.
+4) The "Clear Button" is responsible for quickly clearing the code editing area
+
+**Toolbox**
+
+1) A code block containing all instructions and logic codes can be dragged to the workspace to create a code block and edit it
+2) The Toolbox toolbar section will be further classified according to command type
+3) Logic instructions: if-else, while, print, etc.
+4) Basic motion instructions: PTP, LIN, ARC, etc. Instructions are classified according to application scenarios: gluing, welding, conveyor belts, etc. You can easily find the required code blocks during use.
 
 **Workspace**:Graphical code blocks can be edited and displayed in the code editing area.
 

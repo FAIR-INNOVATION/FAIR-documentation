@@ -1718,7 +1718,7 @@ Master station register information: Master station register information include
 
 - Modbus master station name: configured according to actual situation
 - DO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/110.png
@@ -1731,7 +1731,7 @@ Master station register information: Master station register information include
 
 - Modbus master station name: configured according to actual situation
 - DI name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 
 .. image:: node_editor_software/111.png
    :width: 6in
@@ -1743,7 +1743,7 @@ Master station register information: Master station register information include
 
 - Modbus master station name: configured according to actual situation
 - AO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/112.png
@@ -1756,7 +1756,7 @@ Master station register information: Master station register information include
 
 - Modbus master station name: configured according to actual situation
 - AI name: Configure according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
   
 .. image:: node_editor_software/113.png
    :width: 6in
@@ -1782,7 +1782,7 @@ Master station register information: Master station register information include
 - Modbus master station name: configured according to actual situation
 - AI name: Configure according to actual situation
 - Waiting status: greater than/less than
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered.
   
 .. image:: node_editor_software/115.png
@@ -1794,7 +1794,7 @@ Master station register information: Master station register information include
 7. Slave coil settings, parameters:
    
 - DO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/116.png
@@ -1806,7 +1806,7 @@ Master station register information: Master station register information include
 8. Slave station discrete setting, parameters:
 
 - DI name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 
 .. image:: node_editor_software/117.png
    :width: 6in
@@ -1817,7 +1817,7 @@ Master station register information: Master station register information include
 9. Slave station analog output settings, parameters:
 
 - AO name: configured according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered. For example, the quantity is 3 and the values are 1,0,1
 
 .. image:: node_editor_software/118.png
@@ -1842,7 +1842,7 @@ Master station register information: Master station register information include
 
 - AI name: Configure according to actual situation
 - Waiting status: greater than/less than
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 - Register value: Determined according to the number of registers, multiple values can be entered.
   
 .. image:: node_editor_software/127.png
@@ -1854,7 +1854,7 @@ Master station register information: Master station register information include
 12. Slave station analog input settings, parameters:
 
 - AI name: Configure according to actual situation
-- Number of registers: integer type
+- Number of registers: integer type  0 ~ 128
 
 .. image:: node_editor_software/128.png
    :width: 6in
