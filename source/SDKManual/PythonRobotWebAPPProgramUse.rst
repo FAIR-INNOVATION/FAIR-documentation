@@ -120,7 +120,6 @@ Code example
 ------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 6-8
 
     from fairino import Robot
     import time

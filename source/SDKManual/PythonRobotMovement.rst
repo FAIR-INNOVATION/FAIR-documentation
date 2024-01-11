@@ -57,7 +57,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 6,9,11
 
     from fairino import Robot
     import time
@@ -191,7 +190,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 13,14
 
     from fairino import Robot
     import time
@@ -237,7 +235,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 16-18
 
     from fairino import Robot
     import time
@@ -291,7 +288,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 19,20
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -340,7 +336,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 19,20
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -388,7 +383,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 18
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -468,7 +462,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 15
 
     from fairino import Robot
     import time
@@ -533,7 +526,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 8-10
 
     from fairino import Robot
     import time
@@ -600,7 +592,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 15-20
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -674,7 +665,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 15-20
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -714,7 +704,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 12
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -763,7 +752,6 @@ Code example
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 19,22
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object

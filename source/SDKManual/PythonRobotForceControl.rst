@@ -41,7 +41,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 8, 9
 
     from fairino import Robot
     import time
@@ -70,7 +69,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4,6
 
     from fairino import Robot
     import time
@@ -98,7 +96,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4,6
 
     from fairino import Robot
     import time
@@ -125,7 +122,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4
 
     from fairino import Robot
     import time
@@ -164,7 +160,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 13, 15
 
     from fairino import Robot
     import time
@@ -206,7 +201,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 9,14,19,21
     
     from fairino import Robot
     import time
@@ -252,7 +246,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4
 
     import frrpc
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -277,7 +270,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object

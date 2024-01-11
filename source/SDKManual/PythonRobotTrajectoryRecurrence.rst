@@ -23,7 +23,6 @@ Code example
 --------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 9
 
     from fairino import Robot
     import time
@@ -68,7 +67,6 @@ Code example
 ------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 14, 16
 
     from fairino import Robot
     import time
@@ -106,7 +104,6 @@ Code example
 ------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4
 
     from fairino import Robot
     import time
@@ -157,7 +154,6 @@ Code example
 ------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 8, 10
 
     from fairino import Robot
     import time

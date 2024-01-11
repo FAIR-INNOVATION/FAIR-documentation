@@ -23,7 +23,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 5,7
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -51,7 +50,6 @@ Code example
 ---------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -75,7 +73,6 @@ Code example
 ---------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 5
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -100,7 +97,6 @@ Code example
 -------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 5
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -125,7 +121,6 @@ Code example
 --------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -149,7 +144,6 @@ Code example
 -------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 4
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -173,7 +167,6 @@ Code example
 ---------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 6
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -198,7 +191,6 @@ Code example
 --------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 6
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -223,7 +215,6 @@ Code example
 ----------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 6
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
@@ -248,7 +239,6 @@ Code example
 ------------------
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 6
 
     from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
