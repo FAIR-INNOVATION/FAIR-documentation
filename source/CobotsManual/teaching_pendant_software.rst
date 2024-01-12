@@ -1361,7 +1361,7 @@ The Goto instruction is a jump instruction, enter the statement in the input box
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-4-2 Goto command interface
+.. centered:: Figure 4.7-4-3 Goto command interface
 
 Wait command
 ++++++++++++++++
@@ -1376,7 +1376,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-4-42 WaitTime command interface
+.. centered:: Figure 4.7-4-4 WaitTime command interface
 
 "WaitDI" command, that is, single DI waiting, select the IO port number to be waited for, wait state, wait maximum time and wait timeout processing method, and click "Add" and "Apply".
 
@@ -1493,7 +1493,7 @@ The "Arc" command is arc movement, which includes two points. The first point is
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-3.7-6 Arc command interface
+.. centered:: Figure 4.7-5-3 Arc command interface
 
 Circle command
 ++++++++++++++++
@@ -2283,7 +2283,7 @@ This command is mainly used for mode switching between system mode and point tab
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-13-3 PT-Mode command interface
+.. centered:: Figure 4.7-13-3 PT-Mode command interface
 
 Teaching program is not saved for verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2296,7 +2296,7 @@ If you click "Open", "New", "Export", "Rename" and other related file operations
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-14 The current page program does not save verification
+.. centered:: Figure 4.7-14 The current page program does not save verification
 
 **Step1**:Click the "Not Save" button, and the program will restore the unmodified data and continue to perform previous related file operations.
 
@@ -2308,7 +2308,7 @@ If you leave the program teaching page and switch to other pages, the prompt "Do
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.7-15 Switch page program does not save verification
+.. centered:: Figure 4.7-15 Switch page program does not save verification
 
 **Step1**:Click the "Not Save" button to jump to the previously selected page.
 

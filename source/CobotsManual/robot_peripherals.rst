@@ -747,7 +747,7 @@ Specific attitude recognition: clear the end load data, configure the force sens
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.8-4 Force/Torque Sensor Load Identification
+.. centered:: Figure 5.8-3 Force/Torque Sensor Load Identification
 
 Force/Torque Sensor Assisted Drag
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1186,4 +1186,4 @@ Polishing equipment configuration step
    :align: center
    :width: 6in
 
-.. centered:: Figure 4.11-1 Polishing equipment configuration page
+.. centered:: Figure 5.11-1 Polishing equipment configuration page
