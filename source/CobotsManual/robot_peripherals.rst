@@ -1132,7 +1132,7 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
 
 .. centered:: Figure 5.10‑5 Palletizing pattern A configuration
 
-.. figure:: robot_peripherals/059B.png
+.. figure:: robot_peripherals/070.png
    :align: center
    :width: 6in
 
