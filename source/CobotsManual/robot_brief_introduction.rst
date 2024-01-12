@@ -91,7 +91,7 @@ Robot Denavit–Hartenberg parameters
 
 Denavit–Hartenberg parameters are used to calculate kinematics and dynamics of FR series collaborative robots.
 
-.. figure:: installation/dh_param_fr.png
+.. figure:: installation/063.png
 	:align: center
 	:width: 6in
 	:class: figure-border
