@@ -74,7 +74,7 @@ Users (refer to \ `4.10.2.1 User Management <#user-management>`__\  for user man
 
 The login interface is shown in Figure 4.1-1 login interface.
 
-.. figure:: teaching_pendant_software/002.png
+.. figure:: teaching_pendant_software/001.png
    :width: 6in
    :align: center
 
@@ -87,7 +87,7 @@ System initial interface
 
 After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAIR INNOVATION LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. As shown in Figure 4.2-1 system initial interface schematic diagram.
 
-.. image:: teaching_pendant_software/003.png
+.. image:: teaching_pendant_software/002.png
    :align: center
    :width: 6in
 .. centered:: Figure 4.2-1 Schematic diagram of the initial interface of the system
@@ -96,7 +96,7 @@ Control area
 ~~~~~~~~~~~~~~~
 
 .. note:: 
-   .. image:: teaching_pendant_software/004.png
+   .. image:: teaching_pendant_software/003.png
       :width: 0.75in
       :height: 0.75in
       :align: left
@@ -106,7 +106,7 @@ Control area
    effect:Enable the robot
 
 .. note:: 
-   .. image:: teaching_pendant_software/005.png
+   .. image:: teaching_pendant_software/004.png
       :width: 0.75in
       :height: 0.75in
       :align: left
@@ -116,7 +116,7 @@ Control area
    effect:Upload and start running the teaching program
 
 .. note:: 
-   .. image:: teaching_pendant_software/006.png
+   .. image:: teaching_pendant_software/005.png
       :width: 0.75in
       :height: 0.75in
       :align: left
@@ -126,7 +126,7 @@ Control area
    effect:Stop the current teaching program running
 
 .. note:: 
-   .. image:: teaching_pendant_software/007.png
+   .. image:: teaching_pendant_software/006.png
       :width: 0.75in
       :height: 0.75in
       :align: left
@@ -142,7 +142,7 @@ Status Bar
 ~~~~~~~~~~~~
 
 .. note:: 
-   .. image:: teaching_pendant_software/008.png
+   .. image:: teaching_pendant_software/007.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -152,7 +152,7 @@ Status Bar
    effect:Stopped-stop,Running-run,Pause-pause,Drag-drag
 
 .. note:: 
-   .. image:: teaching_pendant_software/009.png
+   .. image:: teaching_pendant_software/008.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -162,7 +162,7 @@ Status Bar
    effect:Display the tool coordinate system number of the current application
    
 .. note:: 
-   .. image:: teaching_pendant_software/010.png
+   .. image:: teaching_pendant_software/009.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -172,7 +172,7 @@ Status Bar
    effect:The speed of the robot when it is running in the current mode
 
 .. note:: 
-   .. image:: teaching_pendant_software/011.png
+   .. image:: teaching_pendant_software/010.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -182,7 +182,7 @@ Status Bar
    effect:The current robot is running normally
 
 .. note:: 
-   .. image:: teaching_pendant_software/012.png
+   .. image:: teaching_pendant_software/011.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -192,7 +192,7 @@ Status Bar
    effect:There is an error in the current robot operation
 
 .. note:: 
-   .. image:: teaching_pendant_software/013.png
+   .. image:: teaching_pendant_software/012.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -202,7 +202,7 @@ Status Bar
    effect:Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
 
 .. note:: 
-   .. image:: teaching_pendant_software/014.png
+   .. image:: teaching_pendant_software/013.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -212,7 +212,7 @@ Status Bar
    effect:Robot teaching operation mode, set the global speed adjustment of manual mode and automatic mode and specify the speed.
 
 .. note:: 
-   .. image:: teaching_pendant_software/015.png
+   .. image:: teaching_pendant_software/014.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -222,7 +222,7 @@ Status Bar
    effect:The current robot can drag
 
 .. note:: 
-   .. image:: teaching_pendant_software/016.png
+   .. image:: teaching_pendant_software/015.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -232,7 +232,7 @@ Status Bar
    effect:The current robot is not draggable
 
 .. note:: 
-   .. image:: teaching_pendant_software/017.png
+   .. image:: teaching_pendant_software/016.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -242,7 +242,7 @@ Status Bar
    effect:Robot connected
 
 .. note:: 
-   .. image:: teaching_pendant_software/017-1.png
+   .. image:: teaching_pendant_software/017.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -906,7 +906,7 @@ I/O alias configuration
 
 Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click on the "I/O Alias Configuration" submenu to enter the configuration interface, and configure the given meaning names of the control box and end IO signals according to the actual usage scenario. After successful configuration, the modules related to IO signal content will display corresponding aliases, as follows:
 
-.. image:: teaching_pendant_software/io_config.png
+.. image:: teaching_pendant_software/253.png
    :width: 6in
    :align: center
 
@@ -914,21 +914,21 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
 
 **Robot operation**: IO signal selection boxes for IO and TPD control boxes (CtrlBox) and end (End);
 
-.. image:: teaching_pendant_software/robot_operate_io.png
+.. image:: teaching_pendant_software/263.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 4.5-7 Robot operation IO
 
-.. image:: teaching_pendant_software/robot_operate_tpd.png
+.. image:: teaching_pendant_software/264.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.5-8 机器人操作TPD
+.. centered:: Figure 4.5-8 Robot operation TPD
 
 **Robot status**: IO signal status of Robot's control box (CtrlBox) and end (End);
 
-.. image:: teaching_pendant_software/robot_status_io.png
+.. image:: teaching_pendant_software/265.png
    :width: 6in
    :align: center
 
@@ -936,13 +936,13 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
 
 **Teaching simulation - program teaching**: Add program commands such as "Wait", "Digital IO", and "Analog IO", and select the program command line by clicking the "Edit" icon. The IO selection box in the pop-up box will pop up;
 
-.. image:: teaching_pendant_software/add_teach_program.png
+.. image:: teaching_pendant_software/237.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 4.5-10 Program Teach Add IO
 
-.. image:: teaching_pendant_software/teach_program_edit.png
+.. image:: teaching_pendant_software/270.png
    :width: 6in
    :align: center
 
@@ -950,7 +950,7 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
 
 **Teaching simulation - graphical programming**: IO dropdown selection for 'Logic' and 'Control' modules;
 
-.. image:: teaching_pendant_software/graphical_io.png
+.. image:: teaching_pendant_software/249.png
    :width: 6in
    :align: center
 
@@ -958,7 +958,7 @@ Click on "Robot Settings" in the "Initial Settings" menu bar on the left, click 
 
 **Auxiliary Application - Robot Body**: IO key selection box in 'Smart Tool';
 
-.. image:: teaching_pendant_software/smart_tool_io.png
+.. image:: teaching_pendant_software/269.png
    :width: 6in
    :align: center
 
@@ -969,7 +969,7 @@ Output reset configuration
 
 Click "Robot Settings" in "Initial Settings" on the left menu bar, click the "Output Reset Configuration" submenu to enter the configuration interface, and configure whether different outputs need to be reset after stopping/pausing according to the actual need for reset during use. The current output includes control box DO, control box AO, End plate DO, End plate AO, Expand DO, Expand AO and SmartTool DO.
 
-.. image:: teaching_pendant_software/out_put_reset.png
+.. image:: teaching_pendant_software/257.png
    :width: 6in
    :align: center
 
@@ -1150,11 +1150,11 @@ Click the command on the left to add a program node to the program tree.When the
 
 Click "⇄" to switch modes, and the teaching program text can be changed to the editing state, and the editing area can be expanded and collapsed in the editing state.
 
-.. image:: teaching_pendant_software/edit_mode_1.png
+.. image:: teaching_pendant_software/245.png
    :width: 6in
    :align: center
 
-.. image:: teaching_pendant_software/edit_mode_2.png
+.. image:: teaching_pendant_software/246.png
    :width: 6in
    :align: center
 
@@ -1162,11 +1162,11 @@ Click "⇄" to switch modes, and the teaching program text can be changed to the
 
 Click the "Popup/Hide the content on the right side of the current program" button to expand or hide the local teaching points and the backup content of the current program. After the content on the right is expanded, click the icons of "Partial teaching point" and "Current program backup" to display the corresponding content.
 
-.. image:: teaching_pendant_software/program_right_1.png
+.. image:: teaching_pendant_software/260.png
    :width: 6in
    :align: center
 
-.. image:: teaching_pendant_software/program_right_2.png
+.. image:: teaching_pendant_software/261.png
    :width: 6in
    :align: center
 
@@ -1551,7 +1551,7 @@ The "H-Spiral" command is a horizontal space spiral motion. This command is set 
    - Direction of rotation: spiral clockwise/counterclockwise
    - Helix inclination angle: 0~40°
 
-.. image:: teaching_pendant_software/H-spiral.png
+.. image:: teaching_pendant_software/250.png
    :width: 6in
    :align: center
 
@@ -2320,7 +2320,7 @@ Teaching program encryption
 The teaching procedure is divided into a state of encryption and non-encryption. The encryption level is divided into first-level encryption and secondary encryption. Among them, the level of first-level encryption is the highest, and the secondary is second.
 All teaching programs are displayed and set in the form of program encryption information in "System Settings - Custom Information". Encryption level descriptions are provided to the right of the table.
 
-.. image:: teaching_pendant_software/program_encryption.png
+.. image:: teaching_pendant_software/259.png
    :width: 6in
    :align: center
 
@@ -2329,7 +2329,7 @@ All teaching programs are displayed and set in the form of program encryption in
 When the program is a first-level encryption state, after opening the program: the corresponding "export", "preservation", "existing as", "copy", "cut", "delete", "delete", "delete", "delete", "delete" The buttons such as "upward", "downward" and "editing mode switching" will be grayed.
 Click the icon to be invalid and it will prompt that the current program is in an encrypted state. The program "renamed" icon will hide. Add instruction bars and program editing areas are invisible and prompts to be locked in first-level encryption.
 
-.. image:: teaching_pendant_software/encryption1.png
+.. image:: teaching_pendant_software/247.png
    :width: 6in
    :align: center
 
@@ -2338,7 +2338,7 @@ Click the icon to be invalid and it will prompt that the current program is in a
 When the program is second-level encryption, after opening the program on the "Program Demonstration" page: the corresponding "savings", "copy", "shear", "paste", "delete", "upper", "upper" in the operating bar The buttons such as the "Move" will turn ashes.
 Click the icon to be invalid and it will prompt that the current program is encrypted. The program "renamed" icon will hide. The adding instruction bar is not visible and prompts to be locked in a secondary encryption. The program editing area can browse the reading program normally.
 
-.. image:: teaching_pendant_software/encryption2.png
+.. image:: teaching_pendant_software/248.png
    :width: 6in
    :align: center
 
@@ -2347,7 +2347,7 @@ Click the icon to be invalid and it will prompt that the current program is encr
 Both first -level encryption and second -level encryption can use the "export" function. Verification operations will be performed when importing.
 If the program of the same name is an encrypted file, the import operation will be interrupted and indicated that the coverage of the encryption program cannot be introduced.
 
-.. image:: teaching_pendant_software/import.png
+.. image:: teaching_pendant_software/252.png
    :width: 6in
    :align: center
 
@@ -2360,7 +2360,7 @@ The local teaching point is bound to the current teaching program. When adding a
 
 **Add**: Click the "Add Local Teaching Point" icon on the far right of the program file name to add local teaching points. (For detailed records of local teaching points, please refer to the teaching point records in robot operation)
 
-.. image:: teaching_pendant_software/add_local_point.png
+.. image:: teaching_pendant_software/236.png
    :width: 6in
    :align: center
 
@@ -2368,7 +2368,7 @@ The local teaching point is bound to the current teaching program. When adding a
 
 **Delete**: Click the serial number column of the table to select the local teaching point to be deleted, and then click the "Delete" icon in the upper right corner of the title of the local teaching point to delete the local teaching point.
 
-.. image:: teaching_pendant_software/delete_local_points.png
+.. image:: teaching_pendant_software/243.png
    :width: 6in
    :align: center
 
@@ -2376,7 +2376,7 @@ The local teaching point is bound to the current teaching program. When adding a
 
 **Run**: Click the "Start Running" icon in the data operation bar of the local teaching point table to perform a single-point operation of the local teaching point and move the robot to the position of this point.
 
-.. image:: teaching_pendant_software/run_local_point.png
+.. image:: teaching_pendant_software/266.png
    :width: 6in
    :align: center
 
@@ -2384,7 +2384,7 @@ The local teaching point is bound to the current teaching program. When adding a
 
 **Details**: Click the "Details" icon in the data operation bar of the local teaching point table to view the details of the local teaching point.
 
-.. image:: teaching_pendant_software/local_point_info.png
+.. image:: teaching_pendant_software/255.png
    :width: 6in
    :align: center
 
@@ -2396,7 +2396,7 @@ Current program backup
 After the user modifies the teaching program and clicks save, the "backup" function of the current program is triggered (the backup time is 1 year), and the initial content of the current program is saved and displayed on the right side, which is convenient for the user to compare the modified content.
 Users can view the corresponding program backup content by selecting a date, and click the "Delete" icon in the upper right corner to delete the current program backup content. The content of the current program backup can only be viewed, not modified.
 
-.. image:: teaching_pendant_software/program_backup.png
+.. image:: teaching_pendant_software/258.png
    :width: 6in
    :align: center
 
@@ -3177,7 +3177,7 @@ The user clicks the "function enabled" button to open or close the setting of th
 
 Enable the security background program and set the unexpected scene and background program. When the user starts to run the program and the unexpected situation matches the set unexpected situation, the robot will execute the corresponding background program to play a role of security protection.
 
-.. image:: teaching_pendant_software/daemon.png
+.. image:: teaching_pendant_software/241.png
    :width: 6in
    :align: center
 
@@ -3342,7 +3342,7 @@ Authority management
 .. important:: 
    The default function data (function code 1-6) cannot be deleted, and the function code cannot be modified, but the function name and function description can be modified and the authority of the function can be set.
 
-.. image:: teaching_pendant_software/authority.png
+.. image:: teaching_pendant_software/239.png
    :width: 6in
    :align: center
 
@@ -3355,13 +3355,13 @@ There are six functions by default, administrators have no function restrictions
 
 .. centered:: Table 4.10-1 Permission details
 
-.. image:: teaching_pendant_software/authority_table.png
+.. image:: teaching_pendant_software/238.png
    :width: 6in
    :align: center
 
 -  **Add function**: Click the "Add" button, enter the function code, function name and function description, click the "Save" button, and return to the list page after success. Among them, the function code can only be an integer greater than 0 and cannot be the same as the existing function code, and all input items are required.
 
-.. image:: teaching_pendant_software/add_authority.png
+.. image:: teaching_pendant_software/235.png
    :width: 6in
    :align: center
 
@@ -3369,7 +3369,7 @@ There are six functions by default, administrators have no function restrictions
 
 -  **Edit function name and description**: Click the "Edit" icon in the table operation bar to modify the function name and function description of the current function. After the modification is completed, click the "Save" button below to confirm the modification.
 
-.. image:: teaching_pendant_software/edit_authority.png
+.. image:: teaching_pendant_software/244.png
    :width: 6in
    :align: center
 
@@ -3377,11 +3377,11 @@ There are six functions by default, administrators have no function restrictions
 
 -  **Set function permissions**: Click the "Settings" icon in the table operation bar to set the permissions of the current function. After setting, click the "Save" button below to confirm the settings.
 
-.. image:: teaching_pendant_software/set_authority_1.png
+.. image:: teaching_pendant_software/267.png
    :width: 6in
    :align: center
 
-.. image:: teaching_pendant_software/set_authority_2.png
+.. image:: teaching_pendant_software/268.png
    :width: 6in
    :align: center
 
@@ -3389,7 +3389,7 @@ There are six functions by default, administrators have no function restrictions
 
 -  **Delete function**: Click the "Delete" icon in the table operation bar, firstly, it will check whether the current function is used by a user, if no user uses it, the current function can be deleted, otherwise it cannot be deleted.
 
-.. image:: teaching_pendant_software/delete_authority.png
+.. image:: teaching_pendant_software/242.png
    :width: 6in
    :align: center
 
@@ -3398,7 +3398,7 @@ There are six functions by default, administrators have no function restrictions
 Import/Export
 ++++++++++++++++
 
-.. image:: teaching_pendant_software/import_export.png
+.. image:: teaching_pendant_software/251.png
    :width: 6in
    :align: center
 
@@ -3425,7 +3425,7 @@ Custom information
 Click the custom information of the secondary menu bar to enter the custom information interface. Custom information functions can only be used by administrators.
 This page can upload user information packages, custom robot models, and setting teaching program encryption status.
 
-.. image:: teaching_pendant_software/customize.png
+.. image:: teaching_pendant_software/240.png
    :width: 6in
    :align: center
 

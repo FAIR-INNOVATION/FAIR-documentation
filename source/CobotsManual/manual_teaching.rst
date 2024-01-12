@@ -6,7 +6,7 @@ Manual teaching and recording of teaching points
 
 Manual teaching includes two methods, one is to press and hold the end drag button to drag and teach, and the other is to jog in the operation area. After teaching to the target position, the teaching point can be saved. When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it is 100% of the standard speed.
 
-.. image:: teaching_pendant_software/manual_teaching.png
+.. image:: teaching_pendant_software/256.png
    :width: 6in
    :align: center
 
