@@ -606,7 +606,7 @@ Robot arm installation
 
   (I)Avoid fixing the robot to other moving devices.
 
-  .. figure:: installation/64.png
+  .. figure:: installation/064.png
     :align: center
     :width: 3in
     :class: figure-border
@@ -635,7 +635,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
 
   (I)For situations where the motion speed is not too fast, the running speed is not too large, the accuracy requirements are average, and it is not convenient to fix the robot on the ground, the recommended installation base for the robot is as follows.
 
-  .. figure:: installation/62.png
+  .. figure:: installation/062.png
     :align: center
     :width: 3in
     :class: figure-border
@@ -644,7 +644,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
-  .. figure:: installation/63.png
+  .. figure:: installation/067.png
     :align: center
     :width: 3in
     :class: figure-border
@@ -668,7 +668,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 
   (I)For situations where the motion speed is not too fast, the running speed is not too large, the accuracy requirements are average, and it is not convenient to fix the robot on the ground, the recommended installation base for the robot is as follows.
 
-  .. figure:: installation/62.png
+  .. figure:: installation/062.png
     :align: center
     :width: 3in
     :class: figure-border
@@ -677,7 +677,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
-  .. figure:: installation/63.png
+  .. figure:: installation/067.png
     :align: center
     :width: 3in
     :class: figure-border
@@ -701,7 +701,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 
   (I)For situations where the motion speed is not too fast, the running speed is not too large, the accuracy requirements are average, and it is not convenient to fix the robot on the ground, the recommended installation base for the robot is as follows.
 
-  .. figure:: installation/65.png
+  .. figure:: installation/065.png
     :align: center
     :width: 3in
     :class: figure-border
@@ -710,7 +710,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
-  .. figure:: installation/63.png
+  .. figure:: installation/067.png
     :align: center
     :width: 3in
     :class: figure-border
@@ -732,7 +732,7 @@ When installing the robot on the mounting base, use six M10 bolts with a strengt
 .. important:: 
   Due to the large self weight and running inertia of the FR20 robot, it is recommended to directly fix it on the ground for use. The recommended base is as follows.
 
-  .. figure:: installation/66.png
+  .. figure:: installation/066.png
     :align: center
     :width: 4in
     :class: figure-border

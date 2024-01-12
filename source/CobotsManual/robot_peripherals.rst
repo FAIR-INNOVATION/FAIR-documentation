@@ -153,7 +153,7 @@ Peripheral configuration of welding machine
 
 .. centered:: Figure 5.3-1 I/O configuration(Controller I/O)
 
-.. figure:: robot_peripherals/extendedIO.png
+.. figure:: robot_peripherals/065.png
    :align: center
    :width: 3in
 
@@ -456,7 +456,7 @@ Controller + Servo drive (485)
 
 **Step1**: First configure the parameters of the servo drive. Set the servo drive serial number, servo drive manufacturer, servo drive model, servo drive software version, encoder resolution and mechanical transmission ratio. Click the "Clear" button to clear the configuration of the current servo drive number. After successful configuration, obtain the servo drive configuration list data.
 
-.. figure:: robot_peripherals/servo_table.png
+.. figure:: robot_peripherals/069.png
    :align: center
    :width: 3in
 
@@ -467,7 +467,7 @@ Controller + Servo drive (485)
 .. important::
   Before setting the control mode, if the servo is enabled, please disable it first, otherwise the setting will not take effect.
 
-.. figure:: robot_peripherals/servo_debugger.png
+.. figure:: robot_peripherals/067.png
   :align: center
   :width: 3in
 
@@ -475,7 +475,7 @@ Controller + Servo drive (485)
 
 **Step3**: Select the "Extended Axis" command on the program teaching command interface. According to the specific program teaching needs, add instructions in the corresponding places.
 
-.. figure:: robot_peripherals/servo_program.png
+.. figure:: robot_peripherals/068.png
    :align: center
    :width: 3in
 
@@ -1102,7 +1102,7 @@ Palletizing system configuration steps
 .. important:: 
    X, Y and Z are the absolute values of the upper right corner or upper left corner of the tray relative to the robot's coordinate system. Angle is the rotation angle of the robot during installation, and it is recommended to set it to 0 during installation.
 
-.. figure:: robot_peripherals/pallent_equipment.png
+.. figure:: robot_peripherals/066.png
    :align: center
    :width: 3in
 
