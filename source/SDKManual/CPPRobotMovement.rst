@@ -749,9 +749,10 @@ New spline motion command points
      * @param  [in] acc  Acceleration percentage, range [0~100], not available yet
      * @param  [in] ovl  Speed scaling factor, range [0~100]
      * @param  [in] blendR [-1.0]- Movement in place (blocked), [0~1000.0]-smooth radius (non-blocked), unit: mm
+     * @param  [in] lastFlag [0,1] 0-the middle point of the spline curve, continue to execute the next point after execution, 1-the end point of the spline curve, decelerate and stop after execution
      * @return  Error code
      */  
-    errno_t  NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR);
+    errno_t  NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);
 
 New spline motion ends
 ++++++++++++++++++++++++++++++++++
