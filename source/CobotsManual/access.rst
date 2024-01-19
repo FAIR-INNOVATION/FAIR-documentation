@@ -170,7 +170,7 @@ Status Bar
    effect: The current robot is not draggable
 
 .. note:: 
-   .. image:: teaching_pendant_software/016.png
+   .. image:: teaching_pendant_software/017.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -180,7 +180,7 @@ Status Bar
    effect: Robot connected
 
 .. note:: 
-   .. image:: teaching_pendant_software/017.png
+   .. image:: teaching_pendant_software/016.png
       :width: 2.25in
       :height: 0.75in
       :align: left
