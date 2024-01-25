@@ -70,7 +70,7 @@ User login and permission update
      - 666
      - 6
 
-Users (refer to \ `4.10.2.1 User Management <#user-management>`__\  for user management) are divided into six levels by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, management There are no functional restrictions for administrators. For specific default function code permissions, refer to \ `4.10.2.2 Authority management <#authority-management>`__\. 
+Users (refer to \ `5.10.2.1 User Management <#user-management>`__\  for user management) are divided into six levels by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, management There are no functional restrictions for administrators. For specific default function code permissions, refer to \ `5.10.2.2 Authority management <#authority-management>`__\. 
 
 The login interface is shown in Figure 4.1-1 login interface.
 
@@ -232,7 +232,7 @@ Status Bar
    effect:The current robot is not draggable
 
 .. note:: 
-   .. image:: teaching_pendant_software/016.png
+   .. image:: teaching_pendant_software/017.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -242,7 +242,7 @@ Status Bar
    effect:Robot connected
 
 .. note:: 
-   .. image:: teaching_pendant_software/017.png
+   .. image:: teaching_pendant_software/016.png
       :width: 2.25in
       :height: 0.75in
       :align: left
@@ -594,7 +594,7 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "Soft Limits
 
 There may be other equipment in the robot's stroke, and the limit angle can softly limit the robot so that the robot's movement does not exceed a certain coordinate value and prevent the robot from colliding. Triggering the soft limit to stop the robot is automatically triggered by the robot, and there is no stopping distance.
 
-Administrators can use the default values or enter angle values. Input the angle value to limit the positive and negative angles of the robot joints respectively. When the input value exceeds the soft limit angle of the robot joints listed in \ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\ value, the limit angle will be adjusted to the maximum value that can be set. When the robot reports that the command exceeds the limit, it needs to enter the drag mode and drag the robot joints to within the limit angle. The interface is shown in 3.4-17.
+Administrators can use the default values or enter angle values. Input the angle value to limit the positive and negative angles of the robot joints respectively. When the input value exceeds the soft limit angle of the robot joints listed in \ `Table 1.1-1 Robot Basic Parameters <robot_brief_introduction.html#basic-parameters>`__\ value, the limit angle will be adjusted to the maximum value that can be set. When the robot reports that the command exceeds the limit, it needs to enter the drag mode and drag the robot joints to within the limit angle. The interface is shown in 3.4-17.
 
 .. image:: teaching_pendant_software/043.png
    :width: 3in
@@ -671,7 +671,7 @@ Speed scaling
 
 Under the menu bar of "Robot Settings" in "Initial Settings", click "Speed Scaling Settings" to enter the speed scaling setting interface.
 
-This function is to set the running speed of the robot under manual/automatic mode. If the current running mode is automatic, the set speed is the automatic running speed of the robot. If the current running mode is manual, the set speed is the manual running speed of the robot. The setting value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (for standard speed, please refer to  \ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\ ).
+This function is to set the running speed of the robot under manual/automatic mode. If the current running mode is automatic, the set speed is the automatic running speed of the robot. If the current running mode is manual, the set speed is the manual running speed of the robot. The setting value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (for standard speed, please refer to  \ `Table 1.1-1 Robot Basic Parameters <robot_brief_introduction.html#basic-parameters>`__\ ).
 
 .. image:: teaching_pendant_software/049.png
    :width: 3in
@@ -983,7 +983,7 @@ Teaching point record
 
 The manual teaching control area is mainly to set the test coordinate system in the teaching mode, and display the angle and coordinate values of each axis of the robot in real time, and can name and save the teaching points.
 
-When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <introduction.html#basic-parameters>`__\)。
+When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <robot_brief_introduction.html#basic-parameters>`__\)。
 
 For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
 
