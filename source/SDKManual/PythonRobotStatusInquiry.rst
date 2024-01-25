@@ -761,3 +761,107 @@ Code example
     robot = Robot.RPC('192.168.58.2')
     ret = robot.ComputeFileMD5("/fruser/201.lua")   #Calculate the MD5 value of the file in the specified path
     print("Calculates the MD5 value of the file in the specified path ", ret)
+
+Obtain robot version information
++++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetSoftwareVersion()``"
+    "Description", "Obtain robot version information"
+    "Required parameter", "Null"
+    "Optional parameter", "Nothing"
+    "Return value", "- Success -0  Failed -errcode
+    - Return:（if success）robotModel, webVersion, controllerVersion"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    robot = Robot.RPC('192.168.58.2')
+
+    ret = robot.GetSoftwareVersion()
+    print("GetSoftwareVersion()：", ret)
+
+Obtain robot hardware version information
++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetSlaveHardVersion()``"
+    "Description", "Obtain robot hardware version information"
+    "Required parameter", "Null"
+    "Optional parameter", "Nothing"
+    "Return value", "- Success -0  Failed -errcode
+    - Return:（if success）ctrlBoxBoardVersion, driver1Version, driver2Version , driver3Version, driver4Version, driver5Version, driver6Version, endBoardVersion"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetSlaveHardVersion()
+    print("GetSlaveHardVersion()：", ret)
+
+Obtain robot firmware version information
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetSlaveFirmVersion()``"
+    "Description", "Obtain robot firmware version information"
+    "Required parameter", "Null"
+    "Optional parameter", "Nothing"
+    "Return value", "- Success -0  Failed -errcode
+    - Return:（if success）ctrlBoxBoardVersion, driver1Version, driver2Version , driver3Version, driver4Version, driver5Version, driver6Version, endBoardVersion"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetSlaveFirmVersion()
+    print("GetSlaveFirmVersion()：", ret)
+
+Obtain DH compensation parameters
+++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetDHCompensation()``"
+    "Description", "Obtain DH compensation parameters"
+    "Required parameter", "Null"
+    "Optional parameter", "Nothing"
+    "Return value", "- Success -0  Failed -errcode
+    - Return:(if success) dhCompensation Robot DH parameter compensation value (mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.GetDHCompensation()
+    print(error)

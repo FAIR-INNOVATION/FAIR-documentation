@@ -246,3 +246,108 @@ Code example
     fcoeff = [0.5,0.5,0.5,0.5,0.5,0.5]
     error =robot.SetFrictionValue_freedom(fcoeff)
     print("Set joint friction compensation coefficient-free installation:",error)
+
+Download the point table database
++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``PointTableDownLoad(point_table_name, save_file_path)``"
+    "Description", "Download the point table database"
+    "Required parameter", "- ``point_table_name``：pointTable1.db;
+    - ``save_file_path``: C://test/;"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.PointTableDownLoad("point_table_a.db","D://Desktop/testPoint/download/")
+    print("PointTableDownLoad:",error)
+ 
+Upload the point table database
++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``PointTableUpLoad(point_table_file_path)``"
+    "Description", "Download the point table database"
+    "Required parameter", "- ``point_table_file_path``：Full path name of the upload point table   C://test/pointTable1.db"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:   
+
+    from fairino import Robot
+
+    # A connection is established with the robot controller. A successful connection returns a robot object 
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.PointTableUpLoad("D://Desktop/testPoint/point_table_a.db")
+    print("PointTableUpLoad:",error)
+
+Point table switch
++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``PointTableSwitch(point_table_name)``"
+    "Description", "Point table switch"
+    "Required parameter", "- ``point_table_name``：When the point table is empty, that is, "", the lua program is updated to the original program that did not apply the point table"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.PointTableSwitch("point_table_a.db")
+    print("PointTableSwitch:",error)
+
+Point table update Lua
++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``PointTableUpdateLua(point_table_name, lua_file_name)``"
+    "Description", "Point table update Lua"
+    "Required parameter", "- ``point_table_name``：When the point table is empty, that is, "", the lua program is updated to the original program that did not apply the point table
+    - ``lua_file_name``: Name of the lua file to update"
+    "Optional parameter", "Nothing" 
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.PointTableUpdateLua("point_table_a.db","testpoint.lua")
+    print("PointTableUpdateLua:",error)

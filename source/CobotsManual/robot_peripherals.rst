@@ -400,13 +400,27 @@ Controller + PLC（UDP）
 Configuration steps
 ++++++++++++++++++++++++
 
-**Step1**: First configure the expansion axis UDP communication. Set the IP address, port number and communication cycle.
+**Step1**：First configure the expansion axis UDP communication. Set parameters such as IP address, port number, communication cycle, packet loss detection cycle, and number of packet losses. The reconnection cycle and the number of reconnections can only be configured after the automatic reconnection switch is turned on when communication is interrupted.
+
+- IP address: Custom ip address
+- Port number: defined according to actual situation
+- Communication cycle: defined according to actual situation, unit ms
+- Packet loss detection communication cycle: 10 ~ 1000 ms
+- Number of packet losses: 1 ~ 100
+- Communication interruption confirmation time: 0 ~ 500 ms
+- Automatic reconnection after communication interruption: On/Off
+- Reconnection period: 1 ~ 1000 ms
+- Number of reconnections: 1 ~ 100
 
 .. figure:: robot_peripherals/021.png
    :align: center
    :width: 3in
 
 .. centered:: Figure 5.5-1 Extended axis communication configuration
+
+.. important:: 
+   1. After setting the communication disconnection confirmation time, when the communication abnormality exceeds this time period, the communication disconnection will be confirmed and an error will be reported.
+   2. After the UDP communication is disconnected, a UDP disconnection error is triggered (can be reset). You can click the clear warning message button and the UDP communication is re-established.
 
 **Step2**: Select the extended axis number 1, and click the "Parameter Configuration" button to enter the right interface. Set the axis type, axis direction, running speed, acceleration, forward limit, reverse limit, lead, encoder resolution, starting point offset, manufacturer, model and mode, and click Configure to complete the configuration.
 
