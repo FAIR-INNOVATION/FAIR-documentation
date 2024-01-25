@@ -3022,7 +3022,7 @@ A~E key function:
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.9-21 Smart Tool Configuration (A~E key)
+.. centered:: Figure 4.9-21 Smart Tool Configuration (A~E key)
 
 IO key function:
 
@@ -3043,7 +3043,7 @@ IO key function:
    :width: 6in
    :align: center
 
-.. centered:: Figure 3.9‑22 Smart Tool Configuration (IO key)
+.. centered:: Figure 4.9‑22 Smart Tool Configuration (IO key)
 
 Welding Expert Library
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3058,7 +3058,7 @@ Step 1, whether to use the extended axis, if the extended axis is used, the rela
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-22 Extended axis configuration
+.. centered:: Figure 4.9-23 Extended axis configuration
 
 Step 2: Calibrate the starting point, the starting point safety point, the end point, and the ending point safety point. If the extended axis is selected in the first step, the extended axis movement function will be loaded to cooperate with the calibration of relevant points.
 
@@ -3066,7 +3066,7 @@ Step 2: Calibrate the starting point, the starting point safety point, the end p
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-23 Calibration related points
+.. centered:: Figure 4.9-24 Calibration related points
 
 Step 3, choose whether laser is needed, if yes, edit the parameters of the laser positioning command.
 
@@ -3074,7 +3074,7 @@ Step 3, choose whether laser is needed, if yes, edit the parameters of the laser
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-24 Laser positioning configuration
+.. centered:: Figure 4.9-25 Laser positioning configuration
 
 Step 4: Select whether weaving welding is required, and if weaving welding is required, you need to edit the relevant parameters of weaving welding.
 
@@ -3082,7 +3082,7 @@ Step 4: Select whether weaving welding is required, and if weaving welding is re
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-25 Weaving configuration
+.. centered:: Figure 4.9-26 Weaving configuration
 
 Step 5, name the program, and automatically open the program in the program teaching interface.
 
@@ -3090,7 +3090,7 @@ Step 5, name the program, and automatically open the program in the program teac
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-26 Save program
+.. centered:: Figure 4.9-27 Save program
 
 Click "Arc Welding" under "Weldment Shape" to enter the arc welding guidance interface. On the basis of the configuration of the basic settings of the robot, we can quickly generate a welding teaching program through two simple steps. It mainly includes the following two steps.
 
@@ -3100,7 +3100,7 @@ Step 1: Calibrate the starting point, the starting point safety point, the arc t
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-27 Calibration point
+.. centered:: Figure 4.9-28 Calibration point
 
 Step 2: Name the program and automatically open the program in the program teaching interface.
 
@@ -3108,7 +3108,7 @@ Step 2: Name the program and automatically open the program in the program teach
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-28 Save program
+.. centered:: Figure 4.9-29 Save program
 
 Click "Multi-layer multi-pass welding" under "Weldment shape" to enter the multi-layer multi-pass welding guidance interface. After completing the configuration of various robot basic settings, we can quickly generate a welding teaching program through four simple steps. It mainly includes the following five steps.
 
@@ -3118,7 +3118,7 @@ Step 1. Set the first group of points according to the prompts, namely welding p
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-29 First set of point settings
+.. centered:: Figure 4.9-30 First set of point settings
 
 Step 2, the second group of point settings, you can set the type of path point, support straight line and arc path, including welding point, X+ point and Z+ point.
 
@@ -3126,7 +3126,7 @@ Step 2, the second group of point settings, you can set the type of path point, 
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-30 Second set of point settings
+.. centered:: Figure 4.9-31 Second set of point settings
 
 Step 3: After setting all the group points, click "Finish" to enter the function page of each weld bead offset setting function, and set the offset of the required weld bead in turn. The interface is shown in the figure below.
 
@@ -3134,7 +3134,7 @@ Step 3: After setting all the group points, click "Finish" to enter the function
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-31 Weld Bead Offset Setting
+.. centered:: Figure 4.9-32 Weld Bead Offset Setting
 
 Step 4: After all the required weld bead parameters are set, click "Finish" to jump to the program generation page, enter the file name, and the multi-layer multi-pass welding program can be generated, and then the user can open it in the program teaching The program is debugged, and the interface is shown in the figure below.
 
@@ -3142,7 +3142,7 @@ Step 4: After all the required weld bead parameters are set, click "Finish" to j
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-32 Save program
+.. centered:: Figure 4.9-33 Save program
 
 Safe speed setting
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -3159,7 +3159,7 @@ The joint speed and terminal TCP speed can be configured in the first-level and 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-33 Safe speed setting
+.. centered:: Figure 4.9-34 Safe speed setting
 
 Force sensor assisted drag function settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3174,7 +3174,7 @@ Under "DI Configuration" in "Robot Settings", click on the different DI drop-dow
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-34 Force sensor assisted drag function settings
+.. centered:: Figure 4.9-35 Force sensor assisted drag function settings
 
 .. important:: When the force sensor drag-on state is detected, the robot switches to the force sensor drag state; when the force sensor drag-off DI state is detected, the force sensor drag state is turned off;
 
@@ -3189,7 +3189,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-35 Security Wall Configuration
+.. centered:: Figure 4.9-36 Security Wall Configuration
 
 -  **Security Wall Reference Point Configuration**:After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
 
@@ -3200,7 +3200,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-36 Safe range reference point setting
+.. centered:: Figure 4.9-37 Safe range reference point setting
 
 -  Apply effects: The successfully configured security wall is enabled. Drag the robot, if the TCP at the end of the robot is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
 
@@ -3208,7 +3208,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-37 The effect picture after the security range is set successfully
+.. centered:: Figure 4.9-38 The effect picture after the security range is set successfully
 
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
@@ -3223,7 +3223,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-38 Security daemon
+.. centered:: Figure 4.9-39 Security daemon
 
 System settings
 -----------------
