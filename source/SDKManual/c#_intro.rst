@@ -30,4 +30,5 @@ This manual is the secondary development interface document of C#.
     C#RobotWebAPPProgramUse
     C#RobotPeripherals
     C#RobotForceControl
+    C#RobotWelding
     C#RobotOthers

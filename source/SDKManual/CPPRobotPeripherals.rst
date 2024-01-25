@@ -233,3 +233,427 @@ Code example
 
         return 0;
     }
+
+Welding starts
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Welding starts
+	* @param [in] ioType 0 - Controller IO; 1 - Extended IO
+	* @param [in] arcNum welder profile number
+	* @param [in] timeout time limit
+	* @return Error code
+	*/
+	errno_t ARCStart(int ioType, int arcNum, int timeout);
+
+Welding ended
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Welding ended
+	* @param [in] ioType IO Type 0 - Controller IO; 1 - Extended IO
+	* @param [in] arcNum welder profile number
+	* @param [in] timeout arc extinguishing timeout
+	* @return Error code
+	*/
+	errno_t ARCEnd(int ioType, int arcNum, int timeout);
+
+Set the relationship between welding current and output analog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Set the corresponding relationship between welding current and output analog quantity
+	* @param [in] currentMin current value at the left point of the linear relationship between welding current and analog output (A)
+	* @param [in] currentMax current value at the right point of the linear relationship between welding current and analog output (A)
+	* @param [in] outputVoltageMin Analog output voltage value (V) of the left point of the linear relationship between welding current and analog output
+	* @param [in] outputVoltageMax The analog output voltage value (V) of the right point of the linear relationship between welding current and analog output
+	* @return Error code
+	*/
+	errno_t WeldingSetCurrentRelation(double currentMin, double currentMax, double outputVoltageMin, double outputVoltageMax);
+
+Set the relationship between welding voltage and output analog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Set the corresponding relationship between welding voltage and output analog quantity
+	* @param [in] weldVoltageMin eldVoltageMin Welding voltage value (A) at the left point of the linear relationship between welding voltage and analog output
+	* @param [in] weldVoltageMax Welding voltage-analog output linear relationship right point welding voltage value (A)
+	* @param [in] outputVoltageMin Analog output voltage value (V) of the left point of the linear relationship between welding voltage and analog output
+	* @param [in] outputVoltageMax The analog output voltage value (V) of the right point of the linear relationship between welding voltage and analog output
+	* @return Error code
+	*/
+	errno_t WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
+
+Obtain the corresponding relationship between welding current and output analog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Get the corresponding relationship between welding current and output analog quantity
+	* @param [out] currentMin current value at the left point of the linear relationship between welding current and analog output (A)
+	* @param [out] currentMax welding current and analog output (A)
+	* @param [out] outputVoltageMin Analog output voltage value (V) of the left point of the linear relationship between welding current and analog output
+	* @param [out] outputVoltageMax The analog output voltage value (V) of the right point of the linear relationship between welding current and analog output
+	* @return Error code
+	*/
+	errno_t WeldingGetCurrentRelation(double *currentMin, double *currentMax, double *outputVoltageMin, double *outputVoltageMax);
+
+Obtain the corresponding relationship between welding voltage and output analog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Get the corresponding relationship between welding voltage and output analog quantity
+	* @param [out] weldVoltageMin Welding voltage value (A) at the left point of the linear relationship between welding voltage and analog output
+	* @param [out] weldVoltageMax Welding voltage-analog output linear relationship right point welding voltage value (A)
+	* @param [out] outputVoltageMin Analog output voltage value (V) of the left point of the linear relationship between welding voltage and analog output
+	* @param [out] outputVoltageMax The analog output voltage value (V) of the right point of the linear relationship between welding voltage and analog output
+	* @return Error code
+	*/
+	errno_t WeldingGetVoltageRelation(double *weldVoltageMin, double *weldVoltageMax, double *outputVoltageMin, double *outputVoltageMax);
+
+Set welding current
+++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Set welding current
+	* @param [in] ioType 0-control box IO； 1-extend IO
+	* @param [in] current welding current(A)
+	* @param [in] AOIndexWelding current control box analog output port(0-1)
+	* @return Error code
+	*/
+	errno_t WeldingSetCurrent(int ioType, double current, int AOIndex);
+
+Set welding voltage
+++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Set welding voltage
+	* @param [in] ioType 0-control box IO； 1-extend IO
+	* @param [in] voltage welding voltage(V)
+	* @param [in] AOIndex Welding voltage control box analog output port(0-1)
+	* @return Error code
+	*/
+	errno_t WeldingSetVoltage(int ioType, double voltage, int AOIndex);
+
+Set weave parameters
+++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Set weave parameters
+	* @param [in] weaveNum parameters number
+	* @param [in] weaveType weave type：0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
+	* @param [in] weaveFrequency weave frequency(Hz)
+	* @param [in] weaveIncStayTime Wait mode 0- period does not contain wait time; 1- Period contains the wait time
+	* @param [in] weaveRange weave amplitude(mm)
+	* @param [in] weaveLeftStayTime weave left residence time(ms)
+	* @param [in] weaveRightStayTime weave right residence time(ms)
+	* @param [in] weaveCircleRadio Circular wiggle-pullback ratio(0-100%)
+	* @param [in] weaveStationary weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time
+	* @return Error code
+	*/
+	errno_t WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary);
+
+Set weave parameters in real time
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Set weave parameters in real time
+	* @param [in] weaveNum parameters number
+	* @param [in] weaveType weave type：0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
+	* @param [in] weaveFrequency weave frequency(Hz)
+	* @param [in] weaveIncStayTime Wait mode 0- period does not contain wait time; 1- Period contains the wait time
+	* @param [in] weaveRange weave amplitude(mm)
+	* @param [in] weaveLeftStayTime weave left residence time(ms)
+	* @param [in] weaveRightStayTime weave right residence time(ms)
+	* @param [in] weaveCircleRadio Circular wiggle-pullback ratio(0-100%)
+	* @param [in] weaveStationary weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time
+	* @return Error code
+	*/
+	errno_t WeaveOnlineSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary);
+
+Weave start
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Weave start
+	* @param [in] weaveNum Weave welding parameter configuration number
+	* @return Error code
+	*/
+	errno_t WeaveStart(int weaveNum);
+
+Weave end
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Weave end
+	* @param [in] weaveNum Weave welding parameter configuration number
+	* @return Error code
+	*/
+	errno_t WeaveEnd(int weaveNum);
+
+Forward wire feed
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Forward Wire Feed
+	* @param [in] ioType 0-control box IO； 1-extend IO
+	* @param [in] wireFeed wire control: 0-stop wire feed ；1-wire feed
+	* @return Error code
+	*/
+	errno_t SetForwardWireFeed(int ioType, int wireFeed);
+
+Reverse wire feed
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Reverse wire feed
+	* @param [in] ioType 0-control box IO； 1-extend IO
+	* @param [in] wireFeed wire control: 0-stop wire feed ；1-wire feed
+	* @return Error code
+	*/
+	errno_t SetReverseWireFeed(int ioType, int wireFeed);
+
+Aspirated
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief aspirated
+	* @param [in] ioType  0-control box IO； 1-extend IO
+	* @param [in] airControl aspirated control: 0-stop aspirated；1-aspirated
+	* @return Error code
+	*/
+	errno_t SetAspirated(int ioType, int airControl);
+
+Segment weld start
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	* @brief Segment weld start
+	* @param [in] startDesePos Starting point Cartesian position
+	* @param [in] endDesePos Ending point Cartesian position
+	* @param [in] startJPos Starting point joint position
+	* @param [in] endJPos Ending point joint position
+	* @param [in] weldLength Weld length(mm)
+	* @param [in] noWeldLength Length of unwelded section(mm)
+	* @param [in] weldIOType 0-control box IO； 1-extend IO(0-控制箱IO；1-扩展IO)
+	* @param [in] arcNum Welder configuration file number
+	* @param [in] weldTimeout Arcing timeout time
+	* @param [in] isWeave Weave or not
+	* @param [in] weaveNum Weave welding parameter configuration number
+	* @param [in] tool tool number
+	* @param [in] user Workpiece coordinate number, range [1~15]
+	* @param [in] vel Percentage of speed [0~100]
+	* @param [in] acc Acceleration percentage, range[0~100]
+	* @param [in] ovl Velocity scaling factor, range[0~100]
+	* @param [in] blendR [-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm
+	* @param [in] epos Position of expansion shaft, unit: mm
+ 	* @param [in] search 0- no wire seeking, 1- wire seeking
+	* @param [in] offset_flag 0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
+	* @param [in] offset_pos The pose offset
+	* @return Error code
+	*/
+	errno_t SegmentWeldStart(DescPose *startDesePos, DescPose *endDesePos, JointPos *startJPos, JointPos *endJPos, double weldLength, double noWeldLength, int weldIOType, int arcNum, int weldTimeout, bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos *epos, uint8_t search, uint8_t offset_flag, DescPose *offset_pos);
+
+Code example
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    #include "libfairino/robot.h"
+    #ifdef WINDOWS_OPTION
+    #include <string.h>
+    #include <windows.h>
+    #elif LINUX_OPTION
+    #include <cstdlib>
+    #include <iostream>
+    #include <stdio.h>
+    #include <cstring>
+    #include <unistd.h>
+    #endif
+
+    #include <chrono>
+    #include <thread>
+
+    using namespace std;
+
+    int main(void)
+    {
+        printf("start to debug\n");
+        FRRobot robot;            
+        robot.RPC("192.168.58.2"); 
+
+        double current_min = 0;
+        double current_max = 0;
+        double vol_min = 0;
+        double vol_max = 0;
+        double output_vmin = 0;
+        double output_vmax = 0;
+
+        DescPose start_descpose;
+        start_descpose.rpy.rx = 2.243;
+        start_descpose.rpy.ry = 0.828;
+        start_descpose.rpy.rz = -148.894;
+        start_descpose.tran.x = -208.064;
+        start_descpose.tran.y = 412.155;
+        start_descpose.tran.z = 1.926;
+
+        JointPos start_jointpose;
+        start_jointpose.jPos[0] = -51.489;
+        start_jointpose.jPos[1] = -105.721;
+        start_jointpose.jPos[2] = 130.695;
+        start_jointpose.jPos[3] = -108.338;
+        start_jointpose.jPos[4] = -91.356;
+        start_jointpose.jPos[5] = 62.014;
+
+        DescPose end_descpose;
+        end_descpose.rpy.rx = 2.346;
+        end_descpose.rpy.ry = -3.633;
+        end_descpose.rpy.rz = -106.313;
+        end_descpose.tran.x = -425.087;
+        end_descpose.tran.y = 389.637;
+        end_descpose.tran.z = -9.249;
+
+        JointPos end_jointpose;
+        end_jointpose.jPos[0] = -47.137;
+        end_jointpose.jPos[1] = -102.345;
+        end_jointpose.jPos[2] = 127.607;
+        end_jointpose.jPos[3] = -108.526;
+        end_jointpose.jPos[4] = -91.407;
+        end_jointpose.jPos[5] = 23.537;
+
+        ExaxisPos ex_axis_pose;
+        memset(&ex_axis_pose, 0, sizeof(ExaxisPos));
+        DescPose offset_pose;
+        memset(&offset_pose, 0, sizeof(DescPose));
+        int retval = 0;
+
+        retval = robot.WeldingSetCurrentRelation(0, 400, 0, 10);
+        cout << "WeldingSetCurrentRelation retval is: " << retval << endl;
+
+        retval = robot.WeldingSetVoltageRelation(0, 40, 0, 10);
+        cout << "WeldingSetVoltageRelation retval is: " << retval << endl;
+
+        retval = robot.WeldingGetCurrentRelation(&current_min, &current_max, &output_vmin, &output_vmax);
+        cout << "WeldingGetCurrentRelation retval is: " << retval << endl;
+        cout << "current min " << current_min << " current max " << current_max << " output vol min " << output_vmin << " output vol max "<< output_vmax<<endl;
+
+        retval = robot.WeldingGetVoltageRelation(&vol_min, &vol_max, &output_vmin, &output_vmax);
+        cout << "WeldingGetVoltageRelation retval is: " << retval << endl;
+        cout << "vol min " << vol_min << " vol max " << vol_max << " output vol min " << output_vmin << " output vol max "<< output_vmax<<endl;
+
+        retval = robot.WeldingSetCurrent(1, 100, 0);
+        cout << "WeldingSetCurrent retval is: " << retval << endl;
+
+        this_thread::sleep_for(chrono::seconds(3));
+
+        retval = robot.WeldingSetVoltage(1, 10, 0);
+        cout << "WeldingSetVoltage retval is: " << retval << endl;
+        
+        retval = robot.WeaveSetPara(0, 0, 2.0, 0, 10, 0, 0, 0, 0);
+        cout << "retval is: " << retval << endl;
+
+        retval = robot.MoveJ(&start_jointpose, &start_descpose, 1, 0, 50, 50, 50, &ex_axis_pose, 0, 0, &offset_pose);
+        if (retval != 0)
+        {
+            cout << "movej fail " << retval << endl;
+            return 0;
+        }
+
+        retval = robot.WeaveStart(0);
+        cout << "retval is: " << retval << endl;
+
+        retval = robot.MoveL(&end_jointpose, &end_descpose, 1, 0, 50, 50, 50, 0, &ex_axis_pose, 0, 0, &offset_pose);
+        if (retval != 0)
+        {
+            cout << "MoveL fail " << retval << endl;
+            robot.WeaveEnd(0);
+            return 0;
+        }
+
+        retval = robot.WeaveEnd(0);
+        cout << "retval is: " << retval << endl;
+        
+        return 0;
+    }
