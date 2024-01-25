@@ -506,3 +506,65 @@ Code example
         flag = 0;
         robot.FT_Control(flag, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang);
     }
+
+Load identification initialization
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.4
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Load identification initialization
+    * @return Error code
+    */
+    int LoadIdentifyDynFilterInit();
+
+Load identification variable initialization
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.4
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Load identification variable initialization
+    * @return Error code
+    */
+    int LoadIdentifyDynVarInit();
+
+Load identification main program
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.4
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Load identification main program
+    * @param [in] joint_torque joint torque
+    * @param [in] joint_pos joint position
+    * @param [in] t Sampling period
+    * @return Error code
+    */
+    int LoadIdentifyMain(double[] joint_torque, double[] joint_pos, double t);
+
+Obtain the load identification result
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.4
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Obtain the load identification result
+    * @param [in] gain
+    * @param [out] weight Load weight
+    * @param [out] cog Load centroid
+    * @return Error code
+    */
+    int LoadIdentifyGetResult(double[] gain, ref double weight, ref DescTran cog);

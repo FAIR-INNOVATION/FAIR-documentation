@@ -324,3 +324,64 @@ Code example
 
         return 0;
     }
+
+Get robot software version
++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Get robot software version
+	* @param[out]	robotModel Robot model
+	* @param[out]	webversion web version
+	* @param[out]	controllerVersion controller version
+	* @return Error code 
+	*/
+	errno_t GetSoftwareVersion(char robotModel[64], char webVersion[64], char controllerVersion[64]);
+
+Get the robot hardware version
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	* @brief Get the robot hardware version
+	* @param[out] ctrlBoxBoardversion Control box carrier board hardware version
+	* @param[out] driver1version Drive 1 Hardware Version
+	* @param[out] driver2version Drive 2 Hardware Version
+	* @param[out] driver3version Drive 3 Hardware Version
+	* @param[out] driver4version Drive 4 Hardware Version
+	* @param[out] driver5version Drive 5 Hardware Version
+	* @param[out] driver6version Drive 6 Hardware Version
+	* @param[out] endBoardversion End version hardware version
+	* @return Error code 
+	*/
+	errno_t GetHardwareVersion(char ctrlBoxBoardversion[128], char driver1version[128], char driver2version[128], char driver3version[128], char driver4version[128], char driver5version[128], char driver6version[128], char endBoardversion[128]);
+
+Get the robot firmware version
+++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Get the robot firmware version
+	* @param[out] ctrlBoxBoardversion Control box carrier board firmware version
+	* @param[out] driver1version Drive 1 firmware version
+	* @param[out] driver2version Drive 2 firmware version
+	* @param[out] driver3version Drive 3 firmware version
+	* @param[out] driver4version Drive 4 firmware version
+	* @param[out] driver5version Drive 5 firmware version
+	* @param[out] driver6version Drive 6 firmware version
+	* @param[out] endBoardversion End version firmware version
+	* @return Error code 
+	*/
+	errno_t GetFirmwareVersion(char ctrlBoxBoardversion[128], char driver1version[128], char driver2version[128], char driver3version[128], char driver4version[128], char driver5version[128], char driver6version[128], char endBoardversion[128]);
