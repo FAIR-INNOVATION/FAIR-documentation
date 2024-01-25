@@ -301,9 +301,9 @@ The menu bar is as shown in Table 4.2-1 Teaching Pendant Menu Columns
 Operating area
 ~~~~~~~~~~~~~~~~~
 
-IO settings can refer to \ `4.5.1 I/O settings <#i-o-settings>`__\  in 4.5 Control Box I/O.
+IO settings can refer to \ `5.5.1 I/O settings <#i-o-settings>`__\  in 4.5 Control Box I/O.
 
-Joint, Base and other functions can refer to \ `4.6 Robot operation <#robot-operation>`__\.
+Joint, Base and other functions can refer to \ `5.6 Robot operation <#robot-operation>`__\.
 
 3D simulation robot
 ---------------------
@@ -1970,6 +1970,8 @@ This command is mainly used for welding machine peripherals. Before adding this 
 
 Output voltage range: 0~10V, welding voltage range: 0~700V, welding current range: 0~1000A.
 
+.. important:: When configuring the output AO, welding current, and welding voltage, you need to select the I/O type. If you select controller I/O, you need to select the corresponding output AO.
+
 .. image:: teaching_pendant_software/117.png
    :width: 6in
    :align: center
@@ -3136,6 +3138,23 @@ The joint speed and terminal TCP speed can be configured in the first-level and 
 
 .. centered:: Figure 4.9-33 Safe speed setting
 
+Force sensor assisted drag function settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Under "DI Configuration" in "Robot Settings", click on the different DI drop-down boxes to configure auxiliary drag on, auxiliary off and auxiliary drag on/off
+
+- The control box DI function is configured with a force sensor drag function, and the force sensor can be dragged directly through the control box DI input.
+- The DI function at the end of the robot is equipped with a force sensor drag function, and the force sensor can be dragged through the end DI input.
+- Based on TPD trajectory recording in robot drag mode, TPD trajectory recording in force sensor-assisted drag mode is added to achieve smoother TPD trajectory dragging.
+
+.. image:: teaching_pendant_software/271.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-34 Force sensor assisted drag function settings
+
+.. important:: When the force sensor drag-on state is detected, the robot switches to the force sensor drag state; when the force sensor drag-off DI state is detected, the force sensor drag state is turned off;
+
 Security Wall Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3147,7 +3166,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-34 Security Wall Configuration
+.. centered:: Figure 4.9-35 Security Wall Configuration
 
 -  **Security Wall Reference Point Configuration**:After selecting a security wall, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
 
@@ -3158,7 +3177,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-35 Safe range reference point setting
+.. centered:: Figure 4.9-36 Safe range reference point setting
 
 -  Apply effects: The successfully configured security wall is enabled. Drag the robot, if the TCP at the end of the robot is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
 
@@ -3166,7 +3185,7 @@ Under the menu bar of "Security Settings" in "Auxiliary Application", click "Sec
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-36 The effect picture after the security range is set successfully
+.. centered:: Figure 4.9-37 The effect picture after the security range is set successfully
 
 Security daemon
 ~~~~~~~~~~~~~~~~~~~~
@@ -3181,7 +3200,7 @@ Enable the security background program and set the unexpected scene and backgrou
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9-37 Security daemon
+.. centered:: Figure 4.9-38 Security daemon
 
 System settings
 -----------------

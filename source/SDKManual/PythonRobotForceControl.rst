@@ -666,7 +666,7 @@ Flexibility control on
 
     "Prototype", "``FT_ComplianceStart(p,force)``"
     "Description", "Flexibility control on"
-    "Parameter", "- ``p``: Position adjustment coefficient or compliance coefficient
+    "Required parameter", "- ``p``: Position adjustment coefficient or compliance coefficient
     - ``force``:flexibility opening force threshold, unit[N]"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcod"
@@ -711,3 +711,91 @@ Code example
     status = 0
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
     print("Turn off constant force control ",error)
+
+Load identification initialization
+++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "LoadIdentifyDynFilterInit()"
+    "Description", "Load identification initialization"
+    "Required parameter", "Null"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod  "
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+
+    # Load identification initialization
+    error = robot.LoadIdentifyDynFilterInit()
+    print("LoadIdentifyDynFilterInit:",error)
+    # Load identification variable initialization
+    error = robot.LoadIdentifyDynVarInit()
+    print("LoadIdentifyDynVarInit:",error)
+
+    joint_torque= [0,0,0,0,0,0]
+    joint_pos= [0,0,0,0,0,0]
+    gain=[0,0.05,0,0,0,0,0,0.02,0,0,0,0]
+    t =10
+    error,joint_pos=robot.GetActualJointPosDegree(1)
+    joint_pos[1] = joint_pos[1]+10
+    error,joint_torque=robot.GetJointTorques(1)
+    joint_torque[1] = joint_torque[1]+2
+    # Load identification main program
+    error = robot.LoadIdentifyMain(joint_torque, joint_pos, t)
+    print("LoadIdentifyMain:",error)
+    #Obtain the load identification result
+    error = robot.LoadIdentifyGetResult(gain)
+    print("LoadIdentifyGetResult:",error)
+
+Load identification variable initialization
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "LoadIdentifyDynVarInit()"
+    "Description", "Load identification variable initialization"
+    "Required parameter", "Null"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0  Failed -errcod  "
+
+Load identification main program
+++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "LoadIdentifyMain(joint_torque, joint_pos, t)"
+    "Description", "Load identification main program"
+    "Required parameter", "- ``joint_torque``： j1-j6；
+    - ``joint_pos``：j1-j6"
+    "Return value", "Errcode: Success -0  Failed -errcod"
+
+Obtain the load identification result
++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python sdk-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "LoadIdentifyGetResult(gain)"
+    "Description", "Obtain the load identification result"
+    "Required parameter", "- ``gain``"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0  Failed -errcod
+    - Return:(if success) weight Load weight，cog Load centroid [x,y,z]"
