@@ -145,7 +145,46 @@ Peripheral configuration of welding machine
 Peripheral configuration of welding machine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**: In the user peripherals configuration interface, select the "welding machine configuration" button, and users can configure the IO buttons of the welding machine by selecting the IO type and "Controller I/O" to quickly configure the DI and DO required by the welding machine (the default configuration is DI12 for arc start success signal, DO9 for gas supply signal, and DO10 for gas supply signal). Arc signal, DO11 jog wire feeding, DO12 reverse wire feeding, DO13 JOB selection 1, DO14 JOB selection 2, DO15 JOB selection 3). Users can also customize the configuration in the "IO Configuration" interface according to their own needs; or select "Extended I/O", configure the "Welder preparation" and "Arc start success" of the extended DI, and the "Welder starting arc", "Gas detection", "Forward" and "Reverse" of the DO Send wire;
+**Step1**: In the user peripherals configuration interface, select the "welding machine configuration" button, and users can configure the IO buttons of the welding machine by selecting the IO type and "Controller I/O" to quickly configure the DI and DO required by the welding machine. The default configuration is as follows:
+
+.. list-table:: 
+   :widths: 15 40
+   :header-rows: 1
+   :align: center
+
+   * - IO signal
+     - Function
+
+   * - DI12
+     - Arc start success signal
+
+   * - DO9
+     - Air supply signal
+
+   * - DO10
+     - Arc starting signal
+
+   * - DO11
+     - Jog wire feeding
+
+   * - DO12
+     - Reverse wire feeding
+
+   * - DO13
+     - JOB selection 1
+
+   * - DO14
+     - JOB selection 2
+
+   * - DO15
+     - JOB selection 3
+
+Users can also customize the configuration in the "IO Configuration" interface according to their own needs; or select "Extended I/O". 
+
+Extended configuration IO:
+
+- configure the "Welder preparation" and "Arc start success" of the extended DI;
+- the "Welder starting arc", "Gas detection", "Forward" and "Reverse" of the DO Send wire.
 
 .. figure:: robot_peripherals/008.png
    :align: center
