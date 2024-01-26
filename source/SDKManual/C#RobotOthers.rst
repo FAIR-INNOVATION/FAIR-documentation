@@ -359,7 +359,7 @@ Point table update Lua program
 
     /** 
     * @brief Point table update Lua program
-    * @param [in] pointTableName point table name："pointTable1.db", When the point table is empty, that is, "", the lua program is updated to the original program that did not apply the point table
+    * @param [in] pointTableName point table name："pointTable1.db", When the point table is empty, that is, an empty string, the lua program is updated to the original program that did not apply the point table
     * @param [in] luaFileName Lua program name   "test.lua"
     * @param [out] errorStr error string  
     * @return Error code 

@@ -14,7 +14,7 @@ Obtain force sensor configuration
     "Description", "Obtain force sensor configuration"
     "Required parameter", "Nothing"
     "Optional Parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
         - Return(if success): [number,company,device,softversion]
         - number: sensor number, range[1]
         - company: Sensor manufacturer,17-Kunwei Technology,19-Aerospace 11th Institute, 20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core
@@ -35,7 +35,7 @@ Force sensor configuration
     - ``bus``:device mounted terminal bus position, temporarily not used, defaults to 0;"
     "Optional parameter",	"- softversion:software version number, temporarily not used, defaults to 0;
         - bus:device mounted terminal bus position, temporarily not used, defaults to 0;"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -63,7 +63,7 @@ Force sensor activation
     "Description", "Force sensor activation"
     "Required parameter", "- ``state``:0-Reset,1-Activate"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -90,7 +90,7 @@ Zero calibration of force sensor
     "Description", "Zero calibration of force sensor"
     "Required parameter", "- ``state``:0-Remove zero,1-Zero correction"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -116,7 +116,7 @@ Set the force sensor reference coordinate system
     "Description", "Set the force sensor reference coordinate system"
     "Required parameter", "- ``ref``:0-Tool coordinate system,1-Base coordinate system"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -141,7 +141,7 @@ Load weight identification calculation
     "Description", "Load weight identification calculation"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success):weight Load weight,unit[kg] "
 
 Load weight identification record
@@ -154,7 +154,7 @@ Load weight identification record
     "Description", "Load weight identification record"
     "Required parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
     Return(if success):weight Load weight,unit[kg] 
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -182,7 +182,7 @@ Load centroid identification calculation
     "Description", "Load centroid identification calculation"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): cog=[cogx,cogy,cogz],Load centroid ,unit[mm] "
 
 Load centroid identification record
@@ -195,7 +195,7 @@ Load centroid identification record
     "Description", "Load centroid identification record"
     "Required parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -239,7 +239,7 @@ Obtain force/torque data in the reference coordinate system
     "Description", "Obtain force/torque data in the reference coordinate system"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success):data=[fx,fy,fz,mx,my,mz] "
 
 Code example
@@ -263,7 +263,7 @@ Obtain raw force/torque data from the force sensor
     "Description", "Obtain raw force/torque data from the force sensor"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success):data=[fx,fy,fz,mx,my,mz] "
 
 Code example
@@ -293,7 +293,7 @@ Collision protection
     - ``min_threshold``:Minimum Threshold;"
     "Optional parameter", "Nothing"
     - Force/torque detection range:(force_torque-min_threshold,force_torque+max_threshold)"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -342,7 +342,7 @@ Constant force control
     - ``max_dis``:Maximum adjustment distance;
     - ``max_ang``:Maximum adjustment angle;"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -390,7 +390,7 @@ Spiral line exploration
     "Optional parameter", "- ``dr``:Feed rate per circle radius, unit[mm], default to 0.7;
     - ``max_t_ms``:Maximum exploration time,unit[ms] , default to 6000;
     - ``max_vel``:Maximum linear speed,unit[mm/s] , default to 5"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -440,7 +440,7 @@ Rotate Insert
     - ``angleMax``:maximum rotation angle, unit[°] ,default to 45;
     - ``angAccmax``:Maximum rotational acceleration, unit[°/s^2],not used temporarily, default to 0;
     - ``rotorn``:Rotation direction, 1-clockwise, 2-counterclockwise, default to 1"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -492,7 +492,7 @@ Linear insertion
     - ``linorn``:Insertion direction, 1-positive direction, 2-negative direction;"
     "Optional parameter", "- ``lin_v``:Linear velocity, unit[mm/s] , default to 1.0;
     - ``lin_a``:Linear acceleration, unit[mm/s^2],not used temporarily;rotorn:Rotation direction, 1-clockwise, 2-counterclockwise, default to 1.0"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -540,7 +540,7 @@ Calculate the middle plane position to start
     "Description", "Calculate the middle plane position to start"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Calculate the middle plane position to end
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -569,7 +569,7 @@ Surface positioning
     - ``disMax``:Maximum exploration distance,unit[mm]"
     "Optional parameter", "- ``lin_v``:Exploring Linear Speed,unit[mm/s] , default to 3.0;
     - ``lin_a``:Exploring Linear Acceleration,unit[mm/s^2] , default to 0.0"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -656,7 +656,7 @@ Flexibility control off
     "Description", "Flexibility control off"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Flexibility control on
 ++++++++++++++++++++++++++++++++++
@@ -669,7 +669,7 @@ Flexibility control on
     "Required parameter", "- ``p``: Position adjustment coefficient or compliance coefficient
     - ``force``:flexibility opening force threshold, unit[N]"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -724,7 +724,7 @@ Load identification initialization
     "Description", "Load identification initialization"
     "Required parameter", "Null"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod  "
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ------------
@@ -769,7 +769,7 @@ Load identification variable initialization
     "Description", "Load identification variable initialization"
     "Required parameter", "Null"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod  "
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Load identification main program
 ++++++++++++++++++++++++++++++++++
@@ -783,7 +783,7 @@ Load identification main program
     "Description", "Load identification main program"
     "Required parameter", "- ``joint_torque``： j1-j6；
     - ``joint_pos``：j1-j6"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Obtain the load identification result
 +++++++++++++++++++++++++++++++++++++++

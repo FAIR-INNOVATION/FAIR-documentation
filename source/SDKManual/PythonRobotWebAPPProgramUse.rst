@@ -39,7 +39,7 @@ Obtain the execution line number of the current robot job program
     "Description", "Obtain the execution line number of the current robot job program"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success):line_num "
 
 Run the currently loaded job program
@@ -113,7 +113,7 @@ Obtain the name of the loaded job program
     "Description", "Obtain the name of the loaded job program"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): program_name "
 
 Code example

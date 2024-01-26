@@ -15,7 +15,7 @@ Conveyor start or stop
     "Description", "Conveyor start or stop"
     "Required parameter", "- ``status``: 1- Start, 0- stop"
     "Optional parameter", "Nothing"
-    "Return value",	"Errcode: Success -0  Failed -errcod"
+    "Return value",	"Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -38,7 +38,7 @@ Convey record the IO detection points
     "Description", "Convey record the IO detection points"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -61,7 +61,7 @@ Convey record A point
     "Description",	"Convey record A point"
     "Required parameter",	"Nothing"
     "Optional parameter",	"Nothing"
-    "Return value",	"Errcode: Success -0  Failed -errcod"
+    "Return value",	"Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -84,7 +84,7 @@ Convey record reference point
     "Description",	"Convey record reference point"
     "Required parameter",	"Nothing"
     "Optional parameter",	"Nothing"
-    "Return value",	 "Errcode: Success -0  Failed -errcod"
+    "Return value",	 "Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -107,7 +107,7 @@ Convey record B point
     "Description",	"Convey record B point"
     "Required parameter",	"Nothing"
     "Optional parameter",	"Nothing"
-    "Return value",	"Errcode: Success -0  Failed -errcod"
+    "Return value",	"Errcode: Success -0 , Failed -errcode"
 
 Code example
 ----------------
@@ -186,7 +186,7 @@ Conveyor IO detection
     "Description",	"Conveyor IO detection"
     "Required parameter",	"- ``max_t``: Maximum detection time, [ms]"
     "Optional parameter",	"Nothing"
-    "Return value",	"Errcode: Success -0  Failed -errcod"
+    "Return value",	"Errcode: Success -0 , Failed -errcode"
 
 Conveyor get track data
 +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -198,7 +198,7 @@ Conveyor get track data
     "Description",	"Conveyor get track data"
     "Required parameter",	"- ``mode``:1- Tracking Grab 2- Tracking motion 3-TPD tracking"
     "Optional parameter",	"Nothing"
-    "Return value",	"Errcode: Success -0  Failed -errcod"
+    "Return value",	"Errcode: Success -0 , Failed -errcode"
 
 Conveyor track start
 +++++++++++++++++++++++++++++++++++++++++++++++++++

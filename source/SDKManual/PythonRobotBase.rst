@@ -39,7 +39,7 @@ Query SDK version number
     "Description", "Query SDK version number"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return:（if success） [SDK_version, Controller_version]"
 
 Code example
@@ -68,7 +68,7 @@ Obtain Controller IP
     "Description", "Obtain Controller IP"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return:（if success） IP"
 
 Code example

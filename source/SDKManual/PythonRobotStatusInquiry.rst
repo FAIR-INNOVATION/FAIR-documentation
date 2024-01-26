@@ -13,7 +13,7 @@ Obtain robot installation angle
     "Prototype", "``GetRobotInstallAngle()``"
     "Description", "Obtain robot installation angle"
     "Required parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode
+    "Return value", "Errcode: Success -0 , Failed -errcode
     - Return(if success): [yangle,zangle],yangle-angle of roll,zangle-rotation angle"
 
 Code example
@@ -37,7 +37,7 @@ Obtain system variable values
     "Description", "Obtain system variable values"
     "Required parameter", "- ``id``:System variable number, range[1~20]"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode
+    "Return value", "Errcode: Success -0 , Failed -errcode
     - Return(if success): var_value"
 
 Code example
@@ -63,7 +63,7 @@ Obtain the current joint position (angle)
     "Description", "Obtain the current joint position(radian)"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
 
 Code example
@@ -110,7 +110,7 @@ Obtain joint Actual Speed -deg/s
     "Description", "Obtain joint Actual Speed -deg/s"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
 
 Code example
@@ -134,7 +134,7 @@ Obtain Target TCP Composite Speed
     "Description", "Obtain Target TCP Composite Speed"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): [tcp_speed,ori_speed]"
 
 Code example
@@ -159,7 +159,7 @@ Obtain Actual TCP Composite Speed
     "Description", "Obtain Actual TCP Composite Speed"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): [tcp_speed,ori_speed]"
 
 Code example
@@ -183,7 +183,7 @@ Obtain Target TCP Speed
     "Description", "Obtain Actual TCP Composite Speed"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): speed [x,y,z,rx,ry,rz]"
 
 Code example
@@ -207,7 +207,7 @@ Obtain Actual TCP Speed
     "Description", "Obtain Actual TCP Speed"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): speed [x,y,z,rx,ry,rz]"
 
 Code example
@@ -231,7 +231,7 @@ Obtain the current tool pose
     "Description", "Obtain the current tool pose"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): tcp_pose=[x,y,z,rx,ry,rz]"
 
 Code example
@@ -255,7 +255,7 @@ Obtain the current tool coordinate system number
     "Description", "Obtain the current tool coordinate system number"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): tool_id:Tool number"
 
 Code example
@@ -279,7 +279,7 @@ Obtain the current workpiece coordinate system number
     "Description", "Obtain the current workpiece coordinate system number"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): wobj_id:Workpiece number"
 
 Code example
@@ -303,7 +303,7 @@ Obtain the current end flange pose
     "Description", "Obtain the current end flange pose"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): flange_pose=[x,y,z,rx,ry,rz]"
 
 Code example
@@ -328,7 +328,7 @@ Inverse kinematics solution
     "Required parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
     - ``desc_pose``:[x,y,z,rx,ry,rz],tool posture,unit[mm][°]"
     "Optional parameter", "- ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration, default to -1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
 
 Code example
@@ -356,7 +356,7 @@ Inverse kinematics solution - Specify reference location
     - ``desc_pos``:[x,y,z,rx,ry,rz]tool posture,unit[mm][°]
     - ``joint_pos_ref``:[j1,j2,j3,j4,j5,j6], joint reference position,unit[°]"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
 
 Code example
@@ -384,7 +384,7 @@ Inverse kinematics solution - whether there is a solution
     - ``desc_pos``:[x,y,z,rx,ry,rz]tool posture, unit[mm][°]
     - ``joint_pos_ref``:[j1,j2,j3,j4,j5,j6],joint reference position, unit[°]"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): result= “True”-with solution,“False”-without solution"
 
 Code example
@@ -410,7 +410,7 @@ Forward kinematics solution
     "Description", "Forward kinematics, joint position solving tool pose"
     "Required parameter", "- ``joint_pos``:[j1,j2,j3,j4,j5,j6]:joint Position,unit[°]"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): desc_pos=[x,y,z,rx,ry,rz]:tool posture,unit[mm][°]"
 
 Code example
@@ -435,7 +435,7 @@ Obtain the current joint torque
     "Description", "Obtain the current joint torque"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success):  errcode =0, joint_torque =[x,y,z,rx,ry,rz]"
 
 Code example
@@ -459,7 +459,7 @@ Obtain the weight of the current load
     "Description", "Obtain the weight of the current load"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): errcode =0, weight unit[kg]"
 
 Code example
@@ -483,7 +483,7 @@ Obtain the centroid of the current load
     "Description", "Obtain the centroid of the current load"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): weight,unit[kg]"
 
 Code example
@@ -507,7 +507,7 @@ Obtain the current tool coordinate system
     "Description", "Obtain the current tool coordinate system"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): tcp_offset=[x,y,z,rx,ry,rz]: Relative pose,unit[mm][°]"
 
 Code example
@@ -531,7 +531,7 @@ Obtain the current workpiece coordinate system
     "Description", "Obtain the current workpiece coordinate system"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): wobj _offset=[x,y,z,rx,ry,rz]:relative pose,unit[mm][°]"
 
 Code example
@@ -555,7 +555,7 @@ Obtain joint soft limit angle
     "Description", "Obtain joint soft limit angle"
     "Required parameter", "Nothing"
     "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): [j1min,j1max,j2min,j2max,j3min,j3max,j4min,j4max,j5min,j5max, j6min, j6max] :axis 1 to axis 6 joint negative limit and positive limit,unit[mm]"
 
 Code example
@@ -579,7 +579,7 @@ Get system time
     "Description", "Get system time"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success):  t_ms unit[ms] "
 
 Code example
@@ -603,7 +603,7 @@ Obtain the current joint configuration of the robot
     "Description", "Obtain the current joint configuration of the robot"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): config range[0~7]"
 
 Code example
@@ -625,9 +625,9 @@ Get default speed
 
     "Prototype", "``GetDefaultTransVel()``"
     "Description", "Obtain default speed"
-    "Parameter", "Nothing"
+    "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): vel:unit[mm/s]"
 
 Code example
@@ -651,7 +651,7 @@ Check if the robot motion is complete
     "Description", "Check if the robot motion is complete"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): state 0-incomplete,1-complete"
 
 Code example
@@ -675,7 +675,7 @@ Obtain the robot error code
     "Description", "Obtain the robot error code"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): [maincode,subcode]"
 
 Code example
@@ -699,7 +699,7 @@ Obtain the robot teaching point data
     "Description", "Obtain the robot teaching point data"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): [x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,tool, wobj,speed,acc,e1,e2,e3,e4]"
 
 Code example
@@ -724,7 +724,7 @@ Obtain SSH Keygen
     "Description", "Obtain SSH Keygen"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): keygen"
 
 Code example
@@ -748,7 +748,7 @@ Code example
     "Description", "Calculates the MD5 value of the file in the specified path"
     "Required parameter", "``file_path``:The traj folder path is /fruser/traj/, such as /fruser/traj/trajHelix_aima_1.txt."
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): MD5"
 
 Code example
@@ -774,7 +774,7 @@ Obtain robot version information
     "Description", "Obtain robot version information"
     "Required parameter", "Null"
     "Optional parameter", "Nothing"
-    "Return value", "- Success -0  Failed -errcode
+    "Return value", "- Success -0 , Failed -errcode
     - Return:（if success）robotModel, webVersion, controllerVersion"
 
 Code example
@@ -800,7 +800,7 @@ Obtain robot hardware version information
     "Description", "Obtain robot hardware version information"
     "Required parameter", "Null"
     "Optional parameter", "Nothing"
-    "Return value", "- Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return:（if success）ctrlBoxBoardVersion, driver1Version, driver2Version , driver3Version, driver4Version, driver5Version, driver6Version, endBoardVersion"
 
 Code example
@@ -826,7 +826,7 @@ Obtain robot firmware version information
     "Description", "Obtain robot firmware version information"
     "Required parameter", "Null"
     "Optional parameter", "Nothing"
-    "Return value", "- Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return:（if success）ctrlBoxBoardVersion, driver1Version, driver2Version , driver3Version, driver4Version, driver5Version, driver6Version, endBoardVersion"
 
 Code example
@@ -852,7 +852,7 @@ Obtain DH compensation parameters
     "Description", "Obtain DH compensation parameters"
     "Required parameter", "Null"
     "Optional parameter", "Nothing"
-    "Return value", "- Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return:(if success) dhCompensation Robot DH parameter compensation value (mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]"
 
 Code example

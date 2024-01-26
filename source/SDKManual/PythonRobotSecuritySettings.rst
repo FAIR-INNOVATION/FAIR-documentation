@@ -310,9 +310,10 @@ Point table switch
 
     "Prototype", "``PointTableSwitch(point_table_name)``"
     "Description", "Point table switch"
-    "Required parameter", "- ``point_table_name``：When the point table is empty, that is, "", the lua program is updated to the original program that did not apply the point table"
+    "Required parameter", "- ``point_table_name``: When the point table is empty, that is, an empty string, the lua program is updated to the original program that did not apply the point table"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Return value", "- Errcode: Success -0 , Failed -errcode
+    - Return errorStr"
 
 Code example
 ------------
@@ -336,10 +337,11 @@ Point table update Lua
 
     "Prototype", "``PointTableUpdateLua(point_table_name, lua_file_name)``"
     "Description", "Point table update Lua"
-    "Required parameter", "- ``point_table_name``：When the point table is empty, that is, "", the lua program is updated to the original program that did not apply the point table
+    "Required parameter", "- ``point_table_name``: When the point table is empty, that is, an empty string, the lua program is updated to the original program that did not apply the point table
     - ``lua_file_name``: Name of the lua file to update"
     "Optional parameter", "Nothing" 
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Return value", "- Errcode: Success -0 , Failed -errcode
+    - Return errorStr"
 
 Code example
 ------------

@@ -14,7 +14,7 @@ Obtain gripper configuration
     "Description", "Obtain gripper configuration"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success): [number,company,device,softversion]
     - number: Gripper number, range[1]
     - company:Claw manufacturers, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing
@@ -32,7 +32,7 @@ Activate gripper
     "Required parameter", "- ``index``:Claw number;
     - ``action``: 0-reset, 1-activate"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Control gripper
 ++++++++++++++++++++
@@ -49,7 +49,7 @@ Control gripper
     - ``maxtime``:Maximum waiting time, range[0~30000],unit[ms];
     - ``block``:0-blocking, 1-non blocking"
     "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Obtain gripper movement status
 ++++++++++++++++++++++++++++++++++
@@ -61,7 +61,7 @@ Obtain gripper movement status
     "Description", "Obtain gripper movement status"
     "Required parameter", "Nothing"
     "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcode
+    "Return value", "- Errcode: Success -0 , Failed -errcode
     - Return(if success):status:0-incomplete movement,1-exercise "
 
 Configure gripper
@@ -76,7 +76,7 @@ Configure gripper
     - ``device``:Equipment number: Robotiq(0-2F-85 series), Huiling(0-NK series, 1-Z-EFG-100), Tianji(0-TEG-110), Dahuan(0-PGI-140), Zhixing(0-CTPM2F20)"
     "Optional parameter", "- ``softversion``::Software version number, temporarily not used, defaults to 0;
     - ``bus``:Device mounted terminal bus position, temporarily not used, defaults to 0"
-    "Return value", "Errcode: Success -0  Failed -errcod"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
 --------------
