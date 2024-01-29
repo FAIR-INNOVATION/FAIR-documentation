@@ -49,4 +49,4 @@ Ontology & Dimensional Drawings
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-V3.6.8-Release-240105 <https://drive.google.com/file/d/172LGVWknnlbiHJ5cXko-zi3ExqCVfDiE/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-V3.6.9-Release-240129 <https://drive.google.com/file/d/1y66Uk5MELuQVhmu1Eb-v8brTB5jKSHCK/view?usp=sharing>`
