@@ -3513,7 +3513,7 @@ Robot model table
    :align: center
 
    * - **Numerical value**
-     - **Model (Main - Major - Minor)**
+     - **Model (Main model - Major - Minor)**
      
    * - 0
      - Not configured
