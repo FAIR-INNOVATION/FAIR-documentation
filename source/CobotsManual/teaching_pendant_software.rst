@@ -3499,12 +3499,10 @@ There are two ways to set parameters: slider dragging and manual input.
 Robot model configuration
 --------------------------------------
 
-.. note:: 
+.. important:: 
    If you need to modify the robot model, please contact our technical engineers and proceed under guidance.
 
 After logging into the collaborative robot console Web, select the corresponding model to modify in the "System Settings" -> "Maintenance Mode" -> "Controller Compatibility" configuration item. For the robot model, refer to the table below.
-
-You need to enter a password to enter maintenance mode. You also need to enter a password to configure the robot model, which is the same as the password to enter maintenance mode.
 
 Robot model table
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3601,5 +3599,5 @@ Robot model table
    * - ...
      - Reserved
 
-.. important:: 
+.. note:: 
    Among them, 10 major version numbers (1-10) are reserved, and 10 minor version numbers (1-10) are reserved.
