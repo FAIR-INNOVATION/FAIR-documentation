@@ -3495,3 +3495,111 @@ There are two ways to set parameters: slider dragging and manual input.
    :align: center
 
 .. centered:: Figure 4.10-14 Schematic diagram of parameter range configuration
+
+Robot model configuration
+--------------------------------------
+
+.. note:: 
+   If you need to modify the robot model, please contact our technical engineers and proceed under guidance.
+
+After logging into the collaborative robot console Web, select the corresponding model to modify in the "System Settings" -> "Maintenance Mode" -> "Controller Compatibility" configuration item. For the robot model, refer to the table below.
+
+You need to enter a password to enter maintenance mode. You also need to enter a password to configure the robot model, which is the same as the password to enter maintenance mode.
+
+Robot model table
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 0
+   :align: center
+
+   * - **Numerical value**
+     - **Model (Main - Major - Minor)**
+     
+   * - 0
+     - Not configured
+   
+   * - 1
+     - FR3-V1-000 (V5.0)
+   
+   * - 2
+     - FR3-V1-001 (V6.0)
+   
+   * - ...
+     - Reserved
+   
+   * - 101
+     - FR5-V1-000
+   
+   * - 102
+     - FR5-V1-001 (V5.0)
+   
+   * - 103
+     - FR5-V1-002 (V6.0)
+   
+   * - ...
+     - Reserved
+   
+   * - 201
+     - FR10-V1-000 (V5.0)
+   
+   * - 202
+     - FR10-V1-001 (V6.0)
+   
+   * - ...
+     - Reserved
+   
+   * - 301
+     - FR16-V1-000 (V5.0)
+   
+   * - 302
+     - FR16-V1-001 (V6.0)
+   
+   * - ...
+     - Reserved
+   
+   * - 401
+     - FR20-V1-000 (V5.0)
+   
+   * - 402
+     - FR20-V1-001 (V6.0)
+   
+   * - ...
+     - Reserved
+   
+   * - 501
+     - ART3-V1-000
+   
+   * - ...
+     - Reserved
+   
+   * - 601
+     - ART5-V1-000
+   
+   * - ...
+     - Reserved
+   
+   * - 802
+     - FRCustom(8)-V1-001(FR5WM)
+   
+   * - ...
+     - Reserved
+   
+   * - 901
+     - FRCustom(9)-V1-001(FR3MT)
+   
+   * - 902
+     - FRCustom(9)-V1-001(FR10YD)
+   
+   * - ...
+     - Reserved
+   
+   * - 1001
+     - FR30-V1-001(V6.0)
+   
+   * - ...
+     - Reserved
+
+.. important:: 
+   Among them, 10 major version numbers (1-10) are reserved, and 10 minor version numbers (1-10) are reserved.
