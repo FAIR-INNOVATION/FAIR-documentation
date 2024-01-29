@@ -3504,8 +3504,7 @@ Robot model configuration
 
 After logging into the collaborative robot console Web, select the corresponding model to modify in the "System Settings" -> "Maintenance Mode" -> "Controller Compatibility" configuration item. For the robot model, refer to the table below.
 
-Robot model table
-~~~~~~~~~~~~~~~~~~~~~~~~
+The robot model table is as follows:
 
 .. list-table::
    :widths: 30 70
