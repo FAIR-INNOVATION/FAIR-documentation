@@ -2073,6 +2073,282 @@ This command realizes the robot seam tracking and uses the deviation detection o
 
 .. centered:: Figure 3.7-8-7-3 Weld-Trc command interface-left and right compensation parameters
 
+Weld-Trc Operation
+++++++++++++++++++++
+
+Welding machine model and setting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. centered:: Table 4.1-2 Verified welding machine model
+
+.. list-table::
+   :widths: 70
+   :header-rows: 0
+   :align: center
+
+   * - **Verified welding machine model**
+
+   * - MEGMEET ArtsenII CM350
+  
+.. centered:: Table 4.1-3 Welding machine function setting
+
+.. list-table::
+   :widths: 100 100
+   :header-rows: 0
+   :align: center
+
+   * - **Function number**
+     - **Set the parameters**
+
+   * - F18
+     - 20
+
+   * - F19
+     - 56
+
+PLC model and settings
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. centered:: Table 4.1-4 Verified PLC models
+
+.. list-table::
+   :widths: 70
+   :header-rows: 0
+   :align: center
+
+   * - **Verified PLC models**
+
+   * - INOVANCE Easy521
+  
+.. centered:: Table 4.1-5 PLC key settings
+
+.. list-table::
+   :widths: 70 70
+   :header-rows: 0
+   :align: center
+
+   * - **Settings**
+     - **Set the contents**
+
+   * - Communication protocols
+     - CANOPEN
+
+   * - Feedback current sampling source
+     - Feedback data from welding machine
+
+   * - Synchronization period
+     - 2ms
+
+:download:`Annex:PLC Program <../_static/_doc/MEGMEET PLC PROGRAME.zip>`
+
+Arc tracking function
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**1）An introduction to the relationship between setting current and voltage and function tracking performance**
+
+Setting the welding current voltage and feedback welding current signal,blow:
+
+.. image:: teaching_pendant_software/273.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-8-7-4 Short-circuit transition - > half-jet transition- > jet transition
+
+.. note:: Set higher current and voltage value, feedback smaller burr amplitude of welding current, and more stable the welding process, and the more accurate the weld tracking. 
+
+**2）Introduction to the parameters of the function interface**
+
+.. centered:: Table 4.1-6 Arc tracking up-down compensation module
+
+.. list-table::
+   :widths: 70 70 70
+   :header-rows: 0
+   :align: center
+
+   * - **The name of the parameter**
+     - **Meaning**
+     - **Parameter description**
+
+   * - Arc tracking lag time
+     - The time for the feedback current to lag
+     - The default is 0ms, do not adjust it
+
+   * - Compensation for up-down deviations
+     - Up-down compensating switches
+     - You can choose to "on" or "off"
+
+   * - Up-down adjustment coefficients
+     - The coefficient of the relationship between the current and the compensation distance (adjustment sensitivity)
+     - The welding tends to be in a short-circuit transition state, and the current signal-to-noise ratio gradually decreases, so it is recommended to reduce the sensitivity
+
+   * - Up-down start compensating period
+     - The fastest periods to start the up-down compensation
+     - Associated with the swing frequency, it is better to open when the current tends to be stable for 3~4s after arcing. If the oscillation frequency is 1 Hz, the parameter can be 4, if the frequency is 2 Hz, the parameter can be 8, and so on
+
+   * - The maximum distance of up-down compensation each period
+     - The maximum distance of compensation per up-down compensation period
+     - According to the welding scene setting, the faster the weave frequency, the smaller the compensation distance
+
+   * - The maximum distance of compensation for the up-down totals
+     - The maximum cumulative distance of compensation for a single complete welding process
+     - According to the welding scene setting, the larger the weld deviation, the larger the setting
+
+   * - Up-down coordinate system selection
+     - The coordinate system in which the compensation value is compensated
+     - If there is a welding weave, select "Weave", otherwise select "Tool" or "Frame"
+
+   * - Up-down reference current setting method
+     - Selection of the reference current acquisition method
+     - You can choose "Feedback" by reading the feedback current, or "Constant" by filling in the current value directly
+
+   * - The up-down reference current samples start counting
+     - The number of periods for which the reference current is harvested with a delay
+     - Associated with the weave frequency, it is better to open when the current tends to be stable for 3~4s after arcing. If the weave frequency is 1 Hz, the parameter can be 4, if the frequency is 2 Hz, the parameter can be 8, and so on
+
+   * - Up-down reference current sampling counts
+     - Reference current feedback mode, the statistical period of collecting the reference current
+     - Default 1 CYC
+
+   * - Up-down reference currents
+     - Reference current constant mode, reference current value
+     - It can be filled in manually to achieve the desired compensation height
+
+.. centered:: Table 4.1-7 Arc tracking left-right compensation module
+
+.. list-table::
+   :widths: 70 70 70
+   :header-rows: 0
+   :align: center
+
+   * - **The name of the parameter**
+     - **Meaning**
+     - **Parameter description**
+
+   * - Arc tracking lag time
+     - The time for the feedback current to lag
+     - The default is 0ms, do not adjust it
+
+   * - Compensation for left-right deviations
+     - Left-right compensation switches
+     - You can choose to "On" or "Off"
+
+   * - Left-right compensation coefficients
+     - The coefficient of the relationship between the current and the compensation distance (adjustment sensitivity)
+     - The welding tends to be in a short-circuit transition state, and the current signal-to-noise ratio gradually decreases, so it is recommended to reduce the sensitivity
+
+   * - Left-right compensation start counting
+     - The fastest count to start left-right compensation function
+     - Associated with the weave frequency, it is better to start when the current tends to be stable for 3~4s after arcing. If the weave frequency is 1 Hz, the parameter can be 4, if the frequency is 2 Hz, the parameter can be 8, and so on
+
+   * - Left-right the maximum distance of compensation each time
+     - The maximum distance of compensation per compensation cycle
+     - According to the welding scene setting, the faster the swing frequency, the smaller the compensation distance
+
+   * - The maximum distance of compensation for the left -right totals
+     - The maximum cumulative distance of compensation for a single complete welding process
+     - According to the welding scene setting, the larger the weld deviation, the larger the setting
+     
+**3）Scope of application**
+
+.. centered:: Table 4.1-8 Up-down compensation On, Left-right compensation Off
+
+.. list-table::
+   :widths: 70 70
+   :header-rows: 0
+   :align: center
+
+   * - **Key parameters**
+     - **Parameter range**
+
+   * - Weave frequency Hz
+     - 0 (without welding swing), 0.5 to 2 (with weld swing)
+
+   * - Weave amplitude mm
+     - 0 (without welding swing), 3 through 7 (with welding swing)
+
+   * - Set the voltage V
+     - >17
+
+   * - Set the current A
+     - >160
+  
+.. centered:: Table 4.1-9 Up-down compensation Off, Left-right compensation On
+
+.. list-table::
+   :widths: 70 70
+   :header-rows: 0
+   :align: center
+
+   * - **Key parameters**
+     - **Parameter range**
+
+   * - Weave frequency Hz
+     - 0.5 to 2
+
+   * - Weave amplitude mm
+     - 3 to 7
+
+   * - Set the voltage V
+     - >17
+
+   * - Set the current A
+     - >160
+  
+.. centered:: Table 4.1-10 Up-down compensation On, Left-right compensation On
+
+.. list-table::
+   :widths: 70 70
+   :header-rows: 0
+   :align: center
+
+   * - **Key parameters**
+     - **Parameter range**
+
+   * - Weave frequency Hz
+     - 0.5 to 2
+
+   * - Weave amplitude mm
+     - 3 to 7
+
+   * - Set the voltage V
+     - >19
+
+   * - Set the current A
+     - >210
+
+**4）Precautions**
+
+1) The left-right compensated arc tracking function can only be adapted to symmetrical triangle or sine weave based on line trajectory.
+2) The starting position of the welding to be able using the compensation function must be accurately above the weld (the axis of the welding gun is in the center of the fillet weld), and the welding gun should not be too close to the seam, otherwise there is a risk of hitting the welding gun.
+
+.. image:: teaching_pendant_software/274.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.7-8-7-5 The welding gun is above the seam
+
+3) If the deviation between the set trajectory and the seam is larger, the maximum compensation distance each time and the total maximum compensation distance should be larger too.
+4) The deviation between the set trajectory and the end point of the weld should not be larger than 100mm/m, and too large the deviation may cause the welding wire or even the welding gun to hit the workpiece, so that the welding position deviates from the preset trajectory (the weave is not in place), resulting in the arc tracking function can not work normally.
+5) Before the program starts the WeaveStart command, you need to add the ARCStart arc start command to the program.
+6) About the relationship between the arc tracking compensation coordinate and the adjustment coefficient value positive or negative:
+
+.. image:: teaching_pendant_software/275.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-8-7-6 Welding scene
+
+When the up-down compensation direction of the weld is consistent with the positive direction of the Z-axis of the selected coordinate system, the adjustment coefficient is a positive value.
+
+Case: As shown in Figure 4.7-8-7-6, if the "base" or "tool" is selected in the up-down compensation coordinate system, when the workpiece is in the displayed position, the welding gun gradually moves upwards away from the surface of the workpiece when it is not compensated, and it will compensate downward (base coordinate system - Z direction), then the symbol of the up-down compensation coefficients should be a negative sign.
+
+.. important:: 
+   Note that when the "weave" coordinate system is selected, the Z-axis of the weave coordinate system and the Z-axis of the tool coordinate system are inverted, and the compensation coefficient should be positive if the above case is used.
+   
+   The coefficient of the left-right compensation of the weld does not need to be changed, and it is a positive value by default.
+
+7) If a small set current and voltage is selected for welding, the compensate coefficient of arc tracking should be reduced accordingly to reduce the instability compensation caused by the burr of the feedback current.
+
 Adjust command
 ++++++++++++++++
 
