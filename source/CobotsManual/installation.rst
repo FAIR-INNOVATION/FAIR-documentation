@@ -717,7 +717,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 
   .. centered:: Figure 2.4-10 FR10&FR16 Model Collaborative Robot High Demand Mounting Base
 
-Installation requirements for FR20 robot
+Installation requirements for FR20&FR30 robot
 ++++++++++++++++++++++++++++++++++++++++++++++
 
 When installing the robot on the mounting base, use six M10 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 45Nm.Suggest using two on the mounting base φ 8mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
@@ -727,17 +727,17 @@ When installing the robot on the mounting base, use six M10 bolts with a strengt
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-11 FR20 model collaborative robot installation size
+.. centered:: Figure 2.4-11 FR20&FR30 model collaborative robot installation size
 
 .. important:: 
-  Due to the large self weight and running inertia of the FR20 robot, it is recommended to directly fix it on the ground for use. The recommended base is as follows.
+  Because the FR20 and FR30 robots have a large weight and running inertia, it is recommended to be directly fixed on the ground. The recommended base is as follows.
 
   .. figure:: installation/066.png
     :align: center
     :width: 4in
     :class: figure-border
 
-  .. centered:: Figure 2.4-12 FR20 model collaborative robot low requirement mounting base
+  .. centered:: Figure 2.4-12 FR20&FR30 model collaborative robot low requirement mounting base
 
 Tool end installation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -756,7 +756,7 @@ There are four M6 thread holes in the robot tool, which can be used to connect t
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-14 FR20 model robot end flange drawing
+.. centered:: Figure 2.4-14 FR20&FR30 model robot end flange drawing
 
 .. important:: 
 	- Make sure the tools are installed correctly and safely.
@@ -825,6 +825,12 @@ The maximum allowable valid load of the robotic arm depends on the center of gra
 	:width: 6in
 
 .. centered:: Figure 2.4-19 FR20 model collaborative robot load curve
+
+.. figure:: installation/069.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 2.4-20 FR30 model collaborative robot load curve
 
 
 Control connection

@@ -69,6 +69,13 @@ Control cabinet installation space:
 
 .. centered:: Figure 1.1-5 FR20 model collaboration robot movement range
 
+.. figure:: installation/068.png
+	:align: center
+	:width: 6in
+	:class: figure-border
+
+.. centered:: Figure 1.1-6 FR30 model collaboration robot movement range
+
 Robot coordinate system
 ------------------------------------
 
@@ -77,14 +84,14 @@ Robot coordinate system
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-6 Robot DH parameter coordinate system
+.. centered:: Figure 1.1-7 Robot DH parameter coordinate system
 
 .. figure:: installation/024.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-7 French -endframe coordinate system
+.. centered:: Figure 1.1-8 French -endframe coordinate system
 
 Robot Denavit–Hartenberg parameters
 ------------------------------------
@@ -96,7 +103,7 @@ Denavit–Hartenberg parameters are used to calculate kinematics and dynamics of
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-8 FR series collaborative robots Denavit–Hartenberg parameters
+.. centered:: Figure 1.1-9 FR series collaborative robots Denavit–Hartenberg parameters
 
 The Denavit–Hartenberg parameters of FR series collaborative robots are shown as below.
 
@@ -440,6 +447,76 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - link5
       - 4.64
       - [-0.23, 2.28, 18.42]
+    
+    * - Joint6
+      - 0
+      - 0
+      - 120
+      - 0
+      - link6
+      - 0.6
+      - [-2.11, -1.96, -20.38]
+
+.. centered:: Table 1.1-7 FR30 model collaboration robot Denavit–Hartenberg parameter
+
+.. list-table::
+    :widths: 70 50 50 50 50 70 50 120
+    :header-rows: 0
+    :class: no-padding sheet-center
+
+    * - **Kinematics**
+      - **theta [rad]**
+      - **a [m]**
+      - **d [m]**
+      - **alpha [rad]**
+      - **Dynamics**
+      - **Mass [kg]**
+      - **Center of Mass [m]**
+
+    * - Joint1
+      - 0
+      - 0
+      - 215
+      - π/2
+      - link1
+      - 20.64
+      - [-0.22, -37.39, 5.59]
+    
+    * - Joint2
+      - 0
+      - -700
+      - 0
+      - 0
+      - link2
+      - 36.37
+      - [440.73, 0.05, 198.7]
+
+    * - Joint3
+      - 0
+      - -536
+      - 0
+      - 0
+      - link3
+      - 8.41
+      - [185.64, 0.25, 45.82]
+    
+    * - Joint4
+      - 0
+      - 0
+      - 166
+      - π/2
+      - link4
+      - 4.64
+      - [0.23, -2.29, 18.60]
+    
+    * - Joint5
+      - 0
+      - 0
+      - 138
+      - -π/2
+      - link5
+      - 4.64
+      - [-0.23, 2.29, 18.60]
     
     * - Joint6
       - 0

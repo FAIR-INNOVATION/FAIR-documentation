@@ -4,11 +4,11 @@
 
 Brochure
 --------------
-    :download:`FAIR INNOVATION Profile <_static/_doc/FAIR INNOVATION Profile.pdf>`
+    :download:`FAIRINO Product Manual <_static/_doc/FAIRINO Product Manual.pdf>`
 
 Qualification Certification
 ---------------------------------
-    :download:`FAIR INNOVATION CE Certificate <_static/_doc/FAIR INNOVATION CE Certificate.pdf>`
+    :download:`FAIRINO CE Certificate <_static/_doc/FAIRINO CE Certificate.pdf>`
 
 .. Ecological Accessories
 .. ---------------------------
@@ -40,6 +40,8 @@ Ontology & Dimensional Drawings
     :download:`FR16 Drawings <_static/_doc/FR16 Drawings.zip>`
 
     :download:`FR20 Drawings <_static/_doc/FR20 Drawings.zip>`
+
+    :download:`FR30 Drawings <_static/_doc/FR30 Drawings.zip>`
 
 3D Models
 ---------------------------------

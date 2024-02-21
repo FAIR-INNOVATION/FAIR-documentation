@@ -48,6 +48,11 @@ When the robot has high running precision requirements, be sure to add pins to p
      - ≥45Nm
      - φ8mm
 
+   * - FR30
+     - 6 pieces of M10
+     - ≥45Nm
+     - φ8mm
+
 .. important:: 
    It is recommended that the robot mounting base meet the following requirements to ensure that the robot is installed firmly and stably:
 

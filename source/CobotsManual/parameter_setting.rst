@@ -45,6 +45,8 @@ When configuring the end load, please enter the mass of the end tool used and th
    
    - FR20：20kg
 
+   - FR30：30kg
+
    The center of mass coordinate setting range is 0-1000, unit mm.
 
 .. image:: teaching_pendant_software/044.png
