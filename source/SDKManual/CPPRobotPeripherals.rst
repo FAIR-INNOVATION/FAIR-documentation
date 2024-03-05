@@ -587,7 +587,7 @@ Segment weld start
 	* @param [in] isWeave Weave or not
 	* @param [in] weaveNum Weave welding parameter configuration number
 	* @param [in] tool tool number
-	* @param [in] user Workpiece coordinate number, range [1~15]
+	* @param [in] user Workpiece coordinate number, range [0~14]
 	* @param [in] vel Percentage of speed [0~100]
 	* @param [in] acc Acceleration percentage, range[0~100]
 	* @param [in] ovl Velocity scaling factor, range[0~100]
