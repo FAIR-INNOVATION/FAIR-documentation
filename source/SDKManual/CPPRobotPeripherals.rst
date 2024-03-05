@@ -185,23 +185,35 @@ Calculate retreat point-visual
 
 Code example
 ++++++++++++++++
+
+.. versionchanged:: C++SDK-v2.1.2
+
 .. code-block:: c++
     :linenos:
 
+    #include "libfairino/robot.h"
+
+    //If using Windows, include the following header files
+    #include <string.h>
+    #include <windows.h>
+    //If using Linux, include the following header files
+    /*
     #include <cstdlib>
     #include <iostream>
     #include <stdio.h>
     #include <cstring>
     #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
+    */
+
+    #include <chrono>
+    #include <thread>
 
     using namespace std;
 
     int main(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
+        FRRobot robot; 
+        robot.RPC("192.168.58.2"); 
 
         int company = 4;
         int device = 0;
@@ -211,25 +223,80 @@ Code example
         int act = 0;
         int max_time = 30000;
         uint8_t block = 0;
-        uint8_t status, fault;
+        uint8_t status;
+        uint16_t fault;
+        uint16_t active_status = 0;
+        uint8_t current_pos = 0;
+        int8_t current = 0;
+        int voltage = 0;
+        int temp = 0;
+        int8_t speed = 0;
 
         robot.SetGripperConfig(company, device, softversion, bus);
-        sleep(1);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         robot.GetGripperConfig(&company, &device, &softversion, &bus);
         printf("gripper config:%d,%d,%d,%d\n", company, device, softversion, bus);
 
         robot.ActGripper(index, act);
-        sleep(1);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         act = 1;
         robot.ActGripper(index, act);
-        sleep(2);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
         robot.MoveGripper(index, 100, 50, 50, max_time, block);
-        sleep(3);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         robot.MoveGripper(index, 0, 50, 0, max_time, block);
 
         robot.GetGripperMotionDone(&fault, &status);
         printf("motion status:%u,%u\n", fault, status);
+
+        robot.GetGripperActivateStatus(&fault, &active_status);
+        printf("gripper active fault is: %u, status is: %u\n", fault, active_status);
+
+        robot.GetGripperCurPosition(&fault, &current_pos);
+        printf("fault is:%u, current position is: %u\n", fault, current_pos);
+
+        robot.GetGripperCurCurrent(&fault, &current);
+        printf("fault is:%u, current current is: %d\n", fault, current);
+
+        robot.GetGripperVoltage(&fault, &voltage);
+        printf("fault is:%u, current voltage is: %d \n", fault, voltage);
+
+        robot.GetGripperTemp(&fault, &temp);
+        printf("fault is:%u, current temperature is: %d\n", fault, temp);
+
+        robot.GetGripperCurSpeed(&fault, &speed);
+        printf("fault is:%u, current speed is: %d\n", fault, speed);
+
+        int retval = 0;
+        DescPose prepick_pose;
+        DescPose postpick_pose;
+        memset(&prepick_pose, 0, sizeof(DescPose));
+        memset(&postpick_pose, 0, sizeof(DescPose));
+
+        DescPose desc_p1;
+        desc_p1.tran.x = -351.553;
+        desc_p1.tran.y = 87.913;
+        desc_p1.tran.z = 354.175;
+        desc_p1.rpy.rx = -179.680;
+        desc_p1.rpy.ry = -0.133;
+        desc_p1.rpy.rz = 2.472;
+
+        DescPose desc_p2;
+        desc_p2.tran.x = -351.535;
+        desc_p2.tran.y = -247.222;
+        desc_p2.tran.z = 354.173;
+        desc_p2.rpy.rx = -179.680;
+        desc_p2.rpy.ry = -0.137;
+        desc_p2.rpy.rz = 2.473;
+
+        retval = robot.ComputePrePick(&desc_p1, 10, 0, &prepick_pose);
+        printf("ComputePrePick retval is: %d\n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", prepick_pose.tran.x, prepick_pose.tran.y, prepick_pose.tran.z, prepick_pose.rpy.rx, prepick_pose.rpy.ry, prepick_pose.rpy.rz);
+
+        retval = robot.ComputePostPick(&desc_p2, -10, 0, &postpick_pose);
+        printf("ComputePostPick retval is: %d\n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", postpick_pose.tran.x, postpick_pose.tran.y, postpick_pose.tran.z, postpick_pose.rpy.rx, postpick_pose.rpy.ry, postpick_pose.rpy.rz);
 
         return 0;
     }
@@ -514,7 +581,7 @@ Segment weld start
 	* @param [in] endJPos Ending point joint position
 	* @param [in] weldLength Weld length(mm)
 	* @param [in] noWeldLength Length of unwelded section(mm)
-	* @param [in] weldIOType 0-control box IO； 1-extend IO(0-控制箱IO；1-扩展IO)
+	* @param [in] weldIOType 0-control box IO； 1-extend IO
 	* @param [in] arcNum Welder configuration file number
 	* @param [in] weldTimeout Arcing timeout time
 	* @param [in] isWeave Weave or not
@@ -536,23 +603,24 @@ Segment weld start
 Code example
 ++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionchanged:: C++SDK-v2.1.2
 
 .. code-block:: c++
     :linenos:
 
     #include "libfairino/robot.h"
-    #ifdef WINDOWS_OPTION
+
+    //If using Windows, include the following header files
     #include <string.h>
     #include <windows.h>
-    #elif LINUX_OPTION
+    //If using Linux, include the following header files
+    /*
     #include <cstdlib>
     #include <iostream>
     #include <stdio.h>
     #include <cstring>
     #include <unistd.h>
-    #endif
-
+    */
     #include <chrono>
     #include <thread>
 
@@ -560,9 +628,8 @@ Code example
 
     int main(void)
     {
-        printf("start to debug\n");
-        FRRobot robot;            
-        robot.RPC("192.168.58.2"); 
+        FRRobot robot;
+        robot.RPC("192.168.58.2");
 
         double current_min = 0;
         double current_max = 0;
@@ -630,7 +697,7 @@ Code example
 
         retval = robot.WeldingSetVoltage(1, 10, 0);
         cout << "WeldingSetVoltage retval is: " << retval << endl;
-        
+
         retval = robot.WeaveSetPara(0, 0, 2.0, 0, 10, 0, 0, 0, 0);
         cout << "retval is: " << retval << endl;
 
@@ -654,6 +721,70 @@ Code example
 
         retval = robot.WeaveEnd(0);
         cout << "retval is: " << retval << endl;
-        
+
+        retval = 0;
+        retval = robot.SetForwardWireFeed(1, 1);
+        cout << "SetForwardWireFeed retval is: " << retval << endl;
+
+        this_thread::sleep_for(chrono::seconds(3));
+
+        retval = robot.SetForwardWireFeed(1, 0);
+        cout << "SetForwardWireFeed retval is: " << retval << endl;
+
+        retval = robot.SetReverseWireFeed(1, 1);
+        cout << "SetReverseWireFeed retval is: " << retval << endl;
+
+        this_thread::sleep_for(chrono::seconds(3));
+
+        retval = robot.SetReverseWireFeed(1, 0);
+        cout << "SetReverseWireFeed retval is: " << retval << endl;
+
+        retval = robot.SetAspirated(1, 1);
+        cout << "SetAspirated retval " << retval << endl;
+
+        this_thread::sleep_for(chrono::seconds(2));
+
+        retval = robot.SetAspirated(1, 0);
+        cout << "SetAspirated retval " << retval << endl;
+
+        /* All coordinate points are subject to actual working conditions. */
+        start_descpose.rpy.rx = 7.178;
+        start_descpose.rpy.ry = -0.809;
+        start_descpose.rpy.rz = -133.134;
+        start_descpose.tran.x = -135.56;
+        start_descpose.tran.y = 373.448;
+        start_descpose.tran.z = 36.767;
+
+        start_jointpose.jPos[0] = -70.228;
+        start_jointpose.jPos[1] = -130.911;
+        start_jointpose.jPos[2] = 134.147;
+        start_jointpose.jPos[3] = -83.379;
+        start_jointpose.jPos[4] = -95.656;
+        start_jointpose.jPos[5] = 27.74;
+
+        end_descpose.rpy.rx = -4.586;
+        end_descpose.rpy.ry = -10.926;
+        end_descpose.rpy.rz = -124.298;
+        end_descpose.tran.x = -380.207;
+        end_descpose.tran.y = 371.358;
+        end_descpose.tran.z = 55.898;
+
+        end_jointpose.jPos[0] = -50.247;
+        end_jointpose.jPos[1] = -113.273;
+        end_jointpose.jPos[2] = 125.856;
+        end_jointpose.jPos[3] = -100.351;
+        end_jointpose.jPos[4] = -80.702;
+        end_jointpose.jPos[5] = 38.478;
+
+        memset(&ex_axis_pose, 0, sizeof(ExaxisPos));
+        memset(&offset_pose, 0, sizeof(DescPose));
+        retval = 0;
+
+        retval = robot.SegmentWeldStart(&start_descpose, &end_descpose, &start_jointpose, &end_jointpose, 20, 20, 1, 0, 5000, 1, 0, 1, 0, 20, 50, 50, 0, &ex_axis_pose, 0, 0, &offset_pose);
+        if(0 != retval)
+        {
+            cout << "SegmentWeldStart end " << retval << endl;
+        }
+
         return 0;
     }

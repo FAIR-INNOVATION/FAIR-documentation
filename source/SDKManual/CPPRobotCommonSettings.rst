@@ -84,7 +84,7 @@ Set tool coordinate system
 
     /**
     * @brief  Set tool coordinate system
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @param  [in] type  0- tool coordinates, 1- sensor coordinates
     * @param  [in] install Installation position, 0- robot end, 1- robot outside
@@ -99,7 +99,7 @@ Set the tool coordinate list
 
     /**
     * @brief  Set the tool coordinate list
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @param  [in] type  0- tool coordinates, 1- sensor coordinates
     * @param  [in] install Installation position, 0- robot end, 1- robot outside
@@ -138,7 +138,7 @@ Set the external tool coordinate system
 
     /**
     * @brief  Set the external tool coordinate system
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] etcp  Tool center position relative to end flange center position
     * @param  [in] etool  To be determined
     * @return  Error code
@@ -152,7 +152,7 @@ Set the list of external tool coordinate systems
 
     /**
     * @brief  Set the list of external tool coordinate systems
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] etcp  Tool center position relative to end flange center position
     * @param  [in] etool  To be determined
     * @return  Error code
@@ -190,7 +190,7 @@ Set the workpiece coordinate system
 
     /**
     * @brief  Set the workpiece coordinate system
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @return  Error code
     */    
@@ -203,7 +203,7 @@ Set the list of work coordinate systems
 
     /**
     * @brief  Set the list of work coordinate systems
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @return  Error code
     */    
@@ -369,4 +369,102 @@ Code example
         robot.SetRobotInstallAngle(15.0,25.0);
 
         return 0;
+    }
+
+Code example
++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2
+
+.. code-block:: c++
+    :linenos:
+
+    #include "libfairino/robot.h"
+
+    //If using Windows, include the following header files
+    #include <string.h>
+    #include <windows.h>
+    //If using Linux, include the following header files
+    /*
+    #include <cstdlib>
+    #include <iostream>
+    #include <stdio.h>
+    #include <cstring>
+    #include <unistd.h>
+    */
+    #include <chrono>
+    #include <thread>
+    #include <string>
+    using namespace std;
+
+    int main(void)
+    {
+        FRRobot robot;
+        robot.RPC("192.168.58.2");
+
+        int i;
+        float value;
+        int tool_id, etool_id, user_id;
+        int type;
+        int install;
+        int retval = 0;
+
+        DescTran coord;
+        DescPose t_coord, etcp, etool, w_coord;
+        memset(&coord, 0, sizeof(DescTran));
+        memset(&t_coord, 0, sizeof(DescPose));
+        memset(&etcp, 0, sizeof(DescPose));
+        memset(&etool, 0, sizeof(DescPose));
+        memset(&w_coord, 0, sizeof(DescPose));
+
+        DescPose tool0_pose;
+        memset(&tool0_pose, 0, sizeof(DescPose));
+        printf("SetToolPoint start\n");
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+        for (int i = 1; i < 7; i++)
+        {
+            retval = robot.SetToolPoint(i);
+            printf("SetToolPoint retval is: %d\n", retval);
+        }
+        printf("SetToolPoint end\n");
+
+        retval = robot.ComputeTool(&tool0_pose);
+        printf("ComputeTool retval is: %d\n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", tool0_pose.tran.x, tool0_pose.tran.y, tool0_pose.tran.z, tool0_pose.rpy.rx, tool0_pose.rpy.ry, tool0_pose.rpy.rz);
+
+        DescPose tcp4_0_pose;
+        memset(&tcp4_0_pose, 0, sizeof(DescPose));
+        for (int i = 1; i < 5; i++)
+        {
+            retval = robot.SetTcp4RefPoint(i);
+            printf("SetTcp4RefPoint retval is: %d\n", retval);
+        }
+        retval = robot.ComputeTcp4(&tcp4_0_pose);
+        printf("ComputeTcp4 retval is: %d\n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", tcp4_0_pose.tran.x, tcp4_0_pose.tran.y, tcp4_0_pose.tran.z, tcp4_0_pose.rpy.rx, tcp4_0_pose.rpy.ry, tcp4_0_pose.rpy.rz);
+
+        DescPose extcp_0_pose;
+        memset(&extcp_0_pose, 0, sizeof(DescPose));
+        printf("SetExTCPPoint start\n");
+        for (int i = 1; i < 7; i++)
+        {
+            retval = robot.SetExTCPPoint(i);
+            printf("SetExTCPPoint retval is: %d\n", retval);
+        }
+        printf("SetExTCPPoint end\n");
+
+        retval = robot.ComputeExTCF(&extcp_0_pose);
+        printf("ComputeExTCF retval is: %d\n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", extcp_0_pose.tran.x, extcp_0_pose.tran.y, extcp_0_pose.tran.z, extcp_0_pose.rpy.rx, extcp_0_pose.rpy.ry, extcp_0_pose.rpy.rz);
+
+        DescPose wobj_0_pose;
+        memset(&wobj_0_pose, 0, sizeof(DescPose));
+        for (int i = 1; i < 4; i++)
+        {
+            retval = robot.SetWObjCoordPoint(i);
+            printf("SetWObjCoordPoint retval is: %d\n", retval);
+        }
+        retval = robot.ComputeWObjCoord(0, &wobj_0_pose);
+        printf("ComputeWObjCoord retval is: %d\n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", wobj_0_pose.tran.x, wobj_0_pose.tran.y, wobj_0_pose.tran.z, wobj_0_pose.rpy.rx, wobj_0_pose.rpy.ry, wobj_0_pose.rpy.rz);
     }

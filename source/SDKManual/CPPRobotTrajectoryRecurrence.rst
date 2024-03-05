@@ -4,13 +4,13 @@ Trajectory recurrence
 .. toctree:: 
     :maxdepth: 5
 
-Set track recording parameters
-++++++++++++++++++++++++++++++++
+Set TPD trajectory recording parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set track recording parameters
+    * @brief  Set TPD trajectory recording parameters
     * @param  [in] type  Record data type, 1- joint position
     * @param  [in] name  Track file name
     * @param  [in] period_ms  Data sampling period, fixed value 2ms or 4ms or 8ms
@@ -20,13 +20,13 @@ Set track recording parameters
     */
     errno_t  SetTPDParam(int type, char name[30], int period_ms, uint16_t di_choose, uint16_t do_choose);
 
-Start track recording
+Start TPD track recording
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Start track recording
+    * @brief  Start TPD track recording
     * @param  [in] type  Record data type, 1- joint position
     * @param  [in] name  Track file name
     * @param  [in] period_ms  Data sampling period, fixed value 2ms or 4ms or 8ms
@@ -36,24 +36,24 @@ Start track recording
     */
     errno_t  SetTPDStart(int type, char name[30], int period_ms, uint16_t di_choose, uint16_t do_choose); 
 
-Stop track recording
+Stop TPD track recording
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Stop track recording
+    * @brief  Stop TPD track recording
     * @return  Error code
     */
     errno_t  SetWebTPDStop();
 
-Delete track record
+Delete TPD track record
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Delete track record
+    * @brief  Delete TPD track record
     * @param  [in] name  Track file name
     * @return  Error code
     */   
@@ -100,25 +100,25 @@ Code example
         return 0;
     }
 
-Trajectory preloading
+TPD trajectory preloading
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Trajectory preloading
+    * @brief  TPD trajectory preloading
     * @param  [in] name  Track file name
     * @return  Error code
     */      
     errno_t  LoadTPD(char name[30]);
 
-Trajectory recurrence
+TPD trajectory recurrence
 ++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Trajectory recurrence
+    * @brief  TPD trajectory recurrence
     * @param  [in] name  Track file name
     * @param  [in] blend 0- not smooth, 1- smooth
     * @param  [in] ovl  Speed scaling percentage, range [0~100]
@@ -126,54 +126,7 @@ Trajectory recurrence
     */
     errno_t  MoveTPD(char name[30], uint8_t blend, float ovl);
 
-Code example
-++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
-
-    using namespace std;
-
-    int main(void)
-    {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        char name[30] = "tpd2023";
-        int tool = 1;
-        int user = 0;
-        float vel = 100.0;
-        float acc = 100.0;
-        float ovl = 100.0;
-        float blendT = -1.0;
-        int config = -1;
-        uint8_t blend = 1;
-
-        DescPose desc_pose;
-        memset(&desc_pose, 0, sizeof(DescPose));   
-
-        desc_pose.tran.x = -378.9;
-        desc_pose.tran.y = -340.3;
-        desc_pose.tran.z = 107.2;
-        desc_pose.rpy.rx = 179.4;
-        desc_pose.rpy.ry = -1.3;
-        desc_pose.rpy.rz = 125.0;
-
-        robot.LoadTPD(name);
-        robot.MoveCart(&desc_pose, tool, user, vel, acc, ovl, blendT, config);
-        robot.MoveTPD(name, blend, ovl);
-
-        return 0;
-    }
-
-Get the starting pose of the trajectory
+Get the starting pose of the TPD trajectory
 ++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -184,6 +137,74 @@ Get the starting pose of the trajectory
      * @return  error code
      */     
     errno_t  GetTPDStartPose(char name[30], DescPose *desc_pose);
+
+Code example
+++++++++++++++++++
+
+.. versionchanged:: C++SDK-v2.1.2
+
+.. code-block:: c++
+    :linenos:
+
+    #include "libfairino/robot.h"
+
+    //If using Windows, include the following header files
+    #include <string.h>
+    #include <windows.h>
+    //If using Linux, include the following header files
+    /*
+    #include <cstdlib>
+    #include <iostream>
+    #include <stdio.h>
+    #include <cstring>
+    #include <unistd.h>
+    */
+    #include <chrono>
+    #include <thread>
+    #include <string>
+    using namespace std;
+
+    int main(void)
+    {
+        FRRobot robot; 
+        robot.RPC("192.168.58.2"); 
+
+        char name[30] = "tpd2023";
+        int tool = 0;
+        int user = 0;
+        float vel = 50.0;
+        float acc = 100.0;
+        float ovl = 100.0;
+        float blendT = -1.0;
+        int config = -1;
+        uint8_t blend = 0;
+        int retval = 0;
+
+        DescPose desc_pose;
+        memset(&desc_pose, 0, sizeof(DescPose));
+        DescPose start_pose;
+        memset(&start_pose, 0, sizeof(DescPose));
+
+        desc_pose.tran.x = 358.820099;
+        desc_pose.tran.y = -419.684113;
+        desc_pose.tran.z = 525.055115;
+        desc_pose.rpy.rx = -85.994499;
+        desc_pose.rpy.ry = -28.797600;
+        desc_pose.rpy.rz = -133.960007;
+
+        retval = robot.LoadTPD(name);
+        printf("LoadTPD retval is: %d\n", retval);
+        //robot.MoveCart(&desc_pose, tool, user, vel, acc, ovl, blendT, config);
+        
+        robot.GetTPDStartPose(name, &start_pose);
+        printf("start pose, xyz is: %f %f %f. rpy is: %f %f %f \n", start_pose.tran.x, start_pose.tran.y, start_pose.tran.z, start_pose.rpy.rx, start_pose.rpy.ry, start_pose.rpy.rz);
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        
+        retval = robot.MoveTPD(name, blend, ovl);
+        printf("MoveTPD retval is: %d\n", retval);
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        return 0;
+    }
 
 Trajectory preprocessing
 ++++++++++++++++++++++++++++
@@ -328,3 +349,85 @@ Set the torque around the z-axis during trajectory operation
      * @return  error code
      */     
     errno_t  SetTrajectoryJTorqueTz(double tz);
+
+Code example
+++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2
+
+.. code-block:: c++
+    :linenos:
+
+    #include "libfairino/robot.h"
+
+    //If using Windows, include the following header files
+    #include <string.h>
+    #include <windows.h>
+    //If using Linux, include the following header files
+    /*
+    #include <cstdlib>
+    #include <iostream>
+    #include <stdio.h>
+    #include <cstring>
+    #include <unistd.h>
+    */
+    #include <chrono>
+    #include <thread>
+    #include <string>
+    using namespace std;
+
+    int main(void)
+    {
+        FRRobot robot; 
+        robot.RPC("192.168.58.2");
+
+        int retval = 0;
+        char traj_file_name[30] = "/fruser/traj/tra我.txt";
+        retval = robot.LoadTrajectoryJ(traj_file_name, 100, 1);
+        printf("LoadTrajectoryJ %s, retval is: %d\n",traj_file_name, retval);
+
+        DescPose traj_start_pose;
+        memset(&traj_start_pose, 0, sizeof(DescPose));
+        retval = robot.GetTrajectoryStartPose(traj_file_name, &traj_start_pose);
+        printf("GetTrajectoryStartPose is: %d\n", retval);
+        printf("desc_pos:%f,%f,%f,%f,%f,%f\n",traj_start_pose.tran.x,traj_start_pose.tran.y,traj_start_pose.tran.z,	traj_start_pose.rpy.rx,traj_start_pose.rpy.ry,traj_start_pose.rpy.rz);
+
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+
+        robot.SetSpeed(50);
+        robot.MoveCart(&traj_start_pose, 0, 0, 100, 100, 100, -1, -1);
+
+        int traj_num = 0;
+        retval = robot.GetTrajectoryPointNum(&traj_num);
+        printf("GetTrajectoryStartPose retval is: %d, traj num is: %d\n", retval, traj_num);
+
+        retval = robot.SetTrajectoryJSpeed(50.0);
+        printf("SetTrajectoryJSpeed is: %d\n", retval);
+
+        ForceTorque traj_force;
+        memset(&traj_force, 0, sizeof(ForceTorque));
+        traj_force.fx = 10;
+        retval = robot.SetTrajectoryJForceTorque(&traj_force);
+        printf("SetTrajectoryJForceTorque retval is: %d\n", retval);
+
+        retval = robot.SetTrajectoryJForceFx(10.0);
+        printf("SetTrajectoryJForceFx retval is: %d\n", retval);
+
+        retval = robot.SetTrajectoryJForceFy(0.0);
+        printf("SetTrajectoryJForceFy retval is: %d\n", retval);
+
+        retval = robot.SetTrajectoryJForceFz(0.0);
+        printf("SetTrajectoryJForceFz retval is: %d\n", retval);
+
+        retval = robot.SetTrajectoryJTorqueTx(10.0);
+        printf("SetTrajectoryJTorqueTx retval is: %d\n", retval);
+
+        retval = robot.SetTrajectoryJTorqueTy(10.0);
+        printf("SetTrajectoryJTorqueTy retval is: %d\n", retval);
+
+        retval = robot.SetTrajectoryJTorqueTz(10.0);
+        printf("SetTrajectoryJTorqueTz retval is: %d\n", retval);
+
+        retval = robot.MoveTrajectoryJ();
+        printf("MoveTrajectoryJ retval is: %d\n", retval);
+    }

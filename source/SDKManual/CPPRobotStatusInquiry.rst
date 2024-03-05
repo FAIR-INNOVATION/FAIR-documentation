@@ -506,3 +506,128 @@ Code example
 
         return 0;
     }
+
+Code example
++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2
+
+.. code-block:: c++
+    :linenos:
+
+    #include "libfairino/robot.h"
+
+    //If using Windows, include the following header files
+    #include <string.h>
+    #include <windows.h>
+    //If using Linux, include the following header files
+    /*
+    #include <cstdlib>
+    #include <iostream>
+    #include <stdio.h>
+    #include <cstring>
+    #include <unistd.h>
+    */
+
+    #include <chrono>
+    #include <thread>
+
+    using namespace std;
+
+    int main(void)
+    {
+        FRRobot robot;
+        robot.RPC("192.168.58.2");
+
+        uint8_t result = 0;
+        int retval = 0;
+        float joint_speed_deg[6] = {0};
+
+        retval = robot.GetActualJointSpeedsDegree(1, joint_speed_deg);
+        printf("GetActualJointSpeedsDegree retval is: %d \n", retval);
+        printf("joint degree speed is: %f, %f, %f, %f, %f, %f \n", joint_speed_deg[0], joint_speed_deg[1], joint_speed_deg[2], joint_speed_deg[3], joint_speed_deg[4], joint_speed_deg[5]);
+
+        float joint_acc_deg[6] = {0};
+        retval = robot.GetActualJointAccDegree(1, joint_acc_deg);
+        printf("GetActualJointAccDegree retval is: %d \n", retval);
+        printf("joint degree acc is: %f, %f, %f, %f, %f, %f \n", joint_acc_deg[0], joint_acc_deg[1], joint_acc_deg[2], joint_acc_deg[3], joint_acc_deg[4], joint_acc_deg[5]);
+
+        float tcp_speed = 0;
+        float ori_speed = 0;
+        retval = robot.GetTargetTCPCompositeSpeed(1, &tcp_speed, &ori_speed);
+        printf("GetTargetTCPCompositeSpeed retval is: %d \n", retval);
+        printf("tcp_speed is:%f, ori_speed is: %f \n", tcp_speed, ori_speed);
+
+        retval = robot.GetActualTCPCompositeSpeed(1, &tcp_speed, &ori_speed);
+        printf("GetActualTCPCompositeSpeed retval is: %d \n", retval);
+        printf("tcp_speed is:%f, ori_speed is: %f \n", tcp_speed, ori_speed);
+
+        float targer_tcp_speed[6] = {0};
+        retval = robot.GetTargetTCPSpeed(1, targer_tcp_speed);
+        printf("GetTargetTCPSpeed retval is: %d \n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", targer_tcp_speed[0], targer_tcp_speed[1], targer_tcp_speed[2], targer_tcp_speed[3], targer_tcp_speed[4], targer_tcp_speed[5]);
+
+        float actual_tcp_speed[6] = {0};
+        robot.GetActualTCPSpeed(1, actual_tcp_speed);
+        printf("GetActualTCPSpeed retval is: %d \n", retval);
+        printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", actual_tcp_speed[0], actual_tcp_speed[1], actual_tcp_speed[2], actual_tcp_speed[3], actual_tcp_speed[4], actual_tcp_speed[5]);
+
+        JointPos j;
+        DescPose desc_pos, offset_pos1, offset_pos2;
+
+        memset(&j, 0, sizeof(JointPos));
+        memset(&desc_pos, 0, sizeof(DescPose));
+        memset(&offset_pos1, 0, sizeof(DescPose));
+        memset(&offset_pos2, 0, sizeof(DescPose));
+
+        j = {{-39.666, -96.491, -79.531, -94.251, 90.961, -58.714}};
+        offset_pos1.tran.x = 10.0;
+        offset_pos1.rpy.rx = -10.0;
+        offset_pos2.tran.x = 30.0;
+        offset_pos2.rpy.rx = -5.0;
+
+        retval = 0;
+        retval = robot.GetForwardKin(&j, &desc_pos); // When only joint positions are available, the forward kinematics interface can be used to solve the Cartesian space coordinates.
+        printf("GetForwardKin ret is: %d \n", retval);
+        printf("GetForwardKin result:%f,%f,%f,%f,%f,%f\n", desc_pos.tran.x, desc_pos.tran.y, desc_pos.tran.z, desc_pos.rpy.rx, desc_pos.rpy.ry, desc_pos.rpy.rz);
+
+        retval = 0;
+        JointPos start_joint_pose;
+        memset(&start_joint_pose, 0, sizeof(JointPos));
+        retval = robot.GetInverseKinRef(0, &desc_pos, &j, &start_joint_pose);
+        printf("GetInverseKinRef retval is: %d \n", retval);
+        printf("joint is: %f, %f, %f,%f, %f, %f\n", start_joint_pose.jPos[0], start_joint_pose.jPos[1], start_joint_pose.jPos[2], start_joint_pose.jPos[3], start_joint_pose.jPos[4], start_joint_pose.jPos[5]);
+
+        retval = 0;
+        retval = robot.GetInverseKinHasSolution(1, &offset_pos1, &j, &result); // Based on the reference joint coordinates, determine whether the target pose has a solution
+        printf("GetInverseKinHasSolution ret: %d\n", result);
+        if (0 == result)
+        {
+            printf("pose1 can not be solved\n");
+        }
+
+        retval = 0;
+        retval = robot.GetInverseKin(1, &offset_pos1, -1, &start_joint_pose);
+        printf("GetInverseKin retval is: %d \n", retval);
+        printf("GetInverseKin result is: %f, %f, %f, %f, %f, %f\n", start_joint_pose.jPos[0], start_joint_pose.jPos[1], start_joint_pose.jPos[2], start_joint_pose.jPos[3], start_joint_pose.jPos[4], start_joint_pose.jPos[5]);
+
+        int main_code = 0;
+        int sub_code = 0;
+        retval = 0;
+        retval = robot.GetRobotErrorCode(&main_code, &sub_code);
+        printf("GetRobotMotionDone retval is: %d , amin code is:%d, sub code is: %d\n", retval, main_code, sub_code);
+
+        char name[64] = "F1";
+        float data[20] = {0};
+        int ret = robot.GetRobotTeachingPoint(name, data);
+        printf(" %d name is: %s \n", ret, name);
+        for (int i = 0; i < 20; i++)
+        {
+            printf("data is: %f \n", data[i]);
+        }
+
+        int que_len = 0;
+        retval = 0;
+        retval = robot.GetMotionQueueLength(&que_len);
+        printf("GetMotionQueueLength retval is: %d, queue length is: %d \n", retval, que_len);
+    }
