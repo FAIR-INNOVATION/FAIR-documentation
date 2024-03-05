@@ -69,7 +69,7 @@ Update the LUA file for the point table
 Initialize log parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -86,7 +86,7 @@ Initialize log parameters
 Set the log filtering level
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -100,7 +100,7 @@ Set the log filtering level
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:

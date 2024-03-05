@@ -141,7 +141,7 @@ Get the starting pose of the TPD trajectory
 Code example
 ++++++++++++++++++
 
-.. versionchanged:: C++SDK-v2.1.2
+.. versionchanged:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -353,7 +353,7 @@ Set the torque around the z-axis during trajectory operation
 Code example
 ++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:

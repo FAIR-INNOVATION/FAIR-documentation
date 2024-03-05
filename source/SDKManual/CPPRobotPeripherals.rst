@@ -186,7 +186,7 @@ Calculate retreat point-visual
 Code example
 ++++++++++++++++
 
-.. versionchanged:: C++SDK-v2.1.2
+.. versionchanged:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -603,7 +603,7 @@ Segment weld start
 Code example
 ++++++++++++++++++++++++++++++++++++++
 
-.. versionchanged:: C++SDK-v2.1.2
+.. versionchanged:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
