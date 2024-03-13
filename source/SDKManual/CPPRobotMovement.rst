@@ -252,28 +252,6 @@ Circular motion in Cartesian space
     */      
     errno_t  Circle(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, float ovl, uint8_t offset_flag, DescPose *offset_pos);
 
-Servo movement starts
-+++++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief Servo movement starts, used with ServoJ and ServoCart instructions
-     * @return  Error code
-     */
-    errno_t ServoMoveStart();
-
-Servo movement end
-+++++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief Servo movement end, used with ServoJ and ServoCart instructions
-     * @return  Error code
-     */
-    errno_t ServoMoveEnd();
-
 Code example
 ++++++++++++++
 .. code-block:: c++
@@ -465,6 +443,28 @@ Code example
 
         return 0;
     }
+
+Servo movement starts
++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Servo movement starts, used with ServoJ and ServoCart instructions
+     * @return  Error code
+     */
+    errno_t ServoMoveStart();
+
+Servo movement end
++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Servo movement end, used with ServoJ and ServoCart instructions
+     * @return  Error code
+     */
+    errno_t ServoMoveEnd();
 
 Joint space servo mode motion
 +++++++++++++++++++++++++++++++
