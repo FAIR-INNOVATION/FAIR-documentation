@@ -1478,6 +1478,18 @@ The function of this command is similar to the "PTP" command, but the path of th
 
 .. centered:: Figure 4.7-5-2 Lin command interface
 
+.. important:: When the selection point name is "seamPos", the straight line command is applied in the welding scene using the laser sensor. Due to the accumulated operating error during welding, "whether to offset" and "offset amount" are added.
+
+   **Whether to offset**：No, base coordinate system offset, tool coordinate system offset, laser original data offset;
+
+   **Offset**: Δx, Δy, Δz, Δrx, Δry, Δrz, range: -300~300;
+
+   .. image:: teaching_pendant_software/277.png
+      :width: 6in
+      :align: center
+
+   .. centered:: Figure 4.7-5-3 Lin command interface(Welding scene)
+
 Arc command
 ++++++++++++++++
 
@@ -1493,7 +1505,7 @@ The "Arc" command is arc movement, which includes two points. The first point is
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-3 Arc command interface
+.. centered:: Figure 4.7-5-4 Arc command interface
 
 Circle command
 ++++++++++++++++
@@ -1510,7 +1522,7 @@ The "Circle" command is a full circle movement, including two points. The first 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-4 Circle command interface
+.. centered:: Figure 4.7-5-5 Circle command interface
 
 Spiral command
 ++++++++++++++++
@@ -1524,7 +1536,7 @@ Whether to offset, the offset takes effect on the trajectory of the entire helix
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-5 Spiral command interface
+.. centered:: Figure 4.7-5-6 Spiral command interface
 
 N-Spiral command
 ++++++++++++++++
@@ -1537,7 +1549,7 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-6 N-Spiral command interface
+.. centered:: Figure 4.7-5-7 N-Spiral command interface
 
 H-Spiral command
 +++++++++++++++++++
@@ -1555,7 +1567,7 @@ The "H-Spiral" command is a horizontal space spiral motion. This command is set 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-7 H-Spiral command interface
+.. centered:: Figure 4.7-5-8 H-Spiral command interface
 
 Spline command
 ++++++++++++++++
@@ -1568,7 +1580,7 @@ The command is divided into three parts: the start of the spline group, the spli
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-8 Spline command interface
+.. centered:: Figure 4.7-5-9 Spline command interface
 
 N-Spline command
 +++++++++++++++++++
@@ -1582,7 +1594,7 @@ For the given control point and the given waypoint.
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-9 N-Spline command interface
+.. centered:: Figure 4.7-5-10 N-Spline command interface
 
 Weave command
 ++++++++++++++++
@@ -1595,7 +1607,7 @@ The "Weave" command consists of two parts. In the first part, select the weaving
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-10 Weave command interface
+.. centered:: Figure 4.7-5-11 Weave command interface
 
 Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
 
@@ -1603,7 +1615,7 @@ Click "Configuration and Test" to configure the parameters of the weaving weldin
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-11 Weave configuration and testing command interface
+.. centered:: Figure 4.7-5-12 Weave configuration and testing command interface
 
 TPD command
 ++++++++++++++++
@@ -1624,7 +1636,7 @@ When programming, first use the PTP instruction to reach the starting point of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-12 TPD command interface
+.. centered:: Figure 4.7-5-13 TPD command interface
 
 Offset command
 ++++++++++++++++
@@ -1637,7 +1649,7 @@ This command is an overall offset command. Input each offset, add the opening co
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-13 Offset command interface
+.. centered:: Figure 4.7-5-14 Offset command interface
 
 ServoCart command
 ++++++++++++++++++++
@@ -1650,7 +1662,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-14 ServoCart command interface
+.. centered:: Figure 4.7-5-15 ServoCart command interface
 
 Absolute pose control program example:
 
@@ -1675,7 +1687,7 @@ Click the "Trajctory" icon to enter the Trajctory command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-15 Trajctory command interface
+.. centered:: Figure 4.7-5-16 Trajctory command interface
 
 TrajctoryJ command
 ++++++++++++++++++++
@@ -1694,7 +1706,7 @@ Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-16 TrajctoryJ command interface
+.. centered:: Figure 4.7-5-17 TrajctoryJ command interface
 
 DMP command
 ++++++++++++++++
@@ -1707,7 +1719,7 @@ DMP is a trajectory imitation learning method that requires prior planning of re
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-17 DMP command interface
+.. centered:: Figure 4.7-5-18 DMP command interface
 
 WPTrsf command
 ++++++++++++++++
@@ -1720,7 +1732,7 @@ Select the workpiece coordinate system to be automatically converted, and click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-18 WPTrsf command interface
+.. centered:: Figure 4.7-5-19 WPTrsf command interface
 
 Control command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2000,7 +2012,19 @@ Click the "Laser" icon to enter the Laser command editing interface
 
 This command includes three parts: laser command, tracking command and positioning command. Before adding this command, please confirm whether the laser tracking sensor in the user peripheral has been configured successfully. See Robot Peripherals chapter for details.
 
+In the sensor loading module, after displaying the corresponding "sensor command" interface according to the function selection, configure the sensor command:
+
+**Ruiniu/CXZK**: Enter the weld type, range: 0~49 integer
+
 .. image:: teaching_pendant_software/118.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-8-3 Laser command interface
+
+**Quanshi**: Enter the task number, range: 0~255 integer
+
+.. image:: teaching_pendant_software/278.png
    :width: 6in
    :align: center
 

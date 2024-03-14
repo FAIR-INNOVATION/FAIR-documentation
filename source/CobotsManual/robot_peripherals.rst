@@ -280,7 +280,11 @@ Sensor Peripheral Configuration
 Sensor Peripheral Configuration Steps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**: Select the "Sensor Configuration" button in the user peripheral configuration interface. This section takes the end of the robot as an example. The user first sets the maximum difference. The maximum difference of the sensor scanning deviation points is recommended to be set to 4 by default. Data processing is based on actual use. The scene selects raw data or YZ data. The controller IP defaults to 192.168.57.2, the sensor IP can be configured on the same network segment, the port is 5020, and the sampling period is recommended to be 25. The communication protocol is currently adapted to the Ruiniu communication protocol, just load the corresponding protocol. After the loading is complete, the sensor can be tested by pressing the "Sensor On" and "Sensor Off" buttons.
+**Step1**: Select the "Sensor Configuration" button in the user peripheral configuration interface. This section takes the end of the robot as an example.
+
+- The user first sets the maximum difference. The maximum difference of the sensor scanning deviation points is recommended to be set to 4 by default. Data processing is based on actual use. The scene selects raw data or YZ data.
+- The controller IP defaults to 192.168.57.2, the sensor IP can be configured on the same network segment, the port is 5020, and the sampling period is recommended to be 25. The communication protocol is currently adapted to the communication protocols of Ruiniu, Chuangxiang and Quanshi, just load the corresponding protocol.
+- After the loading is complete, the sensor can be tested by pressing the "Sensor On" and "Sensor Off" buttons.
 
 .. figure:: robot_peripherals/011.png
    :align: center
@@ -294,7 +298,13 @@ Sensor Peripheral Configuration Steps
 
 **Step2**: Calibration sensor reference point.
 
-In the tool coordinate system setting function, we calibrate the sensor type tool and use the six-point method to configure the sensor coordinate system. Select a fixed point in the robot workspace, move the sensor center point to the selected point from three different angles, and set points 1, 2, and 3 respectively. Move the sensor center point vertically directly above the selected point and record point 4. Move the sensor center point from a fixed point to a point in the X-axis direction of the sensor coordinate system, and set point 5. Return to the fixed point, move vertically upwards, and move the sensor center point from the fixed point to a point in the Z-axis direction of the sensor coordinate system, and set it as point 6. Click Calculate to get the pose of the sensor tool, and click Apply to complete.
+In the tool coordinate system setting function, we calibrate the sensor type tool and use the six-point method to configure the sensor coordinate system.
+
+- Select a fixed point in the robot workspace, move the sensor center point to the selected point from three different angles, and set points 1, 2, and 3 respectively.
+- Move the sensor center point vertically directly above the selected point and record point 4.
+- Move the sensor center point from a fixed point to a point in the X-axis direction of the sensor coordinate system, and set point 5. 
+- Return to the fixed point, move vertically upwards, and move the sensor center point from the fixed point to a point in the Z-axis direction of the sensor coordinate system, and set it as point 6.
+- Click Calculate to get the pose of the sensor tool, and click Apply to complete. If you do not want to apply the results, click the "Cancel" button to recalibrate.
 
 .. figure:: robot_peripherals/012.png
    :align: center
@@ -302,7 +312,17 @@ In the tool coordinate system setting function, we calibrate the sensor type too
 
 .. centered:: Figure 5.4-2 Reference Point Configuration - Six Point Method
 
-**Eight point method**: In the tool coordinate system setting function, we calibrate the sensor type tool, use the eight-point method to configure the sensor coordinate system, select the eight-point method, move the sensor laser line to coincide with the calibration line on the calibration board, and keep the sensor and the calibration line as close as possible Closer distance and the calibration point is recognized, record point 1, move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 2, move about 20mm in the -x/+x direction, and adjust the robot so that the laser Recognize the calibration point, record point 3, move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 4, move about 5mm in the -rx direction, adjust the robot so that the laser recognizes the calibration point, and record the point 5. Move about 5mm in the -ry direction, adjust the robot so that the laser recognizes the calibration point, record point 6, move about 5mm in the -rz direction, adjust the robot so that the sensor recognizes the calibration point, record point 7, move about 5mm in the -rz direction, and adjust the robot so that Laser recognition to the calibration point, record point 8. Click Calculate to get the sensor pose, click Apply to complete.
+**Eight point method**: In the tool coordinate system setting function, we calibrate the sensor type tool, use the eight-point method to configure the sensor coordinate system, select the eight-point method.
+
+- Move the sensor laser line to coincide with the calibration line on the calibration board, and keep the sensor and the calibration line as close as possible Closer distance and the calibration point is recognized, record point 1.
+- Move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 2.
+- Move about 20mm in the -x/+x direction, and adjust the robot so that the laser Recognize the calibration point, record point 3.
+- Move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 4.
+- Move about 5mm in the -rx direction, adjust the robot so that the laser recognizes the calibration point, and record the point 5.
+- Move about 5mm in the -ry direction, adjust the robot so that the laser recognizes the calibration point, record point 6.
+- move about 5mm in the -rz direction, adjust the robot so that the sensor recognizes the calibration point, record point 7.
+- Move about 5mm in the -rz direction, and adjust the robot so that Laser recognition to the calibration point, record point 8.
+- Click Calculate to get the sensor pose, click Apply to complete. If you do not want to apply the results, click the "Cancel" button to recalibrate.
 
 .. figure:: robot_peripherals/013.png
    :align: center
@@ -310,13 +330,29 @@ In the tool coordinate system setting function, we calibrate the sensor type too
 
 .. centered:: Figure 5.4-3 Reference Point Configuration - Eight Points Method
 
-**Five point method**: In the tool coordinate system setting function, we calibrate the sensor type tool and use the five-point method to configure the sensor coordinate system. First, determine a fixed point, align the end of the tool with this point, record point 1, and then adjust the posture of the robot so that the laser recognizes Record fixed points, respectively record points 2 to 5, and note that the attitude change needs to be as large as possible. Click Calculate to get the sensor pose, click Apply to complete.
+**Five point method**: In the tool coordinate system setting function, we calibrate the sensor type tool and use the five-point method to configure the sensor coordinate system.
+
+- First, determine a fixed point, align the end of the tool with this point, record point 1.
+- And then adjust the posture of the robot so that the laser recognizes Record fixed points, respectively record points 2 to 5, and note that the attitude change needs to be as large as possible.
+- Click Calculate to get the sensor pose, click Apply to complete. If you feel that the accuracy is not as expected, click the "Cancel" button to recalibrate.
 
 .. figure:: robot_peripherals/014.png
    :align: center
    :width: 3in
 
 .. centered:: Figure 5.4-4 Reference Point Configuration - Five Points Method
+
+.. figure:: robot_peripherals/071.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-5 Five Points Method - Sensor output value
+
+.. figure:: robot_peripherals/072.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-6 Five Points Method - Accuracy
 
 Laser sensor tracking function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
