@@ -832,6 +832,8 @@ Specific attitude recognition: clear the end load data, configure the force sens
 
 **Dynamic identification**: After clearing the end load data and configuring the force sensor, establish the sensor coordinate system, adjust the end posture of the robot to be vertically downward, perform "zero point correction" and install the end load. Click "Identification On", drag the robot to move, and then click "Identification Off", the load result can be automatically applied to the robot.
 
+**Automatic Zero Calibration**: After the sensor records the initial position, it can be automatically zeroed.
+
 .. figure:: robot_peripherals/036.png
    :align: center
    :width: 3in
@@ -850,6 +852,8 @@ After the sensor is configured, it can be used with the sensor to better assist 
 .. centered:: Figure 5.8-4 Force/Torque Sensor Drag Lock
 
 **Adaptive selection**: Turn it on when assembly is required. After turning it on, dragging becomes heavier;
+
+**Inertia Parameter**: Adjust the feel during dragging. The minimum value is 0. It needs to be operated with caution under the guidance of technical personnel.
 
 **Damping parameters**:
 
@@ -1235,11 +1239,17 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
    
    **Suction Waiting Time**: The user can configure the waiting time for material suction, monitor the negative pressure arrival signal after suction, and repeat the suction action when it is not in place;
 
+   **Smooth transition**: Turn on the smooth transition button to configure parameters related to palletizing/depalletizing PTP smoothing time and LIN smoothing radius.
+
+   - PTP smoothing time: No smooth transition time/Level 1 (200ms)/Level 2 (400ms)/Level 3 (600ms)/Level 4 (800ms)/Level 5 (1000ms)
+
+   - LIN smooth radius: No smooth transition radius/Level 1 (200mm)/Level 2 (400mm)/Level 3 (600mm)/Level 4 (800mm)/Level 5 (1000mm)
+
 .. figure:: robot_peripherals/063.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.10‑7 Advanced palletizing configuration
+.. centered:: Figure 5.10-7 Advanced palletizing configuration
 
 **Step7**: Click "Generate Program" to open the "Palletizing Monitoring Page", where you can display and view the "Generation Information", "Alarm Information" and "Palletizing Program".
 
@@ -1255,7 +1265,7 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.10‑9 Palletizing program continues
+.. centered:: Figure 5.10-9 Palletizing program continues
 
 Polishing equipment configuration
 ------------------------------------

@@ -1587,8 +1587,15 @@ N-Spline command
 
 Click the "N-Spline" icon to enter the N-Spline command editing interface
 
-This instruction is an optimization instruction for the Spline instruction algorithm, and will replace the existing Spline instruction in the future. This instruction is divided into three parts: the start of the multi-point trajectory, the segment of the multi-point trajectory and the end of the multi-point trajectory. The start mark, the multi-point track segment is to set each track point, click the icon to enter the point adding interface, the end of the multi-point track is the end mark of the multi-point track movement, here you can set the control mode and debugging speed, the control mode is divided into
+This instruction is an optimization instruction for the Spline instruction algorithm, and will replace the existing Spline instruction in the future. 
+
+This instruction is divided into three parts: the start of the multi-point trajectory, the segment of the multi-point trajectory and the end of the multi-point trajectory. The start mark, the multi-point track segment is to set each track point.
+
+Click the icon to enter the point adding interface, the end of the multi-point track is the end mark of the multi-point track movement, here you can set the control mode and debugging speed, the control mode is divided into
 For the given control point and the given waypoint.
+
+- Control mode: arc transition point/given path point
+- Global average connection time: integer, greater than 10, default value is 2000
 
 .. image:: teaching_pendant_software/092.png
    :width: 6in
@@ -1820,13 +1827,23 @@ MoveDO command
 
 Click the "MoveDO" icon to enter the MoveDO command editing interface
 
-This command realizes the function of outputting DO signal continuously according to the set interval during the linear motion.
+This instruction is divided into continuous output mode and single output mode.
+
+- Continuous output mode: During linear motion, the DO signal function is continuously output according to the set interval.
 
 .. image:: teaching_pendant_software/195.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-6-7 MoveDO interface
+.. centered:: Figure 4.7-6-7 MoveDO command continuous output interface
+
+- Single output mode: There are two options: constant speed segment output and free configuration. The setting time is output after the movement starts, and the reset time is output before the movement ends, ranging from [0, 1000].
+
+.. image:: teaching_pendant_software/276.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-6-8 MoveDO instruction single output interface
 
 ToolList command
 +++++++++++++++++++
@@ -1839,7 +1856,7 @@ Select the tool coordinate system name and click "Apply" to add this command to 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-6-8 ToolList command interface
+.. centered:: Figure 4.7-6-9 ToolList command interface
 
 Mode command
 ++++++++++++++++
@@ -1852,7 +1869,7 @@ This command can switch the robot to manual mode, and is usually added at the en
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-6-9 Mode command interface
+.. centered:: Figure 4.7-6-10 Mode command interface
 
 Collision command
 ++++++++++++++++++++
@@ -1865,7 +1882,7 @@ This command is used to set the collision level. Through this command, the colli
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-6-10 Collision command interface
+.. centered:: Figure 4.7-6-11 Collision command interface
 
 Acc command
 ++++++++++++++++
@@ -1878,7 +1895,7 @@ The Acc command is to realize the function that the acceleration of the robot ca
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-6-11 Acc command interface
+.. centered:: Figure 4.7-6-12 Acc command interface
 
 Peripheral Command Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

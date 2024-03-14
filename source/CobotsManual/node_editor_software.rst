@@ -526,6 +526,7 @@ This instruction is a spline instruction algorithm optimization instruction. It 
 "N-Spline" command node, parameters:
 
 - Control mode: teaching point
+- Global average connection time: integer, greater than 10, default value is 2000 ms
 
 "N-Spline-SPL" command node, parameters:
 
@@ -868,17 +869,24 @@ Click the "MoveDO" command node to enter the node graph editing interface
 
 This instruction implements the function of continuously outputting DO signals according to the set interval during linear motion.
 
-"MoveDO" command node, parameters:
+"Motion DO continuous output" command node, parameters:
 
 - Port: Ctrl-DO0 ~ Ctrl-DO0(MoveDOStart,[0~15]), End-DO1(MoveDOStart,[0~1])
 - Setting interval (mm): 0 ~ 500
 - Output pulse duty cycle (%): 0 ~ 99
+
+"Motion DO single output" command node, parameters:
+
+- Port: Ctrl-DO0 ~ Ctrl-DO0(MoveDOOnceStart,[0~15]), End-DO1(MoveDOOnceStart,[0~1])
+- Output mode: constant speed section output/free configuration
+- Setting time (ms): 0 ~ 1000 (The default output mode of the constant speed segment is -1)
+- Reset time (ms): 0 ~ 1000 (The default output mode of the constant speed segment is -1)
   
 .. image:: node_editor_software/037.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.40 "MoveDO" command node interface
+.. centered:: Figure 6.2.40 "Motion DO single/continuous output" command node interface
 
 ToolList instruction
 -----------------------------
