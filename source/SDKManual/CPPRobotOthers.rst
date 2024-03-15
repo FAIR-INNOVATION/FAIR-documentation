@@ -153,3 +153,64 @@ Code example
 		retval = robot.PointTableUpdateLua(point_tablename, lua_name);
 		cout << "retval is: " << retval << endl;
 	}
+
+Download Lua file
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Download Lua file
+	* @param [in] fileName The name of the lua file to be downloaded, for example: "test.lua"
+	* @param [in] savePath Save the file local path, for example: "D://Down/"
+	* @return error code
+	*/
+	errno_t LuaDownLoad(std::string fileName, std::string savePath);
+
+Upload Lua file
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Upload Lua file
+	* @param [in] filePath local lua file path name
+	* @return error code
+	*/
+	errno_t LuaUpload(std::string filePath);
+
+Delete Lua files
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Delete Lua files
+	* @param [in] fileName The name of the lua file to be deleted, for example: "test.lua"
+	* @return error code
+	*/
+	errno_t LuaDelete(std::string fileName);
+
+Get the names of all current lua files
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2.0
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	* @brief Get the names of all current lua files
+	* @param [out] luaNames lua file name list
+	* @return error code
+	*/
+	errno_t GetLuaList(std::list<std::string>* luaNames);
