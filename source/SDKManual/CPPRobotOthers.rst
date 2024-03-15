@@ -214,3 +214,63 @@ Get the names of all current lua files
 	* @return error code
 	*/
 	errno_t GetLuaList(std::list<std::string>* luaNames);
+
+Code example
++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.2.0
+
+.. code-block:: c++
+    :linenos:
+
+	#include "libfairino/robot.h"
+
+	//If using Windows, include the following header files
+	#include <string.h>
+	#include <windows.h>
+	//If using Linux, include the following header files
+	/*
+	#include <cstdlib>
+	#include <iostream>
+	#include <stdio.h>
+	#include <cstring>
+	#include <unistd.h>
+	*/
+	#include <chrono>
+	#include <thread>
+	#include <string>
+
+	using namespace std;
+	int main(void)
+	{
+		FRRobot robot;
+		robot.LoggerInit();
+		robot.SetLoggerLevel(3);
+		robot.RPC("192.168.58.2");
+
+		/* Get lua name */
+		list<std::string> luaNames;
+		int res = robot.GetLuaList(&luaNames);
+		std::cout << "res is: " << res << std::endl;
+		std::cout << "size is: " << luaNames.size() <<std::endl;
+		for(auto it = luaNames.begin(); it != luaNames.end(); it++)
+		{
+			std::cout << it->c_str() << std::endl;
+		}
+
+		/* Download lua */
+		res = robot.LuaDownLoad("test.lua", "D://Down/");
+		std::cout << "res is: " << res << std::endl;
+
+		/* Upload lua */
+		res = robot.LuaUpload("D://Down/test.lua");
+		std::cout << "res is: " << res << std::endl;
+
+		/* Delete lua */
+		res = robot.LuaDelete("test.lua");
+		std::cout << "res is: " << res << std::endl;
+
+		robot.CloseRPC();
+		return 0;
+	}
+	
