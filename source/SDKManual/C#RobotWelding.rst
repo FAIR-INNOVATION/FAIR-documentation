@@ -289,8 +289,8 @@ Segment weld start
     * @param [in] timeout Arcing timeout time
     * @param [in] isWeave is Weave or not 
     * @param [in] weaveNum Weave welding parameter configuration number
-    * @param  [in] tool  Tool coordinate number, range [1~15]
-    * @param  [in] user  Workpiece coordinate number, range [1~15] 7
+    * @param  [in] tool  Tool coordinate number, range [0~14]
+    * @param  [in] user  Workpiece coordinate number, range [0~14]
     * @param  [in] vel  Percentage of speed, range [0~100] 
     * @param  [in] acc  Acceleration percentage, range [0~100], not open for now * @param  [in] ovl  Velocity scaling factor, range[0~100]
     * @param  [in] blendR [-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm

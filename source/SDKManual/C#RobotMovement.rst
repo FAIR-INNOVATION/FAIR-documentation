@@ -147,8 +147,8 @@ Joint space motion
     * @brief  Joint space motion
     * @param  [in] joint_pos  Target joint location, unit: deg
     * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [1~15]
-    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] tool  Tool coordinate number, range [0~14]
+    * @param  [in] user  Workpiece coordinate number, range [0~14]
     * @param  [in] vel  Percentage of speed, range [0~100]
     * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] ovl  Velocity scaling factor, range[0~100]
@@ -169,8 +169,8 @@ Rectilinear motion in Cartesian space
     * @brief  Rectilinear motion in Cartesian space
     * @param  [in] joint_pos  Target joint location, unit: deg
     * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [1~15]
-    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] tool  Tool coordinate number, range [0~14]
+    * @param  [in] user  Workpiece coordinate number, range [0~14]
     * @param  [in] vel  Percentage of speed, range [0~100]
     * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] ovl  Velocity scaling factor, range[0~100]
@@ -192,8 +192,8 @@ Circular arc motion in Cartesian space
     * @brief  Circular arc motion in Cartesian space
     * @param  [in] joint_pos_p  Waypoint joint position, unit: deg
     * @param  [in] desc_pos_p   Waypoint Cartesian position
-    * @param  [in] ptool  Tool coordinate number, range [1~15]
-    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] ptool  Tool coordinate number, range [0~14]
+    * @param  [in] puser  Workpiece coordinate number, range [0~14]
     * @param  [in] pvel  Percentage of speed, range [0~100]
     * @param  [in] pacc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] epos_p  Position of expansion shaft, unit: mm
@@ -201,8 +201,8 @@ Circular arc motion in Cartesian space
     * @param  [in] offset_pos_p  The pose offset
     * @param  [in] joint_pos_t  Target joint position, unit: deg
     * @param  [in] desc_pos_t   Target point Cartesian position
-    * @param  [in] ttool  Tool coordinate number, range [1~15]
-    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] ttool  Tool coordinate number, range [0~14]
+    * @param  [in] tuser  Workpiece coordinate number, range [0~14]
     * @param  [in] tvel  Percentage of speed, range [0~100]
     * @param  [in] tacc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] epos_t  Position of expansion shaft, unit: mm
@@ -223,15 +223,15 @@ Circular motion in Cartesian space
     * @brief  Circular motion in Cartesian space
     * @param  [in] joint_pos_p  Path point 1 joint position, unit: deg
     * @param  [in] desc_pos_p   Waypoint 1 Cartesian position
-    * @param  [in] ptool  Tool coordinate number, range [1~15]
-    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] ptool  Tool coordinate number, range [0~14]
+    * @param  [in] puser  Workpiece coordinate number, range [0~14]
     * @param  [in] pvel  Percentage of speed, range [0~100]
     * @param  [in] pacc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] epos_p  Position of expansion shaft, unit: mm
     * @param  [in] joint_pos_t  Joint position at waypoint 2, unit: deg
     * @param  [in] desc_pos_t   Waypoint 2 Cartesian position
-    * @param  [in] ttool  Tool coordinate number, range [1~15]
-    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] ttool  Tool coordinate number, range [0~14]
+    * @param  [in] tuser  Workpiece coordinate number, range [0~14]
     * @param  [in] tvel  Percentage of speed, range [0~100]
     * @param  [in] tacc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] epos_t  Position of expansion shaft, unit: mm
@@ -313,8 +313,8 @@ Spiral motion in Cartesian space
     * @brief  Spiral motion in Cartesian space
     * @param  [in] joint_pos  Target joint location, unit: deg
     * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [1~15]
-    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] tool  Tool coordinate number, range [0~14]
+    * @param  [in] user  Workpiece coordinate number, range [0~14]
     * @param  [in] vel  Percentage of speed, range [0~100]
     * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] epos  Position of expansion shaft, unit: mm
@@ -516,8 +516,8 @@ Point to point motion in Cartesian space
     /**
     * @brief  Point to point motion in Cartesian space
     * @param  [in]  desc_pos  Target Cartesian pose or pose increment
-    * @param  [in] tool  Tool coordinate number, range [1~15]
-    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] tool  Tool coordinate number, range [0~14]
+    * @param  [in] user  Workpiece coordinate number, range [0~14]
     * @param  [in] vel  Percentage of speed, range [0~100]
     * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] ovl  Velocity scaling factor, range[0~100]
@@ -577,8 +577,8 @@ Spline motion PTP
     * @brief  Joint space spline movement
     * @param  [in] joint_pos  Target joint location, unit: deg
     * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [1~15]
-    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] tool  Tool coordinate number, range [0~14]
+    * @param  [in] user  Workpiece coordinate number, range [0~14]
     * @param  [in] vel  Percentage of speed, range [0~100]
     * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
     * @param  [in] ovl  Velocity scaling factor, range[0~100]   

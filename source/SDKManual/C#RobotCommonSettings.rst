@@ -84,7 +84,7 @@ Set tool coordinate system
 
     /**
     * @brief  Set tool coordinate system
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @param  [in] type  0- tool coordinates, 1- sensor coordinates
     * @param  [in] install Installation position, 0- robot end, 1- robot outside
@@ -99,7 +99,7 @@ Set the tool coordinate list
 
     /**
     * @brief  Set the tool coordinate list
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @param  [in] type  0- tool coordinates, 1- sensor coordinates
     * @param  [in] install Installation position, 0- robot end, 1- robot outside
@@ -138,7 +138,7 @@ Set the external tool coordinate system
 
     /**
     * @brief  Set the external tool coordinate system
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] etcp  Tool center position relative to end flange center position
     * @param  [in] etool  To be determined
     * @return  Error code
@@ -152,7 +152,7 @@ Set the list of external tool coordinate systems
 
     /**
     * @brief  Set the list of external tool coordinate systems
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] etcp  Tool center position relative to end flange center position
     * @param  [in] etool  To be determined
     * @return  Error code
@@ -191,7 +191,7 @@ Set the workpiece coordinate system
 
     /**
     * @brief  Set the workpiece coordinate system
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @return  Error code
     */    
@@ -204,7 +204,7 @@ Set the list of work coordinate systems
 
     /**
     * @brief  Set the list of work coordinate systems
-    * @param  [in] id Frame number, range[1~15]
+    * @param  [in] id Frame number, range[0~14]
     * @param  [in] coord  Tool center position relative to end flange center position
     * @return  Error code
     */    
