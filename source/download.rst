@@ -15,16 +15,6 @@ Qualification Certification
 
 Secondary Development
 ---------------------------------
-    :download:`FAIRINO CPP SDK-v1 <https://github.com/FAIR-INNOVATION/frcobot_cpp_sdk/archive/refs/heads/main.zip>`
-
-    :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
-
-    :download:`FAIRINO C# SDK-v1 <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/archive/refs/heads/main.zip>`
-
-    :download:`FAIRINO Python SDK-v1 <https://github.com/FAIR-INNOVATION/frcobot_python_sdk/archive/refs/heads/main.zip>`
-
-    :download:`FAIRINO Python SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-python-sdk/archive/refs/heads/main.zip>`
-
     :download:`FAIRINO ROS1 <https://github.com/FAIR-INNOVATION/frcobot_ros/archive/refs/heads/master.zip>`
 
     :download:`FAIRINO ROS2 <https://github.com/FAIR-INNOVATION/frcobot_ros2/archive/refs/heads/main.zip>`
@@ -52,3 +42,9 @@ Ontology & Dimensional Drawings
 Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-V3.6.9-Release-240123 <https://drive.google.com/file/d/1y66Uk5MELuQVhmu1Eb-v8brTB5jKSHCK/view?usp=sharing>`
+
+    :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
+
+    :download:`FAIRINO C# SDK-v1 <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/archive/refs/heads/main.zip>`
+
+    :download:`FAIRINO Python SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-python-sdk/archive/refs/heads/main.zip>`
