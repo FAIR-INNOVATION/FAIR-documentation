@@ -153,3 +153,108 @@ Code example
     print("Terminate the currently running job program ", ret)
     time.sleep(2)
     print_program_state()
+
+Download the Lua file
++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``LuaDownLoad(fileName, savePath)``"
+    "Description", "Download the Lua file"
+    "Required parameter", "- ``fileName``: The name of the lua file to be downloaded, for example, “test.lua”
+    - ``savePath``：The local path for saving the file, for example, “D://Down/”"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    robot.LuaDownLoad("test", "D://Desktop/test_download/")
+
+Upload the Lua file
++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LuaUpload(filePath)``"
+    "Description", "Upload the Lua file"
+    "Required parameter", "- ``filePath``：The full path name of the uploaded file, for example, D://test/test.lua"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0 , Failed -errcode
+    - errorStr(The lua file has an error return)"
+
+Code example
+------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    robot.LuaUpload("D://test/test.lua")
+
+Delete the Lua file
++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LuaDelete(fileName)``"
+    "Description", "Delete the Lua file"
+    "Required parameter", "- ``fileName``: The name of the lua file to be deleted, for example, “test.lua”"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret = robot.GetSoftwareVersion()
+    robot.LuaDelete("test2")
+
+Obtain Name of all current lua files
++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetLuaList()``"
+    "Description", "Obtain Name of all current lua files"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret,num,name  = robot.GetLuaList()
+    print(num)
+    print(name)

@@ -140,3 +140,89 @@ Code example
         Thread.Sleep(1000);
         robot.ProgramStop();
     }
+
+Download job program
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Download job program
+    * @param [in] fileName Job program to download "test.lua" or "test.tar.gz"
+    * @param [in] savePath Save the local path of the job program“D://Down/”
+    * @return Error Code 
+    */
+    public int LuaDownLoad(string fileName, string savePath);
+
+Upload job program
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Upload job program
+    * @param [in] filePath Local job program path name ".../test.lua"或".../test.tar.gz"
+    * @param [out] errStr Error message
+    * @return  
+    */
+    public int LuaUpload(string filePath, ref string errStr);
+
+Delete job program
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Delete job program
+    * @param [in] fileName The name of the job program to delete "test.lua"
+    * @return Error Code
+    */
+    public int LuaDelete(string fileName);
+
+Gets all current job program names
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Gets all current job program names
+    * @param [out] luaNames List of job program names
+    * @return Error Code
+    */
+    public int GetLuaList(ref List<string> luaNames) ;
+
+Code example
+++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    private void btnUploadLua_Click(object sender, EventArgs e)
+    {
+        string errstr = "";
+        robot.LuaUpload("D://Upload/test.lua", ref errstr);
+        Console.WriteLine(errstr);
+        robot.LuaDownLoad("test.lua", "D://zDOWN/");
+        robot.LuaDelete("test.lua");
+        List<string> lualist = new List<string>();
+        robot.GetLuaList(ref lualist);
+        int n = lualist.Count;
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine(lualist[i]);
+        }
+    }
