@@ -714,7 +714,7 @@ Code example
 
 Load identification initialization
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -759,7 +759,7 @@ Code example
 
 Load identification variable initialization
 ++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -773,7 +773,7 @@ Load identification variable initialization
 
 Load identification main program
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -787,7 +787,7 @@ Load identification main program
 
 Obtain the load identification result
 +++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1

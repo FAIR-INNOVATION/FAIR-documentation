@@ -249,7 +249,7 @@ Code example
 
 Download the point table database
 +++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -276,7 +276,7 @@ Code example
  
 Upload the point table database
 +++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -302,7 +302,7 @@ Code example
 
 Point table switch
 +++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -329,7 +329,7 @@ Code example
 
 Point table update Lua
 +++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1

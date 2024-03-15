@@ -6,7 +6,7 @@ Weld
 
 Welding Start
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -40,7 +40,7 @@ Code example
 
 Welding end
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -74,7 +74,7 @@ Code example
 
 Set the relationship between welding current and output analog
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -130,7 +130,7 @@ Code example
 
 Set the relationship between welding voltage and output analog
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -147,7 +147,7 @@ Set the relationship between welding voltage and output analog
 
 Obtain the corresponding relationship between welding current and output analog
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -166,7 +166,7 @@ Obtain the corresponding relationship between welding current and output analog
 
 Obtain the corresponding relationship between welding voltage and output analog
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -185,7 +185,7 @@ Obtain the corresponding relationship between welding voltage and output analog
 
 Set welding current
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -201,7 +201,7 @@ Set welding current
 
 Set welding voltage
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -217,7 +217,7 @@ Set welding voltage
 
 Set weave parameters
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -282,7 +282,7 @@ Code example
 
 Set weave parameters in real time
 ++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -304,7 +304,7 @@ Set weave parameters in real time
 
 Weave start
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -318,7 +318,7 @@ Weave start
 
 Weave end
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -332,7 +332,7 @@ Weave end
 
 Forward wire feed
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -380,7 +380,7 @@ Code example
 
 Reverse wire feed
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -395,7 +395,7 @@ Reverse wire feed
 
 Aspirated
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1
@@ -410,7 +410,7 @@ Aspirated
 
 Segment weld start
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
     
 .. csv-table:: 
     :stub-columns: 1

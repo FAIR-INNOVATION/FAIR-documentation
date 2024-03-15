@@ -40,7 +40,8 @@ After configuring ROS Noetic, install the required environment as follows:
         ros-noetic-rosparam-shortcuts \
         ros-noetic-ros-control \
         ros-noetic-ros-controllers \
-        ros-noetic-moveit 
+        ros-noetic-moveit \
+        libxmlrpcpp-dev
 
 Compile
 ---------------------------

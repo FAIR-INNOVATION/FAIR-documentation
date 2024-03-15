@@ -764,7 +764,7 @@ Code example
 
 Obtain robot version information
 +++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -790,7 +790,7 @@ Code example
 
 Obtain robot hardware version information
 +++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -816,7 +816,7 @@ Code example
 
 Obtain robot firmware version information
 ++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
@@ -842,7 +842,7 @@ Code example
 
 Obtain DH compensation parameters
 ++++++++++++++++++++++++++++++++++
-.. versionadded:: python sdk-v2.0.1
+.. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
