@@ -19,7 +19,6 @@ Quick start
     parameter_setting
     manual_teaching
     quick_programming
-    controller_virtual_machine
 
 Manual
 -----------------

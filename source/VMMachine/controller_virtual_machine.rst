@@ -1,11 +1,8 @@
-Robot controller virtual machine
-==================================
-
 Virtual machine environment configuration
----------------------------------------------
+=============================================
 
 Install the Virtual Box
-+++++++++++++++++++++++++
+-------------------------
 
 - Virtual Box Version: VirtualBox-7.0.14.
 - File name: VirtualBox-7.0.14-161095-Win.exe.
@@ -18,7 +15,7 @@ Install the Virtual Box
 .. centered:: Figure 6.1-1 VirtualBox 7.0.14
 
 Mirror configuration
-++++++++++++++++++++++
+----------------------
 
 1) Download and open the image.
 
@@ -98,7 +95,7 @@ The virtual machine system turns off the graphical user interface by default and
    * - reboot
 
 The user logs in the web page and operates the virtual robot
---------------------------------------------------------------
+===============================================================
 
 - When logging in for the first time, the user prepares a test computer and connects it to the virtual machine through a network cable. The network port IP of the test computer is set to 192.168.58.XXX network segment, and the subnet mask is set to 255.255.255.0.
 - On the test computer, open the Chrome browser and enter the default IP: 192.168.58.2 to access the web interface and operate the virtual robot.
@@ -116,7 +113,7 @@ The user logs in the web page and operates the virtual robot
 .. centered:: Figure 6.2-2 Virtual machine web operation interface
 
 User modifies IP address
-++++++++++++++++++++++++++++
+----------------------------
 
 .. image:: controller_virtual_machine/010.png
    :width: 6in
@@ -143,10 +140,10 @@ User modifies IP address
     Appendix 2: Adding a Virtual NIC (Loopback Network Adapter).
 
 Appendix
------------
+==================================
 
 Appendix 1：Enabling Virtualization in the BIOS
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+------------------------------------------------------
 
 Different models of computers may have different processes to enable virtualization. Take Lenovo ThinkPad series Windows 10 as an example:
 
@@ -215,9 +212,9 @@ Different models of computers may have different processes to enable virtualizat
    :align: center
 
 Appendix 2:Adding a Virtual NIC (Loopback Network Adapter)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------------------------
 
-1. Open Device Manager, press "Windows Key + X", select "Network adapters".
+1. Open Device Manager, press "Windows Key - X", select "Network adapters".
    
 .. image:: controller_virtual_machine/024.png
    :width: 4in
@@ -253,7 +250,7 @@ Appendix 2:Adding a Virtual NIC (Loopback Network Adapter)
    :width: 4in
    :align: center
    
-3. View the virtual network card, press the "Windows key + X" , select "Network Connection".
+3. View the virtual network card, press the "Windows key - X" , select "Network Connection".
 
 .. image:: controller_virtual_machine/032.png
    :width: 4in
