@@ -49,6 +49,10 @@ Ontology & Dimensional Drawings
 
     :download:`FRCobots-V6.0 STEP Models <_static/_doc/FRCobots-V6.0 STEP Models.zip>`
 
+FAIRINO SimMachine
+-----------------------
+    :download:`FAIRINO SimMachine <https://pan.baidu.com/s/11yp-X-AlN-OyhzWV9rDlbQ?pwd=lp85>`
+
 Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-V3.6.9-Release-240123 <https://drive.google.com/file/d/1y66Uk5MELuQVhmu1Eb-v8brTB5jKSHCK/view?usp=sharing>`

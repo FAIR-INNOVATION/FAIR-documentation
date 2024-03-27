@@ -16,6 +16,7 @@ Welcome to FAIR's documentation!
 
    CobotsManual/intro
    SDKManual/index
+   VMMachine/vm_intro
 
 .. toctree:: 
    :maxdepth: 6
