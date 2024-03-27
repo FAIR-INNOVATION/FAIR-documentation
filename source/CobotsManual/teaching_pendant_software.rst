@@ -1606,9 +1606,9 @@ For the given control point and the given waypoint.
 Weave command
 ++++++++++++++++
 
-Click the "Weave" icon to enter the Weave command editing interface
+Click the "Weave" icon to enter the Weave command editing interface. The "Weave" command consists of two parts.
 
-The "Weave" command consists of two parts. In the first part, select the weaving number with configured parameters, click "Start Weaving" and "Stop Weaving" and apply to add related commands to the program.
+- Select the weaving number with configured parameters, click "Start Weaving" and "Stop Weaving" and apply to add related commands to the program.
 
 .. image:: teaching_pendant_software/110.png
    :width: 6in
@@ -1616,7 +1616,15 @@ The "Weave" command consists of two parts. In the first part, select the weaving
 
 .. centered:: Figure 4.7-5-11 Weave command interface
 
-Click "Configuration and Test" to configure the parameters of the weaving welding. After the configuration is completed, the weaving welding track can be tested by starting the weaving test and stopping the weaving test.
+- Click "Configuration and Test" to select the weaving type according to the usage scenario and configure the weaving parameters. After the configuration is completed, the weaving trajectory can be tested by pressing the start weaving test and stop weaving test buttons. The current swing types are:
+
+   - Triangular wave swing (LIN/ARC)
+   - Vertical L-shaped triangular wave swing (LIN/ARC)
+   - Circular Oscillation - Clockwise (LIN)
+   - Circular Oscillation - Counterclockwise (LIN)
+   - Sine wave swing (LIN/ARC)
+   - Vertical L-shaped sine wave swing (LIN/ARC)
+   - Vertical welding triangle swing
 
 .. image:: teaching_pendant_software/111.png
    :width: 6in

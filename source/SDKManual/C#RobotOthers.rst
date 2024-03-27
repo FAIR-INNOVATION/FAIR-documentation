@@ -366,7 +366,7 @@ Point table update Lua program
     */
     int PointTableUpdateLua(string pointTableName, string luaFileName, ref string errorStr);
 
-example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -384,4 +384,56 @@ example
         Console.WriteLine($"PointTableSwitch rtn  is {rtn}" + errorStr);
         rtn = robot.ProgramLoad("/fruser/test.lua");
         rtn = robot.ProgramRun();
+    }
+
+Initialize log parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Initialize log parameters
+    * @param [in] logType：Output mode，DIRECT-direct output；BUFFER-buffered output；ASYNC-asynchronous output
+    * @param [in] logLevel：Filter the log level value，ERROR、WARNING、INFO and DEBUG
+    * @param [in] filePath: File save path，“D://Log/”
+    * @param [in] saveFileNum：Number of saved files,The files that exceed the number of files to be saved and the number of days to be saved will be deleted
+    * @param [in] saveDays: Number of days to save the file,The files that exceed the number of files to be saved and the number of days to be saved will be deleted
+    * @return Error Code
+    */
+    public int LoggerInit(FrLogType logType = FrLogType.DIRECT, FrLogLevel logLevel = FrLogLevel.ERROR, string filePath = "", int saveFileNum = 10, int saveDays = 10);
+
+Set the log filtering level
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the log filtering level;
+    * @param [in] logLevel: Filter the log level value，ERROR、WARNING、INFO and DEBUG
+    * @return Error code
+    */
+    public int SetLoggerLevel(FrLogLevel logLevel);
+
+
+Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
+
+.. code-block:: c#
+    :linenos:
+
+    private void btnTestLog_Click(object sender, EventArgs e)
+    {
+        robot = new Robot();
+        robot.RPC("192.168.58.2"); 
+        string path = "D://log/";
+        robot.LoggerInit(FrLogType.ASYNC, FrLogLevel.DEBUG, path, 5, 5);
+        robot.SetLoggerLevel(FrLogLevel.INFO);
     }
