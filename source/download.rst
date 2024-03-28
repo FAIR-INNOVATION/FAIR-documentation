@@ -41,7 +41,7 @@ Ontology & Dimensional Drawings
 
 FAIRINO SimMachine
 -----------------------
-    :download:`FAIRINO SimMachine <https://pan.baidu.com/s/11yp-X-AlN-OyhzWV9rDlbQ?pwd=lp85>`
+    :download:`FAIRINO SimMachine <https://drive.google.com/drive/folders/1C7bpnjDKOTsugNyl99gS5cHgCI6b2-0o?usp=sharing>`
 
 Robot software
 ---------------------------------
