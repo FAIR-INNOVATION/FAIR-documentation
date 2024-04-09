@@ -658,7 +658,7 @@ As shown in Figure 5.5-12, in the "Servo drive debugging" bar, select the corres
 
 **Location Mode** : You can enter a certain motion speed and target position parameters, the servo will move to the target position at the set speed, after moving to the target position, the servo will stop moving.
 
-**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down;
+**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down.
 
 - Click the "Enable" button. In the "Servo Status Bar" on the right of the WebApp, you can observe that the "Enable" status is on, indicating that the servo drive is enabled.
 - Click the "Disable" button in the "Servo Drive Debugging" bar, the "Enable" status light in the "Servo status bar" is off, and the servo enable is turned off.
@@ -775,11 +775,11 @@ Extended axis programming
 
   The meanings of the three parameters in the commands function are:
 
-  - 1: Servo number is 1;
+  - 1: Servo number is 1.
 
-  - 50: Target position;
+  - 50: Target position.
 
-  - 5: Target speed;
+  - 5: Target speed.
 
 .. figure:: robot_peripherals/085.png
    :align: center
