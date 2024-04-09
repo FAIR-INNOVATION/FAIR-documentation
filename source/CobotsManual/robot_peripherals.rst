@@ -540,38 +540,8 @@ Configuration steps
 
 .. centered:: Figure 5.5-6 Extended axis command editing
 
-Controller + Servo drive (485)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Step1**: First configure the parameters of the servo drive. Set the servo drive serial number, servo drive manufacturer, servo drive model, servo drive software version, encoder resolution and mechanical transmission ratio. Click the "Clear" button to clear the configuration of the current servo drive number. After successful configuration, obtain the servo drive configuration list data.
-
-.. figure:: robot_peripherals/069.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.5-7 Configure servo drive parameters
-
-**Step2**: Before debugging the servo drive, be sure to set the servo drive number first, and then set the control mode after the setting is successful. Set the homing method, homing speed and zero hoop speed. When selecting "Position Mode", set "Target Position" and "Running Speed"; select "Speed Mode" to set "Target Speed".
-
-.. important::
-  Before setting the control mode, if the servo is enabled, please disable it first, otherwise the setting will not take effect.
-
-.. figure:: robot_peripherals/067.png
-  :align: center
-  :width: 3in
-
-.. centered:: Figure 5.5-8 Servo drive debugging
-
-**Step3**: Select the "Extended Axis" command on the program teaching command interface. According to the specific program teaching needs, add instructions in the corresponding places.
-
-.. figure:: robot_peripherals/068.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.5-9 Extended Axis InstructionEdit
-
 Extended axis with laser tracking welding teaching program
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table:: 
    :widths: 15 40 100
@@ -616,6 +586,265 @@ Extended axis with laser tracking welding teaching program
    * - 12
      - LTTrackOff
      - #Laser tracking off
+
+Controller + Servo drive (485)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hardware cable connection
+++++++++++++++++++++++++++++++
+
+Figure 5.5-7 shows the schematic diagram of the electrical interface of the control box of FR robot. Before using RS485 communication to control the servo extension shaft, please connect the RS485 communication interface of the servo driver to the RS485 communication interface on the robot control box.
+
+.. figure:: robot_peripherals/067.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-7 Schematic diagram of electrical interface of FR robot easy manufacturing control box
+
+Take Dynatec servo driver FD100-750C as an example, Figure 5.5-8 is the schematic diagram of the driver panel terminal, Figure 5.5-9 is the definition of the X3A-IN terminal of FD100-750C, when the robot is configured to communicate with the FD100-750C servo extension shaft, Connect the 485-A0 and 485-B0 terminals on the control box to pins 4 and 5 of the X3A-IN terminal of the driver.
+
+.. note:: 
+  Please note: you can see a "485" mark on the servo driver panel, the terminal is not open for user use, do not connect your RS485 communication cable to this terminal. 
+
+At the same time, if multiple servo drivers are connected and the driver is the last one in the link, turn on the DIP switch (DIP switch 2) of the RS485 communication interrupt resistance on the panel.
+
+.. figure:: robot_peripherals/067.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-8 FD100-750C driver panel
+
+.. figure:: robot_peripherals/067.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-9 X3A-IN terminal definition of FD100-750C
+
+Communication configuration
+++++++++++++++++++++++++++++++
+
+**Step1**: After ensuring that your RS485 communication cable is correctly connected, the robot and servo extension shaft are powered on, open the robot WebApp, click "Initialize", " Peripheral Config" and "Ext axis" successively to open the "Extension axis Configuration" page,as shown in Figure 5.5-10.
+
+.. figure:: robot_peripherals/073.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-10 RS485 expansion axis configuration
+
+**Step2**: On the "Expansion Axis Configuration" page, select the Combination as "Controller + Servo driver(485)" and ID as "1".
+
+.. note:: 
+  Please note: When connecting multiple servos, this ID is used to distinguish different servos, we will mention this ID many times later.
+
+The Servo manufacturer is "Dynatec", select the model and the software version, fill in the corresponding Resolution of the servo drive, here is 131072, Fill in the mechanical transmission ratio according to your mechanism model, here is 15.45; Click the "Configure" button.
+
+**Step3**: At this point, we have completed the 485 communication configuration between the robot and the servo drive. You can view the real-time status information of the servo in the "Servo status bar" on the right of the WebApp (Figure 5.5-11).
+
+.. figure:: robot_peripherals/074.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-11 Servo status bar
+
+Now you can perform a certain motion test on the expansion shaft equipment, please follow the following test operations under the premise of ensuring safety.
+
+Servo control mode and enablement
+**********************************************
+
+As shown in Figure 5.5-12, in the "Servo drive debugging" bar, select the corresponding servo ID and click the "Set" button on the right; Select the control mode as "Location mode" and click the "Configure" button on the right.
+
+.. note:: 
+  Please note: After switching the control mode, the servo needs to be disabled and then enabled to make the servo control mode switch take effect.
+
+**Location Mode** : You can enter a certain motion speed and target position parameters, the servo will move to the target position at the set speed, after moving to the target position, the servo will stop moving.
+
+**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down;
+
+- Click the "Enable" button. In the "Servo Status Bar" on the right of the WebApp, you can observe that the "Enable" status is on, indicating that the servo drive is enabled.
+- Click the "Disable" button in the "Servo Drive Debugging" bar, the "Enable" status light in the "Servo status bar" is off, and the servo enable is turned off.
+
+.. figure:: robot_peripherals/075.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-12 Servo driver debugging page
+
+Servo homing
+**********************************************
+
+As shown in Figure 5.5-13, the Zero return mode is selected as "current position return to zero", the Zero seeking speed is 5mm/s, and the Zero point gripper speed is 1mm/s.
+
+Click the "Set" button to complete the operation of the current position homing. In the "servo status bar", it can be observed that the current "servo position" is 0.
+
+.. important::
+  Please read this manual completely, and then select the homing mode as "negative limit homing" or "positive limit homing" for homing test.
+
+.. figure:: robot_peripherals/076.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-13 Servo homing debugging
+
+Servo motion
+**********************************************
+
+Before the actual control of the servo motor movement, please first understand the servo motor "Location mode" and "speed mode", once again remind you:
+
+**Location Mode** : You can enter a certain motion speed and target position parameters, the servo will move to the target position at the set speed, after moving to the target position, the servo will stop moving.
+
+**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down;
+
+As shown in Figure 5.5-14, when the control mode of the expansion axis is switched, the display of "Current control mode" will automatically switch
+
+.. note::
+  Please note: After the control mode is switched, the servo must be unenabled and then enabled, so that the control mode switch of the servo will take effect.
+
+If your servo is not currently in Location Mode, switch your servo to Location mode. Enter "target position" as 50mm, running speed as 5mm/s, under the condition of confirming safety, click "Set" button, then the servo motor will move according to the parameters set by you, you can observe the servo position and speed in real time in the "servo status bar".
+
+.. figure:: robot_peripherals/077.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-14 Servo motion debugging (Location mode)
+
+Change the control mode of the servo to "Speed mode", click "Disable", then click "Enable", then the servo switches to speed mode.
+
+.. note:: 
+  Please note: when the servo motor is moving, the servo motor can only be stopped by setting the target speed to 0.
+
+Enter the target speed of 5mm/s, click the "Set" button, the servo motor will keep moving at 5mm/s, you can also observe the servo position and speed in the "servo status bar" in real time.
+
+.. figure:: robot_peripherals/078.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-15 Servo motion debugging (speed mode)
+
+Extended axis programming
+++++++++++++++++++++++++++++++
+
+**Step1**: Create a new user program "testServo.lua", and select "Peripheral Command".
+
+.. figure:: robot_peripherals/079.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-16 Open peripheral Commands
+
+**Step2**: Click "Eaxis" to open the interface of adding extension axis commands.
+
+.. figure:: robot_peripherals/080.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-17 Opens the Add extension axis commands page
+
+**Step3**: select the Combination s "Controller + servo drive (485)" on the Add extension axis commands page, set the control mode as "Location mode", and click the "Add" button on the right.
+
+.. figure:: robot_peripherals/081.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-18 Sets the control mode for the extension axis
+
+**Step4**: Flip the Add extension axis commands interface to the bottom, click the "Apply" button, and close the Add extension axis commands interface.
+
+.. figure:: robot_peripherals/082.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-19 Apply the extension axis commands
+
+**Step5**: At this time, a set of commands to switch the servo control mode will appear in the program "testServo.lua". You can switch the robot to the automatic mode and execute the program.
+
+.. figure:: robot_peripherals/083.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-20 Setup servo control mode program
+
+**Step6**: How to control servo motion through user program? Also open the interface of adding extension axis commands , find the parameter configuration bar, take the Location mode as an example, enter the target position and running speed, and click "Add" button; Flip to the bottom of the Add Extension Axis commands screen, click the "Apply" button, and close the Add extension axis commands screen.
+
+.. figure:: robot_peripherals/084.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.5-21 Add Location mode motion commands
+
+**Step7**: Servo motion commands have been added to the "testServo.lua" program: "AuxServoSetTargetPos,50,5 (1)".
+
+  The meanings of the three parameters in the commands function are:
+
+  - 1: Servo number is 1;
+
+  - 50: Target position;
+
+  - 5: Target speed;
+
+.. figure:: robot_peripherals/085.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.5-22 Location mode servo motion program
+
+**Step8**: Switch the robot to automatic mode and run the program, at which time your servo will move at a speed of 5mm/s to a position of 50mm.
+
+**Step9**: At this point, we have completed the preliminary configuration and testing of the RS485 control servo extension shaft, and you can write the program of the combination of robot motion and servo motion according to the actual situation.
+
+Example of cooperative motion program between extension axis and robot:
+
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - S/N
+     - Instruction format
+     - notes
+   * - 1
+     - AuxServoSetTargetPos(1,50,5)
+     - #The extended axis moves to the reset point
+   * - 2
+     - if(GetDI(8,0) == 1) then
+     - #If the CI0 input is valid
+   * - 3
+     - AuxServoSetTargetPos(1,50,5)
+     - #Expansion shaft movement to 50mm
+   * - 4
+     - PTP(testptp1,100,-1,0)
+     - #Robot moves to point testptp1
+   * - 5
+     - else if(GetDI(9,0) == 1) then
+     - #If the CI1 input is valid
+   * - 6
+     - AuxServoSetTargetPos(1,150,5)
+     - #Expansion shaft movement to 150mm
+   * - 7
+     - PTP(testptp2,100,-1,0)
+     - #Robot moves to point testptp2
+   * - 8
+     - else
+     - #If both CI0 and CI1 inputs are invalid
+   * - 9
+     - AuxServoSetTargetPos(1,300,5)
+     - #The expansion shaft moves to 300mm
+   * - 10
+     - PTP(testptp3,100,-1,0)
+     - #Robot moves to testptp3
+   * - 11
+     - end
+     - 
+
+Summary
+++++++++++++++++++++++++++++++
+
+.. important:: 
+  In summary, there are the following points to note when configuring the RS485 communication between the cooperative robot and the servo expansion axis:
+  
+  1. Correctly connect the RS485 communication cable between the cooperative robot and the servo driver;
+  
+  2. Correctly select the control mode of the servo extension axis;
+  
+  3. After switching the control mode, you must first disable, and then enable the servo, the control mode switch can take effect.
 
 Conveyor Tracking Configuration
 -----------------------------------
