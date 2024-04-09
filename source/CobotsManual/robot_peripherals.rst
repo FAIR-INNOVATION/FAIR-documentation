@@ -599,7 +599,7 @@ Figure 5.5-7 shows the schematic diagram of the electrical interface of the cont
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.5-7 Schematic diagram of electrical interface of FR robot easy manufacturing control box
+.. centered:: Figure 5.5-7 Schematic diagram of electrical interface of FR robot integrated mini control box
 
 Take Dynatec servo driver FD100-750C as an example, Figure 5.5-8 is the schematic diagram of the driver panel terminal, Figure 5.5-9 is the definition of the X3A-IN terminal of FD100-750C, when the robot is configured to communicate with the FD100-750C servo extension shaft, Connect the 485-A0 and 485-B0 terminals on the control box to pins 4 and 5 of the X3A-IN terminal of the driver.
 
@@ -692,9 +692,9 @@ Before the actual control of the servo motor movement, please first understand t
 
 **Location Mode** : You can enter a certain motion speed and target position parameters, the servo will move to the target position at the set speed, after moving to the target position, the servo will stop moving.
 
-**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down;
+**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down.
 
-As shown in Figure 5.5-14, when the control mode of the expansion axis is switched, the display of "Current control mode" will automatically switch
+As shown in Figure 5.5-14, when the control mode of the expansion axis is switched, the display of "Current control mode" will automatically switch.
 
 .. note::
   Please note: After the control mode is switched, the servo must be unenabled and then enabled, so that the control mode switch of the servo will take effect.
