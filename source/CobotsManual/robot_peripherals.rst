@@ -608,13 +608,13 @@ Take Dynatec servo driver FD100-750C as an example, Figure 5.5-8 is the schemati
 
 At the same time, if multiple servo drivers are connected and the driver is the last one in the link, turn on the DIP switch (DIP switch 2) of the RS485 communication interrupt resistance on the panel.
 
-.. figure:: robot_peripherals/067.png
+.. figure:: robot_peripherals/068.png
    :align: center
    :width: 6in
 
 .. centered:: Figure 5.5-8 FD100-750C driver panel
 
-.. figure:: robot_peripherals/067.png
+.. figure:: robot_peripherals/069.png
    :align: center
    :width: 6in
 
