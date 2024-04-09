@@ -789,9 +789,10 @@ Extended axis programming
 
 **Step8**: Switch the robot to automatic mode and run the program, at which time your servo will move at a speed of 5mm/s to a position of 50mm.
 
-**Step9**: At this point, we have completed the preliminary configuration and testing of the RS485 control servo extension shaft, and you can write the program of the combination of robot motion and servo motion according to the actual situation.
+At this point, we have completed the preliminary configuration and testing of the RS485 control servo extension shaft, and you can write the program of the combination of robot motion and servo motion according to the actual situation.
 
-Example of cooperative motion program between extension axis and robot:
+Example of cooperative motion program between extension axis and robot
+********************************************************************************************
 
 .. list-table:: 
    :widths: 15 40 100
@@ -837,8 +838,7 @@ Example of cooperative motion program between extension axis and robot:
 Summary
 ++++++++++++++++++++++++++++++
 
-.. important:: 
-  In summary, there are the following points to note when configuring the RS485 communication between the cooperative robot and the servo expansion axis:
+In summary, there are the following points to note when configuring the RS485 communication between the cooperative robot and the servo expansion axis:
   
   1. Correctly connect the RS485 communication cable between the cooperative robot and the servo driver;
   
