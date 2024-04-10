@@ -840,11 +840,11 @@ Summary
 
 In summary, there are the following points to note when configuring the RS485 communication between the cooperative robot and the servo expansion axis:
   
-  1. Correctly connect the RS485 communication cable between the cooperative robot and the servo driver;
-  
-  2. Correctly select the control mode of the servo extension axis;
-  
-  3. After switching the control mode, you must first disable, and then enable the servo, the control mode switch can take effect.
+1. Correctly connect the RS485 communication cable between the cooperative robot and the servo driver;
+
+2. Correctly select the control mode of the servo extension axis;
+
+3. After switching the control mode, you must first disable, and then enable the servo, the control mode switch can take effect.
 
 Conveyor Tracking Configuration
 -----------------------------------
