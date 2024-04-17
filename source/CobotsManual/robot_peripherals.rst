@@ -277,192 +277,463 @@ When a welding interruption occurs, a warning prompts that the current welding h
 Sensor Peripheral Configuration
 ---------------------------------
 
-Sensor Peripheral Configuration Steps
+The FR cooperative robot is used in cooperation with the laser sensor, and the sensor can identify the characteristic positions such as welding seam to simplify programming and improve production efficiency. The cooperative robot can adapt to the laser sensors of Ruiniu, Chuangxiang and Quanshi, and only need to load the corresponding communication protocol when using different sensors.
+
+Hardware wiring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**: Select the "Sensor Configuration" button in the user peripheral configuration interface. This section takes the end of the robot as an example.
+Before using the laser sensor, it is necessary to install the laser sensor in a suitable position, and connect the network cable of the laser sensor directly or through a switch to any RJ45 interface of the robot control box.
 
-- The user first sets the maximum difference. The maximum difference of the sensor scanning deviation points is recommended to be set to 4 by default. Data processing is based on actual use. The scene selects raw data or YZ data.
-- The controller IP defaults to 192.168.57.2, the sensor IP can be configured on the same network segment, the port is 5020, and the sampling period is recommended to be 25. The communication protocol is currently adapted to the communication protocols of Ruiniu, Chuangxiang and Quanshi, just load the corresponding protocol.
-- After the loading is complete, the sensor can be tested by pressing the "Sensor On" and "Sensor Off" buttons.
+Sensor configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Please make sure that your laser sensor and welding torch have been fixedly installed at the end of the robot, the laser sensor has been connected with the robot control box through a network cable, and the IP address of the laser sensor and the robot control box is in the same network segment. Turn on the power supply of the robot and the sensor. The figure below shows the installation of Ruiniu laser sensor.
 
 .. figure:: robot_peripherals/011.png
    :align: center
-   :width: 3in
+   :width: 6in
 
-.. centered:: Figure 5.4-1 Laser tracking sensor IP configuration
+.. centered:: Figure 5.4-1 Installation of laser sensor
 
-.. important:: 
-	1. Before using the sensor function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is usually used with sensors.
-	2. The maximum difference of the sensor is the maximum deviation between the laser scanning weld position at the previous moment and the current moment, the range is [0~10], the unit is mm, and the recommended value is 4.
-
-**Step2**: Calibration sensor reference point.
-
-In the tool coordinate system setting function, we calibrate the sensor type tool and use the six-point method to configure the sensor coordinate system.
-
-- Select a fixed point in the robot workspace, move the sensor center point to the selected point from three different angles, and set points 1, 2, and 3 respectively.
-- Move the sensor center point vertically directly above the selected point and record point 4.
-- Move the sensor center point from a fixed point to a point in the X-axis direction of the sensor coordinate system, and set point 5. 
-- Return to the fixed point, move vertically upwards, and move the sensor center point from the fixed point to a point in the Z-axis direction of the sensor coordinate system, and set it as point 6.
-- Click Calculate to get the pose of the sensor tool, and click Apply to complete. If you do not want to apply the results, click the "Cancel" button to recalibrate.
+As shown in the figure, open the robot WebApp, click “Initialize”, “Peripheral Config” and “Sensor Tracking” in turn, enter the IP address and port number of the sensor in the communication configuration column, click the Configure button, the default sampling period is 25, and the coordinate system is “LXLYLZ”. Select the corresponding communication protocol according to your sensor model, and click the Load button.
 
 .. figure:: robot_peripherals/012.png
    :align: center
-   :width: 3in
+   :width: 6in
 
-.. centered:: Figure 5.4-2 Reference Point Configuration - Six Point Method
+.. centered:: Figure 5.4-2 Laser sensor configuration
 
-**Eight point method**: In the tool coordinate system setting function, we calibrate the sensor type tool, use the eight-point method to configure the sensor coordinate system, select the eight-point method.
-
-- Move the sensor laser line to coincide with the calibration line on the calibration board, and keep the sensor and the calibration line as close as possible Closer distance and the calibration point is recognized, record point 1.
-- Move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 2.
-- Move about 20mm in the -x/+x direction, and adjust the robot so that the laser Recognize the calibration point, record point 3.
-- Move about 20mm in the -y/+y direction, adjust the robot so that the laser recognizes the calibration point, record point 4.
-- Move about 5mm in the -rx direction, adjust the robot so that the laser recognizes the calibration point, and record the point 5.
-- Move about 5mm in the -ry direction, adjust the robot so that the laser recognizes the calibration point, record point 6.
-- move about 5mm in the -rz direction, adjust the robot so that the sensor recognizes the calibration point, record point 7.
-- Move about 5mm in the -rz direction, and adjust the robot so that Laser recognition to the calibration point, record point 8.
-- Click Calculate to get the sensor pose, click Apply to complete. If you do not want to apply the results, click the "Cancel" button to recalibrate.
+As shown in the figure, find the "Tracking Sensor Test" column in the "Sensor Tracking" page, and click "Open sensor" and "Close sensor" in turn to observe whether the laser of the sensor is turned on or off. If the laser is turned on or off normally, it means that the communication between the robot and the sensor has been established normally. Otherwise, please check whether the parameters such as IP address and port number are correct, and whether the sensor is connected to the robot network correctly.
 
 .. figure:: robot_peripherals/013.png
    :align: center
-   :width: 3in
+   :width: 6in
 
-.. centered:: Figure 5.4-3 Reference Point Configuration - Eight Points Method
+.. centered:: Figure 5.4-3 Communication test of laser sensor
 
-**Five point method**: In the tool coordinate system setting function, we calibrate the sensor type tool and use the five-point method to configure the sensor coordinate system.
+Sensor calibration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- First, determine a fixed point, align the end of the tool with this point, record point 1.
-- And then adjust the posture of the robot so that the laser recognizes Record fixed points, respectively record points 2 to 5, and note that the attitude change needs to be as large as possible.
-- Click Calculate to get the sensor pose, click Apply to complete. If you feel that the accuracy is not as expected, click the "Cancel" button to recalibrate.
+It is necessary to calibrate the laser sensor before using it, and the calibration accuracy directly affects the tracking accuracy of the laser sensor. There are five-point method, six-point method and eight-point method for laser sensor calibration. Take the most commonly used five-point method in welding application scene as an example. Its calibration principle is to point to a fixed calibration point through a tool (welding torch), and then illuminate and identify the point from four different postures through the laser sensor.
+
+.. note:: 
+  Please note: the calibration point must be accurately identified by the laser sensor, otherwise it cannot be accurately calibrated.
+
+And then calculate the coordinate posture of the sensor, as follows.
 
 .. figure:: robot_peripherals/014.png
    :align: center
-   :width: 3in
+   :width: 6in
 
-.. centered:: Figure 5.4-4 Reference Point Configuration - Five Points Method
+.. centered:: Figure 5.4-4 Calibration point of laser sensor
 
-.. figure:: robot_peripherals/071.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.4-5 Five Points Method - Sensor output value
-
-.. figure:: robot_peripherals/072.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.4-6 Five Points Method - Accuracy
-
-Laser sensor tracking function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Command description: Select the "Laser" command on the program teaching command interface. It integrates laser-related instructions. According to the specific program teaching requirements, add instructions in the corresponding places. Refer to the program example below.
+**Step1**: Open the robot WebApp, click “Initialize”, Robot Settings and Tool coord in turn, select an unused tool coordinate system, and clickto change its name to "Welding ", tool type to "tool" and installation location to "end", as shown in the figures.
 
 .. figure:: robot_peripherals/015.png
    :align: center
-   :width: 3in
+   :width: 6in
 
-.. centered:: Figure 5.4-5 Laser Tracking Command Editing
+.. centered:: Figure 5.4-5 Setting "Welding Coordinate System"
 
-program example: 
+.. figure:: robot_peripherals/016.png
+   :align: center
+   :width: 6in
 
-.. list-table:: 
-   :widths: 15 40 100
-   :header-rows: 1
+.. centered:: Figure 5.4-6 Setting the coordinate system of "Welding"
 
-   * - S/N
-     - Instruction format
-     - notes
-   * - 1
-     - LTLaserOn(2)
-     - #Turn on the sensor
-   * - 2
-     - PTP(template1,100,-1,0)
-     - #Sensor starting point
-   * - 3
-     - LTSearchStart(1,20,100,10000,2)
-     - #Start searching
-   * - 4
-     - LTSearchStop()
-     - #Stop searching
-   * - 5
-     - Lin(seamPos,20,-1,0,0,0)
-     - #Start of weld
-   * - 6
-     - LTTrackOn(2)
-     - #Laser tracking
-   * - 7
-     - ARCStart(0,10000)
-     - #Arc striking of welder
-   * - 8
-     - Lin(SeamEnd11,10-1,0,0)
-     - #End of weld
-   * - 9
-     - ARCEnd(0,10000)
-     - #Arc extinguishing of welder
-   * - 10
-     - LTTrackOff()
-     - #Sensor tracking off
-   * - 11
-     - LTLaserOff()
-     - #Turn off the sensor
-
-Laser sensor trajectory reproduction function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Command description: Select the "LT-Rec" command on the program teaching command interface. This instruction is mainly used for obtaining the starting point and end point of the laser recognition path and reappearing the trajectory. According to the specific program teaching requirements, add instructions in the corresponding places. Refer to the program example below.
+As shown in the figure, select an unused coordinate system again, change its name to "LaserSensor", select the tool type as "sensor" and the installation location as "end".
 
 .. figure:: robot_peripherals/017.png
    :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-7 Setting the coordinate system of "laser sensor"
+
+**Step2**: Calibrate the tool coordinate system of the welding torch by six-point method: select the "Welding" coordinate system, click the modify button, and calibrate the tool coordinate system of the welding torch by six-point method (refer to the FR document for the specific calibration method, which will not be repeated here).
+
+.. figure:: robot_peripherals/018.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-8 "Welding" coordinate system calibration 1
+
+.. figure:: robot_peripherals/071.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-9 "Welding" coordinate system calibration 2
+
+**Step3**: As shown in the figure, in Tool Coordinate System Settings, select No.0 coordinate system (base coordinate system), and the default name is "toolcoord0", and click "Apply" to switch the current coordinate system to the base coordinate system.
+
+.. figure:: robot_peripherals/072.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-10  Sensor calibration step 1
+
+**Step4**: As shown in the figure, select the previously set coordinate system of "LaserSensor" again (don't click "Apply"), click the "Modify" button, select the tool type as "Sensor", fix the sensor at the robot end, and select "Five Points Method" in the modification wizard.
+
+.. figure:: robot_peripherals/086.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-11 Sensor Calibration Step 2
+
+**Step5**: Drag the robot to aim the tip of the welding torch at the calibration point, select the coordinate system of "Welding", click "Apply" and click "Set point 1", as shown in the figure.
+
+.. figure:: robot_peripherals/087.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-12 Sensor Calibration Step 3
+
+.. figure:: robot_peripherals/088.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-13 Sensor Calibration Step 4
+
+**Step6**: Select coordinate system No.0 again ("toolcoord0") and click Apply; Then select the "Sensor" coordinate system (don't click "Apply") and click "Modify" to continue the calibration.
+
+.. figure:: robot_peripherals/089.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-14 Sensor Calibration 5
+
+.. figure:: robot_peripherals/090.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-15 Sensor Calibration 6
+
+**Step7**: Move the position of the laser sensor so that the laser just scans to the calibration point, and click "Set Point 2"; At this time, the current sensor data will be displayed at the position corresponding to the serial number of the sensor output value on the left. If the data is normal, it means that the current calibration point is successful, otherwise it needs to be calibrated again.
+
+.. figure:: robot_peripherals/091.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-16 Sensor Calibration 7
+
+.. figure:: robot_peripherals/092.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-17 Sensor Calibration 8
+
+.. figure:: robot_peripherals/093.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-18 Sensor Calibration 9
+
+**Step8**: Make the laser irradiate the calibration points from three different postures in turn, and click "Setpoint 3", "Setpoint 4" and "Setpoint 5" respectively, and finally click the "Calculate" button under the condition that the data of each point is normal.
+
+.. figure:: robot_peripherals/094.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-19 Sensor Calibration 10
+
+**Step9**: At this time, the calibration result and precision of the sensor are displayed on the WebApp, and click the "Apply" button to complete the calibration of the laser sensor. If the calibration accuracy is too poor, you can choose to click the "Cancel" button and calibrate again.
+
+.. figure:: robot_peripherals/095.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-20 sensor calibration accuracy
+
+laser sensor application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: robot_peripherals/096.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-21 Application of welding coordinate system
+
+Before using the laser sensor, apply the "Welding" tool coordinate system to the current tool coordinate system.
+
+Laser sensor teaching point
++++++++++++++++++++++++++++++++
+
+As shown in the figure, drag the robot to make the laser sensor light point to the weld point to be taught. As shown in the figure, select the sensor as "Laser Sensor" in the WebApp, enter the sensor name as "laserPt", and click the "Add" button. Create a new user program "testLaser.lua", create a motion command LIN, select "laserPt" as the target point, and execute the command in one step. At this time, the welding torch will move to the pointing point of the previous laser sensor.
+
+.. figure:: robot_peripherals/097.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-22  Laser Sensing Weld Point
+
+.. figure:: robot_peripherals/098.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-23 Teaching sensor points
+
+.. figure:: robot_peripherals/099.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-24 The welding points to the weld point
+
+Laser Positioning+Tracking
++++++++++++++++++++++++++++++++
+
+It takes several steps for the cooperative robot to cooperate with the laser sensor to complete the laser positioning+laser tracking function:
+
+(1) The robot moves to a certain point outside the weld;
+(2) Laser positioning is started, and the robot carries the laser sensor to move to the weld position;
+(3) The laser sensor recognizes the weld, and the robot drives the welding torch to move to the weld recognition point;
+(4) Laser tracking starts, and at the same time, the robot moves to the end of the weld, and the laser sensor records the position in real time during the movement;
+(5) The welding torch moves along the position recorded by the laser sensor to realize the tracking effect.
+
+Before positioning, tracking and debugging, please ensure that the sensor has been installed correctly, the coordinate system of the "welding" tool has been calibrated correctly, and the laser sensor has been calibrated correctly. As shown in the figure, assuming that the green straight line in the figure is the weld to be welded, the robot can automatically find the welding starting point A and weld to the point B, and the following commands need to be written:
+
+.. figure:: robot_peripherals/100.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-25 Sensor Installation
+
+Write the positioning command
+**********************************************
+
+As shown in the figure, create a new user program "laserTrack.lua" and select "welding command".
+
+.. figure:: robot_peripherals/101.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-26 Add location command
+
+As shown in the figure, click "Laser" to pop up the laser tracking command adding page.
+
+.. figure:: robot_peripherals/102.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-27 Laser tracking command
+
+As shown in Figure  28, find the "Location command", select the coordinate system as "LaserSensor", and select "+x" as the direction to indicate that the robot is searching for the weld while moving with the laser sensor along the "+x" direction of the coordinate system of "Welding" from the current position, and "speed" is the moving speed of laser sensor seeking, and the length is the maximum seeking length of laser sensor, and the robot will report when the robot fails to find the weld when the seeking distance exceeds this length. Please enter the above parameters correctly according to the actual scene. Click the "Start locating" and "End locating" commands in turn, and click the "Apply" button.
+
+.. figure:: robot_peripherals/103.png
+   :align: center
    :width: 3in
 
-.. centered:: Figure 5.4-6 Editing of track reappearance command
+.. centered:: Figure 5.4-28 Add loaction command
 
-Program example:
+At this time, the corresponding commands for the start and end of laser positioning will be added in "laserTrack.lua".
 
-.. list-table:: 
-   :widths: 15 40 100
-   :header-rows: 1
+.. figure:: robot_peripherals/104.png
+   :align: center
+   :width: 6in
 
-   * - S/N
-     - Instruction format
-     - notes
-   * - 1
-     - PTP(template1,100,-1,0)
-     - #Move to starting point
-   * - 2
-     - LaserSensorRecord(2,0,30)
-     - #Sensor start recording
-   * - 3
-     - Lin(template2,100,-1,0,0)
-     - #Move to the end
-   * - 4
-     - LaserSensorRecord(0,0,30)
-     - #Stop recording
-   * - 5
-     - pos={}
-     - #Initialize array
-   * - 6
-     - pos=GetWeldTrackingRecordStartPos(0,30)
-     - #Start point for obtaining laser record
-   * - 7
-     - If type(pos) == “table” then
-     - #Judge data type
-   * - 8
-     - LaserPTP(#pos,pos)
-     - #Move to the starting point of the laser track
-   * - 9
-     - end
-     - /
-   * - 10
-     - LaserSensorRecord(3,0,30)
-     - #Set Recurrence Track
-   * - 11
-     - MoveLTR()
-     - #Start reproducing track
-   * - 12
-     - LaserSensorRecord(0,0,30)
-     - #End
+.. centered:: Figure 5.4-29 Locating procedure
+
+Write the command of moving to seek position
+**********************************************
+
+Add LIN command of point-to-point motion, as shown in the figure, the target point is seamPos, that is, the laser sensor seeking point.
+
+.. note:: 
+  Please note: seamPos point is the name of the point in the robot system dedicated to laser sensor seeking, so it is not necessary to teach this point, and the laser sensor will automatically store the seeking point information in seamPos point after seeking.
+
+And the seeking point can be set with offset, and the offset type can be selected from "Base coordinate offset" and "tool coordinate offset".
+
+.. figure:: robot_peripherals/105.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-30 Locating Offset Option
+
+As shown in the figure, when the seek offset function is enabled, the offset parameters can be set, where "dx" represents the offset distance along the X direction of the selected coordinate system and "drx" represents the rotation angle along the X axis of the selected coordinate system. Click the "Add" button and click the "Apply" button.
+
+.. figure:: robot_peripherals/106.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-31 Setting of locating offset parameters
+
+At this time, the command to move to the seeking point will be added in "testTrack.lua", as shown in the figure.
+
+.. figure:: robot_peripherals/107.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-32 Locating offset procedure
+
+Writing laser tracking commands
+**********************************************
+
+Open the "Laser" command adding page again, as shown in the figure.
+
+.. figure:: robot_peripherals/108.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-33 Laser Tracking
+
+As shown in the figure, click the "Start Tracking" and "Stop Tracking" buttons in the "Laser Tracking" command addition page, and finally click the "Apply" button at the bottom of the page.
+
+.. figure:: robot_peripherals/109.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-34 Start and Stop of Laser Tracking
+
+The user program "testTrack.lua" at this time is shown in the figure:
+
+.. figure:: robot_peripherals/110.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-35 Laser tracking program
+
+Write commands for finding the starting point and tracking the ending point
+********************************************************************************************
+
+Before laser positioning begins, it is necessary to specify a positioning starting point. The robot moves to the positioning starting point first, and then performs positioning along a certain direction and speed. As shown in the figure, the positioning starting point "seamStartPt" is taught near the point A where the laser sensor light is close to the starting point of the weld, and attention should be paid to matching the positioning starting point and the positioning direction to ensure that the robot can find the weld position within the set distance and the maximum positioning time.
+
+.. figure:: robot_peripherals/111.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-36 Locating starting point
+
+As shown in the figure, the tracking end point "Trackedpt" is taught at the weld end.
+
+.. figure:: robot_peripherals/112.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-37 Finding the End Point
+
+Add the above two points to the "testTrack.lua" user program, and the final user program is as follows:
+
+.. figure:: robot_peripherals/113.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-38 Location tracking program
+
+Write welding related commands
+**************************************************
+
+Finally, add a welding command between "seampos" and "trackEndPt", and the final procedure is as follows:
+
+.. figure:: robot_peripherals/114.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-39 Locating and tracking welding procedure
+
+By executing the above program, the robot will start the locating movement with the laser sensor from the locating starting point. After finding the weld, the robot will immediately move to the starting point of the weld, and perform the arc-starting operation. After the arc-starting is successful, the robot will move to the end point of the weld and track the weld trajectory during the movement. After the robot moves to the end point of the weld, it will stop welding.
+
+Laser Track Recording+Track Reproduction
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+The workflow of laser track recording+track reproduction is as follows:
+
+(1) A robot carries a laser sensor to move along a welding seam for a section of trajectory, and the laser sensor records the welding seam position trajectory data in real time during the movement;
+(2) After the trajectory recording is completed, the robot moves to the starting point of trajectory recording;
+(3) The robot performs trajectory reproduction along the trajectory recorded by the laser sensor.
+
+Programming of Robot Trajectory Recording commands
+************************************************************************
+
+Create a new user program "testRecord.lua", click "LT-Rec" to open the laser recording command addition page, and find the "weld data record", as shown in the figure. Select "Start recording", click "Add" button, and select “Stop recording”, and click "Add" button again; Finally click the "Apply" button.
+
+.. figure:: robot_peripherals/115.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-40 Laser recording
+
+.. figure:: robot_peripherals/116.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-41 Start recording and stop recording
+
+At this time, the track recording start and stop commands appear on the page.
+
+.. figure:: robot_peripherals/117.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-42 Trajectory recording program
+
+As shown in the figure, assuming that the green line segment AB in the figure is a weld, the laser is irradiated to the weld starting point A and the weld interruption B respectively, and the starting point "recordStartPt" and the ending point "recordendpt" of trajectory recording are taught.
+
+.. figure:: robot_peripherals/118.png
+   :align: center
+   :width: 6in
+
+.. figure:: robot_peripherals/119.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-43 Starting point and ending point of trajectory recording
+
+Add two linear movement commands to "testRecord.lua", namely, the starting point "recordStartPt" and the ending point "recordEndPt" when moving to the trajectory, and adjust the command positions to make the robot do the following operations: first move to the "recordStartPt" point, start the trajectory recording, and then move the robot to the "recordEndPt" point and stop the trajectory recording.
+
+.. figure:: robot_peripherals/120.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-44 Trajectory recording program
+
+Programming the command of the robot moving to the starting point of trajectory recording
+***************************************************************************************************************
+
+As shown in the figure, click "LT-Rec" to open the page for adding laser recording commands, find the column of "Move to Weld Point", select PTP as the motion mode, enter a certain motion speed, click "Movement to Starting Point" and click "Apply".
+
+.. figure:: robot_peripherals/121.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-45 Movement to the starting point of trajectory
+
+At this time, the user program of "testRecord.lua" is as follows:
+
+.. figure:: robot_peripherals/122.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-46 Program of Moving to the Starting Point of Trajectory
+
+Compilation of Laser Sensor Track Reproduction command
+********************************************************************************
+
+Click "LT-Rec" to open the laser recording command addition page, and find "Weld Data Record", as shown in the figure, select "Track reappearan", click "Add" button, click "Laser Tracking" button, and finally click "Apply" button.
+
+.. figure:: robot_peripherals/123.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4-47 Trajectory Reproduction
+
+The program after adding is as follows:
+
+.. figure:: robot_peripherals/124.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-48 Trajectory Reproduction Program
+
+Compilation of welding related commands
+******************************************************
+
+Finally, add welding start and welding end commands before and after the start and end of trajectory reproduction:
+
+.. figure:: robot_peripherals/125.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-49 Reproducing welding procedure with track record
+
+By executing the above program, the robot will carry the laser sensor to move along the weld trajectory and record the whole trajectory, then the robot will move to the starting point of the trajectory record, and the robot will start welding along the trajectory recorded by the laser sensor. When the robot trajectory reappears, the welding arc will be extinguished and the welding will be completed.
 
 Extended Axis Peripheral Configuration
 -----------------------------------------
