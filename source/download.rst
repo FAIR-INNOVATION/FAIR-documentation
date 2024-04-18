@@ -4,11 +4,11 @@
 
 Brochure
 --------------
-    :download:`FAIRINO Product Manual <_static/_doc/FAIRINO Product Manual.pdf>`
+    :download:`FAIRINO Product Manual <_static/_doc/FAIRINO Product Manual.zip>`
 
 Qualification Certification
 ---------------------------------
-    :download:`FAIRINO CE Certificate <_static/_doc/FAIRINO CE Certificate.pdf>`
+    :download:`FAIRINO CE Certificate <_static/_doc/FAIRINO CE Certificate.zip>`
 
 .. Ecological Accessories
 .. ---------------------------
