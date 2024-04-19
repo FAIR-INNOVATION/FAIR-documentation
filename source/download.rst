@@ -29,6 +29,8 @@ Qualification Certification
     :download:`Explosion-proof Certification <_static/_doc/Explosion-proof certification.zip>`
 
     :download:`CE-EMC Certification <_static/_doc/CE-EMC certification.zip>`
+
+    :download:`CE-MD Certification <_static/_doc/CE-MD certification.zip>`
     
     :download:`Functional Safety Certification <_static/_doc/Functional safety certification.zip>`
 
