@@ -890,7 +890,7 @@ Drive belt tracking stopped
 Transmission belt parameter configuration
 +++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionchanged:: C++SDK-v2.1.2.0
+.. versionchanged:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -910,7 +910,7 @@ Transmission belt parameter configuration
 Grab point compensation
 +++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionchanged:: C++SDK-v2.1.2.0
+.. versionchanged:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -1092,7 +1092,7 @@ Code example
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -1150,7 +1150,7 @@ Code example
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -1269,7 +1269,7 @@ Code example
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:

@@ -614,16 +614,20 @@ Code example
 
 Robot New Spline Motion
 ++++++++++++++++++++++++++++++++
+
 New spline motion start
 -----------------------------------
+
+.. versionchanged:: python SDK-v2.0.3
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``NewSplineStart(type)``"
+    "Prototype", "``NewSplineStart(type, averageTime)``"
     "Description", "New spline motion start"
     "Required parameter", "``type``:0-arc transition, 1-given point position path point"
-    "Optional parameter", "Nothing"
+    "Optional parameter", "``averageTime``: global average connection time (ms), default to 2000"
     "Return value", "Errcode: Success -0  Failed -errcode"
 
 

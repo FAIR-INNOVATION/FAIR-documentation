@@ -389,7 +389,7 @@ Code Example
 Initialize log parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
@@ -408,7 +408,7 @@ Initialize log parameters
 Set the log filtering level
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
@@ -424,7 +424,7 @@ Set the log filtering level
 Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
@@ -436,4 +436,53 @@ Code Example
         string path = "D://log/";
         robot.LoggerInit(FrLogType.ASYNC, FrLogLevel.DEBUG, path, 5, 5);
         robot.SetLoggerLevel(FrLogLevel.INFO);
+    }
+
+Set the robot peripheral protocol
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C# SDK-v1.0.6
+    
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Set the robot peripheral protocol
+    * @param [in] protocol Robot peripheral protocol number 4096-Extended axis control card; 4097-ModbusSlave; 4098-ModbusMaster
+    * @return error code
+    */
+    int SetExDevProtocol(int protocol);
+
+Get the robot peripheral protocol
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C# SDK-v1.0.6
+    
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Get the robot peripheral protocol
+    * @param [out] protocol Robot peripheral protocol number 4096-Extended axis control card; 4097-ModbusSlave; 4098-ModbusMaster
+    * @return error code
+    */
+    int GetExDevProtocol(ref int protocol);
+
+Code Example
+++++++++++++++
+
+.. versionadded:: C# SDK-v1.0.6
+
+.. code-block:: c#
+    :linenos:
+
+    private void btnSetProto_Click(object sender, EventArgs e)
+    {
+        Robot robot = new Robot();
+        robot.RPC("192.168.58.2");
+
+        int protocol = 4098;//ModbusMaster 
+        robot.SetExDevProtocol(protocol);
+
+        robot.GetExDevProtocol(ref protocol);
     }

@@ -144,7 +144,7 @@ Code example
 Download job program
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
@@ -160,7 +160,7 @@ Download job program
 Upload job program
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
@@ -176,7 +176,7 @@ Upload job program
 Delete job program
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
@@ -191,7 +191,7 @@ Delete job program
 Gets all current job program names
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
@@ -206,7 +206,7 @@ Gets all current job program names
 Code example
 ++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.5
+.. versionadded:: C# SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:

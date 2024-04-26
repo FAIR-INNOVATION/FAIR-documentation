@@ -46,7 +46,7 @@ Get the current joint position (Angle)
 Get the current joint position (radians)
 +++++++++++++++++++++++++++++++++++++++++++
 
-.. deprecated:: C++SDK-v2.1.1.0
+.. deprecated:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -510,7 +510,7 @@ Code example
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:

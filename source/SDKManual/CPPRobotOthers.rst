@@ -7,7 +7,7 @@ Others
 Obtain the compensation value of robot DH parameter
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -22,7 +22,7 @@ Obtain the compensation value of robot DH parameter
 Download the point table database
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -38,7 +38,7 @@ Download the point table database
 Upload the point table database
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -53,7 +53,7 @@ Upload the point table database
 Update the LUA file for the point table
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -69,7 +69,7 @@ Update the LUA file for the point table
 Initialize log parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -86,7 +86,7 @@ Initialize log parameters
 Set the log filtering level
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -100,7 +100,7 @@ Set the log filtering level
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -127,7 +127,7 @@ Code example
 	int main(void)
 	{
 		FRRobot robot;
-		robot.LoggerInit(2, "C:/Users/fr/Desktop/c++sdk//sdk_with_log/abcd.log", 2);
+		robot.LoggerInit(2, "C:/Users/fr/Desktop/C++ SDK//sdk_with_log/abcd.log", 2);
 		// robot.LoggerInit();
 		robot.SetLoggerLevel(3);
 		// robot.SetLoggerLevel();

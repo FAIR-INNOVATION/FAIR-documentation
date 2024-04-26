@@ -236,7 +236,7 @@ Wait for tool analog input
 Code example
 ++++++++++++++
 
-.. versionchanged:: C++SDK-v2.1.2.0
+.. versionchanged:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -350,7 +350,7 @@ Code example
 Get robot software version
 +++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -367,7 +367,7 @@ Get robot software version
 Get the robot hardware version
 ++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -389,7 +389,7 @@ Get the robot hardware version
 Get the robot firmware version
 ++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -411,7 +411,7 @@ Get the robot firmware version
 Code example
 ++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:

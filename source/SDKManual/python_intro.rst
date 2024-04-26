@@ -34,4 +34,6 @@ This manual is the secondary development interface document of Python.
     PythonRobotForceControl
     PythonRobotConveyor
     PythonRobotWeld
+    PythonRoboExtendedAxis
     PythonRobotOthers
+    
