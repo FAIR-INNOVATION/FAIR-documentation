@@ -534,3 +534,36 @@ Code example
         robot.GetMotionQueueLength(ref length);
         Console.WriteLine($"GetMotionQueueLength  {length}");
     }
+
+Get the real-time status structure of the robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C# SDK-v1.0.6
+
+.. code-block:: c#
+    :linenos:
+    
+    /** 
+    * @brief Get the real-time status structure of the robot
+    * @param [out] pkg pkg robot real-time status structure
+    * @return error code
+    */
+    int GetRobotRealTimeState(ref ROBOT_STATE_PKG pkg);
+
+Code example
+++++++++++++++
+
+.. versionadded:: C# SDK-v1.0.6
+
+.. code-block:: c#
+    :linenos:
+
+    private void btnGetState_Click(object sender, EventArgs e)
+    {
+        Robot robot = new Robot();
+        robot.RPC("192.168.58.2");
+
+        ROBOT_STATE_PKG pKG = new ROBOT_STATE_PKG();
+        robot.GetRobotRealTimeState(ref pKG);
+        Console.WriteLine($"the state is {pKG.main_code}");
+    }

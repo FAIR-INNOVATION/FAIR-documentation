@@ -10,6 +10,30 @@ Qualification Certification
 ---------------------------------
     :download:`FAIRINO CE Certificate <_static/_doc/FAIRINO CE Certificate.zip>`
 
+    :download:`High Protection IP65 Test Certification Certificate <_static/_doc/High protection IP65 test certification certificate.zip>`
+    
+    :download:`NSF Certification <_static/_doc/NSF certification.zip>`
+
+    :download:`Crash Force Test Certification <_static/_doc/Crash force test certification.zip>`
+
+    :download:`ROHS Test Certification Certificate <_static/_doc/ROHS test certification certificate.zip>`
+
+    :download:`Parts-Motor Certification <_static/_doc/Parts-Motor Certification.zip>`
+
+    :download:`Parts-Driver Certification <_static/_doc/Parts-Driver Certification.zip>`
+
+    :download:`Parts-Core Board Certification <_static/_doc/Parts-Core Board Certification.zip>`
+
+    :download:`Parts-Power Supply Certification <_static/_doc/Parts-Power Supply Certification.zip>`
+
+    :download:`Explosion-proof Certification <_static/_doc/Explosion-proof certification.zip>`
+
+    :download:`CE-EMC Certification <_static/_doc/CE-EMC certification.zip>`
+
+    :download:`CE-MD Certification <_static/_doc/CE-MD certification.zip>`
+    
+    :download:`Functional Safety Certification <_static/_doc/Functional safety certification.zip>`
+
 .. Ecological Accessories
 .. ---------------------------
 

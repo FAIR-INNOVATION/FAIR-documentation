@@ -510,7 +510,7 @@ Code example
 Load identification initialization
 +++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -524,7 +524,7 @@ Load identification initialization
 Load identification variable initialization
 +++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -538,7 +538,7 @@ Load identification variable initialization
 Load identification main program
 +++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -555,7 +555,7 @@ Load identification main program
 Obtain the load identification result
 +++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:

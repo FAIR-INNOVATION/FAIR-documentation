@@ -374,7 +374,7 @@ Code example
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:

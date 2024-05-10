@@ -896,7 +896,10 @@ The default configuration of terminal DI: DI0 drag teaching, DI1 teaching point 
 
 .. centered:: Figure 4.5-5 Terminal DI configuration
 
-After the configuration is complete, you can view the corresponding output DO status on the I/O page of the control box under the corresponding status. (Note: configured DI and DO cannot appear on the teaching programming page)
+After the configuration is complete, you can view the corresponding output DO status on the I/O page of the control box under the corresponding status.
+
+.. note:: 
+   Configured DI and DO cannot appear on the teaching programming page
 
 .. important:: 
    Configured DI and DO are forbidden to be used in teaching programming.
@@ -1107,7 +1110,7 @@ The operation steps of teach programming (TPD) function are as follows:
 
 - **Step5 stop recording**:After the action teaching is completed, click the "Stop Recording" button to stop the track recording, and then drag the teaching switch button to make the robot exit the drag teaching mode. When the teach pendant receives "stop track recording successful", it means the track recording is successful. Same as step 4, after configuring the "TPD recording start/stop" function, you can trigger the recording to stop by an external signal.
 
-- **Step6 teach programming**:Click New, select a blank template, click to enter the PTP function programming item, select the initial position point just saved, click the "Add" button, after the application is completed, a PTP instruction will be displayed in the program file; then click to enter the TPD function programming item, Select the track just recorded, set whether it is smooth and the speed scaling, click the "Add" button, after the application is completed, a MoveTPD instruction will be displayed in the program file, as shown in Figure3.6-10;
+- **Step6 teach programming**:Click New, select a blank template, click to enter the PTP function programming item, select the initial position point just saved, click the "Add" button, after the application is completed, a PTP instruction will be displayed in the program file; then click to enter the TPD function programming item, Select the track just recorded, set whether it is smooth and the speed scaling, click the "Add" button, after the application is completed, a MoveTPD instruction will be displayed in the program file, as shown in Figure 3.6-10;
 
 .. image:: teaching_pendant_software/068.png
    :width: 6in
@@ -1512,17 +1515,166 @@ Circle command
 
 Click the "Circle" icon to enter the Circle command editing interface.
 
-The "Circle" command is a full circle movement, including two points. The first point is the middle transition point 1 of the full circle, and the second point is the middle transition point 2 of the full circle. The transition point 2 can be set to be offset. Effective at transition point 1 and transition point 2.
+The cooperative robot can carry out the circle trajectory movement by adding the circle command. Before adding the circle command, it is necessary to teach three path points on the circle trajectory. Suppose that the three path points on the circle trajectory are "P1", "P2" and "P3" respectively, where "P1" is the starting point of the circle trajectory, "P2" and "P3" are the middle point 1 and 2 of the circle trajectory.Move the robot to the above three points and add the names of the teaching points as "P1", "P2" and "P3" respectively.
 
 .. image:: teaching_pendant_software/087.png
-   :width: 6in
+   :width: 3in
    :align: center
+
+.. centered:: Figure 4.7-5-5 Circle trajectory
 
 .. image:: teaching_pendant_software/088.png
+   :width: 3in
+   :align: center
+
+.. image:: teaching_pendant_software/279.png
+   :width: 3in
+   :align: center
+
+.. image:: teaching_pendant_software/280.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-6 Teaching "P1", "P2" and "P3"
+
+Circle command addition
+**********************************************
+
+**Step1**: Create a new user program "testCircle.lua" and click the "Circle" button to open the page of adding circle commands.
+
+.. image:: teaching_pendant_software/281.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-5 Circle command interface
+.. centered:: Figure 4.7-5-7 Add the circle command button
+
+**Step2**: Select "Middle point 1" as the "P2" point in the circle command addition page, and click "Next".
+
+.. image:: teaching_pendant_software/282.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-8 Middle Point 1 of the Circle
+
+**Step3**: Select "Middle point 2" as the "P3" point, and click the "Add" button and the "Apply" button in turn.
+
+.. image:: teaching_pendant_software/283.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-9 The middle point 2 of the circle
+
+**Step4**: At this time, "testCircle.lua" has added the circle movement command.
+
+.. image:: teaching_pendant_software/284.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-5-10 Circle movement command addition
+
+The above command only define two path points of the circle, and the starting point of the circle movement needs to be defined to make the robot move according to the predetermined circle trajectory. A linear motion command is added, and the target point of linear motion is the starting point "P1" of the circle trajectory, and the position of the command is adjusted to make the robot move to the starting point "P1" of the circle first, and then perform the circle trajectory motion with the middle points of the path "P2" and "P3".
+
+.. image:: teaching_pendant_software/285.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-5-11 Add the starting point of circle motion
+
+Switch the robot to automatic mode, start the program on the premise of ensuring safety, and the robot will move according to the circle trajectory shown in Figure 1.
+
+Circle trajectory offset
+**********************************************
+
+The circular motion of the cooperative robot supports the offset of the positions of the middle point 1 and the middle point 2 of the circular trajectory, and the offset types include the following two types:
+
+**The middle points of the two trajectories of the circle have the same offset:** the middle point 1 (P2) and the middle point 2 (P3) of the circle are offset by the same offset ∆(dx, dy, dz, drx, dry, drz).
+
+**The middle points of the two trajectories of the circle have different offsets:** the middle point 1 (P2) and the middle point 2 (P3) of the circle adopt two different offsets ∆1 (dx1, dy1, dz1, drx1, dry1, drz1) and ∆2 (dx2, dy2, dz2, drx2, dry2, drz2) respectively.
+
+The following demonstrates the usage of "same offset" and "different offset" respectively.
+
+(1) Same offset
+
+Open the circle command addition page, select "Same Offset" for Offset Type, and also select the Middle point 1 of the circle as "P2" point, and click "Next" button.
+
+.. image:: teaching_pendant_software/286.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-12 Same offset of the circle
+
+Select P3 for the middle point 2 of the circle, and select Base Coordinate Offset for Offset.
+
+.. note:: 
+   Note: you can select Tool Coordinate Offset according to the actual work situation.
+
+Enter the offset dx as 10mm, and then click the Add button and the Apply button at the bottom of the page.
+
+.. image:: teaching_pendant_software/287.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-13 Setting Offset
+
+At this time, the circle command that two intermediate points "P2" and "P3" of a circle are offset by 10mm along the X-axis direction of the base coordinate system has been added to the "testCircle.lua" program; Of course, a linear motion command needs to be added before the circle motion command to make the robot move to the starting point of the circle.
+
+.. image:: teaching_pendant_software/288.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-5-14 Same Offset Program for Circle
+
+Switch the robot to the automatic mode, and start the program under the condition of ensuring safety. The actual motion trajectory of the robot passes through the circles of "P1", "P2" and "P3", where "P2" is the point where the original "P2" is offset by 10mm in the X direction, and "P3" is the point where the original "P3" is offset by 10mm in the X direction.
+
+.. image:: teaching_pendant_software/289.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-15 Track with the same offset X10mm
+
+(2) Different offset
+
+Open the circle command adding page, select "Different Offsets" for Offset Type, and also select the middle point 1 of the circle as "P2" point, and select "Base coordinate offset" for "Offset".
+
+.. note:: 
+   Note: you can select "Tool coordinate offset" according to the actual work situation.
+
+Enter the offset dy as 10mm, and click "Next" button.
+
+.. image:: teaching_pendant_software/290.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-16 Different offsets
+
+Select P3 for the middle point 2 of the circle, and select Base Coordinate Offset for Offset
+
+.. note:: 
+   Note: you can select Tool Coordinate Offset according to the actual work situation.
+
+Enter the offset dx as 10mm, and then click the Add button and the Apply button at the bottom of the page.
+
+.. image:: teaching_pendant_software/291.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-17 Offset of middle point 2 is set with different offsets
+
+At this time, an command that the middle point "P2" of the circle is shifted by 10mm along the Y direction of the base coordinate system and "P3" is shifted by 10mm along the X axis direction of the base coordinate system has been added to the "testCircle.lua" program; Of course, a linear motion command needs to be added before the circle motion command to make the robot move to the starting point of the circle.
+
+.. image:: teaching_pendant_software/292.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-5-18 Program for Two Different Offset Points of Circle
+
+Switch the robot to the automatic mode, and start the program under the condition of ensuring safety. The actual motion trajectory of the robot passes through the circles of "P1", "P2" and "P3", where "P2" is the point where the original "P2" is offset by 10mm in the Y direction, and "P3" is the point where the original P3 is offset by 10mm in the X direction.
+
+.. image:: teaching_pendant_software/293.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-5-19 Two trajectory points of the circle are offset from the trajectory respectively
 
 Spiral command
 ++++++++++++++++
@@ -1536,7 +1688,7 @@ Whether to offset, the offset takes effect on the trajectory of the entire helix
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-6 Spiral command interface
+.. centered:: Figure 4.7-5-20 Spiral command interface
 
 N-Spiral command
 ++++++++++++++++
@@ -1549,7 +1701,7 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-7 N-Spiral command interface
+.. centered:: Figure 4.7-5-21 N-Spiral command interface
 
 H-Spiral command
 +++++++++++++++++++
@@ -1567,7 +1719,7 @@ The "H-Spiral" command is a horizontal space spiral motion. This command is set 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-8 H-Spiral command interface
+.. centered:: Figure 4.7-5-22 H-Spiral command interface
 
 Spline command
 ++++++++++++++++
@@ -1580,7 +1732,7 @@ The command is divided into three parts: the start of the spline group, the spli
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-9 Spline command interface
+.. centered:: Figure 4.7-5-23 Spline command interface
 
 N-Spline command
 +++++++++++++++++++
@@ -1601,7 +1753,7 @@ For the given control point and the given waypoint.
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-10 N-Spline command interface
+.. centered:: Figure 4.7-5-24 N-Spline command interface
 
 Weave command
 ++++++++++++++++
@@ -1614,7 +1766,7 @@ Click the "Weave" icon to enter the Weave command editing interface. The "Weave"
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-11 Weave command interface
+.. centered:: Figure 4.7-5-25 Weave command interface
 
 - Click "Configuration and Test" to select the weaving type according to the usage scenario and configure the weaving parameters. After the configuration is completed, the weaving trajectory can be tested by pressing the start weaving test and stop weaving test buttons. The current swing types are:
 
@@ -1630,7 +1782,7 @@ Click the "Weave" icon to enter the Weave command editing interface. The "Weave"
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-12 Weave configuration and testing command interface
+.. centered:: Figure 4.7-5-26 Weave configuration and testing command interface
 
 TPD command
 ++++++++++++++++
@@ -1651,7 +1803,7 @@ When programming, first use the PTP instruction to reach the starting point of t
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-13 TPD command interface
+.. centered:: Figure 4.7-5-27 TPD command interface
 
 Offset command
 ++++++++++++++++
@@ -1664,7 +1816,7 @@ This command is an overall offset command. Input each offset, add the opening co
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-14 Offset command interface
+.. centered:: Figure 4.7-5-28 Offset command interface
 
 ServoCart command
 ++++++++++++++++++++
@@ -1677,7 +1829,7 @@ ServoCart servo control (Cartesian space motion) command, which can control the 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-15 ServoCart command interface
+.. centered:: Figure 4.7-5-29 ServoCart command interface
 
 Absolute pose control program example:
 
@@ -1702,7 +1854,7 @@ Click the "Trajctory" icon to enter the Trajctory command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-16 Trajctory command interface
+.. centered:: Figure 4.7-5-30 Trajctory command interface
 
 TrajctoryJ command
 ++++++++++++++++++++
@@ -1721,7 +1873,7 @@ Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-17 TrajctoryJ command interface
+.. centered:: Figure 4.7-5-31 TrajctoryJ command interface
 
 DMP command
 ++++++++++++++++
@@ -1734,7 +1886,7 @@ DMP is a trajectory imitation learning method that requires prior planning of re
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-18 DMP command interface
+.. centered:: Figure 4.7-5-32 DMP command interface
 
 WPTrsf command
 ++++++++++++++++
@@ -1747,7 +1899,7 @@ Select the workpiece coordinate system to be automatically converted, and click 
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-5-19 WPTrsf command interface
+.. centered:: Figure 4.7-5-33 WPTrsf command interface
 
 Control command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

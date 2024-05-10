@@ -7,7 +7,7 @@ Robot Welding
 Welding Start
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -24,7 +24,7 @@ Welding Start
 Welding end
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -41,7 +41,7 @@ Welding end
 Set the relationship between welding current and output analog
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -59,7 +59,7 @@ Set the relationship between welding current and output analog
 Set the relationship between welding voltage and output analog
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -77,7 +77,7 @@ Set the relationship between welding voltage and output analog
 Obtain the corresponding relationship between welding current and output analog
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -95,7 +95,7 @@ Obtain the corresponding relationship between welding current and output analog
 Obtain the corresponding relationship between welding voltage and output analog
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -113,7 +113,7 @@ Obtain the corresponding relationship between welding voltage and output analog
 Set welding current
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -130,7 +130,7 @@ Set welding current
 Set welding voltage
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -147,7 +147,7 @@ Set welding voltage
 Set weave parameters
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -170,7 +170,7 @@ Set weave parameters
 Set weave parameters in real time
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -193,7 +193,7 @@ Set weave parameters in real time
 Weave start
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -208,7 +208,7 @@ Weave start
 Weave end
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -223,7 +223,7 @@ Weave end
 Forward wire feed
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -239,7 +239,7 @@ Forward wire feed
 Reverse wire feed
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -255,7 +255,7 @@ Reverse wire feed
 Aspirated
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -271,7 +271,7 @@ Aspirated
 Segment weld start
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -305,7 +305,7 @@ Segment weld start
 Code example:
 ++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
+.. versionadded:: C# SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:

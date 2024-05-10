@@ -7,7 +7,7 @@ Others
 Obtain the compensation value of robot DH parameter
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -22,7 +22,7 @@ Obtain the compensation value of robot DH parameter
 Download the point table database
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -38,7 +38,7 @@ Download the point table database
 Upload the point table database
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -53,7 +53,7 @@ Upload the point table database
 Update the LUA file for the point table
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.1.0
+.. versionadded:: C++ SDK-v2.1.1.0
 
 .. code-block:: c++
     :linenos:
@@ -69,7 +69,7 @@ Update the LUA file for the point table
 Initialize log parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -86,7 +86,7 @@ Initialize log parameters
 Set the log filtering level
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -100,7 +100,7 @@ Set the log filtering level
 Code example
 +++++++++++++++
 
-.. versionadded:: C++SDK-v2.1.2.0
+.. versionadded:: C++ SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
@@ -127,7 +127,7 @@ Code example
 	int main(void)
 	{
 		FRRobot robot;
-		robot.LoggerInit(2, "C:/Users/fr/Desktop/c++sdk//sdk_with_log/abcd.log", 2);
+		robot.LoggerInit(2, "C:/Users/fr/Desktop/C++ SDK//sdk_with_log/abcd.log", 2);
 		// robot.LoggerInit();
 		robot.SetLoggerLevel(3);
 		// robot.SetLoggerLevel();
@@ -153,3 +153,91 @@ Code example
 		retval = robot.PointTableUpdateLua(point_tablename, lua_name);
 		cout << "retval is: " << retval << endl;
 	}
+
+Get the robot peripheral protocol
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.3.0
+
+.. code-block:: c++
+    :linenos:
+    
+    /**
+      * @brief Get the robot peripheral protocol
+      * @param [out] protocol Robot peripheral protocol number 4096-Extended axis control card; 4097-ModbusSlave; 4098-ModbusMaster
+      * @return error code
+      */
+    errno_t GetExDevProtocol(int *protocol);
+
+Set the robot peripheral protocol
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.3.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+      * @brief Set the robot peripheral protocol
+      * @param [in] protocol Robot peripheral protocol number 4096-Extended axis control card; 4097-ModbusSlave; 4098-ModbusMaster
+      * @return error code
+      */
+    errno_t SetExDevProtocol(int protocol);
+
+Code example
++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.3.0
+
+.. code-block:: c++
+    :linenos:
+
+    #include "libfairino/robot.h"
+
+    //  If using Windows, include the following header files
+    #include <string.h>
+    #include <windows.h>
+    //  If using linux, include the following header files
+    /*
+    #include <cstdlib>
+    #include <iostream>
+    #include <stdio.h>
+    #include <cstring>
+    #include <unistd.h>
+    */
+    #include <chrono>
+    #include <thread>
+    #include <string>
+
+    using namespace std;
+
+    int main(void)
+    {
+        FRRobot robot; 
+        robot.LoggerInit();
+        robot.SetLoggerLevel();
+        robot.RPC("192.168.58.2");
+        int retval = 0;
+
+        ROBOT_STATE_PKG robot_pkg;
+        int i = 0;
+        while (i < 5)
+        {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            memset(&robot_pkg, 0, sizeof(ROBOT_STATE_PKG));
+            retval = robot.GetRobotRealTimeState(&robot_pkg);
+            std::cout << "program_state " << (int)robot_pkg.program_state<< "\n"
+                << "data_len " << (int)robot_pkg.data_len << "\n"
+                << "robot_state " << (int)robot_pkg.robot_state << "\n"
+                << "robot_mode " << (int)robot_pkg.robot_mode << std::endl;
+            i++;
+        }
+
+        int protocol = 4096;
+        retval = robot.SetExDevProtocol(protocol);
+        std::cout << "SetExDevProtocol retval " << retval << std::endl;
+        retval = robot.GetExDevProtocol(&protocol);
+        std::cout << "GetExDevProtocol retval " << retval <<" protocol is: " << protocol << std::endl;
+
+        return 0;
+    }

@@ -14,7 +14,7 @@ Download the point table database
 
     "Prototype", "``PointTableDownLoad(point_table_name, save_file_path)``"
     "Description", "Download the point table database"
-    "Required parameter", "- ``point_table_name``：pointTable1.db;
+    "Required parameter", "- ``point_table_name``: pointTable1.db;
     - ``save_file_path``: C://test/;"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
@@ -41,7 +41,7 @@ Upload the point table database
 
     "Prototype", "``PointTableUpLoad(point_table_file_path)``"
     "Description", "Download the point table database"
-    "Required parameter", "- ``point_table_file_path``：Full path name of the upload point table   C://test/pointTable1.db"
+    "Required parameter", "- ``point_table_file_path``: Full path name of the upload point table   C://test/pointTable1.db"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
 
@@ -151,7 +151,7 @@ Set Log Level
     "Prototype", "``SetLoggerLevel(lvl=1)``"
     "Description", "Set Log Level"
     "Required parameter", "Nothing"
-    "Optional parameter", "- ``lvl``：The filtering level. The smaller the value, the smaller the log output. 1-error, 2-warnning, 3-inform, 4-debug. The default value is 1."
+    "Optional parameter", "- ``lvl``: The filtering level. The smaller the value, the smaller the log output. 1-error, 2-warnning, 3-inform, 4-debug. The default value is 1."
     "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
@@ -164,3 +164,60 @@ Code example
     robot = Robot.RPC('192.168.58.2')
     robot.LoggerInit(output_model=0,file_path="D://Desktop/fairino.log",file_num=3)
     robot.SetLoggerLevel(3)
+
+Set the robot peripheral protocol
++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.3
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetExDevProtocol(protocol)``"
+    "Description", "Set the robot peripheral protocol"
+    "Required parameter", "Nothing"
+    "Optional parameter", "- ``protocol``: Robot peripheral protocol number,4096-Extended axis control card; 4097-ModbusSlave; 4098-ModbusMaster"
+    "Return value", "Errcode: Success -0 , Failed -errcode"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret =robot.SetExDevProtocol(4098)
+    print("SetExDevProtocol",ret)
+    ret =robot.GetExDevProtocol()
+    print("GetExDevProtocol",ret)
+
+Get the robot peripheral protocol
++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: python SDK-v2.0.3
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetExDevProtocol()``"
+    "Description", "Get the robot peripheral protocol"
+    "Required parameter", "Nothing"
+    "Optional parameter", "Nothing"
+    "Return value", "- Errcode: Success -0 , Failed -errcode
+    - ``protocol(return if success)``: Robot peripheral protocol number,4096-Extended axis control card; 4097-ModbusSlave; 4098-ModbusMaster"
+
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    ret =robot.SetExDevProtocol(4098)
+    print("SetExDevProtocol",ret)
+    ret =robot.GetExDevProtocol()
+    print("GetExDevProtocol",ret)

@@ -647,15 +647,19 @@ Code example
 
 The new spline motion begins
 +++++++++++++++++++++++++++++++++++++++++++
+
+.. versionchanged:: C# SDK-v1.0.6
+
 .. code-block:: c#
     :linenos:
 
     /** 
     * @brief The new spline motion begins
     * @param [in] type  0-Arc transition，1-The given point is a path point
+    * @param [in] averageTime global average connection time (ms) (10 ~ ), default 2000
     * @return Error code 
     */ 
-    int NewSplineStart(int type);
+    int NewSplineStart(int type, int averageTime=2000);
 
 Add spline motion instruction points
 +++++++++++++++++++++++++++++++++++++++++++

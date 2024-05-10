@@ -722,17 +722,21 @@ The spline movement ends
     */
     errno_t  SplineEnd();
 
-New spline motion begins
+New spline movement starts
 ++++++++++++++++++++++++++++++++++
+
+.. versionchanged:: C++ SDK-v2.1.3.0
+
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief New spline motion begins
-     * @param  [in] type   0-Arc transition，1-The given point is a path point
-     * @return  Error code
-     */
-    errno_t  NewSplineStart(int type);
+      * @brief New spline movement starts
+      * @param [in] type 0-arc transition, 1-the given point is the path point
+      * @param [in] averageTime global average connection time (ms) (10 ~ ), default 2000
+      * @return error code
+      */
+    errno_t NewSplineStart(int type, int averageTime=2000);
 
 New spline motion command points
 ++++++++++++++++++++++++++++++++++

@@ -111,3 +111,98 @@ Spiral parameter data type
         public float rotaxis_add;   /* Increment in the direction of the axis of rotation  */
         public uint rot_direction;  /* Rotation direction, 0- clockwise, 1- counterclockwise  */
     }
+
+485 extended axis status  structure 
+++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C# SDK-v1.0.6
+
+.. code-block:: c#
+    :linenos:
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct ROBOT_AUX_STATE
+    {
+        public byte servoId;      //servo ID  
+        public int servoErrCode;  //servo error code
+        public int servoState;    //servo state
+        public double servoPos;   //current position
+        public float servoVel;    //current speed
+        public float servoTorque;  //current torque
+    }
+
+Real-time status structure of the robot
+++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C# SDK-v1.0.6
+
+.. code-block:: c#
+    :linenos:
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct ROBOT_STATE_PKG
+    {
+        public UInt16 frame_head;           //Frame header 0x5A5A
+        public byte frame_cnt;              //Frame count
+        public UInt16 data_len;             //data length  
+        public byte program_state;          //Program running status, 1- stop; 2- Run; 3- Pause
+        public byte robot_state;            //Robot motion state, 1- stop; 2- Run; 3- Pause; 4- Drag  
+        public int main_code;               //main error code
+        public int sub_code;                //sub error code
+        public byte robot_mode;             //Robot mode, 0-automatic mode; 1- Manual mode
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] jt_cur_pos;        //Current joint position
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] tl_cur_pos;       //Current tool position
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] flange_cur_pos;   //Current pose of end flange
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] actual_qd;        //Robot current joint speed
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] actual_qdd;      //Current joint acceleration of robot  
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public double[] target_TCP_CmpSpeed;  //Robot TCP synthesis command speed                         
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] target_TCP_Speed;     //Robot TCP command speed                        
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public double[] actual_TCP_CmpSpeed;   //Robot TCP synthesizes actual speed                        
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] actual_TCP_Speed;   //Robot TCP actual speed                      
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] jt_cur_tor;         //Current torque         
+        public int tool;                        //tool number
+        public int user;                        //workpiece number
+        public byte cl_dgt_output_h;            //Digital output 15-8
+        public byte cl_dgt_output_l;            //Digital output 7-0
+        public byte tl_dgt_output_l;     //tool digital output7-0
+        public byte cl_dgt_input_h;             //Digital input 15-8
+        public byte cl_dgt_input_l;             //Digital input 7-0
+        public byte tl_dgt_input_l;             //tool Digital input 7-0                    
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public UInt16[] cl_analog_input;        //Control box analog input
+        public UInt16 tl_anglog_input;          //Tool analog input                              
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] ft_sensor_raw_data;     //Force/torque sensor raw data
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public double[] ft_sensor_data;   //Force/torque sensor data                           
+        public byte ft_sensor_active;           //Force/torque sensor active status, 0-reset, 1-activated
+        public byte EmergencyStop;              //Emergency stop sign
+        public int motion_done;                 //Position signal
+        public byte gripper_motiondone;         //gripper movement complete signal
+        public int mc_queue_len;                //Motion queue length
+        public byte collisionState;             //Collision detection, 1- collision; 0- No collision
+        public int trajectory_pnum;             //Track point number
+        public byte safety_stop0_state;  /* Safety stop signal SI0 */
+        public byte safety_stop1_state;  /* Safety stop signal SI1 */
+        public byte gripper_fault_id;    /* gripper error number */     
+        public UInt16 gripper_fault;     /* Gripper fault */
+        public UInt16 gripper_active;    /* Gripper active status */
+        public byte gripper_position;    /* Gripper position */
+        public byte gripper_speed;       /* Gripper speed */
+        public byte gripper_current;     /* Gripper current */
+        public int gripper_tmp;          /* Gripper temperature */
+        public int gripper_voltage;      /* Gripper voltage */             
+        public ROBOT_AUX_STATE auxState; /* 485Extended axis state */          
+        public UInt16 check_sum;         /* Sum check */                 
+    }
