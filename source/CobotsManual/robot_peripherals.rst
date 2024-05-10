@@ -735,6 +735,85 @@ Finally, add welding start and welding end commands before and after the start a
 
 By executing the above program, the robot will carry the laser sensor to move along the weld trajectory and record the whole trajectory, then the robot will move to the starting point of the trajectory record, and the robot will start welding along the trajectory recorded by the laser sensor. When the robot trajectory reappears, the welding arc will be extinguished and the welding will be completed.
 
+Find the intersection coordinates of three points and four points
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When the position of the fillet weld is inconvenient to teach directly, the cobot can calculate the intersection coordinate between two planes by manually teaching or finding points on both sides of the fillet weld surface.
+
+For right-angle welds, use three-point intersection coordinate method, and for non-right-angle welds, use four-point intersection coordinate method.
+
+Three-point intersection coordinate calculate method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Collect three planar contact points and save them as teach points;
+
+.. figure:: robot_peripherals/127.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4‑50 Select three contact points
+
+The acquired touchpoint consists of three points, two of which are in the same plane and one in the vertical plane.
+
+.. note:: The pose of the generated intersection point is the same as P3.
+
+**Step2**: Click Initial Settings - > User Peripheral Configuration - > Sensor Tracking, and enter the function module of finding the coordinates of the intersection point of the three points and four points;
+
+.. figure:: robot_peripherals/128.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4‑51 Select points
+
+**Step3**: Select the three-point search in the drop-down box, select the three contact points collected in turn, click Calculate, check whether the display of the generated intersection in the 3D model is wrong, name and save the intersection point;
+
+.. figure:: robot_peripherals/129.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4‑52 Calculate the intersection coordinates and save them
+
+.. figure:: robot_peripherals/130.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4‑53 Save the intersection coordinates as teach points
+
+Four-point intersection coordinate calculate method
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+**Step1**: Collect four planar contact points and save them as teach points;
+
+.. figure:: robot_peripherals/131.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.4‑54 Select Four Points
+
+The acquired contact point consists of four points, the first two of which are in the same plane and the last two in the vertical plane.
+
+.. note::  The pose of the generated intersection point is the same as P4. 
+
+**Step2**: Click Initial Settings - > User Peripheral Configuration - > Sensor Tracking, and enter the function module of finding the coordinates of the intersection point of the three points and four points;
+
+.. figure:: robot_peripherals/132.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4‑55 Select a locus to find the coordinates of the intersection point
+
+**Step3**: Select the four points in the drop-down box, select the four contact points in turn, click Calculate, check whether the display of the generated intersection in the 3D model is incorrect, name the intersection coordinate and save it;
+
+.. figure:: robot_peripherals/133.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4‑56 Calculate the intersection coordinates and save it
+
+.. figure:: robot_peripherals/134.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4‑57 Saving the intersection coordinates as a teach point
+
 Extended Axis Peripheral Configuration
 -----------------------------------------
 
@@ -746,7 +825,7 @@ Controller + PLC（UDP）
 Configuration steps
 ++++++++++++++++++++++++
 
-**Step1**：First configure the expansion axis UDP communication. Set parameters such as IP address, port number, communication cycle, packet loss detection cycle, and number of packet losses. The reconnection cycle and the number of reconnections can only be configured after the automatic reconnection switch is turned on when communication is interrupted.
+**Step1**: First configure the expansion axis UDP communication. Set parameters such as IP address, port number, communication cycle, packet loss detection cycle, and number of packet losses. The reconnection cycle and the number of reconnections can only be configured after the automatic reconnection switch is turned on when communication is interrupted.
 
 - IP address: Custom ip address
 - Port number: defined according to actual situation
@@ -1786,3 +1865,132 @@ Polishing equipment configuration step
    :width: 6in
 
 .. centered:: Figure 5.11-1 Polishing equipment configuration page
+
+Virtual Wall Function Based on Force Sensor
+-------------------------------------------------
+
+Based on the virtual wall function of force sensor, the virtual wall can be set artificially to limit the workspace of the robot and avoid direct collision and contact.
+
+Installation configuration of force sensor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Step1**: Take "Kunwei" sensor as an example. During installation, the coordinate system direction of the force sensor should be consistent with the end flange coordinate system, as shown in Figure 1 (in Figure 1, red is the end flange coordinate system X+ direction, green is the end flange coordinate system Y+ direction, and blue is the end flange coordinate system Z+ direction);
+
+.. figure:: robot_peripherals/135.png
+   :align: center
+   :width: 3in
+
+.. figure:: robot_peripherals/136.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.12-1 Installation of Force Sensor
+
+**Step2**: Click "Terminal Peripheral Configuration" under the menu bar of "User Peripheral Configuration" in "Initial Settings" to enter the terminal peripheral configuration interface;
+
+The equipment type is "Force Sensor Equipment", and the configuration information of force sensor is divided into manufacturer, type, software version and mounting location. Users can configure the corresponding force sensor information according to specific production requirements. If the user needs to change the configuration, he can first select the corresponding number and click the "Clear" button to clear the corresponding information and reconfigure according to the requirements; The specific operation is shown in Figure 2.
+
+**Step3**: Select the number of the configured force sensor and click the "Reset" button. After the page pop-up command is successfully sent, click the "Activate" button to check the activation status in the force sensor information table to judge whether the activation is successful. In addition, the force sensor will have an initial value, and the user can choose "zero point correction" and "zero point removal" according to the use requirements. The zero correction of force sensor needs to ensure that the force sensor is horizontal and vertical, and the robot is not equipped with load.
+
+.. figure:: robot_peripherals/137.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.12-2 Force sensor configuration
+
+.. figure:: robot_peripherals/138.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.12-3 Force sensor activation
+
+Virtual wall configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+With the help of the force sensor, it is necessary to install a drag handle under the force sensor and configure the tool coordinate system. The specific operation is shown in Figure 4. At this time, the way to detect the interference zone is based on the set tool coordinate system position, and the end flange is used as the reference when it is not set.
+
+**Step1**: Click "Interference Zone Configuration" under the menu bar of "Robot Ontology" in "Auxiliary Application" to enter the interface of interference zone configuration function;
+
+**Step2**: The interference mode and the operation of entering the interference zone need to be configured; The interference mode is "cube interference", and the drag configuration when entering the interference area is "unrestricted drag", and the motion configuration when entering the interference area can be used;
+
+**Step3**: According to the requirements, the parameter configuration can be modified. The detection method can be divided into "command position" and "feedback position", the interference zone mode can be divided into "in-range interference" and "out-of-range interference", the reference coordinate system is selected as "base coordinate", and the setting is selected according to the actual use. The detailed operation is shown in Figure 5.
+
+.. figure:: robot_peripherals/139.png
+   :align: center
+   :width: 3in
+
+.. figure:: robot_peripherals/140.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.12-4 Install the drag handle and set the tool coordinate system
+
+.. figure:: robot_peripherals/141.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.12-4 Parameter Configuration of Virtual Wall
+
+**Step4**: The interference zone modes under parameter configuration are divided into "in-range interference" and "out-of-range interference";
+
+.. figure:: robot_peripherals/142.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.12-5 In-range interference
+
+.. figure:: robot_peripherals/143.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.12-6 Out of range interference
+
+**Step5**: Establish the interference zone, as shown in Figures 7 and 8. It is suggested that the interference area should be set as large as possible when selecting "out-of-range interference".
+
+.. figure:: robot_peripherals/144.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.12-7 Two-point method to establish interference zone
+
+.. figure:: robot_peripherals/145.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.12-8 center point+side length method to establish interference zone
+
+Force sensor assisted drag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Step1**: Click "Drag Locking" under the menu bar of "Robot Body" in "Auxiliary Application" to enter the auxiliary locking function interface of force sensor;
+
+**Step2**: Set the parameters as shown in Figure 9 to realize the virtual wall function based on the force sensor. The concrete effects are as follows: near the virtual wall, the resistance becomes larger; Away from the virtual wall, the auxiliary drag function based on the force sensor is normal.
+
+.. figure:: robot_peripherals/037.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.12-9 Parameter setting of auxiliary drag of force sensor
+
+Specific function of parameters:
+
+**Adaptive selection**: Turn it on when assembly is required. After turning it on, dragging becomes heavier;
+
+**Inertia Parameter**: Adjust the feel during dragging. The minimum value is 0. It needs to be operated with caution under the guidance of technical personnel.
+
+**Damping parameters**:
+
+-  Translation direction: It is recommended to set the parameter between [100-200];
+
+-  Rotation direction: It is recommended to set the parameters between [3-10], among which the RZ direction setting range is [0.1-5];
+
+-  Effect: When dragging with the help of a sensor, increasing the damping will make it difficult to drag, and reducing the damping will make it too easy to drag the robot (it is recommended not to be too small);
+
+-  The overall range of damping parameters: translation XYZ: [100-1000]; rotation RX, RY: [3-50], RZ: [2-10];
+
+-  The maximum drag force is 50 and the maximum drag speed is 180.
+
+**Stiffness parameter**: All are set to 0;
+
+**Drag force threshold**: Translation XYZ is [5-10]; rotation RX, RY, RZ is [0.5-5];
+
+**Maximum Drag force**: 50;
+
+**Maximum Drag speed**: 180;

@@ -1383,14 +1383,14 @@ This command is mainly used for welding machine peripherals. Before adding this 
 Segment instruction
 ---------------------
 
-This command is a special command for welding, mainly used in intermittent welding scenarios where one period of welding and one period of non-welding are cycled. Between the starting point and the end point, use this command to select the starting point and the end point, set the debugging speed, set the DO port of arc starting, execution length, non-execution length, set the function mode, swing selection and rounding rules according to the actual application scenario. Realize the segment welding function.
+This command is a special command for welding, mainly used in intermittent welding scenarios where one period of welding and one period of non-welding are cycled. Between the starting point and the end point, use this command to select the starting point and the end point, set the debugging speed, set the DO port of arc starting, execution length, non-execution length, set the function mode, swing selection and rounding rules according to the actual application scenario. Realize the segment welding function, detailed operations can be found in the segment welding instructions on the program teaching page.
 
 "Segment welding" command node, parameters:
 
+- Segment welding mode: no change in attitude/change in attitude
 - Starting point: teaching point
 - End point: teaching point
 - Debugging speed (%): 0~100, default is 100
-- Arc starting do port: Ctrl-DO0~7, Ctrl-CO0~7
 - Execution length: 0~1000
 - Non-executable length: 0~1000
 - Function mode: 0~100, default is 100

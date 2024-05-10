@@ -2022,13 +2022,163 @@ Segment command
 
 Click the "Segment" icon to enter the Segment command editing interface
 
-This instruction is a special instruction for welding, mainly used in the intermittent welding scene where one section is welded and one section is not welded. Between the start point and the end point, use this command to select the start point and end point, set the debugging speed, set the DO port for arc start, the execution length, the non-execution length, set the function mode according to the actual application scene, swing selection and rounding rules. Realize segment welding function.
+The collaborative robot can perform segment welding operations by adding segment welding instructions. Before adding segment welding instructions, you need to select the segment welding mode and teach the starting point and end point. The segment welding mode is divided into unchanged posture and changing posture. The robot considers whether to change the posture during the welding trajectory according to the selected segment welding mode.
+
+Teach the starting point "segment01" and the end point "segment02", and confirm the starting point and end point of the welding trajectory, as shown in the figure below.
 
 .. image:: teaching_pendant_software/112.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-1 Starting point “segment01”
+
+.. image:: teaching_pendant_software/294.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-2 Starting point “segment02”
+
+Segment welding command added
+********************************
+**Step1**: Create a new user program "testSegment1.lua", click the "Segment Welding" button, and open the segment welding instruction adding page.
+
+.. image:: teaching_pendant_software/295.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-8-2 Segment command interface
+.. centered:: Figure 4.7-8-2-3 Add segment welding command button
+
+**Step2**: On the segment welding instruction adding page, select "segment01" as the "start point" and "segment02" as the "end point".
+
+.. image:: teaching_pendant_software/296.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-4 Starting point and end point of segment welding
+
+**Step3**: Configure the debugging speed, execution length, non-execution length, functional mode, swing selection and rounding rules, and click the "Add" button and the "Apply" button in sequence.
+
+**Step4**: At this time, "testSegment1.lua" has added segment welding motion instructions, as shown in Figure5.
+
+.. image:: teaching_pendant_software/297.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-5 Addition of segment welding motion instructions
+
+Changes in segment welding motion trajectory and attitude
+************************************************************
+The segment welding mode of the collaborative robot can be selected for the segment welding movement. The mode types include the following two types;
+
+**No change in posture**：The robot always maintains the posture of the starting point of the welding trajectory during the welding trajectory.
+
+**Changing posture**：During the welding trajectory process, the robot calculates the Cartesian pose and joint position of each segment of the trajectory, and changes its posture during the segment welding operation.
+
+The following demonstrates the usage of "no change posture" and "change posture" respectively.
+
+1. Do not change posture
+   
+As shown in Figure 6, open the segment welding instruction adding page, select "No change in attitude" for "segment welding mode", also select "start point" as "segment01", "end point" as "segment02", set the execution length to 100, non-execution Set the length to 50, select other relevant configurations and save the program.
+
+.. image:: teaching_pendant_software/298.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-6 Segment welding mode without changing attitude
+
+2. Change posture
+   
+As shown in Figure 7, open the segment welding instruction adding page, select "Change Attitude" for "Segment Welding Mode", also select "Start Point" as "segment01", "End Point" as "segment02", set the execution length to 100, and the non-execution length. Set it to 50, select other relevant configurations and save the program.
+
+.. image:: teaching_pendant_software/299.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-7 Changing attitude segment welding mode
+
+3. Section welding operation type
+
+Running program, robot segment welding operation conditions are divided into the following types:
+
+1) If the function mode selects the first segment to execute the function, and the swing selects the execution segment to swing, the rounding rule will not round. Then the robot performs swing motion at 100mm and linear motion at 50mm alternately, and stops when it reaches the end point;
+
+.. image:: teaching_pendant_software/300.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-8 The first section executes the swing function without rounding
+
+2) If the function mode selects the first segment to not execute the function, the swing selection does not execute the segment swing, and the rounding rules do not round. Then the robot performs swing motion for 50mm and linear motion for 100mm alternately, and stops when it reaches the end point;
+
+.. image:: teaching_pendant_software/301.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-9 The first section does not execute the swing function and does not round
+
+3) If the function mode selects the first segment to perform the function, the swing selects the execution segment to swing, and the rounding rules are rounded. Then the robot performs swing motion at 100mm and linear motion at 50mm alternately. After the last period of the overall cycle, if the remaining distance is less than 150mm, it will stop swinging;
+
+.. image:: teaching_pendant_software/302.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-10 The first section performs circular rounding of the swing function
+
+4) If the function mode selects the first segment to perform the function, and the swing selects not to execute the segment swing, the rounding rules are rounded. Then the robot performs swing motion at 50mm and linear motion at 100mm alternately. After the last period of the overall cycle, if the remaining distance is less than 150mm, it will stop swinging;
+
+.. image:: teaching_pendant_software/303.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-11 The first section does not perform circular rounding of the swing function
+
+5) If the function mode selects the first segment to execute the function, the swing selects the execution segment to swing, and the rounding rule is single segment rounding. Then the robot performs swing motion at 100mm and linear motion at 50mm alternately. After the last cycle, if the next segment is 100mm, swing planning is performed and the remaining distance is less than 100mm, the swing will stop; if the next segment is 50mm, linear motion planning is performed and the remaining distance is If it is less than 50mm, the movement will stop;
+
+.. image:: teaching_pendant_software/304.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-12 The first section performs single-section rounding of the swing function
+
+6) If the function mode selects the first segment to perform the function, the swing selects not to execute segment swing, and the rounding rule is single segment rounding. Then the robot performs swing motion at 50mm and linear motion at 100mm alternately. After the last cycle, if the next segment is 50mm, swing planning is performed and the remaining distance is less than 50mm, then the swing is stopped; if the next segment is 100mm, linear motion planning is performed and the remaining distance is Less than 100mm, the movement stops.
+
+.. image:: teaching_pendant_software/305.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-13 The first section does not perform single-section rounding of the swing function
+
+4. Posture contrast
+   
+When configuring different segment welding modes, the posture of the robot during welding trajectory operation will also be different. The posture comparison during operation is as follows:
+
+.. image:: teaching_pendant_software/306.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-14 Initial posture of welding trajectory
+
+.. image:: teaching_pendant_software/307.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-15 The posture does not change during operation
+
+.. image:: teaching_pendant_software/308.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-16 Change of attitude during operation
+
+Actual scene of segment welding
+*************************************
+In the actual test environment, the robot needs to be equipped with a welding gun and other configurations, and perform welding operations on the welding plate according to the created segment welding instructions. The actual scene diagram is as follows:
+
+.. image:: teaching_pendant_software/309.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-8-2-17 Actual scene of segment welding
 
 Laser command
 ++++++++++++++++
@@ -3371,7 +3521,7 @@ IO key function:
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.9‑22 Smart Tool Configuration (IO key)
+.. centered:: Figure 4.9-22 Smart Tool Configuration (IO key)
 
 Welding Expert Library
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3553,6 +3703,179 @@ Enable the security background program and set the unexpected scene and backgrou
 
 .. centered:: Figure 4.9-38 Security daemon
 
+SmartTool+Force Sensor Combination
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Select "End Peripheral Configuration" in the "User Peripheral Configuration" interface, select "Extended IO Device" as the device type, and the extended IO device configuration information is divided into manufacturer, type, software version and mounting location. Different manufacturers correspond to different types.The current manufacturers are NSR and FR.
+
+Users can configure corresponding device information according to specific production needs. After successful configuration, the device information table is displayed. If the user needs to change the configuration, he can first select the corresponding number, click the "Clear" button to clear the corresponding information, and reconfigure the device information according to needs. 
+
+.. important:: Before clicking Clear Configuration, the corresponding device should be in an inactive state.
+
+.. image:: teaching_pendant_software/315.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-39 NSR interface
+
+.. image:: teaching_pendant_software/316.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-40 FR interface
+
+NSR
+++++++
+The corresponding type of NSR are: SmartTool.
+
+1. Hardware installation
+
+1)Disassemble the SmartTool handle, take out the middle tooling, and install it at the end of the robot.
+
+.. image:: teaching_pendant_software/317.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.9-41 Install the tooling in the middle of the SmartTool handle
+
+2)After the tooling is installed, splice the SmartTool handle. After the splicing is successful, connect the connecting cable to the end of the robot.
+
+.. image:: teaching_pendant_software/318.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.9-42 SmartTool handle installed successfully
+
+2. Device information configuration
+
+.. important:: Please ensure that your SmartTool handle has been fixedly installed on the end of the robot and properly connected to the end of the robot.
+
+1)Click the Smart Tool function menu in the auxiliary application to enter this function configuration page. Customize the functions of each button on the end handle according to your needs, including (New Program, Save Program, PTP, Lin, ARC, Weaving Start, Weaving end and IO port);
+
+.. image:: teaching_pendant_software/319.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-43 SmartTool handle button function configuration interface
+
+2)After the SmartTool handle button function configuration is completed, configure the manufacturer of the extended IO device as "NSR", select the "Type", "Software Version" and "Hang Position" information, and click the "Configure" button.
+
+.. image:: teaching_pendant_software/320.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-44 NSR device information configuration interface
+
+3)After successfully configuring the device information, view the table data.
+
+3. Application
+
+After the device information is configured successfully, open the "Teaching Simulation - Program Teaching" interface and create a new "testSmartTool.lua" program. Press the SmartTool handle buttons as needed (key function configuration example: A button - PTP, B button - LIN, C button - ARC, D button - create a new program, E button - save the program, IO button - CO0 ), at this time the robot receives feedback and performs corresponding operations on the program. The teaching program is as shown below:
+
+.. image:: teaching_pendant_software/321.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-45 testSmartTool.lua program that presses the A key
+
+.. image:: teaching_pendant_software/322.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-46 testSmartTool.lua program that presses the B key
+
+.. image:: teaching_pendant_software/323.png
+   :width: 6in
+   :align: center
+
+.. image:: teaching_pendant_software/324.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-47 testSmartTool.lua program that presses the C key
+
+.. image:: teaching_pendant_software/325.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-48 testSmartTool.lua program that presses the D key
+
+.. image:: teaching_pendant_software/326.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-49 testSmartTool.lua program that presses the E key
+
+.. image:: teaching_pendant_software/327.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-50 testSmartTool.lua program that presses the IO key
+
+FR
++++++
+The corresponding type of FR is "SmartTool" and is used in combination with force sensors. The collaborative robot can be adapted to three force sensors of XJC, NSR and GZCX. When using different sensors, you only need to load the corresponding communication protocol, as follows :
+
+- SmartTool + XJC-6F-D82(XJC).
+- SmartTool + NSR-FT Sensor A(NSR)。
+- SmartTool + GZCX-6F-75A(GZCX)。
+
+1. Hardware installation
+1)Install the SmartTool handle on the end of the robot and connect it correctly to the end of the robot (refer to NSR's hardware installation for detailed installation).
+
+2)After the SmartTool handle is installed, install the force sensor (taking Hong Kong Zhichuangxin as an example) at the end of the SmartTool handle, and connect the connecting cable to the SmartTool handle.
+
+.. image:: teaching_pendant_software/328.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.9-51 GZCX force sensor is installed at the end of SmartTool handle
+
+2. Device Configuration
+
+.. important:: Please make sure that your SmartTool handle has been fixedly installed on the end of the robot and is correctly connected to the end of the robot, and that the force sensor has been fixedly installed on the end of the SmartTool handle and is correctly connected to the SmartTool handle.
+
+1)Configure the SmartTool handle (refer to NSR's SmartTool button function configuration);
+
+2)After the SmartTool handle button function configuration is completed, configure the manufacturer of the extended IO device as "FR", select the "Type", "Software Version" and "Hang Position" information, and click the "Configure" button;
+
+.. image:: teaching_pendant_software/329.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-52 FR device information configuration interface
+
+3)After successfully configuring the device information, select the configured force sensor and click the "Activate" button to activate the force sensor. After successful activation, click the "Zero Point Correction" button to clear the force sensor and view the table data;
+
+.. image:: teaching_pendant_software/330.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-53 Force sensor zero calibration
+
+4)According to the current end installation, configure the load data on the "End Load" interface, and configure the tool coordinate data, tool type and installation location on the "Tool Coordinates" interface.
+
+.. image:: teaching_pendant_software/331.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-54 "End load" configuration
+
+.. image:: teaching_pendant_software/332.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-55 "Tool coordinates" configuration
+
+3. Application
+
+After the device information is successfully configured, the SmartTool button function and the force sensor function can be independently implemented, such as measuring the size and force direction of the force and auxiliary drag locking based on the force sensor.
+
+.. image:: teaching_pendant_software/333.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-56 Measure the magnitude and direction of force
+   
 System settings
 -----------------
 
@@ -3820,6 +4143,61 @@ There are two ways to set parameters: slider dragging and manual input.
    :align: center
 
 .. centered:: Figure 4.10-14 Schematic diagram of parameter range configuration
+
+WEB interface locked
+++++++++++++++++++++++++
+
+1. Lock screen settings
+
+Check the web interface lock screen settings in "Custom" and set whether this function is turned on. When choosing to turn on this function, select the usage period. If not selected, it will prompt "The usage period cannot be empty".
+
+.. note:: If the lock screen function is turned on, secondary settings cannot be made, and the system time cannot be updated.) After selecting the usage period, click the "Configure" button.
+
+After selecting the usage period, click the "Configure" button.
+
+.. image:: teaching_pendant_software/310.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.10-15 WEB interface lock screen shutdown settings
+
+.. image:: teaching_pendant_software/311.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.10-16 WEB interface lock screen enable settings
+
+2. Expiration reminder
+
+When the web interface lock screen function is turned on, the following prompt will appear after logging in to the interface:
+
+1)5 days before the expiration of the device, if you power on and log in successfully, a pop-up window will prompt the remaining days of the use period, which can be eliminated by resetting.
+
+.. image:: teaching_pendant_software/312.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.10-17 Boot prompt
+
+2)If the device continues to work, 5 days before the device expires, a pop-up window will automatically pop up at zero o'clock to prompt the remaining days of the service life, which can be eliminated by resetting.
+
+.. image:: teaching_pendant_software/313.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.10-18 Continuous work tips
+
+3. Unlock login
+
+When the web interface lock screen function is turned on, after the device expires, you will directly enter the lock screen interface when you log in to the webApp for the first time. When the device continues to work, it will automatically log out after obtaining the lock screen data at zero point and enter the lock screen interface. At this time, enter the unlock code to unlock and enter the login interface, enter your login information to log in.
+
+.. note:: The integrator operates to generate an encrypted unlock code.
+ 
+.. image:: teaching_pendant_software/314.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.10-19 Lock screen  
 
 Robot model configuration
 --------------------------------------
