@@ -69,7 +69,7 @@ FAIRINO SimMachine
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-V3.7.0-Release-240402 <https://drive.google.com/file/d/1Q4B090Lex85Zcb4PjPWu1u6kfsPl_hUR/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-V3.7.1-Release-240428 <https://drive.google.com/file/d/1LcDlCg168kHVQUBXWImFfpBf_lrJzbil/view?usp=sharing>`
 
     :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
 
