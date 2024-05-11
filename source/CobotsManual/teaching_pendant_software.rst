@@ -2428,7 +2428,7 @@ Weld-Trc Operation
 ++++++++++++++++++++
 
 Welding machine model and setting
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**************************************
 
 .. centered:: Table 4.1-2 Verified welding machine model
 
@@ -2458,7 +2458,7 @@ Welding machine model and setting
      - 56
 
 PLC model and settings
-^^^^^^^^^^^^^^^^^^^^^^^^
+**************************************
 
 .. centered:: Table 4.1-4 Verified PLC models
 
@@ -2493,7 +2493,7 @@ PLC model and settings
 :download:`Annex:PLC Program <../_static/_doc/MEGMEET PLC PROGRAME.zip>`
 
 Arc tracking function
-^^^^^^^^^^^^^^^^^^^^^^^^
+**************************************
 
 **1）An introduction to the relationship between setting current and voltage and function tracking performance**
 

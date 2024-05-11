@@ -35,3 +35,4 @@ Manual
     robot_peripherals
     appendix
     term
+    version_intro
