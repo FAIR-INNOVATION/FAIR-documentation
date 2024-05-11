@@ -35,4 +35,11 @@ Manual
     robot_peripherals
     appendix
     term
+
+Changelog
+----------------
+
+.. toctree:: 
+    :maxdepth: 6
+
     version_intro

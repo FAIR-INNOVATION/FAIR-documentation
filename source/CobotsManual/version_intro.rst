@@ -1,10 +1,5 @@
-Changelog
-================
-
-.. toctree::
-    :maxdepth: 5
-
-**Version V3.7.1**
+Version V3.7.1
+-----------------
 
 Date: 2024-05-10
 
