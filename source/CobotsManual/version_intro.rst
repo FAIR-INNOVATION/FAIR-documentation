@@ -1,21 +1,19 @@
-Release Notes
+Changelog
 ================
 
 .. toctree::
     :maxdepth: 5
 
-New content
---------------
+**Version V3.7.1**
 
-1. Web interface lock function (System settings -> Custom information -> Web interface lock screen settings)
+Date: 2024-05-10
 
-2. The function of finding the intersection coordinates of three points and four points (user peripheral configuration -> sensor tracking -> the function of finding the intersection coordinates of three points and four points)
+- **Web interface lock function**: System settings -> Custom information -> Web interface lock screen settings;
 
-Optimize content
------------------
+- **The function of finding the intersection coordinates of three points and four points**: User peripheral configuration -> Sensor tracking -> The function of finding the intersection coordinates of three points and four points;
 
-1. Segment welding motion posture optimization function (teaching simulation -> program teaching -> segment welding command)
+- **Segment welding motion posture optimization function**: Teaching simulation -> Program teaching -> Segment welding command;
 
-2. Virtual wall function based on force sensor (user peripheral configuration -> terminal peripheral configuration, auxiliary application -> robot body -> interference zone configuration, force sensor drag and lock)
+- **Virtual wall function based on force sensor**: User peripheral configuration -> End peripheral configuration, auxiliary application -> Robot body -> Interference zone configuration, force sensor drag lock;
 
-3. New functions of SmartTool+force sensor combination (user peripheral configuration -> terminal peripheral configuration, auxiliary application -> robot body -> Smart Tool)
+- **New functions of SmartTool+force sensor combination**: User peripheral configuration -> End peripheral configuration, auxiliary application -> Robot body -> Smart Tool.
