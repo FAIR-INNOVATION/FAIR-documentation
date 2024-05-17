@@ -67,6 +67,10 @@ FAIRINO SimMachine
 -----------------------
     :download:`FAIRINO SimMachine <https://drive.google.com/drive/folders/1C7bpnjDKOTsugNyl99gS5cHgCI6b2-0o?usp=sharing>`
 
+Palletizer frcap
+---------------------------------
+    :download:`Palletizer-v2.0.0 <_static/_doc/Palletizer-v2.0.0.zip>`
+
 Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-V3.7.1-Release-240428 <https://drive.google.com/file/d/1LcDlCg168kHVQUBXWImFfpBf_lrJzbil/view?usp=sharing>`

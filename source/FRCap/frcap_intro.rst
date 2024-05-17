@@ -18,3 +18,4 @@ FRCap Plug-in system
     frcap_example
     frcap_api
     frcap_update
+    frcap_palletizing
