@@ -329,7 +329,7 @@ Click "Config" in the advanced configuration column to enter the "Advanced Confi
 .. centered:: Figure 10-3-15 Lifting shaft configuration
 
 Procedural generation
-+++++++++++++++++++++++++++++++++++++++
+--------------------------------------------
 
 Check "Program Generation" below the recipe display, enter the program name, select the recipe according to the recipe and requirements. The left and right recipes can be the same or different, and click the "Generate" button.
 
@@ -348,7 +348,7 @@ Check "Program Generation" below the recipe display, enter the program name, sel
 .. centered:: Figure 10-4-1 Procedural generation
 
 Palletizing status page start and stop
-+++++++++++++++++++++++++++++++++++++++
+--------------------------------------------
 
 Enable this function in the "Status Page" column, enter the palletizing work status page, and view "Production Information", "Alarm Information" and "Palletizing Program".
 
