@@ -34,6 +34,8 @@ Qualification Certification
     
     :download:`Functional Safety Certification <_static/_doc/Functional safety certification.zip>`
 
+    :download:`KCs Certification <_static/_doc/KCs Certificate-FR3+FR5+FR10+FR16+FR20.zip>`
+
 .. Ecological Accessories
 .. ---------------------------
 
