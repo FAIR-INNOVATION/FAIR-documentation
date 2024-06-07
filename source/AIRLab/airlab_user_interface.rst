@@ -10,7 +10,7 @@ Main Interface
 As shown below, the AIRLab software mainly includes the following six modules: 1--menu bar, 2--toolbar, 3--project tree, 4--3D robo and functional area, 5--command feedback area, and 6--operation area. The 3D robot and functional area mainly displays the robot, tool, workpiece model, and scene elements. The command feedback area provides feedback on command execution results.
 
 .. note::
-    clicking the working directory or terminal toggles between displaying the working directory and command feedback results.
+    Clicking the working directory or terminal toggles between displaying the working directory and command feedback results.
 
 For an introduction to the menu bar, toolbar, operation area, and project tree, see the following chapters.
 
@@ -39,7 +39,7 @@ Clicking on File will bring up the dialog box shown below.
 To create a new configuration file, select the type of file to be created.
 
 .. note::
-    currently only welding and palletizing are supported.
+    Currently only welding and palletizing are supported.
 
 After selecting, click New to create a new configuration file. The following figure shows a created palletizing configuration file.
 
@@ -72,8 +72,7 @@ The functions of the View menu are shown in the table below.
 
 .. centered:: Table 3.1 Functions of the View Menu
 
-.. csv-table:: 
-    :stub-columns: 1
+.. csv-table::
     :widths: 10 30
 
     "Zoom","Use the mouse wheel to zoom in or out of the 3D scene"
@@ -208,7 +207,7 @@ The Cartesian space movement includes the following functions: tool and workpiec
 When in virtual state, clicking “+” or “-” or setting the Cartesian space pose achieves Cartesian space movement of the 3D model of the robot. After pressing and holding for 0.6 seconds, the movement is triggered, releasing or reaching the position stops the movement. When in real state, clicking “+” or “-” or setting the Cartesian space pose achieves actual robot Cartesian space movement. The yellow rectangle area displays the current AIRLab robot Cartesian coordinates.
 
 .. note::
-    you can set the step length by modifying the move step length and rotate step length.
+    You can set the step length by modifying the move step length and rotate step length.
 
 .. figure:: airlab_pictures/024.png
     :width: 3in
@@ -226,7 +225,7 @@ When the current state is virtual, clicking the “+” or “-” buttons or se
 When the current state is real, clicking the “+” or “-” buttons will move the actual robot in joint space.
 
 .. note::
-    you can set the step length by modifying the move step length and rotate step length.
+    You can set the step length by modifying the move step length and rotate step length.
 
 .. figure:: airlab_pictures/025.png
     :width: 3in
@@ -242,7 +241,7 @@ Extended Axis Move (need to import extended axes), display the current position 
 Click “+” “-” or set the joint space position to realize the joint space movement of the robot 3D model, press and hold for 0.6s to trigger the movement, and release or Press and hold 0.6s to trigger the movement, and release or stop the movement in place.
 
 .. note::
-    you can set the step length by modifying the moving step length and rotating step length
+    You can set the step length by modifying the moving step length and rotating step length
 
 .. figure:: airlab_pictures/026.png
     :width: 3in
@@ -403,7 +402,7 @@ Simulation
 After setting the simulation speed, click "Simulate". The robot will perform a single simulation stacking.
 
 .. important::
-    can only be used after trajectory generation.
+    Can only be used after trajectory generation.
 
 Click Stop to halt the movement.
 
@@ -424,7 +423,7 @@ The custom interface accessed by clicking on the project tree is shown in the fo
 
 .. csv-table:: 
     :header: "Current Node","Jump Target"
-    :widths: 10 30
+    :widths: 40 60
 
     "Robot","Robot Import Settings"
     "FR3、FR5、FR10、FR16、FR20","Tool Import Settings"

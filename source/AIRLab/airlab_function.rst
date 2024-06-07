@@ -43,7 +43,7 @@ The following models are currently pre-installed in the software:
 
 .. csv-table:: 
     :header: "Model Names","Pallet Grid Numbers","Recommended Pallet Sizes(mm)","Applicable Range"
-    :widths: 10 20 20 50
+    :widths: 10 10 10 70
 
     "G25B214S40","25*25","≤1000","Boxes with side lengths ranging from 2 to 14 grids"
     "G20B411S20","20*20","≤500","Boxes with side lengths ranging from 4 to 11 grids"
@@ -54,9 +54,9 @@ The following models are currently pre-installed in the software:
     "G20T812S20v3","20*20","≤500","Standard express cartons #8~12"
     "G20T812S20v4","20*20","≤500","Standard express cartons #8~12"
 
+Where each grid size equals the pallet size divided by the number of pallet grids. For example, for model G25B214S40, the size of each grid is at most 1000/25 = 40 mm, suitable for box sizes ranging from 80 to 560 mm.
+
 .. important::
-    where each grid size equals the pallet size divided by the number of pallet grids. For example, for model G25B214S40, the size of each grid is at most 1000/25 = 40 mm, suitable for box sizes ranging from 80 to 560 mm.
-    
     You can choose the model that best suits your needs. If the pre-installed models cannot meet your requirements, please feel free to contact us.
 
 Palletizing Height

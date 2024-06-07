@@ -304,6 +304,7 @@ Nodeeditor Installation
 Reference link：https://github.com/paceholder/nodeeditor
 
 Download and Extraction
+++++++++++++++++++++++++++
 
 Extracting the package (modified source code for nodeeditor is provided):
 
@@ -333,7 +334,6 @@ Running CMake with default options:
     cmake ..
 
 Compiling the source code:and installing the compiled binaries:
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: console
     :linenos:

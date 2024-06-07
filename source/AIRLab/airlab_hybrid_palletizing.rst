@@ -31,37 +31,38 @@ Hardware Environment
 PC
 ~~~~~~~~~
 
-**Model**: Yunxuan Industrial PC EPC-E12-A01
+- **Model**: Yunxuan Industrial PC EPC-E12-A01
 
-**OS**: Ubuntu 22.04.3 LTS-64bit
+- **OS**: Ubuntu 22.04.3 LTS-64bit
 
-**Memory**: 32GB
+- **Memory**: 32GB
 
-**GPU**: NVIDIA RTX A2000
+- **GPU**: NVIDIA RTX A2000
 
 Robot
 ~~~~~~~~~
 
-**Robot Model**: FAIRINO FR5 Cobot
+- **Robot Model**: FAIRINO FR5 Cobot
 
-**Robot Version**: V6.0 and above
+- **Robot Version**: V6.0 and above
 
-**Controller Softwawre Version**: V3.7.2
+- **Controller Softwawre Version**: V3.7.2
 
-**Firmware Version**: FR_CRTL_FV2.010.09 Apr 16 2024 08:46:28
+- **Firmware Version**: FR_CRTL_FV2.010.09 Apr 16 2024 08:46:28
 
 Camera
 ~~~~~~~~~
 
-**Model**: XYZ AL-M 3D Camera
+- **Model**: XYZ AL-M 3D Camera
 
 Conveyor Belt
 ~~~~~~~~~~~~~~~~
-**Belt Type**: Flat belt, length 1.5m
 
-**Motor Model**: 60S01330L5HMQD-05, 400W servo motor, working voltage 48V, Sankyo
+- **Belt Type**: Flat belt, length 1.5m
 
-**Accessories**: synchronization pulley, synchronization belt
+- **Motor Model**: 60S01330L5HMQD-05, 400W servo motor, working voltage 48V, Sankyo
+
+- **Accessories**: synchronization pulley, synchronization belt
 
 .. figure:: airlab_pictures/063.png
     :width: 3in
@@ -180,7 +181,7 @@ Visual calibration has certain requirements for the relative position of the cam
 
 .. centered:: (k+1)L\ :sub:`postmove`\ < L\ :sub:`cam-robot`\
 
-where L\ :sub:`cam-robot`\ represents the distance between the farthest reachable position of the robot along the direction of conveyor belt motion and the camera (Fig. 4.1). This implies that there is an upper limit on the lookahead number k.
+where L\ :sub:`cam-robot`\ represents the distance between the farthest reachable position of the robot along the direction of conveyor belt motion and the camera. This implies that there is an upper limit on the lookahead number k.
 
 In this case, we have set the distance L\ :sub:`cam-robot`\ to be approximately 750mm and L\ :sub:`postmove`\=210mm. Therefore, the maximum value for k can be set to 2.
 
