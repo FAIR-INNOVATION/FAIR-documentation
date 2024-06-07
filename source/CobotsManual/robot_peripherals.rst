@@ -74,9 +74,91 @@ Gripper program teaching
      - MoveGripper(1,0,255,0,1000,0)
      - #Clamping jaws open
 
+Lua terminal open protocol configuration
+---------------------------------------------
+
+Overview
+~~~~~~~~~~
+
+Add Lua open design, while being compatible with previous designs. The manufacturer content is: manufacturer = 0x60, type = 0x00, representing the FR Lua open interface and selecting the corresponding peripheral manufacturer and type configuration.
+
+Procedure
+~~~~~~~~~~~
+**Step1**:Enter the robot body->system upgrade interface, select the terminal firmware .bin file, and upgrade the terminal firmware.
+
+.. important:: 
+   You need to first confirm whether the terminal firmware version FV2.010.06 and later software versions are compatible. If the version does not match, the corresponding software firmware is upgraded, otherwise there is no need to upgrade the firmware. 
+
+   Before uploading the terminal firmware upgrade package, you need to enter the boot mode.
+
+.. figure:: robot_peripherals/146.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1-4 Upgrade terminal firmware
+
+**Step2**:Go to User Peripheral Configuration->Lua Open Protocol page, upload Lua terminal open protocol, select the Lua terminal open protocol to be uploaded, and perform the upload operation.
+
+.. important:: Before uploading the terminal protocol, you need to enter the boot mode. At the same time, the file name needs to start with AXLE_LUA.
+
+.. figure:: robot_peripherals/147.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1-5 Upload Lua terminal open protocol
+
+**Step3**:Configure the terminal peripherals, the device type is: force sensor device, the manufacturer is: OpenLua, then select the software version and mounting location, and click the "Configure" button.
+
+.. figure:: robot_peripherals/148.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1-6 Terminal peripheral configuration
+
+**Step4**:Configure the terminal communication parameters, including baud rate, data bit, stop bit, etc. After the configuration is completed, click the "Set" button.
+
+.. figure:: robot_peripherals/149.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1-7 Configure terminal communication parameters
+
+The detailed parameters of terminal communication are as follows:
+
+- Baud rate: supports 1-9600, 2-14400, 3-19200, 4-38400, 5-56000, 6-67600, 7-115200, 8-128000; The terminal RS485 driver chip is a low-speed 485, and the baud rate cannot be >200k;
+- Data bits:Data bits support (8,9), currently 8 is commonly used;
+- Stop bits: 1-1, 2-0.5, 3-2, 4-1.5, currently commonly used =1;
+- Check bit: 0-None, 1-Odd, 2-Even, currently commonly used as 0;
+- Timeout: 1~1000ms, this value needs to be combined with the peripherals to set reasonable time parameters;
+- Number of timeouts: 1~10, mainly for timeout retransmission, reducing occasional exceptions and improving user experience;
+- Periodic instruction time interval: 1~1000ms, mainly used for the time interval between each issuance of periodic instructions;
+
+**Step4**:To enable Lua at the end, click the "Enable" button.
+
+.. figure:: robot_peripherals/150.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1-8 Terminal Lua enabled
+
+When an exception occurs in a Lua file, a warning "Lua file exception at the end" is displayed, and you can choose to "not recover/recover". Turn off the Lua enable button and the warning prompt will be closed.
+
+.. figure:: robot_peripherals/151.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1-9  Lua file exception
+
+Enter the Status Information->Status Query page to query the original data chart of the force/torque sensor. The correctness of the one-dimensional data (Fz) is successfully verified for 0kg 3kg 6kg. Data Fx, Fy, Mx, My, and Mz can also be collected in other dimensions, as shown below:
+
+.. figure:: robot_peripherals/152.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1-10 力/扭矩传感器原始数据
+
 Spray gun peripheral configuration
 -------------------------------------
-
 Spray gun peripheral configuration steps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -750,7 +832,7 @@ Three-point intersection coordinate calculate method
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.4‑50 Select three contact points
+.. centered:: Figure 5.4-50 Select three contact points
 
 The acquired touchpoint consists of three points, two of which are in the same plane and one in the vertical plane.
 
@@ -762,7 +844,7 @@ The acquired touchpoint consists of three points, two of which are in the same p
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.4‑51 Select points
+.. centered:: Figure 5.4-51 Select points
 
 **Step3**: Select the three-point search in the drop-down box, select the three contact points collected in turn, click Calculate, check whether the display of the generated intersection in the 3D model is wrong, name and save the intersection point;
 
@@ -770,13 +852,13 @@ The acquired touchpoint consists of three points, two of which are in the same p
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.4‑52 Calculate the intersection coordinates and save them
+.. centered:: Figure 5.4-52 Calculate the intersection coordinates and save them
 
 .. figure:: robot_peripherals/130.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.4‑53 Save the intersection coordinates as teach points
+.. centered:: Figure 5.4-53 Save the intersection coordinates as teach points
 
 Four-point intersection coordinate calculate method
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -786,7 +868,7 @@ Four-point intersection coordinate calculate method
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.4‑54 Select Four Points
+.. centered:: Figure 5.4-54 Select Four Points
 
 The acquired contact point consists of four points, the first two of which are in the same plane and the last two in the vertical plane.
 
@@ -798,7 +880,7 @@ The acquired contact point consists of four points, the first two of which are i
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.4‑55 Select a locus to find the coordinates of the intersection point
+.. centered:: Figure 5.4-55 Select a locus to find the coordinates of the intersection point
 
 **Step3**: Select the four points in the drop-down box, select the four contact points in turn, click Calculate, check whether the display of the generated intersection in the 3D model is incorrect, name the intersection coordinate and save it;
 
@@ -806,13 +888,13 @@ The acquired contact point consists of four points, the first two of which are i
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.4‑56 Calculate the intersection coordinates and save it
+.. centered:: Figure 5.4-56 Calculate the intersection coordinates and save it
 
 .. figure:: robot_peripherals/134.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.4‑57 Saving the intersection coordinates as a teach point
+.. centered:: Figure 5.4-57 Saving the intersection coordinates as a teach point
 
 Extended Axis Peripheral Configuration
 -----------------------------------------
@@ -1778,7 +1860,7 @@ Palletizing system configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.10‑4 Size configuration of palletizing equipment
+.. centered:: Figure 5.10-4 Size configuration of palletizing equipment
 
 **Step5**: Click "Configure" in the pattern configuration column to enter the mode configuration pop-up window.
 
@@ -1802,13 +1884,13 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.10‑5 Palletizing pattern A configuration
+.. centered:: Figure 5.10-5 Palletizing pattern A configuration
 
 .. figure:: robot_peripherals/070.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.10‑6 Palletizing pattern B configuration
+.. centered:: Figure 5.10-6 Palletizing pattern B configuration
 
 **Step6**: Click "Advanced Configuration" in the teaching program generation column to enter the advanced configuration pop-up window. At this time, configure the "Material Lifting Height", "First Offset Distance", "Second Offset Distance" and "Suction Waiting Time".
 
@@ -1994,3 +2076,87 @@ Specific function of parameters:
 **Maximum Drag force**: 50;
 
 **Maximum Drag speed**: 180;
+
+Six -dimensional force and joint impedance hybrid drag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Summary
++++++++++++
+Six -dimensional force and joint impedance mixed drag function are to perceive the external force by the help of sensors. The robot is auxiliary drag in the drag mode. It can obtain a different drag experience by adjusting the gain coefficient. The joint impedance is limited to the drag force with impedance control.
+
+Installation configuration and zero calibration operation of force sensor
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Installation configuration of force sensor
+
+The detailed operation of the force sensor installation configuration is shown above: Virtual wall configuration based on force sensor.
+
+2. Zero calibration of force sensor
+
+In order to drag the robot conveniently, it is necessary to install a drag handle under the sensor, as shown in Figure 1.
+
+.. figure:: robot_peripherals/153.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.13-1 Drag the handle
+
+**Step1**:According to the length of the actual handle, set the tool coordinate system, as shown in Figure 2.
+
+**Step2**:Under the "Robot Settings" menu bar in the initial settings, click "Power/Torner Sensor Load" to enter the corresponding interface. Use the dragging button to adjust the level of the robot's end level, click the "Record Initial Location" button in the "Sensor Automatic School Zero" column of the "Power/Torque Sensor Load" interface. Then, switch the robot mode as an automatic mode, click the "Automatic School Zero" button. After the program is running, it is to complete the sensor school zero work.  The detailed operation is shown in Figure 3.
+
+.. figure:: robot_peripherals/154.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.13-2 Tool coordinate system setting
+
+.. figure:: robot_peripherals/155.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.13-3 Automatic zero calibration of force/torque sensor
+
+Six -dimensional force and joint impedance hybrid drag
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Auxiliary drag
+
+**Step1**:In the menu bar of the "Robotic Body" in "Auxiliary Application", click "Drag Lock" to enter the dragging lock function interface.
+
+**Step2**:In the column of "Six dimensions and joint impedance mixed drag", set the control status to "open", the impedance opening state is "closed", set the drag gain, the end line speed is 1000mm/s, the angle speed The limit is 100 °/s, and then click the "Apply" button to enable the function. The specific configuration is shown in Figure 4.
+
+**Step3**:Switch the robot mode to drag mode to drag the robot. The specific effect is: drag the end of the robot, the drag is easy, and the experience is good; drag the robot joint and drag weight.
+
+.. figure:: robot_peripherals/156.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.13-4 configuration parameters of six dimensions assisted drag
+
+2. joint impedance control
+
+The role of impedance control is to limit the drag power and drag position, and its default state is "closed".
+The specific operation is shown in Figure 5. The setting status of the setting impedance is "open", and then sets the damping coefficient and stiffness coefficient according to Figure 5. Among them, the function of the rigidity coefficient has not yet been opened.
+
+.. figure:: robot_peripherals/157.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.13-5 Configuration parameters of joint impedance
+
+Specific function of parameters:
+
+- **Control status**: After opening, this function can be used in the drag mode.
+
+- **Impedance control opening**: After opening, you need to configure stiffness parameters and damping parameters. The role is to limit the drag power and drag position.
+
+- **Drag gain**: The parameter is recommended between [0-5]. The parameter is set to 0, and the robot cannot be dragged. The parameter is set to 1, and the drag effect has not improved. The parameters are greater than 1, dragged lightly, and the drag experience is good. The larger the parameters, the easier it is to drag.
+
+- **Stiffness gain**: set to 0, and its role is to return to the initial position before dragging after dragging.
+
+- **Damping gain**: The role is to limit the drag power. The range of 1-3 joint parameters is [0-0.5], and the range of 4-5 joint parameters is [0-0.1]; 6-joint parameter range is [0-0.05].
+
+- **Ending speed**: 1000mm/s, when the speed limit of the end line speed, the robot switching mode to the manual mode, and the TCP speed is
+
+- **Angle speed limit**: 100 °/s, when the angle speed is limited, the robot switching mode to the manual mode, and prompt TCP speeding.
