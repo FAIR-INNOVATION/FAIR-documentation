@@ -18,6 +18,39 @@ The teaching pendant software is the supporting software developed for the robot
 -  Able to view control IO status;
 -  Users can modify passwords, view system information, etc.
 
+Robot's first activation 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Power on the control box and connect the Ethernet cable to the PC.
+
+2. Open a web browser on the PC and visit the target website 192.168.58.2; the robot will enter the activation page upon first power-up.
+
+.. figure:: teaching_pendant_software/334.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.1-1 Activation Interface
+
+3. Enter the correct SN code of the device box and click the "Activate" button after input is complete.
+   
+4. The system will verify your SN code. If the input is correct, the activation process will be completed automatically.
+
+.. figure:: teaching_pendant_software/335.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.1-2 Activation Success Interface
+
+5. After successful activation, please manually restart the control box.
+   
+6. After restarting, visit the target website 192.168.58.2 again to enter the login page.
+
+.. figure:: teaching_pendant_software/001.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.1-3 Login Page
+
 Start software
 ~~~~~~~~~~~~~~~~
 
@@ -28,7 +61,7 @@ Start software
 User login and permission update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. centered:: Table 4.1-1 Initial user
+.. centered:: Table 4.1-4 Initial user
 
 .. list-table::
    :widths: 70 70 70 70
@@ -2004,6 +2037,44 @@ This instruction is divided into continuous output mode and single output mode.
    :align: center
 
 .. centered:: Figure 4.7-6-8 MoveDO instruction single output interface
+
+MoveAO command
+++++++++++++++++
+
+Click the "MoveAO" icon to enter the MoveAO command editing interface
+
+1. Summary
+
+When used in conjunction with motion commands, this instruction can output AO signals proportionally based on real-time TCP speed during the motion process.
+
+2. Description of Motion AO Command
+
+The motion AO command is located in the teaching simulation program teaching command editing area, and the icon is Control Command-Motion AO.
+
+.. image:: teaching_pendant_software/336.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-6-9 Motion AO Instruction
+
+.. image:: teaching_pendant_software/337.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-6-10 Details of Motion AO Instructions
+
+- AO number: dropdown list selection, Ctrl-AO0 corresponds to control box AO0, Ctrl-AO1 corresponds to control box AO1, and End AO0 corresponds to end AO0.
+
+- Maximum TCP speed: The maximum TCP speed value of the robot; Function: Proportional to real-time TCP speed.
+
+- Maximum TCP speed AO percentage: The AO percentage corresponding to the maximum TCP speed value of the robot; Function: Set the upper limit value of AO output.
+
+- Dead zone compensation value AO percentage: When there is a dead zone in the proportional valve, this parameter can be set to ensure AO output; Function: Set the lower limit value of AO output.
+
+.. important:: 
+   Calculation formula:Output AO percentage=Real time TCP speed/Set maximum TCP speed * Set maximum TCP speed AO percentage.
+
+   The accompanying motion commands for this command are as follows:PTP/LIN/ARC/CIRCLE/SPLINE/NSPLINE/SERVOJ。
 
 ToolList command
 +++++++++++++++++++

@@ -12,3 +12,16 @@ Date: 2024-05-10
 - **Virtual wall function based on force sensor**: User peripheral configuration -> End peripheral configuration, auxiliary application -> Robot body -> Interference zone configuration, force sensor drag lock;
 
 - **New functions of SmartTool+force sensor combination**: User peripheral configuration -> End peripheral configuration, auxiliary application -> Robot body -> Smart Tool.
+
+Version v3.7.2
+---------------------
+
+Date: 2024-06-07
+
+- **Based on the LUA -end development protocol configuration function**: initial settings-> user peripheral configuration-> Lua end development protocol configuration
+
+- **Zhuo Zhao Dianjiu Application (Movement AO Control) Function**: Demonstration of Education-> Program Demonstration-> Movement AO instructions;
+
+- **Six -dimensional force and joint impedance mixed drag function**: Auxiliary application -> Robot body -> Six -dimensional force and joint impedance mixed drag;
+
+- **The first activation function of the robot**: Login settings;
