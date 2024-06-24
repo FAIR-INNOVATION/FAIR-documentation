@@ -73,10 +73,6 @@ Palletizer frcap
 ---------------------------------
     :download:`Palletizer-v2.1.0 <_static/_doc/Palletizer-v2.1.0.zip>`
 
-AIRLab Mixed Palletizer
------------------------------
-    :download:`AIRLab Mixed Palletizing Software-v1.0.0 <https://drive.google.com/file/d/1ccDsryrI3I8FJOFl2ZBhJkEJ8eS2Y6tz/view?usp=sharing>`
-
 Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-V3.7.2-Release-240607 <https://drive.google.com/file/d/1lENvG5aMxB7Esp3zkyYrpqvJCU2PwvbR/view?usp=sharing>`
