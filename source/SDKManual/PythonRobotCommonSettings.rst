@@ -272,7 +272,7 @@ Code example
     etool = [21.0,22.0,23.0,24.0,25.0,26.0]
     for i in range(1,4):
         error = robot.SetExTCPPoint(i) # In fact, the robot should be controlled to move to the appropriate position according to the requirements before sending the command
-        print("Set external tool reference point - three point method，point:",i,"errcode",error)
+        print("Set external tool reference point - three point method,point:",i,"errcode",error)
         time.sleep(1)
     error,etcp = robot.ComputeExTCF()
     print("Calculation external tool coordinate system - three point method, errcode ",error," etcp: ",etcp) 
@@ -358,7 +358,7 @@ Code example
     w_coord = [11.0,12.0,13.0,14.0,15.0,16.0]
     for i in range(1,4):
         error = robot.SetWObjCoordPoint(i) # In fact, the robot should be controlled to move to the appropriate position according to the requirements before sending the command
-        print("Set the workpiece reference point - three point method，point",i,"errcode",error)
+        print("Set the workpiece reference point - three point method,point",i,"errcode",error)
         time.sleep(1)
     error, w_coord = robot.ComputeWObjCoord(0)
     print("Calculation of workpiece coordinate system - three point method,errcode: ",error," workpiece coordinate syste:", w_coord)
@@ -507,3 +507,27 @@ Code example
     robot = Robot.RPC('192.168.58.2')
     error = robot.WaitMs(1000)
     print("Waiting for specified time ",error)
+
+Set robot acceleration
+++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetOaccScale(acc)``"
+    "Description", "Set robot acceleration"
+    "Required parameter", "- ``acc``:Robot acceleration percent"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+---------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    robot.SetOaccScale (20)

@@ -120,7 +120,7 @@ Spiral parameter data type
 feedback packet of robot controller state
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionchanged:: C++ SDK-v2.1.3.0
+.. versionchanged:: C++ SDK-v2.1.4.0
 
 .. code-block:: c++
     :linenos:
@@ -216,6 +216,12 @@ feedback packet of robot controller state
         int      gripper_temp;              /* gripper temperature */
         int      gripper_voltage;           /* gripper voltage*/
         robot_aux_state aux_state;
+        EXT_AXIS_STATUS extAxisStatus[4];  /* UDPExtended axis state */
+        uint16_t extDIState[8];        //Extended DI
+        uint16_t extDOState[8];        //Extended DO
+        uint16_t extAIState[4];        //Extended AI
+        uint16_t extAOState[4];        //Extended AO
+        uint16_t check_sum;            /* Sum check */
     }ROBOT_STATE_PKG;
 
 Servo controller status

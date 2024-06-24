@@ -735,7 +735,7 @@ Starting point overall offset
     "Prototype", "``PointsOffsetEnable(flag,offset_pos)``"
     "Description", "Starting point overall offset"
     "Required parameter", "- ``flag``:0-offset under base coordinate or workpiece coordinate system, 2-offset under tool coordinate system;
-    - ``offset_pos``:Offset,unit[mm][°]。"
+    - ``offset_pos``:Offset,unit[mm][°]."
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
 
@@ -778,3 +778,111 @@ Code example
     print("Linear motion in Cartesian space:errcode ", ret) 
     ret = robot.PointsOffsetDisable()
     print("The overall offset of the point ends:errcode ", ret)
+    
+Control box movement AO starts
+++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``MoveAOStart(AONum,maxTCPSpeed=1000,maxAOPercent=100,zeroZoneCmp=20)``"
+    "Description", "Control box movement AO starts"
+    "Required parameter", "- ``AONum``:Control box AO num"
+    "Optional parameter", "
+    - ``maxTCPSpeed``:Indicates the maximum TCP speed [1-5000mm/s]. The default value is 1000;
+    - ``maxAOPercent``:Indicates the AO percentage corresponding to the maximum TCP speed. The default value is 100;
+    - ``zeroZoneCmp``:Dead zone compensation value AO percentage, integer, default is 20, range [0-100]."
+    "Return value", "Errcode: Success -0  Failed -errcode"
+    
+Code example
+---------------
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # A connection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    # Control box movement AO starts
+    error = robot.MoveAOStart(0,100,98,1)
+    print("MoveAOStart",error)
+    error,joint_pos = robot.GetActualJointPosDegree()
+    print("GetActualJointPosDegree",error,joint_pos)
+    joint_pos[0] = joint_pos[0]+10
+    # Robot joint motion
+    error = robot.MoveJ(joint_pos,1,1)
+    print("MoveJ",error)
+    time.sleep(3)
+    # Control box movement AO stops
+    error = robot.MoveAOStop()
+    print("MoveAOStop",error)
+
+Control box movement AO stops
++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``MoveAOStop()``"
+    "Description", "Control box movement AO stops"
+    "Required parameter", "NULL"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Tool movement AO starts
++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``MoveToolAOStart(AONum,maxTCPSpeed=1000,maxAOPercent=100,zeroZoneCmp =20)``"
+    "Description", "Tool movement AO starts"
+    "Required parameter", "- ``AONum``:末端AO编号"
+    "Optional parameter", "
+    - ``maxTCPSpeed``:Indicates the maximum TCP speed [1-5000mm/s]. The default value is 1000;
+    - ``maxAOPercent``:Indicates the AO percentage corresponding to the maximum TCP speed. The default value is 100;
+    - ``zeroZoneCmp``:Dead zone compensation value AO percentage, integer, default is 20, range [0-100]."
+    "Return value", "Errcode: Success -0  Failed -errcode"
+        
+Code example
+------------------
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # onnection is established with the robot controller. A successful connection returns a robot object
+    robot = Robot.RPC('192.168.58.2')
+    #Tool movement AO stars
+    error = robot.MoveToolAOStart(0,100,98,1)
+    print("MoveToolAOStart",error)
+    error,desc_pos = robot.GetActualTCPPose()
+    print("GetActualTCPPose",error,desc_pos)
+    desc_pos[2] = desc_pos[2]-50
+    #Rectilinear motion in Cartesian space
+    error = robot.MoveL(desc_pos,1,1)
+    print("MoveL",error)
+    time.sleep(3)
+    #Tool movement AO stops
+    error = robot.MoveToolAOStop()
+    print("MoveToolAOStop",error)
+    
+Tool movement AO stops
+--------------------------
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``MoveToolAOStop()``"
+    "Description", "Tool movement AO stops"
+    "Required parameter", "NULL"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"

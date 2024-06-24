@@ -792,3 +792,114 @@ Code example
         robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
         robot.PointsOffsetDisable();
     }
+    
+Set control box AO when the robot moves start
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set control box AO when the robot moves Start
+    * @param [in] AONum Control box AO num
+    * @param [in] maxTCPSpeed the maximum TCP speed[1-5000mm/s]，default 1000
+    * @param [in] maxAOPercent the AO percentage corresponding to the maximum TCP speed, default 100%
+    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, integer, default is 20, range [0-100]
+    * @return error code
+    */
+    int MoveAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
+
+Set control box AO when the robot moves stop
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+   
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set control box AO when the robot moves stop
+    * @return error code
+    */
+    int MoveAOStop();
+    
+Set tool AO when the robot moves start
++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+   
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set tool AO when the robot moves start
+    * @param [in] AONum tool AO num
+    * @param [in] maxTCPSpeed the maximum TCP speed[1-5000mm/s]，default 1000
+    * @param [in] maxAOPercent the AO percentage corresponding to the maximum TCP speed, default 100%
+    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, integer, default is 20, range [0-100]
+    * @return error code
+    */
+    int MoveToolAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
+    
+Set tool AO when the robot moves stop
+++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+   
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set tool AO when the robot moves stop
+    * @return error code
+    */
+    int MoveToolAOStop();
+
+Code example
+************
+.. code-block:: c#
+    :linenos:
+
+    private void btnMoveAO_Click(object sender, EventArgs e)
+    {
+        DescPose startdescPose = new DescPose();
+        JointPos startjointPos = new JointPos();
+        DescPose enddescPose = new DescPose();
+        JointPos endjointPos = new JointPos();
+        DescPose CPose = new DescPose();
+        JointPos CJPos = new JointPos();
+        DescPose DPose = new DescPose();
+        JointPos DJPos = new JointPos();            
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        int rtn = robot.MoveToolAOStart(0, 100, 80, 1);
+        //int rtn = robot.MoveAOStart(0, 100, 80, 1);
+        Console.WriteLine(rtn);
+
+        rtn = robot.MoveL(startjointPos, startdescPose, 0, 0, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
+        //robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, 0, 0, offdese);
+        //robot.MoveC(startjointPos, startdescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, 100, 0);
+        //robot.Circle(startjointPos, startdescPose, 0, 0, 100, 100, exaxisPos, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 100, 0, offdese);
+        //robot.SplineStart();
+        //robot.SplinePTP(startjointPos, startdescPose, 0, 0, 100, 100, 100);
+        //robot.SplinePTP(endjointPos, enddescPose, 0, 0, 100, 100, 100);
+        //robot.SplinePTP(CJPos, CPose, 0, 0, 100, 100, 100);
+        //robot.SplinePTP(DJPos, DPose, 0, 0, 100, 100, 100);
+        //robot.SplineEnd();
+
+        //robot.NewSplineStart(0, 5000);
+        //robot.NewSplinePoint(startjointPos, startdescPose, 0, 0, 100, 100, 100, 5, 0);
+        //robot.NewSplinePoint(endjointPos, enddescPose, 0, 0, 100, 100, 100, 5, 0);
+        //robot.NewSplinePoint(CJPos, CPose, 0, 0, 100, 100, 100, 5, 0);
+        //robot.NewSplinePoint(DJPos, DPose, 0, 0, 100, 100, 100, 5, 1);
+        //robot.NewSplineEnd();
+        //int count = 1000;
+        //while (count > 0)
+        //{
+        //    robot.ServoJ(startjointPos, 0, 0, 0.008f, 0, 0);
+        //    startjointPos.jPos[0] += 0.01;//0 joint position increase
+        //    count -= 1;
+        //}
+        rtn = robot.MoveToolAOStop();
+        //rtn = robot.MoveAOStop();
+        Console.WriteLine(rtn);
+    }
+

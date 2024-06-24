@@ -134,7 +134,7 @@ Spiral parameter data type
 Real-time status structure of the robot
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.6
+.. versionchanged:: C# SDK-v1.0.7
 
 .. code-block:: c#
     :linenos:
@@ -203,6 +203,16 @@ Real-time status structure of the robot
         public byte gripper_current;     /* Gripper current */
         public int gripper_tmp;          /* Gripper temperature */
         public int gripper_voltage;      /* Gripper voltage */             
-        public ROBOT_AUX_STATE auxState; /* 485Extended axis state */          
+        public ROBOT_AUX_STATE auxState; /* 485Extended axis state */    
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public EXT_AXIS_STATUS[] extAxisStatus;  /* UDPExtended axis state */
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+        public UInt16[] extDIState;//Extended DI
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+        public UInt16[] extDOState;//Extended DO
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public UInt16[] extAIState;//Extended AI
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public UInt16[] extAOState;//Extended AO        
         public UInt16 check_sum;         /* Sum check */                 
     }

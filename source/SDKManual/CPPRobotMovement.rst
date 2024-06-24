@@ -992,3 +992,171 @@ Code example
 
         return 0;
     }
+
+Set control box AO when the robot moves start
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.4.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set control box AO when the robot moves Start
+    * @param [in] AONum Control box AO num
+    * @param [in] maxTCPSpeed the maximum TCP speed[1-5000mm/s]，default 1000
+    * @param [in] maxAOPercent the AO percentage corresponding to the maximum TCP speed, default 100%
+    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, integer, default is 20, range [0-100]
+    * @return error code
+    */
+    errno_t MoveAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
+
+Set control box AO when the robot moves stop
+++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.4.0
+   
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set control box AO when the robot moves stop
+    * @return error code
+    */
+    errno_t MoveAOStop();
+    
+Set tool AO when the robot moves start
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.4.0
+   
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set tool AO when the robot moves start
+    * @param [in] AONum tool AO num
+    * @param [in] maxTCPSpeed the maximum TCP speed[1-5000mm/s]，default 1000
+    * @param [in] maxAOPercent the AO percentage corresponding to the maximum TCP speed, default 100%
+    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, integer, default is 20, range [0-100]
+    * @return error code
+    */
+    errno_t MoveToolAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
+    
+Set tool AO when the robot moves stop
++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.4.0
+   
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set tool AO when the robot moves stop
+    * @return error code
+    */
+    errno_t MoveToolAOStop();
+
+Code example
+************
+.. code-block:: c++
+    :linenos:
+
+    int testMoveAO(FRRobot* robot)
+    {
+        int tool = 0;
+        int user = 0;
+        float vel = 50.0;
+        float acc = 50.0;
+        float ovl = 50.0;
+        float blendT = -1.0;
+        float blendR = -1;
+        uint8_t flag = 0;
+        int type = 1;
+
+        JointPos j1, j2, j3, j4;
+        DescPose desc_pos1, desc_pos2, desc_pos3, desc_pos4, offset_pos = {};
+        ExaxisPos  epos = {};
+
+        robot->GetActualJointPosDegree(1, &j1);
+        robot->GetActualTCPPose(1, &desc_pos1);
+
+        /*j1.jPos[0] = 50.344;
+        j1.jPos[1] = -68.336;
+        j1.jPos[2] = 94.778;
+        j1.jPos[3] = -117.014;
+        j1.jPos[4] = -92.567;
+        j1.jPos[5] = 73.231;
+        desc_pos1.tran.x = -294.878;
+        desc_pos1.tran.y = -552.449;
+        desc_pos1.tran.z = 272.138;
+        desc_pos1.rpy.rx = -177.393;
+        desc_pos1.rpy.ry = -0.216;
+        desc_pos1.rpy.rz = 67.096;*/
+
+        j2.jPos[0] = 66.022;
+        j2.jPos[1] = -74.633;
+        j2.jPos[2] = 104.187;
+        j2.jPos[3] = -121.965;
+        j2.jPos[4] = -92.643;
+        j2.jPos[5] = 73.233;
+        desc_pos2.tran.x = -114.128;
+        desc_pos2.tran.y = -564.708;
+        desc_pos2.tran.z = 271.102;
+        desc_pos2.rpy.rx = -176.799;
+        desc_pos2.rpy.ry = 1.479;
+        desc_pos2.rpy.rz = 82.756;
+
+        j3.jPos[0] = 79.546;
+        j3.jPos[1] = -83.13;
+        j3.jPos[2] = 113.465;
+        j3.jPos[3] = -121.974;
+        j3.jPos[4] = -92.635;
+        j3.jPos[5] = 73.234;
+        desc_pos3.tran.x = 33.176;
+        desc_pos3.tran.y = -511.069;
+        desc_pos3.tran.z = 277.399;
+        desc_pos3.rpy.rx = -177.015;
+        desc_pos3.rpy.ry = 0.784;
+        desc_pos3.rpy.rz = 96.289;
+
+        j4.jPos[0] = 94.565;
+        j4.jPos[1] = -73.426;
+        j4.jPos[2] = 103.309;
+        j4.jPos[3] = -123.204;
+        j4.jPos[4] = -92.3;
+        j4.jPos[5] = 73.235;
+        desc_pos4.tran.x = 171.039;
+        desc_pos4.tran.y = -559.579;
+        desc_pos4.tran.z = 268.912;
+        desc_pos4.rpy.rx = -176.829;
+        desc_pos4.rpy.ry = 2.545;
+        desc_pos4.rpy.rz = 111.329;
+        
+        int err1 = 0;
+        err1 = robot->MoveAOStart(0, 100, 80, 1);
+        cout << "err num is " << err1 << endl;
+        //robot->MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        //robot->MoveL(&j1, &desc_pos1, tool, user, vel, acc, ovl, blendR, &epos, 0, flag, &offset_pos);
+        //robot->MoveC(&j1, &desc_pos1, 0, 0, 100, 100, &epos, 0, &offset_pos, &j2, &desc_pos2, 0, 0, 100, 100, &epos, 0, &offset_pos, 100, 0);
+        //robot->Circle(&j1, &desc_pos1, 0, 0, 100, 100, &epos, &j2, &desc_pos2, 0, 0, 100, 100, &epos, 100, 0, &offset_pos);
+        //robot->SplineStart();
+        //robot->SplinePTP(&j1, &desc_pos1, 0, 0, 100, 100, 100);
+        //robot->SplinePTP(&j2, &desc_pos2, 0, 0, 100, 100, 100);
+        //robot->SplinePTP(&j3, &desc_pos3, 0, 0, 100, 100, 100);
+        //robot->SplinePTP(&j4, &desc_pos4, 0, 0, 100, 100, 100);
+        //robot->SplineEnd();
+
+        //robot->NewSplineStart(0, 5000);
+        //robot->NewSplinePoint(&j1, &desc_pos1, 0, 0, 100, 100, 100, 5, 0);
+        //robot->NewSplinePoint(&j2, &desc_pos2, 0, 0, 100, 100, 100, 5, 0);
+        //robot->NewSplinePoint(&j3, &desc_pos3, 0, 0, 100, 100, 100, 5, 0);
+        //robot->NewSplinePoint(&j4, &desc_pos4, 0, 0, 100, 100, 100, 5, 1);
+        //robot->NewSplineEnd();
+        int count = 1000;
+        while (count > 0)
+        {
+            robot->ServoJ(&j1, 0, 0, 0.008f, 0, 0);
+            j1.jPos[0] += 0.02;//0 Increased joint position
+            count -= 1;
+        }
+        robot->MoveAOStop();
+        
+        return 0;
+    }

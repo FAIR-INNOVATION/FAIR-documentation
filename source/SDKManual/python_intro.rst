@@ -36,4 +36,5 @@ This manual is the secondary development interface document of Python.
     PythonRobotWeld
     PythonRoboExtendedAxis
     PythonRobotOthers
+    PythonRobotStatusFeedback
     

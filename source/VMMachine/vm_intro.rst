@@ -1,4 +1,4 @@
-Robot controller virtual machine
+FAIRINO SimMachine
 ======================================
 
 .. 简介
