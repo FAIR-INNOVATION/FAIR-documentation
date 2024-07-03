@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'FAIR'
-copyright = '2023, FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
+copyright = '2022-2024, FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
 author = 'FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
-release = '1.0.0'
+release = '3.7.3'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

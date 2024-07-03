@@ -1514,7 +1514,7 @@ After the sensor is configured, it can be used with the sensor to better assist 
 
 **Adaptive selection**: Turn it on when assembly is required. After turning it on, dragging becomes heavier;
 
-**Inertia Parameter**: Adjust the feel during dragging. The minimum value is 0. It needs to be operated with caution under the guidance of technical personnel.
+**Inertia Parameter**: Adjust the feel during dragging. It needs to be operated with caution under the guidance of technical personnel.
 
 **Damping parameters**:
 
@@ -2055,7 +2055,7 @@ Specific function of parameters:
 
 **Adaptive selection**: Turn it on when assembly is required. After turning it on, dragging becomes heavier;
 
-**Inertia Parameter**: Adjust the feel during dragging. The minimum value is 0. It needs to be operated with caution under the guidance of technical personnel.
+**Inertia Parameter**: Adjust the feel during dragging. It needs to be operated with caution under the guidance of technical personnel.
 
 **Damping parameters**:
 

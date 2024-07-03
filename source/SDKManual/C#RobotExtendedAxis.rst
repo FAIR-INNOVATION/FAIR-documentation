@@ -535,13 +535,13 @@ Apply the extended axis coordinate system
 
     /**
     * @brief Apply the extended axis coordinate system
-    * @param [in]  axisCoordNum coordinate system number
-    * @param [in]  toolNum tool number
+    * @param [in]  applyAxisId Extended shaft number BIT0-BIT3 corresponds to the extension axis number 1-4, such as the application extension axis 1 and 3,then 0B 0000 0101, that is 5;
+    * @param [in]  axisCoordNum Extended shaft coordinate system number
     * @param [in]  coord coordinate values
     * @param [in]  calibFlag calibflag 0-No, 1-yes
     * @return error code
     */
-    int ExtAxisActiveECoordSys(int axisCoordNum, int toolNum, DescPose coord, int calibFlag);
+    int ExtAxisActiveECoordSys(int applyAxisId, int axisCoordNum, DescPose coord, int calibFlag);
 
 Code example
 ************

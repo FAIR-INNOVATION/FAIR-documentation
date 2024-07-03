@@ -645,9 +645,10 @@ Apply the extended axis coordinate system
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ExtAxisActiveECoordSys(axisCoordNum,toolNum,coord,calibFlag)``"
+    "Prototype", "``ExtAxisActiveECoordSys(applyAxisId,axisCoordNum,toolNum,coord,calibFlag)``"
     "Description", "Apply the extended axis coordinate system"
     "Required parameter", "
+    - ``applyAxisId``:Extended shaft number BIT0-BIT3 corresponds to the extension axis number 1-4, such as the application extension axis 1 and 3,then 0B 0000 0101, that is 5;
     - ``axisCoordNum``:coordinate system number;
     - ``toolNum``:tool number;
     - ``coord``:coordinate system value[x,y,z,rx,ry,rz];

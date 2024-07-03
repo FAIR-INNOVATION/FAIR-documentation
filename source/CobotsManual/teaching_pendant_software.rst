@@ -546,7 +546,7 @@ There are 5 numbers in the drop-down list of the extended axis coordinate system
 
 .. centered:: Figure 4.4-8 Extended Axis Coordinates
 
-Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in Figure 4.4-9. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. Let’s first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
+Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in Figure 4.4-9. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. Let's first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/035.png
    :width: 3in
@@ -562,7 +562,7 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
 
 .. centered:: Figure 4.4-10 Linear guide calibration
 
-Next, let's look at the second expansion axis scheme - the calibration method of the positioner. The positioner is composed of two extension axes. Select the number of the extension axis and get the information to get the driver information of the corresponding extension axis. We can configure parameters according to this information. After configuration, set the DH parameters, measure the DH parameters of the positioner according to the diagram, and input them into the input box. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
+Next, let's look at the second expansion axis scheme - the calibration method of the positioner. The positioner is composed of two extension axes. Select the number of the extension axis and get the information to get the driver information of the corresponding extension axis. We can configure parameters according to this information. After configuration, set the DH parameters, measure the DH parameters of the positioner according to the diagram, and input them into the input box. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/037.png
    :width: 3in
@@ -586,7 +586,7 @@ Align the center of the end of the robot (using the end point of the tool in the
 
 .. centered:: Figure 4.4-13 Positioner calibration
 
-Next, let's look at the third extended axis solution - the calibration method of the single-axis positioner. The positioner is composed of a rotating extension shaft. Select the number of the extension shaft and get the information to get the driver information of the corresponding extension shaft. We can configure parameters according to this information. The DH parameter is set to 0. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don’t want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
+Next, let's look at the third extended axis solution - the calibration method of the single-axis positioner. The positioner is composed of a rotating extension shaft. Select the number of the extension shaft and get the information to get the driver information of the corresponding extension shaft. We can configure parameters according to this information. The DH parameter is set to 0. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/040.png
    :width: 3in
@@ -1516,7 +1516,7 @@ The function of this command is similar to the "PTP" command, but the path of th
 
 .. important:: When the selection point name is "seamPos", the straight line command is applied in the welding scene using the laser sensor. Due to the accumulated operating error during welding, "whether to offset" and "offset amount" are added.
 
-   **Whether to offset**：No, base coordinate system offset, tool coordinate system offset, laser original data offset;
+   **Whether to offset**:No, base coordinate system offset, tool coordinate system offset, laser original data offset;
 
    **Offset**: Δx, Δy, Δz, Δrx, Δry, Δrz, range: -300~300;
 
@@ -2293,9 +2293,9 @@ Changes in segment welding motion trajectory and attitude
 ************************************************************
 The segment welding mode of the collaborative robot can be selected for the segment welding movement. The mode types include the following two types;
 
-**No change in posture**：The robot always maintains the posture of the starting point of the welding trajectory during the welding trajectory.
+**No change in posture**:The robot always maintains the posture of the starting point of the welding trajectory during the welding trajectory.
 
-**Changing posture**：During the welding trajectory process, the robot calculates the Cartesian pose and joint position of each segment of the trajectory, and changes its posture during the segment welding operation.
+**Changing posture**:During the welding trajectory process, the robot calculates the Cartesian pose and joint position of each segment of the trajectory, and changes its posture during the segment welding operation.
 
 The following demonstrates the usage of "no change posture" and "change posture" respectively.
 
@@ -3104,69 +3104,1956 @@ Users can view the corresponding program backup content by selecting a date, and
 
 .. centered:: Figure 4.7-24 Current program backup
 
-Modbus TCP settings
-~~~~~~~~~~~~~~~~~~~~~
+Modbus TCP Communication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ModbusTCP is a commonly used communication protocol in industrial production. Faao collaborative robots provide two ways to communicate with your device: ModbusTCP master and ModbusTCP slave.
 
-Before using Modbus TCP, users need to configure the master and slave data on the Modbus TCP settings page.
+The collaborative robot supports up to 8 ModbusTCP masters to communicate with external devices at the same time, and each master supports up to 128 registers; the collaborative robot ModbusTCP slave has 128 coils, 128 discrete inputs, 64 holding registers and 64 input registers (holding registers and input register data types include unsigned, signed and floating point types). At the same time, some ModbusTCP slave input register addresses of collaborative robots are dedicated to feedback information such as the current robot's joint position and movement speed, and some coil register addresses are dedicated to controlling the robot to start the program, stop the program, set the control box DO and other functions.
 
-**Modbus master station settings**:Configure the master station and the corresponding master station register address on the page. Operations related to "adding Modbus master station and adding master station register" can be performed.
+The robot ModbusTCP slave only supports establishing a connection with one master station. The robot can communicate with different devices as a master and a slave at the same time. The following is a detailed usage method.
+ 
+ModbusTCP master
++++++++++++++++++
 
-1) Master station information:The master station information includes the master station name, slave station IP, port number, slave station number and communication cycle, and can be edited, refreshed and deleted.
-   
-   - Master station name: Custom name, such as Modbus_1, cannot have the same name, up to 8 master stations
-   - Slave IP: integer type, for example 192.168.57.3
-   - Port number: integer, for example 2021
-   - Slave station number: integer type For example: 1
-   - Communication cycle: integer type, for example 200 ms
+Before using the cooperative robot as the ModbusTCP master station to communicate with your equipment, please check the network connection between your equipment and the robot, and confirm that the network interfaces are in the same network segment.
 
-2) Master station register information:The master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI, AI type cannot be input), and can be edited and deleted.
+There are several steps to use the robot ModbusTCP master station: ①Add the master station; ②Add registers; ③Communication test; (4)Writing user programs; 
 
- - Master station register type: DI, DO, AI (unsigned, signed, floating point), AO (unsigned, signed, floating point)
-     
-     + Unsigned: 0~65535, the number is 16
-     + Signed: -32767~32768, the number is 16
-     + Floating point type: up to three decimal places, the number is 32
-  
- - Address number: integer type For example: 2000
- - Master station register name: Register_1, cannot have the same name, up to 128 master station registers
- - Address value: Integer type. DI and AI types cannot be input
+Add ModbusTCP master
+********************
+As shown in Figure 1, open the WebApp, click "Teaching" and "Program Teaching" in turn to create a new user program "testModbusMaster.lua".
 
 .. image:: teaching_pendant_software/233.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-25 Modbus master configuration page
+.. centered:: Figure 4.7-25-1 Create ModbusTCP master station user program
 
-.. important:: The maximum number of master stations is 8, and the maximum number of master station registers is 128. At the same time, the aliases of the master station and the slave station cannot have the same name.
-
-**Modbus slave station settings**:Digital input, digital output, analog input, analog output and alias modification operations can be performed.
+As shown in Figure 2, click the button to pop up/hide the content on the right side of the current program.
 
 .. image:: teaching_pendant_software/234.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.7-26 Modbus slave configuration page
+.. centered:: Figure 4.7-25-2 The content on the right side of the current program pops up
 
-1) Digital input/output
+As shown in Figure 3, click "ModbusTCP Settings" button to open the ModbusTCP function configuration page.
+
+.. image:: teaching_pendant_software/338.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-3 Open ModbusTCP Settings
+
+As shown in Figure 4, click "Master settings" and "Add Modbus master station" in turn to finish adding a ModbusTCP master station.
+
+.. image:: teaching_pendant_software/339.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-4 Add "ModbusTCP Master Station
+
+As shown in Figure 5, according to your equipment, enter the name, slave ip, port number, slave number and communication cycle in turn. The specific meanings of the above parameters are as follows:
+
+**Name**:ModbusTCP master station name. Robots can create up to 8 master stations to connect with corresponding slave stations. Different master stations can be distinguished by unique names, such as PLC, camera, data acquisition card and FRRobot1;
+
+**Slave IP**:the slave IP address to which the ModbusTCP master station of the robot is connected;
+
+.. note:: The robot and slave equipment must be connected through the network cable first, and the IP addresses of the robot and slave equipment must be in the same network segment.
+
+**Port number**:The port number of ModbusTCP slave station to be connected;
+
+**Slave station number**:ModbusTCP slave station number to be connected;
+
+**Communication period**: The period (ms) when the robot ModbusTCP master station inquires about the slave station status, which only affects the update speed of the slave station register data on the ModbusTCP Settings page, but does not affect the speed of reading or writing the ModbusTCP slave station register value in the lua program of the user.
+
+.. image:: teaching_pendant_software/340.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-5 Setting ModbusTCP master station parameters
+
+After the above parameters are correctly input, the ModbusTCP master station of the robot automatically establishes a connection with the configured slave station. After the connection is successful, the "Connection status" indicator on the page lights up as shown in Figure 6.
+
+.. note:: 
+   If you have confirmed that the relevant parameters of ModbusTCP master station are correctly configured, but the robot is not successfully connected with your equipment, please check the following configurations:
    
-    - Digital input DI read only
-    - The digital output DO can be clicked to control the indicator light switch, and the number is 128
+   ①The physical network connection between the robot and the slave equipment;
 
-2) Analog input
+   ②The IP addresses of the two network physical ports of the robot teaching device and the control box are different, please confirm whether they are connected to the correct network port;
+
+   ③Please confirm whether the network port of the robot and the network port of the slave station equipment are in the same network segment. If the IP address of the robot is 192.168.58.2, the IP address of the slave station equipment must be 192.168.58.0~192.168.58.255, and it cannot be the same as the IP address of the robot; 
    
-    - Analog input AI is divided into unsigned
-    - Signed and floating point models (three decimal places), both read-only
-    - Among them, the number of unsigned and signed is 16, and the number of floating point is 32
+   ④Check whether the port number of the slave equipment is the same as the set port number. (If the connection status indicator is flashing, it means that the register address in the master station is wrong. Please check whether the register type and address are correct)
 
-3) Analog output, analog output AO is divided into unsigned, signed and floating point models (three decimal places)
+.. image:: teaching_pendant_software/341.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-6 Connection status of Modbus TCP master station
+
+At this point, we have completed the creation of a ModbusTCP master station for the robot. If you click "Add Modbus Master Station" again, you can create a new ModbusTCP master station (Figure 7). The robot can support up to 8 master stations to communicate with external devices at the same time. Double-click the "Delete" button in the upper right corner of the Modbus master station to delete the Modbus master station.
+
+.. image:: teaching_pendant_software/342.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-7 Add ModbusTCP master station again
+
+ModbusTCP master add register
+*******************************
+As shown in Figure 8, click the "Add master register" button to add a register for this master station.
+
+.. image:: teaching_pendant_software/343.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-8 Add ModbusTCP master station register
+
+As shown in Figure 9, select the modbus register type, input address number and name of the master station in turn, and the meanings of each parameter are as follows:
+
+**Type**:Register type, DI:discrete input; DO:coil; AI-unsigned:unsigned input register (0-65535); AI-signed:signed input register (-32768-32767); AI-float:float type input register (the data length of float type register is 32 bits, occupying two signed or unsigned registers); AO-unsigned:unsigned holding register (0-65535); AI-signed:signed holding register (-32768-32767); AI-float:float type holding register (the data length of float type register is 32 bits, occupying two signed or unsigned registers), among which the floating-point type registers in AI and AO are big-end display.
+
+**Address number**:The address of ModbusTCP slave register to be read or written;
+
+**Name**: The alias of the register. The ModbusTCP master station of the robot can set up at most 128 different registers, and each register can be distinguished by different names according to the actual meaning, such as "Start", "Servo in Place" and "Liquid Level".
+
+.. image:: teaching_pendant_software/344.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-9 Setting ModbusTCP master station register parameters
+
+Click the "Add Master Register" button again to add another master register, and double-click the "Delete" button on the right side of the register to delete it, as shown in Figure 10, a register is added for each type. 
+
+.. note:: If the master station connection status indicator flashes after adding the master station register, it means that the master station register address cannot be read. Please check whether the register type and address are correct.
+
+.. image:: teaching_pendant_software/345.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-10 Adding Multiple Master Station Registers
+
+ModbusTCP master communication test
+************************************
+Before the communication test, please check whether the "Cnnection status" indicator of ModbusTCP master station is always on. If the indicator is always on, it means that the current connection has been successful. 
+
+As shown in Figure 11, the robot Modbus master station register has an "address value" value box for displaying the current register value, in which the registers of DI (discrete input) and AI (input register) are read-only and the corresponding address values are gray non-editable value boxes. 
+
+When the value of the corresponding address of the slave station changes, the robot master station displays the current value synchronously corresponding to the register address value. DO (coil) and AO (holding register) are readable and writable registers, so their addresses are white editable value boxes, which can be used to read the values of the corresponding registers of ModbusTCP slave stations or modify the values of the registers on the Modbus master station setting page of the robot.
+
+.. image:: teaching_pendant_software/346.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-11 Modbus master station address value
+
+1. Numerical monitoring of DI and AI type registers of master
+
+On the external ModbusTCP slave device, set the address value of No.255 of DI (discrete input) register to 1, change the address value of No.257 of AI (input register) to No.123, change the address value of No.258 to -123, and change the address value of No.259 to 123.3. At this time, the address value of the corresponding register on the robot Modbus master station setting page will be displayed accordingly, as shown in Figure 12. 
+
+.. note:: 
+   Because the register with address 259 is a floating-point register, it actually occupies two 16-bit registers 259 and 260 to store a floating-point number, so you can't set a separate register to operate the No.260 register of AI, otherwise a numerical error will occur.
+
+.. image:: teaching_pendant_software/347.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-12 Modbus master station displays the values of DI and AI registers
+
+2. Numerical writing of DO and AO type registers in the master
    
-    - Unsigned: 0~65535, the number is 16
-    - Signed: -32767~32768, the number is 16
-    - Floating point type: up to three decimal places, the number is 32
+As shown in figure 13, in the Modbus master station setting page of the robot, enter 1 in the No.255 address value input box of the DO (coil) type register named 'Start', and enter 65535,-32767 and 128.78 input boxes of the AO (holding register) named 'Target position A', 'Target position B' and 'Target position C' respectively.
 
-**Slave alias settings**:Click the slave station alias to perform editing operations and modify the slave station alias.
+.. image:: teaching_pendant_software/348.png
+   :width: 6in
+   :align: center
 
-.. important:: The aliases of slave stations of the same type cannot have the same name.
+.. centered:: Figure 4.7-25-13 Modbus master station writes DO and AO registers
+
+3. Numerical monitoring of DO and AO type registers of master
+If you change the values of DO (coil) and AO (holding register) in ModbusTCP slave station, the register address value of ModbusTCP master station setting page will not be updated immediately. You need to click the "Refresh" button in the upper right corner of master station configuration, and then the register address values of DO and AO on the page will be updated, as shown in Figure 14.
+
+.. image:: teaching_pendant_software/349.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-14 Refresh the DO and AO address values of ModbusTCP master station.
+
+Write ModbusTCP master program
++++++++++++++++++++++++++++++++++
+
+As shown in Figure 15, click "All" and "Communication command" in turn to open the communication command adding page.
+
+.. image:: teaching_pendant_software/350.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-15  Open the communication command add page
+
+As shown in Figure 16, click "Modbus".
+
+.. image:: teaching_pendant_software/351.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-16 Select Modbus
+
+As shown in Figure 17, click "Modbus_TCP".
+
+.. image:: teaching_pendant_software/352.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-17 Select Modbus_TCP
+   
+As shown in Figure 18, select "Master station (client)" to open the ModbusTCP master station command addition page (Figure 19).
+
+.. image:: teaching_pendant_software/353.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-18 Selecting Master Station (Client)
+
+.. image:: teaching_pendant_software/354.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-19 ModbusTCP master station command addition
+
+1. Write a single digital output DO (coil)
+
+As shown in Figure 20, select "Modbus master name" as the master station ‘PLC’ added on the Modbus master station setting page before, with DO name as ‘Start’, register number as 1 and register value as 1, and click the "Write digital output" button. Finally, scroll to the bottom of the page and click the "Apply" button (Figure 21).
+
+.. image:: teaching_pendant_software/355.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-20 Adding Write Single Digital Output
+
+.. image:: teaching_pendant_software/356.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-21 Apply write a single digital output command
+
+As shown in Figure 22, at this time, the robot program "testModbusMaster.lua" has added an command for the Modbus master station of the robot to write a single digital output. Switch the robot to the automatic mode, click the start button, and the robot will write the address value of the coil register ‘Start’ corresponding to the master station "PLC" as 1.
+
+.. image:: teaching_pendant_software/357.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-22 Writing a single coil lua program
+
+2. Write multiple digital outputs DO (coils)
+As shown in Figure 23, open the ModbusTCP master station command adding page, select Modbus master name as the master station ‘PLC’ added in the Modbus master station setting page before, the name of DO is ‘Start’, the number of registers is 5, and the register values are 1,0,1,0,1. the number of register values should correspond to the set number of registers, and multiple register values should be separated by English commas, and click the ‘Write digital output’ button. Finally, scroll to the bottom of the page and click the "Apply" button (Figure 24).
+
+.. image:: teaching_pendant_software/358.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-23 Configures writing multiple digital outputs
+   
+.. image:: teaching_pendant_software/359.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-24 Apply writing multiple digital outputs
+
+As shown in figure 25, at this time, the robot program "testModbusMaster.lua" has added an command that the robot Modbus master station writes multiple digital outputs, so as to switch the robot to the automatic mode, click the start button, and the robot will write the values of the coil register ‘Start’ corresponding to the master station ‘PLC’ and the following four coils as 1, 0, 1, 0 and 1 respectively.
+   
+.. image:: teaching_pendant_software/360.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-25 Programming multiple coils lua
+
+3. Read a single digital output DO (coil)
+   
+As shown in Figure 26, open the ModbusTCP master station command addition page, select "Modbus master name" as the master station "PLC" added in the Modbus master station setting page before, the DO name is "Start", the number of registers is 1, and the register value does not need to be filled in, and click "Read digital output". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 27).
+   
+.. image:: teaching_pendant_software/361.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-26 Configuring Reading a Single Digital Output
+      
+.. image:: teaching_pendant_software/362.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-27 Applying Reading a Single Digital Output
+
+As shown in figure 28, at this time, the robot program "testModbusMaster.lua" has added an command for the robot Modbus master station to read a single digital output.
+      
+.. image:: teaching_pendant_software/363.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-28 Program for reading a single coil
+
+Usually, after reading the Modbus register, the read value is stored in a variable, so it is necessary to define a variable to store the read value. As shown in figure 29, click the "switch mode" Button to switch the robot lua program to an editable state, and write the variable "startValue" with added return value before the "ModbusMasterReadDO" command, and the value read after executing the program will be stored in "startValue".
+      
+.. image:: teaching_pendant_software/364.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-29 Reading a single digital output into a variable
+
+The register value of coil type is only 0 and 1, so different operations can be carried out by judging the different register values in robot programs. As shown in Figure 30, click the "Switch Mode" button to switch the robot teaching program to the non-editable mode, and add two joint motion commands to move to two different points "P1" and "P2" respectively.
+      
+.. image:: teaching_pendant_software/365.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-30 Add motion commands of different points
+
+As shown in Figure 31, the program is switched to the editable mode again, and the judgment condition of the coil value "startValue" is written. When the value of "startValue" is 1, the robot moves to the point "P1", otherwise the robot moves to the point "P2".
+      
+.. image:: teaching_pendant_software/366.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-31 Move to different points according to different coil values
+
+Finally, switch the robot program to non-editable mode, switch the robot to automatic mode, and start the running program on the premise of confirming safety. As shown in figure 32, the first two lines of the program set the DO value of the coil named "Start" to 1, so the robot will move to the "P1" point after executing the program.
+      
+.. image:: teaching_pendant_software/367.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-32 Read the register value of a single coil and move it
+
+4. Read multiple digital DO (coils)
+As shown in Figure 33, open the ModbusTCP master station command adding page, select "Modbus master name" as the master station "PLC" added in the Modbus master station setting page, the name of DO is "Start", the number of registers is 6, and the register value does not need to be filled in, and click "Read digital output". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 34).
+      
+.. image:: teaching_pendant_software/368.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-33 Configuring Reading Multiple Digital Outputs 
+         
+.. image:: teaching_pendant_software/369.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-34 Applying Reading Multiple Digital Outputs
+
+As shown in figure 35, at this time, the robot program "testModbusMaster.lua" has added an command that the robot Modbus master station reads multiple digital outputs.
+         
+.. image:: teaching_pendant_software/370.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-35 Reading multiple digital output programs
+
+As shown in figure 36, click the "switch mode" button "" to switch the robot lua program to the editable state. Since the number of readings is six, it is necessary to write and add six return value variables "value1,value2,Value3,Value4, Value5,value6" before the "ModbusMasterReadDO" command, and the six register values read after the program execution will have the above six variables respectively.
+         
+.. image:: teaching_pendant_software/371.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-36 Reading Multiple Digital Outputs and Storing Variables
+
+5. Read DIgital input DI (discrete input)
+As shown in Figure 37, open the ModbusTCP master station command addition page, select "Modbus master name" as the master station "PLC" previously added in the Modbus master station setting page, the DI name is "Servo arrive", the number of registers is 2, and click "Read digital input". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 38).
+         
+.. image:: teaching_pendant_software/372.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-37 Configuring Read Digital Input
+            
+.. image:: teaching_pendant_software/373.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-38 Applying Read Digital Input
+
+As shown in figure 39, at this time, the robot program "testModbusMaster.lua" has added an command for the Modbus master station to read digital input.
+            
+.. image:: teaching_pendant_software/374.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-39 Reading digital input program commands
+
+As shown in Figure 40, click the "Switch Mode" button "" to switch the robot lua program to an editable state, and write the return value variables "state1,state2" before the "ModbusMasterReadDO" command. The two digital input values read after executing the program will be stored in the variables "state1" and "state2" respectively, and you can control the robot to do different operations by judging the variable values.
+            
+.. image:: teaching_pendant_software/375.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-40 Reading digital input and storing variables
+
+6. Read and write analog input AI (input register) and analog output AO (holding register)
+The reading and writing operations of analog input AI (input register) and analog output AO (holding register) are basically the same as those of digital input DI (discrete input) and digital output DO (coil), but the difference is that the data range of the latter is only 0 or 1, while the data range of the former is larger, so the specific operations can refer to the programming of digital input and digital output, and only the reading input AI (Figure 41) and writing analog output AO are shown here.
+            
+.. image:: teaching_pendant_software/376.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-41 Reading analog input AI
+            
+.. image:: teaching_pendant_software/377.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-42 Read and write analog output AO
+
+7. Waiting for digital input
+As shown in Figure 43, open the ModbusTCP master station command addition page, find the "Wait for digital input to be set", that is, wait for DI discrete input setting, select the "servo in place" register with DI name as the configuration, the waiting status is "True" and the timeout time is 5000 ms. Click "Add" button, and finally click "Apply" button.
+            
+.. image:: teaching_pendant_software/378.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-43 Add the command of waiting for DI input
+
+As shown in Figure 44, at this time, the robot program "testModbusMaster.lua" has added an command that the robot Modbus master station waits for DIgital input DI. After starting the program, the robot will wait for the value of the "Servo arrive" register of the "PLC" master station to become true, that is, the value 1. Since the set timeout is 5s, when the "Servo arrive" signal is still 0 after the robot waits 5s, the robot program will report a timeout error and the program will stop.
+            
+.. image:: teaching_pendant_software/379.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-44 Waiting for Digital Input DI Program
+
+8. Waiting for analog input
+As shown in Figure 45, open the ModbusTCP master station command addition page, find "Waiting for analog input setting", that is, waiting for the setting of AI input register, select the configured "liquid level" register with AI name, waiting status of ">", register value of 255 and timeout time of 5000 ms.. Click "Add" button, and finally click "Apply" button.
+            
+.. image:: teaching_pendant_software/380.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-45 Add Waiting for Analog Input
+
+As shown in Figure 46, at this time, the robot program "testModbusMaster.lua" has added an command that the robot Modbus master station waits for the AI input register value. After starting the program, the robot will wait for the "Liquid level" register value of the "PLC" master station to be greater than 255. Since the set timeout is 5s, when the "Liquid level" signal is still less than 255 after the robot waits for 5s, the robot program will report a timeout error and the program will automatically stop running.
+            
+.. image:: teaching_pendant_software/381.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-46 Waiting for AI Input Register Program
+
+ModbusTCP slave
+++++++++++++++++++
+
+Robot ModbusTCP slave station provides four types of registers: Digital input (coil), Digital output (discrete input), Analog input (holding register) and Analog output (input register). The digital input and analog input are mainly used for the robot to read the data of the external ModbusTCP master station to control the robot operation, while the digital output and analog output are mainly used for the robot to send data signals to the external ModbusTCP master station equipment, and the external master station equipment reads the relevant register values to control the equipment operation. In addition to the above-mentioned general input and output, the robot also provides some "Functional digital input (coils)" for the external master station equipment to control the robot's start-up program and stop-up program, and provides some input registers to display the current robot's state information, including the robot's current Cartesian position, the robot's current running state, etc. (please refer to Annex 1: ModbusTCP slave address mapping table). The use process of robot ModbusTCP slave station mainly includes: ①parameter configuration; ②Communication test; ③Programming.
+
+ModbusTCP slave communication parameter configuration
+******************************************************
+
+As shown in Figure 47, open the WebApp, click "Teaching" and "Program Teaching" in turn to create a new user program "testModbusSlave.lua".
+            
+.. image:: teaching_pendant_software/382.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-47 Create ModbusTCP slave station user program
+
+As shown in Figure 48, click the button "" to pop up/hide the content on the right side of the current program.
+            
+.. image:: teaching_pendant_software/383.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-48 The content on the right side of the current program pops up
+
+As shown in Figure 49, click "ModbusTCP Settings" button to open the ModbusTCP function configuration page.
+            
+.. image:: teaching_pendant_software/384.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-49 Open ModbusTCP Settings
+
+As shown in Figure 50, click "Slave Settings" in turn, and enter the IP, Port number and Slave station number of the robot slave station, where "IP" is the IP address of the robot slave station, FAIRINO cooperative robot has two network ports, the teaching device and the control box and the IP addresses of the two ports are different. Enter the correct IP address according to the network port where the external device is connected to the robot slave station (it is recommended that you use the network port on the control box).You have to restart robot after change the IP address, port number or slave station number of the robot ModbusTCP slave station,otherwise it won't take effect.
+            
+.. image:: teaching_pendant_software/385.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-50 ModbusTCP slave settings
+
+After the parameters of ModbusTCP slave station are set and the robot is restarted, the external master station equipment can establish a connection with the robot slave station through the set parameters. After the connection is successful, the "Connection status" indicator light on the robot slave station setting page will light up (Figure 51).
+            
+.. image:: teaching_pendant_software/386.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-51 slave station connection status indicator light
+
+ModbusTCP slave communication test
+************************************
+
+1. Digital input (coil)
+
+The robot ModbusTCP slave station provides 128 coil registers, and their register addresses are 100~127.
+
+.. note:: Please refer to Annex I: ModbusTCP slave station address mapping table.
+
+Aliases can be set for the general registers of robot ModbusTCP slave stations as shown in Figure 52. Modify the name of the robot slave station coil register DI0 to be "A in place" and the name of DI1 to be "B in place". According to the address mapping table, the Modbus coil addresses of "A in place" and "B in place" are 100 and 101, respectively. Set the robot slave station coil register addresses 100 and 101 to 1 on the external ModbusTCP master station equipment, At this time, two register indicators on the monitoring page of the robot ModbusTCP slave station light up .
+            
+.. image:: teaching_pendant_software/387.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-52 ModbusTCP slave station coil state monitoring
+
+2. Digital output (discrete input)
+
+The robot ModbusTCP slave station provides 128 discrete input registers, and their register addresses are 100~127.
+
+.. note:: Please refer to Annex 1: ModbusTCP slave station address mapping table for specific definitions.
+
+Similarly, the robot ModbusTCP slave's discrete input register can also be set with aliases, as shown in Figure 53. Click "Digital Output (Discrete Input)" to modify the name of the robot slave's discrete input register DO0 as "A Start" and DO1 as "B Start". According to the address mapping table, the Modbus discrete input addresses of "A Start" and "B Start" are 100 and 101 respectively. Click "A Start" to correspond to the discrete input indicator light, which lights up, and the value of the corresponding register address 100 becomes 1, which can be read from the external ModbusTCP master station equipment.
+
+.. image:: teaching_pendant_software/388.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-53 ModbusTCP slave discrete input control
+
+3. Analog input (holding register)
+
+The robot provides 64 holding registers of unsigned, signed and float types, with the addresses of AI0~AI63 ranging from 100 to 195.
+
+.. note:: text
+   Please refer to Annex 1: ModbusTCP slave address mapping table for specific definitions, in which the data range of unsigned register is 0~65535, the data range of signed register is -32768~32767, and the float register is displayed at the big end.
+   
+   As shown in Figure 53, the names of AI0 and AI1 are changed to "voltage" and "current" respectively, and the addresses of the two registers are found to be 100 and 101 respectively from the ModbusTCP slave address mapping table. Therefore, when the connected master station equipment modifies the register address values of the holding registers 100 and 101, the register address values of "voltage" and "current" on the ModbusTCP slave station monitoring page of the robot are updated and displayed synchronously, and the robot's analog input is mainly used for reading the external master station equipment values.
+
+.. image:: teaching_pendant_software/389.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-54 ModbusTCP slave analog input monitoring
+
+4. Analog output (input register)
+
+The robot provides 64 input registers of unsigned, signed and floating-point types, with the addresses of AO0~AO63 ranging from 100 to 195.
+   
+.. note:: text
+   please refer to Annex 1: ModbusTCP slave address mapping table, in which the data range of unsigned register is 0~65535, the data range of signed register is -32768~32767, and the floating-point register is displayed at the big end.
+   
+   As shown in figure 55, the names of AO0 and AO1 are changed to "position A" and "position B" respectively, and the values of the input registers are 2000 and 1500 respectively. The addresses of the two registers are 100 and 101 respectively from the station address mapping table of ModbusTCP. Therefore, when the connected master station equipment reads the address values of the input registers 100 and 101, the set values can be obtained, and the simulated output of the robot slave station is mainly used for the robot to transfer to the external master station equipment.
+
+.. image:: teaching_pendant_software/390.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-55 Modbus slave station modifies analog input
+
+ModbusTCP slave programming
+****************************
+
+As shown in Figure 56, click "All" and "Communication command" in turn to open the communication command adding page.
+
+.. image:: teaching_pendant_software/391.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-56 Open the communication command add page
+
+As shown in Figure 57, click "Modbus".
+
+.. image:: teaching_pendant_software/392.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-57 Select Modbus
+
+As shown in Figure 58, click "Modbus_TCP".
+
+.. image:: teaching_pendant_software/393.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-58 Select Modbus_TCP
+
+As shown in figure 59, select "slave station" to open the ModbusTCP slave station command adding page (figure 60).
+
+.. image:: teaching_pendant_software/394.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-59 Selecting a Slave Station
+
+.. image:: teaching_pendant_software/395.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-60 slave command addition
+
+1. Write a single digital output DO (discrete input)
+
+As shown in Figure 61, select the DO name as "A Start", the number of registers is 1 and the register value is 0, and click "Write Single Digital Output". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 62).
+
+.. image:: teaching_pendant_software/396.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-61 Adding Write Single Digital Output command 
+   
+.. image:: teaching_pendant_software/397.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-62 Apply Write Single Digital Output command
+
+As shown in Figure 63, at this time, the robot program "testModbusSlave.lua" has added an command for the robot Modbus slave station to write a single digital output, switch the robot to the automatic mode, click the start button, and the robot will write the address value of the corresponding digital output named "A Start" as 0.
+   
+.. image:: teaching_pendant_software/398.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-63 Write a single digital output LUA program
+
+2. Write multiple digital outputs DO (discrete input)
+
+As shown in Figure 64, open the ModbusTCP slave command addition page, find the "Digital Output Settings", select the DO name as "A Start", the number of registers is 5, and the register values are 1,0,1,0,1, where the number of register values corresponds to the set number of registers, and multiple register values are separated by English commas, and click "Write Digital Output". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 65).
+   
+.. image:: teaching_pendant_software/399.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-64 Configures Writing Multiple Digital Outputs 
+      
+.. image:: teaching_pendant_software/400.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-65 Apply Write Multiple Digital Outputs
+
+As shown in figure 66, at this time, the robot program "testModbusSlave.lua" has added an command for the robot Modbus slave station to write multiple digital outputs. Switch the robot to the automatic mode, click the start button, and the robot will start the slave station "A" and write the values of its four discrete input registers as 1, 0, 1, 0 and 1 respectively.
+      
+.. image:: teaching_pendant_software/401.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-66 Write multiple digital output LUA programs
+
+3. Read a single digital output DO (discrete input)
+
+As shown in Figure 67, open the ModbusTCP master station command addition page, find "Digital Output Settings", the name of DO is "A Start", the number of registers is 1, and the register value does not need to be filled in. Click "Read Digital Output". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 68).
+      
+.. image:: teaching_pendant_software/402.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-67 Configuring Reading a Single Digital Output 
+         
+.. image:: teaching_pendant_software/403.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-68 Apply Reading a Single Digital Output
+
+As shown in Figure 69, at this time, the robot program "testModbusSlave.lua" has added an command for the robot Modbus to read a single digital output from the station.
+         
+.. image:: teaching_pendant_software/404.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-69 Read a single digital output program
+
+Usually, after reading the Modbus register, the read value is stored in a variable, so it is necessary to define a variable to store the read value. As shown in figure 70, click the "switch mode" button "" to switch the robot lua program to the editable state, and write the variable "AStartValue" with added return value before the "ModbusSlaveReadDO" command, and the value read after executing the program will be stored in "AStartValue".
+         
+.. image:: teaching_pendant_software/405.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-70 Reading a single digital output into a variable
+
+The register value of coil type is only 0 and 1, so different operations can be carried out by judging the different register values in robot programs. As shown in Figure 71, click the "Switch Mode" button "" to switch the robot teaching program to the non-editable mode, and add two joint motion commands to move to two different points "P1" and "P2" respectively.
+         
+.. image:: teaching_pendant_software/406.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-71 Add motion commands of different points.
+
+As shown in Figure 72, the program is switched to the editable mode again, and the judgment condition of the digital output value "AStartValue" is written. When the value of "AStartValue" is 1, the robot moves to the point "P1", otherwise the robot moves to the point "P2".
+         
+.. image:: teaching_pendant_software/407.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-72 Move to different points according to different digital output values
+
+Finally, switch the robot program to non-editable mode, switch the robot to automatic mode, and start the running program on the premise of confirming safety. As shown in figure 73, the second line of the program sets the DO value of the digital output named "A Start" to 1, so the robot will move to the "P1" point after executing the program.
+         
+.. image:: teaching_pendant_software/408.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-73 Read the register value of a single coil and move it
+
+4. Read multiple digital outputs DO (discrete input)
+
+As shown in Figure 74, open the ModbusTCP master station command addition page, find the "Digital Output Settings", select the DO name as "A Start", the number of registers is 2, and the register value does not need to be filled in, and click "Read Digital Output". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 75).
+         
+.. image:: teaching_pendant_software/409.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-74 Configures Reading Multiple Digital Outputs
+            
+.. image:: teaching_pendant_software/410.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-75 Apply Read Multiple Digital Outputs
+
+As shown in Figure 76, at this time, the robot program "testModbusSlave.lua" has added an command for the robot Modbus to read multiple digital outputs from the station.
+            
+.. image:: teaching_pendant_software/411.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-76 Reading multiple digital output programs
+
+As shown in figure 77, click the "switch mode" button "" to switch the robot lua program to the editable state. Since the number of readings is two, it is necessary to write and add two return values "value1,value2" before the "ModbusSlaveReadDO" command, and the values of the two digital output registers read after executing the program will be stored in the above two variables respectively. Similarly, you can judge "value1" and "value2".
+            
+.. image:: teaching_pendant_software/412.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-77 Reading Multiple Digital Outputs and Storing Variables
+
+5. Read DIgital input DI (coil)
+
+As shown in Figure 78, open the ModbusTCP slave command addition page, find the "Digital Input Settings", select the DI name as "A in place" and the number of registers as 2, and click "Read Digital Input". Finally, scroll to the bottom of the page and click the "Apply" button (Figure 79).
+            
+.. image:: teaching_pendant_software/413.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-78 Configuring Read Digital Input
+               
+.. image:: teaching_pendant_software/414.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-79 Applying Read Digital Input
+
+As shown in Figure 80, at this time, the robot program "testModbusSlave.lua" has added an command for the robot Modbus to read digital input from the station.
+               
+.. image:: teaching_pendant_software/415.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-80 Reading digital input program commands
+
+As shown in Figure 81, click the "switch mode" button "" to switch the robot lua program to an editable state, and write the return value variable "AState,BState" before the "ModbusSlaveReadDI" command. The two digital input values read after executing the program will be stored in the variables "AState" and "BState" respectively, and you can control the robot to do different operations by judging the variable values.
+              
+.. image:: teaching_pendant_software/416.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-81 Reading digital input program
+
+6. Read and write operations of analog output AO (input register) and analog input AI (hold register)
+
+The reading and writing operations of analog output (input register) and analog input (holding register) are basically the same as those of digital output (discrete input) and digital input (coil), but the difference is that the data range of the latter is only 0 or 1, while the data range of the former is larger, so the specific operations can refer to the programming of digital output and digital input, and only the reading and writing operations of analog input (Figure 82) and analog output (Figure 83) are shown here.
+              
+.. image:: teaching_pendant_software/417.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-82 Reading Analog Input
+              
+.. image:: teaching_pendant_software/418.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-83 Reading and writing analog output
+
+7. Waiting for digital input
+
+As shown in Figure 84, open the ModbusTCP slave command addition page, find "Waiting for digital input settings", select the "A in place" register with DI name as configuration, the waiting status is "True", and the timeout time is 5000 ms. Click "Add" button, and finally click "Apply" button.
+              
+.. image:: teaching_pendant_software/419.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-84 Add the command of waiting for digital input
+
+As shown in Figure 85, at this time, the robot program "testModbusSlave.lua" has added an command that the robot Modbus slave station waits for digital input. After starting the program, the robot will wait for the value of the "A in place" coil register of the slave station to become true, that is, the value 1. Since the set timeout is 5s, when the "A in place" signal is still 0 after the robot waits for 5s, the robot program will report a timeout error and the program will automatically stop running.
+              
+.. image:: teaching_pendant_software/420.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-85 Waiting for Digital Input Program
+
+8. Waiting for analog input
+
+As shown in figure 86, open the ModbusTCP slave command addition page, and find the voltage register with the AI name selected for "Waiting for Analog Input Settings". The waiting state is ">", the register value is 255, and the timeout time is 5000 ms.. Click "Add" button, and finally click "Apply" button.
+
+.. image:: teaching_pendant_software/421.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7-25-86 Add an command to wait for analog input
+
+As shown in Figure 87, at this time, the robot program "testModbusSlave.lua" has added an command that the robot Modbus slave station waits for the analog input value. After starting the program, the robot will wait for the slave station's "voltage" register value to be greater than 255. Since the set timeout time is 5s, when the robot waits for 5s and the "voltage" signal is still less than 255, the robot program will report a timeout error and the program will automatically stop running.
+              
+.. image:: teaching_pendant_software/422.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-87 Waiting for Analog Input Register Program
+
+ModbusTCP slave robot state feedback and control
+******************************************************
+
+The ModbusTCP slave input register addresses 310~473 of the cooperative robot are used to feed back the real-time status of the robot (see Annex 1: ModbusTCP slave address mapping table). You only need to read the value of the corresponding register with the master station equipment to obtain the corresponding real-time status data of the robot.
+
+The coil register addresses 300~599 of ModbusTCP slave station of the cooperative robot are used for the master station equipment to control the robot (see Annex 1: ModbusTCP slave address mapping table). Taking coil address 502 as an example, this address function indicates "startup program".
+
+When the robot is in automatic mode, the master station equipment sets the value of address 502 from 0 to 1, the robot automatically starts to run the currently configured program; Take the coil address 300 as an example. It is used to control the output of the robot control box DO0. When the external master station sets the coil address 300 from 0 to 1, the automatic output of the control box DO0 is valid. Similarly, when the external master station sets the coil address 300 from 1 to 0, the output of the control box DO0 is invalid. As shown in Figure 88, click "Function Digital Input (Coil)" on the ModbusTCP slave station setting page to monitor all current function digital inputs.
+              
+.. image:: teaching_pendant_software/423.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7-25-88 Digital Input of Robot Slave Station Function
+
+Annex 1: Modbus slave address mapping table
+
+.. list-table::
+   :widths: 10 20 25 15 15 10 10
+   :header-rows: 0
+   :align: center
+
+   * - **address**
+     - **type**
+     - **name**
+     - **data type**
+     - **function code**
+     - **Read/write**
+     - **remarks**
+
+   * - 100
+     - 
+     - DI0
+     -  
+     -  
+     -   
+     -   
+
+   * - 101
+     - 
+     - DI1
+     -  
+     -  
+     -   
+     -  
+
+   * - 102
+     - Universal digital input(coil)
+     - DI2
+     - BOOL 
+     - 0x02 
+     -   
+     - 读写 
+  
+   * - 103
+     - 
+     - DI3
+     -  
+     -   
+     -  
+     -  
+  
+   * - ...
+     - 
+     - ...
+     -  
+     -   
+     -  
+     -  
+  
+   * - 227
+     - 
+     - DI127
+     -  
+     -   
+     -  
+     -  
+  
+   * - 
+     - 
+     -   
+     - 
+     -  
+     -  
+     -  
+
+   * - 100
+     - 
+     - DO0
+     -   
+     -  
+     -  
+     -  
+
+   * - 101
+     - 
+     - DO1
+     -   
+     -  
+     -  
+     -  
+
+   * - 102
+     - Universal digital output (discrete)
+     - DO2
+     - BOOL 
+     - 0x01、0x05、0x15 
+     - read only 
+     -   
+  
+   * - 103
+     - 
+     - DO3
+     -  
+     -  
+     -   
+     -  
+  
+   * - ...
+     - 
+     - ...
+     -  
+     -  
+     -   
+     -  
+  
+   * - 227
+     - 
+     - DO127
+     -  
+     -  
+     -   
+     -  
+  
+   * - 
+     - 
+     - 
+     -   
+     -  
+     -  
+     -  
+
+   * - 100
+     - 
+     - AI0
+     -  
+     -   
+     -  
+     -  
+
+   * - 101
+     - 
+     - AI1
+     -   
+     -  
+     -  
+     -  
+
+   * - 102
+     - 
+     - AI2
+     - UINT16
+     - 
+     -   
+     -  
+  
+   * - ...
+     - 
+     - ...
+     -  
+     -   
+     -  
+     -  
+  
+   * - 115
+     - 
+     - AI15
+     -  
+     -  
+     -   
+     -  
+  
+   * - 116
+     - 
+     - AI16
+     -  
+     -   
+     -  
+     -  
+  
+   * - 117
+     - 
+     - AI17
+     -  
+     -   
+     -  
+     -  
+  
+   * - 118
+     - analog input (hold register)
+     - AI18
+     - INT16 
+     - 0x04 
+     - read only
+     -   
+  
+   * - ...
+     - 
+     - ...
+     -   
+     -  
+     -  
+     -
+  
+   * - 131
+     - 
+     - AI31
+     -   
+     -  
+     -  
+     -
+  
+   * - 132
+     - 
+     - AI32
+     -   
+     -  
+     -  
+     -
+  
+   * - 133
+     - 
+     - AI33
+     - FLOAT32 (big end display)
+     -   
+     -  
+     -
+  
+   * - ...
+     - 
+     - ...
+     -   
+     -  
+     -  
+     -
+  
+   * - 194
+     - 
+     - AI63
+     -  
+     -   
+     -  
+     -
+  
+   * - 195
+     - 
+     - 
+     -  
+     -   
+     -  
+     -
+  
+   * - 
+     - 
+     - 
+     -   
+     -  
+     -  
+     -  
+
+   * - 100
+     - 
+     - AO0
+     -  
+     -   
+     -  
+     -  
+
+   * - 101
+     - 
+     - AO1
+     -  
+     -  
+     -   
+     -  
+
+   * - 102
+     - 
+     - AO2
+     - UINT16
+     - 
+     -   
+     -  
+  
+   * - ...
+     - 
+     - ...
+     -  
+     -  
+     -   
+     -  
+  
+   * - 115
+     - 
+     - AO15
+     -  
+     -  
+     -   
+     -  
+  
+   * - 116
+     - 
+     - AO16
+     -  
+     -  
+     -   
+     -  
+  
+   * - 117
+     - 
+     - AO17
+     -  
+     -   
+     -  
+     -  
+  
+   * - 118
+     - analog onput(Input register)
+     - AO18
+     - INT16 
+     - 0x03、0x06、0x16
+     - read and write
+     -   
+  
+   * - ...
+     - 
+     - ...
+     -  
+     -  
+     -   
+     -
+  
+   * - 131
+     - 
+     - AO31
+     -  
+     -  
+     -   
+     -
+  
+   * - 132
+     - 
+     - AO32
+     -  
+     -   
+     -  
+     -
+  
+   * - 133
+     - 
+     - AO33
+     - FLOAT32 (big end display)
+     -  
+     -   
+     -
+  
+   * - ...
+     - 
+     - ...
+     -  
+     -  
+     -   
+     -
+  
+   * - 194
+     - 
+     - AO63
+     -  
+     -  
+     -   
+     -
+  
+   * - 195
+     - 
+     - 
+     -  
+     -   
+     -  
+     -
+       
+   * - 
+     - 
+     - 
+     -  
+     -  
+     -   
+     -
+       
+   * - Robot state feedback
+     - 
+     - 
+     - 
+     -  
+     -   
+     -
+       
+   * - 310 
+     - 
+     - Enabled state 0- not enabled, 1- enabled
+     -  
+     -   
+     -  
+     -
+       
+   * - 311 
+     - 
+     - Robot mode, 1- manual mode, 0- automatic mode
+     -  
+     -   
+     -  
+     -
+       
+   * - 312 
+     - 
+     - Robot running state 1- Stop, 2- Run, 3- Pause, 4- Drag
+     -  
+     -   
+     -  
+     -
+       
+   * - 313 
+     - Robot state (Input register)
+     - Tool number
+     -  
+     -   
+     -  
+     -
+       
+   * - 314 
+     - 
+     - Workpiece number
+     -  
+     -   
+     -  
+     -
+       
+   * - 315 
+     - 
+     - Emergency stop state 0- No emergency stop, 1- Emergency stop
+     -  
+     -   
+     -  
+     -
+     
+   * - 316 
+     - 
+     - Ultra-soft limit fault
+     -  
+     -  
+     -   
+     -
+
+   * - 317
+     - 
+     - Main Error code
+     -  
+     -   
+     -  
+     -
+
+   * - 318
+     - 
+     - Sub Error code
+     -  
+     -   
+     -  
+     -
+
+   * - 319
+     - 
+     - Collision detection, 1- collision, 0- no collision
+     -  
+     -   
+     -  
+     -
+
+   * - 320
+     - 
+     - Motion in place signal
+     -  
+     -   
+     -  
+     -
+
+   * - 321
+     - 
+     - Safety stop signal SI0
+     -  
+     -  
+     -   
+     -
+
+   * - 322
+     - 
+     - Safety stop signal SI1
+     -  
+     -  
+     -  
+     -
+
+   * - 330
+     - 
+     - TCP speed
+     -  
+     -  
+     -   
+     -
+
+   * - 340
+     - 
+     - Joint 1 position
+     -  
+     -  
+     -   
+     -
+
+   * - 342
+     - 
+     - Joint 2 position
+     -  
+     -  
+     -   
+     -
+
+   * - 344
+     - 
+     - Joint 3 position
+     -  
+     -   
+     -  
+     -
+
+   * - 346
+     - 
+     - Position of joint 4
+     -   
+     -  
+     -  
+     -
+
+   * - 348
+     - 
+     - Position of joint 5
+     -  
+     -  
+     -   
+     -
+
+   * - 350
+     - 
+     - Position of joint 6
+     -   
+     -  
+     -  
+     -
+
+   * - 352
+     - 
+     - Joint 1 speed
+     -   
+     -  
+     -  
+     -
+
+   * - 354
+     - 
+     - Joint 2 velocity
+     -  
+     -   
+     -  
+     -
+
+   * - 356
+     - 
+     - Joint 3 velocity
+     -  
+     -  
+     -   
+     -
+
+   * - 358
+     - 
+     - Joint 4 speed
+     -  
+     -  
+     -   
+     -
+
+   * - 360
+     - 
+     - Joint 5 speed
+     -  
+     -   
+     -  
+     -
+
+   * - 362
+     - 
+     - Joint 6 speed
+     -  
+     -   
+     -  
+     -
+
+   * - 364
+     - 
+     - Joint 1 current
+     - FLOAT32 (big end display)
+     -   
+     -  
+     -
+
+   * - 366
+     - 
+     - Joint 2 current
+     -  
+     -   
+     -  
+     -
+
+   * - 368
+     - 
+     - Joint 3 current
+     -  
+     -   
+     -  
+     -
+
+   * - 370
+     - 
+     - Joint 4 current
+     -  
+     -   
+     -  
+     -
+
+   * - 372
+     - 
+     - Joint 5 current
+     -  
+     -  
+     -   
+     -
+
+   * - 374
+     - 
+     - Joint 6 current
+     -  
+     -   
+     -  
+     -
+
+   * - 376
+     - 
+     - Joint 1 torque
+     -  
+     -   
+     -  
+     -
+
+   * - 378
+     - 
+     - Joint 2 torque
+     -  
+     -   
+     -  
+     -
+
+   * - 380
+     - 
+     - Joint 3 torque
+     -  
+     -  
+     -   
+     -
+
+   * - 382
+     - 
+     - Joint 4 torque
+     -  
+     -   
+     -  
+     -
+
+   * - 384
+     - 
+     - Joint 5 torque
+     -  
+     -  
+     -   
+     -
+
+   * - 386
+     - 
+     - Joint 6 torque
+     -  
+     -   
+     -  
+     -
+
+   * - 388
+     - 
+     - TCP location X
+     -  
+     -  
+     -   
+     -
+
+   * - 390
+     - 
+     - TCP location Y
+     -  
+     -  
+     -   
+     -
+
+   * - 392
+     - 
+     - TCP location Z
+     -  
+     -   
+     -  
+     -
+
+   * - 394
+     - 
+     - TCP location RX
+     -  
+     -   
+     -  
+     -
+
+   * - 396
+     - 
+     - TCP location RY
+     -  
+     -   
+     -  
+     -
+
+   * - 398
+     - 
+     - TCP location RZ
+     -   
+     -  
+     -  
+     -
+
+   * - 400
+     - 
+     - TCP speed X
+     -  
+     -  
+     -   
+     -
+
+   * - 402
+     - 
+     - TCP speed Y
+     -  
+     -   
+     -  
+     -
+
+   * - 404
+     - 
+     - TCP speed Z
+     -  
+     -   
+     -  
+     -
+
+   * - 406
+     - 
+     - TCP speed RX
+     -  
+     -   
+     -  
+     -
+
+   * - 408
+     - 
+     - TCP speed RY
+     -  
+     -   
+     -  
+     -
+
+   * - 410
+     - 
+     - TCP speed RZ
+     -  
+     -   
+     -  
+     -
+
+   * - 430
+     - 
+     - Control box analog input AI0
+     -  
+     -  
+     -   
+     -
+
+   * - 432
+     - 
+     - Control box analog input AI1
+     -  
+     -  
+     -   
+     -
+
+   * - 438
+     - 
+     - Tool analog input AI0
+     -  
+     -  
+     -   
+     -
+
+   * - 450
+     - 
+     - Control box analog output AO0
+     -  
+     -  
+     -   
+     -
+
+   * - 452
+     - 
+     - Control box analog output AO1
+     -  
+     -   
+     -  
+     -
+
+   * - 458
+     - 
+     - Tool analog output AO0
+     -  
+     -   
+     -  
+     -
+
+   * - 470
+     - 
+     - Digital inputs Bit0-Bit7 of the control box correspond to DI0-DI7.Bit8-Bit15 corresponds to CI0-CI7
+     - UINT16 
+     -   
+     -  
+     -
+
+   * - 471
+     - 
+     - Tool end digital input Bit0-Bit15 correspond to DI0-DI15
+     -  
+     -   
+     -  
+     -
+
+   * - 472
+     - 
+     - Digital outputs Bit0-Bit7 of the control box correspond to DO0-DO7.Bit8-Bit15 correspond to CO0-CO7
+     -  
+     -   
+     -  
+     -
+
+   * - 473
+     - 
+     - Tool end digital output Bit0-Bit15 corresponds to DO0-DO15
+     -  
+     -  
+     -   
+     -
+
+The robot control form is as follows:
+
+.. list-table::
+   :widths: 10 20 25 15 15 10 10
+   :header-rows: 0
+   :align: center
+   
+   * - **address**
+     - **type**
+     - **name**
+     - **data type**
+     - **function code**
+     - **Read/write**
+     - **remarks**
+
+   * - 300
+     - Digital input (coil)
+     - Control box DO0
+     - BOOL 
+     - 0x02 
+     - read and write 
+     - 
+
+   * - 301
+     - 
+     - Control box DO1
+     -  
+     -  
+     - 
+     - 
+
+   * - 302
+     - 
+     - Control box DO2
+     -  
+     -  
+     - 
+     - 
+
+   * - 303
+     - 
+     - Control box DO3
+     -  
+     -  
+     - 
+     - 
+
+   * - 304
+     - 
+     - Control box DO4
+     -  
+     - 
+     -  
+     - 
+
+   * - 305
+     - 
+     - Control box DO5
+     -  
+     -  
+     - 
+     - 
+
+   * - 306
+     - 
+     - Control box DO6
+     -  
+     - 
+     -  
+     - 
+
+   * - 307
+     - 
+     - Control box DO7
+     -  
+     -  
+     - 
+     - 
+
+   * - 308
+     - 
+     - Control box CO0
+     -  
+     - 
+     -  
+     - 
+
+   * - 309
+     - 
+     - Control box CO1
+     - 
+     -  
+     -  
+     - 
+
+   * - 310
+     - 
+     - Control box CO2
+     -  
+     - 
+     -  
+     - 
+
+   * - 311
+     - 
+     - Control box CO3
+     -  
+     - 
+     -  
+     - 
+
+   * - 312
+     - 
+     - Control box CO4
+     - 
+     -  
+     -  
+     - 
+
+   * - 313
+     - 
+     - Control box CO5
+     -  
+     - 
+     -  
+     - 
+
+   * - 314
+     - 
+     - Control box CO6
+     -  
+     - 
+     -  
+     - 
+
+   * - 315
+     - 
+     - Control box CO7
+     -  
+     - 
+     -  
+     - 
+
+   * - 316
+     - 
+     - Tool DO0
+     -  
+     - 
+     -  
+     - 
+
+   * - 317
+     - 
+     - Tool DO1
+     -  
+     -  
+     - 
+     - 
+
+   * - 318 - 499
+     - 
+     - reserve
+     - 
+     -  
+     -  
+     - 
+
+   * - 500
+     - 
+     - pause
+     - 
+     -  
+     -  
+     - 
+
+   * - 501
+     - 
+     - resume
+     -  
+     - 
+     -  
+     - 
+
+
+   * - 502
+     - 
+     - start
+     - 
+     -  
+     -  
+     - 
+
+   * - 503
+     - 
+     - stop
+     -  
+     - 
+     -  
+     - 
+
+   * - 504
+     - 
+     - Move to job origin
+     -  
+     - 
+     -  
+     - 
+
+   * - 505
+     - 
+     - Manual automatic switching
+     - 
+     -  
+     -  
+     - 
+
+   * - 506
+     - 
+     - Start the main program
+     -  
+     - 
+     -  
+     - 
+
+   * - 507
+     - 
+     - level 1 reduction mode
+     -  
+     - 
+     -  
+     - 
+
+   * - 508
+     - 
+     - level 2 reduction mode
+     - 
+     -  
+     -  
+     - 
+
+   * - 509
+     - 
+     - level 3 reduction mode (stop)
+     - 
+     -  
+     -  
+     - 
+
+   * - 510
+     - 
+     - Clear all faults
+     - 
+     -  
+     -  
+     - 
+
+   * - 511 - 599
+     - 
+     - reserve
+     -  
+     - 
+     -  
+     - 
 
 Graphical programming
 ~~~~~~~~~~~~~~~~~~~~~~~
