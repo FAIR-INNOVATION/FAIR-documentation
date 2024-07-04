@@ -28,7 +28,7 @@ Considering more flexible and rich robot deployment scenarios, we provide a free
 Set end load
 --------------------
 
-Under the menu bar of "Robot Settings" in "Initialize", click "End Load" to enter End load page 。
+Under the menu bar of "Robot Settings" in "Initialize", click "End Load" to enter End load page .
 
 When configuring the end load, please enter the mass of the end tool used and the corresponding center of mass coordinates into the "Load mass" and "Load mass center coordinates X, Y and Z" input boxes and apply.
 

@@ -11,7 +11,7 @@ Term
 - **Class 1 shutdown**：When the robot is powered to stop, the robot will stop. When the robot stops, the power will be cut off. This is a controllable stop, and the robot will follow the programmed path.Cut off the power supply after one second or once the robot stops stably. For more information, refer to ENISO13850:2008 or IEC60204-1:2006.
 - **Class 2 shutdown**：Controllable stop when the robot is powered on. The robot stops all movements within one second.The operation of the safety assessment control system can make the robot stay at the stop position. For more information, refer to IEC60204-1:2006.
 
-**Diagnostic coverage rate（DC）**：Used to measure the effectiveness of the diagnosis implemented to achieve the assessed performance level. For more information, see ENISO13849-1:2008.。
+**Diagnostic coverage rate（DC）**：Used to measure the effectiveness of the diagnosis implemented to achieve the assessed performance level. For more information, see ENISO13849-1:2008..
 
 **Integrator**：The integrator is the mechanism that designs the final installation of the robot. The integrator is responsible for the final risk assessment and must ensure that the final installation complies with local laws and regulations.
 

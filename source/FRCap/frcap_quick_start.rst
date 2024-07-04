@@ -98,8 +98,8 @@ At this point, you have completed the entire plug-in quick creation and usage pr
 
 .. centered:: Figure 2-6  Hello FRCap content
 
-If you want to know the detailed creation wizard guidance, you can continue to view the \ `creation wizard <frcap_create.html#id1>`__\。
+If you want to know the detailed creation wizard guidance, you can continue to view the \ `creation wizard <frcap_create.html#id1>`__\.
 
-To learn about the tool environment and guidance required to develop FRCap, please view \ `the Development Guide <frcap_development_guidance.html#id1>`__\。
+To learn about the tool environment and guidance required to develop FRCap, please view \ `the Development Guide <frcap_development_guidance.html#id1>`__\.
 
-For specific guidance on using FRCap in WebApp, please see \ `Using FRCap in WebApp  <frcap_use.html#webappfrcap>`__\。
+For specific guidance on using FRCap in WebApp, please see \ `Using FRCap in WebApp  <frcap_use.html#webappfrcap>`__\.

@@ -643,7 +643,7 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "End Load" t
 When configuring the end load, please enter the mass of the end tool used and the corresponding center of mass coordinates into the "Load mass" and "Load mass center coordinates X, Y and Z" input boxes and apply.
 
 .. important:: 
-    The load mass cannot exceed the maximum load range of the robot. Please refer to the load range corresponding to the specific robot model. \ `2.1. Basic parameters <robot_brief_introduction.html#basic-parameters>`__\ .The center of mass coordinate setting range is 0-1000, unit mm。
+    The load mass cannot exceed the maximum load range of the robot. Please refer to the load range corresponding to the specific robot model. \ `2.1. Basic parameters <robot_brief_introduction.html#basic-parameters>`__\ .The center of mass coordinate setting range is 0-1000, unit mm.
 
 .. image:: teaching_pendant_software/044.png
    :width: 3in
@@ -1019,7 +1019,7 @@ Teaching point record
 
 The manual teaching control area is mainly to set the test coordinate system in the teaching mode, and display the angle and coordinate values of each axis of the robot in real time, and can name and save the teaching points.
 
-When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <robot_brief_introduction.html#basic-parameters>`__\)。
+When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <robot_brief_introduction.html#basic-parameters>`__\).
 
 For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
 
@@ -2074,7 +2074,7 @@ The motion AO command is located in the teaching simulation program teaching com
 .. important:: 
    Calculation formula:Output AO percentage=Real time TCP speed/Set maximum TCP speed * Set maximum TCP speed AO percentage.
 
-   The accompanying motion commands for this command are as follows:PTP/LIN/ARC/CIRCLE/SPLINE/NSPLINE/SERVOJ。
+   The accompanying motion commands for this command are as follows:PTP/LIN/ARC/CIRCLE/SPLINE/NSPLINE/SERVOJ.
 
 ToolList command
 +++++++++++++++++++
@@ -5926,8 +5926,8 @@ FR
 The corresponding type of FR is "SmartTool" and is used in combination with force sensors. The collaborative robot can be adapted to three force sensors of XJC, NSR and GZCX. When using different sensors, you only need to load the corresponding communication protocol, as follows :
 
 - SmartTool + XJC-6F-D82(XJC).
-- SmartTool + NSR-FT Sensor A(NSR)。
-- SmartTool + GZCX-6F-75A(GZCX)。
+- SmartTool + NSR-FT Sensor A(NSR).
+- SmartTool + GZCX-6F-75A(GZCX).
 
 1. Hardware installation
 1)Install the SmartTool handle on the end of the robot and connect it correctly to the end of the robot (refer to NSR's hardware installation for detailed installation).
