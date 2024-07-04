@@ -162,18 +162,18 @@ Code example
     time.sleep(1)
     ret,state = robot.IsInDragTeach()    # Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode
     if ret == 0:
-        print("drag state is：", state)
+        print("drag state is:", state)
     else:
-        print("the errcode is：",ret)
+        print("the errcode is:",ret)
     time.sleep(3)
     ret = robot.DragTeachSwitch(0)  # When the robot enters the non-drag teaching mode, it can only enter the non-drag teaching mode in manual mode
     print("the robot enters the non-drag teaching mode ", ret)
     time.sleep(1)
     ret,state = robot.IsInDragTeach()    # Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode
     if ret == 0:
-        print("drag state is：", state)
+        print("drag state is:", state)
     else:
-        print("the errcode is：",ret)
+        print("the errcode is:",ret)
 
 Control the robot to enable or lower enable
 +++++++++++++++++++++++++++++++++++++++++++++++

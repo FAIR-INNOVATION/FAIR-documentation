@@ -27,8 +27,8 @@ How to use this manual
 
 This manual contains the guidance information of robot installation programming. Manual includes:
 
--  **Hardware installation part**：Machinery installation and electrical installation of robots
--  **Analysis of the teachor software**：Robot teaching and programming
+-  **Hardware installation part**:Machinery installation and electrical installation of robots
+-  **Analysis of the teachor software**:Robot teaching and programming
 
 This manual is aimed at robot integrators, and integrators should receive basic mechanical and electrical training and be familiar with primary programming concepts.
 

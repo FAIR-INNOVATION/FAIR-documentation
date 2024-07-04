@@ -39,9 +39,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**Open**
+   name:**Open**
    
-   effect：Open user program file, choose to load or delete files in the pop-up box.
+   effect:Open user program file, choose to load or delete files in the pop-up box.
 
 .. note:: 
    .. image:: teaching_pendant_software/074.png
@@ -49,9 +49,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**Save**
+   name:**Save**
    
-   effect：Save node graph edits
+   effect:Save node graph edits
 
 .. note:: 
    .. image:: node_editor_software/131.png
@@ -59,9 +59,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**Overload**
+   name:**Overload**
    
-   effect：Reload the node graph content of the last operation to the local.
+   effect:Reload the node graph content of the last operation to the local.
 
 .. note:: 
    .. image:: teaching_pendant_software/071.png
@@ -69,9 +69,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**New**
+   name:**New**
    
-   effect：Create a new node graph programming file
+   effect:Create a new node graph programming file
 
 .. note:: 
    .. image:: node_editor_software/130.png
@@ -79,9 +79,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**Initial**
+   name:**Initial**
    
-   effect：Load the node graph content of the initial settings.
+   effect:Load the node graph content of the initial settings.
 
 .. note:: 
    .. image:: teaching_pendant_software/073.png
@@ -89,9 +89,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**Export**
+   name:**Export**
    
-   effect：After creating/opening the node graph programming file, click the "Export" button to pop up the "Export Node Graph Programming" pop-up box, select the workspace file name to export the file (json format).
+   effect:After creating/opening the node graph programming file, click the "Export" button to pop up the "Export Node Graph Programming" pop-up box, select the workspace file name to export the file (json format).
 
 .. note:: 
    .. image:: teaching_pendant_software/072.png
@@ -99,9 +99,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**Import**
+   name:**Import**
    
-   effect：Click the "Import" button to pop up the import prompt box. Select the file to be imported and click Import. The file content will be displayed in the node graph programming workspace.
+   effect:Click the "Import" button to pop up the import prompt box. Select the file to be imported and click Import. The file content will be displayed in the node graph programming workspace.
 
 .. note:: 
    .. image:: node_editor_software/129.png
@@ -109,9 +109,9 @@ Use the toolbar at the top left of the Node Graph Programming page.
       :height: 0.75in
       :align: left
 
-   name：**Code**
+   name:**Code**
    
-   effect：After the node graph is connected, Lua code is generated.
+   effect:After the node graph is connected, Lua code is generated.
 
 Node graph operations
 -------------------------

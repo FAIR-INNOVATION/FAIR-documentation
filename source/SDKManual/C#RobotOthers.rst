@@ -346,8 +346,8 @@ DownLoad Point Table
 
     /** 
     * @brief Download the point table from the robot controller to the local computer 
-    * @param [in] pointTableName point table name：pointTable1.db
-    * @param [in] saveFilePath save path： C://test/
+    * @param [in] pointTableName point table name:pointTable1.db
+    * @param [in] saveFilePath save path: C://test/
     * @return Error code 
     */
     int PointTableDownLoad(string pointTableName, string saveFilePath);
@@ -359,7 +359,7 @@ Point table update Lua program
 
     /** 
     * @brief Point table update Lua program
-    * @param [in] pointTableName point table name："pointTable1.db", When the point table is empty, that is, an empty string, the lua program is updated to the original program that did not apply the point table
+    * @param [in] pointTableName point table name:"pointTable1.db", When the point table is empty, that is, an empty string, the lua program is updated to the original program that did not apply the point table
     * @param [in] luaFileName Lua program name   "test.lua"
     * @param [out] errorStr error string  
     * @return Error code 
@@ -396,10 +396,10 @@ Initialize log parameters
 
     /**
     * @brief Initialize log parameters
-    * @param [in] logType：Output mode，DIRECT-direct output；BUFFER-buffered output；ASYNC-asynchronous output
-    * @param [in] logLevel：Filter the log level value，ERROR、WARNING、INFO and DEBUG
+    * @param [in] logType:Output mode，DIRECT-direct output；BUFFER-buffered output；ASYNC-asynchronous output
+    * @param [in] logLevel:Filter the log level value，ERROR、WARNING、INFO and DEBUG
     * @param [in] filePath: File save path，“D://Log/”
-    * @param [in] saveFileNum：Number of saved files,The files that exceed the number of files to be saved and the number of days to be saved will be deleted
+    * @param [in] saveFileNum:Number of saved files,The files that exceed the number of files to be saved and the number of days to be saved will be deleted
     * @param [in] saveDays: Number of days to save the file,The files that exceed the number of files to be saved and the number of days to be saved will be deleted
     * @return Error Code
     */

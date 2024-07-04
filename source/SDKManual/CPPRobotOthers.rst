@@ -76,9 +76,9 @@ Initialize log parameters
 
 	/**
 	 * @brief Initialize log parameters;
-	 * @param output_model：Output mode, 0-direct output; 1-buffered output; 2 - asynchronous output;
+	 * @param output_model:Output mode, 0-direct output; 1-buffered output; 2 - asynchronous output;
 	 * @param file_path: File save path + name, the maximum length is 256, and the name must be in the form of xxx.log, such as /home/fr/linux/fairino.log;
-	 * @param file_num：Scroll the number of files stored, 1~20. The maximum size of a single file is 50M;
+	 * @param file_num:Scroll the number of files stored, 1~20. The maximum size of a single file is 50M;
 	 * @return errno_t Error code;
 	 */
 	errno_t LoggerInit(int output_model = 0, std::string file_path = "", int file_num = 5);

@@ -257,7 +257,7 @@ Download the point table database
 
     "Prototype", "``PointTableDownLoad(point_table_name, save_file_path)``"
     "Description", "Download the point table database"
-    "Required parameter", "- ``point_table_name``：pointTable1.db;
+    "Required parameter", "- ``point_table_name``:pointTable1.db;
     - ``save_file_path``: C://test/;"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
@@ -284,7 +284,7 @@ Upload the point table database
 
     "Prototype", "``PointTableUpLoad(point_table_file_path)``"
     "Description", "Download the point table database"
-    "Required parameter", "- ``point_table_file_path``：Full path name of the upload point table   C://test/pointTable1.db"
+    "Required parameter", "- ``point_table_file_path``:Full path name of the upload point table   C://test/pointTable1.db"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
 

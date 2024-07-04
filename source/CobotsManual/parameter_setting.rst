@@ -35,17 +35,17 @@ When configuring the end load, please enter the mass of the end tool used and th
 .. important:: 
    The load mass cannot exceed the maximum load range of the robot.
 
-   - FR3：3kg
+   - FR3:3kg
 
-   - FR5：5kg
+   - FR5:5kg
 
-   - FR10：10kg
+   - FR10:10kg
 
-   - FR16：16kg
+   - FR16:16kg
    
-   - FR20：20kg
+   - FR20:20kg
 
-   - FR30：30kg
+   - FR30:30kg
 
    The center of mass coordinate setting range is 0-1000, unit mm.
 

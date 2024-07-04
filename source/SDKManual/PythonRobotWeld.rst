@@ -14,9 +14,9 @@ Welding Start
 
     "Prototype", "ARCStart(ioType, arcNum, timeout)"
     "Description", "Welding Start"
-    "Required parameter", "- ``ioType``： 0-control box IO； 1-extend IO
-    - ``arcNum``： Welder configuration file number
-    - ``timeout``： Arcing timeout time"
+    "Required parameter", "- ``ioType``: 0-control box IO； 1-extend IO
+    - ``arcNum``: Welder configuration file number
+    - ``timeout``: Arcing timeout time"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0 , Failed- errcode"
 
@@ -48,9 +48,9 @@ Welding end
 
     "Prototype", "ARCEnd(ioType, arcNum, timeout)"
     "Description", "Welding end"
-    "Required parameter", "- ``ioType``： 0-control box IO； 1-extend IO
-    - ``arcNum``： Welder configuration file number
-    - ``timeout``： Arcing timeout time"
+    "Required parameter", "- ``ioType``: 0-control box IO； 1-extend IO
+    - ``arcNum``: Welder configuration file number
+    - ``timeout``: Arcing timeout time"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0 , Failed- errcode"
 
@@ -82,10 +82,10 @@ Set the relationship between welding current and output analog
 
     "Prototype", "WeldingSetCurrentRelation(currentMin, currentMax, outputVoltageMin, outputVoltageMax)"
     "Description", "Set the relationship between welding current and output analog"
-    "Required parameter", "- ``currentMin``： Welding current-analog output linear relationship left point current value(A)
-    - ``currentMax``：  Welding current-analog output linear relationship right point current value(A)
-    - ``outputVoltageMin``： Welding current-analog output linear relationship left point analog output voltage value(V)
-    - ``outputVoltageMax``：Welding current-analog output linear relationship right point analog output voltage value(V)"
+    "Required parameter", "- ``currentMin``: Welding current-analog output linear relationship left point current value(A)
+    - ``currentMax``:  Welding current-analog output linear relationship right point current value(A)
+    - ``outputVoltageMin``: Welding current-analog output linear relationship left point analog output voltage value(V)
+    - ``outputVoltageMax``:Welding current-analog output linear relationship right point analog output voltage value(V)"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0 , Failed- errcode"
 
@@ -138,10 +138,10 @@ Set the relationship between welding voltage and output analog
 
     "Prototype", "WeldingSetVoltageRelation(weldVoltageMin, weldVoltageMax, outputVoltageMin, outputVoltageMax)"
     "Description", "Set the relationship between welding voltage and output analog"
-    "Required parameter", "- ``weldVoltageMin``： Welding voltage - analog output linear relationship left spot welding voltage value(V)
-    - ``weldVoltageMax``： Welding voltage - analog output linear relationship right spot welding voltage value(V)
-    - ``outputVoltageMin``： Welding voltage-analog output linear relationship left point analog output voltage value(V)
-    - ``outputVoltageMax``：Welding voltage-analog output linear relationship right point analog output voltage value(V)"
+    "Required parameter", "- ``weldVoltageMin``: Welding voltage - analog output linear relationship left spot welding voltage value(V)
+    - ``weldVoltageMax``: Welding voltage - analog output linear relationship right spot welding voltage value(V)
+    - ``outputVoltageMin``: Welding voltage-analog output linear relationship left point analog output voltage value(V)
+    - ``outputVoltageMax``:Welding voltage-analog output linear relationship right point analog output voltage value(V)"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0 , Failed- errcode"
 
@@ -193,9 +193,9 @@ Set welding current
 
     "Prototype", "WeldingSetCurrent(ioType,current, AOIndex)"
     "Description", "Set welding current"
-    "Required parameter", "- ``ioType``： 0-control box IO； 1-extend IO
-    - ``current``： current welding current(A)
-    - ``AOIndex``： Welding current control box analog output port(0-1)"
+    "Required parameter", "- ``ioType``: 0-control box IO； 1-extend IO
+    - ``current``: current welding current(A)
+    - ``AOIndex``: Welding current control box analog output port(0-1)"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -209,9 +209,9 @@ Set welding voltage
 
     "Prototype", "WeldingSetVoltage(ioType,voltage, AOIndex)"
     "Description", "Set welding voltage"
-    "Required parameter", "- ``ioType``： 0-control box IO； 1-extend IO 
-    - ``voltage``： welding voltage(V)
-    - ``AOIndex``： Welding voltage control box analog output port(0-1)"
+    "Required parameter", "- ``ioType``: 0-control box IO； 1-extend IO 
+    - ``voltage``: welding voltage(V)
+    - ``AOIndex``: Welding voltage control box analog output port(0-1)"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -225,15 +225,15 @@ Set weave parameters
 
     "Prototype", "WeaveSetPara(weaveNum, weaveType, weaveFrequency, weaveIncStayTime, weaveRange, weaveLeftStayTime, weaveRightStayTime, weaveCircleRadio, weaveStationary)"
     "Description", "Set weave parameters"
-    "Required parameter", "- ``weaveNum``： parameters number
-    - ``weaveType``： weave type：0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
-    - ``weaveFrequency``： weave frequency(Hz)
-    - ``weaveIncStayTime``： Wait mode 0- period does not contain wait time; 1- Period contains the wait time
-    - ``weaveRange``： weave amplitude(mm)
-    - ``weaveLeftStayTime``： weave left residence time(ms)
-    - ``weaveRightStayTime``： weave right residence time(ms)
-    - ``weaveCircleRadio``： Circular wiggle-pullback ratio(0-100%)
-    - ``weaveStationary``： weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time"
+    "Required parameter", "- ``weaveNum``: parameters number
+    - ``weaveType``: weave type:0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
+    - ``weaveFrequency``: weave frequency(Hz)
+    - ``weaveIncStayTime``: Wait mode 0- period does not contain wait time; 1- Period contains the wait time
+    - ``weaveRange``: weave amplitude(mm)
+    - ``weaveLeftStayTime``: weave left residence time(ms)
+    - ``weaveRightStayTime``: weave right residence time(ms)
+    - ``weaveCircleRadio``: Circular wiggle-pullback ratio(0-100%)
+    - ``weaveStationary``: weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -290,15 +290,15 @@ Set weave parameters in real time
 
     "Prototype", "WeaveOnlineSetPara(weaveNum, weaveType, weaveFrequency, weaveIncStayTime, weaveRange, weaveLeftStayTime, weaveRightStayTime, weaveCircleRadio, weaveStationary)"
     "Description", "Set weave parameters in real time"
-    "Required parameter", "- ``weaveNum``： parameters number
-    - ``weaveType``： weave type：0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
-    - ``weaveFrequency``： weave frequency(Hz)
-    - ``weaveIncStayTime``： Wait mode 0- period does not contain wait time; 1- Period contains the wait time
-    - ``weaveRange``： weave amplitude(mm)
-    - ``weaveLeftStayTime``： weave left residence time(ms)
-    - ``weaveRightStayTime``：  weave right residence time(ms)
-    - ``weaveCircleRadio``： Circular wiggle-pullback ratio(0-100%)
-    - ``weaveStationary``： weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time"
+    "Required parameter", "- ``weaveNum``: parameters number
+    - ``weaveType``: weave type:0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
+    - ``weaveFrequency``: weave frequency(Hz)
+    - ``weaveIncStayTime``: Wait mode 0- period does not contain wait time; 1- Period contains the wait time
+    - ``weaveRange``: weave amplitude(mm)
+    - ``weaveLeftStayTime``: weave left residence time(ms)
+    - ``weaveRightStayTime``:  weave right residence time(ms)
+    - ``weaveCircleRadio``: Circular wiggle-pullback ratio(0-100%)
+    - ``weaveStationary``: weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -312,7 +312,7 @@ Weave start
 
     "Prototype", "WeaveStart(weaveNum)"
     "Description", "Weave start"
-    "Required parameter", "- ``weaveNum``： Weave welding parameter configuration number"
+    "Required parameter", "- ``weaveNum``: Weave welding parameter configuration number"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -326,7 +326,7 @@ Weave end
 
     "Prototype", "WeaveEnd(weaveNum)"
     "Description", "Weave end"
-    "Required parameter", "- ``weaveNum``： Weave welding parameter configuration number"
+    "Required parameter", "- ``weaveNum``: Weave welding parameter configuration number"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -340,8 +340,8 @@ Forward wire feed
 
     "Prototype", "SetForwardWireFeed(ioType, wireFeed)"
     "Description", "Forward wire feed"
-    "Required parameter", "- ``ioType``： 0-control box IO； 1-extend IO
-    - ``wireFeed``： wire control: 0-stop wire feed ；1-wire feed"
+    "Required parameter", "- ``ioType``: 0-control box IO； 1-extend IO
+    - ``wireFeed``: wire control: 0-stop wire feed ；1-wire feed"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
 Code example
@@ -388,8 +388,8 @@ Reverse wire feed
 
     "Prototype", "SetReverseWireFeed(ioType, wireFeed)"
     "Description", "Reverse wire feed"
-    "Required parameter", "- ``ioType``： 0-control box IO； 1-extend IO
-    - ``wireFeed``： wire control  0-stop wire feed ；1-wire feed"
+    "Required parameter", "- ``ioType``: 0-control box IO； 1-extend IO
+    - ``wireFeed``: wire control  0-stop wire feed ；1-wire feed"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -403,8 +403,8 @@ Aspirated
 
     "Prototype", "SetAspirated(ioType, airControl)"
     "Description", "Aspirated"
-    "Required parameter", "- ``ioType``： 0-control box IO； 1-extend IO
-    - ``airControl``： 0-stop aspirated；1-aspirated"
+    "Required parameter", "- ``ioType``: 0-control box IO； 1-extend IO
+    - ``airControl``: 0-stop aspirated；1-aspirated"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed- errcode"
 
@@ -418,26 +418,26 @@ Segment weld start
 
     "Prototype", "SegmentWeldStart(startDesePos,  endDesePos, startJPos, endJPos, weldLength, noWeldLength, weldIOType, arcNum, weldTimeout, isWeave,weaveNum,tool,user,vel=20.0, acc=0.0, ovl=100.0, blendR=-1.0,exaxis_pos=[0.0, 0.0, 0.0, 0.0],  search=0, offset_flag=0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0])"
     "Description", "Segment weld start"
-    "Required parameter", "- ``startDesePos``： Starting point Cartesian position
-    - ``endDesePos``： Ending point Cartesian position
-    - ``startJPos``： Starting point joint position
-    - ``endJPos``：Ending point joint position 
-    - ``weldLength``：Weld length(mm)
-    - ``noWeldLength``：Length of unwelded section(mm)  
-    - ``weldIOType``：0-control box IO； 1-extend IO
-    - ``timeout``：Arcing timeout time
-    - ``isWeave``：True-Weave False- Not weave
-    - ``weaveNum``：Weave welding parameter configuration number Required parameter
-    - ``tool``：Tool coordinate number, range[0~14]
-    - ``user``：Workpiece coordinate number, range,[0~14]"
-    "Optional parameter", "- ``vel``：Percentage of speed, range [0~100],[0~100] , Default 20.0
-    - ``acc``：Acceleration percentage, range [0~100] ,not open for now , Default 0.0
-    - ``ovl``：Velocity scaling factor, range [0~100] , Default 100.0 [-1.0]- movement in place (blocking), [0~1000.0] Smoothing radius (non-blocking), unit: mm, Default -1.0
-    - ``blendR``：[-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm, Default -1.0
-    - ``exaxis_pos``：Position of expansion shaft, unit: m , Default [0.0,0.0,0.0,0.0]
-    - ``search``：0-no wire seeking, 1-wire seeking Default 0
-    - ``offset_flag``：0-no offset, 1-offset in base/job coordinate system, 2- offset in tool coordinate system Default 0
-    - ``offset_pos``：The pose offset Default [0.0,0.0,0.0,0.0,0.0,0.0]"
+    "Required parameter", "- ``startDesePos``: Starting point Cartesian position
+    - ``endDesePos``: Ending point Cartesian position
+    - ``startJPos``: Starting point joint position
+    - ``endJPos``:Ending point joint position 
+    - ``weldLength``:Weld length(mm)
+    - ``noWeldLength``:Length of unwelded section(mm)  
+    - ``weldIOType``:0-control box IO； 1-extend IO
+    - ``timeout``:Arcing timeout time
+    - ``isWeave``:True-Weave False- Not weave
+    - ``weaveNum``:Weave welding parameter configuration number Required parameter
+    - ``tool``:Tool coordinate number, range[0~14]
+    - ``user``:Workpiece coordinate number, range,[0~14]"
+    "Optional parameter", "- ``vel``:Percentage of speed, range [0~100],[0~100] , Default 20.0
+    - ``acc``:Acceleration percentage, range [0~100] ,not open for now , Default 0.0
+    - ``ovl``:Velocity scaling factor, range [0~100] , Default 100.0 [-1.0]- movement in place (blocking), [0~1000.0] Smoothing radius (non-blocking), unit: mm, Default -1.0
+    - ``blendR``:[-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm, Default -1.0
+    - ``exaxis_pos``:Position of expansion shaft, unit: m , Default [0.0,0.0,0.0,0.0]
+    - ``search``:0-no wire seeking, 1-wire seeking Default 0
+    - ``offset_flag``:0-no offset, 1-offset in base/job coordinate system, 2- offset in tool coordinate system Default 0
+    - ``offset_pos``:The pose offset Default [0.0,0.0,0.0,0.0,0.0,0.0]"
     "Return value", "- Errcode: Success -0 , Failed -errcode"
 
 Code example
