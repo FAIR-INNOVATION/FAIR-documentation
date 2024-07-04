@@ -155,7 +155,7 @@ Enter the Status Information->Status Query page to query the original data chart
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.1-10 力/扭矩传感器原始数据
+.. centered:: Figure 5.1-10 Force/Torque Sensor Raw Data
 
 Spray gun peripheral configuration
 -------------------------------------
