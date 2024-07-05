@@ -726,45 +726,45 @@ Programming of Robot Trajectory Recording commands
 
 Create a new user program "testRecord.lua", click "LT-Rec" to open the laser recording command addition page, and find the "weld data record", as shown in the figure. Select "Start recording", click "Add" button, and select “Stop recording”, and click "Add" button again; Finally click the "Apply" button.
 
-.. .. figure:: robot_peripherals/115.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/115.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-40 Laser recording
+.. centered:: Figure 5.4-40 Laser recording
 
-.. .. figure:: robot_peripherals/116.png
-..    :align: center
-..    :width: 3in
+.. figure:: robot_peripherals/116.png
+   :align: center
+   :width: 3in
 
-.. .. centered:: Figure 5.4-41 Start recording and stop recording
+.. centered:: Figure 5.4-41 Start recording and stop recording
 
 At this time, the track recording start and stop commands appear on the page.
 
-.. .. figure:: robot_peripherals/117.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/117.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-42 Trajectory recording program
+.. centered:: Figure 5.4-42 Trajectory recording program
 
 As shown in the figure, assuming that the green line segment AB in the figure is a weld, the laser is irradiated to the weld starting point A and the weld interruption B respectively, and the starting point "recordStartPt" and the ending point "recordendpt" of trajectory recording are taught.
 
-.. .. figure:: robot_peripherals/118.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/118.png
+   :align: center
+   :width: 6in
 
-.. .. figure:: robot_peripherals/119.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/119.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-43 Starting point and ending point of trajectory recording
+.. centered:: Figure 5.4-43 Starting point and ending point of trajectory recording
 
 Add two linear movement commands to "testRecord.lua", namely, the starting point "recordStartPt" and the ending point "recordEndPt" when moving to the trajectory, and adjust the command positions to make the robot do the following operations: first move to the "recordStartPt" point, start the trajectory recording, and then move the robot to the "recordEndPt" point and stop the trajectory recording.
 
-.. .. figure:: robot_peripherals/120.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/120.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-44 Trajectory recording program
+.. centered:: Figure 5.4-44 Trajectory recording program
 
 Programming the command of the robot moving to the starting point of trajectory recording
 ***************************************************************************************************************
