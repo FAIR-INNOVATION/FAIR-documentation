@@ -639,76 +639,76 @@ As shown in the figure, when the seek offset function is enabled, the offset par
 
 At this time, the command to move to the seeking point will be added in "testTrack.lua", as shown in the figure.
 
-.. .. figure:: robot_peripherals/107.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/107.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-32 Locating offset procedure
+.. centered:: Figure 5.4-32 Locating offset procedure
 
 Writing laser tracking commands
 **********************************************
 
 Open the "Laser" command adding page again, as shown in the figure.
 
-.. .. figure:: robot_peripherals/108.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/108.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-33 Laser Tracking
+.. centered:: Figure 5.4-33 Laser Tracking
 
 As shown in the figure, click the "Start Tracking" and "Stop Tracking" buttons in the "Laser Tracking" command addition page, and finally click the "Apply" button at the bottom of the page.
 
-.. .. figure:: robot_peripherals/109.png
-..    :align: center
-..    :width: 3in
+.. figure:: robot_peripherals/109.png
+   :align: center
+   :width: 3in
 
-.. .. centered:: Figure 5.4-34 Start and Stop of Laser Tracking
+.. centered:: Figure 5.4-34 Start and Stop of Laser Tracking
 
 The user program "testTrack.lua" at this time is shown in the figure:
 
-.. .. figure:: robot_peripherals/110.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/110.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-35 Laser tracking program
+.. centered:: Figure 5.4-35 Laser tracking program
 
 Write commands for finding the starting point and tracking the ending point
 ********************************************************************************************
 
 Before laser positioning begins, it is necessary to specify a positioning starting point. The robot moves to the positioning starting point first, and then performs positioning along a certain direction and speed. As shown in the figure, the positioning starting point "seamStartPt" is taught near the point A where the laser sensor light is close to the starting point of the weld, and attention should be paid to matching the positioning starting point and the positioning direction to ensure that the robot can find the weld position within the set distance and the maximum positioning time.
 
-.. .. figure:: robot_peripherals/111.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/111.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-36 Locating starting point
+.. centered:: Figure 5.4-36 Locating starting point
 
 As shown in the figure, the tracking end point "Trackedpt" is taught at the weld end.
 
-.. .. figure:: robot_peripherals/112.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/112.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-37 Finding the End Point
+.. centered:: Figure 5.4-37 Finding the End Point
 
 Add the above two points to the "testTrack.lua" user program, and the final user program is as follows:
 
-.. .. figure:: robot_peripherals/113.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/113.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-38 Location tracking program
+.. centered:: Figure 5.4-38 Location tracking program
 
 Write welding related commands
 **************************************************
 
 Finally, add a welding command between "seampos" and "trackEndPt", and the final procedure is as follows:
 
-.. .. figure:: robot_peripherals/114.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/114.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-39 Locating and tracking welding procedure
+.. centered:: Figure 5.4-39 Locating and tracking welding procedure
 
 By executing the above program, the robot will start the locating movement with the laser sensor from the locating starting point. After finding the weld, the robot will immediately move to the starting point of the weld, and perform the arc-starting operation. After the arc-starting is successful, the robot will move to the end point of the weld and track the weld trajectory during the movement. After the robot moves to the end point of the weld, it will stop welding.
 
