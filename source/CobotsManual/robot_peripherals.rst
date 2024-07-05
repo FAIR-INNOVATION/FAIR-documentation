@@ -469,70 +469,70 @@ As shown in the figure, select an unused coordinate system again, change its nam
 
 .. centered:: Figure 5.4-12 Sensor Calibration Step 3
 
-.. .. figure:: robot_peripherals/088.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/088.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-13 Sensor Calibration Step 4
+.. centered:: Figure 5.4-13 Sensor Calibration Step 4
 
 **Step6**: Select coordinate system No.0 again ("toolcoord0") and click Apply; Then select the "Sensor" coordinate system (don't click "Apply") and click "Modify" to continue the calibration.
 
-.. .. figure:: robot_peripherals/089.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/089.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-14 Sensor Calibration 5
+.. centered:: Figure 5.4-14 Sensor Calibration 5
 
-.. .. figure:: robot_peripherals/090.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/090.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-15 Sensor Calibration 6
+.. centered:: Figure 5.4-15 Sensor Calibration 6
 
 **Step7**: Move the position of the laser sensor so that the laser just scans to the calibration point, and click "Set Point 2"; At this time, the current sensor data will be displayed at the position corresponding to the serial number of the sensor output value on the left. If the data is normal, it means that the current calibration point is successful, otherwise it needs to be calibrated again.
 
-.. .. figure:: robot_peripherals/091.png
+.. figure:: robot_peripherals/091.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.4-16 Sensor Calibration 7
+
+.. .. figure:: robot_peripherals/092.png
 ..    :align: center
 ..    :width: 6in
 
-.. .. centered:: Figure 5.4-16 Sensor Calibration 7
+.. .. centered:: Figure 5.4-17 Sensor Calibration 8
 
-.. figure:: robot_peripherals/092.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/093.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-17 Sensor Calibration 8
-
-.. figure:: robot_peripherals/093.png
-   :align: center
-   :width: 6in
-
-.. centered:: Figure 5.4-18 Sensor Calibration 9
+.. .. centered:: Figure 5.4-18 Sensor Calibration 9
 
 **Step8**: Make the laser irradiate the calibration points from three different postures in turn, and click "Setpoint 3", "Setpoint 4" and "Setpoint 5" respectively, and finally click the "Calculate" button under the condition that the data of each point is normal.
 
-.. figure:: robot_peripherals/094.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/094.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-19 Sensor Calibration 10
+.. .. centered:: Figure 5.4-19 Sensor Calibration 10
 
 **Step9**: At this time, the calibration result and precision of the sensor are displayed on the WebApp, and click the "Apply" button to complete the calibration of the laser sensor. If the calibration accuracy is too poor, you can choose to click the "Cancel" button and calibrate again.
 
-.. figure:: robot_peripherals/095.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/095.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-20 sensor calibration accuracy
+.. .. centered:: Figure 5.4-20 sensor calibration accuracy
 
 laser sensor application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/096.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/096.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-21 Application of welding coordinate system
+.. .. centered:: Figure 5.4-21 Application of welding coordinate system
 
 Before using the laser sensor, apply the "Welding" tool coordinate system to the current tool coordinate system.
 
