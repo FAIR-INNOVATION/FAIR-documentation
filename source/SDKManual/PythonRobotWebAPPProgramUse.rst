@@ -166,7 +166,7 @@ Download the Lua file
     "Prototype", "``LuaDownLoad(fileName, savePath)``"
     "Description", "Download the Lua file"
     "Required parameter", "- ``fileName``: The name of the lua file to be downloaded, for example, “test.lua”
-    - ``savePath``：The local path for saving the file, for example, “D://Down/”"
+    - ``savePath``:The local path for saving the file, for example, “D://Down/”"
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0 , Failed -errcode"
 
@@ -191,7 +191,7 @@ Upload the Lua file
 
     "Prototype", "``LuaUpload(filePath)``"
     "Description", "Upload the Lua file"
-    "Required parameter", "- ``filePath``：The full path name of the uploaded file, for example, D://test/test.lua"
+    "Required parameter", "- ``filePath``:The full path name of the uploaded file, for example, D://test/test.lua"
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0 , Failed -errcode
     - errorStr(The lua file has an error return)"

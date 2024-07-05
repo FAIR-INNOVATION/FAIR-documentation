@@ -134,7 +134,7 @@ Open a new terminal, and use the following commands to print and view real-time 
 
 .. frcobot_camera
 .. -----------------
-.. frcobot_camera提供与图漾RVS和相机的手眼标定功能和无序抓取（Bin-Picking）功能。
+.. frcobot_camera提供与图漾RVS和相机的手眼标定功能和无序抓取（Bin-Picking）功能.
 
 
 

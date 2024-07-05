@@ -786,7 +786,7 @@ Code example
     robot = Robot.RPC('192.168.58.2')
 
     ret = robot.GetSoftwareVersion()
-    print("GetSoftwareVersion()：", ret)
+    print("GetSoftwareVersion():", ret)
 
 Obtain robot hardware version information
 +++++++++++++++++++++++++++++++++++++++++++
@@ -812,7 +812,7 @@ Code example
     # A connection is established with the robot controller. A successful connection returns a robot object
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetSlaveHardVersion()
-    print("GetSlaveHardVersion()：", ret)
+    print("GetSlaveHardVersion():", ret)
 
 Obtain robot firmware version information
 ++++++++++++++++++++++++++++++++++++++++++
@@ -838,7 +838,7 @@ Code example
     # A connection is established with the robot controller. A successful connection returns a robot object
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetSlaveFirmVersion()
-    print("GetSlaveFirmVersion()：", ret)
+    print("GetSlaveFirmVersion():", ret)
 
 Obtain DH compensation parameters
 ++++++++++++++++++++++++++++++++++

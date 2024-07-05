@@ -353,7 +353,7 @@ During field use, it is possible to update the firmware to meet the new requirem
 
 .. centered:: Figure 6.3-2 USB&485 Port Identification Description
 
-**Step3：Upgrade the tool.** After the wiring is completed, open the "Fair Serial Port Debugging Assistant", click the "Terminal Board" button, and select the above identified serial port in the "Serial Port Parameter Setting" function. The baud rate is 115200, the data bit is 8, the check bit is none, and the stop bit is 1. Then open the serial port. After success, the prompt "Serial port opened successfully" will appear.
+**Step3:Upgrade the tool.** After the wiring is completed, open the "Fair Serial Port Debugging Assistant", click the "Terminal Board" button, and select the above identified serial port in the "Serial Port Parameter Setting" function. The baud rate is 115200, the data bit is 8, the check bit is none, and the stop bit is 1. Then open the serial port. After success, the prompt "Serial port opened successfully" will appear.
 
 .. figure:: appendix/003.png
    :align: center
@@ -361,7 +361,7 @@ During field use, it is possible to update the firmware to meet the new requirem
 
 .. centered:: Figure 6.3-3 Serial Port Parameter Settings
 
-**Step4：Firmware upgrade.** Select "End plate" and click "Firmware upgrade", as shown in the fig.
+**Step4:Firmware upgrade.** Select "End plate" and click "Firmware upgrade", as shown in the fig.
 
 .. figure:: appendix/004.png
    :align: center
@@ -381,7 +381,7 @@ During field use, it is possible to update the firmware to meet the new requirem
 
 -  Click "Send File", and when the progress bar displays 100%, it means that the upgrade file has been sent.
 
-**Step5：Upgrade verification.** The system is restarted and powered on. In the "Maintenance Information" column, select "Query terminal board firmware version information", and the firmware version information will be displayed in the "Receive Data Area". If it is consistent with the upgraded file version information, the upgrade is successful, otherwise the upgrade fails.
+**Step5:Upgrade verification.** The system is restarted and powered on. In the "Maintenance Information" column, select "Query terminal board firmware version information", and the firmware version information will be displayed in the "Receive Data Area". If it is consistent with the upgraded file version information, the upgrade is successful, otherwise the upgrade fails.
 
 .. figure:: appendix/006.png
    :align: center

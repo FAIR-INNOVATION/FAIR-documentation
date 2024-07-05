@@ -775,7 +775,7 @@ Code example
         Robot robot = new Robot();
         robot.RPC("192.168.58.2");
 
-    //1.Calibrate and apply the robot tool coordinate system. You can use the four-point method or the six-point method to calibrate and apply the tool coordinate system. The interfaces involved in the calibration of the tool coordinate system are as follows：
+    //1.Calibrate and apply the robot tool coordinate system. You can use the four-point method or the six-point method to calibrate and apply the tool coordinate system. The interfaces involved in the calibration of the tool coordinate system are as follows:
         //    int SetToolPoint(int point_num);  //Set tool reference point - six point method
         //    int ComputeTool(ref DescPose tcp_pose);  //Computational tool coordinate system
         //    int SetTcp4RefPoint(int point_num);    //Set tool reference point - four point method
@@ -865,7 +865,7 @@ Code example
         Robot robot = new Robot();
         robot.RPC("192.168.58.2");
 
-        //1.Calibrate and apply the robot tool coordinate system. You can use the four-point method or the six-point method to calibrate and apply the tool coordinate system. The interfaces involved in the calibration of the tool coordinate system are as follows：
+        //1.Calibrate and apply the robot tool coordinate system. You can use the four-point method or the six-point method to calibrate and apply the tool coordinate system. The interfaces involved in the calibration of the tool coordinate system are as follows:
         //    int SetToolPoint(int point_num);  //Set tool reference point - six point method
         //    int ComputeTool(ref DescPose tcp_pose);  //Computational tool coordinate system
         //    int SetTcp4RefPoint(int point_num);    //Set tool reference point - four point method
@@ -964,7 +964,7 @@ Code example
         Robot robot = new Robot();
         robot.RPC("192.168.58.2");
 
-        //1.Calibrate and apply the robot tool coordinate system. You can use the four-point method or the six-point method to calibrate and apply the tool coordinate system. The interfaces involved in the calibration of the tool coordinate system are as follows：
+        //1.Calibrate and apply the robot tool coordinate system. You can use the four-point method or the six-point method to calibrate and apply the tool coordinate system. The interfaces involved in the calibration of the tool coordinate system are as follows:
         //    int SetToolPoint(int point_num);  //Set tool reference point - six point method
         //    int ComputeTool(ref DescPose tcp_pose);  //Computational tool coordinate system
         //    int SetTcp4RefPoint(int point_num);    //Set tool reference point - four point method

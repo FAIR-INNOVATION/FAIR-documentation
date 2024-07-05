@@ -142,7 +142,7 @@ User modifies IP address
 Appendix
 ==================================
 
-Appendix 1：Enabling Virtualization in the BIOS
+Appendix 1:Enabling Virtualization in the BIOS
 ------------------------------------------------------
 
 Different models of computers may have different processes to enable virtualization. Take Lenovo ThinkPad series Windows 10 as an example:

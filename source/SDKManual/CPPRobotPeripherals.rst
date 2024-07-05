@@ -452,7 +452,7 @@ Set weave parameters
 	/**
 	* @brief Set weave parameters
 	* @param [in] weaveNum parameters number
-	* @param [in] weaveType weave type：0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
+	* @param [in] weaveType weave type:0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
 	* @param [in] weaveFrequency weave frequency(Hz)
 	* @param [in] weaveIncStayTime Wait mode 0- period does not contain wait time; 1- Period contains the wait time
 	* @param [in] weaveRange weave amplitude(mm)
@@ -475,7 +475,7 @@ Set weave parameters in real time
 	/**
 	* @brief Set weave parameters in real time
 	* @param [in] weaveNum parameters number
-	* @param [in] weaveType weave type：0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
+	* @param [in] weaveType weave type:0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
 	* @param [in] weaveFrequency weave frequency(Hz)
 	* @param [in] weaveIncStayTime Wait mode 0- period does not contain wait time; 1- Period contains the wait time
 	* @param [in] weaveRange weave amplitude(mm)

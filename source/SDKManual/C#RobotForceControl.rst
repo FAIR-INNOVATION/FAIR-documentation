@@ -276,7 +276,7 @@ Collision guard
     * @param  [in] ft  Impact force/torque，fx,fy,fz,tx,ty,tz
     * @param  [in] max_threshold Maximum threshold
     * @param  [in] min_threshold Minimum threshold
-    * @note   Force/torque detection range：(ft-min_threshold, ft+max_threshold)
+    * @note   Force/torque detection range:(ft-min_threshold, ft+max_threshold)
     * @return  Error code
     */   
     int FT_Guard(int flag, int sensor_id, int[] select, ForceTorque ft, double[] max_threshold, double[] min_threshold); 

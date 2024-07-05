@@ -205,7 +205,7 @@ Waiting for multiple digital inputs from the control box
     - ``id``:IO number, bit0~bit7 corresponds to DI0~DI7, bit8~bit15 corresponds to CI0~CI7;
     - ``status(uint16_t)``:bit0~bit7 corresponds to DI0~DI7 status, bit8~bit15 corresponds to the states of the CI0~CI7 status bits [0]-off, [1]-on;
     - ``maxtime``:Maximum waiting time, unit[ms];
-    - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting。"
+    - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting."
     "Optional parameter", "Nothing"
     "Return value", "Errcode: Success -0  Failed -errcode"
 

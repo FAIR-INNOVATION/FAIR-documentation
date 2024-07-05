@@ -781,8 +781,8 @@ Load identification main program
 
     "Prototype", "LoadIdentifyMain(joint_torque, joint_pos, t)"
     "Description", "Load identification main program"
-    "Required parameter", "- ``joint_torque``： j1-j6；
-    - ``joint_pos``：j1-j6"
+    "Required parameter", "- ``joint_torque``: j1-j6；
+    - ``joint_pos``:j1-j6"
     "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Obtain the load identification result
