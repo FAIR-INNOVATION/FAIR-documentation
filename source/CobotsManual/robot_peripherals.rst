@@ -771,49 +771,49 @@ Programming the command of the robot moving to the starting point of trajectory 
 
 As shown in the figure, click "LT-Rec" to open the page for adding laser recording commands, find the column of "Move to Weld Point", select PTP as the motion mode, enter a certain motion speed, click "Movement to Starting Point" and click "Apply".
 
-.. .. figure:: robot_peripherals/121.png
-..    :align: center
-..    :width: 3in
+.. figure:: robot_peripherals/121.png
+   :align: center
+   :width: 3in
 
-.. .. centered:: Figure 5.4-45 Movement to the starting point of trajectory
+.. centered:: Figure 5.4-45 Movement to the starting point of trajectory
 
 At this time, the user program of "testRecord.lua" is as follows:
 
-.. .. figure:: robot_peripherals/122.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/122.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-46 Program of Moving to the Starting Point of Trajectory
+.. centered:: Figure 5.4-46 Program of Moving to the Starting Point of Trajectory
 
 Compilation of Laser Sensor Track Reproduction command
 ********************************************************************************
 
 Click "LT-Rec" to open the laser recording command addition page, and find "Weld Data Record", as shown in the figure, select "Track reappearan", click "Add" button, click "Laser Tracking" button, and finally click "Apply" button.
 
-.. .. figure:: robot_peripherals/123.png
-..    :align: center
-..    :width: 3in
+.. figure:: robot_peripherals/123.png
+   :align: center
+   :width: 3in
 
-.. .. centered:: Figure 5.4-47 Trajectory Reproduction
+.. centered:: Figure 5.4-47 Trajectory Reproduction
 
 The program after adding is as follows:
 
-.. .. figure:: robot_peripherals/124.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/124.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-48 Trajectory Reproduction Program
+.. centered:: Figure 5.4-48 Trajectory Reproduction Program
 
 Compilation of welding related commands
 ******************************************************
 
 Finally, add welding start and welding end commands before and after the start and end of trajectory reproduction:
 
-.. .. figure:: robot_peripherals/125.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/125.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-49 Reproducing welding procedure with track record
+.. centered:: Figure 5.4-49 Reproducing welding procedure with track record
 
 By executing the above program, the robot will carry the laser sensor to move along the weld trajectory and record the whole trajectory, then the robot will move to the starting point of the trajectory record, and the robot will start welding along the trajectory recorded by the laser sensor. When the robot trajectory reappears, the welding arc will be extinguished and the welding will be completed.
 
