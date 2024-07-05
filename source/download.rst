@@ -76,7 +76,7 @@ Palletizer frcap
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-V3.7.2-Release-240607 <https://drive.google.com/file/d/1lENvG5aMxB7Esp3zkyYrpqvJCU2PwvbR/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-V3.7.3-Release-240628 <https://drive.google.com/file/d/1ORyqkqcx5In2OpBNuhUt4NtXs82JUfLQ/view?usp=sharing>`
 
     :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
 

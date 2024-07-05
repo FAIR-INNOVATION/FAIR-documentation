@@ -5985,6 +5985,89 @@ After the device information is successfully configured, the SmartTool button fu
    :align: center
 
 .. centered:: Figure 4.9-56 Measure the magnitude and direction of force
+  
+Robot safety
+++++++++++++++++++  
+
+1)In Auxiliary Applications -> Robot Safety -> Safe Stop page, set the safe stop mode parameter function.
+
+.. image:: teaching_pendant_software/424.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-57 Safe Stop Mode Configuration
+
+2)In the Auxiliary Applications -> Robot Safety -> Safe Speed ​​page, set the safe speed.
+
+.. note:: TCP manual speed is less than 250mm/s.
+
+.. image:: teaching_pendant_software/425.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-58 Safe manual speed configuration
+
+3)The valid state of digital input DI0-DI15 and digital output DO0-DO15 sets the valid level configuration of 16 digital inputs and 16 digital outputs, including high level valid and low level valid.
+
+.. image:: teaching_pendant_software/426.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.9-59 DI Configuration
+
+.. image:: teaching_pendant_software/427.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.9-60 DO Configuration
+
+4)The HMI provides the setting of the safety status of 16 digital inputs and 16 digital outputs, which can be set to valid or invalid status. When the controller determines that it is in a safe state, the 16 digital inputs and 16 digital outputs are set to a safe state.
+
+The configuration page is in "Robot Safety" -> "DIO Safety" in the auxiliary application. The page is as follows:
+
+.. image:: teaching_pendant_software/428.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.9-61 DIO safety status configuration
+
+1. The DIO safety function is provided in "DIO Safety". The safety function is dual-channel DI or DO. When a safety DI signal is detected or the safety status flag is triggered, DO is output.
+
+.. image:: teaching_pendant_software/429.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.9-62 DIO safety function configuration
+
+2. Emergency stop types 0, 1a, 1b, 2 can be set, stop time limit can be set, and stop distance limit can be set.
+
+ - Send the control box board through the controller, and the emergency stop type 0 control box board directly cuts off the power;
+
+ - Emergency stop type 1a is to cut off the power supply of the main body after deceleration stop;
+
+ - Emergency stop type 1b is to not cut off the power supply of the main body after deceleration stop, and the main body is disabled;
+
+.. image:: teaching_pendant_software/430.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-63 Emergency stop configuration
+
+3. Protective stop type 0, 1, 2. Protective stop type 0: the control box board directly cuts off the power. Protective stop type 1: the control box board first notifies the controller to control the robot to stop and then the controller feeds back to cut off the power of the control box board. Protective stop type 2: the control box board notifies the controller to control the robot to stop.
+
+.. image:: teaching_pendant_software/431.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-64 Protective shutdown configuration
+
+4. The safety data status flag and control box carrier board fault feedback are obtained through the Web terminal and the controller status feedback. When the flag bit is 1, the safety data status is abnormal in the WebAPP alarm status. After the control box carrier board fault is obtained, the specific error information is displayed in the WebAPP alarm status according to the error code.
+
+.. image:: teaching_pendant_software/432.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.9-65 WebAPP alarm status 
    
 System settings
 -----------------
