@@ -528,11 +528,11 @@ As shown in the figure, select an unused coordinate system again, change its nam
 laser sensor application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: robot_peripherals/096.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/096.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-21 Application of welding coordinate system
+.. .. centered:: Figure 5.4-21 Application of welding coordinate system
 
 Before using the laser sensor, apply the "Welding" tool coordinate system to the current tool coordinate system.
 
@@ -541,23 +541,23 @@ Laser sensor teaching point
 
 As shown in the figure, drag the robot to make the laser sensor light point to the weld point to be taught. As shown in the figure, select the sensor as "Laser Sensor" in the WebApp, enter the sensor name as "laserPt", and click the "Add" button. Create a new user program "testLaser.lua", create a motion command LIN, select "laserPt" as the target point, and execute the command in one step. At this time, the welding torch will move to the pointing point of the previous laser sensor.
 
-.. figure:: robot_peripherals/097.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/097.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-22  Laser Sensing Weld Point
+.. .. centered:: Figure 5.4-22  Laser Sensing Weld Point
 
-.. figure:: robot_peripherals/098.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/098.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-23 Teaching sensor points
+.. .. centered:: Figure 5.4-23 Teaching sensor points
 
-.. figure:: robot_peripherals/099.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/099.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-24 The welding points to the weld point
+.. .. centered:: Figure 5.4-24 The welding points to the weld point
 
 Laser Positioning+Tracking
 +++++++++++++++++++++++++++++++
@@ -572,46 +572,46 @@ It takes several steps for the cooperative robot to cooperate with the laser sen
 
 Before positioning, tracking and debugging, please ensure that the sensor has been installed correctly, the coordinate system of the "welding" tool has been calibrated correctly, and the laser sensor has been calibrated correctly. As shown in the figure, assuming that the green straight line in the figure is the weld to be welded, the robot can automatically find the welding starting point A and weld to the point B, and the following commands need to be written:
 
-.. figure:: robot_peripherals/100.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/100.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-25 Sensor Installation
+.. .. centered:: Figure 5.4-25 Sensor Installation
 
 Write the positioning command
 **********************************************
 
 As shown in the figure, create a new user program "laserTrack.lua" and select "welding command".
 
-.. figure:: robot_peripherals/101.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/101.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-26 Add location command
+.. .. centered:: Figure 5.4-26 Add location command
 
 As shown in the figure, click "Laser" to pop up the laser tracking command adding page.
 
-.. figure:: robot_peripherals/102.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/102.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-27 Laser tracking command
+.. .. centered:: Figure 5.4-27 Laser tracking command
 
 As shown in Figure  28, find the "Location command", select the coordinate system as "LaserSensor", and select "+x" as the direction to indicate that the robot is searching for the weld while moving with the laser sensor along the "+x" direction of the coordinate system of "Welding" from the current position, and "speed" is the moving speed of laser sensor seeking, and the length is the maximum seeking length of laser sensor, and the robot will report when the robot fails to find the weld when the seeking distance exceeds this length. Please enter the above parameters correctly according to the actual scene. Click the "Start locating" and "End locating" commands in turn, and click the "Apply" button.
 
-.. figure:: robot_peripherals/103.png
-   :align: center
-   :width: 3in
+.. .. figure:: robot_peripherals/103.png
+..    :align: center
+..    :width: 3in
 
-.. centered:: Figure 5.4-28 Add loaction command
+.. .. centered:: Figure 5.4-28 Add loaction command
 
 At this time, the corresponding commands for the start and end of laser positioning will be added in "laserTrack.lua".
 
-.. figure:: robot_peripherals/104.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/104.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-29 Locating procedure
+.. .. centered:: Figure 5.4-29 Locating procedure
 
 Write the command of moving to seek position
 **********************************************
@@ -623,11 +623,11 @@ Add LIN command of point-to-point motion, as shown in the figure, the target poi
 
 And the seeking point can be set with offset, and the offset type can be selected from "Base coordinate offset" and "tool coordinate offset".
 
-.. figure:: robot_peripherals/105.png
-   :align: center
-   :width: 3in
+.. .. figure:: robot_peripherals/105.png
+..    :align: center
+..    :width: 3in
 
-.. centered:: Figure 5.4-30 Locating Offset Option
+.. .. centered:: Figure 5.4-30 Locating Offset Option
 
 As shown in the figure, when the seek offset function is enabled, the offset parameters can be set, where "dx" represents the offset distance along the X direction of the selected coordinate system and "drx" represents the rotation angle along the X axis of the selected coordinate system. Click the "Add" button and click the "Apply" button.
 
