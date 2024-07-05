@@ -25,3 +25,10 @@ Date: 2024-06-07
 - **Six -dimensional force and joint impedance mixed drag function**: Auxiliary application -> Robot body -> Six -dimensional force and joint impedance mixed drag;
 
 - **The first activation function of the robot**: Login settings;
+
+Version V3.7.3
+-----------------
+
+Date: 2024-07-02
+
+- **Modbus slave control robot function**: teaching simulation -> program teaching -> ModbusTCP;
