@@ -155,7 +155,7 @@ Enter the Status Information->Status Query page to query the original data chart
    :align: center
    :width: 6in
 
-.. centered:: Figure 5.1-10 力/扭矩传感器原始数据
+.. centered:: Figure 5.1-10 Force/Torque Sensor
 
 Spray gun peripheral configuration
 -------------------------------------
@@ -455,19 +455,19 @@ As shown in the figure, select an unused coordinate system again, change its nam
 
 **Step4**: As shown in the figure, select the previously set coordinate system of "LaserSensor" again (don't click "Apply"), click the "Modify" button, select the tool type as "Sensor", fix the sensor at the robot end, and select "Five Points Method" in the modification wizard.
 
-.. .. figure:: robot_peripherals/086.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/086.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-11 Sensor Calibration Step 2
+.. centered:: Figure 5.4-11 Sensor Calibration Step 2
 
 **Step5**: Drag the robot to aim the tip of the welding torch at the calibration point, select the coordinate system of "Welding", click "Apply" and click "Set point 1", as shown in the figure.
 
-.. .. figure:: robot_peripherals/087.png
-..    :align: center
-..    :width: 6in
+.. figure:: robot_peripherals/087.png
+   :align: center
+   :width: 6in
 
-.. .. centered:: Figure 5.4-12 Sensor Calibration Step 3
+.. centered:: Figure 5.4-12 Sensor Calibration Step 3
 
 .. .. figure:: robot_peripherals/088.png
 ..    :align: center
