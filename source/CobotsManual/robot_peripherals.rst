@@ -463,11 +463,11 @@ As shown in the figure, select an unused coordinate system again, change its nam
 
 **Step5**: Drag the robot to aim the tip of the welding torch at the calibration point, select the coordinate system of "Welding", click "Apply" and click "Set point 1", as shown in the figure.
 
-.. figure:: robot_peripherals/087.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/087.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-12 Sensor Calibration Step 3
+.. .. centered:: Figure 5.4-12 Sensor Calibration Step 3
 
 .. figure:: robot_peripherals/088.png
    :align: center
@@ -491,11 +491,11 @@ As shown in the figure, select an unused coordinate system again, change its nam
 
 **Step7**: Move the position of the laser sensor so that the laser just scans to the calibration point, and click "Set Point 2"; At this time, the current sensor data will be displayed at the position corresponding to the serial number of the sensor output value on the left. If the data is normal, it means that the current calibration point is successful, otherwise it needs to be calibrated again.
 
-.. figure:: robot_peripherals/091.png
-   :align: center
-   :width: 6in
+.. .. figure:: robot_peripherals/091.png
+..    :align: center
+..    :width: 6in
 
-.. centered:: Figure 5.4-16 Sensor Calibration 7
+.. .. centered:: Figure 5.4-16 Sensor Calibration 7
 
 .. figure:: robot_peripherals/092.png
    :align: center
