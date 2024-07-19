@@ -468,3 +468,15 @@ Code example
         printf("ComputeWObjCoord retval is: %d\n", retval);
         printf("xyz is: %f, %f, %f; rpy is: %f, %f, %f\n", wobj_0_pose.tran.x, wobj_0_pose.tran.y, wobj_0_pose.tran.z, wobj_0_pose.rpy.rx, wobj_0_pose.rpy.ry, wobj_0_pose.rpy.rz);
     }
+
+Set robot acceleration
++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set robot acceleration
+    * @param [in] acc Percentage of robot acceleration
+    * @return Error code
+    */
+    int SetOaccScale(double acc)

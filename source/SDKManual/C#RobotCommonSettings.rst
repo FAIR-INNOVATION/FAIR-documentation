@@ -367,3 +367,15 @@ Code example
         robot.GetRobotInstallAngle(ref yangle, ref zangle);
         Console.WriteLine($"yangle  {yangle}   zangle  {zangle}");
     }
+
+Set robot acceleration
++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+	/**
+	 * @brief Set robot acceleration
+	 * @param [in] acc Percentage of robot acceleration
+	 * @return Error code
+	 */
+	errno_t SetOaccScale(double acc);
