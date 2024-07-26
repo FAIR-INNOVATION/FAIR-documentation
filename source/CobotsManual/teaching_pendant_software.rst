@@ -714,6 +714,66 @@ This function is to set the running speed of the robot under manual/automatic mo
 
 After the speed is set successfully, the corresponding speed status bar will change to the set value, and the range of speed value setting is 0~100.
 
+Post-collision response strategy function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. important:: Note: This post-collision response strategy function is only used in the Linux version.
+
+On the basis of the original collision strategy in motion, " Gravitational moment mode " and " Vibration response mode " are added to ensure the safety of man-machine cooperation. 
+
+When the two strategies are triggered, they will switch from automatic mode or manual mode to drag mode. The Gravitational moment mode will move away from the collision point according to the magnitude and direction of the collision force, while the Vibration response mode will return to the collision position after moving away from the collision point. At the same time, collision detection at rest is added.
+
+Collision strategy
++++++++++++++++++++++
+
+Gravitational moment mode
+*****************************
+
+The Gravitational moment mode in collision strategy is set as follows.
+
+**Step1**:Click "Collision Level" under the menu bar of "Robot Settings" in the initial setting to enter the corresponding interface.
+
+**Step2**:In the column of "Collision Strategy", click the drop-down box to select " Gravitational moment mode ", and the interface is shown below; Then, click the "Apply" button to enable the function. 
+
+.. note:: In the operation of the robot, if the load mass changes greatly, this strategy is not recommended; This strategy is not recommended if the running speed is too fast.
+
+.. image:: teaching_pendant_software/433.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.4-24 Gravitational moment mode of Collision Strategy
+
+Vibration response mode
+*************************
+
+The setting steps of oscillation response mode in collision strategy are as follows.
+
+**Step1**:Click "Collision Level" under the menu bar of "Robot Settings" in the initial setting to enter the corresponding interface.
+
+**Step2**:In the column of "Collision Strategy", click the drop-down box to select " Vibration response mode", and the interface is shown below; Then, click the "Apply" button to enable the function.
+
+.. note:: It is not recommended to use this strategy if the robot runs too fast.
+
+.. image:: teaching_pendant_software/434.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.4-25 Vibration response mode of Collision Strategy
+
+Static collision detection
++++++++++++++++++++++++++++++++
+
+The setup steps of static collision detection are as follows.
+
+**Step1**:Click "Collision Level" under the menu bar of "Robot Settings" in the initial setting to enter the corresponding interface.
+
+**Step2**:Turn on the switch for static collision detection, as shown below. When it is detected that the gap between the joint torque command and the torque feedback is too large, the robot will enter the drag mode to avoid continuous extrusion force.
+
+.. image:: teaching_pendant_software/435.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.4-26 Static collision detection
+
 .. Configuration import and export
 .. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

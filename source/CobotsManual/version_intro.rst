@@ -19,6 +19,8 @@ Date: 2024-06-07
 
 - **Six -dimensional force and joint impedance mixed drag function**: Auxiliary application -> Robot body -> Six -dimensional force and joint impedance mixed drag;
 
+- **Post-collision response strategy function**: Initial settings -> Robot settings -> Collision level settings;
+
 - **The first activation function of the robot**: Login settings;
     
 Version V3.7.1
