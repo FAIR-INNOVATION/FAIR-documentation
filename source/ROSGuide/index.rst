@@ -15,3 +15,12 @@ frcobot_ros2
     :numbered: 3
 
     ros2guide
+
+moveIt2
+==============
+
+.. toctree:: 
+    :maxdepth: 5
+    :numbered: 3
+
+    moveIt2
