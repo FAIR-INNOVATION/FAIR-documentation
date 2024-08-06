@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'FAIR'
+project = 'FAIRINO Collaborative Robot User Manual'
 copyright = '2022-2024, FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
 author = 'FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
 release = '3.7.3'
