@@ -22,7 +22,19 @@ The initial user name is admin and the password is 123.
 Simple understanding of WebApp interface
 ------------------------------------------
 
-After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAIR INNOVATION LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. The initial interface of the system is shown in the figure below:
+After the login is successful, the system enters the "Initial". Mainly include:
+
+- 1. FAIRINO LOGO;
+- 2. Menu bar zoom button;
+- 3. Menu bar;
+- 4. Robot control area;
+- 5. Robot status area;
+- 6. 3D simulation robot - 3D scene operation;
+- 7. 3D simulation robot - 3D object operation;
+- 8. Robot supporting functions;
+- 9. Various robot states.
+
+The initial interface of the system is shown in the figure below:
 
 .. image:: teaching_pendant_software/002.png
    :align: center
@@ -81,7 +93,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/007.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -91,17 +103,37 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/008.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
    name: **Tool coordinate system number**
    
    effect: Display the tool coordinate system number of the current application
+
+.. note:: 
+   .. image:: teaching_pendant_software/449.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Workpiece coordinate system number**
+   
+   effect: Display the workpiece coordinate system number currently applied
+
+.. note:: 
+   .. image:: teaching_pendant_software/450.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Extended axis coordinate system number**
+   
+   effect: Displays the currently applied extended axis coordinate system number
    
 .. note:: 
    .. image:: teaching_pendant_software/009.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -111,7 +143,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/010.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -121,7 +153,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/011.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -131,7 +163,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/012.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -141,7 +173,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/013.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -151,7 +183,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/014.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -161,7 +193,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/015.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -171,7 +203,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/017.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -181,7 +213,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/016.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -191,7 +223,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/018.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 

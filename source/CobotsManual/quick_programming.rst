@@ -163,11 +163,17 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 Write and run a program
 -------------------------
 
-The left side is mainly for adding program commands. Click the icon above each keyword to enter the detailed interface. There are two main operations for adding program commands to the file. One way is to open the relevant command and click the Apply button to add the command to the program. , another way is to click the “Add” button first, at this time the command is not saved in the program file, and you need to click “Apply” again to save the command in the file. The second method often occurs when multiple commands of the same type are issued. We add an add button and display the content of the added command to this type of command. Click the Add button to add a command, and the added command displays all the added commands. , click “Apply” to save the added command to the opened file on the right.
+The left side is mainly for adding program commands. Click the icon above each keyword to enter the detailed interface. There are two main operations for adding program commands to the file:
 
-Click the start button to run the program; click the stop button to stop the program; click the pause/resume button to pause/resume the program; when the program is running, the currently executing program node is highlighted in gray.
+- 1. Open the relevant command and click the Apply button to add the command to the program;
 
-In manual mode, click the first icon on the right side of the node to make the robot execute the instruction alone, and the second icon is to edit the content of the node.
+- 2. Click the "Add" button first. At this time, the command is not saved in the program file. You need to click "Apply" to save the command to the file.
+
+The second method often appears when multiple commands of the same type are issued. We add the Add button and display the added command content function for this type of command. Click the Add button to add an instruction. The Added Instructions display all added instructions. Click "Apply" to save the added instructions to the opened file on the right.
+
+Click the Start button to run the program; click the Stop button to stop the program; click the Pause/Resume button to pause/resume the program; when the program is running, the currently executed program node is highlighted in gray.
+
+In manual mode, click the first icon on the right side of the node to make the robot execute the instruction alone, and the second icon is to edit the node content.
 
 .. image:: teaching_pendant_software/069.png
    :width: 6in

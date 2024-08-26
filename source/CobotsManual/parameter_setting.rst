@@ -4,9 +4,9 @@ Robot parameter setting
 Set the installation method
 ----------------------------
 
-The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set on this page in time to ensure the normal operation of the robot.
+The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set in the "Initial - Base - Mounting" menu in time to ensure the normal operation of the robot.
 
-The user clicks the "Fixed mounting" tab in the robot's 3D virtual display area to enter the robot Fixed mounting. On the mode setting page, select "Front Mount", "Flip Mount" or "Side Mount", and click the "Apply" button to complete the robot installation mode setting.
+The user clicks the "Fixed" option under the "Initial - Base - Mounting" menu to enter the robot fixed installation mode setting page, selects "Upright Installation", "Inverted Installation" or "Side Installation", and clicks the "Apply" button to complete the robot installation mode setting.
 
 .. image:: teaching_pendant_software/025.png
    :width: 6in
@@ -14,7 +14,7 @@ The user clicks the "Fixed mounting" tab in the robot's 3D virtual display area 
 
 .. centered:: Figure 3.1-1 Fixed mounting
 
-Considering more flexible and rich robot deployment scenarios, we provide a free mounting function. Users click the "360-degree free mounting" tab in the robot's 3D virtual display area to enter the robot free mounting mode setting page. Manually adjust the "base tilt" and "base rotation" angles, and the 3D model will show the mounting effect accordingly. After modification, click the "Apply" button to complete the robot mounting method setting.
+Considering the more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "Free" tab under the "Initial - Base - Mounting" menu to enter the robot free installation mode setting page. Manually adjust the "Base Tilt" and "Base Rotation" angles, and the 3D model will display the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation mode setting.
 
 .. image:: teaching_pendant_software/026.png
    :width: 6in
@@ -28,7 +28,7 @@ Considering more flexible and rich robot deployment scenarios, we provide a free
 Set end load
 --------------------
 
-Under the menu bar of "Robot Settings" in "Initialize", click "End Load" to enter End load page .
+Under the menu bar of "Initial - Base - Payload", click "End Payload" to enter End payload page .
 
 When configuring the end load, please enter the mass of the end tool used and the corresponding center of mass coordinates into the "Load mass" and "Load mass center coordinates X, Y and Z" input boxes and apply.
 
@@ -61,7 +61,15 @@ When configuring the end load, please enter the mass of the end tool used and th
 Set tool coordinates
 --------------------
 
-Under the menu bar of "Robot Settings" in "Initialize", click "Tool Coordinates" to enter Tool Coordinates Page. Tool coordinates can realize the modification, clearing and application of tool coordinates. There are 15 numbers in the drop-down list of the tool coordinate system. After selecting the corresponding coordinate system (the name of the coordinate system can be customized), the corresponding coordinate value, tool type and installation position will be displayed below (displayed only under the sensor type tool), select Click the "Apply" button after a certain coordinate system, and the currently used tool coordinate system will change to the selected coordinates, as shown in Figure 3.3-1.
+In the menu bar of "Initial - Base - Coordinate", click "TCP" to enter the tool coordinate page.
+
+Tool coordinates can be modified, cleared and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
+
+Under QNX:
+- There are 15 tool coordinate systems.
+
+Under Linux:
+- There are 20 tool coordinate systems.
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. The tool calibration method is divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the tool center point. Its posture is consistent with the end posture by default. The six-point method adds two points to the four-point method. , used to calibrate the pose of the tool.
 
