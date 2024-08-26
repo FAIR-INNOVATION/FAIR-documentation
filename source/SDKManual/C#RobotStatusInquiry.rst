@@ -370,7 +370,7 @@ Get current speed
     :linenos:
 
     /**
-    * @brief  Get the robot's current speed
+    * @brief  Get the robot's default speed
     * @param  [out]  vel  The unit is mm/s
     * @return  Error code
     */   

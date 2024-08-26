@@ -80,11 +80,11 @@ Lua terminal open protocol configuration
 Overview
 ~~~~~~~~~~
 
-Add Lua open design, while being compatible with previous designs. The manufacturer content is: manufacturer = 0x60, type = 0x00, representing the FR Lua open interface and selecting the corresponding peripheral manufacturer and type configuration.
+Lua open protocol supports force sensor, single gripper, multiple grippers, force sensors and grippers in conjunction with each other.
 
 Procedure
 ~~~~~~~~~~~
-**Step1**:Enter the robot body->system upgrade interface, select the terminal firmware .bin file, and upgrade the terminal firmware.
+**Step1**:Enter the Tools App -> System Upgrade, select the terminal firmware.bin file to upgrade the terminal firmware.
 
 .. important:: 
    You need to first confirm whether the terminal firmware version FV2.010.06 and later software versions are compatible. If the version does not match, the corresponding software firmware is upgraded, otherwise there is no need to upgrade the firmware. 
@@ -97,7 +97,7 @@ Procedure
 
 .. centered:: Figure 5.1-4 Upgrade terminal firmware
 
-**Step2**:Go to User Peripheral Configuration->Lua Open Protocol page, upload Lua terminal open protocol, select the Lua terminal open protocol to be uploaded, and perform the upload operation.
+**Step2**:Go to Peripheral -> End-tool -> Open protocol -> Protocol configuration, select the Lua terminal open protocols to be uploaded, and perform the upload operation.
 
 .. important:: Before uploading the terminal protocol, you need to enter the boot mode. At the same time, the file name needs to start with AXLE_LUA.
 
@@ -107,15 +107,7 @@ Procedure
 
 .. centered:: Figure 5.1-5 Upload Lua terminal open protocol
 
-**Step3**:Configure the terminal peripherals, the device type is: force sensor device, the manufacturer is: OpenLua, then select the software version and mounting location, and click the "Configure" button.
-
-.. figure:: robot_peripherals/148.png
-   :align: center
-   :width: 6in
-
-.. centered:: Figure 5.1-6 Terminal peripheral configuration
-
-**Step4**:Configure the terminal communication parameters, including baud rate, data bit, stop bit, etc. After the configuration is completed, click the "Set" button.
+**Step3**:Configure the terminal communication parameters, including baud rate, data bit, stop bit, etc. After the configuration is completed, click the "Set" button.
 
 .. figure:: robot_peripherals/149.png
    :align: center
@@ -125,13 +117,13 @@ Procedure
 
 The detailed parameters of terminal communication are as follows:
 
-- Baud rate: supports 1-9600, 2-14400, 3-19200, 4-38400, 5-56000, 6-67600, 7-115200, 8-128000; The terminal RS485 driver chip is a low-speed 485, and the baud rate cannot be >200k;
-- Data bits:Data bits support (8,9), currently 8 is commonly used;
-- Stop bits: 1-1, 2-0.5, 3-2, 4-1.5, currently commonly used =1;
-- Check bit: 0-None, 1-Odd, 2-Even, currently commonly used as 0;
-- Timeout: 1~1000ms, this value needs to be combined with the peripherals to set reasonable time parameters;
-- Number of timeouts: 1~10, mainly for timeout retransmission, reducing occasional exceptions and improving user experience;
-- Periodic instruction time interval: 1~1000ms, mainly used for the time interval between each issuance of periodic instructions;
+- **Baud rate**: supports 1-9600, 2-14400, 3-19200, 4-38400, 5-56000, 6-67600, 7-115200, 8-128000; The terminal RS485 driver chip is a low-speed 485, and the baud rate cannot be >200k;
+- **Data bits**:Data bits support (8,9), currently 8 is commonly used;
+- **Stop bits**: 1-1, 2-0.5, 3-2, 4-1.5, currently commonly used =1;
+- **Check bit**: 0-None, 1-Odd, 2-Even, currently commonly used as 0;
+- **Timeout**: 1~1000ms, this value needs to be combined with the peripherals to set reasonable time parameters;
+- **Number of timeouts**: 1~10, mainly for timeout retransmission, reducing occasional exceptions and improving user experience;
+- **Periodic instruction time interval**: 1~1000ms, mainly used for the time interval between each issuance of periodic instructions;
 
 **Step4**:To enable Lua at the end, click the "Enable" button.
 
@@ -156,6 +148,81 @@ Enter the Status Information->Status Query page to query the original data chart
    :width: 6in
 
 .. centered:: Figure 5.1-10 Force/Torque Sensor
+
+Terminal peripheral configuration
+--------------------------------------
+
+Force sensor equipment
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Device type select Force sensor equipment -> Enable Force sensor equipment, the Force transducer is displayed in the configured device. Click to enter FT interface to query force sensor data.
+
+.. figure:: robot_peripherals/148.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1‑10 Enable force sensor
+
+Gripper equipment
+~~~~~~~~~~~~~~~~~~~~~
+**Step1**：Device Type Select Gripper equipment -> Enable Gripper -> Select Gripper ID -> Check the function code that the gripper is adapted to -> Click Configure, and the ID and function code of the gripper will be displayed in the configured device.
+
+.. figure:: robot_peripherals/194.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1‑11 Configure gripper
+
+.. note:: 
+  As the end open function currently supports the gripper device address range of 1~8, the gripper device address should be adjusted through the gripper manufacturer's host computer before use.
+
+  The ticked function code should be checked through the product manual provided by the gripper manufacturer to check the function of the gripper adapted, and it should keep corresponding with the terminal Lua function code, please consult 《Terminal Lua Adaptation Gripper Instruction Manual》for details.
+
+**Step2**：Select Gripper ID -> Reset -> Active, the gripper is initialized once, please refer to the product manual provided by the gripper manufacturer for specific initialization.
+
+.. figure:: robot_peripherals/195.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1‑12 Activate the gripper
+
+**Step3**：Go to Program -> coding -> Gripper -> Add gripper motion instruction.
+
+.. figure:: robot_peripherals/196.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1‑13 Add gripper motion command
+
+.. figure:: robot_peripherals/197.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1‑14 Example of gripper movement command
+
+Multiple grippers
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Refer to the Gripper step for activation and motion control.
+
+.. figure:: robot_peripherals/198.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1‑15 Configure Multiple Grippers
+
+.. note:: As the end open function currently supports the gripper device address range of 1~8, the gripper device address should be adjusted through the gripper manufacturer's host computer before use.
+
+Force sensors and grippers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configure and enable the reference force sensor and gripper steps.
+
+.. figure:: robot_peripherals/199.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.1‑15 Configure force sensors and grippers
 
 Spray gun peripheral configuration
 -------------------------------------
@@ -223,138 +290,1475 @@ Spray program teaching
 
 Peripheral configuration of welding machine
 ---------------------------------------------
+The welding efficiency and welding quality can be significantly improved when welding with the cooperative robot. FAIRINO cooperative robot can control welding through two methods: "Controller IO" or "Digital communication protocol":
 
-Peripheral configuration of welding machine
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Controller IO**:The robot controls the welding current and welding voltage by setting the analog output (0-10V) of the control box, controls the welding arc starting, wire feeding and gas feeding through the digital output of the control box, and collects the signal inputs such as welding machine preparation and successful arc starting through the digital input of the control box.
 
-**Step1**: In the user peripherals configuration interface, select the "welding machine configuration" button, and users can configure the IO buttons of the welding machine by selecting the IO type and "Controller I/O" to quickly configure the DI and DO required by the welding machine. The default configuration is as follows:
+**Digital communication protocol**:the robot communicates with PLC through UDP, and the PLC communicates with the welding machine through CANOpen bus or other protocols, so as to control the welding voltage and current, arc starting, wire feeding, gas feeding and other operations of the welding machine (see Annex 1 for the UDP communication protocol of the robot).
 
-.. list-table:: 
-   :widths: 15 40
-   :header-rows: 1
-   :align: center
+Welding control by cooperative robot mainly includes the following steps: ① welding gun installation and signal wiring;②parameter configuration of welding machine; ③Write welding control program.
 
-   * - IO signal
-     - Function
+Welding torch installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-   * - DI12
-     - Arc start success signal
-
-   * - DO9
-     - Air supply signal
-
-   * - DO10
-     - Arc starting signal
-
-   * - DO11
-     - Jog wire feeding
-
-   * - DO12
-     - Reverse wire feeding
-
-   * - DO13
-     - JOB selection 1
-
-   * - DO14
-     - JOB selection 2
-
-   * - DO15
-     - JOB selection 3
-
-Users can also customize the configuration in the "IO Configuration" interface according to their own needs; or select "Extended I/O". 
-
-Extended configuration IO:
-
-- configure the "Welder preparation" and "Arc start success" of the extended DI;
-- the "Welder starting arc", "Gas detection", "Forward" and "Reverse" of the DO Send wire.
+As shown in Figure 1, the welding torch is installed at the end of the robot through the adapter plate, and the welding torch cable needs to be fixed on the mechanical arm.
 
 .. figure:: robot_peripherals/008.png
    :align: center
    :width: 3in
 
-.. centered:: Figure 5.3-1 I/O configuration(Controller I/O)
+.. centered:: Figure 5.3-1 The welding gun is installed at the end of the robot
 
-.. figure:: robot_peripherals/065.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.3-2 I/O configuration(Extended I/O)
-
-.. important:: 
-	Before using the welding machine function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching. The welder function is often used in conjunction with a laser tracking sensor.
-
-**Step2**: After the configuration is complete, select the number, set the waiting time, and click the six buttons of "arc end", "arc start", "gas", "gas off", "forward wire feed" and "reverse wire feed" to proceed welding machine debugging;
-
-.. figure:: robot_peripherals/008.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.3-3 Welding machine configuration
-
-**Step3**: Select the "Weld" command on the program teaching command interface. According to the specific program teaching requirements, add and apply the "End arc", "Arc", "Gas OFF", "Gas ON", "Stop forward", "Forward", "Stop reverse" and "Reverse" instructions in the corresponding places.
-
-.. figure:: robot_peripherals/009.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 5.3-4 Welding Machine Command Editing
-
-Welding program teaching
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. list-table:: 
-   :widths: 15 40 100
-   :header-rows: 1
-
-   * - S/N
-     - Instruction format
-     - notes
-   
-   * - 1
-     - ARCEnd(0,0,10000)
-     - End arc
-
-   * - 2
-     - ARCStart(0,0,10000)
-     - Arc
-
-   * - 3
-     - SetAspirated(0,0)
-     - Gas OFF
-
-   * - 4
-     - SetAspirated(0,1)
-     - Gas ON
-
-   * - 5
-     - SetForwardWireFeed(0,0)
-     - Stop forward
-
-   * - 6
-     - SetForwardWireFeed(0,1)
-     - Forward
-
-   * - 7
-     - SetReverseWireFeed(0,0)
-     - Stop reverse
-
-   * - 8
-     - SetReverseWireFeed(0,1)
-     - Reverse
-
-Arc interruption parameter configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Arc interruption parameter configuration can obtain and set arc interruption detection enable and confirmation duration.
-
-Welding interruption and resumption parameter configuration can obtain and set the welding interruption and reconnection enable, the weld bead overlap distance, the speed of returning to the arc starting point from the current position, and the operating mode.
+After the welding gun is fixed and installed, the tool coordinate system of the welding gun need to be calibrated by the six-point method and applied as the current tool coordinate system (Figure 2). The calibration accuracy of the tool coordinate system of the welding gun will affect the actual welding accuracy.
 
 .. figure:: robot_peripherals/062.png
    :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-2 Calibration and application of robot tool coordinate system
+
+Welding machine parameter configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The cooperative robot can control the welding process through "Controller IO" signal or "Digital communication protocol". There are two main differences between the two modes:
+
+①When using "Controller IO", it is necessary to set the corresponding relationship between the actual control welding current(voltage) and the analog output value of the control box; 
+
+②Communication parameters need to be configured when using Digital Communication Protocol.
+
+"Controller IO" welding control configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+As shown in Figure 3, open the WebApp and click "Initialize", "Peripheral Config" and "Welding Config" in turn.
+
+.. figure:: robot_peripherals/065.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-3 Open the welding machine configuration
+
+As shown in Figure 4, select the control type as "Control I/O".
+
+.. figure:: robot_peripherals/158.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-4 Selecting Control Type
+
+Welding function I/O configuration
+******************************************
+
+As shown in Figure 5, select the welding machine status signal DI input port and the welding machine control signal DO output port, and click the "Set" button. The meanings of each signal are as follows:
+
+.. figure:: robot_peripherals/159.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-5 Setting welding machine signal port
+
+**Welder preparation**:when the welding machine is ready for welding operation, the welding machine outputs the signal to the robot; 
+
+When the welding machine is not ready for other reasons, the welding machine does not input the signal to the robot, and at this time, the upper right corner of the robot WebApp prompts "Welding machine is not ready" (Figure 6). If your welding machine does not have a ready signal, you can set this port to "None" (Figure 7).
+
+.. figure:: robot_peripherals/160.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-6 The welding machine is not ready to report an error
+
+.. figure:: robot_peripherals/161.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-7 The welding machine preparation is set to "None"
+
+**Arc start success**:the arc-starting of the welding machine has been successful. After the robot outputs the arc-starting signal to the welding machine, it waits for the arc-starting success signal from the welding machine to be fed back. If the robot fails to detect the arc-starting success signal within the set timeout, the robot reports an "Arc sticking timeout" error (Figure 8);
+
+When using the robot welding function, welding can still be carried out if the arc starting success signal is not configured, but the robot will report the warning of "Arc successful DI not configured" (Figure 9); If your welding machine has a successful arc starting signal output, we suggest that you configure this signal for safer welding.
+
+.. figure:: robot_peripherals/162.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-8 Error in Timeout of Arc Starting
+   
+.. figure:: robot_peripherals/163.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-9 Successful arcing DI is not configured with warning
+
+**Welding interruption recovery**:The welding interruption will be triggered when the arc is unexpectedly interrupted or the operator stops welding actively during the welding process of the robot. After the welding interruption, when the external input signal to the robot changes from invalid to effective, the robot will automatically resume welding from the original interrupted position (see Section 4.1 of this paper for details).
+
+**Welding Interruption Exit**:The welding interruption will be triggered when the arc is unexpectedly interrupted during the welding process of the robot or the operator suspends the welding actively. When the signal input from outside to the robot changes from invalid to effective after the welding interruption, the robot will stop the welding, and the welding cannot be resumed after the welding termination (please refer to Section 4.1 of this article for details).
+
+**Welding starting Arc**:the robot controls the DO output port of arc starting of welding machine. When the robot program executes the arc starting instruction, the DO output port corresponding to arc starting of welding machine is valid.
+
+**Gas detection**:the robot controls the DO output port of the gas feeding of the welding machine. When the robot executes the welding gas feeding instruction, the DO output port corresponding to the gas feeding automatically outputs effectively.
+
+**Forward wire feeding**: the robot controls the DO output port of the welding machine for forward wire feeding. When the robot executes the forward wire feeding instruction, the DO output port corresponding to the forward wire feeding is automatically output effectively.
+
+**Reverse wire feeding**:the robot controls the DO output port of reverse wire feeding of the welding machine. When the robot executes the reverse wire feeding instruction, the corresponding DO output port automatically outputs effectively.
+
+Configuration of welding process parameters
+******************************************************
+
+As shown in Figure 10, the column of "Welding process parameters" is found on the welding configuration page, and the cooperative robot provides 100 groups of welding process parameters from 0 to 99, in which process number 0 means that welding process curves are not used, and process numbers 1 to 99 use welding process curves.
+   
+.. figure:: robot_peripherals/164.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-10 Configuration of welding process parameters 
+
+When using the welding process curve, take welding process number 1 as an example, enter the parameters of "Arc starting current" to "Arc ending time" as shown in Figure 8, click the "Set" button, and the actual welding process represented by the process parameters is as follows:
+
+①Set welding current 200A and voltage 23V;
+
+②Arc starting and wait for arcing success;
+
+③After successful arcing, the arc remains 500ms(arc starting time, the robot does not move);
+
+④Set welding current 150A, welding voltage 21V, and then the robot starts to move and weld;
+
+⑤After welding to the end point, set the welding current to 100A, welding voltage to 19V(arc ending current, arc ending voltage); 
+
+⑥After the arc current and voltage are set, keep the arc burning for 500ms (the robot does not move), and finally extinguish the arc.
+
+When the welding process curve is not used, that is, when the welding process parameter number is 0, as shown in Figure 11, the welding process is as follows: 
+
+①Set the welding current and welding voltage;
+
+②The robot controls the arc starting of the welding machine, and waits for the arc to succeed;
+
+③ After the arc is successful, the robot begins to move and weld;
+
+④The robot immediately extinguishes the arc after welding to the end point.
+   
+.. figure:: robot_peripherals/165.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-11 Do Not use welding process curve 
+
+Set the relationship diagram between welding current and voltage and analog output
+*********************************************************************************************************************
+
+When the welding control type of the cooperative robot is set to Controller IO, the welding current and welding voltage are controlled by controlling the output of the analog output of the control box (the output voltage of the analog output of the control box ranges from 0 to 10V). In this case, the linear mapping between the output value of the analog output of the control box and the actual welding current and welding voltage needs to be configured.
+
+As shown in Figure 12, find "Welding current voltage linear relationship with output analog" on the welding machine configuration page, where "A-V" indicates the correspondence between welding current and output analog voltage of control box, and "V-V" indicates the correspondence between welding voltage and output analog voltage of control box. 
+
+Select "A-V", input welding current range 0-1000A, analog output voltage 0-10V, output AO as "Ctrl-AO0" (welding current control analog output port is AO0), click "Configure" button; Under this parameter, when the output analog voltage of the control box is 1.5V, the corresponding welding current is 150A.
+   
+.. figure:: robot_peripherals/166.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-12 Welding current voltage linear relationship with output analog
+
+As shown in Figure 13, click "V-V" to set the corresponding relationship between welding voltage and analog output voltage of the control box. The input welding voltage range is 0-60V, the output voltage value of analog is 0-10V, and the output AO is "Ctrl-AO1" (the output port of welding current control analog is AO0). Click "Configure" button. If the control box AO1 analog output 3.5V, the actual control welding voltage is 21V.
+   
+.. figure:: robot_peripherals/167.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-13 Welding voltage linear relationship with output analog
+
+Welding machine commissioning
+**************************************
+
+As shown in Figure 14, find "Welding machine commissioning" in the configuration page of the welding machine, select process number 1, enter the timeout time as 1000ms, click "Gas on", the robot will control the welding machine to start conveying protective gas, click "Gas OFF" button, the robot will control the welding machine to stop conveying protective gas. Other buttons "Arc", "Forward", "Reverse" and other operation methods are the same, no more details.
+   
+.. figure:: robot_peripherals/168.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-14 Welding machine commissioning
+
+Digital Communication Protocol welding control configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Robot welding control through "Digital communication protocol", in essence, robot and PLC through UDP communication, the arc starting, wire feeding, gas feeding, current, voltage and other control data is transmitted to the PLC through UDP communication, and then the PLC side further through CANOpen bus (or other ways) to control the welding machine. At the same time, the PLC end collects the actual welding current and voltage, and feedbacks the arc success signal to the robot. (See Attachment 1 for the robot UDP communication protocol).
+
+As shown in Figure 15, open WebApp and click "Initialize", "Peripheral config" and "Welder config" in turn.
+   
+.. figure:: robot_peripherals/169.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-15 Open welding config
+
+As shown in Figure 16, the control type is selected as "Digital communication protocol". Since the robot communicates with PLC through UDP, UDP communication parameters need to be configured. The meanings of each parameter are as follows:
+
+**IP address**:IP address of PLC for UDP communication;
+
+**Port number**:PLC UDP communication port number;
+
+**Communication cycle**:the cycle of UDP communication between the robot and the PLC, the default is 2ms;
+
+**Packet loss detection cycle and Packet loss times**:When the number of lost packets in the packet loss detection period exceeds the specified value, the robot reports an error message indicating UDP Packet loss Exception and automatically cuts off the communication.
+
+**Communication interruption confirmation time**:the robot does not receive a complete PLC feedback packet within this period of time, which will report "UDP communication interruption" error alarm, and cut off UDP communication.
+
+**Automatic reconnection after communication interruption**:whether the robot automatically reconnects after detecting UDP communication interruption;
+
+**Reconnection period and Num of reconnections**:After automatic reconnection of UDP communication interruption is enabled and UDP communication interruption is detected, the robot reconnects at the set period. When the reconnection times reach the maximum set value and the connection is not successful, the robot reports an error alarm of "UDP communication interruption" and disconnects the UDP communication at the same time.
+
+After configuring the above parameters, click the "Configure" and "Load" buttons successively.
+   
+.. figure:: robot_peripherals/170.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-16 Select Digital communication protocol
+
+Welding function I/O configuration
+*********************************************
+
+As shown in Figure 17, select the welding machine status signal DI input port and the welding machine control signal DO output port, and click the "Set" button. The meanings of each signal are as follows:
+   
+.. figure:: robot_peripherals/171.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-17 Welding function I/O configuration
+
+**Welder preparation**:when the welding machine is ready for welding operation, the welding machine outputs the signal to the robot; When the welding machine is not ready for other reasons, the welding machine does not input the signal to the robot, and at this time, the upper right corner of the robot WebApp prompts "Welding machine is not ready" (Figure 6). If your welding machine does not have a ready signal, you can set this port to "None" (Figure 7).
+   
+.. figure:: robot_peripherals/172.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-18 The welding machine is not ready to report an error
+   
+.. figure:: robot_peripherals/173.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-19 The welding machine preparation is set to "None"
+
+**Arc start success**:the arc-starting of the welding machine has been successful. After the robot outputs the arc-starting signal to the welding machine, it waits for the arc-starting success signal from the welding machine to be fed back. If the robot fails to detect the arc-starting success signal within the set timeout, the robot reports an "Arc sticking timeout" error (Figure 20);
+
+When using the robot welding function, welding can still be carried out if the arc starting success signal is not configured, but the robot will report the warning of "Arc successful DI not configured" (Figure 9); If your welding machine has a successful arc starting signal output, we suggest that you configure this signal for safer welding.
+   
+.. figure:: robot_peripherals/174.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-20 Error in Timeout of Arc Starting	
+      
+.. figure:: robot_peripherals/175.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-21 Successful arcing DI is not configured with warning
+
+**Welding interruption recovery**:The welding interruption will be triggered when the arc is unexpectedly interrupted or the operator stops welding actively during the welding process of the robot. After the welding interruption, when the external input signal to the robot changes from invalid to effective, the robot will automatically resume welding from the original interrupted position (see Section 4.1 of this paper for details).
+
+**Welding Interruption Exit**:The welding interruption will be triggered when the arc is unexpectedly interrupted during the welding process of the robot or the operator suspends the welding actively. When the signal input from outside to the robot changes from invalid to effective after the welding interruption, the robot will stop the welding, and the welding cannot be resumed after the welding termination (please refer to Section 4.1 of this article for details).
+
+**Welding starting Arc**:the robot controls the DO output port of arc starting of welding machine. When the robot program executes the arc starting instruction, the DO output port corresponding to arc starting of welding machine is valid.
+
+**Gas detection**: the robot controls the DO output port of the gas feeding of the welding machine. When the robot executes the welding gas feeding instruction, the DO output port corresponding to the gas feeding automatically outputs effectively.
+
+**Forward wire feeding**: the robot controls the DO output port of the welding machine for forward wire feeding. When the robot executes the forward wire feeding instruction, the DO output port corresponding to the forward wire feeding is automatically output effectively.
+
+**Reverse wire feeding**:the robot controls the DO output port of reverse wire feeding of the welding machine. When the robot executes the reverse wire feeding instruction, the corresponding DO output port automatically outputs effectively.
+
+Configuration of welding process parameters
+**************************************************
+
+As shown in Figure 10, the column of "Welding process parameters" is found on the welding configuration page, and the cooperative robot provides 100 groups of welding process parameters from 0 to 99, in which process number 0 means that welding process curves are not used, and process numbers 1 to 99 use welding process curves.
+      
+.. figure:: robot_peripherals/176.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-22 Configuration of welding process parameters
+
+When using the welding process curve, take welding process number 1 as an example, enter the parameters of "Arc starting current" to "Arc ending time" as shown in Figure 8, click the "Set" button, and the actual welding process represented by the process parameters is as follows:
+
+①Set welding current 200A and voltage 23V;
+
+②Arc starting and wait for arcing success; 
+
+③After successful arcing, the arc remains 500ms(arc starting time, the robot does not move);
+
+④Set welding current 150A, welding voltage 21V, and then the robot starts to move and weld;
+
+⑤After welding to the end point, set the welding current to 100A, welding voltage to 19V(arc ending current, arc ending voltage); 
+
+⑥After the arc current and voltage are set, keep the arc burning for 500ms (the robot does not move), and finally extinguish the arc.
+
+When the welding process curve is not used, that is, when the welding process parameter number is 0, as shown in Figure 11, the welding process is as follows:
+
+①Set the welding current and welding voltage;
+
+②The robot controls the arc starting of the welding machine, and waits for the arc to succeed;
+
+③After the arc is successful, the robot begins to move and weld;
+
+④The robot immediately extinguishes the arc after welding to the end point.
+      
+.. figure:: robot_peripherals/177.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-23 Do Not use welding process curve
+
+Welding machine commissioning
+******************************************
+
+As shown in Figure 14, find "Welding machine commissioning" in the configuration page of the welding machine, select process number 1, enter the timeout time as 1000ms, click "Gas on", the robot will control the welding machine to start conveying protective gas, click "Gas OFF" button, the robot will control the welding machine to stop conveying protective gas. Other buttons "Arc", "Forward", "Reverse" and other operation methods are the same.
+
+.. figure:: robot_peripherals/178.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-24 Welding machine commissioning
+
+Welding programming
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Programmed using welding process curves
++++++++++++++++++++++++++++++++++++++++++++++++
+When selecting the welding process curve (selecting the welding process parameter number 1-99), the voltage and current control during the welding process follows the curve parameter set by a certain process parameter number, and there is no need to add commands to set the welding voltage and current. As shown in Figure 25, click "Teaching" and "Program teaching" to create a new user program "testWeld.lua".
+
+.. figure:: robot_peripherals/179.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-25 Create"testWeld.lua"program
+
+As shown in Figure 26, select "Welding command".
+
+.. figure:: robot_peripherals/180.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-26 Select"Welding command"
+
+As shown in Figure 27, click "Welding" to open the page for adding welding command.
+
+.. figure:: robot_peripherals/181.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-27 Click“Weld”
+
+As shown in Figure 28, select the control type as "Controller I/O" (according to the actual configuration of the welding control mode) in the open welding instruction add page, select the welding process number as 1(process number 0 does not use the welding process curve, process number 1-99 uses the welding process curve), and the maximum waiting time is 10000ms. Click the "arc" button and the "arc" button in turn, and finally click "Apply".
+
+.. figure:: robot_peripherals/182.png
+   :align: center
    :width: 3in
 
-.. centered:: Figure 5.3-5 Arc interruption parameter configuration
+.. centered:: Figure 5.3-28 Add welding commands
 
-When a welding interruption occurs, a warning prompts that the current welding has been interrupted, and "exit interruption" and "interruption recovery" operations can be performed.
+As shown in Figure 29, at this time, arc starting and arc ending command for welding have been added in the "testWeld.lua" program. Since welding process curve number 1 is selected for arc starting and arc closing, the voltage and current control in the welding process follows the curve parameters set in process number 1, and there is no need to add commands for setting welding voltage and current。
+
+.. figure:: robot_peripherals/183.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-29 Arc start end program
+
+As shown in Figure 30, two linear motion command are added, and the order of command is adjusted, so that the robot first moves to the "P1" point, performs arcing, and then moves to the "P2" point, performs arcing, and realizes the robot welding from the "P1" point to the "P2" point。
+
+.. figure:: robot_peripherals/184.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-30 Robot welding from “P1” to “P2”
+
+Welding program without the use of welding process curves
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If you choose not to use the welding process curve (that is, select the welding process parameter number 0), the welding program needs to add command to set welding voltage and current to control the actual welding parameters. As shown in Figure 31, click "Teaching" and "Program teaching" to create a new user program "testWeld.lua".
+
+.. figure:: robot_peripherals/185.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-31 Create“testWeld.lua”program
+
+As shown in Figure 32, select "Welding command"。
+
+.. figure:: robot_peripherals/186.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-32 Select“Welding command”
+
+As shown in Figure 33, click "Welding" to open the page for adding welding command.
+
+.. figure:: robot_peripherals/187.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-33 Click“Weld”
+
+As shown in Figure 34, in the open welding instruction add page, select the control type as "Controller I/O" (according to the actual configuration of the welding control mode), select the welding process number as 0(process number 0 does not use the welding process curve, process number 1-99 uses the welding process curve), and set the welding current control AO to "Ctrl-AO0". The welding current is 150A, click "Add" button; Set welding voltage control AO to "Ctrl-AO1", welding voltage to 21V, click "Add" button; Set the maximum waiting time to 10000ms, click the "arc" button and "arc" button in turn, and finally click "Apply".。
+
+.. figure:: robot_peripherals/188.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 5.3-34 Add welding commands
+
+As shown in Figure 35, at this time, welding arc starting and welding arc closing command have been added in the "testWeld.lua" program. Since welding process number 0 is selected for welding arc starting and closing command, when the program is executed to set welding voltage and current command, The robot will automatically output the corresponding analog quantity of the control box according to the set welding voltage and current values and the "corresponding relationship between welding voltage, current and output analog quantity" set in the welder configuration page。
+
+.. figure:: robot_peripherals/189.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.3-35 robot welding program set current and voltage
+
+As shown in Figure 36, add two linear motion command, and adjust the order of command, so that the robot first moves to the "P1" point and arc starting, and then moves to the "P2" point and arc ending, so that the robot can weld from the "P1" point to the "P2" point.
+
+.. figure:: robot_peripherals/190.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 5.3-36 robot weld from the "P1" point to the "P2" point
+
+Before running the program, please check:
+
+① whether the welding gun has been correctly installed, whether the welding gun tool coordinate system has been calibrated, and applied to the current tool coordinate system; 
+
+② Whether the welding power supply, gas and wire work normally; 
+
+③ Whether the signal lines between the robot and the welding machine are connected.
+
+Welding interruption and recovery
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Interruptions may occur during robot welding under the following conditions:
+
+①The operator actively suspends the welding to observe the actual welding situation or clean the nozzle and other operations;
+
+②Accidental interruption of welding arc;
+
+③The collision of the robot leads to the suspension of welding;
+
+When an interruption occurs during the robot welding process, the operator can switch the robot to manual mode, drag the robot to a safe position, and deal with the cause of the interruption. 
+
+After the problem is solved, the cobot can automatically move from the current position to the position where the welding interruption occurs to restart the arc and resume the welding. The specific operation process is as follows: 
+
+①Configuration of welding interruption recovery parameters;
+
+②Perform the welding procedure and suspend the welding during the welding process to interrupt the welding;
+
+③Switch the robot to manual mode, and deal with related problems, and then switch the robot to automatic mode after the processing is completed;
+
+④Click the "Resume welding" button, and the robot will automatically resume welding。
+
+Welding interrupt and resume parameter configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+As shown in Figure 37, click "Initialize", "Peripheral config" and "Welding config", find the "Detection arc interruption parameter configuration" column, open "Enable", enter "Confirmation time" as 20ms, and click "Configuration" button, that is, when the invalid signal of arc starting success exceeds 20ms during the welding process, the robot will report "welding arc interruption" error; Find the "Welding interrupt and Resume parameter configuration" column, open "Enable", enter "Overlap distance" as 5mm, "Speed" as 10%, "Motion mode" as "PTP", and click "Configure" button. The above three parameters are explained as follows:
+
+**Overlap distance**:In order to ensure the continuity of the weld after recovery and the weld before interruption, the arc point of the recovery welding needs to have a certain overlap distance with the original weld.
+
+**Speed**:After welding interruption, it is often necessary to move the robot to a safe position and process the weld. When welding recovery is performed after processing is completed, the robot will move from the current position to the welding rearc point. The "speed" means the speed at which the robot moves to the rearc point.
+
+**Motion mode**:After welding interruption, it is often necessary to move the robot to a safe position and process the weld. When welding recovery is performed after processing is completed, the robot will move from the current position to the welding rearc point. The "motion mode" means the movement mode of the robot to the rearc point, and there are two options: "LIN" and "PTP".
+
+.. figure:: robot_peripherals/191.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 5.3-37 Welding interrupt and Resume parameter configuration
+
+Usage of welding interrupt and resume parameter configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Take the program in Figure 38 as an example, switch the robot to the automatic mode, click the start button, and the robot will start welding. During the welding process, click the pause button, and the welding will be interrupted. A prompt box for resuming welding interruption will pop up in the upper right corner of the WebApp (Figure 39), and click the "Resume Welding" button, and the robot will automatically move to the arc restart point and perform the subsequent welding operation.
+
+.. figure:: robot_peripherals/192.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 5.3-38 Performing the welding procedure
+
+.. figure:: robot_peripherals/193.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 5.3-39 Welding recovery
+
+The welding interruption recovery function of cooperative robot can only be used for line weld or arc weld, and there can be no logical programs such as "if" and "while" in lua program, otherwise welding cannot be resumed.
+
+Appendix 1: UDP communication protocol for robots
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Robot controller -> PLC
++++++++++++++++++++++++++++
+
+.. list-table:: 
+   :widths: 10 10 10 10 20
+   :header-rows: 1
+   :align: center
+
+   * - Serial number
+     - Register address
+     - Data type
+     - Data value
+     - Variable name
+
+   * - 1
+     - D199
+     - INT
+     - 0x5A5A
+     - Frame header
+
+   * - 2
+     - D200
+     - INT
+     - 
+     - 1#Motor control word
+
+   * - 3
+     - D201
+     - DINT
+     - 
+     - 1#Target position input
+
+   * - 4
+     - D202
+     - DINT
+     - 
+     - 1#Target position input
+
+   * - 5
+     - D203
+     - INT
+     - 
+     - 1#Return to Zero Control Word
+
+   * - 6
+     - D204
+     - DINT
+     - 
+     - 1#Return to Zero High Speed Input
+
+   * - 7
+     - D205
+     - DINT
+     - 
+     - 1#Return to Zero High Speed Input
+
+   * - 8
+     - D206
+     - DINT
+     - 
+     - 1#Return to Zero Low Speed Input
+
+   * - 9
+     - D207
+     - DINT
+     - 
+     - 1#Return to Zero Low Speed Input
+
+   * - 10
+     - D208
+     - DINT
+     - 
+     - 1#Position offset (reserved)
+
+   * - 11
+     - D209
+     - DINT
+     - 
+     - 1#Position offset (reserved)
+
+   * - 12
+     - D210
+     - DINT
+     - 
+     - 1#Speed Offset (Reserved)
+
+   * - 13
+     - D211
+     - DINT
+     - 
+     - 1#Speed Offset (Reserved)
+
+   * - 14
+     - D212
+     - DINT
+     - 
+     - 1#Torque Offset (Reserved)
+
+   * - 15
+     - D213
+     - DINT
+     - 
+     - 1#Torque Offset (Reserved)
+
+   * - 16
+     - D214
+     - INT
+     - 
+     - 2#Motor control word
+
+   * - 17
+     - D215
+     - DINT
+     - 
+     - 2#Target position input
+
+   * - 18
+     - D216
+     - DINT
+     - 
+     - 2#Target position input
+
+   * - 19
+     - D217
+     - INT
+     - 
+     - 2#Return to Zero Control Word
+
+   * - 20
+     - D218
+     - DINT
+     - 
+     - 2#Return to Zero High Speed Input
+
+   * - 21
+     - D219
+     - DINT
+     - 
+     - 2#Return to Zero High Speed Input
+
+   * - 22
+     - D220
+     - DINT
+     - 
+     - 2#Return to Zero Low Speed Input
+
+   * - 23
+     - D221
+     - DINT
+     - 
+     - 2#Return to Zero Low Speed Input
+
+   * - 24
+     - D222
+     - DINT
+     - 
+     - 2#Position offset (reserved)
+
+   * - 25
+     - D223
+     - DINT
+     - 
+     - 2#Position offset (reserved)
+
+   * - 26
+     - D224
+     - DINT
+     - 
+     - 2#Speed Offset (Reserved)
+
+   * - 27
+     - D225
+     - DINT
+     - 
+     - 2#Speed Offset (Reserved)
+
+   * - 28
+     - D226
+     - DINT
+     - 
+     - 2#Torque Offset (Reserved)
+
+   * - 29
+     - D227
+     - DINT
+     - 
+     - 2#Torque Offset (Reserved)
+
+   * - 30
+     - D228
+     - INT
+     - 
+     - 3#Motor control word
+  
+   * - 31
+     - D229
+     - DINT
+     - 
+     - 3#Target position input
+
+   * - 32
+     - D230
+     - DINT
+     - 
+     - 3#Target position input
+
+   * - 33
+     - D231
+     - INT
+     - 
+     - 3#Return to Zero Control Word
+
+   * - 34
+     - D232
+     - DINT
+     - 
+     - 3#Return to Zero High Speed Input
+
+   * - 35
+     - D233
+     - DINT
+     - 
+     - 3#Return to Zero High Speed Input
+
+   * - 36
+     - D234
+     - DINT
+     - 
+     - 3#Return to Zero Low Speed Input
+
+   * - 37
+     - D235
+     - DINT
+     - 
+     - 3#Return to Zero Low Speed Input
+
+   * - 38
+     - D236
+     - DINT
+     - 
+     - 3#Position offset (reserved)
+
+   * - 39
+     - D237
+     - DINT
+     - 
+     - 3#Position offset (reserved)
+
+   * - 40
+     - D238
+     - DINT
+     - 
+     - 3#Speed Offset (Reserved)
+
+   * - 41
+     - D239
+     - DINT
+     - 
+     - 3#Speed Offset (Reserved)
+
+   * - 42
+     - D240
+     - DINT
+     - 
+     - 3#Torque Offset (Reserved)
+
+   * - 43
+     - D241
+     - DINT
+     - 
+     - 3#Torque Offset (Reserved)
+
+   * - 44
+     - D242
+     - INT
+     - 
+     - 4#Motor control word
+  
+   * - 45
+     - D243
+     - DINT
+     - 
+     - 4#Target position input
+
+   * - 46
+     - D244
+     - DINT
+     - 
+     - 4#Target position input
+
+   * - 47
+     - D245
+     - INT
+     - 
+     - 4#Return to Zero Control Word
+
+   * - 48
+     - D246
+     - DINT
+     - 
+     - 4#Return to Zero High Speed Input
+
+   * - 49
+     - D247
+     - DINT
+     - 
+     - 4#Return to Zero High Speed Input
+
+   * - 50
+     - D248
+     - DINT
+     - 
+     - 4#Return to Zero Low Speed Input
+
+   * - 51
+     - D249
+     - DINT
+     - 
+     - 4#Return to Zero Low Speed Input
+
+   * - 52
+     - D250
+     - DINT
+     - 
+     - 4#Position offset (reserved)
+
+   * - 53
+     - D251
+     - DINT
+     - 
+     - 4#Position offset (reserved)
+
+   * - 54
+     - D252
+     - DINT
+     - 
+     - 4#Speed Offset (Reserved)
+
+   * - 55
+     - D253
+     - DINT
+     - 
+     - 4#Speed Offset (Reserved)
+
+   * - 56
+     - D254
+     - DINT
+     - 
+     - 4#Torque Offset (Reserved)
+
+   * - 57
+     - D255
+     - DINT
+     - 
+     - 4#Torque Offset (Reserved)
+
+   * - 58
+     - D256
+     - INT
+     - 
+     - General output DO(0-15)
+
+   * - 59
+     - D257
+     - INT
+     - 
+     - General output DO(16-31)
+
+   * - 60
+     - D258
+     - INT
+     - 
+     - General output DO(32-47)
+
+   * - 61
+     - D259
+     - INT
+     - 
+     - General output DO(48-63)
+
+   * - 62
+     - D260
+     - INT
+     - 
+     - General output DO(64-79)
+
+   * - 63
+     - D261
+     - INT
+     - 
+     - General output DO(80-95)
+
+   * - 64
+     - D262
+     - INT
+     - 
+     - High speed output DO(96-111)
+
+   * - 65
+     - D263
+     - INT
+     - 
+     - High speed output DO(112-127)
+
+   * - 66
+     - D264
+     - INT
+     - 
+     - Analog output AO0
+
+   * - 67
+     - D265
+     - INT
+     - 
+     - Analog output AO1
+
+   * - 68
+     - D266
+     - INT
+     - 
+     - Analog output AO2
+
+   * - 69
+     - D267
+     - INT
+     - 
+     - Analog output AO3
+
+   * - 70
+     - D268
+     - REAL
+     - 
+     - Welding voltage
+
+   * - 71
+     - D269
+     - REAL
+     - 
+     - Welding voltage
+
+   * - 72
+     - D270
+     - REAL
+     - 
+     - Welding current
+
+   * - 73
+     - D271
+     - REAL
+     - 
+     - Welding current
+
+   * - 74
+     - D272
+     - REAL
+     - 
+     - Packet loss detection period
+
+   * - 75
+     - D273
+     - INT
+     - 
+     - Number of packet loss
+
+   * - 76
+     - D274
+     - INT
+     - 
+     - Frame Count (0-255)
+
+   * - 77
+     - D275
+     - INT
+     - 
+     - CRC check code
+
+PLC -> robot controller
+++++++++++++++++++++++++++++++++++++++
+
+.. list-table:: 
+   :widths: 10 10 10 10 20
+   :header-rows: 1
+   :align: center
+
+   * - Serial number
+     - Register address
+     - Data type
+     - Data value
+     - Variable name
+
+   * - 1
+     - D99
+     - INT
+     - 0x5A5A
+     - Frame header
+
+   * - 2
+     - D100
+     - INT
+     - 
+     - 1#Motor status word
+
+   * - 3
+     - D101
+     - DINT
+     - 
+     - 1#Current position
+
+   * - 4
+     - D102
+     - DINT
+     - 
+     - 1#Current position
+
+   * - 5
+     - D103
+     - INT
+     - 
+     - 1#Return to zero status word
+
+   * - 6
+     - D104
+     - DINT
+     - 
+     - 1#Return to Zero High Speed Feedback
+
+   * - 7
+     - D105
+     - DINT
+     - 
+     - 1#Return to Zero High Speed Feedback
+
+   * - 8
+     - D106
+     - DINT
+     - 
+     - 1#Return to Zero Low Speed Feedback
+
+   * - 9
+     - D107
+     - DINT
+     - 
+     - 1#Return to Zero Low Speed Feedback
+
+   * - 10
+     - D108
+     - INT
+     - 
+     - 1#Fault code
+
+   * - 11
+     - D109
+     - DINT
+     - 
+     - 1#Servo deviation (reserved)
+
+   * - 12
+     - D110
+     - DINT
+     - 
+     - 1#Servo deviation (reserved)
+
+   * - 13
+     - D111
+     - DINT
+     - 
+     - 1#Speed feedback (reserved)
+
+   * - 14
+     - D112
+     - DINT
+     - 
+     - 1#Speed feedback (reserved)
+
+   * - 15
+     - D113
+     - DINT
+     - 
+     - 1#Real-time Torque (Reserved)
+
+   * - 16
+     - D114
+     - INT
+     - 
+     - 1#Real-time Torque (Reserved)
+
+   * - 17
+     - D115
+     - INT
+     - 
+     - 2#Motor status word
+
+   * - 18
+     - D116
+     - DINT
+     - 
+     - 2#Current position
+
+   * - 19
+     - D117
+     - INT
+     - 
+     - 2#Current position
+
+   * - 20
+     - D118
+     - INT
+     - 
+     - 2#Return to zero status word
+
+   * - 21
+     - D119
+     - DINT
+     - 
+     - 2#Return to Zero High Speed Feedback
+
+   * - 22
+     - D120
+     - DINT
+     - 
+     - 2#Return to Zero High Speed Feedback
+
+   * - 23
+     - D121
+     - DINT
+     - 
+     - 2#Return to Zero Low Speed Feedback
+
+   * - 24
+     - D122
+     - DINT
+     - 
+     - 2#Return to Zero Low Speed Feedback
+
+   * - 25
+     - D123
+     - INT
+     - 
+     - 2#Fault code
+
+   * - 26
+     - D124
+     - DINT
+     - 
+     - 2#Servo deviation (reserved)
+
+   * - 27
+     - D125
+     - DINT
+     - 
+     - 2#Servo deviation (reserved)
+
+   * - 28
+     - D126
+     - DINT
+     - 
+     - 2#Speed feedback (reserved)
+
+   * - 29
+     - D127
+     - DINT
+     - 
+     - 2#Speed feedback (reserved)
+
+   * - 30
+     - D128
+     - INT
+     - 
+     - 2#Real-time Torque (Reserved)
+  
+   * - 31
+     - D129
+     - DINT
+     - 
+     - 2#Real-time Torque (Reserved)
+
+   * - 32
+     - D130
+     - INT
+     - 
+     - 3#Motor status word
+
+   * - 33
+     - D131
+     - INT
+     - 
+     - 3#Current position
+
+   * - 34
+     - D132
+     - DINT
+     - 
+     - 3#Current position
+
+   * - 35
+     - D133
+     - INT
+     - 
+     - 3#Return to zero status word
+
+   * - 36
+     - D134
+     - DINT
+     - 
+     - 3#Return to Zero High Speed Feedback
+
+   * - 37
+     - D135
+     - DINT
+     - 
+     - 3#Return to Zero High Speed Feedback
+
+   * - 38
+     - D136
+     - DINT
+     - 
+     - 3#Return to Zero Low Speed Feedback
+
+   * - 39
+     - D137
+     - DINT
+     - 
+     - 3#Return to Zero Low Speed Feedback
+
+   * - 40
+     - D138
+     - DINT
+     - 
+     - 3#Fault code
+
+   * - 41
+     - D139
+     - DINT
+     - 
+     - 3#Servo deviation (reserved)
+
+   * - 42
+     - D140
+     - DINT
+     - 
+     - 3#Servo deviation (reserved)
+
+   * - 43
+     - D141
+     - DINT
+     - 
+     - 3#Speed feedback (reserved)
+
+   * - 44
+     - D142
+     - INT
+     - 
+     - 3#Speed feedback (reserved)
+  
+   * - 45
+     - D143
+     - DINT
+     - 
+     - 3#Real-time Torque (Reserved)
+
+   * - 46
+     - D144
+     - DINT
+     - 
+     - 3#Real-time Torque (Reserved)
+
+   * - 47
+     - D145
+     - INT
+     - 
+     - 4#Motor status word
+
+   * - 48
+     - D146
+     - DINT
+     - 
+     - 4#Current position
+
+   * - 49
+     - D147
+     - DINT
+     - 
+     - 4#Current position
+
+   * - 50
+     - D148
+     - INT
+     - 
+     - 4#Return to zero status word
+
+   * - 51
+     - D149
+     - DINT
+     - 
+     - 4#Return to Zero High Speed Feedback
+
+   * - 52
+     - D150
+     - DINT
+     - 
+     - 4#Return to Zero High Speed Feedback
+
+   * - 53
+     - D151
+     - DINT
+     - 
+     - 4#Return to Zero Low Speed Feedback
+
+   * - 54
+     - D152
+     - DINT
+     - 
+     - 4#Return to Zero Low Speed Feedback
+
+   * - 55
+     - D153
+     - DINT
+     - 
+     - 4#Fault code
+
+   * - 56
+     - D154
+     - DINT
+     - 
+     - 4#Servo deviation (reserved)
+
+   * - 57
+     - D155
+     - DINT
+     - 
+     - 4#Servo deviation (reserved)
+
+   * - 58
+     - D156
+     - INT
+     - 
+     - Speed feedback (reserved)
+
+   * - 59
+     - D157
+     - INT
+     - 
+     - Speed feedback (reserved)
+
+   * - 60
+     - D158
+     - DINT
+     - 
+     - Real-time Torque (Reserved)
+
+   * - 61
+     - D159
+     - DINT
+     - 
+     - Real-time Torque (Reserved)
+
+   * - 62
+     - D160
+     - INT
+     - 
+     - General input DI(0-15)
+
+   * - 63
+     - D161
+     - INT
+     - 
+     - General input DI(16-31)
+
+   * - 64
+     - D162
+     - INT
+     - 
+     - General input DI(32-47)
+
+   * - 65
+     - D163
+     - INT
+     - 
+     - General input DI(48-63)
+
+   * - 66
+     - D164
+     - INT
+     - 
+     - General input DI(64-79)
+
+   * - 67
+     - D165
+     - INT
+     - 
+     - General input DI(80-95)
+
+   * - 68
+     - D166
+     - INT
+     - 
+     - General input DI(96-111)
+
+   * - 69
+     - D167
+     - INT
+     - 
+     - General input DI(112-127)
+
+   * - 70
+     - D168
+     - REAL
+     - 
+     - Analog AI0
+
+   * - 71
+     - D169
+     - REAL
+     - 
+     - Analog AI1
+
+   * - 72
+     - D170
+     - REAL
+     - 
+     - Analog AI2
+
+   * - 73
+     - D171
+     - REAL
+     - 
+     - Analog AI3
+
+   * - 74
+     - D172
+     - REAL
+     - 
+     - Actual weld current feedback
+
+   * - 75
+     - D173
+     - REAL
+     - 
+     - Actual weld current feedback
+
+   * - 76
+     - D174
+     - REAL
+     - 
+     - Actual weld voltage feedback
+
+   * - 77
+     - D275
+     - REAL
+     - 
+     - Actual weld voltage feedback
+
+   * - 78
+     - D176
+     - INT
+     - 
+     - Fault code 0- no fault, 1- data packet loss
+
+   * - 79
+     - D177
+     - INT
+     - 
+     - Frame count
+
+   * - 80
+     - D178
+     - INT
+     - 
+     - CRC check code
 
 Sensor Peripheral Configuration
 ---------------------------------
@@ -377,7 +1781,7 @@ Please make sure that your laser sensor and welding torch have been fixedly inst
 
 .. centered:: Figure 5.4-1 Installation of laser sensor
 
-As shown in the figure, open the robot WebApp, click “Initialize”, “Peripheral Config” and “Sensor Tracking” in turn, enter the IP address and port number of the sensor in the communication configuration column, click the Configure button, the default sampling period is 25, and the coordinate system is “LXLYLZ”. Select the corresponding communication protocol according to your sensor model, and click the Load button.
+As shown in the figure, open the robot WebApp, click "Initialize", "Peripheral Config" and "Sensor Tracking" in turn, enter the IP address and port number of the sensor in the communication configuration column, click the Configure button, the default sampling period is 25, and the coordinate system is "LXLYLZ". Select the corresponding communication protocol according to your sensor model, and click the Load button.
 
 .. figure:: robot_peripherals/012.png
    :align: center
@@ -409,7 +1813,7 @@ And then calculate the coordinate posture of the sensor, as follows.
 
 .. centered:: Figure 5.4-4 Calibration point of laser sensor
 
-**Step1**: Open the robot WebApp, click “Initialize”, Robot Settings and Tool coord in turn, select an unused tool coordinate system, and clickto change its name to "Welding ", tool type to "tool" and installation location to "end", as shown in the figures.
+**Step1**: Open the robot WebApp, click "Initialize", Robot Settings and Tool coord in turn, select an unused tool coordinate system, and clickto change its name to "Welding ", tool type to "tool" and installation location to "end", as shown in the figures.
 
 .. figure:: robot_peripherals/015.png
    :align: center
@@ -724,7 +2128,7 @@ The workflow of laser track recording+track reproduction is as follows:
 Programming of Robot Trajectory Recording commands
 ************************************************************************
 
-Create a new user program "testRecord.lua", click "LT-Rec" to open the laser recording command addition page, and find the "weld data record", as shown in the figure. Select "Start recording", click "Add" button, and select “Stop recording”, and click "Add" button again; Finally click the "Apply" button.
+Create a new user program "testRecord.lua", click "LT-Rec" to open the laser recording command addition page, and find the "weld data record", as shown in the figure. Select "Start recording", click "Add" button, and select "Stop recording", and click "Add" button again; Finally click the "Apply" button.
 
 .. figure:: robot_peripherals/115.png
    :align: center

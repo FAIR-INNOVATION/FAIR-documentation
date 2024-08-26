@@ -1,28 +1,40 @@
+Version V3.7.4
+-----------------
+
+Date: 2024-08-09
+
+- **Based on lua terminal open protocol software function (gripper part)**: Initial settings -> Peripherals -> End tools -> Open protocol -> Lua terminal development protocol configuration;
+
+- **Oblique sawtooth swing function**: Teaching program -> Program programming -> Weave instruction;
+
+- **Robot welding process package optimization function**: Initial settings -> Peripherals -> Welding machine -> Welding machine configuration;
+
+- **Lin instruction joint overspeed processing function**: Teaching program -> Program programming -> Lin instruction;
 
 Version V3.7.3
 -----------------
 
 Date: 2024-06-28
 
-- **Modbus slave control robot function**: teaching simulation -> program teaching -> ModbusTCP;
+- **Modbus slave control robot function**: Teaching program -> Program programming -> ModbusTCP;
 
-- **New emergency stop type**: Auxiliary application -> Robot safety -> Emergency stop -> Stop type;
+- **New emergency stop type**: Initial settings -> Safety -> Emergency stop -> Stop type;
 
-Version v3.7.2
----------------------
+Version V3.7.2
+-----------------
 
 Date: 2024-06-07
 
-- **Based on the LUA -end development protocol configuration function**: initial settings-> user peripheral configuration-> Lua end development protocol configuration
+- **Lua terminal development protocol configuration function**: Initial settings -> Peripherals -> Terminal tools -> Open protocol -> Lua terminal development protocol configuration;
 
-- **Zhuo Zhao Dianjiu Application (Movement AO Control) Function**: Demonstration of Education-> Program Demonstration-> Movement AO instructions;
+- **Zhuozhao dispensing application (motion AO control) function**: Teaching program -> Program programming -> MoveAO instructions;
 
-- **Six -dimensional force and joint impedance mixed drag function**: Auxiliary application -> Robot body -> Six -dimensional force and joint impedance mixed drag;
+- **Six-dimensional force and joint impedance mixed drag function**: Auxiliary application -> Tool application -> Drag lock -> Six-dimensional force and joint impedance mixed drag;
 
-- **Post-collision response strategy function**: Initial settings -> Robot settings -> Collision level settings;
+- **Post-collision response strategy function**: Initial settings -> Basics -> Joints -> Collision level settings;
 
-- **The first activation function of the robot**: Login settings;
-    
+- **Robot first activation function**: Login settings;
+
 Version V3.7.1
 -----------------
 
@@ -30,10 +42,10 @@ Date: 2024-05-10
 
 - **Web interface lock function**: System settings -> Custom information -> Web interface lock screen settings;
 
-- **The function of finding the intersection coordinates of three points and four points**: User peripheral configuration -> Sensor tracking -> The function of finding the intersection coordinates of three points and four points;
+- **Function of finding three or four points to find the coordinates of the intersection**: Initial settings -> Peripherals -> Tracking -> Sensors -> Function of finding three or four points to find the coordinates of the intersection;
 
-- **Segment welding motion posture optimization function**: Teaching simulation -> Program teaching -> Segment welding command;
+- **Function of optimizing the motion posture of segment welding**: Teaching program -> Program programming -> Segment welding instruction;
 
-- **Virtual wall function based on force sensor**: User peripheral configuration -> End peripheral configuration, auxiliary application -> Robot body -> Interference zone configuration, force sensor drag lock;
+- **Virtual wall function based on force sensor**: Initial settings -> Peripherals -> End tool -> End peripheral configuration, auxiliary application -> Tool application -> Interference area, force sensor drag lock;
 
-- **New functions of SmartTool+force sensor combination**: User peripheral configuration -> End peripheral configuration, auxiliary application -> Robot body -> Smart Tool.
+- **New function of SmartTool+force sensor combination**: Initial settings -> Peripherals -> End tool -> End peripheral configuration, auxiliary application -> Tool application -> Smart Tool.

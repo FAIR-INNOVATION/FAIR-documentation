@@ -1584,7 +1584,70 @@ The function of this command is similar to the "PTP" command, but the path of th
       :width: 6in
       :align: center
 
-   .. centered:: Figure 4.7-5-3 Lin command interface(Welding scene)
+   .. centered:: Figure 4.7-5-2-1 Lin command interface(Welding scene)
+
+LIN command joint	overspeed processing function
+*****************************************************************
+
+When using the Cartesian space linear motion command LIN, the constrained condition is the linear velocity, but the actual operation is affected by the workspace, and the angular velocity of the joint may have exceeded the limit when the linear velocity requirement is met. This function implements an optional handling strategy to deal with joint overspeed during LIN movements.
+
+**Step1**:Click the Linear Motion Command button；
+
+.. image:: teaching_pendant_software/436.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 4.7‑5-3-1 Click the Linear Motion Command button
+
+**Step2**:Select the linear motion command target waypoint；
+
+.. image:: teaching_pendant_software/437.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7‑5-3-2 Select the linear motion target waypoint
+
+**Step3**:Turn on the joint overspeed protection switch；
+
+.. image:: teaching_pendant_software/438.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7‑5-3-3 Turn on the joint overspeed protection switch button
+
+**Step4**:Select the joint overspeed treatment strategy (first two options is not for joint overspeed treatment)；
+
+.. image:: teaching_pendant_software/439.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.7‑5-3-4 Joint overspeed treatment strategies
+
+**Step5**:
+   Set the processing option and processing parameters, then click the Add button to add the Lua command；
+
+   Under the adaptive speed reduction strategy, the deceleration threshold is the percentage of the linear velocity reduction value relative to the set linear velocity, and when the deceleration value exceeds the set threshold, the robot will report an error and stop.
+
+.. image:: teaching_pendant_software/440.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.7‑5-3-5 Joint overspeed treatment strategy selection and setting
+
+**Step6**:The added Lua command is shown in the figure；
+
+.. image:: teaching_pendant_software/441.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.7‑5-3-6 lua command
+
+**Joint overspeed protection begins**:JointOverSpeedProtectStart（a，b）；
+   a:strategy type number（same as the order of drop-down box）
+
+   b:threshold（0~100）
+
+**Joint overspeed protection ends**:JointOverSpeedProtectEnd（）；
 
 Arc command
 ++++++++++++++++
@@ -1876,6 +1939,63 @@ Click the "Weave" icon to enter the Weave command editing interface. The "Weave"
    :align: center
 
 .. centered:: Figure 4.7-5-26 Weave configuration and testing command interface
+
+Slope serration weave function
+**********************************
+
+This function allows the end of the robot tool to generate slope serration weave trajectory in Cartesian space. The weave is superimposed on the linear trajectory, and the azimuth parameter (unit deg) defines the azimuth angle of the swing welding on the specified welding plane; 
+
+When the value is positive, the left endpoint is skewed in the forward direction, and when it is negative, the right endpoint is skewed in the forward direction; If it is 90deg or -90deg, it can weave in the forward direction.
+
+.. image:: teaching_pendant_software/442.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.7‑5-26-1 Swing azimuth effect
+
+**Step1**：Edit to set up basic linear motion.
+
+.. image:: teaching_pendant_software/443.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.7‑5-26-2 Example of a basic linear motion LUA program
+
+**Step2**：Add weave command in motion command block.
+
+.. image:: teaching_pendant_software/444.png
+   :width: 1.5in
+   :align: center
+
+.. centered:: Figure 4.7‑5-26-3 Add weave command
+
+**Step3**：Click the "Configure" button, select "Triangular wave swing" or "Sine wave swing" from the drop-down box, imput desired azimuth angle in "Swing direction azimuth" box and click "Apply".
+
+.. image:: teaching_pendant_software/445.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7‑5-26-4 Weave parameter configuration
+
+**Step4**：Click the "Start Swing" button to add the swing command above the linear motion; Click the "Stop Swing" button to add the swing command below the linear motion.
+
+.. image:: teaching_pendant_software/446.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 4.7‑5-26-5 Add the lua program after the swing command
+
+**Step5**：Click "Start Running"buttom, and the end trajectory of the robot is shown in the figure.
+
+.. image:: teaching_pendant_software/447.png
+   :width: 3in
+   :align: center
+
+.. image:: teaching_pendant_software/448.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.7‑5-26-6 Zigzag weave (left) slope serration weave (right)
 
 TPD command
 ++++++++++++++++
