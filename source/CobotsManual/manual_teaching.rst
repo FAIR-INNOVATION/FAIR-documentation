@@ -34,4 +34,3 @@ Click the "Start Run" button to perform a single-point operation of the local te
 
 .. important:: 
    The modified values of the teaching points x, y, z, rx, ry, rz should not exceed the working range of the robot.
-

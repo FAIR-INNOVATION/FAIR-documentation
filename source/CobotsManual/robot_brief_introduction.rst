@@ -7,7 +7,7 @@ Robot brief introduction
 Basic parameters
 ------------------
 
-.. centered:: Table 1.1-1 Basic parameters of robotics
+.. centered:: Table 2.1-1 Basic parameters of robotics
 
 .. figure:: installation/017.png
 	:align: center
@@ -39,42 +39,42 @@ Control cabinet installation space:
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-1 FR3 model collaboration robot movement range
+.. centered:: Figure 2.1-1 FR3 model collaboration robot movement range
 
 .. figure:: installation/019.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-2 FR5 model collaboration robot movement range
+.. centered:: Figure 2.1-2 FR5 model collaboration robot movement range
 
 .. figure:: installation/020.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-3 FR10 model collaboration robot movement range
+.. centered:: Figure 2.1-3 FR10 model collaboration robot movement range
 
 .. figure:: installation/021.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-4 FR16 model collaboration robot movement range
+.. centered:: Figure 2.1-4 FR16 model collaboration robot movement range
 
 .. figure:: installation/022.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-5 FR20 model collaboration robot movement range
+.. centered:: Figure 2.1-5 FR20 model collaboration robot movement range
 
 .. figure:: installation/068.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-6 FR30 model collaboration robot movement range
+.. centered:: Figure 2.1-6 FR30 model collaboration robot movement range
 
 Robot coordinate system
 ------------------------------------
@@ -84,14 +84,14 @@ Robot coordinate system
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-7 Robot DH parameter coordinate system
+.. centered:: Figure 2.3-1 Robot DH parameter coordinate system
 
 .. figure:: installation/024.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-8 French -endframe coordinate system
+.. centered:: Figure 2.3-2 French -endframe coordinate system
 
 Robot Denavit–Hartenberg parameters
 ------------------------------------
@@ -103,11 +103,11 @@ Denavit–Hartenberg parameters are used to calculate kinematics and dynamics of
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 1.1-9 FR series collaborative robots Denavit–Hartenberg parameters
+.. centered:: Figure 2.4-1 FR series collaborative robots Denavit–Hartenberg parameters
 
 The Denavit–Hartenberg parameters of FR series collaborative robots are shown as below.
 
-.. centered:: Table 1.1-2 FR3 model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-1 FR3 model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
     :widths: 70 50 50 50 50 70 50 120
@@ -177,7 +177,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0.36
       - [-0.55, -1.11, -20.05]
 
-.. centered:: Table 1.1-3 FR5 model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-2 FR5 model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
     :widths: 70 50 50 50 50 70 50 120
@@ -247,7 +247,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0.36
       - [0.93, 0.81, -20.05]
 
-.. centered:: Table 1.1-4 FR10 model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-3 FR10 model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
     :widths: 70 50 50 50 50 70 50 120
@@ -317,7 +317,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0.35
       - [1.24, 0.85, -20.34]
 
-.. centered:: Table 1.1-5 FR16 model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-4 FR16 model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
     :widths: 70 50 50 50 50 70 50 120
@@ -387,7 +387,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0.35
       - [1.24, 0.85, -20.34]
 
-.. centered:: Table 1.1-6 FR20 model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-5 FR20 model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
     :widths: 70 50 50 50 50 70 50 120
@@ -457,7 +457,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0.6
       - [-2.11, -1.96, -20.38]
 
-.. centered:: Table 1.1-7 FR30 model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-6 FR30 model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
     :widths: 70 50 50 50 50 70 50 120

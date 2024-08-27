@@ -38,15 +38,15 @@ When running the robot system, we must first ensure the safety of the operators.
 Security settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the "Safety Settings" menu bar in "Auxiliary Application", click "Safety stop mode" to enter the safe stop setting function interface.
+Under the "Initial - Safety" menu bar, click "Stop mode" to enter the safe stop mode interface.
 
 Enable the security stop mode. When the robot is reported or warned, the robot will automatically enable and play a role in safe protection.
 
 .. figure:: installation/001.png
 	:align: center
-	:class: figure-border
+	:width: 3in
 
-.. centered::  Figure 2.1-1 Safety stop setting
+.. centered::  Figure 3.1-1 Safety stop mode
 
 -  **Speed reduction**:After this mode is activated, the speed of the robotic arm in the joint space will be limited. The value in the corresponding text box is the limit value of the speed of the joints of each joint, the setting range of 1, 2, and 3 joints is 15 ~ 150 °/s, 4, 5, and 6 joints is 15 ~ 180 °/s; the motion speed limit of the robotic arm in the Descartes space is the TCP speed limit value, and the set range is 0 ~ 80mm/s.
 
@@ -81,31 +81,31 @@ Nameplate information
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.1-2 FR3 model collaborative robot
+.. centered:: Figure 3.1-2 FR3 model collaborative robot
 
 .. figure:: installation/003.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.1-3 FR5 model collaborative robot
+.. centered:: Figure 3.1-3 FR5 model collaborative robot
 
 .. figure:: installation/004.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.1-4 FR10 model collaborative robot
+.. centered:: Figure 3.1-4 FR10 model collaborative robot
 
 .. figure:: installation/005.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.1-5 FR16 model collaborative robot
+.. centered:: Figure 3.1-5 FR16 model collaborative robot
 
 .. figure:: installation/006.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.1-6 FR20 model collaborative robot
+.. centered:: Figure 3.1-6 FR20 model collaborative robot
 
 Effectiveness and responsibility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,7 +195,7 @@ The following table shows the stop distance and stop time of the type 0 stop. Th
 
 Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to the ground. Joint 2, joint 3, joint 4, joint 5 testing robots follow the vertical trajectory, the rotating shaft is parallel to the ground, and stops when the robot moves down.
 
-.. centered:: Table 2.1-1 Category 0 stop distance(rad)
+.. centered:: Table 3.1-1 Category 0 stop distance(rad)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
    :header-rows: 0
@@ -249,7 +249,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.31
      - 0.22
 
-.. centered:: Table 2.1-2 Category 0 stop time (ms)
+.. centered:: Table 3.1-2 Category 0 stop time (ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
    :header-rows: 0
@@ -316,7 +316,7 @@ At the same time, the stop time and stop distance of the robot safety stop and s
 Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to the ground. Joint 2, joint 3, joint 4, joint 5 testing robots follow the vertical trajectory, the rotating shaft is parallel to the ground, and stops when the robot moves down.
 
 
-.. centered:: Table 2.1-3 Safety stop distance(rad)
+.. centered:: Table 3.1-3 Safety stop distance(rad)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
    :header-rows: 0
@@ -370,7 +370,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.33
      - 0.25
 
-.. centered:: Table 2.1-4 Safety stop time(ms)
+.. centered:: Table 3.1-4 Safety stop time(ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
    :header-rows: 0
@@ -424,7 +424,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 280
      - 200
 
-.. centered:: Table 2.1-5 Soft limit stop distance(rad)
+.. centered:: Table 3.1-5 Soft limit stop distance(rad)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
    :header-rows: 0
@@ -478,7 +478,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.36
      - 0.27
 
-.. centered:: Table 2.1-6 Soft limit stop time(ms)
+.. centered:: Table 3.1-6 Soft limit stop time(ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
    :header-rows: 0
@@ -611,12 +611,12 @@ Robot arm installation
     :width: 3in
     :class: figure-border
 
-  .. centered:: Figure 2.4-1 Avoid installing on other sports equipment
+  .. centered:: Figure 3.4-1 Avoid installing on other sports equipment
 
   Make sure the robot arm is installed correctly and safely. Unstable installation will cause accidents.
 
 .. note:: 
-	You can purchase accurate bases as attachments. Figure 2.4-2、1.5-5、1.5-8、1.5-11 show the position of the sales hole and the location of the screw.
+	You can purchase accurate bases as attachments. Figure 3.4-2、3.4-5、3.4-8、3.4-11 show the position of the sales hole and the location of the screw.
 
 Installation requirements for FR3 robot
 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -628,7 +628,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-2 FR3 model collaborative robot installation size
+.. centered:: Figure 3.4-2 FR3 model collaborative robot installation size
 
 .. important:: 
   According to different application scenarios, we recommend several robot installation bases as follows
@@ -640,7 +640,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
     :width: 3in
     :class: figure-border
 
-  .. centered:: Figure 2.4-3 FR3 model collaborative robot low requirement mounting base
+  .. centered:: Figure 3.4-3 FR3 model collaborative robot low requirement mounting base
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
@@ -649,7 +649,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
     :width: 3in
     :class: figure-border
 
-  .. centered:: Figure 2.4-4 FR3 Model Collaborative Robot High Demand Mounting Base
+  .. centered:: Figure 3.4-4 FR3 Model Collaborative Robot High Demand Mounting Base
 
 Installation requirements for FR5 robot
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -661,7 +661,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-5 FR5 model collaborative robot installation size
+.. centered:: Figure 3.4-5 FR5 model collaborative robot installation size
 
 .. important:: 
   According to different application scenarios, we recommend several robot installation bases as follows
@@ -673,7 +673,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
     :width: 3in
     :class: figure-border
 
-  .. centered:: Figure 2.4-6 FR5 Model Collaborative Robot High Demand Mounting Base
+  .. centered:: Figure 3.4-6 FR5 Model Collaborative Robot High Demand Mounting Base
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
@@ -682,7 +682,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
     :width: 3in
     :class: figure-border
   
-  .. centered:: Figure 2.4-7 FR5 model collaborative robot low requirement mounting base
+  .. centered:: Figure 3.4-7 FR5 model collaborative robot low requirement mounting base
 
 Installation requirements for FR10&FR16 robot
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -694,7 +694,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-8 FR10&FR16 model collaborative robot installation size
+.. centered:: Figure 3.4-8 FR10&FR16 model collaborative robot installation size
 
 .. important:: 
   According to different application scenarios, we recommend several robot installation bases as follows
@@ -706,7 +706,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
     :width: 3in
     :class: figure-border
 
-  .. centered:: Figure 2.4-9 FR10&FR16 model collaborative robot low requirement mounting base
+  .. centered:: Figure 3.4-9 FR10&FR16 model collaborative robot low requirement mounting base
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
@@ -715,7 +715,7 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
     :width: 3in
     :class: figure-border
 
-  .. centered:: Figure 2.4-10 FR10&FR16 Model Collaborative Robot High Demand Mounting Base
+  .. centered:: Figure 3.4-10 FR10&FR16 Model Collaborative Robot High Demand Mounting Base
 
 Installation requirements for FR20&FR30 robot
 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -727,7 +727,7 @@ When installing the robot on the mounting base, use six M10 bolts with a strengt
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-11 FR20&FR30 model collaborative robot installation size
+.. centered:: Figure 3.4-11 FR20&FR30 model collaborative robot installation size
 
 .. important:: 
   Because the FR20 and FR30 robots have a large weight and running inertia, it is recommended to be directly fixed on the ground. The recommended base is as follows.
@@ -737,7 +737,7 @@ When installing the robot on the mounting base, use six M10 bolts with a strengt
     :width: 4in
     :class: figure-border
 
-  .. centered:: Figure 2.4-12 FR20&FR30 model collaborative robot low requirement mounting base
+  .. centered:: Figure 3.4-12 FR20&FR30 model collaborative robot low requirement mounting base
 
 Tool end installation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -749,14 +749,14 @@ There are four M6 thread holes in the robot tool, which can be used to connect t
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-13 FR3/FR5/FR10/FR16 model robot end flange drawing
+.. centered:: Figure 3.4-13 FR3/FR5/FR10/FR16 model robot end flange drawing
 
 .. figure:: installation/031.png
 	:align: center
 	:width: 6in
 	:class: figure-border
 
-.. centered:: Figure 2.4-14 FR20&FR30 model robot end flange drawing
+.. centered:: Figure 3.4-14 FR20&FR30 model robot end flange drawing
 
 .. important:: 
 	- Make sure the tools are installed correctly and safely.
@@ -800,37 +800,37 @@ The maximum allowable valid load of the robotic arm depends on the center of gra
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.4-15 FR3 model collaborative robot load curve
+.. centered:: Figure 3.4-15 FR3 model collaborative robot load curve
 
 .. figure:: installation/033.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.4-16 FR5 model collaborative robot load curve
+.. centered:: Figure 3.4-16 FR5 model collaborative robot load curve
 
 .. figure:: installation/034.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.4-17 FR10 model collaborative robot load curve
+.. centered:: Figure 3.4-17 FR10 model collaborative robot load curve
 
 .. figure:: installation/035.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.4-18 FR16 model collaborative robot load curve
+.. centered:: Figure 3.4-18 FR16 model collaborative robot load curve
 
 .. figure:: installation/036.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.4-19 FR20 model collaborative robot load curve
+.. centered:: Figure 3.4-19 FR20 model collaborative robot load curve
 
 .. figure:: installation/069.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.4-20 FR30 model collaborative robot load curve
+.. centered:: Figure 3.4-20 FR30 model collaborative robot load curve
 
 
 Control connection
@@ -854,7 +854,7 @@ This series of robots adopts TN-S single-phase 220V AC power supply, and the equ
 .. warning:: 
 	Before wiring, please ensure that the power supply is turned off and hang a safety warning sign next to it.
 
-The external wiring of this series of robotic arm control systems is connected using pluggable and quickly installable plugs. The wiring panel of the collaborative robot is shown in Figure 2.5-1.
+The external wiring of this series of robotic arm control systems is connected using pluggable and quickly installable plugs. The wiring panel of the collaborative robot is shown in Figure 3.5-1.
 
 -  Ensure that the 220V power cord is connected to the power socket with the control box power button turned off (button turned to 0) (full load input voltage is 6A/220VAC~7A/210VAC)
 
@@ -874,68 +874,68 @@ The external wiring of this series of robotic arm control systems is connected u
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.5-1 Robot wiring schematic diagram
+.. centered:: Figure 3.5-1 Robot wiring schematic diagram
 
 Controller I/O panel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the I/O in the control box to control various devices, including the stop button of pneumatic relay, PLC, and tight limit device. Figure 2.5-2 shows the electrical interface group of the control box. Figure 2.5-3 shows the electrical interface group that is easy to manufacture control box.
+You can use the I/O in the control box to control various devices, including the stop button of pneumatic relay, PLC, and tight limit device. Figure 3.5-2 shows the electrical interface group of the control box. Figure 3.5-3 shows the electrical interface group that is easy to manufacture control box.
 
 .. figure:: installation/038.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.5-2 Control box electrical interface schematic diagram
+.. centered:: Figure 3.5-2 Control box electrical interface schematic diagram
 
 .. figure:: installation/039.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.5-3 Easy to manufacture control box electrical interface schematic diagram
+.. centered:: Figure 3.5-3 Easy to manufacture control box electrical interface schematic diagram
 
 RJ45 network interface group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The network interface group address in the control box is shown in Figure 2.5-3. Note that the graph corresponds to the sequence of the address order of the internal network port of the control box, and the default port of the robot is prohibited from insertion. The user's network port can be used to communicate with the camera and other devices. The IP address is 192.168.57.2. The button box interface is default to the faculty control port, and the IP address is 192.168.58.2. Use the network cable connection button box interface and computer. The computer IP address is set to 192.168.58.10 or the same network segment as it. You can access the oscilloscope page. Easy to manufacture control boxes to access the pages of the oscillator through the network port of the connection button box.
+The network interface group address in the control box is shown in figure below. Note that the graph corresponds to the sequence of the address order of the internal network port of the control box, and the default port of the robot is prohibited from insertion. The user's network port can be used to communicate with the camera and other devices. The IP address is 192.168.57.2. The button box interface is default to the faculty control port, and the IP address is 192.168.58.2. Use the network cable connection button box interface and computer. The computer IP address is set to 192.168.58.10 or the same network segment as it. You can access the oscilloscope page. Easy to manufacture control boxes to access the pages of the oscillator through the network port of the connection button box.
 
 .. figure:: installation/040.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-4 Significant diagram of network interface group
+.. centered:: Figure 3.5-4 Significant diagram of network interface group
 
 End plate
 ~~~~~~~~~~~~~
 
-You can use the end -panel's I/O and 485 communication interfaces to control various devices, including pneumatic relay, PLC and emergency stop buttons. The PIN foot distribution and its PIN foot explanation is shown in Figure 2.5-4. The I/O connector model is M12 connector 8 cores.
+You can use the end -panel's I/O and 485 communication interfaces to control various devices, including pneumatic relay, PLC and emergency stop buttons. The PIN foot distribution and its PIN foot explanation is shown in figure below. The I/O connector model is M12 connector 8 cores.
 
 .. figure:: installation/041.png
 	:align: center
 	:width: 3in
 	:class: figure-border
 
-.. centered:: Figure 2.5-5 The schematic diagram of the end version of the electrical interface
+.. centered:: Figure 3.5-5 The schematic diagram of the end version of the electrical interface
 
 Ground
 ~~~~~~~~~~~~~~
 
-1. The control box is located at the M4 combination screw in the upper left of the power switch, as shown in Figure 2.5-5.
+1. The control box is located at the M4 combination screw in the upper left of the power switch, as shown in figure below.
 
 .. figure:: installation/042.png
 	:align: center
 	:width: 8in
 	:class: figure-border
 
-.. centered:: Figure 2.5-6 Demonstration diagram of the control box
+.. centered:: Figure 3.5-6 Demonstration diagram of the control box
 
-2. The body is located on the right side of the base of the base, as shown in Figure 2.5-6.
+2. The body is located on the right side of the base of the base, as shown in figure below.
 
 .. figure:: installation/043.png
 	:align: center
 	:width: 4in
 	:class: figure-border
 
-.. centered:: Figure 2.5-7 Dragon schematic diagram of the body
+.. centered:: Figure 3.5-7 Dragon schematic diagram of the body
 
 The protective wire used alone, the cross -sectional area should not be less than:
 
@@ -953,23 +953,23 @@ This section stipulates the electrical specifications of the following control b
 
 Robots must be installed in accordance with electrical specifications.
 
-By configured the "Power Communication" interface, you can use the internal or external 24V power supply to power the digital I/O. The above two terminals (EX24V and EXON) in the interface are 24V and ground with external power supply, and the two terminals (24V and GND) below are 24V and land of internal power supply. The default configuration uses internal power, as shown in Figure 2.5-7.
+By configured the "Power Communication" interface, you can use the internal or external 24V power supply to power the digital I/O. The above two terminals (EX24V and EXON) in the interface are 24V and ground with external power supply, and the two terminals (24V and GND) below are 24V and land of internal power supply. The default configuration uses internal power, as shown in figure below.
 
 .. figure:: installation/044.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-8 Power communication schematic diagram 01
+.. centered:: Figure 3.5-8 Power communication schematic diagram 01
 
-If the load power is large, you can connect the external power supply as shown in Figure 2.5-8.
+If the load power is large, you can connect the external power supply as shown in figure below.
 
 .. figure:: installation/045.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-9 Power communication schematic diagram 02
+.. centered:: Figure 3.5-9 Power communication schematic diagram 02
 
-The electrical specifications of internal and external power are shown in Table 2.5-1 Internal and external electrical specifications:
+The electrical specifications of internal and external power are shown in table below Internal and external electrical specifications:
 
 .. centered:: Table 2.5‑1 Internal and external power supply electrical specifications
 .. list-table::
@@ -1021,7 +1021,7 @@ The electrical specifications of internal and external power are shown in Table 
        | V
        | A
 
-The electrical specifications of digital I/O are shown in Table 2.5-2 Digital I/O Electric Specifications:
+The electrical specifications of digital I/O are shown in table below Digital I/O Electric Specifications:
 
 .. centered:: Table 2.5‑2 Digital I/O Electric Specification
 .. list-table::
@@ -1102,11 +1102,11 @@ The electrical specifications of digital I/O are shown in Table 2.5-2 Digital I/
 Safety I/O
 ~~~~~~~~~~~~~~~
 
-This section describes the electrical specifications of security I/O, and must abide by the general electrical specifications in Section 1.6.6.
+This section describes the electrical specifications of security I/O, and must abide by the general electrical specifications in Section 3.5.6.
 
-Safety devices and equipment must be installed in accordance with the safety description and risk assessment, see section 1.1. All security I/O is paired (redundant) and must be stored as two independent branches. Single failures should not cause loss of security function.
+Safety devices and equipment must be installed in accordance with the safety description and risk assessment, see section 3.1. All security I/O is paired (redundant) and must be stored as two independent branches. Single failures should not cause loss of security function.
 
-Safety I/O includes emergency stop and security stop. Urgent stop input is only used for emergency stop equipment, and safely stops input for various security -related protection equipment. Functional differences are shown in Table 2.5-3:
+Safety I/O includes emergency stop and security stop. Urgent stop input is only used for emergency stop equipment, and safely stops input for various security -related protection equipment. Functional differences are shown in table below:
 
 .. centered:: Table 2.5-3 Functional difference
 .. list-table::
@@ -1155,48 +1155,48 @@ Safety I/O includes emergency stop and security stop. Urgent stop input is only 
 The following sections are given some examples of how to use security I/O.
 
 **Default safety configuration**
-When the robot leaves the factory, it has the default configuration. It can be operated without any additional safety devices. Please refer to Figure 2.5-9.
+When the robot leaves the factory, it has the default configuration. It can be operated without any additional safety devices. Please refer to figure below.
 
 .. figure:: installation/049.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-10 Safety protection schematic diagram 01
+.. centered:: Figure 3.5-10 Safety protection schematic diagram 01
 
 **Connect the emergency stop button**
-In most applications, one or more additional emergency stop buttons need to be used. See Figure 2.5-10.
+In most applications, one or more additional emergency stop buttons need to be used. Please refer to figure below.
 
 .. figure:: installation/050.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-11 Safety protection schematic diagram 02
+.. centered:: Figure 3.5-11 Safety protection schematic diagram 02
 
 **Connect the security stop button**
-An example of a safe stop device is the door switch that the robot stops when the door is turned on. See Figure 2.5-11.
+An example of a safe stop device is the door switch that the robot stops when the door is turned on. Please refer to figure below.
 
 .. figure:: installation/051.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-12 Safety protection schematic diagram 03
+.. centered:: Figure 3.5-12 Safety protection schematic diagram 03
 
 Universal digital amount I/O
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes the electrical specifications of the general digital I/O, and must abide by the general electrical specifications in Section 1.6.6.
+This section describes the electrical specifications of the general digital I/O, and must abide by the general electrical specifications in Section 3.5.6.
 
 The general digital amount I/O can be used to drive relays, solenoid valves and other devices or interact with other PLCs.
 
 **Digital quantity output control load**
 
-This example demonstrates how to connect the digital quantity output to control the load, see Figure 2.5-12.
+This example demonstrates how to connect the digital quantity output to control the load, Please refer to figure below.
 
 .. figure:: installation/052.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-13 Great digital quantity output schematic diagram 01
+.. centered:: Figure 3.5-13 Great digital quantity output schematic diagram 01
 
 Digital input from the button
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1207,7 +1207,7 @@ The following example demonstrates how to connect the simple button to the digit
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-14 Great digital quantity output schematic diagram 02
+.. centered:: Figure 3.5-14 Great digital quantity output schematic diagram 02
 
 Interact with other devices or PLC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1218,7 +1218,7 @@ The following example demonstrates how to interact with other devices or PLC dig
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.5-15 Interactive diagram with other devices or PLC
+.. centered:: Figure 3.5-15 Interactive diagram with other devices or PLC
 
 Simulation I/O
 ~~~~~~~~~~~~~~~~
@@ -1359,7 +1359,7 @@ The following example is to demonstrate the use of analog output control conveyo
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-16 Simulation output schematic diagram
+.. centered:: Figure 3.5-16 Simulation output schematic diagram
 
 **Use analog input**
 
@@ -1369,12 +1369,12 @@ The following example is to demonstrate the simulation input connection simulati
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 2.5-17 Simulation input schematic diagram
+.. centered:: Figure 3.5-17 Simulation input schematic diagram
 
 Demonstrate and end LED
 ---------------------------
 
-The robotic oscilloscope can use a computer or tablet to access and control the robot. The connection method can refer to Section 1.6.3 to explain. In addition, users can also use our FR-HMI osteter.
+The robotic oscilloscope can use a computer or tablet to access and control the robot. The connection method can refer to Section 3.5.3 to explain. In addition, users can also use our FR-HMI osteter.
 
 Introduction to the button box
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1459,7 +1459,7 @@ FR-HMI Teach pendant introduction
 End LED definition
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. centered:: Table 2.6‑1 The end LED definition table
+.. centered:: Table 3.6‑1 The end LED definition table
 .. list-table::
    :widths: 50 50
    :header-rows: 0
