@@ -35,21 +35,6 @@ When running the robot system, we must first ensure the safety of the operators.
 
 7. Under the emergency and abnormalities of people being pinched or wrapped inside by a robot, pushing or pulling the robot arm by force (at least 700 N) to force joint movements. With a power-free driver, the arm of the manual mobile robot is limited to emergency and may damage the joint.
 
-Security settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Under the "Initial - Safety" menu bar, click "Stop mode" to enter the safe stop mode interface.
-
-Enable the security stop mode. When the robot is reported or warned, the robot will automatically enable and play a role in safe protection.
-
-.. figure:: installation/001.png
-	:align: center
-	:width: 3in
-
-.. centered::  Figure 3.1-1 Safety stop mode
-
--  **Speed reduction**:After this mode is activated, the speed of the robotic arm in the joint space will be limited. The value in the corresponding text box is the limit value of the speed of the joints of each joint, the setting range of 1, 2, and 3 joints is 15 ~ 150 °/s, 4, 5, and 6 joints is 15 ~ 180 °/s; the motion speed limit of the robotic arm in the Descartes space is the TCP speed limit value, and the set range is 0 ~ 80mm/s.
-
 Danger recognition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -81,31 +66,31 @@ Nameplate information
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-2 FR3 model collaborative robot
+.. centered:: Figure 3.1-1 FR3 model collaborative robot
 
 .. figure:: installation/003.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-3 FR5 model collaborative robot
+.. centered:: Figure 3.1-2 FR5 model collaborative robot
 
 .. figure:: installation/004.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-4 FR10 model collaborative robot
+.. centered:: Figure 3.1-3 FR10 model collaborative robot
 
 .. figure:: installation/005.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-5 FR16 model collaborative robot
+.. centered:: Figure 3.1-4 FR16 model collaborative robot
 
 .. figure:: installation/006.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-6 FR20 model collaborative robot
+.. centered:: Figure 3.1-5 FR20 model collaborative robot
 
 Effectiveness and responsibility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
