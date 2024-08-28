@@ -29,7 +29,7 @@ Robot's first activation
    :width: 4in
    :align: center
 
-.. centered:: Figure 4.1-1 Activation Interface
+.. centered:: Figure 5.1-1 Activation Interface
 
 3. Enter the correct SN code of the device box and click the "Activate" button after input is complete.
    
@@ -39,7 +39,7 @@ Robot's first activation
    :width: 4in
    :align: center
 
-.. centered:: Figure 4.1-2 Activation Success Interface
+.. centered:: Figure 5.1-2 Activation Success Interface
 
 5. After successful activation, please manually restart the control box.
    
@@ -49,7 +49,7 @@ Robot's first activation
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.1-3 Login Page
+.. centered:: Figure 5.1-3 Login Page
 
 Start software
 ~~~~~~~~~~~~~~~~
@@ -61,7 +61,7 @@ Start software
 User login and permission update
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. centered:: Table 4.1-4 Initial user
+.. centered:: Table 5.1-1 Initial user
 
 .. list-table::
    :widths: 70 70 70 70
@@ -105,25 +105,37 @@ User login and permission update
 
 Users (refer to \ `5.10.2.1 User Management <#user-management>`__\  for user management) are divided into six levels by default, administrators have no function restrictions, operators and monitors can use a small number of functions, ME engineers, PE&PQE engineers and technicians & team leaders have some function restrictions, management There are no functional restrictions for administrators. For specific default function code permissions, refer to \ `5.10.2.2 Authority management <#authority-management>`__\. 
 
-The login interface is shown in Figure 4.1-1 login interface.
+The login interface is shown in figure below.
 
 .. figure:: teaching_pendant_software/001.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.1-1 Login Interface
+.. centered:: Figure 5.1-4 Login Interface
 
 After the login is successful, the system will load the model and other data, and enter the initial page after loading.
 
 System initial interface
 ----------------------------
 
-After the login is successful, the system enters the "initial interface". The initial interface shows that the teach pendant mainly includes the FAIR INNOVATION LOGO and the button to return to the initial page, the menu bar, the menu bar zoom button, the robot operation area, the control area, the status area, the 3D simulation robot and Pose and IO information area, a total of eight areas. As shown in Figure 4.2-1 system initial interface schematic diagram.
+After the login is successful, the system enters the "Initial". Mainly include:
+
+- 1. FAIRINO LOGO;
+- 2. Menu bar zoom button;
+- 3. Menu bar;
+- 4. Robot control area;
+- 5. Robot status area;
+- 6. 3D simulation robot - 3D scene operation;
+- 7. 3D simulation robot - 3D object operation;
+- 8. Robot supporting functions;
+- 9. Various robot states.
+
+The initial interface of the system is shown in the figure below:
 
 .. image:: teaching_pendant_software/002.png
    :align: center
    :width: 6in
-.. centered:: Figure 4.2-1 Schematic diagram of the initial interface of the system
+.. centered:: Figure 5.2-1 Schematic diagram of the initial interface of the system
 
 Control area
 ~~~~~~~~~~~~~~~
@@ -176,7 +188,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/007.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -186,17 +198,37 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/008.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
    name:**Tool coordinate system number**
    
    effect:Display the tool coordinate system number of the current application
+
+.. note:: 
+   .. image:: teaching_pendant_software/449.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Workpiece coordinate system number**
+   
+   effect: Display the workpiece coordinate system number currently applied
+
+.. note:: 
+   .. image:: teaching_pendant_software/450.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Extended axis coordinate system number**
+   
+   effect: Displays the currently applied extended axis coordinate system number
    
 .. note:: 
    .. image:: teaching_pendant_software/009.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -206,7 +238,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/010.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -216,7 +248,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/011.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -226,7 +258,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/012.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -236,7 +268,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/013.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -246,7 +278,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/014.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -256,7 +288,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/015.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -266,7 +298,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/017.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -276,7 +308,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/016.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -286,7 +318,7 @@ Status Bar
 
 .. note:: 
    .. image:: teaching_pendant_software/018.png
-      :width: 2.25in
+      :width: 0.75in
       :height: 0.75in
       :align: left
 
@@ -294,49 +326,40 @@ Status Bar
    
    effect:Display username and permissions and logout user
 
-
-
 Menu Bar
 ~~~~~~~~~~~~
 
-The menu bar is as shown in Table 4.2-1 Teaching Pendant Menu Columns
+The menu bar is as shown in table below.
 
-.. centered:: Table 4.2-1 Teach pendant menu column
+.. centered:: Table 5.2-1 Teach pendant menu column
 
-+--------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|first level                                 |second level                                                                                                                                                                                                                                                                                                                                                                                              |
-+============================================+==========================================================================================================================================================================================================================================================================================================================================================================================================+
-|Initial settings                            |Robot settings                                                                                                                                                                                                                                                                                                                                                                                            | 
-|                                            +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                            |User peripheral configuration                                                                                                                                                                                                                                                                                                                                                                             |
-+--------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Teaching simulation                         |Program teaching                                                                                                                                                                                                                                                                                                                                                                                          | 
-|                                            +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                            |Graphical programming                                                                                                                                                                                                                                                                                                                                                                                     |
-|                                            +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                            |Node graph programming                                                                                                                                                                                                                                                                                                                                                                                    |
-|                                            +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                            |Teaching management                                                                                                                                                                                                                                                                                                                                                                                       |
-+--------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+                         
-|Status information                          |System log                                                                                                                                                                                                                                                                                                                                                                                                | 
-|                                            +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                            |Status Query                                                                                                                                                                                                                                                                                                                                                                                              |
-+--------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Auxiliary application                       |Robot body                                                                                                                                                                                                                                                                                                                                                                                                | 
-|                                            +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                            |Welding expert database                                                                                                                                                                                                                                                                                                                                                                                   |
-|                                            +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                            |Secruity settings                                                                                                                                                                                                                                                                                                                                                                                         |
-+--------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ 
-|System settings                             |/                                                                                                                                                                                                                                                                                                                                                                                                         |
-+--------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ 
-
-Operating area
-~~~~~~~~~~~~~~~~~
-
-IO settings can refer to \ `5.5.1 I/O settings <#i-o-settings>`__\  in 4.5 Control Box I/O.
-
-Joint, Base and other functions can refer to \ `5.6 Robot operation <#robot-operation>`__\.
++-------------+----------------+
+| first level |  second level  |
++=============+================+
+| Initial     | Base           |
++-------------+----------------+
+|             | Safety         |
++-------------+----------------+
+|             | Peripheral     |
++-------------+----------------+
+| Program     | Coding         |
++-------------+----------------+
+|             | Graphical      |
++-------------+----------------+
+|             | Node Graph     |
++-------------+----------------+
+|             | Points         |
++-------------+----------------+
+| Status      | Log            |
++-------------+----------------+
+|             | Query          |
++-------------+----------------+
+| Application | Tool App       |
++-------------+----------------+
+|             | Welding expert |
++-------------+----------------+
+| System      | /              |
++-------------+----------------+
 
 3D simulation robot
 ---------------------
@@ -344,61 +367,80 @@ Joint, Base and other functions can refer to \ `5.6 Robot operation <#robot-oper
 3D virtual trajectory and import tool model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Trajectory drawing**:When running the teaching program, turn on the trajectory drawing function, and the 3D model of the robot will describe the trajectory of the robot movement.
+.. note:: 
+   .. image:: teaching_pendant_software/020.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-**Import tool model**:Click the "Import" button, and the tool model can be displayed on the end of the robot after the tool model is imported. Currently, the tool model file formats supported are STL and DAE.
+   name:**Trajectory drawing**
+   
+   explain: Click the button to turn on the trajectory drawing function. When running the teaching program, the robot 3D model will depict the trajectory of the robot's movement.
 
-.. image:: teaching_pendant_software/020.png
-   :width: 3in
-   :align: center
+.. note:: 
+   .. image:: teaching_pendant_software/451.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-.. centered:: Figure 4.3-1 Virtual trajectory drawing and tool model import
+   name:**Import tool model**
+   
+   explain: Click the button to pop up the import tool model modal window. After the uploaded file is successfully imported, the tool model can be displayed at the end of the robot. Currently supported tool model file formats are STL and DAE.
 
 3D visualization display of robot coordinate system
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create various 3D virtual coordinate systems in the 3D virtual area of the WebAPP robot, taking the display of the base coordinate system as an example, as shown in the figure below. Among them, the X axis is red, the Y axis is green, and the Z axis is blue.
 
-**Base coordinate system**:In the base coordinate system WebAPP, the system robot is displayed in the three-dimensional virtual area by default, and the fixed mark is at the bottom center of the robot base. The 3D virtual base coordinate system can be displayed manually.
+.. note:: 
+   .. image:: teaching_pendant_software/021.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-.. image:: teaching_pendant_software/021.png
-   :width: 6in
-   :align: center
+   name:**Base coordinate system**
+   
+   explain: In the base coordinate system WebAPP, the system robot is displayed in the three-dimensional virtual area by default, and the fixed mark is at the bottom center of the robot base. The 3D virtual base coordinate system can be displayed manually.
 
-.. centered:: Figure 4.3-2 Base coordinate system display off and on
+.. note:: 
+   .. image:: teaching_pendant_software/022.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-**Tool coordinate system**:The display of the tool coordinate system is enabled by default and can be manually disabled. After the WebAPP starts and the user logs in successfully, obtain the tool coordinate system name and corresponding parameter data of the current application, and initialize the current tool coordinate system.
+   name:**Tool coordinate system**
+   
+   explain: The display of the tool coordinate system is enabled by default and can be manually disabled. After the WebAPP starts and the user logs in successfully, obtain the tool coordinate system name and corresponding parameter data of the current application, and initialize the current tool coordinate system.
 
-When applying other tool coordinate systems during use, after the application tool coordinate system command succeeds, first clear the existing tool coordinate system in the robot's 3D virtual area, and then transfer the newly applied tool coordinate system parameter data into the 3D coordinate system The API is generated to generate the tool coordinate system, and after the generation is completed, it is displayed in the three-dimensional virtual area of the robot.
+.. important:: 
+   When applying other tool coordinate systems during use, after the application tool coordinate system command succeeds, first clear the existing tool coordinate system in the robot's 3D virtual area, and then transfer the newly applied tool coordinate system parameter data into the 3D coordinate system The API is generated to generate the tool coordinate system, and after the generation is completed, it is displayed in the three-dimensional virtual area of the robot.
 
-.. image:: teaching_pendant_software/022.png
-   :width: 6in
-   :align: center
+.. note:: 
+   .. image:: teaching_pendant_software/023.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-.. centered:: Figure 4.3-3 Tool coordinate system display
+   name:**Workpiece coordinate system**
+   
+   explain: The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
 
-**Workpiece coordinate system**:The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
+.. note:: 
+   .. image:: teaching_pendant_software/024.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-.. image:: teaching_pendant_software/023.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 4.3-4 Workpiece coordinate system display
-
-**External Axis Coordinate System**:The external axis coordinate system is turned off by default, and it can be manually turned on and displayed. The process is consistent with the tool coordinate system.
-
-.. image:: teaching_pendant_software/024.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 4.3-5 External axis coordinate system display
+   name:**External Axis Coordinate System**
+   
+   explain: The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
 
 Robot installation method setting and display
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set on this page in time to ensure the normal operation of the robot.
+The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set in the "Initial - Base - Mounting" menu in time to ensure the normal operation of the robot.
 
-The user clicks the "Fixed Installation" tab in the robot's 3D virtual display area to enter the robot's fixed installation mode setting page, select "Front Mount", "Flip Mount" or "Side Mount", and click the "Apply" button to complete the robot installation mode setting .
+The user clicks the "Fixed" option under the "Initial - Base - Mounting" menu to enter the robot fixed installation mode setting page, selects "Upright Installation", "Inverted Installation" or "Side Installation", and clicks the "Apply" button to complete the robot installation mode setting.
 
 .. image:: teaching_pendant_software/025.png
    :width: 6in
@@ -406,7 +448,7 @@ The user clicks the "Fixed Installation" tab in the robot's 3D virtual display a
 
 .. centered:: Figure 4.3-6 Fixed installation
 
-Considering more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "360-degree free installation" tab in the robot's 3D virtual display area to enter the robot free installation mode setting page. Manually adjust the "base tilt" and "base rotation" angles, and the 3D model will show the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation method setting.
+Considering the more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "Free" tab under the "Initial - Base - Mounting" menu to enter the robot free installation mode setting page. Manually adjust the "Base Tilt" and "Base Rotation" angles, and the 3D model will display the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation mode setting.
 
 .. image:: teaching_pendant_software/026.png
    :width: 6in
@@ -423,13 +465,23 @@ Robot settings
 Tool coordinates
 ~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Robot Settings" in "Initial Settings", click "Tool Coordinates" to enter the tool coordinates interface. Tool coordinates can realize the modification, clearing and application of tool coordinates. There are 15 numbers in the drop-down list of the tool coordinate system. After selecting the corresponding coordinate system (the name of the coordinate system can be customized), the corresponding coordinate value, tool type and installation position will be displayed below (displayed only under the sensor type tool), select Click the "Apply" button after a certain coordinate system, and the currently used tool coordinate system will change to the selected coordinates, as shown in Figure3.4-1.
+In the menu bar of "Initial - Base - Coordinate", click "TCP" to enter the tool coordinate page.
+
+Tool coordinates can be modified, cleared and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
 
 .. image:: teaching_pendant_software/027.png
    :width: 3in
    :align: center
    
-.. centered:: Figure 4.4-1 Set tool coordinates
+.. centered:: Figure 5.4-1 Set tool coordinates
+
+Under QNX:
+
+- There are 15 tool coordinate systems.
+
+Under Linux:
+
+- There are 20 tool coordinate systems.
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. Tool calibration methods are divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the center point of the tool. Its posture defaults to be consistent with the end posture. The six-point method adds two points to the four-point method. , used to calibrate the attitude of the tool, here we take the six-point method as an example to explain.
 
@@ -437,15 +489,15 @@ Click "Modify" to reset the tool coordinate system of the number according to th
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-2 Set tool coordinates
+.. centered:: Figure 5.4-2 Set tool coordinates
 
-Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of Figure 4.4-3. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of Figure 4.4-3. Keep the posture unchanged, use the base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the positive direction of the X-axis of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6. This direction is the positive direction of the Z-axis of the tool coordinate system, and the positive direction of the Y-axis of the tool coordinate system is determined by the right-hand rule. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
+Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of Figure 5.4-3. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of Figure 5.4-3. Keep the posture unchanged, use the base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the positive direction of the X-axis of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6. This direction is the positive direction of the Z-axis of the tool coordinate system, and the positive direction of the Y-axis of the tool coordinate system is determined by the right-hand rule. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
 
 .. image:: teaching_pendant_software/029.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.4-3 Schematic diagram of the six-point method
+.. centered:: Figure 5.4-3 Schematic diagram of the six-point method
 
 After completing the last step, click "Finish" to return to the tool coordinate interface, and click "Save" to store the tool coordinate system just created.
 
@@ -461,41 +513,41 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "External To
 
 The modification, clearing and application of external tool coordinates can be realized in the external tool coordinate system setting interface.
 
-There are 15 numbers in the drop-down list of the external tool coordinate system, from etoolcoord0~etoolcoord14, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used tool coordinate system Change to the selected coordinates, as shown in Figure 4.4-4.
+There are 15 numbers in the drop-down list of the external tool coordinate system, from etoolcoord0~etoolcoord14, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used tool coordinate system Change to the selected coordinates, as shown in Figure 5.4-4.
 
 .. image:: teaching_pendant_software/030.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-4 External tool coordinates
+.. centered:: Figure 5.4-4 External tool coordinates
 
-Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in Figure 4.4-5.
+Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in Figure 5.4-5.
 
 .. image:: teaching_pendant_software/031.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-5 Schematic diagram of the six-point method
+.. centered:: Figure 5.4-5 Schematic diagram of the six-point method
 
 **1. Three-point method to determine the external TCP**
 
-1. **Set point 1**:The TCP of the measured tool is moved to the external TCP, click the Setpoint 1 button;
+- **Set point 1**:The TCP of the measured tool is moved to the external TCP, click the Setpoint 1 button;
 
-2. **Set point 2**:Move a certain distance from point 1 along the X axis of the external TCF coordinate system, and click the button to set point 2;
+- **Set point 2**:Move a certain distance from point 1 along the X axis of the external TCF coordinate system, and click the button to set point 2;
 
-3. **Set point 3**:Go back to point 1, move from point 1 along the Z axis of the external TCF coordinate system for a certain distance, and click the button to set point 3;
+- **Set point 3**:Go back to point 1, move from point 1 along the Z axis of the external TCF coordinate system for a certain distance, and click the button to set point 3;
 
-4. **Calculate**:Click the calculate button to get the external TCF;
+- **Calculate**:Click the calculate button to get the external TCF;
 
 **2.Six-point method to determine the tool TCF**
 
-1. **Set points 1-4**:Select a fixed point in the robot space, move the tool to the selected point from four different angles, and set points 1-4 in sequence;
+- **Set points 1-4**:Select a fixed point in the robot space, move the tool to the selected point from four different angles, and set points 1-4 in sequence;
 
-2. **Set point 5**:Go back to the fixed point and move a certain distance along the X axis of the tool TCF coordinate system, and click the Set Point 5 button;
+- **Set point 5**:Go back to the fixed point and move a certain distance along the X axis of the tool TCF coordinate system, and click the Set Point 5 button;
 
-3. **Set point 6**:Go back to the fixed point and move a certain distance along the Y axis of the tool TCF coordinate system, and click the set point 6 button;
+- **Set point 6**:Go back to the fixed point and move a certain distance along the Y axis of the tool TCF coordinate system, and click the set point 6 button;
 
-4. **Calculate**:Click the calculate button to get the tool TCF;
+- **Calculate**:Click the calculate button to get the tool TCF;
 
 If you need to reset, click the Cancel button to go back to the step of creating a new tool coordinate system.
 
@@ -516,7 +568,7 @@ wobjcoord14), and then the corresponding coordinate value will be displayed in t
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-6 Set workpiece coordinates
+.. centered:: Figure 5.4-6 Set workpiece coordinates
 
 The workpiece coordinate system is generally calibrated based on the tool, and the workpiece coordinate system needs to be established on the basis of the established tool coordinate system. Click "Modify" to reset the workpiece coordinate system of the number according to the prompt. Fix the workpiece and select the calibration method "origin-X-axis-Z-axis" or "origin-X-axis-XY+plane". The selection of the first two points of the two calibration methods is the same, and the third point is different. One method is to calibrate the Z direction of the workpiece coordinate system, and the second method is to calibrate a point on the XY+ plane, just calibrate according to the diagram. Click the Calculate button to calculate the workpiece pose. If you need to reset it, click Cancel and press the Modify button to re-create the workpiece coordinate system.
 
@@ -524,7 +576,7 @@ The workpiece coordinate system is generally calibrated based on the tool, and t
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-7 Schematic diagram of the three-point method
+.. centered:: Figure 5.4-7 Schematic diagram of the three-point method
 
 After completing the last step, click "Finish" to return to the workpiece coordinate interface, and click "Save" to store the workpiece coordinate system just created.
 
@@ -538,21 +590,21 @@ Extended Axis Coordinates
 
 Under the menu bar of "Robot Settings" in "Initial Settings", click "Extended Axis Coordinate System" to enter the extended axis coordinate system interface. In the extended axis coordinate system setting interface, the modification, clearing and application of the extended axis coordinates can be realized.
 
-There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in Figure 4.4-8.
+There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in Figure 5.4-8.
 
 .. image:: teaching_pendant_software/034.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-8 Extended Axis Coordinates
+.. centered:: Figure 5.4-8 Extended Axis Coordinates
 
-Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in Figure 4.4-9. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. Let's first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
+Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in Figure 5.4-9. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. Let's first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
 .. image:: teaching_pendant_software/035.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-9 Linear guide configuration
+.. centered:: Figure 5.4-9 Linear guide configuration
 
 If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, and align the end center of the robot (using the tool end point in the application tool coordinate system) with two different postures. Fix a point on the quasi-expansion axis, set point 1 and point 2 respectively. Remove the enable, and move the extension axis for a certain distance. After enabling, also align the center point of the end of the robot with the previous fixed point, and set point 3. Remove the enable, move the expansion axis to the zero point, and enable the expansion axis. Move the center point of the end of the robot to the fixed point and vertically upward space, set point 4, calculate the coordinate system and save it.
 
@@ -560,7 +612,7 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-10 Linear guide calibration
+.. centered:: Figure 5.4-10 Linear guide calibration
 
 Next, let's look at the second expansion axis scheme - the calibration method of the positioner. The positioner is composed of two extension axes. Select the number of the extension axis and get the information to get the driver information of the corresponding extension axis. We can configure parameters according to this information. After configuration, set the DH parameters, measure the DH parameters of the positioner according to the diagram, and input them into the input box. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
@@ -568,7 +620,7 @@ Next, let's look at the second expansion axis scheme - the calibration method of
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-11 Positioner configuration
+.. centered:: Figure 5.4-11 Positioner configuration
 
 If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. Carl pose, for example, select a point in the positive direction of Y, and measure Y to be 100mm, then input the value as shown in the figure, click the reference point, and the reference point can be set. The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point.
 
@@ -576,7 +628,7 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-12 Positioner reference point configuration
+.. centered:: Figure 5.4-12 Positioner reference point configuration
 
 Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the two axes for a short distance, align the center of the end of the robot to the reference point, and set Point 2, continue to jog the two axes, the center of the robot end is aligned with the reference point, set point 3, and finally continue to jog the two axes, align the center of the robot end with the reference point, set point 4, click Calculate, and get the coordinates Click the save button to apply the result.
 
@@ -584,7 +636,7 @@ Align the center of the end of the robot (using the end point of the tool in the
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-13 Positioner calibration
+.. centered:: Figure 5.4-13 Positioner calibration
 
 Next, let's look at the third extended axis solution - the calibration method of the single-axis positioner. The positioner is composed of a rotating extension shaft. Select the number of the extension shaft and get the information to get the driver information of the corresponding extension shaft. We can configure parameters according to this information. The DH parameter is set to 0. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
 
@@ -592,7 +644,7 @@ Next, let's look at the third extended axis solution - the calibration method of
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-14 Single axis positioner configuration
+.. centered:: Figure 5.4-14 Single axis positioner configuration
 
 If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. Carl pose, click "Reference Point" to set the reference point. The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point. Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the rotation axis for a short distance, align the center of the end of the robot to the reference point, and set the point 2. Continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 3, and finally continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 4, click Calculate, and get the result of the coordinate system, Click Save to apply.
 
@@ -600,7 +652,7 @@ If you need to move synchronously with the robot, click Calibrate to enter the c
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-15 Single axis positioner calibration
+.. centered:: Figure 5.4-15 Single axis positioner calibration
 
 .. important:: 
    1. The extended axis coordinate system is calibrated on the basis of the tool, and the extended axis coordinate system needs to be established on the basis of the established tool coordinate system.
@@ -612,13 +664,13 @@ Collision level
 
 Under the menu bar of "Robot Settings" in "Initial Settings", click "Collision Level" to enter the collision level interface.
 
-The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 4.4-16.
+The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 5.4-16.
 
 .. image:: teaching_pendant_software/042.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-16 Schematic diagram of collision level
+.. centered:: Figure 5.4-16 Schematic diagram of collision level
 
 Soft limit
 ~~~~~~~~~~~
@@ -633,7 +685,7 @@ Administrators can use the default values or enter angle values. Input the angle
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-17 Schematic diagram of robot limit
+.. centered:: Figure 5.4-17 Schematic diagram of robot limit
 
 End load
 ~~~~~~~~~~
@@ -649,7 +701,7 @@ When configuring the end load, please enter the mass of the end tool used and th
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-18 Schematic diagram of load setting
+.. centered:: Figure 5.4-18 Schematic diagram of load setting
 
 .. important:: 
    After the load is installed at the end of the robot, the weight of the end load and the coordinates of the center of mass must be set correctly, otherwise it will affect the drag function of the robot and the use of the collision detection function.
@@ -663,7 +715,7 @@ Before taking measurements, make sure the load is installed and then select the 
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-19 Load Identification Joint Setup
+.. centered:: Figure 5.4-19 Load Identification Joint Setup
 
 Click "Load Identification Start" to test. In case of emergency, please stop the movement in time.
 
@@ -671,7 +723,7 @@ Click "Load Identification Start" to test. In case of emergency, please stop the
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-20 load identification start
+.. centered:: Figure 5.4-20 load identification start
 
 After the exercise is over, click the "Get Identification Result" button to obtain the calculated tool data and display it on the page. If you want to apply it to the load data, click Apply
 
@@ -679,7 +731,7 @@ After the exercise is over, click the "Get Identification Result" button to obta
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-21 Load Identification Results
+.. centered:: Figure 5.4-21 Load Identification Results
 
 Friction compensation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -694,7 +746,7 @@ Under the menu bar of "Robot Settings" in "Initial Settings", click "Friction Co
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-22 Friction Compensation Settings
+.. centered:: Figure 5.4-22 Friction Compensation Settings
 
 .. important:: 
    The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
@@ -710,7 +762,7 @@ This function is to set the running speed of the robot under manual/automatic mo
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.4-23 Velocity scaling settings
+.. centered:: Figure 5.4-23 Velocity scaling settings
 
 After the speed is set successfully, the corresponding speed status bar will change to the set value, and the range of speed value setting is 0~100.
 
@@ -740,7 +792,7 @@ The Gravitational moment mode in collision strategy is set as follows.
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.4-24 Gravitational moment mode of Collision Strategy
+.. centered:: Figure 5.4-24 Gravitational moment mode of Collision Strategy
 
 Vibration response mode
 *************************
@@ -757,7 +809,7 @@ The setting steps of oscillation response mode in collision strategy are as foll
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.4-25 Vibration response mode of Collision Strategy
+.. centered:: Figure 5.4-25 Vibration response mode of Collision Strategy
 
 Static collision detection
 +++++++++++++++++++++++++++++++
@@ -772,7 +824,7 @@ The setup steps of static collision detection are as follows.
    :width: 6in
    :align: center
 
-.. centered:: Figure 4.4-26 Static collision detection
+.. centered:: Figure 5.4-26 Static collision detection
 
 .. Configuration import and export
 .. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -791,7 +843,7 @@ The setup steps of static collision detection are as follows.
 ..    :width: 3in
 ..    :align: center
 
-.. .. centered:: Figure 4.4-24 Configuration import and export
+.. .. centered:: Figure 5.4-24 Configuration import and export
 
 Control box I/O
 --------------------

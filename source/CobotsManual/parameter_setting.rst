@@ -65,19 +65,21 @@ In the menu bar of "Initial - Base - Coordinate", click "TCP" to enter the tool 
 
 Tool coordinates can be modified, cleared and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
 
-Under QNX:
-- There are 15 tool coordinate systems.
-
-Under Linux:
-- There are 20 tool coordinate systems.
-
-Click "Modify" to reset the tool coordinate system of the number according to the prompt. The tool calibration method is divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the tool center point. Its posture is consistent with the end posture by default. The six-point method adds two points to the four-point method. , used to calibrate the pose of the tool.
-
 .. image:: teaching_pendant_software/027.png
    :width: 3in
    :align: center
 
 .. centered:: Figure 3.3-1 Set tool coordinates
+
+Under QNX:
+
+- There are 15 tool coordinate systems.
+
+Under Linux:
+
+- There are 20 tool coordinate systems.
+
+Click "Modify" to reset the tool coordinate system of the number according to the prompt. The tool calibration method is divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the tool center point. Its posture is consistent with the end posture by default. The six-point method adds two points to the four-point method. , used to calibrate the pose of the tool.
 
 .. image:: teaching_pendant_software/028.png
    :width: 3in
