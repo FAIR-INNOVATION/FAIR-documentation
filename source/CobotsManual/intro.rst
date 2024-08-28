@@ -31,8 +31,16 @@ Manual
     installation
     quick_start_robot
     teaching_pendant_software
-    node_editor_software
+    base
+    safety
     robot_peripherals
+    coding
+    graphical
+    node_editor_software
+    points
+    status
+    application
+    system
     appendix
     term
 
