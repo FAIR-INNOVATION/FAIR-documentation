@@ -30,7 +30,7 @@ After the login is successful, the system enters the "Initial". Mainly include:
 - 4. Robot control area;
 - 5. Robot status area;
 - 6. 3D simulation robot - 3D scene operation;
-- 7. 3D simulation robot - 3D object operation;
+- 7. 3D simulation robot - robot body operation;
 - 8. Robot supporting functions;
 - 9. Various robot states.
 
