@@ -128,7 +128,7 @@ After the login is successful, the system enters the "Initial". Mainly include:
 - 6. 3D simulation robot - 3D scene operation;
 - 7. 3D simulation robot - robot body operation;
 - 8. Robot supporting functions;
-- 9. Various robot states.
+- 9. Robot and supporting function status.
 
 The initial interface of the system is shown in the figure below:
 
@@ -207,7 +207,7 @@ Status Bar
    effect:Display the tool coordinate system number of the current application
 
 .. note:: 
-   .. image:: teaching_pendant_software/449.png
+   .. image:: teaching_pendant_software/027.png
       :width: 0.75in
       :height: 0.75in
       :align: left
@@ -217,7 +217,7 @@ Status Bar
    effect: Display the workpiece coordinate system number currently applied
 
 .. note:: 
-   .. image:: teaching_pendant_software/450.png
+   .. image:: teaching_pendant_software/028.png
       :width: 0.75in
       :height: 0.75in
       :align: left
@@ -364,31 +364,11 @@ The menu bar is as shown in table below.
 3D simulation robot
 ---------------------
 
-3D virtual trajectory and import tool model
+3D scene operation bar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note:: 
-   .. image:: teaching_pendant_software/020.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name:**Trajectory drawing**
-   
-   explain: Click the button to turn on the trajectory drawing function. When running the teaching program, the robot 3D model will depict the trajectory of the robot's movement.
-
-.. note:: 
-   .. image:: teaching_pendant_software/451.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name:**Import tool model**
-   
-   explain: Click the button to pop up the import tool model modal window. After the uploaded file is successfully imported, the tool model can be displayed at the end of the robot. Currently supported tool model file formats are STL and DAE.
-
 3D visualization display of robot coordinate system
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create various 3D virtual coordinate systems in the 3D virtual area of the WebAPP robot, taking the display of the base coordinate system as an example, as shown in the figure below. Among them, the X axis is red, the Y axis is green, and the Z axis is blue.
 
@@ -435,134 +415,141 @@ Create various 3D virtual coordinate systems in the 3D virtual area of the WebAP
    
    explain: The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
 
-Robot installation method setting and display
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3D virtual trajectory and import tool model
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set in the "Initial - Base - Mounting" menu in time to ensure the normal operation of the robot.
+.. note:: 
+   .. image:: teaching_pendant_software/020.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-The user clicks the "Fixed" option under the "Initial - Base - Mounting" menu to enter the robot fixed installation mode setting page, selects "Upright Installation", "Inverted Installation" or "Side Installation", and clicks the "Apply" button to complete the robot installation mode setting.
-
-.. image:: teaching_pendant_software/025.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 4.3-6 Fixed installation
-
-Considering the more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "Free" tab under the "Initial - Base - Mounting" menu to enter the robot free installation mode setting page. Manually adjust the "Base Tilt" and "Base Rotation" angles, and the 3D model will display the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation mode setting.
-
-.. image:: teaching_pendant_software/026.png
-   :width: 6in
-   :align: center
+   name:**Trajectory drawing**
    
-.. centered:: Figure 4.3-7 360 degree free installation
+   explain: Click the button to turn on the trajectory drawing function. When running the teaching program, the robot 3D model will depict the trajectory of the robot's movement.
 
-.. important:: 
-   After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
+.. note:: 
+   .. image:: teaching_pendant_software/029.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
 
-Robot operation
------------------
+   name:**Import tool model**
+   
+   explain: Click the button to pop up the import tool model modal window. After the uploaded file is successfully imported, the tool model can be displayed at the end of the robot. Currently supported tool model file formats are STL and DAE.
 
-Teaching point record
-~~~~~~~~~~~~~~~~~~~~~~~
+Robot body operation bar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The manual teaching control area is mainly to set the test coordinate system in the teaching mode, and display the angle and coordinate values of each axis of the robot in real time, and can name and save the teaching points.
+TCP
+++++++++++++++++
 
-When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. The speed and acceleration of the teaching point can be set above the operation area. The set value is the percentage of the standard speed of the robot. If it is set to 100, it means 100% of the standard speed (please refer to\ `Table 1.1-1 Robot Basic Parameters <robot_brief_introduction.html#basic-parameters>`__\).
+**Base Jog**: In the base coordinate system, you can click the corresponding coordinate system button to control the robot, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ. The function of Base jogging is similar to that of single-axis jogging in Joint motion. As shown in figure below.
 
-For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
-
-.. image:: teaching_pendant_software/059.png
+.. image:: teaching_pendant_software/030.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.6-1 Schematic diagram of manual operation area
-
-.. important:: 
-   When using it for the first time, please set a small speed value like 30 to familiarize yourself with the movement of the robot to avoid accidents
-
-Joint Jog
-~~~~~~~~~~~
-
-Under Joint operation, the 6 slider bars in the middle represent the angles of the corresponding axes respectively, and the joint movement is divided into single-axis inching and multi-axis linkage
-
-**single axis jog**:The user can control the movement of the robot by operating the left and right circular buttons, as shown in Figure3.6-2. In the manual mode and the joint coordinate system, perform a rotation operation on a joint of the robot. When the robot stops beyond the range of motion (soft limit), you can use single-axis jogging for manual operation to move the robot out of the overrun position. Single-axis jogging is faster and more convenient than other operation modes for rough positioning and large-scale movement.
-
-Set the "long press movement threshold" (the maximum distance the robot can run when the button is long pressed, and the input value range is 0~300) parameters, long press the round button to control the robot running, if the button is released during the robot running, the robot will stop immediately Movement, if you keep pressing the button without releasing it, the robot will run and stop moving after long pressing the value set by the movement threshold.
-
-**Multi-axis linkage**:The user can operate the six sliders in the middle to adjust the corresponding target position of the robot, as shown in Figure3.6-3. The target position can be determined by observing the 3D virtual robot. If the adjusted position does not meet your expectations, click the "Restore" button. Make the 3D virtual robot return to the initial position. After the user determines the target position, he can click the "Apply" button, and the physical robot will perform corresponding movements.
-
-.. image:: teaching_pendant_software/060.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 4.6-2 Schematic diagram of single-axis jogging and multi-axis linkage
-
-.. important:: 
-   In multi-axis linkage, the setting value of the fifth joint j5 cannot be less than 0.01 degrees. If the expected value is less than 0.01 degrees, you can first set it to 0.011 degrees, and then fine-tune the fifth joint j5 through single-axis jogging.
-
-Base Jog
-~~~~~~~~~~
-
-In the base coordinate system, you can operate the circular buttons on the left and right sides to control the robot, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ, and the six slider bars in the middle are respectively represented on the corresponding coordinate axes The position and range of motion, as shown in Figure3.6-3. The function of Base jogging is similar to that of single-axis jogging in Joint motion.
-
-.. image:: teaching_pendant_software/061.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 4.6-3 Base jog diagram
+.. centered:: Figure 5.3-1 Base jog diagram
    
 .. important:: 
    The button can be released at any time to stop the robot. If necessary, press the emergency stop button to stop the robot.
 
-Tool Jog
-~~~~~~~~~~~~~~~~
+**Tool Jog**: Select the tool coordinate system, you can click the corresponding coordinate system button to control the robot, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ. The function of Tool jogging is similar to that of single-axis jogging in Joint motion. As shown in figure below. 
 
-Select the tool coordinate system, you can operate the circular buttons on the left and right sides to control the robot, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ, and the six slider bars in the middle represent the positions on the corresponding coordinate axes. Position and range of motion, as shown in Figure3.6-4. The function of Tool jogging is similar to that of single-axis jogging in Joint motion.
-
-.. image:: teaching_pendant_software/062.png
+.. image:: teaching_pendant_software/031.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.6-4 Tool Jogging Schematic Diagram
+.. centered:: Figure 5.3-2 Tool Jogging Schematic Diagram
 
-Wobj jog
-~~~~~~~~~~
+**Wobj Jog**: Select workpiece jogging, you can operate the circular buttons on the left and right to control the robot. In the workpiece coordinate system, move along the X, Y, Z axis in a straight line or rotate around RX, RY, RZ. The function of Wobj jogging is similar to that of single-axis jogging in Joint motion. As shown in figure below. 
 
-Select workpiece jogging, you can operate the circular buttons on the left and right to control the robot. In the workpiece coordinate system, move along the X, Y, Z axis in a straight line or rotate around RX, RY, RZ. The six slider bars in the middle are respectively Indicates the position and motion range on the corresponding coordinate axis, as shown in Figure3.6-5. The function of Wobj jogging is similar to that of single-axis jogging in Joint motion.
-
-.. image:: teaching_pendant_software/063.png
+.. image:: teaching_pendant_software/032.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.6-5 Wobj jogging diagram
+.. centered:: Figure 5.3-3 Wobj jogging diagram
+
+Joint Jog
+++++++++++++++++
+
+Under Joint operation, the 6 slider bars in the middle represent the angles of the corresponding axes respectively, and the joint movement is divided into single-axis inching and multi-axis linkage
+
+**single axis jog**:The user can control the movement of the robot by operating the left and right circular buttons, as shown in figure below. In the manual mode and the joint coordinate system, perform a rotation operation on a joint of the robot. When the robot stops beyond the range of motion (soft limit), you can use single-axis jogging for manual operation to move the robot out of the overrun position. Single-axis jogging is faster and more convenient than other operation modes for rough positioning and large-scale movement.
+
+.. image:: teaching_pendant_software/033.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3-4 Schematic diagram of single-axis jogging
+
+.. important:: 
+   Set the "long press movement threshold" (the maximum distance the robot can run when the button is long pressed, and the input value range is 0~300) parameters, long press the round button to control the robot running, if the button is released during the robot running, the robot will stop immediately Movement, if you keep pressing the button without releasing it, the robot will run and stop moving after long pressing the value set by the movement threshold.
+
+**Multi-axis linkage**:The user can operate the six sliders in the middle to adjust the corresponding target position of the robot, as shown in figure below. The target position can be determined by observing the 3D virtual robot. If the adjusted position does not meet your expectations, click the "Restore" button. Make the 3D virtual robot return to the initial position. After the user determines the target position, he can click the "Apply" button, and the physical robot will perform corresponding movements.
+
+.. image:: teaching_pendant_software/034.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3-5 Schematic diagram of multi-axis linkage
+
+.. important:: 
+   In multi-axis linkage, the setting value of the fifth joint j5 cannot be less than 0.01 degrees. If the expected value is less than 0.01 degrees, you can first set it to 0.011 degrees, and then fine-tune the fifth joint j5 through single-axis jogging.
 
 Move
-~~~~~~~~~~
+++++++++++++++++
 
 Select Move, you can directly input the Cartesian coordinate value, click "Calculate joint position", the joint position is displayed as the calculated result, confirm that there is no danger, you can click "Move to this point" to control the robot to move to the input Cartesian pose.
 
-.. image:: teaching_pendant_software/064.png
+.. image:: teaching_pendant_software/035.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.6-6 Move mobile diagram
+.. centered:: Figure 5.3-6 Move mobile diagram
 
 .. important:: 
    When a given pose cannot be reached, first check whether the Cartesian space pose exceeds the working range of the robot, and then check whether there is a singular pose in the process from the current pose to the target pose, if there is a singular position, adjust the current pose or process insert a new pose in order to avoid singular poses.
 
-Eaxis move
-~~~~~~~~~~~~
+Robot supporting function bar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Select Eaxis to move, this function is the jog function of the extension axis, it needs to be configured to configure the extension axis, use this jog function to control the extension axis, see "Chapter 4 Machine-Robot Peripherals-Extended Axis Peripherals" for details configuration".
+Teaching point record
++++++++++++++++++++++++++++
 
-.. image:: teaching_pendant_software/065.png
-   :width: 3in
+The manual teaching control area is mainly to set the test coordinate system in the teaching mode, and display the angle and coordinate values of each axis of the robot in real time, and can name and save the teaching points.
+
+When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. 
+
+For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
+
+.. image:: teaching_pendant_software/036.png
+   :width: 6in
    :align: center
 
-.. centered:: Figure 4.6-7 Eaxis Mobile Diagram
+.. centered:: Figure 5.3‑7 Schematic diagram of manual operation area
+
+.. important:: 
+   When using it for the first time, please set a small speed value like 30 to familiarize yourself with the movement of the robot to avoid accidents
+
+I/O
+++++++++++++++++
+
+In this interface, the digital output, analog output (0-10v) and end tool digital output in the robot control box can be realized. Output, analog output (0-10v) for manual control. As shown in figure below.
+
+- DO operation: select the port number, if the DO is low level, the right operation button will display ON, click the button to set the DO to high level.
+
+- AO operation: Select the port number, enter a value (0-100) in the input box on the right, the value is a percentage, setting 100 means setting the AO port to 10v.
+
+.. image:: teaching_pendant_software/037.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.3‑8 I/O
 
 TPD (Teach-in programming)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++
 
 The operation steps of teach programming (TPD) function are as follows:
 
@@ -570,19 +557,19 @@ The operation steps of teach programming (TPD) function are as follows:
 
 - **Step2 Configure track recording parameters**:Click TPD to enter the "TPD" function item to configure trajectory recording parameters, set the name of the trajectory file, pose type and sampling period, configure DI and DO, and record the corresponding output by triggering DI during the process of recording the TPD trajectory DO, as Figure3.6-8;
 
-.. image:: teaching_pendant_software/066.png
-   :width: 3in
+.. image:: teaching_pendant_software/038.png
+   :width: 6in
    :align: center
 
-.. centered:: Figure 4.6-8 TPD track record
+.. centered:: Figure 5.3‑9 TPD track record
 
 - **Step3 Check robot mode**:Check whether the robot mode is in manual mode. If not, switch to manual mode. In manual mode, there are two ways to switch to drag teaching mode, one is long press the end button, and the other is interface dragging mode It is recommended to switch the robot from the interface to the drag teaching mode in the TPD record. As shown in Figure 4.6-9;
 
-.. image:: teaching_pendant_software/067.png
+.. image:: teaching_pendant_software/039.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.6-9 robot mode
+.. centered:: Figure 5.3‑10 robot mode
 
 .. important:: 
    When switching to the drag mode from the interface, first confirm whether the end tool load and the center of mass are set correctly, and whether the friction compensation coefficient is set reasonably, then press and hold the end button to confirm whether the drag is normal, and then switch to the drag mode from the interface after confirming that it is correct.
@@ -593,11 +580,11 @@ The operation steps of teach programming (TPD) function are as follows:
 
 - **Step6 teach programming**:Click New, select a blank template, click to enter the PTP function programming item, select the initial position point just saved, click the "Add" button, after the application is completed, a PTP instruction will be displayed in the program file; then click to enter the TPD function programming item, Select the track just recorded, set whether it is smooth and the speed scaling, click the "Add" button, after the application is completed, a MoveTPD instruction will be displayed in the program file, as shown in Figure 3.6-10;
 
-.. image:: teaching_pendant_software/068.png
-   :width: 6in
+.. image:: teaching_pendant_software/040.png
+   :width: 3in
    :align: center
 
-.. centered:: Figure 4.6-10 TPD programming
+.. centered:: Figure 5.3‑11 TPD programming
 
 - **Step7 Trajectory recurrence**:After editing the teaching program, switch to the automatic operation mode, click the "start running" icon on the top of the interface to start running the program, and the robot will start to reproduce the teaching action.
 
@@ -617,6 +604,187 @@ TPD file deletion and exception handling:
 
 .. important:: 
    During the operation of the TPD function, you should strictly follow the corresponding prompts on the teach pendant.
+
+Eaxis move
+++++++++++++++++
+
+Select Eaxis to move, this function is the jog function of the extension axis, it needs to be configured to configure the extension axis, use this jog function to control the extension axis, see "Chapter 4 Machine-Robot Peripherals-Extended Axis Peripherals" for details configuration".
+
+.. image:: teaching_pendant_software/041.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.3-12 Eaxis Mobile Diagram
+
+FT
+++++++++++++++++
+
+Select the reference frame as a reference for the force sensor when dragging.
+
+.. image:: teaching_pendant_software/042.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.3‑12 FT diagram
+
+Telecentric fixed point
+++++++++++++++++++++++++++++++++
+
+This function is mainly used in medical penetration. After setting the telecentric fixed point, the robot end always moves at this point.
+
+.. image:: teaching_pendant_software/043.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.3‑13 Schematic diagram of telecentric fixed point
+
+Robot and supporting function status bar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Robot
+++++++++++++++++
+
+Displays the current robot model, stiffness, joints and coordinate data information.
+
+.. image:: teaching_pendant_software/044.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑14 Robot Status
+
+Program
+++++++++++++++++
+
+Display information about the currently running program and subprogram.
+
+.. image:: teaching_pendant_software/045.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑15 Program Status
+
+I/O
+++++++++++++++++
+
+The status display area on the right side of the 3D model will display the current IO status. In digital input and digital output, if the port level is high, the point will be displayed in green, and if it is low, it will be displayed in white; analog input and analog output The display value is 0-100, and 100 means 10v.
+
+.. image:: teaching_pendant_software/046.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑16 IO Status
+
+ExAxis
+++++++++++++++++
+
+Display the current extended axis (controller + PLC) servo status information.
+
+.. image:: teaching_pendant_software/047.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑17 Extended axis (controller + PLC) status
+
+
+Gripper
+++++++++++++++++
+
+Displays the current gripper status information.
+
+.. image:: teaching_pendant_software/048.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑18 Gripper status
+
+FT
+++++++++++++++++
+
+Display current force control status information.
+
+.. image:: teaching_pendant_software/049.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑19 Force control state
+
+Convery
+++++++++++++++++
+
+Displays current conveyor status information.
+
+.. image:: teaching_pendant_software/050.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑20 Conveyor Belt Status
+
+Servo
+++++++++++++++++
+
+Displays the current extended axis (controller + servo controller) status information.
+
+.. image:: teaching_pendant_software/051.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑21 Extended axis (controller + servo controller) status
+
+Polish
+++++++++++++++++
+
+Display current grinding status information.
+
+.. image:: teaching_pendant_software/052.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑22 Polishing status
+
+Weld
+++++++++++++++++
+
+Display current welding status information.
+
+.. image:: teaching_pendant_software/053.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑23 Welding status
+
+Robot installation method setting and display
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set in the "Initial - Base - Mounting" menu in time to ensure the normal operation of the robot.
+
+The user clicks the "Fixed" option under the "Initial - Base - Mounting" menu to enter the robot fixed installation mode setting page, selects "Upright Installation", "Inverted Installation" or "Side Installation", and clicks the "Apply" button to complete the robot installation mode setting.
+
+.. image:: teaching_pendant_software/025.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.3-24 Fixed installation
+
+Considering the more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "Free" tab under the "Initial - Base - Mounting" menu to enter the robot free installation mode setting page. Manually adjust the "Base Tilt" and "Base Rotation" angles, and the 3D model will display the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation mode setting.
+
+.. image:: teaching_pendant_software/026.png
+   :width: 6in
+   :align: center
+   
+.. centered:: Figure 5.3-25 360 degree free installation
+
+.. important:: 
+   After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
+
+
+
+
+
+
+
+
+
+
 
 Teaching simulation
 -----------------------

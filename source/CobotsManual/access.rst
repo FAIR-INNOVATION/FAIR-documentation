@@ -32,7 +32,7 @@ After the login is successful, the system enters the "Initial". Mainly include:
 - 6. 3D simulation robot - 3D scene operation;
 - 7. 3D simulation robot - robot body operation;
 - 8. Robot supporting functions;
-- 9. Various robot states.
+- 9. Robot and supporting function status.
 
 The initial interface of the system is shown in the figure below:
 
@@ -112,7 +112,7 @@ Status Bar
    effect: Display the tool coordinate system number of the current application
 
 .. note:: 
-   .. image:: teaching_pendant_software/449.png
+   .. image:: teaching_pendant_software/027.png
       :width: 0.75in
       :height: 0.75in
       :align: left
@@ -122,7 +122,7 @@ Status Bar
    effect: Display the workpiece coordinate system number currently applied
 
 .. note:: 
-   .. image:: teaching_pendant_software/450.png
+   .. image:: teaching_pendant_software/028.png
       :width: 0.75in
       :height: 0.75in
       :align: left

@@ -306,7 +306,7 @@ The Gravitational moment mode in collision strategy is set as follows.
 .. note:: In the operation of the robot, if the load mass changes greatly, this strategy is not recommended; This strategy is not recommended if the running speed is too fast.
 
 .. image:: base/022.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.3-3 Gravitational moment mode of Collision Strategy
@@ -323,7 +323,7 @@ The setting steps of oscillation response mode in collision strategy are as foll
 .. note:: It is not recommended to use this strategy if the robot runs too fast.
 
 .. image:: base/023.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.3-4 Vibration response mode of Collision Strategy
@@ -338,7 +338,7 @@ The setup steps of static collision detection are as follows.
 **Step2**:Turn on the switch for static collision detection, as shown below. When it is detected that the gap between the joint torque command and the torque feedback is too large, the robot will enter the drag mode to avoid continuous extrusion force.
 
 .. image:: base/024.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.3-5 Static collision detection
@@ -363,21 +363,6 @@ Under the menu bar of "Initial - Base - Joint", click "Friction comp." to enter 
 
 I/O setup
 --------------------
-
-I/O settings
-~~~~~~~~~~~~~~~
-
-.. Click the "IO" button in the operation area on the left side of the 3D model to enter the IO setting interface, as shown in figure below. In this interface, the digital output, analog output (0-10v) and end tool digital output in the robot control box can be realized. Output, analog output (0-10v) for manual control:
-
-.. - DO operation: select the port number, if the DO is low level, the right operation button will display ON, click the button to set the DO to high level.
-
-.. - AO operation: Select the port number, enter a value (0-100) in the input box on the right, the value is a percentage, setting 100 means setting the AO port to 10v.
-
-
-.. I/O status display
-.. ~~~~~~~~~~~~~~~~~~~~
-
-.. The status display area on the right side of the 3D model will display the current IO status. In digital input and digital output, if the port level is high, the point will be displayed in green, and if it is low, it will be displayed in white; analog input and analog output The display value is 0-100, and 100 means 10v.
 
 I/O configuration
 ~~~~~~~~~~~~~~~~~~
@@ -621,7 +606,22 @@ Click "Initial - Base - I/O setup" on the menu bar, click on the "Alias"  submen
 Filter
 ~~~~~~~~~~~~~~~~
 
-Click "Robot Settings" in "Initial Settings" on the menu bar, and click the "Filter" submenu to enter the IO filter time setting interface. The filter time setting interface includes: control box DI filter time, end board DI filter time, control box AI0 Filtering time, AI1 filtering time of the control box, AI0 filtering time of the end board, as shown in Figure3.5-3. Users can set the corresponding parameters according to their needs, just click the corresponding setting button.
+Click "Robot Settings" in "Initial Settings" on the menu bar, and click the "Filter" submenu to enter the IO filter time setting interface. The filter time setting interface includes: 
+
+- control box DI filter time
+- end board DI filter time
+- control box AI0 Filtering time
+- AI1 filtering time of the control box
+- AI0 filtering time of the end board
+- Button box DI filter time
+- Extended DI filter time
+- Extended AI0 filter time
+- Extended AI1 filter time
+- Extended AI2 filter time
+- Extended AI3 filter time
+- Smart DI filter time
+
+Users can set the corresponding parameters according to their needs, just click the corresponding setting button. As shown in figure below.
 
 .. image:: base/029.png
    :width: 3in
@@ -635,10 +635,18 @@ Click "Robot Settings" in "Initial Settings" on the menu bar, and click the "Fil
 Output reset
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset" submenu to enter the configuration interface, and configure whether different outputs need to be reset after stopping/pausing according to the actual need for reset during use. The current output includes control box DO, control box AO, End plate DO, End plate AO, Expand DO, Expand AO and SmartTool DO.
+Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset" submenu to enter the configuration interface, and configure whether different outputs need to be reset after stopping/pausing according to the actual need for reset during use. The current output includes:
+
+- control box DO
+- control box AO
+- End plate DO
+- End plate AO
+- Expand DO
+- Expand AO
+- SmartTool DO
 
 .. image:: base/030.png
-   :width: 6in
+   :width: 3in
    :align: center
 
 .. centered:: Figure 6.4-5 Output reset configuration
