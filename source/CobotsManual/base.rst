@@ -579,7 +579,7 @@ Among them, the default configuration of the control box: CO0 is 1-the robot is 
 
 .. centered:: Figure 6.4-1 Control box DI and DO configuration
 
-The default configuration of terminal DI: DI0 drag teaching, DI1 teaching point recording.
+**The default configuration of terminal DI**: DI0 drag teaching, DI1 teaching point recording.
 
 .. image:: base/027.png
    :width: 3in
@@ -591,6 +591,18 @@ After the configuration is complete, you can view the corresponding output DO st
 
 .. important:: 
    Configured DI and DO are forbidden to be used in coding.
+
+**Reduction mode configuration (level 1, level 2, level 3)**: The joint speed and terminal TCP speed can be configured in the first-level and second-level reduction modes, and the third-level reduction mode is to stop without configuring the speed.
+
+.. image:: base/032.png
+   :width: 3in
+   :align: center
+
+.. image:: base/033.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 4.9-34 Safe speed setting
 
 Alias
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -606,7 +618,7 @@ Click "Initial - Base - I/O setup" on the menu bar, click on the "Alias"  submen
 Filter
 ~~~~~~~~~~~~~~~~
 
-Click "Robot Settings" in "Initial Settings" on the menu bar, and click the "Filter" submenu to enter the IO filter time setting interface. The filter time setting interface includes: 
+Click "Initial - Base - I/O setup" on the menu bar, and click the "Filter" submenu to enter the IO filter time setting interface. The filter time setting interface includes: 
 
 - control box DI filter time
 - end board DI filter time

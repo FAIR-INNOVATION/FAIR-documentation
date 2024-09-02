@@ -343,7 +343,7 @@ During field use, it is possible to update the firmware to meet the new requirem
    :align: center
    :width: 4in
 
-.. centered:: Figure 6.3-1 Pin Pin Distribution of Aviation Connector
+.. centered:: Figure 16.3-1 Pin Pin Distribution of Aviation Connector
 
 **Step2: hardware connection.** connect the USB end of the USB to 485 tool to the PC, and in the PC device manager, if the USB&485 tool is identified, the following interface will appear.
 
@@ -351,7 +351,7 @@ During field use, it is possible to update the firmware to meet the new requirem
    :align: center
    :width: 6in
 
-.. centered:: Figure 6.3-2 USB&485 Port Identification Description
+.. centered:: Figure 16.3-2 USB&485 Port Identification Description
 
 **Step3:Upgrade the tool.** After the wiring is completed, open the "Fair Serial Port Debugging Assistant", click the "Terminal Board" button, and select the above identified serial port in the "Serial Port Parameter Setting" function. The baud rate is 115200, the data bit is 8, the check bit is none, and the stop bit is 1. Then open the serial port. After success, the prompt "Serial port opened successfully" will appear.
 
@@ -359,7 +359,7 @@ During field use, it is possible to update the firmware to meet the new requirem
    :align: center
    :width: 4in
 
-.. centered:: Figure 6.3-3 Serial Port Parameter Settings
+.. centered:: Figure 16.3-3 Serial Port Parameter Settings
 
 **Step4:Firmware upgrade.** Select "End plate" and click "Firmware upgrade", as shown in the fig.
 
@@ -367,7 +367,7 @@ During field use, it is possible to update the firmware to meet the new requirem
    :align: center
    :width: 6in
 
-.. centered:: Figure 6.3-4 End Plate Firmware Upgrade
+.. centered:: Figure 16.3-4 End Plate Firmware Upgrade
 
 -  First, click "Flash Erase". After the erasure is successful, you will be prompted in the receiving data area that the erasure is successful.
 
@@ -377,7 +377,7 @@ During field use, it is possible to update the firmware to meet the new requirem
    :align: center
    :width: 6in
 
-.. centered:: Figure 6.3-5 Select Upgrade File
+.. centered:: Figure 16.3-5 Select Upgrade File
 
 -  Click "Send File", and when the progress bar displays 100%, it means that the upgrade file has been sent.
 
@@ -387,7 +387,7 @@ During field use, it is possible to update the firmware to meet the new requirem
    :align: center
    :width: 6in
 
-.. centered:: Figure 6.3-6 Querying Firmware Version Information
+.. centered:: Figure 16.3-6 Querying Firmware Version Information
 
 Appendix 4: Control Box 485 Upgrade
 ----------------------------------------
@@ -400,7 +400,7 @@ The upgrade process is the same as that of the terminal board, and the software 
    :align: center
    :width: 4in
 
-.. centered:: Figure 6.4-1 Power Communication Interface
+.. centered:: Figure 16.4-1 Power Communication Interface
 
 Appendix 5: List of Spare Parts and Vulnerable Parts
 -------------------------------------------------------------
