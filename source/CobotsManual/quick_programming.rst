@@ -30,7 +30,7 @@ Operate on program files
 Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
-   .. image:: teaching_pendant_software/070.png
+   .. image:: coding/006.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -40,7 +40,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Open user program file
 
 .. note:: 
-   .. image:: teaching_pendant_software/071.png
+   .. image:: coding/007.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -50,7 +50,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Select a template to create a new program file
    
 .. note:: 
-   .. image:: teaching_pendant_software/072.png
+   .. image:: coding/008.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -60,7 +60,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Import the file into the user program folder
 
 .. note:: 
-   .. image:: teaching_pendant_software/073.png
+   .. image:: coding/009.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -70,7 +70,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Export user program files to a local point.
 
 .. note:: 
-   .. image:: teaching_pendant_software/074.png
+   .. image:: coding/010.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -80,7 +80,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Save file edits
 
 .. note:: 
-   .. image:: teaching_pendant_software/075.png
+   .. image:: coding/011.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -90,7 +90,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Rename the file and store it in the user program or template program folder.
 
 .. note:: 
-   .. image:: teaching_pendant_software/076.png
+   .. image:: coding/012.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -100,7 +100,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Duplicates a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
 
 .. note:: 
-   .. image:: teaching_pendant_software/077.png
+   .. image:: coding/013.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -110,7 +110,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Allows you to paste previously cut or copied nodes.
 
 .. note:: 
-   .. image:: teaching_pendant_software/078.png
+   .. image:: coding/014.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -120,7 +120,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Cuts a node and allows it to be used for other operations (eg: paste it elsewhere in the program tree).
 
 .. note:: 
-   .. image:: teaching_pendant_software/079.png
+   .. image:: coding/015.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -130,7 +130,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Deletes a node from the program tree.
 
 .. note:: 
-   .. image:: teaching_pendant_software/080.png
+   .. image:: coding/016.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -140,7 +140,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Move the node up.
 
 .. note:: 
-   .. image:: teaching_pendant_software/081.png
+   .. image:: coding/017.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -150,7 +150,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    effect: Move the node down.
 
 .. note:: 
-   .. image:: teaching_pendant_software/082.png
+   .. image:: coding/018.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -175,7 +175,7 @@ Click the Start button to run the program; click the Stop button to stop the pro
 
 In manual mode, click the first icon on the right side of the node to make the robot execute the instruction alone, and the second icon is to edit the node content.
 
-.. image:: teaching_pendant_software/069.png
+.. image:: coding/001.png
    :width: 6in
    :align: center
 
