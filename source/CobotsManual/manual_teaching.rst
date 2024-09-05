@@ -26,7 +26,7 @@ In this interface, you can import and export teaching point files. After selecti
 
 Click the "Start Run" button to perform a single-point operation of the local teaching point and move the robot to the position of the point. In addition, users can search for teaching points by name.
 
-.. image:: teaching_pendant_software/140.png
+.. image:: points/001.png
    :width: 6in
    :align: center
 

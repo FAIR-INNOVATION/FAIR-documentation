@@ -304,13 +304,13 @@ After selecting the usage period, click the "Configure" button.
    :width: 6in
    :align: center
 
-.. centered:: Figure 15.5-1 WEB interface lock screen shutdown settings
+.. centered:: Figure 15.4-3 WEB interface lock screen shutdown settings
 
 .. image:: system/024.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 15.5-2 WEB interface lock screen enable settings
+.. centered:: Figure 15.4-4 WEB interface lock screen enable settings
 
 2. Expiration reminder
 
@@ -322,7 +322,7 @@ When the web interface lock screen function is turned on, the following prompt w
    :width: 6in
    :align: center
 
-.. centered:: Figure 15.5-3 Boot prompt
+.. centered:: Figure 15.4-5 Boot prompt
 
 2)If the device continues to work, 5 days before the device expires, a pop-up window will automatically pop up at zero o'clock to prompt the remaining days of the service life, which can be eliminated by resetting.
 
@@ -330,7 +330,7 @@ When the web interface lock screen function is turned on, the following prompt w
    :width: 6in
    :align: center
 
-.. centered:: Figure 15.5-4 Continuous work tips
+.. centered:: Figure 15.4-6 Continuous work tips
 
 3. Unlock login
 
@@ -342,7 +342,7 @@ When the web interface lock screen function is turned on, after the device expir
    :width: 6in
    :align: center
 
-.. centered:: Figure 15.5-5 Lock screen  
+.. centered:: Figure 15.4-7 Lock screen  
 
 Robot model configuration
 --------------------------------------

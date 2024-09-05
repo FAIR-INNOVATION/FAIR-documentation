@@ -34,7 +34,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 .. centered:: Figure 6.1-2 Toolbar
 
 .. note:: 
-   .. image:: teaching_pendant_software/070.png
+   .. image:: coding/006.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -44,7 +44,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
    effect:Open user program file, choose to load or delete files in the pop-up box.
 
 .. note:: 
-   .. image:: teaching_pendant_software/074.png
+   .. image:: coding/010.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -64,7 +64,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
    effect:Reload the node graph content of the last operation to the local.
 
 .. note:: 
-   .. image:: teaching_pendant_software/071.png
+   .. image:: coding/007.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -84,7 +84,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
    effect:Load the node graph content of the initial settings.
 
 .. note:: 
-   .. image:: teaching_pendant_software/073.png
+   .. image:: coding/009.png
       :width: 1.5in
       :height: 0.75in
       :align: left
@@ -94,7 +94,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
    effect:After creating/opening the node graph programming file, click the "Export" button to pop up the "Export Node Graph Programming" pop-up box, select the workspace file name to export the file (json format).
 
 .. note:: 
-   .. image:: teaching_pendant_software/072.png
+   .. image:: coding/008.png
       :width: 1.5in
       :height: 0.75in
       :align: left
