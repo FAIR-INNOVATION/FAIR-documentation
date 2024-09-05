@@ -20,7 +20,7 @@ Node graph programming is programming software developed for robots. Its main fu
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.1-1 Node graph programming interface
+.. centered:: Figure 11.1-1 Node graph programming interface
 
 Toolbar
 ~~~~~~~~~~
@@ -31,7 +31,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.1-2 Toolbar
+.. centered:: Figure 11.1-2 Toolbar
 
 .. note:: 
    .. image:: coding/006.png
@@ -147,7 +147,7 @@ Click the "If/Else" related command node to enter the node diagram editing inter
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.1 "If/Else" command node interface
+.. centered:: Figure 11.3-1 "If/Else" command node interface
 
 While instruction
 -------------------
@@ -164,7 +164,7 @@ Enter the waiting condition in the input box behind While, enter the action inst
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.2 “While” command node interface
+.. centered:: Figure 11.4-1 “While” command node interface
 
 Goto instruction
 ------------------
@@ -179,7 +179,7 @@ Click "Goto" on the relevant command node to enter the node graph editing interf
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.3 "Goto" command node interface
+.. centered:: Figure 11.5-1 "Goto" command node interface
 
 .. important:: Jump name cannot start with a number
 
@@ -198,9 +198,9 @@ This instruction is a delay instruction, divided into four parts: "WaitMs", "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.4 "Wait" command node interface
+.. centered:: Figure 11.6-1 "Wait" command node interface
 
-1. "WaitDI" command node, parameters:
+2. "WaitDI" command node, parameters:
 
 - DI port number: Ctrl-DI0 ~ Ctrl-CI7(WaitDI,[0~15]), End-DI0 ~ End-DI1(WaitToolDI,[0~1])
 - Status: false/true
@@ -211,9 +211,9 @@ This instruction is a delay instruction, divided into four parts: "WaitMs", "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.5 "WaitMultiDI" command node interface
+.. centered:: Figure 11.6-2 "WaitMultiDI" command node interface
 
-1. "WaitMultiDI" command node, parameters:
+3. "WaitMultiDI" command node, parameters:
 
 - Condition: and/or
 - Conditional selection: Select the port number that the bit status is enabled, separated by commas, for example DI0, DI1
@@ -225,9 +225,9 @@ This instruction is a delay instruction, divided into four parts: "WaitMs", "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.6 "WaitMultiDI" command node interface
+.. centered:: Figure 11.6-3 "WaitMultiDI" command node interface
 
-4."WaitAI" command node, parameters:
+4. "WaitAI" command node, parameters:
 
 - Condition: and/or
 - AI port number: Ctrl-AI0 ~ Ctrl-AI1(WaitAI,[0~1]), End-AI0(WaitToolAI,[0])
@@ -240,7 +240,7 @@ This instruction is a delay instruction, divided into four parts: "WaitMs", "Wai
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.7 "WaitAI" command node interface
+.. centered:: Figure 11.6-4 "WaitAI" command node interface
 
 Pause instruction
 --------------------
@@ -257,7 +257,7 @@ This command is a pause command. Insert this command in the program. When the pr
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.8 "Pause" command node interface
+.. centered:: Figure 11.7-1 "Pause" command node interface
 
 Dofile instruction
 --------------------
@@ -276,7 +276,7 @@ This command is a pause command. Insert this command in the program. When the pr
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.9 “Dofile” command node interface
+.. centered:: Figure 11.8-1 “Dofile” command node interface
 
 Set system variable command
 ----------------------------------
@@ -294,7 +294,7 @@ This instruction is a setting system variable instruction, which is divided into
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.10 "Configure system variable command" command node interface
+.. centered:: Figure 11.9-1 "Configure system variable command" command node interface
 
 "Obtain system variable command" command node, parameters:
 
@@ -304,7 +304,7 @@ This instruction is a setting system variable instruction, which is divided into
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.11 "Obtain system variable command" command node interface
+.. centered:: Figure 11.9-2 "Obtain system variable command" command node interface
 
 .. important:: The variable name must be a defined name.
 
@@ -328,7 +328,7 @@ You can select the point you need to reach. The smooth transition time setting c
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.12 "PTP" command node interface
+.. centered:: Figure 11.10-1 "PTP" command node interface
 
 LIN instruction
 -----------------
@@ -352,7 +352,7 @@ The function of this command is similar to the "point to point" command, but the
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.13 “LIN” command node interface
+.. centered:: Figure 11.11-1 “LIN” command node interface
 
 LIN(seamPos) instruction
 -------------------------------
@@ -376,7 +376,7 @@ This command function is used in welding scenarios using laser sensors.
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.14 “LIN(seamPos)” command node interface
+.. centered:: Figure 11.12-1 “LIN(seamPos)” command node interface
 
 ARC instruction 
 -----------------
@@ -401,7 +401,7 @@ The arc motion contains two points. The first point is the transition point in t
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.15 "ARC" command node interface
+.. centered:: Figure 11.13-1 "ARC" command node interface
 
 Circle instruction
 --------------------
@@ -422,7 +422,7 @@ The full circle motion includes two points. The first point is the middle transi
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.16 "Circle" command node interface
+.. centered:: Figure 11.14-1 "Circle" command node interface
 
 Spiral instruction
 ---------------------
@@ -450,7 +450,7 @@ The spiral motion contains three points, which form a circle. On the third point
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.17 "Spiral" command node interface
+.. centered:: Figure 11.15-1 "Spiral" command node interface
 
 N-Spiral instruction
 ------------------------
@@ -476,7 +476,7 @@ The new spiral motion is an optimized version of spiral motion. This instruction
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.18 “N-Spiral” command node interface
+.. centered:: Figure 11.16-1 “N-Spiral” command node interface
 
 H-Spiral instruction
 ------------------------
@@ -496,7 +496,7 @@ The “H-Spiral” command is a horizontal space spiral motion. This command is 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.19 “H-Spiral” command node interface
+.. centered:: Figure 11.17-1 “H-Spiral” command node interface
 
 Spline instruction
 --------------------
@@ -514,7 +514,7 @@ This command is divided into three parts: the start of the spline group, the spl
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.20 "Spline" command node interface
+.. centered:: Figure 11.18-1 "Spline" command node interface
 
 N-Spline instruction
 ----------------------
@@ -539,7 +539,7 @@ This instruction is a spline instruction algorithm optimization instruction. It 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.21 “N-Spline” command node interface
+.. centered:: Figure 11.19-1 “N-Spline” command node interface
 
 Weave instruction
 --------------------
@@ -556,7 +556,7 @@ This command consists of two parts. The first part selects the weaving number of
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.22 “Weave” command node interface
+.. centered:: Figure 11.20-1 “Weave” command node interface
 
 TPD instruction
 -----------------
@@ -577,7 +577,7 @@ When programming, first use the point-to-point command to reach the starting poi
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.23 "TPD" command node interface
+.. centered:: Figure 11.21-1 "TPD" command node interface
 
 Offset instruction
 ---------------------
@@ -599,7 +599,7 @@ This command is an overall offset command. Enter each offset. The program connec
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.24 "Offset" command node interface
+.. centered:: Figure 11.22-1 "Offset" command node interface
 
 ServoCart instruction
 ---------------------------
@@ -633,7 +633,7 @@ Servo control (Cartesian space motion) instruction, which can control robot move
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.25 “ServoCart” command node interface
+.. centered:: Figure 11.23-1 “ServoCart” command node interface
 
 Trajectory instruction
 ---------------------------
@@ -651,7 +651,7 @@ In this command, the user first needs to have a recorded trajectory.
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.26 “Trajectory” command node interface
+.. centered:: Figure 11.24-1 “Trajectory” command node interface
 
 TrajectoryJ instruction
 -------------------------
@@ -670,7 +670,7 @@ In this command, the user first needs to have a recorded trajectory, and the tra
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.27 "TrajectoryJ" command node interface
+.. centered:: Figure 11.25-1 "TrajectoryJ" command node interface
 
 DMP instruction
 -----------------
@@ -688,7 +688,7 @@ DMP is a trajectory imitation learning method that requires planning a reference
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.28 "DMP" command node interface
+.. centered:: Figure 11.26-1 "DMP" command node interface
 
 WPSTrsf instruction
 ---------------------------------
@@ -705,7 +705,7 @@ Select the workpiece coordinate system to be automatically converted, click "Add
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.29 "WPSTrsf" command node interface
+.. centered:: Figure 11.27-1 "WPSTrsf" command node interface
 
 ToolTrst instruction
 -----------------------
@@ -722,7 +722,7 @@ Select the tool coordinate system to be automatically converted, click "Add" and
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.30 “ToolTrst” command node interface
+.. centered:: Figure 11.28-1 “ToolTrst” command node interface
 
 Digital IO instruction node
 ------------------------------
@@ -743,7 +743,7 @@ This instruction is an IO instruction, which is divided into two parts: setting 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.31 “SetDO” command node interface
+.. centered:: Figure 11.29-1 “SetDO” command node interface
 
 2. "GetDI" command node, parameters:
 
@@ -757,7 +757,7 @@ This instruction is an IO instruction, which is divided into two parts: setting 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.32 "GetDI" command node interface
+.. centered:: Figure 11.29-2 "GetDI" command node interface
 
 Simulate AI commands
 ----------------------
@@ -777,7 +777,7 @@ In this command, it is divided into two functions: setting analog output (SetAO/
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.33 “SetAO” command node interface
+.. centered:: Figure 11.30-1 “SetAO” command node interface
    
 2. "GetAI" command node, parameters:
 
@@ -792,7 +792,7 @@ In this command, it is divided into two functions: setting analog output (SetAO/
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.34 "GetAI" command node interface
+.. centered:: Figure 11.30-2 "GetAI" command node interface
 
 Virtual IO command node
 -------------------------
@@ -810,7 +810,7 @@ This instruction is a virtual IO control instruction that can set the simulated 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.35 "Configure simulated external DI" command node interface
+.. centered:: Figure 11.31-1 "Configure simulated external DI" command node interface
    
 2. "Configure simulated external AI" command node, parameters:
 
@@ -821,7 +821,7 @@ This instruction is a virtual IO control instruction that can set the simulated 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.36 "Configure simulated external AI" command node interface
+.. centered:: Figure 11.31-2 "Configure simulated external AI" command node interface
 
 Extended IO command node
 -----------------------------
@@ -838,7 +838,7 @@ Aux-IO is a command function used by the robot to communicate with the PLC to co
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.37 "Obtain simulated external DI" command node interface
+.. centered:: Figure 11.32-1 "Obtain simulated external DI" command node interface
    
 2. "Obtain simulated external AI" command node, parameters:
 
@@ -848,7 +848,7 @@ Aux-IO is a command function used by the robot to communicate with the PLC to co
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.38 "Obtain simulated external AI" command node interface
+.. centered:: Figure 11.32-2 "Obtain simulated external AI" command node interface
 
 3. "Configure UDP communication" command node, parameters:
 
@@ -860,7 +860,7 @@ Aux-IO is a command function used by the robot to communicate with the PLC to co
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.39 "Configure UDP Communication" command node interface
+.. centered:: Figure 11.32-3 "Configure UDP Communication" command node interface
 
 MoveDO instruction
 ---------------------
@@ -886,7 +886,7 @@ This instruction implements the function of continuously outputting DO signals a
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.40 "Motion DO single/continuous output" command node interface
+.. centered:: Figure 11.33-1 "Motion DO single/continuous output" command node interface
 
 ToolList instruction
 -----------------------------
@@ -905,7 +905,7 @@ Select the tool coordinate system name and click "Apply" to add this instruction
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.41 "SetToolList" command node interface
+.. centered:: Figure 11.34-1 "SetToolList" command node interface
 
 2. "SetWobToolList" command node, parameters:
 
@@ -915,7 +915,7 @@ Select the tool coordinate system name and click "Apply" to add this instruction
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.42 "SetWobToolList" command node interface
+.. centered:: Figure 11.34-2 "SetWobToolList" command node interface
 
 Mode instruction
 ------------------
@@ -932,7 +932,7 @@ This instruction can switch the robot to manual mode. It is usually added at the
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.43 “Mode” command node interface
+.. centered:: Figure 11.35-1 “Mode” command node interface
 
 Collision instruction
 --------------------------
@@ -950,7 +950,7 @@ This command sets the collision level. Through this command, the collision level
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.44 “Collision” command node interface
+.. centered:: Figure 11.36-1 “Collision” command node interface
 
 Acc instruction
 ----------------
@@ -967,7 +967,7 @@ The "Acc" command is a function that allows the robot's acceleration to be set i
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.45 "Acc" command node interface
+.. centered:: Figure 11.37-1 "Acc" command node interface
 
 Gripper instruction
 ----------------------
@@ -989,7 +989,7 @@ In the command, the number of the gripper that has been configured and activated
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.46 "Gripper Movement" node interface
+.. centered:: Figure 11.38-1 "Gripper Movement" node interface
 
 The gripper reset command displays the configured gripper number. You can add the gripper reset command to the program.
 
@@ -1001,7 +1001,7 @@ The gripper reset command displays the configured gripper number. You can add th
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.47 "Gripper reset" node interface
+.. centered:: Figure 11.38-2 "Gripper reset" node interface
 
 The gripper activation command displays the configured gripper number. You can add the gripper activation command to the program.
 
@@ -1013,7 +1013,7 @@ The gripper activation command displays the configured gripper number. You can a
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.48 "Gripper activation" node interface
+.. centered:: Figure 11.38-3 "Gripper activation" node interface
 
 Spray instruction
 --------------------
@@ -1024,25 +1024,25 @@ This command is a spray-related command that controls the spray gun to "start sp
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.49 "Start spraying" command node interface
+.. centered:: Figure 11.39-1 "Start spraying" command node interface
 
 .. image:: node_editor_software/047.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.50 "Stop spraying" command node interface
+.. centered:: Figure 11.39-2 "Stop spraying" command node interface
 
 .. image:: node_editor_software/048.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.51 "Clearing gun" command node interface
+.. centered:: Figure 11.39-3 "Clearing gun" command node interface
 
 .. image:: node_editor_software/049.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.52 "Stop clearing" command node interface
+.. centered:: Figure 11.39-4 "Stop clearing" command node interface
 
 Extended axis instructions (controller - PLC)
 -------------------------------------------------
@@ -1057,7 +1057,7 @@ It is divided into UDP communication loading/configuration, asynchronous movemen
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.53 "Extended axis UDP communication configuration" command node interface
+.. centered:: Figure 11.40-1 "Extended axis UDP communication configuration" command node interface
 
 "Extended axis asynchronous motion" command node, parameters:
 
@@ -1068,7 +1068,7 @@ It is divided into UDP communication loading/configuration, asynchronous movemen
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.54 "Extended axis asynchronous motion" command node interface
+.. centered:: Figure 11.40-2 "Extended axis asynchronous motion" command node interface
 
 "Synchronized PTP/LIN motion" command node, parameters:
 
@@ -1080,7 +1080,7 @@ It is divided into UDP communication loading/configuration, asynchronous movemen
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.55 "Synchronized PTP/LIN motion" command node interface
+.. centered:: Figure 11.40-3 "Synchronized PTP/LIN motion" command node interface
 
 "Synchronized ARC motion" command node, the default motion mode is ARC, parameters:
 
@@ -1091,7 +1091,7 @@ It is divided into UDP communication loading/configuration, asynchronous movemen
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.56 "Synchronized ARC motion" command node interface
+.. centered:: Figure 11.40-4 "Synchronized ARC motion" command node interface
 
 "Return to zero" command node, parameters:
 
@@ -1104,7 +1104,7 @@ It is divided into UDP communication loading/configuration, asynchronous movemen
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.57 "Return to zero" command node interface
+.. centered:: Figure 11.40-5 "Return to zero" command node interface
 
 "Enable" command node,,parameters:
 
@@ -1114,7 +1114,7 @@ It is divided into UDP communication loading/configuration, asynchronous movemen
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.58 "Enable" command node interface
+.. centered:: Figure 11.40-6 "Enable" command node interface
 
 Extended axis instructions (controller - servo drive)
 -------------------------------------------------------
@@ -1131,7 +1131,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.59 "Servo ID" command node interface
+.. centered:: Figure 11.41-1 "Servo ID" command node interface
 
 "Control mode" command node,, parameters:
 
@@ -1142,7 +1142,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.60 "Control Mode" command node interface
+.. centered:: Figure 11.41-2 "Control Mode" command node interface
 
 "Servo enable" command node, parameters:
 
@@ -1153,7 +1153,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.61 "Servo enable" command node interface
+.. centered:: Figure 11.41-3 "Servo enable" command node interface
 
 "Servo return to zero" command node, parameters:
 
@@ -1166,7 +1166,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.62 "Servo return to zero" command node interface
+.. centered:: Figure 11.41-4 "Servo return to zero" command node interface
 
 "Position mode" command node, parameters:
 
@@ -1178,7 +1178,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.63 "Position Mode" command node interface
+.. centered:: Figure 11.41-5 "Position Mode" command node interface
 
 "Speed mode" command node, parameters:
 
@@ -1189,7 +1189,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.64 "Speed Mode" command node interface
+.. centered:: Figure 11.41-6 "Speed Mode" command node interface
 
 Conveyor belt instruction
 ----------------------------------
@@ -1204,7 +1204,7 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.65 "Conveyor belt IO real-time detection" command node interface
+.. centered:: Figure 11.42-1 "Conveyor belt IO real-time detection" command node interface
 
 "Real-time detection of conveyor belt position" command node, parameters:
 
@@ -1214,7 +1214,7 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.66 "Real-time detection of conveyor belt position" command node interface
+.. centered:: Figure 11.42-2 "Real-time detection of conveyor belt position" command node interface
 
 "Conveyor tracking enabled" command node, parameters:
 
@@ -1224,13 +1224,13 @@ This instruction includes four commands: Conveyor belt IO real-time detection, p
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.67 "Conveyor tracking enabled" command node interface
+.. centered:: Figure 11.42-3 "Conveyor tracking enabled" command node interface
 
 .. image:: node_editor_software/065.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.68 "Conveyor tracking off" command node interface
+.. centered:: Figure 11.42-4 "Conveyor tracking off" command node interface
 
 Polish instruction
 ----------------------------------
@@ -1241,13 +1241,13 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.69 "Polishing communication equipment uninstallation" command node interface
+.. centered:: Figure 11.43-1 "Polishing communication equipment uninstallation" command node interface
 
 .. image:: node_editor_software/067.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.70 "Polishing communication equipment loading" command node interface
+.. centered:: Figure 11.43-2 "Polishing communication equipment loading" command node interface
 
 "Polishing equipment enable" command node, parameters:
 
@@ -1257,19 +1257,19 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.71 "Polishing equipment enable" command node interface
+.. centered:: Figure 11.43-3 "Polishing equipment enable" command node interface
 
 .. image:: node_editor_software/069.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.72 "Polishing equipment error clearing" command node interface
+.. centered:: Figure 11.43-4 "Polishing equipment error clearing" command node interface
 
 .. image:: node_editor_software/070.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.73 "Polishing equipment force sensor clear" command node interface
+.. centered:: Figure 11.43-6 "Polishing equipment force sensor clear" command node interface
 
 "Polishing speed" command node, parameters:
 
@@ -1279,7 +1279,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.74 "Speed" command node interface
+.. centered:: Figure 11.43-7 "Speed" command node interface
 
 "Polishing contact force" command node, parameters:
 
@@ -1289,7 +1289,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.75 "Polishing contact force" command node interface
+.. centered:: Figure 11.43-8 "Polishing contact force" command node interface
 
 "Polishing protrusion distance" command node, parameters:
 
@@ -1299,7 +1299,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.76 "Polishing protrusion distance" command node interface
+.. centered:: Figure 11.43-9 "Polishing protrusion distance" command node interface
 
 "Polishing control mode" command node, parameters:
 
@@ -1309,7 +1309,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.77 "Polishing control mode" command node interface
+.. centered:: Figure 11.43-10 "Polishing control mode" command node interface
 
 Weld command
 ----------------------
@@ -1326,7 +1326,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.78 "Welding machine voltage" command node interface
+.. centered:: Figure 11.44-1 "Welding machine voltage" command node interface
 
 2. "Welding machine current" command node, parameters:
 
@@ -1336,7 +1336,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.79 "Welding machine current" command node interface
+.. centered:: Figure 11.44-2 "Welding machine current" command node interface
 
 3. "Arc closing/arc starting" command node, parameters:
 
@@ -1348,7 +1348,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.80 "Arc closing/arc starting" command node interface
+.. centered:: Figure 11.44-3 "Arc closing/arc starting" command node interface
 
 4. "Gas ON/OFF" command node, parameters:
 
@@ -1358,9 +1358,9 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.81 "Gas on/off" command node interface
+.. centered:: Figure 11.44-4 "Gas on/off" command node interface
 
-1. "Forward/Stop forward" command node, parameters:
+5. "Forward/Stop forward" command node, parameters:
 
 - I/O type: controller IO/expansion IO
 
@@ -1368,9 +1368,9 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.82 "Forward/Stop forward" command node interface
+.. centered:: Figure 11.44-5 "Forward/Stop forward" command node interface
 
-5. "Reverse wire feed/Stop reverse" command node, parameters:
+6. "Reverse wire feed/Stop reverse" command node, parameters:
 
 - I/O type: controller IO/expansion IO
 
@@ -1378,7 +1378,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.83 "Reverse wire feed/Stop reverse" command node interface
+.. centered:: Figure 11.44-6 "Reverse wire feed/Stop reverse" command node interface
 
 Segment instruction
 ---------------------
@@ -1401,7 +1401,7 @@ This command is a special command for welding, mainly used in intermittent weldi
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.84 "Segment welding" command node interface
+.. centered:: Figure 11.45-1 "Segment welding" command node interface
 
 Laser instruction
 --------------------
@@ -1418,7 +1418,7 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.85-1 "Open/Close sensor" command node interface -- Weld type
+.. centered:: Figure 11.46-1 "Open/Close sensor" command node interface -- Weld type
 
 - Select task number: 0 ~ 255
   
@@ -1426,7 +1426,7 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.85-2 "Open/Close sensor" command node interface -- Task number
+.. centered:: Figure 11.46-2 "Open/Close sensor" command node interface -- Task number
 
 2. "Load/unload sensor" command node, parameters
 
@@ -1436,7 +1436,7 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.86 "Load/unload sensor" command node interface
+.. centered:: Figure 11.46-3 "Load/unload sensor" command node interface
 
 3. "Start/Stop Tracking" command node, parameters
 
@@ -1446,7 +1446,7 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.87 "Start/stop tracking" command node interface
+.. centered:: Figure 11.46-4 "Start/stop tracking" command node interface
 
 4. "Data Record" command node, parameters
 
@@ -1457,7 +1457,7 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.88 "Data Logging" command node interface
+.. centered:: Figure 11.46-5 "Data Logging" command node interface
 
 5. "Laser tracking recurrence" command node, parameters
   
@@ -1465,7 +1465,7 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.89 "Laser Tracking Reappearance" command node interface
+.. centered:: Figure 11.46-6 "Laser Tracking Reappearance" command node interface
 
 6. "Sensor point acquisition movement" command node, parameters
 
@@ -1477,7 +1477,7 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.90 "Data Logging" command node interface
+.. centered:: Figure 11.46-7 "Data Logging" command node interface
 
 1. "Start/End locating" command node, parameters
 
@@ -1492,9 +1492,10 @@ This command contains three parts: laser command, tracking command and positioni
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.91 "Start/End locating" command node interface
+.. centered:: Figure 11.46-8 "Start/End locating" command node interface
 
-laser recording instructions
+
+Laser recording instructions
 ----------------------------------
 
 This command implements the function of taking out the starting point and end point of laser tracking and recording, so that the robot can automatically move to the starting point. It is suitable for situations where the movement starts from outside the workpiece and laser tracking and recording is performed. At the same time, the host computer can obtain the information of the starting point and end point in the recorded data. for subsequent exercise.
@@ -1511,7 +1512,7 @@ Implementing the adjustable laser tracking reproduction speed function allows th
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.92 "Weld data record" command node interface
+.. centered:: Figure 11.47-1 "Weld data record" command node interface
 
 "Obtain weld starting point/end point" command node, parameters:
 
@@ -1522,7 +1523,7 @@ Implementing the adjustable laser tracking reproduction speed function allows th
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.93 "Obtain weld starting point/end point" command node interface
+.. centered:: Figure 11.47-2 "Obtain weld starting point/end point" command node interface
 
 W-Search instruction
 -----------------------
@@ -1543,7 +1544,7 @@ This command is generally used in welding scenarios and requires the welding mac
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.94 "Welding wire positioning start/end" command node interface
+.. centered:: Figure 11.48-1 "Welding wire positioning start/end" command node interface
 
 The search point setting adds points based on the weld type and calculation method.
 
@@ -1560,7 +1561,7 @@ The search point setting adds points based on the weld type and calculation meth
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.95 "Search point setting" command node interface
+.. centered:: Figure 11.48-2 "Search point setting" command node interface
 
 Calculate the offset to set the datum and contact points based on the weld type and calculation method.
 
@@ -1577,7 +1578,7 @@ Calculate the offset to set the datum and contact points based on the weld type 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.96 "Calculate offset" command node interface
+.. centered:: Figure 11.48-3 "Calculate offset" command node interface
 
 "Contact point data write" command node, parameters:
 
@@ -1588,7 +1589,7 @@ Calculate the offset to set the datum and contact points based on the weld type 
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.97 "Contact Point Data Write" command node interface
+.. centered:: Figure 11.48-4 "Contact Point Data Write" command node interface
 
 Weld-Trc instruction
 -------------------------
@@ -1613,7 +1614,7 @@ This instruction implements robot welding seam tracking using welding seam devia
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.98 "Arc tracking on/off" command node interface
+.. centered:: Figure 11.49-1 "Arc tracking on/off" command node interface
 
 Attitude adjustment instructions
 ----------------------------------
@@ -1640,7 +1641,7 @@ After recording the three corresponding posture points, add posture adaptive adj
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.99 "Turn on attitude adjustment" command node interface
+.. centered:: Figure 11.50-1 "Turn on attitude adjustment" command node interface
 
 "Turn off attitude adjustment" command node, parameters:
 
@@ -1650,7 +1651,7 @@ After recording the three corresponding posture points, add posture adaptive adj
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.100 "Turn off attitude adjustment" command node interface
+.. centered:: Figure 11.50-2 "Turn off attitude adjustment" command node interface
 
 F/T Instruction
 ----------------
@@ -1671,7 +1672,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.101 "Turn on/off collision detection" command node interface
+.. centered:: Figure 11.51-1 "Turn on/off collision detection" command node interface
 
 2. "Turn on/off control" command node, parameters:
 
@@ -1688,7 +1689,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.102 "Turn on/off control" command node interface
+.. centered:: Figure 11.51-2 "Turn on/off control" command node interface
 
 3. "FT_Compliance Start/End" command node, parameters:
 
@@ -1699,7 +1700,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.103 "FT_Compliance Start/End" command node interface
+.. centered:: Figure 11.51-3 "FT_Compliance Start/End" command node interface
 
 4. "FT_Spiral" command node, parameters:
 
@@ -1713,7 +1714,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.104 "FT_Spiral" command node interface
+.. centered:: Figure 11.51-4 "FT_Spiral" command node interface
 
 5. "FT_Rot" command node, parameters:
 
@@ -1729,7 +1730,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.105 "FT_Rot" command node interface
+.. centered:: Figure 11.51-5 "FT_Rot" command node interface
 
 6. "FT_Lin" command node, parameters:
 
@@ -1744,7 +1745,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.106 "FT_Lin" command node interface
+.. centered:: Figure 11.51-6 "FT_Lin" command node interface
 
 7. "FT_FindSurface" command node, parameters:
 
@@ -1760,7 +1761,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.107 "FT_FindSurface" command node interface
+.. centered:: Figure 11.51-7 "FT_FindSurface" command node interface
 
 8. "FT_CalCenter Start/End" command node
 
@@ -1768,7 +1769,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.108 "FT_CalCenter Start/End" command node interface
+.. centered:: Figure 11.51-8 "FT_CalCenter Start/End" command node interface
    
 1. "FT_Click" command node, parameters:
 
@@ -1781,7 +1782,7 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.109 "FT_Click" command node interface
+.. centered:: Figure 11.51-9 "FT_Click" command node interface
 
 Torque recording command
 ------------------------------
@@ -1809,7 +1810,7 @@ Click the "Torque Record Stop" button to stop recording. Click "Torque Record Re
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.110 "Torque recording start" command node interface
+.. centered:: Figure 11.52-1 "Torque recording start" command node interface
 
 2. "Torque recording end" command node
 
@@ -1817,7 +1818,7 @@ Click the "Torque Record Stop" button to stop recording. Click "Torque Record Re
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.111 "Torque recording end" command node interface
+.. centered:: Figure 11.52-2 "Torque recording end" command node interface
 
 3. "Torque record reset" command node
 
@@ -1825,7 +1826,7 @@ Click the "Torque Record Stop" button to stop recording. Click "Torque Record Re
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.112 "Torque record reset" command node interface
+.. centered:: Figure 11.52-3 "Torque record reset" command node interface
 
 Modbus instruction
 --------------------
@@ -1847,7 +1848,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.113 Master station "read/write coil" command node interface
+.. centered:: Figure 11.53-1 Master station "read/write coil" command node interface
 
 2. Master station discrete setting, parameters:
 
@@ -1859,7 +1860,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.114 Master station "read discrete quantity" command node interface
+.. centered:: Figure 11.53-2Master station "read discrete quantity" command node interface
 
 3. Master station analog output settings, parameters:
 
@@ -1872,9 +1873,9 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.115 Master station "read/write analog output" command node interface
+.. centered:: Figure 11.53-3 Master station "read/write analog output" command node interface
 
-4.Master station analog input settings, parameters:
+4. Master station analog input settings, parameters:
 
 - Modbus master station name: configured according to actual situation
 - AI name: Configure according to actual situation
@@ -1884,7 +1885,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.116 Master station "read analog input" command node interface
+.. centered:: Figure 11.53-4 Master station "read analog input" command node interface
 
 5. The master station waits for digital input settings, parameters:
 
@@ -1897,7 +1898,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.117 Master station "waiting for digital input" command node interface
+.. centered:: Figure 11.53-5 Master station "waiting for digital input" command node interface
 
 6. The master station waits for analog word input settings, parameters:
 
@@ -1911,7 +1912,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.118 Master station "wait for analog input" command node interface
+.. centered:: Figure 11.53-6 Master station "wait for analog input" command node interface
 
 7. Slave coil settings, parameters:
    
@@ -1923,7 +1924,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.119 Slave "read/write coil" command node interface
+.. centered:: Figure 11.53-7 Slave "read/write coil" command node interface
 
 8. Slave station discrete setting, parameters:
 
@@ -1934,7 +1935,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.120 Slave station "read discrete quantity" command node interface
+.. centered:: Figure 11.53-8 Slave station "read discrete quantity" command node interface
 
 9. Slave station analog output settings, parameters:
 
@@ -1946,7 +1947,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.121 Slave "read/write analog output" command node interface
+.. centered:: Figure 11.53-9 Slave "read/write analog output" command node interface
 
 10. The slave station waits for digital input settings, parameters:
 
@@ -1958,7 +1959,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.122 Slave "wait for digital input" command node interface
+.. centered:: Figure 11.53-10 Slave "wait for digital input" command node interface
 
 11. The slave station waits for analog word input settings, parameters:
 
@@ -1971,7 +1972,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.123 Master station "wait for analog input" command node interface
+.. centered:: Figure 11.53-11 Master station "wait for analog input" command node interface
 
 12. Slave station analog input settings, parameters:
 
@@ -1982,7 +1983,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.124 Slave "read analog input" command node interface
+.. centered:: Figure 11.53-12 Slave "read analog input" command node interface
 
 13.  Read register instruction, parameters:
 
@@ -1996,7 +1997,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.125 "Modbus Slave Read register instruction" node interface
+.. centered:: Figure 11.53-13 "Modbus Slave Read register instruction" node interface
 
 14. Read register data command, parameters:
 
@@ -2007,7 +2008,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.126 "Read register data" node interface
+.. centered:: Figure 11.53-14 "Read register data" node interface
 
 15. Write register command, parameters:
 
@@ -2022,7 +2023,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.2.127 "Write Register" node interface
+.. centered:: Figure 11.53-15 "Write Register" node interface
 
 Application scenario usage examples
 ------------------------------------
@@ -2036,7 +2037,7 @@ For example, install a tip on the end of the robot and drag it to a position nea
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.3.1 "Force Control" command node application configuration interface
+.. centered:: Figure 11.54-1 "Force Control" command node application configuration interface
 
 - Enter the file name. If the correct parameters are not entered, the save will fail and a prompt will appear indicating that the command node parameter configuration is incorrect.
 
@@ -2044,7 +2045,7 @@ For example, install a tip on the end of the robot and drag it to a position nea
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.3.2 Command node parameter configuration error interface
+.. centered:: Figure 11.54-2 Command node parameter configuration error interface
   
 - After clicking Run, the robot will explore in a spiral plus straight line motion. After exploring the correct hole position, use linear and rotational insertion movements until the hole is correctly inserted.
 

@@ -262,7 +262,7 @@ Under the menu bar of "Initial - Base - Joint", click "Soft limit" to enter the 
 
 There may be other equipment in the robot's stroke, and the limit angle can softly limit the robot so that the robot's movement does not exceed a certain coordinate value and prevent the robot from colliding. Triggering the soft limit to stop the robot is automatically triggered by the robot, and there is no stopping distance.
 
-Administrators can use the default values or enter angle values. Input the angle value to limit the positive and negative angles of the robot joints respectively. When the input value exceeds the soft limit angle of the robot joints listed in \ `Table 1.1-1 Robot Basic Parameters <robot_brief_introduction.html#basic-parameters>`__\ value, the limit angle will be adjusted to the maximum value that can be set. When the robot reports that the command exceeds the limit, it needs to enter the drag mode and drag the robot joints to within the limit angle. The interface is shown in figure below.
+Administrators can use the default values or enter angle values. Input the angle value to limit the positive and negative angles of the robot joints respectively. When the input value exceeds the robot joint soft limit angle value listed in the robot basic parameter table in 2.1-Basic Parameters, the limit angle will be adjusted to the maximum value that can be set. When the robot reports that the command exceeds the limit, it needs to enter the drag mode and drag the robot joints to within the limit angle. The interface is shown in figure below.
 
 .. image:: base/020.png
    :width: 3in
@@ -285,6 +285,7 @@ The collision level is divided into one to ten levels, and the detection of one 
 
 Post-collision response strategy function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. important:: Note: This post-collision response strategy function is only used in the Linux version.
 
 On the basis of the original collision strategy in motion, " Gravitational moment mode " and " Vibration response mode " are added to ensure the safety of man-machine cooperation. 
@@ -602,7 +603,7 @@ After the configuration is complete, you can view the corresponding output DO st
    :width: 3in
    :align: center
 
-.. centered:: Figure 4.9-34 Safe speed setting
+.. centered:: Figure 6.4-3 Safe speed setting
 
 Alias
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -613,7 +614,7 @@ Click "Initial - Base - I/O setup" on the menu bar, click on the "Alias"  submen
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.4-3 I/O alias configuration
+.. centered:: Figure 6.4-4 I/O alias configuration
 
 Filter
 ~~~~~~~~~~~~~~~~
@@ -639,7 +640,7 @@ Users can set the corresponding parameters according to their needs, just click 
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-4 Filter interface
+.. centered:: Figure 6.4-5 Filter interface
 
 .. important:: 
    The I/O filter time range is [0~200], the unit is ms.
@@ -661,7 +662,7 @@ Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-5 Output reset configuration
+.. centered:: Figure 6.4-6 Output reset configuration
 
 .. Configuration import and export
 .. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

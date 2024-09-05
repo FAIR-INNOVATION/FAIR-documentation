@@ -1234,7 +1234,7 @@ Segment welding command added
 **Step4**: At this time, "testSegment1.lua" has added segment welding motion instructions, as shown in Figure5.
 
 .. image:: coding/110.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 9.8-2-5 Addition of segment welding motion instructions
@@ -1409,7 +1409,7 @@ This command is a welding wire positioning command, including three commands of 
 In writing a program, usually first set the start command of the search, and then add two LIN instructions to determine the direction of the search. After the search is successful, obtain the calculated offset, and pass the offset through the overall offset command. To take effect into the real welding motion command, the program example is as follows.
 
 .. image:: coding/127.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 9.8-6 W-Search example(1D)
@@ -1451,7 +1451,7 @@ Weld-Trc Operation
 Welding machine model and setting
 **************************************
 
-.. centered:: Table 4.1-2 Verified welding machine model
+.. centered:: Table 9.8-1 Verified welding machine model
 
 .. list-table::
    :widths: 70
@@ -1462,7 +1462,7 @@ Welding machine model and setting
 
    * - MEGMEET ArtsenII CM350
   
-.. centered:: Table 4.1-3 Welding machine function setting
+.. centered:: Table 9.8-2 Welding machine function setting
 
 .. list-table::
    :widths: 100 100
@@ -1481,7 +1481,7 @@ Welding machine model and setting
 PLC model and settings
 **************************************
 
-.. centered:: Table 4.1-4 Verified PLC models
+.. centered:: Table 9.8-3 Verified PLC models
 
 .. list-table::
    :widths: 70
@@ -1492,7 +1492,7 @@ PLC model and settings
 
    * - INOVANCE Easy521
   
-.. centered:: Table 4.1-5 PLC key settings
+.. centered:: Table 9.8-4 PLC key settings
 
 .. list-table::
    :widths: 70 70
@@ -1530,7 +1530,7 @@ Setting the welding current voltage and feedback welding current signal,blow:
 
 **2）Introduction to the parameters of the function interface**
 
-.. centered:: Table 4.1-6 Arc tracking up-down compensation module
+.. centered:: Table 9.8-5 Arc tracking up-down compensation module
 
 .. list-table::
    :widths: 70 70 70
@@ -1585,7 +1585,7 @@ Setting the welding current voltage and feedback welding current signal,blow:
      - Reference current constant mode, reference current value
      - It can be filled in manually to achieve the desired compensation height
 
-.. centered:: Table 4.1-7 Arc tracking left-right compensation module
+.. centered:: Table 9.8-6 Arc tracking left-right compensation module
 
 .. list-table::
    :widths: 70 70 70
@@ -1622,7 +1622,7 @@ Setting the welding current voltage and feedback welding current signal,blow:
      
 **3）Scope of application**
 
-.. centered:: Table 4.1-8 Up-down compensation On, Left-right compensation Off
+.. centered:: Table 9.8-7 Up-down compensation On, Left-right compensation Off
 
 .. list-table::
    :widths: 70 70
@@ -1644,7 +1644,7 @@ Setting the welding current voltage and feedback welding current signal,blow:
    * - Set the current A
      - >160
   
-.. centered:: Table 4.1-9 Up-down compensation Off, Left-right compensation On
+.. centered:: Table 9.8-8 Up-down compensation Off, Left-right compensation On
 
 .. list-table::
    :widths: 70 70
@@ -1666,7 +1666,7 @@ Setting the welding current voltage and feedback welding current signal,blow:
    * - Set the current A
      - >160
   
-.. centered:: Table 4.1-10 Up-down compensation On, Left-right compensation On
+.. centered:: Table 9.8-9 Up-down compensation On, Left-right compensation On
 
 .. list-table::
    :widths: 70 70

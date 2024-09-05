@@ -525,7 +525,7 @@ When saving a teaching point, the coordinate system of the teaching point is the
 For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
 
 .. image:: teaching_pendant_software/036.png
-   :width: 6in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 5.3‑7 Schematic diagram of manual operation area
@@ -543,7 +543,7 @@ In this interface, the digital output, analog output (0-10v) and end tool digita
 - AO operation: Select the port number, enter a value (0-100) in the input box on the right, the value is a percentage, setting 100 means setting the AO port to 10v.
 
 .. image:: teaching_pendant_software/037.png
-   :width: 6in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 5.3‑8 I/O
@@ -558,7 +558,7 @@ The operation steps of teach programming (TPD) function are as follows:
 - **Step2 Configure track recording parameters**:Click TPD to enter the "TPD" function item to configure trajectory recording parameters, set the name of the trajectory file, pose type and sampling period, configure DI and DO, and record the corresponding output by triggering DI during the process of recording the TPD trajectory DO, as Figure3.6-8;
 
 .. image:: teaching_pendant_software/038.png
-   :width: 6in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 5.3‑9 TPD track record
@@ -581,7 +581,7 @@ The operation steps of teach programming (TPD) function are as follows:
 - **Step6 teach programming**:Click New, select a blank template, click to enter the PTP function programming item, select the initial position point just saved, click the "Add" button, after the application is completed, a PTP instruction will be displayed in the program file; then click to enter the TPD function programming item, Select the track just recorded, set whether it is smooth and the speed scaling, click the "Add" button, after the application is completed, a MoveTPD instruction will be displayed in the program file, as shown in Figure 3.6-10;
 
 .. image:: teaching_pendant_software/040.png
-   :width: 3in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 5.3‑11 TPD programming
@@ -611,7 +611,7 @@ Eaxis move
 Select Eaxis to move, this function is the jog function of the extension axis, it needs to be configured to configure the extension axis, use this jog function to control the extension axis, see "Chapter 4 Machine-Robot Peripherals-Extended Axis Peripherals" for details configuration".
 
 .. image:: teaching_pendant_software/041.png
-   :width: 6in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 5.3-12 Eaxis Mobile Diagram
@@ -622,7 +622,7 @@ FT
 Select the reference frame as a reference for the force sensor when dragging.
 
 .. image:: teaching_pendant_software/042.png
-   :width: 6in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 5.3‑12 FT diagram
@@ -633,7 +633,7 @@ Telecentric fixed point
 This function is mainly used in medical penetration. After setting the telecentric fixed point, the robot end always moves at this point.
 
 .. image:: teaching_pendant_software/043.png
-   :width: 6in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 5.3‑13 Schematic diagram of telecentric fixed point
