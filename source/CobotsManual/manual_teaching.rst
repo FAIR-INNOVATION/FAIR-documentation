@@ -11,7 +11,7 @@ Manual teaching includes two methods:
 
 After teaching to the target position, you can save the teaching point in "Robot supporting functions - Point Name". When saving the teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application.
 
-.. image:: teaching_pendant_software/256.png
+.. image:: teaching_pendant_software/056.png
    :width: 6in
    :align: center
 

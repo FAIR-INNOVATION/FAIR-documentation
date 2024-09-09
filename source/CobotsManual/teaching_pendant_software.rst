@@ -25,7 +25,7 @@ Robot's first activation
 
 2. Open a web browser on the PC and visit the target website 192.168.58.2; the robot will enter the activation page upon first power-up.
 
-.. figure:: teaching_pendant_software/334.png
+.. figure:: teaching_pendant_software/058.png
    :width: 4in
    :align: center
 
@@ -35,7 +35,7 @@ Robot's first activation
    
 4. The system will verify your SN code. If the input is correct, the activation process will be completed automatically.
 
-.. figure:: teaching_pendant_software/335.png
+.. figure:: teaching_pendant_software/059.png
    :width: 4in
    :align: center
 
@@ -136,6 +136,14 @@ The initial interface of the system is shown in the figure below:
    :align: center
    :width: 6in
 .. centered:: Figure 5.2-1 Schematic diagram of the initial interface of the system
+
+When entering the "Initial", "Program - Coding", "Program - Graphical" and “Auxiliary” of the WebApp, the 3D simulation robot model page is half-expanded. Click the expanded icon to re-enter the system initial interface.
+
+.. image:: teaching_pendant_software/054.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 5.2‑2 3D simulation robot model page can be rolled out icon
 
 Control area
 ~~~~~~~~~~~~~~~
