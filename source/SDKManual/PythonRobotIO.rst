@@ -351,3 +351,231 @@ Code example
     max_waittime = 2000
     error = robot.WaitToolAI(0,0,50,max_waittime,0)
     print("WaitToolAI ",error)
+
+Set whether the output is reset after the control box DO stop/pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetOutputResetCtlBoxDO(resetFlag)``"
+    "Description", "Set whether the output is reset after the control box DO stop/pause"
+    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+    time.sleep(5)
+    error = robot.SetDO(1,1)
+    print("SetDO 1  return:",error)
+
+    error = robot.SetDO(3,1)
+    print("SetDO 3  return:",error)
+
+    error = robot.SetToolDO(1,1)
+    print("SetToolDO return:",error)
+
+    error = robot.SetAO(0,25)
+    print("SetAO 0   return:",error)
+
+    error = robot.SetAO(1,87)
+    print("SetAO 1  return:",error)
+
+    error = robot.SetToolAO(0,54)
+    print("SetToolAO return:",error)
+
+    error = robot.SetOutputResetCtlBoxDO(1)
+    print("SetOutputResetCtlBoxDO return:",error)
+
+    error = robot.SetOutputResetCtlBoxAO(1)
+    print("SetOutputResetCtlBoxAO return:",error)
+
+    error = robot.SetOutputResetAxleDO(1)
+    print("SetOutputResetCtlBoxDO return:",error)
+
+    error = robot.SetOutputResetAxleAO(1)
+    print("SetOutputResetCtlBoxAO return:",error)
+
+    error = robot.ProgramRun()
+    print("ProgramRun return:",error)
+    time.sleep(3)
+    error = robot.ProgramStop()
+    print("ProgramPause return:",error)
+
+    time.sleep(5)
+
+    error = robot.SetDO(1,1)
+    print("SetDO 1  return:",error)
+
+    error = robot.SetDO(3,1)
+    print("SetDO 3  return:",error)
+
+    error = robot.SetToolDO(1,1)
+    print("SetToolDO return:",error)
+
+    error = robot.SetAO(0,25)
+    print("SetAO 0   return:",error)
+
+    error = robot.SetAO(1,87)
+    print("SetAO 1  return:",error)
+
+    error = robot.SetToolAO(0,54)
+    print("SetToolAO return:",error)
+    error = robot.SetOutputResetCtlBoxDO(0)
+    print("SetOutputResetCtlBoxDO return:",error)
+
+    error = robot.SetOutputResetCtlBoxAO(0)
+    print("SetOutputResetCtlBoxAO return:",error)
+
+    error = robot.SetOutputResetAxleDO(0)
+    print("SetOutputResetCtlBoxDO return:",error)
+
+    error = robot.SetOutputResetAxleAO(0)
+    print("SetOutputResetCtlBoxAO return:",error)
+
+    error = robot.ProgramRun()
+    print("ProgramRun return:",error)
+    time.sleep(3)
+    error = robot.ProgramStop()
+    print("ProgramPause return:",error)
+
+Set whether the output is reset after the control box AO stop/pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetOutputResetCtlBoxDO(resetFlag)``"
+    "Description", "Set whether the output is reset after the control box AO stop/pause"
+    "Required parameter", "- ``resetFlag``：0-reset；1-non-reset"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Sets whether the output is reset after the end tool DO stops/pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetOutputResetAxleDO(resetFlag)``"
+    "Description", "Sets whether the output is reset after the end tool DO stops/pause"
+    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Set whether the output is reset after the end tool AO stops/pauses
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetOutputResetAxleAO(resetFlag)``"
+    "Description", "Set whether the output is reset after the end tool AO stops/pauses"
+    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Sets whether the output is reset after an extended DO stop/pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetOutputResetExtDO (resetFlag)``"
+    "Description", "Sets whether the output is reset after an extended DO stop/pause"
+    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    error = robot.SetAuxDO(1,True,False,False)
+    print("SetAuxDO 1  return:",error)
+
+    error = robot.SetAuxDO(3,True,False,False)
+    print("SetAuxDO 3  return:",error)
+
+    error = robot.SetAuxAO(0,10,False)
+    print("SetAuxAO 0   return:",error)
+
+    error = robot.SetAuxAO(1,87,False)
+    print("SetAuxAO 1  return:",error)
+
+    error = robot.SetOutputResetExtDO(1)
+    print("SetOutputResetExtDO return:",error)
+
+    error = robot.SetOutputResetExtAO(1)
+    print("SetOutputResetExtAO return:",error)
+
+    error = robot.ProgramRun()
+    print("ProgramRun return:",error)
+    time.sleep(3)
+    error = robot.ProgramStop()
+    print("ProgramPause return:",error)
+
+    time.sleep(3)
+    error = robot.SetAuxDO(1,True,False,False)
+    print("SetAuxDO 1  return:",error)
+
+    error = robot.SetAuxDO(3,True,False,False)
+    print("SetAuxDO 3  return:",error)
+
+    error = robot.SetAuxAO(0,10,False)
+    print("SetAuxAO 0   return:",error)
+
+    error = robot.SetAuxAO(1,87,False)
+    print("SetAuxAO 1  return:",error)
+
+    error = robot.SetOutputResetExtDO(0)
+    print("SetOutputResetExtDO return:",error)
+
+    error = robot.SetOutputResetExtAO(0)
+    print("SetOutputResetExtAO return:",error)
+
+    error = robot.ProgramRun()
+    print("ProgramRun return:",error)
+    time.sleep(3)
+    error = robot.ProgramStop()
+    print("ProgramPause return:",error)
+
+Sets whether the output is reset after the expansion AO stops/pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetOutputResetExtAO (resetFlag)``"
+    "Description", "Sets whether the output is reset after the expansion AO stops/pause"
+    "Required parameter", "- ``resetFlag``： 0-non-reset；1-reset"
+    "Optional parameter", "NULL"
+    "Return value", "Errcode: Success -0  Failed -errcode"

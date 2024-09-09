@@ -209,17 +209,18 @@ Code example
 
 Linear motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++
+.. versionchanged:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``MoveL(desc_pos, tool, user, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0 , ovl = 100.0, blendR = -1.0, exaxis_pos = [0.0,0.0,0.0,0.0], search = 0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0] )``"
+    "Prototype", "``MoveL(desc_pos, tool, user, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0 , ovl = 100.0, blendR = -1.0, exaxis_pos = [0.0,0.0,0.0,0.0], search = 0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0],overSpeedStrategy=0,speedPercent=10)``"
     "Description", "Linear motion in Cartesian space"
     "Required parameter", "- ``desc_pos``:Target Cartesian pose,unit[mm][°];
     - ``tool``:Tool number,[0~14];
     - ``user``:Workpiece number,[0~14];"
-  - "Optional parameter", "- ``joint_pos``:Target joint position, unit[°], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
+    "Optional parameter", "- ``joint_pos``:Target joint position, unit[°], Default initial value is [0.0,0.0,0.0,0.0,0.0, 0.0,0.0], default value calls inverse kinematics to solve for return value;
     - ``vel``:Speed percentage,[0~100], default to is 20.0;;
     - ``acc``:Acceleration percentage,[0~100], default to is 0.0;
     - ``ovl``:Speed scaling factor,[0~100], default to is 100.0;
@@ -227,7 +228,10 @@ Linear motion in Cartesian space
     - ``exaxis_pos``:External axis 1 position to external axis 4 position, default to is[0.0,0.0,0.0,0.0];
     - ``search``:[0]-non welding wire positioning, [1]-welding wire positioning ,default to is 0;
     - ``offset_flag``:[0]-no offset, [1]-offset under workpiece/base coordinate system, [2]-offset under tool coordinate system, default to is 0;
-    - ``offset_pos``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0]"
+    - ``offset_pos``:Pose offset,unit[mm][°] , default to is [0.0,0.0,0.0,0.0,0.0,0.0]
+    - ``overSpeedStrategy``:Overspeed handling policy, 0-policy off; 1-standard; 2-error stop on overspeed; 3-adaptive speed reduction, default is 0
+    - ``speedPercent``:Percentage of allowable speed reduction threshold [0-100], default 10%
+    "
     "Return value", "Errcode: Success -0  Failed -errcode"
 
 Code example

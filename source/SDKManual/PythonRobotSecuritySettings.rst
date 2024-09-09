@@ -353,3 +353,87 @@ Code example
     robot = Robot.RPC('192.168.58.2')
     error = robot.PointTableUpdateLua("point_table_a.db","testpoint.lua")
     print("PointTableUpdateLua:",error)
+
+Set up a robot collision detection method
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetCollisionDetectionMethod(method)``"
+    "Description", "Set up a robot collision detection method"
+    "Required parameter", "
+    - ``method``：Collision Detection Methods：0-Current Mode；1-Dual encoder；2-Current and dual encoders are turned on simultaneously
+    "
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcode"
+
+Set static collision detection to start or stop
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetStaticCollisionOnOff(status)``"
+    "Description", "Set static collision detection to start or stop"
+    "Required parameter", "
+    - ``status``：0-close；1-open
+    "
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcode"
+
+Set static collision detection to start or sto
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetPowerLimit(status, power)``"
+    "Description", "Set static collision detection to start or sto"
+    "Required parameter", "
+    - ``status``：  0-close；1-open
+    "
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcode"
+    
+Code example
+------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    error = robot.SetPowerLimit(0,2)
+    print("SetPowerLimit return:",error)
+
+    error = robot.DragTeachSwitch(1)
+    print("DragTeachSwitch return:",error)
+
+    error,joint_torque = robot.GetJointTorques()
+    print("GetJointTorques return",joint_torque)
+    joint_torque = [joint_torque[0],joint_torque[1],joint_torque[2],joint_torque[3],joint_torque[4],joint_torque[5]]
+    error_joint = 0
+    count =100
+    error = robot.ServoJTStart()    #servoJT start
+    print("ServoJTStart return",error)
+    while(count):
+        if error!=0:
+            error_joint =error
+        joint_torque[0] = joint_torque[0] + 10  #Increase 0.1 NM per 1-axis, 100 movements
+        error = robot.ServoJT(joint_torque, 0.001)  # Joint space servo mode motion
+        count = count - 1
+        time.sleep(0.001)
+    print("ServoJTStart return",error_joint)
+    error = robot.ServoJTEnd()  #End of servo motion
+    time.sleep(1)
+    print("ServoJTEnd return",error)

@@ -221,3 +221,81 @@ Code example
     print("SetExDevProtocol",ret)
     ret =robot.GetExDevProtocol()
     print("GetExDevProtocol",ret)
+
+End-of-Axis Sensor Configuration
++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AxleSensorConfig(idCompany, idDevice, idSoftware, idBus)``"
+    "Description", "End-of-Axis Sensor Configuration"
+    "Required parameter", "
+    - ``idCompany``: company，18-JUNKONG；25-HUIDE
+    - ``idDevice``: typology，0-JUNKONG/RYR6T.V1.0
+    - ``idSoftware``: software version，0-J1.0/HuiDe1.0(Not yet open)
+    - ``idBus``: Mounting Location，1-End port 1；2-End port 2..8-End port 8(Not yet open)
+    "
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0 , Failed -errcode"
+
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+    error = robot.AxleSensorConfig(18,0,0,0)
+    print("AxleSensorConfig return:", error)
+
+    error = robot.AxleSensorConfigGet()
+    print("AxleSensorConfigGet return:", error)
+
+    error = robot.AxleSensorActivate(0)
+    print("AxleSensorActivate return:", error)
+    time.sleep(1)
+    error = robot.AxleSensorActivate(1)
+    print("AxleSensorActivate return:", error)
+
+    while(1):
+        error = robot.AxleSensorRegWrite(1, 4, 6, 1, 0, 0, 0)
+        print("AxleSensorRegWrite return:", error)
+        
+Get End-of-Axis Sensor Configuration
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AxleSensorConfigGet()``"
+    "Description", "Get End-of-Axis Sensor Configuration"
+    "Required parameter", "NULL"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0 , Failed -errcode
+    - ``Return(control state) idCompany``: company，18-JUNKONG；25-HUIDE
+    - ``Return(control state) idDevice``:  typology，0-JUNKONG/RYR6T.V1.0
+    "
+        
+End-of-Axis Sensor activation
++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AxleSensorActivate(actFlag)``"
+    "Description", "End-of-Axis Sensor activation"
+    "Required parameter", "``actFlag``：  0-reset；1-activation"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0 , Failed -errcode
+    - ``Return（control state）coord``: coordinate system value[x,y,z,rx,ry,rz]
+    "

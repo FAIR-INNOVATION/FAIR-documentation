@@ -108,6 +108,8 @@ Code example
 
 Set the force sensor reference coordinate system
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: python SDK-v2.0.5
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -115,7 +117,7 @@ Set the force sensor reference coordinate system
     "Prototype", "``FT_SetRCS(ref)``"
     "Description", "Set the force sensor reference coordinate system"
     "Required parameter", "- ``ref``:0-Tool coordinate system,1-Base coordinate system"
-    "Optional parameter", "Nothing"
+    "Optional parameter", "- ``coord``：[x,y,z,rx,ry,rz]Custom coordinate system values, default[0,0,0,0,0,0]"
     "Return value", "Errcode: Success -0 , Failed -errcode"
 
 Code example
@@ -799,3 +801,280 @@ Obtain the load identification result
     "Optional parameter", "Nothing"
     "Return value", "- Errcode: Success -0  Failed -errcod
     - Return:(if success) weight Load weight，cog Load centroid [x,y,z]"
+
+Set up six-dimensional force and joint impedance hybrid drag switches and parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain, dragMaxTcpVel,dragMaxTcpOriVel)"
+    "Description", " Set up six-dimensional force and joint impedance hybrid drag switches and parameters"
+    "Required parameter", "- ``status``： control state，0-close；1-open
+    - ``impedanceFlag``：Impedance open sign，0-close；1-open
+    - ``lamdeDain=[D1,D2,D3,D4,D5, D6]``： drag gain
+    - ``KGain=[K1,K2,K3,K4,K5,K6]``：stiffness gain
+    - ``BGain=[B1,B2,B3,B4,B5,B]``： damping gain
+    - ``dragMaxTcpVel``：Maximum linear speed limit at the moving end
+    - ``dragMaxTcpOriVel``：Maximum angular velocity limit at the end of the drag"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod"
+
+Code example
+-------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    status = 1 #control state，0-close；1-open
+    impedanceFlag = 1 #Impedance open sign，0-close；1-open
+    lamdeDain = [ 3.0, 2.0, 2.0, 2.0, 2.0, 3.0] # drag gain
+    KGain = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00] # stiffness gain
+    BGain = [150, 150, 150, 5.0, 5.0, 1.0] # damping gain
+    dragMaxTcpVel = 1000 #Maximum linear speed limit at the moving end
+    dragMaxTcpOriVel = 180 #Maximum angular velocity limit at the end of the drag
+
+    error = robot.DragTeachSwitch(1)
+    print("DragTeachSwitch 1  return:",error)
+
+    error = robot.ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain,dragMaxTcpVel,dragMaxTcpOriVel)
+    print("ForceAndJointImpedanceStartStop return:",error)
+
+    error = robot.GetForceAndTorqueDragState()
+    print("GetForceAndTorqueDragState return:",error)
+
+    time.sleep(10)
+
+    status = 0 #control state，0-close；1-open
+    impedanceFlag = 0 #Impedance open sign，0-close；1-open
+    error = robot.ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain,dragMaxTcpVel,dragMaxTcpOriVel)
+    print("ForceAndJointImpedanceStartStop return:",error)
+
+    error = robot.GetForceAndTorqueDragState()
+    print("GetForceAndTorqueDragState return:",error)
+
+    error = robot.DragTeachSwitch(0)
+    print("DragTeachSwitch 0  return:",error)
+
+The force sensor turns on automatically after the error is cleared
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "SetForceSensorDragAutoFlag(status)"
+    "Description", "The force sensor turns on automatically after the error is cleared"
+    "Required parameter", "- ``status``： control state，0-close；1-open"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod"
+    
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    error = robot. SetForceSensorDragAutoFlag (1)
+    print("SetForceSensorDragAutoFlag return:",error)
+    
+Force Sensor Assisted Drag
+++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)"
+    "Description", "Force Sensor Assisted Drag"
+    "Required parameter", "- ``status``：control state，0-close；1-open
+    - ``asaptiveFlag``：Adaptive opening sign，0-close；1-open
+    - ``interfereDragFlag``：Interference zone towing sign，0-close；1-open
+    - ``M=[m1,m2,m3,m4,m5,m6]``：inertia factor 
+    - ``B=[b1,b2,b3,b4,b5,b6]``：damping factor
+    - ``K=[k1,k2,k3,k4,k5,k6]``：coefficient of rigidity
+    - ``F=[f1,f2,f3,f4,f5,f6]``：Drag the six-dimensional force threshold
+    - ``Fmax``：Maximum towing power limit
+    - ``Vmax``：Maximum joint speed limit"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod"
+    
+Code example
+--------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    status = 1 # control state, 0-close; 1-open
+    asaptiveFlag = 1 #Adaptive opening sign, 0-close; 1-open
+    interfereDragFlag = 1 #Interference zone towing sign, 0-close; 1-open
+    M = [15, 15, 15, 0.5, 0.5, 0.1] #inertia factor
+    B = [150, 150, 150, 5, 5, 1] #damping factor
+    K = [0, 0, 0, 0, 0, 0] #coefficient ofrigidity
+    F = [5, 5, 5, 1, 1, 1] # Drag the six-dimensional force threshold
+    Fmax = 50 #Maximum towing power limit
+    Vmax = 1810 #Maximum joint speed limit
+
+    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)
+    print("EndForceDragControl return:",error)
+
+    time.sleep(10)
+    status=0
+    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)
+    print("EndForceDragControl return:",error)
+        
+Get force sensor drag switch status
+++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "GetForceAndTorqueDragState()"
+    "Description", "Get force sensor drag switch status"
+    "Required parameter", "NULL"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod
+    - ``Return（control state）dragState``：Force Sensor Assisted Drag Control Status，0-close；1-open
+    - ``Return（control state）sixDimensionalDragState``：Six-dimensional force-assisted drag control state，0-close；1-open"
+        
+Set the load weight under the force transducer
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "SetForceSensorPayload(weight)"
+    "Description", "Set the load weight under the force transducer"
+    "Required parameter", " - ``weight``：weight kg"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod"
+        
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    error = robot.SetForceSensorPayload(0.8)
+    print("SetForceSensorPayload return:",error)
+
+    error = robot.SetForceSensorPayloadCog(0.5,0.6,12.5)
+    print("SetForceSensorPayLoadCog return:",error)
+
+    error = robot.GetForceSensorPayload()
+    print("GetForceSensorPayLoad return:",error)
+
+    error = robot.GetForceSensorPayloadCog()
+    print("GetForceSensorPayLoadCog return:",error)
+            
+Set the load center of mass under the force transducer
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "SetForceSensorPayloadCog(x,y,z)"
+    "Description", "Set the load center of mass under the force transducer"
+    "Required parameter", "
+    - ``x``：load center of mass x mm
+    - ``y``：load center of mass y mm
+    - ``z``：load center of mass z mm
+    "
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod"
+            
+Get the load weight under the force transducer
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "GetForceSensorPayload()"
+    "Description", "Get the load weight under the force transducer"
+    "Required parameter", "NULL"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod
+    - ``Return（control state） weight``：weight load weight kg"
+            
+Get the load center of mass under the force transducer
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "GetForceSensorPayloadCog()"
+    "Description", "Get the load center of mass under the force transducer"
+    "Required parameter", "NULL"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod
+    - ``Return（control state） x``：load center of mass x mm 
+    - ``Return（control state） y``：load center of mass y mm 
+    - ``Return（control state） z``：load center of mass z mm"
+            
+Automatic zeroing of force sensors
+++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "ForceSensorAutoComputeLoad()"
+    "Description", "Automatic zeroing of force sensors"
+    "Required parameter", "NULL"
+    "Optional parameter", "NULL"
+    "Return value", "- Errcode: Success -0  Failed -errcod
+    - ``Return（control state） weight``：sensor qualitykg
+    - ``Return（control state） pos=[x,y,z]``：sensor center of mass mm"
+        
+Code example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    error = robot.SetForceSensorPayload(0)
+    print("SetForceSensorPayload return:",error)
+
+    error = robot.SetForceSensorPayloadCog(0,0,0)
+    print("SetForceSensorPayLoadCog return:",error)
+
+    error = robot.ForceSensorAutoComputeLoad()
+    print("ForceSensorAutoComputeLoad return:",error)

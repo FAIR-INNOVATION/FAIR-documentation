@@ -740,7 +740,30 @@ Code example
     #Coordinate system calculation of positioner - four-point method
     error,coord = robot.PositionorComputeECoordSys()
     print("PositionorComputeECoordSys() return:",error,coord)
-                     
+    
+End-of-Axis Sensor Register Write
+++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AxleSensorRegWrite(devAddr, regHAddr, regLAddr, regNum, data1, data2, isNoBlock)``"
+    "Description", "End-of-Axis Sensor Register Write"
+    "Required parameter", "
+    - ``devAddr``： Device Address Number 0-255
+    - ``regHAddr``：Register address high 8 bits
+    - ``regLAddr``：Register address lower 8 bits
+    - ``regNum``： Number of registers 0-255
+    - ``data1``：Write register value 1
+    - ``data2``：Write register value 2
+    - ``isNoBlock``： 0-blockage；1-non-blocking
+    "
+    "Optional parameter", "NULL"
+    "Return value", "
+    - Errcode: Success -0 , Failed -errcode"
+    
 The UDP extension axis is enabled
 ++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
