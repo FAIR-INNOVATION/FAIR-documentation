@@ -396,9 +396,9 @@ When using the robot welding function, welding can still be carried out if the a
 
 .. centered:: Figure 8.5-9 Successful arcing DI is not configured with warning
 
-**Welding interruption recovery**:The welding interruption will be triggered when the arc is unexpectedly interrupted or the operator stops welding actively during the welding process of the robot. After the welding interruption, when the external input signal to the robot changes from invalid to effective, the robot will automatically resume welding from the original interrupted position (see Section 4.1 of this paper for details).
+**Welding interruption recovery**:The welding interruption will be triggered when the arc is unexpectedly interrupted or the operator stops welding actively during the welding process of the robot. After the welding interruption, when the external input signal to the robot changes from invalid to effective, the robot will automatically resume welding from the original interrupted position.
 
-**Welding Interruption Exit**:The welding interruption will be triggered when the arc is unexpectedly interrupted during the welding process of the robot or the operator suspends the welding actively. When the signal input from outside to the robot changes from invalid to effective after the welding interruption, the robot will stop the welding, and the welding cannot be resumed after the welding termination (please refer to Section 4.1 of this article for details).
+**Welding Interruption Exit**:The welding interruption will be triggered when the arc is unexpectedly interrupted during the welding process of the robot or the operator suspends the welding actively. When the signal input from outside to the robot changes from invalid to effective after the welding interruption, the robot will stop the welding, and the welding cannot be resumed after the welding termination.
 
 **Welding starting Arc**:the robot controls the DO output port of arc starting of welding machine. When the robot program executes the arc starting instruction, the DO output port corresponding to arc starting of welding machine is valid.
 
@@ -561,9 +561,9 @@ When using the robot welding function, welding can still be carried out if the a
 
 .. centered:: Figure 8.5-21 Successful arcing DI is not configured with warning
 
-**Welding interruption recovery**:The welding interruption will be triggered when the arc is unexpectedly interrupted or the operator stops welding actively during the welding process of the robot. After the welding interruption, when the external input signal to the robot changes from invalid to effective, the robot will automatically resume welding from the original interrupted position (see Section 4.1 of this paper for details).
+**Welding interruption recovery**:The welding interruption will be triggered when the arc is unexpectedly interrupted or the operator stops welding actively during the welding process of the robot. After the welding interruption, when the external input signal to the robot changes from invalid to effective, the robot will automatically resume welding from the original interrupted position.
 
-**Welding Interruption Exit**:The welding interruption will be triggered when the arc is unexpectedly interrupted during the welding process of the robot or the operator suspends the welding actively. When the signal input from outside to the robot changes from invalid to effective after the welding interruption, the robot will stop the welding, and the welding cannot be resumed after the welding termination (please refer to Section 4.1 of this article for details).
+**Welding Interruption Exit**:The welding interruption will be triggered when the arc is unexpectedly interrupted during the welding process of the robot or the operator suspends the welding actively. When the signal input from outside to the robot changes from invalid to effective after the welding interruption, the robot will stop the welding, and the welding cannot be resumed after the welding termination.
 
 **Welding starting Arc**:the robot controls the DO output port of arc starting of welding machine. When the robot program executes the arc starting instruction, the DO output port corresponding to arc starting of welding machine is valid.
 
