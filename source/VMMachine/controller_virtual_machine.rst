@@ -440,7 +440,7 @@ Take 192.168.56.0/24 as an example：docker network create --driver bridge --sub
 Appendix
 ==================================
 
-Appendix 1:Enabling Virtualization in the BIOS
+Appendix 1: Enabling Virtualization in the BIOS
 ------------------------------------------------------
 
 Different models of computers may have different processes to enable virtualization. Take Lenovo ThinkPad series Windows 10 as an example:
@@ -509,7 +509,7 @@ Different models of computers may have different processes to enable virtualizat
    :width: 4in
    :align: center
 
-Appendix 2:Adding a Virtual NIC (Loopback Network Adapter)
+Appendix 2: Adding a Virtual NIC (Loopback Network Adapter)
 -------------------------------------------------------------------
 
 1. Open Device Manager, press "Windows Key - X", select "Network adapters".
@@ -581,7 +581,7 @@ Appendix 2:Adding a Virtual NIC (Loopback Network Adapter)
    :width: 6in
    :align: center
 
-Appendix 3: root Permissions
+Appendix 3: Root Permissions
 --------------------------------------
 
 After Ubuntu is installed, the root user is not allowed to log in by default, and the password is empty. If you want to log in as the root user, you must first set a password for the root user.
@@ -662,7 +662,7 @@ Appendix 4: Docker Basic Commands
    docker rmi -f [image_id_or_name]: Force remove an image.
    docker build: Build an image.
 
-8. docker镜像相关 :
+8. Docker image-related commands :
 
 .. code-block:: console
    :linenos:
