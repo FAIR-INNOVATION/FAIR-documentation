@@ -1158,7 +1158,7 @@ This command can set the rotation speed, contact force, extension distance and c
    :width: 3in
    :align: center
 
-.. centered:: Figure 3.7-6 Polish command interface
+.. centered:: Figure 9.7-6 Polish command interface
 
 Welding command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1945,7 +1945,7 @@ PT-Mode command
 
 Click the "PT-Mode" icon to enter the PT-Mode command editing interface
 
-This command is mainly used for mode switching between system mode and point table mode. Teaching points in different point tables can be applied by switching point tables.For details, see \ `Teaching management page <teaching_pendant_software.html#teaching-management>`__\
+This command is mainly used for mode switching between system mode and point table mode. Teaching points in different point tables can be applied by switching point tables.For details, see Chapter 11 - Points.
 
 .. image:: coding/151.png
    :width: 3in
@@ -2632,7 +2632,7 @@ As shown in Figure 57, click "Modbus".
 As shown in Figure 58, click "Modbus_TCP".
 
 .. image:: coding/220.png
-   :width: 6in
+   :width: 3in
    :align: center
 
 .. centered:: Figure 9.18-58 Select Modbus_TCP
@@ -2640,7 +2640,7 @@ As shown in Figure 58, click "Modbus_TCP".
 As shown in figure 59, select "slave station" to open the ModbusTCP slave station command adding page (figure 60).
 
 .. image:: coding/221.png
-   :width: 6in
+   :width: 3in
    :align: center
 
 .. centered:: Figure 9.18-59 Selecting a Slave Station

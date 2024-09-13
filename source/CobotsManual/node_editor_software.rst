@@ -1269,7 +1269,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.43-6 "Polishing equipment force sensor clear" command node interface
+.. centered:: Figure 11.43-5 "Polishing equipment force sensor clear" command node interface
 
 "Polishing speed" command node, parameters:
 
@@ -1279,7 +1279,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.43-7 "Speed" command node interface
+.. centered:: Figure 11.43-6 "Speed" command node interface
 
 "Polishing contact force" command node, parameters:
 
@@ -1289,7 +1289,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.43-8 "Polishing contact force" command node interface
+.. centered:: Figure 11.43-7 "Polishing contact force" command node interface
 
 "Polishing protrusion distance" command node, parameters:
 
@@ -1299,7 +1299,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.43-9 "Polishing protrusion distance" command node interface
+.. centered:: Figure 11.43-8 "Polishing protrusion distance" command node interface
 
 "Polishing control mode" command node, parameters:
 
@@ -1309,7 +1309,7 @@ This command is used for polishing scenes. When using it, you need to uninstall 
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.43-10 "Polishing control mode" command node interface
+.. centered:: Figure 11.43-9 "Polishing control mode" command node interface
 
 Weld command
 ----------------------
@@ -1860,7 +1860,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.53-2Master station "read discrete quantity" command node interface
+.. centered:: Figure 11.53-2 Master station "read discrete quantity" command node interface
 
 3. Master station analog output settings, parameters:
 

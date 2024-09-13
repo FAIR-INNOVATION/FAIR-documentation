@@ -140,8 +140,39 @@ Enable the security background program and set the unexpected scene and backgrou
 
 Direction limit (Only used in Linux systems)
 ---------------------------------------------
+
+Click "Initial - Safety" in the menu bar, and then click the "Direction limit" submenu to enter the configuration interface.
+
+Tool direction limit is a protective function that acts on the Cartesian space of the robot tool end to limit the range of motion of the robot end posture, including function enablement settings, reference tool direction settings, and maximum offset angle settings. The maximum offset angle defines the maximum angle limit between the Z axis of the Cartesian coordinate system of the tool end and the reference tool direction, which can usually be understood as a conical space.
+
+.. image:: safety/012.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.8-1 Direction limit
+
 Robot limit (Only used in Linux systems)
 ---------------------------------------------
 
+Click "Initial - Safety" in the menu bar, and then click the "Robot limit" submenu to enter the configuration interface.
+
+Robot limits include momentum and power, where the momentum limit is used to limit the robot's maximum momentum, and the power limit is used to limit the mechanical work done by the robot.
+
+.. image:: safety/013.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.9-1 Robot limit
+
 Power detection (Only used in QNX systems)
 ---------------------------------------------
+
+Click "Initial - Safety" in the menu bar, and then click the "Power detection" submenu to enter the configuration interface.
+
+When acting directly on the current loop of the robot (only with the command servoJT), it is used to limit the work done by the robot. When it is detected that the integral of the robot speed and torque exceeds the limit, power protection is performed.
+
+.. image:: safety/014.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.10-1 Power detection
