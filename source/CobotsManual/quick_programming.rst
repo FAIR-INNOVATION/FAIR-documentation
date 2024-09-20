@@ -8,7 +8,7 @@ Introduction to Simple Motion Instructions
 
 You can choose the point to be reached, and the smooth transition time setting can realize that the movement from this point to the next point is continuous. Whether to set the offset, you can choose to offset based on the base coordinate system and based on the tool coordinates, and pop up x, y, z, rx, ry, rz offset settings, PTP specific path is the optimal path automatically planned by the motion controller, click “Add” and “Apply” to save this command.
 
-.. image:: teaching_pendant_software/057.png
+.. image:: teaching_pendant_software/055.png
    :width: 6in
    :align: center
 
@@ -18,7 +18,7 @@ You can choose the point to be reached, and the smooth transition time setting c
 
 The function of this command is similar to the “PTP” command, but the path of the point reached by this command is a straight line.
 
-.. image:: teaching_pendant_software/055.png
+.. image:: teaching_pendant_software/057.png
    :width: 6in
    :align: center
 
@@ -27,7 +27,7 @@ The function of this command is similar to the “PTP” command, but the path o
 Operate on program files
 --------------------------
 
-Modify the program tree using the toolbar at the bottom of the program tree.
+Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/006.png
@@ -163,7 +163,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 Write and run a program
 -------------------------
 
-The left side is mainly for adding program commands. Click the icon above each keyword to enter the detailed interface. There are two main operations for adding program commands to the file:
+The left side is mainly for adding program commands. Click the icon above each keyword to enter the detailed interface. There are two main operations for adding program commands to files:
 
 - 1. Open the relevant command and click the Apply button to add the command to the program;
 
