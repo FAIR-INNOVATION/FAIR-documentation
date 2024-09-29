@@ -401,9 +401,9 @@ The corresponding type of FR is "SmartTool" and is used in combination with forc
 
 .. important:: Please make sure that your SmartTool handle has been fixedly installed on the end of the robot and is correctly connected to the end of the robot, and that the force sensor has been fixedly installed on the end of the SmartTool handle and is correctly connected to the SmartTool handle.
 
-1)Configure the SmartTool handle (refer to NSR's SmartTool button function configuration);
+1) Configure the SmartTool handle (refer to NSR's SmartTool button function configuration);
 
-2)After the SmartTool handle button function configuration is completed, configure the manufacturer of the extended IO device as "FR", select the "Type", "Software Version" and "Hang Position" information, and click the "Configure" button;
+2) After the SmartTool handle button function configuration is completed, configure the manufacturer of the extended IO device as "FR", select the "Type", "Software Version" and "Hang Position" information, and click the "Configure" button;
 
 .. image:: application/030.png
    :width: 4in
@@ -411,7 +411,7 @@ The corresponding type of FR is "SmartTool" and is used in combination with forc
 
 .. centered:: Figure 14.12‑14 FR device information configuration interface
 
-3)After successfully configuring the device information, select the configured force sensor and click the "Activate" button to activate the force sensor. After successful activation, click the "Zero Point Correction" button to clear the force sensor and view the table data;
+3) After successfully configuring the device information, select the configured force sensor and click the "Activate" button to activate the force sensor. After successful activation, click the "Zero Point Correction" button to clear the force sensor and view the table data;
 
 .. image:: application/031.png
    :width: 4in
@@ -419,7 +419,7 @@ The corresponding type of FR is "SmartTool" and is used in combination with forc
 
 .. centered:: Figure 14.12‑15 Force sensor zero calibration
 
-4)According to the current end installation, configure the load data on the "End Load" interface, and configure the tool coordinate data, tool type and installation location on the "Tool Coordinates" interface.
+4) According to the current end installation, configure the load data on the "End Load" interface, and configure the tool coordinate data, tool type and installation location on the "Tool Coordinates" interface.
 
 .. image:: application/032.png
    :width: 4in
@@ -562,36 +562,95 @@ Step 2: Name the program and automatically open the program in the program teach
 Multi-layer welding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click "Multi-layer welding" under "Weldment shape" to enter the multi-layer multi-pass welding guidance interface. After completing the configuration of various robot basic settings, we can quickly generate a welding teaching program through four simple steps. It mainly includes the following five steps.
+When the weld leg size is greater than 10mm, the multi-layer multi-pass welding function is usually adopted. This function can configure the welding program templated, add the arc tracking function to the first welding process of multi-layer multi-pass welding, and correct the weld deviation in the subsequent multi-pass linear welding process, so as to improve the weld quality.
 
-Step 1. Set the first group of points according to the prompts, namely welding point, X+ point, Z+ point and safety point.
+The operation process of arc tracking multi-layer and multi-pass welding function is as follows:
+
+1) Set the tool coordinate system and fill in the tool size and attitude of the welding gun.
+
+.. note::
+   The values on the interface are examples only, and the actual tool status shall prevail.
 
 .. image:: application/047.png
-   :width: 3in
+   :width: 6in
    :align: center
 
-.. centered:: Figure 14.14‑8 First set of point settings
+.. centered:: Figure 14.14-8 Sets the tool coordinate system
 
-Step 2, the second group of point settings, you can set the type of path point, support straight line and arc path, including welding point, X+ point and Z+ point.
+2) Click on "Application", select "Welding Expert", and select "Multi-layer welding" in the "Weldment Shape" category.
 
 .. image:: application/048.png
-   :width: 3in
+   :width: 6in
    :align: center
 
-.. centered:: Figure 14.14‑9 Second set of point settings
+.. centered:: Figure 14.14-9 Open the multi-layer welding interface
 
-Step 3: After setting all the group points, click "Finish" to enter the function page of each weld bead offset setting function, and set the offset of the required weld bead in turn. The interface is shown in the figure below.
+3) To use the arc tracing function, be sure to turn on the "First Layer Weld Swing Function" switch and configure the corresponding swing parameters.
 
 .. image:: application/049.png
-   :width: 4in
+   :width: 6in
    :align: center
 
-.. centered:: Figure 14.14‑10 Weld Bead Offset Setting
+.. centered:: Figure 14.14-10 Turn on the first layer welding swing function
 
-Step 4: After all the required weld bead parameters are set, click "Finish" to jump to the program generation page, enter the file name, and the multi-layer multi-pass welding program can be generated, and then the user can open it in the program teaching The program is debugged, and the interface is shown in the figure below.
+4) Click the "Configure" button to edit the swing parameters.
+
+.. note::
+   If arc tracking is required to compensate left and right, only the "triangle wave swing" and "sine wave swing" types can be selected, the swing frequency shall not be less than 0.5Hz, the swing amplitude shall not be less than 3mm, the waiting time for the swing left and right shall be consistent, and the swing azimuth angle shall be 0.
 
 .. image:: application/050.png
-   :width: 4in
+   :width: 6in
    :align: center
 
-.. centered:: Figure 14.14‑11 Save program
+.. centered:: Figure 14.14-11 Configure the swing parameters
+
+5) Turn on the "Arc Tracking Function" switch, edit the corresponding up-down and left-right compensation parameters, and then click "Next" to enter the multi-layer multi-pass welding setting page.
+
+.. note::
+   The arc tracking parameters are configured according to the actual welding situation, refer to the "Arc Tracking Function Operation Manual" or contact relevant technicians.
+
+.. image:: application/051.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.14-12  Configure arc tracing parameters
+
+6) Here the "welds" is the welding start position; "X+ point" is a point in the X+ direction of the welding point relative to the custom offset coordinate system; "Z+point" is a point in the Z+ direction of the welding point relative to the custom offset coordinate system; The "Safety Point" is the transition point from the completion of the previous weld to the start of the next weld. After the teaching and setting is complete, click "Next" to select the relevant location of the weld end point.
+
+.. image:: application/052.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.14-13 Multi-layer welding line start point position setting
+
+7) 6.Select "Straight Point", where "Weld Point" is the end position of the weld; "X+ point" is a point in the X+ direction of the custom offset coordinate system relative to the "weld point"; The Z+ point is a point in the Z+ direction of the custom offset coordinate system relative to the Weld Point. After the teaching and setting is completed, click "Next" to set the multi-layer and multi-pass welding parameters.
+
+.. image:: application/053.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.14-14 Multi-layer weld line end point position setting
+
+8) On this page, you can set the number of multi-layer welds and their distribution locations. Click the "On/Off" box in the parameter table to select the corresponding value of the active multi-layer multi-pass weld, and fill in the "X", "Z" and "B" columns with the desired corresponding offset position and angle in the custom coordinate system. After the setup is complete, click the "Compelete" button to go to the next step.
+
+.. image:: application/054.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.14-15 Multi-layer welding parameter setting
+
+9) At this point, all parameters have been configured, enter the name of the program you want to save, and click the "Save" button to automatically produce the corresponding multi-layer multi-pass welding program.
+
+.. image:: application/055.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.14-16 Multi-layer welding program generation
+
+10) Click the "Open Program" button to read the LUA program saved in the previous step, as shown in the following figure.
+
+.. image:: application/056.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.14-17 Example of an arc tracing multi-layer welding procedure
