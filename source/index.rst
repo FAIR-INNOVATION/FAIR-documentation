@@ -18,6 +18,7 @@ Welcome to FAIR's documentation!
    SDKManual/index
    VMMachine/vm_intro
    FRCap/frcap_intro
+   LuaProgram/lua_intro
 
 .. toctree:: 
    :maxdepth: 6
