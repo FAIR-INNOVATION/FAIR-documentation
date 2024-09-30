@@ -116,6 +116,7 @@ body {
 .rst-content table.no-padding td {
     padding: 8px 0px !important;
 }
-img {
+figure a.reference img,
+a.reference img {
     border: 1px solid #221714;
 }
