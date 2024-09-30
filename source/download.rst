@@ -8,6 +8,8 @@ Brochure
 
 Qualification Certification
 ---------------------------------
+    :download:`FAIRINO ISO9001 Quality Certification <_static/_doc/FAIRINO ISO9001 Quality Certification.pdf>`
+
     :download:`FAIRINO CE Certificate <_static/_doc/FAIRINO CE Certificate.pdf>`
 
     :download:`High Protection IP65 Test Certification Certificate <_static/_doc/High protection IP65 test certification certificate.zip>`
