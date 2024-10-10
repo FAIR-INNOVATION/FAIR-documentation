@@ -253,7 +253,7 @@ User can quickly configure the DO required for spraying through the one-key conf
 
 .. figure:: robot_peripherals/018.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.4-2 Spray Gun Command Editing
 
@@ -659,7 +659,7 @@ As shown in Figure 28, select the control type as "Controller I/O" (according to
 
 .. figure:: robot_peripherals/039.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.5-28 Add welding commands
 
@@ -710,7 +710,7 @@ As shown in Figure 34, in the open welding instruction add page, select the cont
 
 .. figure:: robot_peripherals/042.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.5-34 Add welding commands
 
@@ -799,6 +799,15 @@ The welding interruption recovery function of cooperative robot can only be used
 
 Appendix 1: UDP communication protocol for robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. warning::
+  1）CRC check method: Modbus 16 check is used, but only the lower 8 bits are taken for check. Check data area D100-D176,D200-D273.
+
+  2）Arc tracking: The actual current feedback is to convert the actual current of the welding machine obtained by the PLC into an analog quantity of 0-4095 and transmit it to the analog quantity channel 0 of the UDP data protocol, namely D168.
+
+  3）Speed ​​conversion logic: The robot sends the speed (unit mm/s) V÷lead×60=V';
+
+  PLC converts the robot's speed to V'×encoder resolution÷60=V" unit (pulse/s).
 
 Robot controller -> PLC
 +++++++++++++++++++++++++++
@@ -1382,7 +1391,7 @@ PLC -> robot controller
 
    * - 16
      - D114
-     - INT
+     - DINT
      - 
      - 1#Real-time Torque (Reserved)
 
@@ -1400,7 +1409,7 @@ PLC -> robot controller
 
    * - 19
      - D117
-     - INT
+     - DINT
      - 
      - 2#Current position
 
@@ -1466,7 +1475,7 @@ PLC -> robot controller
 
    * - 30
      - D128
-     - INT
+     - DINT
      - 
      - 2#Real-time Torque (Reserved)
   
@@ -1484,7 +1493,7 @@ PLC -> robot controller
 
    * - 33
      - D131
-     - INT
+     - DINT
      - 
      - 3#Current position
 
@@ -1550,7 +1559,7 @@ PLC -> robot controller
 
    * - 44
      - D142
-     - INT
+     - DINT
      - 
      - 3#Speed feedback (reserved)
   
@@ -1634,15 +1643,15 @@ PLC -> robot controller
 
    * - 58
      - D156
-     - INT
+     - DINT
      - 
-     - Speed feedback (reserved)
+     - 4#Speed feedback (reserved)
 
    * - 59
      - D157
-     - INT
+     - DINT
      - 
-     - Speed feedback (reserved)
+     - 4#Speed feedback (reserved)
 
    * - 60
      - D158
@@ -1706,25 +1715,25 @@ PLC -> robot controller
 
    * - 70
      - D168
-     - REAL
+     - INT
      - 
      - Analog AI0
 
    * - 71
      - D169
-     - REAL
+     - INT
      - 
      - Analog AI1
 
    * - 72
      - D170
-     - REAL
+     - INT
      - 
      - Analog AI2
 
    * - 73
      - D171
-     - REAL
+     - INT
      - 
      - Analog AI3
 
@@ -1747,7 +1756,7 @@ PLC -> robot controller
      - Actual weld voltage feedback
 
    * - 77
-     - D275
+     - D175
      - REAL
      - 
      - Actual weld voltage feedback
@@ -2039,7 +2048,7 @@ And the seeking point can be set with offset, and the offset type can be selecte
 
 .. figure:: robot_peripherals/077.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.6-30 Locating Offset Option
 
@@ -2047,7 +2056,7 @@ As shown in the figure, when the seek offset function is enabled, the offset par
 
 .. figure:: robot_peripherals/078.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.6-31 Setting of locating offset parameters
 
@@ -2074,7 +2083,7 @@ As shown in the figure, click the "Start Tracking" and "Stop Tracking" buttons i
 
 .. figure:: robot_peripherals/081.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.6-34 Start and Stop of Laser Tracking
 
@@ -2187,7 +2196,7 @@ As shown in the figure, click "LT-Rec" to open the page for adding laser recordi
 
 .. figure:: robot_peripherals/093.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.6-45 Movement to the starting point of trajectory
 
@@ -2206,7 +2215,7 @@ Click "LT-Rec" to open the laser recording command addition page, and find "Weld
 
 .. figure:: robot_peripherals/095.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.6-47 Trajectory Reproduction
 
@@ -2389,7 +2398,7 @@ Configuration steps
 
 .. figure:: robot_peripherals/111.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.7-6 Extended axis command editing
 
@@ -2573,6 +2582,18 @@ Enter the target speed of 5mm/s, click the "Set" button, the servo motor will ke
 
 .. centered:: Figure 8.7-15 Servo motion debugging (speed mode)
 
+If the robot encounters an emergency situation such as collision or pressing the emergency stop button, the extended axis can trigger an emergency stop and stop moving according to the set emergency stop deceleration. After the collision alarm is restored, instructions can continue to be issued to restore the operation of the extended axis.
+
+In the advanced settings, it is necessary to set the servo acceleration/deceleration and servo emergency stop acceleration/deceleration as follows:
+
+.. figure:: robot_peripherals/175.png
+  :align: center
+  :width: 4in
+
+.. centered:: Figure 8.7-16 Advanced settings for servo motion
+
+Click on "Pause" or "Stop" to stop the 485 extension axis according to the set deceleration.
+
 Extended axis programming
 ++++++++++++++++++++++++++++++
 
@@ -2596,15 +2617,15 @@ Extended axis programming
 
 .. figure:: robot_peripherals/123.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.7-18 Sets the control mode for the extension axis
 
-**Step4**: Flip the Add extension axis commands interface to the bottom, click the "Apply" button, and close the Add extension axis commands interface.
+**Step4**: Flip the Add extension axis commands interface to the bottom, click the "Apply" button.
 
 .. figure:: robot_peripherals/124.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.7-19 Apply the extension axis commands
 
@@ -2616,11 +2637,11 @@ Extended axis programming
 
 .. centered:: Figure 8.7-20 Setup servo control mode program
 
-**Step6**: How to control servo motion through user program? Also open the interface of adding extension axis commands , find the parameter configuration bar, take the Location mode as an example, enter the target position and running speed, and click "Add" button; Flip to the bottom of the Add Extension Axis commands screen, click the "Apply" button, and close the Add extension axis commands screen.
+**Step6**: How to control servo motion through user program? Also open the interface of adding extension axis commands , find the parameter configuration bar, take the Location mode as an example, enter the target position and running speed, and click "Add" button; Flip to the bottom of the Add Extension Axis commands screen, click the "Apply" button.
 
 .. figure:: robot_peripherals/126.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.7-21 Add Location mode motion commands
 
@@ -2819,7 +2840,7 @@ Attitude adaptive configuration steps
 
 .. figure:: robot_peripherals/134.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.9-2 Attitude Adjustment Command Edit
 
@@ -2965,7 +2986,7 @@ Command description: "FT_Guard" command is a collision detection command. Select
 
 .. figure:: robot_peripherals/139.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-5 FT_Guard Command Edit
 
@@ -2995,7 +3016,7 @@ Instruction description: The "FT_Control" instruction is a force control motion 
 
 .. figure:: robot_peripherals/140.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-6 FT_Control Command Edit
 
@@ -3025,7 +3046,7 @@ Instruction description: The "FT_Spiral" instruction is a spiral line exploratio
 
 .. figure:: robot_peripherals/141.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-7 FT_Spiral Command Edit
 
@@ -3055,7 +3076,7 @@ Instruction description: The "FT_Rot" instruction is a rotation exploration inse
 
 .. figure:: robot_peripherals/142.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-8 FT_Rot Command Edit
 
@@ -3085,7 +3106,7 @@ Instruction description: "FT_Lin" instruction is rotation exploration insertion,
 
 .. figure:: robot_peripherals/143.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-9 FT_Lin Command Edit
 
@@ -3115,7 +3136,7 @@ Instruction description: The "FT_FindSurface" instruction is for surface positio
 
 .. figure:: robot_peripherals/144.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-10 FT_FindSurface Command Edit
 
@@ -3142,7 +3163,7 @@ Instruction description: The "FT_CalCenter" instruction is for center positionin
 
 .. figure:: robot_peripherals/145.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-11 FT_CalCenter Command Edit
 
@@ -3199,7 +3220,7 @@ Instruction description: The "FT_Click" command is click force detection, which 
 
 .. figure:: robot_peripherals/146.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.10-12 FT_Click Command Edit
 
