@@ -1002,7 +1002,7 @@ Click the "WPTrsf" icon to enter the WPTrsf command editing interface.
 Select the workpiece coordinate system to be automatically converted, and click "Add" and "Apply" to save the instruction. This instruction realizes automatic conversion of points in the workpiece coordinate system when executing internal PTP and LIN instructions. Use the example area to show and prompt the correct combination of instructions. After adding specific instructions, you can adjust the combination according to the actual scene.
 
 .. image:: coding/081.png
-   :width: 3in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 9.5-33 WPTrsf command interface
