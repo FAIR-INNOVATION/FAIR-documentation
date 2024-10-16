@@ -103,6 +103,123 @@ Network settings
   
 -  **Set network**:Click the "Set Network" button, prompting that the configuration is in progress. After the configuration is complete, the device needs to be restarted.
 
+Teaching device multilingual settings function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Teaching device multilingual settings
+++++++++++++++++++++++++++++++++++++++++
+
+1.Connect the control box to the teaching device and start it up.
+
+2.Log in with the account admin and password 123. Navigate to the page, click on System Settings - General Settings, and confirm that the teaching device is enabled.
+
+.. image:: system/028.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑2 Teaching device enabled status
+
+3.On the login screen (or during the initial activation screen, settings can also be made), select the language at the top right corner.
+
+.. image:: system/029.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑3 Language settings on the activation interface
+
+.. image:: system/030.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑4 Language settings on the login interface
+
+4.Take the login interface language settings as an example, select the language. If the following prompts (in different languages) appear, it means the settings are successful. Restart the control box to complete the language settings.
+
+.. image:: system/031.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑5 Set to Chinese
+
+.. image:: system/032.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑6 Set to English
+
+.. image:: system/033.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑7 Set to Japanese
+
+.. image:: system/034.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑8 Set to French
+
+.. image:: system/035.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑9 Set to Korean
+
+Input method switch
+++++++++++++++++++++++++++++
+
+The default input method is set to English.
+
+1.Open the soft keyboard located at the bottom right corner and tap on the input field, for example, tap on the username input field.
+
+2.Switch to the Chinese Pinyin input method
+
+Press the CTRL key twice; when the key status turns red, click the spacebar to select the input method. The following are Chinese input methods.
+
+.. image:: system/036.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑10 Chinese Pinyin input method
+
+3.Switch to the English input method
+
+Click the CTRL key twice; when the key status turns red, click the spacebar to select the input method. The following will be the English input method.
+
+.. image:: system/037.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑11 English input method
+
+4.Switch to the Japanese input method
+
+Click the CTRL key twice; when the key status turns red, press the spacebar to select the input method. The following will be the Japanese input method.
+
+.. image:: system/038.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑12 Japanese input method
+
+You can switch between text types such as Hiragana and Katakana in the input method floating window.
+
+.. image:: system/039.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑13 Switching text types in Japanese input method
+
+4.Switch to the French input method
+
+Click the CTRL key twice; when the key status turns red, press the spacebar to select the input method. The following will be the French input method.
+
+.. image:: system/040.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑14 French input method
+
 Account settings account settings
 --------------------------------------
 
@@ -147,7 +264,7 @@ User management page, used to save user information, you can add user ID, functi
 .. important::
    The initial user 111 and the current login user cannot be deleted.
 
-.. image:: system/005.png
+.. image:: system/002.png
    :width: 6in
    :align: center
 

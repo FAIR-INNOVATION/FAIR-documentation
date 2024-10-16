@@ -538,6 +538,77 @@ When using the Cartesian space linear motion command LIN, the constrained condit
 
 **Joint overspeed protection ends**:JointOverSpeedProtectEnd();
 
+Angular velocity adjustable function
+**********************************************
+
+This function can be used when encountering a workpiece that requires corner welding during the welding process, or when a specific linear line is planned (a quick transition is required when the attitude change is large and the position change is small, but the linear speed cannot be accelerated).
+
+**Step1**：Set the tool coordinate system to calibrate the tool size and attitude of the welding gun.
+
+.. warning:: The values on the interface are examples only, and the actual tool status shall prevail.
+
+.. image:: coding/246.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-3-7 Sets the tool coordinate system
+
+**Step2**：Click on "Program", select "Coding", and select " LIN" in the "Motion Command" category.
+
+.. image:: coding/247.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-3-8 Straight line command setting interface
+
+**Step3**：Set the starting point of each straight line of wrapping angle welding as the transition point, turn on the "The transition point angular velocity is adjustable" button, and set the maximum acceleration percentage (the default maximum angular velocity of 100% is 360°/s).
+
+.. image:: coding/248.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-3-9 Transition point angular velocity adjustment parameter configuration interface
+
+**Step4**：Click the "Add" button to generate a LIN command with the adjustment of the transition attitude angular velocity.
+
+.. image:: coding/249.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-3-10 Add a transition point linear motion command
+
+**Step5**：The robot completes the attitude transition at the starting point, normally executes the linear command movement to the end point of the section, closes the "The transition point angular velocity is adjustable" button, and adds a termination waypoint.
+
+.. image:: coding/250.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-3-11  Inserts the end point of the line
+
+**Step6**：Click the "Apply" button to generate the corresponding LUA command.
+
+.. image:: coding/251.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-3-12 Generate a straight LUA instruction with transition points
+
+A complete set of corner wrapping welds usually has more than one transition point, and in the case of corner wrapping shown in Figure 7, there are two attitude transition points with small position change and large attitude change during the welding process. 
+
+Point 1 is the starting point of the first section of welding, and point 2 is the end point of the first section of welding; 
+
+Point 3 is the starting point of the second section of welding, and point 4 is the end point of the second section of welding; 
+
+Point 5 is the starting point of the third section of welding, and point 6 is the end point of the third section of welding. 
+
+The attitude transition occurs from the end point of the previous section of welding to the starting point of the next section of welding, so it is necessary to add the attitude angular velocity adjustment instruction at the starting point of the next section of welding, so that the maximum linear velocity remains unchanged during the transition of the wrapping angle attitude, and the maximum angular velocity is increased, so that the process of wrapping angle welding process runs.
+
+.. image:: coding/252.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.5-3-13 Example of a wrapping welding process
+
 Arc command
 ++++++++++++++++
 
@@ -1874,7 +1945,7 @@ F/T command
 
 Click the "F/T" icon to enter the F/T command editing interface
 
-The instruction includes FT_Guard (collision detection), FT_Control (constant force control), FT_Spiral (spiral insertion), FT_Rot (rotation insertion), FT_Lin (linear insertion), FT_FindSurface (surface positioning), FT_CalCenter (center positioning) seven instructions, detailed See Robot Peripherals chapter.
+The command includes nine commands: FT_Guard (collision detection), FT_Control (constant force control), FT_Compliance (compliance control), FT_Spiral (spiral insertion), FT_Rot ​​(rotation insertion), FT_Lin (linear insertion), FT_FindSurface (surface positioning), FT_CalCenter (center positioning), FT_Click (click force detection), see the robot peripherals chapter for details.
 
 .. image:: coding/136.png
    :width: 6in
