@@ -682,3 +682,150 @@ Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset
 ..    :align: center
 
 .. .. centered:: Figure 6.5-1 Configuration import and export
+
+Tool Tcp Automatic Calibration
+-------------------------------------------
+
+Overview
+~~~~~~~~~~~~~
+
+Robot tool TCP (Tool Center Position, TCP) automatic calibration uses photoelectric sensor equipment (double tube cross type) to quickly calibrate the robot tool TCP. By counting the time when the tool triggers I/O signals in the photoelectric sensor device during robot movement, the conversion relationship between the robot end flange and the tool coordinate system is established, thereby accurately calibrating the robot tool coordinate system and improving the accuracy of the robot system.
+
+Calibration process of coordinate system for sensor equipment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Installing robots
+++++++++++++++++++++++++++
+
+Install a robot with an absolute positioning accuracy of 1.2 mm on the work platform, and install a specialized tool for calibrating the coordinate system of the photoelectric sensor on the end flange of the robot.
+
+.. image:: base/034.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 6.5‑1 Example of robot installation
+
+Installing sensor device
++++++++++++++++++++++++++++++++++
+
+Connect the two sets of brown, blue, and black signal wires of the photoelectric sensor device to the two sets of 24V, 0V, CI0, and CI1 ports (any available configurable digital signal input port is sufficient) of the robot control box. Power on the control box to start the robot and light up the X and Y axis beams of the photoelectric sensor device.
+
+.. image:: base/035.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 6.5‑2 Example of photoelectric sensor equipment
+
+Setting up the TCP automatic calibration system coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+According to the TCP automatic calibration system for robot tools, firstly, place the coarse positioning photoelectric sensor device in the flexible workspace of the robot, and ensure that the coordinate system of the photoelectric sensor device is roughly aligned with the robot base coordinate system.
+
+As shown above, where {b} is the robot base coordinate system, {e} is the end flange coordinate system, and {s} is the sensor coordinate system.
+
+.. image:: base/036.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑3 Coordinate system setting for TCP automatic calibration system of robot tool
+
+(1) adjust the posture of the robot's end flange to Rx, Ry, and Rz at 180 °, 0 °, and 0 °, respectively, and ensure that this posture remains unchanged throughout the entire calibration sensor device coordinate system movement process after adjustment；
+
+(2) Then make the robot tool TCP perform MoveL motion together in the X and Y axis directions of the robot base coordinate system and the sensor coordinate system；
+
+(3) During the movement of the robot, once the X and Y axis beams of the photoelectric sensor device always maintain the triggering I/O signal state, the installation position of the photoelectric sensor device can be accurately positioned as its current position.
+
+Calibrate the sensor coordinate system based on the web interface
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In the robot web control interface, click on "Initial" - "Base" - "Coordinate" - "TCP" to enter the "Tool coordinate system settings" interface；
+
+Select the reference coordinate system from the drop-down menu of "Coordinate system name", and choose the corresponding "Tool Type" and "Installation position", then click "Modify" to enter the "Modify Wizard" interface；
+
+Select "Laser automatic calibration", enter the laser automatic calibration interface, click "Configuration", enter the "Laser calibration device configuration" interface, if there are previous settings, click "Modify".
+
+.. image:: base/037.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.5‑4  Example of entering the photoelectric automatic calibration interface
+
+Set I/O
+***********************
+
+Select the input port numbers for the control box of the X-axis laser beam and Y-axis laser beam, then click "Set". After successful settings, a green check mark will appear before the "Setup I/O" indicator.
+
+.. image:: base/038.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑5 Example of setting the X and Y axis laser beam I/O ports of the laser sensor
+
+Teaching center point
+******************************
+
+Drag the robot to trigger the X and Y axis beam I/O signals of the photoelectric sensor device using the TCP tool, and then move it along the Z+ axis direction of the base coordinate system to a position 5 mm above the measurement plane of the sensor device (where the X and Y axis beams intersect). 
+
+.. warning:: Note that during this process, the end flange posture of the robot remains unchanged at Rx, Ry, and Rz, which are 180 °, 0 °, and 0 °, respectively. Then click "Record". After successful setting, a green check mark will appear before the "Setup center Point" marker.
+
+.. image:: base/039.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑6  The teaching TCP is located at the center of the sensor measurement plane
+
+Set parameters
+****************************
+
+Set three custom parameters: "Movement radius", "Angular velocity", and "Depth of movement".
+
+(1) The "Movement radius" parameter is the radius at which the robot tool performs circular motion. Referring to the effective measurement radius of the laser sensor used, which is 35 mm, it is recommended to set it to "10-15 mm". If it is too large, it may cause interference between the tool and the sensor, and if it is too small, it may cause interference between the X and Y axis laser I/O signals of the sensor;
+
+(2) The "Angular velocity" parameter is the uniform angular velocity at which the robot tool moves in a circular motion. It is recommended to set it to "10-40 deg/s". If it is too large, it may cause impact vibration at the end of the tool and result in frame dropping of sensor I/O signals;
+
+(3) The "Depth of movement" parameter is the Euclidean distance between the centers of the robot's two circular motions. The effective measurement height of the laser sensor used is 25 mm, and it is recommended to set it to "5-15mm". If it is too large, it may cause interference between the tool and the sensor.
+
+Then click on "Set", and after successful settings, a green check mark will appear before the "Set Parameters" icon.
+
+.. image:: base/040.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑7 Example of custom parameter setting
+
+Run
+*********************
+
+In automatic mode, click "Run" to initiate the calibration operation of the sensor coordinate system. After the operation is completed, the interface displays the x, y, and z coordinate values of the calibrated sensor coordinate system and the attitude angles of Rx, Ry, and Rz. Then click "complete" to save the current data and exit the current interface.
+
+.. image:: base/041.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑8 Example of calibration results for laser sensor coordinate system
+
+.. warning:: Pay attention to the current operation. It is recommended that the robot perform this operation during the lifecycle of each production task (robot power off start operation) to prevent small displacement of sensor installation position caused by high-frequency vibration during operation and calculation errors caused by incorrect operation resulting in the release of sensor coordinate system calibration data in the controller.
+
+Calibration process of tool coordinate system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After completing the "Laser device configured", if a green check mark appears in front of the label, it indicates that the laser sensor coordinate system has been successfully set. Remove the specialized tool for the end flange of the robot and install the unknown tool to be calibrated. Click "Calibrate" to start the TCP automatic calibration tool. After the operation is completed, the interface will display the calibration results.
+
+.. image:: base/042.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.5‑9 Example of TCP calibration results for tool
+
+Click "Save" to update the calibration result of the current tool TCP in the selected reference coordinate system from the drop-down menu of "Coordinate system name" in the "Current tool coordinate system" interface.
+
+In the "Current tool coordinate system" interface, click "Apply" to apply the current tool TCP calibration result in the current reference tool coordinate system.
+
+.. important:: 
+  It should be noted that:
+
+  （1）Note that before clicking "calibrate", you can avoid errors during the calibration tool coordinate system process by observing whether the x, y, and z coordinate results of the calibrated sensor coordinate system have significant errors compared to the actual sensor installation position. If the situation occurs, the reason may be that the robot tool TCP automatic calibration system coordinate system is set incorrectly, and the installation position of the laser sensor equipment needs to be adjusted before recalibrating the sensor coordinate system;
+
+  （2）At the same time, after clicking "Calibrate", you can avoid errors in the process of calibrating the tool coordinate system by observing whether the robot adjusts the end flange attitude significantly (>90 °) after performing two circular movements. If the situation occurs, the reason may be that the "movement radius" parameter is set too small, causing interference in the sensor I/O signal. In this case, it is necessary to modify the "movement radius" parameter and click "calibrate" again;
+
+  （3）In addition, it is recommended to calibrate the tool type with a cylindrical end, a spindle direction roughly parallel to the end flange spindle direction, and a radius within 10 mm. The measurable length of the tool end should be within 5-15 mm (not the overall length of the tool) to avoid interference with the sensor device.

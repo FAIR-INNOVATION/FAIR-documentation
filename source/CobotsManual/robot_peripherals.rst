@@ -541,7 +541,7 @@ As shown in Figure 17, select the welding machine status signal DI input port an
    
 .. figure:: robot_peripherals/025.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.5-19 The welding machine preparation is set to "None"
 
@@ -1796,7 +1796,7 @@ Please make sure that your laser sensor and welding torch have been fixedly inst
 
 .. figure:: robot_peripherals/048.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-1 Installation of laser sensor
 
@@ -1828,7 +1828,7 @@ And then calculate the coordinate posture of the sensor, as follows.
 
 .. figure:: robot_peripherals/051.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-4 Calibration point of laser sensor
 
@@ -1888,7 +1888,7 @@ As shown in the figure, select an unused coordinate system again, change its nam
 
 .. figure:: robot_peripherals/059.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-12 Sensor Calibration Step 3
 
@@ -1916,7 +1916,7 @@ As shown in the figure, select an unused coordinate system again, change its nam
 
 .. figure:: robot_peripherals/063.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-16 Sensor Calibration 7
 
@@ -1966,7 +1966,7 @@ As shown in the figure, drag the robot to make the laser sensor light point to t
 
 .. figure:: robot_peripherals/069.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-22  Laser Sensing Weld Point
 
@@ -1978,7 +1978,7 @@ As shown in the figure, drag the robot to make the laser sensor light point to t
 
 .. figure:: robot_peripherals/071.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-24 The welding points to the weld point
 
@@ -1997,7 +1997,7 @@ Before positioning, tracking and debugging, please ensure that the sensor has be
 
 .. figure:: robot_peripherals/072.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-25 Sensor Installation
 
@@ -2102,15 +2102,15 @@ Before laser positioning begins, it is necessary to specify a positioning starti
 
 .. figure:: robot_peripherals/083.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-36 Locating starting point
 
-As shown in the figure, the tracking end point "Trackedpt" is taught at the weld end.
+As shown in the figure, the tracking end point "trackEndpt" is taught at the weld end.
 
 .. figure:: robot_peripherals/084.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-37 Finding the End Point
 
@@ -2655,6 +2655,8 @@ Extended axis programming
 
   - 5: Target speed.
 
+  - 10: Acceleration percentage.
+
 .. figure:: robot_peripherals/127.png
    :align: center
    :width: 6in
@@ -2730,7 +2732,7 @@ Conveyor Tracking Configuration Steps
 
 .. figure:: robot_peripherals/128.png
    :align: center
-   :width: 4in
+   :width: 3in
 
 .. centered:: Figure 8.8-1 Conveyor configuration
 

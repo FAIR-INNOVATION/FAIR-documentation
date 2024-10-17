@@ -1,3 +1,18 @@
+Version V3.7.5
+-----------------
+
+Date: 2024-09-30
+
+- **Adjustable angular velocity of wrap angle attitude transition function**: Teaching program -> Programming -> Linear Lin instruction;
+
+- **Arc tracking multi-layer multi-pass welding function**: Auxiliary application -> Welding expert library -> Weldment shape -> Multi-layer multi-pass welding;
+
+- **Zeiss 485 extended axis function (increased acceleration and emergency stop)**: Initial settings -> Peripherals -> Extended axis -> Extended axis configuration;
+
+- **Robot tool TCP automatic calibration function (self-made fiber optic sensor tooling)**: Initial settings -> Coordinate system -> Tool -> Tool coordinate system;
+
+- **Teach pendant multi-language setting function**: Login page -> Language setting;
+
 Version V3.7.4
 -----------------
 

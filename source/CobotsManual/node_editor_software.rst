@@ -264,7 +264,7 @@ Dofile instruction
 
 Click the "Dofile" command node to enter the node graph editing interface
 
-This command is a pause command. Insert this command in the program. When the program executes this command, the robot will be in a paused state. If you want to continue running, click the "Pause/Resume" button in the control area.
+This command is a dofile command. Insert this command in the program. When the program executes this command, the robot will be in a paused state. If you want to continue running, click the "Pause/Resume" button in the control area.
 
 "Dofile" command node, parameters:
 
@@ -1133,7 +1133,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
 
 .. centered:: Figure 11.41-1 "Servo ID" command node interface
 
-"Control mode" command node,, parameters:
+"Control mode" command node, parameters:
 
 - Servo ID: 1~15
 - Control mode: position mode/speed mode
@@ -1161,6 +1161,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
 - Zero return method: current position zero return/negative limit zero return/positive limit zero return
 - Homing speed: 0~2000, default bit 5
 - Zero point hoop speed: 0~2000, default is 1
+- Acceleration percentage: 1-100
 
 .. image:: node_editor_software/059.png
    :width: 6in
@@ -1173,6 +1174,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
 - Servo ID: 1~15
 - Target location: unlimited
 - Homing speed: unlimited
+- Acceleration percentage: 1-100
 
 .. image:: node_editor_software/060.png
    :width: 6in
@@ -1184,6 +1186,7 @@ It is divided into servo ID, control mode, servo enable and servo zero return; t
 
 - Servo ID: 1~15
 - Target speed: unlimited
+- Acceleration percentage: 1-100
 
 .. image:: node_editor_software/061.png
    :width: 6in
@@ -1770,19 +1773,6 @@ This command includes FT_Guard (collision detection), FT_Control (constant force
    :align: center
 
 .. centered:: Figure 11.51-8 "FT_CalCenter Start/End" command node interface
-   
-1. "FT_Click" command node, parameters:
-
-- Action termination force threshold (N): 0 ~ 100
-- Linear speed (mm/s): 0 ~ 100
-- Linear acceleration (mm/s^2): 0 ~ 100
-- Maximum insertion distance (mm): 0 ~ 100
-
-.. image:: node_editor_software/106.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 11.51-9 "FT_Click" command node interface
 
 Torque recording command
 ------------------------------
