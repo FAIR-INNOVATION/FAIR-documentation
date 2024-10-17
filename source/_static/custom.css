@@ -71,6 +71,11 @@ body {
     display: none;
 }
 
+.wy-table-responsive {
+    display: flex;
+    justify-content: center;
+ }
+
 /* override table width restrictions */
 @media screen and (min-width: 767px) {
 
