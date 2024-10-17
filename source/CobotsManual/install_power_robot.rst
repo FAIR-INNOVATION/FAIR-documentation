@@ -89,7 +89,6 @@ The button box
 .. figure:: installation/059.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 1.3-1 The second version of the button box
 
@@ -135,6 +134,7 @@ The end LED
 .. list-table::
    :widths: 50 50
    :header-rows: 0
+   :align: center
 
    * - **Function**
      - **LED color**

@@ -11,7 +11,7 @@ Since the teaching pendant is generally not connected to external peripherals su
 
 By using graphical programming, it can be simple and easy to understand, easy to operate, and Chinese language operation.
 
-The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows
+The page is divided into three areas: "operation bar", "toolbox toolbar" and "workspace code editing area". The overall layout design is as follows.
 
 .. image:: graphical/001.png
    :width: 6in
@@ -131,7 +131,7 @@ Drag the "Function method instruction" code block to enter the graphical editing
 
 "Function method" instruction node, parameters:
 
-- Function name: the name of the function to be run
+- Function name: the name of the function to be run.
 
 .. image:: graphical/025.png
    :width: 6in
@@ -179,7 +179,7 @@ Straight line instruction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drag the "Straight line instruction" code block to enter the graphical editing interface workspace.
 
-This instruction function is similar to the "point to point" instruction, but the path to the point reached by this instruction is a straight line
+This instruction function is similar to the "point to point" instruction, but the path to the point reached by this instruction is a straight line.
 
 "Straight line" instruction node, parameters:
 
@@ -307,11 +307,11 @@ Full circle command
 ~~~~~~~~~~~~~~~~~~~~~
 Drag the "full circle command" code block to enter the graphical editing interface workspace.
 
-Click the "full circle" command node to enter the node diagram editing interface
+Click the "full circle" command node to enter the node diagram editing interface.
 
-- Full circle motion includes two points, the first point is the full circle middle transition point 1, the second point is the full circle middle transition point 2, transition point 2 can be set whether to offset, the offset is effective for both transition point 1 and transition point 2
+Full circle motion includes two points, the first point is the full circle middle transition point 1, the second point is the full circle middle transition point 2, transition point 2 can be set whether to offset, the offset is effective for both transition point 1 and transition point 2.
 
-- "Full circle" command node, parameters:
+"Full circle" command node, parameters:
 
 - Full circle middle point 1: teaching point
 
@@ -371,7 +371,7 @@ New spiral instruction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drag the "New Spiral Instruction" code block to enter the graphical editing interface workspace.
 
-Click the "New Spiral" instruction node to enter the node graph editing interface
+Click the "New Spiral" instruction node to enter the node graph editing interface.
 
 The new spiral motion is an optimized version of the spiral motion. This instruction only requires one point plus the configuration of various parameters to realize the spiral motion. The robot takes the current position as the starting point. The user sets the debugging speed, whether to offset, the number of spiral turns, spiral inclination, initial radius, radius increment, axis direction increment and rotation direction. The number of spiral turns refers to the number of spiral turns of the spiral line. The spiral inclination refers to the angle between the tool Z axis and the horizontal direction. The posture correction angle corrects the posture at the end of the spiral line and the posture of the first point of the spiral line. The initial radius refers to the radius of the first circle. The radius increment refers to the increment of each circle radius. The axis direction increment refers to the increment of the spiral axis direction. The rotation direction is clockwise and counterclockwise.
 
@@ -1123,7 +1123,7 @@ Debug speed (%): 0~100
 
 .. centered:: Chart 10.7-11 "Synchronous ARC motion" instruction code block
 
-"Extended axis return to zero" instruction node,, parameters:
+"Extended axis return to zero" instruction node, parameters:
 
 - Extended axis number: 1~4
 
@@ -1245,7 +1245,7 @@ This command contains four commands: IO real-time detection, position real-time 
 
 "IO real-time detection" instruction node, parameters:
 
-Maximum waiting time: 0~10000
+- Maximum waiting time: 0~10000
 
 .. image:: graphical/081.png
    :width: 6in
@@ -1501,7 +1501,7 @@ Drag the "Laser tracking command" code block to enter the graphical editing inte
 
 This command contains three parts: laser command, tracking command and positioning command. Before adding this command, please confirm whether the laser tracking sensor in the user's peripherals has been successfully configured. See the robot peripherals section for details.
 
-1. "Turn sensor on/off" command node, parameters
+1. "Turn sensor on/off" command node, parameters:
 
 - Select weld type: 0 ~ 49
 
@@ -1527,7 +1527,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 10.8-10 "Turn sensor on/off—solution" command code block
 
-2. "Load/unload sensor" command node, parameters
+2. "Load/unload sensor" command node, parameters:
 
 - Function selection: Ruiniu RRT-SV2-BP/Chuangxiang CXZK-RBTA4L
 
@@ -1537,7 +1537,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 10.8-11 "Load/unload sensor" instruction code block
 
-3. "Start/stop laser tracking" instruction node, parameters
+3. "Start/stop laser tracking" instruction node, parameters:
 
 - Coordinate system name: custom configuration coordinate system
 
@@ -1547,7 +1547,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 10.8-12 "Start/stop laser tracking" instruction code block
 
-4. "Data recording" instruction node, parameters
+4. "Data recording" instruction node, parameters:
 
 - Function selection: stop recording/real-time tracking/start recording/track reproduction
 
@@ -1559,7 +1559,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 10.8-13 "Data Record" instruction code block
 
-5. "Sensor Point Movement" instruction node, parameters
+5. "Sensor Point Movement" instruction node, parameters:
 
 - Coordinate system name: Custom configuration coordinate system
 
@@ -1573,7 +1573,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 10.8-14 "Sensor Point Movement" instruction code block
 
-6. "Laser Tracking Reappearance" instruction node, parameters
+6. "Laser Tracking Reappearance" instruction node, parameters:
 
 .. image:: graphical/109.png
    :width: 6in
@@ -1581,7 +1581,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 10.8-15 "Laser Tracking Reappearance" instruction code block
 
-7. "Positioning Start/End" instruction node, parameters
+7. "Positioning Start/End" instruction node, parameters:
 
 - Coordinate system name: Custom configuration coordinate system
 
@@ -1941,7 +1941,7 @@ The command includes nine commands: FT_Guard (collision detection), FT_Control (
 
 .. centered:: Figure 10.9-7 Surface positioning instruction code block
 
-8. "Middle plane start/end calculation" instruction node
+8. "Middle plane start/end calculation" instruction node:
 
 .. image:: graphical/126.png
    :width: 6in

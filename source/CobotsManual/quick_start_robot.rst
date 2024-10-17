@@ -121,7 +121,6 @@ Matching the oscilloscopy
 .. figure:: quick_start_robot/008.png
    :align: center
    :width: 4in
-   :class: figure-border
 
 .. centered:: Figure 4.3-8 record and add some P1
 
@@ -130,7 +129,6 @@ Matching the oscilloscopy
 .. figure:: quick_start_robot/009.png
    :align: center
    :width: 4in
-   :class: figure-border
 
 .. centered:: Figure 4.3-9 record and add some P2
 

@@ -37,42 +37,36 @@ Control cabinet installation space:
 .. figure:: installation/018.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.1-1 FR3 model collaboration robot movement range
 
 .. figure:: installation/019.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.1-2 FR5 model collaboration robot movement range
 
 .. figure:: installation/020.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.1-3 FR10 model collaboration robot movement range
 
 .. figure:: installation/021.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.1-4 FR16 model collaboration robot movement range
 
 .. figure:: installation/022.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.1-5 FR20 model collaboration robot movement range
 
 .. figure:: installation/068.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.1-6 FR30 model collaboration robot movement range
 
@@ -82,14 +76,12 @@ Robot coordinate system
 .. figure:: installation/023.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.3-1 Robot DH parameter coordinate system
 
 .. figure:: installation/024.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.3-2 French -endframe coordinate system
 
@@ -101,7 +93,6 @@ Denavit–Hartenberg parameters are used to calculate kinematics and dynamics of
 .. figure:: installation/063.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.4-1 FR series collaborative robots Denavit–Hartenberg parameters
 

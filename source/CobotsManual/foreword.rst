@@ -38,6 +38,7 @@ Follow the relevant standards
 .. list-table::
    :widths: 30 70
    :header-rows: 0
+   :align: center
 
    * - **Standard**
      - **Definition**

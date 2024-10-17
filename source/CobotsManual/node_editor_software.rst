@@ -154,7 +154,7 @@ While instruction
 
 Click the "While" related command node to enter the node graph editing interface.
 
-Enter the waiting condition in the input box behind While, enter the action instructions during the loop in the input box behind do, and click Save. (For the convenience of operation, you can enter any do content and edit other instructions in the program to insert them instead)
+Enter the waiting condition in the input box behind While, enter the action instructions during the loop in the input box behind do, and click Save. (For the convenience of operation, you can enter any do content and edit other instructions in the program to insert them instead).
 
 “While” command:
 
@@ -171,7 +171,7 @@ Goto instruction
 
 Click "Goto" on the relevant command node to enter the node graph editing interface.
 
-"Goto" command, the first "Body" arrow icon connects to the body content node, and the second "Completed" arrow icon connects to the subsequent jump position goto instruction node. (This command requires a certain programming foundation. If you need help, please contact us)
+"Goto" command, the first "Body" arrow icon connects to the body content node, and the second "Completed" arrow icon connects to the subsequent jump position goto instruction node. (This command requires a certain programming foundation. If you need help, please contact us).
 
 - Jump name: Enter the jump name to determine the jump location
 
@@ -181,7 +181,7 @@ Click "Goto" on the relevant command node to enter the node graph editing interf
 
 .. centered:: Figure 11.5-1 "Goto" command node interface
 
-.. important:: Jump name cannot start with a number
+.. important:: Jump name cannot start with a number.
 
 Wait instruction
 ---------------------------
@@ -262,7 +262,7 @@ This command is a pause command. Insert this command in the program. When the pr
 Dofile instruction
 --------------------
 
-Click the "Dofile" command node to enter the node graph editing interface
+Click the "Dofile" command node to enter the node graph editing interface.
 
 This command is a dofile command. Insert this command in the program. When the program executes this command, the robot will be in a paused state. If you want to continue running, click the "Pause/Resume" button in the control area.
 
@@ -281,7 +281,7 @@ This command is a dofile command. Insert this command in the program. When the p
 Set system variable command
 ----------------------------------
 
-Click the "Set system variable command" command node to enter the node graph editing interface
+Click the "Set system variable command" command node to enter the node graph editing interface.
 
 This instruction is a setting system variable instruction, which is divided into setting system variables and obtaining system variables. It is used in conjunction with while, if-else and other instructions.
 
@@ -311,9 +311,9 @@ This instruction is a setting system variable instruction, which is divided into
 PTP instruction
 -----------------
 
-Click the "PTP" command node to enter the node graph editing interface
+Click the "PTP" command node to enter the node graph editing interface.
 
-You can select the point you need to reach. The smooth transition time setting can realize the continuous movement from this point to the next point. Whether to set the offset, you can choose the offset based on the base coordinate system and the offset based on the tool coordinate, and x, y will pop up. z, rx, ry, rz offset settings, the specific PTP path is the optimal path automatically planned by the motion controller
+You can select the point you need to reach. The smooth transition time setting can realize the continuous movement from this point to the next point. Whether to set the offset, you can choose the offset based on the base coordinate system and the offset based on the tool coordinate, and x, y will pop up. z, rx, ry, rz offset settings, the specific PTP path is the optimal path automatically planned by the motion controller.
 
 "PTP" command node, parameters:
 
@@ -365,8 +365,8 @@ This command function is used in welding scenarios using laser sensors.
 
 - Point name: Teaching point
 - Debugging speed (%): 0 ~ 100
-- Stop: false/true. When true is selected, the smooth transition parameter value does not take effect.
-- Smooth transition (mm): Smooth transition radius 0 ~ 1000
+- Stop: false/true. When true is selected, the smooth transition parameter value does not take effect;
+- Smooth transition (mm): Smooth transition radius 0 ~ 1000;
 - Weld cache data selection: execution planning data/execution record data;
 - Board type: corrugated board/corrugated board/fence board/oil drum/corrugated shell steel;
 - Whether to offset: No/base coordinate offset/tool ​​coordinate offset/Laser raw data offset. When No is selected, the dx~drz parameter values ​​will not take effect.
@@ -381,17 +381,17 @@ This command function is used in welding scenarios using laser sensors.
 ARC instruction 
 -----------------
 
-Click the "ARC" command node to enter the node graph editing interface
+Click the "ARC" command node to enter the node graph editing interface.
 
-The arc motion contains two points. The first point is the transition point in the middle of the arc, and the second point is the end point. Both the transition point and the end point can be offset or not. You can choose to offset based on the base coordinate system or offset based on the tool coordinate. Shift, set x, y, z, rx, ry, rz offset, the end point can set a smooth transition radius to achieve continuous motion effect
+The arc motion contains two points. The first point is the transition point in the middle of the arc, and the second point is the end point. Both the transition point and the end point can be offset or not. You can choose to offset based on the base coordinate system or offset based on the tool coordinate. Shift, set x, y, z, rx, ry, rz offset, the end point can set a smooth transition radius to achieve continuous motion effect.
 
 "ARC" command node, parameters:
 
 - Arc middle point: teaching point
-- Whether to offset: No/base coordinate offset/tool ​​coordinate offset. When No is selected, the dx~drz parameter values ​​will not take effect.
+- Whether to offset: No/base coordinate offset/tool ​​coordinate offset. When No is selected, the dx~drz parameter values ​​will not take effect
 - dx~drz: offset
 - Arc end point: teaching point
-- Whether to offset: No/base coordinate offset/tool ​​coordinate offset. When No is selected, the dx~drz parameter values ​​will not take effect.
+- Whether to offset: No/base coordinate offset/tool ​​coordinate offset. When No is selected, the dx~drz parameter values ​​will not take effect
 - dx~drz: offset
 - Debugging speed (%): 0 ~ 100
 - Stop: false/true. When true is selected, the smooth transition parameter value does not take effect.
@@ -406,7 +406,7 @@ The arc motion contains two points. The first point is the transition point in t
 Circle instruction
 --------------------
 
-Click the "Circle" command node to enter the node graph editing interface
+Click the "Circle" command node to enter the node graph editing interface.
 
 The full circle motion includes two points. The first point is the middle transition point 1 of the full circle, and the second point is the middle transition point 2 of the full circle. Transition point 2 can be set to be offset. This offset takes effect on both transition point 1 and Transition point 2
 
@@ -427,7 +427,7 @@ The full circle motion includes two points. The first point is the middle transi
 Spiral instruction
 ---------------------
 
-Click the "Spiral" command node to enter the node graph editing interface
+Click the "Spiral" command node to enter the node graph editing interface.
 
 The spiral motion contains three points, which form a circle. On the third point setting page, the parameter settings include the number of spiral turns, attitude correction angle, radius increment and rotation axis direction increment. The number of spiral turns is The number of movement circles of the spiral. The attitude correction angle corrects the attitude at the end of the spiral and the attitude of the first point of the spiral. The radius increment is the increment of the radius of each circle. The rotation axis direction increment is the direction of the spiral axis. Increment. Set whether to offset, the offset takes effect on the entire spiral trajectory.
 
@@ -455,7 +455,7 @@ The spiral motion contains three points, which form a circle. On the third point
 N-Spiral instruction
 ------------------------
 
-Click the "N-Spiral" command node to enter the node graph editing interface
+Click the "N-Spiral" command node to enter the node graph editing interface.
 
 The new spiral motion is an optimized version of spiral motion. This instruction only requires one point and the configuration of each parameter to achieve spiral motion. The robot takes the current position as the starting point, and the user sets the debugging speed, offset or not, the number of spiral turns, the spiral inclination angle, the initial radius, the radius increment, the rotation axis direction increment and the rotation direction. The number of spiral turns is the length of the spiral. The number of movement circles, the spiral inclination angle is the angle between the Z axis of the tool and the horizontal direction, the attitude correction angle corrects the attitude at the end of the spiral and the attitude of the first point of the spiral, the initial radius is the radius of the first circle, and the radius increment That is, the increment of the radius of each circle, the increment of the rotation axis direction is the increment of the spiral axis direction, and the rotation direction is clockwise and counterclockwise.
 
@@ -481,7 +481,7 @@ The new spiral motion is an optimized version of spiral motion. This instruction
 H-Spiral instruction
 ------------------------
 
-Click the “H-Spiral” icon to enter the H-Spiral command editing interface
+Click the “H-Spiral” icon to enter the H-Spiral command editing interface.
 
 The “H-Spiral” command is a horizontal space spiral motion. This command is set after the single-segment motion (straight line) command.
 
@@ -501,7 +501,7 @@ The “H-Spiral” command is a horizontal space spiral motion. This command is 
 Spline instruction
 --------------------
 
-Click the "Spline" command node to enter the node graph editing interface
+Click the "Spline" command node to enter the node graph editing interface.
 
 This command is divided into three parts: the start of the spline group, the spline segment and the end of the spline group. The start of the spline group is the starting mark of the spline movement. The current node graph of the spline segment only contains the SPL segment. The end of the spline group is The end mark of the spline movement.
 
@@ -519,7 +519,7 @@ This command is divided into three parts: the start of the spline group, the spl
 N-Spline instruction
 ----------------------
 
-Click the "N-Spline" command node to enter the node graph editing interface
+Click the "N-Spline" command node to enter the node graph editing interface.
 
 This instruction is a spline instruction algorithm optimization instruction. It will replace the existing spline instruction later. This instruction is divided into three parts: multi-point trajectory start, multi-point trajectory segment and multi-point trajectory end. The multi-point trajectory starts with multi-point trajectory. The starting mark of the movement. The multi-point track segment means setting each track point. Click the icon to enter the point adding interface. The end of the multi-point track is the end mark of the multi-point track movement. Here you can set the control mode and debugging speed. The control mode is divided into for a given control point and a given path point.
 
@@ -544,7 +544,7 @@ This instruction is a spline instruction algorithm optimization instruction. It 
 Weave instruction
 --------------------
 
-Click the "Weave" command node to enter the node graph editing interface
+Click the "Weave" command node to enter the node graph editing interface.
 
 This command consists of two parts. The first part selects the weaving number of the configured parameters. The program for connecting the Body to represent the connection node is executed between "Start Weaving" and "Stop Weaving".
 
@@ -561,7 +561,7 @@ This command consists of two parts. The first part selects the weaving number of
 TPD instruction
 -----------------
 
-Click the "TPD" command node to enter the node graph editing interface
+Click the "TPD" command node to enter the node graph editing interface.
 
 In this command, the user first needs to have a recorded trajectory.
 
@@ -582,7 +582,7 @@ When programming, first use the point-to-point command to reach the starting poi
 Offset instruction
 ---------------------
 
-Click the "Offset" command node to enter the node graph editing interface
+Click the "Offset" command node to enter the node graph editing interface.
 
 This command is an overall offset command. Enter each offset. The program connecting the Body to represent the connection node is executed between start and close. The motion command in the middle will be offset based on the base coordinates (or workpiece coordinates).
 
@@ -604,7 +604,7 @@ This command is an overall offset command. Enter each offset. The program connec
 ServoCart instruction
 ---------------------------
 
-Click the "ServoCart" command node to enter the node diagram editing interface
+Click the "ServoCart" command node to enter the node diagram editing interface.
 
 Servo control (Cartesian space motion) instruction, which can control robot movement through absolute pose control or based on the current pose offset.
 
@@ -638,7 +638,7 @@ Servo control (Cartesian space motion) instruction, which can control robot move
 Trajectory instruction
 ---------------------------
 
-Click the "Trajectory" command node to enter the node graph editing interface
+Click the "Trajectory" command node to enter the node graph editing interface.
 
 In this command, the user first needs to have a recorded trajectory.
 
@@ -656,7 +656,7 @@ In this command, the user first needs to have a recorded trajectory.
 TrajectoryJ instruction
 -------------------------
 
-Click the "TrajectoryJ" command node to enter the node graph editing interface
+Click the "TrajectoryJ" command node to enter the node graph editing interface.
 
 In this command, the user first needs to have a recorded trajectory, and the trajectory file can be imported in advance in the teaching program interface. The trajectory command and trajectory J command are suitable for the general interface of the camera directly giving the trajectory. When there is a discrete trajectory point file in a fixed format, it can be imported into the system to make the robot move according to the trajectory of the imported file.
 
@@ -675,7 +675,7 @@ In this command, the user first needs to have a recorded trajectory, and the tra
 DMP instruction
 -----------------
 
-Click the "DMP" command node to enter the node graph editing interface
+Click the "DMP" command node to enter the node graph editing interface.
 
 DMP is a trajectory imitation learning method that requires planning a reference trajectory in advance. In the command editing interface, select the teaching point as the new starting point, click "Add" and "Apply" to save the command. The specific path of DMP is a new trajectory that imitates the reference trajectory with a new starting point.
 
@@ -693,7 +693,7 @@ DMP is a trajectory imitation learning method that requires planning a reference
 WPSTrsf instruction
 ---------------------------------
 
-Click the "WPSTrsf" command node to enter the node graph editing interface
+Click the "WPSTrsf" command node to enter the node graph editing interface.
 
 Select the workpiece coordinate system to be automatically converted, click "Add" and "Apply" to save the instruction. When adding PTP and LIN instructions, connect them to the Body to implement execution within the instruction, and the points in the workpiece coordinate system are automatically converted.
 
@@ -710,7 +710,7 @@ Select the workpiece coordinate system to be automatically converted, click "Add
 ToolTrst instruction
 -----------------------
 
-Click the "ToolTrst" command node to enter the node graph editing interface
+Click the "ToolTrst" command node to enter the node graph editing interface.
 
 Select the tool coordinate system to be automatically converted, click "Add" and "Apply" to save the instruction. When adding PTP and LIN instructions, connect them to the Body to implement execution within the instruction, and the points in the tool coordinate system are automatically converted.
 
@@ -865,7 +865,7 @@ Aux-IO is a command function used by the robot to communicate with the PLC to co
 MoveDO instruction
 ---------------------
 
-Click the "MoveDO" command node to enter the node graph editing interface
+Click the "MoveDO" command node to enter the node graph editing interface.
 
 This instruction implements the function of continuously outputting DO signals according to the set interval during linear motion.
 

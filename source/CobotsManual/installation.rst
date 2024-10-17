@@ -594,7 +594,6 @@ Robot arm installation
   .. figure:: installation/064.png
     :align: center
     :width: 3in
-    :class: figure-border
 
   .. centered:: Figure 3.4-1 Avoid installing on other sports equipment
 
@@ -611,7 +610,6 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
 .. figure:: installation/025.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 3.4-2 FR3 model collaborative robot installation size
 
@@ -623,7 +621,6 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
   .. figure:: installation/062.png
     :align: center
     :width: 3in
-    :class: figure-border
 
   .. centered:: Figure 3.4-3 FR3 model collaborative robot low requirement mounting base
   
@@ -632,7 +629,6 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
   .. figure:: installation/067.png
     :align: center
     :width: 3in
-    :class: figure-border
 
   .. centered:: Figure 3.4-4 FR3 Model Collaborative Robot High Demand Mounting Base
 
@@ -644,7 +640,6 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 .. figure:: installation/026.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 3.4-5 FR5 model collaborative robot installation size
 
@@ -656,7 +651,6 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
   .. figure:: installation/062.png
     :align: center
     :width: 3in
-    :class: figure-border
 
   .. centered:: Figure 3.4-6 FR5 Model Collaborative Robot High Demand Mounting Base
   
@@ -665,7 +659,6 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
   .. figure:: installation/067.png
     :align: center
     :width: 3in
-    :class: figure-border
   
   .. centered:: Figure 3.4-7 FR5 model collaborative robot low requirement mounting base
 
@@ -677,7 +670,6 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 .. figure:: installation/027.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 3.4-8 FR10&FR16 model collaborative robot installation size
 
@@ -689,7 +681,6 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
   .. figure:: installation/065.png
     :align: center
     :width: 3in
-    :class: figure-border
 
   .. centered:: Figure 3.4-9 FR10&FR16 model collaborative robot low requirement mounting base
   
@@ -698,7 +689,6 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
   .. figure:: installation/067.png
     :align: center
     :width: 3in
-    :class: figure-border
 
   .. centered:: Figure 3.4-10 FR10&FR16 Model Collaborative Robot High Demand Mounting Base
 
@@ -710,7 +700,6 @@ When installing the robot on the mounting base, use six M10 bolts with a strengt
 .. figure:: installation/029.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 3.4-11 FR20&FR30 model collaborative robot installation size
 
@@ -720,7 +709,6 @@ When installing the robot on the mounting base, use six M10 bolts with a strengt
   .. figure:: installation/066.png
     :align: center
     :width: 4in
-    :class: figure-border
 
   .. centered:: Figure 3.4-12 FR20&FR30 model collaborative robot low requirement mounting base
 
@@ -732,14 +720,12 @@ There are four M6 thread holes in the robot tool, which can be used to connect t
 .. figure:: installation/030.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 3.4-13 FR3/FR5/FR10/FR16 model robot end flange drawing
 
 .. figure:: installation/031.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 3.4-14 FR20&FR30 model robot end flange drawing
 
@@ -897,7 +883,6 @@ You can use the end -panel's I/O and 485 communication interfaces to control var
 .. figure:: installation/041.png
 	:align: center
 	:width: 3in
-	:class: figure-border
 
 .. centered:: Figure 3.5-5 The schematic diagram of the end version of the electrical interface
 
@@ -909,16 +894,14 @@ Ground
 .. figure:: installation/042.png
 	:align: center
 	:width: 8in
-	:class: figure-border
 
 .. centered:: Figure 3.5-6 Demonstration diagram of the control box
 
-2. The body is located on the right side of the base of the base, as shown in figure below.
+1. The body is located on the right side of the base of the base, as shown in figure below.
 
 .. figure:: installation/043.png
 	:align: center
 	:width: 4in
-	:class: figure-border
 
 .. centered:: Figure 3.5-7 Dragon schematic diagram of the body
 
@@ -960,6 +943,7 @@ The electrical specifications of internal and external power are shown in table 
 .. list-table::
    :widths: 50 20 6 4 6 4
    :header-rows: 0
+   :align: center
 
    * - **Terminal**
      - **Parameter**
@@ -1012,6 +996,7 @@ The electrical specifications of digital I/O are shown in table below Digital I/
 .. list-table::
    :widths: 30 40 6 4 6 4
    :header-rows: 0
+   :align: center
 
    * - **Terminal**
      - **Parameter**
@@ -1097,6 +1082,7 @@ Safety I/O includes emergency stop and security stop. Urgent stop input is only 
 .. list-table::
    :widths: 100 60 60
    :header-rows: 0
+   :align: center
 
    * - 
      - **Emergency stop**
@@ -1212,6 +1198,7 @@ Simulation I/O
 .. list-table::
    :widths: 50 20 6 4 6 4
    :header-rows: 0
+   :align: center
 
    * - **Terminal**
      - **Parameter**
@@ -1369,7 +1356,6 @@ The first version of the button box
 .. figure:: installation/058.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.6-1 The first version of the button box
 
@@ -1388,7 +1374,6 @@ The second version of the button box
 .. figure:: installation/059.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.6-2 The second version of the button box
 
@@ -1414,14 +1399,12 @@ FR-HMI Teach pendant introduction
 .. figure:: installation/060.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.6-3 FR-HMI teaching pendant front
 
 .. figure:: installation/061.png
 	:align: center
 	:width: 6in
-	:class: figure-border
 
 .. centered:: Figure 2.6-4 FR-HMI teaching pendant back
 
@@ -1448,6 +1431,7 @@ End LED definition
 .. list-table::
    :widths: 50 50
    :header-rows: 0
+   :align: center
 
    * - **Function**
      - **LED color**

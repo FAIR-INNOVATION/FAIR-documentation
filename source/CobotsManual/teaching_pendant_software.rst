@@ -45,12 +45,6 @@ Robot's first activation
    
 6. After restarting, visit the target website 192.168.58.2 again to enter the login page.
 
-.. figure:: teaching_pendant_software/001.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1-3 Login Page
-
 Start software
 ~~~~~~~~~~~~~~~~
 
@@ -108,10 +102,138 @@ Users (refer to 15.2.1 User Management for user management) are divided into six
 The login interface is shown in figure below.
 
 .. figure:: teaching_pendant_software/001.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 5.1-3 Login Interface
+
+
+Teaching device multilingual settings function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Teaching device multilingual settings
+++++++++++++++++++++++++++++++++++++++++
+
+1.Connect the control box to the teaching device and start it up.
+
+2.Log in with the account admin and password 123. Navigate to the page, click on System Settings - General Settings, and confirm that the teaching device is enabled.
+
+.. image:: teaching_pendant_software/061.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 5.1-4 Login Interface
+.. centered:: Figure 5.1‑4 Teaching device enabled status
+
+3.On the login screen (or during the initial activation screen, settings can also be made), select the language at the top right corner.
+
+.. image:: teaching_pendant_software/062.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑5 Language settings on the activation interface
+
+.. image:: teaching_pendant_software/063.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑6 Language settings on the login interface
+
+4.Take the login interface language settings as an example, select the language. If the following prompts (in different languages) appear, it means the settings are successful. Restart the control box to complete the language settings.
+
+.. image:: teaching_pendant_software/064.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑7 Set to Chinese
+
+.. image:: teaching_pendant_software/065.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑8 Set to English
+
+.. image:: teaching_pendant_software/066.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑9 Set to Japanese
+
+.. image:: teaching_pendant_software/067.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑10 Set to French
+
+.. image:: teaching_pendant_software/068.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑11 Set to Korean
+
+Input method switch
+++++++++++++++++++++++++++++
+
+The default input method is set to English.
+
+1.Open the soft keyboard located at the bottom right corner and tap on the input field, for example, tap on the username input field.
+
+2.Switch to the Chinese Pinyin input method
+
+Press the CTRL key twice; when the key status turns red, click the spacebar to select the input method. The following are Chinese input methods.
+
+.. image:: teaching_pendant_software/069.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑12 Chinese Pinyin input method
+
+3.Switch to the English input method
+
+Click the CTRL key twice; when the key status turns red, click the spacebar to select the input method. The following will be the English input method.
+
+.. image:: teaching_pendant_software/070.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑13 English input method
+
+4.Switch to the Japanese input method
+
+Click the CTRL key twice; when the key status turns red, press the spacebar to select the input method. The following will be the Japanese input method.
+
+.. image:: teaching_pendant_software/071.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑14 Japanese input method
+
+You can switch between text types such as Hiragana and Katakana in the input method floating window.
+
+.. image:: teaching_pendant_software/072.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑15 Switching text types in Japanese input method
+
+4.Switch to the French input method
+
+Click the CTRL key twice; when the key status turns red, press the spacebar to select the input method. The following will be the French input method.
+
+.. image:: teaching_pendant_software/073.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑16 French input method
+
+5. Switch to Korean input method
+
+Click the CTRL key twice, the button status will turn red, and click on the space to select the input method. The following is the Korean input method.
+
+.. image:: teaching_pendant_software/074.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 5.1‑17 korean hangul keyboard 
 
 After the login is successful, the system will load the model and other data, and enter the initial page after loading.
 
@@ -452,7 +574,7 @@ Robot body operation bar
 TCP
 ++++++++++++++++
 
-**Base Jog**: In the base coordinate system, you can click the corresponding coordinate system button to control the robot, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ. The function of Base jogging is similar to that of single-axis jogging in Joint motion. As shown in figure below.
+**Base Jog**: In the base coordinate system, the robot can be controlled by long pressing the corresponding coordinate system button, move in a straight line on the X, Y, and Z axes or rotate around RX, RY, and RZ. The function of Base jogging is similar to that of single-axis jogging in Joint motion. As shown in figure below.
 
 .. image:: teaching_pendant_software/030.png
    :width: 3in
@@ -530,9 +652,18 @@ The manual teaching control area is mainly to set the test coordinate system in 
 
 When saving a teaching point, the coordinate system of the teaching point is the coordinate system of the current robot application. 
 
+There are two ways to record teaching points: "quick point recording" and "named point recording".
+
+- Quick point recording: teaching points are automatically recorded and names are automatically generated;
+- Naming points: Customized naming of teaching points, consisting of teaching point prefix+teaching point name;
+
 For the sensor teaching point, select the calibrated sensor type tool, enter the point name, click Add, and the saved point position is the position recognized by the sensor.
 
 .. image:: teaching_pendant_software/036.png
+   :width: 5in
+   :align: center
+
+.. image:: teaching_pendant_software/060.png
    :width: 5in
    :align: center
 

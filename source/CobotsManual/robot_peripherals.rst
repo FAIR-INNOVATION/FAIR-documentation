@@ -50,6 +50,7 @@ Gripper program teaching
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -263,6 +264,7 @@ Spray program teaching
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -535,7 +537,7 @@ As shown in Figure 17, select the welding machine status signal DI input port an
    
 .. figure:: robot_peripherals/024.png
    :align: center
-   :width: 4in
+   :width: 3in
 
 .. centered:: Figure 8.5-18 The welding machine is not ready to report an error
    
@@ -2151,13 +2153,13 @@ Create a new user program "testRecord.lua", click "LT-Rec" to open the laser rec
 
 .. figure:: robot_peripherals/087.png
    :align: center
-   :width: 4in
+   :width: 6in
 
 .. centered:: Figure 8.6-40 Laser recording
 
 .. figure:: robot_peripherals/088.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.6-41 Start recording and stop recording
 
@@ -2173,11 +2175,11 @@ As shown in the figure, assuming that the green line segment AB in the figure is
 
 .. figure:: robot_peripherals/090.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. figure:: robot_peripherals/091.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-43 Starting point and ending point of trajectory recording
 
@@ -2408,6 +2410,7 @@ Extended axis with laser tracking welding teaching program
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -2673,6 +2676,7 @@ Example of cooperative motion program between extension axis and robot
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -2774,6 +2778,7 @@ Conveyor belt tracking teaching program
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -2852,6 +2857,7 @@ Attitude self-adaptive with extended axis and laser tracking welding teaching pr
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -2997,6 +3003,7 @@ Program example:
 .. list-table:: 
    :widths: 15 15 70
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -3027,6 +3034,7 @@ Program example:
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -3057,6 +3065,7 @@ Program example:
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -3087,6 +3096,7 @@ Program example:
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -3117,6 +3127,7 @@ Program example:
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -3147,6 +3158,7 @@ Program example:
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -3174,6 +3186,7 @@ Program example:
 .. list-table:: 
    :widths: 1 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format
@@ -3231,6 +3244,7 @@ Program example:
 .. list-table:: 
    :widths: 15 40 100
    :header-rows: 1
+   :align: center
 
    * - S/N
      - Instruction format

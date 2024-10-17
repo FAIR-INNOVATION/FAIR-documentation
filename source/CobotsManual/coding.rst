@@ -863,8 +863,7 @@ This instruction is an optimization instruction for the Spline instruction algor
 
 This instruction is divided into three parts: the start of the multi-point trajectory, the segment of the multi-point trajectory and the end of the multi-point trajectory. The start mark, the multi-point track segment is to set each track point.
 
-Click the icon to enter the point adding interface, the end of the multi-point track is the end mark of the multi-point track movement, here you can set the control mode and debugging speed, the control mode is divided into
-For the given control point and the given waypoint.
+Click the icon to enter the point adding interface, the end of the multi-point track is the end mark of the multi-point track movement, here you can set the control mode and debugging speed.
 
 - Control mode: arc transition point/given path point
 - Global average connection time: integer, greater than 10, default value is 2000
