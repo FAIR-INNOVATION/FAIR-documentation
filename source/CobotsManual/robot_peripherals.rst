@@ -665,7 +665,7 @@ As shown in Figure 28, select the control type as "Controller I/O" (according to
 
 .. centered:: Figure 8.5-28 Add welding commands
 
-As shown in Figure 29, at this time, arc starting and arc ending command for welding have been added in the "testWeld.lua" program. Since welding process curve number 1 is selected for arc starting and arc closing, the voltage and current control in the welding process follows the curve parameters set in process number 1, and there is no need to add commands for setting welding voltage and current。
+As shown in Figure 29, at this time, arc starting and arc ending command for welding have been added in the "testWeld.lua" program. Since welding process curve number 1 is selected for arc starting and arc closing, the voltage and current control in the welding process follows the curve parameters set in process number 1, and there is no need to add commands for setting welding voltage and current.
 
 .. figure:: robot_peripherals/040.png
    :align: center
@@ -673,7 +673,7 @@ As shown in Figure 29, at this time, arc starting and arc ending command for wel
 
 .. centered:: Figure 8.5-29 Arc start end program
 
-As shown in Figure 30, two linear motion command are added, and the order of command is adjusted, so that the robot first moves to the "P1" point, performs arcing, and then moves to the "P2" point, performs arcing, and realizes the robot welding from the "P1" point to the "P2" point。
+As shown in Figure 30, two linear motion command are added, and the order of command is adjusted, so that the robot first moves to the "P1" point, performs arcing, and then moves to the "P2" point, performs arcing, and realizes the robot welding from the "P1" point to the "P2" point.
 
 .. figure:: robot_peripherals/041.png
    :align: center
@@ -692,7 +692,7 @@ If you choose not to use the welding process curve (that is, select the welding 
 
 .. centered:: Figure 8.5-31 Create“testWeld.lua”program
 
-As shown in Figure 32, select "Welding command"。
+As shown in Figure 32, select "Welding command".
 
 .. figure:: robot_peripherals/037.png
    :align: center
@@ -708,7 +708,7 @@ As shown in Figure 33, click "Welding" to open the page for adding welding comma
 
 .. centered:: Figure 8.5-33 Click“Weld”
 
-As shown in Figure 34, in the open welding instruction add page, select the control type as "Controller I/O" (according to the actual configuration of the welding control mode), select the welding process number as 0(process number 0 does not use the welding process curve, process number 1-99 uses the welding process curve), and set the welding current control AO to "Ctrl-AO0". The welding current is 150A, click "Add" button; Set welding voltage control AO to "Ctrl-AO1", welding voltage to 21V, click "Add" button; Set the maximum waiting time to 10000ms, click the "arc" button and "arc" button in turn, and finally click "Apply".。
+As shown in Figure 34, in the open welding instruction add page, select the control type as "Controller I/O" (according to the actual configuration of the welding control mode), select the welding process number as 0(process number 0 does not use the welding process curve, process number 1-99 uses the welding process curve), and set the welding current control AO to "Ctrl-AO0". The welding current is 150A, click "Add" button; Set welding voltage control AO to "Ctrl-AO1", welding voltage to 21V, click "Add" button; Set the maximum waiting time to 10000ms, click the "arc" button and "arc" button in turn, and finally click "Apply".
 
 .. figure:: robot_peripherals/042.png
    :align: center
@@ -716,7 +716,7 @@ As shown in Figure 34, in the open welding instruction add page, select the cont
 
 .. centered:: Figure 8.5-34 Add welding commands
 
-As shown in Figure 35, at this time, welding arc starting and welding arc closing command have been added in the "testWeld.lua" program. Since welding process number 0 is selected for welding arc starting and closing command, when the program is executed to set welding voltage and current command, The robot will automatically output the corresponding analog quantity of the control box according to the set welding voltage and current values and the "corresponding relationship between welding voltage, current and output analog quantity" set in the welder configuration page。
+As shown in Figure 35, at this time, welding arc starting and welding arc closing command have been added in the "testWeld.lua" program. Since welding process number 0 is selected for welding arc starting and closing command, when the program is executed to set welding voltage and current command, The robot will automatically output the corresponding analog quantity of the control box according to the set welding voltage and current values and the "corresponding relationship between welding voltage, current and output analog quantity" set in the welder configuration page.
 
 .. figure:: robot_peripherals/043.png
    :align: center
@@ -761,7 +761,7 @@ After the problem is solved, the cobot can automatically move from the current p
 
 ③Switch the robot to manual mode, and deal with related problems, and then switch the robot to automatic mode after the processing is completed;
 
-④Click the "Resume welding" button, and the robot will automatically resume welding。
+④Click the "Resume welding" button, and the robot will automatically resume welding.
 
 Welding interrupt and resume parameter configuration
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

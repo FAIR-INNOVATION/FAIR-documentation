@@ -118,8 +118,8 @@ Teaching device multilingual settings
 
 2.Log in with the account admin and password 123. Navigate to the page, click on System Settings - General Settings, and confirm that the teaching device is enabled.
 
-.. image:: teaching_pendant_software/061.png
-   :width: 6in
+.. image:: teaching_pendant_software/001.png
+   :width: 4in
    :align: center
 
 .. centered:: Figure 5.1‑4 Teaching device enabled status
@@ -140,100 +140,17 @@ Teaching device multilingual settings
 
 4.Take the login interface language settings as an example, select the language. If the following prompts (in different languages) appear, it means the settings are successful. Restart the control box to complete the language settings.
 
-.. image:: teaching_pendant_software/064.png
-   :width: 6in
+.. image:: teaching_pendant_software/061.png
+   :width: 4in
    :align: center
 
 .. centered:: Figure 5.1‑7 Set to Chinese
 
-.. image:: teaching_pendant_software/065.png
-   :width: 6in
+.. image:: teaching_pendant_software/001.png
+   :width: 4in
    :align: center
 
 .. centered:: Figure 5.1‑8 Set to English
-
-.. image:: teaching_pendant_software/066.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑9 Set to Japanese
-
-.. image:: teaching_pendant_software/067.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑10 Set to French
-
-.. image:: teaching_pendant_software/068.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑11 Set to Korean
-
-Input method switch
-++++++++++++++++++++++++++++
-
-The default input method is set to English.
-
-1.Open the soft keyboard located at the bottom right corner and tap on the input field, for example, tap on the username input field.
-
-2.Switch to the Chinese Pinyin input method
-
-Press the CTRL key twice; when the key status turns red, click the spacebar to select the input method. The following are Chinese input methods.
-
-.. image:: teaching_pendant_software/069.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑12 Chinese Pinyin input method
-
-3.Switch to the English input method
-
-Click the CTRL key twice; when the key status turns red, click the spacebar to select the input method. The following will be the English input method.
-
-.. image:: teaching_pendant_software/070.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑13 English input method
-
-4.Switch to the Japanese input method
-
-Click the CTRL key twice; when the key status turns red, press the spacebar to select the input method. The following will be the Japanese input method.
-
-.. image:: teaching_pendant_software/071.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑14 Japanese input method
-
-You can switch between text types such as Hiragana and Katakana in the input method floating window.
-
-.. image:: teaching_pendant_software/072.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑15 Switching text types in Japanese input method
-
-4.Switch to the French input method
-
-Click the CTRL key twice; when the key status turns red, press the spacebar to select the input method. The following will be the French input method.
-
-.. image:: teaching_pendant_software/073.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑16 French input method
-
-5. Switch to Korean input method
-
-Click the CTRL key twice, the button status will turn red, and click on the space to select the input method. The following is the Korean input method.
-
-.. image:: teaching_pendant_software/074.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.1‑17 korean hangul keyboard 
 
 After the login is successful, the system will load the model and other data, and enter the initial page after loading.
 
@@ -593,7 +510,7 @@ TCP
 
 .. centered:: Figure 5.3-2 Tool Jogging Schematic Diagram
 
-**Wobj Jog**: Select workpiece jogging, you can operate the circular buttons on the left and right to control the robot. In the workpiece coordinate system, move along the X, Y, Z axis in a straight line or rotate around RX, RY, RZ. The function of Wobj jogging is similar to that of single-axis jogging in Joint motion. As shown in figure below. 
+**Wobj Jog**: Select workpiece jogging, you can long press the circular buttons on the left and right to control the robot. In the workpiece coordinate system, move along the X, Y, Z axis in a straight line or rotate around RX, RY, RZ. The function of Wobj jogging is similar to that of single-axis jogging in Joint motion. As shown in figure below. 
 
 .. image:: teaching_pendant_software/032.png
    :width: 3in

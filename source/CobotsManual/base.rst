@@ -231,7 +231,7 @@ When configuring the end load, please enter the mass of the end tool used and th
     The load mass cannot exceed the maximum load range of the robot. For the load range corresponding to the specific robot model, please refer to 2.1. Basic parameters.The center of mass coordinate setting range is 0-1000, unit mm.
 
 .. image:: base/016.png
-   :width: 3in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 6.2-1 Schematic diagram of load setting
@@ -245,7 +245,7 @@ If the user is unsure about the tool mass or center of mass, he can click "Autom
 Before taking measurements, make sure the load is installed and then select the version. Click the "Tool Data Measurement" button to enter the load motion test interface.
 
 .. image:: base/017.png
-   :width: 3in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 6.2-2 Load Identification Joint Setup
@@ -321,7 +321,7 @@ The Gravitational moment mode in collision strategy is set as follows.
 .. note:: In the operation of the robot, if the load mass changes greatly, this strategy is not recommended; This strategy is not recommended if the running speed is too fast.
 
 .. image:: base/022.png
-   :width: 4in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 6.3-3 Gravitational moment mode of Collision Strategy
@@ -338,7 +338,7 @@ The setting steps of oscillation response mode in collision strategy are as foll
 .. note:: It is not recommended to use this strategy if the robot runs too fast.
 
 .. image:: base/023.png
-   :width: 4in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 6.3-4 Vibration response mode of Collision Strategy
@@ -353,7 +353,7 @@ The setup steps of static collision detection are as follows.
 **Step2**:Turn on the switch for static collision detection, as shown below. When it is detected that the gap between the joint torque command and the torque feedback is too large, the robot will enter the drag mode to avoid continuous extrusion force.
 
 .. image:: base/024.png
-   :width: 4in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 6.3-5 Static collision detection
@@ -748,18 +748,18 @@ As shown above, where {b} is the robot base coordinate system, {e} is the end fl
 
 .. centered:: Figure 6.5‑3 Coordinate system setting for TCP automatic calibration system of robot tool
 
-(1) adjust the posture of the robot's end flange to Rx, Ry, and Rz at 180 °, 0 °, and 0 °, respectively, and ensure that this posture remains unchanged throughout the entire calibration sensor device coordinate system movement process after adjustment；
+(1) adjust the posture of the robot's end flange to Rx, Ry, and Rz at 180 °, 0 °, and 0 °, respectively, and ensure that this posture remains unchanged throughout the entire calibration sensor device coordinate system movement process after adjustment;
 
-(2) Then make the robot tool TCP perform MoveL motion together in the X and Y axis directions of the robot base coordinate system and the sensor coordinate system；
+(2) Then make the robot tool TCP perform MoveL motion together in the X and Y axis directions of the robot base coordinate system and the sensor coordinate system;
 
 (3) During the movement of the robot, once the X and Y axis beams of the photoelectric sensor device always maintain the triggering I/O signal state, the installation position of the photoelectric sensor device can be accurately positioned as its current position.
 
 Calibrate the sensor coordinate system based on the web interface
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In the robot web control interface, click on "Initial" - "Base" - "Coordinate" - "TCP" to enter the "Tool coordinate system settings" interface；
+In the robot web control interface, click on "Initial" - "Base" - "Coordinate" - "TCP" to enter the "Tool coordinate system settings" interface;
 
-Select the reference coordinate system from the drop-down menu of "Coordinate system name", and choose the corresponding "Tool Type" and "Installation position", then click "Modify" to enter the "Modify Wizard" interface；
+Select the reference coordinate system from the drop-down menu of "Coordinate system name", and choose the corresponding "Tool Type" and "Installation position", then click "Modify" to enter the "Modify Wizard" interface;
 
 Select "Laser automatic calibration", enter the laser automatic calibration interface, click "Configuration", enter the "Laser calibration device configuration" interface, if there are previous settings, click "Modify".
 

@@ -12,9 +12,11 @@ Click "System Settings" on the left menu bar, and click "General Settings" on th
 Network settings can set controller IP, subnet mask, default gateway, DNS server and teach pendant IP (this IP is valid when using our FR-HMI teach pendant, and needs to be used when using FR-HMI teach pendant Configure the teaching pendant to be enabled), which is convenient for customers to use the scene.
 
 - The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本語).
-- The following is a language comparison table. Among the non-system built-in languages, download the language package and import it into the system after translation.
+
 - The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
 
+- The following is a language comparison table.
+  
 .. list-table:: 
    :widths: 20 40 40 30
    :header-rows: 1
@@ -24,62 +26,31 @@ Network settings can set controller IP, subnet mask, default gateway, DNS server
      - Local language name
      - Language code(ISO 639-1)
      - Is it built-in
+
    * - Chinese
      - 中文(汉语)
      - zh
      - True
+
    * - English
      - en
      - ja
      - True
+
    * - French
      - français
      - fr
      - True
+
    * - Japanese
      - 日本語
      - ja
      - True
-   * - Spanish
-     - Español
-     - es
-     - False
-   * - Russian
-     - Pу́сский
-     - ru
-     - False
-   * - Arabic
-     - اَلْعَرَبِيَّةُ
-     - ar
-     - False
-   * - German
-     - Deutsch
-     - de
-     - False
-   * - Portuguese
-     - Deutsch
-     - pt
-     - False
-   * - Hindi
-     - हिन्दी
-     - hi
-     - False
-   * - Italian
-     - Italiano
-     - it
-     - False
-   * - Bengali
-     - বাংলা
-     - bn
-     - False
+
    * - Korean
      - 한국어
      - ko
-     - False
-   * - Turkish
-     - Türkçe
-     - tr
-     - False
+     - True
 
 Users can set the number of retained logs and import and export the system configuration file. The maximum number of retained logs is 30, and the system configuration file records the set value.
 
@@ -141,9 +112,9 @@ User management page, used to save user information, you can add user ID, functi
 
 -  **Delete users**:The deletion methods are divided into single deletion and batch deletion. 
  
-   1.Click the single "Delete" button on the right side of the list, and it will prompt "Please click the delete button again to confirm deletion", and click the list again to delete successfully. 
+   1. Click the single "Delete" button on the right side of the list, and it will prompt "Please click the delete button again to confirm deletion", and click the list again to delete successfully. 
    
-   2.Click the check box on the left, select the users to be deleted, and then click the batch "Delete" button at the top of the list twice to delete. 
+   2. Click the check box on the left, select the users to be deleted, and then click the batch "Delete" button at the top of the list twice to delete. 
    
 .. important::
    The initial user 111 and the current login user cannot be deleted.

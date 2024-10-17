@@ -543,7 +543,7 @@ Angular velocity adjustable function
 
 This function can be used when encountering a workpiece that requires corner welding during the welding process, or when a specific linear line is planned (a quick transition is required when the attitude change is large and the position change is small, but the linear speed cannot be accelerated).
 
-**Step1**：Set the tool coordinate system to calibrate the tool size and attitude of the welding gun.
+**Step1**:Set the tool coordinate system to calibrate the tool size and attitude of the welding gun.
 
 .. warning:: The values on the interface are examples only, and the actual tool status shall prevail.
 
@@ -553,7 +553,7 @@ This function can be used when encountering a workpiece that requires corner wel
 
 .. centered:: Figure 9.5-3-7 Sets the tool coordinate system
 
-**Step2**：Click on "Program", select "Coding", and select " LIN" in the "Motion Command" category.
+**Step2**:Click on "Program", select "Coding", and select " LIN" in the "Motion Command" category.
 
 .. image:: coding/247.png
    :width: 6in
@@ -561,7 +561,7 @@ This function can be used when encountering a workpiece that requires corner wel
 
 .. centered:: Figure 9.5-3-8 Straight line command setting interface
 
-**Step3**：Set the starting point of each straight line of wrapping angle welding as the transition point, turn on the "The transition point angular velocity is adjustable" button, and set the maximum acceleration percentage (the default maximum angular velocity of 100% is 360°/s).
+**Step3**:Set the starting point of each straight line of wrapping angle welding as the transition point, turn on the "The transition point angular velocity is adjustable" button, and set the maximum acceleration percentage (the default maximum angular velocity of 100% is 360°/s).
 
 .. image:: coding/248.png
    :width: 6in
@@ -569,7 +569,7 @@ This function can be used when encountering a workpiece that requires corner wel
 
 .. centered:: Figure 9.5-3-9 Transition point angular velocity adjustment parameter configuration interface
 
-**Step4**：Click the "Add" button to generate a LIN command with the adjustment of the transition attitude angular velocity.
+**Step4**:Click the "Add" button to generate a LIN command with the adjustment of the transition attitude angular velocity.
 
 .. image:: coding/249.png
    :width: 6in
@@ -577,7 +577,7 @@ This function can be used when encountering a workpiece that requires corner wel
 
 .. centered:: Figure 9.5-3-10 Add a transition point linear motion command
 
-**Step5**：The robot completes the attitude transition at the starting point, normally executes the linear command movement to the end point of the section, closes the "The transition point angular velocity is adjustable" button, and adds a termination waypoint.
+**Step5**:The robot completes the attitude transition at the starting point, normally executes the linear command movement to the end point of the section, closes the "The transition point angular velocity is adjustable" button, and adds a termination waypoint.
 
 .. image:: coding/250.png
    :width: 6in
@@ -585,7 +585,7 @@ This function can be used when encountering a workpiece that requires corner wel
 
 .. centered:: Figure 9.5-3-11  Inserts the end point of the line
 
-**Step6**：Click the "Apply" button to generate the corresponding LUA command.
+**Step6**:Click the "Apply" button to generate the corresponding LUA command.
 
 .. image:: coding/251.png
    :width: 6in

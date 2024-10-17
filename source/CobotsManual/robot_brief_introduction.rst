@@ -28,11 +28,11 @@ The installation of the robot body requires a space of 3m × 3m × 2m (length ×
 
 Control cabinet installation space:
 
-1.The control box should be placed in easy operation to prevent water flooding, 0.6m-1.5m from the ground.
+1. The control box should be placed in easy operation to prevent water flooding, 0.6m-1.5m from the ground.
 
-2.The cabinet must be far away from the heat source.
+2. The cabinet must be far away from the heat source.
 
-3.On one side of the control box's heavy load line, there should be no obstruction within 150mm, and the remaining side shall be not covered within 100mm, which is convenient for heat dissipation and extraction.
+3. On one side of the control box's heavy load line, there should be no obstruction within 150mm, and the remaining side shall be not covered within 100mm, which is convenient for heat dissipation and extraction.
 
 .. figure:: installation/018.png
 	:align: center

@@ -13,7 +13,7 @@ Brief introduction
 This manual will use the following warnings. The role of these warnings is to ensure the safety of personal and equipment. When you read this manual, you must comply with and execute all the assembly instructions and guidelines in other chapters in this manual. This is very important. Pay special attention to text related to warning signs.
 
 .. important:: 
-    - If the robot (robot body, control box, oscilloscope, or button box) is damaged, changed or modified due to anthropogenic causes, FAIR INNOVATION refuses to bear all responsibilities；
+    - If the robot (robot body, control box, oscilloscope, or button box) is damaged, changed or modified due to anthropogenic causes, FAIR INNOVATION refuses to bear all responsibilities;
     - FAIR INNOVATION is not responsible for any damage caused by the robot or any other device due to errors written by customers or any other device.
 
 Personnel safety
@@ -1413,8 +1413,6 @@ FR-HMI Teach pendant introduction
 **Start key:**\ Start the program.
 
 **Stop key:**\ Stop the currently running program.
-
-**F4 button:**\ Enter the keyboard to call the keys.
 
 **Joint button:**\ The joint node of the robot.
 

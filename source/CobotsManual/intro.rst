@@ -41,6 +41,7 @@ Manual
     status
     application
     system
+    teach_pendant
     appendix
     term
 
