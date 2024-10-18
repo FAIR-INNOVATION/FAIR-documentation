@@ -71,7 +71,8 @@ body {
     display: none;
 }
 
-.wy-table-responsive {
+#menu-bar .wy-table-responsive,
+#appendix-5-list-of-spare-parts-and-vulnerable-parts .wy-table-responsive {
     display: flex;
     justify-content: center;
  }
