@@ -28,14 +28,13 @@ Toolbar
 Use the toolbar at the top left of the Node Graph Programming page.
 
 .. image:: node_editor_software/002.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 11.1-2 Toolbar
 
 .. note:: 
    .. image:: coding/006.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -45,7 +44,6 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
 .. note:: 
    .. image:: coding/010.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -55,7 +53,6 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
 .. note:: 
    .. image:: node_editor_software/131.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -65,7 +62,6 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
 .. note:: 
    .. image:: coding/007.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -75,7 +71,6 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
 .. note:: 
    .. image:: node_editor_software/130.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -85,7 +80,6 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
 .. note:: 
    .. image:: coding/009.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -95,7 +89,6 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
 .. note:: 
    .. image:: coding/008.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -105,7 +98,6 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
 .. note:: 
    .. image:: node_editor_software/129.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 

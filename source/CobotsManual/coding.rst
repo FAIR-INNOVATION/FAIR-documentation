@@ -29,7 +29,6 @@ The icons to the right of the program name are described as follows:
 
 .. note:: 
    .. image:: coding/003.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -39,7 +38,6 @@ The icons to the right of the program name are described as follows:
 
 .. note:: 
    .. image:: coding/004.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -49,7 +47,6 @@ The icons to the right of the program name are described as follows:
 
 .. note:: 
    .. image:: coding/005.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -64,7 +61,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/006.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -74,7 +70,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/007.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -84,7 +79,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
    
 .. note:: 
    .. image:: coding/008.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -94,7 +88,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/009.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -104,7 +97,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/010.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -114,7 +106,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/011.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -124,7 +115,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/012.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -134,7 +124,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/013.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -144,7 +133,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/014.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -154,7 +142,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/015.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -164,7 +151,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/016.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -174,7 +160,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/017.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -184,7 +169,6 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
 .. note:: 
    .. image:: coding/018.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -196,7 +180,6 @@ The icons on the top right are described as follows:
 
 .. note:: 
    .. image:: coding/240.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -206,7 +189,6 @@ The icons on the top right are described as follows:
 
 .. note:: 
    .. image:: coding/241.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -216,7 +198,6 @@ The icons on the top right are described as follows:
 
 .. note:: 
    .. image:: coding/242.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -226,7 +207,6 @@ The icons on the top right are described as follows:
 
 .. note:: 
    .. image:: coding/243.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -236,7 +216,6 @@ The icons on the top right are described as follows:
 
 .. note:: 
    .. image:: coding/244.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -246,7 +225,6 @@ The icons on the top right are described as follows:
 
 .. note:: 
    .. image:: coding/245.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 

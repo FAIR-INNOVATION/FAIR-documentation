@@ -107,12 +107,49 @@ The login interface is shown in figure below.
 
 .. centered:: Figure 5.1-3 Login Interface
 
-
-Teaching device multilingual settings function
+Multilingual settings function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Teaching device multilingual settings
-++++++++++++++++++++++++++++++++++++++++
+- The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本語).
+
+- The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
+
+- The following is a language comparison table.
+  
+.. list-table:: 
+   :widths: 20 40 40 30
+   :header-rows: 1
+   :align: center
+
+   * - Language
+     - Local language name
+     - Language code(ISO 639-1)
+     - Is it built-in
+
+   * - Chinese
+     - 中文(汉语)
+     - zh
+     - True
+
+   * - English
+     - en
+     - ja
+     - True
+
+   * - French
+     - français
+     - fr
+     - True
+
+   * - Japanese
+     - 日本語
+     - ja
+     - True
+
+   * - Korean
+     - 한국어
+     - ko
+     - True
 
 1.Connect the control box to the teaching device and start it up.
 

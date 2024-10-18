@@ -7,73 +7,100 @@ System
 General settings
 -------------------
 
-Click "System Settings" on the left menu bar, and click "General Settings" on the secondary menu bar to enter the general settings interface. The general setting can update the robot system time according to the current computer time, so that the time of recording the log content is accurate.
+Click "System Settings" on the left menu bar, and then click "General Settings" on the secondary menu bar to enter the general settings interface. General settings can update the robot system time according to the current computer time so that the time of the log content can be recorded accurately.
 
-Network settings can set controller IP, subnet mask, default gateway, DNS server and teach pendant IP (this IP is valid when using our FR-HMI teach pendant, and needs to be used when using FR-HMI teach pendant Configure the teaching pendant to be enabled), which is convenient for customers to use the scene.
-
-- The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本語).
-
-- The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
-
-- The following is a language comparison table.
-  
-.. list-table:: 
-   :widths: 20 40 40 30
-   :header-rows: 1
+.. image:: system/028.png
+   :width: 3in
    :align: center
 
-   * - Language
-     - Local language name
-     - Language code(ISO 639-1)
-     - Is it built-in
+.. centered:: Figure 15.1‑1 Time Settings
 
-   * - Chinese
-     - 中文(汉语)
-     - zh
-     - True
-
-   * - English
-     - en
-     - ja
-     - True
-
-   * - French
-     - français
-     - fr
-     - True
-
-   * - Japanese
-     - 日本語
-     - ja
-     - True
-
-   * - Korean
-     - 한국어
-     - ko
-     - True
-
-Users can set the number of retained logs and import and export the system configuration file. The maximum number of retained logs is 30, and the system configuration file records the set value.
-
-Restore factory settings under system recovery can clear user data and restore the robot to factory settings.
-
-The slave station log generation and controller log export functions are to download some important status or error record files of the controller, which is convenient for troubleshooting robot problems.
+Network settings can set the controller IP, subnet mask, default gateway, DNS server and teach pendant IP (this IP is valid when using our FR-HMI teach pendant, and the teach pendant enable status needs to be configured to enable when using the FR-HMI teach pendant), which is convenient for customers to use the scene.
 
 Network settings
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: system/001.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 15.1‑1 Schematic diagram of network settings
+.. centered:: Figure 15.1‑2 Network settings diagram
 
--  **Set ethernet**:Enter the IP of the network card that needs to communicate, subnet mask (linked with IP, automatically filled), default gateway, and DNS server. The factory default IP of network card 0 network port: 192.168.57.2, the factory default IP of network card 1 network port: 192.168.58.2.
+- **Set network card**: Enter the network card IP, subnet mask (linked with IP, automatically filled in), default gateway, and DNS server that need to communicate. The factory default IP of network card 0 network port is: 192.168.57.2, and the factory default IP of network card 1 network port is: 192.168.58.2.
 
--  **Teach pendant enabled**:Controls whether the teach pendant is enabled. By default, the teach pendant is turned off, and the device cannot be operated using the teach pendant. Click the slide switch button to enable the teach pendant to operate the device.
-  
--  **Access IP**:Select the network card associated with WebAPP and WebRecovery. When the teach pendant is enabled, WebAPP selects network card 1 by default, and network card 0 is not optional.
-  
--  **Set network**:Click the "Set Network" button, prompting that the configuration is in progress. After the configuration is complete, the device needs to be restarted.
+- **Teach pendant enable**: Control whether to enable the teach pendant. The teach pendant is turned off by default, and the device cannot be operated using the teach pendant. Click the slide switch button to enable the teach pendant to operate the device.
+
+- **Access IP**: Select the network card associated with WebAPP and WebRecovery. When the teach pendant is enabled, WebAPP selects network card 1 by default, and network card 0 is not selectable.
+
+- **Set up network**: Click the "Set up network" button, and it will prompt that the configuration is in progress. After the configuration is complete, you need to restart the device.
+
+Teach pendant touch screen calibration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After enabling the teach pendant, you can calibrate the teach pendant.
+
+.. image:: system/029.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 15.1‑3 Teach pendant touch screen calibration
+
+Peripheral industrial computer configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To enable the peripheral industrial computer, you need to enter the IP address. After successful configuration, you need to restart the control box and industrial computer.
+
+.. image:: system/030.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 15.1‑4 Peripheral IPC Configuration
+
+System Language
+~~~~~~~~~~~~~~~~~~
+
+Select the system language and click the "Apply" button to switch the system language.
+
+.. image:: system/031.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 15.1‑5 System Language
+
+Log Management
+~~~~~~~~~~~~~~~~~~~
+
+Users can set the number of logs to be retained and import and export system configuration files. The maximum number of logs to be retained is 30, and the system configuration file records the setting value.
+
+.. image:: system/032.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 15.1‑6 Log Management
+
+Timeout Logout Time Setting
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Users can set the timeout logout time. If the time is met, the robot will automatically log out. The unit is min.
+
+.. image:: system/033.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 15.1‑7 Timeout Logout Time Setting
+
+System Settings
+~~~~~~~~~~~~~~~~~
+
+Restoring to factory settings under system recovery can clear user data and restore the robot to factory configuration.
+
+The slave log generation and controller log export functions are to download some important status or error record files of the controller, which is convenient for troubleshooting robot problems.
+
+.. image:: system/034.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 15.1‑8 System Settings
 
 Account settings account settings
 --------------------------------------

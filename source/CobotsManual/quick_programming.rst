@@ -31,7 +31,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/006.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -41,7 +40,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/007.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -51,7 +49,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
    
 .. note:: 
    .. image:: coding/008.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -61,7 +58,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/009.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -71,7 +67,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/010.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -81,7 +76,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/011.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -91,7 +85,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/012.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -101,7 +94,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/013.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -111,7 +103,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/014.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -121,7 +112,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/015.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -131,7 +121,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/016.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -141,7 +130,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/017.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 
@@ -151,7 +139,6 @@ Use the toolbar at the top of the program tree to modify the program tree.
 
 .. note:: 
    .. image:: coding/018.png
-      :width: 1.5in
       :height: 0.75in
       :align: left
 

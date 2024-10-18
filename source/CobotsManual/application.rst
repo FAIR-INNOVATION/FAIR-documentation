@@ -175,7 +175,7 @@ Add a lua interface for reading and writing registers based on Modbus-rtu commun
 Program sample screenshot:
 
 .. image:: application/011.png
-   :width: 4in
+   :width: 3in
    :align: center
 
 .. centered:: Figure 14.8‑2 Modbus-rtu communication lua program example
