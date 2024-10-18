@@ -15,7 +15,7 @@ In the menu bar of "Initial - Base - Coordinate", click "TCP" to enter the tool 
 Tool coordinates can be modified, cleared and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
 
 .. image:: base/001.png
-   :width: 3in
+   :width: 4in
    :align: center
    
 .. centered:: Figure 6.1-1 Set tool coordinates
@@ -31,7 +31,7 @@ Under Linux:
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. Tool calibration methods are divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the center point of the tool. Its posture defaults to be consistent with the end posture. The six-point method adds two points to the four-point method. , used to calibrate the attitude of the tool, here we take the six-point method as an example to explain.
 
 .. image:: base/002.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.1-2 Set tool coordinates
@@ -61,7 +61,7 @@ The modification, clearing and application of external tool coordinates can be r
 There are 15 numbers in the drop-down list of the external tool coordinate system, from etoolcoord0~etoolcoord14, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used tool coordinate system Change to the selected coordinates, as shown in figure below.
 
 .. image:: base/004.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.1-4 External tool coordinates
@@ -69,7 +69,7 @@ There are 15 numbers in the drop-down list of the external tool coordinate syste
 Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in figure below.
 
 .. image:: base/005.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.1-5 Schematic diagram of the six-point method
@@ -110,7 +110,7 @@ Under the menu bar of "Initial - Base - Coordinate", click "Workpiece" to enter 
 wobjcoord14), and then the corresponding coordinate value will be displayed in the "Coordinate System Coordinates" below. After selecting a certain coordinate system, click the "Apply" button, and the currently used workpiece coordinate system will change to the selected coordinates, as shown in figure below.
 
 .. image:: base/006.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.1-6 Set workpiece coordinates
@@ -138,7 +138,7 @@ Under the menu bar of "Initial - Base - Coordinate", click "Ext. Axis" to enter 
 There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in figure below.
 
 .. image:: base/008.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.1-8 Extended Axis Coordinates
@@ -231,7 +231,7 @@ When configuring the end load, please enter the mass of the end tool used and th
     The load mass cannot exceed the maximum load range of the robot. For the load range corresponding to the specific robot model, please refer to 2.1. Basic parameters.The center of mass coordinate setting range is 0-1000, unit mm.
 
 .. image:: base/016.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.2-1 Schematic diagram of load setting
@@ -245,7 +245,7 @@ If the user is unsure about the tool mass or center of mass, he can click "Autom
 Before taking measurements, make sure the load is installed and then select the version. Click the "Tool Data Measurement" button to enter the load motion test interface.
 
 .. image:: base/017.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.2-2 Load Identification Joint Setup
@@ -615,11 +615,11 @@ After the configuration is complete, you can view the corresponding output DO st
 **Reduction mode configuration (level 1, level 2, level 3)**: The joint speed and terminal TCP speed can be configured in the first-level and second-level reduction modes, and the third-level reduction mode is to stop without configuring the speed.
 
 .. image:: base/032.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. image:: base/033.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.4-3 Safe speed setting

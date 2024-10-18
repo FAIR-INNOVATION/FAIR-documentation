@@ -21,25 +21,25 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
 
 **Operation bar**
 
-1) **Load**: responsible for reloading the workspace
+1) **Load**: responsible for reloading the workspace;
 
-2) **Import**: responsible for importing related graphical programming programs
+2) **Import**: responsible for importing related graphical programming programs;
 
-3) **Export**: responsible for exporting the saved graphical programming programs in the workspace. The "Save" button function is to save the code block as the corresponding teaching program after editing is completed
+3) **Export**: responsible for exporting the saved graphical programming programs in the workspace. The "Save" button function is to save the code block as the corresponding teaching program after editing is completed;
 
-4) **Save**: responsible for saving the edited graphical code block
+4) **Save**: responsible for saving the edited graphical code block;
 
-5) **Clear**: responsible for quickly clearing the code editing area
+5) **Clear**: responsible for quickly clearing the code editing area;
 
-6) **Code**: responsible for translating code blocks into Lua code
+6) **Code**: responsible for translating code blocks into Lua code.
 
 **Toolbox**
 
-1) Code blocks containing all instructions and logic codes can be dragged to the workspace to create code blocks and edit them
+1) Code blocks containing all instructions and logic codes can be dragged to the workspace to create code blocks and edit them;
 
-2) The Toolbox toolbar section will be further classified according to the instruction type
+2) The Toolbox toolbar section will be further classified according to the instruction type;
 
-3) Logic instructions: if-else, while, etc.
+3) Logic instructions: if-else, while, etc;
 
 4) Basic motion instructions: PTP, LIN, ARC, etc. Instructions are classified according to application scenarios: gluing, welding, conveyor belts, etc. You can easily find the required code blocks during use.
 

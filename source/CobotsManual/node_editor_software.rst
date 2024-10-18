@@ -41,7 +41,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name:**Open**
    
-   effect:Open user program file, choose to load or delete files in the pop-up box.
+   effect:Open user program file, choose to load or delete files in the pop-up box
 
 .. note:: 
    .. image:: coding/010.png
@@ -61,7 +61,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name:**Overload**
    
-   effect:Reload the node graph content of the last operation to the local.
+   effect:Reload the node graph content of the last operation to the local
 
 .. note:: 
    .. image:: coding/007.png
@@ -81,7 +81,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name:**Initial**
    
-   effect:Load the node graph content of the initial settings.
+   effect:Load the node graph content of the initial settings
 
 .. note:: 
    .. image:: coding/009.png
@@ -91,7 +91,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name:**Export**
    
-   effect:After creating/opening the node graph programming file, click the "Export" button to pop up the "Export Node Graph Programming" pop-up box, select the workspace file name to export the file (json format).
+   effect:After creating/opening the node graph programming file, click the "Export" button to pop up the "Export Node Graph Programming" pop-up box, select the workspace file name to export the file (json format)
 
 .. note:: 
    .. image:: coding/008.png
@@ -101,7 +101,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name:**Import**
    
-   effect:Click the "Import" button to pop up the import prompt box. Select the file to be imported and click Import. The file content will be displayed in the node graph programming workspace.
+   effect:Click the "Import" button to pop up the import prompt box. Select the file to be imported and click Import. The file content will be displayed in the node graph programming workspace
 
 .. note:: 
    .. image:: node_editor_software/129.png
@@ -111,7 +111,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name:**Code**
    
-   effect:After the node graph is connected, Lua code is generated.
+   effect:After the node graph is connected, Lua code is generated
 
 Node graph operations
 -------------------------
@@ -341,11 +341,11 @@ The function of this command is similar to the "point to point" command, but the
 
 - Point name: Teaching point
 - Debugging speed (%): 0 ~ 100
-- Stop: false/true. When true is selected, the smooth transition parameter value does not take effect;
-- Smooth transition (mm): Smooth transition radius 0 ~ 1000;
-- Whether to seek position: false/true;
-- Position search point variables: REF0~99/RES0~99. When false is selected for position search, the parameters will not take effect;
-- Whether to offset: No/base coordinate offset/tool ​​coordinate offset. When No is selected, the dx~drz parameter values ​​will not take effect;
+- Stop: false/true. When true is selected, the smooth transition parameter value does not take effect
+- Smooth transition (mm): Smooth transition radius 0 ~ 1000
+- Whether to seek position: false/true
+- Position search point variables: REF0~99/RES0~99. When false is selected for position search, the parameters will not take effect
+- Whether to offset: No/base coordinate offset/tool ​​coordinate offset. When No is selected, the dx~drz parameter values ​​will not take effect
 - dx~drz: Offset.
 
 .. image:: node_editor_software/011.png
@@ -365,10 +365,10 @@ This command function is used in welding scenarios using laser sensors.
 
 - Point name: Teaching point
 - Debugging speed (%): 0 ~ 100
-- Stop: false/true. When true is selected, the smooth transition parameter value does not take effect;
-- Smooth transition (mm): Smooth transition radius 0 ~ 1000;
-- Weld cache data selection: execution planning data/execution record data;
-- Board type: corrugated board/corrugated board/fence board/oil drum/corrugated shell steel;
+- Stop: false/true. When true is selected, the smooth transition parameter value does not take effect
+- Smooth transition (mm): Smooth transition radius 0 ~ 1000
+- Weld cache data selection: execution planning data/execution record data
+- Board type: corrugated board/corrugated board/fence board/oil drum/corrugated shell steel
 - Whether to offset: No/base coordinate offset/tool ​​coordinate offset/Laser raw data offset. When No is selected, the dx~drz parameter values ​​will not take effect.
 - dx~drz: Offset.
 
@@ -408,7 +408,7 @@ Circle instruction
 
 Click the "Circle" command node to enter the node graph editing interface.
 
-The full circle motion includes two points. The first point is the middle transition point 1 of the full circle, and the second point is the middle transition point 2 of the full circle. Transition point 2 can be set to be offset. This offset takes effect on both transition point 1 and Transition point 2
+The full circle motion includes two points. The first point is the middle transition point 1 of the full circle, and the second point is the middle transition point 2 of the full circle. Transition point 2 can be set to be offset. This offset takes effect on both transition point 1 and Transition point 2.
 
 "Circle" command node, parameters:
 
@@ -1051,7 +1051,7 @@ This instruction is aimed at scenarios where external axes are used. Used in com
 
 It is divided into UDP communication loading/configuration, asynchronous movement, synchronous PTP/LIN movement, synchronous ARC movement, zero return command and enable command.
 
-"Extended axis UDP communication configuration" command node, enter the IP address, port number and communication cycle;
+"Extended axis UDP communication configuration" command node, enter the IP address, port number and communication cycle.
 
 .. image:: node_editor_software/050.png
    :width: 6in
@@ -1413,7 +1413,7 @@ Click the "Laser" command node to enter the node graph programming interface
 
 This command contains three parts: laser command, tracking command and positioning command. Before adding this command, please confirm whether the laser tracking sensor in the user peripheral has been configured successfully. See the Robot Peripherals chapter for details.
 
-1. "Open/Close sensor" command node, parameters
+1. "Open/Close sensor" command node, parameters:
 
 - Select weld type: 0 ~ 49
   
@@ -1431,7 +1431,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 11.46-2 "Open/Close sensor" command node interface -- Task number
 
-2. "Load/unload sensor" command node, parameters
+2. "Load/unload sensor" command node, parameters:
 
 - Function selection: Ruiniu RRT-SV2-BP/CXZK-RBTA4L
   
@@ -1441,7 +1441,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 11.46-3 "Load/unload sensor" command node interface
 
-3. "Start/Stop Tracking" command node, parameters
+3. "Start/Stop Tracking" command node, parameters:
 
 - Coordinate system name: Customized configuration coordinate system
   
@@ -1451,7 +1451,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 11.46-4 "Start/stop tracking" command node interface
 
-4. "Data Record" command node, parameters
+4. "Data Record" command node, parameters:
 
 - Function selection: stop recording/real-time tracking/start recording/track recurrence
 - Waiting time (ms): 0 ~ 10000
@@ -1462,7 +1462,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 11.46-5 "Data Logging" command node interface
 
-5. "Laser tracking recurrence" command node, parameters
+5. "Laser tracking recurrence" command node, parameters:
   
 .. image:: node_editor_software/086.png
    :width: 6in
@@ -1470,7 +1470,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 11.46-6 "Laser Tracking Reappearance" command node interface
 
-6. "Sensor point acquisition movement" command node, parameters
+6. "Sensor point acquisition movement" command node, parameters:
 
 - Coordinate system name: Customized configuration coordinate system
 - Sports mode: PTP/Lin
@@ -1482,7 +1482,7 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 11.46-7 "Data Logging" command node interface
 
-1. "Start/End locating" command node, parameters
+7. "Start/End locating" command node, parameters:
 
 - Coordinate system name: Customized configuration coordinate system
 - Direction: -x/-x/-y/-y/-z/-z/specifies the direction
@@ -1551,14 +1551,14 @@ This command is generally used in welding scenarios and requires the welding mac
 
 The search point setting adds points based on the weld type and calculation method.
 
-- When the type is fillet weld and the calculation method is 1D (one of xyz), the point addition is selected from point a and point b;
-- When the type is fillet weld and the calculation method is 2D (two in xyz), the point addition is selected from point a, point b, point e, and point f;
-- When the type is fillet weld and the calculation method is 3D (xyz), the point addition is selected from point a, point b, point c, point d, point e, and point f;
-- When the type is fillet weld and the calculation method is 2D- (two in xyz, one in rxryrz), the point addition is selected from point a, point b, point c, point d, point e, and point f;
-- When the type is inner and outer diameter and the calculation method is 2D2D (two in xyz), the point addition is selected from point a and point b;
-- When the type is point and the calculation method is 3D (xyz), the point addition is selected from point a, point b, point c, point d, point e, and point f;
-- When the type is camera and the calculation method is 3D- (xyzrxryrz), the point addition is selected from point a and point b;
-- When the type is surface and the calculation method is 3D- (xyzrxryrz), the point addition is selected from point a and point b;
+- When the type is fillet weld and the calculation method is 1D (one of xyz), the point addition is selected from point a and point b
+- When the type is fillet weld and the calculation method is 2D (two in xyz), the point addition is selected from point a, point b, point e, and point f
+- When the type is fillet weld and the calculation method is 3D (xyz), the point addition is selected from point a, point b, point c, point d, point e, and point f
+- When the type is fillet weld and the calculation method is 2D- (two in xyz, one in rxryrz), the point addition is selected from point a, point b, point c, point d, point e, and point f
+- When the type is inner and outer diameter and the calculation method is 2D2D (two in xyz), the point addition is selected from point a and point b
+- When the type is point and the calculation method is 3D (xyz), the point addition is selected from point a, point b, point c, point d, point e, and point f
+- When the type is camera and the calculation method is 3D- (xyzrxryrz), the point addition is selected from point a and point b
+- When the type is surface and the calculation method is 3D- (xyzrxryrz), the point addition is selected from point a and point b
 
 .. image:: node_editor_software/092.png
    :width: 6in
@@ -1568,14 +1568,13 @@ The search point setting adds points based on the weld type and calculation meth
 
 Calculate the offset to set the datum and contact points based on the weld type and calculation method.
 
-- When the type is fillet weld and the calculation method is 1D (one of xyz), set reference point 1 and contact point 1;
-- When the type is fillet weld and the calculation method is 2D (two in xyz), set datum point 1, datum point 2, contact point 1, and contact point 2;
-- When the type is fillet weld and the calculation method is 3D (xyz), set datum point 1, datum point 2, datum point 3, contact point 1, contact point 2, and contact point 3;
-- When the type is fillet weld and the calculation method is 2D- (two in xyz, one in rxryrz), set reference point 1, reference point 2, reference point 3, contact point 1, contact point 2, contact point 3 ;
-- When the type is inner and outer diameter and the calculation method is 2D2D (two in xyz), set datum point 1, datum point 2, datum point 3, contact point 1, contact point 2, and contact point 3;
-- When the type is point and the calculation method is 3D (xyz), set contact point 1 and contact point 2;
-- When the type is camera and the calculation method is 3D- (xyzrxryrz), set contact point 1 and contact point 2;
-- When the type is face and the calculation method is 3D- (xyzrxryrz), set contact point 1, contact point 2, contact point 3, contact point 4, contact point 5, and contact point 6;
+- When the type is fillet weld and the calculation method is 2D (two in xyz), set datum point 1, datum point 2, contact point 1, and contact point 2
+- When the type is fillet weld and the calculation method is 3D (xyz), set datum point 1, datum point 2, datum point 3, contact point 1, contact point 2, and contact point 3
+- When the type is fillet weld and the calculation method is 2D- (two in xyz, one in rxryrz), set reference point 1, reference point 2, reference point 3, contact point 1, contact point 2, contact point 3 
+- When the type is inner and outer diameter and the calculation method is 2D2D (two in xyz), set datum point 1, datum point 2, datum point 3, contact point 1, contact point 2, and contact point 3
+- When the type is point and the calculation method is 3D (xyz), set contact point 1 and contact point 2
+- When the type is camera and the calculation method is 3D- (xyzrxryrz), set contact point 1 and contact point 2
+- When the type is face and the calculation method is 3D- (xyzrxryrz), set contact point 1, contact point 2, contact point 3, contact point 4, contact point 5, and contact point 6
 
 .. image:: node_editor_software/093.png
    :width: 6in
@@ -1586,7 +1585,7 @@ Calculate the offset to set the datum and contact points based on the weld type 
 "Contact point data write" command node, parameters:
 
 - Contact point name: RES0~99
-- Contact point name: The data format is {0,0,0,0,0,0};
+- Contact point name: The data format is {0,0,0,0,0,0}
 
 .. image:: node_editor_software/094.png
    :width: 6in

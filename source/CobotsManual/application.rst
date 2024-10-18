@@ -14,7 +14,7 @@ In the menu bar of "Application - Tool App", click the "Robot packing" button to
    
    If it is shipped from the factory, go to System Settings - General Settings and restore the factory settings before leaving the factory.
 
-**Step1**:Move the robot to zero point before moving to the packing point
+**Step1**:Move the robot to zero point before moving to the packing point.
 
 **Step2**:Click the "Move to Zero" button to confirm that the robot's mechanical zero point is correct and that the gaps in the orange circles in the figure are aligned with each joint.
 

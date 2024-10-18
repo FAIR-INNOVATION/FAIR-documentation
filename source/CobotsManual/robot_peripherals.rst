@@ -242,11 +242,11 @@ User can quickly configure the DO required for spraying through the one-key conf
 .. important:: 
 	Before using the spraying function, it is necessary to establish the corresponding tool coordinate system first, and apply the established tool coordinate system during program teaching.
 
-**Step2**: After the configuration is complete, click the four buttons "Start Spraying", "Stop Spraying", "Start Cleaning the Gun" and "Stop Cleaning the Gun" to debug the spray gun;
+**Step2**: After the configuration is complete, click the four buttons "Start Spraying", "Stop Spraying", "Start Cleaning the Gun" and "Stop Cleaning the Gun" to debug the spray gun.
 
 .. figure:: robot_peripherals/017.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 8.4-1 Gun Configuration
 
@@ -366,7 +366,7 @@ As shown in Figure 5, select the welding machine status signal DI input port and
 
 .. centered:: Figure 8.5-5 Setting welding machine signal port
 
-**Welder preparation**:when the welding machine is ready for welding operation, the welding machine outputs the signal to the robot; 
+**Welder preparation**:when the welding machine is ready for welding operation, the welding machine outputs the signal to the robot.
 
 When the welding machine is not ready for other reasons, the welding machine does not input the signal to the robot, and at this time, the upper right corner of the robot WebApp prompts "Welding machine is not ready" (Figure 6). If your welding machine does not have a ready signal, you can set this port to "None" (Figure 7).
 
@@ -382,7 +382,7 @@ When the welding machine is not ready for other reasons, the welding machine doe
 
 .. centered:: Figure 8.5-7 The welding machine preparation is set to "None"
 
-**Arc start success**:the arc-starting of the welding machine has been successful. After the robot outputs the arc-starting signal to the welding machine, it waits for the arc-starting success signal from the welding machine to be fed back. If the robot fails to detect the arc-starting success signal within the set timeout, the robot reports an "Arc sticking timeout" error (Figure 8);
+**Arc start success**:the arc-starting of the welding machine has been successful. After the robot outputs the arc-starting signal to the welding machine, it waits for the arc-starting success signal from the welding machine to be fed back. If the robot fails to detect the arc-starting success signal within the set timeout, the robot reports an "Arc sticking timeout" error (Figure 8).
 
 When using the robot welding function, welding can still be carried out if the arc starting success signal is not configured, but the robot will report the warning of "Arc successful DI not configured" (Figure 9); If your welding machine has a successful arc starting signal output, we suggest that you configure this signal for safer welding.
 
@@ -2353,7 +2353,7 @@ Configuration steps
 
 .. figure:: robot_peripherals/106.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 8.7-1 Extended axis communication configuration
 
@@ -2384,7 +2384,7 @@ Configuration steps
 
 .. figure:: robot_peripherals/109.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 8.7-4 Extended Axis Test
 
@@ -2591,7 +2591,7 @@ In the advanced settings, it is necessary to set the servo acceleration/decelera
 
 .. figure:: robot_peripherals/175.png
   :align: center
-  :width: 4in
+  :width: 6in
 
 .. centered:: Figure 8.7-16 Advanced settings for servo motion
 

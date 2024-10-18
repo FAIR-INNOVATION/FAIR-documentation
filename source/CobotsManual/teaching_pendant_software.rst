@@ -159,15 +159,15 @@ System initial interface
 
 After the login is successful, the system enters the "Initial". Mainly include:
 
-- 1. FAIRINO LOGO;
-- 2. Menu bar zoom button;
-- 3. Menu bar;
-- 4. Robot control area;
-- 5. Robot status area;
-- 6. 3D simulation robot - 3D scene operation;
-- 7. 3D simulation robot - robot body operation;
-- 8. Robot supporting functions;
-- 9. Robot and supporting function status.
+1. FAIRINO LOGO;
+2. Menu bar zoom button;
+3. Menu bar;
+4. Robot control area;
+5. Robot status area;
+6. 3D simulation robot - 3D scene operation;
+7. 3D simulation robot - robot body operation;
+8. Robot supporting functions;
+9. Robot and supporting function status.
 
 The initial interface of the system is shown in the figure below:
 

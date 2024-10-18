@@ -317,7 +317,7 @@ For ease of operation, you can enter any do content and edit other instructions 
 if…else command
 ++++++++++++++++
 
-Click the "if...else" button to enter the if...else command editing interface
+Click the "if...else" button to enter the if...else command editing interface.
 
 This command contains the following buttons:
 
@@ -339,7 +339,7 @@ This instruction requires a certain programming foundation. If you need help, pl
 Goto command
 ++++++++++++++++
 
-Click the "Goto" button to enter the Goto command editing interface
+Click the "Goto" button to enter the Goto command editing interface.
 
 The Goto instruction is a jump instruction, enter the statement in the input box on the right, and click "Add" and "Apply" after editing. (This instruction requires a certain programming foundation, if you need help, please contact us)
 
@@ -352,7 +352,7 @@ The Goto instruction is a jump instruction, enter the statement in the input box
 Wait command
 ++++++++++++++++
 
-Click the "Wait" icon to enter the Wait command editing interface
+Click the "Wait" icon to enter the Wait command editing interface.
 
 This instruction is a delay instruction, which is divided into three parts: "WaitMs", "WaitDI" and "WaitAI".
 
@@ -391,7 +391,7 @@ This instruction is a delay instruction, which is divided into three parts: "Wai
 Pause command
 ++++++++++++++++
 
-Click the "Pause" icon to enter the Pause command editing interface
+Click the "Pause" icon to enter the Pause command editing interface.
 
 This instruction is a pause instruction. Insert this instruction into the program. When the program executes this instruction, the robot will be in a pause state. If you want to continue running, click the "Pause/Resume" button in the control area.
 
@@ -404,7 +404,7 @@ This instruction is a pause instruction. Insert this instruction into the progra
 Dofile command
 ++++++++++++++++
 
-Click the "Dofile" icon to enter the Dofile command editing interface
+Click the "Dofile" icon to enter the Dofile command editing interface.
 
 The Dofile command calls the internal program of the controller. When using the Dofile command, the called subroutine needs to be saved, and the main program does not need to be saved again if it has not changed. The Dofile command supports two-level calls, and two parameter settings need to be paid attention to. One is the level of the call, and the other is the ID number of the call. In principle, the same ID number cannot appear in the same program.
 
@@ -417,7 +417,7 @@ The Dofile command calls the internal program of the controller. When using the 
 Var command
 ++++++++++++++++
 
-Click the "Var" icon to enter the Var command editing interface
+Click the "Var" icon to enter the Var command editing interface.
 
 This command is a variable system command, which is divided into two parts: Lua variable definition, variable query and Sys variable renaming, getting value, and setting value. Lua variable definition can declare a variable and assign an initial value, and cooperate with while, if-else and other commands Use the Lua variable query command to query the value of the input variable name in real time and display it in the status bar. The number of Sys variables is fixed, and you can rename them, get variable values, and set variable values. The values stored in this variable will not be cleared when the system is turned off.
 
@@ -799,7 +799,7 @@ Switch the robot to the automatic mode, and start the program under the conditio
 Spiral command
 ++++++++++++++++
 
-Click the "Spiral" icon to enter the Spiral command editing interface
+Click the "Spiral" icon to enter the Spiral command editing interface.
 
 The "Spiral" command is a spiral motion, which includes three points, which form a circle. On the third point setting page, there are several parameters including the number of spiral turns, attitude correction angle, radius increment and rotation axis direction increment. Setting, the number of helix circles is the number of motion circles of the helix, the attitude correction angle is the attitude at the end of the helix and the attitude of the first point of the helix, the radius increment is the increment of the radius of each circle, and the direction of the rotation axis is increased. The amount is the increment in the direction of the screw axis. set up
 Whether to offset, the offset takes effect on the trajectory of the entire helix.
@@ -813,7 +813,7 @@ Whether to offset, the offset takes effect on the trajectory of the entire helix
 N-Spiral command
 ++++++++++++++++
 
-Click the "N-Spiral" icon to enter the N-Spiral command editing interface
+Click the "N-Spiral" icon to enter the N-Spiral command editing interface.
 
 The "N-Spiral" command is an optimized version of the spiral motion. This command only needs one point plus the configuration of various parameters to realize the spiral motion. The robot takes the current position as the starting point, and the user sets the debugging speed, whether to offset, the number of spiral turns, the spiral inclination, the initial radius, the radius increment, the rotation axis direction increment and the rotation direction. The number of spiral turns is the helix. The number of motion circles, the helix inclination is the angle between the Z axis of the tool and the horizontal direction, the attitude correction angle is the attitude at the end of the helix and the attitude of the first point of the helix, the initial radius is the radius of the first circle, and the radius increment That is, the increment of the radius of each circle, the increment in the direction of the rotation axis is the increment in the direction of the screw axis, and the direction of rotation is clockwise and counterclockwise.
 
@@ -826,7 +826,7 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
 H-Spiral command
 +++++++++++++++++++
 
-Click the "H-Spiral" icon to enter the H-Spiral command editing interface
+Click the "H-Spiral" icon to enter the H-Spiral command editing interface.
 
 The "H-Spiral" command is a horizontal space spiral motion. This command is set after the single-segment motion (straight line) command. 
 
@@ -844,7 +844,7 @@ The "H-Spiral" command is a horizontal space spiral motion. This command is set 
 Spline command
 ++++++++++++++++
 
-Click the "Spline" icon to enter the Spline command editing interface
+Click the "Spline" icon to enter the Spline command editing interface.
 
 The command is divided into three parts: the start of the spline group, the spline segment and the end of the spline group. The start of the spline group is the start mark of the spline movement. The spline segment includes SPL, SLIN and SCIRC segments. Click the corresponding icon to enter the command Add interface, the end of spline group is the end sign of spline movement.
 
@@ -857,7 +857,7 @@ The command is divided into three parts: the start of the spline group, the spli
 N-Spline command
 +++++++++++++++++++
 
-Click the "N-Spline" icon to enter the N-Spline command editing interface
+Click the "N-Spline" icon to enter the N-Spline command editing interface.
 
 This instruction is an optimization instruction for the Spline instruction algorithm, and will replace the existing Spline instruction in the future. 
 
@@ -963,7 +963,7 @@ When the value is positive, the left endpoint is skewed in the forward direction
 TPD command
 ++++++++++++++++
 
-Click the "TPD" button to enter the TPD command editing interface
+Click the "TPD" button to enter the TPD command editing interface.
 
 In this command, the user first needs to have a recorded track.
 
@@ -984,7 +984,7 @@ When programming, first use the PTP instruction to reach the starting point of t
 Offset command
 ++++++++++++++++
 
-Click the "Offset" icon to enter the Offset command editing interface
+Click the "Offset" icon to enter the Offset command editing interface.
 
 This command is an overall offset command. Input each offset, add the opening command and closing command to the program, and the motion command between the start and close will be offset based on the base coordinates (or workpiece coordinates).
 
@@ -997,7 +997,7 @@ This command is an overall offset command. Input each offset, add the opening co
 ServoCart command
 ++++++++++++++++++++
 
-Click the "ServoC" icon to enter the ServoCart command editing interface
+Click the "ServoC" icon to enter the ServoCart command editing interface.
 
 ServoCart servo control (Cartesian space motion) command, which can control the robot motion through absolute pose control or based on the current pose offset.
 
@@ -1024,7 +1024,7 @@ Example of control program based on current pose offset (base coordinate offset)
 Trajctory command
 +++++++++++++++++++
 
-Click the "Trajctory" icon to enter the Trajctory command editing interface
+Click the "Trajctory" icon to enter the Trajctory command editing interface.
 
 .. image:: coding/078.png
    :width: 6in
@@ -1035,15 +1035,15 @@ Click the "Trajctory" icon to enter the Trajctory command editing interface
 TrajctoryJ command
 ++++++++++++++++++++
 
-Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface
+Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface.
 
-1.Trajectory file import function: select a local computer file to import to the robot control system
+1. Trajectory file import function: select a local computer file to import to the robot control system.
 
-2.Track preloading: select the imported track file and load it by command
+2. Track preloading: select the imported track file and load it by command.
 
-3.Trajectory movement: Send the robot movement through the combination command of the preloaded trajectory file and the selected debugging speed
+3. Trajectory movement: Send the robot movement through the combination command of the preloaded trajectory file and the selected debugging speed.
 
-4.Print the track point number: print the track point number during the robot running track, so as to check the progress of the current movement
+4. Print the track point number: print the track point number during the robot running track, so as to check the progress of the current movement.
 
 .. image:: coding/079.png
    :width: 3in
@@ -1056,7 +1056,7 @@ DMP command
 
 Click the "DMP" icon to enter the DMP command editing interface.
 
-DMP is a trajectory imitation learning method that requires prior planning of reference trajectories. In the command editing interface , select the teaching point as the new starting point, click "Add" and "Apply" to save the command. The DMP specific path is a new trajectory that mimics the reference trajectory with a new starting point.
+DMP is a trajectory imitation learning method that requires prior planning of reference trajectories. In the command editing interface. , select the teaching point as the new starting point, click "Add" and "Apply" to save the command. The DMP specific path is a new trajectory that mimics the reference trajectory with a new starting point.
 
 .. image:: coding/080.png
    :width: 6in
@@ -1089,7 +1089,7 @@ Control command interface
 IO command
 ++++++++++++++++
 
-Click the "IO" icon to enter the IO command editing interface
+Click the "IO" icon to enter the IO command editing interface.
 
 The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and getting IO (GetDI/SPLCGetDI).
 
@@ -1112,7 +1112,7 @@ In the "GetDI/SPLCGetDI" command, select the value of the port number you want t
 AI command
 ++++++++++++++++
 
-Click the "AI" icon to enter the AI command editing interface
+Click the "AI" icon to enter the AI command editing interface.
 
 In this instruction, it is divided into two functions: setting analog output (SetAO/SPLCSetAO) and obtaining analog input (GetAI/SPLCGetAI).
 
@@ -1135,7 +1135,7 @@ In this instruction, it is divided into two functions: setting analog output (Se
 Vir-IO command
 ++++++++++++++++
 
-Click the "Vir-IO" icon to enter the Vir-IO command editing interface
+Click the "Vir-IO" icon to enter the Vir-IO command editing interface.
 
 This command is a virtual IO control command, which can realize the setting of the simulated external DI and AI status, and obtain the simulated DI and AI status.
 
@@ -1148,7 +1148,7 @@ This command is a virtual IO control command, which can realize the setting of t
 Aux-IO command
 ++++++++++++++++
 
-Click the "Aux-IO" icon to enter the Aux-IO command editing interface
+Click the "Aux-IO" icon to enter the Aux-IO command editing interface.
 
 Aux-IO is the instruction function for the robot to communicate with the PLC to control the external expansion IO. It is necessary for the robot to establish UDP communication with the PLC. On the basis of the original 16-channel input and output, 128-channel input and output can be expanded. The usage of this command is the same as that mentioned above. IO usage is similar. There are certain technical difficulties in using this function, please contact us for consultation beforehand.
 
@@ -1161,7 +1161,7 @@ Aux-IO is the instruction function for the robot to communicate with the PLC to 
 MoveDO command
 ++++++++++++++++
 
-Click the "MoveDO" icon to enter the MoveDO command editing interface
+Click the "MoveDO" icon to enter the MoveDO command editing interface.
 
 This instruction is divided into continuous output mode and single output mode.
 
@@ -1184,7 +1184,7 @@ This instruction is divided into continuous output mode and single output mode.
 MoveAO command
 ++++++++++++++++
 
-Click the "MoveAO" icon to enter the MoveAO command editing interface
+Click the "MoveAO" icon to enter the MoveAO command editing interface.
 
 1. Summary
 
@@ -1222,7 +1222,7 @@ The motion AO command is located in the teaching simulation program teaching com
 ToolList command
 +++++++++++++++++++
 
-Click the "ToolList" icon to enter the ToolList command editing interface
+Click the "ToolList" icon to enter the ToolList command editing interface.
 
 Select the tool coordinate system name and click "Apply" to add this command to the program. When the program runs this statement, the tool coordinate system of the robot will be set.
 
@@ -1235,7 +1235,7 @@ Select the tool coordinate system name and click "Apply" to add this command to 
 Mode command
 ++++++++++++++++
 
-Click the "Mode" icon to enter the Mode command editing interface
+Click the "Mode" icon to enter the Mode command editing interface.
 
 This command can switch the robot to manual mode, and is usually added at the end of a program so that the user can automatically switch the robot to manual mode and drag the robot after the program runs.
 
@@ -1248,7 +1248,7 @@ This command can switch the robot to manual mode, and is usually added at the en
 Collision command
 ++++++++++++++++++++
 
-Click the "Collision" icon to enter the Collision command editing interface
+Click the "Collision" icon to enter the Collision command editing interface.
 
 This command is used to set the collision level. Through this command, the collision level of each axis can be adjusted in real time during program operation, and the application scenario can be deployed more flexibly.
 
@@ -1261,7 +1261,7 @@ This command is used to set the collision level. Through this command, the colli
 Acc command
 ++++++++++++++++
 
-Click the "Acc" icon to enter the Acc command editing interface
+Click the "Acc" icon to enter the Acc command editing interface.
 
 The Acc command is to realize the function that the acceleration of the robot can be set separately. By adjusting the acceleration scaling factor of the motion command, the acceleration and deceleration time can be increased or decreased, and the takt time of the robot action can be adjusted.
 
@@ -1283,7 +1283,7 @@ Peripheral Command Interface
 Gripper command
 ++++++++++++++++++
 
-Click the "Gripper" icon to enter the Gripper command editing interface
+Click the "Gripper" icon to enter the Gripper command editing interface.
 
 In this command, it is divided into the gripper motion control command and the gripper activation/reset command. In the gripper control command, the number of the gripper that has been configured and activated is displayed. The user can edit through the edit box, or slide the slider to The required value is used to complete the setting of jaw opening and closing, opening and closing speed and opening and closing torque. Blocking means that the gripper moves in parallel with the previous movement command. Click the "Add" and "Apply" buttons to save the set value to the teaching file. The gripper reset/activation command displays the number of the grippers that have been configured, and the reset/activation command can be added to the program.
 
@@ -1296,7 +1296,7 @@ In this command, it is divided into the gripper motion control command and the g
 Spray command
 ++++++++++++++++
 
-Click the "Spray" icon to enter the Spray command editing interface
+Click the "Spray" icon to enter the Spray command editing interface.
 
 This command is a spraying-related command, which controls the spray gun to "start spraying", "stop spraying", "start cleaning the gun" and "stop the light gun". When editing the program command, it is necessary to confirm that the peripherals of the spray gun have been configured. For details, see the chapter on peripherals of the robot.
 
@@ -1309,7 +1309,7 @@ This command is a spraying-related command, which controls the spray gun to "sta
 EAxis command
 ++++++++++++++++
 
-Click the "EAxis" icon to enter the EAxis command editing interface, Select the combination mode: 
+Click the "EAxis" icon to enter the EAxis command editing interface., Select the combination mode: 
 
 - Controller + servo drive (485)
 - Controller + PLC (UDP)
@@ -1333,7 +1333,7 @@ Select controller + servo drive(485),This command can configure the extended axi
 Convey command
 ++++++++++++++++
 
-Click the "Convey" icon to enter the Convey command editing interface
+Click the "Convey" icon to enter the Convey command editing interface.
 
 This command includes four commands: position real-time detection, IO real-time detection, tracking on and tracking off. See Robot Peripherals chapter for details.
 
@@ -1346,7 +1346,7 @@ This command includes four commands: position real-time detection, IO real-time 
 Polish command
 ++++++++++++++++
 
-Click the "Polishing" icon to enter the Polish command editing interface
+Click the "Polishing" icon to enter the Polish command editing interface.
 
 This command can set the rotation speed, contact force, extension distance and control mode of the grinding equipment.
 
@@ -1368,7 +1368,7 @@ Welding command interface
 Weld command
 ++++++++++++++++
 
-Click the "Weld" icon to enter the Weld command editing interface
+Click the "Weld" icon to enter the Weld command editing interface.
 
 This command is mainly used for welding machine peripherals. Before adding this command, please confirm whether the welding machine configuration is completed in the user peripherals. For details, see the chapter on robot peripherals.
 
@@ -1386,7 +1386,7 @@ This command is mainly used for welding machine peripherals. Before adding this 
 Segment command
 ++++++++++++++++
 
-Click the "Segment" icon to enter the Segment command editing interface
+Click the "Segment" icon to enter the Segment command editing interface.
 
 The collaborative robot can perform segment welding operations by adding segment welding instructions. Before adding segment welding instructions, you need to select the segment welding mode and teach the starting point and end point. The segment welding mode is divided into unchanged posture and changing posture. The robot considers whether to change the posture during the welding trajectory according to the selected segment welding mode.
 
@@ -1552,7 +1552,7 @@ In the actual test environment, the robot needs to be equipped with a welding gu
 Laser command
 ++++++++++++++++
 
-Click the "Laser" icon to enter the Laser command editing interface
+Click the "Laser" icon to enter the Laser command editing interface.
 
 This command includes three parts: laser command, tracking command and positioning command. Before adding this command, please confirm whether the laser tracking sensor in the user peripheral has been configured successfully. See Robot Peripherals chapter for details.
 
@@ -1577,7 +1577,7 @@ In the sensor loading module, after displaying the corresponding "sensor command
 LT-Rec command
 ++++++++++++++++
 
-Click the "LT-Rec" icon to enter the LT-Rec command editing interface
+Click the "LT-Rec" icon to enter the LT-Rec command editing interface.
 
 This command realizes the function of taking out the starting point and end point of laser tracking recording, so that the robot can automatically move to the starting point position, which is suitable for the occasion where the movement starts from the outside of the workpiece and laser tracking recording is performed. At the same time, the host computer can obtain the information of the starting point and end point in the recorded data. for follow-up exercise.
 
@@ -1592,7 +1592,7 @@ Realize the adjustable function of laser tracking and reproduction speed, so tha
 W-Search command
 ++++++++++++++++
 
-Click the "W-Search" icon to enter the W-Search command editing interface
+Click the "W-Search" icon to enter the W-Search command editing interface.
 
 This command is a welding wire positioning command, including three commands of start of positioning, end of positioning and calculation of offset. This command is generally used in welding scenes and requires the combination of welding machine and robot IO and motion commands.
 
@@ -1613,7 +1613,7 @@ In writing a program, usually first set the start command of the search, and the
 Weld-Trc command
 ++++++++++++++++++
 
-Click the "Weld-Trc" icon to enter the Weld-Trc command editing interface
+Click the "Weld-Trc" icon to enter the Weld-Trc command editing interface.
 
 This command realizes the robot seam tracking and uses the deviation detection of the welding seam to compensate the trajectory, and the arc sensor can be used to detect the seam deviation.
 
@@ -1920,7 +1920,7 @@ Case: If the "base" or "tool" is selected in the up-down compensation coordinate
 Adjust command
 ++++++++++++++++
 
-Click the "Adjust" icon to enter the Adjust command editing interface
+Click the "Adjust" icon to enter the Adjust command editing interface.
 
 This command adaptively adjusts the posture of the welding torch for the scene of welding tracking. After recording the three corresponding posture points, add the posture adaptive adjustment command according to the actual direction of the robot's movement. See Robot Peripherals chapter for details.
 
@@ -1942,7 +1942,7 @@ Force control command interface
 F/T command
 ++++++++++++++++
 
-Click the "F/T" icon to enter the F/T command editing interface
+Click the "F/T" icon to enter the F/T command editing interface.
 
 The command includes nine commands: FT_Guard (collision detection), FT_Control (constant force control), FT_Compliance (compliance control), FT_Spiral (spiral insertion), FT_Rot ​​(rotation insertion), FT_Lin (linear insertion), FT_FindSurface (surface positioning), FT_CalCenter (center positioning), FT_Click (click force detection), see the robot peripherals chapter for details.
 
@@ -1955,7 +1955,7 @@ The command includes nine commands: FT_Guard (collision detection), FT_Control (
 Torque command
 ++++++++++++++++
 
-Click the "Torque" icon to enter the Torque command editing interface
+Click the "Torque" icon to enter the Torque command editing interface.
 
 This command is a torque recording command, which realizes the real-time torque recording collision detection function. Click the "Torque Record Start" button to continuously record the collision situation during the operation of the motion command, and the recorded real-time torque is used as the theoretical value of the collision detection judgment to reduce the probability of false alarms. When the set threshold range is exceeded, the collision detection duration is recorded. Click the "Torque Recording Stop" button to stop recording. Click "Torque Record Reset" to return the status to the default state.
 
@@ -1977,7 +1977,7 @@ Visual command interface
 3D command
 ++++++++++++++++
 
-Click the "3D" icon to enter the 3D command editing interface
+Click the "3D" icon to enter the 3D command editing interface.
 
 This command generates commands for 3D vision program examples. Users can refer to the generated programs and communicate with other vision devices, including two program case references of camera calibration and camera capture.
 
@@ -1999,7 +1999,7 @@ Palletizing command interface
 Pallet command
 ++++++++++++++++
 
-Click the "Pallet" icon to enter the Pallet command editing interface
+Click the "Pallet" icon to enter the Pallet command editing interface.
 
 This instruction generates instructions for the palletizing program, which is consistent with the matrix movement function in Section 3.9.6. For details, refer to that chapter.
 
@@ -2037,7 +2037,7 @@ Communication command interface
 Modbus command
 ++++++++++++++++
 
-Click the "Mobus" icon to enter the Modbus command editing interface
+Click the "Mobus" icon to enter the Modbus command editing interface.
 
 The command function is a bus function based on the ModbusTCP protocol. The user can control the robot to communicate with the ModbusTCP client or server (the master station communicates with the slave station) through relevant instructions, and perform read and write operations on coils, discrete quantities, and registers.
 
@@ -2058,7 +2058,7 @@ For more operating functions of ModbusTCP, please contact us for consultation.
 Xmlrpc command
 ++++++++++++++++
 
-Click the "Xmlroc" icon to enter the Xmlrpc command editing interface
+Click the "Xmlroc" icon to enter the Xmlrpc command editing interface.
 
 XML-RPC is a remote procedure call method for transferring data between programs using xml over sockets. In this way, the robot controller can call the function (with parameters) in the remote program/service and obtain the returned structured data. The Robot Controller handles all the details of writing XML-RPC client messages and handling conversions between data types and XML.
 
@@ -2113,7 +2113,7 @@ Auxiliary command interface
 Thread command
 ++++++++++++++++
 
-Click the "Thread" icon to enter the Thread command editing interface
+Click the "Thread" icon to enter the Thread command editing interface.
 
 The Thread command is an auxiliary thread function. Users can define an auxiliary thread to run simultaneously with the main thread. The auxiliary thread mainly performs data interaction with external devices, supports socket communication, obtains robot DI status, robot DO status settings, and obtains robot status information. Thread data interaction, the data obtained by the main thread through the auxiliary thread is used to control the judgment of the robot's motion logic, the screenshot of the user program example:
 
@@ -2126,7 +2126,7 @@ The Thread command is an auxiliary thread function. Users can define an auxiliar
 Function command
 ++++++++++++++++
 
-Click the "Function" icon to enter the Function command editing interface
+Click the "Function" icon to enter the Function command editing interface.
 
 This command is to call the function interface function, provide the robot interface function to the customer to choose, and remind the customer of the parameters required by the function, which is convenient for the customer to write script commands, and more functions are being added one after another.
 
@@ -2139,7 +2139,7 @@ This command is to call the function interface function, provide the robot inter
 PT-Mode command
 ++++++++++++++++
 
-Click the "PT-Mode" icon to enter the PT-Mode command editing interface
+Click the "PT-Mode" icon to enter the PT-Mode command editing interface.
 
 This command is mainly used for mode switching between system mode and point table mode. Teaching points in different point tables can be applied by switching point tables.For details, see Chapter 11 - Points.
 
