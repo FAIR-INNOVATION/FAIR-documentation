@@ -104,6 +104,10 @@ body {
     margin-bottom: 0px;
 }
 
+.rst-content .centered strong{
+    font-weight: normal !important;
+}
+
 .sheet-center {
     text-align: center;
 }
