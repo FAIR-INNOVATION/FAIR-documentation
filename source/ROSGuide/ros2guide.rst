@@ -1,18 +1,18 @@
 Introduction
-++++++++++
+++++++++++++++++++++
 fairino_hardware is an API interface developed based on ROS2 for FaAO collaborative robot, aiming at making it more convenient for entry-level users to use FaAO SDK. Through the parameter configuration file to configure the default parameters, it can adapt to different customer requirements.
 
 fairino_hardware
-++++++++++++++
+++++++++++++++++++++++++
 This section explains how to configure the APP environment.
 
 Basic Environment Installation
---------------
+------------------------------------------
 
 It is recommended to use Ubuntu22.04LTS(Jammy). Once the system is installed, you can install ROS2. Ros2-humble is recommended:https://docs.ros.org/en/humble/index.html。Before compiling fairino_hardware, you need to install the official ros2_control package. For ros2_control installation, see the tutorial:https://control.ros.org/humble/index.html。There are two official ros2_control installation modes, namely command installation mode and source code compilation installation mode. Because command installation mode may lead to incomplete installation of function package, it is recommended to use source code compilation installation mode.
 
 Compile and build fairino_hardware
----------------------
+-------------------------------------------------
 1. Create the colcon workspace
 fairino_hardware consists of two packages: fairino_msgs for custom data structures and fairino_hardware for the program body. Once you have the base environment installed, create a colcon workspace, like this:
 
@@ -38,10 +38,10 @@ Wait for the previous command to finish compiling
     colcon build --packages-select fairino_hardware
 
 Quick start
-++++++++++++++
+++++++++++++++++++++++++++++
 
 Starting the process
------------------
+----------------------------------
 On Ubuntu, open the command line and type:
 
 .. code-block::  shell
@@ -56,7 +56,7 @@ On Ubuntu, open the command line and type:
     :align: center
 
 View the manipulator state feedback process
---------------------------
+------------------------------------------------------------
 The state feedback of the manipulator is published through the topic. Users can observe the state data refresh through the commands that come with ros2, or write programs to obtain the data.
 
 On ubuntu, open the command line and type:
@@ -75,7 +75,7 @@ Can see the status data being refreshed in the command-line window, as shown in 
     :align: center
 
 Process for issuing instructions
---------------------------
+-------------------------------------------
 On ubuntu, open the command line and type:
 
 .. code-block:: shell
@@ -108,13 +108,13 @@ In the GUI, select plugins->serivce->serivce caller, bring up the following scre
    Except for the GET command, which returns a string, the rest of the function feedback values are int values, typically 0 for error, 1 for correct execution, and any other values refer to the error code defined in the xmlrpc SDK.
 
 Modifying the parameter flow
---------------------------
+------------------------------------------------------------
 Since the simplified SDK is to improve the native SDK interface, it can be simplified because some parameters are given default values. However, in the actual use process, the default parameters can not meet the requirements, in this case, you can modify the value of the corresponding default parameters and then load them into the node.
 
 There is a fairino_remotecmdinterface_para.yaml parameter file in the source code file. The parameters in the file are preset default parameters, which are used to simplify the instruction input parameters. You can modify the parameters according to your specific needs, and then use the command to modify the parameters dynamically: ros2 param load fr_command_server ~/ros2_ws/src/fairino_hardware/fairino_remotecmdinterface_para.yaml。
 
 API Description
-++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
