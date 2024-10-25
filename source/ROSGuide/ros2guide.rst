@@ -11,11 +11,102 @@ Basic Environment Installation
 
 It is recommended to use Ubuntu22.04LTS(Jammy). Once the system is installed, you can install ROS2. Ros2-humble is recommended:https://docs.ros.org/en/humble/index.html。Before compiling fairino_hardware, you need to install the official ros2_control package. For ros2_control installation, see the tutorial:https://control.ros.org/humble/index.html。There are two official ros2_control installation modes, namely command installation mode and source code compilation installation mode. Because command installation mode may lead to incomplete installation of function package, it is recommended to use source code compilation installation mode.
 
+The detail progress of installation of ROS2(humble)：
+
+1.Open a shell window,set locale information
+
+.. code-block:: shell
+    :linenos:
+
+    locale  # check for UTF-8
+
+    sudo apt update && sudo apt install locales
+    sudo locale-gen en_US en_US.UTF-8
+    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+    export LANG=en_US.UTF-8
+
+    locale  # verify settings
+
+2.Set source
+
+.. code-block:: shell
+    :linenos:
+    
+    sudo apt install software-properties-common
+    sudo add-apt-repository universe
+
+    sudo apt update && sudo apt install curl -y
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+3.Install ROS2
+
+.. code-block:: shell
+    :linenos:
+
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install ros-humble-desktop
+
+4.Then install dev-tool
+
+.. code-block:: shell
+    :linenos:
+
+    sudo apt install ros-dev-tools
+
+The detail installation process of ros2_control:
+
+1.First the ROS2 source must be added
+
+.. code-block:: shell
+    :linenos:
+
+    source /opt/ros/humble/setup.bash
+
+2.Create ros2_control workspace, download the source code
+
+.. code-block:: shell
+    :linenos:
+
+    mkdir -p ~/ros2_control_ws/src
+    cd ~/ros2_control_ws/
+    wget https://raw.githubusercontent.com/ros-controls/ros2_control_ci/master/ros_controls.$ROS_DISTRO.repos
+    vcs import src < ros_controls.$ROS_DISTRO.repos
+
+3.Install dependences
+
+.. code-block:: shell
+    :linenos:
+
+    rosdep update --rosdistro=$ROS_DISTRO
+    sudo apt-get update
+    rosdep install --from-paths src --ignore-src -r -y
+
+4.Build ros2_control
+
+.. code-block:: shell
+    :linenos:
+
+    . /opt/ros/${ROS_DISTRO}/setup.sh
+    colcon build --symlink-install
+
+
+
 Compile and build fairino_hardware
 -------------------------------------------------
 1. Create the colcon workspace
 fairino_hardware consists of two packages: fairino_msgs for custom data structures and fairino_hardware for the program body. Once you have the base environment installed, create a colcon workspace, like this:
 
+Rmenber source ROS2&ros2_control first
+
+.. code-block:: shell
+    :linenos:
+
+    source /opt/ros/humble/setup.bash
+    source ~/ros2_control_ws/install/setup.bash
+    
 .. code-block:: shell
     :linenos:
 
@@ -32,7 +123,7 @@ Copy the package code to ros2_ws/src and run the following command inside ros2_w
 
 Wait for the previous command to finish compiling
 
-.. code-block::  shell
+.. code-block:: shell
     :linenos:
 
     colcon build --packages-select fairino_hardware
@@ -44,7 +135,7 @@ Starting the process
 ----------------------------------
 On Ubuntu, open the command line and type:
 
-.. code-block::  shell
+.. code-block:: shell
     :linenos:
 
     cd ros2_ws
