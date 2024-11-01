@@ -515,10 +515,12 @@ API Description
     Function description:Joint space motion
     string point_name - For example, JNT1 is the point with the sequence number 1 of the node information,CART1 is the point with the sequence number 1 of the Cartesian point information,MoveJ instruction supports the input of the node or Cartesian point. It should be noted that because the default parameters of the MoveJ instruction specify the tool coordinate system and the workpiece coordinate system, when the serial number of the two coordinate systems is inconsistent with the current load, the instruction will cause an error. It is necessary to modify the coordinate system parameters and LOAD parameters in the default parameters before running the movement instruction.
     float vel - Command speed percentage, range 0-100
+    int tool - tool coordinate index
+    int user - reference coordinate index
     */
-    int MoveJ(string point_name, float vel);//point_name indicates the input prestored point information,
+    int MoveJ(string point_name, float vel,int tool, int user);//point_name indicates the input prestored point information,
     // Examples
-    MoveJ(JNT1,10)
+    MoveJ(JNT1,10,1,1)
 
     /*
     Function description:Rectilinear motion in Cartesian space
