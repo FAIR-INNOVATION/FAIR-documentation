@@ -7,8 +7,11 @@ Status
 System log
 ----------------------
 
-Click the "Log" button in the "Status" on the left menu bar to enter the log display interface. The log records some important operation records of the teach pendant, such as the log-in person, the increase and decrease of the teaching point, etc. After clicking to enter, the log records of the current day are displayed by default. If you want to query the previous records, select the target in the "Date Selection" Date, the log record of the current day will be displayed in real time below, and the number of log records can be set in the system settings for details. When there is too much user log information, the user can
-Find relevant log information according to the type.
+When you enter the "Status Information - System Log" interface for the first time, all types of log data for the day are displayed by default.
+
+The log data is graded and currently divided into: All, Error Warning, Basic Settings, Security Settings, Peripheral Settings, Main Unit Operation, Teaching Program, Tool Application, System Settings, and File Import and Export.
+
+There is a search input box in the upper right corner of the data table. Users can enter the filter content according to their search needs. The interface is as follows:
 
 .. image:: status/001.png
    :width: 6in

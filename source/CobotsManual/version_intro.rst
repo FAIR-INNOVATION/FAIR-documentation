@@ -1,3 +1,40 @@
+Version V3.7.6
+-----------------
+
+Date: 2024-11-18
+
+- **Initial settings page layout optimization**: Initial settings -> Optimize tool setting interface, load configuration interface and some function icon display;
+
+- **WebApp peripheral extension axis configuration function interaction optimization**: Initial settings -> Peripherals -> Extension axis interface layout and interaction optimization;
+
+- **System log function optimization**: Status information -> System log -> Added log paging display and log detailed operation category distinction;
+
+- **XY direction horizontal constant force grinding function**: Teaching program -> Programming -> Force control set -> F/T_Control command adds "grinding disc radius" parameter, which can be repeated linear/curved motion along the workpiece surface;
+
+- **Laser point movement function**: Initial settings -> Peripherals -> Tracking -> Sensor -> Three-point and four-point position search intersection coordinate function adds lua script command usage;
+
+- **External axis configuration-two-degree-of-freedom trolley function**: Initial settings -> Coordinate system -> Extended axis -> Extended axis coordinate system -> Added "two-degree-of-freedom trolley" extended axis solution, UDP communication between the robot and PLC, and then the PLC controls the two-degree-of-freedom trolley through EtherCat;
+
+- **TCP calibration method based on flat tool function**: Initial settings -> Coordinate system -> Tool -> Tool coordinate system -> Added "flat tool calibration" coordinate system calibration method;
+
+- **Robot background program function**: Teaching program -> Program programming -> Background program can normally obtain I/O interface data, including system I/O, modbus, and extended I/O;
+
+- **Robot trajectory automatic avoidance of singularity function**: Teaching program -> Program programming -> Linear Lin/Arc instructions add "singularity avoidance" motion protection configuration;
+
+- **Rotating gripper end adaptation function**: Initial settings -> Peripherals -> Open protocol -> Added rotating gripper related function code configuration;
+
+- **Customized protocol slave station command**: Remote mode -> Added "controller slave station protocol" configuration;
+
+- **UDP communication welding wire positioning function**: The robot can use UDP to expand IO to start and stop the welding wire positioning and obtain the welding wire positioning success signal;
+
+- **Backup package function optimization**: Support the import and use of old version data packets (QNX 3.6.1 and later version data packets);
+
+- **Factory reset function optimization**: Added file verification to increase the stability of system factory reset;
+
+- **Upgrade function optimization**: QNX3.6.9 and later versions can be directly upgraded to QNX3.7.6, and the current version user data will be retained after the upgrade;
+
+- **Page downgrade function**: WebApp page supports downgrade, which can be downgraded to any version of QNX3.6.9 and later, and the current version user data will be retained after the downgrade;
+  
 Version V3.7.5
 -----------------
 

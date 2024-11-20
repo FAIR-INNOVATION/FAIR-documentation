@@ -475,8 +475,6 @@ Swing Instruction
 ~~~~~~~~~~~~~~~~~~~~~
 Drag the "Swing Instruction" code block to enter the graphical editing interface workspace.
 
-This instruction consists of two parts. The first part selects the welding number with configured parameters. The program connecting the Body represents the connection node and is executed between "Start welding" and "Stop welding".
-
 "Swing" instruction node, parameters:
 
 - Number: 0~7
@@ -491,7 +489,7 @@ Point offset instruction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drag the "point offset instruction" code block to enter the graphical editing interface workspace.
 
-This instruction is an overall offset instruction. Enter each offset. The program connecting the Body represents the connection node and is executed between the start and the end. The intermediate motion instructions will be offset based on the base coordinates (or workpiece coordinates).
+This instruction is an overall offset instruction. Enter each offset. The intermediate motion instructions will be offset based on the base coordinates (or workpiece coordinates).
 
 "Point offset" command node, parameters:
 
@@ -645,7 +643,7 @@ Tool conversion instruction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drag the "Tool conversion instruction" code block to enter the graphical editing interface workspace.
 
-Select the tool coordinate system to be automatically converted, click "Add" and "Apply" to save the instruction. When adding PTP and LIN instructions, connecting them with Body can be executed inside the instruction, and the points in the tool coordinate system are automatically converted.
+Select the tool coordinate system to be automatically converted, click "Add" and "Apply" to save the instruction. The tool coordinate system are automatically converted.
 
 "Tool conversion" instruction node, parameters:
 
@@ -661,7 +659,7 @@ Workpiece conversion instruction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drag the "Workpiece conversion instruction" code block to enter the graphical editing interface workspace.
 
-Select the workpiece coordinate system to be automatically converted, click "Add" and "Apply" to save the instruction. When adding PTP and LIN instructions, connect them to Body to realize the execution inside the instruction, and the points in the workpiece coordinate system are automatically converted.
+Select the workpiece coordinate system to be automatically converted, the points in the workpiece coordinate system are automatically converted.
 
 "Workpiece conversion" instruction node, parameters:
 

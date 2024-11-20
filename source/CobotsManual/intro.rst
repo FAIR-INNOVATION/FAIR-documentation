@@ -42,6 +42,7 @@ Manual
     application
     system
     teach_pendant
+    custom_protocol_slave
     appendix
     term
 

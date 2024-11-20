@@ -504,7 +504,7 @@ When using the Cartesian space linear motion command LIN, the constrained condit
 **Step6**: The added Lua command is shown in the figure;
 
 .. image:: coding/039.png
-   :width: 4in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 9.5-3-6 lua command
@@ -523,7 +523,7 @@ This function can be used when encountering a workpiece that requires corner wel
 
 **Step1**:Set the tool coordinate system to calibrate the tool size and attitude of the welding gun.
 
-.. warning:: The values on the interface are examples only, and the actual tool status shall prevail.
+.. note:: The values on the interface are examples only, and the actual tool status shall prevail.
 
 .. image:: coding/246.png
    :width: 6in
@@ -1054,6 +1054,21 @@ Select the workpiece coordinate system to be automatically converted, and click 
    :align: center
 
 .. centered:: Figure 9.5-33 WPTrsf command interface
+
+Tool conversion command
+++++++++++++++++++++++++++++++
+
+Click the "Tool conversion" icon to enter the ToolTrsf command editing interface.
+
+After adding PTP and Lin instructions, select the tool coordinate system to be automatically converted, click "Add" and "Apply" to save the instruction, and the Cartesian coordinates of the points in the instruction will be automatically converted according to the currently set workpiece coordinate system.
+
+.. note:: The usage example area shows and prompts the correct combination of instructions. After adding specific instructions, you can adjust the combination according to the actual scenario.
+
+.. image:: coding/276.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-34 ToolTrsf command interface
 
 Control command interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4122,3 +4137,269 @@ The robot control form is as follows:
      -  
      - 
 
+Robot Backgrounder Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Robot Backgrounder Function
+++++++++++++++++++++++++++++++++++
+
+The robot background program is a control program used to process the logical relationship of signals in the process of running the robot in the foreground motion program, and the background is also running, and the two are independent of each other in the operation relationship.
+
+The background program can monitor the operating status of the foreground and at the same time send control signals to the foreground. The background program can also be connected with external devices through I/O communication to monitor and control the operation of robot peripheral equipment. Unlike the foreground teach-in, the background logic program can run commands, which cannot control any axis of motion. Therefore, it cannot be programmed with any robot axis motion commands. Only the logic control function and I/O communication function are retained.
+
+When using a background program, the program scans in a loop from start to finish. The running cycle is 1 millisecond, and a delay function can be added to the background program to control the running cycle. During the execution of the background program, it is not affected by emergency stop, pause, or alarm. 
+
+.. note:: Run up to 8 background programs at the same time.
+
+A maximum of 8 programs can be executed at the same time as background logic, and an error alarm will be sent when the number of programs exceeds the maximum value.
+
+When the power is cut off, the background logic program will be automatically loaded and run according to the set state the next time the power is turned on.
+
+Save the robot background program
+************************************
+
+Backgrounder creation, editing, and saving can only be used in the Backgrounder interface.
+
+**Step1**:Open the robot background program interface. Open the teaching page, click "Program", and then click "Coding". Select the command background program in the upper left corner to enter the background program interface.
+
+.. note:: The background program only contains logic judgment, assignment instructions, front-end control instructions, I/O interface instructions and Modbus communication instructions.
+
+.. image:: coding/253.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1 The robot background program interface
+
+**Step2**:In manual mode, open the background teach program file. Click "New" to create a new teaching program file, edit the program, and click "Save" to save the file. 
+
+.. note:: The running cycle of the background program is 1 millisecond, and the provided delay function can be used in the program, as shown in the fourth line of the program in the following figure, to increase the delay of 1 second to control the running cycle.
+
+.. image:: coding/254.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-2 Save the robot background program
+
+Robot background program management
+********************************************
+
+Successfully saved backgrounders can be created, paused, resumed, and deleted in the backgrounder management interface. The backgrounder management interface allows you to intuitively see the running status of all created backgrounders. Green is running, and red is paused.
+
+**Step1**:Create a background program. Click the Background Program Management button, select the saved background program from the drop-down box, and click Start Run to run the corresponding background program.
+
+.. image:: coding/255.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-3 Start running the robot background program
+
+**Step2**:Resume and pause the background program. In the background program management page, click Resume and Pause on the monitor to resume and pause the corresponding background program.Click Delete on the monitor program to delete the corresponding background program.
+
+.. image:: coding/256.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-4 Pause、resume、delete the background program
+
+Use of the robot user variables
+++++++++++++++++++++++++++++++++++++++
+
+.. note:: The new user variable function is applicable to the data interaction between the robot background program and the foreground program, or between different background programs.
+
+Robot user variable management
+*************************************
+
+Before using user variables, you can rename them to your liking. Open the teach-in page, click "Program", "Coding", and "user variable management", which can be used in both the foreground program and the background program. Click on the variable name to change the variable name directly.
+
+.. image:: coding/257.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-5 Robot user variable management
+
+Robot user variable use
+*************************
+
+When user variables are used in foreground  and background programs, only the user variable read/write interface can be used.
+
+**Step1**:In manual mode, open the teach-in program file. Open the teaching page, click "Program", click "Coding", and click "New" to create a new teaching program file.
+
+.. image:: coding/258.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-6 Create a new teach-in program file
+
+**Step2**:Use the user variable read interface. Click the "Variable" command, select "User Variable", click the Get Variable Value drop-down box, select the user variable to be read, and click the "Add" and "Apply" buttons to write the user variable reading interface program.
+
+.. image:: coding/259.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-7 Use the user variable read interface
+
+**Step3**:Use user variables to write interfaces. Click the "Variable" command, select "User Variable", click the Set Variable Value drop-down box, select the user variable to be set, and fill in the corresponding set value, which supports both constant and variable value. Click the Add and Apply buttons to write user variables and write interface programs.
+
+.. image:: coding/260.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-8 Use the user variable write interface
+
+XY horizontal constant
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++
+
+The principle of lateral constant force grinding in the XY direction is as follows: Lateral constant force grinding refers to applying a grinding tool (such as a grinding wheel, grinding disc, etc.) with a constant force on a specified workpiece surface, and controlling the movement of the tool along the XY direction to maintain a constant grinding force at the contact point. 
+
+Operation process of lateral constant force grinding function in XY direction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To perform constant force grinding using a force sensor, it is necessary to install a grinding tool under the force sensor and configure the tool coordinate system. Click on the "Initial" - "Base" - "Coordinate" - "TCP" button in sequence to enter the "Tool coordinate system settings" interface. Select the coordinate system to be set in the "Coordinate system name" (taking toolcoord 0 coordinate system as an example), and set it according to the size of the end tool.
+
+.. image:: coding/246.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.20-1 Set tool coordinate system
+
+Force control reference coordinate system setting. In the web interface, click on "FT" - "Reference coord.", select "Custom coordinates", and set each parameter to "0". When the force sensor is working, different reference coordinate systems will affect the magnitude of the external force obtained by the sensor.
+
+.. image:: coding/261.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.20-2 Set reference coordinate
+
+Fix the flat plate to be polished in the robot workspace, and the plate should not shake. Place the end of the tool approximately perpendicular to the polishing plate and teach the starting and ending points.
+
+.. image:: coding/262.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.20-3 Polishing layout diagram
+
+Click on the "Program" - "Coding" - "F/T" button in sequence, and add the "FT_Control" instruction. The "FT_Control" command is a force controlled motion command that allows the robot to move around the set force.
+
+.. image:: coding/263.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.20-4 Add FT_Control command
+
+.. image:: coding/264.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.20-5 Example of FT_Control polishing instruction
+
+The specific function of parameters:
+
+**Coordinate system name**:The name corresponding to setting the sensor coordinate system; 
+
+**Check the direction of force detection and set the detection threshold**:Select the direction of the control force. In horizontal polishing, check Fx and Fy and set the corresponding expected constant force; 
+
+**PID parameters**:Set the PID proportional coefficients for force and torque, generally setting the F_P_gain to 0.001;
+
+**Maximum adjustment distance**:corresponding to the maximum movement distance in the X, Y, and Z directions; 
+
+**Maximum adjustment angle**:corresponding to the maximum rotation angle of RX, RY, RZ; 
+
+**Grinding disc radius**:determined by the actual radius of the end grinding tool.
+
+Automatic Singularity Avoidance Trajectory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++
+
+When the robot encounters a singular range that cannot be passed by the robot in the LIN and ARC command tracks, the robot will report an error or prompt the next digit to be strange or a singular warning appears. 
+
+If you want to be able to reach the next waypoint that will pass through the singular range, you can use this function to avoid the singularity point through joint space or Cartesian space to reach the next target pose.
+
+.. image:: coding/265.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.21-1 A simple schematic diagram of a robot's singularity
+
+The above figure is a schematic diagram of the robot singularity, the robot singularity includes three kinds of singularity: shoulder, elbow and wrist, and A is the 5 joint center WCP (Wrist Center Point), which is used to judge the shoulder singularity; B is the singular range of the shoulder, which resembles a cylinder, and its radius is the length of the robot DH parameter d4, and the robot enters the singular state when the WCP enters the cylinder B; C is the elbow singularity boundary of the robot, and the robot is in the elbow singularity state when J3=0 or 180°; D is the internal space, and it is in the wrist singular state when J5=0 or 180° at any position in the internal space.
+
+.. note:: It should be noted that singularity is a motion characteristic determined by the physical structure of the robot, which should be avoided as much as possible during actual operation, and it will lead to changes in the terminal posture and speed and even configuration configuration when it is avoided by algorithms, and it is necessary to consider whether the side effects of avoidance affect the requirements before making a choice.
+
+The trajectory automatically avoids the operation process of the singularity function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In the new program, click Add Robot LIN/ARC type motion command.
+
+.. image:: coding/266.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.21-2 Add LIN/ARC LUA command
+
+2.Click the "LIN" command, select the waypoint of the robot singularity, and click the "Singularity Avoidance" button in the "Motion Protection" sub-option of the command parameter configuration interface.
+
+.. image:: coding/267.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.21-3 Turn on singularity avoidance switch
+
+3.Singularity Avoidance parameters include Guard Mode, Shoulder Singularity, Elbow Singularity, and Wrist Singularity. Among them, the "protection mode" is divided into "joint mode" and "Cartesian mode", which means that the robot can cross the singular from the joint space or bypass the singular from the Cartesian space; The parameters of the "Singular Adjustment" specify the maximum deviation between the range of the determination of singularity and the singularity avoidance, which is mm for shoulder and elbow singularity units, and ° for wrist singular units.
+
+.. note:: The joint space will select the nearest trajectory between the joints, so there will be no limit situation, and the joint limit may occur when the Cartesian space is avoided, so you need to pay attention to and adjust it during teaching.
+
+After selecting and setting the singularity avoidance parameters, you can click the "Add" button to add the command, and then click "Apply" to add the LUA command to the program.
+
+.. image:: coding/268.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.21-4 Configure singularity avoidance parameters and add the lua command
+
+The teach-in completes a typical LIN singular avoidance movement lua procedure as follows:
+
+.. image:: coding/269.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.21-5 lua program that contains singularity avoidance instructions
+
+The effect of achieving avoidance is as follows, and the red is the trajectory line at the end of the robot:
+
+.. image:: coding/270.png
+   :width: 4in
+   :align: center
+
+.. image:: coding/271.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.21-6 Example of a shoulder singular avoidance trajectory(top: Cartesian space, bottom: joint space)
+
+.. image:: coding/272.png
+   :width: 4in
+   :align: center
+
+.. image:: coding/273.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.21-7 Example of an elbow singular avoidance trajectory(top: Cartesian space, bottom: joint space)
+
+.. image:: coding/274.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.21-8  Example of a wrist singular avoidance trajectory (joint space)
+
+6.If the start and end points of the movement are within the set singular range, when more than one singularity occurs during the movement, or even when two or more singular situations occur at the same time, the interface will display a pop-up window of "[Warning] Singular Pose" to indicate that the current singular situation cannot be avoided.
+
+.. image:: coding/275.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.21-9  The current singular situation cannot be avoided

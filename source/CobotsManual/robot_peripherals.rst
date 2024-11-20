@@ -10,13 +10,13 @@ Gripper Peripheral Configuration
 Gripper program teaching steps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**: In the "Initial - Peripheral - End-tool" menu bar, click "Adapter device" to enter the terminal peripheral configuration interface.
+**Step1**: In the "Initial - PerfApplication of welding coordinate systemipheral - End-tool" menu bar, click "Adapter device" to enter the terminal peripheral configuration interface.
 
 Select "Gripper Device" for the device type. The configuration information of the gripper is divided into gripper manufacturer, gripper type, software version and mounting location. Specific production requirements to configure the corresponding jaw information. If the user needs to change the configuration, first select the corresponding gripper number, click the "Clear" button to clear the corresponding button, and reconfigure according to the needs;
 
 .. figure:: robot_peripherals/001.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 8.1-1 Gripper Jaw Configuration
 
@@ -27,7 +27,7 @@ Select "Gripper Device" for the device type. The configuration information of th
 
 .. figure:: robot_peripherals/002.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 8.1-2 Gripper configuration information
 
@@ -40,7 +40,7 @@ Select "Gripper Device" for the device type. The configuration information of th
 
 .. figure:: robot_peripherals/003.png
    :align: center
-   :width: 3in
+   :width: 6in
 
 .. centered:: Figure 8.1-3 Gripper Command Edit
 
@@ -133,7 +133,7 @@ The detailed parameters of terminal communication are as follows:
 
 .. figure:: robot_peripherals/007.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.2-4 Terminal Lua enabled
 
@@ -174,7 +174,7 @@ Gripper equipment
 
 .. figure:: robot_peripherals/011.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.3-2 Configure gripper
 
@@ -187,7 +187,7 @@ Gripper equipment
 
 .. figure:: robot_peripherals/012.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.3-3 Activate the gripper
 
@@ -212,7 +212,7 @@ Refer to the Gripper step for activation and motion control.
 
 .. figure:: robot_peripherals/015.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.3-6 Configure Multiple Grippers
 
@@ -225,9 +225,46 @@ Configure and enable the reference force sensor and gripper steps.
 
 .. figure:: robot_peripherals/016.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.3-7 Configure force sensors and grippers
+
+Rotary gripper
+~~~~~~~~~~~~~~~~~~~
+
+**Step1**:Device Type Select Gripper equipment -> Enable Gripper -> Select Gripper ID -> Check the function code that the gripper is adapted to -> Click Configure, and the ID and function code of the gripper will be displayed in the configured device.
+
+.. figure:: robot_peripherals/207.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.3‑8 Configuration of grippers and function codes
+
+.. note:: The ticked function code should be checked through the product manual provided by the gripper manufacturer to check the function of the gripper adapted, and it should keep corresponding with the terminal Lua function code, please consult 《FR05-end-full-peripheral-protocol-V2.5-20241101.xlsx》for details.
+
+**Step2**:Select Gripper ID -> Reset -> Active, the gripper is initialized once, please refer to the product manual provided by the gripper manufacturer for specific initialization.
+
+.. figure:: robot_peripherals/208.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.3‑9 Activate gripper
+
+**Step3**:Go to Program -> coding -> Gripper -> Add gripper motion instruction.
+
+.. figure:: robot_peripherals/209.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑10 Adding rotary gripper motion command
+
+.. figure:: robot_peripherals/210.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑11 Example of rotary gripper motion command
+
+.. note:: The number of revolutions is the absolute number of revolutions, the maximum number of forward revolutions is 90 revolutions, the maximum number of reverse revolutions is 90 revolutions, and reset processing is required after rotation.
 
 Spray gun peripheral configuration
 -------------------------------------
@@ -323,7 +360,7 @@ After the welding gun is fixed and installed, the tool coordinate system of the 
 
 .. figure:: robot_peripherals/020.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.5-2 Calibration and application of robot tool coordinate system
 
@@ -803,11 +840,11 @@ Appendix 1: UDP communication protocol for robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. warning::
-  1）CRC check method: Modbus 16 check is used, but only the lower 8 bits are taken for check. Check data area D100-D176,D200-D273.
+  1)CRC check method: Modbus 16 check is used, but only the lower 8 bits are taken for check. Check data area D100-D176,D200-D273.
 
-  2）Arc tracking: The actual current feedback is to convert the actual current of the welding machine obtained by the PLC into an analog quantity of 0-4095 and transmit it to the analog quantity channel 0 of the UDP data protocol, namely D168.
+  2)Arc tracking: The actual current feedback is to convert the actual current of the welding machine obtained by the PLC into an analog quantity of 0-4095 and transmit it to the analog quantity channel 0 of the UDP data protocol, namely D168.
 
-  3）Speed ​​conversion logic: The robot sends the speed (unit mm/s) V÷lead×60=V';
+  3)Speed ​​conversion logic: The robot sends the speed (unit mm/s) V÷lead×60=V';
 
   PLC converts the robot's speed to V'×encoder resolution÷60=V" unit (pulse/s).
 
@@ -1955,7 +1992,7 @@ laser sensor application
 
 .. figure:: robot_peripherals/068.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.6-21 Application of welding coordinate system
 
@@ -2242,167 +2279,449 @@ Finally, add welding start and welding end commands before and after the start a
 
 By executing the above program, the robot will carry the laser sensor to move along the weld trajectory and record the whole trajectory, then the robot will move to the starting point of the trajectory record, and the robot will start welding along the trajectory recorded by the laser sensor. When the robot trajectory reappears, the welding arc will be extinguished and the welding will be completed.
 
-Find the intersection coordinates of three points and four points
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When the position of the fillet weld is inconvenient to teach directly, the cobot can calculate the intersection coordinate between two planes by manually teaching or finding points on both sides of the fillet weld surface.
+Laser point picking motion function
+---------------------------------------------
 
-For right-angle welds, use three-point intersection coordinate method, and for non-right-angle welds, use four-point intersection coordinate method.
+During the welding process, the laser point taking motion can be configured to achieve the desired posture when the robot reaches the position point. It can easily adapt to special scenarios such as diagonal welds and bevel welds.
 
-Three-point intersection coordinate calculate method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Operation process of laser point picking motion function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Step1**: Collect three planar contact points and save them as teach points;
+**Step 1**: Before using the laser sensor, apply the "welding gun" tool coordinate system to the current tool coordinate system. Open the teaching page, click on "Initial Settings", "Fundamentals", "Coordinate System", "Tools" in sequence, select the coordinate system name "Welding Gun" and apply it. The tool coordinate system in the upper left corner of the system page will be displayed as Tool1.
+
+.. figure:: robot_peripherals/068.png
+  :align: center
+  :width: 4in
+
+.. centered:: Figure 8.7-1 Application of Welding Gun Coordinate System
+
+**Step 2**: Write a Lua program for laser point picking motion. Click on "Teaching Program", "Program Programming", "New Button" in sequence, and create a new user program "testPointRecord. lua".
+
+.. figure:: robot_peripherals/176.png
+  :align: center
+  :width: 3in
+
+.. centered:: Figure 8.7-2: Creating a new laser point motion program
+
+**Step 3**: Configure reference posture teaching points (optional). Drag the robot to the desired welding posture in manual mode. On the teaching page, click on "Teaching Point Record", "Naming Points", and then save the posture teaching point "referencePoint" in sequence.
+
+.. figure:: robot_peripherals/177.png
+  :align: center
+  :width: 4in
+
+.. centered:: Figure 8.7-3 Save Attitude Reference Teaching Points
+
+
+**Step 4**: Generate a laser point motion program. Click on "Teaching Program", "Program Programming", "Welding Instructions", "Laser Tracking", and slide down the content to the sensor sampling motion. Select the desired "Motion Mode", "Debugging Speed", and attitude reference point to generate the corresponding laser sampling LUA program.
+
+If no attitude reference point is selected, the default motion is to maintain the attitude when taking the point. If an attitude reference point is selected, it will run to the laser point with the reference attitude.
+
+.. figure:: robot_peripherals/178.png
+  :align: center
+  :width: 6in
+
+.. centered:: Figure 8.7-4 Select Attitude Reference Teaching Point
+
+Perform laser sampling motion. Drag the robot to direct the laser sensor light towards the desired welding seam point for teaching, and the laser sensor will obtain the welding seam position for point taking. After performing the laser sampling motion, the welding gun will run in a reference posture to the point scanned by the laser sensor.
+
+.. figure:: robot_peripherals/179.png
+  :align: center
+  :width: 4in
+
+.. centered:: Figure 8.7-5 Laser Acquisition of Weld Seam Position
+
+.. figure:: robot_peripherals/180.png
+  :align: center
+  :width: 4in
+
+.. centered:: Figure 8.7-6 Welding gun pointing at the weld position with reference posture
+
+Find the intersection coordinates of three and four points
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When it is inconvenient to directly teach the position of the fillet weld, the collaborative robot can calculate the intersection point of the collected points on the two planes to generate the position of the fillet weld by manually teaching or locating the plane positions of the plates on both sides of the fillet weld.
+
+For right angle welds, the three-point positioning method can be used to find the intersection coordinates; For non right angle welds, the four point positioning method is used to find the intersection coordinates.
+
+Provide instructions and Lua scripts to obtain the coordinates of the intersection point, perform positioning motion, and configure reference posture. The robot carrying the welding gun can move to the intersection point with the reference teaching point posture.
+
+Command intersection point
+++++++++++++++++++++++++++++++++++++++
+
+Find the coordinates of the intersection point at three points
+**********************************************************************
+
+**Step 1**: Collect three plane contact points and save them as teaching points, configure reference teaching points;
 
 .. figure:: robot_peripherals/098.png
-   :align: center
-   :width: 4in
+  :align: center
+  :width: 4in
 
-.. centered:: Figure 8.6-50 Select three contact points
+.. centered:: Figure 8.7-7 Select three search points from 
 
-The acquired touchpoint consists of three points, two of which are in the same plane and one in the vertical plane.
+The collected contact points consist of three points, with two points located in the same plane and another point located in a vertical plane.
 
-.. note:: The pose of the generated intersection point is the same as P3.
+Note: If no attitude reference point is selected, the generated intersection point attitude will be consistent with point P3 by default. If attitude reference point is selected, it will be consistent with the attitude of the reference teaching point.
 
-**Step2**: In "Initial Settings - Peripherals - Tracking", click "Sensor" to enter the sensor tracking configuration interface, and enter the function module of finding the coordinates of the intersection point of the three points and four points;
+**Step 2**: On the teaching page, click on "Initial Settings", "Peripherals", "Tracking", "Sensors" in sequence, and find the function module for calculating the intersection coordinates of three and four points.
 
 .. figure:: robot_peripherals/099.png
-   :align: center
-   :width: 4in
+  :align: center
+  :width: 4in
 
-.. centered:: Figure 8.6-51 Select points
+.. centered:: Figure 8.7-8 Select the location for finding the intersection point coordinates
 
-**Step3**: Select the three-point search in the drop-down box, select the three contact points collected in turn, click Calculate, check whether the display of the generated intersection in the 3D model is wrong, name and save the intersection point;
+**Step 3**: Select the three-point positioning from the drop-down menu, select the three contact points collected in sequence, click calculate, check if the display of the generated intersection points in the 3D model is correct, name and save the intersection points;
 
 .. figure:: robot_peripherals/100.png
-   :align: center
-   :width: 6in
+  :align: center
+  :width: 6in
 
-.. centered:: Figure 8.6-52 Calculate the intersection coordinates and save them
+.. centered:: Figure 8.7-9 Calculate intersection coordinates and save
+
+**Step 4**: Save the teaching points and perform teaching exercises.
 
 .. figure:: robot_peripherals/101.png
-   :align: center
-   :width: 6in
+  :align: center
+  :width: 6in
 
-.. centered:: Figure 8.6-53 Save the intersection coordinates as teach points
+.. centered:: Figure 8.7-10 Save intersection coordinates as teaching points
 
-Four-point intersection coordinate calculate method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Find the coordinates of the intersection point at four points
+***************************************************************
 
-**Step1**: Collect four planar contact points and save them as teach points;
+**Step 1**: Collect four plane contact points and save them as teaching points, and configure reference teaching points.
 
 .. figure:: robot_peripherals/102.png
-   :align: center
-   :width: 4in
+  :align: center
+  :width: 4in
 
-.. centered:: Figure 8.6-54 Select Four Points
+.. centered:: Select four search points from Figure 8.7-11
 
-The acquired contact point consists of four points, the first two of which are in the same plane and the last two in the vertical plane.
+The collected contact points consist of four points, with the first two points located in the same plane and the last two points located in the vertical plane.
 
-.. note::  The pose of the generated intersection point is the same as P4. 
+Note: If no attitude reference point is selected, the generated intersection point attitude will be consistent with point P4 by default. If attitude reference point is selected, it will be consistent with the attitude of the reference teaching point.
 
-**Step2**: In "Initial Settings - Peripherals - Tracking", click "Sensor" to enter the sensor tracking configuration interface, and enter the function module of finding the coordinates of the intersection point of the three points and four points;
+**Step 2**: On the teaching page, click on "Initial Settings", "Peripherals", "Tracking", "Sensors" in sequence, and find the function module for calculating the intersection coordinates of three and four points.
 
 .. figure:: robot_peripherals/103.png
-   :align: center
-   :width: 4in
+  :align: center
+  :width: 4in
 
-.. centered:: Figure 8.6-55 Select a locus to find the coordinates of the intersection point
+.. centered:: Figure 8.7-12 Select the finding point and reference point for finding the intersection coordinates
 
-**Step3**: Select the four points in the drop-down box, select the four contact points in turn, click Calculate, check whether the display of the generated intersection in the 3D model is incorrect, name the intersection coordinate and save it;
+**Step 3**: Select the four point positioning from the drop-down menu, select the four contact points collected in sequence, click calculate, check if the displayed intersection points generated in the 3D model are correct, name and save the intersection points;
 
 .. figure:: robot_peripherals/104.png
-   :align: center
-   :width: 6in
+  :align: center
+  :width: 6in
 
-.. centered:: Figure 8.6-56 Calculate the intersection coordinates and save it
+.. centered:: Figure 8.7-13 Calculate intersection coordinates and save
+
+**Step 4**: Save the teaching points and perform teaching exercises.
 
 .. figure:: robot_peripherals/105.png
-   :align: center
-   :width: 6in
+  :align: center
+  :width: 6in
 
-.. centered:: Figure 8.6-57 Saving the intersection coordinates as a teach point
+.. centered:: Figure 8.7-14 Save intersection coordinates as teaching points
+
+Lua script for finding intersection points and positioning motion
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Find the coordinates of the intersection point at three points
+**********************************************************************
+
+**Step 1**: Collect three plane contact points and save them as teaching points, and configure reference teaching points.
+
+.. figure:: robot_peripherals/098.png
+  :align: center
+  :width: 4in
+
+.. centered:: Select three search points from Figure 8.7-15
+
+The collected contact points consist of three points, with two points located in the same plane and another point located in a vertical plane.
+
+Note: If no attitude reference point is selected, the generated intersection point attitude will be consistent with point P3 by default. If attitude reference point is selected, it will be consistent with the attitude of the reference teaching point.
+
+**Step 2**: Write a Lua program for three-point intersection point positioning motion. Click on "Teaching Program", "Program Programming", "New Button" in sequence, and create a new user program "test3point.lua".
+
+.. figure:: robot_peripherals/181.png
+  :align: center
+  :width: 6in
+
+.. centered:: Figure 8.7-16: Creating a three-point intersection point positioning motion program
+
+**Step 3**: Generate a three-point intersection point positioning motion program. Click on "Teaching Program", "Program Programming", "Welding Instructions", "Laser Tracking", and slide down the content to find the intersection point motion. Select the "three-point positioning" method, and then select the collected contact points "Point 1", "Point 2", "Point 3" and attitude reference points from the drop-down box. Select the desired "Motion Method" and "Debugging Speed", and click the "Add" and "Apply" buttons to generate the corresponding three-point intersection point positioning motion program.
+
+.. figure:: robot_peripherals/182.png
+  :align: center
+  :width: 6in
+
+.. centered:: Figure 8.7-17 Three point Intersection Point Finding Motion
+
+**Step 4**: Click the run button in automatic mode to automatically perform three-point intersection calculation. The robot drags the welding gun to move to the intersection position with reference posture.
+
+Find the coordinates of the intersection point at four points
+*****************************************************************
+
+**Step 1**: Collect four plane contact points and save them as teaching points, and configure reference teaching points.
+
+.. figure:: robot_peripherals/102.png
+  :align: center
+  :width: 4in
+
+.. centered:: Select four search points from Figure 8.7-18
+
+The collected contact points consist of four points, with two points located in the same plane and the last two points located in another plane.
+
+Note: If no attitude reference point is selected, the generated intersection point attitude will be consistent with point P4 by default. If attitude reference point is selected, it will be consistent with the attitude of the reference teaching point.
+
+**Step 2**: Write a Lua program for finding the intersection point and positioning motion of four points. Click on "Teaching Program", "Program Programming", "New Button" in sequence, and create a new user program "test4point. lua".
+
+.. figure:: robot_peripherals/183.png
+  :align: center
+  :width: 6in
+
+.. centered:: Figure 8.7-19 Create a new four point intersection point positioning motion program
+
+**Step 3**: Generate a four point intersection point positioning motion program. As shown in Figure 2-14, click on "Teaching Program", "Program Programming", "Welding Instruction", "Laser Tracking", and slide down the content to find the intersection point motion. Select the "Four Point Positioning" method, and then select the collected contact points "Point 1", "Point 2", "Point 3", "Point 4" and attitude reference points from the drop-down menu. Select the desired "Motion Method" and "Debugging Speed", and click the "Add" and "Apply" buttons to generate the corresponding four point intersection point positioning motion program.
+
+.. figure:: robot_peripherals/184.png
+  :align: center
+  :width: 6in
+
+.. centered:: Figure 8.7-20 Four point Intersection Point Finding Motion
+
+**Step 4**: Click the run button in automatic mode to automatically calculate the four point intersection point. The robot drags the welding gun to move to the intersection point position with reference posture.
 
 Extended Axis Peripheral Configuration
------------------------------------------
+-----------------------------------------------
 
-In "Initial Settings - Peripherals", click "Extended Axis" to enter the extended axis configuration interface, and select the combination method to configure the corresponding extended axis peripherals.
-
-Combination methods are divided into:
-
-- Controller + PLC (UDP)
-- Controller + Servo drive (485)
-
-Controller + PLC（UDP）
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Configuration steps
-++++++++++++++++++++++++
-
-**Step1**: First configure the expansion axis UDP communication. Set parameters such as IP address, port number, communication cycle, packet loss detection cycle, and number of packet losses. The reconnection cycle and the number of reconnections can only be configured after the automatic reconnection switch is turned on when communication is interrupted.
-
-- IP address: Custom ip address
-- Port number: defined according to actual situation
-- Communication cycle: defined according to actual situation, unit ms
-- Packet loss detection communication cycle: 10 ~ 1000 ms
-- Number of packet losses: 1 ~ 100
-- Communication interruption confirmation time: 0 ~ 500 ms
-- Automatic reconnection after communication interruption: On/Off
-- Reconnection period: 1 ~ 1000 ms
-- Number of reconnections: 1 ~ 100
+In "Initial - Peripheral", click "Ext. axis" to enter the extended axis configuration interface. Click the picture to select the combination method according to the communication method to configure the corresponding extended axis peripherals. The interface for the first entry of the extended axis configuration is as follows:
 
 .. figure:: robot_peripherals/106.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.7-1 Extended axis communication configuration
+.. centered:: Figure 8.8‑1 Expanded axis configuration first entry interface
 
-.. important:: 
-   1. After setting the communication disconnection confirmation time, when the communication abnormality exceeds this time period, the communication disconnection will be confirmed and an error will be reported.
-   2. After the UDP communication is disconnected, a UDP disconnection error is triggered (can be reset). You can click the clear warning message button and the UDP communication is re-established.
+Currently, the combination methods are divided into the following two types according to the communication method:
 
-**Step2**: Select the extended axis number 1, and click the "Parameter Configuration" button to enter the right interface. Set the axis type, axis direction, running speed, acceleration, forward limit, reverse limit, lead, encoder resolution, starting point offset, manufacturer, model and mode, and click Configure to complete the configuration.
+- Controller + PLC (UDP communication).
+  
+- Controller  + Servo Drive (485 communication).
+
+Controller + PLC (UDP communication)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before using the extended axis function, it is necessary to establish the corresponding extended axis coordinate system, and apply the established tool coordinate system during program teaching. The extended axis function is mainly used in conjunction with the welder function and the laser tracking sensor function.
 
 .. figure:: robot_peripherals/107.png
    :align: center
-   :width: 3in
-
-.. centered:: Figure 8.7-2 Extended axis parameter configuration
-	
-.. important:: 
-	Before using the extended axis function, it is necessary to establish the corresponding extended axis coordinate system, and apply the established tool coordinate system during program teaching. The extended axis function is mainly used in conjunction with the welder function and the laser tracking sensor function.
-
-**Step3**: Click the "Zero Setting" button to enter the zero setting pop-up window, as shown in the picture on the right. Set the zero return method, zero search speed, zero hoop speed and axis direction, click the "Setting" button, the extended axis will start to return to zero, the zero return status will be displayed in the blank space below the axis direction, when "zero return completed" appears The prompt indicates that the zero point of the extension axis is set successfully.
-
-.. figure:: robot_peripherals/108.png
-   :align: center
-   :width: 3in
-
-.. centered:: Figure 8.7-3 Extended axis zero point setting
-
-**Step4**: Select the number of the extended axis whose parameters have been configured, click "Servo Enable", set the running speed, acceleration and the maximum distance of a single run, and test the extended axis for forward rotation and reverse rotation.
-
-.. figure:: robot_peripherals/109.png
-   :align: center
    :width: 4in
 
-.. centered:: Figure 8.7-4 Extended Axis Test
+.. centered:: Figure 8.8‑2 Application of extended axis coordinate system and display of current extended axis scheme
 
-**Step5**: The extension axis is usually used in conjunction with the laser sensor. At this time, the laser sensor is usually installed externally. The sensor reference point configuration needs to be calibrated by the three-point method instead of the six-point method used before. Align the center of the tool with the middle point of the bottom of the right cross-section (the side close to the camera), set point 1, align the center of the tool with the middle point of the bottom of the other cross-section, which is the middle point of the left cross-section, set point 2, and set the center of the tool with Move the point to the middle point of the upper edge of the cross-section on the right side of the sensor, set point 3, calculate and save, and click Apply to complete the three-point calibration.
+When you only need to modify the current extended axis coordinate system, select the coordinate system in the peripheral extended axis configuration interface to apply it. When you need to change the extended axis solution, you need to enter the "Initial - Base - Coordinate - Ext. axis" interface to modify it. For specific operations, refer to Chapter 6.1 of the User Manual.
+
+When the extended axis scheme is "0-single degree of freedom linear guide", "1-two degrees of freedom L-type positioner", "2-three degrees of freedom", "3-four degrees of freedom" and "4-single degree of freedom positioner", the "UDP extended axis" and "positioning completion time setting" contents are displayed after the UDP communication configuration is successful. When the extended axis scheme is "5-two degrees of freedom trolley", the interface displays the "two degrees of freedom trolley test" content.
+
+UDP communication configuration
++++++++++++++++++++++++++++++++++++++++++++
+
+.. note:: 
+   .. image:: robot_peripherals/108.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Edit button**
+   
+   Function:UDP communication parameter configuration
+
+.. note:: 
+   .. image:: robot_peripherals/109.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Load button; Function**
+   
+   Function:UDP communication loading
+
+**Step1**:Configure the expansion axis UDP communication parameters: set the IP address, port number, communication cycle, packet loss detection cycle, packet loss times and other parameters. The reconnection cycle and reconnection times can only be configured after the automatic reconnection switch is turned on when the communication is interrupted.
+
+- IP address:IP address;
+
+- Port number: defined according to actual situation;
+
+- Communication cycle: defined according to actual situation, unit ms;
+
+- Packet loss detection communication cycle: 10 ~ 1000 ms;
+
+- Number of packet losses: 1 ~ 100;
+
+- Communication interruption confirmation time: 0 ~ 500 ms;
+
+- Automatic reconnection after communication interruption: On/Off;
+
+- Reconnection period: 1 ~ 1000 ms;
+
+- Number of reconnections: 1 ~ 100.
 
 .. figure:: robot_peripherals/110.png
    :align: center
-   :width: 3in
+   :width: 4in
 
-.. centered:: Figure 8.7-5 Three-point sensor calibration
+.. centered:: Figure 8.8‑3 Extension axis UDP communication parameter configuration
 
-**Step6**: Select the "EAxis" command on the program teaching command interface. According to the specific program teaching requirements, add instructions in the corresponding places.
+.. important:: 
+  1. After setting the communication disconnection confirmation time, the communication will be confirmed disconnected and an error will be reported only when the communication abnormality exceeds this time.
+  2. After UDP communication is disconnected, a UDP disconnection error is triggered (resettable). You can click the Clear Warning Message button to establish UDP communication again.
+
+**Step2**:After the communication parameters are configured successfully, click the "Load" button to establish UDP communication. After the communication is successful, the button in front of "UDP Communication Configuration" turns green. The extended axis status in the various states of the robot shows that the extended axis has been servoed in place.
+
+.. figure:: robot_peripherals/115.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑4 Extended axis UDP to establish communication
+
+.. figure:: robot_peripherals/116.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑5 Extension axis servo in place
+
+.. important:: 
+  1. When the UDP communication connection is not established, the UDP extended axis number information cannot be configured and viewed;
+  2. Before loading the extended axis UDP communication, be sure to configure and apply the extended axis coordinate system except for sequence number 0.
+
+UDP extension axis
++++++++++++++++++++++
+
+.. note:: 
+   .. image:: robot_peripherals/108.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Edit button**
+   
+   Function:Extend axis parameter configuration
+
+.. note:: 
+   .. image:: robot_peripherals/117.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Enable button**
+   
+   Function:Extended axis enable status, click the button to enable the extended axis
+
+.. note:: 
+   .. image:: robot_peripherals/118.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Disable button**
+   
+   Function:Disable the extended axis. Click the button to enable the extended axis
+
+.. note:: 
+   .. image:: robot_peripherals/119.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Return to zero button**
+   
+   Function:Return to zero button; Function: Setting the return to zero mode of the extended axis
+
+.. note:: 
+   .. image:: robot_peripherals/120.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Test button**
+   
+   Function:Extended axis function test
+
+**Step1**:Select any extended axis number (currently only 1, 2, 3, 4), click the "Edit" button behind the extended axis number to enter the detailed configuration interface. Set the axis type, axis direction, running speed, acceleration, positive limit, negative limit, lead, encoder resolution, starting point offset, manufacturer, model and mode, and click Configure to complete the configuration.
+
+- Axis types:linear guides, rotary axes and infinitely rotating axes;
+
+- Axis direction:positive/negative;
+
+- Operating speed:0~2000mm/s;
+
+- Acceleration:0 ~ 2000 mm/s²;
+
+- Positive direction limit:0 ~ 50000;
+
+- Reverse limit:-50000 ~ 0;
+
+- Lead:0~1000;
+
+- Encoder resolution:0 ~ 10000000;
+
+- Starting offset:0 ~ 10000mm;
+
+- Manufacturers: Hechuan, Huichuan and Panasonic;
+
+- Model:Automatically match the model list according to the manufacturer;
+
+- Mode:Incremental system and absolute position system.
+
+.. figure:: robot_peripherals/185.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑6 Extended axis parameter configuration
+
+**Step2**:After the extended axis parameters are configured, click the "Disable" button to enable the corresponding extended axis number. After successful enabling, you can set the zero return mode and extended axis test. When the extended axis is not enabled, you cannot set the zero return mode and extended axis test.
+
+.. figure:: robot_peripherals/186.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.8‑7 Extended axis enable/disable
+
+**Step3**:If the extended axis is not enabled successfully, you cannot enter the setting interface and the button will be grayed out. After the extended axis is enabled successfully, click the "Return to Zero" button to enter the return to zero setting interface. Set the return to zero method, zero search speed and zero point clamp speed. Click the "Set" button and the extended axis will start to return to zero. The return to zero status will be displayed in the blank space below the axis direction. When the "Return to Zero Completed" prompt appears, it means that the extended axis zero point setting is successful.
+
+- Zero return mode:Current position zero return, negative limit zero return and positive limit zero return;
+
+- Zero seeking speed:0~2000mm/s;
+
+- Zero point gripper speed:0~2000mm/s;
+
+.. figure:: robot_peripherals/187.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑8 Zero return mode setting
+
+**Step4**:If the extended axis is not enabled successfully, you cannot enter the setting interface and the button is grayed out; after the extended axis is enabled successfully and the zero return method is set, click the "Test" button to enter the extended axis test interface. Set the running speed, acceleration and maximum distance, and test the extended axis in forward and reverse rotation. During the rotation process, you can click the "Stop" button to test whether the extended axis can stop normally.
+
+.. figure:: robot_peripherals/188.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑9 Extended axis test
+
+**Step5**:The extension axis is usually used in conjunction with a laser sensor. In this case, the laser sensor is usually installed externally. The sensor reference point configuration needs to be calibrated using the three-point method, rather than the six-point method used previously. Align the tool center to the middle point at the bottom of the right cross section (the side close to the camera) and set point 1. Align the tool center to the middle point at the bottom of the left cross section of the other cross section and set point 2. Move the tool center to the middle point on the upper edge of the right cross section of the sensor and set point 3. Calculate and save. Click Apply to complete the three-point calibration.
+
+.. figure:: robot_peripherals/189.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑10 Sensor three-point calibration
+
+**Step6**:In the "Program - Coding" interface, select the "Extended Axis" command of the peripheral instruction. Add instructions in the corresponding place according to the specific program teaching requirements.
 
 .. figure:: robot_peripherals/111.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-6 Extended axis command editing
+.. centered:: Figure 8.8‑11 Extended axis command editing
 
 Extended axis with laser tracking welding teaching program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2426,7 +2745,8 @@ Extended axis with laser tracking welding teaching program
      - #Start searching
    * - 4
      - LTSearchStop()
-     - #Stop searching
+     - #Stop seeking
+
    * - 5
      - EXT_AXIS_PTP(1,1,seamPos)
      - #Start point of external axis movement weld
@@ -2450,225 +2770,360 @@ Extended axis with laser tracking welding teaching program
      - #Arc extinguishing of welder
    * - 12
      - LTTrackOff
-     - #Laser tracking off
+     - #Laser Tracking Off
 
-Controller + Servo drive (485)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Positioning completion time
+++++++++++++++++++++++++++++
+
+After the expansion axis establishes UDP communication, enter the time and click the "Configure" button to complete the setting. This configuration item is used to monitor the time when the expansion axis stops moving.
+
+.. figure:: robot_peripherals/190.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑12 Positioning completion time configuration
+
+Two-degree-of-freedom car test
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When the extended axis scheme is configured as "5-two degrees of freedom trolley" in the extended axis coordinate system, this content will be displayed after entering the UDP communication interface. Otherwise, it cannot be viewed.
+
+.. figure:: robot_peripherals/191.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑13 The extended axis solution is the "5-two degrees of freedom trolley" interface
+
+.. important:: The two-DOF car uses extended axis numbers 1 and 2 by default. After UDP 	communication is successful, check whether the extended axis 1 and 2 servos are 	in place through the extended axis status in the robot's various states.
+
+.. figure:: robot_peripherals/192.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.8‑14 Two-DOF trolley extension axis servo in place
+
+.. note:: 
+   .. image:: robot_peripherals/117.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Enable button**
+   
+   Function:Extended axis enable status, click the button to enable the extended axis
+
+.. note:: 
+   .. image:: robot_peripherals/118.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Disable button**
+   
+   Function:Disable the extended axis. Click the button to enable the extended axis
+
+.. note:: 
+   .. image:: robot_peripherals/119.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Return to zero button**
+   
+   Function:Return the current position of the extended axis to zero
+
+.. note:: 
+   .. image:: robot_peripherals/120.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Test button**
+   
+   Function:two-degree-of-freedom trolley function test
+
+**Step1**:After UDP communication is successful, click the "Disable" button to enable the corresponding extended axis of the two-DOF car. Check the extended axis status in the robot's various states to see whether the extended axis 1 and 2 servos are enabled.
+
+.. figure:: robot_peripherals/193.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.8‑15 Two-DOF trolley extension axis enabled
+
+**Step2**:After the extended axis is enabled successfully, click the "Return to Zero" button to set the current position of the extended axis to return to zero. After the return to zero is successful, the test button is highlighted, otherwise it is grayed out.
+
+.. figure:: robot_peripherals/194.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑16 The current position of the two-degree-of-freedom car returns to zero successfully
+
+**Step3**:After the current position of the two-degree-of-freedom car returns to zero successfully, click the "Test" button to enter the interface, select the motion mode, enter the parameters for motion test, and click the "Stop" button during the motion to test the stop function.
+
+- Sports mode:LIN/ARC;
+
+- Distance:-5000~5000mm(LIN);
+
+- Radius:1~5000mm(LIN);
+
+- Angle:-360~360°(ARC);
+
+- Speed:1~100%
+
+.. figure:: robot_peripherals/195.png
+   :align: center
+   :width: 4in
+
+.. figure:: robot_peripherals/196.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑17 Two-degree-of-freedom car test
+
+Controller + Servo Drive (485 communication)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hardware cable connection
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++
 
-Figure 8.7-7 shows the schematic diagram of the electrical interface of the control box of FR robot. Before using RS485 communication to control the servo extension shaft, please connect the RS485 communication interface of the servo driver to the RS485 communication interface on the robot control box.
+Before using RS485 communication to control the servo expansion axis, please first connect the RS485 communication interface of the servo driver to the RS485 communication interface on the robot control box. The electrical interface diagram of the Fao Robot Easy Manufacturing control box is as follows:
 
 .. figure:: robot_peripherals/112.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-7 Schematic diagram of electrical interface of FR robot integrated mini control box
+.. centered:: Figure 8.8‑18 Schematic diagram of electrical interface of FR robot integrated mini control box
 
-Take Dynatec servo driver FD100-750C as an example, Figure 8.7-8 is the schematic diagram of the driver panel terminal, Figure 8.7-9 is the definition of the X3A-IN terminal of FD100-750C, when the robot is configured to communicate with the FD100-750C servo extension shaft, Connect the 485-A0 and 485-B0 terminals on the control box to pins 4 and 5 of the X3A-IN terminal of the driver.
-
-.. note:: 
-  Please note: you can see a "485" mark on the servo driver panel, the terminal is not open for user use, do not connect your RS485 communication cable to this terminal. 
-
-At the same time, if multiple servo drivers are connected and the driver is the last one in the link, turn on the DIP switch (DIP switch 2) of the RS485 communication interrupt resistance on the panel.
+Take the Dynatech servo drive FD100-750C model as an example, refer to the terminal diagram of the drive panel and the definition of the X3A-IN terminal of FD100-750C. When the robot is configured to communicate with the FD100-750C servo expansion axis, the 485-A0 terminal and the 485-B0 terminal on the control box need to be connected to the 4th and 5th pins of the drive X3A-IN terminal respectively. (Please note: You can see a plug terminal with a "485" logo on the servo drive panel. This terminal is not open to users for use. Please do not connect your RS485 communication cable to this terminal). At the same time, if multiple servo drives are connected and this drive is the last one in the chain, the RS485 communication interruption resistor DIP switch (DIP 2) on the panel needs to be turned on.
 
 .. figure:: robot_peripherals/113.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-8 FD100-750C driver panel
+.. centered:: Figure 8.8‑19 FD100-750C Driver Panel
 
 .. figure:: robot_peripherals/114.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-9 X3A-IN terminal definition of FD100-750C
+.. centered:: Figure 8.8‑20 X3A-IN terminal definition of FD100-750C
 
-Communication configuration
-++++++++++++++++++++++++++++++
+Communication layout
+++++++++++++++++++++++++
 
-**Step1**: After ensuring that your RS485 communication cable is correctly connected, the robot and servo extension shaft are powered on, open the robot WebApp, click "Initialize", " Peripheral Config" and "Ext axis" successively to open the "Extension axis Configuration" page,as shown in Figure 8.7-10.
+After ensuring that your RS485 communication cable is correctly connected and the robot and servo expansion axis are powered on normally, open the robot WebApp and click "Initial Settings - Peripherals - Expansion Axis" to enter the "Extension Axis Configuration" interface. As shown in the figure below:
 
-.. figure:: robot_peripherals/115.png
+.. figure:: robot_peripherals/197.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.7-10 RS485 expansion axis configuration
+.. centered:: Figure 8.8‑21 RS485 expansion axis configuration
 
-**Step2**: On the "Expansion Axis Configuration" page, select the Combination as "Controller + Servo driver(485)" and ID as "1".
+In the "Extended Axis Configuration" interface, click the picture with the combination of "controller + servo drive" to enter the detailed configuration interface. In the servo drive configuration, select the number "1" (please note: when multiple servos are connected, this number is used to distinguish different servos, and we will mention this number many times later), the manufacturer is "Dynatek", select the corresponding servo drive model, here the model is "FD00-750C", the software version is V1.0, fill in the resolution corresponding to the servo drive, here is 131072, fill in the mechanical transmission ratio according to your mechanism model, here is 15.45, and click the "Configure" button.
+
+.. figure:: robot_peripherals/198.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑22 Servo drive configuration
+
+So far, we have completed the 485 communication configuration between the robot and the servo drive. You can view the real-time status information of the servo in the "Servo Status Bar" on the right side of the WebApp. As shown in the figure below:
+
+.. figure:: robot_peripherals/199.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑23 Servo Status Bar
+
+Now you need to enable and set the zero return mode of the expansion axis device in sequence, and then you can perform certain motion tests. Please follow this manual to perform the following test operations while ensuring safety.
+
+Configured servo drive
+++++++++++++++++++++++++++
 
 .. note:: 
-  Please note: When connecting multiple servos, this ID is used to distinguish different servos, we will mention this ID many times later.
+   .. image:: robot_peripherals/200.png
+      :height: 0.75in
+      :align: left
 
-The Servo manufacturer is "Dynatec", select the model and the software version, fill in the corresponding Resolution of the servo drive, here is 131072, Fill in the mechanical transmission ratio according to your mechanism model, here is 15.45; Click the "Configure" button.
+   Name:**View button**
+   
+   Function:Click to view the servo drive configuration 
 
-**Step3**: At this point, we have completed the 485 communication configuration between the robot and the servo drive. You can view the real-time status information of the servo in the "Servo status bar" on the right of the WebApp (Figure 8.7-11).
+.. note:: 
+   .. image:: robot_peripherals/117.png
+      :height: 0.75in
+      :align: left
 
-.. figure:: robot_peripherals/116.png
+   Name:**Enable button**
+   
+   Function:Servo drive enable status, click the button to enable the servo drive
+
+.. note:: 
+   .. image:: robot_peripherals/118.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Disable button**
+   
+   Function:Servo drive is disabled, click the button to enable the servo drive
+
+.. note:: 
+   .. image:: robot_peripherals/119.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Return to zero button**
+   
+   Function:Set the servo drive return to zero mode
+
+.. note:: 
+   .. image:: robot_peripherals/120.png
+      :height: 0.75in
+      :align: left
+
+   Name:**Test button**
+   
+   Function:Servo drive test
+
+.. note:: 
+   .. image:: robot_peripherals/201.png
+      :height: 0.75in
+      :align: left
+
+   Name:**ervo error clear button**
+   
+   Function:When the servo drive prompts an error, click to clear it
+
+Servo control mode and enable
+************************************
+
+In "Configured Servo Drives", select the control mode as "Position Mode", select the corresponding servo number, and click the "Disable" button. The servo drive number will be set first, and the control mode will be set after the setting is successful. After the control mode is set successfully, the servo drive will be enabled (please note: after switching the control mode, you need to first disable the servo drive and then enable the servo drive, so that the servo control mode switch will take effect).
+
+.. figure:: robot_peripherals/202.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑24 Servo control mode and enable
+
+After the servo is successfully enabled, check the "Servo" status light in the "Servo" column of the robot's status bar to see that the "Servo Enable" status light is on, indicating that the servo driver has been enabled. Click the "Enable" status button to disable the servo driver, and the "Servo Enable" status light will go out.
+
+.. figure:: robot_peripherals/103.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑25 Servo drive status bar 
+
+Servo zero return
+********************
+
+After the servo drive is enabled successfully, the "Return to Zero" button is highlighted. Click the button to enter the setting interface. Select the return to zero mode as "Current Position Return to Zero", the return to zero speed is 5mm/s, and the zero point clamp speed is 1mm/s; click the "Set" button to complete the servo current position return to zero operation. In the "Servo" in the various status bars of the robot, you can observe that the current "Servo Position" is 0; (Please read this manual completely before selecting the return to zero mode as "Negative Limit Return to Zero" or "Positive Limit Return to Zero" for the return to zero test).
+
+.. figure:: robot_peripherals/204.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-11 Servo status bar
-
-Now you can perform a certain motion test on the expansion shaft equipment, please follow the following test operations under the premise of ensuring safety.
-
-Servo control mode and enablement
-**********************************************
-
-As shown in Figure 8.7-12, in the "Servo drive debugging" bar, select the corresponding servo ID and click the "Set" button on the right; Select the control mode as "Location mode" and click the "Configure" button on the right.
-
-.. note:: 
-  Please note: After switching the control mode, the servo needs to be disabled and then enabled to make the servo control mode switch take effect.
-
-**Location Mode** : You can enter a certain motion speed and target position parameters, the servo will move to the target position at the set speed, after moving to the target position, the servo will stop moving.
-
-**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down.
-
-- Click the "Enable" button. In the "Servo Status Bar" on the right of the WebApp, you can observe that the "Enable" status is on, indicating that the servo drive is enabled.
-- Click the "Disable" button in the "Servo Drive Debugging" bar, the "Enable" status light in the "Servo status bar" is off, and the servo enable is turned off.
-
-.. figure:: robot_peripherals/117.png
-   :align: center
-   :width: 4in
-
-.. centered:: Figure 8.7-12 Servo driver debugging page
-
-Servo homing
-**********************************************
-
-As shown in Figure 8.7-13, the Zero return mode is selected as "current position return to zero", the Zero seeking speed is 5mm/s, and the Zero point gripper speed is 1mm/s.
-
-Click the "Set" button to complete the operation of the current position homing. In the "servo status bar", it can be observed that the current "servo position" is 0.
-
-.. important::
-  Please read this manual completely, and then select the homing mode as "negative limit homing" or "positive limit homing" for homing test.
-
-.. figure:: robot_peripherals/118.png
-   :align: center
-   :width: 4in
-
-.. centered:: Figure 8.7-13 Servo homing debugging
+.. centered:: Figure 8.8‑26 Servo zero return
 
 Servo motion
-**********************************************
+***************
 
-Before the actual control of the servo motor movement, please first understand the servo motor "Location mode" and "speed mode", once again remind you:
+Before actually controlling the servo motor, please first understand the "position mode" and "speed mode" of the servo motor. Here are some reminders:
 
-**Location Mode** : You can enter a certain motion speed and target position parameters, the servo will move to the target position at the set speed, after moving to the target position, the servo will stop moving.
+**Position Mode**: You can enter a certain movement speed and target position parameters, and the servo will move to the target position at the set speed. After moving to the target position, the servo will stop moving.
 
-**Speed Mode** : You can enter a certain target speed, the servo will keep moving according to the target speed set by you until you set the target speed to 0 or enable the servo motor down.
+**Speed Mode**: You can enter a certain target speed, and the servo will move at the target speed you set until you set the target speed to 0 or disable the servo motor.
 
-As shown in Figure 8.7-14, when the control mode of the expansion axis is switched, the display of "Current control mode" will automatically switch.
+When switching the control mode, the "Current Control Mode" display will automatically switch (please note: after switching the control mode, you need to first disable the servo and then enable the servo for the servo control mode switch to take effect). If your servo is not currently in "position mode", please switch your servo to position mode. Enter the "target position" as 50mm and the running speed as 5mm/s. After confirming that it is safe, click the "Set" button. At this time, the servo motor will move according to the parameters you set. You can observe the position and speed of the servo in real time in the "Servo" in the various status bars of the robot.
 
-.. note::
-  Please note: After the control mode is switched, the servo must be unenabled and then enabled, so that the control mode switch of the servo will take effect.
-
-If your servo is not currently in Location Mode, switch your servo to Location mode. Enter "target position" as 50mm, running speed as 5mm/s, under the condition of confirming safety, click "Set" button, then the servo motor will move according to the parameters set by you, you can observe the servo position and speed in real time in the "servo status bar".
-
-.. figure:: robot_peripherals/119.png
+.. figure:: robot_peripherals/205.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.7-14 Servo motion debugging (Location mode)
+.. centered:: Figure 8.8‑27 Servo motion debugging (position mode)
 
-Change the control mode of the servo to "Speed mode", click "Disable", then click "Enable", then the servo switches to speed mode.
+Change the servo control mode to "speed mode", click the "enable" status button to disable the servo driver, and then click the "disable" status button. The servo will now switch to speed mode (please note: after the servo motor is moving, the servo motor can only be stopped by setting the target speed to 0). Enter the target speed as 5mm/s, click the "set" button, and the servo motor will keep moving at a speed of 5mm/s. You can also observe the position and speed of the servo in real time in the "Servo" in the status bar of the robot.
 
-.. note:: 
-  Please note: when the servo motor is moving, the servo motor can only be stopped by setting the target speed to 0.
-
-Enter the target speed of 5mm/s, click the "Set" button, the servo motor will keep moving at 5mm/s, you can also observe the servo position and speed in the "servo status bar" in real time.
-
-.. figure:: robot_peripherals/120.png
+.. figure:: robot_peripherals/206.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.7-15 Servo motion debugging (speed mode)
+.. centered:: Figure 8.8‑28 Servo motion debugging (speed mode)
 
-If the robot encounters an emergency situation such as collision or pressing the emergency stop button, the extended axis can trigger an emergency stop and stop moving according to the set emergency stop deceleration. After the collision alarm is restored, instructions can continue to be issued to restore the operation of the extended axis.
+Advanced Settings
+++++++++++++++++++++
 
-In the advanced settings, it is necessary to set the servo acceleration/deceleration and servo emergency stop acceleration/deceleration as follows:
+If the robot collides, presses the emergency stop button, or other emergency situations, the expansion axis can trigger an emergency stop and stop moving at the set emergency stop deceleration. After the collision alarm is restored, instructions can continue to be issued to resume the expansion axis. You need to set the servo acceleration and deceleration and the servo emergency stop acceleration and deceleration in the advanced settings, as shown in the figure below:
 
 .. figure:: robot_peripherals/175.png
-  :align: center
-  :width: 6in
+   :align: center
+   :width: 4in
 
-.. centered:: Figure 8.7-16 Advanced settings for servo motion
+.. centered:: Figure 8.8‑29 Advanced Settings
 
-Click on "Pause" or "Stop" to stop the 485 extension axis according to the set deceleration.
+Extension axis programming
+++++++++++++++++++++++++++++++++++
 
-Extended axis programming
-++++++++++++++++++++++++++++++
-
-**Step1**: Create a new user program "testServo.lua", and select "Peripheral Command".
+Create a new user program "testServo.lua" in "Program - Coding" and select "Peripheral command".
 
 .. figure:: robot_peripherals/121.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-16 Open peripheral Commands
+.. centered:: Figure 8.8‑30 Open peripheral command
 
-**Step2**: Click "Eaxis" to open the interface of adding extension axis commands.
+Click “Eaxis” to open the interface of adding extension axis commands.
 
 .. figure:: robot_peripherals/122.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-17 Opens the Add extension axis commands page
+.. centered:: Figure 8.8‑31 Open the Add Extended Axis Instruction page
 
-**Step3**: select the Combination s "Controller + servo drive (485)" on the Add extension axis commands page, set the control mode as "Location mode", and click the "Add" button on the right.
+In the Add Extended Axis Instruction page, select the combination mode as "Controller + Servo Drive (485)", set the control mode to "Position Mode", and click the "Add" button on the right.
 
 .. figure:: robot_peripherals/123.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-18 Sets the control mode for the extension axis
+.. centered:: Figure 8.8‑32 Set the control mode of the extended axis
 
-**Step4**: Flip the Add extension axis commands interface to the bottom, click the "Apply" button.
+Scroll to the bottom of the Add Extended Axis Instructions interface and click the "Apply" button.
 
 .. figure:: robot_peripherals/124.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-19 Apply the extension axis commands
+.. centered:: Figure 8.8‑33 Applying extended axis instructions
 
-**Step5**: At this time, a set of commands to switch the servo control mode will appear in the program "testServo.lua". You can switch the robot to the automatic mode and execute the program.
+At this time, a set of instructions for switching the servo control mode appears in the "testServo.lua" program. You can switch the robot to automatic mode and execute the program.
 
 .. figure:: robot_peripherals/125.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-20 Setup servo control mode program
+.. centered:: Figure 8.8‑34 Setting the servo control mode procedure
 
-**Step6**: How to control servo motion through user program? Also open the interface of adding extension axis commands , find the parameter configuration bar, take the Location mode as an example, enter the target position and running speed, and click "Add" button; Flip to the bottom of the Add Extension Axis commands screen, click the "Apply" button.
+How to control servo motion through user program? Open the Add Extended Axis Instruction interface as shown below, find the parameter configuration bar, take the position mode as an example, enter the target position and running speed, and click the "Add" button; turn the Add Extended Axis Instruction interface to the bottom, click the "Apply" button, and close the Add Extended Axis Instruction interface.
 
 .. figure:: robot_peripherals/126.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-21 Add Location mode motion commands
+.. centered:: Figure 8.8‑35 Add position mode motion instructions
 
-**Step7**: Servo motion commands have been added to the "testServo.lua" program: "AuxServoSetTargetPos,50,5 (1)".
+The servo motion instruction "AuxServoSetTargetPos(1,50,5)" has been added to the "testServo.lua" program. The three parameters in the instruction function have the following meanings:
 
-  The meanings of the three parameters in the commands function are:
+- 1:Servo number is 1.
 
-  - 1: Servo number is 1.
+- 50:Target location.
 
-  - 50: Target position.
-
-  - 5: Target speed.
-
-  - 10: Acceleration percentage.
+- 5:Target speed.
 
 .. figure:: robot_peripherals/127.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.7-22 Location mode servo motion program
+.. centered:: Figure 8.8‑36 Position Mode Servo Motion Program
 
-**Step8**: Switch the robot to automatic mode and run the program, at which time your servo will move at a speed of 5mm/s to a position of 50mm.
+Switch the robot to automatic mode, run the program, and your servo will move to a position of 50mm at a speed of 5mm/s.
 
-At this point, we have completed the preliminary configuration and testing of the RS485 control servo extension shaft, and you can write the program of the combination of robot motion and servo motion according to the actual situation.
+So far, we have completed the preliminary configuration and testing of the RS485 controlled servo expansion axis. You can write a program that combines robot motion and servo motion according to the actual situation, as shown in the following figure.
 
 Example of cooperative motion program between extension axis and robot
 ********************************************************************************************
@@ -2724,7 +3179,95 @@ In summary, there are the following points to note when configuring the RS485 co
 
 2. Correctly select the control mode of the servo extension axis;
 
-3. After switching the control mode, you must first disable, and then enable the servo, the control mode switch can take effect.
+3. After switching the control mode, you must first remove the enable and then enable the servo so that the control mode switch can take effect.
+
+Welding trolley control
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Welding trolley configuration
+++++++++++++++++++++++++++++++++++++
+
+The cooperative robot communicates with the PLC through UDP to control the movement of the welding trolley. Therefore, before configuring and controlling the welding trolley, please check the network connection between the robot and the PLC to ensure that the network connection is normal and the related equipment is powered on. The configuration steps of the welding trolley include:
+
+①The selection of the type of the extension axis and the application of the extension axis coordinate system; 
+②UDP communication configuration and loading;
+③The welding trolley enables and homing;
+
+Specific operations are as follows:
+
+(1) Enter the robot teaching device interface, and click "Initial", "Base", "Coordinate", "Ext.axis" in turn; Select an extended axis coordinate system.
+
+.. note:: Note that it cannot be exaxis0.
+
+.. figure:: robot_peripherals/211.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑37 Select the extension axis coordinate system
+
+(2) Click "Modify", find the "Modify Wizard", select the extension axis scheme as "5-Two-degree-of-freedom car", and click the "Apply" button in the "Modify Wizard" and the "Apply" button in the "Current extension axis coordinate system" successively.
+
+.. figure:: robot_peripherals/212.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑38 Selecting an extension axis scheme
+
+(3) Then click "Initial", "Peripheral", "Ext. axis", and select the combination mode as "Controller +PLC (UDP)". Enter the corresponding UDP communication configuration parameters. The default parameters are shown in the figure. Click the "Configure" and "Load" buttons successively to establish the UDP network connection between the robot and PLC.
+
+.. figure:: robot_peripherals/110.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑39 Setting UDP communication parameters
+
+The welding trolley enable and homing
+++++++++++++++++++++++++++++++++++++++++++
+
+(1) Since the "5-Two-degree-of-freedom car" extension axis scheme and the corresponding extension axis coordinate system have been applied in the above steps, the current extension axis scheme is displayed on the page as "5-Two-degree-of-freedom car"; Click the "Enable" button to enable the welding trolley automatically;
+
+.. figure:: robot_peripherals/193.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.8‑40 Enabling the welding trolley
+
+(2) In the status bar of UDP extension axis on the right side of the teaching page, you can monitor whether the trolley is enabled. The left and right wheels of the trolley correspond to the extension axis 1 axis and 2 axis respectively.
+
+.. figure:: robot_peripherals/116.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑41 Extension axis status monitoring
+
+(3) After confirming that both trolley axles are enabled, click "Current position homing", and then the two trolley axles homing according to the current position in turn.
+
+.. figure:: robot_peripherals/194.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑42 Welding trolley homing
+
+Welding trolley motion control
+++++++++++++++++++++++++++++++++++++
+
+Before the trolley moves, please ensure that the extension axis scheme "5-Two-degree-of-freedom car" has been selected and the corresponding extension axis coordinate system has been applied to complete the configuration and loading of UDP communication, and complete the enabling and homing of the trolley.
+
+(1) Linear motion of welding trolley: Open the teaching interface, click "Initial", "Peripheral" and "Ext. axis" successively, select the combination mode as "Controller +PLC (UDP)", confirm that the current extension axis scheme is "5-Two-degree-of-freedom car", in the "Extended axis test", select the movement mode as "Line", enter the movement distance and speed, and click the "Motion" button after confirming the safety. The trolley moves in a straight line according to the set distance and speed. When the moving distance is positive, the trolley moves forward. When the moving distance is negative, the trolley moves backward. Click the "Stop" button during the trolley movement, and the trolley will stop immediately.
+
+.. figure:: robot_peripherals/195.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑43 Linear motion of the welding trolley
+
+(2) Arc motion of welding trolley: Open the teaching interface, click "Initial", "Peripheral" and "Ext. axis" in turn, select the combination mode as "Controller +PLC (UDP)", confirm that the current extension axis scheme is "5-Two-degree-of-freedom car", in the "Extended axis test", select the motion mode as "Arc", enter the radius, Angle and speed, confirm the safety, click the "Motion" button. The trolley moves in an arc according to the set radius and Angle. When the Angle value is positive, the trolley turns to the right. When the Angle value is negative, the trolley turns to the left. Click the "Stop" button during the trolley movement, and the trolley will stop immediately.
+
+.. figure:: robot_peripherals/196.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.8‑44 Arc motion of the welding trolley
 
 Conveyor Tracking Configuration
 -----------------------------------
@@ -2738,7 +3281,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.8-1 Conveyor configuration
+.. centered:: Figure 8.9-1 Conveyor configuration
 
 **Step2**: Next, set the grab point compensation value, which is the compensation distance in the three directions of X, Y, and Z, which can be set according to the actual situation during the debugging process.
 
@@ -2746,7 +3289,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.8-2 Conveyor Grab Point Compensation Configuration
+.. centered:: Figure 8.9-2 Conveyor Grab Point Compensation Configuration
 
 **Step3**: Turn on the conveyor belt, move the calibrated object to the defined point A, and stop the conveyor belt. Move the robot, align the sharp point of the calibration rod at the end of the robot with the sharp point of the object to be calibrated, click the start point A button, a dialog box will pop up, displaying the current encoder value and robot pose, and click Calibrate to complete the start point A calibration.
 
@@ -2754,7 +3297,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.8-3 Starting Point A Configuration
+.. centered:: Figure 8.9-3 Starting Point A Configuration
 
 **Step4**: Click the reference point button to enter the reference point calibration. When recording the reference point, record the height and attitude of the robot when it is grasping. Every time it tracks, it will track and grasp with the height and attitude area of the recorded reference point. It can be different from the AB point. Click Calibrate to complete the reference point calibration.
 
@@ -2762,7 +3305,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.8-4 Reference point configuration
+.. centered:: Figure 8.9-4 Reference point configuration
 
 **Step5**: Turn on the conveyor belt, move the calibrated object to the defined point B, and stop the conveyor belt. Move the robot, align the sharp point of the calibration rod at the end of the robot with the sharp point of the object to be calibrated, click the end point B button, a dialog box will pop up, displaying the current encoder value and robot pose, click the calibration to complete the end point B calibration.
 
@@ -2770,7 +3313,7 @@ Conveyor Tracking Configuration Steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.8-5 Terminal B configuration
+.. centered:: Figure 8.9-5 Terminal B configuration
 
 Conveyor belt tracking teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2838,7 +3381,7 @@ Attitude adaptive configuration steps
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.9-1 Attitude Adjustment Configuration
+.. centered:: Figure 8.10-1 Attitude Adjustment Configuration
 
 .. important:: 
 	The attitude change between A posture and B posture, A posture and C posture is as small as possible under the condition that the application requirements are met. The posture adaptive function is an auxiliary application function, usually used in conjunction with seam tracking.
@@ -2849,7 +3392,7 @@ Attitude adaptive configuration steps
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.9-2 Attitude Adjustment Command Edit
+.. centered:: Figure 8.10-2 Attitude Adjustment Command Edit
 
 Attitude self-adaptive with extended axis and laser tracking welding teaching program
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2919,7 +3462,7 @@ Select "Force Sensor Device" for the device type. The force sensor configuration
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.10-1 Force/Torque Sensor Configuration
+.. centered:: Figure 8.11-1 Force/Torque Sensor Configuration
 
 .. important:: 
 	The corresponding sensor should be inactive before clicking Clear Configuration.
@@ -2930,7 +3473,7 @@ Select "Force Sensor Device" for the device type. The force sensor configuration
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.10-2 Force/Torque Sensor Configuration Information
+.. centered:: Figure 8.11-2 Force/Torque Sensor Configuration Information
 
 **Step3**: Select the configured force sensor number and click the "Reset" button. After the page pops up and the command is sent successfully, click the "Activate" button to check the activation status in the force sensor information table to determine whether the activation is successful; in addition, the force sensor will There is an initial value, and the user can select "zero point correction" and "zero point removal" according to the usage requirements. The force sensor zero point correction needs to ensure that the force sensor is horizontal and vertical, and the robot is not equipped with a load.
 
@@ -2951,7 +3494,7 @@ Specific attitude recognition: clear the end load data, configure the force sens
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.10-3 Force/Torque Sensor Load Identification
+.. centered:: Figure 8.11-3 Force/Torque Sensor Load Identification
 
 Force/Torque Sensor Assisted Drag
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2962,7 +3505,7 @@ After the sensor is configured, it can be used with the sensor to better assist 
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.10-4 Force/Torque Sensor Drag Lock
+.. centered:: Figure 8.11-4 Force/Torque Sensor Drag Lock
 
 **Adaptive selection**: Turn it on when assembly is required. After turning it on, dragging becomes heavier;
 
@@ -2996,7 +3539,7 @@ Command description: "FT_Guard" command is a collision detection command. Select
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-5 FT_Guard Command Edit
+.. centered:: Figure 8.11-5 FT_Guard Command Edit
 
 Program example:
 
@@ -3027,7 +3570,7 @@ Instruction description: The "FT_Control" instruction is a force control motion 
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-6 FT_Control Command Edit
+.. centered:: Figure 8.11-6 FT_Control Command Edit
 
 Program example:
 
@@ -3058,7 +3601,7 @@ Instruction description: The "FT_Spiral" instruction is a spiral line exploratio
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-7 FT_Spiral Command Edit
+.. centered:: Figure 8.11-7 FT_Spiral Command Edit
 
 Program example:
 
@@ -3089,7 +3632,7 @@ Instruction description: The "FT_Rot" instruction is a rotation exploration inse
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-8 FT_Rot Command Edit
+.. centered:: Figure 8.11-8 FT_Rot Command Edit
 
 Program example:
 
@@ -3120,7 +3663,7 @@ Instruction description: "FT_Lin" instruction is rotation exploration insertion,
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-9 FT_Lin Command Edit
+.. centered:: Figure 8.11-9 FT_Lin Command Edit
 
 Program example:
 
@@ -3151,7 +3694,7 @@ Instruction description: The "FT_FindSurface" instruction is for surface positio
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-10 FT_FindSurface Command Edit
+.. centered:: Figure 8.11-10 FT_FindSurface Command Edit
 
 Program example:
 
@@ -3179,7 +3722,7 @@ Instruction description: The "FT_CalCenter" instruction is for center positionin
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-11 FT_CalCenter Command Edit
+.. centered:: Figure 8.11-11 FT_CalCenter Command Edit
 
 Program example:
 
@@ -3237,7 +3780,7 @@ Instruction description: The "FT_Click" command is click force detection, which 
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.10-12 FT_Click Command Edit
+.. centered:: Figure 8.11-12 FT_Click Command Edit
 
 Program example:
 
@@ -3270,7 +3813,7 @@ Select "Extended IO Device" for the device type. The configuration information o
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.11-1 Extended IO device configuration
+.. centered:: Figure 8.12-1 Extended IO device configuration
 
 .. important:: 
 	The corresponding device should be inactive before clicking Clear Configuration.
@@ -3281,7 +3824,7 @@ Select "Extended IO Device" for the device type. The configuration information o
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.11-2 Extended IO device function configuration
+.. centered:: Figure 8.12-2 Extended IO device function configuration
 
 Palletizing system configuration
 ---------------------------------------
@@ -3297,7 +3840,7 @@ For the first time use, you need to create a recipe first. Click "Create Recipe"
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.12-1 Palletizing recipe configuration
+.. centered:: Figure 8.13-1 Palletizing recipe configuration
 
 **Step2**:  Click "Configure" in the workpiece configuration bar to enter the workpiece configuration pop-up window, set the "length", "width", "height" of the workpiece and the grabbing point of the workpiece, click "confirm configuration" to complete the workpiece information setting.
 
@@ -3305,7 +3848,7 @@ For the first time use, you need to create a recipe first. Click "Create Recipe"
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.12-2 Palletizing workpiece configuration
+.. centered:: Figure 8.13-2 Palletizing workpiece configuration
 
 **Step3**: Click "Configure" in the tray configuration bar to enter the tray configuration pop-up window, set the tray "front", "side" and "height", then set the station and station transition point, click "confirm configuration" to complete the tray information setting.
 
@@ -3313,7 +3856,7 @@ For the first time use, you need to create a recipe first. Click "Create Recipe"
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.12-3 Palletizing pallet configuration
+.. centered:: Figure 8.13-3 Palletizing pallet configuration
 
 **Step4**: Click "Configure" in the size configuration column of the palletizing equipment to enter the size configuration pop-up window. Set the devices "X", "Y", "Z", and "Angle", and click "Confirm Configuration" to complete the size configuration information setting of the palletizing equipment.
 
@@ -3324,7 +3867,7 @@ For the first time use, you need to create a recipe first. Click "Create Recipe"
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.12-4 Size configuration of palletizing equipment
+.. centered:: Figure 8.13-4 Size configuration of palletizing equipment
 
 **Step5**: Click "Configure" in the pattern configuration column to enter the mode configuration pop-up window.
 
@@ -3348,13 +3891,13 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.12-5 Palletizing pattern A configuration
+.. centered:: Figure 8.13-5 Palletizing pattern A configuration
 
 .. figure:: robot_peripherals/154.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.12-6 Palletizing pattern B configuration
+.. centered:: Figure 8.13-6 Palletizing pattern B configuration
 
 **Step6**: Click "Advanced Configuration" in the teaching program generation column to enter the advanced configuration pop-up window. At this time, configure the "Material Lifting Height", "First Offset Distance", "Second Offset Distance" and "Suction Waiting Time".
 
@@ -3374,7 +3917,7 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.12-7 Advanced palletizing configuration
+.. centered:: Figure 8.13-7 Advanced palletizing configuration
 
 **Step7**: Click "Generate Program" to open the "Palletizing Monitoring Page", where you can display and view the "Generation Information", "Alarm Information" and "Palletizing Program".
 
@@ -3382,7 +3925,7 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.12-8 Palletizing system monitoring
+.. centered:: Figure 8.13-8 Palletizing system monitoring
 
 **Step8**: After an error is reported in the middle of the palletizing running program, the program stops. After the user clears the error first, select the palletizing program to run again. At this time, the "Last Program Interruption" pop-up box will pop up. Click the "Continue" button to continue running, and click "Restart" button to restart the program.
 
@@ -3390,7 +3933,7 @@ When configuring workpieces, first set the workpiece interval. The frame on the 
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.12-9 Palletizing program continues
+.. centered:: Figure 8.13-9 Palletizing program continues
 
 Polishing equipment configuration
 ------------------------------------
@@ -3412,7 +3955,7 @@ Configure the communication information, you need to configure the IP address, p
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.13-1 Polishing equipment configuration page
+.. centered:: Figure 8.14-1 Polishing equipment configuration page
 
 Virtual Wall Function Based on Force Sensor
 -------------------------------------------------
@@ -3432,7 +3975,7 @@ Installation configuration of force sensor
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.14-1 Installation of Force Sensor
+.. centered:: Figure 8.15-1 Installation of Force Sensor
 
 **Step2**: In the menu bar of "Initial - Peripheral - End -tool", click "Adapter device" to enter the terminal peripheral configuration interface.
 
@@ -3444,13 +3987,13 @@ The equipment type is "Force Sensor Equipment", and the configuration informatio
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-2 Force sensor configuration
+.. centered:: Figure 8.15-2 Force sensor configuration
 
 .. figure:: robot_peripherals/162.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-3 Force sensor activation
+.. centered:: Figure 8.15-3 Force sensor activation
 
 Virtual wall configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3470,13 +4013,13 @@ With the help of the force sensor, it is necessary to install a drag handle unde
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-4 Install the drag handle and set the tool coordinate system
+.. centered:: Figure 8.15-4 Install the drag handle and set the tool coordinate system
 
 .. figure:: robot_peripherals/165.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-5 Parameter Configuration of Virtual Wall
+.. centered:: Figure 8.15-5 Parameter Configuration of Virtual Wall
 
 **Step4**: The interference zone modes under parameter configuration are divided into "in-range interference" and "out-of-range interference";
 
@@ -3484,13 +4027,13 @@ With the help of the force sensor, it is necessary to install a drag handle unde
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-6 In-range interference
+.. centered:: Figure 8.15-6 In-range interference
 
 .. figure:: robot_peripherals/167.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-7 Out of range interference
+.. centered:: Figure 8.15-7 Out of range interference
 
 **Step5**: Establish the interference zone, as shown in Figures 7 and 8. It is suggested that the interference area should be set as large as possible when selecting "out-of-range interference".
 
@@ -3498,13 +4041,13 @@ With the help of the force sensor, it is necessary to install a drag handle unde
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-8 Two-point method to establish interference zone
+.. centered:: Figure 8.15-8 Two-point method to establish interference zone
 
 .. figure:: robot_peripherals/169.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-9 center point+side length method to establish interference zone
+.. centered:: Figure 8.15-9 center point+side length method to establish interference zone
 
 Force sensor assisted drag
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3517,7 +4060,7 @@ Force sensor assisted drag
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-10 Parameter setting of auxiliary drag of force sensor
+.. centered:: Figure 8.15-10 Parameter setting of auxiliary drag of force sensor
 
 Specific function of parameters:
 
@@ -3568,7 +4111,7 @@ In order to drag the robot conveniently, it is necessary to install a drag handl
    :align: center
    :width: 3in
 
-.. centered:: Figure 8.14-11 Drag the handle
+.. centered:: Figure 8.15-11 Drag the handle
 
 **Step1**: According to the length of the actual handle, set the tool coordinate system, as shown in Figure 2.
 
@@ -3580,13 +4123,13 @@ Use the dragging button to adjust the level of the robot's end level, click the 
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-12 Tool coordinate system setting
+.. centered:: Figure 8.15-12 Tool coordinate system setting
 
 .. figure:: robot_peripherals/172.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-13 Automatic zero calibration of force/torque sensor
+.. centered:: Figure 8.15-13 Automatic zero calibration of force/torque sensor
 
 Six -dimensional force and joint impedance hybrid drag
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -3603,7 +4146,7 @@ Six -dimensional force and joint impedance hybrid drag
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-14 configuration parameters of six dimensions assisted drag
+.. centered:: Figure 8.15-14 configuration parameters of six dimensions assisted drag
 
 2. joint impedance control
 
@@ -3615,7 +4158,7 @@ The specific operation is shown in Figure 5. The setting status of the setting i
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14-15 Configuration parameters of joint impedance
+.. centered:: Figure 8.15-15 Configuration parameters of joint impedance
 
 Specific function of parameters:
 

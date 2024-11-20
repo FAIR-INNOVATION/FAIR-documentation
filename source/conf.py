@@ -9,7 +9,7 @@
 project = 'FAIRINO Collaborative Robot User Manual'
 copyright = '2022-2024, FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
 author = 'FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
-release = '3.7.5'
+release = '3.7.6'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -27,7 +27,7 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_css_files = ["custom.css"]
-html_logo = "_static/logo-en.png"
+html_logo = "_static/logo.svg"
 html_theme_options = {
     "logo_only": True,
     "display_version": False

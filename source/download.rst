@@ -69,6 +69,22 @@ Ontology & Dimensional Drawings
     :download:`FRCobots-V5.0 STEP Models <_static/_doc/FRCobots-V5.0 STEP Models.zip>`
 
     :download:`FRCobots-V6.0 STEP Models <_static/_doc/FRCobots-V6.0 STEP Models.zip>`
+    
+    :download:`Mini Control Box 2kw (DC + AC) STEP Models <_static/_doc/Mini control box 2kw (DC+AC).zip>`
+
+    :download:`Control Box 5kw (DC+AC) STEP Models <_static/_doc/Control box 5kw (DC+AC).zip>`
+
+    :download:`Teaching Pendant STEP Models <_static/_doc/Teaching Pendant.zip>`
+
+    :download:`Button Box STEP Models <_static/_doc/Button Box.zip>`
+
+    :download:`Palletizing Station STEP Models <_static/_doc/Palletizing.zip>`
+
+    :download:`Sorting Workstation STEP Models <_static/_doc/Sorting.zip>`
+
+    :download:`Spark Project Education Work Platform STEP Models <_static/_doc/Spark Project.zip>`
+
+    :download:`Intelligent Welding Workstation STEP Models <_static/_doc/Intelligent welding.zip>`
 
 FAIRINO SimMachine
 -----------------------
@@ -82,7 +98,7 @@ Palletizer frcap
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-V3.7.5-Release-240930 <https://drive.google.com/file/d/1QL7buGN-JMgMktyfBQ_HAuQ8fE5FoYyj/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-V3.7.6-Release-241118 <https://drive.google.com/file/d/1Nvx5Rffuyt3pA1BAOnsSgpQGpPE7ZICd/view?usp=sharing>`
 
     :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
 
