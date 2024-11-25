@@ -1,937 +1,849 @@
-Force control
-======================
+Force Control
+====================================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-Obtain force sensor configuration
-++++++++++++++++++++++++++++++++++++
+Get Force Sensor Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_GetConfig()``"
-    "Description", "Obtain force sensor configuration"
-    "Required parameter", "Nothing"
-    "Optional Parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-        - Return(if success): [number,company,device,softversion]
-        - number: sensor number, range[1]
-        - company: Sensor manufacturer,17-Kunwei Technology,19-Aerospace 11th Institute, 20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core
-        - device:equipment number: Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongkomi Point (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A)
-        - softversion:Software version number, temporarily not used, defaults to 0"
+    "Description", "Get Force Sensor Configuration"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``[number,company,device,softversion,bus]``：number 传感器编号;company  力传感器厂商，17-坤维科技，19-航天十一院，20-ATI 传感器，21-中科米点，22-伟航敏芯;device  设备号，坤维 (0- KWR75B), Aisino Eleven (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB10A); softvesion software version number, not used for the time being, the default is 0." 
 
-Force sensor configuration
-++++++++++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``FT_SetConfig(company,device,softversion=0,bus=0)``"
-    "Description", "Force sensor configuration"
-    "Required parameter", "- ``company``:Sensor manufacturer,17-Kunwei Technology,19-Aerospace 11th Institute,20-ATI sensors, 21-Zhongke Mi Dian, 22-Weihang Sensitive Core;
-    - ``device``:equipment number: Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongkomi Point (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A);
-    - ``softversion``:software version number, temporarily not used, defaults to 0;;
-    - ``bus``:device mounted terminal bus position, temporarily not used, defaults to 0;"
-    "Optional parameter",	"- softversion:software version number, temporarily not used, defaults to 0;
-        - bus:device mounted terminal bus position, temporarily not used, defaults to 0;"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
-
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    company = 17    
-    device = 0     
-    error = robot.FT_SetConfig(company, device)   # Force sensor configuration
-    print("Force sensor configuration",error)
-    config = robot.FT_GetConfig() # Obtain force sensor configuration
-    print(' Obtain force sensor configuration ',config)
+    company = 17 #Sensor Manufacturer, 17-Kunwit Technology
+    device = 0 # sensor device number
+    error = robot.FT_SetConfig(company, device) #Configure force sensors
+    print("Configuring force sensor error code",error)
+    config = robot.FT_GetConfig() #Get force sensor configuration information
+    print('Get force sensor configuration information',config)
+    time.sleep(1)
+    error = robot.FT_Activate(0) # sensor reset
+    print("Sensor reset error code",error)
+    time.sleep(1)
+    error = robot.FT_Activate(1) #sensor activation
+    print("Sensor activation error code",error)
+    time.sleep(1)
+    error = robot.SetLoadWeight(0.0) # end load set to zero
+    print("End load set to zero error code",error)
+    time.sleep(1)
+    error = robot.SetLoadCoord(0.0,0.0,0.0) # end load center of mass set to zero
+    print("End center of mass set to zero error code",error)
+    time.sleep(1)
+    error = robot.FT_SetZero(0) #sensor de-zeroing
+    print("Sensor Remove Zero Error Code",error)
+    time.sleep(1)
+    error = robot.FT_GetForceTorqueOrigin() #Query sensor raw data
+    print("Querying sensor raw data",error)
+    error = robot.FT_SetZero(1) #Sensor zero correction, note that at this time the end can not be installed tools, only the force sensor
+    print("Sensor zero correction",error)
+    time.sleep(1)
+    error = robot.FT_GetForceTorqueRCS() #Query data in sensor coordinate system
+    print("Querying data in sensor coordinate system",error)
+
+Force Sensor Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``FT_SetConfig(company,device,softversion=0,bus=0)``"
+    "Description", "Force Sensor Configuration"
+    "Required Parameters","- ``company``: Sensor Manufacturer, 17 - Kunwei Technology, 19 - Aerospace 11th Academy, 20 - ATI Sensors, 21 - Zhongke MiDot, 22 - Weihang Minxin;
+    - ``device``: device number, Kunwei (0-KWR75B), Aisino Eleventh Academy (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A);"
+    "Default parameters", "- ``softversion``: software version number, not used for now, default is 0;
+    - ``bus``: device mount end bus location, not used yet, default is 0;"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
 Force sensor activation
-+++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_Activate(state)``"
     "Description", "Force sensor activation"
-    "Required parameter", "- ``state``:0-Reset,1-Activate"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Mandatory parameters", "- ``state``: 0-reset, 1-activate"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2')
-    error = robot.FT_Activate(0)  # Reset force sensor
-    print("Reset force sensor ",error)
-    time.sleep(1)
-    error = robot.FT_Activate(1)  # Activate force sensor 
-    print("Activate force sensor ",error)
-
-Zero calibration of force sensor
-++++++++++++++++++++++++++++++++++++
+Force Sensor Zeroing
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_SetZero(state)``"
-    "Description", "Zero calibration of force sensor"
-    "Required parameter", "- ``state``:0-Remove zero,1-Zero correction"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Description", "Force Transducer Zeroing"
+    "Mandatory parameters", "- ``state``: 0-removal of zeros, 1-zero correction"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2')
-    error = robot.FT_SetZero(0)   # Sensor zero removal
-    print("Sensor zero removal ",error)
-    error = robot.FT_SetZero(1)   # The zero point of the sensor should be corrected. Please note that no tool can be installed at the end of the sensor.
-    print("Sensor zero corrected ",error)
-
-Set the force sensor reference coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force transducer reference coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_SetRCS(ref)``"
-    "Description", "Set the force sensor reference coordinate system"
-    "Required parameter", "- ``ref``:0-Tool coordinate system,1-Base coordinate system"
-    "Optional parameter", "- ``coord``：[x,y,z,rx,ry,rz]Custom coordinate system values, default[0,0,0,0,0,0]"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "prototype", "``FT_SetRCS(ref,coord=[0,0,0,0,0,0,0])``"
+    "Description", "Setting the force transducer reference coordinate system"
+    "Mandatory parameters", "- ``ref``: 0 - tool coordinate system, 1 - base coordinate system"
+    "Default parameters", "- ``coord``: [x,y,z,rx,ry,rz] customized coordinate system values, default [0,0,0,0,0,0,0]"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error = robot.FT_SetRCS(0)    # Set the force sensor reference coordinate system
-    print(' Set the force sensor reference coordinate system ',error)
+    # Load recognition, where the tool to be recognized is mounted at the end, underneath the force transducer, with the end pointing vertically downwards.
+    error = robot.FT_SetRCS(0) #Set the reference coordinate system to the tool coordinate system, 0 - tool coordinate system, 1 - base coordinate system
+    print('Setting reference coordinate system error code',error)
     time.sleep(1)
+    tool_id = 10 #Sensor coordinate system number
+    tool_coord = [0.0,0.0,35.0,0.0,0.0,0.0,0.0] # Sensor position relative to end flange
+    tool_type = 1 # 0-tool, 1-sensor
+    tool_install = 0 # 0 - end of installation, 1 - robot external
+    error = robot.SetToolCoord(tool_id,tool_coord,tool_type,tool_install) #Set the sensor coordinate system, the sensor relative to the end flange position
+    print('Setting sensor coordinate system error code',error)
+    time.sleep(1)
+    error = robot.FT_PdIdenRecord(tool_id) #record identification data
+    print('Record load weight error code',error)
+    time.sleep(1)
+    error = robot.FT_PdIdenRecord() #Calculate the load weight in kg
+    print('Calculating load weight error code',error)
+    # Load center of mass recognition, the robot needs to be taught three different poses, then the recognition data is recorded and finally the load center of mass is calculated.
+    robot.Mode(1)
+    ret = robot.DragTeachSwitch(1) #Robot cuts to drag teach mode, must be in manual mode to cut to drag teach mode
+    time.sleep(5)
+    ret = robot.DragTeachSwitch(0)
+    time.sleep(1)
+    error = robot.FT_PdCogIdenRecord(tool_id,1)
+    print('Load center of mass 1 error code',error)#record identification data
+    ret = robot.DragTeachSwitch(1) #Robot cuts to drag teach mode, must be in manual mode to cut to drag teach mode
+    time.sleep(5)
+    ret = robot.DragTeachSwitch(0)
+    time.sleep(1)
+    error = robot.FT_PdCogIdenRecord(tool_id,2)
+    print('Load center of mass 2 error code',error)
+    ret = robot.DragTeachSwitch(1) #Robot cuts to drag teach mode, must be in manual mode to cut to drag teach mode
+    time.sleep(5)
+    ret = robot.DragTeachSwitch(0)
+    time.sleep(1)
+    error = robot.FT_PdCogIdenRecord(tool_id,3)
+    print('Load center of mass 3 error code',error)
+    time.sleep(1)
+    error = robot.FT_PdCogIdenCompute()
+    print('Load center of mass calculation error code',error)
 
 Load weight identification calculation
-++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_PdIdenCompute()``"
     "Description", "Load weight identification calculation"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success):weight Load weight,unit[kg] "
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode   
+    - ``weight``: weight of the load in kg "
 
-Load weight identification record
-+++++++++++++++++++++++++++++++++++++
+Load weight identification records
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_PdIdenRecord(tool_id)``"
     "Description", "Load weight identification record"
-    "Required parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
-    Return(if success):weight Load weight,unit[kg] 
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Mandatory parameters", "- ``tool_id``: sensor coordinate system number, range [0~14]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2')
-    tool_id = 10  
-    error = robot.FT_PdIdenRecord(tool_id)   # Load weight identification record
-    print('Load weight identification record ',error)
-    time.sleep(1)
-    error = robot.FT_PdIdenRecord()  # Load weight identification calculation
-    print('Load weight identification calculation ',error)
-
-Load centroid identification calculation
-++++++++++++++++++++++++++++++++++++++++++++
+Load center of mass identification calculation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_PdCogIdenCompute()``"
-    "Description", "Load centroid identification calculation"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): cog=[cogx,cogy,cogz],Load centroid ,unit[mm] "
+    "Description", "Load center of mass identification calculation"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode  
+    - ``cog=[cogx,cogy,cogz]``: center of mass of load in mm "
 
-Load centroid identification record
-++++++++++++++++++++++++++++++++++++++
+Load center of mass identification records
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_PdCogIdenRecord(tool_id)``"
-    "Description", "Load centroid identification record"
-    "Required parameter", "- ``tool_id``:Sensor coordinate number,range[0~14]"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "prototype", "``FT_PdCogIdenRecord(tool_id,index)``"
+    "Description", "Load center of mass identification record"
+    "Mandatory parameter", "- ``tool_id``: sensor coordinate system number, range [0~14].
+    - ``index``: point number [1 to 3]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------
-.. code-block:: python
-    :linenos:
-    
-    from fairino import Robot
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    #For load centroid identification, the robot needs to teach three different poses, then record the identification data, and finally calculate the load centroid
-    robot.Mode(1)
-    ret = robot.DragTeachSwitch(1)  
-    time.sleep(5)
-    ret = robot.DragTeachSwitch(0)
-    time.sleep(1)
-    error = robot.FT_PdCogIdenRecord(tool_id,1)
-    print(' Load centroid identification record ',error) 
-    ret = robot.DragTeachSwitch(1)   
-    time.sleep(5)
-    ret = robot.DragTeachSwitch(0)
-    time.sleep(1)
-    error = robot.FT_PdCogIdenRecord(tool_id,2)
-    print('Load centroid identification record ',error)
-    ret = robot.DragTeachSwitch(1)  
-    time.sleep(5)
-    ret = robot.DragTeachSwitch(0)
-    time.sleep(1)
-    error = robot.FT_PdCogIdenRecord(tool_id,3)
-    print(' Load centroid identification record ',error)
-    time.sleep(1)
-    error = robot.FT_PdCogIdenCompute()
-    print('Load centroid identification calculation ',error)
-
-Obtain force/torque data in the reference coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Obtaining force/torque data in the reference coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_GetForceTorqueRCS()``"
-    "Description", "Obtain force/torque data in the reference coordinate system"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success):data=[fx,fy,fz,mx,my,mz] "
+    "Description", "Get force/torque data in reference coordinate system"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``data=[fx,fy,fz,tx,ty,tz]``: force/torque data in the reference coordinate system."
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     import frrpc
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = frrpc.RPC('192.168.58.2')
-    rcs = robot.FT_GetForceTorqueRCS()  #Query data in the sensor coordinate system
+    rcs = robot.FT_GetForceTorqueRCS() #Query data in sensor coordinate system
     print(rcs)
 
-Obtain raw force/torque data from the force sensor
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Obtaining Force Sensor Raw Force/Torque Data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_GetForceTorqueOrigin()``"
-    "Description", "Obtain raw force/torque data from the force sensor"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success):data=[fx,fy,fz,mx,my,mz] "
+    "Description", "Get force sensor raw force/torque data"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode  
+    - ``data=[fx,fy,fz,tx,ty,tz]``: Force sensor raw force/torque data "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
-    from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2')
-    error = robot.FT_GetForceTorqueOrigin()   # Obtain raw force/torque data from the force sensor
-    print("Obtain raw force/torque data from the force sensor ",error)
+    import frrpc
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = frrpc.RPC('192.168.58.2')
+    origin = robot.FT_GetForceTorqueOrigin() #Query sensor raw data
+    print(origin)
 
-Collision protection
-++++++++++++++++++++++++++++++++++
+Collision Guard
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_Guard(flag,sensor_num,select,force_torque,max_threshold,min_threshold)``"
-    "Description", "Collision protection"
-    "Required parameter", "- ``flag``:0-Turn off collision protection, 1-Turn on collision protection;
-    - ``sensor_num``:Force sensor number;
-    - ``select``:Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective;
-    - ``force_torque``:Collision detection force/moment,unit[N or Nm];
-    - ``max_threshold``:Maximum threshold;
-    - ``min_threshold``:Minimum Threshold;"
-    "Optional parameter", "Nothing"
-    - Force/torque detection range:(force_torque-min_threshold,force_torque+max_threshold)"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "description", "collision guarding"
+    "Required Parameters", "- ``flag``: 0 - turn off collision guarding, 1 - turn on collision guarding;
+    - ``sensor_num``: force sensor number;
+    - ``select``: whether or not the six degrees of freedom detect collisions [fx,fy,fz,mx,my,mz], 0 - not valid, 1 - valid;
+    - ``force_torque``: collision detection force/torque in N or Nm;
+    - ``max_threshold``: maximum threshold;
+    - ``min_threshold``: minimum threshold;
+    - Force/torque detection range: (force_torque-min_threshold,force_torque+max_threshold)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    actFlag = 1   #Enable flag, 0-Disable collision guard, 1-Enable collision guard
-    sensor_num = 1  #Force sensor number
-    is_select = [1,1,1,1,1,1]  #Whether the six degrees of freedom detect the collision[fx,fy,fz,mx,my,mz],0-Ineffective, 1-Effective
-    force_torque = [0.0,0.0,0.0,0.0,0.0,0.0]  #Collision detection force/moment,detection range（force_torque-min_threshold,force_torque+max_threshold）
-    max_threshold = [10.0,10.0,10.0,10.0,10.0,10.0]  #Maximum threshold
-    min_threshold = [5.0,5.0,5.0,5.0,5.0,5.0]   #Minimum Threshold
-    P1=[-160.619,-586.138,384.988,-170.166,-44.782,169.295]
-    P2=[-87.615,-606.209,556.119,-102.495,10.118,178.985]
-    P3=[41.479,-557.243,484.407,-125.174,46.995,-132.165]
-    error = robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold)    # Turn on collision protection
-    print("Turn on collision protection ",error)
-    error = robot.MoveL(P1,1,0)         # linear motion in Cartesian space
-    print("Linear motion in Cartesian space ",error)
+    #Collision Guard
+    actFlag = 1 # turn on flag, 0 - turn off collision guarding, 1 - turn on collision guarding
+    sensor_num = 1 # force sensor number
+    is_select = [1,1,1,1,1,1] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
+    force_torque = [0.0,0.0,0.0,0.0,0.0,0.0,0.0] #Collision detection force and torque, detection range (force_torque-min_threshold,force_torque+max_threshold)
+    max_threshold = [10.0,10.0,10.0,10.0,10.0,10.0] #max_threshold
+    min_threshold = [5.0,5.0,5.0,5.0,5.0,5.0,5.0] #min_threshold
+    p1=[-160.619,-586.138,384.988,-170.166,-44.782,169.295]
+    p2=[-87.615,-606.209,556.119,-102.495,10.118,178.985]
+    p3=[41.479,-557.243,484.407,-125.174,46.995,-132.165]
+    error = robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold) #Enable collision guarding
+    print("Collision guarding error code turned on",error)
+    error = robot.MoveL(P1,1,0) # Cartesian space linear motion
+    print("Cartesian space linear motion error code",error)
     error = robot.MoveL(P2,1,0)
-    print("Linear motion in Cartesian space ",error)
+    print("Cartesian space linear motion error code",error)
     error = robot.MoveL(P3,1,0)
-    print("Linear motion in Cartesian space ",error)
-    actFlag = 0
-    error = robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold)    # Turn off collision protection
-    print("Turn off collision protection ",error)
+    print("Cartesian space linear motion error code",error)
+    actFlag = 0 
+    error = robot.FT_Guard(actFlag, sensor_num, is_select, force_torque, max_threshold, min_threshold) #Turn off collision guarding
+    print("Close collision guard error code",error)
 
-Constant force control
-++++++++++++++++++++++++++++++++++
+constant force control
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_Control(flag,sensor_num,select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)``"
+    "prototype","``FT_Control(flag,sensor_num,select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)``"
     "Description", "Constant force control"
-    "Required parameter", "- ``flag``:Constant force control open flag, 0-off, 1-on;
-    - ``sensor_num``:Force sensor number;
-    - ``select``:Are the six degrees of freedom detected [fx,fy,fz,mx,my,mz],0-ineffective, 1-effective;
-    - ``force_torque``:Detection force/torque, unit[N or Nm];
-    - ``gain``:[f_p,f_i,f_d,m_p,m_i,m_d],Force PID parameters, Torque PID parameters;
-    - ``adj_sign``:Adaptive start stop status, 0-off, 1-on;
-    - ``ILC_sign``: ILC control start stop status, 0-stop, 1-training, 2-practical operation;
-    - ``max_dis``:Maximum adjustment distance;
-    - ``max_ang``:Maximum adjustment angle;"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Mandatory parameter", "- ``flag``: constant force control on flag, 0-off, 1-on;
+    - ``sensor_num``: force sensor number;
+    - ``select``: whether the six degrees of freedom are detected [fx,fy,fz,mx,my,mz], 0 - not valid, 1 - valid;
+    - ``force_torque``: detection of force/torque in N or Nm;
+    - ``gain``: [f_p,f_i,f_d,m_p,m_i,m_d], force PID parameter, moment PID parameter;
+    - ``adj_sign``: adaptive start/stop state, 0-off, 1-on;
+    - ``ILC_sign``: ILC control start/stop status, 0-stop, 1-training, 2-practical;
+    - ``max_dis``: maximum adjustment distance;
+    - ``max_ang``: maximum angle of adjustment;"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    #Constant force control
-    status = 1  #Constant force control open flag, 0-off, 1-on
-    sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0005,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
-    adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
-    ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
-    max_dis = 100.0  #Maximum adjustment distance
-    max_ang = 0.0  #Maximum adjustment angle
-    J1=[70.395, -46.976, 90.712, -133.442, -87.076, -27.138]
-    P2=[-123.978, -674.129, 44.308, -178.921, 2.734, -172.449]
-    P3=[123.978, -674.129, 42.308, -178.921, 2.734, -172.449]
+    # Constant force control
+    status = 1 # Constant force control on flag, 0 - off, 1 - on
+    sensor_num = 1 # force sensor number
+    is_select = [0,0,1,0,0,0,0] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
+    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  
+    gain = [0.0005,0.0,0.0,0.0,0.0,0.0,0.0] # force PID parameter, moment PID parameter
+    adj_sign = 0 #Adaptive start/stop state, 0-off, 1-on
+    ILC_sign = 0 #ILC control start/stop status, 0-stop, 1-training, 2-practice
+    max_dis = 100.0 #Maximum adjustment distance
+    max_ang = 0.0 #Maximum adjustment angle
+    j1=[70.395, -46.976, 90.712, -133.442, -87.076, -27.138]
+    p2=[-123.978, -674.129, 44.308, -178.921, 2.734, -172.449]
+    p3=[123.978, -674.129, 42.308, -178.921, 2.734, -172.449]
     error = robot.MoveJ(J1,1,0)    
-    print("Joint space motion PTP ",error)
+    print("Joint space motion instruction error code",error)
     error = robot.MoveL(P2,1,0)
-    print("Linear motion in Cartesian space ",error)
+    print("Cartesian space linear motion instruction error code",error)
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn on constant force control ",error)
-    error = robot.MoveL(P3,1,0)    
-    print("Linear motion in Cartesian space ",error)
+    print("Constant force control on error code",error)
+    error = robot.MoveL(P3,1,0) # Cartesian space linear motion
+    print("Cartesian space linear motion instruction error code",error)
     status = 0
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn off constant force control ",error)
+    print("Constant force control end error code",error)
 
-Spiral line exploration
-++++++++++++++++++++++++++++++++++
+Helix Exploration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_SpiralSearch(rcs,ft, dr = 0.7,max_t_ms = 60000, max_vel = 5)``"
-    "Description", "Spiral line exploration"
-    "Required parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
-    - ``ft``:Force or torque threshold (0-100), unit[N/Nm];"
-    "Optional parameter", "- ``dr``:Feed rate per circle radius, unit[mm], default to 0.7;
-    - ``max_t_ms``:Maximum exploration time,unit[ms] , default to 6000;
-    - ``max_vel``:Maximum linear speed,unit[mm/s] , default to 5"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Prototype", "``FT_SpiralSearch(rcs, ft, dr=0.7, max_t_ms=60000, max_vel=5)``"
+    "Description", "Helix Explorations"
+    "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system
+    - ``ft``: force or moment threshold (0 to 100) in N or Nm;"
+    "Default parameters","- ``dr``: radius feed per revolution in mm Default 0.7.
+    - ``max_t_ms``: maximum time to explore, in ms default 60000.
+    - ``max_vel``: maximum value of linear velocity in mm/s Default 5"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    P = [36.794,-675.119, 65.379, -176.938, 2.535, -179.829]
-    #Constant force parameter
-    status = 1  #Constant force control open flag, 0-off, 1-on
-    sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
-    adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
-    ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
-    max_dis = 100.0  #Maximum adjustment distance
-    max_ang = 5.0  #Maximum adjustment angle
-    #Helix explore parameters
-    rcs = 0  #Reference frame, 0-Tool frame, 1-Base frame
-    fFinish = 1.0 #Force or moment threshold（0~100）,unit[N or Nm]
-
-    error = robot.MoveL(P,1,0)
-    print("Linear motion in Cartesian space ",error)
+    p = [36.794, -675.119, 65.379, -176.938, 2.535, -179.829]
+    # HENRY Parameters
+    status = 1 # Constant force control on flag, 0 - off, 1 - on
+    sensor_num = 1 # force sensor number
+    is_select = [0,0,1,0,0,0,0] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
+    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  
+    gain = [0.0001,0.0,0.0,0.0,0.0,0.0] # force PID parameter, moment PID parameter
+    adj_sign = 0 #Adaptive start/stop state, 0-off, 1-on
+    ILC_sign = 0 #ILC control start/stop status, 0-stop, 1-training, 2-practice
+    max_dis = 100.0 #Maximum adjustment distance
+    max_ang = 5.0 #Maximum adjustment angle
+    # Helix Exploration Parameters
+    rcs = 0 # reference coordinate system, 0-tool coordinate system, 1-base coordinate system
+    fFinish = 10 # Force or moment threshold (0~100) in N or Nm
+    error = robot.MoveL(P,1,0) #Cartesian space linear motion to initial point
+    print("Cartesian space linear motion to initial point",error)
+    is_select = [0,0,1,1,1,0] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign, max_dis,max_ang)
-    print("Turn on constant force control ",error)
+    print("Constant force control on error code",error)
     error = robot.FT_SpiralSearch(rcs,fFinish,max_vel=3)
-    print("Spiral line exploration ",error)
+    print("Helix Exploration Error Code",error)
     status = 0
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign, max_dis,max_ang)
-    print("Turn off constant force control ",error)
+    print("Constant force control off error code",error)
 
-Rotate Insert
-++++++++++++++++++++++++++++++++++
+Rotary insertion
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_RotInsertion(rcs,ft, orn, angVelRot = 3, angleMax = 45, angAccmax = 0, rotorn =1)``"
-    "Description", "Rotate Insert"
-    "Required parameter", "- ``rcs``:Reference coordinate system, 0-tool coordinate system, 1-base coordinate system;
-    - ``ft``:Force or torque threshold (0-100), unit[N/Nm];
-    - ``orn``:Direction of force, 1-fz,2-mz;"
-    "Optional parameter", "- ``angVelRot``:Rotational angular velocity: uni[t°/s],default to 3;
-    - ``angleMax``:maximum rotation angle, unit[°] ,default to 45;
-    - ``angAccmax``:Maximum rotational acceleration, unit[°/s^2],not used temporarily, default to 0;
-    - ``rotorn``:Rotation direction, 1-clockwise, 2-counterclockwise, default to 1"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Prototype", "``FT_RotInsertion(rcs, ft, orn, angVelRot=3, angleMax=45, angAccmax=0, rotorn=1)``"
+    "Description", "Rotary Insertion"
+    "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
+    - ``ft``: force or moment threshold (0 to 100) in N or Nm.
+    - ``orn``: direction of force/torque, 1 - along the z-axis, 2 - around the z-axis;"
+    "Default parameter", "- ``angVelRot``: angular speed of rotation in °/s, default 3;
+    - ``angleMax``: maximum angle of rotation, in ° default 45.
+    - ``angAccmax``: maximum rotational acceleration in °/s^2, not used yet Default 0.
+    - ``rotorn``: direction of rotation, 1 - clockwise, 2 - counterclockwise Default 1"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    P = [36.794,-675.119, 65.379, -176.938, 2.535, -179.829]
-    #Constant force parameter
-    status = 1  #Constant force control open flag, 0-off, 1-on
-    sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
-    adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
-    ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
-    max_dis = 100.0  #Maximum adjustment distance
-    max_ang = 5.0  #Maximum adjustment angle
-    #Rotational insertion parameter
-    rcs = 0  #Reference frame, 0-Tool frame, 1-Base frame
-    angVelRot = 2.0  #Rotational angular velocity,unit[°/s]
-    forceInsertion = 1.0 #Force or moment threshold（0~100）,unit[N or Nm]
-    angleMax= 45 #Maximum rotation Angle,unit[°]
-    orn = 1 #Direction of force,1-fz,2-mz
-    angAccmax = 0.0 #Maximum rotational acceleration, unit[°/s^2],not used temporarily
-    rotorn = 1 #Rotation direction, 1-clockwise, 2-counterclockwise
-    error = robot.MoveL(P,1,0) # Linear motion in Cartesian space
-    print("Linear motion in Cartesian space ",error)
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    p = [36.794, -675.119, 65.379, -176.938, 2.535, -179.829]
+    # HENRY Parameters
+    status = 1 # Constant force control on flag, 0 - off, 1 - on
+    sensor_num = 1 # force sensor number
+    is_select = [0,0,1,0,0,0,0] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
+    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0] 
+    gain = [0.0001,0.0,0.0,0.0,0.0,0.0] # force PID parameter, moment PID parameter   
+    adj_sign = 0 #Adaptive start/stop state, 0-off, 1-on
+    ILC_sign = 0 #ILC control start/stop status, 0-stop, 1-training, 2-practice
+    max_dis = 100.0 #Maximum adjustment distance
+    max_ang = 5.0 #Maximum adjustment angle
+    # Rotary insertion parameters
+    rcs = 0 # reference coordinate system, 0-tool coordinate system, 1-base coordinate system
+    forceInsertion = 2.0 # force or moment threshold (0~100) in N or Nm
+    orn = 1 # direction of force, 1-fz,2-mz
+    # Default parameter angVelRot: angular velocity of rotation in °/s Default 3
+    #Default parameter angleMax: Maximum rotation angle in ° Default 5
+    #Default parameter angAccmax: maximum rotational acceleration in °/s^2, not used yet Default 0
+    #Default parameter rotorn: direction of rotation, 1-clockwise, 2-counterclockwise Default 1
+    error = robot.MoveL(P,1,0) #Cartesian space linear motion to initial point
+    print("Cartesian space linear motion to initial point",error)
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn on constant force control ",error)
+    print("Constant force control on error code",error)
     error = robot.FT_RotInsertion(rcs,1,orn)
-    print("Rotate Insert ",error)
+    print("Rotary insertion error code",error)
     status = 0
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn off constant force control ",error)
+    print("Constant force control off error code",error)
 
 Linear insertion
-++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_LinInsertion(rcs, ft, disMax, linorn, lin_v = 1.0, lin_a = 1.0)``"
-    "Description", "Linear insertion"
-    "Required parameter", "- ``rcs``:Reference frame, 0-Tool frame, 1-Base frame;
-    - ``ft``:Force or torque threshold (0-100), unit[N/Nm];
-    - ``disMax``:Maximum insertion distance,unit[mm];
-    - ``linorn``:Insertion direction, 1-positive direction, 2-negative direction;"
-    "Optional parameter", "- ``lin_v``:Linear velocity, unit[mm/s] , default to 1.0;
-    - ``lin_a``:Linear acceleration, unit[mm/s^2],not used temporarily;rotorn:Rotation direction, 1-clockwise, 2-counterclockwise, default to 1.0"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "prototype", "``FT_LinInsertion(rcs, ft, disMax, linorn, lin_v=1.0, lin_a=1.0)``"
+    "Description", "Linear Insertion"
+    "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
+    - ``ft``: force or moment threshold (0 to 100) in N or Nm.
+    - ``disMax``: maximum insertion distance in mm.
+    - ``linorn``: insertion direction: 0-negative direction, 1-positive direction"
+    "Default parameters","- ``lin_v``: linear velocity in mm/s Default 1.
+    - ``lin_a``: linear acceleration in mm/s^2, not used yet Default 1"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
     
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    P = [36.794,-675.119, 65.379, -176.938, 2.535, -179.829]
-    #Constant force parameter
-    status = 1  #Constant force control open flag, 0-off, 1-on
-    sensor_num = 1 #Force sensor number
-    is_select = [0,0,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0001,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
-    adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
-    ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
-    max_dis = 100.0  #Maximum adjustment distance
-    max_ang = 5.0  #Maximum adjustment angle
-    #Linear insertion parameter
-    rcs = 0  #Reference frame, 0-Tool frame, 1-Base frame
-    force_goal = 20.0  #Force or moment threshold（0~100）,unit[N or Nm]
-    lin_v = 0.0 #Linear velocity,unit[mm/s]
-    lin_a = 0.0 #Linear acceleration, unit[mm/s^2],not used temporarily
-    disMax = 100.0 #Maximum insertion distance,unit[mm]
-    linorn = 1 #Insertion direction, 1-positive direction, 2-negative direction
-    error = robot.MoveL(P,1,0) # Linear motion in Cartesian space
-    print("Linear motion in Cartesian space ",error)
+    p = [36.794, -675.119, 65.379, -176.938, 2.535, -179.829]
+    # HENRY Parameters
+    status = 1 # Constant force control on flag, 0 - off, 1 - on
+    sensor_num = 1 # force sensor number
+    is_select = [0,0,1,0,0,0,0] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
+    force_torque = [0.0,0.0,-10.0,0.0,0.0,0.0]  
+    gain = [0.0001,0.0,0.0,0.0,0.0,0.0] # force PID parameter, moment PID parameter
+    adj_sign = 0 #Adaptive start/stop state, 0-off, 1-on
+    ILC_sign = 0 #ILC control start/stop status, 0-stop, 1-training, 2-practice
+    max_dis = 100.0 #Maximum adjustment distance
+    max_ang = 5.0 #Maximum adjustment angle
+    # Linear insertion parameters
+    rcs = 0 # reference coordinate system, 0-tool coordinate system, 1-base coordinate system
+    force_goal = 10.0 # Force or moment threshold (0~100) in N or Nm
+    disMax = 100.0 # Maximum insertion distance in mm
+    linorn = 1 # insertion direction, 1-positive direction, 2-negative direction
+    #Default parameter lin_v: linear velocity in mm/s Default 1
+    #Default parameter lin_a: linear acceleration in mm/s^2, not used Default 0
+    error = robot.MoveL(P,1,0) #Cartesian space linear motion to initial point
+    print("Cartesian space linear motion to initial point",error)
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn on constant force control ",error)
+    print("Constant force control on error code",error)
     error = robot.FT_LinInsertion(rcs,force_goal,disMax,linorn)
-    print("Linear insertion",error)
+    print("Linear insertion error code",error)
     status = 0
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn off constant force control ",error)
+    print("Constant force control off error code",error)
 
-Calculate the middle plane position to start
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculation of the center plane position begins
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_CalCenterStart()``"
-    "Description", "Calculate the middle plane position to start"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Description", "Calculation of mid-plane position begins"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Calculate the middle plane position to end
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate end of mid-plane position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_CalCenterEnd()``"
-    "Description", "Calculate the middle plane position to end"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - Return(if success):pos=[x,y,z,rx,ry,rz] "
+    "Description", "End of calculation of mid-plane position"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode
+    - ``pos=[x,y,z,rx,ry,rz]``: mid-plane position"
 
 Surface positioning
-++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_FindSurface (rcs, dir, axis, disMax, ft, lin_v = 3.0, lin_a = 0.0)``"
-    "Description", "Surface positioning"
-    "Required parameter", "- ``rcs``: Reference frame, 0-Tool frame, 1-Base frame;
-    - ``dir``:Direction of movement, 1-positive, 2-negative;
-    - ``axis``:Move Axis,1-x,2-y,3-z;
-    - ``disMax``:Maximum exploration distance,unit[mm]"
-    "Optional parameter", "- ``lin_v``:Exploring Linear Speed,unit[mm/s] , default to 3.0;
-    - ``lin_a``:Exploring Linear Acceleration,unit[mm/s^2] , default to 0.0"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "prototype", "``FT_FindSurface (rcs, dir, axis, disMax, ft, lin_v=3.0, lin_a=0.0)``"
+    "Description", "Surface Positioning"
+    "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
+    - ``dir``: direction of movement, 1-positive, 2-negative;
+    - ``axis``: moving axes, 1-x, 2-y, 3-z;
+    - ``disMax``: large exploration distance in mm.
+    - ``ft``: action termination force threshold in N;"
+    "Default Parameters", "- ``lin_v``: explore linear velocity in mm/s default 3.
+    - ``lin_a``: explore linear acceleration in mm/s^2 default 0;"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    #Constant force parameter
-    status = 1  #Constant force control open flag, 0-off, 1-on
-    sensor_num = 1 #Force sensor number
-    is_select = [1,0,0,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [-2.0,0.0,0.0,0.0,0.0,0.0]  #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0002,0.0,0.0,0.0,0.0,0.0]  #Maximum threshold
-    adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
-    ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
-    max_dis = 100.0  #Maximum adjustment distance
-    max_ang = 5.0  #Maximum adjustment angle
-    #Surface positioning parameter
-    rcs = 0 #Reference frame, 0-Tool frame, 1-Base frame
-    direction = 1 #Direction of movement,1-positive direction, 2-negative direction
-    axis = 1 #Axis of movement,1-X,2-Y,3-Z
-    lin_v = 3.0  #Exploring straight-line velocity,unit[mm/s]
-    lin_a = 0.0  #Exploration linear acceleration,unit[mm/s^2]
-    disMax = 50.0 #Maximum exploration distance,unit[mm]
-    force_goal = 2.0 #Action termination force threshold,unit[N]
-
-    P1=[-77.24,-679.599,58.328,179.373,-0.028,-167.849]
-    Robot.MoveCart(P1,1,0)       #Point to point motion in joint space
-    #Look for the center in the x direction
-    #The first surface
+    # Constant force control
+    status = 1 # Constant force control on flag, 0 - off, 1 - on
+    sensor_num = 1 # force sensor number
+    is_select = [1,0,0,0,0,0,0] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
+    force_torque = [-2.0,0.0,0.0,0.0,0.0,0.0]  
+    gain = [0.0002,0.0,0.0,0.0,0.0,0.0,0.0] # force PID parameter, moment PID parameter
+    adj_sign = 0 #Adaptive start/stop state, 0-off, 1-on
+    ILC_sign = 0 #ILC control start/stop status, 0-stop, 1-training, 2-practice
+    max_dis = 15.0 #Maximum adjustment distance
+    max_ang = 0.0 #Maximum adjustment angle
+    # Surface positioning parameters
+    rcs = 0 # reference coordinate system, 0-tool coordinate system, 1-base coordinate system
+    direction = 1 # direction of movement, 1-positive direction, 2-negative direction
+    axis = 1 # move axis, 1-X,2-Y,3-Z
+    lin_v = 3.0 #Explore linear velocity in mm/s
+    lin_a = 0.0 # Explore linear acceleration in mm/s^2
+    disMax = 50.0 # Maximum exploration distance in mm
+    force_goal = 2.0 # Action termination force threshold in N
+    p1=[-77.24,-679.599,58.328,179.373,-0.028,-167.849]
+    Robot.MoveCart(P1,1,0) #joint space point-to-point motion
+    #x direction to find the center
+    #1 surface
     error = robot.FT_CalCenterStart()
-    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    print("Calculating the start of the midplane error code",error)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control start error code",error)
     error = robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
+    print("Looking for X+ surface error code",error)
     status = 0
-    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control end error code",error)
     time.sleep(2)
-    error = robot.MoveCart(P1,1,0)       #Point to point motion in joint space
+    error = robot.MoveCart(P1,1,0) #joint space point-to-point motion
+    print("Joint space point-to-point motion error code",error)
     time.sleep(5)
-    #The second surface
-    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    direction = 2 #Direction of movement,1-positive direction, 2-negative direction
+    #2nd surface
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control start error code",error)
+    direction = 2 # direction of movement, 1-positive direction, 2-negative direction
     error = robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
+    print("Looking for X-surface error code",error)
     status = 0
-    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    #Calculate the x-direction center position
+    error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control end error code",error)
+    # Calculate the x-direction center position
     error,xcenter = robot.FT_CalCenterEnd()
-    print("xcenter",xcenter)
+    print("Calculation of end-of-middle-plane error code in x-direction",xcenter) 
     error = robot.MoveCart(xcenter,1,0)
+    print("Joint space point-to-point motion error code",error)
     time.sleep(1)
-    #Look for the center in the y direction
-    #The first surface
+    #y direction to find the center
+    #1 surface
     error =robot.FT_CalCenterStart()
-    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    direction = 1 #Direction of movement,1-positive direction, 2-negative direction
-    axis = 2 #Axis of movement,1-X,2-Y,3-Z
-    disMax = 150.0 #Maximum exploration distance,unit[mm]
-    lin_v = 6.0  #Exploring straight-line velocity,unit[mm/s]
+    print("Calculating the start of the midplane error code",error)
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control start error code",error)
+    direction = 1 # direction of movement, 1-positive direction, 2-negative direction
+    axis = 2 # move axis, 1-X,2-Y,3-Z
+    disMax = 150.0 # Maximum exploration distance in mm
+    lin_v = 6.0 #Explore linear velocity in mm/s
     error =robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
+    print("Looking for surface Y + error code",error)
     status = 0
-    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    error =robot.MoveCart(P1,1,0)       #Point to point motion in joint space
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control end error code",error)
+    error =robot.MoveCart(P1,1,0) #joint space point-to-point motion
+    print("Joint space point-to-point motion error code",error)
     Robot.WaitMs(1000)
-    #The second surface
-    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    direction = 2 #Direction of movement,1-positive direction, 2-negative direction
+    #2nd surface
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control start error code",error)
+    direction = 2 # direction of movement, 1-positive direction, 2-negative direction
     error =robot.FT_FindSurface(rcs,direction,axis,disMax,force_goal)
+    print("Looking for surface Y-error code",error)
     status = 0
-    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)
-    #Calculate the y center position
+    error =robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
+    print("Constant force control end error code",error)
+    # Calculate the y-direction center position
     error,ycenter=robot.FT_CalCenterEnd()
-    print("y center position",ycenter)
+    print("Calculating end of mid-plane Y-direction error code",ycenter)
     error =robot.MoveCart(ycenter,1,0)
+    print("Joint space point-to-point motion error code",error)
 
-Flexibility control off
-++++++++++++++++++++++++++++++++++
+Soft control off
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_ComplianceStop()``"
-    "Description", "Flexibility control off"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Description", "Softening control off"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Flexibility control on
-++++++++++++++++++++++++++++++++++
+Soft control on
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_ComplianceStart(p,force)``"
-    "Description", "Flexibility control on"
-    "Required parameter", "- ``p``: Position adjustment coefficient or compliance coefficient
-    - ``force``:flexibility opening force threshold, unit[N]"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Prototype", "``FT_ComplianceStart(p, force)``"
+    "Description", "Softening control on"
+    "Mandatory parameters", "- ``p``: Position adjustment factor or softness factor
+    - ``force``: soft opening force threshold in N"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-----------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    J1=[75.005,-46.434,90.687,-133.708,-90.315,-27.139]
-    P2=[-77.24,-679.599,38.328,179.373,-0.028,-167.849]
-    P3=[77.24,-679.599,38.328,179.373,-0.028,-167.849]
-    #Constant force parameter
-    status = 1  #Constant force control open flag, 0-off, 1-on
-    sensor_num = 1 #Force sensor number
-    is_select = [1,1,1,0,0,0]  #Six degrees of freedom choice[fx,fy,fz,mx,my,mz],0-ineffective, 1-effective
-    force_torque = [-10.0,-10.0,-10.0,0.0,0.0,0.0] #Collision detection force and torque, detection range（force_torque-min_threshold,force_torque+max_threshold）
-    gain = [0.0005,0.0,0.0,0.0,0.0,0.0]  # 
-    adj_sign = 0  #Adaptive start stop status, 0-off, 1-on
-    ILC_sign = 0  #ILC control start stop status, 0-stop, 1-training, 2-practical operation
-    max_dis = 1000.0  #Maximum adjustment distanc
-    max_ang = 0.0  #Maximum adjustment angle
+    j1=[75.005,-46.434,90.687,-133.708,-90.315,-27.139]
+    p2=[-77.24,-679.599,38.328,179.373,-0.028,-167.849]
+    p3=[77.24,-679.599,38.328,179.373,-0.028,-167.849]
+    # Constant force control parameters
+    status = 1 # Constant force control on flag, 0 - off, 1 - on
+    sensor_num = 1 # force sensor number
+    is_select = [1,1,1,0,0,0] #Six degrees of freedom to select [fx,fy,fz,mx,my,mz], 0-not in effect, 1-in effect
+    force_torque = [-10.0,-10.0,-10.0,0.0,0.0,0.0] 
+    gain = [0.0005,0.0,0.0,0.0,0.0,0.0,0.0] # force PID parameter, moment PID parameter
+    adj_sign = 0 #Adaptive start/stop state, 0-off, 1-on
+    ILC_sign = 0 #ILC control start/stop status, 0-stop, 1-training, 2-practice
+    max_dis = 1000.0 #Maximum adjustment distance
+    max_ang = 0.0 #Maximum adjustment angle
     error = robot.MoveJ(J1,1,0)
-    #Compliance control
+    print("Joint space movement to point 1 error code",error)
+    #Smooth control
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn on constant force control ",error)
-    p = 0.00005  # Coefficient of position adjustment or compliance
-    force = 30.0 # Compliant opening force threshold,unit[N]
+    print("Constant force control start error code",error)
+    p = 0.00005 # Position adjustment factor or softness factor
+    force = 30.0 # soft opening force threshold in N
     error = robot.FT_ComplianceStart(p,force)
-    print("Turn on flexibility control ",error)
-    error = robot.MoveL(P2,1,0,vel =10)   # Rectilinear motion in Cartesian space
-    print("Rectilinear motion in Cartesian space ", error)
+    print("SoftControl start error code",error)
+    error = robot.MoveL(P2,1,0,vel =10) # Cartesian space linear motion
+    print("Cartesian space linear motion to point 2 error code", error)
     error = robot.MoveL(P3,1,0,vel =10)
-    print("Rectilinear motion in Cartesian space ", error)
+    print("Cartesian space linear motion to point 3 error code", error)
     time.sleep(1)
     error = robot.FT_ComplianceStop()
-    print("Turn off flexibility control ",error)
+    print("soft control end error code",error)
     status = 0
     error = robot.FT_Control(status,sensor_num,is_select,force_torque,gain,adj_sign, ILC_sign,max_dis,max_ang)
-    print("Turn off constant force control ",error)
+    print("Constant force control off error code",error)
 
-Load identification initialization
-++++++++++++++++++++++++++++++++++
+Load recognition filter initialization
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "LoadIdentifyDynFilterInit()"
-    "Description", "Load identification initialization"
-    "Required parameter", "Null"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Prototype", "``LoadIdentifyDynFilterInit()``"
+    "Description", "Load Recognition Filter Initialization"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
-------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
 
-    # Load identification initialization
+    # Load recognition filter initialization
     error = robot.LoadIdentifyDynFilterInit()
     print("LoadIdentifyDynFilterInit:",error)
-    # Load identification variable initialization
+    # Load recognition variable initialization
     error = robot.LoadIdentifyDynVarInit()
     print("LoadIdentifyDynVarInit:",error)
 
-    joint_torque= [0,0,0,0,0,0]
-    joint_pos= [0,0,0,0,0,0]
-    gain=[0,0.05,0,0,0,0,0,0.02,0,0,0,0]
+    joint_torque= [0,0,0,0,0,0,0]
+    joint_pos= [0,0,0,0,0,0,0]
+    gain=[0,0.05,0,0,0,0,0,0,0.02,0,0,0,0]
     t =10
     error,joint_pos=robot.GetActualJointPosDegree(1)
     joint_pos[1] = joint_pos[1]+10
     error,joint_torque=robot.GetJointTorques(1)
     joint_torque[1] = joint_torque[1]+2
-    # Load identification main program
+    # Load Recognition Main Program
     error = robot.LoadIdentifyMain(joint_torque, joint_pos, t)
     print("LoadIdentifyMain:",error)
-    #Obtain the load identification result
+    # Get load recognition results
     error = robot.LoadIdentifyGetResult(gain)
     print("LoadIdentifyGetResult:",error)
 
-Load identification variable initialization
-++++++++++++++++++++++++++++++++++++++++++++++++
+Initialization of load recognition variables
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "LoadIdentifyDynVarInit()"
-    "Description", "Load identification variable initialization"
-    "Required parameter", "Null"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Prototype", "``LoadIdentifyDynVarInit()``"
+    "Description", "Load Identification Variable Initialization"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Load identification main program
-++++++++++++++++++++++++++++++++++
+Load Recognition Main Program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "LoadIdentifyMain(joint_torque, joint_pos, t)"
-    "Description", "Load identification main program"
-    "Required parameter", "- ``joint_torque``: j1-j6；
-    - ``joint_pos``:j1-j6"
-    "Return value", "Errcode: Success -0 , Failed -errcode"
+    "Prototype", "``LoadIdentifyMain(joint_torque, joint_pos, t)``"
+    "Description", "Load Recognition Master Program"
+    "Mandatory parameters", "- ``joint_torque``: Joint torque j1-j6;
+    - ``joint_pos``: joint position j1-j6
+    - ``t``: sampling period"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Obtain the load identification result
-+++++++++++++++++++++++++++++++++++++++
+Getting Load Recognition Results
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "LoadIdentifyGetResult(gain)"
-    "Description", "Obtain the load identification result"
-    "Required parameter", "- ``gain``"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0  Failed -errcod
-    - Return:(if success) weight Load weight，cog Load centroid [x,y,z]"
+    "Prototype", "``LoadIdentifyGetResult(gain)``"
+    "Description", "Get load identification results"
+    "Mandatory parameters", "- ``gain``: gravity term coefficient double[6], centrifugal term coefficient double[6]"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``weight``: weight of the load
+    - ``cog=[x,y,z]``: load center of mass coordinates"
 
-Set up six-dimensional force and joint impedance hybrid drag switches and parameters
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain, dragMaxTcpVel,dragMaxTcpOriVel)"
-    "Description", " Set up six-dimensional force and joint impedance hybrid drag switches and parameters"
-    "Required parameter", "- ``status``： control state，0-close；1-open
-    - ``impedanceFlag``：Impedance open sign，0-close；1-open
-    - ``lamdeDain=[D1,D2,D3,D4,D5, D6]``： drag gain
-    - ``KGain=[K1,K2,K3,K4,K5,K6]``：stiffness gain
-    - ``BGain=[B1,B2,B3,B4,B5,B]``： damping gain
-    - ``dragMaxTcpVel``：Maximum linear speed limit at the moving end
-    - ``dragMaxTcpOriVel``：Maximum angular velocity limit at the end of the drag"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod"
-
-Code example
--------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
-
-    robot = Robot.RPC('192.168.58.2')
-
-    status = 1 #control state，0-close；1-open
-    impedanceFlag = 1 #Impedance open sign，0-close；1-open
-    lamdeDain = [ 3.0, 2.0, 2.0, 2.0, 2.0, 3.0] # drag gain
-    KGain = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00] # stiffness gain
-    BGain = [150, 150, 150, 5.0, 5.0, 1.0] # damping gain
-    dragMaxTcpVel = 1000 #Maximum linear speed limit at the moving end
-    dragMaxTcpOriVel = 180 #Maximum angular velocity limit at the end of the drag
-
-    error = robot.DragTeachSwitch(1)
-    print("DragTeachSwitch 1  return:",error)
-
-    error = robot.ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain,dragMaxTcpVel,dragMaxTcpOriVel)
-    print("ForceAndJointImpedanceStartStop return:",error)
-
-    error = robot.GetForceAndTorqueDragState()
-    print("GetForceAndTorqueDragState return:",error)
-
-    time.sleep(10)
-
-    status = 0 #control state，0-close；1-open
-    impedanceFlag = 0 #Impedance open sign，0-close；1-open
-    error = robot.ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain,dragMaxTcpVel,dragMaxTcpOriVel)
-    print("ForceAndJointImpedanceStartStop return:",error)
-
-    error = robot.GetForceAndTorqueDragState()
-    print("GetForceAndTorqueDragState return:",error)
-
-    error = robot.DragTeachSwitch(0)
-    print("DragTeachSwitch 0  return:",error)
-
-The force sensor turns on automatically after the error is cleared
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "SetForceSensorDragAutoFlag(status)"
-    "Description", "The force sensor turns on automatically after the error is cleared"
-    "Required parameter", "- ``status``： control state，0-close；1-open"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod"
-    
-Code example
-------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-
-    error = robot. SetForceSensorDragAutoFlag (1)
-    print("SetForceSensorDragAutoFlag return:",error)
-    
 Force Sensor Assisted Drag
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)"
-    "Description", "Force Sensor Assisted Drag"
-    "Required parameter", "- ``status``：control state，0-close；1-open
-    - ``asaptiveFlag``：Adaptive opening sign，0-close；1-open
-    - ``interfereDragFlag``：Interference zone towing sign，0-close；1-open
-    - ``M=[m1,m2,m3,m4,m5,m6]``：inertia factor 
-    - ``B=[b1,b2,b3,b4,b5,b6]``：damping factor
-    - ``K=[k1,k2,k3,k4,k5,k6]``：coefficient of rigidity
-    - ``F=[f1,f2,f3,f4,f5,f6]``：Drag the six-dimensional force threshold
-    - ``Fmax``：Maximum towing power limit
-    - ``Vmax``：Maximum joint speed limit"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod"
-    
-Code example
---------------
+    "Prototype", "``ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain, dragMaxTcpVel, dragMaxTcpOriVel)``"
+    "Description", "Force sensor assisted drag"
+    "Mandatory parameters", "- ``status``: control status, 0 - off; 1 - on
+    - ``impedanceFlag``: impedance on flag, 0 - off; 1 - on
+    - ``lamdeDain``: [D1, D2, D3, D4, D5, D6] drag gain
+    - ``KGain``: [K1,K2,K3,K4,K5,K6] Stiffness Gain
+    - ``BGain``: [B1,B2,B3,B4,B5,B] damping gain
+    - ``dragMaxTcpVel``: maximum line speed limit at the end of a drag
+    - ``dragMaxTcpOriVel``: drag end maximum angular velocity limit"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
 
     robot = Robot.RPC('192.168.58.2')
 
-    status = 1 # control state, 0-close; 1-open
-    asaptiveFlag = 1 #Adaptive opening sign, 0-close; 1-open
-    interfereDragFlag = 1 #Interference zone towing sign, 0-close; 1-open
-    M = [15, 15, 15, 0.5, 0.5, 0.1] #inertia factor
-    B = [150, 150, 150, 5, 5, 1] #damping factor
-    K = [0, 0, 0, 0, 0, 0] #coefficient ofrigidity
-    F = [5, 5, 5, 1, 1, 1] # Drag the six-dimensional force threshold
-    Fmax = 50 #Maximum towing power limit
-    Vmax = 1810 #Maximum joint speed limit
+    status = 1 # control status, 0-off; 1-on
+    asaptiveFlag = 1 #Adaptive on flag, 0-off; 1-on
+    interfereDragFlag = 1 # interference zone drag flag, 0-off; 1-on
+    M = [15, 15, 15, 0.5, 0.5, 0.1] #Inertia factor
+    B = [150, 150, 150, 5, 5, 1] # Damping factor
+    K = [0, 0, 0, 0, 0, 0, 0] #Stiffness factor
+    F = [5, 5, 5, 1, 1, 1] #drag six-dimensional force thresholds
+    Fmax = 50 # Maximum towing force limit
+    Vmax = 1810 # Maximum joint speed limit
 
     error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)
     print("EndForceDragControl return:",error)
@@ -940,45 +852,135 @@ Code example
     status=0
     error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)
     print("EndForceDragControl return:",error)
-        
-Get force sensor drag switch status
-++++++++++++++++++++++++++++++++++++++
+
+The force sensor turns on automatically after the error is cleared.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "GetForceAndTorqueDragState()"
-    "Description", "Get force sensor drag switch status"
-    "Required parameter", "NULL"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod
-    - ``Return（control state）dragState``：Force Sensor Assisted Drag Control Status，0-close；1-open
-    - ``Return（control state）sixDimensionalDragState``：Six-dimensional force-assisted drag control state，0-close；1-open"
-        
-Set the load weight under the force transducer
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "SetForceSensorPayload(weight)"
-    "Description", "Set the load weight under the force transducer"
-    "Required parameter", " - ``weight``：weight kg"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod"
-        
-Code example
-------------
+    "Prototype", "``SetForceSensorDragAutoFlag(status)``"
+    "Description", "The force sensor turns on automatically after an error is cleared."
+    "Mandatory parameters", "- ``status``: control status, 0 - off; 1 - on"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+    
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    error = robot. SetForceSensorDragAutoFlag (1)
+    print("SetForceSensorDragAutoFlag return:",error)
+    
+Setting up hybrid drag switches and parameters for six-dimensional force and joint impedance
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)``"
+    "Description", "Setting up the six-dimensional force and joint impedance hybrid drag switch and parameters"
+    "Mandatory parameters", "- ``status``: control status, 0 - off; 1 - on
+    - ``asaptiveFlag``: adaptive on flag, 0 - off; 1 - on
+    - ``interfereDragFlag``: interference area drag flag, 0 - off; 1 - on
+    - ``M=[m1,m2,m3,m4,m5,m6]``: inertia factor
+    - ``B=[b1,b2,b3,b4,b5,b6]``: damping factor
+    - ``K=[k1,k2,k3,k4,k5,k6]``: stiffness factor
+    - ``F=[f1,f2,f3,f4,f5,f6]``: drag six-dimensional force thresholds
+    - ``Fmax``: Maximum towing force limitation
+    - ``Vmax``: maximum joint speed limit"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+    
+code example
+-------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    status = 1 # control status, 0-off; 1-on
+    impedanceFlag = 1 # impedance on flag, 0-off; 1-on
+    lamdeDain = [ 3.0, 2.0, 2.0, 2.0, 2.0, 2.0, 3.0] # drag gain
+    KGain = [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] # Stiffness gain
+    BGain = [150, 150, 150, 5.0, 5.0, 1.0] # Damping gain
+    dragMaxTcpVel = 1000 # Maximum line speed limit at the end of the drag
+    dragMaxTcpOriVel = 180 # Maximum angular velocity limit at end of drag
+
+    error = robot.DragTeachSwitch(1)
+    print("DragTeachSwitch 1 return:",error)
+
+    error = robot.ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain,dragMaxTcpVel,dragMaxTcpOriVel)
+    print("ForceAndJointImpedanceStartStop return:",error)
+
+    error = robot.GetForceAndTorqueDragState()
+    print("GetForceAndTorqueDragState return:",error)
+
+    time.sleep(10)
+
+    status = 0 # control status, 0-off; 1-on
+    impedanceFlag = 0 # impedance on flag, 0-off; 1-on
+    error = robot.ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain,dragMaxTcpVel,dragMaxTcpOriVel)
+    print("ForceAndJointImpedanceStartStop return:",error)
+
+    error = robot.GetForceAndTorqueDragState()
+    print("GetForceAndTorqueDragState return:",error)
+
+    error = robot.DragTeachSwitch(0)
+    print("DragTeachSwitch 0 return:",error)
+        
+Get force sensor drag switch status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetForceAndTorqueDragState()``"
+    "Description", "Get force sensor drag switch status"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``dragState``: force sensor assisted drag control state, 0 - off; 1 - on
+    - ``sixDimensionalDragState``: six-dimensional force-assisted drag control state, 0-off; 1-on"
+        
+Setting the load weight under the force transducer
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetForceSensorPayload(weight)``"
+    "Description", "Set the load weight under the force transducer"
+    "Mandatory parameters", " - ``weight``: load weight kg"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+        
+code example
+-------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
 
     robot = Robot.RPC('192.168.58.2')
 
@@ -994,79 +996,79 @@ Code example
     error = robot.GetForceSensorPayloadCog()
     print("GetForceSensorPayLoadCog return:",error)
             
-Set the load center of mass under the force transducer
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the load center of mass under the force transducer
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "SetForceSensorPayloadCog(x,y,z)"
-    "Description", "Set the load center of mass under the force transducer"
-    "Required parameter", "
-    - ``x``：load center of mass x mm
-    - ``y``：load center of mass y mm
-    - ``z``：load center of mass z mm
+    "Prototype", "``SetForceSensorPayloadCog(x,y,z)``"
+    "Description", "Setting the center of mass of the load under the force transducer"
+    "Mandatory parameters", "
+    - ``x``: load center of mass x mm
+    - ``y``: load center of mass y mm
+    - ``z``: load center of mass z mm
     "
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
             
-Get the load weight under the force transducer
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Getting the load weight under the force transducer
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "GetForceSensorPayload()"
-    "Description", "Get the load weight under the force transducer"
-    "Required parameter", "NULL"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod
-    - ``Return（control state） weight``：weight load weight kg"
+    "Prototype", "``GetForceSensorPayload()``"
+    "Description", "Get the weight of the load under the force transducer."
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``weight``: loaded weight kg"
             
-Get the load center of mass under the force transducer
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Obtaining the center of mass of the load under the force transducer
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "GetForceSensorPayloadCog()"
-    "Description", "Get the load center of mass under the force transducer"
-    "Required parameter", "NULL"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod
-    - ``Return（control state） x``：load center of mass x mm 
-    - ``Return（control state） y``：load center of mass y mm 
-    - ``Return（control state） z``：load center of mass z mm"
+    "Prototype", "``GetForceSensorPayloadCog()``"
+    "Description", "Getting the center of mass of the load under the force transducer"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``x``: load center of mass x mm 
+    - ``y``: load center of mass y mm 
+    - ``z``: load center of mass z mm"
             
 Automatic zeroing of force sensors
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "ForceSensorAutoComputeLoad()"
+    "Prototype", "``ForceSensorAutoComputeLoad()``"
     "Description", "Automatic zeroing of force sensors"
-    "Required parameter", "NULL"
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcod
-    - ``Return（control state） weight``：sensor qualitykg
-    - ``Return（control state） pos=[x,y,z]``：sensor center of mass mm"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``weight``: sensor mass kg
+    - ``pos=[x,y,z]``: sensor center of mass mm"
         
-Code example
-------------
+code example
+-------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
 
     robot = Robot.RPC('192.168.58.2')
 
@@ -1078,3 +1080,33 @@ Code example
 
     error = robot.ForceSensorAutoComputeLoad()
     print("ForceSensorAutoComputeLoad return:",error)
+
+Sensor auto-zero data logging
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ForceSensorSetSaveDataFlag(recordCount)``"
+    "Description", "Sensor auto-zero data logging"
+    "Mandatory parameters", "- ``recordCount``: number of record data 1-3"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Fail-errcode"
+
+Automatic sensor zeroing calculation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ForceSensorComputeLoad()``"
+    "Description", "Sensor auto-zero data logging"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Fail-errcode
+    - ``weight``: sensor mass kg 
+    - ``pos=[x,y,z]``: sensor center of mass mm"

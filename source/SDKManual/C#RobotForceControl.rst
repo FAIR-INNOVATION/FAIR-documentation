@@ -1,62 +1,63 @@
-Force control
-=======================
+Machine Human Control
+===============================================
 
 .. toctree:: 
     :maxdepth: 5
 
-Force sensor configuration
-+++++++++++++++++++++++++++++
+
+Force Sensor Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Configured force sensor
-    * @param  [in] company  Manufacturer of force sensors, 17-Kunwei Technology
-    * @param  [in] device  Device number, not used yet. The default value is 0
-    * @param  [in] softvesion  Software version. The value is not used. The default value is 0
-    * @param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
-    * @return  Error code
+    * @brief Configure the force sensor
+    * @param [in] company Force Sensor Manufacturer, 17 - Quintiq Technologies
+    * @param [in] device device number, not used, default is 0
+    * @param [in] softvesion software version number, do not use, the default is 0
+    * @param [in] bus device hangs on the end of the bus position, do not use, the default is 0
+    * @return Error code
     */
-    int FT_SetConfig(int company, int device, int softvesion, int bus);
+    int FT_SetConfig(int company, int device, int softvesion, int bus); 
 
-Get the force sensor configuration
-++++++++++++++++++++++++++++++++++++
+Get the force transducer configuration 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Get the force sensor configuration 
-    * @param [out] deviceID force sensor ID number 
-    * @param [out] company Manufacturer of force sensors, 17-Kunwei Technology
-    * @param [out] device   Device number, not used yet. The default value is 0
-    * @param [out] softvesion Software version. The value is not used. The default value is 0
+    * @brief Get force sensor configuration 
+    * @param [out] deviceID force sensor number 
+    * @param [out] company Force Sensor Manufacturer,, Force Sensor Manufacturer, 17-Kunwei Technology, 19-Aerospace 11th Academy, 20-ATI Sensors, 21-Zhongke MiDot, 22-Weihang Minxin
+    * @param [out] device device number, Kunwei (0-KWR75B), Aisino Eleven (0-MCS6A-200-4), ATI (0-AXIA80 -M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A) 
+    * @param [out] softvesion software version number, not used, the default is 0 
     * @return Error code 
     */ 
     int FT_GetConfig(ref int deviceID, ref int company, ref int device, ref int softvesion); 
 
 Force sensor activation
-+++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Force sensor activation
-    * @param  [in] act  0- reset, 1- activate
-    * @return  Error code
+    * @brief Force sensor activation
+    * @param [in] act 0-reset, 1-activate
+    * @return Error code.
     */
-    int FT_Activate(byte act);
+    int FT_Activate(byte act). 
 
-Force sensor calibration
-++++++++++++++++++++++++++
+Force Transducer Zeroing
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Force sensor calibration
-    * @param  [in] act  0- zero removal, 1- zero correction
-    * @return  Error code
+    * @brief Force sensor zeroing
+    * @param [in] act 0-remove zero, 1-zero correction
+    * @return Error code
     */
-    int FT_SetZero(byte act);   
+    int FT_SetZero(byte act); 
 
 Code example
 +++++++++++++++
@@ -64,8 +65,8 @@ Code example
     :linenos:
 
     private void btnFT_Click(object sender, EventArgs e)
-    {
-        Robot robot = new Robot();
+    {     
+       Robot robot = new Robot();
         robot.RPC("192.168.58.2");
 
         int company = 17;
@@ -94,13 +95,13 @@ Code example
                 
         robot.SetLoadCoord(coord);
         Thread.Sleep(1000);
-        robot.FT_SetZero(0);//0-Remove Zero, 1-Zero Correction
+        robot.FT_SetZero(0);// 0 Remove zero point 1 Correct zero point
         Thread.Sleep(1000);
 
         ForceTorque ft = new ForceTorque(0, 0, 0, 0, 0, 0);
         int rtn = robot.FT_GetForceTorqueOrigin(1, ref ft);
         Console.WriteLine($"ft origin : {ft.fx}, {ft.fy}, { ft.fz}, { ft.tx}, { ft.ty}, { ft.tz}    rtn   {rtn}");
-        rtn = robot.FT_SetZero(1);//Zero Correction
+        rtn = robot.FT_SetZero(1);// zero correction
         //Console.WriteLine($"set zero rtn {rtn}");
 
         Thread.Sleep(2000);
@@ -111,73 +112,73 @@ Code example
         Console.WriteLine($"FT_GetForceTorqueRCS rcs : {ft.fx}, {ft.fy}, {ft.fz}, {ft.tx}, {ft.ty}, {ft.tz}");
     }
 
-Set the reference coordinate system of the force sensor
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set the force sensor reference coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Set the reference coordinate system of the force sensor
-    * @param  [in] ref  0- tool frame, 1- base frame
-    * @return  Error code
+    * @brief Set the force sensor reference coordinate system.
+    * @param [in] ref 0-tool coordinate system, 1-base coordinate system
+    * @return Error code.
     */
-    int FT_SetRCS(byte type);
+    int FT_SetRCS(byte type). 
 
-Load weight identification record
-++++++++++++++++++++++++++++++++++++
+Load Weight Recognition Record
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Load weight identification record
-    * @param  [in] id  Sensor coordinate system number, range [1~14]
-    * @return  Error code
+    * @brief Load weight identification record.
+    * @param [in] id Sensor coordinate system number in the range [1~14].
+    * @return Error code.
     */
-    int FT_PdIdenRecord(int id);  
+    int FT_PdIdenRecord(int id).
 
-Load weight identification calculation
-+++++++++++++++++++++++++++++++++++++++++
+Load weight recognition calculation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Load weight identification calculation
-    * @param  [out] weight  Load weight, unit: kg
-    * @return  Error code
+    * @brief Load weight recognition calculation.
+    * @param [out] weight Weight of the load in kg.
+    * @return Error code.
     */   
-    int FT_PdIdenCompute(ref double weight);
+    int FT_PdIdenCompute(ref double weight).
 
-Load centroid identification record
-+++++++++++++++++++++++++++++++++++++
+Load center of mass identification record
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Load centroid identification record
-    * @param  [in] id  Sensor coordinate system number, range [1~14]
-    * @param  [in] index Point number, range [1~3]
-    * @return  Error code
+    * @brief Load center-of-mass identification logging
+    * @param [in] id Sensor coordinate system number, range [1~14].
+    * @param [in] index point number, range [1~3].
+    * @return Error code
     */
-    int FT_PdCogIdenRecord(int id, int index);  
+    int FT_PdCogIdenRecord(int id, int index). 
 
-Load centroid identification calculation
-++++++++++++++++++++++++++++++++++++++++++
+Load center of mass identification calculation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Load centroid identification calculation
-    * @param  [out] cog  Load center of mass, unit: mm
-    * @return  Error code
+    * @brief Load center of mass identification calculation.
+    * @param [out] cog load center of mass in mm.
+    * @return Error code.
     */   
-    int FT_PdCogIdenCompute(ref DescTran cog); 
+    int FT_PdCogIdenCompute(ref DescTran cog);
 
-Code example
+Code Samples
 +++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    private void btnFTPdCog_Click(object sender, EventArgs e)
+      private void btnFTPdCog_Click(object sender, EventArgs e)
     {
         Robot robot = new Robot();
         robot.RPC("192.168.58.2");
@@ -239,49 +240,49 @@ Code example
         Console.WriteLine($"cog : {cog.x}, {cog.y}, {cog.z}");
     }
 
-Obtain force/torque data in the reference coordinate system
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get force/torque data in reference coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Obtain force/torque data in the reference coordinate system
-    * @param  [out] ft  Force/torque，fx,fy,fz,tx,ty,tz
-    * @return  Error code
+    * @brief Get force/torque data in reference coordinate system.
+    * @param [out] ft force/torque, fx,fy,fz,tx,ty,tz
+    * @return Error code
     */   
-    int FT_GetForceTorqueRCS(byte flag, ref ForceTorque ft);
+    int FT_GetForceTorqueRCS(byte flag, ref ForceTorque ft); 
 
-Obtain the raw force/torque data of the force sensor
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get force sensor raw force/torque data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Obtain the raw force/torque data of the force sensor
-    * @param  [out] ft  Force/torque，fx,fy,fz,tx,ty,tz
-    * @return  Error code
+    * @brief Get the raw force/torque data from the force sensor.
+    * @param [out] ft force/torque, fx,fy,fz,tx,ty,tz
+    * @return Error code.
     */   
-    int FT_GetForceTorqueOrigin(byte flag, ref ForceTorque ft);
+    int FT_GetForceTorqueOrigin(byte flag, ref ForceTorque ft); 
 
 Collision guard
-+++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Collision guard
-    * @param  [in] flag 0- Disable collision guard. 1- Enable collision guard
-    * @param  [in] sensor_id Force sensor number
-    * @param  [in] select  Select the six degrees of freedom whether to detect collision, 0- no detection, 1- detection
-    * @param  [in] ft  Impact force/torque，fx,fy,fz,tx,ty,tz
-    * @param  [in] max_threshold Maximum threshold
-    * @param  [in] min_threshold Minimum threshold
-    * @note   Force/torque detection range:(ft-min_threshold, ft+max_threshold)
-    * @return  Error code
+    * @brief collision guarding
+    * @param [in] flag 0- turn off collision guarding, 1- turn on collision guarding
+    * @param [in] sensor_id Force sensor number.
+    * @param [in] select Whether to detect collision in six degrees of freedom, 0-no detection, 1-detection.
+    * @param [in] ft collision force/torque, fx,fy,fz,tx,ty,tz
+    * @param [in] max_threshold max_threshold
+    * @param [in] min_threshold min_threshold
+    * @note Force/torque detection range: (ft-min_threshold, ft+max_threshold)
+    * @return Error code
     */   
     int FT_Guard(int flag, int sensor_id, int[] select, ForceTorque ft, double[] max_threshold, double[] min_threshold); 
 
-Code Example
+Code Samples
 +++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -293,7 +294,7 @@ Code Example
 
         byte flag = 1;
         byte sensor_id = 1;
-        int[] select = new int[6]{ 1, 0, 0, 0, 0, 0 };//Only enable x-axis collision protection
+        int[] select = new int[6]{ 1, 0, 0, 0, 0, 0 };//只启用x轴碰撞守护
         double[] max_threshold = new double[6]{ 5.0f, 0.01f, 0.01f, 0.01f, 0.01f, 0.01f };
         double[] min_threshold = new double[6]{ 3.0f, 0.01f, 0.01f, 0.01f, 0.01f, 0.01f };
 
@@ -336,24 +337,24 @@ Code Example
     }
 
 Constant force control
-+++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Constant force control
-    * @param  [in] flag 0- turn off constant force control, 1- turn on constant force control
-    * @param  [in] sensor_id Force sensor number
-    * @param  [in] select  Select the six degrees of freedom whether to detect collision, 0- no detection, 1- detection
-    * @param  [in] ft  Impact force/torque，fx,fy,fz,tx,ty,tz
-    * @param  [in] ft_pid Force pid parameter, torque pid parameter
-    * @param  [in] adj_sign Adaptive start-stop control, 0- off, 1- on
-    * @param  [in] ILC_sign ILC start stop control, 0- stop, 1- training, 2- operation
-    * @param  [in] Maximum Adjustment distance, unit: mm
-    * @param  [in] Maximum Adjustment Angle, unit: deg
-    * @return  Error code
+    * @brief Constant force control
+    * @param [in] flag 0- turn off constant force control, 1- turn on constant force control
+    * @param [in] sensor_id force sensor number
+    * @param [in] select Selects whether or not to detect collisions in the six degrees of freedom, 0-does not detect, 1-detects.
+    * @param [in] ft collision force/torque, fx,fy,fz,tx,ty,tz
+    * @param [in] ft_pid force pid parameter, torque pid parameter
+    * @param [in] adj_sign Adaptive start/stop control, 0-off, 1-on
+    * @param [in] ILC_sign ILC start-stop control, 0-stop, 1-training, 2-practice
+    * @param [in] Maximum adjustment distance in mm
+    * @param [in] Max. adjustment angle in deg.
+    * @return Error code
     */   
-    int FT_Control(int flag, int sensor_id, int[] select, ForceTorque ft, double[] ft_pid, int adj_sign, int ILC_sign, double max_dis, double max_ang);
+    int FT_Control(int flag, int sensor_id, int[] select, ForceTorque ft, double[] ft_pid, int adj_sign, int ILC_sign, double max_dis, double max_ang);   
 
 Code example
 +++++++++++++++
@@ -413,34 +414,35 @@ Code example
         Console.WriteLine($"FT_Control end rtn {rtn}");
     }
 
-Compliant control on
-+++++++++++++++++++++++++++++++++++++++++++++
+Smooth control on
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Compliant control on
-    * @param  [in] p Coefficient of position adjustment or compliance
-    * @param  [in] force Compliant opening force threshold, unit: N
-    * @return  Error code
+    * @brief Softening control on
+    * @param [in] p Position adjustment coefficient or softening coefficient.
+    * @param [in] force Soft opening force threshold in N
+    * @return Error code.
     */   
-    int FT_ComplianceStart(float p, float force);
+    int FT_ComplianceStart(float p, float force).
 
-Compliant control off
-+++++++++++++++++++++++++++++++++++++++++++++
+Flex control off
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Compliant control off
-    * @return  Error code
+    * @brief Smooth control off
+    * @return Error code
     */   
-    int FT_ComplianceStop();
+    int FT_ComplianceStop(); 
 
 Code example
 +++++++++++++++
 .. code-block:: c#
     :linenos:
+
 
     private void btnComplience_Click(object sender, EventArgs e)
     {
@@ -507,64 +509,60 @@ Code example
         robot.FT_Control(flag, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang);
     }
 
-Load identification initialization
-+++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C# SDK-v1.0.4
+Load recognition initialization
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Load identification initialization
+    * @brief Load Recognition Initialization
     * @return Error code
     */
     int LoadIdentifyDynFilterInit();
 
-Load identification variable initialization
-+++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C# SDK-v1.0.4
+Initialize load identifying variables
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Load identification variable initialization
+    * @brief Initialization of load recognition variables.
     * @return Error code
     */
     int LoadIdentifyDynVarInit();
 
 Load identification main program
-+++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C# SDK-v1.0.4
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Load identification main program
-    * @param [in] joint_torque joint torque
-    * @param [in] joint_pos joint position
-    * @param [in] t Sampling period
+    * @brief Load recognition main program.
+    * @param [in] joint_torque Joint torque.
+    * @param [in] joint_pos Joint position.
+    * @param [in] t Sampling period.
     * @return Error code
     */
     int LoadIdentifyMain(double[] joint_torque, double[] joint_pos, double t);
 
-Obtain the load identification result
-+++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C# SDK-v1.0.4
+Get the load identification result
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Obtain the load identification result
-    * @param [in] gain
-    * @param [out] weight Load weight
-    * @param [out] cog Load centroid
-    * @return Error code
+    * @brief Get load recognition results
+    * @param [in] gain Gravity term coefficient double[6], centrifugal term coefficient double[6].
+    * @param [out] weight load weight
+    * @param [out] cog load center of mass
+    * @return error code
     */
     int LoadIdentifyGetResult(double[] gain, ref double weight, ref DescTran cog);

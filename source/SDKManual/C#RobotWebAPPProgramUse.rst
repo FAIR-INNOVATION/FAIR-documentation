@@ -1,116 +1,115 @@
-WebAPP program use
-================================
-
+Robot WebAPP application use
+===================================
 .. toctree:: 
     :maxdepth: 5
 
-Set the default job program to be automatically loaded upon startup
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the default job program to load automatically on boot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Set the default job program to be automatically loaded upon startup
-    * @param  [in] flag  0- boot does not automatically load the default program, 1- boot automatically load the default program
-    * @param  [in] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
-    * @return  Error code
+    * @brief Setting the default job program to load automatically on boot up
+    * @param [in] flag 0-boot-up does not automatically load the default program, 1-boot-up automatically loads the default program
+    * @param [in] program_name Name and path of the job programme, e.g. "/fruser/movej.lua", where "/fruser/" is a fixed path.
+    * @return error code
     */
     int LoadDefaultProgConfig(byte flag, string program_name); 
 
 Load the specified job program
-+++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Load the specified job program
-    * @param  [in] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
-    * @return  Error code
+    * :: @brief loads a specified programme of work
+    * @param [in] program_name Name and path of the job programme, e.g. "/fruser/movej.lua", where "/fruser/" is a fixed path.
+    * @return error code
     */
-    int ProgramLoad(string program_name);
+    int ProgramLoad(string program_name). 
 
-Get the loaded job program name
-+++++++++++++++++++++++++++++++++++
+Get the name of the loaded job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Get the loaded job program name
-    * @param  [out] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
-    * @return  Error code
+    * :: @brief Get the name of the loaded job programme
+    * @param [out] program_name Name and path of the job programme, e.g. "/fruser/movej.lua", where "/fruser/" is a fixed path.
+    * @return error code
     */
-    int GetLoadedProgram(ref string program_name); 
+    int GetLoadedProgram(ref string program_name). 
 
 Get the line number of the current robot job program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Get the line number of the current robot job program
-    * @param  [out] line  line number
-    * @return  Error code
-    */   
-    int GetCurrentLine(ref int line);
+    * @brief Get the line number of the current robot job program execution.
+    * @param [out] line line number
+    * @return error code
+    */  
+    int GetCurrentLine(ref int line).
 
 Run the currently loaded job program
-+++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Run the currently loaded job program
-    * @return  Error code
+    * :: @brief Run the currently loaded job program
+    * @return error code
     */
     int ProgramRun();
 
-Pause the current running job program
-++++++++++++++++++++++++++++++++++++++++
+Suspend the currently running job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Pause the current running job program
-    * @return  Error code
+    * :: @brief Suspend the currently running operational programme
+    * @return error code
     */ 
     int ProgramPause();
 
-Resume the currently suspended job program
-+++++++++++++++++++++++++++++++++++++++++++++
+Resumption of the currently suspended operating procedure
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Resume the currently suspended job program
-    * @return  Error code
+    * :: @brief Resumption of currently suspended operating procedures
+    * @return error code
     */ 
-    int ProgramResume();  
+    int ProgramResume(); 
 
-Terminates the currently running job program
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Terminate the currently running job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Terminates the currently running job program
-    * @return  Error code
+    * :: @brief terminate the currently running job programme
+    * @return error code
     */ 
     int ProgramStop();   
 
-Get the robot job program execution state
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Getting the robot's job program execution status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Get the robot job program execution state
-    * @param  [out]  state 1- program stop or no program running, 2- program running, 3- program pause
-    * @return  Error code
+    * :: @brief Obtaining robot programme execution status
+    * @param [out] state 1-program stopped or no program running, 2-program running, 3-program suspended
+    * @return error code
     */
-    int GetProgramState(ref byte state);
+    int GetProgramState(ref byte state).
 
-Code example
-++++++++++++++
+code example
+++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -141,72 +140,73 @@ Code example
         robot.ProgramStop();
     }
 
-Download job program
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Downloading of operating procedures
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.5
+.. versionadded:: C#SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Download job program
-    * @param [in] fileName Job program to download "test.lua" or "test.tar.gz"
-    * @param [in] savePath Save the local path of the job program“D://Down/”
-    * @return Error Code 
+    * :: @brief Downloading the work programme
+    * @param [in] fileName The "test.lua" or "test.tar.gz" file to download.
+    * @param [in] savePath Save the local path of the job programme "D:///Down/".
+    * @return error code 
     */
     public int LuaDownLoad(string fileName, string savePath);
 
-Upload job program
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Uploading of operational procedures
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.5
+.. versionadded:: C#SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Upload job program
-    * @param [in] filePath Local job program path name ".../test.lua"或".../test.tar.gz"
-    * @param [out] errStr Error message
-    * @return  
+    * :: @brief Uploading of operational procedures
+    * @param [in] filePath Local job program path name "... /test.lua" or "... /test.tar.gz"
+    * @param [out] errStr error message
+    * @return error code 
     */
     public int LuaUpload(string filePath, ref string errStr);
 
-Delete job program
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Deletion of operational procedures
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.5
+.. versionadded:: C#SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Delete job program
-    * @param [in] fileName The name of the job program to delete "test.lua"
-    * @return Error Code
+    * :: @brief Deletion of operating procedures
+    * @param [in] fileName The name of the job programme to be deleted, "test.lua".
+    * @return error code 
     */
-    public int LuaDelete(string fileName);
+    public int LuaDelete(string fileName).
 
-Gets all current job program names
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Get the names of all current job programs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.5
+.. versionadded:: C#SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Gets all current job program names
-    * @param [out] luaNames List of job program names
-    * @return Error Code
+    * :: @brief gets the names of all the current operating procedures
+    * @param [out] luaNames list of job program names
+    * @return error code 
     */
     public int GetLuaList(ref List<string> luaNames) ;
 
-Code example
-++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.5
+code example
+++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.5
 
 .. code-block:: c#
     :linenos:

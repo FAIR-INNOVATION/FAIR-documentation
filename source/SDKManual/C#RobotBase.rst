@@ -1,119 +1,119 @@
-Basics
-=================
+Robotics Basics
+=============
 
-.. toctree:: 
+.. toctree:. 
     :maxdepth: 5
 
-Instantiate the robot
-++++++++++++++++++++++++++++++++++
+Instantiated Robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Robot interface class constructor
+    * @brief Robot interface class constructor
     */
-    Robot();
+    Robot(). 
 
-Establishes communication with the controller
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Establish communication with the controller
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Establish communication with the robot controller
-    * @param  [in] ip  Controller IP address. The default value is 192.168.58.2
-    * @return Error code
+    * :: @brief establishes communication with the robot controller
+    * @param [in] ip controller IP address, out default is 192.168.58.2
+    * @return error code
     */
     int RPC(string ip);
 
-Disconnect the communication with the robot control box
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Disconnect communication with the robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-    
+
     /** 
-    * @brief Disconnect the communication with the robot control box
-    * @return Error code 
+    * @brief Disconnect communication with robot controller 
+    * @return error code 
     */ 
-    int CloseRPC();
+    int CloseRPC(); 
 
-Query the SDK version number
-++++++++++++++++++++++++++++++++++
+Query SDK version number
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Query the SDK version number
-    * @param  [out] version  SDK version
-    * @return  Error code
+    * @brief query SDK version number 
+    * @param [out] version SDK version number 
+    * @return error code 
     */  
-    int GetSDKVersion(ref string version);
+    int GetSDKVersion(ref string version).
 
-Obtain Controller IP address
-++++++++++++++++++++++++++++++++++++
+Get controller IP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Obtain Controller IP address
-    * @param  [out] ip  Controller IP
-    * @return  Error code
+    * @brief Get controller IP
+    * @param [out] ip Controller IP
+    * @return error code
     */
-    int GetControllerIP(ref string ip);
+    int GetControllerIP(ref string ip).
 
-Control the robot to enter or exit the drag teaching mode
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Controls the robot into and out of drag-and-drop instructor mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Control the robot to enter or exit the drag teaching mode
-    * @param  [in] state 0-exit drag mode，1-enter the drag mode
-    * @return  Error code
+    * @brief Controls the robot into and out of drag-and-drop instructor mode.
+    * @param [in] state 0-exit drag instructor mode, 1-enter drag instructor mode
+    * @return error code
     */
-    int DragTeachSwitch(byte state);
+    int DragTeachSwitch(byte state).
 
 Queries whether the robot is in drag mode
-++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Check whether the robot is in drag mode
-    * @param  [out] state 0-non-drag teaching mode，1-drag the teaching mode
-    * @return  Error code
+    * @brief Query whether the robot is in drag-and-drop mode.
+    * @param [out] state 0-non-drag instructional mode, 1-drag instructional mode
+    * @return error code
     */
-    int IsInDragTeach(ref byte state); 
+    int IsInDragTeach(ref byte state). 
 
-Control up enable and down enable
-+++++++++++++++++++++++++++++++++++++
+Control robot up-enable or down-enable
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Enable or disable the function on or off the robot. By default, the function is enabled automatically after the robot is powered on
-    * @param  [in] state  0-down-enable，1-upper enable
-    * @return  Error code
+    * @brief Controls robot up-enable or down-enable, defaults to automatic up-enable when the robot is powered on.
+    * @param [in] state 0-down enable, 1-up enable
+    * @return error code
     */
-    int RobotEnable(byte state); 
+    int RobotEnable(byte state). 
 
-Control robot hand/automatic mode
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Control of robot hand-automatic mode switching
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Control robot hand/automatic mode
-    * @param [in] mode 0-automatic mode，1-manual mode
-    * @return Error code
+    * @brief Control of robot hand-automatic mode switching
+    * @param [in] mode 0-automatic mode, 1-manual mode
+    * @return error code
     */
-    int Mode(int mode);
+    int Mode(int mode).
 
-Code example
-+++++++++++++++
+code example
++++++++++++++
 .. code-block:: c#
     :linenos:
-    
+
     private void btnStandard_Click(object sender, EventArgs e)
     {
         Robot robot = new Robot();

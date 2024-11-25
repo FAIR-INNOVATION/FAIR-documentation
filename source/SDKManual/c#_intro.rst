@@ -1,18 +1,18 @@
 C#
-=======
+==============
 
-This manual is the secondary development interface document of C#.
+This document is the C# version of the secondary development interface document.
 
 .. important::
 
-    Robot parameter unit description: The robot position unit is millimeter (mm), and the attitude unit is degree (°).
+    Description of robot parameter units: robot position in millimeters (mm) and attitude in degrees (°).
 
-.. important:: 
+.. important::
 
-    1)	In code examples that are not specifically stated, the robot has been powered on and enabled by default;
-    2)	All code examples in the documentation default to no interference within the robot's workspace;
-    3)	Please use the data of the on-site robot in the actual use test;
-    4)	Before using this SDK, you need to find the "xmlrpcnet" package through NuGet and add it to the project reference;
+    1) All code examples in the documentation default to the robot being powered on and enabled unless otherwise specified;
+    2) All code examples in the documentation default to no interference in the robot's workspace;
+    3) Please use the data of the robot in the field for actual use testing.
+    4) Before using this SDK, you need to find the “xmlrpcnet” package through NuGet and add it to the project reference;
 
 
 .. toctree:: 
@@ -32,5 +32,5 @@ This manual is the secondary development interface document of C#.
     C#RobotForceControl
     C#RobotWelding
     C#RobotExtendedAxis
-    C#RobotOthers
-    
+    C#RobotOther
+

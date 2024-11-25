@@ -1,11 +1,11 @@
-Basic
-===========================
+Robotics Basics
+=======================================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-Instantiating robots
-++++++++++++++++++++++++
+Instantiated Robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
@@ -14,192 +14,307 @@ Instantiating robots
     "Prototype", "``RPC(ip)``"
     "Description", "Instantiating a robot object"
     "Required parameter", "- ``ip``:The IP address of the robot, with a default factory IP of “192.168.58.2”"
-    "Optional parameter", "Nothing"
+    "Optional parameter", "NULL"
     "Return value", "- Success: Returns a robot object
     - Failed: The created object will be destroyed"
      
-Code example
----------------
+code example
+------------------------------------------------
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
 
-Query SDK version number
-++++++++++++++++++++++++++++
+Close the RPC connection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetSDKVersion()``"
-    "Description", "Query SDK version number"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return:（if success） [SDK_version, Controller_version]"
-
-Code example
---------------
+    "Prototype", "``CloseRPC()``"
+    "Description", "Close RPC connection"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "NULL"
+     
+code example
+------------------------------------------------
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    ret,version  = robot.GetSDKVersion()    # Query SDK version numbe
-    if ret ==0:
-        print("SDK version is", version )
-    else:
-        print("The query failed with the error code is",ret)
+    robot.CloseRPC()
 
-Obtain Controller IP
-++++++++++++++++++++++
+Query SDK version number
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "prototype", "``GetSDKVersion()``"
+    "Description", "Query SDK version number"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Fail-errcode
+    - ``sdk``: SDK version number, controller version number"
+
+code example
+---------------------------------------------------
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    ret,version = robot.GetSDKVersion() #query the SDK version number
+    if ret == 0.
+        print("SDK version number is ", version )
+    else.
+        print("Query failed with error code ",ret)
+
+Get controller IP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetControllerIP()``"
-    "Description", "Obtain Controller IP"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return:（if success） IP"
+    "Description", "Query Controller IP"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``ip``: controller IP"
 
-Code example
---------------
+code example
+--------------------------------------------------
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    ret,ip = robot.GetControllerIP()    # Obtain Controller IP
-    if ret ==0:
-        print("controller ip is ", ip)
-    else:
-        print("the errcode is ",ret)
+    ret,ip = robot.GetControllerIP() #query controller IP
+    if ret == 0.
+        print("Controller IP is ", ip)
+    else.
+        print("Query failed with error code ",ret)
 
-Control robot manual/automatic mode switch
-+++++++++++++++++++++++++++++++++++++++++++++++
+Control of robot hand-automatic mode switching
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``Mode(state)``"
-    "Description", "Control robot manual/automatic mode switch"
-    "Required parameter", "- ``state``:1-Manual mode,0-Automatic mode"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``Mode(state)``"
+    "description", "control robot hand auto mode switching"
+    "Mandatory parameters", "- ``state``: 0 - automatic mode, 1 - manual mode"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
---------------
+code example
+--------------------------------------------------
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    ret = robot.Mode(0)   # The robot goes into automatic operation mode
-    print("The robot goes into automatic operation mode ", ret)
+    #Robot hand-automatic mode switching
+    ret = robot.Mode(0) #Robot cuts to autorun mode
+    print("Robot cut into autorun mode", ret)
     time.sleep(1)
-    ret = robot.Mode(1)   # The robot goes into manual mode
-    print("The robot goes into manual mode ", ret)
+    ret = robot.Mode(1) #Robot cut to manual mode
+    print("Robot cut to manual mode", ret)
 
-Robot drag mode
-+++++++++++++++++
+Robot Drag Mode
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Control the robot to enter or exit the drag teaching mode
-------------------------------------------------------------
+Controlling the robot into and out of drag-and-drop instructor mode
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``DragTeachSwitch(state)``"
-    "Description", "Control the robot to enter or exit the drag teaching mode"
-    "Required parameter", "- ``state``:1-Enter drag teaching mode,0-Exit drag teaching mode"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Controls the robot into and out of drag-and-drop demonstration mode."
+    "Mandatory parameter", "- ``state``: 1-entry into drag-indicator mode, 0-exit from drag-indicator mode"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Check if the robot is in drag mode
--------------------------------------
+Queries whether the robot is in drag mode
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``IsInDragTeach()``"
-    "Description", "Check if the robot is in drag mode"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Queries whether the robot is in drag-and-drop demonstration mode."
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``state``: 0 - non-drag instructional mode, 1 - drag instructional mode"
 
-Code example
--------------
+code example
+--------------------------------------------------
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2') 
-    robot.Mode(1) # The robot goes into manual mode
-    print("The robot goes into manual mode ", ret)
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    #Robot hand-automatic mode switching
+    ret = robot.Mode(0) #Robot cuts to autorun mode
+    print("Robot cut into autorun mode", ret)
     time.sleep(1)
-    ret = robot.DragTeachSwitch(1)  # When the robot enters the drag teaching mode, it can only enter the drag teaching mode in manual mode
-    print("the robot enters the drag teaching mode ", ret)
-    time.sleep(1)
-    ret,state = robot.IsInDragTeach()    # Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode
-    if ret == 0:
-        print("drag state is:", state)
-    else:
-        print("the errcode is:",ret)
-    time.sleep(3)
-    ret = robot.DragTeachSwitch(0)  # When the robot enters the non-drag teaching mode, it can only enter the non-drag teaching mode in manual mode
-    print("the robot enters the non-drag teaching mode ", ret)
-    time.sleep(1)
-    ret,state = robot.IsInDragTeach()    # Check whether the user is in drag mode, 1-Drag mode, 0-No drag mode
-    if ret == 0:
-        print("drag state is:", state)
-    else:
-        print("the errcode is:",ret)
+    ret = robot.Mode(1) #Robot cuts to manual mode
+    print("Robot cut to manual mode", ret)
 
-Control the robot to enable or lower enable
-+++++++++++++++++++++++++++++++++++++++++++++++
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    # Robot enters or exits drag-and-drop instructional mode
+    ret = robot.Mode(1) #Robot cut to manual mode
+    print("Robot cut to manual mode", ret)
+    time.sleep(1)
+    ret = robot.DragTeachSwitch(1) #Robot cuts to drag teach mode, must be in manual mode to cut to drag teach mode
+    print("Robot cut to drag-and-drop instructional mode", ret)
+    time.sleep(1)
+    ret,state = robot.IsInDragTeach() #query if in drag teach mode, 1-drag teach mode, 0-non-drag teach mode
+    if ret == 0.
+        print("Current drag mode state:", state)
+    else.
+        print("Query failed with error code:",ret)
+    time.sleep(3)
+    ret = robot.DragTeachSwitch(0) # robot cuts to non-drag teach mode, must be in manual mode to cut to non-drag teach mode
+    print("Robot cut to non-drag instructional mode", ret)
+    time.sleep(1)
+    ret,state = robot.IsInDragTeach() #query if in drag teach mode, 1-drag teach mode, 0-non-drag teach mode
+    if ret == 0.
+        print("Current drag mode state:", state)
+    else.
+        print("Query failed with error code:",ret)
+
+Control robot up-enable or down-enable
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``RobotEnable(state)``"
-    "Description", "Control the robot to enable or lower enable"
-    "Required parameter", "- ``state``:1-Upper enable,0-Lower enable"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``RobotEnable(state)``"
+    "Description", "Control robot up-enable or down-enable"
+    "Mandatory parameters", "- ``state``: 1 - up enable, 0 - down enable"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
 
-Code example
----------------
+code example
+--------------------------------------------------
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    ret = robot.RobotEnable(0)   # Unable the robot
-    print("Unable the robot", ret)
+    # Robot up-enable or down-enable
+    ret = robot.RobotEnable(0) # robot down enable
+    print("Enabling under robot", ret)
     time.sleep(3)
-    ret = robot.RobotEnable(1)   # This function is enabled on the robot. After the robot is powered on, it is automatically enabled by default
-    print("Enabled on the robot ", ret)
+    ret = robot.RobotEnable(1) #RobotEnable, robot is automatically enabled by default after power up
+    print("Enabling on robot", ret)
+
+Joint Torque Power Detection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetPowerLimit(status, power)``"
+    "Description", "Joint Torque Power Detection"
+    "Mandatory parameters", "- ``state``: 0-off, 1-on
+    - ``power``: set maximum power (W)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Setting the Robot 20004 Port Feedback Cycle
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetRobotRealtimeStateSamplePeriod(period)``"
+    "Description", "Setting the robot 20004 port feedback cycle"
+    "Mandatory parameter", "- ``period``: robot 20004 port feedback period (ms)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Get robot 20004 port feedback cycle
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotRealtimeStateSamplePeriod()``"
+    "Description", "Get robot 20004 port feedback cycle"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``period``: robot 20004 port feedback period (ms)"
+
+Robot software upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SoftwareUpgrade(filePath, block)``"
+    "Description", "Robot Software Upgrade"
+    "Required parameters","- ``filePath``: full path of the software upgrade package
+    - ``block``: whether to block until the upgrade is complete true:blocking; false:non-blocking"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode "
+
+Get robot software upgrade status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetSoftwareUpgradeState()``"
+    "Description", "Get robot software upgrade status"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``state``: robot package upgrade status, 0: idle in progress or uploading upgrade package in progress, 1~100: percentage of upgrade completed, -1: upgrade software failure, -2: checksum failure, -3: version checksum failure, -4: unpacking failure, -5: user configuration upgrade failure, -6: peripheral configuration upgrade failure, -7: extended axis configuration upgrade failure, -8: robot configuration upgrade failure, -9: DH parameter configuration upgrade failure"
+
+    

@@ -1,66 +1,65 @@
-Trajectory recurrence
+Robot trajectory replication
 ==============================
-
 .. toctree:: 
     :maxdepth: 5
 
-Set track recording parameters
-++++++++++++++++++++++++++++++++
+Setting up track recording parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Set track recording parameters
-    * @param  [in] type  Record data type, 1- joint position
-    * @param  [in] name  Track file name
-    * @param  [in] period_ms  Data sampling period, fixed value 2ms or 4ms or 8ms
-    * @param  [in] di_choose  DI Select,bit0 to bit7 corresponds to control box DI0 to DI7, bit8 to bit9 corresponds to end DI0 to DI1, 0- do not select, 1- select
-    * @param  [in] do_choose  DO select,bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0- do not select, 1- select
-    * @return  Error code
+    * :: @brief Setting track logging parameters
+    * @param [in] type Record data type, 1-joint position
+    * @param [in] name track file name
+    * @param [in] period_ms data sampling period, fixed value 2ms or 4ms or 8ms
+    * @param [in] di_choose DI choice,bit0~bit7 corresponds to control box DI0~DI7,bit8~bit9 corresponds to end DI0~DI1,0-no choice,1-choice
+    * @param [in] do_choose DO selection, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choice, 1-choice
+    * @return error code
     */
     int SetTPDParam(int type, string name, int period_ms, UInt16 di_choose, UInt16 do_choose);
 
-Start track recording
-++++++++++++++++++++++++++++
+Start Track Recording
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Start track recording
-    * @param  [in] type  Record data type, 1- joint position
-    * @param  [in] name  Track file name
-    * @param  [in] period_ms  Data sampling period, fixed value 2ms or 4ms or 8ms
-    * @param  [in] di_choose  DI Select,bit0 to bit7 corresponds to control box DI0 to DI7, bit8 to bit9 corresponds to end DI0 to DI1, 0- do not select, 1- select
-    * @param  [in] do_choose  DO select,bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0- do not select, 1- select
-    * @return  Error code
+    * @brief start track record
+    * @param [in] type Record data type, 1-joint position
+    * @param [in] name track file name
+    * @param [in] period_ms data sampling period, fixed value 2ms or 4ms or 8ms
+    * @param [in] di_choose DI choice,bit0~bit7 corresponds to control box DI0~DI7,bit8~bit9 corresponds to end DI0~DI1,0-no choice,1-choice
+    * @param [in] do_choose DO selection, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choice, 1-choice
+    * @return error code
     */
     int SetTPDStart(int type, string name, int period_ms, UInt16 di_choose, UInt16 do_choose); 
 
-Stop track recording
-++++++++++++++++++++++++++++
+Stop Track Recording
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Stop track recording
-    * @return  Error code
+    * :: @brief stop track recording
+    * @return error code
     */
     int SetWebTPDStop(); 
 
-Delete track record
-++++++++++++++++++++++++++++
+Deleting track records
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Delete track record
-    * @param  [in] name  Track file name
-    * @return  Error code
-    */   
-    int SetTPDDelete(string name); 
+    * @brief Delete track record
+    * @param [in] name track file name
+    * @return error code
+    */  
+    int SetTPDDelete(string name). 
 
-Code example
-++++++++++++++
+code example
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -89,46 +88,46 @@ Code example
     }
 
 Trajectory preloading
-++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Trajectory preloading
-    * @param  [in] name  Track file name
-    * @return  Error code
-    */      
-    int LoadTPD(string name);
+    * @brief Trajectory preloading
+    * @param [in] name track file name
+    * @return error code
+    */  
+    int LoadTPD(string name).
 
-Get the trajectory start position and attitude
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the start position of the trajectory
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Get the trajectory start pose 
-    * @param [in] name  trajectory file name
-    * @param [out] desc_pose trajectory start position and attitude
-    * @return Error code 
+    * @brief Get the trajectory start position. 
+    * @param [in] name track file name
+    * @param [out] desc_pose trajectory start position 
+    * @return error code 
     */ 
     int GetTPDStartPose(string name, ref DescPose desc_pose); 
 
-Trajectory recurrence
-++++++++++++++++++++++++++++
+Trajectory Reproduction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Trajectory recurrence
-    * @param  [in] name  Track file name
-    * @param  [in] blend 0- not smooth, 1- smooth
-    * @param  [in] ovl  Speed scaling percentage, range [0~100]
-    * @return  Error code
+    * :: @brief Trajectory replication
+    * @param [in] name track file name
+    * @param [in] blend 0-unsmoothed, 1-smoothed
+    * @param [in] ovl speed scaling percentage, range [0~100]
+    * @return error code
     */
-    int MoveTPD(string name, byte blend, float ovl); 
+    int MoveTPD(string name, byte blend, float ovl). 
 
-Code example
-++++++++++++++++++
+code example
+++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -149,7 +148,7 @@ Code example
 
         DescPose desc_pose = new DescPose();
         robot.GetTPDStartPose(name, ref desc_pose);
-        Console.WriteLine($"GetTPDStartPose:{desc_pose.tran.x},{desc_pose.tran.y},{desc_pose.tran.z},{desc_pose.rpy.rx},{desc_pose.rpy.ry},{desc_pose.rpy.rz}");
+        Console.WriteLine($"GetTPDStartPose:{desc_pose.tran.x},{desc_pose.tran.y},{desc_pose.tran.z},{desc_pose.rpy.rx},{desc_pose.rpy.ry} ,{desc_pose.rpy.rz}").
         robot.SetTrajectoryJSpeed(100.0f);
 
         robot.LoadTPD(name);
@@ -157,154 +156,154 @@ Code example
         robot.MoveTPD(name, blend, 100.0f);
     }
 
-External trajectory file preprocessing
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+External track file preprocessing
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief External trajectory file preprocessing
-    * @param [in] name trajectory file name 
-    * @param [in] ovl Percentage speed scaling，range[0~100] 
-    * @param [in] opt controls the default value is 1
-    * @return Error code
+    * :: @brief External track file preprocessing 
+    * @param [in] name track file name  
+    * @param [in] ovl speed scaling percentage, range [0~100] 
+    * @param [in] opt 1-control point, default 1 
+    * @return error code 
     */ 
     int LoadTrajectoryJ(string name, float ovl, int opt); 
 
-Reproduces the external trajectory file
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+External track file track reproduction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Reproduces the external trajectory file 
-    * @return Error code
+    * :: @brief External trajectory file trajectory replication  
+    * @return error code 
     */
-    int MoveTrajectoryJ();
+    int MoveTrajectoryJ().
 
-Gets trajectory file start position and attitude
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get track file track start position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Gets trajectory file start position and attitude
-    * @param [in] name trajectory file name  
-    * @param [out] desc_pose trajectory file start position and attitude 
-    * @return Error code 
+    * @brief Get track file track start position 
+    * @param [in] name track file name  
+    * @param [out] desc_pose trajectory start position  
+    * @return error code 
     */ 
     int GetTrajectoryStartPose(string name, ref DescPose desc_pose); 
 
-Gets the trajectory file point number
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get track file track point number
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Gets the trajectory file point number   
-    * @param [out] pnum trajectory file point number  
-    * @return Error code 
+    * @brief Get track point number   
+    * @param [out] pnum track point number  
+    * @return error code 
     */  
-    int GetTrajectoryPointNum(ref int pnum); 
+    int GetTrajectoryPointNum(ref int pnum).
 
-Set the trajectory file motion move velocity
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting Track File Track Run Speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Set the trajectory file motion move velocity   
-    * @param [in] ovl Percentage of velocity  
-    * @return Error code 
+    * @brief Setting track file track run speeds   
+    * @param [in] ovl speed percentage  
+    * @return error code 
     */  
-    int SetTrajectoryJSpeed(double ovl);
+    int SetTrajectoryJSpeed(double ovl).
 
-Set the forces and torques in trajectory file running
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting forces and moments in trajectory file trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Set the forces and torques in trajectory file running  
-    * @param [in] ft Force and torque in three directions  (N,Nm)
-    * @return Error code 
+    * @brief Setting forces and moments in trajectory file trajectory runs  
+    * @param [in] ft Force and torque in three directions, in N and Nm
+    * @return error code 
     */
-    int SetTrajectoryJForceTorque(ForceTorque ft); 
+    int SetTrajectoryJForceTorque(ForceTorque ft). 
 
-Sets the force in the x direction of the trajectory
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force along the x-direction in the trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Sets the force in the x direction of the trajectory  
-    * @param [in] fx  the force in the x direction (N)
-    * @return Error code
+    * @brief sets the force along the x-direction in the trajectory run  
+    * @param [in] fx Force along x direction in N
+    * @return error code 
     */
-    int SetTrajectoryJForceFx(double fx);
+    int SetTrajectoryJForceFx(double fx).
 
-Sets the force in the y direction of the trajectory
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force along the y-direction in the trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Sets the force in the y direction of the trajectory
-    * @param [in] fy  the force in the y direction (N)
-    * @return Error code 
+    * @brief Setting the force along the y-direction in the trajectory run  
+    * @param [in] fy Force along y direction in N
+    * @return error code 
     */
-    int SetTrajectoryJForceFy(double fy);
+    int SetTrajectoryJForceFy(double fy).
 
-Sets the force in the z direction of the trajectory
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force along the z-direction in a trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Sets the force in the z direction of the trajectory
-    * @param [in] fz the force in the z direction (N)
-    * @return Error code 
+    * @brief Setting the force along the z-direction in a trajectory run  
+    * @param [in] fz Force along the z-direction in N
+    * @return error code 
     */
-    int SetTrajectoryJForceFz(double fz);
+    int SetTrajectoryJForceFz(double fz).
 
-Sets the torque around the x axis during the trajectory run
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the torque around the x-axis in a trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Sets the torque around the x axis during the trajectory run  
-    * @param [in] tx  the torque around the x axis (Nm)
-    * @return Error code 
+    * @brief Setting the torque around the x-axis in the trajectory run  
+    * @param [in] tx Torque around x-axis in Nm
+    * @return error code 
     */
-    int SetTrajectoryJTorqueTx(double tx);
+    int SetTrajectoryJTorqueTx(double tx).
 
-Sets the torque around the y axis during the trajectory run
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the torque around the y-axis in trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Sets the torque around the y axis during the trajectory run  
-    * @param [in] ty  the torque around the x axis (Nm)
-    * @return Error code 
+    * @brief Setting the torque around the y-axis for a trajectory run  
+    * @param [in] ty Torque around y-axis in Nm
+    * @return error code 
     */
-    int SetTrajectoryJTorqueTy(double ty);
+    int SetTrajectoryJTorqueTy(double ty).
 
-Sets the torque around the z axis during the trajectory run
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the torque around the z-axis in trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Sets the torque around the z axis during the trajectory run  
-    * @param [in] tz  the torque around the z axis (Nm)
-    * @return Error code 
+    * @brief Sets the torque around the z-axis for the trajectory run.  
+    * @param [in] tz Torque around z-axis in Nm
+    * @return error code 
     */
-    int SetTrajectoryJTorqueTz(double tz);
+    int SetTrajectoryJTorqueTz(double tz).
 
-Code example
-++++++++++++++++++
+code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -318,9 +317,9 @@ Code example
         rtn = robot.LoadTrajectoryJ(name, 100, 1);
         Console.WriteLine($"LoadTrajectoryJ:{rtn}");
 
-        DescPose desc_pos2 = new DescPose(0, 0, 0, 0, 0, 0);
+        DescPose desc_pos2 = new DescPose(0, 0, 0, 0, 0, 0, 0, 0);
         rtn = robot.GetTrajectoryStartPose(name, ref desc_pos2);
-        Console.WriteLine($"GetTrajectoryStartPose:{desc_pos2.tran.x},{desc_pos2.tran.y},{desc_pos2.tran.z},{desc_pos2.rpy.rx},{desc_pos2.rpy.ry},{desc_pos2.rpy.rz}");
+        Console.WriteLine($"GetTrajectoryStartPose:{desc_pos2.tran.x},{desc_pos2.tran.y},{desc_pos2.tran.z},{desc_pos2.rpy.rx},{desc_pos2. rpy.ry},{desc_pos2.rpy.rz}").
 
         int tool = 1;
         int user = 0;
@@ -333,32 +332,32 @@ Code example
         robot.MoveCart(desc_pos2, tool, user, vel, acc, ovl, blendT, config);
 
         rtn = robot.SetTrajectoryJSpeed(20);
-        Console.WriteLine($"SetTrajectoryJSpeed: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJSpeed: rtn {rtn}");
 
         rtn = robot.MoveTrajectoryJ();
         Console.WriteLine($"MoveTrajectoryJ:{rtn}");
 
         int pnum = -1;
         rtn = robot.GetTrajectoryPointNum(ref pnum);
-        Console.WriteLine($"GetTrajectoryPointNum: rtn  {rtn}    num {pnum}");
+        Console.WriteLine($"GetTrajectoryPointNum: rtn {rtn} num {pnum}");
 
         rtn = robot.SetTrajectoryJSpeed(100);
-        Console.WriteLine($"SetTrajectoryJSpeed: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJSpeed: rtn {rtn}");
 
-        ForceTorque ft = new ForceTorque(1, 1, 1, 1, 1, 1);
+        ForceTorque ft = new ForceTorque(1, 1, 1, 1, 1, 1, 1, 1);
         rtn = robot.SetTrajectoryJForceTorque(ft);
-        Console.WriteLine($"SetTrajectoryJForceTorque: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJForceTorque: rtn {rtn}");
 
         rtn = robot.SetTrajectoryJForceFx(1.0);
-        Console.WriteLine($"SetTrajectoryJForceFx: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJForceFx: rtn {rtn}");
         rtn = robot.SetTrajectoryJForceFy(1.0);
-        Console.WriteLine($"SetTrajectoryJForceFx: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJForceFx: rtn {rtn}");
         rtn = robot.SetTrajectoryJForceFz(1.0);
-        Console.WriteLine($"SetTrajectoryJForceFx: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJForceFx: rtn {rtn}");
         rtn = robot.SetTrajectoryJTorqueTx(1.0);
-        Console.WriteLine($"SetTrajectoryJForceFx: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJForceFx: rtn {rtn}");
         rtn = robot.SetTrajectoryJTorqueTy(1.0);
-        Console.WriteLine($"SetTrajectoryJForceFx: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJForceFx: rtn {rtn}");
         rtn = robot.SetTrajectoryJTorqueTz(1.0);
-        Console.WriteLine($"SetTrajectoryJForceFx: rtn  {rtn}");
+        Console.WriteLine($"SetTrajectoryJForceFx: rtn {rtn}");
     }

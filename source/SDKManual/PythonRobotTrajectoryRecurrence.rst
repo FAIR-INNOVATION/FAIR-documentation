@@ -1,372 +1,348 @@
 Trajectory recurrence
-================================ 
+====================================================================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-Set trajectory recording parameters
-++++++++++++++++++++++++++++++++++++
+Setting Track Recording Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetTPDParam(name, period_ms, type = 1,di_choose = 0, do_choose = 0)``"
-    "Description", "Set trajectory recording parameters"
-    "Required parameter", "- ``name``:Track name;
-    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;"
-    "Optional parameter", "- ``type``:Data type, 1-joint position, default to 1;
-    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected, default to 0;
-    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected, default to 0"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``SetTPDParam(name, period_ms, type=1,di_choose=0, do_choose=0)``"
+    "Description", "Setting parameters for track logging"
+    "Mandatory parameters", "- ``name``: track name;
+    - ``period_ms``: sampling period, fixed value, 2ms or 4ms or 8ms;"
+    "Default parameters", "- ``type``: data type, 1-joint position;
+    - ``di_choose``: DI choose, bit0~bit7 corresponds to control box DI0~DI7, bit8~bit9 corresponds to end DI0~DI1, 0-no choose, 1-choose Default 0.
+    - ``do_choose``: DO choose, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choose, 1-choose Default 0"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
---------------
+code example
+----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    type = 1  
-    name = 'tpd2023' 
-    period = 4  
-    di = 0 
-    do = 0 
-    ret = robot.SetTPDParam(name, period, di_choose=di)    # Set trajectory recording parameters
-    print("Set trajectory recording parameters ", ret)
-
-Start trajectory recording
-++++++++++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetTPDStart(name, period_ms, type = 1,di_choose = 0, do_choose = 0)``"
-    "Description", "Start trajectory recording"
-    "Required parameter", "-  ``name``:Track name;
-    - ``period_ms``:Sampling period, fixed value, 2ms or 4ms or 8ms;"
-    "Optional parameter", "- ``type``:Data type, 1-joint position;
-    - ``di_choose``:DI selection, bit0~bit7 corresponds to control boxes DI0~DI7, bit8~bit9 corresponds to terminal DI0~DI1, 0-not selected, 1-selected, default to 0;
-    - ``do_choose``:DO selection, bit0~bit7 corresponds to control boxes DO0~DO7, bit8~bit9 corresponds to terminal DO0~DO1, 0-not selected, 1-selected, default to 0"
-    "Return value", "Errcode: Success -0  Failed -errcode"
-
-Stop trajectory recording
-++++++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetWebTPDStop()``"
-    "Description", "Stop trajectory recording"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
-
-Code example
-------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2')
-    type = 1 
-    name = 'tpd2023'  
-    period = 4  
-    di = 0 
-    do = 0 
-    robot.Mode(1)  # Robot goes into manual mode
+    type = 1 # data type, 1-joint position
+    name = 'tpd2023' # track name
+    period = 4 # sampling period, 2ms or 4ms or 8ms
+    di = 0 # di input configuration
+    do = 0 # do output configuration
+    ret = robot.SetTPDParam(name, period, di_choose=di) #configure TPD parameters
+    print("Configuration TPD parameter error code", ret)
+    robot.Mode(1) # robot cut to manual mode
     time.sleep(1)  
-    robot.DragTeachSwitch(1)  # The robot cuts into the drag teaching mode
+    robot.DragTeachSwitch(1) # robot cuts to drag teach mode
+    ret = robot.GetActualTCPPose()
+    print("Get current tool position", ret)
     time.sleep(1)
-    ret = robot.SetTPDStart(name, period, do_choose=do)   # Start trajectory recording
-    print("Start trajectory recording", ret)
+    ret = robot.SetTPDStart(name, period, do_choose=do) # start logging the demonstration trajectory
+    print("Starting to record the demonstration track error code", ret)
     time.sleep(15)
-    ret = robot.SetWebTPDStop()  # Stop trajectory recording
-    print("Stop trajectory recording", ret)
-    robot.DragTeachSwitch(0)  # The robot exits drag teaching mode
+    ret = robot.SetWebTPDStop() # stop logging the demonstration trajectory
+    print("Stopped recording of the demonstration track error code", ret)
+    robot.DragTeachSwitch(0) # robot cuts to non-drag teach mode
+    # robot.SetTPDDelete('tpd2023') # Delete TPD tracks
 
-Delete trajectory record
-+++++++++++++++++++++++++
+Start Track Recording
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTPDStart(name, period_ms, type=1,di_choose=0, do_choose=0)``"
+    "Description", "Start Track Record"
+    "Mandatory parameters", "- ``name``: track name;
+    - ``period_ms``: sampling period, fixed value, 2ms or 4ms or 8ms;"
+    "Default parameters", "- ``type``: number datatype, 1-joint position default 1;
+    - ``di_choose``: DI choose, bit0~bit7 corresponds to control box DI0~DI7, bit8~bit9 corresponds to end DI0~DI1, 0-no choose, 1-choose Default 0.
+    - ``do_choose``: DO choose, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choose, 1-choose Default 0"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Stop Track Recording
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "prototype", "``SetWebTPDStop()``"
+    "Description", "Stop Track Record"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Deleting track records
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTPDDelete(name)``"
-    "Description", "Delete trajectory record"
-    "Required parameter", "- ``name``:Track name"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
-
-Code example
-------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2')
-    # robot.SetTPDDelete('tpd2023')   # Delete trajectory record
+    "Description", "Delete Track Record"
+    "Mandatory parameters", "- ``name``: track name"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
 Trajectory preloading
-+++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``LoadTPD(name)``"
-    "Description", "Trajectory preloading"
-    "Required parameter", "- ``name``:Track name"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Trajectory Preloading"
+    "Mandatory parameters", "- ``name``: track name"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-ObtainTPD start pose
-+++++++++++++++++++++++++++++
+code example
+----------------------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    # P1=[-321.821, 125.694, 282.556, 174.106, -15.599, 152.669]
+    name = 'tpd2023' #track name
+    blend = 1 # whether to smooth, 1-smooth, 0-not smooth
+    ovl = 100.0 #speed scaling
+    ret = robot.LoadTPD(name) # track preloading
+    print("track preload error code",ret)
+    ret,P1 = robot.GetTPDStartPose(name) #Get trajectory start pose
+    print ("Get trajectory start position error code",ret, "start position",P1)
+    ret = robot.MoveL(P1,0,0) #move to start point
+    print("Movement to start point error code",ret)
+    time.sleep(10)
+    ret = robot.MoveTPD(name, blend, ovl) # trajectory replication
+    print("Trajectory reproduction error code",ret)
+
+Get the starting position of the trajectory
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetTPDStartPose(name)``"
-    "Description", "ObtainTPD start pose"
-    "Required parameter", "- ``name``:Track name"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - Return(if success): desc_pose [x,y,z,rx,ry,rz]"
+    "Description", "Get trajectory start position"
+    "Mandatory parameters", "- ``name``: track name"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``desc_pose=[x,y,z,rx,ry,rz]``: trajectory start position"
 
-Trajectory reproduction
-++++++++++++++++++++++++
+Trajectory Reproduction
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``MoveTPD(name,blend,ovl)``"
-    "Description", "Trajectory reproduction"
-    "Required parameter", "- ``name``:Track name
-    - ``blend``:Is it smooth, 0-not smooth, 1-smooth
-    - ``ovl``:Speed scaling factor, range[0~100]"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Trajectory Reproduction"
+    "Mandatory parameters", "- ``name``: track name
+    - ``blend``: smooth or not, 0 - not smooth, 1 - smooth
+    - ``ovl``: velocity scaling factor, range [0 to 100]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2')
-    # P1=[-321.821, 125.694, 282.556, 174.106, -15.599, 152.669]
-    name = 'tpd2023'   
-    blend = 1   
-    ovl = 100.0   
-    ret = robot.LoadTPD(name)  # Trajectory preloading
-    print("Trajectory preloading",ret)
-    ret,P1 = robot.GetTPDStartPose(name)   # ObtainTPD start pose
-    print ("ObtainTPD start pose ",ret," start pose ",P1)
-    ret = robot.MoveL(P1,0,0)       # Move to the start pose
-    print("Move to the start pos",ret)
-    time.sleep(10)
-    ret = robot.MoveTPD(name, blend, ovl)  # Trajectory reproduction
-    print("Trajectory reproduction ",ret)
-
-Track preprocessing - Import track files
-++++++++++++++++++++++++++++++++++++++++++++
+Trajectory preprocessing
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``LoadTrajectoryJ(name,ovl,opt = 1)``"
-    "Description", "Track preprocessing - Import track files"
-    "Required parameter", "- ``name``:Track name
-    - ``ovl``:Speed scaling factor, range[0~100]
-    - ``opt``:1- Control point, default to 1"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``LoadTrajectoryJ(name,ovl,opt=1)``"
+    "description", "trajectory preprocessing"
+    "Mandatory parameters", "- ``name``: track name, e.g., /fruser/traj/trajHelix_aima_1.txt.
+    - ``ovl``: percentage of speed scaling, range [0~100];"
+    "Default parameter", "- ``opt``: 1-control point, default 1"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Trajectory reproduction - Import track files
-++++++++++++++++++++++++++++++++++++++++++++
+Trajectory Reproduction
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``MoveTrajectoryJ()``"
-    "Description", "Trajectory reproduction - Import track files"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Trajectory Reproduction"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Obtain trajectory start pose - Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Getting the starting position of the trajectory
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetTrajectoryStartPose(name)``"
-    "Description", "Obtain trajectory start pose - Import track files"
-    "Required parameter", "``name``:Track name"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - Return(if success): desc_pose [x,y,z,rx,ry,rz]"
+    "Description", "Get trajectory starting position"
+    "Mandatory parameters", "``name``: track name"
+    "Default parameters", "NULL"      
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``desc_pose=[x,y,z,rx,ry,rz]``: trajectory start position"
 
-Obtain trajectory point number - Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get track point number
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTrajectoryPointNum()``"
-    "Description", "Obtain trajectory point number - Import track files"
-    "Required parameter", "``name``:Track name"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - Return(if success):  pnum"
+    "prototype", "``GetTrajectoryPointNum()``"
+    "Description", "Get track point number"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``pnum``: track point number"
 
-Set trajectory speed - Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the speed of the trajectory in operation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTrajectoryJSpeed(ovl)``"
-    "Description", "Set trajectory speed - Import track files"
-    "Required parameter", "``ovl``:Speed scaling percentage, range [0~100]"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Sets the speed of the trajectory as it runs."
+    "Mandatory parameter", "``ovl``: speed scaling percentage, range [0~100]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Set trajectory force and torque- Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force and torque during trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTrajectoryJForceTorque(ft)``"
-    "Description", "Set trajectory force and torque- Import track files"
-    "Required parameter", "``ft``:[fx,fy,fz,tx,ty,tz], unit[N or Nm];"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting the force and torque in the trajectory run"
+    "Mandatory parameters", "``ft=[fx,fy,fz,tx,ty,tz]``: units N and Nm"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Set trajectory force Fx- Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force along the x-direction in the trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTrajectoryJForceFx(fx)``"
-    "Description", "Set trajectory force Fx- Import track files"
-    "Required parameter", "``fx``:Force in the x direction, unit N"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Set the force along the x-direction in the trajectory run"
+    "Mandatory parameter", "``ft``: force in x direction, in N"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Set trajectory force Fy- Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force along the y-direction in the trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTrajectoryJForceFx(fy)``"
-    "Description", "Set trajectory force Fy- Import track files"
-    "Required parameter", "``fy``:Force in the y direction, unit N"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Set the force along the y-direction in the trajectory run"
+    "Mandatory parameter", "``fy``: force along y direction in N"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Set trajectory force Fz- Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the force along the z-direction in a trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTrajectoryJForceFx(fz)``"
-    "Description", "Set trajectory force Fz- Import track files"
-    "Required parameter", "``fz``:Force in the z direction, unit N"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Set the force along the z-direction in the trajectory run"
+    "Mandatory parameter", "``fz``: force along the z-direction, in N"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Set trajectory torqueTx- Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the torque around the x-axis in a trajectory run
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTrajectoryJTorqueTx(tx)``"
-    "Description", "Set trajectory torqueTx- Import track files"
-    "Required parameter", "``tx``:Torque around the x axis, unit Nm"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Set the torque around the x-axis for the trajectory run"
+    "Mandatory parameter", "``tx``: torque around x-axis in Nm"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Set trajectory torqueTy- Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the torque around the y-axis in trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetTrajectoryJTorqueTx(ty)``"
-    "Description", "Set trajectory torqueTy- Import track files"
-    "Required parameter", "``ty``:Torque around the y axis, unit Nm"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``SetTrajectoryJTorqueTx(ty)``"
+    "Description", "Set the torque around the y-axis for the trajectory run"
+    "Mandatory parameter", "``ty``: torque around y-axis in Nm"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Set trajectory torqueTz- Import track files
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the torque around the z-axis in trajectory operation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetTrajectoryJTorqueTx(tz)``"
-    "Description", "Set trajectory torqueTy- Import track files"
-    "Required parameter", "``tz``:Torque around the z axis, unit Nm"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Sets the torque around the z-axis for the trajectory run"
+    "Mandatory parameter", "``tz``: torque around z-axis in Nm"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
+code example
+----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    name = "/fruser/traj/trajHelix_aima_1.txt"   
-    blend = 1   
-    ovl = 50.0   
-    ft =[0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-    ret = robot.LoadTrajectoryJ(name,ovl)  #Trajectory preloading
-    print("Trajectory preloading",ret)
-    ret,P1 = robot.GetTrajectoryStartPose(name)   # Obtain trajectory start pose - Import track files
-    print ("Obtain trajectory start pose - Import track files ",ret," start pose ",P1)
-    ret = robot.MoveL(P1,1,0)       # Move to start pose
-    print("Move tostart pose ",ret)
-    ret = robot.GetTrajectoryPointNum()# Obtain trajectory point number - Import track files
-    print("Obtain trajectory point number - Import track files ",ret)
+    name = "/fruser/traj/trajHelix_aima_1.txt" #track name
+    blend = 1 # whether to smooth, 1-smooth, 0-not smooth
+    ovl = 50.0 #speed scaling
+    ft = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+    ret = robot.LoadTrajectoryJ(name,ovl) #trajectory preloading
+    print("track preload error code",ret)
+    ret,P1 = robot.GetTrajectoryStartPose(name) #Get Trajectory Start Pose
+    print ("Get trajectory start position error code",ret, "start position",P1)
+    ret = robot.MoveL(P1,1,0) #move to start point
+    print("Movement to start point error code",ret)
+    ret = robot.GetTrajectoryPointNum() #get the trajectory point number
+    print("Get track point number error code",ret)
     time.sleep(10)
-    ret = robot.MoveTrajectoryJ()  # Trajectory reproduction - Import track files
-    print("Trajectory reproduction - Import track files ",ret)
+    ret = robot.MoveTrajectoryJ() # trajectory replication
+    print("Trajectory reproduction error code",ret)
     time.sleep(10)
-    ret = robot.SetTrajectoryJSpeed(ovl)  # Set trajectory speed - Import track files
-    print("Set trajectory speed - Import track files",ret)
+    ret = robot.SetTrajectoryJSpeed(ovl) #Set the speed in the trajectory run
+    print("Setting the speed error code for the trajectory run",ret)
     time.sleep(1)
-    ret = robot.SetTrajectoryJForceTorque(ft)  # Set trajectory force and torque- Import track files
-    print("Set trajectory force and torque- Import track files ",ret)
+    ret = robot.SetTrajectoryJForceTorque(ft) #Set the force and torque in the trajectory run
+    print("Setting the force and torque error codes for the trajectory run",ret)
     time.sleep(1)
-    ret = robot.SetTrajectoryJForceFx(0) # Set trajectory force Fx- Import track files
-    print("Set trajectory force Fx- Import track files ",ret)
+    ret = robot.SetTrajectoryJForceFx(0) #Set the force along the x-direction in the trajectory run
+    print("Setting the force along x direction error code in the trajectory run",ret)
     time.sleep(1)
-    ret = robot.SetTrajectoryJForceFy(0) # Set trajectory force Fy- Import track files
-    print("Set trajectory force Fy- Import track files ",ret)
+    ret = robot.SetTrajectoryJForceFy(0) #Set the force along the y-direction in the trajectory run
+    print("Setting the force error code along the y-direction in the trajectory run",ret)
     time.sleep(1)
-    ret = robot.SetTrajectoryJForceFz(0) # Set trajectory force Fz- Import track files
-    print("Set trajectory force Fx- Import track files ",ret)
+    ret = robot.SetTrajectoryJForceFz(0) #Set the force along the z-direction in the trajectory run
+    print("Setting the force error code along the z-direction in the trajectory run",ret)
     time.sleep(1)
-    ret = robot.SetTrajectoryJTorqueTx(0) # Set trajectory torqueTy- Import track files
-    print("Set trajectory torqueTy- Import track files ",ret)
+    ret = robot.SetTrajectoryJTorqueTx(0) #Set the torque around the x-axis for the trajectory run
+    print("Setting the torque around x-axis error code for the trajectory run",ret)
     time.sleep(1)
-    ret = robot.SetTrajectoryJTorqueTy(0) # Set trajectory torqueTy- Import track files
-    print("Set trajectory torqueTy- Import track files ",ret)
+    ret = robot.SetTrajectoryJTorqueTy(0) #Set the torque around the y-axis for the trajectory run
+    print("Setting the torque around y-axis error code for the trajectory run",ret)
     time.sleep(1)
-    ret = robot.SetTrajectoryJTorqueTz(0) # Set trajectory torqueTz- Import track files
-    print("Set trajectory torqueTz- Import track files ",ret)
+    ret = robot.SetTrajectoryJTorqueTz(0) #Set the torque around the z-axis for the trajectory run
+    print("Setting the torque around z-axis error code for the trajectory run",ret)
     time.sleep(1)

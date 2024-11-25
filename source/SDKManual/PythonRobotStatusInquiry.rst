@@ -1,769 +1,769 @@
 Status query
-=====================
+===============
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-Obtain robot installation angle
-+++++++++++++++++++++++++++++++++++++++++++++
+Getting the robot mounting angle
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetRobotInstallAngle()``"
-    "Description", "Obtain robot installation angle"
-    "Required parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode
-    - Return(if success): [yangle,zangle],yangle-angle of roll,zangle-rotation angle"
+    "Description", "Get robot mounting angle"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``[yangle,zangle]``: yangle - angle of inclination, zangle - angle of rotation."
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetRobotInstallAngle()
-    print("Obtain robot installation angle", ret)
+    print("Get robot mounting angle", ret)
 
-Obtain system variable values
-++++++++++++++++++++++++++++++++++++++++++
+Getting system variable values
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetSysVarValue(id)``"
-    "Description", "Obtain system variable values"
-    "Required parameter", "- ``id``:System variable number, range[1~20]"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0 , Failed -errcode
-    - Return(if success): var_value"
+    "Description", "Get system variable values"
+    "Mandatory parameters", "- ``id``: system variable number, range [1~20]"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``var_value``: system variable value"
 
-Code example
-------------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     for i in range(1,21):
         error = robot.GetSysVarValue(i)
-        print("Obtain system variable number:",i,"value:", error)
+        print("System variable number:", i, "value", error)
 
-Obtain the current joint position (angle)
-++++++++++++++++++++++++++++++++++++++++++++++++
+Get the current joint position (angle).
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualJointPosDegree(flag = 1)``"
-    "Description", "Obtain the current joint position(radian)"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
+    "prototype", "``GetActualJointPosDegree(flag=1)``"
+    "Description", "Get the current position (angle) of the joint."
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking, default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: current joint position (angle)"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualJointPosDegree()
-    print("Obtain the current joint position (angle)", ret)
+    print("Get current joint position (angle)", ret)
 
-Obtain the current joint position(radian)
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Get the current joint position in radians.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualJointPosRadian(flag = 1)``"
-    "Description", "Obtain the current joint position(radian)"
-    "Required parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Success:[0,joint_pos],joint_pos=[j1,j2,j3,j4,j5,j6]
-    - Failed:[errcode,]"
+    "Prototype", "``GetActualJointPosRadian(flag=1)``"
+    "Description", "Get the current position (in radians) of the joint."
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: current joint position (in radians)"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualJointPosRadian()
-    print("Obtain the current joint position(radian)", ret)
+    print("Get current joint position in radians", ret)
 
-Obtain joint Actual Speed -deg/s
-++++++++++++++++++++++++++++++++++++++++++++++++
+Get joint feedback speed -deg/s
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualJointSpeedsDegree (flag = 1 )``"
-    "Description", "Obtain joint Actual Speed -deg/s"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
+    "prototype", "``GetActualJointSpeedsDegree (flag=1)``"
+    "Description", "Get joint feedback speed -deg/s"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``speed=[j1,j2,j3,j4,j5,j6]``: joint feedback speed -deg/s"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualJointSpeedsDegree()
-    print("Obtain joint Actual Speed -deg/s ", ret)
+    print("Getting joint feedback speed -deg/s", ret)
 
-Obtain Target TCP Composite Speed
-++++++++++++++++++++++++++++++++++++++++++++++++
+Get TCP command synthesis speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTargetTCPCompositeSpeed (flag = 1)``"
-    "Description", "Obtain Target TCP Composite Speed"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): [tcp_speed,ori_speed]"
+    "Prototype", "``GetTargetTCPCompositeSpeed(flag=1)``"
+    "Description", "Get TCP command synthesis speed"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``[tcp_speed,ori_speed]``: tcp_speed - linear closing speed ori_speed - attitude closing speed"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
-    
+
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetTargetTCPCompositeSpeed()
-    print("Obtain Target TCP Composite Speed", ret)
+    print("Getting TCP command synthesis speed", ret)
 
-
-Obtain Actual TCP Composite Speed
-++++++++++++++++++++++++++++++++++++++++++++++++
+Getting TCP Feedback Hopping Speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualTCPCompositeSpeed (flag = 1)``"
-    "Description", "Obtain Actual TCP Composite Speed"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): [tcp_speed,ori_speed]"
+    "Prototype", "``GetActualTCPCompositeSpeed(flag=1)``"
+    "Description", "Get TCP feedback closing speed"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``[tcp_speed,ori_speed]``: tcp_speed - linear closing speed ori_speed - attitude closing speed"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualTCPCompositeSpeed()
-    print("Obtain Actual TCP Composite Speed ", ret)
+    print("Getting TCP Feedback Hopping Speed", ret)
 
-Obtain Target TCP Speed
-++++++++++++++++++++++++++++++++++++++++++++++++
+Get TCP command speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTargetTCPSpeed (flag = 1)``"
-    "Description", "Obtain Actual TCP Composite Speed"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): speed [x,y,z,rx,ry,rz]"
+    "Prototype", "``GetTargetTCPSpeed(flag=1)``"
+    "Description", "Get TCP command speed"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``speed=[x,y,z,rx,ry,rz]``: TCP command speed, mm/s"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetTargetTCPSpeed()
-    print("Obtain Target TCP Speed ", ret)
+    print("Getting TCP command speed", ret)
 
-Obtain Actual TCP Speed
-++++++++++++++++++++++++++++++++++++++++++++++++
+Getting TCP feedback speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualTCPSpeed (flag = 1)``"
-    "Description", "Obtain Actual TCP Speed"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): speed [x,y,z,rx,ry,rz]"
+    "Prototype", "``GetActualTCPSpeed(flag=1)``"
+    "Description", "Get TCP feedback on speed"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``speed=[x,y,z,rx,ry,rz]``: TCP feedback speed"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualTCPSpeed()
-    print("Obtain Actual TCP Speed ", ret)
+    print("Getting TCP feedback speed", ret)
 
-Obtain the current tool pose
-++++++++++++++++++++++++++++++++
+Get current tool position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualTCPPose (flag = 1)``"
-    "Description", "Obtain the current tool pose"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): tcp_pose=[x,y,z,rx,ry,rz]"
+    "Prototype", "``GetActualTCPPose(flag=1)``"
+    "Description", "Get current tool position"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``tcp_pose=[x,y,z,rx,ry,rz]``: current tool pose"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualTCPPose()
-    print("Obtain the current tool pose", ret)
+    print("Get current tool position", ret)
 
-Obtain the current tool coordinate system number
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the current tool coordinate system number
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualTCPNum (flag = 1)``"
-    "Description", "Obtain the current tool coordinate system number"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): tool_id:Tool number"
+    "prototype", "``GetActualTCPNum(flag=1)``"
+    "Description", "Get the current tool coordinate system number"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``tool_id``: tool coordinate system number"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualTCPNum()
-    print("Obtain the current tool coordinate system number", ret)
+    print("Get current tool coordinate system number", ret)
 
-Obtain the current workpiece coordinate system number
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the current workpiece coordinate system number
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualWObjNum (flag = 1)``"
-    "Description", "Obtain the current workpiece coordinate system number"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): wobj_id:Workpiece number"
+    "prototype", "``GetActualWObjNum(flag=1)``"
+    "Description", "Get the current workpiece coordinate system number"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``wobj_id``: the workpiece coordinate system number"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualWObjNum()
-    print("Obtain the current workpiece coordinate system number", ret)
+    print("Get current workpiece coordinate system number", ret)
 
-Obtain the current end flange pose
-+++++++++++++++++++++++++++++++++++++++++++++++
+Get the current end flange position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetActualToolFlangePose(flag)``"
-    "Description", "Obtain the current end flange pose"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): flange_pose=[x,y,z,rx,ry,rz]"
+    "Prototype", "``GetActualToolFlangePose(flag=1)``"
+    "Description", "Get current end flange position"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``flange_pose=[x,y,z,rx,ry,rz]``: current end flange pose"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetActualToolFlangePose()
-    print("Obtain the current end flange pose ", ret)
+    print("Get current end flange position", ret)
 
 Inverse kinematics solution
-+++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetInverseKin(type,desc_pos,config = -1)``"
-    "Description", "Inverse kinematics, Cartesian pose to solve joint position"
-    "Required parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
-    - ``desc_pose``:[x,y,z,rx,ry,rz],tool posture,unit[mm][°]"
-    "Optional parameter", "- ``config``:Joint configuration, [-1]-refer to the current joint position for solution, [0-7]-solve based on joint configuration, default to -1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
+    "prototype", "``GetInverseKin(type,desc_pos,config=-1)``"
+    "Description", "Inverse kinematics, Cartesian position solving for joint positions "
+    "Mandatory parameters", "- ``type``: 0-absolute position (base coordinate system), 1-relative position (base coordinate system), 2-relative position (tool coordinate system)
+    - ``desc_pose``:[x,y,z,rx,ry,rz], tool position in [mm][°]"
+    "Default parameters", "- ``config``: joint configuration, [-1] - solved with reference to current joint position, [0~7] - solved based on joint configuration Default -1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: inverse kinematics solution, Cartesian positional solution for joint positions"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
+    j1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
+    p1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     ret = robot.GetInverseKin(0,P1,config=-1)
-    print("Inverse kinematics, Cartesian pose to solve joint position ", ret)
+    print("Inverse kinematics, Cartesian position solving for joint position", ret)
 
-Inverse kinematics solution - Specify reference location
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Inverse Kinematics Solution - Specifying Reference Positions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetInverseKinRef(type,desc_pos,joint_pos_ref)``"
-    "Description", "Inverse kinematics solve inverse kinematics, tool pose solve joint position, and refer to specified joint position to solve"
-    "Required parameter", "- ``type``:0-absolute pose (base coordinate system), 1-relative pose (base coordinate system), 2-relative pose (tool coordinate system)
-    - ``desc_pos``:[x,y,z,rx,ry,rz]tool posture,unit[mm][°]
-    - ``joint_pos_ref``:[j1,j2,j3,j4,j5,j6], joint reference position,unit[°]"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): joint_pos=[j1,j2,j3,j4,j5,j6]"
+    "prototype", "``GetInverseKinRef(type,desc_pos,joint_pos_ref)``"
+    "Description", "Inverse kinematics, tool position solving for joint positions, solving with reference to specified joint positions"
+    "Mandatory parameters", "- ``type``: 0-absolute position (base coordinate system), 1-relative position (base coordinate system), 2-relative position (tool coordinate system)
+    - ``desc_pos``: [x,y,z,rx,ry,rz] tool position in [mm][°]
+    - ``joint_pos_ref``: [j1,j2,j3,j4,j5,j6], joint reference position in [°]"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: inverse kinematics solution, tool position solving for joint position"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
+    j1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
+    p1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     ret = robot.GetInverseKinRef(0,P1,J1)
-    print("Inverse kinematics solve inverse kinematics, tool pose solve joint position, and refer to specified joint position to solve", ret)
+    print("Inverse kinematics, tool position solving for joint position, solving with reference to specified joint position", ret)
 
-Inverse kinematics solution - whether there is a solution
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Inverse kinematics solving-whether there is a solution
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetInverseKinHasSolution(type,desc_pos,joint_pos_ref)``"
-    "Description", "Inverse kinematics, tool pose solution, whether joint position is solved"
-    "Required parameter", "- ``type``:0-Absolute pose (base coordinate system), 1-Relative pose (base coordinate system), 2-Relative pose (tool coordinate system)
-    - ``desc_pos``:[x,y,z,rx,ry,rz]tool posture, unit[mm][°]
-    - ``joint_pos_ref``:[j1,j2,j3,j4,j5,j6],joint reference position, unit[°]"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): result= “True”-with solution,“False”-without solution"
+    "prototype", "``GetInverseKinHasSolution(type,desc_pos,joint_pos_ref)``"
+    "Description", "Inverse kinematics, tool position solving for joint position Is there a solution"
+    "Mandatory parameters", "- ``type``: 0-absolute position (base coordinate system), 1-relative position (base coordinate system), 2-relative position (tool coordinate system)
+    - ``desc_pos``: [x,y,z,rx,ry,rz] tool position in [mm][°]
+    - ``joint_pos_ref``: [j1,j2,j3,j4,j5,j6], joint reference position in [°]"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``result``: ``True``-with solution, ``False``-without solution"
 
-Code example
-----------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
-    P1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
+    j1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
+    p1=[75.414,568.526,338.135,-178.348,-0.930,52.611]
     ret = robot.GetInverseKinHasSolution(0,P1,J1)
-    print("Inverse kinematics, tool pose solution, whether joint position is solved", ret)
+    print("Inverse kinematics, tool position solving for joint position with or without a solution", ret)
 
-Forward kinematics solution
-+++++++++++++++++++++++++++++++++
+Positive kinematics solving
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetForwardKin(joint_pos)``"
-    "Description", "Forward kinematics, joint position solving tool pose"
-    "Required parameter", "- ``joint_pos``:[j1,j2,j3,j4,j5,j6]:joint Position,unit[°]"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): desc_pos=[x,y,z,rx,ry,rz]:tool posture,unit[mm][°]"
+    "Description", "Positive Kinematics, Joint Position Solving Tool Posture"
+    "Mandatory parameters", "- ``joint_pos``:[j1,j2,j3,j4,j5,j6]: joint position in [°]"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``desc_pos=[x,y,z,rx,ry,rz]``: positive kinematics solution, joint position solver tool position"
 
-Code example
--------------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    J1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
+    j1=[95.442,-101.149,-98.699,-68.347,90.580,-47.174]
     ret = robot.GetForwardKin(J1)
-    print("Forward kinematics, joint position solving tool pose", ret)
+    print("Positive kinematics, joint position solving tool positon", ret)
 
-Obtain the current joint torque
-+++++++++++++++++++++++++++++++++++
+Get current joint torque
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetJointTorques (flag = 1)``"
-    "Description", "Obtain the current joint torque"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success):  errcode =0, joint_torque =[x,y,z,rx,ry,rz]"
+    "Prototype", "``GetJointTorques(flag=1)``"
+    "Description", "Get the current joint torque"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``torques=[j1,j2,j3,j4,j5,j6]``: joint torques."
 
-Code example
-----------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot 
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetJointTorques()
-    print("Obtain the current joint torque ", ret)
+    print("Get current joint torque", ret)
 
-Obtain the weight of the current load
-+++++++++++++++++++++++++++++++++++++++++++
+Get the weight of the current load
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTargetPayload (flag = 1)``"
-    "Description", "Obtain the weight of the current load"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): errcode =0, weight unit[kg]"
+    "Prototype", "``GetTargetPayload(flag=1)``"
+    "Description", "Get the quality of the current load"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``weight``: current load weight in [kg]"
 
-Code example
------------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetTargetPayload(0)
-    print("Obtain the weight of the current load ", ret)
+    print("Getting the quality of the current load", ret)
 
-Obtain the centroid of the current load
-++++++++++++++++++++++++++++++++++++++++++++
+Get the center of mass of the current load
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTargetPayloadCog (flag = 1)``"
-    "Description", "Obtain the centroid of the current load"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): weight,unit[kg]"
+    "Prototype", "``GetTargetPayloadCog(flag=1)``"
+    "Description", "Get the center of mass of the current load"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``cog=[x,y,z]``: coordinates of the current center of mass in [mm]"
 
-Code example
-----------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetTargetPayloadCog(0)
-    print("Obtain the centroid of the current load", ret)
+    print("Get the center of mass of the current load", ret)
 
-Obtain the current tool coordinate system
-++++++++++++++++++++++++++++++++++++++++++++++++
+Get the current tool coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetTCPOffset (flag = 1)``"
-    "Description", "Obtain the current tool coordinate system"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): tcp_offset=[x,y,z,rx,ry,rz]: Relative pose,unit[mm][°]"
+    "Prototype", "``GetTCPOffset(flag=1)``"
+    "Description", "Get current tool coordinate system"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``tcp_offset=[x,y,z,rx,ry,rz]``: Relative position of the current tool coordinate system in [mm][°]"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetTCPOffset()
-    print("Obtain the current tool coordinate system", ret)
+    print("Get current tool coordinate system", ret)
 
-Obtain the current workpiece coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the current workpiece coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetWObjOffset(flag = 1)``"
-    "Description", "Obtain the current workpiece coordinate system"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): wobj _offset=[x,y,z,rx,ry,rz]:relative pose,unit[mm][°]"
+    "prototype", "``GetWObjOffset(flag=1)``"
+    "Description", "Get current workpiece coordinate system"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "``flag``: 0-blocking, 1-non-blocking, default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``wobj_offset=[x,y,z,rx,ry,rz]``: Relative position of the current workpiece coordinate system in [mm][°]"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetWObjOffset()
-    print("Obtain the current workpiece coordinate system", ret)
+    print("Get current workpiece coordinate system", ret)
 
-Obtain joint soft limit angle
-++++++++++++++++++++++++++++++++
+Obtaining the soft limiting angle of a joint
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetJointSoftLimitDeg(flag)``"
-    "Description", "Obtain joint soft limit angle"
-    "Required parameter", "Nothing"
-    "Optional parameter", "- ``flag``:0-blocking, 1-non blocking, default to 1"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): [j1min,j1max,j2min,j2max,j3min,j3max,j4min,j4max,j5min,j5max, j6min, j6max] :axis 1 to axis 6 joint negative limit and positive limit,unit[mm]"
+    "Prototype", "``GetJointSoftLimitDeg(flag=1)``"
+    "Description", "Acquisition of joint soft limiting angle"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "``flag``: 0-blocking, 1-non-blocking Default 1"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``[j1min,j1max,j2min,j2max,j3min,j3max, j4min,j4max,j5min, j5max, j6min,j6max]``: Axis 1 to Axis 6, joints with negative and positive limits, in [mm]"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetJointSoftLimitDeg()
-    print("Obtain joint soft limit angle", ret)
+    print("Get joint soft limit angle", ret)
 
 Get system time
-++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetSystemClock()``"
     "Description", "Get system time"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success):  t_ms unit[ms] "
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``t_ms``: system time in [ms]"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetSystemClock()
-    print("Get system time", ret)
+    print("Getting system time", ret)
 
-Obtain the current joint configuration of the robot
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the current joint configuration of the robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetRobotCurJointsConfig()``"
-    "Description", "Obtain the current joint configuration of the robot"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): config range[0~7]"
+    "Description", "Get the current joint configuration of the robot"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``config``: Robot's current joint configuration, range [0~7]"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetRobotCurJointsConfig()
-    print("Obtain the current joint configuration of the robot ", ret)
+    print("Get the current joint configuration of the robot", ret)
 
-Get default speed
-++++++++++++++++++++++++++++++++++++++++
+Getting the default speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetDefaultTransVel()``"
-    "Description", "Obtain default speed"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): vel:unit[mm/s]"
+    "Description", "Get Default Speed"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``vel``: default speed in [mm/s]"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetDefaultTransVel()
-    print("Obtain default speed ", ret)
+    print("Getting default speed", ret)
 
-Check if the robot motion is complete
-+++++++++++++++++++++++++++++++++++++++++++++
+Queries whether robot motion is complete
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetRobotMotionDone()``"
-    "Description", "Check if the robot motion is complete"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): state 0-incomplete,1-complete"
+    "Description", "Query if robot movement is complete"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``state``: state of robot motion, 0 - unfinished, 1 - finished"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetRobotMotionDone()
-    print("Check if the robot motion is complete ", ret)
+    print("Querying if robot movement is complete", ret)
 
-Obtain the robot error code
-+++++++++++++++++++++++++++++++++++++++++++++
+Query Robot Error Code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetRobotErrorCode()``"
-    "Description", "Obtain the robot error code"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): [maincode,subcode]"
+    "Description", "Query Robot Error Code"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``[maincode subcode]``: robot error code, maincode - main error code, subcode - suberror code"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetRobotErrorCode()
-    print("Obtain the robot error code ", ret)
+    print("Query robot error code", ret)
 
-Obtain the robot teaching point data
-+++++++++++++++++++++++++++++++++++++++++++++
+Query Robot Teaching Management Points Data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetRobotTeachingPoint(name)``"
-    "Description", "Obtain the robot teaching point data"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): [x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,tool, wobj,speed,acc,e1,e2,e3,e4]"
+    "Description", "Query Robot Demonstration and Management point data"
+    "Mandatory parameters", "``name``: name of point"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``[x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,TOOL,WOBJ,SPEED,ACC,E1,E2,E3,E4]``: point data"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetRobotTeachingPoint("11")
-    print("Obtain the robot teaching point data", ret)
+    print("Query robot demonstration management point data error code", ret)
 
-
-Obtain SSH Keygen
-+++++++++++++++++++++++++++++++++++++++++++++
+Get SSH public key
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetSSHKeygen()``"
-    "Description", "Obtain SSH Keygen"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): keygen"
+    "description", "Get SSH public key"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``keygen``: public key"
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    ret = robot.GetSSHKeygen() # Obtain SSH Keygen
-    print("Obtain SSH Keygen", ret)
+    ret = robot.GetSSHKeygen() #Get SSH
+    print("Getting SSH", ret)
 
-6.31Calculates the MD5 value of the file in the specified path
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate the MD5 value of a file in a specified path
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``ComputeFileMD5(file_path)``"
-    "Description", "Calculates the MD5 value of the file in the specified path"
-    "Required parameter", "``file_path``:The traj folder path is /fruser/traj/, such as /fruser/traj/trajHelix_aima_1.txt."
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return(if success): MD5"
+    "Description", "Calculates the MD5 value of a file in the specified path."
+    "Mandatory parameter","- ``file_path``: file path including filename, default Traj folder path is :/fruser/traj/, e.g. /fruser/traj/trajHelix_aima_1.txt"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``md5``: the MD5 value of the file."
 
-Code example
---------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    ret = robot.ComputeFileMD5("/fruser/201.lua")   #Calculate the MD5 value of the file in the specified path
-    print("Calculates the MD5 value of the file in the specified path ", ret)
+    ret = robot.ComputeFileMD5("/fruser/201.lua") #Calculate the MD5 value of the file under the specified path
+    print("Calculating MD5 values for files in the specified path", ret)
 
-Obtain robot version information
-+++++++++++++++++++++++++++++++++++
+Getting robot version information
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
@@ -771,25 +771,28 @@ Obtain robot version information
     :widths: 10 30
 
     "Prototype", "``GetSoftwareVersion()``"
-    "Description", "Obtain robot version information"
-    "Required parameter", "Null"
-    "Optional parameter", "Nothing"
-    "Return value", "- Success -0 , Failed -errcode
-    - Return:（if success）robotModel, webVersion, controllerVersion"
+    "Description", "Get robot version information"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``robotModel``: robot model
+    - ``webVersion``: web version
+    - ``controllerVersion``: controller version"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
 
     ret = robot.GetSoftwareVersion()
     print("GetSoftwareVersion():", ret)
 
-Obtain robot hardware version information
-+++++++++++++++++++++++++++++++++++++++++++
+Getting robot hardware version information
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
@@ -797,25 +800,32 @@ Obtain robot hardware version information
     :widths: 10 30
 
     "Prototype", "``GetSlaveHardVersion()``"
-    "Description", "Obtain robot hardware version information"
-    "Required parameter", "Null"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return:（if success）ctrlBoxBoardVersion, driver1Version, driver2Version , driver3Version, driver4Version, driver5Version, driver6Version, endBoardVersion"
+    "Description", "Get robot hardware version information"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``ctrlBoxBoardVersion``: control box version
+    - ``driver1Version``
+    - ``driver2Version``
+    - ``driver3Version``
+    - ``driver4Version``
+    - ``driver5Version``
+    - ``driver6Version``
+    - ``endBoardVersion``"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetSlaveHardVersion()
     print("GetSlaveHardVersion():", ret)
 
-Obtain robot firmware version information
-++++++++++++++++++++++++++++++++++++++++++
+Getting robot firmware version information
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
@@ -823,25 +833,32 @@ Obtain robot firmware version information
     :widths: 10 30
 
     "Prototype", "``GetSlaveFirmVersion()``"
-    "Description", "Obtain robot firmware version information"
-    "Required parameter", "Null"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return:（if success）ctrlBoxBoardVersion, driver1Version, driver2Version , driver3Version, driver4Version, driver5Version, driver6Version, endBoardVersion"
+    "Description", "Get information about the robot's firmware version."
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``ctrlBoxBoardVersion``: control box version
+    - ``driver1Version``
+    - ``driver2Version``
+    - ``driver3Version``
+    - ``driver4Version``
+    - ``driver5Version``
+    - ``driver6Version``
+    - ``endBoardVersion``"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ret = robot.GetSlaveFirmVersion()
     print("GetSlaveFirmVersion():", ret)
 
-Obtain DH compensation parameters
-++++++++++++++++++++++++++++++++++
+Get DH compensation parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
@@ -849,19 +866,49 @@ Obtain DH compensation parameters
     :widths: 10 30
 
     "Prototype", "``GetDHCompensation()``"
-    "Description", "Obtain DH compensation parameters"
-    "Required parameter", "Null"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return:(if success) dhCompensation Robot DH parameter compensation value (mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]"
+    "Description", "Get DH compensation parameters"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``dhCompensation=[cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]``: Robot DH Parameter Compensation Values (mm)"
 
-Code example
-------------
+code example
+---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.GetDHCompensation()
     print(error)
+
+Getting the current torque of a joint actuator
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetJointDriverTorque()``"
+    "Description", "Get the current torque of the joint actuator"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``data=[j1,j2,j3,j4,j5,j6]``: current torque of joint drive"
+
+Get the current temperature of the joint drive
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetJointDriverTemperature()``"
+    "Description", "Get the current temperature of the articulated drive"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``data=[t1,t2,t3,t4,t5,t6]``: current temperature of the joint drive"

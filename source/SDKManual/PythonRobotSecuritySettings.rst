@@ -1,281 +1,284 @@
-Security settings
-=========================
+Security Settings
+===================================================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
 
-Set collision level
-++++++++++++++++++++++++++
+Setting the collision level
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetAnticollision (mode,level,config)``"
-    "Description", "Set collision level"
-    "Required parameter", "- ``mode``:0-level, 1-percentage;;
-    - ``level=[j1,j2,j3,j4,j5,j6]``:collision threshold;
-    - ``config``:0-do not update configuration file, 1-update configuration file"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting the collision level"
+    "Mandatory parameters", "- ``mode``: 0 - level, 1 - percentage;
+    - ``level=[j1,j2,j3,j4,j5,j6]``: collision threshold;
+    - ``config``: 0 - do not update configuration file, 1 - update configuration file"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     level = [1.0,2.0,3.0,4.0,5.0,6.0]
     error = robot.SetAnticollision(0,level,1)
-    print("Set collision level:",error)
+    print("Setting collision level error code:",error)
     level = [50.0,20.0,30.0,40.0,50.0,60.0]
     error = robot.SetAnticollision(1,level,1)
-    print("Set collision level:",error)
+    print("Setting collision level error code:",error)
 
-Set the strategy after collision
-+++++++++++++++++++++++++++++++++++
+Setting the post-collision strategy
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetCollisionStrategy (strategy)``"
-    "Description", "Set the strategy after collision"
-    "Required parameter", "- ``strategy``:0-Error Pause, 1-Continue Running"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Prototype", "``SetCollisionStrategy(strategy,safeTime,safeDistance,safetyMargin)``"
+    "Description", "Set post-crash strategy"
+    "Mandatory parameters", "- ``strategy``: 0 - report error and pause, 1 - keep running"
+    "Default parameters", "- ``safeTime``: safe stop time [1000-2000] ms, default: 1000
+    - ``safeDistance``: safe stopping distance [1-150] mm, default: 100
+    - ``safetyMargin[6]``: safety margin [1-10], default: [10,10,10,10,10,10,10]"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error = robot.SetCollisionStrategy(1)
-    print("Set the strategy after collision:",error)
+    error = robot.SetCollisionStrategy(strategy=1)
+    print("Setting post-collision policy error code:",error)
 
-Set positive limit
-+++++++++++++++++++++++
+Setting the positive limit
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetLimitPositive(p_limit)``"
-    "Description", "Set positive limit"
-    "Required parameter", "- ``p_limit=[j1,j2,j3,j4,j5,j6]``:six joint positions"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting positive limits"
+    "Mandatory parameters", "- ``p_limit=[j1,j2,j3,j4,j5,j6]``: six joint positions"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     p_limit = [170.0,80.0,150.0,80.0,170.0,160.0]
     error = robot.SetLimitPositive(p_limit)
-    print("Set positive limit:",error)
+    print("Setting positive limit error code:",error)
 
-Set negative limit
-++++++++++++++++++++++++
+Setting the negative limit
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetLimitNegative(n_limit)``"
-    "Description", "Set negative limit"
-    "Required parameter", "- ``n_limit=[j1,j2,j3,j4,j5,j6]``:six joint positions"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting negative limits"
+    "Mandatory parameters", "- ``n_limit=[j1,j2,j3,j4,j5,j6]``: six joint positions"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
--------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     n_limit = [-170.0,-260.0,-150.0,-260.0,-170.0,-160.0]
     error = robot.SetLimitNegative(n_limit)
-    print("Set negative limit:",error)
+    print("Setting negative limit error code:",error)
 
-Error status cleared
-+++++++++++++++++++++++
+error state clearing
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``ResetAllError()``"
-    "Description", "Error status cleared,only resettable errors can be cleared"
-    "Required parameter", "Nothing"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Error state clearing, only resettable errors can be cleared"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
---------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.ResetAllError()
-    print("Error status cleared:",error)
+    print("Error status clearing error code:",error)
 
-Joint friction compensation switch
-++++++++++++++++++++++++++++++++++++++++
+Joint Friction Compensation Switch
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FrictionCompensationOnOff(state)``"
-    "Description", "Joint friction compensation switch"
-    "Required parameter", "- ``state``:0-off,1-on"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Joint Friction Compensation Switch"
+    "Mandatory parameters", "- ``state``: 0-off, 1-on"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
--------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.FrictionCompensationOnOff(1)
-    print("Joint friction compensation switch:",error)
+    print("Joint friction compensation switch error code:",error)
 
-Set joint friction compensation coefficient formal installation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the joint friction compensation coefficients - positive loading
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetFrictionValue_level(coeff)``"
-    "Description", "Set joint friction compensation coefficient - formal installation"
-    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting the joint friction compensation coefficient - Fixed mounting - Positive mounting"
+    "Mandatory parameters", "- ``coeff=[j1,j2,j3,j4,j5,j6]``: six joint compensation coefficients"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     lcoeff = [0.9,0.9,0.9,0.9,0.9,0.9]
     error = robot.SetFrictionValue_level(lcoeff)
-    print("Set joint friction compensation coefficient formal installation:",error)
+    print("Setting Joint Friction Compensation Coefficient - Genuine Error Code:",error)
 
-Set joint friction compensation coefficient - Side Mount
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the joint friction compensation coefficient - side mounting
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetFrictionValue_wall(coeff)``"
-    "Description", "Set joint friction compensation coefficient - Side Mount"
-    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting the joint friction compensation coefficient - fixed mounting - side mounting"
+    "Mandatory parameters", "- ``coeff=[j1,j2,j3,j4,j5,j6]``: six joint compensation coefficients"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
---------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     wcoeff = [0.4,0.4,0.4,0.4,0.4,0.4]
     error = robot.SetFrictionValue_wall(wcoeff)
-    print("Set joint friction compensation coefficient - Side Mount:",error)
+    print("Setting the joint friction compensation factor - side loading error code:",error)
 
-Set joint friction compensation coefficient-Inverted
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the Joint Friction Compensation Factor - Inverted
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetFrictionValue_ceiling(coeff)``"
-    "Description", "Set joint friction compensation coefficient-Inverted"
-    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting the joint friction compensation coefficient - fixed mounting - inverted mounting"
+    "Mandatory parameters", "- ``coeff=[j1,j2,j3,j4,j5,j6]``: six joint compensation coefficients"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     ccoeff = [0.6,0.6,0.6,0.6,0.6,0.6]
     error =robot.SetFrictionValue_ceiling(ccoeff)
-    print("Set joint friction compensation coefficient-Inverted:",error)
+    print("Setting the joint friction compensation factor - flip-flop error code:",error)
 
-Set joint friction compensation coefficient-free installation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the joint friction compensation factor - free mounting
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``SetFrictionValue_freedom(coeff)``"
-    "Description", "Set joint friction compensation coefficient-free installation"
-    "Required parameter", "- ``coeff=[j1,j2,j3,j4,j5,j6]``:six joint compensation coefficients"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Setting the joint friction compensation factor - free mounting"
+    "Mandatory parameters", "- ``coeff=[j1,j2,j3,j4,j5,j6]``: six joint compensation coefficients"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    fcoeff = [0.5,0.5,0.5,0.5,0.5,0.5]
+    fcoeff = [0.5,0.5,0.5,0.5,0.5,0.5,0.5]
     error =robot.SetFrictionValue_freedom(fcoeff)
-    print("Set joint friction compensation coefficient-free installation:",error)
+    print("Setting the joint friction compensation factor - free loading error code:",error)
 
-Download the point table database
-+++++++++++++++++++++++++++++++++
+Download Point Table Database
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``PointTableDownLoad(point_table_name, save_file_path)``"
-    "Description", "Download the point table database"
-    "Required parameter", "- ``point_table_name``:pointTable1.db;
-    - ``save_file_path``: C://test/;"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Prototype", "``PointTableDownLoad(point_table_name,save_file_path)``"
+    "Description", "Download Points Table Database"
+    "Required Parameters", "- ``point_table_name``: name of the point table to be downloaded pointTable1.db;
+    - ``save_file_path``: storage path to download the point table C://test/;"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
 
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error = robot.PointTableDownLoad("point_table_a.db","D://Desktop/testPoint/download/")
-    print("PointTableDownLoad:",error)
+    error = robot.PointTableDownLoad("point_table_a.db", "D://Desktop/testPoint/download/")
+    print("PointTableDownLoad error code:",error)
  
-Upload the point table database
-+++++++++++++++++++++++++++++++++
+Upload point table database
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
@@ -283,25 +286,25 @@ Upload the point table database
     :widths: 10 30
 
     "Prototype", "``PointTableUpLoad(point_table_file_path)``"
-    "Description", "Download the point table database"
-    "Required parameter", "- ``point_table_file_path``:Full path name of the upload point table   C://test/pointTable1.db"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Upload point table database"
+    "Required Parameters", "- ``point_table_file_path``: full pathname of uploaded point table C://test/pointTable1.db"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:   
 
     from fairino import Robot
 
-    # A connection is established with the robot controller. A successful connection returns a robot object 
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.PointTableUpLoad("D://Desktop/testPoint/point_table_a.db")
-    print("PointTableUpLoad:",error)
+    print("PointTableUpLoad error code:",error)
 
-Point table switch
-+++++++++++++++++++++++++++++++++
+Point table switching
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
@@ -309,69 +312,67 @@ Point table switch
     :widths: 10 30
 
     "Prototype", "``PointTableSwitch(point_table_name)``"
-    "Description", "Point table switch"
-    "Required parameter", "- ``point_table_name``: When the point table is empty, that is, an empty string, the lua program is updated to the original program that did not apply the point table"
-    "Optional parameter", "Nothing"
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return errorStr"
+    "Description", "Point table switching"
+    "mandatory parameter","- ``point_table_name``: name of the point table to be switched, pointTable1.db, when the point table is empty, i.e. "", it means updating the lua program to the initial program with no point table applied"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
 
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.PointTableSwitch("point_table_a.db")
     print("PointTableSwitch:",error)
 
-Point table update Lua
-+++++++++++++++++++++++++++++++++
+Point table update lua file
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``PointTableUpdateLua(point_table_name, lua_file_name)``"
-    "Description", "Point table update Lua"
-    "Required parameter", "- ``point_table_name``: When the point table is empty, that is, an empty string, the lua program is updated to the original program that did not apply the point table
-    - ``lua_file_name``: Name of the lua file to update"
-    "Optional parameter", "Nothing" 
-    "Return value", "- Errcode: Success -0 , Failed -errcode
-    - Return errorStr"
+    "prototype", "``PointTableUpdateLua(point_table_name, lua_file_name)``"
+    "Description", "Points table update lua file"
+    "Required Parameters","- ``point_table_name``: the name of the point table to be switched pointTable1.db, when the point table is empty, i.e. "", it means updating the lua program to the initial program without applying the point table
+    - ``lua_file_name``: name of the lua file to be updated testPointTable.lua"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error = robot.PointTableUpdateLua("point_table_a.db","testpoint.lua")
+    error = robot.PointTableUpdateLua("point_table_a.db", "testpoint.lua")
     print("PointTableUpdateLua:",error)
 
-Set up a robot collision detection method
-++++++++++++++++++++++++++++++++++++++++++++++++
+Setting up a robot collision detection method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetCollisionDetectionMethod(method)``"
-    "Description", "Set up a robot collision detection method"
-    "Required parameter", "
-    - ``method``：Collision Detection Methods：0-Current Mode；1-Dual encoder；2-Current and dual encoders are turned on simultaneously
+    "prototype", "``SetCollisionDetectionMethod(method)``"
+    "Description", "Sets the robot collision detection method."
+    "Mandatory parameters", "
+    - ``method``: collision detection method: 0 - current mode; 1 - dual encoder; 2 - current and dual encoder on at the same time  
     "
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcode"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"
 
-Set static collision detection to start or stop
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set static undercollision detection to start off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -379,15 +380,15 @@ Set static collision detection to start or stop
     :widths: 10 30
 
     "Prototype", "``SetStaticCollisionOnOff(status)``"
-    "Description", "Set static collision detection to start or stop"
-    "Required parameter", "
-    - ``status``：0-close；1-open
+    "Description", "Set static undercollision detection to start off"
+    "Mandatory parameters", "
+    - ``status``: 0 - off; 1 - on
     "
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcode"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"
 
-Set static collision detection to start or sto
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set collision detection start off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -395,21 +396,21 @@ Set static collision detection to start or sto
     :widths: 10 30
 
     "Prototype", "``SetPowerLimit(status, power)``"
-    "Description", "Set static collision detection to start or sto"
-    "Required parameter", "
-    - ``status``：  0-close；1-open
+    "Description", "Set static undercollision detection to start off"
+    "Mandatory parameters", "
+    - ``status``: 0 - off; 1 - on
     "
-    "Optional parameter", "NULL"
-    "Return value", "- Errcode: Success -0  Failed -errcode"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"
     
-Code example
-------------
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
 
     from fairino import Robot
     import time
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
 
     robot = Robot.RPC('192.168.58.2')
 
@@ -424,16 +425,75 @@ Code example
     joint_torque = [joint_torque[0],joint_torque[1],joint_torque[2],joint_torque[3],joint_torque[4],joint_torque[5]]
     error_joint = 0
     count =100
-    error = robot.ServoJTStart()    #servoJT start
+    error = robot.ServoJTStart() #servoJT start
     print("ServoJTStart return",error)
-    while(count):
-        if error!=0:
+    while(count).
+        if error!=0.
             error_joint =error
-        joint_torque[0] = joint_torque[0] + 10  #Increase 0.1 NM per 1-axis, 100 movements
-        error = robot.ServoJT(joint_torque, 0.001)  # Joint space servo mode motion
+        joint_torque[0] = joint_torque[0] + 10 # Increase 0.1NM per 1-axis for 100 movements
+        error = robot.ServoJT(joint_torque, 0.001) # joint space servo mode motion
         count = count - 1
         time.sleep(0.001)
     print("ServoJTStart return",error_joint)
-    error = robot.ServoJTEnd()  #End of servo motion
+    error = robot.ServoJTEnd() # servo motion end
     time.sleep(1)
     print("ServoJTEnd return",error)
+
+Odd-position protection on.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SingularAvoidStart(protectMode, minShoulderPos=100, minElbowPos=50, minWristPos=10)``"
+    "Description", "Turn on odd-bit posture protection."
+    "Mandatory parameters", "
+    - ``protectMode``: singular position protection protection mode: 0 - articulated mode; 1 - Cartesian mode
+    "
+    "Default Parameters", "- ``minShoulderPos``: Shoulder singularity adjustment range (mm), default 100.0
+    - ``minElbowPos``: elbow singularity adjustment range (mm), default 50.0
+    - ``minWristPos``: range of wrist singularity adjustment (°), default 10.0"
+    "Return Value", "- errcode Success-0 Failure- errcode"
+
+Odd position protection off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SingularAvoidEnd()``"
+    "Description", "Turn off odd-position protection"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"
+
+code example
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+
+    startdescPose = [-352.437, -88.350, 226.471, 177.222, 4.924, 86.631]
+    startjointPos = [-3.463, -84.308, 105.579, -108.475, -85.087, -0.334]
+
+    middescPose = [-518.339, -23.706, 207.899, -178.420, 0.171, 71.697]
+    midjointPos = [-8.587, -51.805, 64.914, -104.695, -90.099, 9.718]
+
+    enddescPose = [-273.934, 323.003, 227.224, 176.398, 2.783, 66.064]
+    endjointPos = [-63.460, -71.228, 88.068, -102.291, -90.149, -39.605]
+
+    robot.MoveL(desc_pos=startdescPose, tool=0, user=0,vel=50)
+    error = robot.SingularAvoidStart(1,100,50,10)
+    print("SingularAvoidStart return ", error)
+    robot.MoveC(desc_pos_p=middescPose,tool_p=0,user_p=0,desc_pos_t=enddescPose,tool_t=0,user_t=0,vel_p=50,vel_t=50)
+    error = robot.SingularAvoidEnd()
+    print("SingularAvoidEnd return ", error)

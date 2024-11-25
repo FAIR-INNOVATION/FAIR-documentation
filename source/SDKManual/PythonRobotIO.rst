@@ -1,359 +1,366 @@
 IO
 ============
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-Set the digital output of the control box
-++++++++++++++++++++++++++++++++++++++++++++
+Setting the control box digital output
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetDO(id, status, smooth = 0, block = 0)``"
-    "Description", "Set the digital output of the control box"
-    "Required parameter", "-  ``id``:IO number,range[0~15];
-    - ``status``:0-off, 1-on;"
-    "Optional parameter", "- ``smooth``:0-unsmooth, 1-smooth,default to 0;
-    - ``block``:0-blocking, 1-non blocking,default to 0;"
-    "Return value", "SetSpeed: Success -0  Failed -errcode"
+    "prototype", "``SetDO(id, status, smooth=0, block=0)``"
+    "Description", "Setting the control box digital outputs"
+    "Mandatory parameters", "- ``id``: io number, range [0~15];
+    - ``status``: 0 - off, 1 - on;"
+    "Default Parameters", "- ``smooth``: 0-not smooth, 1-smooth Default 0;
+    - ``block``:0-blocking, 1-non-blocking Default 0"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
+    # Test control box DO
     for i in range(0,16):
-        error = robot.SetDO(i,1)      #Open the control box DO
+        error = robot.SetDO(i,1) #open the control box DO
     time.sleep(1)
     for i in range(0,16):
-        robot.SetDO(i,0)      #Close the control box DO
+        robot.SetDO(i,0) #Close the control box DO
 
-
-Set tool digital output
-++++++++++++++++++++++++++++
+Setting Tool Digital Outputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetToolDO (id, status, smooth = 0, block = 0)``"
-    "Description", "Set tool digital output"
-    "Required parameter", "-  ``id``:IO number,range[0~15];
-    - ``status``:0-off, 1-on;"
-    "Optional parameter", "- ``smooth``:0-unsmooth, 1-smooth,default to 0;
-    - ``block``:0-blocking, 1-non blocking,default to 0;"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``SetToolDO (id, status, smooth=0, block=0)``"
+    "Description", "Setting the digital output of the tool"
+    "Mandatory parameters", "- ``id``: io number, range [0~1];
+    - ``status``: 0 - off, 1 - on;"
+    "Default Parameters", "- ``smooth``: 0-not smooth, 1-smooth;
+    - ``block``: 0-blocking, 1-non-blocking."
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
+    # Test tool DO
     error_tooldo = 0
     for i in range(0,2):
-        error = robot.SetToolDO(i,1)    # Open the tool DO
+        error = robot.SetToolDO(i,1) #Turn on tool DOs
     robot.WaitMs(1000)
     for i in range(0,2):
-        error = robot.SetToolDO(i,0)    # Close the tool DOO
+        error = robot.SetToolDO(i,0) #Turn off tool DOs
 
-Set the analog output of the control box
-+++++++++++++++++++++++++++++++++++++++++++++
+
+Setting the control box analog output
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetAO(id,value,block = 0)``"
-    "Description", "Set the analog output of the control box"
-    "Required parameter", "- ``id``:IO number,range[0~1];
-    - ``value``:electricity or voltage value percentage, range [0-100%] corresponds to electricity value [0-20mA] or voltage [0-10V];"
-    "Optional parameter", "``block``:[0]-blocking, [1]-non blocking,default to 0"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Prototype", "``SetAO(id,value,block=0)``"
+    "Description", "Setting the control box analog output"
+    "Mandatory parameters", "- ``id``: io number, range [0~1];
+    - ``value``: percentage of current or voltage value in the range [0 to 100%] corresponding to current value [0 to 20 mA] or voltage [0 to 10 V];"
+    "Default parameters", "- ``block``:[0]-blocking, [1]-non-blocking Default 0"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = Robot.RPC('192.168.58.2') 
-    error = robot.SetAO(0,100.0)
-    print("Set the AO0 of the control box ", error)
-    error = robot.SetAO(1,100.0)
-    print("Set the AO1 of the control box ", error)
-
-Set tool analog output
-+++++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetToolAO(id,value,block = 0)``"
-    "Description", "Set tool analog output"
-    "Required parameter", "- ``id``:IO number,range[0];
-    - ``value``:electricity or voltage value percentage, range [0-100%] corresponds to electricity value [0-20mA] or voltage [0-10V];"
-    "Optional parameter", "``block``:[0]-blocking, [1]-non blocking,default to 0"
-    "Return value", "Errcode: Success -0  Failed -errcode"
-
-Code example
----------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
+    # Test control box AO
+    error = robot.SetAO(0,100.0)
+    print("Setting AO0 error code:", error)
+    error = robot.SetAO(1,100.0)
+    print("Setting AO1 error code:", error)
+
+Setting Tool Analog Outputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetToolAO(id,value,block=0)``"
+    "Description", "Setup Tool Analog Output"
+    "Mandatory parameters", "- ``id``: io number, range [0];
+    - ``value``: percentage of current or voltage value in the range [0 to 100%] corresponding to current value [0 to 20 mA] or voltage [0 to 10 V];"
+    "Default parameters", "- ``block``:[0]-blocking, [1]-non-blocking Default 0"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+code example
+---------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    # Test end AO
     error = robot.SetToolAO(0,100.0)
-    print("Set tool analog output ", error)
+    print("Setting ToolAO0 error code:", error)
     Robot.WaitMs(1000)
     error = robot.SetToolAO(0,0.0)
-    print("Set tool analog output ", error)
+    print("Setting ToolAO0 error code:", error)
 
-Obtain the digital input of the control box
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Getting control box digital inputs
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetDI(id, block = 0)``"
-    "Description", "Obtain the digital input of the control box"
-    "Required parameter", "``id``:IO number,range[0~15];"
-    "Optional parameter", "``block``:[0]-blocking, [1]-non blocking,default to 0"
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - Return(if success): di: 0-Low level,1-High level"
+    "prototype", "``GetDI(id, block=0)``"
+    "Description", "Get control box digital inputs"
+    "Mandatory parameters", "- ``id``: io number, range [0~15];"
+    "Default Parameters", "- ``block``: 0-blocking, 1-non-blocking Default 0"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``di``: 0-low level, 1-high level"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.GetDI(0,0)
-    print("Obtain the di0 of the control box",error)
+    print("Getting DI0",error)
 
-Obtain tool digital input
-+++++++++++++++++++++++++++++
+Get Tool Digital Inputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetToolDI(id, block = 0)``"
-    "Description", "Obtain tool digital input"
-    "Required parameter", "- ``id``:IO number,range[0~1];
-    - ``block``:[0]-blocking, [1]-non blocking"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - Return(if success): di: 0-Low level,1-High level"
+    "prototype", "``GetToolDI(id, block=0)``"
+    "Description", "Get Tool Digital Inputs"
+    "Mandatory parameters", "- ``id``: io number, range [0~1];"
+    "Default Parameters", "- ``block``: 0-blocking, 1-non-blocking Default 0"
+    "Return Value", "Error Code Success-0 Failure- errcode
+    - ``di``: 0 - low level, 1 - high level"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     tool_di = robot.GetToolDI(1,0)
-    print("Obtain tool di1 ",tool_di)
+    print("Get ToolDI",tool_di)
 
-Waiting for digital input from the control box
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+Waiting for control box digital inputs
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``WaitDI(id,status,maxtime,opt)``"
-    "Description", "Waiting for digital input from the control box"
-    "Required parameter", "- ``id``:IO number,range[0~15];
-    - ``status``:0-off,1-on;
-    - ``maxtime``:Maximum waiting time, unit[ms];
-    - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``WaitDI(id,status,maxtime,opt)``"
+    "Description", "Waiting for control box digital input"
+    "Mandatory parameters", "- ``id``: io number, range [0~15];
+    - ``status``: 0-off, 1-on;
+    - ``maxtime``: maximum waiting time in [ms];
+    - ``opt``: post timeout policy, 0-program stops and prompts for timeout, 1-ignore timeout prompts program to continue execution, 2-always wait"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    max_waittime = 2000 
+    max_waittime = 2000
+    # Waiting for the control box DI
     error = robot.WaitDI(0,1,max_waittime,0)
-    print("WaitDI ",error)
+    print("WaitDI error code",error)
 
-
-Waiting for multiple digital inputs from the control box
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Waiting for control box with multiple digital inputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``WaitMultiDI(mode,id,status,maxtime,opt)``"
-    "Description", "Waiting for multiple digital inputs from the control box"
-    "Required parameter", "- ``mode``:[0]-Multiplex AND, [1]-Multiplex OR;
-    - ``id``:IO number, bit0~bit7 corresponds to DI0~DI7, bit8~bit15 corresponds to CI0~CI7;
-    - ``status(uint16_t)``:bit0~bit7 corresponds to DI0~DI7 status, bit8~bit15 corresponds to the states of the CI0~CI7 status bits [0]-off, [1]-on;
-    - ``maxtime``:Maximum waiting time, unit[ms];
-    - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting."
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``WaitMultiDI(mode,id,status,maxtime,opt)``"
+    "Description", "Waiting for control box with multiple digital inputs"
+    "Mandatory parameters", "- ``mode``: [0]-multiple with, [1]-multiple or;
+    - ``id``: io number, bit0~bit7 correspond to DI0~DI7, bit8~bit15 correspond to CI0~CI7;
+    - ``status``: bit0~bit7 corresponds to DI0~DI7 status, bit8~bit15 corresponds to the status of CI0~CI7 status bits [0]-off, [1]-on;
+    - ``maxtime``: maximum waiting time in [ms];
+    - ``opt``: post-timeout policy, 0-program stops and prompts for timeout, 1-ignores timeout prompting program to continue execution, 2-always waits."
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     max_waittime = 2000
+    #Waiting for control box multiplexed DI
     error = robot.WaitMultiDI(1,3,1,max_waittime,0)
-    print("WaitMultiDI",error)
+    print("WaitMultiDI error code",error)
 
-Waiting for tool digital input
-++++++++++++++++++++++++++++++++++
+Waiting for tool digital inputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``WaitToolDI(id,status,maxtime,opt)``"
-    "Description", "Waiting for the end digital input"
-    "Required parameter", "- ``id``:IO number,range[0~1];
-    - ``status``:0-off,1-on;
-    - ``maxtime``:Maximum waiting time, unit[ms];
-    - ``opt``:after timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``WaitToolDI(id,status,maxtime,opt)``"
+    "Description", "Waiting for end digital input"
+    "Mandatory parameters", "- ``id``: io number, range [0~1];
+    - ``status``: 0-off, 1-on;
+    - ``maxtime``: maximum waiting time in [ms];
+    - ``opt``: post timeout policy, 0-program stops and prompts for timeout, 1-ignore timeout prompts program to continue execution, 2-always wait"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     max_waittime = 2000
+    #Waiting for the tool DI
     error = robot.WaitToolDI(1,1,max_waittime,0)
-    print("WaitToolDI",error)
+    print("WaitToolDI error code",error)
 
-Waiting for terminal digital input
-+++++++++++++++++++++++++++++++++++++++
+Getting Control Box Analog Inputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetAI(id, block = 0)``"
-    "Description", "Waiting for terminal digital input"
-    "Required parameter", "- ``id``:IO number,range[0~1];"
-    "Optional parameter", "``block``:[0]-blocking, [1]-non blocking,default to 0."
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - Return(if success): value:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];"
+    "Description", "Get control box analog inputs"
+    "Mandatory parameters", "- ``id``: io number, range [0~1];"
+    "Default Parameters","- ``block``:0-blocking, 1-non-blocking Default 0 "
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``value``: Percentage of input current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V]."
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.GetAI(0)
-    print("Obtain AI0",error)
+    print("Getting AI0",error)
 
-Obtain tool analog input
-++++++++++++++++++++++++++++
+Get Tool Analog Inputs
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``GetToolAI (id, block = 0)``"
-    "Description", "Obtain terminal analog input"
-    "Required parameter", "- ``id``:IO number,range[0];"
-    "Optional parameter", "``block``:[0]-blocking, [1]-non blocking,default to 0."
-    "Return value", "Errcode: Success -0  Failed -errcode
-    - FReturn(if success): value:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];"
+    "Description", "Get end analog input"
+    "Mandatory parameters", "- ``id``: io number, range [0];"
+    "Default Parameters", "- ``block``: 0-blocking, 1-non-blocking Default 0"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``value``: Percentage of input current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V]."
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     error = robot.GetToolAI(0)
-    print("Obtain ToolAI0",error)
+    print("Getting ToolAI0",error)
 
-Waiting for the control box simulation input
-++++++++++++++++++++++++++++++++++++++++++++++++
+Waiting for control box analog inputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``WaitAI(id,sign,value,maxtime,opt)``"
-    "Description", "Waiting for the control box simulation input"
-    "Required parameter", "- ``id``:IO number,range[0~1];
-    - ``sign``:0-Greater than,1-Less than
-    - ``value``:Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];
-    - ``maxtime``:Maximum waiting time, unit[ms];
-    - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``WaitAI(id,sign,value,maxtime,opt)``"
+    "Description", "Waiting for control box analog input"
+    "Mandatory parameters", "- ``id``: io number, range [0~1];
+    - ``sign``: 0 - greater than, 1 - less than
+    - ``value``: percentage of input current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V];
+    - ``maxtime``: maximum waiting time in [ms];
+    - ``opt``: post timeout policy, 0-program stops and prompts for timeout, 1-ignore timeout prompts program to continue execution, 2-always wait"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     max_waittime = 2000
-    error = robot.WaitAI(0,0,50,max_waittime,1)          
-    print("WaitAI ",error)
+    # Waiting for the control box AI
+    error = robot.WaitAI(0,0,50,max_waittime,1) #Ignore the timeout prompts for the program to continue execution
+    print("WaitAI error code",error)
 
-Waiting for tool analog input
-++++++++++++++++++++++++++++++++
+Waiting for tool analog inputs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``WaitToolAI(id,sign,value,maxtime,opt)``"
-    "Description", "Waiting for the end analog input"
-    "Required parameter", "- ``id``:IO number,range[0];
-    - ``sign``:0-Greater than,1-Less than
-    - ``value``: Input current or voltage value percentage, range[0-100] corresponds to current value[0-20mA] or voltage[0-10V];
-    - ``maxtime``:Maximum waiting time, unit[ms];
-    - ``opt``:After timeout strategy, 0-program stops and prompts for timeout, 1-ignore timeout prompt to continue executing the program, 2-keep waiting"
-    "Optional parameter", "Nothing"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "prototype", "``WaitToolAI(id,sign,value,maxtime,opt)``"
+    "Description", "Waiting for end analog input"
+    "Mandatory parameters", "- ``id``: io number, range [0];
+    - ``sign``: 0 - greater than, 1 - less than
+    - ``value``: percentage of input current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V];
+    - ``maxtime``: maximum waiting time in [ms];
+    - ``opt``: post timeout policy, 0-program stops and prompts for timeout, 1-ignore timeout prompts program to continue execution, 2-always wait"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # A connection is established with the robot controller. A successful connection returns a robot object
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     max_waittime = 2000
+    # Waiting for the tool AI
     error = robot.WaitToolAI(0,0,50,max_waittime,0)
-    print("WaitToolAI ",error)
+    print("WaitToolAI error code",error)
 
-Set whether the output is reset after the control box DO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting whether the output is reset after the control box DO stop/pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -361,36 +368,36 @@ Set whether the output is reset after the control box DO stop/pause
     :widths: 10 30
 
     "Prototype", "``SetOutputResetCtlBoxDO(resetFlag)``"
-    "Description", "Set whether the output is reset after the control box DO stop/pause"
-    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
-    "Optional parameter", "NULL"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Sets whether or not the output is reset after a control box DO stop/pause"
+    "Mandatory parameters", "- ``resetFlag``: 0-no reset; 1-reset"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
 
     robot = Robot.RPC('192.168.58.2')
     time.sleep(5)
     error = robot.SetDO(1,1)
-    print("SetDO 1  return:",error)
+    print("SetDO 1 return:",error)
 
     error = robot.SetDO(3,1)
-    print("SetDO 3  return:",error)
+    print("SetDO 3 return:",error)
 
     error = robot.SetToolDO(1,1)
     print("SetToolDO return:",error)
 
     error = robot.SetAO(0,25)
-    print("SetAO 0   return:",error)
+    print("SetAO 0 return:",error)
 
     error = robot.SetAO(1,87)
-    print("SetAO 1  return:",error)
+    print("SetAO 1 return:",error)
 
     error = robot.SetToolAO(0,54)
     print("SetToolAO return:",error)
@@ -416,19 +423,19 @@ Code example
     time.sleep(5)
 
     error = robot.SetDO(1,1)
-    print("SetDO 1  return:",error)
+    print("SetDO 1 return:",error)
 
     error = robot.SetDO(3,1)
-    print("SetDO 3  return:",error)
+    print("SetDO 3 return:",error)
 
     error = robot.SetToolDO(1,1)
     print("SetToolDO return:",error)
 
     error = robot.SetAO(0,25)
-    print("SetAO 0   return:",error)
+    print("SetAO 0 return:",error)
 
     error = robot.SetAO(1,87)
-    print("SetAO 1  return:",error)
+    print("SetAO 1 return:",error)
 
     error = robot.SetToolAO(0,54)
     print("SetToolAO return:",error)
@@ -450,8 +457,8 @@ Code example
     error = robot.ProgramStop()
     print("ProgramPause return:",error)
 
-Set whether the output is reset after the control box AO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting whether the output is reset after the control box AO stop/pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -459,13 +466,13 @@ Set whether the output is reset after the control box AO stop/pause
     :widths: 10 30
 
     "Prototype", "``SetOutputResetCtlBoxDO(resetFlag)``"
-    "Description", "Set whether the output is reset after the control box AO stop/pause"
-    "Required parameter", "- ``resetFlag``：0-reset；1-non-reset"
-    "Optional parameter", "NULL"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Sets whether the outputs are reset after a control box AO stop/pause"
+    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Sets whether the output is reset after the end tool DO stops/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sets whether the output is reset after the end tool DO stops/pause.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -473,13 +480,13 @@ Sets whether the output is reset after the end tool DO stops/pause
     :widths: 10 30
 
     "Prototype", "``SetOutputResetAxleDO(resetFlag)``"
-    "Description", "Sets whether the output is reset after the end tool DO stops/pause"
-    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
-    "Optional parameter", "NULL"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Sets whether the output is reset after the end tool DO stops/pauses"
+    "Mandatory parameter", "- ``resetFlag``: 0 - no reset; 1 - reset"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
 Set whether the output is reset after the end tool AO stops/pauses
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -487,47 +494,47 @@ Set whether the output is reset after the end tool AO stops/pauses
     :widths: 10 30
 
     "Prototype", "``SetOutputResetAxleAO(resetFlag)``"
-    "Description", "Set whether the output is reset after the end tool AO stops/pauses"
-    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
-    "Optional parameter", "NULL"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Sets whether the output is reset after the end tool AO stops/pauses"
+    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Sets whether the output is reset after an extended DO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sets whether the outputs are reset after an extended DO stop/pause.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetOutputResetExtDO (resetFlag)``"
+    "prototype", "``SetOutputResetExtDO (resetFlag)``"
     "Description", "Sets whether the output is reset after an extended DO stop/pause"
-    "Required parameter", "- ``resetFlag``：0-non-reset；1-reset"
-    "Optional parameter", "NULL"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------
+code example
+---------------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # Establishes a connection with the robot controller and returns a robot object if the connection is successful
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
 
     robot = Robot.RPC('192.168.58.2')
 
     error = robot.SetAuxDO(1,True,False,False)
-    print("SetAuxDO 1  return:",error)
+    print("SetAuxDO 1 return:",error)
 
     error = robot.SetAuxDO(3,True,False,False)
-    print("SetAuxDO 3  return:",error)
+    print("SetAuxDO 3 return:",error)
 
     error = robot.SetAuxAO(0,10,False)
-    print("SetAuxAO 0   return:",error)
+    print("SetAuxAO 0 return:",error)
 
     error = robot.SetAuxAO(1,87,False)
-    print("SetAuxAO 1  return:",error)
+    print("SetAuxAO 1 return:",error)
 
     error = robot.SetOutputResetExtDO(1)
     print("SetOutputResetExtDO return:",error)
@@ -543,16 +550,16 @@ Code example
 
     time.sleep(3)
     error = robot.SetAuxDO(1,True,False,False)
-    print("SetAuxDO 1  return:",error)
+    print("SetAuxDO 1 return:",error)
 
     error = robot.SetAuxDO(3,True,False,False)
-    print("SetAuxDO 3  return:",error)
+    print("SetAuxDO 3 return:",error)
 
     error = robot.SetAuxAO(0,10,False)
-    print("SetAuxAO 0   return:",error)
+    print("SetAuxAO 0 return:",error)
 
     error = robot.SetAuxAO(1,87,False)
-    print("SetAuxAO 1  return:",error)
+    print("SetAuxAO 1 return:",error)
 
     error = robot.SetOutputResetExtDO(0)
     print("SetOutputResetExtDO return:",error)
@@ -566,8 +573,8 @@ Code example
     error = robot.ProgramStop()
     print("ProgramPause return:",error)
 
-Sets whether the output is reset after the expansion AO stops/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sets whether the output is reset after the expansion AO stops/pause.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -575,7 +582,7 @@ Sets whether the output is reset after the expansion AO stops/pause
     :widths: 10 30
 
     "Prototype", "``SetOutputResetExtAO (resetFlag)``"
-    "Description", "Sets whether the output is reset after the expansion AO stops/pause"
-    "Required parameter", "- ``resetFlag``： 0-non-reset；1-reset"
-    "Optional parameter", "NULL"
-    "Return value", "Errcode: Success -0  Failed -errcode"
+    "Description", "Sets whether the output is reset after an extended AO stop/pause"
+    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"

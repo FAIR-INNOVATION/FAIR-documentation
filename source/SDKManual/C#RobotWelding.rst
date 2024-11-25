@@ -1,311 +1,312 @@
-Robot Welding
-==================
-
+Robotic welding
+==========================
 .. toctree:: 
     :maxdepth: 5
 
-Welding Start
-++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+Start of welding
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Welding Start
-    * @param [in] ioType  0-control box IO； 1-extend IO
-    * @param [in] arcNum Welder configuration file number
-    * @param [in] timeout Arcing timeout time
-    * @return Error code
+    * @brief Welding begins
+    * @param [in] ioType io type 0-controller IO; 1-extended IO
+    * @param [in] arcNum Welder profile number
+    * @param [in] timeout Arc start timeout
+    * @return error code
     */
     int ARCStart(int ioType, int arcNum, int timeout);
 
-Welding end
-++++++++++++++++++++++++++++++++++
+End of welding
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Welding end
-    * @param [in] ioType 0-control box IO； 1-extend IO
-    * @param [in] arcNum Welder configuration file number
-    * @param [in] timeout Quenching arc timeout time
-    * @return Error code
+    * @brief End of welding
+    * @param [in] ioType io type 0-controller IO; 1-extended IO
+    * @param [in] arcNum Welder profile number
+    * @param [in] timeout Arc off timeout
+    * @return error code
     */
     int ARCEnd(int ioType, int arcNum, int timeout);
 
-Set the relationship between welding current and output analog
+Setting of welding current and output analogue correspondence
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set the relationship between welding current and output analog
-    * @param [in] currentMin Welding current-analog output linear relationship left point current value(A)
-    * @param [in] currentMax Welding current-analog output linear relationship right point current value(A)
-    * @param [in] outputVoltageMin Welding current-analog output linear relationship left point analog output voltage value(V)
-    * @param [in] outputVoltageMax Welding current-analog output linear relationship right point analog output voltage value(V)
-    * @return Error code
+    * @brief Set weld current to analogue output
+    * @param [in] currentMin Welding current - analogue output linear relationship left point current value (A)
+    * @param [in] currentMax Welding current - analogue output linear relationship right point current value (A)
+    * @param [in] outputVoltageMin Welding current - analogue output linear relationship left point analogue output voltage value (V)
+    * @param [in] outputVoltageMax The analogue output voltage value (V) at the right point of the weld current-analog output linear relationship.
+    * @return error code
     */
     int WeldingSetCurrentRelation(double currentMin, double currentMax, double outputVoltageMin, double outputVoltageMax);
 
-Set the relationship between welding voltage and output analog
+Setting the welding voltage and output analogue correspondence
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set the relationship between welding voltage and output analog
-    * @param [in] weldVoltageMin Welding voltage - analog output linear relationship left spot welding voltage value(V)
-    * @param [in] weldVoltageMax Welding voltage - analog output linear relationship right spot welding voltage value(V)
-    * @param [in] outputVoltageMin Welding voltage-analog output linear relationship left point analog output voltage value(V)
-    * @param [in] outputVoltageMax Welding voltage-analog output linear relationship right point analog output voltage value(V)
-    * @return Error code
+    * @brief Setting the weld voltage to output analogue correspondence
+    * @param [in] weldVoltageMin Welding Voltage - Analogue Output Linear Relationship Left Point Welding Voltage Value (A)
+    * @param [in] weldVoltageMax Welding Voltage - Analogue Output Linear Relationship Right Point Welding Voltage Value (A)
+    * @param [in] outputVoltageMin Welding Voltage - Analogue Output Linear Relationship Left Point Analogue Output Voltage Value (V)
+    * @param [in] outputVoltageMax Analogue output voltage value (V) at the right point of the weld voltage-analogue output linear relation
+    * @return error code
     */
     int WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
 
-Obtain the corresponding relationship between welding current and output analog
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Getting the correspondence between welding current and output analogue
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Obtain the corresponding relationship between welding current and output analog
-    * @param [out] currentMin Welding current-analog output linear relationship left point current value(A)
-    * @param [out] currentMax Welding current-analog output linear relationship right point current value(A)
-    * @param [out] outputVoltageMin Welding current-analog output linear relationship left point analog output voltage value(V)
-    * @param [out] outputVoltageMax Welding current-analog output linear relationship right point analog output voltage value(V)
-    * @return Error code
+    * @brief Get weld current to output analogue
+    * @param [out] currentMin Welding current - analogue output linear relationship left point current value (A)
+    * @param [out] currentMax Welding current - analogue output linear relationship right point current value (A)
+    * @param [out] outputVoltageMin Welding current - analogue output linear relationship left point analogue output voltage value (V)
+    * @param [out] outputVoltageMax Analogue output voltage value (V) at the right point of the weld current-analog output linear relationship
+    * @return error code
     */
     int WeldingGetCurrentRelation(ref double currentMin, ref double currentMax, ref double outputVoltageMin, ref double outputVoltageMax);
 
-Obtain the corresponding relationship between welding voltage and output analog
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Getting welding voltage and output analogue correspondence
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief The corresponding relationship between welding voltage and output analog is obtained
-    * @param [out] weldVoltageMin Welding voltage - analog output linear relationship left spot welding voltage value(V)
-    * @param [out] weldVoltageMax Welding voltage - analog output linear relationship right spot welding voltage value(V)(V)
-    * @param [out] outputVoltageMin Welding voltage-analog output linear relationship left point analog output voltage value(V)
-    * @param [out] outputVoltageMax Welding voltage-analog output linear relationship right point analog output voltage value(V)
-    * @return Error code
+    * @brief Get weld voltage to analogue output
+    * @param [out] weldVoltageMin Welding Voltage - Analogue Output Linear Relationship Left Point Welding Voltage Value (A)
+    * @param [out] weldVoltageMax Welding Voltage - Analogue Output Linear Relationship Right Point Welding Voltage Value (A)
+    * @param [out] outputVoltageMin Welding voltage - analogue output linear relationship left point analogue output voltage value (V)
+    * @param [out] outputVoltageMax Analogue output voltage value (V) at the right point of the weld voltage-analogue output linearity relation
+    * @return error code
     */
     int WeldingGetVoltageRelation(ref double weldVoltageMin, ref double weldVoltageMax, ref double outputVoltageMin, ref double outputVoltageMax);
 
-Set welding current
-++++++++++++++++++++++++++++++++++
+Setting the welding current
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set welding current
-    * @param [in] ioType 0-control box IO； 1-extend IO
-    * @param [in] current welding current(A)
-    * @param [in] AOIndex Welding current control box analog output port(0-1)
-    * @return Error code
+    * @brief Set weld current
+    * @param [in] ioType Control IO type 0-Control box IO; 1-Extended IO
+    * @param [in] current Welding current value (A)
+    * @param [in] AOIndex Welding current control box analogue output port (0-1)
+    * @return error code
     */
-    int WeldingSetCurrent(int ioType, double current, int AOIndex);
+    int WeldingSetCurrent(int ioType, double current, int AOIndex).
 
-Set welding voltage
-++++++++++++++++++++++++++++++++++
+Setting the welding voltage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set welding voltage
-    * @param [in] ioType 0-control box IO； 1-extend IO
-    * @param [in] voltage welding voltage(V)
-    * @param [in] AOIndex Welding voltage control box analog output port(0-1)
-    * @return Error code
+    * @brief Set weld voltage
+    * @param [in] ioType Control IO type 0-Control box IO; 1-Extended IO
+    * @param [in] voltage Welding voltage value (A)
+    * @param [in] AOIndex Analogue output port of welding voltage control box (0-1)
+    * @return error code
     */
     int WeldingSetVoltage(int ioType, double voltage, int AOIndex);
 
-Set weave parameters
-++++++++++++++++++++++++++++++++++
+Setting the oscillation parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Set weave parameters
-    * @param [in] weaveNum parameters number
-    * @param [in] weaveType weave type:0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
-    * @param [in] weaveFrequency weave frequency(Hz)
-    * @param [in] weaveIncStayTime Wait mode 0- period does not contain wait time; 1- Period contains the wait time
-    * @param [in] weaveRange weave amplitude(mm)
-    * @param [in] weaveLeftStayTime weave left residence time(ms)
-    * @param [in] weaveRightStayTime weave right residence time(ms)
-    * @param [in] weaveCircleRadio Circular wiggle-pullback ratio(0-100%)
-    * @param [in] weaveStationary weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time
-    * @return Error code
-    */
-    int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary);
-
-Set weave parameters in real time
-++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set weave parameters in real time
-    * @param [in] weaveNum parameters number
-    * @param [in] weaveType weave type:0- plane triangular weave ; 1- vertical L-shaped triangular weave; 2- clockwise circular weave; 3-counterclockwise circular weave; 4-plane sine weave; 5-vertical L-shaped sine weave; 6- vertical triangular weave; 7- Vertical sine weave
-    * @param [in] weaveFrequency weave frequency(Hz)
-    * @param [in] weaveIncStayTime Wait mode 0- period does not contain wait time; 1- Period contains the wait time
-    * @param [in] weaveRange weave amplitude(mm)
-    * @param [in] weaveLeftStayTime weave left residence time(ms)
-    * @param [in] weaveRightStayTime weave right residence time(ms)
-    * @param [in] weaveCircleRadio Circular wiggle-pullback ratio(0-100%)
-    * @param [in] weaveStationary weave position wait, 0- position continue to move within the waiting time; 1- The position is stationary during the waiting time
-    * @return Error code
+    * :: @brief Setting the swing parameters
+    * @param [in] weaveNum weave parameter configuration number
+    * @param [in] weaveType weaveType 0-planar triangular wave swing; 1-vertical L-shaped triangular wave swing; 2-clockwise circular swing; 3-counterclockwise circular swing; 4-planar sine wave swing; 5-vertical L-shaped sine wave swing; 6-vertical triangular wave swing; 7-vertical sine wave swing
+    * @param [in] weaveFrequency swing frequency (Hz)
+    * @param [in] weaveIncStayTime wait mode 0-cycle without wait time; 1-cycle with wait time
+    * @param [in] weaveRange swing range (mm)
+    * @param [in] weaveLeftStayTime weaveLeftStayTime (ms)
+    * @param [in] weaveRightStayTime weaveRightStayTime (ms)
+    * @param [in] weaveCircleRadio Circle swing-back ratio (0-100%)
+    * @param [in] weaveStationary swing position wait, 0 - position continues to move during wait time; 1 - position is stationary during wait time
+    * @return error code
     */
-    int WeaveOnlineSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary);
+    int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary).
 
-Weave start
-++++++++++++++++++++++++++++++++++
+Instant setting of swing parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Weave start
-    * @param [in] weaveNum Weave welding parameter configuration number
-    * @return Error code
+    * @brief Instant setup of swing parameters
+    * @param [in] weaveNum weave parameter configuration number
+    * @param [in] weaveType weaveType 0-planar triangular wave swing; 1-vertical L-shaped triangular wave swing; 2-clockwise circular swing; 3-counterclockwise circular swing; 4-planar sine wave swing; 5-vertical L-shaped sine wave swing; 6-vertical triangular wave swing; 7-vertical sine wave swing
+    * @param [in] weaveFrequency swing frequency (Hz)
+    * @param [in] weaveIncStayTime wait mode 0-cycle without wait time; 1-cycle with wait time
+    * @param [in] weaveRange swing range (mm)
+    * @param [in] weaveLeftStayTime weaveLeftStayTime (ms)
+    * @param [in] weaveRightStayTime weaveRightStayTime (ms)
+    * @param [in] weaveCircleRadio Circle swing-back ratio (0-100%)
+    * @param [in] weaveStationary swing position wait, 0 - position continues to move during wait time; 1 - position is stationary during wait time
+    * @return error code
     */
-    int WeaveStart(int weaveNum);
+    int WeaveOnlineSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary).
 
-Weave end
-++++++++++++++++++++++++++++++++++
+swing start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Weave end
-    * @param [in] weaveNum Weave welding parameter configuration number
-    * @return Error code
+    * @brief The swing is on
+    * @param [in] weaveNum weave parameter configuration number
+    * @return error code
     */
-    int WeaveEnd(int weaveNum);
+    int WeaveStart(int weaveNum).
 
-Forward wire feed
-++++++++++++++++++++++++++++++++++
+end of swing
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Forward Wire Feed
-    * @param [in] ioType 0-control box IO； 1-extend IO
-    * @param [in] wireFeed wire control: 0-stop wire feed ；1-wire feed 
-    * @return Error code
+    * @brief End of swing
+    * @param [in] weaveNum weave parameter configuration number
+    * @return error code
     */
-    int SetForwardWireFeed(int ioType, int wireFeed);
+    int WeaveEnd(int weaveNum).
+
+Positive wire feed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.0.4
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Forward wire feed
+    * @param [in] ioType io type 0-Controller IO; 1-Extended IO
+    * @param [in] wireFeed Wire Feed Control 0-Stop Wire Feed; 1-Feed Wire
+    * @return error code
+    */
+    int SetForwardWireFeed(int ioType, int wireFeed). 	
 
 Reverse wire feed
-++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
     * @brief Reverse wire feed
-    * @param [in] ioType 0-control box IO； 1-extend IO
-    * @param [in] wireFeed wire control: 0-stop wire feed ；1-wire feed 
-    * @return Error code
+    * @param [in] ioType io type 0-Controller IO; 1-Extended IO
+    * @param [in] wireFeed Wire Feed Control 0-Stop Wire Feed; 1-Feed Wire
+    * @return error code
     */
-    int SetReverseWireFeed(int ioType, int wireFeed);
+    int SetReverseWireFeed(int ioType, int wireFeed).
 
-Aspirated
-++++++++++++++++++++++++++++++++++
+aspiration (phonetics, explosion of breath on consonants distinguishing Chinese p, t from b, d)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief aspirated
-    * @param [in] ioType 0-control box IO； 1-extend IO
-    * @param [in] airControl aspirated control: 0-stop aspirated；1-aspirated
-    * @return Error code
+    * @brief sends gas
+    * @param [in] ioType io type 0-Controller IO; 1-Extended IO
+    * @param [in] airControl airControl 0-stop air delivery; 1-feed air
+    * @return error code
     */
-    int SetAspirated(int ioType, int airControl);
+    int SetAspirated(int ioType, int airControl).
 
-Segment weld start
-++++++++++++++++++++++++++++++++++
+segment welding
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * @brief Segment weld start
+    * :: Start of @brief segment welding
     * @param [in] startDesePos Starting point Cartesian position
-    * @param [in] endDesePos Ending point Cartesian position
+    * @param [in] endDesePos End Point Cartesian Positions
     * @param [in] startJPos Starting point joint position
-    * @param [in] endJPos Ending point joint position
-    * @param [in] weldLength Weld length(mm)
-    * @param [in] noWeldLength Length of unwelded section(mm)
-    * @param [in] weldIOType 0-control box IO； 1-extend IO
-    * @param [in] arcNum Welder configuration file number
-    * @param [in] timeout Arcing timeout time
-    * @param [in] isWeave is Weave or not 
-    * @param [in] weaveNum Weave welding parameter configuration number
-    * @param  [in] tool  Tool coordinate number, range [0~14]
-    * @param  [in] user  Workpiece coordinate number, range [0~14]
-    * @param  [in] vel  Percentage of speed, range [0~100] 
-    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now * @param  [in] ovl  Velocity scaling factor, range[0~100]
-    * @param  [in] blendR [-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm
-    * @param  [in] epos  Position of expansion shaft, unit: mm
-    * @param  [in] search  0- no wire seeking, 1- wire seeking
-    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos  The pose offset
-    * @return Error code 
+    * @param [in] endJPos endJoint Positions
+    * @param [in] weldLength Weld section length (mm)
+    * @param [in] noWeldLength Non-Weld Length (mm)
+    * @param [in] weldIOType Weld IO type (0-control box IO; 1-extended IO)
+    * @param [in] arcNum Welder profile number
+    * @param [in] weldTimeout 起/收弧超时时间时间
+    * @param [in] isWeave isWeave or not?
+    * @param [in] weaveNum weave parameter configuration number
+    * @param [in] tool tool number
+    * @param [in] user Workpiece number
+    * @param [in] vel velocity percentage, range [0~100]
+    * @param [in] acc Acceleration percentage, range [0~100], not open yet.
+    * @param [in] ovl velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm	 
+    * @param [in] epos Extended axis position in mm
+    * @param [in] search 0-no wire search, 1-wire search
+    * @param [in] offset_flag 0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos Bit position offset
+    * @return error code 
     */
-    int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos);
+    int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos);
 
-Code example:
-++++++++++++++++++++++++++++++++++
+code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C# SDK-v1.0.4
+.. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
@@ -320,7 +321,7 @@ Code example:
         JointPos endjointPos = new JointPos(-71.746, -87.177, 123.953, -126.25, -89.429, -0.089);
 
         ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0, 0);
 
         robot.WeldingSetCurrentRelation(0, 400, 0, 10);
         robot.WeldingSetVoltageRelation(0, 40, 0, 10);
@@ -352,10 +353,10 @@ Code example:
         robot.SetAspirated(0, 0);
 
         robot.SetSpeed(5);
-        robot.MoveL(startjointPos, startdescPose, 1, 0, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
+        robot.MoveL(startjointPos, startdescPose, 1, 0, 100, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
         robot.ARCStart(0, 0, 1000);
         robot.WeaveStart(0);
-        robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
+        robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
         robot.ARCEnd(0, 0, 1000);
         robot.WeaveEnd(0);
     }
