@@ -79,33 +79,40 @@ Calculation tool coordinate system
 
 Set tool coordinate system
 ++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.5.0
+
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  Set tool coordinate system
-    * @param  [in] id Frame number, range[0~14]
-    * @param  [in] coord  Tool center position relative to end flange center position
-    * @param  [in] type  0- tool coordinates, 1- sensor coordinates
-    * @param  [in] install Installation position, 0- robot end, 1- robot outside
-    * @return  Error code
-    */
-    errno_t  SetToolCoord(int id, DescPose *coord, int type, int install);
+	/**
+	 * @brief  Set tool coordinate system
+	 * @param  [in] id Frame number, range[0~14]
+	 * @param  [in] coord  Tool center position relative to end flange center position
+	 * @param  [in] type  0- tool coordinates, 1- sensor coordinates
+	 * @param  [in] install Installation position, 0- robot end, 1- robot outside
+	 * @param  [in] toolID tool ID
+	 * @param  [in] loadNum loadNum
+	 * @return  Error code
+	 */
+	errno_t  SetToolCoord(int id, DescPose* coord, int type, int install, int toolID, int loadNum);
 
 Set the tool coordinate list
 ++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.5.0
+
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set the tool coordinate list
-    * @param  [in] id Frame number, range[0~14]
-    * @param  [in] coord  Tool center position relative to end flange center position
-    * @param  [in] type  0- tool coordinates, 1- sensor coordinates
-    * @param  [in] install Installation position, 0- robot end, 1- robot outside
-    * @return  Error code
-    */
-    errno_t  SetToolList(int id, DescPose *coord, int type, int install);   
+    *@brief  Set the tool coordinate list
+    *@param  [in] id Frame number, range[0~14]
+    *@param  [in] coord  Tool center position relative to end flange center position
+    *@param  [in] type  0- tool coordinates, 1- sensor coordinates
+    *@param  [in] install Installation position, 0- robot end, 1- robot outside
+	*@param  [in] loadNum Load number
+    *@return  Error code
+	 */
+	errno_t  SetToolList(int id, DescPose* coord, int type, int install, int loadNum); 
 
 Setting External Tool Reference Points - Six-Point Method
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -173,41 +180,51 @@ Set the workpiece reference point - three-point method
 
 Calculate workpiece coordinate system
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.5.0
+
 .. code-block:: c++
     :linenos:
 
-    /**
-     * @brief  Calculate workpiece coordinate system
-     * @param [out] wobj_pose Workpiece coordinate system
-     * @return Error code
-     */
-    errno_t ComputeWObjCoord(DescPose *wobj_pose);
+	/**
+	 * @brief  Calculate workpiece coordinate system
+	 * @param [in] Calculation method 0: origin-x axis-z axis 1: origin-x axis-xy plane
+	 * @param [in] refFrame ref frame number
+	 * @param [out] wobj_pose Workpiece coordinate system
+	 * @return Error code
+	 */	
+	errno_t ComputeWObjCoord(int method, int refFrame, DescPose* wobj_pose);
 
 Set the workpiece coordinate system
 ++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.5.0
+    
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  Set the workpiece coordinate system
-    * @param  [in] id Frame number, range[0~14]
-    * @param  [in] coord  Tool center position relative to end flange center position
-    * @return  Error code
-    */    
-    errno_t  SetWObjCoord(int id, DescPose *coord);
+	/**
+	 * @brief  Set workpiece coordinate system
+	 * @param  [in] id Coordinate system number, range [0~14]
+	 * @param  [in] coord  The workpiece coordinate system relative to the end flange center pose
+	 * @param  [in] refFrame Reference coordinate system
+	 * @return  Error code
+     */	 
+	errno_t  SetWObjCoord(int id, DescPose* coord, int refFrame);
 
 Set the list of work coordinate systems
 ++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.5.0
+
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  Set the list of work coordinate systems
-    * @param  [in] id Frame number, range[0~14]
-    * @param  [in] coord  Tool center position relative to end flange center position
-    * @return  Error code
-    */    
-    errno_t  SetWObjList(int id, DescPose *coord);  
+	/**
+    *@brief  Set the list of work coordinate systems
+    *@param  [in] id Frame number, range[0~14]
+    *@param  [in] coord  Tool center position relative to end flange center position
+	*@param  [in] refFrame Reference coordinate system
+    *@return  Error code
+     */	 
+	errno_t  SetWObjList(int id, DescPose* coord, int refFrame);
 
 Set the end load weight
 ++++++++++++++++++++++++++++++++++

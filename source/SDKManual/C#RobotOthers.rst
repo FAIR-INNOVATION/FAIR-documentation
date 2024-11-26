@@ -4,7 +4,6 @@ Other interfaces
 .. toctree:: 
     :maxdepth: 5
 
-
 Belt start and stop
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -294,7 +293,7 @@ Getting the robot DH parameter compensation value
     int GetDHCompensation(ref double[] dhCompensation)
 
 code example
-+++++++++
++++++++++++++
 .. code-block:: c#
     :linenos:
 

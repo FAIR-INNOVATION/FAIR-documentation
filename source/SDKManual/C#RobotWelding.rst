@@ -75,7 +75,7 @@ Setting the welding voltage and output analogue correspondence
     int WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
 
 Getting the correspondence between welding current and output analogue
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
 
@@ -253,7 +253,7 @@ Reverse wire feed
     int SetReverseWireFeed(int ioType, int wireFeed).
 
 aspiration (phonetics, explosion of breath on consonants distinguishing Chinese p, t from b, d)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
 

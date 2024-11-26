@@ -9,7 +9,7 @@ Setting the 485 extension axis parameters
 .. versionchanged:: C#SDK-v1.0.6
 
 .. code-block:: c#
-    :linenos.
+    :linenos:
 
     /** 
     * @brief Setting 485 extended axis parameters

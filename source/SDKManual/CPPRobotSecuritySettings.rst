@@ -20,15 +20,20 @@ Set collision level
 
 Set the post-collision policy
 ++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.5.0
+    
 .. code-block:: c++
     :linenos:
 
-    /**
+	/**
     * @brief  Set the post-collision policy
     * @param  [in] strategy  0- Error stop, 1- Continue running
-    * @return  Error code  
-    */
-    errno_t  SetCollisionStrategy(int strategy);
+	* @param  [in] safeTime  Safe stop time[1000 - 2000]ms
+	* @param  [in] safeDistance  Safe stopping distance[1-150]mm
+    * @param  [in] safetyMargin  j1-j6 Safety factor[1-10]
+    * @return  Error code   
+	 */
+	errno_t  SetCollisionStrategy(int strategy, int strategy, int safeTime, int safeDistance, int safetyMargin[]);
 
 Set the positive limit
 ++++++++++++++++++++++++++++++++

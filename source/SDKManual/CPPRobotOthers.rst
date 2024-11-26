@@ -241,3 +241,363 @@ Code example
 
         return 0;
     }
+
+Gets the terminal communication parameters
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief gets the terminal communication parameters
+    * @param param axle communication parameters
+    * @return  error code
+    */
+    errno_t GetAxleCommunicationParam(AxleComParam* param);
+
+Sets the terminal communication parameters
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief sets the terminal communication parameters
+    * @param param  axle communication parameters
+    * @return  error code
+    */
+    errno_t SetAxleCommunicationParam(AxleComParam param);
+
+Set the end file transfer type
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set the end file transfer type
+    * @param type 1-MCU；2-LUA
+    * @return  error code
+    */
+    errno_t SetAxleFileType(int type);
+
+Set to enable axle LUA execution
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set to enable axle LUA execution
+    * @param enable 0- Disable; 1- Enable
+    * @return  error code
+    */
+    errno_t SetAxleLuaEnable(int enable);
+
+Axle LUA file error reset
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Axle LUA file error reset
+    * @param status 0- No recovery; 1- Recovery
+    * @return  error code
+    */
+    errno_t SetRecoverAxleLuaErr(int status);
+
+Gets the axle LUA execution enable status
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Gets the axle LUA execution enable status
+    * @param status status[0]: 0- Is not enabled. 1- Enabled
+    * @return  error code
+    */
+    errno_t GetAxleLuaEnableStatus(int status[]);
+
+Set the axle LUA end device enablement type
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set the axle LUA end device enablement type
+    * @param forceSensorEnable Force sensor Enabled status, 0- Disable. 1- Enable
+    * @param gripperEnable Specifies whether the gripper is enabled. 0- Disables the gripper. 1- Enable
+    * @param IOEnable IO Indicates whether the device is enabled. 0- Indicates that the device is disabled. 1- Enable
+    * @return  error code
+    */
+    errno_t SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable);
+
+Gets the axle LUA end device enabled type
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Gets the axle LUA end device enabled type
+    * @param enable enable[0]: indicates whether the forceSensorEnable force sensor is enabled. 0- Indicates whether the forcesenSOrenable force sensor is disabled. 1- Enable
+    * @param enable enable[1]:gripperEnable Indicates whether the gripper is enabled. 0- Disables the gripper. 1- Enable
+    * @param enable enable[2]:IOEnable I/o Indicates whether the device is enabled. 0- Indicates whether the device is disabled. 1- Enable
+    * @return  error code
+    */
+    errno_t GetAxleLuaEnableDeviceType(int* forceSensorEnable, int* gripperEnable, int* IOEnable);
+
+Gets the currently configured end device
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief gets the currently configured end device
+    *  @param forceSensorEnable Force sensor Enabled Device number 0- Not enabled; 1- Enable
+    * @param gripperEnable Number of the gripperenable device, 0- Disable; 1- Enable
+    * @param IODeviceEnable IODevice enable Device ID. 0- Disable. 1- Enable
+    * @return  error code
+    */
+    errno_t GetAxleLuaEnableDevice(int forceSensorEnable[], int gripperEnable[], int IODeviceEnable[]);
+
+Setting enables the gripper action control function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief setting enables the gripper action control function
+    * @param id ID of the gripper device
+    * @param func func[0]- gripper enabled; func[1]- gripper initialization; 2- Position setting; 3- Speed setting; 4- Torque setting; 6- Read the gripper status; 7- Read the initialization state; 8- Read the fault code; 9- Read position; 10- Read speed; 11- Read torque
+    * @return  error code
+    */
+    errno_t SetAxleLuaGripperFunc(int id, int func[]);
+
+Obtains the enable gripper action control function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief obtains the enable gripper action control function
+    * @param id ID of the gripper device
+    * @param func func[0]- gripper enabled; func[1]- gripper initialization; 2- Position setting; 3- Speed setting; 4- Torque setting; 6- Read the gripper status; 7- Read the initialization state; 8- Read the fault code; 9- Read position; 10- Read speed; 11- Read torque
+    * @return  error code
+    */
+    errno_t GetAxleLuaGripperFunc(int id, int func[]);
+
+Robot Ethercat writes files from the slave station
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * The @brief robot Ethercat writes files from the slave station
+    * @param type Slave file type, 1- Upgrade slave file; 2- Upgrade the slave configuration file
+    * @param slaveID Secondary station ID
+    * @param fileName File name of the upload file
+    * @return  error code
+    */
+    errno_t SlaveFileWrite(int type, int slaveID, std::string fileName);
+
+Uploals the axle Lua open protocol file
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief uploals the axle Lua open protocol file
+    * @param filePath Local lua file pathname "... /AXLE_LUA_End_DaHuan.lua"
+    * @return error code
+    */
+    errno_t AxleLuaUpload(std::string filePath);
+
+Robot Ethercat entered boot mode from the station
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * The @brief robot Ethercat entered boot mode from the station
+    * @return  error code
+    */
+    errno_t SetSysServoBootMode();
+
+Example 1
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    void TestAxleLuaGripper(FRRobot* robot)
+    {
+        robot->AxleLuaUpload("D://zUP/AXLE_LUA_End_DaHuan.lua"); 
+
+        //Restart robot     
+
+        ROBOT_STATE_PKG pkg;
+        memset(&pkg, 0, sizeof(pkg));
+        AxleComParam param(7, 8, 1, 0, 5, 3, 1);
+        //AxleComParam param = new AxleComParam(8,7,2,1,6,4,2);
+        robot->SetAxleCommunicationParam(param);
+
+        AxleComParam getParam;
+        robot->GetAxleCommunicationParam(&getParam);
+        printf("GetAxleCommunicationParam param is %d %d %d %d %d %d %d\n", getParam.baudRate, getParam.dataBit, getParam.stopBit, getParam.verify, getParam.timeout, getParam.timeoutTimes, getParam.period);
+
+        robot->SetAxleLuaEnable(1);
+        int luaEnableStatus = 0;
+        robot->GetAxleLuaEnableStatus(&luaEnableStatus);
+        robot->SetAxleLuaEnableDeviceType(0, 1, 0);
+        
+        int forceEnable = 0;
+        int gripperEnable = 0;
+        int ioEnable = 0;
+        robot->GetAxleLuaEnableDeviceType(&forceEnable, &gripperEnable, &ioEnable);
+        printf("GetAxleLuaEnableDeviceType param is %d %d %d\n", forceEnable, gripperEnable, ioEnable);
+
+        //int func[16] = {0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0};
+        int func[16] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        robot->SetAxleLuaGripperFunc(1, func);
+        int getFunc[16] = {0};
+        robot->GetAxleLuaGripperFunc(1, getFunc);
+        int getforceEnable[16] = {0};
+        int getgripperEnable[16] = {0};
+        int getioEnable[16] = {0};
+        robot->GetAxleLuaEnableDevice(getforceEnable, getgripperEnable, getioEnable);
+        printf("\ngetforceEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getforceEnable[i]);
+        }
+        printf("\ngetgripperEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getgripperEnable[i]);
+        }
+        printf("\ngetioEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getioEnable[i]);
+        }
+        printf("\n");
+        robot->ActGripper(1, 0);
+        robot->Sleep(2000);
+        robot->ActGripper(1, 1);
+        robot->Sleep(2000);
+        robot->MoveGripper(1, 90, 10, 100, 50000, 0);
+        int pos = 0;
+        while (true)
+        {
+            robot->GetRobotRealTimeState(&pkg);
+            printf("gripper pos is %u\n", pkg.gripper_position);
+            robot->Sleep(100);
+        }
+    }
+
+Example 2
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++ SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    void TestAxleLuaForceSensor(FRRobot* robot)
+    {
+        robot->AxleLuaUpload("D://zUP/AXLE_LUA_End_DaHuan.lua");
+
+        //Restart robot  
+
+        ROBOT_STATE_PKG pkg;
+        memset(&pkg, 0, sizeof(pkg));
+        AxleComParam param(7, 8, 1, 0, 5, 3, 1);
+        robot->SetAxleCommunicationParam(param);
+
+        AxleComParam getParam;
+        robot->GetAxleCommunicationParam(&getParam);
+        printf("GetAxleCommunicationParam param is %d %d %d %d %d %d %d\n", getParam.baudRate, getParam.dataBit, getParam.stopBit, getParam.verify, getParam.timeout, getParam.timeoutTimes, getParam.period);
+
+        robot->SetAxleLuaEnable(1);
+        int luaEnableStatus = 0;
+        robot->GetAxleLuaEnableStatus(&luaEnableStatus);
+        robot->SetAxleLuaEnableDeviceType(1, 0, 0);
+
+        int forceEnable = 0;
+        int gripperEnable = 0;
+        int ioEnable = 0;
+        robot->GetAxleLuaEnableDeviceType(&forceEnable, &gripperEnable, &ioEnable);
+        printf("GetAxleLuaEnableDeviceType param is %d %d %d\n", forceEnable, gripperEnable, ioEnable);
+
+        
+        int getforceEnable[16] = { 0 };
+        int getgripperEnable[16] = { 0 };
+        int getioEnable[16] = { 0 };
+        robot->GetAxleLuaEnableDevice(getforceEnable, getgripperEnable, getioEnable);
+        printf("\ngetforceEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getforceEnable[i]);
+        }
+        printf("\ngetgripperEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getgripperEnable[i]);
+        }
+        printf("\ngetioEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getioEnable[i]);
+        }
+        printf("\n");
+        
+        vector <double> M = { 15.0, 15.0, 15.0, 0.5, 0.5, 0.1 };
+        vector <double> B = { 150.0, 150.0, 150.0, 5.0, 5.0, 1.0 };
+        vector <double> K = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        vector <double> F = { 10.0, 10.0, 10.0, 1.0, 1.0, 1.0 };
+        robot->EndForceDragControl(1, 0, 0, M, B, K, F, 50, 100);
+
+        robot->Sleep(10 * 1000);
+
+        robot->EndForceDragControl(0, 0, 0, M, B, K, F, 50, 100);
+    }

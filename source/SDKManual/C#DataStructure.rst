@@ -134,7 +134,7 @@ Extended axis state type
     }
 
 Robot State Feedback Structures Types
-++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.7
 
 .. code-block:: c#

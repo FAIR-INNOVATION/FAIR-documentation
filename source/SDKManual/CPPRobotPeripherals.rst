@@ -49,6 +49,8 @@ Activate gripper
 
 Control gripper
 ++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.5.0
+    
 .. code-block:: c++
     :linenos:
 
@@ -60,9 +62,13 @@ Control gripper
     * @param  [in] force  Percentage of torque, range[0~100]
     * @param  [in] max_time  Maximum wait time, range[0~30000], unit: ms
     * @param  [in] block  0- blocking, 1- non-blocking
+	* @param  [in] type grippr type, 0-parallel clamp; 1- Rotate the claw
+	* @param  [in] rotNum Number of turns[0-100]
+	* @param  [in] rotVel Percent rotation speed[100]
+	* @param  [in] rotTorque Percentage of rotating torque [0-100]
     * @return  Error code
-    */
-    errno_t  MoveGripper(int index, int pos, int vel, int force, int max_time, uint8_t block);
+	 */
+	errno_t  MoveGripper(int index, int pos, int vel, int force, int max_time, uint8_t block, int type, double rotNum, int rotVel, int rotTorque);
 
 Obtain the gripper motion state
 +++++++++++++++++++++++++++++++++++
