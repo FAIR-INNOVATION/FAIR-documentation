@@ -1634,8 +1634,28 @@ This command realizes the robot seam tracking and uses the deviation detection o
 
 .. centered:: Figure 9.8-6-3 Weld-Trc command interface-left and right compensation parameters
 
-Weld-Trc Operation
-++++++++++++++++++++
+Robot arc tracking system composition
++++++++++++++++++++++++++++++++++++++++
+
+During arc tracking welding, the welding machine feeds the real-time welding current signal to PLC, and then the PLC feeds back to the robot through UDP communication. The robot can compensate the welding trajectory position according to the real-time feedback welding current value to achieve arc tracking effect. There are two ways to feedback the current signal between the welding machine and the PLC:
+
+①CANopen or other bus communication: If your welder supports CANopen, EtherCAT, ModbusTCP and other bus communication protocols (such as MEGMEET A2 series, etc.), the PLC and the welder can communicate data directly through the relevant communication protocols, and the corresponding welding current signal can be directly transmitted to the PLC through communication. The PLC then feeds back to the robot through UDP communication.
+
+.. image:: coding/277.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-6-4 Topology diagram of robot arc tracking system (PLC communicates with welding machine bus)
+.. centered:: a-computer;b-Robot and control box;c-PLC and bus communication module; d-welder
+
+②Analog IO: PLC can also directly collect the analog signal, and then convert the analog signal into the current value with a certain conversion relationship to feed back to the robot; If your welding machine has a real-time welding current analog output channel, you can directly connect the channel to the PLC analog input module; If your welding machine does not have a real-time welding current analog output channel, you can connect an external Hall current sensor. The sensor collects the real-time welding current signal, converts the welding current signal into an analog signal, and outputs the welding current signal to the PLC analog input module.
+
+.. image:: coding/278.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-6-5 Topology diagram of robot arc tracking system (PLC acquisition of analog signals)
+.. centered:: a-computer; b-Robot and control box; c-PLC and analog input module; d-welder and Hall current sensor
 
 Welding machine model and setting
 **************************************
@@ -1705,19 +1725,80 @@ PLC model and settings
 Arc tracking function
 **************************************
 
-**1)An introduction to the relationship between setting current and voltage and function tracking performance**
+**1）Introduction to the arc tracing feature**
 
-Setting the welding current voltage and feedback welding current signal,blow:
+.. image:: coding/279.png
+   :width: 4in
+   :align: center
 
-.. image:: coding/131.png
+.. centered:: Figure 9.8-7-1 Typical arc tracing scenario
+
+Typical scenarios for the arc tracing function include: a. welding the workpiece (the weld groove is at a right or acute angle), b. the welding gun, e. weld center line. 
+
+The arc tracking function can tracing the welding groove through the collected welding current information and the swing parameters: c. up and down (depth) direction tracking and d. left and right (center line) direction tracking.
+
+**2）Communication Configuration**
+
+Open WebApp and click "Initial", "Peripheral" and "Welder" in turn.
+
+.. image:: coding/280.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.8-7-1 Short-circuit transition - > half-jet transition- > jet transition
+.. centered:: Figure 9.8-7-2 Open welding config
 
-.. note:: Set higher current and voltage value, feedback smaller burr amplitude of welding current, and more stable the welding process, and the more accurate the weld tracking. 
+The control type is selected as "Digital communication protocol". Since the robot communicates with PLC through UDP, UDP communication parameters need to be configured. The meanings of each parameter are as follows:
 
-**2)Introduction to the parameters of the function interface**
+**IP address**:IP address of PLC for UDP communication;
+
+**Port number**:PLC UDP communication port number;
+
+**Communication cycle**:The cycle of UDP communication between the robot and the PLC, the default is 2ms;
+
+**Packet loss detection cycle and Packet loss times**:When the number of lost packets in the packet loss detection period exceeds the specified value, the robot reports an error message indicating UDP Packet loss Exception and automatically cuts off the communication;
+
+**Communication interruption confirmation time**:The robot does not receive a complete PLC feedback packet within this period of time, which will report "UDP communication interruption" error alarm, and cut off UDP communication;
+
+**Automatic reconnection after communication interruption**:Whether the robot automatically reconnects after detecting UDP communication interruption;
+
+**Reconnection period and Num of reconnections**:After automatic reconnection of UDP communication interruption is enabled and UDP communication interruption is detected, the robot reconnects at the set period. When the reconnection times reach the maximum set value and the connection is not successful, the robot reports an error alarm of "UDP communication interruption" and disconnects the UDP communication at the same time.
+
+After configuring the above parameters, click the "Configure" and "Load" buttons successively.
+
+.. image:: coding/281.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-7-3 Selecting the control type
+   
+**3）Arc Tracing Channel Configuration**
+
+Click "Initial", "Base", "I/O setup" and "AI" successively, select the corresponding extended AI channel according to the actual configuration, and click "Apply" button.
+
+.. note:: 
+   The UDP communication protocol between the robot and the PLC is shown in 8.5.5.Appendix 1: UDP communication protocol for robots. In the protocol, the PLC feedback data to the robot includes four analog input channels with serial numbers 70~73, corresponding to Aux-AI0~3 in Figure 4-4; 
+   
+   In the welding process, PLC collects real-time welding current signals and converts them into 0~4095 numerical signals and assign them to an analog input channel (default is "Aux-AI0"). The robot side collects the corresponding analog input channel values for arc tracking operations.
+   
+   If you need to change the arc tracking channel to "Aux-AI1", "Aux-AI2" or "Aux-AI3", you need to update the PLC program simultaneously and assign the real-time welding current collected to the corresponding analog input port.
+
+.. image:: coding/282.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-7-4 Arc tracking channel configuration
+
+**4）Introduction to the use of arc tracing function commands**
+
+The arc tracking function can be adapted to the swing welding movement, inserting the arc tracking start command after the swing welding arc starts, and inserting the arc tracking end command before the swing welding arc extinguishing.
+
+.. image:: coding/283.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-7-5 Typical example of arc tracing
+
+**5)Introduction to the parameters of the function interface**
 
 .. centered:: Table 9.8-5 Arc tracking up-down compensation module
 
@@ -1728,7 +1809,7 @@ Setting the welding current voltage and feedback welding current signal,blow:
 
    * - **The name of the parameter**
      - **Meaning**
-     - **Parameter description**
+     - **Description**
 
    * - Arc tracking lag time
      - The time for the feedback current to lag
@@ -1809,7 +1890,7 @@ Setting the welding current voltage and feedback welding current signal,blow:
      - The maximum cumulative distance of compensation for a single complete welding process
      - According to the welding scene setting, the larger the weld deviation, the larger the setting
      
-**3)Scope of application**
+**6)Scope of application**
 
 .. centered:: Table 9.8-7 Up-down compensation On, Left-right compensation Off
 
@@ -1877,38 +1958,22 @@ Setting the welding current voltage and feedback welding current signal,blow:
    * - Set the current A
      - >210
 
-**4)Precautions**
+**7)Precautions**
 
 1) The left-right compensated arc tracking function can only be adapted to symmetrical triangle or sine weave based on line trajectory.
 2) The starting position of the welding to be able using the compensation function must be accurately above the weld (the axis of the welding gun is in the center of the fillet weld), and the welding gun should not be too close to the seam, otherwise there is a risk of hitting the welding gun.
+3) The material on both sides of the groove of the workpiece needs to be consistent.
+4) The coordinate size and attitude of the workpiece need to be accurately calibrated using the 6-point method.
+5) If the deviation between the set trajectory and the seam is larger, the maximum compensation distance each time and the total maximum compensation distance should be larger too.
+6) The deviation between the set trajectory and the end point of the weld should not be larger than 100mm/m, and too large the deviation may cause the welding wire or even the welding gun to hit the workpiece, so that the welding position deviates from the preset trajectory (the weave is not in place), resulting in the arc tracking function can not work normally.
+7) If a small set current and voltage is selected for welding, the compensate coefficient of arc tracking should be reduced accordingly to reduce the instability compensation caused by the burr of the feedback current.
+8)  When different coordinate systems are selected for arc tracking, the positive and negative signs of the up-down and left-right compensation coefficients may need to be adjusted, which can be judged by test welding in addition to the direction of the corresponding coordinate system. If the welding trajectory (left) is taught on an inclined plate, the welding trajectory (right) moves in the direction of descent based on the tilt gradient of the swing plane after arc tracking is enabled, and the height of the welding torch at the end is close to the starting point, then the sign of the adjustment coefficient is correct.
 
-.. image:: coding/132.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 9.8-7-2 The welding gun is above the seam
-
-3) If the deviation between the set trajectory and the seam is larger, the maximum compensation distance each time and the total maximum compensation distance should be larger too.
-4) The deviation between the set trajectory and the end point of the weld should not be larger than 100mm/m, and too large the deviation may cause the welding wire or even the welding gun to hit the workpiece, so that the welding position deviates from the preset trajectory (the weave is not in place), resulting in the arc tracking function can not work normally.
-5) Before the program starts the WeaveStart command, you need to add the ARCStart arc start command to the program.
-6) About the relationship between the arc tracking compensation coordinate and the adjustment coefficient value positive or negative:
-
-.. image:: coding/133.png
+.. image:: coding/284.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.8-7-3 Welding scene
-
-When the up-down compensation direction of the weld is consistent with the positive direction of the Z-axis of the selected coordinate system, the adjustment coefficient is a positive value.
-
-Case: If the "base" or "tool" is selected in the up-down compensation coordinate system, when the workpiece is in the displayed position, the welding gun gradually moves upwards away from the surface of the workpiece when it is not compensated, and it will compensate downward (base coordinate system - Z direction), then the symbol of the up-down compensation coefficients should be a negative sign.
-
-.. important:: 
-   Note that when the "weave" coordinate system is selected, the Z-axis of the weave coordinate system and the Z-axis of the tool coordinate system are inverted, and the compensation coefficient should be positive if the above case is used.
-   
-   The coefficient of the left-right compensation of the weld does not need to be changed, and it is a positive value by default.
-
-7) If a small set current and voltage is selected for welding, the compensate coefficient of arc tracking should be reduced accordingly to reduce the instability compensation caused by the burr of the feedback current.
+.. centered:: Figure 9.8-7-6 Set the tilt swing trajectory (left), weld trajectory when the symbol is correct (right)
 
 Adjust command
 ++++++++++++++++
