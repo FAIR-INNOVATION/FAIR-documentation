@@ -552,8 +552,8 @@ Storage
 
 The collaborative robot should be stored in -25 ~ 60 ° C, and there is no frost-free environment.
 
-Maintenance and scrap treatment
----------------------------------
+Maintenance, inspection, and scrapping
+-------------------------------------------
 
 Maintenance disposal
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -711,33 +711,26 @@ Below is a checklist of checklists that FAO Robots recommends performing based o
    
 .. note:: Do not use compressed air to clean robot arms as it may damage components. Do not store the robot for more than 6 months without visual inspection. 
 
-(1) If possible, move the robot arm to the zero position. 
-
-(2) Turn off and disconnect the power cord of the control box. 
-
-(3) Check the cable between the control box and the robot arm for any damage. 
-
-(4) Check whether the base mounting bolts are properly tightened. 
-
-(5) Check whether the tool flange bolts are properly tightened. 
-
-(6) Check whether the flat ring is worn and damaged.
-
-(7) Check all joint backs for any cracks or damage. 
-
-(8) Check that the screws for the articulated rear cover are seated and tightened correctly. 
+- If possible, move the robot arm to the zero position. 
+- Turn off and disconnect the power cord of the control box. 
+- Check the cable between the control box and the robot arm for any damage. 
+- Check whether the base mounting bolts are properly tightened. 
+- Check whether the tool flange bolts are properly tightened. 
+- Check whether the flat ring is worn and damaged.
+- Check all joint backs for any cracks or damage. 
+- Check that the screws for the articulated rear cover are seated and tightened correctly. 
 
 .. note:: If the robot shows any damage during the warranty period, please contact the dealer who purchased the robot.
 
 3. Function check
 
-The purpose of the functional inspection is to ensure that screws, bolts, tools and robot arms are not loose. The screws/bolts mentioned in the inspection planshall be checked with torque wrenches and the torque shall comply with the standard specifications, which can be found in chapter 1.5 of the Installation Specifications of the User Manual for the specifications of the mounting bolts of the robot arm.
+The purpose of the functional inspection is to ensure that screws, bolts, tools and robot arms are not loose. The screws/bolts mentioned in the inspection planshall be checked with torque wrenches and the torque shall comply with the standard specifications, which can be found in chapter of the Installation Specifications of the User Manual for the specifications of the mounting bolts of the robot arm.
 
 4. Cleaning
 
-You can wipe off any dust/dirt/grease observed on the robot arm using a cloth and one of the following cleaners: water, isopropyl alcohol, 10% ethanol or 10% naphtha. If the robot is operating in harsh environments, such as cutting fluids, coolants, etc., it is recommended to clean or replacethe rubber ringregularly. 
+You can wipe off any dust/dirt/grease observed on the robot arm using a cloth and one of the following cleaners: water, isopropyl alcohol, 10% ethanol or 10% naphtha. If the robot is operating in harsh environments, such as cutting fluids, coolants, etc., it is recommended to clean or replacethe rubber ringregularly.
 
-Do not use bleach. Do not use bleach in any diluted cleaning solution. 
+Do not use bleach. Do not use bleach in any diluted cleaning solution.
 
 In rare cases, a very small amount of grease can be seen from the joint. This does not affect the function, use or longevity of the joint. 
 
@@ -824,11 +817,11 @@ Below is a checklist of checklists that FAO Robots recommends performing based o
 
 2. Visual inspection
 
-(1) Unplug the power cord from the control box.
+- Unplug the power cord from the control box.
 
-(2) Check that the terminals of the control board are inserted correctly and there are no loose wires.
+- Check that the terminals of the control board are inserted correctly and there are no loose wires.
 
-(3) Check whether there is dirt/dust in the control box. Use an ESD vacuum cleaner for cleaning if necessary. 
+- Check whether there is dirt/dust in the control box. Use an ESD vacuum cleaner for cleaning if necessary. 
 
 .. note:: Do not use compressed air to clean the inside of the control box as this may damage components. 
 
@@ -836,8 +829,8 @@ Below is a checklist of checklists that FAO Robots recommends performing based o
 
 .. note:: Robot safety features are important and it is recommended to test once a month to ensure proper functionality.
 
-(1)Emergency stop button onteach pendant/button box:
-
+- Emergency stop button onteach pendant/button box:
+  
   A. Press the emergency stop button on the teach pendant/button box. 
   B. Observe that the robot stops and turns off the joint power. 
   C. Turn on the robot power again. 
@@ -850,31 +843,33 @@ Below is a checklist of checklists that FAO Robots recommends performing based o
 		:align: center
 		:width: 4in
 
-（2）Other safety inputs and outputs remain operational
+- Other safety inputs and outputs remain operational
+  
+  Check which safety inputs and outputs are active and whether they can be triggered by PolyScope or external devices.
 
-Check which safety inputs and outputs are active and whether they can be triggered by PolyScope or external devices.
+- Date and clock
+  
+  Check that the date and clock in the Log tab are correct. Incorrect dates and clocks indicate low CMOS battery charge. CMOS batteries have a shelf life of up to5 years.
 
-（3）date and clock
-
-Check that the date and clock in the Log tab are correct. Incorrect dates and clocks indicate low CMOS battery charge. CMOS batteries have a shelf life of up to5 years.
-
-（4） Check whether the terminal snaps are in place
-
+- Check whether the terminal snaps are in place
+  
 	.. figure:: installation/077.png
 		:align: center
 		:width: 4in
 
 4. Cleaning
 
-(1) Teaching device
+- Teaching device
+  
+  You may need to clean the teach pendant screen. It is recommended to use a standard mild industrial cleaner that does not contain diluents or any corrosive additives. Do not wipe the screen with abrasive materials. Fawbots don't market specific cleaning agents.
 
-You may need to clean the teach pendant screen. It is recommended to use a standard mild industrial cleaner that does not contain diluents or any corrosive additives. Do not wipe the screen with abrasive materials. Fawbots don't market specific cleaning agents.
+- The button box 
+  
+  Do not need to be cleaned regularly when it is not normal. If the key identification is blurred and affects the recognition operation, please clean it with detergent at any time.
 
-(2) The button box does not need to be cleaned regularly when it is not normal. If the key identification is blurred and affects the recognition operation, please clean it with detergent at any time.
-
-(3) Control box
-
-The control box contains two filters, one on each side of the control box.
+- Control box
+  
+  The control box contains two filters, one on each side of the control box.
 
   A. The filter can be observed from the left and right side vents of the control box. Under normal circumstances, you can see the honeycomb structure of the filter.
   B. Remove the filter for cleaning. Clean with low pressure air or change filters as needed. Remember to clean each side. If it is dirty or damaged, replace it (worse, remove the upper cover of the controller and replace the filter from inside the upper cover). 
@@ -1250,49 +1245,52 @@ Controller interface
 This series of robots can be equipped with three control boxes with different power inputs. For details on the control box power input, refer to the control box nameplate information. The robot needs to be electrically grounded.
 
 .. list-table::
-   :widths: 60 20 20 20 20 20
+   :widths: 20 40 40
    :header-rows: 0
    :align: center
 
    * - 
-     - **DC 2kW**
-     - **DC 5kW**
-     - **AC narrow voltage 2kW**
-     - **AC wide voltage 2kW**
-     - **AC wide voltage 5kW**
+     - **Maximum Input (for customers to configure the front-stage power supply)**
+     - **Is the maximum output Output (maximum output peak)**
 
-   * - **Maximum Input (for customers to configure the front-stage power supply)**
+   * - **DC 2kW**
      - 30-60VDC/30A
+     - 2000W/48VDC/41A
+
+   * - **DC 5kW**
      - 30-60VDC/40A
-     - 176-264VDC/10A/单机/50Hz
-     - 100-240VDC/10A/单机/50-60Hz
-     - 100-240VDC/16A/单机/50-60Hz
-
-   * - **Is the maximum output Output (maximum output peak)**
-     - 2000W/48VDC/41A
-     - 5000W/48VDC/104A
-     - 2000W/48VDC/41A
-     - 2000W/48VDC/41A
      - 5000W/48VDC/104A
 
+   * - **AC narrow voltage 2kW**
+     - 176-264VDC/10A/Single Machine/50Hz
+     - 2000W/48VDC/41A
+
+   * - **AC wide voltage 2kW**
+     - 100-240VDC/10A/Single Machine/50-60Hz
+     - 2000W/48VDC/41A
+
+   * - **AC wide voltage 5kW**
+     - 100-240VDC/16A/Single Machine/50-60Hz
+     - 5000W/48VDC/104A
+  
 .. warning:: 
 	Before wiring, please ensure that the power supply is turned off and hang a safety warning sign next to it.
 
 The external wiring of this series of robotic arm control systems is connected using pluggable and quickly installable plugs. The wiring panel of the collaborative robot is shown in Figure 3.5-1.
 
--  Make sure the power button on the control box is off (the button is turned to 0) and connect the power cord to the power socket
+-  Make sure the power button on the control box is off (the button is turned to 0) and connect the power cord to the power socket.
 
--  Connect the robot body overload cable to the control box overload interface
+-  Connect the robot body overload cable to the control box overload interface.
 
--  Insert the button box aviation plug into the control box teaching device interface
+-  Insert the button box aviation plug into the control box teaching device interface.
 
--  The heat dissipation ports on both sides of the control box should be spaced at least 15CM apart
+-  The heat dissipation ports on both sides of the control box should be spaced at least 15CM apart.
 
--  At the front of the control box (user Table metal, switch power button, heavy load and teaching pendant wiring harness), the spacing distance should not be less than 25CM
+-  At the front of the control box (user Table metal, switch power button, heavy load and teaching pendant wiring harness), the spacing distance should not be less than 25CM.
 
--  The control box is 0.6-1.5m above the ground
+-  The control box is 0.6-1.5m above the ground.
 
--  Do not allow users to replace power cables on their own
+-  Do not allow users to replace power cables on their own.
 
 .. figure:: installation/037.png
 	:align: center

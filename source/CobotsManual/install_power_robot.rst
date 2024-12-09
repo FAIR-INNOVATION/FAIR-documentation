@@ -55,7 +55,6 @@ When the robot has high running precision requirements, be sure to add pins to p
 
 .. important:: 
    It is recommended that the robot mounting base meet the following requirements to ensure that the robot is installed firmly and stably:
-
    
     (1)The robot mount needs to be strong enough and have sufficient load-bearing capacity. It should be able to carry at least 5 times the weight of the robot and at least 10 times the 1-axis torque.
 
@@ -71,8 +70,13 @@ Connect the control box
 -------------------------
 
 This series of robots can be configured with three control boxes with different power inputs. For details on the control box power input, see the control box nameplate information.
-
 The robot needs to be electrically grounded. The external wiring of the manipulator control system is connected using pluggable and quickly installed plugs.
+
+A. 30-60VDC
+B. 176-264VAC~50-60Hz
+C. 100-240VAC~50-60HZ
+
+.. note:: The AC input control box has two versions: narrow voltage and wide voltage. The control box wiring terminals and appearance are consistent, and cannot be distinguished by appearance alone. Please confirm by the control box nameplate and power on after confirmation.
 
 The wiring panel of the collaborative robot is shown in the following figure:
 
@@ -81,12 +85,6 @@ The wiring panel of the collaborative robot is shown in the following figure:
    :align: center
 
 .. centered:: Figure 1.2-1 Control box wiring panel
-
-（1）30-60VDC
-（2）176-264VAC~50-60Hz
-（3）100-240VAC~50-60HZ
-
-.. note:: The AC input control box has two versions: narrow voltage and wide voltage. The control box wiring terminals and appearance are consistent, and cannot be distinguished by appearance alone. Please confirm by the control box nameplate and power on after confirmation.
 
 The button box interface is the control port of the teach pendant by default, and the IP address is 192.168.58.2. Use a network cable to connect the button box interface and the computer. The computer IP address is set to 192.168.58.10 or the same network segment. Open the Google browser and enter 192.168.58.2 You can access the teach pendant page.
 
