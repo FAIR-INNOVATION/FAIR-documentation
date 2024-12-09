@@ -70,13 +70,23 @@ When the robot has high running precision requirements, be sure to add pins to p
 Connect the control box
 -------------------------
 
-This series of robots are powered by TN-S single-phase 220V AC power supply. The equipment comes with a 5-meter power cord. The three-pin plug end is inserted into the AC 220V socket provided on site, and the robot is electrically grounded. The external connections of the manipulator control system are all connected by pluggable plugs that can be quickly installed. The wiring panel of the collaborative robot is as follows:
+This series of robots can be configured with three control boxes with different power inputs. For details on the control box power input, see the control box nameplate information.
+
+The robot needs to be electrically grounded. The external wiring of the manipulator control system is connected using pluggable and quickly installed plugs.
+
+The wiring panel of the collaborative robot is shown in the following figure:
 
 .. image:: installation/037.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 1.2-1 Control box wiring panel
+
+（1）30-60VDC
+（2）176-264VAC~50-60Hz
+（3）100-240VAC~50-60HZ
+
+.. note:: The AC input control box has two versions: narrow voltage and wide voltage. The control box wiring terminals and appearance are consistent, and cannot be distinguished by appearance alone. Please confirm by the control box nameplate and power on after confirmation.
 
 The button box interface is the control port of the teach pendant by default, and the IP address is 192.168.58.2. Use a network cable to connect the button box interface and the computer. The computer IP address is set to 192.168.58.10 or the same network segment. Open the Google browser and enter 192.168.58.2 You can access the teach pendant page.
 

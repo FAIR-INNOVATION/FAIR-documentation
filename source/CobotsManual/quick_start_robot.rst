@@ -15,14 +15,16 @@ Install the robot arm and control box according to the 3.5 and 3.6 in the hardwa
 
 -  Connect the robot arm ontology to the heavy load interface of the control box;
 
--  Plug the button box aviation plug into the control box exemporary instrument interface. If you are equipped with a touch-screen version of the teenter, you also need to use the data cable of both ends as the Type-C interface, insert the Type of the button box and the instructor, respectively. -c interface;
+-  Plug the button box aviation plug into the control box exemporary instrument interface. 
 
--  Make sure that the control box power button is closed (the button is hit to 0) to receive the 220V power cord to the power socket;
+-  Make sure the power button of the control box is turned off (the button is turned to 0) and connect the power cord to the power socket;
 
 -  Plug in the power control box plug.
 
 .. warning:: 
-   If the robot is placed on a strong surface, the robot may dump and cause damage.
+   (1) If the robot is placed on a strong surface, the robot may dump and cause damage.
+
+   (2) Do not quickly switch the power of the control box on and off. It is recommended that the time between switching the power of the control box off and on again be greater than 1 minute.
 
 Demonstrate startup control robot
 -------------------------------------

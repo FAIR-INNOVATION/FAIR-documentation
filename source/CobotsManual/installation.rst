@@ -562,6 +562,443 @@ Please check the emergency stop and protection stop for 1 month. Determine wheth
 
 Please refer to the wiring chapter for emergency stop and protective stop wiring.
 
+Inspection Plan
+~~~~~~~~~~~~~~~~~~~
+
+Preface
++++++++++++
+
+Safety Notice
+****************
+
+The following warnings are used in this manual. These warnings are intended to ensure personal and equipment safety. It is important that you observe and follow all assembly instructions and guidelines in other sections of this manual when reading this manual.
+
+Special attention should be paid to the text related to warning signs. Please read the user manual carefully before use. This manual is only used as a customer maintenance instruction manual. Maintenance operators need to have professional competence. Non-professional personnel operation. FAO refuses to assume all responsibilities.
+
+.. note:: If the robot (robot body, control box, teaching box) is damaged, changed or modified due tohumanreasons,FAO rejects all responsibility; FAO is not responsible for any damage to the robot or any other equipment caused by errors inthe programs written by thecustomer.
+
+Effectiveness and accountability
+**************************************
+
+The information in this manual does not cover the design, installation and operation of a complete robot application, nor does it cover all peripheral equipment that may affect the safety of this complete system. The complete system is designed and installed to meet safety requirements established in the standards and codes of the country where the robot is installed.
+
+It is the responsibility of FAO integrators to ensure compliance with relevant national laws and regulations and to ensure that there are no significant risks in the complete robot application. This includes but is not limited to the following:
+
+- Do a risk assessment of the complete robotic system
+- Connect other machinery and additional safety equipment defined by the risk assessment
+- Establish appropriate security settings in software
+- Ensure that users do not modify any security measures
+- Confirm that the design and installation of the entire robot system is correct
+- Clear instructions for use
+- Mark the relevant logo and contact information of the integrator on the robot
+- Collect all documents in technical files, including this manual
+
+Limited Liability
+*********************
+
+Any safety information contained in this manual should not be considered a general robot safety guarantee, and even if all safety instructions are followed, it may still cause personal injury or equipment damage.
+
+Warning signs in this manual
+*************************************
+
+The following symbols define the hazard classification specifications contained in this manual. The same warning signs are used on the products. 
+
+.. note:: 
+   .. image:: installation/070.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Danger**
+     
+   Function: This refers to an electrical situation that is about to cause danger and, if not avoided, could result in death or serious injury.
+
+.. note:: 
+   .. image:: installation/071.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Electric shockhazard**
+   
+   Function: This refers to an imminent hazardous electric shock situation which, if not avoided, could result in electrocution or serious injury.
+
+.. note:: 
+   .. image:: installation/072.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Burnhazard**
+   
+   Function: This refers to hot surfaces that may cause hazards and, if touched, may cause injury to persons.
+
+Inspection maintenance plan
+++++++++++++++++++++++++++++++++++
+
+Robotic arm
+**************
+
+1. Inspection plan
+
+Below is a checklist of checklists that FAO Robots recommends performing based on the marked time intervals. If the inspection reveals that the condition of the relevant parts is unqualified, please correct it immediately.
+
+.. note:: F=Functional check,V=visual inspection,*=Must be checked after severe collision.
+
+.. list-table::
+   :widths: 10 40 20 20 20 20
+   :header-rows: 0
+   :align: center
+
+   * - 
+     - **Check item**
+     - 
+     - **Monthly**
+     - **Semi-annually**
+     - **Annually**
+
+   * - 1
+     - Check joint rear cover *
+     - V
+     - 
+     - ✔
+     - 
+
+   * - 2
+     - Check joint rear cover screws
+     - F
+     - 
+     - ✔
+     - 
+
+   * - 3
+     - Check joint rubber ring
+     - V
+     - 
+     - ✔
+     - 
+
+   * - 4
+     - Check robot cables
+     - V
+     - 
+     - ✔
+     - 
+
+   * - 5
+     - Check robot cable links
+     - V
+     - 
+     - ✔
+     - 
+
+   * - 6
+     - Check robot base mounting bolts *
+     - F
+     - ✔
+     - 
+     - 
+
+   * - 7
+     - Check End Tool Mounting Bolts *
+     - F
+     - ✔
+     - 
+     - 
+
+.. figure:: installation/073.png
+  :align: center
+  :width: 3in
+
+2. Visual inspection
+   
+.. note:: Do not use compressed air to clean robot arms as it may damage components. Do not store the robot for more than 6 months without visual inspection. 
+
+(1) If possible, move the robot arm to the zero position. 
+
+(2) Turn off and disconnect the power cord of the control box. 
+
+(3) Check the cable between the control box and the robot arm for any damage. 
+
+(4) Check whether the base mounting bolts are properly tightened. 
+
+(5) Check whether the tool flange bolts are properly tightened. 
+
+(6) Check whether the flat ring is worn and damaged.
+
+(7) Check all joint backs for any cracks or damage. 
+
+(8) Check that the screws for the articulated rear cover are seated and tightened correctly. 
+
+.. note:: If the robot shows any damage during the warranty period, please contact the dealer who purchased the robot.
+
+3. Function check
+
+The purpose of the functional inspection is to ensure that screws, bolts, tools and robot arms are not loose. The screws/bolts mentioned in the inspection planshall be checked with torque wrenches and the torque shall comply with the standard specifications, which can be found in chapter 1.5 of the Installation Specifications of the User Manual for the specifications of the mounting bolts of the robot arm.
+
+4. Cleaning
+
+You can wipe off any dust/dirt/grease observed on the robot arm using a cloth and one of the following cleaners: water, isopropyl alcohol, 10% ethanol or 10% naphtha. If the robot is operating in harsh environments, such as cutting fluids, coolants, etc., it is recommended to clean or replacethe rubber ringregularly. 
+
+Do not use bleach. Do not use bleach in any diluted cleaning solution. 
+
+In rare cases, a very small amount of grease can be seen from the joint. This does not affect the function, use or longevity of the joint. 
+
+Control box, teaching device, button box
+******************************************
+
+1. Inspection plan
+
+Below is a checklist of checklists that FAO Robots recommends performing based on the marked time intervals. If the inspection reveals that the condition of the relevant parts is unqualified, please correct it immediately.
+
+.. note:: F=Functional check,V=Visual inspection.
+
+.. list-table::
+   :widths: 10 40 20 20 20 20
+   :header-rows: 0
+   :align: center
+
+   * - 
+     - **Check item**
+     - 
+     - **Monthly**
+     - **Semi-annually**
+     - **Annually**
+
+   * - 1
+     - Emergency stop button on test button box (teach pendant)
+     - F
+     - ✔
+     - 
+     - 
+
+   * - 2
+     - Safety input and output functions on the test terminal strip
+     - F
+     - ✔
+     - 
+     - 
+
+   * - 3
+     - Detection button box start/stop, mode switching function
+     - F
+     - ✔
+     - 
+     - 
+
+   * - 4
+     - Test button box (teach pendant) cable
+     - V
+     - 
+     - ✔
+     - 
+
+   * - 5
+     - Check and clean the air filter on the control box
+     - V
+     - ✔
+     - 
+     - 
+
+   * - 6
+     - Check whether the terminals of the control box are firm
+     - F
+     - 
+     - ✔
+     - 
+
+   * - 7
+     - Ground resistance of detection control box ≤1Ω
+     - F
+     - 
+     - 
+     - ✔
+
+   * - 8
+     - Check the main power supply of the control box
+     - F
+     - 
+     - 
+     - ✔
+
+.. figure:: installation/074.png
+  :align: center
+  :width: 3in
+
+2. Visual inspection
+
+(1) Unplug the power cord from the control box.
+
+(2) Check that the terminals of the control board are inserted correctly and there are no loose wires.
+
+(3) Check whether there is dirt/dust in the control box. Use an ESD vacuum cleaner for cleaning if necessary. 
+
+.. note:: Do not use compressed air to clean the inside of the control box as this may damage components. 
+
+3. Function check
+
+.. note:: Robot safety features are important and it is recommended to test once a month to ensure proper functionality.
+
+(1)Emergency stop button onteach pendant/button box:
+
+  A. Press the emergency stop button on the teach pendant/button box. 
+  B. Observe that the robot stops and turns off the joint power. 
+  C. Turn on the robot power again. 
+
+	.. figure:: installation/075.png
+		:align: center
+		:width: 4in
+
+	.. figure:: installation/076.png
+		:align: center
+		:width: 4in
+
+（2）Other safety inputs and outputs remain operational
+
+Check which safety inputs and outputs are active and whether they can be triggered by PolyScope or external devices.
+
+（3）date and clock
+
+Check that the date and clock in the Log tab are correct. Incorrect dates and clocks indicate low CMOS battery charge. CMOS batteries have a shelf life of up to5 years.
+
+（4） Check whether the terminal snaps are in place
+
+	.. figure:: installation/077.png
+		:align: center
+		:width: 4in
+
+4. Cleaning
+
+(1) Teaching device
+
+You may need to clean the teach pendant screen. It is recommended to use a standard mild industrial cleaner that does not contain diluents or any corrosive additives. Do not wipe the screen with abrasive materials. Fawbots don't market specific cleaning agents.
+
+(2) The button box does not need to be cleaned regularly when it is not normal. If the key identification is blurred and affects the recognition operation, please clean it with detergent at any time.
+
+(3) Control box
+
+The control box contains two filters, one on each side of the control box.
+
+  A. The filter can be observed from the left and right side vents of the control box. Under normal circumstances, you can see the honeycomb structure of the filter.
+  B. Remove the filter for cleaning. Clean with low pressure air or change filters as needed. Remember to clean each side. If it is dirty or damaged, replace it (worse, remove the upper cover of the controller and replace the filter from inside the upper cover). 
+  C. Listen to the sound of the fan when running. If the sound is abnormal, please contact the service provider or replace it.
+
+Registration card for French-Austrian robot inspection plan
+******************************************************************
+
+1. Robotic arm
+  
+.. list-table::
+   :widths: 40 20 20 20 40
+   :header-rows: 0
+   :align: center
+
+   * - **InspectionItem**
+     - **Inspected**
+     - **Inspector**
+     - **Data**
+     - **Remark**
+
+   * - **Check joint rear cover**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check joint rear cover screws**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check joint rubber ring**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check robot cables**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check robot cable links**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check robot base mounting bolts**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check End Tool Mounting Bolts**
+     - 
+     - 
+     - 
+     - 
+  
+2. Control box, teaching device, button box
+
+.. list-table::
+   :widths: 40 20 20 20 40
+   :header-rows: 0
+   :align: center
+
+   * - **InspectionItem**
+     - **Inspected**
+     - **Inspector**
+     - **Data**
+     - **Remark**
+
+   * - **Emergency stop button on test button box (teach pendant)**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Safety input and output functions on the test terminal strip**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Detection button box start/stop, mode switching function**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Test button box (teach pendant) cable**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check and clean the air filter on the control box**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check whether the terminals of the control box are firm**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Ground resistance of detection control box ≤1Ω**
+     - 
+     - 
+     - 
+     - 
+
+   * - **Check the main power supply of the control box**
+     - 
+     - 
+     - 
+     - 
+
 Robot waste disposal
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -751,7 +1188,7 @@ When installing and using a collaborative robot, make sure to meet the following
 
 -  Avoid the device from working under the unstable conditions of the current
 
--  Users need to increase the air switch with a capability of not less than 10A/250V in front of the robot power.
+-  Users need to add an air switch before the robot power supply, and it is recommended to add an EMC filter
 
 .. note:: 
 	If you want to hang or install the collaborative robot, please contact us.
@@ -810,24 +1247,40 @@ Control connection
 Controller interface
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This series of robots adopts TN-S single-phase 220V AC power supply, and the equipment comes with a 5-meter power cord. The three pin plug end is inserted into the on-site AC 220V socket, and the robot is electrically grounded
+This series of robots can be equipped with three control boxes with different power inputs. For details on the control box power input, refer to the control box nameplate information. The robot needs to be electrically grounded.
 
--  Rating input voltage: 6A/220VAC
+.. list-table::
+   :widths: 60 20 20 20 20 20
+   :header-rows: 0
+   :align: center
 
--  Rated output voltage: 48V/21A
+   * - 
+     - **DC 2kW**
+     - **DC 5kW**
+     - **AC narrow voltage 2kW**
+     - **AC wide voltage 2kW**
+     - **AC wide voltage 5kW**
 
--  Number of phase: single phase
+   * - **Maximum Input (for customers to configure the front-stage power supply)**
+     - 30-60VDC/30A
+     - 30-60VDC/40A
+     - 176-264VDC/10A/单机/50Hz
+     - 100-240VDC/10A/单机/50-60Hz
+     - 100-240VDC/16A/单机/50-60Hz
 
--  Frequency: 50Hz
-
--  Output short-circuit rating: 48V/22A
+   * - **Is the maximum output Output (maximum output peak)**
+     - 2000W/48VDC/41A
+     - 5000W/48VDC/104A
+     - 2000W/48VDC/41A
+     - 2000W/48VDC/41A
+     - 5000W/48VDC/104A
 
 .. warning:: 
 	Before wiring, please ensure that the power supply is turned off and hang a safety warning sign next to it.
 
 The external wiring of this series of robotic arm control systems is connected using pluggable and quickly installable plugs. The wiring panel of the collaborative robot is shown in Figure 3.5-1.
 
--  Ensure that the 220V power cord is connected to the power socket with the control box power button turned off (button turned to 0) (full load input voltage is 6A/220VAC~7A/210VAC)
+-  Make sure the power button on the control box is off (the button is turned to 0) and connect the power cord to the power socket
 
 -  Connect the robot body overload cable to the control box overload interface
 
@@ -879,6 +1332,8 @@ End plate
 ~~~~~~~~~~~~~
 
 You can use the end -panel's I/O and 485 communication interfaces to control various devices, including pneumatic relay, PLC and emergency stop buttons. The PIN foot distribution and its PIN foot explanation is shown in figure below. The I/O connector model is M12 connector 8 cores.
+
+.. note:: End board I/O and 485 interfaces are prohibited from hot plugging.
 
 .. figure:: installation/041.png
 	:align: center
