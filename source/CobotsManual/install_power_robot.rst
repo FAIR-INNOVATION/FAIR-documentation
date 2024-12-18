@@ -184,3 +184,15 @@ Power on enable
 ----------------
 
 Before powering on, please confirm that the emergency stop button of the button box is released, press the red switch button of the control box to power on, and the LED light at the end will be in a steady green state after enabling successfully.
+
+Power Off
+----------------
+
+.. important:: 
+  When using this device, please make sure to stop all running programs, disable the status query function, and confirm that the operating status is "Stopped" before turning off the power. This operation is to protect the safety of the device and stored data and avoid data loss or system damage caused by sudden power outages.
+
+.. image:: installation/078.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 1.5-1 Turn off the power button

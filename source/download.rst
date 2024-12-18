@@ -4,7 +4,9 @@
 
 Brochure
 --------------
-    :download:`FAIRINO Product Manual <_static/_doc/FAIRINO Product Manual.zip>`
+    :download:`FAIRINO Product Catalogue <_static/_doc/FAIRINO Product Catalogue.pdf>`
+
+    :download:`FAIRINO Accessories Ecosystem <_static/_doc/FAIRINO Accessories Ecosystem.pdf>`
 
 Qualification Certification
 ---------------------------------
@@ -96,12 +98,36 @@ Palletizer frcap
 ---------------------------------
     :download:`Palletizer-v2.1.0 <_static/_doc/Palletizer-v2.1.0.zip>`
 
+CPP SDK
+---------------------------------
+
+    Latest version: :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
+
+    \ `Historical Version <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/releases>`__\
+
+C# SDK
+---------------------------------
+
+    Latest version: :download:`FAIRINO C# SDK-v1 <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/archive/refs/heads/main.zip>`
+
+    \ `Historical Version <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/releases>`__\
+
+Python SDK
+---------------------------------
+
+    Latest version: :download:`FAIRINO Python SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-python-sdk/archive/refs/heads/main.zip>`
+
+    \ `Historical Version <https://github.com/FAIR-INNOVATION/fairino-python-sdk/releases>`__\
+
+Java SDK
+---------------------------------
+
+    Latest version: :download:`FAIRINO Java SDK-v1 <https://github.com/FAIR-INNOVATION/fairino-java-sdk/archive/refs/heads/main.zip>`
+
+    \ `Historical Version <https://github.com/FAIR-INNOVATION/fairino-java-sdk/releases>`__\
+
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-V3.7.6-Release-241118 <https://drive.google.com/file/d/1Nvx5Rffuyt3pA1BAOnsSgpQGpPE7ZICd/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-QNX-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ZuGEkbvVvR7f5viylLS4iYhlf_jHydnU/view?usp=sharing>`
 
-    :download:`FAIRINO CPP SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-cpp-sdk/archive/refs/heads/main.zip>`
-
-    :download:`FAIRINO C# SDK-v1 <https://github.com/FAIR-INNOVATION/fairino-csharp-sdk/archive/refs/heads/main.zip>`
-
-    :download:`FAIRINO Python SDK-v2 <https://github.com/FAIR-INNOVATION/fairino-python-sdk/archive/refs/heads/main.zip>`
+    :download:`FAIRINO-CobotSoftware-Linux-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ifjffSx6ZDco2fhllgLEL5Tp3qZJgU8V/view?usp=sharing>`
