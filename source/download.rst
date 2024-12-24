@@ -12,39 +12,190 @@ Qualification Certification
 ---------------------------------
     :download:`FAIRINO ISO9001 Quality Certification <_static/_doc/FAIRINO ISO9001 Quality Certification.pdf>`
 
-    :download:`FAIRINO CE Certificate <_static/_doc/FAIRINO CE Certificate.pdf>`
+.. list-table::
+   :widths: 15 4 4 4 4 4 4 4 20
+   :header-rows: 0
+   :class: sheet-center
 
-    :download:`High Protection IP65 Test Certification Certificate <_static/_doc/High protection IP65 test certification certificate.zip>`
-    
-    :download:`NSF Certification <_static/_doc/NSF certification.zip>`
+   * - **Certification/Model**
+     - **FR3**
+     - **FR5**
+     - **FR10**
+     - **FR16**
+     - **FR20**
+     - **FR30**
+     - **FR3MT**
+     - **Certificate Download**
 
-    :download:`Crash Force Test Certification <_static/_doc/Crash force test certification.pdf>`
+   * - **High Protection IP65 Test Certification Certificate**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/High protection IP65 test certification certificate.zip>`
 
-    :download:`ROHS Test Certification Certificate <_static/_doc/ROHS test certification certificate.zip>`
+   * - **NSF Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/NSF Certification.zip>`
 
-    :download:`Parts-Motor Certification <_static/_doc/Parts-Motor Certification.pdf>`
+   * - **Crash Force Test Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/Crash force test certification.zip>`
 
-    :download:`Parts-Driver Certification <_static/_doc/Parts-Driver Certification.pdf>`
+   * - **ROHS Test Certification Certificate**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - --
+     - :download:`download <_static/_doc/ROHS test certification certificate.zip>`
 
-    :download:`Parts-Core Board Certification <_static/_doc/Parts-Core Board Certification.pdf>`
+   * - **Parts-Motor Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/Parts-Motor Certification.pdf>`
 
-    :download:`Parts-Power Supply Certification <_static/_doc/Parts-Power Supply Certification.pdf>`
+   * - **Parts-Driver Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/Parts-Driver Certification.pdf>`
 
-    :download:`Explosion-proof Certification <_static/_doc/Explosion-proof certification.zip>`
+   * - **Parts-Core Board Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/Parts-Core Board Certification.pdf>`
 
-    :download:`CE-EMC Certification <_static/_doc/CE-EMC certification.pdf>`
+   * - **Parts-Power Supply Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/Parts-Power Supply Certification.pdf>`
 
-    :download:`CE-MD Certification <_static/_doc/CE-MD certification.zip>`
-    
-    :download:`Functional Safety Certification <_static/_doc/Functional safety certification.pdf>`
+   * - **Explosion-proof Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/Explosion-proof certification.zip>`
 
-    :download:`KCs Certification <_static/_doc/KCs Certificate-FR3+FR5+FR10+FR16+FR20.zip>`
+   * - **CE-EMC Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/CE-EMC certification.pdf>`
 
-    :download:`SEMI Certification <_static/_doc/SEMI Certification.pdf>`
-            
-    :download:`NRTL Industrial Robot certification <_static/_doc/NRTL Industrial Robot certification.pdf>`
-    
-    :download:`NRTL Collaborative Robot certification <_static/_doc/NRTL Collaborative Robot certification.pdf>`
+   * - **CE-MD Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/CE-MD certification.zip>`
+
+   * - **Control Box CE Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/FRC100-AC-x000-A version control box CE (MD+EMC) certificate.pdf>`
+
+   * - **Functional Safety Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/Functional safety certification.zip>`
+
+   * - **KCs Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - --
+     - :download:`download <_static/_doc/KCs Certification(FR3-FR20).pdf>`
+
+   * - **SEMI Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/SEMI Certification.pdf>`
+
+   * - **NRTL Industrial Robot Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/FR3-30 Industrial Robot NRTL Certification.pdf>`
+
+   * - **NRTL Collaborative Robot Certification**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - :download:`download <_static/_doc/NRTL Collaborative Robot certification.pdf>`
 
 Secondary Development
 ---------------------------------
