@@ -76,3 +76,14 @@ Click the CTRL key twice, the key status turns red, click the spacebar to select
 .. centered:: Figure 16.2‑6 English Input Method
 
 After successful login, the system will load the model and other data, and enter the initial page after loading.
+
+The language of the teaching pendant and webApp is inconsistent
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+After the teach pendant is enabled, the teach pendant and webApp language verification will be triggered on the login interface. When the teach pendant language is inconsistent with the webApp language, the following prompt will appear.
+
+.. image:: teach_pendant/008.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 16.2‑7 The language of the teaching pendant and webApp is inconsistent

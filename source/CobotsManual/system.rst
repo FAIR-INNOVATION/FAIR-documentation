@@ -10,7 +10,7 @@ General settings
 Click "System Settings" on the left menu bar, and then click "General Settings" on the secondary menu bar to enter the general settings interface. General settings can update the robot system time according to the current computer time so that the time of the log content can be recorded accurately.
 
 .. image:: system/028.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 15.1‑1 Time Settings
@@ -40,7 +40,7 @@ Teach pendant touch screen calibration
 After enabling the teach pendant, you can calibrate the teach pendant.
 
 .. image:: system/029.png
-   :width: 3in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 15.1‑3 Teach pendant touch screen calibration
@@ -59,13 +59,61 @@ To enable the peripheral industrial computer, you need to enter the IP address. 
 System Language
 ~~~~~~~~~~~~~~~~~~
 
-Select the system language and click the "Apply" button to switch the system language.
+Language Import
+++++++++++++++++
+
+Select a language pack to import (Note: the import file format is [language code].json). If the import is successful and the language pack is not an existing language in the system, a new imported language pack data will be added to the system language.
 
 .. image:: system/031.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 15.1‑5 System language interface
+
+Language Export
++++++++++++++++++
+Select the system language, taking English as an example, click the "Export" button, and the exported download file will pop up on the page.
+
+.. image:: system/035.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑6 Export system language
+   
+Language Application
+++++++++++++++++++++++
+
+Select the system language and click the "Apply" button to switch the system language. After the language is applied successfully, the system will automatically log out to the login page, and the system language will be switched to the current language. Take English as an example:
+
+.. image:: system/036.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑7 Language system successful interface
+
+System safe mode recovery
+++++++++++++++++++++++++++++++
+
+When the system needs to upgrade or downgrade the version, or the system language pack import fails and the system cannot be entered normally, you need to enter the "System Security Mode Recovery" interface. The specific operations are as follows:
+1. Enter the System Settings -> General Settings -> Network Settings interface, adjust the WebRecovery access IP to the network card 0 position, and click "Set Network".
+
+.. image:: system/037.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑8 WebRecovery set up the network card interface
+
+2. After the network settings are successful, restart the control box, switch the IP address to 192.168.57.xxx, and connect the network cable to the control box network card 0.
+3. Log in to the URL "192.168.57.2:8050" and enter the "System Security Mode Recovery" interface.
+
+.. image:: system/038.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 15.1‑5 System Language
+.. centered:: Figure 15.1‑9 System security mode recovery interface
+
+- Software upgrade package import: system software package upgrade or downgrade;
+- Restore factory language: clear the imported application language package data, restore the factory language package data, and set the default language to English;
 
 Log Management
 ~~~~~~~~~~~~~~~~~~~
@@ -73,10 +121,23 @@ Log Management
 Users can set the number of logs to be retained and import and export system configuration files. The maximum number of logs to be retained is 30, and the system configuration file records the setting value.
 
 .. image:: system/032.png
-   :width: 3in
+   :width: 4in
    :align: center
 
-.. centered:: Figure 15.1‑6 Log Management
+.. centered:: Figure 15.1‑10 Log Management
+  
+Fault data
+~~~~~~~~~~~~
+
+Click the "Fault Data Save Enable" button to generate a fault data file when the controller fails, saving data 15 seconds before and after the fault.
+
+After saving, you can select all data sources to export in the system settings, and unzip error_data.tar.gz to view the fault data file.
+
+.. image:: system/039.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 15.1‑11 Fault data
 
 Timeout Logout Time Setting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,7 +148,7 @@ Users can set the timeout logout time. If the time is met, the robot will automa
    :width: 3in
    :align: center
 
-.. centered:: Figure 15.1‑7 Timeout Logout Time Setting
+.. centered:: Figure 15.1‑8 Timeout Logout Time Setting
 
 System Settings
 ~~~~~~~~~~~~~~~~~
@@ -100,7 +161,7 @@ The slave log generation and controller log export functions are to download som
    :width: 4in
    :align: center
 
-.. centered:: Figure 15.1‑8 System Settings
+.. centered:: Figure 15.1‑9 System Settings
 
 Account settings account settings
 --------------------------------------
@@ -369,7 +430,10 @@ The robot model table is as follows:
    
    * - 2
      - FR3-V1-001 (V6.0)
-   
+ 
+   * - 3
+     - FR3-V1-002(V6.0 Mirror)
+    
    * - ...
      - Reserved
    
@@ -423,7 +487,16 @@ The robot model table is as follows:
    
    * - ...
      - Reserved
+ 
+   * - 702
+     - FRCustom(7)-V1-001(FR3WML)
+
+   * - 703
+     - FRCustom(7)-V1-001(FR3WMS)
    
+   * - ...
+     - Reserved
+      
    * - 802
      - FRCustom(8)-V1-001(FR5WM)
    

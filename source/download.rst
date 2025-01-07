@@ -45,7 +45,7 @@ Qualification Certification
      - ✅
      - ✅
      - ✅
-     - :download:`download <_static/_doc/NSF Certification.zip>`
+     - :download:`download <_static/_doc/NSF Certification Certificate.zip>`
 
    * - **Crash Force Test Certification**
      - ✅
@@ -279,6 +279,4 @@ Java SDK
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-QNX-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ZuGEkbvVvR7f5viylLS4iYhlf_jHydnU/view?usp=sharing>`
-
-    :download:`FAIRINO-CobotSoftware-Linux-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ifjffSx6ZDco2fhllgLEL5Tp3qZJgU8V/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-QNX-V3.7.7-Release-241230 <https://drive.google.com/file/d/1AADC-i_6tJhYxDIhFBq7Lf--pjph1cGb/view?usp=sharing>`

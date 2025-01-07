@@ -37,7 +37,7 @@ Teaching management is divided into two modes: "system mode" and "point table mo
 
 **Run**: Click the "Start Run" button to perform a single-point operation of the local teaching point, and move the robot to the position of this point.
 
-.. image:: points/004.png
+.. image:: points/001.png
    :width: 6in
    :align: center
 

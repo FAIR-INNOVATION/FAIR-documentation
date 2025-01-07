@@ -73,6 +73,50 @@ The backup package data includes tool coordinate system data, system configurati
 
 .. centered:: Figure 14.3‑1 Data backup interface
 
+For this function, the following will provide a detailed description of the dynamics configuration, installation method and backup package import related modules.
+
+Backup Package Import Verification Function
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Add verification function when importing backup packages, and compare key parameters between the backup package and the imported robot. The specific parameters are shown in table below. If these parameters are not set accurately, there will be certain security risks. Only when they are completely consistent, the backup package can be imported normally. If there is inconsistency, an error message will be displayed, as shown below. At this point, it is necessary to check whether the key parameters imported into the robot are consistent with the backup package.
+
+five key parameters to compare table:
+
+.. list-table::
+   :widths: 15 40 100
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Serial Number**
+     - **Key Parameter**
+     - **Specific Definition**
+
+   * - 1
+     - ROBOT_TYPE
+     - Robot Model
+
+   * - 2
+     - INSTALL_POS
+     - Installation Method
+
+   * - 3
+     - INSTALL_YANGLE
+     - Base Tilt
+
+   * - 4
+     - INSTALL_ZANGLE
+     - Base Rotation
+
+   * - 5
+     - NEW_TEACH_ENABLE
+     - Dynamics Configuration
+
+.. image:: application/064.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.3‑2 When the key parameters are inconsistent, the interface will prompt an error
+
 10s data record
 ------------------------
 
@@ -98,6 +142,80 @@ Before using the button box or other IO signals to record the teaching point fun
    :align: center
 
 .. centered:: Figure 14.5‑1 Teach point configuration
+
+End-point dot automatic overwrite update Lua program function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+End-point dot configuration
++++++++++++++++++++++++++++++++
+
+1. Click on Auxiliary Applications - Tool Applications - Teaching Point Configuration to access the teaching point configuration page.
+
+.. image:: application/057.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.5‑2 Teaching Point Configuration Page
+
+2. Enable the end-point dot function and click on settings. You can use the switch to select the Lua programs that need to be updated for specific positions. 
+3. The configuration is complete, with the end-tip dot name prefixed as "test", the numbering limit set to 10, and all Lua programs selected for enabling updates. Close the webApp, and the function remains active.
+   
+End-button dot automatic update Lua program
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Click the robot end-point dot button.
+
+.. image:: application/058.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 14.5‑3 end-point dot button
+
+2. At this point, the end-tip LED flashes: with the purple light flashing (start) -> blue light on (dot recording and updating in Lua) -> green light on (dot recording completed), and the position information corresponding to the selected Lua program's name is synchronized and updated.
+
+.. image:: application/059.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑3 End-tip dot recording and updating Lua program LED changes
+
+3. When the dot recording fails, the end-tip LED flashes: Purple light flashing (start) -> Red light flashing (dot recording failed) -> Green light on (returning to normal).
+
+.. image:: application/060.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑4 LED changes when end-tip dot recording fails
+
+Function usage example
++++++++++++++++++++++++++++
+
+1. Click on Auxiliary Applications - Tool Applications - Teaching Point Configuration, customize the prefix to "test", set the number limit to 5, select Robot Teaching as the teaching method, enable the end-point dot function, and click on settings.
+2. Activate the Lua program "program1" that requires position updates.
+
+.. image:: application/061.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.5‑5 Teaching Point Configuration
+
+3. As shown below, it depicts the "program1" program and its current running trajectory.
+
+.. image:: application/062.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.5‑6 Program1 program and its current running trajectory
+
+4. Switch the page to manual mode, move the robot to a new position, click the end-tip dot button, and wait for the end-tip LED to complete its flashing sequence: Purple light flashing (start) -> Blue light on (dot recording and updating in Lua) -> Green light on (dot recording completed), at which point the recorded position is labeled as test1.
+5. Repeat step 4 to record positions "test2," "test3," "test4," and "test5," completing the recording of 5 points. At this stage, the positions for the "program1" program have been synchronized and updated.
+6. Re-run the "program1" program. The motion trajectory will have been updated, and the updated motion trajectory is shown below.
+
+.. image:: application/063.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 14.5‑7 Updated running trajectory
 
 Work origin
 ------------------------

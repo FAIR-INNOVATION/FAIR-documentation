@@ -110,7 +110,7 @@ The login interface is shown in figure below.
 Multilingual settings function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The system currently comes with four languages: Chinese (汉语), English (English), French (français) and Japanese (日本語).
+- The system currently comes with four languages: Chinese (汉语), Chinese (汉语繁體), English (English), French (français), Japanese (日本語) and Russian (Русский).
 
 - The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
 
@@ -131,6 +131,11 @@ Multilingual settings function
      - zh
      - True
 
+   * - Chinese
+     - 中文(汉语繁體)
+     - tc
+     - True
+
    * - English
      - en
      - ja
@@ -149,6 +154,11 @@ Multilingual settings function
    * - Korean
      - 한국어
      - ko
+     - True
+
+   * - Russian
+     - Русский
+     - ru
      - True
 
 1.Connect the control box to the teaching device and start it up.
@@ -848,23 +858,19 @@ Display current welding status information.
 Robot installation method setting and display
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set in the "Initial - Base - Mounting" menu in time to ensure the normal operation of the robot.
+On the web teaching page, click "Initial Settings" → "Basics" → "Installation Page". The page layout is shown below. The specific instructions are as follows:
 
-The user clicks the "Fixed" option under the "Initial - Base - Mounting" menu to enter the robot fixed installation mode setting page, selects "Upright Installation", "Inverted Installation" or "Side Installation", and clicks the "Apply" button to complete the robot installation mode setting.
-
-.. image:: teaching_pendant_software/025.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 5.3-24 Fixed installation
-
-Considering the more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "Free" tab under the "Initial - Base - Mounting" menu to enter the robot free installation mode setting page. Manually adjust the "Base Tilt" and "Base Rotation" angles, and the 3D model will display the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation mode setting.
+(1) Quick installation is used for common installation settings of robotic arms, corresponding from left to right: formal installation, side installation and reverse installation. When the corresponding button is clicked, the interface will automatically deliver and change the base tilt and rotation angle.
+(2) If the required installation method does not meet the requirements of quick installation, you can configure it by setting the base tilt and rotation angle yourself.
+(3) Whether it is quick installation or setting the base tilt and rotation angle by yourself, you need to click Apply to take effect.
+   
+.. note:: Please make sure that the set installation method is consistent with the actual robotic arm before dragging, otherwise there will be safety risks.
 
 .. image:: teaching_pendant_software/026.png
    :width: 6in
    :align: center
    
-.. centered:: Figure 5.3-25 360 degree free installation
+.. centered:: Figure 5.3-24 360 degree free installation
 
 .. important:: 
    After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.

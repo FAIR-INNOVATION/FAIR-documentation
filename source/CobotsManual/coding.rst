@@ -516,6 +516,8 @@ When using the Cartesian space linear motion command LIN, the constrained condit
 
 **Joint overspeed protection ends**:JointOverSpeedProtectEnd();
 
+.. note:: For the “singularity crossing” motion protection, please refer to the description of the singularity crossing function in automatic mode.
+   
 Angular velocity adjustable function
 **********************************************
 
@@ -1024,7 +1026,7 @@ Click the "TrajctoryJ" icon to enter the TrajctoryJ command editing interface.
 4. Print the track point number: print the track point number during the robot running track, so as to check the progress of the current movement.
 
 .. image:: coding/079.png
-   :width: 3in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 9.5-31 TrajctoryJ command interface
@@ -1742,7 +1744,7 @@ The arc tracking function can tracing the welding groove through the collected w
 Open WebApp and click "Initial", "Peripheral" and "Welder" in turn.
 
 .. image:: coding/280.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 9.8-7-2 Open welding config
@@ -1766,7 +1768,7 @@ The control type is selected as "Digital communication protocol". Since the robo
 After configuring the above parameters, click the "Configure" and "Load" buttons successively.
 
 .. image:: coding/281.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 9.8-7-3 Selecting the control type
@@ -1783,7 +1785,7 @@ Click "Initial", "Base", "I/O setup" and "AI" successively, select the correspon
    If you need to change the arc tracking channel to "Aux-AI1", "Aux-AI2" or "Aux-AI3", you need to update the PLC program simultaneously and assign the real-time welding current collected to the corresponding analog input port.
 
 .. image:: coding/282.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 9.8-7-4 Arc tracking channel configuration
@@ -4468,3 +4470,535 @@ The effect of achieving avoidance is as follows, and the red is the trajectory l
    :align: center
 
 .. centered:: Figure 9.21-9  The current singular situation cannot be avoided
+
+Singularity crossing function in automatic mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++
+
+When the robot executes LIN or ARC commands and passes through a singularity, its speed may fluctuate drastically, leading to unstable motion control and even potential damage to the equipment. By utilizing the singularity crossing function, the robot can smoothly pass through singularities. This manual takes the example of the LIN command passing through a wrist singularity to illustrate how to use the singularity crossing function in automatic mode.
+
+Operation Flow
+++++++++++++++++
+
+1. Teach the robot to execute the LIN command with two motion control points (named wristlin1 and wristlin2 in this manual).
+
+2. Click the “Program” button, then click “Coding”, select the “PTP” command under “Motion command”, and add the first motion point.
+
+.. image:: coding/285.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.22-1 Add the first motion point
+
+3. Select the “LIN” command under “Motion command”, and add the second motion point. In the “Motion protection” section, select "Singularity Crossing," and set the adjustment ranges for shoulder singularity, elbow singularity, and wrist singularity.
+
+.. image:: coding/286.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.22-2 Set the singularity crossing parameters
+
+4. Generate and run the Lua program. The typical LIN command program for singularity crossing in automatic mode.
+
+.. image:: coding/287.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.22-3 Typical singularities crossing LIN instructions
+
+5. Observe the robot's motion results, and adjust the robot's movement speed and singularity settings range to achieve different motion accuracy and impact.
+
+Precision Impact Table
+++++++++++++++++++++++++++++++++++
+
+1. Wrist singularity is the most easily triggered singularity type for the robot. A table comparing the precision and impact of wrist singularity for LIN and ARC commands has been compiled. The comparison table for LIN and ARC commands are shown below, (〇 indicates that a collision warning was triggered).
+   
+.. centered:: Table 9.22-3-1 Error of wrist singularity LIN command (Unit: mm）
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 2 mm
+     - 0.19					
+     - 0.20
+     - 0.20 
+     - 0.21 
+     - 〇  
+     - 〇  
+
+   * - 4 mm
+     - 0.14					
+     - 0.14
+     - 0.14
+     - 0.14
+     - 0.14  
+     - 0.14  
+
+   * - 6 mm
+     - 0.40				
+     - 0.40
+     - 0.41
+     - 0.41
+     - 0.42  
+     - 0.42  
+
+   * - 8 mm
+     - 0.82				
+     - 0.83
+     - 0.83
+     - 0.84
+     - 0.83  
+     - 0.84  
+
+   * - 10 mm
+     - 1.38				
+     - 1.38
+     - 1.39
+     - 1.39
+     - 1.39
+     - 1.41  
+   
+.. centered:: Table 9.22-3-2 Linear jerk of wrist singularity LIN command (Unit: m/s3)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 2 mm
+     - 0.605						
+     - 12.040
+     - 11.370
+     - 2743.000		
+     - 〇  
+     - 〇  
+
+   * - 4 mm
+     - 0.916								
+     - 34.620
+     - 110.900	
+     - 241.300	
+     - 303.900  
+     - 400.700  
+
+   * - 6 mm
+     - 0.906									
+     - 59.700
+     - 139.600
+     - 343.700
+     - 445.600  
+     - 582.900  
+
+   * - 8 mm
+     - 1.073									
+     - 67.480
+     - 199.600
+     - 438.300
+     - 553.400 
+     - 623.900  
+
+   * - 10 mm
+     - 1.013								
+     - 69.490
+     - 195.800	
+     - 556.600
+     - 649.300
+     - 953.300  
+   
+.. centered:: Table 9.22-3-3 Angular jerk of wrist singularity LIN command (Unit: °/s³)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 2 mm
+     - 1122									
+     - 25140
+     - 24780
+     - 54890		
+     - 〇  
+     - 〇  
+
+   * - 4 mm
+     - 305													
+     - 9035
+     - 26030
+     - 39330
+     - 60510
+     - 80330
+
+   * - 6 mm
+     - 219														
+     - 8161
+     - 19450
+     - 84700
+     - 109300
+     - 143400 
+
+   * - 8 mm
+     - 478													
+     - 6651
+     - 19780
+     - 121600
+     - 150500
+     - 162100 
+
+   * - 10 mm
+     - 281												
+     - 5296
+     - 14470
+     - 161600
+     - 177300
+     - 256000
+   
+.. centered:: Table 9.22-3-4 Error of wrist singularity ARC command (Unit: mm)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 2 mm
+     - 1.06									
+     - 1.06
+     - 1.05
+     - 1.05		
+     - 〇  
+     - 〇  
+
+   * - 4 mm
+     - 1.58														
+     - 1.59
+     - 1.60
+     - 1.62
+     - 〇  
+     - 〇 
+
+   * - 6 mm
+     - 3.31																			
+     - 3.34
+     - 3.35
+     - 3.32
+     - 3.39
+     - 3.33 
+
+   * - 8 mm
+     - 5.81																		
+     - 5.83
+     - 5.87
+     - 5.87
+     - 5.87
+     - 5.96 
+
+   * - 10 mm
+     - 9.06																	
+     - 9.09
+     - 9.12
+     - 9.17
+     - 9.17
+     - 9.22
+   
+.. centered:: Table 9.22-3-5 Linear jerk of wrist singularity ARC command (Unit: m/s3)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 2 mm
+     - 13.970										
+     - 643.000	
+     - 2230.000	
+     - 3408.000	
+     - 〇  
+     - 〇  
+
+   * - 4 mm
+     - 0.635																	
+     - 24.850
+     - 42.480
+     - 76.990
+     - 〇  
+     - 〇 
+
+   * - 6 mm
+     - 3.000																						
+     - 19.960
+     - 45.350
+     - 57.120
+     - 77.050
+     - 59.800	 
+
+   * - 8 mm
+     - 1.494																						
+     - 27.830
+     - 90.290
+     - 124.200
+     - 148.400
+     - 168.000
+
+   * - 10 mm
+     - 0.460																					
+     - 31.870
+     - 112.600
+     - 211.000
+     - 229.300
+     - 117.500
+   
+.. centered:: Table 9.22-3-6 Angular jerk of wrist singularity ARC command (Unit: °/s³)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 2 mm
+     - 3378													
+     - 85380
+     - 228600	
+     - 351900
+     - 〇  
+     - 〇  
+
+   * - 4 mm
+     - 1098																				
+     - 31360
+     - 71460
+     - 104800
+     - 〇  
+     - 〇 
+
+   * - 6 mm
+     - 390																											
+     - 15770
+     - 43650
+     - 79330
+     - 93930
+     - 124200 
+
+   * - 8 mm
+     - 315																											
+     - 10270
+     - 28770
+     - 57000
+     - 75840
+     - 94050
+
+   * - 10 mm
+     - 504																										
+     - 6108
+     - 21470
+     - 34920
+     - 47280
+     - 97160
+
+2. Since shoulder singularity and elbow singularity correspond to the robot's minimum and maximum working boundaries, respectively, precision cannot be used as an evaluation metric. Therefore, an impact comparison table for shoulder singularity is compiled, as shown in Tab, and an impact comparison table for elbow singularity is compiled, as shown below (where 〇 indicates that a collision warning was triggered).
+   
+.. centered:: Table 9.22-3-7 Linear jerk of shoulder singularity (Unit: m/s3)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 40 mm
+     - 1.166																
+     - 99.730
+     - 253.200	
+     - 273.500
+     - 〇  
+     - 〇  
+
+   * - 70 mm
+     - 1.047																								
+     - 92.440
+     - 328.900
+     - 634.500
+     - 878.400  
+     - 1499.000	 
+
+   * - 100 mm
+     - 1.060																															
+     - 90.250
+     - 273.900
+     - 506.600
+     - 926.300
+     - 1555.000	 
+
+.. centered:: Table 9.22-3-8 Angular jerk of shoulder singularity (Unit: °/s³)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 40 mm
+     - 396																		
+     - 89.83
+     - 824
+     - 348
+     - 〇  
+     - 〇  
+
+   * - 70 mm
+     - 428																													
+     - 121
+     - 681
+     - 167
+     - 1783 
+     - 35690 
+
+   * - 100 mm
+     - 440																																				
+     - 151
+     - 473
+     - 246
+     - 1495
+     - 39280
+
+.. centered:: Table 9.22-3-9 Linear jerk of elbow singularity (Unit: m/s3)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 40 mm
+     - 0.905																						
+     - 14.430
+     - 52.080
+     - 87.380
+     - 129.400  
+     - 657.000  
+
+   * - 70 mm
+     - 1.144																																		
+     - 24.320
+     - 79.580
+     - 270.300
+     - 793.300 
+     - 1478.000 
+
+   * - 100 mm
+     - 1.852																																									
+     - 27.930
+     - 112.700
+     - 328.100
+     - 583.000
+     - 758.600
+
+.. centered:: Table 9.22-3-10 Angular jerk of elbow singularity (Unit: °/s³)
+
+.. list-table::
+   :widths: 40 30 30 30 30 30 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Range / Velocity**
+     - **2**
+     - **20**
+     - **40**
+     - **60**
+     - **80**
+     - **100**
+
+   * - 40 mm
+     - 347																										
+     - 128
+     - 148
+     - 142
+     - 63
+     - 38050 
+
+   * - 70 mm
+     - 424																																						
+     - 132
+     - 141
+     - 21780
+     - 56190
+     - 95610 
+
+   * - 100 mm
+     - 46																																														
+     - 1443
+     - 6194
+     - 19940
+     - 35170
+     - 46770

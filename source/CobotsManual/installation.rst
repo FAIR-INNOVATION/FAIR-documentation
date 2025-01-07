@@ -1251,7 +1251,7 @@ This series of robots can be equipped with three control boxes with different po
 
    * - 
      - **Maximum Input (for customers to configure the front-stage power supply)**
-     - **Is the maximum output Output (maximum output peak)**
+     - **Maximum output Output (maximum output peak)**
 
    * - **DC 2kW**
      - 30-60VDC/30A

@@ -107,7 +107,7 @@ Procedure
 
 .. figure:: robot_peripherals/005.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.2-2 Upload Lua terminal open protocol
 
@@ -115,7 +115,7 @@ Procedure
 
 .. figure:: robot_peripherals/006.png
    :align: center
-   :width: 6in
+   :width: 4in
 
 .. centered:: Figure 8.2-3 Configure terminal communication parameters
 
@@ -145,13 +145,17 @@ When an exception occurs in a Lua file, a warning "Lua file exception at the end
 
 .. centered:: Figure 8.2-5  Lua file exception
 
-Enter the Status Information->Status Query page to query the original data chart of the force/torque sensor. The correctness of the one-dimensional data (Fz) is successfully verified for 0kg 3kg 6kg. Data Fx, Fy, Mx, My, and Mz can also be collected in other dimensions, as shown below:
+When the gripper device type is selected.
+
+**Open "Condition monitoring"**: The right gripper status bar displays the real-time status information of the gripper's running speed, torque, position, etc.
+
+**Close "Condition monitoring"**: The right gripper data status bar is closed.
 
 .. figure:: robot_peripherals/009.png
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.2-6 Force/Torque Sensor
+.. centered:: Figure 8.2‑6 Condition monitoring
 
 Terminal peripheral configuration
 --------------------------------------
@@ -547,6 +551,8 @@ As shown in Figure 16, the control type is selected as "Digital communication pr
 
 **Communication interruption confirmation time**:the robot does not receive a complete PLC feedback packet within this period of time, which will report "UDP communication interruption" error alarm, and cut off UDP communication.
 
+**Automatic reconnection after power off and restart**：Does the robot automatically reconnect and restore after detecting a power outage and restart;
+
 **Automatic reconnection after communication interruption**:whether the robot automatically reconnects after detecting UDP communication interruption;
 
 **Reconnection period and Num of reconnections**:After automatic reconnection of UDP communication interruption is enabled and UDP communication interruption is detected, the robot reconnects at the set period. When the reconnection times reach the maximum set value and the connection is not successful, the robot reports an error alarm of "UDP communication interruption" and disconnects the UDP communication at the same time.
@@ -834,7 +840,8 @@ Take the program in Figure 38 as an example, switch the robot to the automatic m
 
 .. centered:: Figure 8.5-39 Welding recovery
 
-The welding interruption recovery function of cooperative robot can only be used for line weld or arc weld, and there can be no logical programs such as "if" and "while" in lua program, otherwise welding cannot be resumed.
+.. warning::
+  The collaborative robot welding interruption recovery function can only be used for straight line welds or arc welds. When using the while (1) loop welding, nested multi-layer while loops are not supported, and conditional judgment statements containing local variables cannot be included. If the segment welding function is used, please pay attention to adding a feedback segment welding information interface.
 
 Appendix 1: UDP communication protocol for robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2563,6 +2570,8 @@ UDP communication configuration
 
 - Communication interruption confirmation time: 0 ~ 500 ms;
 
+- Automatic reconnection after power off and start: On/Off;
+
 - Automatic reconnection after communication interruption: On/Off;
 
 - Reconnection period: 1 ~ 1000 ms;
@@ -3279,7 +3288,7 @@ Conveyor Tracking Configuration Steps
 
 .. figure:: robot_peripherals/128.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 8.9-1 Conveyor configuration
 
@@ -3287,7 +3296,7 @@ Conveyor Tracking Configuration Steps
 
 .. figure:: robot_peripherals/129.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 8.9-2 Conveyor Grab Point Compensation Configuration
 
@@ -3506,6 +3515,21 @@ After the sensor is configured, it can be used with the sensor to better assist 
    :width: 4in
 
 .. centered:: Figure 8.11-4 Force/Torque Sensor Drag Lock
+
+.. note:: 
+   The singularity point strategy is a singularity point crossing and avoidance function developed under force sensor assisted locking.
+
+   The singularity avoidance strategy is the default function option. When assisted dragging is turned on, the avoidance function is turned on by default. Singularity avoidance is a function that applies virtual force to keep the robot away from a singular configuration when the robot is in a singular configuration.
+
+   Strange configuration:
+
+   **Elbow singularity**: Rotation axes 2, 3, and 4 are in the same plane. At this time, the elbow joint is fully extended or fully contracted. Due to the mechanical limitation of the FR robot, the robot cannot reach this position of full contraction.
+
+   **Wrist singularity**: Rotation axes 4 and 6 are parallel. At this time, due to the mechanical limitation of the FR robot, the robot cannot reach this position.
+
+   **Shoulder singularity**: The wrist center point is located in the plane formed by rotation axes 1 and 2.
+
+   Singularity crossing function, select "Singularity strategy" as "Crossing" and apply it. When the robot detects that the current posture is in a singular configuration, it automatically switches to the current loop drag mode. When the detection exits the singular configuration, the drag mode switches to force sensor assisted dragging to continue moving.
 
 **Adaptive selection**: Turn it on when assembly is required. After turning it on, dragging becomes heavier;
 
@@ -3770,34 +3794,6 @@ Program example:
    * - 12
      - MoveCart(pos,GetActualTCPNum(),GetActualWObjNum(),30,10,100,-1,0)
      - #Move to the center of positioning
-
-Force/Torque Sensor Tap Force Detection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Instruction description: The "FT_Click" command is click force detection, which is used to detect a click force, and is usually used in conjunction with the surface positioning action. After setting the parameters, add it to the program, run the program, and the end starts to move toward the target along the Z direction of the tool coordinate system. When the force in the positive Z direction reaches the value of the click force, the click force detection is completed.
-
-.. figure:: robot_peripherals/146.png
-   :align: center
-   :width: 6in
-
-.. centered:: Figure 8.11-12 FT_Click Command Edit
-
-Program example:
-
-.. list-table:: 
-   :widths: 15 40 100
-   :header-rows: 1
-   :align: center
-
-   * - S/N
-     - Instruction format
-     - notes
-   * - 1
-     - PTP(1,30,-1,0)
-     - #Initial position
-   * - 2
-     - FT_Click(0,5,5,0,100,0)
-     - #Spot force detection
 
 Extended IO device peripheral configuration
 --------------------------------------------
