@@ -597,7 +597,7 @@ End of new spline movement
     :linenos:
 
     /** 
-    * @brief New spline campaign begins 
+    * @brief End of new spline movement 
     * @return error code 
     */ 
     int NewSplineEnd();

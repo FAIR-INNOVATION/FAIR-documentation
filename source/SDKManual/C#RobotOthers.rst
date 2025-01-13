@@ -286,7 +286,7 @@ Getting the robot DH parameter compensation value
     :linenos:
 
     /** 
-    * :: @brief Getting a safety stop signal 
+    * :: @brief Getting the robot DH parameter compensation value
     * @param [out] dhCompensation Robot DH parameter compensation value (mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]
     * @return error code 
     */

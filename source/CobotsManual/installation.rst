@@ -92,6 +92,12 @@ Nameplate information
 
 .. centered:: Figure 3.1-5 FR20 model collaborative robot
 
+.. figure:: installation/007.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.1-6 FR30 model collaborative robot
+
 Effectiveness and responsibility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -163,9 +163,9 @@ Qualification Certification
      - ✅
      - ✅
      - ✅
+     - ✅
      - --
-     - --
-     - :download:`download <_static/_doc/KCs Certification(FR3-FR20).pdf>`
+     - :download:`download <_static/_doc/KCs Certification.zip>`
 
    * - **SEMI Certification**
      - ✅

@@ -794,3 +794,78 @@ Code example
 
         return 0;
     }
+
+Gets the number of turns of the rotary gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: V3.7.6
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief  Gets the number of turns of the rotary gripper
+	 * @param  [out] fault  0-no error, 1-error
+	 * @param  [out] num  Number of turns
+	 * @return  Error code
+	 */
+	errno_t GetGripperRotNum(uint16_t* fault, double* num);
+
+Gets the rotation speed of the rotating gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: V3.7.6
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief  Gets the rotation speed of the rotating gripper
+	 * @param  [out] fault  0-no error, 1-error
+	 * @param  [out] speed  Percent rotation speed
+	 * @return  Error code
+	 */
+	errno_t GetGripperRotSpeed(uint16_t* fault, int* speed);
+
+Gets the rotating torque of the rotating gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: V3.7.6
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief  Gets the rotating torque of the rotating gripper
+	 * @param  [out] fault  0-no error, 1-error
+	 * @param  [out] torque  Percent torque of rotation
+	 * @return  Error code
+	 */
+	errno_t GetGripperRotTorque(uint16_t* fault, int* torque);
+
+Code example
+********************
+
+.. versionadded:: V3.7.6
+
+.. code-block:: c++
+    :linenos:
+
+    int MoveRotGripper(FRRobot* robot, int pos, double rotPos)
+    {
+        robot->ResetAllError();
+        robot->ActGripper(1, 1);
+        robot->Sleep(1000);
+        int rtn = robot->MoveGripper(1, pos, 50, 50, 5000, 1, 1, rotPos, 50, 100);
+        printf("move gripper rtn is %d\n", rtn);
+        uint16_t fault = 0;
+        double rotNum = 0.0;
+        int rotSpeed = 0;
+        int rotTorque = 0;
+        robot->GetGripperRotNum(&fault, &rotNum);
+        robot->GetGripperRotSpeed (&fault, &rotSpeed);
+        robot->GetGripperRotTorque(&fault, &rotTorque);
+        printf("gripper rot num : %lf, gripper rotSpeed : %d, gripper rotTorque : %d\n", rotNum, rotSpeed, rotTorque);
+
+        return 0;
+    }

@@ -431,3 +431,52 @@ Code example
         retval = robot.MoveTrajectoryJ();
         printf("MoveTrajectoryJ retval is: %d\n", retval);
     }
+
+Upload TrajectoryJ file
++++++++++++++++++++++++++++++
+.. versionadded:: V3.7.7
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Upload TrajectoryJ file
+	 * @param [in] filePath file path   C://test/testJ.txt
+	 * @return Error code
+	 */
+	errno_t TrajectoryJUpLoad(const std::string& filePath);
+
+Delete TrajectoryJ file
++++++++++++++++++++++++++++++
+.. versionadded:: V3.7.7
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Delete TrajectoryJ file
+	 * @param [in] fileName file name testJ.txt
+	 * @return Error code
+	 */
+	errno_t TrajectoryJDelete(const std::string& fileName);
+
+Code example
+******************
+.. versionadded:: V3.7.7
+
+.. code-block:: c++
+    :linenos:
+
+    void TrajectoryJUpload(FRRobot* robot)
+    {
+        int rtn = -1;
+        rtn = robot->TrajectoryJUpLoad("D://zUP/testA.txt");
+        printf("Upload TrajectoryJ A %d\n", rtn);
+        rtn = robot->TrajectoryJUpLoad("D://zUP/testB.txt");
+        printf("Upload TrajectoryJ B %d\n", rtn);
+
+        rtn = robot->TrajectoryJDelete("testA.txt");
+        printf("Delete TrajectoryJ A %d\n", rtn);
+        rtn = robot->TrajectoryJDelete("testB.txt");
+        printf("Delete TrajectoryJ B %d\n", rtn);
+    }

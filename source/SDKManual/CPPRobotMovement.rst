@@ -1160,3 +1160,60 @@ Code example
         
         return 0;
     }
+
+Start Ptp motion FIR filtering
++++++++++++++++++++++++++++++++++++++
+.. versionadded:: V3.7.7
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+	* @brief Start Ptp motion FIR filtering
+	* @param [in] maxAcc Maximum acceleration(deg/s2)
+	* @return Error code
+	*/
+	errno_t PtpFIRPlanningStart(double maxAcc);
+
+Stop Ptp motion FIR filtering
+++++++++++++++++++++++++++++++++++
+.. versionadded:: V3.7.7
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	* @brief Stop Ptp motion FIR filtering
+	* @return Error code
+	*/
+	errno_t PtpFIRPlanningEnd();
+
+Start LIN, ARC motion FIR filtering
++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: V3.7.7
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	* @brief Start LIN, ARC motion FIR filtering
+	* @param [in] maxAccLin Extreme linear acceleration(mm/s2)
+	* @param [in] maxAccDeg Extreme angular acceleration(deg/s2)
+	* @param [in] maxJerkLin Extreme linear plus acceleration(mm/s3)
+	* @param [in] maxJerkDeg Extreme angular plus acceleration(deg/s3)
+	* @return Error code
+	*/
+	errno_t LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
+
+Stop LIN, ARC motion FIR filtering
++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: V3.7.7
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	* @brief Stop LIN, ARC motion FIR filtering
+	* @return Error code
+	*/
+	errno_t LinArcFIRPlanningEnd();

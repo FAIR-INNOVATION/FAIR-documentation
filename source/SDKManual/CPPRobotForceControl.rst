@@ -10,12 +10,12 @@ Force sensor configuration
     :linenos:
 
     /**
-    * @brief  Configured force sensor
-    * @param  [in] company  Manufacturer of force sensors, 17-Kunwei Technology
-    * @param  [in] device  Device number, not used yet. The default value is 0
-    * @param  [in] softvesion  Software version. The value is not used. The default value is 0
-    * @param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
-    * @return  Error code
+    * @brief force sensor configuration
+    * @param [in] company force sensor manufacturer, 17-Kunwei Technology, 19-Aerospace 11th Institute, 20-ATI Sensor, 21-Zhongke Midian, 22-Weihang Minxin, 23-NBIT, 24-Xinjingcheng (XJC), 26-NSR
+    * @param [in] device device number, Kunwei (0-KWR75B), Aerospace 11th Institute (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke Midian (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A), NBIT (0-XLH93003ACS), Xinjingcheng XJC (0-XJC-6F-D82), NSR (0-NSR-FTSensorA)
+    * @param [in] softvesion Software version number, not used yet, default is 0
+    * @param [in] bus device is hung at the end bus position, not used yet, default is 0
+    * @return error code
     */
     errno_t  FT_SetConfig(int company, int device, int softvesion, int bus);
 

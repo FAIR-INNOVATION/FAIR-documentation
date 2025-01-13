@@ -4,54 +4,54 @@ Version V3.7.7
 Date: 2024-12-30
 
 - **Real-time monitoring function of gripper status data**:
-    Path: Initial Settings -> Peripherals -> Open Protocol -> Status Monitoring;
+    Path: Initial Settings -> Peripherals -> Open Protocol -> Status Monitoring.
 
-    Description: Real-time display of gripper running speed, torque, position and other status information;
+    Description: Real-time display of gripper running speed, torque, position and other status information.
 
 - **Controller fault data collection function**:
-    Path: System Settings -> General Settings -> Fault Data;
+    Path: System Settings -> General Settings -> Fault Data.
 
-    Description: When a collision, instruction point error or other faults occur during the operation of the robot, the controller automatically records the robot position, speed and other status information 15s before and after the fault occurs. WebApp can export fault information in .csv format to help troubleshoot and analyze the cause of the fault;
+    Description: When a collision, instruction point error or other faults occur during the operation of the robot, the controller automatically records the robot position, speed and other status information 15s before and after the fault occurs. WebApp can export fault information in .csv format to help troubleshoot and analyze the cause of the fault.
 
 - **Singularity avoidance and crossing function based on force sensor assisted drag**:
-    Path: Auxiliary Application -> Tool Application -> Drag Lock -> Force Sensor Assisted Lock;
+    Path: Auxiliary Application -> Tool Application -> Drag Lock -> Force Sensor Assisted Lock.
 
-    Description: 1. In the force sensor assisted drag interface, select the strategy of avoidance. When the robot is dragged close to the singularity, a virtual force will be generated; 2. When the strategy is selected as crossing, it will switch to drag mode when approaching the singularity, and switch to force sensor assisted drag when away from the singularity;
+    Description: 1. In the force sensor assisted drag interface, select the strategy of avoidance. When the robot is dragged close to the singularity, a virtual force will be generated. 2. When the strategy is selected as crossing, it will switch to drag mode when approaching the singularity, and switch to force sensor assisted drag when away from the singularity.
 
 - **Old dynamics adaptation 360° free installation and backup package import adaptation dynamics function**:
-    Path: Initial Settings -> Basics -> Installation -> Free Installation, Auxiliary Application -> Tool Application -> Data Backup;
+    Path: Initial Settings -> Basics -> Installation -> Free Installation, Auxiliary Application -> Tool Application -> Data Backup.
 
-    Description: When importing the backup package, add verification of robot type, installation method, installation angle and dynamic configuration type. When the above parameters are inconsistent, prompt to prohibit import;
+    Description: When importing the backup package, add verification of robot type, installation method, installation angle and dynamic configuration type. When the above parameters are inconsistent, prompt to prohibit import.
 
 - **Singularity crossing function in automatic mode**:
-    Path: Teaching Program -> Peripherals -> LIN/ARC instructions;
+    Path: Teaching Program -> Peripherals -> LIN/ARC instructions.
 
-    Description: Added "singularity crossing" motion protection configuration;
+    Description: Added "singularity crossing" motion protection configuration.
     
 - **Lua program function that automatically updates the corresponding point after the end button records the point**:
-    Path: Auxiliary application -> Tool application -> Teaching point configuration;
+    Path: Auxiliary application -> Tool application -> Teaching point configuration.
 
-    Description: Added the Lua program function that automatically updates the corresponding point after the end button records the point;
+    Description: Added the Lua program function that automatically updates the corresponding point after the end button records the point.
 
 - **Status query interface optimization**:
-    Path: Status information -> Status query;
+    Path: Status information -> Status query.
 
-    Description: Status query interface UI and interaction optimization;
+    Description: Status query interface UI and interaction optimization.
 
 - **WebApp, teach pendant interface optimization**:
-    Description: WebApp, teach pendant added Russian and Traditional Chinese display interfaces;
+    Description: WebApp, teach pendant added Russian and Traditional Chinese display interfaces.
 
 - **WebApp display interface optimization function**:
-    Description: Added software version and robot model display in the lower left corner of the WebApp interface;
+    Description: Added software version and robot model display in the lower left corner of the WebApp interface.
 
 - **Extended axis plus laser tracking function**:
-    Description: 1. The robot moves synchronously with the external axis, and the laser realizes synchronous tracking in the external axis coordinate system; 2. The robot moves asynchronously with the external axis, and the laser can track in the robot base coordinate system or the external axis coordinate system;
+    Description: 1. The robot moves synchronously with the external axis, and the laser realizes synchronous tracking in the external axis coordinate system. 2. The robot moves asynchronously with the external axis, and the laser can track in the robot base coordinate system or the external axis coordinate system.
 
 - **Tool point drag function based on force sensor**:
-    Description: In the web interface, set the FT reference coordinate system to a custom coordinate system. After turning on the force sensor-assisted dragging, the robot moves along the set tool coordinate system;
+    Description: In the web interface, set the FT reference coordinate system to a custom coordinate system. After turning on the force sensor-assisted dragging, the robot moves along the set tool coordinate system.
 
 - **Robot CNDE function**:
-    Description: The client can obtain robot status feedback and send control data to the robot through CNDE (UDP communication). The status feedback cycle is configurable (1-200ms), and the robot status feedback data content and the client input control robot data content can be freely configured;
+    Description: The client can obtain robot status feedback and send control data to the robot through CNDE (UDP communication). The status feedback cycle is configurable (1-200ms), and the robot status feedback data content and the client input control robot data content can be freely configured.
 
 Version V3.7.6
 -----------------
@@ -59,79 +59,79 @@ Version V3.7.6
 Date: 2024-11-18
 
 - **Initial setting page layout optimization**:
-    Path: Initial setting;
+    Path: Initial setting.
 
-    Description: Optimize the tool setting interface, load configuration interface and some function icon display;
+    Description: Optimize the tool setting interface, load configuration interface and some function icon display.
 
 - **WebApp peripheral extension axis configuration function interaction optimization**:
-    Path: Initial setting -> Peripheral -> Extension axis;
+    Path: Initial setting -> Peripheral -> Extension axis.
 
-    Description: Extension axis interface layout and interaction optimization;
+    Description: Extension axis interface layout and interaction optimization.
 
 - **System log function optimization**:
-    Path: Status information -> System log;
+    Path: Status information -> System log.
 
-    Description: Added log paging display and log detailed operation category distinction;
+    Description: Added log paging display and log detailed operation category distinction.
 
 - **XY direction horizontal constant force grinding function**:
-    Path: Teaching program -> Programming -> Force control set -> F/T_Control instruction;
+    Path: Teaching program -> Programming -> Force control set -> F/T_Control instruction.
 
-    Description: Add "grinding disc radius" parameter, which can perform repeated straight line/curve motion along the workpiece surface;
+    Description: Add "grinding disc radius" parameter, which can perform repeated straight line/curve motion along the workpiece surface.
 
 - **Laser point motion function**:
-    Path: Initial setting -> Peripheral -> Tracking -> Sensor;
+    Path: Initial setting -> Peripheral -> Tracking -> Sensor.
 
-    Description: The function of finding the coordinates of the intersection of three and four points is added with the use of lua script instructions;
+    Description: The function of finding the coordinates of the intersection of three and four points is added with the use of lua script instructions.
 
 - **External axis configuration-two-degree-of-freedom trolley function**:
-    Path: Initial settings -> Coordinate system -> Extended axis -> Extended axis coordinate system;
+    Path: Initial settings -> Coordinate system -> Extended axis -> Extended axis coordinate system.
 
-    Description: Add the "two-degree-of-freedom trolley" extended axis solution, the robot and PLC communicate with UDP, and then the PLC controls the two-degree-of-freedom trolley through EtherCat;
+    Description: Add the "two-degree-of-freedom trolley" extended axis solution, the robot and PLC communicate with UDP, and then the PLC controls the two-degree-of-freedom trolley through EtherCat.
 
 - **TCP calibration method based on flat tool function**:
-    Path: Initial settings -> Coordinate system -> Tool -> Tool coordinate system;
+    Path: Initial settings -> Coordinate system -> Tool -> Tool coordinate system.
 
-    Description: Add the "flat tool calibration" coordinate system calibration method;
+    Description: Add the "flat tool calibration" coordinate system calibration method.
 
 - **Robot background program function**:
-    Path: Teaching program -> Program programming;
+    Path: Teaching program -> Program programming.
 
-    Description: The background program can normally obtain I/O interface data, including system I/O, modbus, and extended I/O;
+    Description: The background program can normally obtain I/O interface data, including system I/O, modbus, and extended I/O.
 
 - **Robot trajectory automatically avoids singular points function**:
-    Path: Teaching program -> Program programming -> Linear Lin/Arc instructions;
+    Path: Teaching program -> Program programming -> Linear Lin/Arc instructions.
 
-    Description: Added "Singularity Avoidance" motion protection configuration;
+    Description: Added "Singularity Avoidance" motion protection configuration.
 
 - **Rotating gripper end adaptation function**:
-    Path: Initial Settings -> Peripherals -> Open Protocol;
+    Path: Initial Settings -> Peripherals -> Open Protocol.
 
-    Description: Added rotating gripper related function code configuration;
+    Description: Added rotating gripper related function code configuration.
 
 - **Custom Protocol Slave Instructions**:
-    Path: Remote Mode;
+    Path: Remote Mode.
 
-    Description: Added "Controller Slave Protocol" configuration;
+    Description: Added "Controller Slave Protocol" configuration.
 
 - **UDP Communication Wire Positioning Function**:
 
-    Description: The robot can use UDP to expand IO to start and stop the welding wire positioning and obtain the welding wire positioning success signal;
+    Description: The robot can use UDP to expand IO to start and stop the welding wire positioning and obtain the welding wire positioning success signal.
 
 - **Backup package function optimization**:
 
-    Description: Support the import and use of old version data packets (QNX 3.6.1 and later version data packets);
+    Description: Support the import and use of old version data packets (QNX 3.6.1 and later version data packets).
 
-- **Restore Factory Settings Function Optimization**: Added file verification to increase the system restore factory stability;
+- **Restore Factory Settings Function Optimization**: Added file verification to increase the system restore factory stability.
 
-    Description: Added file verification to increase the system restore factory stability;
+    Description: Added file verification to increase the system restore factory stability.
 
 - **Upgrade function optimization**:
 
-    Description: QNX3.6.9 and later versions can be directly upgraded to QNX3.7.6, and the current version user data will be retained after the upgrade;
+    Description: QNX3.6.9 and later versions can be directly upgraded to QNX3.7.6, and the current version user data will be retained after the upgrade.
 
 - **Page downgrade function**:
 
-    Description: WebApp pages support downgrades, which can be downgraded to any version of QNX3.6.9 and later, and the current version user data will be retained after the downgrade;
+    Description: WebApp pages support downgrades, which can be downgraded to any version of QNX3.6.9 and later, and the current version user data will be retained after the downgrade.
 
 Version V3.7.5
 -----------------
@@ -139,29 +139,29 @@ Version V3.7.5
 Date: 2024-09-30
 
 - **Adjustable angular velocity function of wrap angle attitude transition**:
-    Path: Teaching program -> Programming -> Linear Lin instruction;
+    Path: Teaching program -> Programming -> Linear Lin instruction.
 
-    Description: Added "Adjustable angular velocity of transition point" motion protection configuration;
+    Description: Added "Adjustable angular velocity of transition point" motion protection configuration.
 
 - **Arc tracking multi-layer multi-pass welding function**:
-    Path: Auxiliary application -> Welding expert library -> Weldment shape -> Multi-layer multi-pass welding;
+    Path: Auxiliary application -> Welding expert library -> Weldment shape -> Multi-layer multi-pass welding.
 
-    Description: Added "First layer welding swing function" and "Arc tracking function" configuration;
+    Description: Added "First layer welding swing function" and "Arc tracking function" configuration.
 
 - **485 extended axis configuration function**:
-    Path: Initial settings -> Peripherals -> Extended axis -> Extended axis configuration;
+    Path: Initial settings -> Peripherals -> Extended axis -> Extended axis configuration.
 
-    Description: Added "acceleration and emergency stop" configuration;
+    Description: Added "acceleration and emergency stop" configuration.
 
 - **Robot tool TCP automatic calibration function (self-made fiber optic sensor tooling)**:
-    Path: Initial settings -> Coordinate system -> Tool -> Tool coordinate system;
+    Path: Initial settings -> Coordinate system -> Tool -> Tool coordinate system.
 
-    Description: Added "photoelectric automatic calibration" coordinate system calibration;
+    Description: Added "photoelectric automatic calibration" coordinate system calibration.
 
 - **Teach pendant multi-language setting function**:
-    Path: Login page;
+    Path: Login page.
 
-    Description: Added "language switching" configuration;
+    Description: Added "language switching" configuration.
 
 Version V3.7.4
 -----------------
@@ -169,24 +169,24 @@ Version V3.7.4
 Date: 2024-08-09
 
 - **Based on lua terminal open protocol software function (gripper part)**:
-    Path: Initial settings -> Peripherals -> Terminal tools -> Open protocol -> Lua terminal development protocol configuration;
+    Path: Initial settings -> Peripherals -> Terminal tools -> Open protocol -> Lua terminal development protocol configuration.
 
-    Description: Added "Terminal protocol enable" configuration;
+    Description: Added "Terminal protocol enable" configuration.
 
 - **Oblique sawtooth swing function**:
-    Path: Teaching program -> Program programming -> Swing Weave instruction;
+    Path: Teaching program -> Program programming -> Swing Weave instruction.
 
-    Description: Added "Swing direction azimuth" parameter configuration;
+    Description: Added "Swing direction azimuth" parameter configuration.
 
 - **Robot welding process package optimization function**:
-    Path: Initial settings -> Peripherals -> Welding machine -> Welding machine configuration;
+    Path: Initial settings -> Peripherals -> Welding machine -> Welding machine configuration.
 
-    Description: Added "Welding process parameters" configuration;
+    Description: Added "Welding process parameters" configuration.
 
 - **Lin instruction joint overspeed processing function**:
-    Path: Teaching Program -> Programming -> Linear Lin Instruction;
+    Path: Teaching Program -> Programming -> Linear Lin Instruction.
 
-    Description: Added "Joint Overspeed Protection" motion protection configuration;
+    Description: Added "Joint Overspeed Protection" motion protection configuration.
 
 Version V3.7.3
 -----------------
@@ -194,14 +194,14 @@ Version V3.7.3
 Date: 2024-06-28
 
 - **Modbus slave control robot function**:
-    Path: Teaching Program -> Programming -> ModbusTCP;
+    Path: Teaching Program -> Programming -> ModbusTCP.
 
-    Description: Added "Slave Controller" configuration;
+    Description: Added "Slave Controller" configuration.
 
 - **Emergency Stop Type Function**:
-    Path: Initial Settings -> Safety -> Emergency Stop;
+    Path: Initial Settings -> Safety -> Emergency Stop.
 
-    Description: Added "Class 1a, Class 2a, Class 2" stop types;
+    Description: Added "Class 1a, Class 2a, Class 2" stop types.
 
 Version V3.7.2
 -----------------
@@ -209,29 +209,29 @@ Version V3.7.2
 Date: 2024-06-07
 
 - **Lua terminal development protocol configuration function**:
-    Path: Initial Settings -> Peripherals -> Terminal Tools -> Open Protocol;
+    Path: Initial Settings -> Peripherals -> Terminal Tools -> Open Protocol.
 
-    Description: Added "Development Protocol" configuration;
+    Description: Added "Development Protocol" configuration.
 
 - **Motion AO control instruction function**:
-    Path: Teaching program -> Programming;
+    Path: Teaching program -> Programming.
 
-    Description: Added "Motion AO instruction";
+    Description: Added "Motion AO instruction".
 
 - **Six-dimensional force and joint impedance mixed drag function**:
-    Path: Auxiliary application -> Tool application -> Drag lock;
+    Path: Auxiliary application -> Tool application -> Drag lock.
 
-    Description: Added "Six-dimensional force and joint impedance mixed drag";
+    Description: Added "Six-dimensional force and joint impedance mixed drag".
 
 - **Post-collision response strategy function**:
-    Path: Initial settings -> Basics -> Joints -> Collision level;
+    Path: Initial settings -> Basics -> Joints -> Collision level.
 
-    Description: Added "Collision strategy" configuration;
+    Description: Added "Collision strategy" configuration.
 
 - **Robot first activation function**:
-    Path: Login settings;
+    Path: Login settings.
 
-    Description: Added robot first activation verification function;
+    Description: Added robot first activation verification function.
 
 Version V3.7.1
 -----------------
@@ -239,26 +239,26 @@ Version V3.7.1
 Date: 2024-05-10
 
 - **Web interface lock function**:
-    Path: System settings -> Custom information;
+    Path: System settings -> Custom information.
 
-    Description: Added "web interface lock screen" configuration;
+    Description: Added "web interface lock screen" configuration.
 
 - **Three-point and four-point intersection coordinate search function**:
-    Path: Initial Settings -> Peripherals -> Tracking -> Sensors;
+    Path: Initial Settings -> Peripherals -> Tracking -> Sensors.
 
-    Description: Added "Three-point and Four-point Intersection Point Coordinates Function";
+    Description: Added "Three-point and Four-point Intersection Point Coordinates Function".
 
 - **Segment Welding Motion Posture Optimization Function**:
-    Path: Teaching Program -> Programming -> Segment Welding Segment Instructions;
+    Path: Teaching Program -> Programming -> Segment Welding Segment Instructions.
 
-    Description: Added "Segment Welding Mode" configuration;
+    Description: Added "Segment Welding Mode" configuration.
 
 - **Virtual Wall Function Based on Force Sensor**:
-    Path: Initial Settings -> Peripherals -> End Tools -> End Peripherals, Auxiliary Applications -> Tool Applications -> Drag Lock;
+    Path: Initial Settings -> Peripherals -> End Tools -> End Peripherals, Auxiliary Applications -> Tool Applications -> Drag Lock.
 
-    Description: Added "Force Sensor" related configuration parameters to the end peripheral configuration, and "Inertia Coefficient" configuration to the force sensor auxiliary lock;
+    Description: Added "Force Sensor" related configuration parameters to the end peripheral configuration, and "Inertia Coefficient" configuration to the force sensor auxiliary lock.
 
 - **SmartTool+Force Sensor Combination New Function**:
-    Path: Auxiliary Applications -> Tool Applications -> Smart Tool;
+    Path: Auxiliary Applications -> Tool Applications -> Smart Tool.
 
-    Description: Added key function configuration;
+    Description: Added key function configuration.
