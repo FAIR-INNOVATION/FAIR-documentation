@@ -63,7 +63,7 @@ Qualification Certification
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
      - --
      - :download:`download <_static/_doc/ROHS test certification certificate.zip>`
 
@@ -280,3 +280,5 @@ Java SDK
 Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-QNX-V3.7.7-Release-241230 <https://drive.google.com/file/d/1AADC-i_6tJhYxDIhFBq7Lf--pjph1cGb/view?usp=sharing>`
+
+    :download:`FAIRINO-CobotSoftware-Linux-V3.7.7-Release-250114 <https://drive.google.com/file/d/1rE4aWcQoVa2KVngUKW_luW7BUHaoW8Kl/view?usp=sharing>`

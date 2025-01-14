@@ -547,7 +547,7 @@ Surface positioning
     "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
     - ``dir``: direction of movement, 1-positive, 2-negative;
     - ``axis``: moving axes, 1-x, 2-y, 3-z;
-    - ``disMax``: large exploration distance in mm.
+    - ``disMax``: maximum exploration distance in mm.
     - ``ft``: action termination force threshold in N;"
     "Default Parameters", "- ``lin_v``: explore linear velocity in mm/s default 3.
     - ``lin_a``: explore linear acceleration in mm/s^2 default 0;"
