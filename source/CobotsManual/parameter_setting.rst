@@ -63,14 +63,6 @@ Tool coordinates can be modified, cleared and applied. In the drop-down list of 
 
 .. centered:: Figure 3.3-1 Set tool coordinates
 
-Under QNX:
-
-- There are 15 tool coordinate systems.
-
-Under Linux:
-
-- There are 20 tool coordinate systems.
-
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. The tool calibration method is divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the tool center point. Its posture is consistent with the end posture by default. The six-point method adds two points to the four-point method. , used to calibrate the pose of the tool.
 
 .. image:: base/002.png
@@ -82,4 +74,4 @@ Click "Modify" to reset the tool coordinate system of the number according to th
 .. important:: 
    1. After the tool is installed at the end, the tool coordinate system must be calibrated and applied, otherwise the position and attitude of the tool center point will not meet the expected values when the robot executes the motion command.
 
-   2. The tool coordinate system generally uses toolcoord1~toolcoord14, and toolcoord0 is used to indicate that the position center of the tool TCP is at the center of the end flange. When calibrating the tool coordinate system, it is first necessary to apply the tool coordinate system to toolcoord0, and then select other tool coordinate systems for calibration. Calibration and application.
+   2. The tool coordinate system generally uses toolcoord1~toolcoord19, and toolcoord0 is used to indicate that the position center of the tool TCP is at the center of the end flange. When calibrating the tool coordinate system, it is first necessary to apply the tool coordinate system to toolcoord0, and then select other tool coordinate systems for calibration. Calibration and application.

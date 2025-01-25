@@ -4324,7 +4324,7 @@ The principle of lateral constant force grinding in the XY direction is as follo
 Operation process of lateral constant force grinding function in XY direction
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-To perform constant force grinding using a force sensor, it is necessary to install a grinding tool under the force sensor and configure the tool coordinate system. Click on the "Initial" - "Base" - "Coordinate" - "TCP" button in sequence to enter the "Tool coordinate system settings" interface. Select the coordinate system to be set in the "Coordinate system name" (taking toolcoord 0 coordinate system as an example), and set it according to the size of the end tool.
+To perform constant force grinding using a force sensor, it is necessary to install a grinding tool under the force sensor and configure the tool coordinate system. Click on the "Initial" -> "Base" -> "Coordinate" -> "TCP" button in sequence to enter the "Tool coordinate system settings" interface. Select the coordinate system to be set in the "Coordinate system name" (taking toolcoord 0 coordinate system as an example), and set it according to the size of the end tool.
 
 .. image:: coding/246.png
    :width: 4in
@@ -4332,7 +4332,7 @@ To perform constant force grinding using a force sensor, it is necessary to inst
 
 .. centered:: Figure 9.20-1 Set tool coordinate system
 
-Force control reference coordinate system setting. In the web interface, click on "FT" - "Reference coord.", select "Custom coordinates", and set each parameter to "0". When the force sensor is working, different reference coordinate systems will affect the magnitude of the external force obtained by the sensor.
+Force control reference coordinate system setting. In the web interface, click on "FT" -> "Reference coord.", select "Custom coordinates", and set each parameter to "0". When the force sensor is working, different reference coordinate systems will affect the magnitude of the external force obtained by the sensor.
 
 .. image:: coding/261.png
    :width: 6in
@@ -4348,7 +4348,7 @@ Fix the flat plate to be polished in the robot workspace, and the plate should n
 
 .. centered:: Figure 9.20-3 Polishing layout diagram
 
-Click on the "Program" - "Coding" - "F/T" button in sequence, and add the "FT_Control" instruction. The "FT_Control" command is a force controlled motion command that allows the robot to move around the set force.
+Click on the "Program" -> "Coding" -> "F/T" button in sequence, and add the "FT_Control" instruction. The "FT_Control" command is a force controlled motion command that allows the robot to move around the set force.
 
 .. image:: coding/263.png
    :width: 4in
@@ -5002,3 +5002,48 @@ Precision Impact Table
      - 19940
      - 35170
      - 46770
+
+Real-time forward trajectory planning function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++
+
+Real-time forward-looking trajectory planning is based on current and future path information, dynamically adjusting the robot's motion parameters such as speed and acceleration to ensure smoothness, continuity and accuracy of motion. By predicting the robot's future position and posture, forward-looking control can respond before the key points of the path, thereby avoiding unstable motion or trajectory errors due to sudden changes in speed and acceleration.
+
+Operation process
+++++++++++++++++++++++
+
+**Step1**: Prepare a trajectory point file in "txt" format, in which each trajectory point is represented by a Cartesian pose.
+
+**Step2**: Click the "Teaching Program"->"Programming" button in sequence, select the "Trajectory Forward" command in "Motion Command", and import and delete the trajectory file in "Command Configuration".
+
+.. image:: coding/288.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.23-1 Import and delete trajectory files
+
+**Step3**: Select the trajectory file to be run and add the "Trace Preload" command: First, select the fitting method for the trajectory points in "Curve Fitting Method", including "Straight Line Connection", "Straight Line Fitting", "B-Spline Curve", "Polynomial Optimization Method", etc. When "Straight Line Fitting" is selected, it is necessary to set the error limit additionally, and other methods do not need this setting; secondly, set the smoothing method and smoothing accuracy; finally, set the maximum speed, maximum acceleration and maximum jerk during the operation.
+
+.. image:: coding/289.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.23-2 Set trajectory preload parameters
+
+**Step 4**: Add the "trajectory motion" command and generate a Lua program. By running the Lua program, you can perform real-time forward trajectory planning on the imported trajectory file. The typical program of real-time forward trajectory planning is shown in the figure below.
+
+.. image:: coding/290.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.23-3 Typical program for real-time forward-looking trajectory planning
+
+**Step 5**: For the "LoadTrajectory" command line in the lua program, click the edit button to modify the setting parameters to achieve different trajectory planning effects.
+
+.. image:: coding/291.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.23-4 Modify the setting parameters

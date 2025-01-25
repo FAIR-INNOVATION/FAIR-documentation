@@ -7,7 +7,7 @@ Safety
 Stop mode
 --------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Stop mode" submenu to enter the configuration interface, set the safe stop mode parameter function.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Stop mode" submenu to enter the configuration interface, set the safe stop mode parameter function.
 
 .. image:: safety/001.png
    :width: 4in
@@ -18,7 +18,7 @@ Click "Initial - Safety" in the menu bar, and then click the "Stop mode" submenu
 Safe speed
 --------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Safe speed" submenu to enter the configuration interface, set the safe speed.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Safe speed" submenu to enter the configuration interface, set the safe speed.
 
 .. note:: TCP manual speed is less than 250mm/s.
 
@@ -31,7 +31,7 @@ Click "Initial - Safety" in the menu bar, and then click the "Safe speed" submen
 I/O safety
 --------------
 
-Click "Initial - Safety" in the menu bar, and then click the "I/O safety" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "I/O safety" submenu to enter the configuration interface.
 
 The HMI provides the setting of the safety status of 16 digital inputs and 16 digital outputs, which can be set to valid or invalid status. When the controller determines that it is in a safe state, the 16 digital inputs and 16 digital outputs are set to a safe state.
 
@@ -53,7 +53,7 @@ On Linux:
 Emergency stop
 ---------------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Emergency stop" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Emergency stop" submenu to enter the configuration interface.
 
 Emergency stop types 0, 1a, 1b, 2 can be set, stop time limit can be set, and stop distance limit can be set.
 
@@ -72,7 +72,7 @@ Emergency stop types 0, 1a, 1b, 2 can be set, stop time limit can be set, and st
 Protective stop
 ---------------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Protective stop" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Protective stop" submenu to enter the configuration interface.
 
 Protective stop type 0, 1, 2. Protective stop type 0: the control box board directly cuts off the power. Protective stop type 1: the control box board first notifies the controller to control the robot to stop and then the controller feeds back to cut off the power of the control box board. Protective stop type 2: the control box board notifies the controller to control the robot to stop.
 
@@ -94,7 +94,7 @@ Protective stop type 0, 1, 2. Protective stop type 0: the control box board dire
 Safety plane
 ---------------------------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Safety plane" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Safety plane" submenu to enter the configuration interface.
 
 -  **Safety Plane Configuration**:Click the enable button to enable the corresponding security plane. When the security plane is not configured with a security range, an error will be prompted. Click the drop-down box, select the security plane you want to set, and automatically bring out the security distance (you can not set it, the default value is 0), and then click the "Setting" button to set it successfully.
   
@@ -126,7 +126,7 @@ Click "Initial - Safety" in the menu bar, and then click the "Safety plane" subm
 Daemon
 ---------------------------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Daemon" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Daemon" submenu to enter the configuration interface.
 
 The user clicks the "function enabled" button to open or close the setting of the daemon. Select "Unexpected Situation" and "Background Program", and click the "Settings" button to configure the parameters of the unexpected situation handling logic.
 
@@ -141,7 +141,7 @@ Enable the security background program and set the unexpected scene and backgrou
 Direction limit (Only used in Linux systems)
 ---------------------------------------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Direction limit" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Direction limit" submenu to enter the configuration interface.
 
 Tool direction limit is a protective function that acts on the Cartesian space of the robot tool end to limit the range of motion of the robot end posture, including function enablement settings, reference tool direction settings, and maximum offset angle settings. The maximum offset angle defines the maximum angle limit between the Z axis of the Cartesian coordinate system of the tool end and the reference tool direction, which can usually be understood as a conical space.
 
@@ -154,7 +154,7 @@ Tool direction limit is a protective function that acts on the Cartesian space o
 Robot limit (Only used in Linux systems)
 ---------------------------------------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Robot limit" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Robot limit" submenu to enter the configuration interface.
 
 Robot limits include momentum and power, where the momentum limit is used to limit the robot's maximum momentum, and the power limit is used to limit the mechanical work done by the robot.
 
@@ -167,7 +167,7 @@ Robot limits include momentum and power, where the momentum limit is used to lim
 Power detection (Only used in QNX systems)
 ---------------------------------------------
 
-Click "Initial - Safety" in the menu bar, and then click the "Power detection" submenu to enter the configuration interface.
+Click "Initial" -> "Safety" in the menu bar, and then click the "Power detection" submenu to enter the configuration interface.
 
 When acting directly on the current loop of the robot (only with the command servoJT), it is used to limit the work done by the robot. When it is detected that the integral of the robot speed and torque exceeds the limit, power protection is performed.
 

@@ -12,12 +12,14 @@ Qualification Certification
 ---------------------------------
     :download:`FAIRINO ISO9001 Quality Certification <_static/_doc/FAIRINO ISO9001 Quality Certification.pdf>`
 
+Robot certification:
+
 .. list-table::
-   :widths: 15 4 4 4 4 4 4 4 20
+   :widths: 20 10 10 10 10 10 10 10 10
    :header-rows: 0
    :class: sheet-center
 
-   * - **Certification/Model**
+   * - **Certificate/Model**
      - **FR3**
      - **FR5**
      - **FR10**
@@ -25,9 +27,9 @@ Qualification Certification
      - **FR20**
      - **FR30**
      - **FR3MT**
-     - **Certificate Download**
+     - **Download**
 
-   * - **High Protection IP65 Test Certification Certificate**
+   * - **High Protection IP65 Test Certificate**
      - ✅
      - ✅
      - ✅
@@ -37,7 +39,7 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/High protection IP65 test certification certificate.zip>`
 
-   * - **NSF Certification**
+   * - **NSF Certificate**
      - ✅
      - ✅
      - ✅
@@ -47,7 +49,7 @@ Qualification Certification
      - ✅
      - :download:`download <_static/_doc/NSF Certification Certificate.zip>`
 
-   * - **Crash Force Test Certification**
+   * - **Crash Force Test Certificate**
      - ✅
      - ✅
      - ✅
@@ -63,41 +65,11 @@ Qualification Certification
      - ✅
      - ✅
      - ✅
-     - ✅
+     - --
      - --
      - :download:`download <_static/_doc/ROHS test certification certificate.zip>`
 
-   * - **Parts-Motor Certification**
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - :download:`download <_static/_doc/Parts-Motor Certification.pdf>`
-
-   * - **Parts-Driver Certification**
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - :download:`download <_static/_doc/Parts-Driver Certification.pdf>`
-
-   * - **Parts-Core Board Certification**
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - :download:`download <_static/_doc/Parts-Core Board Certification.pdf>`
-
-   * - **Parts-Power Supply Certification**
+   * - **Parts-Power Supply Certificate**
      - ✅
      - ✅
      - ✅
@@ -107,7 +79,7 @@ Qualification Certification
      - ✅
      - :download:`download <_static/_doc/Parts-Power Supply Certification.pdf>`
 
-   * - **Explosion-proof Certification**
+   * - **Explosion-proof Certificate**
      - ✅
      - ✅
      - ✅
@@ -117,7 +89,7 @@ Qualification Certification
      - ✅
      - :download:`download <_static/_doc/Explosion-proof certification.zip>`
 
-   * - **CE-EMC Certification**
+   * - **CE-EMC Certificate**
      - ✅
      - ✅
      - ✅
@@ -127,7 +99,7 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/CE-EMC certification.pdf>`
 
-   * - **CE-MD Certification**
+   * - **CE-MD Certificate**
      - ✅
      - ✅
      - ✅
@@ -137,17 +109,7 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/CE-MD certification.zip>`
 
-   * - **Control Box CE Certification**
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - :download:`download <_static/_doc/FRC100-AC-x000-A version control box CE (MD+EMC) certificate.pdf>`
-
-   * - **Functional Safety Certification**
+   * - **Functional Safety Certificate**
      - ✅
      - ✅
      - ✅
@@ -157,7 +119,7 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/Functional safety certification.zip>`
 
-   * - **KCs Certification**
+   * - **KCs Certificate**
      - ✅
      - ✅
      - ✅
@@ -167,7 +129,7 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/KCs Certification.zip>`
 
-   * - **SEMI Certification**
+   * - **SEMI Certificate**
      - ✅
      - ✅
      - ✅
@@ -177,7 +139,7 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/SEMI Certification.pdf>`
 
-   * - **NRTL Industrial Robot Certification**
+   * - **NRTL Industrial Robot Certificate**
      - ✅
      - ✅
      - ✅
@@ -187,7 +149,7 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/FR3-30 Industrial Robot NRTL Certification.pdf>`
 
-   * - **NRTL Collaborative Robot Certification**
+   * - **NRTL Collaborative Robot Certificate**
      - ✅
      - ✅
      - ✅
@@ -197,6 +159,44 @@ Qualification Certification
      - --
      - :download:`download <_static/_doc/NRTL Collaborative Robot certification.pdf>`
 
+Control box certification:
+
+.. list-table::
+   :widths: 45 125 35
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **Certification**
+     - **Product Model**
+     - **Download**
+   * - **Control box CE(MD+EMC) certification**
+     - FRC100-AC-2000-A, FRC100-AC-5000-A
+     - :download:`download <_static/_doc/FRC100-AC-x000-A version control box CE (MD+EMC) certificate.pdf>`
+
+Component certification:
+
+.. list-table::
+   :widths: 45 125 35
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Certification**
+     - **Product Model**
+     - **Download**
+   * - **Motor certification**
+     - FR60-100, FR60-200, FR80-470, FR130-960, FR130-1500
+     - :download:`download <_static/_doc/Parts-Motor Certification.pdf>`
+   * - **Driver certification**
+     - FR01-SD6-14, FR01-SD6-17, FR01-SD8-25, FR01-SD13-32, FR01-SD13-40
+     - :download:`download <_static/_doc/Parts-Driver Certification.pdf>`
+   * - **Power supply certification**
+     - FRP-800-4824
+     - :download:`download <_static/_doc/Parts-Power Supply Certification.pdf>`
+   * - **Core board certification**
+     - PETREL
+     - :download:`download <_static/_doc/Parts-Core Board Certification.pdf>`
+  
 Secondary Development
 ---------------------------------
     :download:`FAIRINO ROS1 <https://github.com/FAIR-INNOVATION/frcobot_ros/archive/refs/heads/master.zip>`

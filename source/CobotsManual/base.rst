@@ -10,7 +10,7 @@ Coordinate
 TCP
 ~~~~~~~~~~~~~~~~~~~
 
-In the menu bar of "Initial - Base - Coordinate", click "TCP" to enter the tool coordinate page.
+In the menu bar of "Initial" -> "Base" -> "Coordinate", click "TCP" to enter the tool coordinate page.
 
 Tool coordinates can be modified, cleared and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
 
@@ -19,14 +19,6 @@ Tool coordinates can be modified, cleared and applied. In the drop-down list of 
    :align: center
    
 .. centered:: Figure 6.1-1 Set tool coordinates
-
-Under QNX:
-
-- There are 15 tool coordinate systems.
-
-Under Linux:
-
-- There are 20 tool coordinate systems.
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. Tool calibration methods are divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the center point of the tool. Its posture defaults to be consistent with the end posture. The six-point method adds two points to the four-point method. , used to calibrate the attitude of the tool, here we take the six-point method as an example to explain.
 
@@ -48,13 +40,13 @@ After completing the last step, click "Finish" to return to the tool coordinate 
 
 .. important:: 
    1. After the tool is installed at the end, the tool coordinate system must be calibrated and applied, otherwise the position and attitude of the tool center point will not meet the expected values when the robot executes the motion command.
-   2. The tool coordinate system generally uses toolcoord1~toolcoord14, and toolcoord0 is used to indicate that the position center of the tool TCP is at the center of the end flange. When calibrating the tool coordinate system, it is first necessary to apply the tool coordinate system to toolcoord0, and then select other tool coordinate systems for calibration and application.
+   2. The tool coordinate system generally uses toolcoord1~toolcoord19, and toolcoord0 is used to indicate that the position center of the tool TCP is at the center of the end flange. When calibrating the tool coordinate system, it is first necessary to apply the tool coordinate system to toolcoord0, and then select other tool coordinate systems for calibration and application.
 
 
 Ext. TCP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial - Base - Coordinate", click "Ext. TCP" to enter the external tool coordinate system interface.
+Under the menu bar of "Initial" -> "Base" -> "Coordinate", click "Ext. TCP" to enter the external tool coordinate system interface.
 
 The modification, clearing and application of external tool coordinates can be realized in the external tool coordinate system setting interface.
 
@@ -106,7 +98,7 @@ After completing the last step, click "Finish" to return to the tool coordinate 
 Workpiece
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial - Base - Coordinate", click "Workpiece" to enter the workpiece coordinates interface. Workpiece coordinates can realize the modification, clearing and application of workpiece coordinates. There are 15 numbers in the drop-down list of the workpiece coordinate system, select the corresponding coordinate system (wobjcoord0~
+Under the menu bar of "Initial" -> "Base" -> "Coordinate", click "Workpiece" to enter the workpiece coordinates interface. Workpiece coordinates can realize the modification, clearing and application of workpiece coordinates. There are 15 numbers in the drop-down list of the workpiece coordinate system, select the corresponding coordinate system (wobjcoord0~
 wobjcoord14), and then the corresponding coordinate value will be displayed in the "Coordinate System Coordinates" below. After selecting a certain coordinate system, click the "Apply" button, and the currently used workpiece coordinate system will change to the selected coordinates, as shown in figure below.
 
 .. image:: base/006.png
@@ -133,7 +125,7 @@ After completing the last step, click "Finish" to return to the workpiece coordi
 Ext. Axis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial - Base - Coordinate", click "Ext. Axis" to enter the extended axis coordinate system interface. In the extended axis coordinate system setting interface, the modification, clearing and application of the extended axis coordinates can be realized.
+Under the menu bar of "Initial" -> "Base" -> "Coordinate", click "Ext. Axis" to enter the extended axis coordinate system interface. In the extended axis coordinate system setting interface, the modification, clearing and application of the extended axis coordinates can be realized.
 
 There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in figure below.
 
@@ -223,7 +215,7 @@ Payload
 End payload
 ~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial - Base - Payload", click "End payload" to enter the end load interface.
+Under the menu bar of "Initial" -> "Base" -> "Payload", click "End payload" to enter the end load interface.
 
 When configuring the end load, please enter the mass of the end tool used and the corresponding center of mass coordinates into the "Load mass" and "Load mass center coordinates X, Y and Z" input boxes and apply.
 
@@ -272,7 +264,7 @@ Joint
 Soft limit
 ~~~~~~~~~~~
 
-Under the menu bar of "Initial - Base - Joint", click "Soft limit" to enter the soft limit interface.
+Under the menu bar of "Initial" -> "Base" -> "Joint", click "Soft limit" to enter the soft limit interface.
 
 There may be other equipment in the robot's stroke, and the limit angle can softly limit the robot so that the robot's movement does not exceed a certain coordinate value and prevent the robot from colliding. Triggering the soft limit to stop the robot is automatically triggered by the robot, and there is no stopping distance.
 
@@ -287,7 +279,7 @@ Administrators can use the default values or enter angle values. Input the angle
 Collision level
 ~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial - Base - Joint", click "Collision Level" to enter the collision level interface.
+Under the menu bar of "Initial" -> "Base" -> "Joint", click "Collision Level" to enter the collision level interface.
 
 The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 6.1-16.
 
@@ -309,12 +301,16 @@ When the two strategies are triggered, they will switch from automatic mode or m
 Collision strategy
 +++++++++++++++++++++
 
+FT_Guard command is used to realize collision detection based on force sensor. The previous collision strategies were "collision stop", "collision pause" and "moving on". In order to avoid the extrusion force between robot and object after collision, the strategies of "Gravitational moment mode", "Vibration response mode" and "Collision rebound mode" are added.
+
+When triggered, all three strategies will switch from automatic mode or manual mode to drag mode, and then switch to manual mode. Among them, the Gravitational moment mode will be far away from the collision point according to the magnitude and direction of the collision force; The Vibration response mode will return to the collision position after being far away from the collision point; The collision rebound mode will accelerate away from the collision point according to the set parameters.
+
 Gravitational moment mode
 *****************************
 
 The Gravitational moment mode in collision strategy is set as follows.
 
-**Step1**:Click "Collision Level" under the menu bar of "Initial - Base - Joint" to enter the corresponding interface.
+**Step1**:Click "Collision Level" under the menu bar of "Initial" -> "Base" -> "Joint" to enter the corresponding interface.
 
 **Step2**:In the column of "Collision Strategy", click the drop-down box to select " Gravitational moment mode ", and the interface is shown below; Then, click the "Apply" button to enable the function. 
 
@@ -331,7 +327,7 @@ Vibration response mode
 
 The setting steps of oscillation response mode in collision strategy are as follows.
 
-**Step1**:Click "Collision Level" under the menu bar of "Initial - Base - Joint" to enter the corresponding interface.
+**Step1**:Click "Collision Level" under the menu bar of "Initial" -> "Base" -> "Joint" to enter the corresponding interface.
 
 **Step2**:In the column of "Collision Strategy", click the drop-down box to select " Vibration response mode", and the interface is shown below; Then, click the "Apply" button to enable the function.
 
@@ -343,12 +339,54 @@ The setting steps of oscillation response mode in collision strategy are as foll
 
 .. centered:: Figure 6.3-4 Vibration response mode of Collision Strategy
 
+Collision rebound mode
+**************************
+
+The collision rebound mode in collision strategy is set as follows.
+
+**Step 1**：Click "Collision Level" under the menu bar of "Robot Settings" in the initial setting to enter the corresponding interface.
+
+**Step 2**：In the column of "Collision Strategy", click the drop-down box to select "Collision Rebound Mode", and set the safety time of 1000ms, the safety distance of 150mm, the safety speed of 150mm/s, and the safety factor of each joint is 5. The specific interface is shown below.
+
+.. image:: base/049.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.3-5 Collision rebound mode of collision strategy
+
+The meaning of each parameter:
+  - Safe time: indicates the duration in drag mode after switching from automatic mode to drag mode, and the range is [1000-2000] ms;
+  - Safe distance: indicates the position of the robot away from the collision point after collision, and the range is [150-200] mm;
+  - Safe speed: indicates the maximum TCP speed of the robot away from the collision point after collision. If the speed limit is exceeded, the rebound force will be restrained, and the range is [50-250] mm/s;
+  - Safety factor: indicates the attenuation speed of rebound force. The smaller the factor, the faster the attenuation and the faster the rebound speed, and vice versa. The range is [1-10], dimensionless.
+
+FT_Guard Command
+**********************
+
+FT_Guard command is used to realize collision detection of force sensor. First select the direction of detection, or set all directions. Then, the current force sensor data is obtained as the initial value, and then the maximum threshold and minimum threshold are set to determine the upper and lower limits of collision force triggering, so that the collision detection function setting can be completed. Take the Z-direction configuration as an example. See Figure for detailed settings.
+
+.. image:: base/050.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.3-6 parameter of FT_Guard command
+
+FT_Guard command is usually used with motion command, such as PTP or LIN, and a simple example is shown below.
+
+.. image:: base/051.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 6.3-7 example of FT_Guard with motion command
+
+The first behavior of figure sets the force sensor collision detection on, and the last behavior turns off the force sensor collision detection function.
+
 Static collision detection
 +++++++++++++++++++++++++++++++
 
 The setup steps of static collision detection are as follows.
 
-**Step1**:Click "Collision Level" under the menu bar of "Initial - Base - Joint" to enter the corresponding interface.
+**Step1**:Click "Collision Level" under the menu bar of "Initial" -> "Base" -> "Joint" to enter the corresponding interface.
 
 **Step2**:Turn on the switch for static collision detection, as shown below. When it is detected that the gap between the joint torque command and the torque feedback is too large, the robot will enter the drag mode to avoid continuous extrusion force.
 
@@ -356,12 +394,12 @@ The setup steps of static collision detection are as follows.
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-5 Static collision detection
+.. centered:: Figure 6.3-8 Static collision detection
 
 Friction compensation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial - Base - Joint", click "Friction comp." to enter the friction compensation setting interface.
+Under the menu bar of "Initial" -> "Base" -> "Joint", click "Friction comp." to enter the friction compensation setting interface.
 
 **Friction compensation coefficient**:The usage scenario for friction compensation is only in the dragging mode. The friction compensation coefficient can be set from 0 to 1. The higher the value, the greater the compensation force when dragging. The friction compensation coefficient needs to be set separately for each axis according to the different installation methods.
 
@@ -371,7 +409,7 @@ Under the menu bar of "Initial - Base - Joint", click "Friction comp." to enter 
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-6 Friction Compensation Settings
+.. centered:: Figure 6.3-9 Friction Compensation Settings
 
 .. important:: 
    The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
@@ -382,237 +420,198 @@ I/O setup
 I/O configuration
 ~~~~~~~~~~~~~~~~~~
 
-Click "Initial - Base - I/O setup" on the menu bar, and click the "DI Configuration" and "DO Configuration" submenus respectively to enter the DI and DO configuration interface. Among them, the control box CI0-CI7 and CO0-CO7 are configurable, and the terminal DI0 and DI1 are configurable. 
+Click "Initial" -> "Base" -> "I/O setup" on the menu bar, and click the "DI Configuration" and "DO Configuration" submenus respectively to enter the DI and DO configuration interface. Among them, the control box CI0-CI7 and CO0-CO7 are configurable, and the terminal DI0 and DI1 are configurable. 
+
+DI Configuration
+++++++++++++++++++++
 
 In production, when the collaborative robot needs to connect peripherals or stops suddenly due to failure or other factors, it needs to output DO signal to realize sound and light alarm prompt. The input configurable functions are shown in table below.
 
-.. centered:: Table 6.4-1 Control box input configurable functions
+.. centered:: Table 6.4-1 Configurable functions of control box input
 
 .. list-table:: 
-   :widths: 15 80
+   :widths: 15 30 100
    :header-rows: 1
    :align: center
 
-   * - Fuction No
-     - Fuction name
+   * - Function number
+     - Function name
+     - Function description
    * - 0
-     - nothing
+     - None
+     - None
    * - 1
-     - Arcing success signal
+     - Arc start success signal
+     - The arc starts successfully and the robot outputs the arc start signal to the welder
    * - 2
-     - Welding machine preparation signal
+     - Welding preparation signal
+     - Robot welding preparation success signal
    * - 3
-     - Belt detection
+     - Conveyor detection
+     - Conveyor detection switch DI configuration signal
    * - 4
-     - suspend
+     - Pause
+     - Robot motion pause signal during welding
    * - 5
-     - recovery
+     - Resume
+     - When the arc is interrupted unexpectedly during robot welding or the operator actively pauses welding, welding interruption will be triggered. After welding interruption, when the external input signal to the robot changes from invalid to valid, the robot automatically resumes welding from the original interrupted position
    * - 6
-     - start-up 
+     - Start
+     - In the DI configuration configurable input, select CIO as "Start" and click "Apply". The configurable input valid state can be selected as "high level valid". When the CI0 level changes from low level to high level, the "start" function is triggered to start the program opened in the current teaching program interface. If the interface is not opened, the last saved program will be run; the configurable input valid state can be selected as "low level valid". When the CI0 level changes from high level to low level, the "start" function is triggered to start the program opened in the current teaching program interface. If the interface is not opened, the last saved program will be run
    * - 7
-     - stop it  
+     - Stop
+     - The robot stops the motion signal during welding
    * - 8
-     - Pause/Resume 
+     - Pause/resume
+     - After the robot moves, the pause/resume motion signal is triggered cyclically
    * - 9
-     - Start/Stop
+     - Start/stop
+     - After the robot moves, the start/stop motion signal is triggered cyclically
    * - 10
-     - Pedal drag switch 
+     - Foot drag switch
+     - Robot foot drag switch motion signal
    * - 11
-     - Move to job origin
+     - Move to the operation origin
+     - The robot moves to the operation origin signal with the current robot posture as the operation origin
    * - 12
-     - Manual automatic switching
+     - Manual automatic switching (pulse signal)
+     - In the configurable input of DI configuration, select CIO as "Manual automatic switching (pulse signal)", and click "Apply". Select "High level valid" for the configurable input valid state. When the CI0 level changes from low level to high level, the "Manual automatic switching (pulse signal)" function is triggered, and the robot switches the running state once; select "Low level valid" for the configurable input valid state. When the CI0 level changes from high level to low level, the "Manual automatic switching (pulse signal)" function is triggered, and the robot switches the running state once
    * - 13
-     - Welding wire position finding succeeded
+     - Welding wire positioning success
+     - Robot welding wire positioning success signal
    * - 14
-     - Motion interruption 
+     - Motion interruption
+     - Robot motion program interruption signal
    * - 15
      - Start main program
+     - Start robot main program signal
    * - 16
-     - Start rewind
+     - Start rewinding
+     - After the robot program is running, the program rewinding start signal.
    * - 17
-     - Start up confirmation
+     - Start confirmation
+     - Robot program start confirmation signal
    * - 18
      - Laser detection signal X
+     - Robot laser sensor detection signal X
    * - 19
      - Laser detection signal Y
+     - Robot laser sensor detection signal Y
    * - 20
-     - External emergency stop input signal 1 (Configurable only under QNX)
+     - External emergency stop input signal 1
+     - Robot external emergency stop input signal 1, ① only displayed under QNX. ② Under LINUX, relevant configuration can be made in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 21
-     - External emergency stop input signal 2(Configurable only under QNX)
+     - External emergency stop input signal 2
+     - Robot external emergency stop input signal 2, ① only displayed under QNX. ② Under LINUX, relevant configuration can be made in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 22
-     - Level 1 reduction mode (Configurable only under QNX)
+     - Level 1 reduction mode
+     - Robot level 1 reduction mode, ① only displayed under QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 23
-     - Level 2 reduction mode (Configurable only under QNX)
+     - Secondary reduction mode
+     - Robot secondary reduction mode, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 24
-     - Level 3 reduction mode (stop) (Configurable only under QNX)
+     - Third-level reduction mode (stop)
+     - Robot third-level reduction mode (stop), ① only displayed in QNX. ② Under LINUX, you can make relevant configurations in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 25
      - Resume welding
+     - After the robot is interrupted from welding, the welding operation signal is restored
    * - 26
-     - Terinate welding
+     - Stop welding
+     - During the robot welding process, the welding operation signal is stopped
    * - 27
-     - Assisted drag on
+     - Auxiliary drag on
+     - Control box DI function configuration force sensor drag function on signal
    * - 28
-     - Assisted drag off
+     - Auxiliary drag off
+     - Control box DI function configuration force sensor drag function off signal
    * - 29
-     - Assisted drag on/off
-   
-
-The output configurable functions are shown in table below.
-
-.. centered:: Table 6.4-2 Control box output configurable function
-
-.. list-table:: 
-   :widths: 15 80
-   :header-rows: 1
-   :align: center
-
-   * - Fuction No
-     - Fuction name
-   * - 0
-     - nothing
-   * - 1
-     - report errors
-   * - 2
-     - motion
-   * - 3
-     - Spraying start and stop
-   * - 4
-     - Spraying gun cleaning
-   * - 5
-     - Arcing
-   * - 6
-     - aspiration
-   * - 7
-     - Forward wire feeding
-   * - 8
-     - Reverse wire feeding
-   * - 9
-     - JOB input port 1
-   * - 10
-     - JOB input port 2
-   * - 11
-     - JOB input port 3
-   * - 12
-     - Start and stop of conveyor belt
-   * - 13
-     - suspend
-   * - 14
-     - Reaching the job origin
-   * - 15
-     - Enter the interference zone
-   * - 16
-     - Start stop control of welding wire positioning
-   * - 17
-     - Robot startup completed
-   * - 18
-     - Program start and stop
-   * - 19
-     - Automatic manual mode
-   * - 20
-     - Emergency stop output singal 1 (Configurable only under QNX)
-   * - 21
-     - Emergency stop output singal 2 (Configurable only under QNX)
-   * - 22
-     - Lua script program stop or running
-   * - 23
-     - Safe status output (Configurable only under QNX)
-   * - 24
-     - Protective stop status output (Configurable only under QNX)
-   * - 25
-     - Robot in motion (Configurable only under QNX)
-   * - 26
-     - Robot reduced mode (Configurable only under QNX)
-   * - 27
-     - Robot non-reduced mode (Configurable only under QNX)
-   * - 28
-     - Reserved
-   * - 29
-     - Command point error
+     - Auxiliary drag on/off
+     - Control box DI function configuration force sensor drag function, cycle on/off signal
    * - 30
-     - Drive error
+     - Clear all errors
+     - Clear all error signals triggered by the robot
    * - 31
-     - Soft limit exceeded error
-   * - 32
-     - Collision error
-   * - 33
-     - Wrong number of active slaves
-   * - 34
-     - Slave error
-   * - 35
-     - IO error
-   * - 36
-     - Gripper error
-   * - 37
-     - File error
-   * - 38
-     - Strange pose error
-   * - 39
-     - Driver communication error
-   * - 40
-     - Parameter error
-   * - 41
-     - External axis exceeds software limit error
+     - Manual automatic switching (high and low level)
+     - In the configurable input of DI configuration, select CIO as "Manual automatic switching (high and low level)" and click "Apply". The configurable input valid state can be selected as "high level valid". When CI0 is switched to a high level, the "manual automatic switching (high and low levels)" function is triggered, and the robot state is switched to the automatic state; the configurable input valid state can be selected as "low level valid". When CI0 is switched to a low level, the "manual automatic switching (high and low levels)" function is triggered, and the robot state is switched to the automatic state.
 
-.. centered:: Table 6.4-3 Terminal input configurable function
+末端输入有效状态
+****************************************
+
+.. centered:: Table 6.4-2 Configurable functions of terminal input
 
 .. list-table:: 
-   :widths: 15 80
+   :widths: 15 30 100 
    :header-rows: 1
    :align: center
 
-   * - Fuction No
-     - Fuction name
+   * - Function number
+     - Function name
+     - Function description
    * - 0
-     - nothing
+     - None
+     - None
    * - 1
-     - Drag Mode
+     - Drag mode
+     - The robot end enables the drag mode signal
    * - 2
      - Teaching point record
+     - The robot end enables the teaching point record signal and saves the current robot point data
    * - 3
-     - Manual automatic switching
+     - Hand automatic switching
+     - Robot hand automatic switching trigger signal
    * - 4
-     - TPD track recording start/stop
+     - TPD trajectory recording start/stop
+     - After the robot starts TPD movement, the trajectory recording start/stop signal
    * - 5
-     - suspend
+     - Pause
+     - Robot movement pause signal
    * - 6
-     - recovery
+     - Resume
+     - Robot resume movement signal
    * - 7
-     - start-up
+     - Start
+     - Robot program start signal
    * - 8
-     - stop it
+     - Stop
+     - Robot program stop signal
    * - 9
      - Pause/Resume
+     - After the robot moves, the pause/resume movement signal is triggered cyclically
    * - 10
      - Start/Stop
+     - After the robot moves, the start/stop movement signal is triggered cyclically
    * - 11
-     - Assisted drag on
+     - Auxiliary drag on
+     - Control box DI function configuration force sensor drag function on signal
    * - 12
-     - Assisted drag off
+     - Auxiliary drag off
+     - Control box DI function configuration force sensor drag function off signal
    * - 13
-     - Assisted drag on/off
+     - Auxiliary drag on/off
+     - Control box DI function configuration force sensor drag function, cycle on/off signal
 
-Among them, the default configuration of the control box: CO0 is 1-the robot is reporting an error, and CO1 is 2-the robot is in motion.
+The default configuration of the control box: CO0 is 1-robot error, CO1 is 2-robot in motion.
 
 .. image:: base/026.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.4-1 Control box DI and DO configuration
+.. centered:: Figure 6.4‑1 Control box DI and DO configuration
 
-**The default configuration of terminal DI**: DI0 drag teaching, DI1 teaching point recording.
+**Terminal DI default configuration**: DI0 drag teaching, DI1 teaching point recording.
 
 .. image:: base/027.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4-2 Terminal DI configuration
+.. centered:: Figure 6.4‑2 Terminal DI configuration
 
-After the configuration is complete, you can view the corresponding output DO status on the I/O page of the control box under the corresponding status.
+After configuration is completed, the corresponding output DO status can be viewed in the control box I/O page under the corresponding state.
 
-.. important:: 
-   Configured DI and DO are forbidden to be used in coding.
+.. important::
+  The configured DI and DO are prohibited from being used in program programming.
 
-**Reduction mode configuration (level 1, level 2, level 3)**: The joint speed and terminal TCP speed can be configured in the first-level and second-level reduction modes, and the third-level reduction mode is to stop without configuring the speed.
+**Reduction mode configuration (first level, second level, third level)**: The first and second level reduction modes can configure the joint speed and terminal TCP speed, and the third level reduction mode is stop and the speed does not need to be configured.
 
 .. image:: base/032.png
    :width: 4in
@@ -622,7 +621,167 @@ After the configuration is complete, you can view the corresponding output DO st
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4-3 Safe speed setting
+.. centered:: Figure 6.4‑3 Reduced mode configuration
+
+DO configuration
+++++++++++++++++++
+
+The output configurable functions are shown in the following table:
+
+.. centered:: Table 6.4‑3 Control box output configurable functions
+
+.. list-table:: 
+   :widths: 15 30 100
+   :header-rows: 1
+   :align: center
+
+   * - Function number
+     - Function name
+     - Function description
+   * - 0
+     - None
+     - None
+   * - 1
+     - Error
+     - DO output error signal
+   * - 2
+     - Movement
+     - Robot movement signal
+   * - 3
+     - Spray start and stop
+     - Robot spray start and stop operation signal
+   * - 4
+     - Spray gun cleaning
+     - Robot spray gun cleaning operation signal
+   * - 5
+     - Arc start
+     - The robot controls the DO output port of the welding machine arc start. When the robot program executes the arc start command, the DO output port corresponding to the welding machine arc start automatically outputs valid
+   * - 6
+     - Gas supply
+     - The robot controls the DO output port of the welding machine gas supply. When the robot executes the welding gas supply command, the DO output port corresponding to the gas supply automatically outputs valid
+   * - 7
+     - Forward wire feeding
+     - The robot controls the DO output port of the welding machine forward wire feeding. When the robot executes the forward wire feeding command, the DO output port corresponding to the forward wire feeding automatically outputs valid
+   * - 8
+     - Reverse wire feeding
+     - The robot controls the DO output port of the welding machine to feed the wire in reverse. When the robot executes the reverse wire feeding command, the DO output port corresponding to the reverse wire feeding automatically outputs and becomes valid
+   * - 9
+     - JOB input port 1
+     - JOB input port 1 signal
+   * - 10
+     - JOB input port 2
+     - JOB input port 2 signal
+   * - 11
+     - JOB input port 3
+     - JOB input port 3 signal
+   * - 12
+     - Conveyor start and stop
+     - Conveyor movement start and stop operation signal
+   * - 13
+     - Pause
+     - Robot movement pause signal
+   * - 14
+     - Arrival at the operation origin
+     - Robot movement to the operation origin signal
+   * - 15
+     - Enter the interference zone
+     - Robot movement to the interference zone signal
+   * - 16
+     - Wire position finding start and stop control
+     - Robot wire position finding start and stop control operation signal
+   * - 17
+     - Robot start completion
+     - Robot start completion signal
+   * - 18
+     - Program start stop
+     - Robot motion program start stop signal
+   * - 19
+     - Automatic manual mode
+     - Robot hand automatic mode switching signal
+   * - 20
+     - Emergency stop output signal 1
+     - Robot emergency stop output signal 1, ① only displayed under QNX. ② Under LINUX, you can configure it in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+   * - 21
+     - Emergency stop output signal 2
+     - Robot emergency stop output signal 2, ① only displayed under QNX. ② Under LINUX, you can configure it in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+   * - 22
+     - Lua script program run/stop
+     - Robot motion Lua script program run/stop signal
+   * - 23
+     - Safety status output
+     - Robot safety status output signal, ① only displayed under QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+   * - 24
+     - Protective stop status output
+     - Robot protective stop status output signal, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+   * - 25
+     - Robot in motion
+     - Robot in motion status signal, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+   * - 26
+     - Robot reduction mode
+     - Robot reduction mode signal, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+   * - 27
+     - Robot non-reduction mode
+     - Robot non-reduction mode signal, ① only displayed in QNX. ② Under LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+   * - 28
+     - Reserved
+     - Reserved
+   * - 29
+     - Command point error
+     - Joint command point error signal
+   * - 30
+     - Drive error
+     - Drive error signal
+   * - 31
+     - Soft limit error
+     - Robot exceeds soft limit error signal, need to adjust the corresponding joint soft limit
+   * - 32
+     - Collision error
+     - Robot collision error signal
+   * - 33
+     - Active slave number error
+     - Active slave number error abnormal signal
+   * - 34
+     - Slave error
+     - Slave abnormal error signal
+   * - 35
+     - I/O error
+     - I/O error signal
+   * - 36
+     - Gripper error
+     - Gripper related configuration abnormal signal
+   * - 37
+     - File error
+     - Configuration file loading error signal
+   * - 38
+     - Singular position error
+     - Error signal when the robot moves to a singular position
+   * - 39
+     - Driver communication error
+     - Abnormal communication error signal of the robot driver
+   * - 40
+     - Parameter error
+     - DO high and low level range error
+   * - 41
+     - External axis exceeds soft limit error
+     - External axis 1-4 exceeds soft limit fault signal
+
+Control box DO high and low effective configurable function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++
+During the entire process from the control box power-on to the robot enabling, DO can be configured to the required output state according to the specific usage scenario, which is more flexible and convenient to use.
+
+Operation steps
+++++++++++++++++++
+
+Enter Initial Settings->Basics->I/O Settings->DO interface, and configure the control box DO output during power-on to the required high/low level.
+
+.. image:: base/055.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.4‑7 Control box DO output configuration during power-on
 
 Alias
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -633,7 +792,7 @@ Click "Initial - Base - I/O setup" on the menu bar, click on the "Alias"  submen
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4-4 I/O alias configuration
+.. centered:: Figure 6.4-8 I/O alias configuration
 
 Filter
 ~~~~~~~~~~~~~~~~
@@ -659,7 +818,7 @@ Users can set the corresponding parameters according to their needs, just click 
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-5 Filter interface
+.. centered:: Figure 6.4-9 Filter interface
 
 .. important:: 
    The I/O filter time range is [0~200], the unit is ms.
@@ -681,7 +840,7 @@ Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-6 Output reset configuration
+.. centered:: Figure 6.4-10 Output reset configuration
 
 .. Configuration import and export
 .. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -757,7 +916,7 @@ As shown above, where {b} is the robot base coordinate system, {e} is the end fl
 Calibrate the sensor coordinate system based on the web interface
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In the robot web control interface, click on "Initial" - "Base" - "Coordinate" - "TCP" to enter the "Tool coordinate system settings" interface;
+In the robot web control interface, click on "Initial" -> "Base" -> "Coordinate" -> "TCP" to enter the "Tool coordinate system settings" interface;
 
 Select the reference coordinate system from the drop-down menu of "Coordinate system name", and choose the corresponding "Tool Type" and "Installation position", then click "Modify" to enter the "Modify Wizard" interface;
 

@@ -76,7 +76,7 @@ The backup package data includes tool coordinate system data, system configurati
 For this function, the following will provide a detailed description of the dynamics configuration, installation method and backup package import related modules.
 
 Backup Package Import Verification Function
-++++++++++++++++++++++++++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Add verification function when importing backup packages, and compare key parameters between the backup package and the imported robot. The specific parameters are shown in table below. If these parameters are not set accurately, there will be certain security risks. Only when they are completely consistent, the backup package can be imported normally. If there is inconsistency, an error message will be displayed, as shown below. At this point, it is necessary to check whether the key parameters imported into the robot are consistent with the backup package.
 

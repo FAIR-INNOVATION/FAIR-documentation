@@ -4111,7 +4111,7 @@ In order to drag the robot conveniently, it is necessary to install a drag handl
 
 **Step1**: According to the length of the actual handle, set the tool coordinate system, as shown in Figure 2.
 
-**Step2**: In the "Initial - Base - Payload" menu bar, click "FT payload" to enter the force/torque sensor load interface.
+**Step2**: In the "Initial" -> "Base" -> "Payload" menu bar, click "FT payload" to enter the force/torque sensor load interface.
 
 Use the dragging button to adjust the level of the robot's end level, click the "Record Initial Location" button in the "Sensor Automatic School Zero" column of the "Power/Torque Sensor Load" interface. Then, switch the robot mode as an automatic mode, click the "Automatic School Zero" button. After the program is running, it is to complete the sensor school zero work.  The detailed operation is shown in Figure 3.
 
@@ -4132,7 +4132,7 @@ Six -dimensional force and joint impedance hybrid drag
 
 1. Auxiliary drag
 
-**Step1**: In the menu bar of "Application - Tool App", click "Drag locking" to enter the drag lock function interface.
+**Step1**: In the menu bar of "Application" -> "Tool App", click "Drag locking" to enter the drag lock function interface.
 
 **Step2**: In the column of "Six dimensions and joint impedance mixed drag", set the control status to "open", the impedance opening state is "closed", set the drag gain, the end line speed is 1000mm/s, the angle speed The limit is 100 °/s, and then click the "Apply" button to enable the function. The specific configuration is shown in Figure 4.
 
@@ -4171,3 +4171,254 @@ Specific function of parameters:
 - **Ending speed**: 1000mm/s, when the speed limit of the end line speed, the robot switching mode to the manual mode, and the TCP speed is
 
 - **Angle speed limit**: 100 °/s, when the angle speed is limited, the robot switching mode to the manual mode, and prompt TCP speeding.
+
+Welding tracking function at fixed-point using ext-axis and laser
+-----------------------------------------------------------------------------------
+
+1Robot fixed-point tracking welding system using ext-axis and laser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: robot_peripherals/220.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.16‑1 Robot fixed-point tracking welding system composition
+
+In the system, (a) is a computer, (b) is a robot and its control box, (c) is a positioner and driving equipment, (d) a welding seam tracking laser sensor, and (e) is a welding machine and supporting equipment.
+
+.. figure:: robot_peripherals/221.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 8.16‑2 Schematic diagram of peripheral installation
+
+The weld tracking laser sensor and welding gun (b) are mounted on the end flange of the robot (a), and the positioner (c) is fixed outside the robot.
+
+Ext-axis communication configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The robot communicates with the expansion axis using UDP or RS485.
+
+.. figure:: robot_peripherals/106.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.16‑3 Externed axis configuration page
+
+Click the "Initial", "Peripherals", and "Ext. Axis" buttons on the robot operation interface to enter the extended axis configuration page. For example, if you use a PLC to connect to a robot through UDP communication, click the "UDP Communication" icon to enter the expansion axis configuration page of UDP communication.
+
+.. figure:: robot_peripherals/222.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.16‑4 UDP communication configuration interface
+
+On the UDP communication ext-axis configuration page, you can select the corresponding ext-axis number, connect and configure UDP communication parameters (address, port, cycle, packet loss detection, etc.), and the completion time of the ext-axis positioning.
+
+The configuration content of the ext-axis is not the focus of this function introduction, and the detailed configuration is shown in the corresponding part of the user manual.
+
+Weld seam tracking laser sensor connection configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Connect the weld tracking laser sensor via the following configuration page:
+
+.. figure:: robot_peripherals/223.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑5 Laser Sensor Connection & Configuration page
+
+Click the "Initial", "Peripherals", "Tracking", and "Sensor" buttons to enter the configuration page. The configuration page includes "Sensor Configuration", "Communication Configuration and Loading", "Benchmark Calculation", "Three-point and Four-point Finding and Intersection Coordinate Function", click "Sensor Configuration" to set the sensor input filtering parameters, and click "Communication Configuration and Loading" to enter the corresponding communication parameters to connect the laser sensor.
+
+The configuration content of the laser sensor is not the focus of this function introduction, and the detailed configuration is shown in the corresponding part of the user manual.
+
+Welder connection configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configure the welder from the following configuration pages:
+
+.. figure:: robot_peripherals/224.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑6 Welder configuration page
+
+The welding machine communication can use IO communication or RS485 communication, click "Initial", "Peripherals", "Welder" to enter the configuration and connection interface, and you can configure "Control Type", "I/O configuration", "Welding Process Parameters", "Welding Machine Debugging" and other modules.
+
+The configuration content of the welding machine is not the focus of this function introduction, and the detailed configuration is shown in the corresponding part of the user manual.
+
+The tool coordinate and laser sensor coordinate calibration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After the welding torch is installed at the end of the robot, the welding torch and the laser sensor external parameters are calibrated:
+
+.. figure:: robot_peripherals/225.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑7 Tool coordinate system configuration page
+
+Click "Initial", "Basic", "Coordinate", "TCP" to enter the tool coordinate system setting page.
+
+Select an empty coordinate system and select the 6-point method for torch tool calibration.
+
+.. figure:: robot_peripherals/226.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑8 Select 6-point method to calibrate the welding gun
+
+Select an empty coordinate system and select the 5-point method for laser sensor calibration.
+
+.. figure:: robot_peripherals/227.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑9 Select 5-point method to calibrate the laser sensor
+
+The calibration content of the tool coordinate system and the laser sensor coordinate system is not the focus of this function introduction, and the detailed calibration method is shown in the corresponding part of the user manual.
+
+Ext-axis and laser fixed-point tracking function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are two methods of extended axis and laser fixed-point tracking, the tracking strategy of "recording first and then reproducing" is implemented in the transformation mode of laser data, and the tracking strategy of "reproduction while recording" is implemented in the non-transformation mode of laser data.
+
+Ext-axis coordinate system calibration
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+When using the ext-axis coordinate system to realize the synchronous laser tracking between the ext-axis and the robot, the ext-axis coordinate system needs to be calibrated.
+
+.. figure:: robot_peripherals/228.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑10 Ext-axis coordinate system settings page
+
+Click "Initial", "Basics", "Ext. axis" to enter the Ext-Axis coordinate system setting interface, select the Ext-Axis number that needs to be set, click the Edit button, select "4-Single Degree of Freedom Positioner" and save.
+
+.. figure:: robot_peripherals/229.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑11 Ext-axis calibration page
+
+When calibrating the expansion axis, pay attention to selecting "Robot Relative Expansion Axis Position" as "Outside the Expansion Axis". In the case of positioners, the 4-point method is selected for calibration.
+
+The content of the ext-axis calibration is not the focus of this function introduction, and the detailed calibration method is shown in the corresponding part of the user manual.
+
+Ext-axis synchronized with the robot's laser tracking
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Transformation type laser tracking
+****************************************
+
+The ext-axis under the base coordinate system and the robot synchronous laser tracking do not need to calibrate the ext-axis, and the rest of the function settings are consistent with the synchronous tracking under the composition and ext-axis coordinate system.
+
+First, configure the laser tracking data and set the laser tracker data to data with transformation type.
+
+.. figure:: robot_peripherals/230.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑12 Transformation type for setting up laser data
+
+Click "Initial Settings", "Peripherals", "Tracking", "Sensor", click "Sensor Configuration" in the drop-down box on the page, and adjust "Data Processing" to data with transformation type.
+
+.. figure:: robot_peripherals/231.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑13 Laser tracking feature page
+
+This function is realized by a combination of multi-functional modules, the main functional modules are included in the "Laser Tracking" function. Click "Program", "Coding", "Laser" to enter the laser tracking page.
+
+.. figure:: robot_peripherals/232.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑14 Add a command to start recording laser data
+
+A command to start recording laser data is added after the ext-axis movement has reached the welding start point.
+
+.. figure:: robot_peripherals/233.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑15 Added a stop recording laser data command
+
+Add a stop recording laser data command after the ext-axis movement has reached the weld end point.
+
+After the robot records the movement trajectory of the weld during the movement of the ext-axis in situ, it can return the ext-axis to the starting point of the weld, ready to start synchronous tracking welding.
+
+At the beginning of welding, the welding torch needs to be moved to the starting point of the data recorded by the laser sensor, and the movment to the welding point command needs to be added:
+
+.. figure:: robot_peripherals/234.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑16 Add move to weld joint command
+
+Click the "Program", "Coding", "LT-Rec" buttons, select "Move to Welding Point", set the movement mode and speed, click the "Starting Point" button and apply.
+
+.. figure:: robot_peripherals/235.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑17 Add a command to reproduce the data recorded by the laser on the trajectory
+
+On the "Laser" page, select the "Data Record" and "Track Reappearance" commands, click "Add" and apply. In the command, the waiting time is set to 0ms by default, and the speed is the ratio of the reproduction speed to the recorded speed, which is recommended to be greater than 50%.
+
+After the " Track Reappearance " command, the ext-axis motion command is added to realize the synchronous movement of the extended axis and the robot laser tracking.
+
+The following is a typical LUA procedure for ext-axis movement with laser fixed-point tracking:
+
+.. figure:: robot_peripherals/236.png
+   :align: center
+   :width: 5in
+
+.. centered:: Figure 8.16‑18 Ext-axis movment with laser fixed-point tracking sample program
+
+The robot performs the process of "scanning first and tracking later", first recording the change trajectory of the weld seam of the workpiece when the ext-axis is moving, and then synchronous execution of the ext-axis and trajectory replication during welding.
+
+Non-transformation type laser tracking
+**************************************************
+
+Fixed-point tracking using laser data without transformation eliminates the need to calibrate the extended axis coordinate system.
+
+Set the laser tracking sensor data to a non-transformation type.
+
+.. figure:: robot_peripherals/237.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑19 Set up transformation type laser data
+
+Click "Initial Settings", "Peripherals", "Tracking", "Sensors", click "Sensor Configuration" in the drop-down box of the page, and adjust "Data Processing" to data without transformation.
+
+.. figure:: robot_peripherals/238.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑20  Laser tracking feature page
+
+Click "Program", "Codeing", "Laser Tracking" to enter the laser tracking page, or click "Laser Recording" to directly enter the recording page.
+
+.. figure:: robot_peripherals/239.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.16‑21 Added a reproduce while recording command
+
+On the "LT-Rec" page, select the "Record and reproduce" command, click "Add" and apply. In the command, you can select "Delay Time" or "Delay Distance" (recommended delay distance), the compensation sensitivity coefficient is adjusted according to the actual sensor laser data, the lower the value, the lower the adjustment sensitivity, the better the anti-interference, and the default reproduction speed is 100%.
+
+Add the extended axis motion command after the "Reproducing while recording" command to realize the synchronous movement of the extended axis and the robot laser tracking.
+
+The following is a typical LUA procedure for untransformed, fixed-point tracking of extended axis plus laser data：
+
+.. figure:: robot_peripherals/240.png
+   :align: center
+   :width: 5in
+
+.. centered:: Figure 8.16‑22  Extended axis plus laser data non-transformation fixed-point tracking sample program
+
+After the welding torch aligns the offset at the front laser, the robot expands the axis movement and executes the process of "reproducing while recording", and the laser tracker on the front first records the change trajectory of the workpiece weld when the extended axis moves, and then adjusts it at the welding gun after setting the delay distance or time.

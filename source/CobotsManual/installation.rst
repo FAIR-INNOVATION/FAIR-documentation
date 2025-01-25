@@ -1199,48 +1199,122 @@ Floor carrier capacity
 
 Installing the robot on a strong surface, the surface should be sufficient to withstand the weight of the robotic arm at least 5 times, and the surface cannot be vibrated.
 
-Maximum valid load
-~~~~~~~~~~~~~~~~~~~~~~
+Load curves for all FR series models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The maximum allowable valid load of the robotic arm depends on the center of gravity. When the center of gravity of the load becomes farther, the load that the robot will suffer will become smaller.
+Overview
++++++++++++++++
 
+The rated payload of the robot arm depends on the center of gravity offset of the payload, where the center of gravity offset is defined as the distance between the end flange center and the center of gravity of the attached payload in mm, which can be calculated by formula (1).
+
+.. figure:: installation/079.png
+	:align: center
+	:width: 6in
+
+Where, are the components of the effective load in the end flange coordinate system, in mm.
+
+If the effective load is a combination, where the masses of each object are: m1, m2 to mnkg; the center of gravity in the end flange coordinate system is: [x1 y1 z1], [x2 y2 z2] to [xn yn zn]mm; then the mass kg and center of gravity mm of the combination can be calculated by equations (2) and (3).
+
+.. figure:: installation/080.png
+	:align: center
+	:width: 6in
+
+Load curve
+++++++++++++++++++
+
+The load curve is based on the test of each model under a specific trajectory. Among them, the operating environment of "full performance" is: the friction compensation coefficient of each joint is 1; the collision level of each joint is 10; the web interface sets 100% running speed and 360deg/s\ :sup:`2` acceleration; dynamics 2.0. In this environment, the "full performance" part of the load curve is suitable for most running trajectories.
+
+If the end load is in the "extended load capacity", it is necessary to turn on the "time optimal mode" and meet the acceleration limit, or reduce the robot's working range.
+
+FR3 Model Collaborative Robot Load Curve
+***********************************************
+
+The maximum load that the FR3 collaborative robot can carry is 5kg, and the rated load is 3kg. The load curve is shown in Figure 1. The specific interpretation of the load curve is as follows:
+
+(1) FR3 can carry a load of 3kg or less at full performance, see the "blue envelope";
+
+(2) When the load is 3kg to 5kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
+
+  ① Turn on the "time optimal mode", it is recommended to set the acceleration to less than 360deg/s\ :sup:`2`;
+
+  ② Reduce the robot's working range or reduce the operating speed.
 
 .. figure:: installation/032.png
 	:align: center
-	:width: 6in
+	:width: 5in
 
-.. centered:: Figure 3.4-15 FR3 model collaborative robot load curve
+.. centered:: Figure 3.4-15 FR3 Model Collaborative Robot Load Curve
+
+FR5 Model Collaborative Robot Load Curve
+*******************************************
+
+The maximum load that the FR5 collaborative robot can carry is 7kg, and the rated load is 5kg. The load curve is shown in the figure, which is "full performance".
 
 .. figure:: installation/033.png
 	:align: center
-	:width: 6in
+	:width: 5in
 
-.. centered:: Figure 3.4-16 FR5 model collaborative robot load curve
+.. centered:: Figure 3.4-16 FR5 Model Collaborative Robot Load Curve
+
+FR10 Model Collaborative Robot Load Curve
+*******************************************
+
+The maximum load that the FR10 collaborative robot can carry is 14kg, and the rated load is 10kg. The load curve is shown in Figure 3. The specific interpretation of the load curve is as follows:
+
+(1) FR10 can carry a load of 10kg or less at full performance, see the "blue envelope";
+
+(2) When the load is 10kg to 14kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
+
+  ① Turn on the "time optimal mode", it is recommended to set the acceleration to less than 180deg/s\ :sup:`2`;
+
+  ② Reduce the robot's working range or reduce the operating speed.
 
 .. figure:: installation/034.png
 	:align: center
-	:width: 6in
+	:width: 5in
 
-.. centered:: Figure 3.4-17 FR10 model collaborative robot load curve
+.. centered:: Figure 3.4-17 FR10 Model Collaborative Robot Load Curve
+  
+FR16 Model Collaborative Robot Load Curve
+**********************************************
+
+The maximum load that the FR16 collaborative robot can carry is 20kg, and the rated load is 16kg. The load curve is shown in the figure, which is "full performance".
 
 .. figure:: installation/035.png
 	:align: center
-	:width: 6in
+	:width: 5in
 
-.. centered:: Figure 3.4-18 FR16 model collaborative robot load curve
+.. centered:: Figure 3.4-18 FR16 Model Collaborative Robot Load Curve
+
+FR20 Model Collaborative Robot Load Curve
+*************************************************
+
+The maximum load that the FR20 collaborative robot can carry is 25kg, and the rated load is 20kg. The load curve is shown in the figure. The specific interpretation of the load curve is as follows:
+
+(1) FR20 can carry a load of 20kg or less at full performance, see the "blue envelope";
+
+(2) When the load is 20kg to 25kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
+
+  ① Turn on the "time optimal mode", it is recommended to set the acceleration to less than 90deg/s\ :sup:`2`;
+
+  ② Reduce the robot's working range or reduce the operating speed.
 
 .. figure:: installation/036.png
 	:align: center
-	:width: 6in
+	:width: 5in
 
-.. centered:: Figure 3.4-19 FR20 model collaborative robot load curve
+.. centered:: Figure 3.4-19 FR20 Model Collaborative Robot Load Curve
+
+FR30 Model Collaborative Robot Load Curve
+*************************************************
+
+The maximum load that the FR30 collaborative robot can carry is 35kg, and the rated load is 30kg. The load curve is shown in the figure, which is "full performance".
 
 .. figure:: installation/069.png
 	:align: center
-	:width: 6in
+	:width: 5in
 
-.. centered:: Figure 3.4-20 FR30 model collaborative robot load curve
-
+.. centered:: Figure 3.4-20 FR30 Model Collaborative Robot Load Curve
 
 Control connection
 ------------------------

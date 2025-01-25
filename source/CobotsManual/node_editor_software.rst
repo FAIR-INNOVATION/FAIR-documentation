@@ -891,7 +891,7 @@ Select the tool coordinate system name and click "Apply" to add this instruction
 
 1. "SetToolList" command node, parameters:
 
-- Tool coordinate system name: toolcoord1 ~ toolcoord14(SetToolList, [0~14]), etoolcoord0 ~ etoolcoord14(SetExToolList, [0~14])
+- Tool coordinate system name: toolcoord1 ~ toolcoord19(SetToolList, [0~19]), etoolcoord0 ~ etoolcoord14(SetExToolList, [0~14])
   
 .. image:: node_editor_software/038.png
    :width: 6in
@@ -1036,7 +1036,7 @@ This command is a spray-related command that controls the spray gun to "start sp
 
 .. centered:: Figure 11.39-4 "Stop clearing" command node interface
 
-Extended axis instructions (controller - PLC)
+Extended axis instructions (controller + PLC)
 -------------------------------------------------
 
 This instruction is aimed at scenarios where external axes are used. Used in combination with the PTP instruction, it can decompose the movement of a point in space in the X-axis direction into external axis motion. Select the external axis number, select synchronization as the motion mode, and select the point you want to reach.
@@ -1108,7 +1108,7 @@ It is divided into UDP communication loading/configuration, asynchronous movemen
 
 .. centered:: Figure 11.40-6 "Enable" command node interface
 
-Extended axis instructions (controller - servo drive)
+Extended axis instructions (controller + servo drive)
 -------------------------------------------------------
 
 This command can configure extended axis parameters. Set different parameters according to different control modes. The configured expansion axis can be set to its zero point.

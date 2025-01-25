@@ -1,3 +1,44 @@
+Version V3.7.8
+-----------------
+
+Date: 2025-01-20
+
+- **Extension axis plus laser data non-transformation fixed-point tracking function**:
+    Path: Teaching program -> Program programming, graphical programming, node diagram programming, initial settings -> Peripherals -> Sensors.
+
+    Description: Mainly for real-time fixed-point tracking of positioners, so that the workpiece deviation recorded by the laser during the movement of the extension axis is compensated at the end of the robot tool.
+
+- **Robot CI configuration new and optimized functions**:
+    Path: Initial settings -> Basics -> I/O settings -> DI configuration, teaching program -> Program programming, graphical programming, node diagram programming.
+
+    Description: 1. CI configurable input adds high and low level switching robot hand automatic mode function. Configure the CI port as "hand automatic switching (high and low level)". When the input signal of this port is valid, the robot automatically switches to automatic mode. When the input signal of this port is invalid, the robot automatically switches to manual mode. 2. After opening the LUA program in WebApp, the currently opened LUA program will be automatically run when starting the LUA program through the configurable CI, instead of the last saved program.
+
+- **WebApp status query function optimization**:
+    Path: Status Information -> Status Query.
+
+    Note: The front-end and back-end data interaction method changes the front-end polling request method to the websocket active data sending method to reduce CPU usage.
+
+- **Control box firmware DO power-on high and low effective configurable function**:
+    Path: Initial Settings -> Basics -> I/O Settings -> DO Configuration.
+
+    Note: Added "Control box DO output during power-on" configuration. Before the robot is enabled, the control box DO can be configured to the required high and low level states according to the specific usage scenario.
+
+- **Real-time forward trajectory planning method function**:
+    Path: Teaching program -> Program programming, graphical programming, node diagram programming.
+
+    Description: Added "TrajectoryLA" instruction.
+
+- **Strategy function based on force sensor collision**:
+    Path: Initial settings -> Joints -> Collision level.
+
+    Description: Added "safe speed" parameter in collision rebound mode.
+
+- **Automatic lifting function after force sensor collision**:
+    Description: After realizing collision detection based on force sensor, the robot automatically lifts and can limit the speed of the lifting process.
+
+- **Load curve drawing of FR full series models**:
+    Description: Update the load curve chart of FR full series models.
+
 Version V3.7.7
 -----------------
 

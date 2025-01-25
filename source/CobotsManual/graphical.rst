@@ -789,7 +789,7 @@ Drag the "Set tool coordinate system"/"Set workpiece coordinate system" code blo
 
 1. "Set tool coordinate system" command node, parameters:
 
-- Tool coordinate system name: toolcoord1 ~ toolcoord14(SetToolList,[0~14]), etoolcoord0 ~ etoolcoord14(SetExToolList, [0~14])
+- Tool coordinate system name: toolcoord1 ~ toolcoord19(SetToolList,[0~19]), etoolcoord0 ~ etoolcoord14(SetExToolList, [0~14])
 
 .. image:: graphical/052.png
    :width: 6in
@@ -1067,7 +1067,7 @@ This command is related to spraying, controlling the spray gun to "start sprayin
 
 .. centered:: Figure 10.7-7 Stop gun cleaning instruction code block
 
-Extended axis instruction (controller-PLC)
+Extended axis instruction (controller+PLC)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drag the "Extended axis instruction" code block to enter the graphical editing interface workspace.
 
@@ -1147,7 +1147,7 @@ Debug speed (%): 0~100
 
 .. centered:: Figure 10.7-13 Extended axis enable instruction code block
 
-Extended axis instruction (controller-servo drive)
+Extended axis instruction (controller+servo drive)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drag the "Extended axis instruction" code block to enter the graphical editing interface workspace.
 

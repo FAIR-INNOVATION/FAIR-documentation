@@ -7,7 +7,7 @@ Status
 System log
 ----------------------
 
-When you enter the "Status Information - System Log" interface for the first time, all types of log data for the day are displayed by default.
+When you enter the "Status Information" -> "System Log" interface for the first time, all types of log data for the day are displayed by default.
 
 The log data is classified into levels, currently divided into: all, error warnings, basic settings, security settings, peripheral settings, main unit operations, teaching programs, tool applications, system settings, and file import and export.
 
