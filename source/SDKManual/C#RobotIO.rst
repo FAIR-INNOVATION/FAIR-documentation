@@ -234,7 +234,7 @@ Get the DO output state of the machine controller
     */ 
     int GetDO(ref int do_state_h, ref int do_state_l);
 
-Code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -380,7 +380,7 @@ Get the firmware version of the robot
     */ 
     int GetFirmwareVersion(ref string ctrlBoxBoardVersion, ref string driver1Version, ref string driver2Version, ref string driver3Version,ref string driver4Version, ref string driver5Version, ref string driver6Version, ref string endBoardVersion);
 
-Code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:

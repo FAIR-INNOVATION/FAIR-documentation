@@ -160,7 +160,7 @@ Get the temperature of the gripper
     */
     int GetGripperTemp(ref int fault, ref int temp);
 
-Code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -252,3 +252,65 @@ Calculate retreat point-visual
     * @return error code 
     */ 
     int ComputePostPick(DescPose desc_pos, double zlength, double zangle, ref DescPose post_pos);
+
+Get the number of revolutions of the rotating jaws
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the number of revolutions of the rotating jaws
+    * @param [out] fault 0-no error, 1-with error
+    * @param [out] num The number of revolutions.
+    * @return Error code
+    */
+    int GetGripperRotNum(ref UInt16 fault, ref double num);
+
+Get the rotational speed percentage of the rotating jaws
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the rotational speed percentage of the rotating jaws
+    * @param [out] fault 0-no error, 1-with error
+    * @param [out] speed Get the rotational speed percentage of the rotating jaw.
+    * @return Error code
+    */
+    int GetGripperRotSpeed(ref UInt16 fault, ref int speed);
+
+Get the percentage of rotational torque of the rotating jaws
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the percentage of rotational torque of the rotating jaws
+    * @param [out] fault 0-no error, 1-error
+    * @param [out] torque Percentage of rotating torque
+    * @return Error code
+    */
+    int GetGripperRotTorque(ref UInt16 fault, ref int torque);
+
+Code Example
+++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    int MoveRotGripper(int pos, double rotPos)
+    {
+        robot.ResetAllError();
+        robot.ActGripper(1, 1);
+        Thread.Sleep(1000);
+        int rtn = robot.MoveGripper(1, pos, 50, 50, 5000, 1, 1, rotPos, 50, 100);
+        Console.WriteLine($"move gripper rtn is {rtn}" );
+        UInt16 fault = 0;
+        double rotNum = 0.0;
+        int rotSpeed = 0;
+        int rotTorque = 0;
+        robot.GetGripperRotNum(ref fault, ref rotNum);
+        robot.GetGripperRotSpeed(ref fault, ref rotSpeed);
+        robot.GetGripperRotTorque(ref fault, ref rotTorque);
+        Console.WriteLine($"gripper rot num :{ rotNum}, gripper rotSpeed :{rotSpeed}, gripper rotTorque : { rotTorque}");
+        return 0;
+    }

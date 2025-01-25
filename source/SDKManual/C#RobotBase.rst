@@ -1,7 +1,7 @@
 Robotics Basics
-======================
+================================================
 
-.. toctree:. 
+.. toctree::
     :maxdepth: 5
 
 Instantiated Robot
@@ -12,7 +12,7 @@ Instantiated Robot
     /**
     * @brief Robot interface class constructor
     */
-    Robot(). 
+    Robot();
 
 Establish communication with the controller
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -109,7 +109,20 @@ Control of robot hand-automatic mode switching
     */
     int Mode(int mode).
 
-code example
+disconnection reconnects
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief disconnection reconnects
+    * @param [in] enable Whether to enable true- enable, false- disable
+    * @param [in] times Indicates the number of reconnections
+    * @param [in] period Reconnection interval (ms)
+    * /
+    void SetReconnectParam(bool enable, int times, int period);
+
+Code Example
 +++++++++++++
 .. code-block:: c#
     :linenos:
@@ -117,6 +130,7 @@ code example
     private void btnStandard_Click(object sender, EventArgs e)
     {
         Robot robot = new Robot();
+        robot.SetReconnectParam(true, 100, 200); // Disconnection parameters
         robot.RPC("192.168.58.2"); 
 
         string ip = "";

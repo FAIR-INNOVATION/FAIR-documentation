@@ -5,7 +5,7 @@ RobotMovement
     :maxdepth: 5
 
 
-jog point and click
+Jog point and click
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -22,7 +22,7 @@ jog point and click
     */ 
     int StartJOG(byte refType, byte nb, byte dir, float vel, float acc, float max_dis);
 
-jog tap to decelerate and stop
+Jog tap to decelerate and stop
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -34,7 +34,7 @@ jog tap to decelerate and stop
     */
     int StopJOG(byte stopType).
 
-jog tapping stops immediately
+Jog tapping stops immediately
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -45,7 +45,7 @@ jog tapping stops immediately
     */
     int ImmStopJOG(); 
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -243,7 +243,7 @@ Whole circle motion in Cartesian space
     */  
     int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, float ovl, byte offset_flag, DescPose offset_pos).
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -327,7 +327,7 @@ Spiral motion in Cartesian space
     */
     int NewSpiral(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, ExaxisPos epos, float ovl, byte offset_flag, DescPose offset_pos, SpiralParam spiral_param); 
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -422,7 +422,7 @@ Joint space servo mode motion
     */
     int ServoJ(JointPos joint_pos, float acc, float vel, float cmdT, float filterT, float gain);
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -478,7 +478,7 @@ Servo-mode motion in Cartesian space
     */
     int ServoCart(int mode, DescPose desc_pos, double[] pos_gain, float acc, float vel, float cmdT, float filterT, float gain);
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -528,7 +528,7 @@ Point-to-point motion in Cartesian space
     */ 
     int MoveCart(DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -598,7 +598,7 @@ End of spline motion
     */
     int SplineEnd(); 
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -687,7 +687,7 @@ End of new spline movement
     :linenos:
 
     /** 
-    * @brief End of new spline movement
+    * @brief New spline campaign begins 
     * @return error code 
     */ 
     int NewSplineEnd();
@@ -750,7 +750,7 @@ Overall point shift ends
     */
     int PointsOffsetDisable(); 
 
-code example
+Code Example
 ++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -854,7 +854,7 @@ End AO Flying Racket Stop
     */
     int MoveToolAOStop();
 
-code example
+Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -919,7 +919,7 @@ Starting odd position protection
     * @param [in] minWristPos wrist singularity adjustment range (°), default 10
     * @return error code
     */
-    int SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);;
+    int SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);
 
 Stop odd position protection
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -932,9 +932,9 @@ Stop odd position protection
     * :: @brief stops odd-position protection.
     * @return error code
     */
-    int SingularAvoidEnd().
+    int SingularAvoidEnd();
 
-code example
+Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.9
     
@@ -959,4 +959,116 @@ code example
         robot.SingularAvoidStart(1, 100, 50, 10);
         robot.MoveC(midjointPos, middescPose, 0, 0, 50, 100, exaxisPos, 0, offdese, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, 100, -1) ;
         robot.SingularAvoidEnd();
+    }
+
+Start ptp motion FIR filtering
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief start ptp motion FIR filtering
+    * @param [in] maxAcc Maximum acceleration extreme (deg/s2)
+    * @return Error code.
+    */
+    int PtpFIRPlanningStart(double maxAcc);
+
+Start LIN, ARC motion FIR filtering
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief start LIN, ARC motion FIR filtering
+    * @param [in] maxAccLin Linear Acceleration Extreme (mm/s2)
+    * @param [in] maxAccDeg angular acceleration extreme (deg/s2)
+    * @param [in] maxJerkLin Linear Acceleration Polar (mm/s3)
+    * @param [in] maxJerkDeg angular plus acceleration pole (deg/s3)
+    * @return Error code
+    */
+    int LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
+
+Disable ptp motion FIR filtering
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief disable ptp motion FIR filtering
+    * @return error code
+    */
+    int PtpFIRPlanningEnd();
+
+Disable LIN, ARC motion FIR filtering
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Disable LIN, ARC motion FIR filtering
+    * @return error code
+    */
+    int LinArcFIRPlanningEnd();
+
+Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: C#SDK-v1.0.9
+    
+.. code-block:: c#
+    :linenos:
+
+    void FIRPTP( bool enable)
+    {
+        DescPose startdescPose = new DescPose(-569.710, -132.595, 395.147, 178.418, -1.893, 171.051);
+        JointPos startjointPos = new JointPos(-2.334, -79.300, 108.196, -120.594, -91.790, -83.386);
+
+        DescPose enddescPose = new DescPose(-366.397, -572.427, 418.339, -178.972, 1.829, -142.970);
+        JointPos endjointPos = new JointPos(43.651, -70.284, 91.057, -109.075, -88.768, -83.382);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        if (enable)
+        {
+            robot.PtpFIRPlanningStart(1000);
+            robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+            robot.MoveJ(endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+            robot.PtpFIRPlanningEnd();
+        }
+        else
+        {
+            robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+            robot.MoveJ(endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        }
+    }
+    void FIRLin( bool enable)
+    {
+        DescPose startdescPose = new DescPose(-569.710, -132.595, 395.147, 178.418, -1.893, 171.051);
+        JointPos startjointPos = new JointPos(-2.334, -79.300, 108.196, -120.594, -91.790, -83.386);
+
+        DescPose enddescPose = new DescPose(-366.397, -572.427, 418.339, -178.972, 1.829, -142.970);
+        JointPos endjointPos = new JointPos(43.651, -70.284, 91.057, -109.075, -88.768, -83.382);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        if (enable)
+        {
+            robot.LinArcFIRPlanningStart(5000, 5000, 5000, 5000);
+            robot.MoveL(startjointPos, startdescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+            robot.MoveL(endjointPos, enddescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+            robot.LinArcFIRPlanningEnd();
+        }
+        else
+        {
+            robot.MoveL(startjointPos, startdescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+            robot.MoveL(endjointPos, enddescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+        }
+    }
+    private void button4_Click(object sender, EventArgs e)
+    {
+        FIRPTP(false);
+        FIRPTP(true);
+        //FIRLin(false);
+        //FIRLin(true);
     }

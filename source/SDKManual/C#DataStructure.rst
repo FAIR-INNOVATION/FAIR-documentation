@@ -30,7 +30,7 @@ Cartesian space position data type
     {
         public double x; /* x-axis coordinate in mm */
         public double y; /* y-axis coordinate in mm */
-        public double z; /* z-axis coordinate in mm */ struct DescTran { public double x; /* x-axis coordinate in mm */
+        public double z; /* z-axis coordinate in mm */
     }
 
 Euler Angle Attitude data type
@@ -89,9 +89,9 @@ Torque sensor data type
         public double fx; /* Force component along x-axis in N */
         public double fy; /* Force component along y-axis in N */
         public double fz; /* Component of force along z-axis in N */
-        public double tx; /* Component of moment around x-axis, unit Nm */ public double ty; /* Component of force along y-axis, unit N
+        public double tx; /* Component of moment around x-axis, unit Nm */ 
         public double ty; /* Component of moment around y-axis, in Nm */
-        public double tz; /* Moment component around z-axis, in Nm */ public double ty; /* Moment component around y-axis, in Nm */
+        public double tz; /* Moment component around z-axis, in Nm */ 
     }
 
 Helix parameter data type
@@ -133,8 +133,20 @@ Extended axis state type
         public float servoTorque; //Servo current torque
     }
 
+Welding interrupt status
++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct WELDING_BREAKOFF_STATE
+    {
+        public byte breakOffState;  // Welding interrupt status
+        public byte weldArcState;   // Welding arc interrupted state
+    }
+
 Robot State Feedback Structures Types
-+++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.7
 
 .. code-block:: c#
@@ -143,8 +155,8 @@ Robot State Feedback Structures Types
     /**
     * @brief Robot status feedback struct type.
     */
-    [StructLayout(LayoutKind.Sequential, Pack = 1)] struct layout (LayoutKind.)
-    Public structure ROBOT_STATE_PKG
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct ROBOT_STATE_PKG
     {
     public UInt16 frame_head; // frame header 0x5A5A
     public byte frame_cnt; //frame count
@@ -157,23 +169,23 @@ Robot State Feedback Structures Types
 
     [MarshalAs(UnmanagedType.ByValArray,SizeConst=6)].
     public double[] jt_cur_pos; //current position of joints
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public double[] tl_cur_pos.
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
     public double[] tl_cur_pos; // current position of tool
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public double[] flange_cur_pos; //Tool's current position.
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]  
     public double[] flange_cur_pos; //end flange current pose
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public public
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] 
     public double[] actual_qd; //current joint velocity of the robot
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public double[] actual_qddd.
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] 
     public double[] actual_qdd; //Robot's current joint acceleration  
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)] public double[] target_TCP
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)] 
     public double[] target_TCP_CmpSpeed; //robot TCP synthesis command speed                         
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public double[] target_TCP_CmpSpeed //Bot/TCP synthesized command speed
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] 
     public double[] target_TCP_Speed; //robot TCP command speed                        
-    [MarshalAs(UnmanagedType.ByValArray,SizeConst = 2)] public double[] target_TCP_Speed /Bot/TCP Command Speed
+    [MarshalAs(UnmanagedType.ByValArray,SizeConst = 2)]
     public double[] actual_TCP_CmpSpeed; //robot TCP synthesis actual speed                        
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public double[] actual_TCP_CmpSpeed / Robot/TCP synthesis actual speed
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
     public double[] actual_TCP_Speed; //robot TCP actual speed                      
-    [MarshalAs(UnmanagedType.ByValArray,SizeConst = 6)] public double[] jt_crray(ByValArray)
+    [MarshalAs(UnmanagedType.ByValArray,SizeConst = 6)] 
     public double[] jt_cur_tor; //current torque         
     public int tool; //tool number
     public int user; //workpiece number
@@ -186,9 +198,9 @@ Robot State Feedback Structures Types
     [MarshalAs(UnmanagedType.ByValArray,SizeConst=2)](only bit 0)
     public UInt16[] cl_analog_input; //control box analog input
     public UInt16 tl_anglog_input; //tool analog input                              
-    [MarshalAs(UnmanagedType.ByValArray,SizeConst = 6)] public double[] ft_sensor
+    [MarshalAs(UnmanagedType.ByValArray,SizeConst = 6)] 
     public double[] ft_sensor_raw_data; // force/torque sensor raw data
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] public double[] ft_sensor_raw_data; //Force/Torque sensor raw data
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)] 
     public double[] ft_sensor_data; //force/torque sensor data                           
     public byte ft_sensor_active; //Force/Torque Sensor active, 0-reset, 1-active
     public byte EmergencyStop; //Emergency stop flag
@@ -200,23 +212,38 @@ Robot State Feedback Structures Types
     public byte safety_stop0_state; /* safety stop signal SI0 */
     public byte safety_stop1_state; /* Safety stop signal SI1 */
     public byte gripper_fault_id; /* error gripper id */               
-    public UInt16 gripper_fault; /* Gripper fault */ public byte gripper_fault_id; /* Gripper error number */
+    public UInt16 gripper_fault; /* Gripper fault */ 
     public UInt16 gripper_active; /* gripper_active status */
     public byte gripper_position; /* Gripper position */
     public byte gripper_speed; /* gripper_speed */
     public byte gripper_current; /* Gripper current */
     public int gripper_tmp; /* gripper_temp */
-    public int gripper_voltage; /* Gripper voltage */ public byte gripper_current; /* Gripper temperature */                 
+    public int gripper_voltage; /* Gripper voltage */                
     public ROBOT_AUX_STATE auxState; /* 485 Extended Axis State */ 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] public EXT_AXIS_STATE
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] 
     public EXT_AXIS_STATUS[] extAxisStatus; /* UDP Extended Axis Status */
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)] public UInt16[] extAxStatus
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)] 
     public UInt16[] extDIState;// Extended DI inputs
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)] public UInt16[] extDIState
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)] 
     public UInt16[] extDOState;//extended DO output
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] public UInt16[] extDOState
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] 
     public UInt16[] extAIState;//extended AI inputs
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] public UInt16[] extAISAtate
-    public UInt16[] extAOState;//extended AO Outputs           
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)] 
+    public UInt16[] extAOState;//extended AO Outputs 
+    public int rbtEnableState;       //robot enable state
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+    public double[] jointDriverTorque;               //Joint Drive Torque
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+    public double[] jointDriverTemperature;          //Joint Drive Temperature
+    public ROBOT_TIME robotTime;     //Robotic system time
+    public int softwareUpgradeState; //Software Upgrade Status 0-Idle or uploading upgrade package; 1~100: Upgrade completion percentage; -1: Upgrade software failure; -2: Verification failure; -3: Version verification failure; -4: Decompression failure; -5: User Configuration Upgrade Failure; -6: Peripheral Configuration Upgrade Failure; -7: Expansion Axis Configuration Upgrade Failure; -8: Robot Configuration Upgrade Failure; -9: DH Parameter Configuration Upgrade Failed
+    public UInt16 endLuaErrCode;    //End LUA operational status 
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+    public  UInt16[] cl_analog_output;  //Control box analog output
+    public UInt16 tl_analog_output;     //Tool analog output
+    public float gripperRotNum;           // The current number of turns of the rotating clamp
+    public byte gripperRotSpeed;       //Percentage of the current rotation speed of the rotary clamp
+    public byte gripperRotTorque;	   //Percentage of the current rotating torque of the rotating clamp     
+    public WELDING_BREAKOFF_STATE weldingBreakOffState;//Welding interrupt status    
     public UInt16 check_sum; /* sum check */                  
     }

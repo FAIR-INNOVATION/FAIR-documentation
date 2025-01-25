@@ -108,7 +108,7 @@ Getting the robot's job program execution status
     */
     int GetProgramState(ref byte state).
 
-code example
+Code Example
 ++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -203,7 +203,7 @@ Get the names of all current job programs
     public int GetLuaList(ref List<string> luaNames) ;
 
 
-code example
+Code Example
 ++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.5

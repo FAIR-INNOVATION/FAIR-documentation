@@ -59,7 +59,7 @@ Force Transducer Zeroing
     */
     int FT_SetZero(byte act); 
 
-Code example
+Code Example
 +++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -356,7 +356,7 @@ Constant force control
     */   
     int FT_Control(int flag, int sensor_id, int[] select, ForceTorque ft, double[] ft_pid, int adj_sign, int ILC_sign, double max_dis, double max_ang);   
 
-Code example
+Code Example
 +++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -438,7 +438,7 @@ Flex control off
     */   
     int FT_ComplianceStop(); 
 
-Code example
+Code Example
 +++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -566,3 +566,143 @@ Get the load identification result
     * @return error code
     */
     int LoadIdentifyGetResult(double[] gain, ref double weight, ref DescTran cog);
+
+Force Sensor Assisted Drag
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Force sensor assisted drag
+    * @param [in] status control status, 0-off; 1-on
+    * @param [in] asaptiveFlag Adaptive on flag, 0-off; 1-on
+    * @param [in] interfereDragFlag Interference area drag flag, 0-off; 1-on
+    * @param [in] M inertia factor
+    * @param [in] B damping factor
+    * @param [in] K Stiffness factor
+    * @param [in] F Dragging six-dimensional force threshold
+    * @param [in] Fmax Maximum drag force limit Nm
+    * @param [in] Vmax Maximum joint speed limit °/s
+    * @return Error code
+    */
+    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, double[] M, double[] B, double[] K, double[] F, double Fmax, double Vmax);
+
+Get force sensor drag switch status
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get force sensor drag switch state.
+    * @param [out] dragState force sensor assist drag control state, 0-off; 1-on
+    * @param [out] sixDimensionalDragState sixDimensionalForceAssistedDragState, 0-off; 1-on
+    * @return ErrorCode
+    */
+    int GetForceAndTorqueDragState(ref int dragState, ref int sixDimensionalDragState).
+
+Force sensor auto-zeroing
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Force sensor auto-zero
+    * @param [out] weight Sensor mass kg 
+    * @param [out] pos sensor center of mass mm
+    * @return Error code
+    */
+    int ForceSensorAutoComputeLoad(ref double weight, ref DescTran pos);
+
+Setting up hybrid drag switches and parameters for six-dimensional force and joint impedance
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting up the six-dimensional force and joint impedance hybrid drag switch and parameters.
+    * @param [in] status Control status, 0-off, 1-on.
+    * @param [in] impedanceFlag impedance on flag, 0-off; 1-on
+    * @param [in] lamdeDain drag gain
+    * @param [in] KGain Stiffness Gain
+    * @param [in] BGain damping gain
+    * @param [in] dragMaxTcpVel Drag End Max Linear Velocity Limit
+    * @param [in] dragMaxTcpOriVel Maximum angular velocity limit at drag end
+    * @return Error code
+    */
+    int ForceAndJointImpedanceStartStop(int status, impedanceFlag, double[] lamdeDain, double[] KGain, double[] BGain, double dragMaxTcpVel, double dragMaxTcpOriVel).
+
+
+Set the force sensor under load weight
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the load weight under the force sensor.
+    * @param [in] weight load weight kg
+    * @return Error code.
+    */
+    int SetForceSensorPayLoad(double weight);
+
+Set the force sensor payload center of mass
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the center of mass of the load under the force sensor.
+    * @param [in] x load center of mass x mm 
+    * @param [in] y load center of mass y mm
+    * @param [in] z load center of mass z mm
+    * @return Error code
+    */
+    int SetForceSensorPayLoadCog(double x, double y, double z);
+
+Setting the load center of mass under a force transducer
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the center of mass of the load under the force sensor.
+    * @param [in] x load center of mass x mm 
+    * @param [in] y load center of mass y mm
+    * @param [in] z load center of mass z mm
+    * @return Error code
+    */
+    int SetForceSensorPayLoadCog(double x, double y, double z);
+
+Get the force sensor pay load weight
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the weight of the load under the force sensor.
+    * @param [in] weight load weight kg
+    * @return Error code
+    */
+    int GetForceSensorPayLoad(ref double weight).
+
+Get force sensor payload center of mass
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the center of mass of the load under the force sensor.
+    * @param [out] x load center of mass x mm 
+    * @param [out] y load center of mass y mm
+    * @param [out] z load center of mass z mm
+    * @return Error code
+    */
+    int GetForceSensorPayLoadCog(ref double x, ref double y, ref double z);

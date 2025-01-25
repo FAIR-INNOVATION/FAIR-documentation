@@ -128,7 +128,7 @@ Setting the joint friction compensation factor - free mounting
     */
     int SetFrictionValue_freedom(double[] coeff).
 
-code example
+Code Example
 +++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:

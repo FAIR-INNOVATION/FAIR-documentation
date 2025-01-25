@@ -75,7 +75,7 @@ Setting the welding voltage and output analogue correspondence
     int WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
 
 Getting the correspondence between welding current and output analogue
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
 
@@ -253,7 +253,7 @@ Reverse wire feed
     int SetReverseWireFeed(int ioType, int wireFeed).
 
 aspiration (phonetics, explosion of breath on consonants distinguishing Chinese p, t from b, d)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
 
@@ -303,7 +303,7 @@ segment welding
     */
     int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos);
 
-code example
+Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
@@ -359,4 +359,418 @@ code example
         robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
         robot.ARCEnd(0, 0, 1000);
         robot.WeaveEnd(0);
+    }
+
+Welding Wire Finding Position Begins
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Solder wire seek start
+    * @param [in] refPos 1-datum point 2-contact point
+    * @param [in] searchVel searchVelocity % * @param [in] searchDel
+    * @param [in] searchDis Search distance mm
+    * @param [in] autoBackFlag autoBackFlag, 0 - not auto; - auto
+    * @param [in] autoBackVel autoBackVelocity % * @param [in] searchDis searchDistance mm
+    * @param [in] autoBackDis autoBack distance mm
+    * @param [in] offectFlag 1-with offset seek; 2-teach point seek
+    * @return error code
+    */
+    int WireSearchStart(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
+
+End of wire search
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief End of solder wire seek
+    * @param [in] refPos 1-datum point 2-contact point
+    * @param [in] searchVel searchVelocity %
+    * @param [in] searchDis Search distance in mm
+    * @param [in] autoBackFlag autoBackFlag, 0 - not auto; - auto
+    * @param [in] autoBackVel autoBackVelocity % * @param [in] searchDis searchDistance mm
+    * @param [in] autoBackDis autoBack distance mm
+    * @param [in] offectFlag 1-with offset seek; 2-teach point seek
+    * @return error code
+    */
+    int WireSearchEnd(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
+
+Calculating wire finding offsets
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Calculate weld wire seek offset.
+    * @param [in] seamType weldType
+    * @param [in] method Calculation method
+    * @param [in] varNameRef datums 1-6, ‘#’ means no point variable
+    * @param [in] varNameRes contact points 1-6, ‘#’ means no point variable
+    * @param [out] offectFlag 0-offset directly superimposed on the command point; 1-offset requires a coordinate transformation of the command point
+    * @param [out] offect offset position [x, y, z, a, b, c]
+    * @return Error code
+    */
+    int GetWireSearchOffset(int seamType, int method, string[] varNameRef, string[] varNameRes, ref int offsetFlag, ref DescPose offset);;
+
+Wait for the wire search to complete
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Waiting for wire seek to complete.
+    * @return Error code.
+    */
+    int WireSearchWait(string name).
+
+Write wire search contact to database
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Welding wire seek contact written to database.
+    * @param [in] varName Contact name ‘RES0’ ~ ‘RES99’.
+    * @param [in] pos contact data [x, y, x, a, b, c]
+    * @return Error code
+    */
+    int SetPointToDatabase(string varName, DescPose pos);
+
+Arc tracking control
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Arc tracking control
+    * @param [in] flag switch, 0-off; 1-on
+    * @param [in] dalayTime hysteresis time in ms
+    * @param [in] isLeftRight left-right deviation compensation
+    * @param [in] klr left/right adjustment factor (sensitivity)
+    * @param [in] tStartLr Left/Right compensation time cyc
+    * @param [in] stepMaxLr Maximum compensation in mm per shift * @param [in] stepMaxLr Maximum compensation in mm per shift
+    * @param [in] sumMaxLr Total max compensation in mm
+    * @param [in] isUpLow Compensation for up and down deviation
+    * @param [in] kud up/down adjustment factor (sensitivity)
+    * @param [in] tStartUd up/down compensation time cyc
+    * @param [in] stepMaxUd Maximum compensation in mm for each step.
+    * @param [in] sumMaxUd up and down total max. compensation mm
+    * @param [in] axisSelect upper and lower coordinate system selection, 0-swing; 1-tool; 2-base
+    * @param [in] referenceType upper and lower reference current setting mode, 0-feedback; 1-constant
+    * @param [in] referSampleStartUd upper and lower reference current sample start count (feedback), cyc
+    * @param [in] referSampleCountUd upper and lower reference current sampling cycle count (feedback), cyc
+    * @param [in] referenceCurrent upper and lower reference currents mA
+    * @return Error code
+    */
+    int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent).
+
+Arc tracking AI passband selection
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Arc-tracking AI passband selection.
+    * @param [in] channel Arc-tracking AI passband selection, [0-3].
+    * @return Error code.
+    */
+    int ArcWeldTraceExtAIChannelConfig(int channel);
+
+Simulated Swing Start
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Simulation of swing start
+    * @param [in] weaveNum swing parameter number
+    * @return ErrorCode
+    */
+    int WeaveStartSim(int weaveNum).
+
+End of simulation
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Simulation of end of swing
+    * @param [in] weaveNum swing parameter number
+    * @return ErrorCode
+    */
+    int WeaveEndSim(int weaveNum).
+
+Start trajectory detection warning (no motion)
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief start trajectory detection warning (no motion)
+    * @param [in] weaveNum swing parameter number
+    * @return Error code
+    */
+    int WeaveInspectStart(int weaveNum).
+
+End trajectory detection warning (no motion)
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief end trajectory detection warning (no motion)
+    * @param [in] weaveNum swing parameter number
+    * @return Error code
+    */
+    int WeaveInspectEnd(int weaveNum).
+
+Extended IO-Configuration Welder Gas Detection Signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Extended IO-Configuration Welder Gas Detection Signal
+    * @param [in] DONum gas detection signal extended DO number
+    * @return error-code
+    */
+    int SetAirControlExtDoNum(int DONum).
+
+Extended IO-Configuration Welder Arc Start Signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Extended IO-Configuration of the welder arc start signal.
+    * @param [in] DONum Welder Arc Start Signal Extended DO Number
+    * @return Error code.
+    */
+    int SetArcStartExtDoNum(int DONum).
+
+Extended IO-Configuring the Welder Reverse Wire Feed Signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Extended IO-Configuration Welder Reverse Wire Feed Signal
+    * @param [in] DONum Reverse Wire Feed Signal Extension DO Number
+    * @return Error Code
+    */
+    int SetWireReverseFeedExtDoNum(int DONum).
+
+Extended IO-Configuration Welder Forward Wire Feed Signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Extended IO-Config welder positive wire feed signal.
+    * @param [in] DONum Forward Wire Feed Signal Extension DO Number
+    * @return Error Code
+    */
+    int SetWireForwardFeedExtDoNum(int DONum).
+
+ Extended IO-Configuration Welder Arc Start Success Signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Extended IO-Configuration Welder Arc Success Signal
+    * @param [in] DINum Extended DI number for arc success signal.
+    * @return error-code
+    */
+    int SetArcDoneExtDiNum(int DINum).
+
+Extended IO-Configuration Welder Ready Signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Extended IO-Configuration Welder Ready Signal
+    * @param [in] DINum Welder ready signal extended DI number
+    * @return error-code
+    */
+    int SetWeldReadyExtDiNum(int DINum).
+
+Extended IO-Configure weld interrupt recovery signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Extended IO-Configuration Weld Interrupt Recovery Signal
+    * @param [in] reWeldDINum Resume weld signal after weld interrupt Extended DI number
+    * @param [in] abortWeldDINum Exit Weld Signal Extended DI Number after a Weld Interrupt
+    * @return Error Code
+    */
+    nt SetExtDIWeldBreakOffRecover(int reWeldDINum, int abortWeldDINum);
+
+Arc Tracking + Multi-Layer Multi-Pass Compensation On
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Arc tracking + multilayer multichannel compensation turned on
+    * @return Error code
+    */
+    int ArcWeldTraceReplayStart();
+
+ArcWeldTrace + MultiLayerMultiChannelCompensation OFF
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+        /**
+         * @brief Arc tracking + multilayer multichannel compensation off
+         * @return Error code
+         */
+    int ArcWeldTraceReplayEnd();
+
+Offset Coordinate Change - Multi-Layer Multi-Pass Welding
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+     /**
+     * @brief offset coordinate change - multilayer multi-pass welding
+     * @param [in] pointO Cartesian orientation of datum.
+     * @param [in] pointX Cartesian position of datum X in the direction of the offset.
+     * @param [in] pointZ Cartesian position of the datum Z to the offset direction point.
+     * @param [in] dx x-direction offset (mm)
+     * @param [in] z offset (mm)
+     * @param [in] offset around y-axis (°)
+     * @param [out] Offset of the result of the calculation.
+     * @return Error code
+     */
+    int MultilayerOffsetTrsfToBase(DescTran pointO, DescTran pointX, DescTran pointZ, double dx, double dy, double db, ref DescPose offset);
+
+Setting parameters for detecting unexpected interruptions of the robotic welding arc
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting parameters for detecting unexpected interruptions of the robotic welding arc
+    * @param [in] checkEnable whether to enable detection; 0-don't enable; 1-enable
+    * @param [in] arcInterruptTimeLength arcInterruptAcknowledgmentTimeLength(ms)
+    * @return Error code
+    */
+    int WeldingSetCheckArcInterruptionParam(int checkEnable, int arcInterruptTimeLength)
+
+Get parameters for detecting unexpected interruptions of the robotic welding arc
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get parameters for detecting unexpected interruptions of the robotic welding arc
+    * @param [out] checkEnable whether to enable detection; 0-don't enable; 1-enable
+    * @param [out] arcInterruptTimeLength arcInterruptAcknowledgmentTimeLength(ms)
+    * @return Error code
+    */
+    int WeldingGetCheckArcInterruptionParam(ref int checkEnable, ref int arcInterruptTimeLength)
+
+Setting the robot weld interrupt recovery parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting the robot weld interrupt recovery parameters
+    * @param[in] enable Whether to enable weld interrupt recovery.
+    * @param[in] length The overlap distance of the weld (mm).
+    * @param[in] velocity the speed of the robot to return to the restart point (0-100)
+    * @param[in] moveType Robot movement to restart point type; 0-LIN; 1-PTP
+    * @return Error code
+    */
+    int WeldingSetReWeldAfterBreakOffParam(int enable, double length, double velocity, int moveType)
+
+Get robot weld interrupt recovery parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get robot weld interrupt recovery parameters.
+    * @param [out] enable Whether to enable weld interrupt recovery or not.
+    * @param [out] length The overlap distance of the weld (mm).
+    * @param [out] velocity the speed of the robot to return to the restart point (0-100)
+    * @param [out] moveType the way the robot moves to the restart point; 0-LIN; 1-PTP
+    * @return Error code
+    */
+    int WeldingGetReWeldAfterBreakOffParam(ref int enable, ref double length, ref double velocity, ref int moveType)
+
+Setting the robot to resume welding after a welding interruption
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting the robot to resume welding after a welding interruption
+    * @return Error code
+    */
+    int WeldingStartReWeldAfterBreakOff()
+
+Setting the robot to exit welding after a weld interruption
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting the robot to exit welding after a weld interruption
+    * @return Error code
+    */
+    int WeldingAbortWeldAfterBreakOff()
+
+code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button7_Click(object sender, EventArgs e)
+    {
+        int rtn = -1;
+        rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200);
+        Console.WriteLine("WeldingSetCheckArcInterruptionParam  {0}", rtn);
+        rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0);
+        Console.WriteLine("WeldingSetReWeldAfterBreakOffParam {0}", rtn);
+        int enable = 0;
+        double length = 0;
+        double velocity = 0;
+        int moveType = 0;
+        int checkEnable = 0;
+        int arcInterruptTimeLength = 0;
+        rtn = robot.WeldingGetCheckArcInterruptionParam(ref checkEnable, ref arcInterruptTimeLength);
+        Console.WriteLine($"WeldingGetCheckArcInterruptionParam  checkEnable {checkEnable} - arcInterruptTimeLength {arcInterruptTimeLength}");
+
+        rtn = robot.WeldingGetReWeldAfterBreakOffParam(ref enable, ref length, ref velocity,ref moveType);
+        Console.WriteLine("WeldingGetReWeldAfterBreakOffParam  enable = {0}, length = {1}, velocity = {2}, moveType = {3}", enable, length, velocity, moveType);
+
+        robot.ProgramLoad("/fruser/test.lua");
+        robot.ProgramRun();
+
+        Thread.Sleep(5000);
+
+        while (true)
+        {
+            ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG { };
+            robot.GetRobotRealTimeState(ref pkg);
+            Console.WriteLine("welding breakoff state is     {0}", pkg.weldingBreakOffState.breakOffState);
+            if (pkg.weldingBreakOffState.breakOffState == 1)
+            {
+                Console.WriteLine("welding breakoff ! \n");
+                Thread.Sleep(2000);
+                rtn = robot.WeldingStartReWeldAfterBreakOff();
+                Console.WriteLine("WeldingStartReWeldAfterBreakOff    %d\n", rtn);
+                break;
+            }
+            Thread.Sleep(100);
+        }
     }

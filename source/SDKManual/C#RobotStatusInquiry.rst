@@ -388,7 +388,7 @@ Queries whether robot motion is complete
     */  
     int GetRobotMotionDone(ref byte state).
 
-code example
+Code Example
 ++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -506,7 +506,7 @@ Querying the robot motion queue cache length
     */
     int GetMotionQueueLength(ref int len).
 
-code example
+Code Example
 +++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -549,7 +549,7 @@ Get robot real-time status structure
     */
     int GetRobotRealTimeState(ref ROBOT_STATE_PKG pkg);
 
-code example
+Code Example
 +++++++++++++++++++++++++++++++++
 ... versionadded:: C#SDK-v1.0.6
 

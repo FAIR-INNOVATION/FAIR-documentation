@@ -9,7 +9,7 @@ Setting the 485 extension axis parameters
 .. versionchanged:: C#SDK-v1.0.6
 
 .. code-block:: c#
-    :linenos:
+    :linenos.
 
     /** 
     * @brief Setting 485 extended axis parameters
@@ -72,7 +72,7 @@ Setting the 485 extended axis control mode
     */
     int AuxServoSetControlMode(int servoId, int mode).
 
-code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.6
     
@@ -81,12 +81,12 @@ code example
 
     private void btnWeldStart_Click(object sender, EventArgs e)
     {
-    Robot robot = new Robot();
-    robot.RPC("192.168.58.2");
+        Robot robot = new Robot();
+        robot.RPC("192.168.58.2");
 
-    robot.AuxServoSetParam(1, 1, 1, 1, 1, 131072, 36);//set configuration parameters
-    int ID = -1, company = -1, model = -1, soft = -1, servoResolution= -1;
-    int radio = -1;
+        robot.AuxServoSetParam(1, 1, 1, 1, 1, 131072, 36);//set configuration parameters
+        int ID = -1, company = -1, model = -1, soft = -1, servoResolution= -1;
+        int radio = -1;
         robot.AuxServoGetParam(1, ref company, ref model, ref soft, ref servoResolution, ref radio);//get configuration parameters
         
         Thread.Sleep(100);
@@ -145,7 +145,7 @@ Setting the 485 extended axis target speed (velocity mode)
     */
     int AuxServoSetTargetSpeed(int servoId, double speed).
 
-code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.6
 
@@ -250,7 +250,7 @@ Setting the 485 Extended Axis Data Axis Number in Status Feedback
     */
     int AuxServosetStatusID(int servoId).
 
-code example
+Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.6
 
@@ -262,7 +262,7 @@ code example
         Robot robot = new Robot();
         robot.RPC("192.168.58.2");
 
-            robot.AuxServoClearError(1);
+        robot.AuxServoClearError(1);
         int errCode = 0;
         int servoState = 0;
         double pos = 0;
@@ -346,8 +346,8 @@ Offloading UDP communication
     */
     int ExtDevUnloadUDPDriver();
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++****
+Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -463,7 +463,7 @@ Setting the extended axis system DH parameter configuration
     */
     int SetAxisDHParaConfig(int axisConfig, double axisDHd1, double axisDHd2, double axisDHd3, double axisDHd4, double axisDHa1, double axisDHa2, double axisDHa3, double axisDHa4);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
@@ -528,8 +528,8 @@ Applying the Extended Axis Coordinate System
     */
     int ExtAxisActiveECoordSys(int applyAxisId, int axisCoordNum, DescPose coord, int calibFlag);
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
+Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -589,8 +589,8 @@ Shifter Coordinate System Calculation - Four Point Method
     */
     int PositionorComputeECoordSys(DescPose& coord);
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
+Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -676,8 +676,8 @@ UDP Extended Axis Tap Stop
     */
     int ExtAxisStopJog(int axisID).
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
+Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -710,8 +710,8 @@ UDP Extended Axis Motion
     */
     int ExtAxisMove(ExaxisPos pos, double ovl);
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
+Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -749,8 +749,8 @@ Synchronised motion of UDP extension axes with robot joint motion
     */
     int ExtAxisSyncMoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos epos, float blendT, byte offset_flag, DescPose offset_pos);
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
+Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -781,7 +781,7 @@ code example
         robot.ExtAxisServoOn(1, 0);
         robot.ExtAxisSetHoming(1, 0, 20, 3);
 
-        /5. Extended axis coordinate system calibration and application (Note: the calibration interface of the indexing machine and the linear slide is different, the following is the calibration interface of the indexing machine).
+        //5. Extended axis coordinate system calibration and application (Note: the calibration interface of the indexing machine and the linear slide is different, the following is the calibration interface of the indexing machine).
         DescPose pos = new DescPose(/* Enter the coordinates of your calibration point */);
         robot.SetRefPointInExAxisEnd(pos);
         robot.PositionorSetRefPoint(1); /* You need to calibrate the extended axis by four differently positioned points, so you need to call this interface 4 times to complete the calibration */
@@ -839,8 +839,8 @@ Synchronised motion of the UDP extension axes with the linear motion of the robo
     */
     int ExtAxisSyncMoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, int offset_flag, DescPose offset_pos).
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
+Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -871,7 +871,7 @@ code example
         robot.ExtAxisServoOn(1, 0);
         robot.ExtAxisSetHoming(1, 0, 20, 3);
 
-        /5. Carrying out calibration and application of extended axis coordinate systems
+        //5. Carrying out calibration and application of extended axis coordinate systems
         DescPose pos = new DescPose(/* Enter the coordinates of your calibration point */);
         robot.SetRefPointInExAxisEnd(pos);
         robot.PositionorSetRefPoint(1); /* You need to calibrate the extended axis by four differently positioned points, so you need to call this interface 4 times to complete the calibration */
@@ -938,8 +938,8 @@ UDP extension axes synchronised with robot circular motion
     */
     int ExtAxisSyncMoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, float ovl, float blendR).
     
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
+Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
@@ -970,7 +970,7 @@ code example
         robot.ExtAxisServoOn(1, 0);
         robot.ExtAxisSetHoming(1, 0, 20, 3);
 
-        /5. Perform extended axis coordinate system calibration and application
+        //5. Perform extended axis coordinate system calibration and application
         DescPose pos = new DescPose(/* Enter the coordinates of your calibration point */);
         robot.SetRefPointInExAxisEnd(pos);
         robot.PositionorSetRefPoint(1); /* You need to calibrate the extended axis by four differently positioned points, so you need to call this interface 4 times to complete the calibration */
@@ -1007,160 +1007,6 @@ code example
 
         // Start of synchronised movement
         robot.ExtAxisSyncMoveC(midjointPos, middescPose, 1, 1, 100, 100, midexaxisPos, 0, offdese, endjointPos, enddescPose, 1, 1, 100, 100, endexaxisPos , 0, offdese, 100, 0).
-    }
-
-Setting Up the Weld Wire Seek Expansion IO Port
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting up the Weld Wire Seeker Expansion IO Port
-    * @param searchDoneDINum Solder Wire Successful DO Port (0-127)
-    * @param searchStartDONum Welding wire seek start/stop control DO port (0-127)
-    * @return error code
-    */
-    int SetWireSearchExtDIONum(int searchDoneDINum, int searchStartDONum);
-
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++**
-.. versionchanged:: C#SDK-v1.0.9
-    
-.. code-block:: c#
-    :linenos:
-
-    private void button7_Click(object sender, EventArgs e)
-    {
-        /UDP wire seeker
-        robot.ExtDevSetUDPComParam("192.168.58.2", 2021, 2, 50, 5, 50, 1, 50, 10);
-        robot.ExtDevLoadUDPDriver();
-        robot.SetWireSearchExtDIONum(0, 0);
-
-        int rtn0, rtn1, rtn2 = 0;
-        ExaxisPos exaxisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
-        DescPose offdese = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-
-        DescPose descStart = new DescPose(-158.767, -510.596, 271.709, -179.427, -0.745, -137.349);
-        JointPos jointStart = new JointPos(61.667, -79.848, 108.639, -119.682, -89.700, -70.985);
-
-        DescPose descEnd = new DescPose(0.332, -516.427, 270.688, 178.165, 0.017, -119.989);
-        JointPos jointEnd = new JointPos(79.021, -81.839, 110.752, -118.298, -91.729, -70.981);
-
-        robot.MoveL(jointStart, descStart, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-        robot.MoveL(jointEnd, descEnd, 1, 0, 100, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-
-        DescPose descREF0A = new DescPose(-66.106, -560.746, 270.381, 176.479, -0.126, -126.745);
-        JointPos jointREF0A = new JointPos(73.531, -75.588, 102.941, -116.250, -93.347, -69.689);
-
-        DescPose descREF0B = new DescPose(-66.109, -528.440, 270.407, 176.479, -0.129, -126.744);
-        JointPos jointREF0B = new JointPos(72.534, -79.625, 108.046, -117.379, -93.366, -70.687);
-
-        DescPose descREF1A = new DescPose(72.975, -473.242, 270.399, 176.479, -0.129, -126.744);
-        JointPos jointREF1A = new JointPos(87.169, -86.509, 115.710, -117.341, -92.993, -56.034);
-        DescPose descREF1B = new DescPose(31.355, -473.238, 270.405, 176.480, -0.130, -126.745);
-        JointPos jointREF1B = new JointPos(82.117, -87.146, 116.470, -117.737, -93.145, -61.090);
-        rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF0A, descREF0A, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese); //starting point
-        robot.MoveL(jointREF0B, descREF0B, 1, 0, 10, 100, 100, -1, exaxisPos, 1, 0, offdese); //direction point
-        rtn1 = robot.WireSearchWait("REF0");
-        rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-        rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF1A, descREF1A, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese); //starting point
-        robot.MoveL(jointREF1B, descREF1B, 1, 0, 10, 100, 100, -1, exaxisPos, 1, 0, offdese); //direction point
-        rtn1 = robot.WireSearchWait("REF1");
-        rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-
-        rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF0A, descREF0A, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese); //starting point
-        robot.MoveL(jointREF0B, descREF0B, 1, 0, 10, 100, 100, -1, exaxisPos, 1, 0, offdese); //direction point
-        rtn1 = robot.WireSearchWait("RES0");
-        rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-
-        rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-        robot.MoveL(jointREF1A, descREF1A, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese); //starting point
-        robot.MoveL(jointREF1B, descREF1B, 1, 0, 10, 100, 100, -1, exaxisPos, 1, 0, offdese); //direction point
-        rtn1 = robot.WireSearchWait("RES1");
-        rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-        List<string> varNameRef1 = new List<string> { "REF0", "REF1", "#", "#", "#", "#" };
-        List<string> varNameRes1 = new List<string> { "RES0", "RES1", "#", "#", "#", "#" };
-        string[] varNameRef = varNameRef1.ToArray();
-        string[] varNameRes = varNameRes1.ToArray();
-        int offectFlag = 0;
-        DescPose offectPos = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        rtn0 = robot.GetWireSearchOffset(0, 0, varNameRef, varNameRes, ref offectFlag, ref offectPos);
-        robot.PointsOffsetEnable(0, offectPos);
-        robot.MoveL(jointStart, descStart, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-        robot.MoveL(jointEnd, descEnd, 1, 0, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);
-        robot.PointsOffsetDisable();
-    }
-
-Set welder control mode to expand DO port
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting up welder control mode to expand DO ports
-    * @param DONum Welder control mode DO port (0-127)
-    * @return error code
-    */
-    int SetWeldMachineCtrlModeExtDoNum(int DONum).
-
-Setting the welder control mode
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting the welder control mode
-    * @param mode Welder control mode;0-unitary
-    * @return error code
-    */
-    int SetWeldMachineCtrlMode(int mode).
-
-code example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
-    
-.. code-block:: c#
-    :linenos:
-
-    private void button8_Click(object sender, EventArgs e)
-    {
-        robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 50, 5, 50, 1, 50, 10);
-        robot.ExtDevLoadUDPDriver();
-
-        robot.SetWeldMachineCtrlModeExtDoNum(17);
-        for (int i = 0; i < 5; i++)
-        {
-            robot.SetWeldMachineCtrlMode(1);
-            Thread.Sleep(500);
-            robot.SetWeldMachineCtrlMode(0);
-            Thread.Sleep(500);
-        }
-
-        robot.SetWeldMachineCtrlModeExtDoNum(18);
-        for (int i = 0; i < 5; i++)
-        {
-            robot.SetWeldMachineCtrlMode(1);
-            Thread.Sleep(500);
-            robot.SetWeldMachineCtrlMode(0);
-            Thread.Sleep(500);
-        }
-        robot.SetWeldMachineCtrlModeExtDoNum(19);
-        for (int i = 0; i < 5; i++)
-        {
-            robot.SetWeldMachineCtrlMode(1);
-            Thread.Sleep(500);
-            robot.SetWeldMachineCtrlMode(0);
-            Thread.Sleep(500);
-        }
     }
 
 Removable Device Enable
@@ -1234,7 +1080,7 @@ Movable unit circular motion
     */
     int TractorMoveC(double radio, double angle, double vel).
 
-code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.9
     
@@ -1298,7 +1144,7 @@ Setting up Extended AO
     */
     int SetAuxAO(int AONum, double value, bool block);
     
-code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
@@ -1420,7 +1266,7 @@ Get Extended AI Value
     */
     int GetAuxAI(int AINum, bool isNoBlock, int& value);
 
-code example
+Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
@@ -1455,3 +1301,55 @@ code example
     robot.WaitAuxDI(1, true, 1000, false);
     robot.WaitAuxAI(1, 1, 132, 1000, false);
     }
+
+Setting the 485 Extended Axis Motion Acceleration and Deceleration
++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting the acceleration and deceleration of the 485 extended axis motion.
+    * @param [in] acc 485 Extended Axis Motion Acceleration
+    * @param [in] dec 485 Extended Axis Motion Deceleration
+    * @return Error code.
+    */
+    int AuxServoSetAcc(double acc, double dec);
+
+Sets the acceleration and deceleration of the 485 extended axis.
++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting the 485 extended axis acceleration and deceleration for an emergency stop.
+    * @param [in] acc 485 Extended Axis Stop Acceleration
+    * @param [in] dec 485 Extended Axis Acceleration and Deceleration.
+    * @return Error Code
+    */
+    int AuxServoSetEmergencyStopAcc(double acc, double dec);
+
+Get the acceleration and deceleration of the 485 extended axis motion
++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the acceleration and deceleration of the 485 extended axis motion.
+    * @param [out] acc 485 Extended Axis Motion Acceleration
+    * @param [out] dec 485 Extended Axis Motion Deceleration
+    * @return Error code.
+    */
+    int AuxServoGetAcc(ref double acc, ref double dec);
+
+Get the acceleration and deceleration of the 485 extended axis.
++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the acceleration and deceleration of the 485 extended axis emergency stop.
+    * @param [out] acc 485 Extended Axis Stop Acceleration
+    * @param [out] dec 485 Extended Axis Acceleration and Deceleration.
+    * @return Error Code
+    */
+    int AuxServoGetEmergencyStopAcc(ref double acc, ref double dec);
