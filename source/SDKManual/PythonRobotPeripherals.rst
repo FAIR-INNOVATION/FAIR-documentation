@@ -78,7 +78,7 @@ Configuration of jaws
     - ``bus``: device mount end bus location, not used yet, default is 0;"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 --------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -176,3 +176,51 @@ Getting to Enable Jaw Motion Control
     "Default parameters", "NULL"
     "Return Value", "- errorcode Success-0 Failure- errcode 
     - ``func``: 0-jaw enable; 1-jaw initialization; 2-position setting; 3-speed setting; 4-torque setting; 6-reading the jaw status; 7-reading the initialization status; 8-reading the fault code; 9-reading the position; 10-reading the speed; 11-reading the torque,12-15 reserved"
+
+Get the number of rotation turns of the rotary gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperRotNum()``"
+    "Description", "Get the number of rotation turns of the rotary gripper"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``num``：Number of turns"
+
+Gets the percentage of rotation speed of the rotating gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperRotSpeed()``"
+    "Description", "Gets the percentage of rotation speed of the rotating gripper"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``speed``：Percent rotation speed"
+
+Obtains the percentage of rotating torque of the rotating gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperRotTorque()``"
+    "Description", "Obtains the percentage of rotating torque of the rotating gripper"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``torque``：Percent torque of rotation"

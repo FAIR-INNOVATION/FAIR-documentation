@@ -16,7 +16,7 @@ Setting the global speed
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -40,7 +40,7 @@ Setting system variable values
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -67,7 +67,7 @@ Setting Tool Reference Points - Six-Point Method
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -113,7 +113,7 @@ Setting Tool Reference Points - Four Point Method
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``tcp_pose=[x,y,z,rx,ry,rz]``: tool coordinate system"
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -163,7 +163,7 @@ Setting the tool coordinate system
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -192,7 +192,7 @@ Setting the tool coordinate system list
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -217,7 +217,7 @@ Setting External Tool Reference Points-Three-Point Method
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -266,7 +266,7 @@ Setting the external tool coordinate system
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -294,7 +294,7 @@ Setting up a list of external tool coordinate systems
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -320,7 +320,7 @@ Setting the workpiece reference point - three-point method
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -368,7 +368,7 @@ Setting the workpiece coordinate system
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -395,7 +395,7 @@ Setting the list of workpiece coordinate systems
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -410,25 +410,30 @@ code example
 
 Setting the end load weight
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Python SDK-v2.0.8-3.7.8
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetLoadWeight(weight)``"
+    "Prototype", "``SetLoadWeight(loadNum, weight)``"
     "Description", "Set the end load weight, incorrect load weight setting may cause the robot to go out of control in drag mode"
-    "Mandatory parameters", "- ``weight``: unit [kg]"
+    "Mandatory parameters", "- ``loadNum``:load number
+    - ``weight``: unit [kg]"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
+.. versionchanged:: Python SDK-v2.0.8-3.7.8
+
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error = robot.SetLoadWeight(0)#!!!! Load weight should be set to match actual (incorrect load weight setting may cause robot to lose control in drag mode)
+    error = robot.SetLoadWeight(0,0)#!!!! Load weight should be set to match actual (incorrect load weight setting may cause robot to lose control in drag mode)
 
 Setting the robot mounting method - fixed mounting
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -442,7 +447,7 @@ Setting the robot mounting method - fixed mounting
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -455,7 +460,6 @@ code example
 
 Setting the robot mounting angle - free mounting
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -467,7 +471,7 @@ Setting the robot mounting angle - free mounting
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -480,7 +484,6 @@ code example
 
 Setting the end load center of mass coordinates
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -493,7 +496,7 @@ Setting the end load center of mass coordinates
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -516,7 +519,7 @@ Waiting for a specified time
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -541,7 +544,7 @@ Setting robot acceleration
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -578,3 +581,168 @@ Specify Attitude Velocity Off
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
+
+Tool coordinate system transition begins
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ToolTrsfStart(toolNum)``"
+    "Description", "Tool coordinate system transition begins"
+    "Mandatory parameters", "- ``toolNum``:Tool coordinate system number[0-14]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Tool coordinate system conversion is complete
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ToolTrsfEnd()``"
+    "Description", "Tool coordinate system conversion is complete"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+    
+Code example
+------------------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    startjointPos = [52.850, -84.327, 102.163, -112.843, -84.131, 0.063]
+    startdescPose = [-226.699, -501.969, 264.638, -174.973, 5.852, 143.301]
+    endjointPos = [52.850, -77.596, 111.785, -129.196, -84.131, 0.062]
+    enddescPose = [-226.702, -501.973, 155.833, -174.973, 5.852, 143.301]
+
+    robot.ToolTrsfStart(1)
+    rtn = robot.MoveJ(startjointPos, 0, 0, startdescPose)
+    print("rtn is ", rtn)
+    rtn = robot.MoveJ(endjointPos, 0, 0, enddescPose)
+    print("rtn is ", rtn)
+    robot.ToolTrsfEnd()
+
+Calculate the tool coordinate system based on the point information
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ComputeToolCoordWithPoints(method, pos)``"
+    "Description", "Calculate the tool coordinate system based on the point information"
+    "Mandatory parameters", "- ``method``:Calculation method; 0-four point method; One - six point method
+    - ``pos``:The array length of the joint position group is 4 in the four-point method and 6 in the six-point method"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode  
+    - ``tcp_offset=[x,y,z,rx,ry,rz]``:Tool coordinate system calculated from point information, unit [mm][°]"
+
+Code example
+------------------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    p1Desc = [-394.073, -276.405, 399.451, -133.692, 7.657, -139.047]
+    p1Joint = [15.234, -88.178, 96.583, -68.314, -52.303, -122.926]
+
+    p2Desc = [-187.141, -444.908, 432.425, 148.662, 15.483, -90.637]
+    p2Joint = [61.796, -91.959, 101.693, -102.417, -124.511, -122.767]
+
+    p3Desc = [-368.695, -485.023, 426.640, -162.588, 31.433, -97.036]
+    p3Joint = [43.896, -64.590, 60.087, -50.269, -94.663, -122.652]
+
+    p4Desc = [-291.069, -376.976, 467.560, -179.272, -2.326, -107.757]
+    p4Joint = [39.559, -94.731, 96.307, -93.141, -88.131, -122.673]
+
+    p5Desc = [-284.140, -488.041, 478.579, 179.785, -1.396, -98.030]
+    p5Joint = [49.283, -82.423, 81.993, -90.861, -89.427, -122.678]
+
+    p6Desc = [-296.307, -385.991, 484.492, -178.637, -0.057, -107.059]
+    p6Joint = [40.141, -92.742, 91.410, -87.978, -88.824, -122.808]
+
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+
+    posJ = [p1Joint, p2Joint, p3Joint, p4Joint, p5Joint, p6Joint]
+    rtn, coordRtn = robot.ComputeToolCoordWithPoints(1, posJ)
+    print("ComputeToolCoordWithPoints ", rtn, "coord is ", coordRtn[0], coordRtn[1], coordRtn[2], coordRtn[3], coordRtn[4], coordRtn[5])
+
+    robot.MoveJ(p1Joint, 0, 0, p1Desc)
+    robot.SetToolPoint(1)
+    robot.MoveJ(p2Joint, 0, 0, p2Desc)
+    robot.SetToolPoint(2)
+    robot.MoveJ(p3Joint, 0, 0, p3Desc)
+    robot.SetToolPoint(3)
+    robot.MoveJ(p4Joint, 0, 0, p4Desc)
+    robot.SetToolPoint(4)
+    robot.MoveJ(p5Joint, 0, 0, p5Desc)
+    robot.SetToolPoint(5)
+    robot.MoveJ(p6Joint, 0, 0, p6Desc)
+    robot.SetToolPoint(6)
+    rtn, coordRtn = robot.ComputeTool()
+    print("ComputeTool ", rtn, "coord is ", coordRtn[0], coordRtn[1], coordRtn[2], coordRtn[3], coordRtn[4], coordRtn[5])
+
+Calculate the workpiece coordinate system based on the point information
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ComputeWObjCoordWithPoints(method, pos, refFrame)``"
+    "Description", "Calculate the workpiece coordinate system based on the point information"
+    "Mandatory parameters", "- ``method``:Calculation method; 0: origin - X-axis - Z-axis 1: origin - X-axis -xy plane
+    - ``pos``:Three TCP location groups
+    - ``refFrame``: reference coordinate system"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode 
+    - ``wobj_offset=[x,y,z,rx,ry,rz]``:Workpiece coordinate system calculated from point information, unit [mm][°]"
+
+Code example
+------------------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    p1Desc = [-275.046, -293.122, 28.747, 174.533, -1.301, -112.101]
+    p1Joint = [35.207, -95.350, 133.703, -132.403, -93.897, -122.768]
+
+    p2Desc = [-280.339, -396.053, 29.762, 174.621, -3.448, -102.901]
+    p2Joint = [44.304, -85.020, 123.889, -134.679, -92.658, -122.768]
+
+    p3Desc = [-270.597, -290.603, 83.034, 179.314, 0.808, -114.171]
+    p3Joint = [32.975, -99.175, 125.966, -116.484, -91.014, -122.857]
+
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+
+    posTCP = [p1Desc, p2Desc, p3Desc]
+    rtn, coordRtn = robot.ComputeWObjCoordWithPoints(1, posTCP, 0)
+    print("ComputeWObjCoordWithPoints ", rtn, "coord is ", coordRtn[0], coordRtn[1], coordRtn[2], coordRtn[3], coordRtn[4], coordRtn[5])
+
+    robot.MoveJ(p1Joint, 1, 0, p1Desc)
+    robot.SetWObjCoordPoint(1)
+    robot.MoveJ(p2Joint, 1, 0, p2Desc)
+    robot.SetWObjCoordPoint(2)
+    robot.MoveJ(p3Joint, 1, 0, p3Desc)
+    robot.SetWObjCoordPoint(3)
+    rtn, coordRtn = robot.ComputeWObjCoord(1, 0)
+    print("ComputeTool ", rtn, "coord is ", coordRtn[0], coordRtn[1], coordRtn[2], coordRtn[3], coordRtn[4], coordRtn[5])

@@ -59,7 +59,7 @@ Deleting track records
     */  
     int SetTPDDelete(string name). 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -149,7 +149,7 @@ Setting the speed of the trajectory in operation
     */
     int SetTrajectoryJSpeed(double ovl). 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -310,7 +310,7 @@ Setting the torque around the z-axis in trajectory operation
     */
     int SetTrajectoryJTorqueTz(double tz).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -353,4 +353,81 @@ code example
         robot.MoveTrajectoryJ();
     }
 
+Uploading Track J files
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
 
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief  Uploading Track J files  
+    * @param  [in] filePath Full pathname of the uploaded track file C://test/testJ.txt
+    * @return error code  
+    */
+    int TrajectoryJUpLoad(String filePath);
+
+Deletion of Track J files
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Deletion of Track J files  
+    * @param [in] fileName Name of the document testJ.txt
+    * @return 错误码 
+    */
+    int TrajectoryJDelete(String fileName);
+
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection successful");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+
+        robot.TrajectoryJDelete("testA.txt");//Deleting track files
+        robot.TrajectoryJUpLoad("D://zUP/testA.txt");//Uploading Track J files
+
+        int retval = 0;
+        String traj_file_name= "/fruser/traj/testA.txt";
+        retval = robot.LoadTrajectoryJ(traj_file_name, 100, 1);
+        System.out.println("LoadTrajectoryJ %s, retval is:"+traj_file_name+retval);
+
+        DescPose traj_start_pose=new DescPose(0,0,0,0,0,0);
+        retval = robot.GetTrajectoryStartPose(traj_file_name, traj_start_pose);
+        System.out.println("GetTrajectoryStartPose is: %d"+retval);
+        System.out.println("desc_pos:"+"("+traj_start_pose.tran.x+","+traj_start_pose.tran.y+","+traj_start_pose.tran.z+","+traj_start_pose.rpy.rx+","+traj_start_pose.rpy.ry+","+traj_start_pose.rpy.rz+")");
+
+        robot.SetSpeed(30);
+        robot.MoveCart(traj_start_pose, 1, 0, 100, 100, 100, -1, -1);
+
+        robot.Sleep(5000);
+
+        int traj_num = 0;
+
+        ROBOT_STATE_PKG pkg = robot.GetRobotRealTimeState();
+        traj_num=pkg.trajectory_pnum;
+        System.out.println("GetTrajectoryStartPose traj num is:"+traj_num);
+
+        retval = robot.MoveTrajectoryJ();
+        System.out.println("MoveTrajectoryJ retval is:"+retval);
+    }

@@ -16,7 +16,7 @@ Drive belt start and stop
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -73,7 +73,7 @@ Recording reference points
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -96,7 +96,7 @@ Record point B
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -125,7 +125,7 @@ Drive Belt Parameter Configuration
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -162,7 +162,7 @@ Conveyorized workpiece IO inspection
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -245,7 +245,7 @@ linear motion
     - ``blendR``: [-1.0]-motion in place (blocking), [0~1000]-smoothing radius (non-blocking) in [mm] default -1.0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:

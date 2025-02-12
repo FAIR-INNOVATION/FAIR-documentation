@@ -6,7 +6,7 @@ Status feedback information
 
 Status Feedback Comparison Table
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. versionadded:: python SDK-v2.0.4
+.. versionchanged:: Python SDK-v2.0.8-3.7.8
     
 .. csv-table:: 
     :header-rows: 1
@@ -91,9 +91,14 @@ Status Feedback Comparison Table
     "second", "seconds"
     "millisecond", "milliseconds"
     "softwareUpgradeState", "Robot Software Upgrade State"
+    "cl_analog_output[i]","Control box analog output,i:0~1"
+    "tl_analog_output","Tool analog output"
+    "gripperRotNum","Rotation gripper current rotation number"
+    "gripperRotSpeed","Rotation gripper current rotation speed percentage"
+    "gripperRotTorque","Rotation gripper current rotation torque percentage"
     "endLuaErrCode", "endLUARunningStatus"
     
-code example
+Code example
 ---------------------------------------------
 
 .. code-block:: python
@@ -245,4 +250,10 @@ code example
     print("second:", robot.robot_state_pkg.second)
     print("millisecond:", robot.robot_state_pkg.millisecond)
     print("softwareUpgradeState:", robot.robot_state_pkg.softwareUpgradeState)
+    print("cl_analog_output[0]:",robot.robot_state_pkg.cl_analog_output[0])
+    print("cl_analog_output[1]:",robot.robot_state_pkg.cl_analog_output[1])
+    print("tl_analog_output:",robot.robot_state_pkg.tl_analog_output)
+    print("gripperRotNum:",robot.robot_state_pkg.gripperRotNum)
+    print("gripperRotSpeed:",robot.robot_state_pkg.gripperRotSpeed)
+    print("gripperRotTorque:",robot.robot_state_pkg.gripperRotTorque)
     print("endLuaErrCode:", robot.robot_state_pkg.endLuaErrCode)

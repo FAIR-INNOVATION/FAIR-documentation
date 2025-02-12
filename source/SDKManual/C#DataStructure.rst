@@ -146,8 +146,8 @@ Welding interrupt status
     }
 
 Robot State Feedback Structures Types
-++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.7
++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: c# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:

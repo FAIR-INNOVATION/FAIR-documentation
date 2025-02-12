@@ -154,7 +154,7 @@ linear motion
     */ 
     int ConveyorTrackMoveL(String name, int tool, int wobj, double vel, double acc, double ovl, double blendR);   
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

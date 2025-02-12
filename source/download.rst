@@ -12,7 +12,7 @@ Qualification Certification
 ---------------------------------
     :download:`FAIRINO ISO9001 Quality Certification <_static/_doc/FAIRINO ISO9001 Quality Certification.pdf>`
 
-Robot certification:
+Robot Certification:
 
 .. list-table::
    :widths: 20 10 10 10 10 10 10 10 10
@@ -68,16 +68,6 @@ Robot certification:
      - --
      - --
      - :download:`download <_static/_doc/ROHS test certification certificate.zip>`
-
-   * - **Parts-Power Supply Certificate**
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - ✅
-     - :download:`download <_static/_doc/Parts-Power Supply Certification.pdf>`
 
    * - **Explosion-proof Certificate**
      - ✅
@@ -158,6 +148,16 @@ Robot certification:
      - ✅
      - --
      - :download:`download <_static/_doc/NRTL Collaborative Robot certification.pdf>`
+
+   * - **Cleaning Robot CLASS3 Certificate**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - --
+     - --
+     - --
+     - :download:`download <_static/_doc/Cleaning Robot CLASS3 Certificate(FR3-FR16).pdf>`
 
 Control box certification:
 

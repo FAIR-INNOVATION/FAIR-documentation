@@ -517,7 +517,7 @@ Set the extended shaft system DH parameters
     * @param [in] axisDHd2 External axisDH parameter d2 mm
     * @param [in] axisDHd3 External axisDH parameter d3 mm
     * @param [in] axisDHd4 External axisDH parameter d4 mm
-    * @param [in] axisDHa1 External axisDH parameter 11 mm
+    * @param [in] axisDHa1 External axisDH parameter a1 mm
     * @param [in] axisDHa2 External axisDH parameter a2 mm
     * @param [in] axisDHa3 External axisDH parameter a3 mm
     * @param [in] axisDHa4 External axisDH parameter a4 mm

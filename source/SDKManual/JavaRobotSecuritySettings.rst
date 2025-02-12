@@ -68,7 +68,7 @@ error state clearing
     */
     int ResetAllError(); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -167,7 +167,7 @@ Setting the joint friction compensation factor - free mounting
     */
     int SetFrictionValue_freedom(Object[] coeff).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -229,7 +229,7 @@ Stop odd position protection
     */
     int SingularAvoidEnd().
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

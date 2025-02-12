@@ -116,7 +116,7 @@ Get the name of the loaded job program
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``program_name``: the name of the loaded operating program."
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -174,7 +174,7 @@ Download Lua files
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -200,7 +200,7 @@ Uploading Lua files
     "Return Value", "- errorcode Success-0 Failure- errcode
     - errorStr(lua file exists error returned)"
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -225,7 +225,7 @@ Deleting Lua files
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -253,7 +253,7 @@ Get the names of all current lua files
     - ``lua_num``: number of lua files
     - ``luaNames``: list of lua file names"
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -279,7 +279,7 @@ Documentation of teaching points
     "Default Parameters", "- ``update_allprogramfile``: whether to overwrite, 0-no overwrite, 1-overwrite, default 0"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:

@@ -18,7 +18,7 @@ Setting the control box digital output
     - ``block``:0-blocking, 1-non-blocking Default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -48,7 +48,7 @@ Setting Tool Digital Outputs
     - ``block``: 0-blocking, 1-non-blocking."
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -78,7 +78,7 @@ Setting the control box analog output
     "Default parameters", "- ``block``:[0]-blocking, [1]-non-blocking Default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -105,7 +105,7 @@ Setting Tool Analog Outputs
     "Default parameters", "- ``block``:[0]-blocking, [1]-non-blocking Default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -133,7 +133,7 @@ Getting control box digital inputs
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``di``: 0-low level, 1-high level"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -157,7 +157,7 @@ Get Tool Digital Inputs
     "Return Value", "Error Code Success-0 Failure- errcode
     - ``di``: 0 - low level, 1 - high level"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -183,7 +183,7 @@ Waiting for control box digital inputs
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -212,7 +212,7 @@ Waiting for control box with multiple digital inputs
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -240,7 +240,7 @@ Waiting for tool digital inputs
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -266,7 +266,7 @@ Getting Control Box Analog Inputs
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``value``: Percentage of input current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V]."
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -290,7 +290,7 @@ Get Tool Analog Inputs
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``value``: Percentage of input current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V]."
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -317,7 +317,7 @@ Waiting for control box analog inputs
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -346,7 +346,7 @@ Waiting for tool analog inputs
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -373,7 +373,7 @@ Setting whether the output is reset after the control box DO stop/pause
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -513,7 +513,7 @@ Sets whether the outputs are reset after an extended DO stop/pause.
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------
 .. code-block:: python
     :linenos:

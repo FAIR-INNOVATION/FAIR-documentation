@@ -158,7 +158,7 @@ Get the center of mass of the current load
     */  
     int GetTargetPayloadCog(int flag, DescTran cog);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -247,7 +247,7 @@ Obtaining the soft limiting angle of a joint
     */
     int GetJointSoftLimitDeg(int flag, Object[] negative, Object[] positive); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -312,7 +312,7 @@ Get the default speed of the robot
     */  
     List<Number> GetDefaultTransVel(); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -378,7 +378,7 @@ Calculate the MD5 value of a file in a specified path
     */ 
     int ComputeFileMD5(String file_path, String md5); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -461,7 +461,7 @@ Getting the robot firmware version
     int GetFirmwareVersion(String ctrlBoxBoardVersion, String driver1Version, String driver2Version, String driver3Version,
                                           String driver4Version, String driver5Version, String driver6Version, String endBoardVersion);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

@@ -17,7 +17,7 @@ Getting the robot mounting angle
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``[yangle,zangle]``: yangle - angle of inclination, zangle - angle of rotation."
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -41,7 +41,7 @@ Getting system variable values
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``var_value``: system variable value"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -67,7 +67,7 @@ Get the current joint position (angle).
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: current joint position (angle)"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -91,7 +91,7 @@ Get the current joint position in radians.
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: current joint position (in radians)"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -115,7 +115,7 @@ Get joint feedback speed -deg/s
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``speed=[j1,j2,j3,j4,j5,j6]``: joint feedback speed -deg/s"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -139,7 +139,7 @@ Get TCP command synthesis speed
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``[tcp_speed,ori_speed]``: tcp_speed - linear closing speed ori_speed - attitude closing speed"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -163,7 +163,7 @@ Getting TCP Feedback Hopping Speed
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``[tcp_speed,ori_speed]``: tcp_speed - linear closing speed ori_speed - attitude closing speed"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -187,7 +187,7 @@ Get TCP command speed
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``speed=[x,y,z,rx,ry,rz]``: TCP command speed, mm/s"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -211,7 +211,7 @@ Getting TCP feedback speed
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``speed=[x,y,z,rx,ry,rz]``: TCP feedback speed"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -235,7 +235,7 @@ Get current tool position
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``tcp_pose=[x,y,z,rx,ry,rz]``: current tool pose"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -259,7 +259,7 @@ Get the current tool coordinate system number
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``tool_id``: tool coordinate system number"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -283,7 +283,7 @@ Get the current workpiece coordinate system number
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``wobj_id``: the workpiece coordinate system number"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -307,7 +307,7 @@ Get the current end flange position
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``flange_pose=[x,y,z,rx,ry,rz]``: current end flange pose"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -332,7 +332,7 @@ Inverse kinematics solution
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: inverse kinematics solution, Cartesian positional solution for joint positions"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -360,7 +360,7 @@ Inverse Kinematics Solution - Specifying Reference Positions
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``joint_pos=[j1,j2,j3,j4,j5,j6]``: inverse kinematics solution, tool position solving for joint position"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -388,7 +388,7 @@ Inverse kinematics solving-whether there is a solution
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``result``: ``True``-with solution, ``False``-without solution"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -414,7 +414,7 @@ Positive kinematics solving
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``desc_pos=[x,y,z,rx,ry,rz]``: positive kinematics solution, joint position solver tool position"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -439,7 +439,7 @@ Get current joint torque
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``torques=[j1,j2,j3,j4,j5,j6]``: joint torques."
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -463,7 +463,7 @@ Get the weight of the current load
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``weight``: current load weight in [kg]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -487,7 +487,7 @@ Get the center of mass of the current load
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``cog=[x,y,z]``: coordinates of the current center of mass in [mm]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -511,7 +511,7 @@ Get the current tool coordinate system
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``tcp_offset=[x,y,z,rx,ry,rz]``: Relative position of the current tool coordinate system in [mm][°]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -535,7 +535,7 @@ Get the current workpiece coordinate system
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``wobj_offset=[x,y,z,rx,ry,rz]``: Relative position of the current workpiece coordinate system in [mm][°]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -559,7 +559,7 @@ Obtaining the soft limiting angle of a joint
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``[j1min,j1max,j2min,j2max,j3min,j3max, j4min,j4max,j5min, j5max, j6min,j6max]``: Axis 1 to Axis 6, joints with negative and positive limits, in [mm]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -583,7 +583,7 @@ Get system time
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``t_ms``: system time in [ms]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -607,7 +607,7 @@ Get the current joint configuration of the robot
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``config``: Robot's current joint configuration, range [0~7]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -631,7 +631,7 @@ Getting the default speed
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``vel``: default speed in [mm/s]"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -655,7 +655,7 @@ Queries whether robot motion is complete
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``state``: state of robot motion, 0 - unfinished, 1 - finished"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -679,7 +679,7 @@ Query Robot Error Code
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``[maincode subcode]``: robot error code, maincode - main error code, subcode - suberror code"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -703,7 +703,7 @@ Query Robot Teaching Management Points Data
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``[x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,TOOL,WOBJ,SPEED,ACC,E1,E2,E3,E4]``: point data"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -727,7 +727,7 @@ Get SSH public key
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``keygen``: public key"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -751,7 +751,7 @@ Calculate the MD5 value of a file in a specified path
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``md5``: the MD5 value of the file."
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -779,7 +779,7 @@ Getting robot version information
     - ``webVersion``: web version
     - ``controllerVersion``: controller version"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -813,7 +813,7 @@ Getting robot hardware version information
     - ``driver6Version``
     - ``endBoardVersion``"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -846,7 +846,7 @@ Getting robot firmware version information
     - ``driver6Version``
     - ``endBoardVersion``"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -872,7 +872,7 @@ Get DH compensation parameters
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``dhCompensation=[cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]``: Robot DH Parameter Compensation Values (mm)"
 
-code example
+Code example
 ---------------------------------------------------------------------------
 .. code-block:: python
     :linenos:

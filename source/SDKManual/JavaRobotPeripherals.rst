@@ -79,8 +79,8 @@ Getting the jaw movement status
     */
     List<Integer> GetGripperMotionDone(); 
 
-code example
-++++++++++++++++
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -136,6 +136,95 @@ code example
         List<Integer> rtnArray = new ArrayList<Integer>() {};
         rtnArray=robot.GetGripperMotionDone();
         System.out.println("gripper motion done : " + rtnArray.get(2) + ", " + rtnArray.get(1));
+    }
+
+Get the number of revolutions of the rotary gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get the number of revolutions of the rotary gripper
+    * @return List[0]: error code List[1]: 0-no error, 1-with error List[2]:number of revolutions
+    */
+    List<Number> GetGripperRotNum(); 
+
+Get the rotational speed percentage of the rotating gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get the rotational speed percentage of the rotating gripper
+    * @return List[0]: error code List[1]: 0-no error, 1-with error List[2]:Rotation speed percentage
+    */
+    List<Number> GetGripperRotSpeed(); 
+
+Get the percentage of rotational torque of the rotating jaws
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get the percentage of rotational torque of the rotating jaws
+    * @return List[0]: error code List[1]: 0-no error, 1-with error List[2]:Percentage of rotating moment
+    */
+    List<Number> GetGripperRotTorque(); 
+
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection successful");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+
+        robot.ResetAllError();
+        robot.ActGripper(1, 1);
+        robot.Sleep(1000);
+        int rtn = robot.MoveGripper(1, pos, 50, 50, 5000, 1, 1, rotPos, 50, 100);
+        System.out.println("move gripper rtn is:"+rtn);
+        while (true)
+        {
+            ROBOT_STATE_PKG pkg=robot.GetRobotRealTimeState();
+            if (Math.abs(pkg.gripper_position - pos) < 1.5)
+            {
+                break;
+            }
+            else
+            {
+                System.out.println("cur gripper pos is:"+pkg.gripper_position);
+                robot.Sleep(10);
+            }
+        }
+        System.out.println("Gripper Motion Done:"+pos);
+        
+        while (true){
+            ROBOT_STATE_PKG pkg = robot.GetRobotRealTimeState();
+            System.out.println("the robot AO0 "+pkg.cl_analog_output[0]/40.96+", AO1 "+pkg.cl_analog_output[1]/40.96+", tool AO0:  "+pkg.tl_analog_output/40.96);
+            System.out.println("gripper pos "+pkg.gripper_position+"- vel "+pkg.gripper_speed+" - torque "+pkg.gripper_current+" - rotPos "+pkg.gripperRotNum+" - rotvel "+pkg.gripperRotSpeed+" - rotTor "+ pkg.gripperRotTorque);
+            robot.Sleep(200);
+        }
+
     }
 
 Calculate pre-capture point-visual

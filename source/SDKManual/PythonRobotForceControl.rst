@@ -17,7 +17,7 @@ Get Force Sensor Configuration
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``[number,company,device,softversion,bus]``：number 传感器编号;company  力传感器厂商，17-坤维科技，19-航天十一院，20-ATI 传感器，21-中科米点，22-伟航敏芯;device  设备号，坤维 (0- KWR75B), Aisino Eleven (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB10A); softvesion software version number, not used for the time being, the default is 0." 
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -58,14 +58,16 @@ code example
 
 Force Sensor Configuration
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Python SDK-v2.0.8-3.7.8
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
     "Prototype", "``FT_SetConfig(company,device,softversion=0,bus=0)``"
     "Description", "Force Sensor Configuration"
-    "Required Parameters","- ``company``: Sensor Manufacturer, 17 - Kunwei Technology, 19 - Aerospace 11th Academy, 20 - ATI Sensors, 21 - Zhongke MiDot, 22 - Weihang Minxin;
-    - ``device``: device number, Kunwei (0-KWR75B), Aisino Eleventh Academy (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A);"
+    "Required Parameters","- ``company``: Sensor Manufacturer, 17 - Kunwei Technology, 19 - Aerospace 11th Academy, 20 - ATI Sensors, 21 - Zhongke MiDot, 22 - Weihang Minxin，23-NBIT，24-XJC，26-NSR;
+    - ``device``: device number, Kunwei (0-KWR75B), Aisino Eleventh Academy (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A)，NBIT(0-XLH93003ACS)，XJC(0-XJC-6F-D82)，NSR(0-NSR-FTSensorA);"
     "Default parameters", "- ``softversion``: software version number, not used for now, default is 0;
     - ``bus``: device mount end bus location, not used yet, default is 0;"
     "Return Value", "Error Code Success-0 Failure- errcode"
@@ -108,7 +110,7 @@ Setting the force transducer reference coordinate system
     "Default parameters", "- ``coord``: [x,y,z,rx,ry,rz] customized coordinate system values, default [0,0,0,0,0,0,0]"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -221,7 +223,7 @@ Obtaining force/torque data in the reference coordinate system
     "Return Value", "- errorcode Success-0 Failure- errcode 
     - ``data=[fx,fy,fz,tx,ty,tz]``: force/torque data in the reference coordinate system."
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -245,7 +247,7 @@ Obtaining Force Sensor Raw Force/Torque Data
     "Return Value", "- errorcode Success-0 Failure- errcode  
     - ``data=[fx,fy,fz,tx,ty,tz]``: Force sensor raw force/torque data "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -274,7 +276,7 @@ Collision Guard
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -324,7 +326,7 @@ constant force control
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -372,7 +374,7 @@ Helix Exploration
     - ``max_vel``: maximum value of linear velocity in mm/s Default 5"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -422,7 +424,7 @@ Rotary insertion
     - ``rotorn``: direction of rotation, 1 - clockwise, 2 - counterclockwise Default 1"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -475,7 +477,7 @@ Linear insertion
     - ``lin_a``: linear acceleration in mm/s^2, not used yet Default 1"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -547,13 +549,13 @@ Surface positioning
     "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
     - ``dir``: direction of movement, 1-positive, 2-negative;
     - ``axis``: moving axes, 1-x, 2-y, 3-z;
-    - ``disMax``: maximum exploration distance in mm.
+    - ``disMax``: large exploration distance in mm.
     - ``ft``: action termination force threshold in N;"
     "Default Parameters", "- ``lin_v``: explore linear velocity in mm/s default 3.
     - ``lin_a``: explore linear acceleration in mm/s^2 default 0;"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -670,7 +672,7 @@ Soft control on
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -726,7 +728,7 @@ Load recognition filter initialization
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -824,7 +826,7 @@ Force Sensor Assisted Drag
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -867,7 +869,7 @@ The force sensor turns on automatically after the error is cleared.
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
     
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -902,7 +904,7 @@ Setting up hybrid drag switches and parameters for six-dimensional force and joi
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
     
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -973,7 +975,7 @@ Setting the load weight under the force transducer
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
         
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -1062,7 +1064,7 @@ Automatic zeroing of force sensors
     - ``weight``: sensor mass kg
     - ``pos=[x,y,z]``: sensor center of mass mm"
         
-code example
+Code example
 -------------------------------------------------------------
 .. code-block:: python
     :linenos:

@@ -56,7 +56,7 @@ Point table update lua file
     */
     int PointTableUpdateLua(String pointTableName, String luaFileName, String errorStr);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -114,7 +114,7 @@ Setting the log filter level
     int SetLoggerLevel(FrLogLevel logLevel);
 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -161,7 +161,7 @@ Obtaining robot peripheral protocols
     */
     List<Integer> GetExDevProtocol();
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -245,7 +245,7 @@ End Sensor Register Write
     */
     int AxleSensorRegWrite(int devAddr, int regHAddr, int regLAddr, int regNum, int data1, int data2, int isNoBlock);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

@@ -44,7 +44,7 @@ Immediate stop for jog taps
     */
     int ImmStopJOG(); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -178,7 +178,7 @@ Whole circle motion in Cartesian space
     */  
     int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -237,7 +237,7 @@ Spiral motion in Cartesian space
     */
     int NewSpiral(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, ExaxisPos epos, double ovl, int offset_flag, DescPose offset_pos, SpiralParam spiral_param);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -305,7 +305,7 @@ Joint space servo mode motion
     */
     int ServoJ(JointPos joint_pos, ExaxisPos axisPos, double acc, double vel, double cmdT, double filterT, double gain);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -361,7 +361,7 @@ Servo-mode motion in Cartesian space
     */
     int ServoCart(int mode, DescPose desc_pose, Object[] pos_gain, double acc, double vel, double cmdT, double filterT, double gain);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -421,7 +421,7 @@ Point-to-point motion in Cartesian space
     */ 
     int MoveCart(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendT, int config); int MoveCart(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendT, int config).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -485,7 +485,7 @@ End of spline motion
     */
     int SplineEnd(). 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -597,7 +597,7 @@ End of new spline movement
     :linenos:
 
     /** 
-    * @brief End of new spline movement 
+    * @brief New spline campaign begins 
     * @return error code 
     */ 
     int NewSplineEnd();
@@ -660,7 +660,7 @@ Overall offset of points ends
     */
     int PointsOffsetDisable(); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -758,7 +758,7 @@ End AO Fly Tap Stop
     */
     int MoveToolAOStop();
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -797,4 +797,139 @@ code example
         robot.MoveL(j2, desc_p2,0, 0, 30, 100, 100, -1, epos, 0, 0, offset_pos, 0, 100);
         robot.MoveToolAOStop();
         //robot.MoveAOStop();
+    }
+
+Start Ptp motion FIR filtering
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Start Ptp motion FIR filtering
+    * @param [in] maxAcc Maximum acceleration extreme (deg/s2)
+    * @return error code
+    */
+    int PtpFIRPlanningStart(double maxAcc);
+
+Turn off Ptp Motion FIR Filtering
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Turn off Ptp Motion FIR Filtering
+    * @return error code
+    */
+    int PtpFIRPlanningEnd();
+
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection success");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+        DescPose startdescPose=new DescPose(-569.710, -132.595, 395.147, 178.418, -1.893, 171.051);
+        JointPos startjointPos=new JointPos(-2.334, -79.300, 108.196, -120.594, -91.790, -83.386);
+
+        DescPose enddescPose=new DescPose(-366.397, -572.427, 418.339, -178.972, 1.829, -142.970);
+        JointPos endjointPos=new JointPos(43.651, -70.284, 91.057, -109.075, -88.768, -83.382);
+
+        ExaxisPos exaxisPos=new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese=new DescPose(0, 0, 0, 0, 0, 0);
+
+        robot.PtpFIRPlanningStart(1000);
+        robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveJ(endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.PtpFIRPlanningEnd();
+
+        robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveJ(endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+    }
+
+Started LIN, ARC motion FIR filtering
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Started LIN, ARC motion FIR filtering
+    * @param [in] maxAccLin Linear Acceleration Extreme (mm/s2)
+    * @param [in] maxAccDeg Angular Acceleration Extreme (deg/s2)
+    * @param [in] maxJerkLin Linear Acceleration Extreme (mm/s3)
+    * @param [in] maxJerkDeg angular plus acceleration pole (deg/s3)
+    * @return error code
+    */
+    int LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
+
+Turn off LIN, ARC motion FIR filtering
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Turn off LIN, ARC motion FIR filtering
+    * @return error code
+    */
+    int LinArcFIRPlanningEnd();
+
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection success");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+        DescPose startdescPose=new DescPose(-366.397, -572.427, 418.339, -178.972, 1.829, -142.970);
+        JointPos startjointPos=new JointPos(43.651, -70.284, 91.057, -109.075, -88.768, -83.382);
+
+        DescPose middescPose=new DescPose(-569.710, -132.595, 395.147, 178.418, -1.893, 171.051);
+        JointPos midjointPos=new JointPos(-2.334, -79.300, 108.196, -120.594, -91.790, -83.386);
+
+        DescPose enddescPose=new DescPose(-608.420, 610.692, 314.930, -176.438, -1.756, 117.333);
+        JointPos endjointPos=new JointPos(-56.153, -46.964, 68.015, -113.200, -86.661, -83.479);
+
+        ExaxisPos exaxisPos=new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese=new DescPose(0, 0, 0, 0, 0, 0);
+
+        robot.LinArcFIRPlanningStart(1000, 1000, 1000, 1000);
+        robot.MoveL(startjointPos, startdescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+        robot.MoveC(midjointPos, middescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, 100, -1);
+        robot.LinArcFIRPlanningEnd();
     }

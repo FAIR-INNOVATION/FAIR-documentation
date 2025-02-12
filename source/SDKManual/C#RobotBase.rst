@@ -109,13 +109,14 @@ Control of robot hand-automatic mode switching
     */
     int Mode(int mode).
 
-disconnection reconnects
+Disconnection reconnects
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief disconnection reconnects
+    * @brief Disconnection reconnects
     * @param [in] enable Whether to enable true- enable, false- disable
     * @param [in] times Indicates the number of reconnections
     * @param [in] period Reconnection interval (ms)
@@ -124,6 +125,8 @@ disconnection reconnects
 
 Code Example
 +++++++++++++
+.. versionchanged:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 

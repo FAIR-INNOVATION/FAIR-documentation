@@ -18,7 +18,7 @@ Instantiated Robot
     "Return value", "- Success: Returns a robot object
     - Failed: The created object will be destroyed"
      
-code example
+Code example
 ------------------------------------------------
 
 .. code-block:: python
@@ -41,7 +41,7 @@ Close the RPC connection
     "Default parameters", "NULL"
     "Return Value", "NULL"
      
-code example
+Code example
 ------------------------------------------------
 
 .. code-block:: python
@@ -66,7 +66,7 @@ Query SDK version number
     "Return Value", "- Error Code Success-0 Fail-errcode
     - ``sdk``: SDK version number, controller version number"
 
-code example
+Code example
 ---------------------------------------------------
 
 .. code-block:: python
@@ -95,7 +95,7 @@ Get controller IP
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``ip``: controller IP"
 
-code example
+Code example
 --------------------------------------------------
 
 .. code-block:: python
@@ -123,7 +123,7 @@ Control of robot hand-automatic mode switching
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 --------------------------------------------------
 
 .. code-block:: python
@@ -170,7 +170,7 @@ Queries whether the robot is in drag mode
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``state``: 0 - non-drag instructional mode, 1 - drag instructional mode"
 
-code example
+Code example
 --------------------------------------------------
 
 .. code-block:: python
@@ -226,7 +226,7 @@ Control robot up-enable or down-enable
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
+Code example
 --------------------------------------------------
 
 .. code-block:: python

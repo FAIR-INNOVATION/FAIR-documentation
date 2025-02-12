@@ -869,3 +869,140 @@ Code example
 
         return 0;
     }
+
+Sets the detection parameters of unexpected interruption of robot welding arc
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.8-3.7.8
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Sets the detection parameters of unexpected interruption of robot welding arc
+	 * @param [in] checkEnable Whether the check is enabled. 0: Indicates that the function is disabled. 1- Enable
+	 * @param [in] arcInterruptTimeLength Duration for confirming arc interruption (ms)
+	 * @return Error code
+    */
+	errno_t WeldingSetCheckArcInterruptionParam(int checkEnable, int arcInterruptTimeLength);
+
+Get the detection parameters of unexpected interruption of robot welding arc
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.8-3.7.8
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Get the detection parameters of unexpected interruption of robot welding arc
+	 * @param [out] checkEnable Whether the check is enabled. 0: Indicates that the function is disabled. 1- Enable
+	 * @param [out] arcInterruptTimeLength Duration for confirming arc interruption (ms)
+	 * @return Error code
+    */
+	errno_t WeldingGetCheckArcInterruptionParam(int* checkEnable, int* arcInterruptTimeLength);
+
+Set the parameters of robot welding interruption recovery
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.8-3.7.8
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Set the parameters of robot welding interruption recovery
+	 * @param [in] enable Whether to enable welding interrupt recovery
+	 * @param [in] length Weld overlap distance (mm)
+	 * @param [in] velocity Percentage of velocity at which the robot returns to the rearcing point (0-100)
+	 * @param [in] moveType Indicates how the robot moves to the rearcing point. 0-LIN; 1-PTP
+	 * @return Error code
+    */
+	errno_t WeldingSetReWeldAfterBreakOffParam(int enable, double length, double velocity, int moveType);
+    
+Get robot welding interrupt recovery parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.8-3.7.8
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Get robot welding interrupt recovery parameters
+	 * @param [out] enable Whether to enable welding interrupt recovery
+	 * @param [out] length Weld overlap distance (mm)
+	 * @param [out] velocity Percentage of robot return to rearcing point (0-100)
+	 * @param [out] moveType Indicates how the robot moves to the rearcing point. 0-LIN; 1-PTP
+	 * @return Error code
+    */
+	errno_t WeldingGetReWeldAfterBreakOffParam(int* enable, double* length, double* velocity, int* moveType);
+
+Sets the robot to resume welding after welding interruption
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.8-3.7.8
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Sets the robot to resume welding after welding interruption
+	 * @return Error code
+    */
+	errno_t WeldingStartReWeldAfterBreakOff();
+
+Sets the robot to exit welding after welding interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.8-3.7.8
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+	 * @brief Sets the robot to exit welding after welding interruption
+	 * @return Error code
+	 */
+	errno_t WeldingAbortWeldAfterBreakOff();
+
+Code example
+********************
+.. versionadded:: C++SDK-v2.1.8-3.7.8
+
+.. code-block:: c++
+    :linenos:
+
+    void TestReWeld(FRRobot* robot)
+    {
+        int rtn = -1;
+        rtn = robot->WeldingSetCheckArcInterruptionParam(1, 200);
+        printf("WeldingSetCheckArcInterruptionParam    %d\n", rtn);
+        rtn = robot->WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0);
+        printf("WeldingSetReWeldAfterBreakOffParam    %d\n", rtn);
+        int enable = 0;
+        double length = 0;
+        double velocity = 0;
+        int moveType = 0;
+        int checkEnable = 0;
+        int arcInterruptTimeLength = 0;
+        rtn = robot->WeldingGetCheckArcInterruptionParam(&checkEnable, &arcInterruptTimeLength);
+        printf("WeldingGetCheckArcInterruptionParam  checkEnable  %d   arcInterruptTimeLength  %d\n", checkEnable, arcInterruptTimeLength);
+        rtn = robot->WeldingGetReWeldAfterBreakOffParam(&enable, &length, &velocity, &moveType);
+        printf("WeldingGetReWeldAfterBreakOffParam  enable = %d, length = %lf, velocity = %lf, moveType = %d\n", enable, length, velocity, moveType);
+
+        robot->ProgramLoad("/fruser/test.lua");
+        robot->ProgramRun();
+
+        robot->Sleep(5000);
+
+        while (true)
+        {
+            ROBOT_STATE_PKG pkg = {};
+            robot->GetRobotRealTimeState(&pkg);
+            printf("welding breakoff state is     %d\n", pkg.weldingBreakOffState.breakOffState);
+            if (pkg.weldingBreakOffState.breakOffState == 1)
+            {
+                printf("welding breakoff ! \n");
+                robot->Sleep(2000);
+                rtn = robot->WeldingStartReWeldAfterBreakOff();
+                printf("WeldingStartReWeldAfterBreakOff    %d\n", rtn);
+                break;
+            }
+            robot->Sleep(100);
+        }
+    }

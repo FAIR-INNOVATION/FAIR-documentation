@@ -534,7 +534,7 @@ In production, when the collaborative robot needs to connect peripherals or stop
      - Manual automatic switching (high and low level)
      - In the configurable input of DI configuration, select CIO as "Manual automatic switching (high and low level)" and click "Apply". The configurable input valid state can be selected as "high level valid". When CI0 is switched to a high level, the "manual automatic switching (high and low levels)" function is triggered, and the robot state is switched to the automatic state; the configurable input valid state can be selected as "low level valid". When CI0 is switched to a low level, the "manual automatic switching (high and low levels)" function is triggered, and the robot state is switched to the automatic state.
 
-末端输入有效状态
+Terminal input valid state
 ****************************************
 
 .. centered:: Table 6.4-2 Configurable functions of terminal input

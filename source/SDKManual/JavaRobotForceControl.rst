@@ -4,17 +4,19 @@ human control of machinery
 .. toctree:: 
     :maxdepth: 5
 
-Force Sensor Configuration
+Config force sensor
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.1-3.7.8
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Configuring force sensors
-    * @param [in] config company:force sensor manufacturers, 17-Kunwei Technology, 19-Aerospace 11th Academy, 20-ATI Sensors, 21-Zhongke MiDot, 22-Weihang Minxin
-    * @param [in] config device: device number, Kunwei (0-KWR75B), Aisino Eleven (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A)
-    * @param [in] config softvesion: software version number, not used yet, default is 0.
-    * @param [in] config bus: the device hangs on the end bus position, not used for the time being, the default is 0
+    * @brief config force sensor
+    * @param config company: force sensor manufacturer, 17-Kunwei Technology, 19-Aerospace 11th Academy, 20-ATI sensors, 21-Zhongke Mipoint, 22-Weihang Minxin, 23-NBIT, 24-Xinjingcheng (XJC), 26-NSR
+    * @param config device: device number, Kunwei (0-KWR75B), Aisino Eleven (0-MCS6A-200-4), ATI (0-AXIA80-M8), Zhongke MiDot (0-MST2010), Weihang Minxin (0-WHC6L-YB-10A), NBIT (0-XLH93003ACS ), XJC(0-XJC-6F-D82), NSR(0-NSR-FTSensorA), NBIT(0-XLH93003ACS).
+    * @param config softvesion:software version number, not used for the time being, the default is 0
+    * @param config bus:device hangs on the end bus position, not used, default is 0
     * @return error code
     */
     int FT_SetConfig(DeviceConfig config). 
@@ -58,7 +60,7 @@ Force Sensor Zeroing
     */
     int FT_SetZero(int act). 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -163,7 +165,7 @@ Load center of mass identification calculation
     */  
     int FT_PdCogIdenCompute(DescTran cog).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -270,7 +272,7 @@ Collision Guard
     */  
     int FT_Guard(int flag, int sensor_id, Object[] select, ForceTorque ft, Object[] max_threshold, Object[] min_threshold); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -332,7 +334,7 @@ constant force control
     */  
     int FT_Control(int flag, int sensor_id, Object[] select, ForceTorque ft, Object[] ft_pid, int adj_sign, int ILC_sign, double max_dis, double max_ang , int filter_Sign, int posAdapt_sign, int isNoBlock).   
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -406,7 +408,7 @@ Soft Control Off
     */  
     int FT_ComplianceStop(); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -540,7 +542,7 @@ Force Sensor Assisted Drag
     */
     int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, Object[] M, Object[] B, Object[] K, Object[] F, double Fmax, double Vmax);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -598,7 +600,7 @@ Setting up hybrid drag switches and parameters for six-dimensional force and joi
     */
     int ForceAndJointImpedanceStartStop(int status, int impedanceFlag, Object[] lamdeGain, Object[] KGain, Object[] BGain, double dragMaxTcpVel, double dragMaxTcpOriVel);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -675,7 +677,7 @@ Obtaining the center of mass of the load under the force transducer
     */
     int GetForceSensorPayLoadCog(DescTran cog).
     
-code example
+Code example
 +++++++++++++++
 .. code-block:: Java
     :linenos:

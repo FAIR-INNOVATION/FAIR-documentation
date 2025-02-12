@@ -19,7 +19,7 @@ Setting Track Recording Parameters
     - ``do_choose``: DO choose, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choose, 1-choose Default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -100,7 +100,7 @@ Trajectory preloading
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -297,7 +297,7 @@ Setting the torque around the z-axis in trajectory operation
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -346,3 +346,67 @@ code example
     ret = robot.SetTrajectoryJTorqueTz(0) #Set the torque around the z-axis for the trajectory run
     print("Setting the torque around z-axis error code for the trajectory run",ret)
     time.sleep(1)
+
+Upload trace J file
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``TrajectoryJUpLoad(filePath)``"
+    "Description", "Upload trace J file"
+    "Mandatory parameter", "- ``filePath``:Full path name of the uploaded trajectory file，C://test/testJ.txt"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Delete the track J file
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``TrajectoryJDelete(filePath)``"
+    "Description", "Delete the track J file"
+    "Mandatory parameter", "- ``filePath``:Removes the full pathname of the trace file,C://test/testJ.txt"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Code example
+------------------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # A connection is established with the robot controller and a robot object is returned if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.LoggerInit()
+    robot.SetLoggerLevel(lvl=1)
+    
+    retval = robot.TrajectoryJDelete("testA.txt")
+    print("TrajectoryJDelete return ", retval)
+    robot.TrajectoryJUpLoad("D://zUP/testA.txt")
+
+    traj_file_name = "/fruser/traj/testA.txt"
+    retval = robot.LoadTrajectoryJ(traj_file_name, 100, 1)
+    print("LoadTrajectoryJ return ", retval)
+
+    retval,traj_start_pose = robot.GetTrajectoryStartPose(traj_file_name)
+    print("GetTrajectoryStartPose return ", retval)
+    print("The starting pose of the trajectory:", traj_start_pose[0], traj_start_pose[1], traj_start_pose[2], traj_start_pose[3], traj_start_pose[4], traj_start_pose[5])
+
+    robot.SetSpeed(20)
+    robot.MoveCart(traj_start_pose, 1, 0)
+
+    time.sleep(5)
+
+    retval,traj_num = robot.GetTrajectoryPointNum()
+    print("GetTrajectoryPointNum return ", retval)
+    print("Trajectory point number: ", traj_num)
+
+    retval = robot.MoveTrajectoryJ()
+    print("MoveTrajectoryJ return ", retval)

@@ -23,7 +23,7 @@ Setting the 485 Extended Axis Parameters
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------
 
 .. code-block:: python
@@ -69,7 +69,7 @@ Getting 485 Expansion Axis Configuration Parameters
     - ``servoResolution``: encoder resolution;
     - ``axisMechTransRatio``: mechanical transmission ratio;"
 
-code example
+Code example
 --------------------------------------------
 Refer to the code example for setting the 485 extended axis parameters
 
@@ -88,7 +88,7 @@ Setting the 485 expansion axis enable/disable
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------
 
 .. code-block:: python
@@ -142,7 +142,7 @@ Setting the 485 Extended Axis Control Mode
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------
 Refer to the code example for setting 485 extension axis enable/disable
 
@@ -162,7 +162,7 @@ Setting the 485 extended axis target position (position mode)
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------
 Refer to the code example for setting 485 extension axis enable/disable
 
@@ -181,7 +181,7 @@ Setting the 485 extended axis target speed (velocity mode)
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 
 .. code-block:: python
@@ -265,7 +265,7 @@ Setting the 485 extended axis back to zero
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
     
-code example
+Code example
 ---------------------------------
 Refer to the code example for setting 485 extension axis enable/disable
 
@@ -283,7 +283,7 @@ Clearing 485 Expansion Axis Error Messages
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
     
-code example
+Code example
 ---------------------------------
 Refer to the code example for setting the 485 extended axis parameters
 
@@ -306,7 +306,7 @@ Get 485 extended axis servo status
     - ``servoSpeed``: servo current speed mm/s or °/s;
     - ``servoTorque``: servo current torque Nm;"
 
-code example
+Code example
 ---------------------------------
 Refer to the code example for setting 485 extension axis enable/disable
 
@@ -409,7 +409,7 @@ Parameter configuration for UDP extended axis communication
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -464,7 +464,7 @@ Load UDP communication
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -509,7 +509,7 @@ UDP Extended Axis Communication Recovery after Abnormal Disconnection
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
     
-code example
+Code example
 ------------------------
 
 .. code-block:: python
@@ -554,7 +554,7 @@ Setting the extended robot position relative to the extended axis
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
         
-code example
+Code example
 ------------------------
 
 .. code-block:: python
@@ -638,7 +638,7 @@ Setting the reference point of the extended axis coordinate system - four-point 
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
             
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -667,7 +667,7 @@ Calculating the Extended Axis Coordinate System - Four Point Method
     "Return Value", "- errorcode Success-0 Failure- errcode.
     - ``coord``: extended axis coordinate system values [x,y,z,rx,ry,rz];"
                   
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -716,7 +716,7 @@ Setting of the calibration reference point in the position in the coordinate sys
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
                       
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -743,7 +743,7 @@ Reference Point Setting for the Shifter Coordinate System - Four-Point Method
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
                           
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -772,7 +772,7 @@ Shifter Coordinate System Calculation - Four Point Method
     "Return Value", "- errorcode Success-0 Failure- errcode.
     - ``coord``: the value of the coordinate system of the translocator [x,y,z,rx,ry,rz];"
                             
-code example
+Code example
 ------------------------
 
 .. code-block:: python
@@ -823,7 +823,7 @@ UDP Extended Axis Enable
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
                                 
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -920,7 +920,7 @@ Setting the Extended DO
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
                                     
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -1087,7 +1087,7 @@ UDP Extended Axis Motion
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
                                         
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -1133,7 +1133,7 @@ UDP extension axes synchronized with robot joint motion
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;"
     "Return Value", "Error Code Success-0 Failure- errcode;"
                                         
-code example
+Code example
 ------------------------
 
 .. code-block:: python
@@ -1218,7 +1218,7 @@ UDP extension axes synchronized with robot linear motion
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;"
     "Return Value", "Error Code Success-0 Failure- errcode;"
                                             
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -1270,7 +1270,7 @@ UDP extension axes synchronized with robot circular motion
     - ``blendR``: [-1.0] - motion in place (blocking), [0~1000] - smoothing radius (non-blocking) in [mm] default -1.0;"
     "Return Value", "Error Code Success-0 Failure- errcode;"
                                                 
-code example
+Code example
 ------------------------------------
 
 .. code-block:: python
@@ -1362,7 +1362,7 @@ Stopping motion of movable devices
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------
 
 .. code-block:: python

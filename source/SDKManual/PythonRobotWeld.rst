@@ -20,7 +20,7 @@ Welding Start
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -54,7 +54,7 @@ End of welding
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -90,7 +90,7 @@ Setting of welding current and output analog correspondences
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -218,7 +218,7 @@ Setting the welding voltage
 
 Setting Oscillation Parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: python SDK-v2.0.5
+.. versionchanged:: Python SDK-v2.0.8-3.7.8
     
 .. csv-table:: 
     :stub-columns: 1
@@ -231,6 +231,9 @@ Setting Oscillation Parameters
     - ``weaveFrequency``: swing frequency (Hz)
     - ``weaveIncStayTime``: wait mode 0-cycle without wait time; 1-cycle with wait time mandatory parameter
     - ``weaveRange``: swing range (mm)
+    - ``weaveLeftRange``： vertical triangle swing left chord length(mm)
+    - ``weaveRightRange``： vertical triangle swing right chord length(mm)
+    - ``additionalStayTime``： vertical triangle swing vertical triangle point residence time(mm)
     - ``weaveLeftStayTime``: wave left stay time (ms)
     - ``weaveRightStayTime``: wave right stay time (ms)
     - ``weaveCircleRadio``: Circle swing-back ratio (0-100%)
@@ -238,7 +241,7 @@ Setting Oscillation Parameters
     "Default parameters", "- ``weaveYawAngle``: azimuth angle of the swing direction (rotation around the swing Z-axis) in °, default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -345,7 +348,7 @@ Positive wire feed
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -464,7 +467,7 @@ Segmented welding startup
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]"
     "Return Value", "- errcode Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -545,7 +548,7 @@ Welding wire position finding start
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -749,7 +752,7 @@ Arc tracking control
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
 
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -840,7 +843,7 @@ Simulated swing start
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
     
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -897,7 +900,7 @@ Start trajectory detection warning (no movement)
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
         
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -963,7 +966,7 @@ Setting Welding Process Curve Parameters
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
             
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -1033,7 +1036,7 @@ Extended IO-Configuration Welder Gas Detection Signal
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
             
-code example
+Code example
 ----------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -1213,7 +1216,7 @@ Setting the welder control mode
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
 
-code example
+Code example
 ----------------------------------------------------
 
 .. code-block:: python
@@ -1294,13 +1297,13 @@ Arc Tracking + Multi-Layer Multi-Channel Compensation Off
 
 Offset Coordinate Change - Multi-layer Multi-pass Welding
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
+.. versionchanged:: Python SDK-v2.0.8-3.7.8
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype", "``MultilayerOffsetTrsfToBase(pointo, pointX, pointZ, dx, dy, db)``"
+    "Prototype", "``MultilayerOffsetTrsfToBase(pointo, pointX, pointZ, dx, dy, db)``"
     "Description", "Offset Coordinate Change - Multi-Layer Multi-Pass Welding"
     "Mandatory parameters", "- ``pointo``: datum Cartesian orientation
     - ``pointX``: Cartesian position of point X in the offset direction from the reference point X.
@@ -1309,5 +1312,144 @@ Offset Coordinate Change - Multi-layer Multi-pass Welding
     - ``dz``: z-direction offset (mm)
     - ``dry``: offset around the y-axis (°)"
     "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode 
+    "Return Value", "- Error Code Success-0 Failure- errcode 
     - ``offset``: the offset of the result of the calculation"
+
+Set the detection parameters of robot welding arc unexpected interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetCheckArcInterruptionParam(checkEnable, arcInterruptTimeLength)``"
+    "Description", "Set the detection parameters of robot welding arc unexpected interruption"
+    "Mandatory parameters", "- ``checkEnable``: Whether to enable detection. 0: Indicates that the function is disabled. 1- Enable
+    - ``arcInterruptTimeLength``:Arc break confirmation time (ms)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+The detection parameters of unexpected interruption of robot welding arc were obtained
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingGetCheckArcInterruptionParam()``"
+    "Description", "The detection parameters of unexpected interruption of robot welding arc were obtained"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode 
+    - ``checkEnable``: Whether to enable detection. 0: Indicates that the function is disabled. 1- Enable
+    - ``arcInterruptTimeLength``:Arc break confirmation time (ms)"
+
+Set the robot welding interrupt recovery parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetReWeldAfterBreakOffParam(enable, length, velocity, moveType)``"
+    "Description", "Set the robot welding interrupt recovery parameters"
+    "Mandatory parameters", "- ``enable``:Whether to enable recovery from welding interruption
+    - ``length``: weld overlap distance (mm)
+    - ``velocity``: Percentage of robot return to rearcing point (0-100)
+    - ``moveType``: The way the robot moves to the rearcing point; 0-LIN; 1-PTP"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Obtain the robot welding interrupt recovery parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingGetReWeldAfterBreakOffParam()``"
+    "Description", "Obtain the robot welding interrupt recovery parameters"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode 
+    - ``enable``: Whether to enable recovery from welding interruption
+    - ``length``: weld overlap distance (mm)
+    - ``velocity``: Percentage of robot return to rearcing point (0-100)
+    - ``moveType``: The way the robot moves to the rearcing point; 0-LIN; 1-PTP"
+
+Set the robot to resume welding after welding interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingStartReWeldAfterBreakOff()``"
+    "Description", "Set the robot to resume welding after welding interruption"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Set the robot to exit welding after welding interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingAbortWeldAfterBreakOff()``"
+    "Description", "Set the robot to exit welding after welding interruption"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Code example
+----------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    rtn = -1
+    rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200)
+    print("WeldingSetCheckArcInterruptionParam return", rtn)
+    rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0)
+    print("WeldingSetReWeldAfterBreakOffParam return", rtn)
+    enable = 0
+    length = 0
+    velocity = 0
+    moveType = 0
+    checkEnable = 0
+    arcInterruptTimeLength = 0
+    rtn, checkEnable, arcInterruptTimeLength = robot.WeldingGetCheckArcInterruptionParam()
+    print("WeldingGetCheckArcInterruptionParam checkEnable:", checkEnable)
+    print("WeldingGetCheckArcInterruptionParam arcInterruptTimeLength:", arcInterruptTimeLength)
+    rtn, enable, length, velocity, moveType = robot.WeldingGetReWeldAfterBreakOffParam()
+    print("*****")
+    print("WeldingGetReWeldAfterBreakOffParam enable:", enable)
+    print("WeldingGetReWeldAfterBreakOffParam length:", length)
+    print("WeldingGetReWeldAfterBreakOffParam velocity:", velocity)
+    print("WeldingGetReWeldAfterBreakOffParam moveType:", moveType)
+
+    robot.ProgramLoad("/fruser/test.lua")
+    robot.ProgramRun()
+
+    time.sleep(5)
+
+    while True:
+        print("welding breakoff state is ", robot.robot_state_pkg.weldingBreakOffState.breakOffState)
+        if robot.robot_state_pkg.weldingBreakOffState.breakOffState == 1:
+            print("welding breakoff !")
+            time.sleep(2)
+            rtn = robot.WeldingStartReWeldAfterBreakOff()
+            print("WeldingStartReWeldAfterBreakOff return", rtn)
+            break
+        time.sleep(0.1)

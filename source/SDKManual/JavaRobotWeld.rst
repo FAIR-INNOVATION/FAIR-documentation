@@ -80,7 +80,7 @@ Getting welding voltage and output analog correspondence
     */
     int WeldingGetVoltageRelation(WeldVoltageAORelation relation).
 
-code example
+Code example
 ++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -226,7 +226,7 @@ end of swing (math.)
     */
     int WeaveEnd(int weaveNum).
 
-code example
+Code example
 ++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -270,7 +270,7 @@ code example
         robot.MoveL(j2, desc_p2,3, 0, 10, 100, 100, -1, epos, 0, 0, offset_pos, 0, 100);
         robot.ARCEnd(0, 0, 10000);
         robot.WeaveEnd(0);
-    } 
+    }
 
 Positive wire feed
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -311,7 +311,7 @@ aspiration (phonetics, explosion of breath on consonants distinguishing Chinese 
     */
     int SetAspirated(int ioType, int airControl).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -377,7 +377,7 @@ segment welding
     */
     int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType,int arcNum, int weldTimeout, boolean isWeave, int weaveNum, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -485,7 +485,7 @@ Welding wire seek contact points written to database
     */
     int SetPointToDatabase(String varName, DescPose pos);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -675,7 +675,7 @@ Obtaining Welding Process Curve Parameters
     */
     int WeldingGetProcessParam(int id, WeldingProcessParam param);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -787,7 +787,7 @@ Extended IO-Configuration Weld Interrupt Recovery Signal
     */
     int SetExtDIWeldBreakOffRecover(int reWeldDINum, int abortWeldDINum);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -854,7 +854,7 @@ Setting the welder control mode
     */
     int SetWeldMachineCtrlMode(int mode).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -894,5 +894,158 @@ code example
             robot.Sleep(500);
             robot.SetWeldMachineCtrlMode(1);
             robot.Sleep(500);
+        }
+    }
+
+Setting parameters for detecting unexpected interruptions of robotic welding arcs
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Set parameters for detecting unexpected interruptions to the robot's welding arc.
+    * @param [in] checkEnable Whether to enable detection; 0-don't enable; 1-enable
+    * @param [in] arcInterruptTimeLength arcInterruptAcknowledgmentTimeLength(ms)
+    * @return error code 
+    */
+    int WeldingSetCheckArcInterruptionParam(int checkEnable, int arcInterruptTimeLength);
+
+Get the parameters for detecting accidental interruptions of the robot's welding arc
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Get parameters for detecting unexpected interruptions of a robotic welding arc.
+    * @return List[0]:error code; List[1]:double Whether to enable detection; 0-don't enable; 1-enable; List[2]:arc interrupt acknowledgement duration (ms) 
+    */
+    List<Integer> WeldingGetCheckArcInterruptionParam();
+
+Set the robot welding interruption recovery parameter
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Sets the robot weld interrupt recovery parameters.
+    * @param [in] enable Whether to enable weld interrupt recovery.
+    * @param [in] length The overlap distance of the weld (mm).
+    * @param [in] velocity the speed of the robot to return to the restart point (0-100)
+    * @param [in] moveType the way the robot moves to the restart point; 0-LIN; 1-PTP
+    * @return error code 
+    */
+    int WeldingSetReWeldAfterBreakOffParam(int enable, double length, double velocity, int moveType);
+
+Get the robot welding break recovery parameter
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Get robot weld interrupt recovery parameters.
+    * @return List[0]:error code; List[1]:int Whether to enable weld interrupt recovery; List[2]:double Weld overlap distance (mm);
+    * @return List[3]:double Robot return to re-start point speed percentage (0-100); List[4]:int Robot movement to re-start point way; 0-LIN; 1-PTP 
+    */
+    List<Number> WeldingGetReWeldAfterBreakOffParam();
+
+Setting up a robot to resume welding after an interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Setting the robot to resume welding after an interruption.
+    * @return error code 
+    */
+    int WeldingStartReWeldAfterBreakOff();
+
+Sets the robot to exit welding after a weld break
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Setting the robot to exit welding after a weld interrupt.
+    * @return error code 
+    */
+    int WeldingAbortWeldAfterBreakOff();
+
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection success");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+        int rtn = -1;
+        rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200);
+        System.out.println("WeldingSetCheckArcInterruptionParam: "+rtn);
+        rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0);
+        System.out.println("WeldingSetReWeldAfterBreakOffParam: "+rtn);
+        int enable = 0;
+        double length = 0;
+        double velocity = 0;
+        int moveType = 0;
+        int checkEnable = 0;
+        int arcInterruptTimeLength = 0;
+        List<Integer> rtnArray = new ArrayList<Integer>() {};
+        List<Number> rtnArrayWeld = new ArrayList<Number>() {};
+        rtnArray = robot.WeldingGetCheckArcInterruptionParam();
+        checkEnable=rtnArray.get(1);
+        arcInterruptTimeLength=rtnArray.get(2);
+        System.out.println("WeldingGetCheckArcInterruptionParam  checkEnable:"+checkEnable +", arcInterruptTimeLength : "+ arcInterruptTimeLength);
+        rtnArrayWeld = robot.WeldingGetReWeldAfterBreakOffParam();
+        enable=(int) rtnArrayWeld.get(1);
+        length=(double) rtnArrayWeld.get(2);
+        velocity=(double) rtnArrayWeld.get(3);
+        moveType=(int) rtnArrayWeld.get(4);
+        System.out.println("WeldingGetReWeldAfterBreakOffParam :"+ enable +",length: "+length+",velocity :"+velocity+",moveType :"+moveType);
+        //Welding interruption recovery
+        robot.ProgramLoad("/fruser/test.lua");
+        robot.ProgramRun();
+
+        robot.Sleep(5000);
+
+        while (true)
+        {
+            ROBOT_STATE_PKG pkg=new ROBOT_STATE_PKG();
+            pkg=robot.GetRobotRealTimeState();
+            System.out.println("welding breakoff state is "+pkg.weldingBreakOffstate.breakOffState);
+            if (pkg.weldingBreakOffstate.breakOffState == 1)
+            {
+                System.out.println("welding breakoff !");
+                robot.Sleep(2000);
+                rtn = robot.WeldingStartReWeldAfterBreakOff();
+                System.out.println("WeldingStartReWeldAfterBreakOff: "+rtn);
+                break;
+            }
+            robot.Sleep(100);
         }
     }

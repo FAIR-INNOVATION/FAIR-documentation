@@ -20,7 +20,7 @@ Download Point Table Database
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:
@@ -46,7 +46,7 @@ Upload point table database
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:   
@@ -72,7 +72,7 @@ Point table switching
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
@@ -99,7 +99,7 @@ Point table update lua file
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
@@ -127,7 +127,7 @@ Initialize Logging Parameters
     - ``file_num``: number of files for rolling storage, 1~20, default value is 5. Individual files are capped at 50M."
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
@@ -153,7 +153,7 @@ Setting the log filter level
     "Default Parameters","- ``lvl``: filter level value, the smaller the value the less output logs, 1-error, 2-warnning, 3-inform, 4-debug, default value is 1"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
@@ -178,7 +178,7 @@ Setting up robot peripheral protocols
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos: 
@@ -225,7 +225,7 @@ End Sensor Configuration
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------
 .. code-block:: python
     :linenos:

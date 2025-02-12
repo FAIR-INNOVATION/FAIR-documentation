@@ -17,7 +17,7 @@ Setting the default job program to load automatically on boot
     */
     int LoadDefaultProgConfig(int flag, String program_name); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -87,7 +87,7 @@ Run the currently loaded job program
     */
     int ProgramRun();
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -155,7 +155,7 @@ Terminate the currently running job program
     */ 
     int StopMotion().   
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -242,7 +242,7 @@ Get the names of all current job programs
     */
     int GetLuaList(List<String> luaNames).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

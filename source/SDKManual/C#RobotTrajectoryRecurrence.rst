@@ -364,6 +364,7 @@ Code Example
 
 Uploading the track J file
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -376,6 +377,7 @@ Uploading the track J file
 
 Delete the track J file
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -388,6 +390,7 @@ Delete the track J file
 
 Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 

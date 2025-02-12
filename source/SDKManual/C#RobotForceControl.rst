@@ -569,6 +569,7 @@ Get the load identification result
 
 Force Sensor Assisted Drag
 +++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:
@@ -590,6 +591,7 @@ Force Sensor Assisted Drag
 
 Get force sensor drag switch status
 +++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:
@@ -604,6 +606,7 @@ Get force sensor drag switch status
 
 Force sensor auto-zeroing
 +++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:
@@ -617,7 +620,8 @@ Force sensor auto-zeroing
     int ForceSensorAutoComputeLoad(ref double weight, ref DescTran pos);
 
 Setting up hybrid drag switches and parameters for six-dimensional force and joint impedance
-+++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:
@@ -638,6 +642,7 @@ Setting up hybrid drag switches and parameters for six-dimensional force and joi
 
 Set the force sensor under load weight
 +++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:
@@ -651,21 +656,7 @@ Set the force sensor under load weight
 
 Set the force sensor payload center of mass
 +++++++++++++++++++++++++++++++++++++++++++++
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Set the center of mass of the load under the force sensor.
-    * @param [in] x load center of mass x mm 
-    * @param [in] y load center of mass y mm
-    * @param [in] z load center of mass z mm
-    * @return Error code
-    */
-    int SetForceSensorPayLoadCog(double x, double y, double z);
-
-Setting the load center of mass under a force transducer
-+++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:
@@ -681,6 +672,7 @@ Setting the load center of mass under a force transducer
 
 Get the force sensor pay load weight
 +++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:
@@ -694,6 +686,7 @@ Get the force sensor pay load weight
 
 Get force sensor payload center of mass
 +++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 
 .. code-block:: c#
     :linenos:

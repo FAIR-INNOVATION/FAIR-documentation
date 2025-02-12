@@ -140,7 +140,7 @@ Waiting for tool analog inputs
     */
     int WaitToolAI(int id, int sign, double value, int max_time, int opt); 
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -265,7 +265,7 @@ Sets whether the output is reset after the expansion AO stops/pause.
     */ 
     int SetOutputResetExtAO(int resetFlag);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

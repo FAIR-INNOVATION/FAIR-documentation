@@ -961,8 +961,22 @@ Code Example
         robot.SingularAvoidEnd();
     }
 
+Safety stop trigger 
+++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Safety stop trigger signal
+    * @return error code
+    */
+    int GetSafetyCode();
+
 Start ptp motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -975,6 +989,7 @@ Start ptp motion FIR filtering
 
 Start LIN, ARC motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -990,6 +1005,7 @@ Start LIN, ARC motion FIR filtering
 
 Disable ptp motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -1001,6 +1017,7 @@ Disable ptp motion FIR filtering
 
 Disable LIN, ARC motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 

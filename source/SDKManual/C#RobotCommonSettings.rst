@@ -388,6 +388,8 @@ Setting robot acceleration
 
 Calculate the tool coordinate system from the point information
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -402,6 +404,8 @@ Calculate the tool coordinate system from the point information
 
 Calculate the workpiece coordinate system from the point information
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -416,6 +420,8 @@ Calculate the workpiece coordinate system from the point information
 
 code example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+    
 .. code-block:: c#
     :linenos:
 

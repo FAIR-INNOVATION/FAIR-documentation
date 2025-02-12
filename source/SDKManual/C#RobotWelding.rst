@@ -75,7 +75,7 @@ Setting the welding voltage and output analogue correspondence
     int WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
 
 Getting the correspondence between welding current and output analogue
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
 
@@ -252,8 +252,8 @@ Reverse wire feed
     */
     int SetReverseWireFeed(int ioType, int wireFeed).
 
-aspiration (phonetics, explosion of breath on consonants distinguishing Chinese p, t from b, d)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Aspiration (phonetics, explosion of breath on consonants distinguishing Chinese p, t from b, d)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
 
@@ -268,7 +268,7 @@ aspiration (phonetics, explosion of breath on consonants distinguishing Chinese 
     */
     int SetAspirated(int ioType, int airControl).
 
-segment welding
+Segment welding
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. versionadded:: C#SDK-v1.0.4
@@ -363,6 +363,7 @@ Code Example
 
 Welding Wire Finding Position Begins
 ++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -381,6 +382,8 @@ Welding Wire Finding Position Begins
 
 End of wire search
 ++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -399,6 +402,8 @@ End of wire search
 
 Calculating wire finding offsets
 ++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -416,6 +421,7 @@ Calculating wire finding offsets
 
 Wait for the wire search to complete
 ++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -427,6 +433,7 @@ Wait for the wire search to complete
 
 Write wire search contact to database
 ++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -440,6 +447,8 @@ Write wire search contact to database
 
 Arc tracking control
 ++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -468,6 +477,7 @@ Arc tracking control
 
 Arc tracking AI passband selection
 ++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -480,6 +490,8 @@ Arc tracking AI passband selection
 
 Simulated Swing Start
 ++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -492,6 +504,8 @@ Simulated Swing Start
 
 End of simulation
 ++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -504,6 +518,7 @@ End of simulation
 
 Start trajectory detection warning (no motion)
 ++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -516,6 +531,7 @@ Start trajectory detection warning (no motion)
 
 End trajectory detection warning (no motion)
 ++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -528,6 +544,7 @@ End trajectory detection warning (no motion)
 
 Extended IO-Configuration Welder Gas Detection Signal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -540,6 +557,7 @@ Extended IO-Configuration Welder Gas Detection Signal
 
 Extended IO-Configuration Welder Arc Start Signal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -552,6 +570,7 @@ Extended IO-Configuration Welder Arc Start Signal
 
 Extended IO-Configuring the Welder Reverse Wire Feed Signal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -564,6 +583,7 @@ Extended IO-Configuring the Welder Reverse Wire Feed Signal
 
 Extended IO-Configuration Welder Forward Wire Feed Signal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -574,8 +594,9 @@ Extended IO-Configuration Welder Forward Wire Feed Signal
     */
     int SetWireForwardFeedExtDoNum(int DONum).
 
- Extended IO-Configuration Welder Arc Start Success Signal
+Extended IO-Configuration Welder Arc Start Success Signal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -588,6 +609,7 @@ Extended IO-Configuration Welder Forward Wire Feed Signal
 
 Extended IO-Configuration Welder Ready Signal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -600,6 +622,7 @@ Extended IO-Configuration Welder Ready Signal
 
 Extended IO-Configure weld interrupt recovery signal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -613,6 +636,7 @@ Extended IO-Configure weld interrupt recovery signal
 
 Arc Tracking + Multi-Layer Multi-Pass Compensation On
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -624,6 +648,7 @@ Arc Tracking + Multi-Layer Multi-Pass Compensation On
 
 ArcWeldTrace + MultiLayerMultiChannelCompensation OFF
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -635,6 +660,7 @@ ArcWeldTrace + MultiLayerMultiChannelCompensation OFF
 
 Offset Coordinate Change - Multi-Layer Multi-Pass Welding
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -644,15 +670,17 @@ Offset Coordinate Change - Multi-Layer Multi-Pass Welding
      * @param [in] pointX Cartesian position of datum X in the direction of the offset.
      * @param [in] pointZ Cartesian position of the datum Z to the offset direction point.
      * @param [in] dx x-direction offset (mm)
-     * @param [in] z offset (mm)
-     * @param [in] offset around y-axis (°)
-     * @param [out] Offset of the result of the calculation.
+     * @param [in] dz z-direction offset (mm)
+     * @param [in] dry offset around y-axis (°)
+     * @param [out] offset Offset of the result of the calculation.
      * @return Error code
      */
-    int MultilayerOffsetTrsfToBase(DescTran pointO, DescTran pointX, DescTran pointZ, double dx, double dy, double db, ref DescPose offset);
+    int MultilayerOffsetTrsfToBase(DescTran pointO, DescTran pointX, DescTran pointZ, double dx, double dz, double dry, ref DescPose offset);
 
 Setting parameters for detecting unexpected interruptions of the robotic welding arc
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -666,6 +694,8 @@ Setting parameters for detecting unexpected interruptions of the robotic welding
 
 Get parameters for detecting unexpected interruptions of the robotic welding arc
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -679,6 +709,8 @@ Get parameters for detecting unexpected interruptions of the robotic welding arc
 
 Setting the robot weld interrupt recovery parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -694,6 +726,8 @@ Setting the robot weld interrupt recovery parameters
 
 Get robot weld interrupt recovery parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -709,6 +743,8 @@ Get robot weld interrupt recovery parameters
 
 Setting the robot to resume welding after a welding interruption
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -720,6 +756,8 @@ Setting the robot to resume welding after a welding interruption
 
 Setting the robot to exit welding after a weld interruption
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -731,6 +769,8 @@ Setting the robot to exit welding after a weld interruption
 
 code example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 

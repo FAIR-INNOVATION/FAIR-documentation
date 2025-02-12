@@ -50,7 +50,7 @@ Immediate stop for jog taps
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
@@ -175,7 +175,7 @@ Joint space motion
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0];"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -223,7 +223,7 @@ Cartesian linear motion in space
     "
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -275,7 +275,7 @@ Circular motion in Cartesian space
     - ``blendR``:[-1.0]-motion in place (blocking), [0~1000]-smoothing radius (non-blocking) in [mm] default -1.0;"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -322,7 +322,7 @@ Whole circle motion in Cartesian space
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -363,7 +363,7 @@ Spiral motion in Cartesian space
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -445,7 +445,7 @@ Servo-mode motion in Cartesian space
     - ``gain``: proportional amplifier for target position, not open yet, default 0.0;"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ---------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -509,7 +509,7 @@ Point-to-point motion in Cartesian space
     - ``config``: joint configuration, [-1] - solve with reference to current joint position, [0~7] - solve based on joint configuration default is -1"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -575,7 +575,7 @@ End of spline motion
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
@@ -648,7 +648,7 @@ new spline command point
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 
-code example
+Code example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
@@ -687,7 +687,7 @@ Robot termination motion
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 -------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -707,6 +707,34 @@ code example
     print("Terminating motion: error code", ret) 
     robot.MoveL(desc_pos2, tool, user, vel=40, acc=100)
     print("Cartesian space linear motion point 2: error code", ret)
+
+Robot pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``PauseMotion()``"
+    "Description", "Pause motion. Using pause motion requires the motion instruction to be in a non-blocking state"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Robot resume motion
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Python SDK-v2.0.8-3.7.8
+    
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``ResumeMotion()``"
+    "Description", "Resume motion, using resume motion requires the motion instruction to be in a non-blocking state"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
 Robot points are shifted overall
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -735,7 +763,7 @@ Overall offset of points ends
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
+Code example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
@@ -780,7 +808,7 @@ Control box motion AO start
     - ``zeroZoneCmp``: deadzone compensation value AO percentage, shaped, default 20%, range [0-100]."
     "Return Value", "Error Code Success-0 Failure- errcode"
     
-code example
+Code example
 ---------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -834,7 +862,7 @@ End Motion AO Start
     - ``zeroZoneCmp``: deadzone compensation value AO percentage, shaped, default 20%, range [0-100]."
     "Return Value", "Error Code Success-0 Failure- errcode"
         
-code example
+Code example
 ---------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -858,7 +886,7 @@ code example
     print("MoveToolAOStop",error)
     
 End movement AO end
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
@@ -866,7 +894,110 @@ End movement AO end
     :widths: 10 30
     
     "Prototype", "``MoveToolAOStop()``"
-    "description", "end movement AO end"
+    "Description", "end movement AO end"
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
+
+Start Ptp motion FIR filtering
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``PtpFIRPlanningStart(maxAcc)``"
+    "Description", "Start Ptp motion FIR filtering"
+    "Mandatory parameters", "- ``maxAcc``:Maximum acceleration extremum(deg/s2)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Disable Ptp motion FIR filtering
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``PtpFIRPlanningEnd()``"
+    "Description", "Disable Ptp motion FIR filtering"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Code example
+------------------------------------------------------------------------------------------
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    startdescPose = [-569.710, -132.595, 395.147, 178.418, -1.893, 171.051]
+    startjointPos = [-2.334, -79.300, 108.196, -120.594, -91.790, -83.386]
+    enddescPose = [-366.397, -572.427, 418.339, -178.972, 1.829, -142.970]
+    endjointPos = [43.651, -70.284, 91.057, -109.075, -88.768, -83.382]
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+
+    # Ptp motion FIR filtering is turned on
+    robot.PtpFIRPlanningStart(maxAcc=1000)
+    robot.MoveJ(startjointPos, 0, 0,vel=50)
+    robot.MoveJ(endjointPos, 0, 0,vel=50)
+    robot.PtpFIRPlanningEnd()
+
+LIN, ARC motion FIR filtering is started
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``LinArcFIRPlanningStart(maxAccLin,maxAccDeg,maxJerkLin,maxJerkDeg)``"
+    "Description", "LIN, ARC motion FIR filtering is started"
+    "Return", "- ``maxAccLin``:Linear acceleration extremum(mm/s2)
+    - ``maxAccDeg``:Angular acceleration extremum(deg/s2)
+    - ``maxJerkLin``:Linear plus acceleration extremum(mm/s3)
+    - ``maxJerkDeg``:Angle plus acceleration extremum(deg/s3)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Turn off LIN and ARC motion FIR filtering
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``LinArcFIRPlanningEnd()``"
+    "Description", "Turn off LIN and ARC motion FIR filtering"
+    "Return", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"  
+
+Code example
+---------------------------------------------------------------------------------------------------------
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    startdescPose = [-569.710, -132.595, 395.147, 178.418, -1.893, 171.051]
+    startjointPos = [-2.334, -79.300, 108.196, -120.594, -91.790, -83.386]
+    enddescPose = [-366.397, -572.427, 418.339, -178.972, 1.829, -142.970]
+    endjointPos = [43.651, -70.284, 91.057, -109.075, -88.768, -83.382]
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+
+    # LIN, ARC motion FIR filtering is turned on
+    robot.LinArcFIRPlanningStart(5000, 5000, 5000, 5000)
+    robot.MoveL(startdescPose, 0, 0,vel=100)
+    robot.MoveL(enddescPose, 0, 0,vel=100)
+    robot.LinArcFIRPlanningEnd()

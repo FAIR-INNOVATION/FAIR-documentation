@@ -96,7 +96,7 @@ Control of robot hand-automatic mode switching
     */
     int Mode(int mode).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

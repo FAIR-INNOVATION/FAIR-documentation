@@ -317,8 +317,26 @@ Servo controller status
       public float servoTorque = 0; // servo current torque 25
     }
 
+Welding interrupt status
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.1-3.7.8
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Welding interrupt status
+    */
+    public class WELDING_BREAKOFF_STATE
+    {
+      public int breakOffState = 0; //welding interrupt state
+      public int weldArcState = 0; //welding arc interrupt state
+    }
+
 Robot Status Feedback Structure Type
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.1-3.7.8
+
 .. code-block:: Java
     :linenos:
 
@@ -389,6 +407,15 @@ Robot Status Feedback Structure Type
       public ROBOT_TIME robotTime = new ROBOT_TIME();
       public int softwareUpgradeState = 0; //Robot software upgrade state 0-Idle or uploading upgrade package; 1~100: percentage of upgrade completion; -1: upgrade software failure; -2: verification failure; -3: version verification failure; -4: decompression failure; -5: user configuration upgrade failure; -6: peripheral configuration upgrade failure; -7: Failed to upgrade extended axis configuration; -8: Failed to upgrade robot configuration; -9: Failed to upgrade DH parameter configuration
       public int endLuaErrCode; //end LUA running state
+
+      public int[] cl_analog_output=new int[2];  //Control box analog output
+      public int tl_analog_output;              //Tool Analog Output
+      public float gripperRotNum;               //Current number of revolutions of the rotary gripper
+      ublic int gripperRotSpeed;                //Percentage of current rotation speed of rotating jaws
+      public int gripperRotTorque;	            //Percentage of current rotating torque of rotating jaws
+
+      public  WELDING_BREAKOFF_STATE weldingBreakOffstate=new WELDING_BREAKOFF_STATE();//Welding interrupt status
+
       public short check_sum = 0; /* sum check */
 
       public ROBOT_STATE_PKG()

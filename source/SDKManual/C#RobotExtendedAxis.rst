@@ -9,7 +9,7 @@ Setting the 485 extension axis parameters
 .. versionchanged:: C#SDK-v1.0.6
 
 .. code-block:: c#
-    :linenos.
+    :linenos:
 
     /** 
     * @brief Setting 485 extended axis parameters
@@ -455,7 +455,7 @@ Setting the extended axis system DH parameter configuration
     * @param [in] axisDHd2 external axisDH parameter d2 mm
     * @param [in] axisDHd3 external axisDH parameter d3 mm
     * @param [in] axisDHd4 external axisDH parameter d4 mm
-    * @param [in] axisDHa1 external axisDH parameter11 mm
+    * @param [in] axisDHa1 external axisDH parameter a1 mm
     * @param [in] axisDHa2 external axisDH parameter a2 mm
     * @param [in] axisDHa3 external axisDH parameter a3 mm
     * @param [in] axisDHa4 external axisDH parameter a4 mm
@@ -1303,7 +1303,8 @@ Code Example
     }
 
 Setting the 485 Extended Axis Motion Acceleration and Deceleration
-+++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -1316,7 +1317,8 @@ Setting the 485 Extended Axis Motion Acceleration and Deceleration
     int AuxServoSetAcc(double acc, double dec);
 
 Sets the acceleration and deceleration of the 485 extended axis.
-+++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -1329,7 +1331,8 @@ Sets the acceleration and deceleration of the 485 extended axis.
     int AuxServoSetEmergencyStopAcc(double acc, double dec);
 
 Get the acceleration and deceleration of the 485 extended axis motion
-+++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -1342,7 +1345,8 @@ Get the acceleration and deceleration of the 485 extended axis motion
     int AuxServoGetAcc(ref double acc, ref double dec);
 
 Get the acceleration and deceleration of the 485 extended axis.
-+++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 

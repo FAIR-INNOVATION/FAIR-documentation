@@ -101,7 +101,7 @@ Setting the 485 extended axis target speed (velocity mode)
     */
     int AuxServoSetTargetSpeed(int servoId, double speed, double acc);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -185,7 +185,7 @@ Setting the 485 Extended Axis Data Axis Number in Status Feedback
     */
     int AuxServosetStatusID(int servoId).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -274,7 +274,7 @@ Offloading UDP communication
     */
     int ExtDevUnloadUDPDriver(); int ExtDevUnloadUDPDriver().
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -390,7 +390,7 @@ Setting the extended axis system DH parameter configuration
     * @param [in] axisDHd2 external axisDH parameter d2 mm
     * @param [in] axisDHd3 external axisDH parameter d3 mm
     * @param [in] axisDHd4 external axisDH parameter d4 mm
-    * @param [in] axisDHa1 external axisDH parameter11 mm
+    * @param [in] axisDHa1 external axisDH parameter a1 mm
     * @param [in] axisDHa2 external axisDH parameter a2 mm
     * @param [in] axisDHa3 external axisDH parameter a3 mm
     * @param [in] axisDHa4 external axisDH parameter a4 mm
@@ -398,7 +398,7 @@ Setting the extended axis system DH parameter configuration
     */
     int SetAxisDHParaConfig(int axisConfig, double axisDHd1, double axisDHd2, double axisDHd3, double axisDHd4, double axisDHa1, double axisDHa2, double axisDHa3, double axisDHa4);
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -585,7 +585,7 @@ UDP Extended Axis Tap Stop
     */
     int ExtAxisStopJog(int axisID).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -800,7 +800,7 @@ UDP extension axes synchronized with robot circular motion
     */
     int ExtAxisSyncMoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag , DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_ flag, DescPose offset_pos_t, double ovl, double blendR).
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
@@ -949,7 +949,7 @@ Stopping motion of movable devices
     */
     int TractorStop().
 
-code example
+Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:

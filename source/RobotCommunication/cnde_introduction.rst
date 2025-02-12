@@ -33,11 +33,11 @@ There are four main steps to use the CNDE function of robot:
      - UINT8
      - Control box standard DI input (bit0 ~ bit7 indicates DI0 ~ DI7)
 
-   * - std_DI_box
+   * - cfg_DI_box
      - UINT8
      - Control box configurable CI input (bit0 ~ bit7 indicates CI0 ~ CI7)
 
-   * - std_DI_box
+   * - cfg_DI_tool
      - UINT8
      - Configurable tool DI inputs (bit0 ~ bit2 indicates toolDI0 ~ toolDI1)
 
@@ -161,7 +161,7 @@ There are four main steps to use the CNDE function of robot:
      - DOUBLE
      - Load mass (kg)
 
-   * - payload_cog
+   * - pay_cog
      - DOUBLE_3
      - Load centroid (x,y,z)(mm)
 
@@ -180,6 +180,10 @@ There are four main steps to use the CNDE function of robot:
    * - output_DOUBLE_reg_X
      - DOUBLE_X
      - DOUBLE robot output register (X represents the number of registers, if you need 16 DOUBLE output registers, the actual name is "output_DOUBLE_reg_16", and the robot can support up to 64 DOUBLE output registers)
+
+   * - ft_sensor_data
+     - DOUBLE_6
+     - Force sensor data
 
 .. centered:: Table 1-2 Configuration Functions of Robot Input Control
 

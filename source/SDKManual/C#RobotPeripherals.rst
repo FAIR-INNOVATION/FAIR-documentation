@@ -255,6 +255,7 @@ Calculate retreat point-visual
 
 Get the number of revolutions of the rotating jaws
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -268,6 +269,7 @@ Get the number of revolutions of the rotating jaws
 
 Get the rotational speed percentage of the rotating jaws
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -281,6 +283,7 @@ Get the rotational speed percentage of the rotating jaws
 
 Get the percentage of rotational torque of the rotating jaws
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -294,6 +297,8 @@ Get the percentage of rotational torque of the rotating jaws
 
 Code Example
 ++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 

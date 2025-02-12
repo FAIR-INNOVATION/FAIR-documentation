@@ -294,7 +294,7 @@ Getting the robot DH parameter compensation value
     int GetDHCompensation(ref double[] dhCompensation)
 
 Code Example
-+++++++++
++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -487,6 +487,8 @@ Code Example
 
 End Sensor Configuration
 +++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -502,6 +504,7 @@ End Sensor Configuration
 
 Get the end sensor configuration
 +++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
 .. code-block:: c#
     :linenos:
 
@@ -515,8 +518,11 @@ Get the end sensor configuration
 
 End sensor activation
 +++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
+
     /**
     * @brief End sensor activation
     * @param [in] actFlag 0-reset; 1-activate
@@ -526,6 +532,8 @@ End sensor activation
 
 End Sensor Register Write
 +++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+
 .. code-block:: c#
     :linenos:
 
@@ -544,6 +552,8 @@ End Sensor Register Write
 
 Code example
 +++++++++++++++++++++++++++++
+.. versionadded:: c# SDK-v1.1.0-3.7.8
+    
 .. code-block:: c#
     :linenos:
 
