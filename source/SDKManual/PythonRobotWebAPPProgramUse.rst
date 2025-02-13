@@ -264,27 +264,3 @@ Code example
     ret,num,name = robot.GetLuaList()
     print(num)
     print(name)
-    
-Documentation of teaching points
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SavePoint(name, update_allprogramfile=0)``"
-    "Description", "Documentation of demonstration points"
-    "Mandatory parameters", "- ``name``: name of the demonstration site"
-    "Default Parameters", "- ``update_allprogramfile``: whether to overwrite, 0-no overwrite, 1-overwrite, default 0"
-    "Return Value", "Error Code Success-0 Failure- errcode "
-
-Code example
-----------------------------------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    robot.SavePoint("test1")
