@@ -1,3 +1,32 @@
+Version V3.8.0
+-----------------
+
+Date: 2025-02-28
+
+- **Offset and swing monotonous gradual arc tracking function**:
+    Path: Teaching program -> Program programming, graphical programming, node diagram programming.
+
+    Description: The swing width of the swing parameter can be gradually changed in a section of welding movement, and the swing parameter at the beginning of the section gradually transitions to the swing parameter at the end of the section, and the welding center can actively offset the weld center.
+
+- **Custom collision detection torque threshold function**:
+    Path: Teaching program -> Program programming, graphical programming, node diagram programming.
+
+    Description: The collision detection torque threshold can be set during operation. You can select the joint torque threshold or TCP side torque threshold as needed, and print the joint speed, acceleration, torque and other information to the log file after the collision.
+
+- **Real-time forward trajectory planning method function**:
+    Path: Teaching program -> Program programming, graphical programming, node diagram programming.
+
+    Description: Realize smooth connection of multi-track point fitting, and adaptively adjust the running speed with the path curvature.
+
+- **Load curve drawing of FR full series models**:
+    Description: Update the load curve chart of FR full series models.
+
+- **Reduction mode speed switching logic optimization**:
+    Description: When the reduction mode is triggered, there will occasionally be movement with a speed far lower than the reduction mode speed. This problem is optimized and solved.
+
+- **Teaching point optimization**:
+    Description: Optimize the teaching point adding prompt information.
+
 Version V3.7.8
 -----------------
 
