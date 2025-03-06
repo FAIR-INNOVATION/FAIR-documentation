@@ -94,6 +94,9 @@ Know the button box and end LED
 The button box
 ~~~~~~~~~~~~~~~~
 
+V1.0 version
+**************
+
 .. figure:: installation/059.png
 	:align: center
 	:width: 6in
@@ -134,10 +137,53 @@ The button box
    * - Dragging mode
      - Enter/exit drag mode.
 
+V2.0 version
+********************
+
+.. image:: installation/079.png
+  :width: 6in
+  :align: center
+
+.. centered:: Figure 1.3-2 Control box wiring panel
+
+.. centered:: Table 1.3-2 Control box wiring panel button description
+
+.. list-table::
+  :widths: 50 200
+  :header-rows: 0
+  :align: center
+
+  * - **Button name**
+    - **Function**
+
+  * - Emergency stop switch
+    - When the emergency stop switch is pressed, the robot enters the emergency stop state
+
+  * - Start stop
+    - Start/stop running the program
+
+  * - Network port
+    - Connect to web teach pendant
+
+  * - IP reset
+    - Reset network port IP
+
+  * - Record point
+    - Record teaching point
+
+  * - One-click clear
+    - Clear all recoverable errors
+
+  * - Running mode
+    - Automatic/manual mode switching
+
+  * - Drag mode
+    - Enter/exit drag mode
+
 The end LED
 ~~~~~~~~~~~~~~~~
 
-.. centered:: Table 1.3-2 The end LED definition table
+.. centered:: Table 1.3-3 The end LED definition table
 
 .. list-table::
    :widths: 50 50

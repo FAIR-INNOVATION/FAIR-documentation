@@ -5030,7 +5030,13 @@ Operation process
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.23-2 Set trajectory preload parameters
+.. centered:: Figure 9.23-2 Set trajectory preload parameters "Straight Line Connection
+
+.. image:: coding/292.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.23-3 Set trajectory preload parameters "B-Spline Curve"
 
 **Step 4**: Add the "trajectory motion" command and generate a Lua program. By running the Lua program, you can perform real-time forward trajectory planning on the imported trajectory file. The typical program of real-time forward trajectory planning is shown in the figure below.
 
@@ -5038,7 +5044,7 @@ Operation process
    :width: 5in
    :align: center
 
-.. centered:: Figure 9.23-3 Typical program for real-time forward-looking trajectory planning
+.. centered:: Figure 9.23-4 Typical program for real-time forward-looking trajectory planning
 
 **Step 5**: For the "LoadTrajectory" command line in the lua program, click the edit button to modify the setting parameters to achieve different trajectory planning effects.
 
@@ -5046,4 +5052,409 @@ Operation process
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.23-4 Modify the setting parameters
+.. centered:: Figure 9.23-5 Modify the setting parameters
+
+Swing amplitude monotonous gradual arc tracking function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Swinging motion can realize two swinging amplitude switching modes: "sudden change" and "gradual change".
+
+The "sudden change" mode refers to the mode of directly switching the swinging parameters of the previous section with the swinging parameters of the next section. It can be realized by setting two adjacent swinging motions with different parameters, or by issuing a new swinging number in real time during the swinging motion (see the manual section corresponding to the function for details, which will not be repeated here).
+
+The "gradual change" mode means that in the current swinging motion, the swinging amplitude set at the beginning gradually changes to the swinging amplitude set at the end.
+
+The swinging parameter gradual switching mode only supports the process of linear swinging.
+
+Introduction
+++++++++++++++
+
+The swinging motion trajectory of monotonic gradual swinging amplitude is shown in the figure below.
+
+.. image:: coding/293.png
+   :width: 4in
+   :align: center
+
+Among them, the blue line is the swing direction, a is the swing amplitude of the starting point, and b is the swing amplitude of the ending point. The swing amplitude gradually changes during the movement.
+
+.. note:: Please note that currently only the starting point and the end point are of the same type, the swing amplitude is different (from a to b), and the other parameters are consistent. It is recommended to check the swing parameters before executing the swing.
+
+The operation process of setting a swing amplitude gradual swing is as follows:
+
+**Step 1**: Click "Teaching Program", "Programming", select and click the "Swing" button under "Motion Instructions" to enter the swing instruction configuration page.
+
+.. image:: coding/294.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.24-1 Click the swing function button
+
+**Step 2**: Select the swing parameter number at the start of the swing in the command editor, click "Start Swing" and then click the "Add" button.
+   
+.. image:: coding/295.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.24-2 Add starting swing parameters
+
+**Step 3**: Select the target number of the swing gradient, click "Swing gradient start", and click the "Add" button.
+   
+.. image:: coding/296.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.24-3 Add gradual swing parameters
+
+**Step 4**: After adding the corresponding linear motion, click "Swing Gradient End" and click Add, then click "Stop Swing" and add, complete the setting of a gradual swing motion, and click "Apply" to add it to the LUA program.
+   
+.. image:: coding/297.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.24-4 Implement a complete swing amplitude gradient motion LUA instruction
+
+Offset arc tracking function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+During the arc tracking welding process, the robot defaults to adjusting the welding gun swing center to track the workpiece groove center according to the current information to keep consistent, but some process requirements require that the welding gun swing center has a certain offset relative to the workpiece groove center.
+   
+.. image:: coding/298.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.25-1 Typical scenarios of bias arc tracking
+
+Typical scenarios of the bias arc tracking function include: a. welding workpiece (welding groove is right angle or acute angle), b. welding gun, e. groove center line. The arc tracking function realizes the following for the welding groove: c. up and down (depth) direction tracking and d. left and right (center) direction tracking, f. left and right direction tracking offset distance.
+
+To realize bias arc tracking, two methods of setting left and right offsets can be selected, namely "sampling" and "percentage" adjustment methods.
+
+Sampling bias arc tracking
+++++++++++++++++++++++++++++++++
+
+The sampling method is to collect the left and right current values ​​during the swinging within a certain cycle as a reference after the swing welding arc is started, and compare the sampling current with the reference current in the subsequent welding process to obtain the tracking direction.
+
+The sampling method requires teaching the swing welding starting position to the required offset, the offset shall not be greater than the swing amplitude, and the weld needs to cover the splicing groove.
+
+The sampling bias instruction setting process is as follows:
+   
+.. image:: coding/299.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.25-2 Click the arc tracking command button
+
+**Step 1**: Click "Teaching Program", "Programming", select and click the "Arc Tracking" button under "Welding Command" to enter the arc tracking command configuration page.
+   
+.. image:: coding/300.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.25-3 Sampling bias arc tracking configuration page
+
+**Step 2**: Bias arc tracking acts on left and right compensation. Click the "Left and Right Compensation" subpage, pull down and select "Sampling" in the bias mode, set the sampling start period (the sampling start period must be less than the left and right compensation start time), select "Start" for the instruction type, and click the Add button to generate the LUA instruction.
+   
+.. image:: coding/301.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.25-4 Add sampling bias arc tracking end instruction
+
+**Step 3**: After adding the swing motion instruction, click to select the arc tracking instruction type "End", and click Add to generate the corresponding LUA instruction.
+
+Percentage bias arc tracking
+++++++++++++++++++++++++++++++++++++
+
+The percentage bias is to gain the input sampling current by percentage during the arc tracking process, so that the current of the left and right swing cycles will deviate, and the robot will automatically compensate for the deviation signal.
+
+.. note:: It should be noted that the smaller the swing amplitude and the larger the groove angle, the smaller the deviation of the left and right currents, and the smaller the adjustment percentage. It is recommended to debug with every 1% as the adjustment interval.
+
+The percentage bias instruction setting process is as follows:
+   
+.. image:: coding/299.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.25-5 Click the arc tracking command button
+
+**Step 1**: Click "Teaching Program", "Programming", select and click the "Arc Tracking" button under "Welding Command" to enter the arc tracking command configuration page.
+   
+.. image:: coding/302.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.25-6 Sampling bias arc tracking configuration page
+
+**Step 2**: Bias arc tracking acts on left and right compensation. Click the "Left and Right Compensation" subpage, pull down and select "Percent" in the bias mode, set the percentage value (positive value compensates the current gain of the first half cycle and the direction of the second half cycle, negative value is the opposite), select "Start" for the instruction type, and click the Add button to generate the LUA instruction.
+   
+.. image:: coding/303.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.25-7 Add percentage bias arc tracking end instruction
+
+**Step 3**: After adding the swing motion instruction, click to select the arc tracking instruction type "End", and click Add to generate the corresponding LUA instruction.
+
+The typical LUA program structure of a bias tracking is as follows:
+   
+.. image:: coding/304.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.25-8 A typical bias arc tracking LUA program
+
+Custom collision detection threshold function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++
+
+The custom collision detection threshold function is a perfection of the current manual setting of the collision level function. If the current collision level setting does not meet the usage scenario, the user can set a custom collision detection threshold according to the actual situation. The collision detection threshold is divided into joint detection threshold and TCP detection threshold.
+
+Function setting description
+++++++++++++++++++++++++++++
+
+**Step1**: Click "Teaching Program", select "Programming", and open the corresponding interface.
+
+**Step2**: Click the "New" button above, enter "example", select "empty.lua", and create a new lua script, as shown in Figure 1.
+   
+.. image:: coding/305.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.26-1 Create a new lua script
+
+Joint detection threshold function setting instructions
+*****************************************************************
+
+Parameter setting instructions
+""""""""""""""""""""""""""""""""""
+
+**Step1**: In the control command interface, select the "collision detection" function, as shown in Figure 2. Click "collision detection on", and select "joint only" under the detection status bar. According to actual needs, modify the input values ​​of J1-J6, the value range is, the unit is NM. In this mode, modifying the TCP threshold in the X-RZ direction does not take effect. According to actual needs, select "non-blocking" or "blocking" for blocking. Click the Add button to complete the opening instruction addition.
+
+**Step2**: Click "collision detection off", click the Add button, and complete the closing instruction addition. The program preview interface is shown in Figure 3, click the "Apply" button to complete the function addition.
+
+.. note:: The custom collision detection threshold function is a set of instructions, which needs to be closed in time after opening.
+
+**Step3**: In the collision detection function, add the corresponding motion instructions, as shown in Figure 4.
+   
+.. image:: coding/306.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-2 Joint detection threshold setting interface
+   
+.. image:: coding/307.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-3 Program preview interface
+   
+.. image:: coding/308.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-4 lua script program example interface
+
+TCP detection threshold function setting instructions
+****************************************************************
+
+Parameter setting instructions
+""""""""""""""""""""""""""""""""""
+
+**Step1**: In the control command interface, select the "collision detection" function, as shown in Figure 5. Click "collision detection on", and select "TCP only" under the detection status bar. According to actual needs, modify the input value of the X-RZ direction, the value range is, and the unit is N. In this mode, modifying the joint threshold of J1-J6 does not take effect. According to actual needs, select "non-blocking" or "blocking" for blocking. Click the Add button to complete the opening instruction addition.
+
+**Step2**: Click "collision detection off", click the Add button, and complete the closing instruction addition. The program preview interface is shown in Figure 6, click the "Apply" button to complete the function addition.
+
+.. note:: The custom collision detection threshold function is a set of instructions, which needs to be closed in time after opening.
+   
+.. image:: coding/309.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-5 TCP detection threshold setting interface
+   
+.. image:: coding/310.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-6 Program preview interface
+
+**Step 3**: Add corresponding motion instructions in the collision detection function, as shown in Figure 7.
+   
+.. image:: coding/311.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-7 lua script program example interface
+
+Joint and TCP detection threshold function setting instructions
+**********************************************************************
+
+Parameter setting instructions
+"""""""""""""""""""""""""""""""""""""
+
+**Step 1**: In the control instruction interface, select the "collision detection" function, as shown in Figure 8. Click "collision detection on", and select "joint and TCP" under the detection status bar. According to actual needs, modify the input values ​​of J1-J6 and X-RZ directions. The value range of J1-J6 is, the unit is NM; the input value of X-RZ direction is, the unit is N. According to actual needs, select "non-blocking" or "blocking" for blocking. Click the Add button to complete the instruction addition.
+   
+.. image:: coding/312.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-8 Joint and TCP detection threshold setting interface
+
+**Step2**: Click "Close Collision Detection", click the Add button, and the closing command is added. The program preview interface is shown in Figure 9. Click the "Apply" button to complete the function addition.
+
+.. note:: The custom collision detection threshold function is a set of instructions, which needs to be closed in time after opening.
+   
+.. image:: coding/313.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-9 Program preview interface
+
+**Step 3**: Add corresponding motion instructions in the collision detection function, as shown in Figure 10.
+   
+.. image:: coding/314.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.26-10 lua script program example interface
+
+Recommended settings for detection thresholds
+********************************************************
+
+Joint detection thresholds
+"""""""""""""""""""""""""""""""""""
+
+The recommended joint detection threshold is equivalent to setting the collision level to level 10. The larger the value, the less sensitive the collision detection. The value range is in NM. The data in the table is for reference only. The actual value needs to be adjusted according to the robot's running speed and load conditions.
+
+.. centered:: Table 9.26-1 Recommended joint thresholds
+
+.. list-table::
+   :widths: 30 20 20 20 20 20 20
+   :header-rows: 0
+   :class: sheet-center
+   :align: center
+
+   * - **Robot Type**
+     - **J1**
+     - **J2**
+     - **J3**
+     - **J4**
+     - **J5**
+     - **J6**
+
+   * - **FR3**
+     - 0.4					
+     - 0.7
+     - 0.6 
+     - 0.3 
+     - 0.3 
+     - 0.3 
+
+   * - **FR5**
+     - 0.6					
+     - 1
+     - 0.8 
+     - 0.3 
+     - 0.3 
+     - 0.3 
+
+   * - **FR10**
+     - 2.5					
+     - 3.6
+     - 0.8 
+     - 0.6 
+     - 0.6 
+     - 0.6  
+
+   * - **FR16**
+     - 2.5					
+     - 3.6
+     - 0.8 
+     - 0.6 
+     - 0.6 
+     - 0.6 
+
+   * - **FR20**
+     - 5					
+     - 8
+     - 4.5
+     - 0.9 
+     - 0.9
+     - 0.9 
+
+   * - **FR30**
+     - 5					
+     - 8
+     - 4.5
+     - 0.9 
+     - 0.9
+     - 0.9 
+
+TCP detection threshold
+""""""""""""""""""""""""""""
+
+The larger the TCP detection threshold, the less sensitive the collision detection. The value range is, and the unit is N. The data in the table is for reference only. The actual value needs to be adjusted according to the robot's running speed and load conditions.
+
+.. centered:: Table 9.26-2 TCP detection threshold
+
+.. list-table::
+   :widths: 30 20 20 20 20 20 20
+   :header-rows: 0
+   :class: sheet-center
+   :align: center
+
+   * - **Robot Type**
+     - **X**
+     - **Y**
+     - **Z**
+     - **RX**
+     - **RY**
+     - **RZ**
+
+   * - **FR3**
+     - 300					
+     - 300
+     - 300
+     - 20 
+     - 20
+     - 20
+
+   * - **FR5**
+     - 300					
+     - 300
+     - 300
+     - 20 
+     - 20
+     - 20
+
+   * - **FR10**
+     - 500					
+     - 500
+     - 500
+     - 35 
+     - 35
+     - 35 
+
+   * - **FR16**
+     - 500					
+     - 500
+     - 500
+     - 35 
+     - 35
+     - 35 
+
+   * - **FR20**
+     - 800					
+     - 800
+     - 800
+     - 60 
+     - 60
+     - 60 
+
+   * - **FR30**
+     - 800					
+     - 800
+     - 800
+     - 60 
+     - 60
+     - 60 

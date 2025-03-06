@@ -1205,26 +1205,16 @@ Load curves for all FR series models
 Overview
 +++++++++++++++
 
-The rated payload of the robot arm depends on the center of gravity offset of the payload, where the center of gravity offset is defined as the distance between the end flange center and the center of gravity of the attached payload in mm, which can be calculated by formula (1).
+The load curves in this section are based on the tests of each model under specific trajectories. The load curves of each model have two parts: "full performance" and "extended load capacity", as follows:
 
-.. figure:: installation/079.png
-	:align: center
-	:width: 6in
+(1) The operating environment of "full performance" is: the friction compensation coefficient of each joint is 1; the collision level of each joint is 10; the web interface is set to 100% operating speed and 360deg/s2 acceleration; dynamics 2.0. In this environment, the "full performance" part of the load curve is suitable for most operating trajectories.
 
-Where, are the components of the effective load in the end flange coordinate system, in mm.
+(2) If the end load is in the "extended load capacity", the "time optimal mode" must be turned on and the acceleration limit must be met, or the robot's working range must be reduced.
 
-If the effective load is a combination, where the masses of each object are: m1, m2 to mnkg; the center of gravity in the end flange coordinate system is: [x1 y1 z1], [x2 y2 z2] to [xn yn zn]mm; then the mass kg and center of gravity mm of the combination can be calculated by equations (2) and (3).
+Parameter Description
+++++++++++++++++++++++++
 
-.. figure:: installation/080.png
-	:align: center
-	:width: 6in
-
-Load curve
-++++++++++++++++++
-
-The load curve is based on the test of each model under a specific trajectory. Among them, the operating environment of "full performance" is: the friction compensation coefficient of each joint is 1; the collision level of each joint is 10; the web interface sets 100% running speed and 360deg/s\ :sup:`2` acceleration; dynamics 2.0. In this environment, the "full performance" part of the load curve is suitable for most running trajectories.
-
-If the end load is in the "extended load capacity", it is necessary to turn on the "time optimal mode" and meet the acceleration limit, or reduce the robot's working range.
+The rated payload of the robot depends on the center of gravity offset of the payload, where the center of gravity offset is defined as the distance between the center of the end flange and the center of gravity of the attached payload.
 
 FR3 Model Collaborative Robot Load Curve
 ***********************************************
@@ -1248,7 +1238,14 @@ The maximum load that the FR3 collaborative robot can carry is 5kg, and the rate
 FR5 Model Collaborative Robot Load Curve
 *******************************************
 
-The maximum load that the FR5 collaborative robot can carry is 7kg, and the rated load is 5kg. The load curve is shown in the figure, which is "full performance".
+The maximum load that the FR5 collaborative robot can carry is 7kg, and the rated load is 5kg. The load curve is shown in the figure. The specific interpretation of the load curve is as follows:
+
+(1) FR5 can carry a load of 5kg or less at full performance, see the "blue envelope";
+(2) When the load is 5kg to 7kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
+
+① Turn on the "time optimal mode", it is recommended to set the acceleration to less than 360deg/s\ :sup:`2`;
+
+② Reduce the robot's working range or reduce the running speed.
 
 .. figure:: installation/033.png
 	:align: center
@@ -1278,7 +1275,15 @@ The maximum load that the FR10 collaborative robot can carry is 14kg, and the ra
 FR16 Model Collaborative Robot Load Curve
 **********************************************
 
-The maximum load that the FR16 collaborative robot can carry is 20kg, and the rated load is 16kg. The load curve is shown in the figure, which is "full performance".
+The maximum load that the FR16 collaborative robot can carry is 20kg, and the rated load is 16kg. The load curve is shown in the figure. The specific interpretation of the load curve is as follows:
+
+(1) FR16 can carry a load of 16kg or less at full performance, see the "blue envelope";
+
+(2) When the load is 16kg to 20kg, it is the extended load capacity, see the "red envelope", and the robot can operate in the following states:
+
+① Turn on the "time optimal mode", and it is recommended to set the acceleration to less than 180deg/s\ :sup:`2`;
+
+② Reduce the robot's working range or reduce the operating speed.
 
 .. figure:: installation/035.png
 	:align: center
@@ -1295,7 +1300,7 @@ The maximum load that the FR20 collaborative robot can carry is 25kg, and the ra
 
 (2) When the load is 20kg to 25kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
 
-  ① Turn on the "time optimal mode", it is recommended to set the acceleration to less than 90deg/s\ :sup:`2`;
+  ① Turn on the "time optimal mode", it is recommended to set the acceleration to less than 150deg/s\ :sup:`2`;
 
   ② Reduce the robot's working range or reduce the operating speed.
 
@@ -1308,7 +1313,15 @@ The maximum load that the FR20 collaborative robot can carry is 25kg, and the ra
 FR30 Model Collaborative Robot Load Curve
 *************************************************
 
-The maximum load that the FR30 collaborative robot can carry is 35kg, and the rated load is 30kg. The load curve is shown in the figure, which is "full performance".
+The maximum load that the FR30 collaborative robot can carry is 35kg, and the rated load is 30kg. The load curve is shown in the figure.
+
+(1) FR30 can carry a load of 30kg or less at full performance, see the "blue envelope";
+
+(2) When the load is 30kg to 35kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
+
+① Turn on the "time optimal mode", it is recommended to set the acceleration to less than 150deg/s\ :sup:`2`;
+
+② Reduce the robot's working range or reduce the operating speed.
 
 .. figure:: installation/069.png
 	:align: center

@@ -10,6 +10,14 @@ Welcome to FAIR's documentation!
     :align: center
     :figclass: align-center
 
+Language Switching
+
+    \ `Simplified Chinese <https://fairino-doc-zhs.readthedocs.io/latest/>`__\
+
+    \ `Traditional Chinese <https://fairino-doc-zht.readthedocs.io/latest/>`__\ 
+
+    \ `Japanese <https://fairino-doc-ja.readthedocs.io/latest/>`__\ 
+
 .. toctree::
    :maxdepth: 6
    :caption: User manual
