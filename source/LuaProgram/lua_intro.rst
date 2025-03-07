@@ -1,4 +1,4 @@
-FR LUA Programming Script User Manual
+FR LUA Programming Script
 =======================================
 
 PDF Download

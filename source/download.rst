@@ -279,4 +279,4 @@ Java SDK
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-QNX-V3.7.8-Release-250303 <https://drive.google.com/file/d/1CdVdPcJy0_WHEgtZhDmNO5Ry9KHxMrnu/view?usp=sharing >`
+    :download:`FAIRINO-CobotSoftware-QNX-V3.8.0-Release-250303 <https://drive.google.com/file/d/1CdVdPcJy0_WHEgtZhDmNO5Ry9KHxMrnu/view?usp=sharing >`

@@ -1,7 +1,7 @@
 Version V3.8.0
 -----------------
 
-Date: 2025-02-28
+Date: 2025-03-03
 
 - **Offset and swing monotonous gradual arc tracking function**:
     Path: Teaching program -> Program programming, graphical programming, node diagram programming.
