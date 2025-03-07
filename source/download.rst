@@ -65,7 +65,7 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
      - --
      - :download:`download <_static/_doc/ROHS test certification certificate.zip>`
 
