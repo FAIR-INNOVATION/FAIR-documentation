@@ -259,7 +259,7 @@ Use the "fairino-net" network and the "fairino_simmachine" image to start a cont
 .. code-block:: console
    :linenos:
 
-   docker run -d -P --name fairino-container --net fairino-net fairino_simmachine
+   docker run -d -P --name fairino-container --privileged -u root --net fairino-net fairino_simmachine
 
 .. image:: controller_virtual_machine/041.png
    :width: 6in
