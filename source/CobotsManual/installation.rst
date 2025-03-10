@@ -1897,13 +1897,14 @@ The robotic oscilloscope can use a computer or tablet to access and control the 
 Introduction to the button box
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The first version of the button box
+60 Button Box (POE) (BX01)
++++++++++++++++++++++++++++++++++++++
 
 .. figure:: installation/058.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.6-1 The first version of the button box
+.. centered:: Figure 2.6-1 60 Button Box (POE) (BX01)
 
 **Emergency stop switch:**\  When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
@@ -1915,13 +1916,14 @@ The first version of the button box
 
 **Button 3:**\ Start/stop running program.
 
-The second version of the button box
+60 Button Box (POE) (BX02)-V1.0
+++++++++++++++++++++++++++++++++++++++
 
 .. figure:: installation/059.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.6-2 The second version of the button box
+.. centered:: Figure 2.6-2 60 Button Box (POE) (BX02)-V1.0
 
 **Emergency stop switch:**\ When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
@@ -1938,6 +1940,31 @@ The second version of the button box
 **Working mode:**\ Automatic/manual mode switch.
 
 **Drag mode:**\ Enter/exit drag mode.
+
+60 Button Box (POE) (BX02) - V2.0
+++++++++++++++++++++++++++++++++++++++
+
+.. figure:: installation/079.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.6-3 60 Button Box (POE) (BX02) - V2.0
+
+**Emergency stop switch:** \ When the emergency stop switch is pressed, the robot enters an emergency stop state.
+
+**Start/Stop:** \ Start/Stop running the program.
+
+**Network port:** \ Connect to a web teaching pendant.
+
+**IP reset:** \ Reset the network port IP.
+
+**Record point:** \ Record teaching points.
+
+**One click clear:** \ Clear all recoverable errors.
+
+**Operation mode:** \ Automatic/Manual mode switching.
+
+**Drag mode:** \ Enter/exit drag mode.
 
 FR-HMI Teach pendant introduction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

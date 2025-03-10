@@ -94,14 +94,23 @@ Know the button box and end LED
 The button box
 ~~~~~~~~~~~~~~~~
 
-V1.0 version
-**************
+60 Button Box (POE) (BX01)
++++++++++++++++++++++++++++++++++++
+
+.. figure:: installation/058.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 1.3-1 60 Button Box (POE) (BX01)
+
+60 Button Box (POE) (BX02)-V1.0
++++++++++++++++++++++++++++++++++++
 
 .. figure:: installation/059.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 1.3-1 The second version of the button box
+.. centered:: Figure 1.3-2 60 Button Box (POE) (BX02)-V1.0
 
 .. centered:: Table 1.3-1 Control box wiring panel button description
 
@@ -137,14 +146,14 @@ V1.0 version
    * - Dragging mode
      - Enter/exit drag mode.
 
-V2.0 version
-********************
+60 Button Box (POE) (BX02)-V2.0
++++++++++++++++++++++++++++++++++++
 
 .. image:: installation/079.png
   :width: 6in
   :align: center
 
-.. centered:: Figure 1.3-2 Control box wiring panel
+.. centered:: Figure 1.3-3 60 Button Box (POE) (BX02)-V2.0
 
 .. centered:: Table 1.3-2 Control box wiring panel button description
 
@@ -183,7 +192,7 @@ V2.0 version
 The end LED
 ~~~~~~~~~~~~~~~~
 
-.. centered:: Table 1.3-3 The end LED definition table
+.. centered:: Table 1.3-4 The end LED definition table
 
 .. list-table::
    :widths: 50 50

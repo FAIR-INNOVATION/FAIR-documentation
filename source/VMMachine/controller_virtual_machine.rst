@@ -646,7 +646,7 @@ Appendix 4: Docker Basic Commands
    systemctl status docker
    --If it's running, you'll see "active" in green
 
-7. Docker image-related commands :
+7. Docker container :
 
 .. code-block:: console
    :linenos:
@@ -662,7 +662,7 @@ Appendix 4: Docker Basic Commands
    docker rmi -f [image_id_or_name]: Force remove an image.
    docker build: Build an image.
 
-8. Docker image-related commands :
+8. Docker container :
 
 .. code-block:: console
    :linenos:
