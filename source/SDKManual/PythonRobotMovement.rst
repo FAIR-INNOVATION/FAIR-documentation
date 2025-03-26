@@ -463,7 +463,7 @@ Code example
     error = robot.ServoMoveStart() #ServoMoveStart
     print("Servo motion start error code",error)
     while(count).
-        error = robot.ServoJ(joint_pos=joint_pos,axisPos=[0,0,0,0,0,0]) #joint space servo mode motion
+        error = robot.ServoJ(joint_pos=joint_pos,axisPos=[0,0,0,0]) #joint space servo mode motion
         if error!=0.
             error_joint =error
         joint_pos[0] = joint_pos[0] + 0.1 # 1-axis movement 0.1 degree each time, 100 movements

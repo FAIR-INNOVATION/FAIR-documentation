@@ -27,6 +27,18 @@ Date: 2025-03-03
 - **Teaching point optimization**:
     Description: Optimize the teaching point adding prompt information.
 
+- **FOCAS-based CNC Function Package**:
+    Description: Adds FOCAS CNC functions.
+
+- **Slave Command Adaptation Board**:
+    Description: Adapts slave commands to EnTalk miniPCIe board (Profinet protocol, Ethernet/IP protocol, CC-Link protocol) and CIFX 9OE-RE/F/PNS miniPCIe board (Profinet protocol, Ethernet/IP protocol, Ethercat protocol, CC-Link protocol).
+
+- **Checkpoint Timestamp Feedback Function**:
+    Description: Servo J motion can receive timestamp results, including command number and timestamps for issuance, enqueueing, dequeueing, and execution.
+
+- **Laser Sensor Adaptation Controller Peripheral Open Protocol**:
+    Description: Adds laser peripheral open protocol communication functionality.
+
 Version V3.7.8
 -----------------
 

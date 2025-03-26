@@ -2286,6 +2286,24 @@ Finally, add welding start and welding end commands before and after the start a
 
 By executing the above program, the robot will carry the laser sensor to move along the weld trajectory and record the whole trajectory, then the robot will move to the starting point of the trajectory record, and the robot will start welding along the trajectory recorded by the laser sensor. When the robot trajectory reappears, the welding arc will be extinguished and the welding will be completed.
 
+Laser Sensor Adapter Controller Peripheral Open Protocol (Only for Linux Systems)
+************************************************************************************
+
+**Step1**: If you need to use "Open Protocol Connection" and "Control Laser Sensor", in the sensor tracking configuration, select "Controller Open Protocol" for the "Protocol Type" option. If the original solution is adopted, select "Adapted Laser Device", and configure the laser peripheral in the tracking sensor interface.
+
+.. figure:: robot_peripherals/241.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.6‑50 "Open Protocol Connection" and "Control Laser Sensor" Configuration Interface
+
+**Step2**: Then, in "Initial Settings" -> "Peripherals" -> "Control Box" -> "Peripheral Open Protocol", upload the corresponding laser sensor's peripheral open protocol. After successful upload, select the protocol number and the uploaded file name, click configure, and run the uploaded laser sensor in the device operation and status to establish a connection with the corresponding laser sensor.
+
+.. figure:: robot_peripherals/242.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.6‑51 Laser Sensor Connection Established
 
 Laser point picking motion function
 ---------------------------------------------
@@ -4422,3 +4440,286 @@ The following is a typical LUA procedure for untransformed, fixed-point tracking
 .. centered:: Figure 8.16‑22  Extended axis plus laser data non-transformation fixed-point tracking sample program
 
 After the welding torch aligns the offset at the front laser, the robot expands the axis movement and executes the process of "reproducing while recording", and the laser tracker on the front first records the change trajectory of the workpiece weld when the extended axis moves, and then adjusts it at the welding gun after setting the delay distance or time.
+
+FOCAS-based CNC Function Package (For Linux Systems Only)
+--------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~
+
+To automate the loading and unloading process in machine tool operations, a CNC function package based on FOCAS communication has been developed. This package enables communication interaction and collaborative motion between collaborative robots and CNC machine tools.
+
+As shown in the figure, FOCAS communication is Ethernet-based. By connecting the robot control box's network port to the embedded network port of the machine tool via an Ethernet cable, FOCAS communication between the robot and the machine tool can be established, enabling CNC control and machine tool status monitoring on the robot side.
+
+.. figure:: robot_peripherals/213.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑1 FOCAS Communication Topology Between Robot and CNC
+
+Currently, the CNC function package based on FOCAS communication supported by the control box includes the following machine tool control and status feedback functions, as shown in the table.
+
+.. centered:: Table 8.17-1 Supported Functions of the FOCAS-based CNC Function Package
+
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **No.**
+     - **Function Name**
+     - **Description**
+   * - 1
+     - Machine Tool Type
+     - Status Feedback
+   * - 2
+     - FOCAS Communication Status
+     - Status Feedback
+   * - 3
+     - Automatic Mode Operation
+     - Control, Status Feedback
+   * - 4
+     - Alarm Status
+     - Status Feedback
+   * - 5
+     - Safety Door
+     - Status Feedback
+   * - 6
+     - Chuck
+     - Control, Status Feedback
+   * - 7
+     - Emergency Stop
+     - Control, Status Feedback
+  
+Operation Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+FOCAS Communication Establishment
++++++++++++++++++++++++++++++++++++++
+
+FOCAS communication is Ethernet-based. It requires the robot, CNC machine tool, and PC to form a local area network (LAN) to establish a physical link. The final FOCAS communication is achieved through the robot's open protocol.
+
+Network Configuration
+*************************
+
+**Step1**: First, change the IP address of the PC to the same subnet as the robot control box. The IP address of the robot control box is "192.168.58.2".
+
+If no switch is used for networking, the two built-in network ports on the robot control box can be used for networking. The steps are as follows: Log in to the robot's WebAPP, go to System Settings -> General Settings -> Network Settings, and set the IP address of Port 0 to 192.168.58.2 and Port 1 to 192.168.57.2. Simultaneously, set WebAPP to Port 0 and WebRecovery to Port 1, as shown in the figure. After completing all settings, click "Set Network".
+
+.. figure:: robot_peripherals/214.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑2 Robot Network Configuration Diagram
+
+**Step2**: Restart the control box and connect it to the PC via Port 0. Log in to the robot's WebApp. Configure the IP address of the CNC machine tool to be in the same subnet as the PC and the robot control box, i.e., 192.168.58.xx, and change the machine tool's port to 8193. This completes all network configurations.
+
+Open Protocol File Configuration
+****************************************
+
+**Step1**: Next, configure the peripheral open protocol. First, create a Lua file named with the prefix "CtrlDev_CNC" as the open protocol file for establishing FOCAS communication, such as "CtrlDev_CNC_demo.lua".
+
+This file needs to set the open protocol ID and use the `CNCComSet` function to establish or disconnect the connection with the CNC. The parameters of the `CNCComSet` function are described in the table below. Example code is provided.
+
+.. centered:: Table 8.17-2 CNCComSet Function Parameter Description
+
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **No.**
+     - **Function Name**
+     - **Description**
+   * - 1
+     - Machine Tool Manufacturer
+     - 0-Invalid, 1-Machine Tool (FOCAS)
+   * - 2
+     - Communication Command
+     - 1-Establish Connection, 1001-Disconnect
+   * - 3
+     - Machine Tool IP Address
+     - --
+   * - 4
+     - Machine Tool Port Number
+     - --
+
+Example Code for Establishing FOCAS Communication Connection:
+
+.. code-block:: console
+    :linenos:
+
+    local id = 1      --Open LUA Protocol ID
+    --FOCAS Disconnect
+    CNCComSet(1, 1001, '192.168.57.100', 8193)
+    sleep_ms(1000)
+    --FOCAS Connect
+    CNCComSet(1, 1, '192.168.57.100', 8193)
+    sleep_ms(1000)
+    while(1) do
+    sleep_ms(5000)
+    end
+
+**Step2**: After completing the open protocol Lua file, open the WebAPP, select "Initial Settings" -> "Peripherals" -> "Control Box" -> "Peripheral Open Protocol", upload the "CtrlDev_CNC_demo.lua" file, select the ID set in the file, and click "Configure". This is shown in the figure.
+
+.. figure:: robot_peripherals/215.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑3 Open Protocol File Upload and Configuration
+
+**Step3**: Check that all communication links are normal and ensure the CNC machine tool is powered on. Click the "Connect" button in the open protocol. The status of the CNC -> FOCAS communication can be confirmed in the status feedback column on the right (Red: Connected; Gray: Disconnected), as shown in the figure.
+
+.. figure:: robot_peripherals/216.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑4 FOCAS Communication Connection Establishment 
+
+CNC Status Feedback Description
+++++++++++++++++++++++++++++++++++++++
+
+The status feedback of the CNC machine tool is displayed in the CNC icon in the peripheral status feedback section on the far right of the WebAPP, as shown in the figure. Clicking it will display the current status of the machine tool, including the manufacturer, machine tool type, FOCAS communication status, alarm flag, machine tool operation status, machine tool door status, machine tool chuck status, and machine tool emergency stop status.
+
+.. figure:: robot_peripherals/217.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑5 CNC Status Feedback Panel 
+
+The meanings of the status feedback indicator lights for the CNC are shown in the table below.
+
+.. centered:: Table 8.17-3 CNC Status Feedback Indicator Light Meanings
+
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **No.**
+     - **Function Name**
+     - **Description**
+   * - 1
+     - FOCAS Communication Status
+     - Gray-Communication Disconnected, Red-Communication Normal
+   * - 2
+     - Alarm Flag
+     - Gray-No Warning, Red-Warning Exists
+   * - 3
+     - Machine Tool Operation Status
+     - Gray-Stopped, Green-Running
+   * - 4
+     - Machine Tool Door Status
+     - Gray-Door Closed, Green-Door Open
+   * - 5
+     - Machine Tool Chuck Status
+     - Gray-Chuck Released, Green-Chuck Clamped
+   * - 6
+     - Machine Tool Emergency Stop Status
+     - Gray-Emergency Stop Inactive, Green-Emergency Stop Active
+
+CNC Control Description
+++++++++++++++++++++++++++
+
+CNC machine tool control is located in the peripheral open protocol. After completing the FOCAS communication connection, click the upper right corner of the configured peripheral open protocol to open the CNC control page, as shown in the figure.
+
+.. note:: The control buttons include door control (Open, Close), chuck control (Clamp, Release), start/stop control (Run, Stop), and emergency stop control (Emergency Stop, Inactive). All control signals are edge-triggered.
+
+.. figure:: robot_peripherals/218.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.17‑6 CNC Control Page 
+
+CNC Teaching Program Description
+++++++++++++++++++++++++++++++++++++
+
+The CNC function package supports calling control commands in teaching programs and real-time acquisition of machine tool status. Open "Teaching Program" -> "Program Programming" -> "Peripheral Commands" -> "CNC" to see all supported CNC teaching commands, as shown in the figure.
+
+.. figure:: robot_peripherals/219.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑7 CNC Teaching Commands 
+
+.. note:: The control commands correspond one-to-one with CNC controls and are edge-triggered. After executing a start command, the stop command must be executed before the next start command can take effect.
+
+"Machine Tool Current Status Acquisition" is a Lua function that returns nine parameters, as described in the table below.
+
+.. centered:: Table 8.17-4 "Machine Tool Current Status Acquisition" Return Value Description
+
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **No.**
+     - **Name**
+     - **Meaning**
+   * - 1
+     - Manufacturer
+     - 0-Invalid, 1-Other-Reserved
+   * - 2
+     - FOCAS Communication Status
+     - 0-Communication Normal, Other-Communication Disconnected
+   * - 3
+     - Machine Tool Model (string)
+     - '15' : Series 150/150i '16' : Series 160/160i '18' : Series 180/180i '21' : Series 210/210i '30' : Series 300i '31' : Series 310i '32' : Series 320i '0' : Series 0i 
+   * - 4
+     - Machine Tool Model (string)
+     - '15' : Series 150/150i '16' : Series 160/160i '18' : Series 180/180i '21' : Series 210/210i '30' : Series 300i '31' : Series 310i '32' : Series 320i '0' : Series 0i 
+   * - 5
+     - Machine Tool Operation Status
+     - 0-Stopped, 1-Running
+   * - 6
+     - Machine Tool Emergency Stop Status
+     - 0-Emergency Stop Active, Other-Emergency Stop Inactive
+   * - 7
+     - Machine Tool Alarm Status
+     - 0-No Warning, Other-Warning Exists
+   * - 8
+     - Machine Tool Door Status
+     - 0-Door Open, 1-Door Closed
+   * - 9
+     - Machine Tool Chuck Status
+     - 0-Chuck Released, 1-Chuck Clamped
+
+An example Lua teaching program for the robot loading and unloading process is provided. This example program includes controlling the CNC to close the door, open the door, start running, stop running, release the chuck, and clamp the chuck. It uses the current status of the CNC as a condition for decision-making and sets the robot to move between three points: the safe point, the pick-up point, and the place point, as shown in the code.
+
+Example Lua Teaching Program for Collaborative Motion Between Robot and CNC:
+
+.. code-block:: console
+    :linenos:
+
+     while (1) do 
+        CNCDoorClose()
+        CNCWorkStart()
+        WaitMs(1000)
+        t1,t2,t3,t4,t5,t6,t7,t8,t9=CNCGetStatus()
+        if t5 == 1 then
+            PTP(CNCsafe,100,-1,0)
+        else
+            CNCWorkStop()
+            CNCDoorOpen()
+            WaitMs(1000)
+            PTP(CNCg1,100,-1,0)
+            WaitMs(1000)
+            CNCChuckOpen()
+            PTP(CNCg2,100,-1,0)
+            PTP(CNCsafe,100,-1,0)
+        end
+        t1,t2,t3,t4,t5,t6,t7,t8,t9=CNCGetStatus()
+        if t8 == 0 then
+            if t5 == 0 then
+                PTP(CNCg2,100,-1,0)
+                 PTP(CNCg1,100,-1,0)
+                 CNCChuckFastening()
+                 WaitMs(1000)
+                 PTP(CNCsafe,100,-1,0)
+             end   
+         end
+    end
