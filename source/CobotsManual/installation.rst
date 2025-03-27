@@ -636,6 +636,511 @@ The following symbols define the hazard classification specifications contained 
    
    Function: This refers to hot surfaces that may cause hazards and, if touched, may cause injury to persons.
 
+Digital Input/Output Description of Control Box
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Digital Input Description of Control Box
+++++++++++++++++++++++++++++++++++++++++++++
+
+Summary of Digital Input of Control Box
+***************************************
+
+The following lists the input types supported by the digital input of Faro robot integrated mini control box, as well as the corresponding wiring diagrams and configuration comparison tables.
+
+.. figure:: installation/080.png
+	:align: center
+	:width: 4in
+
+.. centered:: Figure 3.3-1 General Input Valid Status
+
+.. centered:: Table 3.3-1 Control Box Digital Input Configuration Comparison Table
+
+.. list-table::
+   :widths: 15 15 35 10 10 10 10 
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type**
+     - **Input Type**
+     - **Connection Diagram**
+     - **High Level Valid (Switch Closed)** 
+     - **High Level Valid (Switch Open)** 
+     - **Low Level Valid (Switch Closed)**
+     - **Low Level Valid (Switch Open)**
+
+   * - DC Control Box
+     - NPN Output
+     - .. figure:: installation/081.png
+          :align: center
+          :width: 3in
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+   * - AC Narrow Voltage Control Box
+     - NPN Output
+     - .. figure:: installation/082.png
+          :align: center
+          :width: 3in
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - NPN Output
+     - .. figure:: installation/083.png
+          :align: center
+          :width: 3in
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - PNP Output
+     - .. figure:: installation/084.png
+          :align: center
+          :width: 3in
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+Supported Types of Digital Input of Control Box
+*************************************************************
+
+The digital input of DC control box and AC narrow voltage control box only supports NPN type input. The digital input of AC wide voltage control box supports optional NPN and PNP types, with NPN type as the default factory setting.
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type**
+     - **Input Type**
+
+   * - DC Control Box
+     - NPN Input
+
+   * - AC Narrow Voltage Control Box
+     - NPN Input
+
+   * - AC Wide Voltage Control Box
+     - NPN Input/PNP Input
+
+Wiring Diagram of Digital Input of Control Box
+**************************************************
+
+The digital input of DC control box and AC narrow voltage control box only supports NPN type input. The wiring diagram is as follows.
+
+	.. figure:: installation/085.png
+		:align: center
+		:width: 6in
+
+	.. centered:: Figure 3.3-2 Wiring Diagram of Digital Input for DC Control Box and AC Narrow Voltage Control Box
+
+The digital input of AC wide voltage control box supports optional NPN and PNP types, with NPN type as the default factory setting. The wiring diagrams are as follows:
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Input Type** 
+     - **Connection Diagram**
+
+   * - NPN Input 
+     - 	.. figure:: installation/086.png
+          :align: center
+          :width: 3in
+
+   * - PNP Input
+     - 	.. figure:: installation/087.png
+          :align: center
+          :width: 3in
+
+The input type of the wide voltage control box digital input is determined by the DIP switch inside the control box. If the user needs to change the input type, the DIP switch needs to be set to the corresponding position.
+
+.. list-table::
+   :widths: 30 30 40
+   :header-rows: 0
+   :align: center
+
+   * -  
+     - DIP Switch Position
+     - DIP Switch Physical Position
+
+   * - NPN Input 
+     - EX-24V
+     - .. figure:: installation/088.png
+          :align: center
+          :width: 3in
+
+   * - PNP Input 
+     - EX-0V
+     - 	.. figure:: installation/089.png
+          :align: center
+          :width: 3in
+
+Software Settings Related to Digital Input of Control Box
+***************************************************************
+
+The only software setting item for digital input is "General Input Valid Status", which represents the digital voltage level value corresponding to the detected valid input. This setting allows users to use digital input more flexibly.
+
+	.. figure:: installation/090.png
+		:align: center
+		:width: 6in
+
+  .. centered:: Figure 3.3-3 General Input Valid Status
+
+The comparison table of valid status detected by the software under different settings of "General Input Valid Status" when the external switch of digital input is in different states is as follows:
+
+.. centered:: Table 3.3-2 Valid Status Comparison Table
+
+.. list-table::
+   :widths: 15 15 15 15 15 15
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type** 
+     - **Input Type**
+     - **High Level Valid (Switch Closed)**
+     - **High Level Valid (Switch Open)**
+     - **Low Level Valid (Switch Closed)**
+     - **Low Level Valid (Switch Open)**
+
+   * - DC Control Box
+     - NPN Input
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+   * - AC Narrow Voltage Control Box
+     - NPN Input
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - NPN Input
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - PNP Input
+     - Invalid
+     - Valid
+     - Valid
+     - Invalid
+
+Digital Output Description of Control Box
++++++++++++++++++++++++++++++++++++++++++++++
+
+Summary of Digital Output of Control Box
+*************************************************
+
+The following lists the output types supported by the digital output of Faro robot integrated mini control box, as well as the corresponding wiring diagrams and configuration comparison tables.
+
+.. figure:: installation/091.png
+	:align: center
+	:width: 4in
+
+.. centered:: Figure 3.3-4 Control Box DO Output During Power-On
+
+.. centered:: Table 3.3-3 Control Box Digital Output Configuration Comparison Table
+
+.. list-table::
+   :widths: 10 10 30 10 10 10 10
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type**
+     - **Input Type**
+     - **Connection Diagram**
+     - **High Level (Switch Set to ON)** 
+     - **High Level (Switch Set to OFF)** 
+     - **Low Level (Switch Set to ON)**
+     - **Low Level (Switch Set to OFF)**
+
+   * - DC Control Box
+     - NPN Output
+     - 	.. figure:: installation/093.png
+          :align: center
+          :width: 3in
+     - Valid 
+     - Valid
+     - Invalid
+     - Invalid
+
+   * - AC Narrow Voltage Control Box
+     - NPN Output
+     - .. figure:: installation/094.png
+          :align: center
+          :width: 3in
+     - Valid 
+     - Valid
+     - Invalid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - NPN Output
+     - .. figure:: installation/095.png
+          :align: center
+          :width: 3in
+     - Valid 
+     - Valid
+     - Invalid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - PNP Output
+     - .. figure:: installation/096.png
+          :align: center
+          :width: 3in
+     - Valid 
+     - Valid
+     - Invalid
+     - Invalid
+
+.. figure:: installation/092.png
+  :align: center
+  :width: 4in
+
+.. centered:: Figure 3.3-5 General Output Valid Status
+
+.. centered:: Table 3.3-4 Control Box Digital Output Configuration Comparison Table
+
+.. list-table::
+   :widths: 10 10 30 10 10 10 10 
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type**
+     - **Input Type**
+     - **Connection Diagram**
+     - **High Level Valid (Switch Set to ON)**
+     - **High Level Valid (Switch Set to OFF)**
+     - **Low Level Valid (Switch Set to ON)**
+     - **Low Level Valid (Switch Set to OFF)**
+
+   * - DC Control Box
+     - NPN Output
+     - 	.. figure:: installation/093.png
+          :align: center
+          :width: 3in
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+   * - AC Narrow Voltage Control Box
+     - NPN Output
+     - .. figure:: installation/094.png
+          :align: center
+          :width: 3in
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+   * - AC Wide Voltage Control Box
+     - NPN Output
+     - .. figure:: installation/095.png
+          :align: center
+          :width: 3in
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+   * - AC Wide Voltage Control Box
+     - PNP Output
+     - .. figure:: installation/096.png
+          :align: center
+          :width: 3in
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+Supported Types of Digital Output of Control Box
+*****************************************************
+
+The digital output of DC control box and AC narrow voltage control box only supports NPN type output. The digital output of AC wide voltage control box supports optional NPN and PNP types, with push-pull structure. It only needs to be wired according to the corresponding wiring diagram without special settings.
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type**
+     - **Input Type**
+
+   * - DC Control Box
+     - NPN Output
+
+   * - AC Narrow Voltage Control Box
+     - NPN Output
+
+   * - AC Narrow Voltage Control Box
+     - NPN Output/PNP Output
+
+Wiring Diagram of Digital Output of Control Box
+******************************************************
+
+The digital output of DC control box and AC narrow voltage control box only supports NPN type output. The wiring diagram is as follows.
+
+	.. figure:: installation/097.png
+		:align: center
+		:width: 6in
+
+	.. centered:: Figure 3.3-6 Wiring Diagram of Digital Output for DC Control Box and AC Narrow Voltage Control Box
+
+The digital output of AC wide voltage control box supports NPN and PNP types. The wiring diagrams are as follows:
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Input Type** 
+     - **Connection Diagram**
+
+   * - NPN Input 
+     - 	.. figure:: installation/098.png
+          :align: center
+          :width: 3in
+
+   * - PNP Input
+     - 	.. figure:: installation/099.png
+          :align: center
+          :width: 3in
+
+Software Settings Related to Digital Output of Control Box
+***************************************************************
+
+There are two software setting items for digital output: "Control Box DO Output During Power-On" and "General Output Valid Status". "Control Box DO Output During Power-On" represents the output level during the power-on period of the control box when the control system has not completed initialization. It can correspond to different output valid states, which can flexibly meet the requirements for output status during power-on. "General Output Valid Status" represents the digital output voltage level value that needs to be controlled when the output is valid. This setting allows users to use digital output more flexibly.
+
+(1) The comparison table of valid status under different settings of "Control Box DO Output During Power-On" is as follows:
+
+	.. figure:: installation/100.png
+		:align: center
+		:width: 6in
+
+	.. centered:: Figure 3.3-7 Control Box DO Output During Power-On
+
+.. centered:: Table 3.3-5 Valid Status Comparison Table
+
+.. list-table::
+   :widths: 20 15 15 15 15 15
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type** 
+     - **Input Type**
+     - **High Level Valid (Switch Set to ON)**
+     - **High Level Valid (Switch Set to OFF)**
+     - **Low Level Valid (Switch Set to ON)**
+     - **Low Level Valid (Switch Set to OFF)**
+
+   * - DC Control Box
+     - NPN Output
+     - Valid
+     - Valid
+     - Invalid
+     - Invalid
+
+   * - AC Narrow Voltage Control Box
+     - NPN Output
+     - Valid
+     - Valid
+     - Invalid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - NPN Output
+     - Valid
+     - Valid
+     - Invalid
+     - Invalid
+
+   * - AC Wide Voltage Control Box
+     - PNP Output
+     - Valid
+     - Valid
+     - Invalid
+     - Invalid
+
+(2) The comparison table of valid status under different settings of "General Output Valid Status" is as follows:
+
+	.. figure:: installation/101.png
+		:align: center
+		:width: 6in
+
+	.. centered:: Figure 3.3-8 General Output Valid Status
+
+.. centered:: Table 3.3-6 Valid Status Comparison Table
+
+.. list-table::
+   :widths: 20 15 15 15 15 15
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type** 
+     - **Input Type**
+     - **High Level Valid (Switch Set to ON)**
+     - **High Level Valid (Switch Set to OFF)**
+     - **Low Level Valid (Switch Set to ON)**
+     - **Low Level Valid (Switch Set to OFF)**
+
+   * - DC Control Box
+     - NPN Output
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+   * - AC Narrow Voltage Control Box
+     - NPN Output
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+   * - AC Wide Voltage Control Box
+     - NPN Output
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+   * - AC Wide Voltage Control Box
+     - PNP Output
+     - Valid
+     - Invalid
+     - Invalid
+     - Valid
+
+Precautions When Switching Digital Related Functions of Control Box
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(1) When switching digital input/output functions, the safety operation procedures of the robot must be followed to ensure the safety of operators and equipment.
+(2) Avoid switching digital input/output functions during robot operation to prevent affecting the normal operation of the robot.
+(3) Before switching digital input/output functions, the power supply of the robot must be cut off to prevent electric shock and unexpected machine movement, which may cause personal injury and equipment damage.
+(4) Before switching functions, the requirements of the robot control system for digital input/output must be clarified, including signal type, voltage level, load capacity, etc.
+(5) Ensure that the connection between digital input/output ports and external devices is correct, including whether the wiring is secure and whether the ports match.
+(6) Avoid repeated signal allocation to ensure that each signal is uniquely allocated.
+(7) After allocation is completed, the robot control system must be restarted to make the settings take effect.
+(8) After completing the configuration, enter the I/O status interface to check whether the status of digital input/output signals is correct.
+(9) Verify whether the digital input/output functions are working properly through actual operation or writing test programs.
+(10) If digital input/output signals are related to program logic, check whether the processing of these signals in the program is correct.
+
 Inspection maintenance plan
 ++++++++++++++++++++++++++++++++++
 

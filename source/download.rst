@@ -12,6 +12,10 @@ Qualification Certification
 ---------------------------------
     :download:`FAIRINO ISO9001 Quality Certification <_static/_doc/FAIRINO ISO9001 Quality Certification.pdf>`
 
+    :download:`FAIRINO ISO14001 Environmental Management System Certification <_static/_doc/FAIRINO_ISO14001_Environmental_Management_System_Certification.pdf>`
+
+    :download:`FAIRINO ISO45001 Occupational Health and Safety Management System Certification <_static/_doc/FAIRINO_ISO45001_Occupational_Health_and_Safety_Management_System_Certification.pdf>`
+
 Robot Certification:
 
 .. list-table::
