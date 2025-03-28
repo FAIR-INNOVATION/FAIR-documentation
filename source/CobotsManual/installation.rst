@@ -639,6 +639,22 @@ The following symbols define the hazard classification specifications contained 
 Digital Input/Output Description of Control Box
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Precautions When Switching Digital Related Functions of Control Box
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. important:: 
+
+  (1) When switching digital input/output functions, the safety operation procedures of the robot must be followed to ensure the safety of operators and equipment.
+  (2) Avoid switching digital input/output functions during robot operation to prevent affecting the normal operation of the robot.
+  (3) Before switching digital input/output functions, the power supply of the robot must be cut off to prevent electric shock and unexpected machine movement, which may cause personal injury and equipment damage.
+  (4) Before switching functions, the requirements of the robot control system for digital input/output must be clarified, including signal type, voltage level, load capacity, etc.
+  (5) Ensure that the connection between digital input/output ports and external devices is correct, including whether the wiring is secure and whether the ports match.
+  (6) Avoid repeated signal allocation to ensure that each signal is uniquely allocated.
+  (7) After allocation is completed, the robot control system must be restarted to make the settings take effect.
+  (8) After completing the configuration, enter the I/O status interface to check whether the status of digital input/output signals is correct.
+  (9) Verify whether the digital input/output functions are working properly through actual operation or writing test programs.
+  (10) If digital input/output signals are related to program logic, check whether the processing of these signals in the program is correct.
+
 Digital Input Description of Control Box
 ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -1126,20 +1142,6 @@ There are two software setting items for digital output: "Control Box DO Output 
      - Invalid
      - Invalid
      - Valid
-
-Precautions When Switching Digital Related Functions of Control Box
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-(1) When switching digital input/output functions, the safety operation procedures of the robot must be followed to ensure the safety of operators and equipment.
-(2) Avoid switching digital input/output functions during robot operation to prevent affecting the normal operation of the robot.
-(3) Before switching digital input/output functions, the power supply of the robot must be cut off to prevent electric shock and unexpected machine movement, which may cause personal injury and equipment damage.
-(4) Before switching functions, the requirements of the robot control system for digital input/output must be clarified, including signal type, voltage level, load capacity, etc.
-(5) Ensure that the connection between digital input/output ports and external devices is correct, including whether the wiring is secure and whether the ports match.
-(6) Avoid repeated signal allocation to ensure that each signal is uniquely allocated.
-(7) After allocation is completed, the robot control system must be restarted to make the settings take effect.
-(8) After completing the configuration, enter the I/O status interface to check whether the status of digital input/output signals is correct.
-(9) Verify whether the digital input/output functions are working properly through actual operation or writing test programs.
-(10) If digital input/output signals are related to program logic, check whether the processing of these signals in the program is correct.
 
 Inspection maintenance plan
 ++++++++++++++++++++++++++++++++++
