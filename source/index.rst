@@ -12,11 +12,11 @@ Welcome to FAIR's documentation!
 
 Language Switching
 
-    \ `Simplified Chinese <https://fairino-doc-zhs.readthedocs.io/latest/>`__\
+    \ `简体中文 <https://fairino-doc-zhs.readthedocs.io/latest/>`__\
 
-    \ `Traditional Chinese <https://fairino-doc-zht.readthedocs.io/latest/>`__\ 
+    \ `繁體中文 <https://fairino-doc-zht.readthedocs.io/latest/>`__\ 
 
-    \ `Japanese <https://fairino-doc-ja.readthedocs.io/latest/>`__\ 
+    \ `日本語 <https://fairino-doc-ja.readthedocs.io/latest/>`__\ 
 
 .. toctree::
    :maxdepth: 6
