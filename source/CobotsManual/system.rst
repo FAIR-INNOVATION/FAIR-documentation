@@ -301,13 +301,20 @@ Custom information
 ------------------------
 
 Click the custom information of the secondary menu bar to enter the custom information interface. Custom information functions can only be used by administrators.
-This page can upload user information packages, custom robot models, and setting teaching program encryption status.
+This page can upload user information packages, robot models, and setting teaching program encryption status.
 
 .. image:: system/015.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 15.4-1 Custom information schematic diagram
+
+Robot Model
+~~~~~~~~~~~~~~~
+
+.. important::
+   1. The robot model configured here is a custom robot model name, which is inconsistent with the robot model function configured in "System" -> "Maintenance" -> "Controller Compatible";
+   2. It is not recommended to use names starting with "FR" and "ART". If you enter a custom robot model starting with "FR" and "ART", the model name you enter must be consistent with the "Model Abbreviation" in the robot model catalog table (for details of the robot model catalog table, see the "Robot Model Configuration" section).
 
 Parameter range configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -415,108 +422,141 @@ After logging into the collaborative robot console Web, select the corresponding
 The robot model table is as follows:
 
 .. list-table::
-   :widths: 30 70
+   :widths: 10 58 32
    :header-rows: 0
    :align: center
 
    * - **Numerical value**
      - **Model (Main model - Major - Minor)**
+     - **Model Abbreviation**
      
    * - 0
      - Not configured
-   
+     - /
+
    * - 1
-     - FR3-V1-000 (V5.0)
-   
+     - FR3-V1-000(V5.0)
+     - FR3 V5.0
+
    * - 2
-     - FR3-V1-001 (V6.0)
- 
+     - FR3-V1-001(V6.0)
+     - FR3 V6.0
+
    * - 3
      - FR3-V1-002(V6.0 Mirror)
-    
+     - FR3 V6.0(Mirror)
+
    * - ...
      - Reserved
-   
+     - /
+
    * - 101
      - FR5-V1-000
-   
+     - FR5 V4.0
+
    * - 102
-     - FR5-V1-001 (V5.0)
-   
+     - FR5-V1-001(V5.0)
+     - FR5 V5.0
+
    * - 103
-     - FR5-V1-002 (V6.0)
-   
+     - FR5-V1-002(V6.0)
+     - FR5 V6.0
+     
    * - ...
      - Reserved
+     - /
    
    * - 201
-     - FR10-V1-000 (V5.0)
-   
+     - FR10-V1-000(V5.0)
+     - FR10 V5.0
+
    * - 202
-     - FR10-V1-001 (V6.0)
-   
+     - FR10-V1-001(V6.0)
+     - FR10 V6.0
+     
    * - ...
      - Reserved
+     - /
    
    * - 301
-     - FR16-V1-000 (V5.0)
-   
+     - FR16-V1-000(V5.0)
+     - FR16 V5.0
+
    * - 302
-     - FR16-V1-001 (V6.0)
-   
+     - FR16-V1-001(V6.0)
+     - FR16 V6.0
+     
    * - ...
      - Reserved
+     - /
    
    * - 401
-     - FR20-V1-000 (V5.0)
-   
+     - FR20-V1-000(V5.0)
+     - FR20 V5.0
+
    * - 402
-     - FR20-V1-001 (V6.0)
-   
+     - FR20-V1-001(V6.0)
+     - FR20 V6.0
+     
    * - ...
      - Reserved
-   
+     - /
+
    * - 501
      - ART3-V1-000
-   
+     - ART3
+     
    * - ...
      - Reserved
-   
+     - /
+
    * - 601
      - ART5-V1-000
-   
+     - ART5
+     
    * - ...
      - Reserved
- 
+     - /
+
    * - 702
      - FRCustom(7)-V1-001(FR3WML)
+     - FR3WML
 
    * - 703
      - FRCustom(7)-V1-001(FR3WMS)
-   
+     - FR3WMS
+     
    * - ...
      - Reserved
-      
+     - /
+  
    * - 802
      - FRCustom(8)-V1-001(FR5WM)
-   
+     - FR5WM
+     
    * - ...
      - Reserved
-   
+     - /
+
    * - 901
      - FRCustom(9)-V1-001(FR3MT)
-   
+     - FR3MT
+
    * - 902
      - FRCustom(9)-V1-001(FR10YD)
-   
+     - FR10YD
+     
    * - ...
      - Reserved
-   
+     - /
+
    * - 1001
      - FR30-V1-001(V6.0)
-   
+     - FR30 V6.0
+     
    * - ...
      - Reserved
+     - /
 
 .. note:: 
    Among them, 10 major version numbers (1-10) are reserved, and 10 minor version numbers (1-10) are reserved.
