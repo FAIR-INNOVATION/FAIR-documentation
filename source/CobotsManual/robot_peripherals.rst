@@ -2891,7 +2891,7 @@ Controller + Servo Drive (485 communication)
 Hardware cable connection
 +++++++++++++++++++++++++++++
 
-Before using RS485 communication to control the servo expansion axis, please first connect the RS485 communication interface of the servo driver to the RS485 communication interface on the robot control box. The electrical interface diagram of the Fao Robot Easy Manufacturing control box is as follows:
+Before using RS485 communication to control the servo expansion axis, please first connect the RS485 communication interface of the servo driver to the RS485 communication interface on the robot control box. The electrical interface diagram of the FAIRINO Robot Easy Manufacturing control box is as follows:
 
 .. figure:: robot_peripherals/112.png
    :align: center
