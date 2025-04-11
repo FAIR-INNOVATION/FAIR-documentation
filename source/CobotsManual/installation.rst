@@ -573,16 +573,16 @@ Safety Notice
 
 The following warnings are used in this manual. These warnings are intended to ensure personal and equipment safety. It is important that you observe and follow all assembly instructions and guidelines in other sections of this manual when reading this manual.
 
-Special attention should be paid to the text related to warning signs. Please read the user manual carefully before use. This manual is only used as a customer maintenance instruction manual. Maintenance operators need to have professional competence. Non-professional personnel operation. FAO refuses to assume all responsibilities.
+Special attention should be paid to the text related to warning signs. Please read the user manual carefully before use. This manual is only used as a customer maintenance instruction manual. Maintenance operators need to have professional competence. Non-professional personnel operation. FAIRINO refuses to assume all responsibilities.
 
-.. note:: If the robot (robot body, control box, teaching box) is damaged, changed or modified due tohumanreasons,FAO rejects all responsibility; FAO is not responsible for any damage to the robot or any other equipment caused by errors inthe programs written by thecustomer.
+.. note:: If the robot (robot body, control box, teaching box) is damaged, changed or modified due tohumanreasons,FAIRINO rejects all responsibility; FAIRINO is not responsible for any damage to the robot or any other equipment caused by errors inthe programs written by thecustomer.
 
 Effectiveness and accountability
 **************************************
 
 The information in this manual does not cover the design, installation and operation of a complete robot application, nor does it cover all peripheral equipment that may affect the safety of this complete system. The complete system is designed and installed to meet safety requirements established in the standards and codes of the country where the robot is installed.
 
-It is the responsibility of FAO integrators to ensure compliance with relevant national laws and regulations and to ensure that there are no significant risks in the complete robot application. This includes but is not limited to the following:
+It is the responsibility of FAIRINO integrators to ensure compliance with relevant national laws and regulations and to ensure that there are no significant risks in the complete robot application. This includes but is not limited to the following:
 
 - Do a risk assessment of the complete robotic system
 - Connect other machinery and additional safety equipment defined by the risk assessment
@@ -638,7 +638,7 @@ Robotic arm
 
 1. Inspection plan
 
-Below is a checklist of checklists that FAO Robots recommends performing based on the marked time intervals. If the inspection reveals that the condition of the relevant parts is unqualified, please correct it immediately.
+Below is a checklist of checklists that FAIRINO Robots recommends performing based on the marked time intervals. If the inspection reveals that the condition of the relevant parts is unqualified, please correct it immediately.
 
 .. note:: F=Functional check,V=visual inspection,*=Must be checked after severe collision.
 
@@ -739,7 +739,7 @@ Control box, teaching device, button box
 
 1. Inspection plan
 
-Below is a checklist of checklists that FAO Robots recommends performing based on the marked time intervals. If the inspection reveals that the condition of the relevant parts is unqualified, please correct it immediately.
+Below is a checklist of checklists that FAIRINO Robots recommends performing based on the marked time intervals. If the inspection reveals that the condition of the relevant parts is unqualified, please correct it immediately.
 
 .. note:: F=Functional check,V=Visual inspection.
 
@@ -861,7 +861,7 @@ Below is a checklist of checklists that FAO Robots recommends performing based o
 
 - Teaching device
   
-  You may need to clean the teach pendant screen. It is recommended to use a standard mild industrial cleaner that does not contain diluents or any corrosive additives. Do not wipe the screen with abrasive materials. Fawbots don't market specific cleaning agents.
+  You may need to clean the teach pendant screen. It is recommended to use a standard mild industrial cleaner that does not contain diluents or any corrosive additives. Do not wipe the screen with abrasive materials. FAIRINO don't market specific cleaning agents.
 
 - The button box 
   

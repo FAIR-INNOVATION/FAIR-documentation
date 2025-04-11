@@ -234,7 +234,7 @@ As this has been configured once before, if the initial configuration Check file
 
 Launch
 """"""""""""""""""""""""""""""""""
-After the configuration is complete, you can compile the functionality packages, you can use the custom robot moveit2 configuration package to replace the Fao robot moveit2 configuration package, to achieve plug-in compatibility for the use of user-defined robots.
+After the configuration is complete, you can compile the functionality packages, you can use the custom robot moveit2 configuration package to replace the FAIRINO robot moveit2 configuration package, to achieve plug-in compatibility for the use of user-defined robots.
 
 .. code-block:: shell
     :linenos:
@@ -559,4 +559,4 @@ Summarize
 ++++++++++++++++++++++++++++++
 This tutorial describes the installation, configuration and use of the MoveIt2 plug-in; the installation and use of the fairino_hardware plug-in to realize the synchronous motion of the rviz2 simulation robot and the actual robot; and the compilation and running of the mtc sample code package to realize the customization function with the help of the moveit2 and fairino_hardware plug-ins.
 
-It is hoped that the elaboration of this tutorial will enable users to have a more comprehensive understanding of MoveIt2 and the fairino_hardware plugin, and hopefully help them to better personalize the Fao robot service features.
+It is hoped that the elaboration of this tutorial will enable users to have a more comprehensive understanding of MoveIt2 and the fairino_hardware plugin, and hopefully help them to better personalize the FAIRINO robot service features.

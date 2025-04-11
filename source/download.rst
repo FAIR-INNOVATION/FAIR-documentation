@@ -279,6 +279,6 @@ Java SDK
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-QNX-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ZuGEkbvVvR7f5viylLS4iYhlf_jHydnU/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-QX-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ZuGEkbvVvR7f5viylLS4iYhlf_jHydnU/view?usp=sharing>`
 
-    :download:`FAIRINO-CobotSoftware-Linux-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ifjffSx6ZDco2fhllgLEL5Tp3qZJgU8V/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-LA-V3.7.6-Release-241201 <https://drive.google.com/file/d/1ifjffSx6ZDco2fhllgLEL5Tp3qZJgU8V/view?usp=sharing>`
