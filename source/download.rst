@@ -247,7 +247,7 @@ FAIRINO SimMachine
 -----------------------
     :download:`FAIRINO SimMachine Virtual Box <https://drive.google.com/drive/folders/1C7bpnjDKOTsugNyl99gS5cHgCI6b2-0o?usp=sharing>`
 
-    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1P_YhAC7bv6vLM6JK4XFZEcVSdK93HdG7/view?usp=sharing>`
+    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1a8lAS2tWYoIWCRbRGJ0QsY2ln_EWQpwI/view?usp=sharing>`
 
 Palletizer frcap
 ---------------------------------
@@ -280,6 +280,11 @@ Java SDK
     Latest version: :download:`FAIRINO Java SDK-v1 <https://github.com/FAIR-INNOVATION/fairino-java-sdk/archive/refs/heads/main.zip>`
 
     \ `Historical Version <https://github.com/FAIR-INNOVATION/fairino-java-sdk/releases>`__\
+
+Communication Command Protocol
+---------------------------------
+
+    :download:`Robot Controller Communication Command Protocol <_static/_doc/Collaborative Robot Controller Communication Command Protocol User Manual.pdf>`
 
 Robot software
 ---------------------------------

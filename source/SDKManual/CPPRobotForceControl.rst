@@ -1331,240 +1331,9 @@ Code example
         return 0;
     }
 
-Wire search begins
-+++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief  Wire search begins
-    * @param  [in] refPos  1- Reference point 2- contact point
-    * @param  [in] searchVel   Search speed %
-    * @param  [in] searchDis  Seeking distance mm
-    * @param  [in] autoBackFlag Automatic return flag, 0- not automatic; - Auto
-    * @param  [in] autoBackVel  Automatic return speed %
-    * @param  [in] autoBackDis  Automatic return distance mm
-    * @param  [in] offectFlag  1- Find with offset; 2- Find the teaching point
-    * @return  error code
-    */
-     errno_t WireSearchStart(int refPos, float searchVel, int searchDis, int autoBackFlag, float autoBackVel, int autoBackDis, int offectFlag);
-
-Wire locating is complete
-++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief  Wire locating is complete
-     * @param  [in] refPos  1- Reference point 2- contact point
-     * @param  [in] searchVel   Search speed %
-     * @param  [in] searchDis  Seeking distance mm
-     * @param  [in] autoBackFlag Automatic return flag, 0- not automatic; - Auto
-     * @param  [in] autoBackVel  Automatic return speed %
-     * @param  [in] autoBackDis  Automatic return distance mm
-     * @param  [in] offectFlag  1- Find with offset; 2- Find the teaching point
-     * @return  error code
-     */
-    errno_t WireSearchEnd(int refPos, float searchVel, int searchDis, int autoBackFlag, float autoBackVel, int autoBackDis, int offectFlag);
-
-Calculate the seeking offset of the welding wire
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-
-.. code-block:: c++
-    :linenos:
-
-     /**
-      * @brief  Calculate the seeking offset of the welding wire
-      * @param  [in] seamType  Weld type
-      * @param  [in] method   Calculation method
-      * @param  [in] varNameRef Reference points 1-6, "#" indicates no point variable
-      * @param  [in] varNameRes Contact points 1-6, "#" indicates no point variable
-      * @param  [out] offectFlag 0- offset is superimposed directly to the instruction point; 1- Offset requires a coordinate transformation of the instruction point
-      * @param  [out] offect Offset pose[x, y, z, a, b, c]
-      * @return  error code
-      */
-     errno_t GetWireSearchOffset(int seamType, int method, std::vector<std::string> varNameRef, std::vector<std::string> varNameRes, int& offectFlag, DescPose& offect);
-
-Wait for wire locating to complete
-+++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-
-.. code-block:: c++
-    :linenos:
-
-     /**
-      * @brief  Wait for wire locating to complete
-      * @return error code
-      */
-     errno_t WireSearchWait(std::string varName);
-
-Wire seeking contact is written to the database
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-    
-.. code-block:: c++
-    :linenos:
-
-     /**
-      * @brief  Wire seeking contact is written to the database
-      * @param  [in] varName  Contact point name: RES0 ~ RES99
-      * @param  [in] pos  Contact data[x, y, x, a, b, c]
-      * @return  error code
-      */
-     errno_t SetPointToDatabase(std::string varName, DescPose pos);
-
-Code example
-+++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-    
-.. code-block:: c++
-    :linenos:
-
-    void Wiresearch(FRRobot* robot)
-    {
-    int rtn0, rtn1, rtn2 = 0;
-    ExaxisPos exaxisPos = { 0, 0, 0, 0 };
-    DescPose offdese = { 0, 0, 0, 0, 0, 0 };
-
-    DescPose descStart = { 203.061, 56.768, 62.719, -177.249, 1.456, -83.597 };
-    JointPos jointStart = { -127.012, -112.931, -94.078, -62.014, 87.186, 91.326 };
-
-    DescPose descEnd = { 122.471, 55.718, 62.209, -177.207, 1.375, -76.310 };
-    JointPos jointEnd = { -119.728, -113.017, -94.027, -62.061, 87.199, 91.326 };
-
-    robot->MoveL(&jointStart, &descStart, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese );
-    robot->MoveL(&jointEnd, &descEnd, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
-
-    DescPose descREF0A = { 147.139, -21.436, 60.717, -179.633, -3.051, -83.170 };
-    JointPos jointREF0A = { -121.731, -106.193, -102.561, -64.734, 89.972, 96.171 };
-
-    DescPose descREF0B = { 139.247, 43.721, 65.361, -179.634, -3.043, -83.170 };
-    JointPos jointREF0B = { -122.364, -113.991, -90.860, -68.630, 89.933, 95.540 };
-
-    DescPose descREF1A = { 289.747, 77.395, 58.390, -179.074, -2.901, -89.790 };
-    JointPos jointREF1A = { -135.719, -119.588, -83.454, -70.245, 88.921, 88.819 };
-
-    DescPose descREF1B = { 259.310, 79.998, 64.774, -179.073, -2.900, -89.790 };
-    JointPos jointREF1B = { -133.133, -119.029, -83.326, -70.976, 89.069, 91.401 };
-
-    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-    robot->MoveL(&jointREF0A, &descREF0A, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);  //Start point
-    robot->MoveL(&jointREF0B, &descREF0B, 1, 1, 100, 100, 100, -1, &exaxisPos, 1, 0, &offdese);  //Direction point
-    rtn1 = robot->WireSearchWait("REF0");
-    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-
-    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-    robot->MoveL(&jointREF1A, &descREF1A, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);  //起点
-    robot->MoveL(&jointREF1B, &descREF1B, 1, 1, 100, 100, 100, -1, &exaxisPos, 1, 0, &offdese);  //方向点
-    rtn1 = robot->WireSearchWait("REF1");
-    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-
-    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-    robot->MoveL(&jointREF0A, &descREF0A, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);  //起点
-    robot->MoveL(&jointREF0B, &descREF0B, 1, 1, 100, 100, 100, -1, &exaxisPos, 1, 0, &offdese);  //方向点
-    rtn1 = robot->WireSearchWait("RES0");
-    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-
-    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
-    robot->MoveL(&jointREF1A, &descREF1A, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);  //起点
-    robot->MoveL(&jointREF1B, &descREF1B, 1, 1, 100, 100, 100, -1, &exaxisPos, 1, 0, &offdese);  //方向点
-    rtn1 = robot->WireSearchWait("RES1");
-    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
-
-    vector <string> varNameRef = { "REF0", "REF1", "#", "#", "#", "#" };
-    vector <string> varNameRes = { "RES0", "RES1", "#", "#", "#", "#" };
-    int offectFlag = 0;
-    DescPose offectPos = {0, 0, 0, 0, 0, 0};
-    rtn0 = robot->GetWireSearchOffset(0, 0, varNameRef, varNameRes, offectFlag, offectPos);
-    robot->PointsOffsetEnable(0, &offectPos);
-    robot->MoveL(&jointStart, &descStart, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
-    robot->MoveL(&jointEnd, &descEnd, 1, 1, 100, 100, 100, -1, &exaxisPos, 1, 0, &offdese);
-    robot->PointsOffsetDisable();
-    }
-
-Arc tracking control
-+++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-    
-.. code-block:: c++
-    :linenos:
-
-     /**
-     * @brief  Arc tracking control
-     * @param  [in] flag Switch, 0-off; 1-on
-     * @param  [in] dalayTime Lag time, in ms
-     * @param  [in] isLeftRight Left-right deviation compensation
-     * @param  [in] klr Left-right adjustment coefficient (sensitivity);
-     * @param  [in] tStartLr Left-right start compensation time around cyc
-     * @param  [in] stepMaxLr Left-right the maximum compensation amount each time mm
-     * @param  [in] sumMaxLr Left-right total maximum compensation mm
-     * @param  [in] isUpLow Up-down compensation
-     * @param  [in] kud Up-down adjustment factor;
-     * @param  [in] tStartUd Start Up-down compensation time cyc
-     * @param  [in] stepMaxUd Maximum compensation amount Up-down each time mm
-     * @param  [in] sumMaxUd Total maximum compensation Up-down
-     * @param  [in] axisSelect Up-down coordinate system selection, 0-swing; 1- Tools; 2- Base
-     * @param  [in] referenceType Up-down reference current setting mode, 0-feedback; 1-constant
-     * @param  [in] referSampleStartUd Up-down reference current sampling start count (feedback);cyc
-     * @param  [in] referSampleCountUd Up-down reference current sampling cycle count;cyc
-     * @param  [in] referenceCurrent Up-down reference current mA
-     * @return  error code
-      */
-     errno_t ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent);
-
-Set the input signal port for arc tracking
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-    
-.. code-block:: c++
-    :linenos:
-
-     /**
-      * @brief  Set the input signal port for arc tracking
-      * @param  [in] channel Arc tracking AI passband selection,[0-3]
-      * @return  error code
-      */
-     errno_t ArcWeldTraceExtAIChannelConfig(int channel);
-
-Code example
-+++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-    
-.. code-block:: c++
-    :linenos:
-
-    int WeldTraceControl(FRRobot* robot)
-    {
-    DescPose startdescPose = { -583.168, 325.637, 1.176, 75.262, 0.978, -3.571 };
-    JointPos startjointPos = { -49.049, -77.203, 136.826, -189.074, -79.407, -11.811 };
-
-    DescPose enddescPose = { -559.439, 420.491, 32.252, 77.745, 1.460, -10.130 };
-    JointPos endjointPos = { -54.986, -77.639, 131.865, -185.707, -80.916, -12.218 };
-
-    ExaxisPos exaxisPos = { 0, 0, 0, 0 };
-    DescPose offdese = { 0, 0, 0, 0, 0, 0 };
-
-    robot->WeldingSetCurrent(1, 230, 0, 0);
-    robot->WeldingSetVoltage(1, 24, 0, 1);
-
-    robot->MoveJ(&startjointPos, &startdescPose, 13, 0, 5, 100, 100, &exaxisPos, -1, 0, &offdese);
-    robot->ArcWeldTraceControl(1, 0, 0, 0.06, 5, 5, 300, 1, -0.06, 5, 5, 300, 1, 0, 4, 1, 10);
-    robot->ARCStart(1, 0, 10000);
-    robot->MoveL(&endjointPos, &enddescPose, 13, 0, 5, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
-    robot->ARCEnd(1, 0, 10000);
-
-    robot->ArcWeldTraceControl(0, 0, 0, 0.06, 5, 5, 300, 1, -0.06, 5, 5, 300, 1, 0, 4, 1, 10);
-    return 0;
-    }
-
 Force sensor assists drag
 +++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
+.. versionchanged:: C++SDK-v2.2.0-3.8.0
     
 .. code-block:: c++
     :linenos:
@@ -1574,6 +1343,7 @@ Force sensor assists drag
      * @param  [in] status Control status, 0- off; 1- On
      * @param  [in] asaptiveFlag Adaptive on flag, 0- off; 1- On
      * @param  [in] interfereDragFlag Interference drag flag, 0- off; 1- On
+     * @param  [in] singularityConstraintsFlag Singularity strategy, 0-avoid; 1-traverse
      * @param  [in] M Inertia coefficient
      * @param  [in] B Damping coefficient
      * @param  [in] K Stiffness coefficient
@@ -1582,11 +1352,11 @@ Force sensor assists drag
      * @param  [in] Vmax Maximum joint speed limit
      * @return  error code
      */
-     errno_t EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, std::vector<double> M, std::vector<double> B, std::vector<double> K, std::vector<double> F, double Fmax, double Vmax);
+     errno_t EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag, std::vector<double> M, std::vector<double> B, std::vector<double> K, std::vector<double> F, double Fmax, double Vmax);
 
 Code example
 +++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
+.. versionchanged:: C++SDK-v2.2.0-3.8.0
     
 .. code-block:: c++
     :linenos:

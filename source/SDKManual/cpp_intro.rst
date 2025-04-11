@@ -34,5 +34,6 @@ This manual is the secondary development interface document of C++.
     CPPRobotPeripherals
     CPPRobotForceControl
     CPPRobotExtendedAxis
+    CPPRobotWelding
     CPPRobotOthers
     

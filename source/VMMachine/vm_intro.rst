@@ -8,3 +8,5 @@ FAIRINO SimMachine
     :numbered: 5
 
     controller_virtual_machine
+    controller_docker_machine
+    controller_machine_appendix

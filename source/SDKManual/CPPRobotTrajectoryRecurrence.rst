@@ -480,3 +480,57 @@ Code example
         rtn = robot->TrajectoryJDelete("testB.txt");
         printf("Delete TrajectoryJ B %d\n", rtn);
     }
+
+Trajectory Preprocessing (Look Ahead), Trajectory Reproduction (Look Ahead)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.0-3.8.0
+
+Interface Description
+************************
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Trajectory preprocessing (Look Ahead)
+     * @param  [in] name  Trajectory file name
+     * @param  [in] mode Sampling mode, 0-no sampling; 1-equal interval sampling; 2-error limited sampling
+     * @param  [in] errorLim Error limit, effective when using linear fitting
+     * @param  [in] type Smoothing method, 0-Bezier smoothing
+     * @param  [in] precision Smoothing precision, effective when using Bezier smoothing
+     * @param  [in] vamx Maximum set velocity, mm/s
+     * @param  [in] amax Maximum set acceleration, mm/s²
+     * @param  [in] jmax Maximum set jerk, mm/s³
+     * @return  Error code
+     */
+    errno_t LoadTrajectoryLA(char name[30], int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax);
+
+    /**
+    * @brief  Trajectory reproduction (Look Ahead)
+    * @return  Error code
+    */
+    errno_t MoveTrajectoryLA();
+
+Code Example
+""""""""""""""""""""""""
+
+.. code-block:: c++
+    :linenos:
+
+    void TestTrajectoryLA(FRRobot* robot)
+    {
+    int rtn = 0;
+    rtn = robot->TrajectoryJUpLoad("D://zUP/A.txt");
+    cout << "TrajectoryJUpLoad A.txt rtn is " << rtn << endl;
+    rtn = robot->TrajectoryJUpLoad("D://zUP/B.txt");
+    cout << "TrajectoryJUpLoad B.txt rtn is " << rtn << endl;
+    char nameA[30] = "/fruser/traj/A.txt";
+    char nameB[30] = "/fruser/traj/B.txt";
+
+    robot->LoadTrajectoryLA(nameA, 1, 2, 0, 2, 100, 200, 1000);   
+    DescPose startPos(0, 0, 0, 0, 0, 0);
+    robot->GetTrajectoryStartPose(nameA, &startPos);
+    robot->MoveCart(&startPos, 1, 0, 100, 100, 100, -1, -1);
+    rtn = robot->MoveTrajectoryLA();
+    cout << "MoveTrajectoryLA rtn is " << rtn << endl;
+    }

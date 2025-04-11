@@ -179,3 +179,58 @@ Code example
 
         return 0;
     }
+
+Custom Collision Detection Threshold Function Start/End
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.0-3.8.0
+
+Interface Description
+************************
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief  Start custom collision detection threshold function, set collision detection thresholds for joints and TCP
+     * @param  [in] flag 1-joint detection only; 2-TCP detection only; 3-both joint and TCP detection
+     * @param  [in] jointDetectionThreshould Joint collision detection threshold j1-j6
+     * @param  [in] tcpDetectionThreshould TCP collision detection threshold, xyzabc
+     * @param  [in] block 0-non-blocking; 1-blocking
+     * @return  Error code
+     */
+    errno_t CustomCollisionDetectionStart(int flag, double jointDetectionThreshould[6], double tcpDetectionThreshould[6], int block);
+
+    /**
+     * @brief  End custom collision detection threshold function
+     * @return  Error code
+     */
+    errno_t CustomCollisionDetectionEnd();
+
+Code Example
+************************
+
+.. code-block:: c++
+    :linenos:
+
+    void CustomCollisionTest(FRRobot* robot)
+    {
+        DescPose p1Desc(228.879, -503.594, 453.984, -175.580, 8.293, 171.267);
+        JointPos p1Joint(102.700, -85.333, 90.518, -102.365, -83.932, 22.134);
+        DescPose p2Desc(-333.302, -435.580, 449.866, -174.997, 2.017, 109.815);
+        JointPos p2Joint(41.862, -85.333, 90.526, -100.587, -90.014, 22.135);
+        ExaxisPos exaxisPos(0.0, 0.0, 0.0, 0.0);
+        DescPose offdese(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        robot->MoveL(&p2Joint, &p2Desc, 0, 0, 100, 100, 100, 2, &exaxisPos, 0, 0, &offdese);
+        robot->ResetAllError();
+        int safety[6] = { 5,5,5,5,5,5 };
+        robot->SetCollisionStrategy(3, 1000, 150, 250, safety);
+        double jointDetectionThreshould[6] = { 0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
+        double tcpDetectionThreshould[6] = { 60,60,60,60,60,60 };
+        int rtn = robot->CustomCollisionDetectionStart(3, jointDetectionThreshould, tcpDetectionThreshould, 0);
+        cout << "CustomCollisionDetectionStart rtn is " << rtn << endl;
+
+        robot->MoveL(&p1Joint, &p1Desc, 0, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
+        robot->MoveL(&p2Joint, &p2Desc, 0, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
+        rtn = robot->CustomCollisionDetectionEnd();
+        cout << "CustomCollisionDetectionEnd rtn is " << rtn << endl;
+    }
