@@ -410,3 +410,66 @@ Code example
 
     retval = robot.MoveTrajectoryJ()
     print("MoveTrajectoryJ return ", retval)
+
+Trajectory preprocessing(Trajectory foresight)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.0
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LoadTrajectoryLA(name, mode, errorLim, type, precision, vamx, amax, jmax)``"
+    "Description", "Trajectory preprocessing(Trajectory foresight)"
+    "Mandatory parameter", "- ``name``:track file name
+    - ``mode``: sampling mode, 0- No sampling; 1- equal data interval sampling; 2- Equal error limit sampling
+    - ``errorLim``: error limitation, effective using straight line fitting
+    - ``type``: smooth mode, 0-Bessel smooth
+    - ``precision``: smoothing accuracy, effective when using Bessel smoothing
+    - ``vamx``: set maximum speed, mm/s
+    - ``amax``: set maximum acceleration, mm/s2
+    - ``jmax``: maximum acceleration, mm/s3"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Trajectory reproduction(Trajectory foresight)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.0
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MoveTrajectoryLA()``"
+    "Description", "Trajectory reproduction(Trajectory foresight)"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+code example
+------------------------------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # A connection is established with the robot controller and a robot object is returned if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    rtn = 0
+    rtn = robot.TrajectoryJUpLoad("D://zUP/A.txt")
+    print("TrajectoryJUpLoad A.txt rtn is ",rtn)
+    rtn = robot.TrajectoryJUpLoad("D://zUP/B.txt")
+    print("TrajectoryJUpLoad B.txt rtn is ", rtn)
+    nameA = "/fruser/traj/A.txt"
+    nameB = "/fruser/traj/B.txt"
+
+    # rtn = robot.LoadTrajectoryLA(nameA, 2, 0.0, 0, 1.0, 100.0, 200.0, 1000.0) #B样条
+    # print("LoadTrajectoryLA rtn is ", rtn)
+    robot.LoadTrajectoryLA(nameB, 0, 0, 0, 1, 100, 100, 1000) #直线连接
+    # robot.LoadTrajectoryLA(nameA, 1, 2, 0, 2, 100, 200, 1000) #直线拟合
+    # error,startPos = robot.GetTrajectoryStartPose(nameA)
+    error,startPos = robot.GetTrajectoryStartPose(nameB)
+    robot.MoveCart(startPos, 1, 0, 100, 100, 100, -1, -1)
+    rtn = robot.MoveTrajectoryLA()
+    print("MoveTrajectoryLA rtn is ", rtn)

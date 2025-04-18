@@ -452,6 +452,71 @@ Arc tracking control
 .. code-block:: c#
     :linenos:
 
+    / * *
+    * @brief arc tracking control
+    * @param [in] flag Switch, 0- off. 1-on
+    * @param [in] dalayTime Delay time (unit: ms)
+    * @param [in] isLeftRight left and right deviation compensation
+    * @param [in] klr adjustment coefficient (sensitivity)
+    * @param [in] tStartLr or around start compensation time cyc
+    * @param [in] stepMaxLr About the maximum compensation amount mm each time
+    * @param [in] sumMaxLr Maximum total compensation mm
+    * @param [in] isUpLow up-and-down deviation compensation
+    * @param [in] kud up-down adjustment factor (sensitivity)
+    * @param [in] tStartUd start up and down compensation time cyc
+    * @param [in] stepMaxUd Maximum compensation amount mm each time
+    * @param [in] sumMaxUd Maximum total compensation
+    * @param [in] axisSelect upper and lower coordinate system selection, 0-swing; 1- Tools; 2- Base
+    * @param [in] referenceType Reference current setting mode, 0- feedback; 1-constant
+    * @param [in] referSampleStartUd Reference current sampling starts counting (feedback), cyc
+    * @param [in] referSampleCountUd Reference current sampling cycle count (feedback), cyc
+    * @param [in] referenceCurrent Upper and lower reference current mA
+    * @param [in] offsetType Indicates the offset tracking type. 0- no offset. 1- Sampling; 2- percentage 
+    * @param [in] offsetParameter Offset parameter; Sampling (offset sampling start time, default sampling cycle); Percentage (offset percentage (-100 to 100)) /version 3.8.0
+    * @return Error code
+    * /
+    int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent, int offsetType, int offsetParameter);
+
+Code example
+++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C#SDK-v1.1.0
+
+.. code-block:: c#
+    :linenos:
+
+    private void btnweld_Click(object sender, EventArgs e)
+    {
+
+        //Arc Tracking
+        DescPose p1Desc = new DescPose(-72.912, -587.664, 31.849, 43.283, -6.731, 15.068);
+        JointPos p1Joint = new JointPos(74.620, -80.903, 94.608, -109.882, -90.436, -13.432);
+
+        DescPose p2Desc = new DescPose(-104.915, -483.712, -25.231, 42.228, -6.572, 18.433);
+        JointPos p2Joint = new JointPos(66.431, -92.875, 116.362, -120.516, -88.627, -24.731);
+
+        DescPose p3Desc = new DescPose(-242.834, -498.697, -23.681, 46.576, -5.286, 8.318);
+        JointPos p3Joint = new JointPos(57.153, -82.046, 104.060, -116.659, -92.478, -24.735);
+        ExaxisPos exaxisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+        DescPose offdese = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        robot.WeldingSetVoltage(1, 19, 0, 0);
+        robot.WeldingSetCurrent(1, 190, 0, 0);
+        robot.MoveJ(p1Joint, p1Desc, 1, 1, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveL(p2Joint, p2Desc, 1, 1, 100, 100, 50, -1, exaxisPos, 0, 0, offdese);
+        robot.ARCStart(1, 0, 10000);
+        robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 60, 0, 0, 4, 1, 10, 2, 2);
+        robot.WeaveStart(0);
+        robot.MoveL(p3Joint, p3Desc, 1, 1, 100, 100, 1, -1, exaxisPos, 0, 0, offdese);
+        robot.WeaveEnd(0);
+        robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 60, 0, 0, 4, 1, 10, 2, 2);
+        robot.ARCEnd(1, 0, 10000);
+    }
+
+Arc tracking control
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
     /**
     * @brief Arc tracking control
     * @param [in] flag switch, 0-off; 1-on
@@ -813,4 +878,61 @@ code example
             }
             Thread.Sleep(100);
         }
+    }
+
+Swing gradient begins
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    / * *
+    * @brief Swing gradient begins
+    * @param [in] weaveNum Swing number
+    * @return Error code
+    * /
+    int WeaveChangeStart(int weaveNum)
+
+Swing gradient ends
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    / * *
+    * @brief Swing gradient ends
+    * @return Error code
+    * /
+    int WeaveChangeEnd()
+
+Code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void btnweld_Click(object sender, EventArgs e)
+    {
+        //摆动渐变
+        DescPose p1Desc = new DescPose(-72.912, -587.664, 31.849, 43.283, -6.731, 15.068);
+        JointPos p1Joint = new JointPos(74.620, -80.903, 94.608, -109.882, -90.436, -13.432);
+
+        DescPose p2Desc = new DescPose(-104.915, -483.712, -25.231, 42.228, -6.572, 18.433);
+        JointPos p2Joint = new JointPos(66.431, -92.875, 116.362, -120.516, -88.627, -24.731);
+
+        DescPose p3Desc = new DescPose(-240.651, -483.840, -7.161, 46.577, -5.286, 8.318);
+        JointPos p3Joint = new JointPos(56.457, -84.796, 104.618, -114.497, -92.422, -25.430);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+        DescPose offdese = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        robot.WeldingSetVoltage(1, 19, 0, 0);
+        robot.WeldingSetCurrent(1, 190, 0, 0);
+        robot.MoveJ(p1Joint, p1Desc, 1, 1, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveL(p2Joint, p2Desc, 1, 1, 100, 100, 50, -1, exaxisPos, 0, 0, offdese);
+        robot.ARCStart(1, 0, 10000);
+        robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0);
+        robot.WeaveStart(0);
+        robot.WeaveChangeStart(1);
+        robot.MoveL(p3Joint, p3Desc, 1, 1, 100, 100, 1, -1, exaxisPos, 0, 0, offdese);
+        robot.WeaveChangeEnd();
+        robot.WeaveEnd(0);
+        robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0);
+        robot.ARCEnd(1, 0, 10000);
     }

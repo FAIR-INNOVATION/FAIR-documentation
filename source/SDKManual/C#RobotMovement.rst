@@ -961,7 +961,7 @@ Code Example
         robot.SingularAvoidEnd();
     }
 
-Safety stop trigger 
+Safety Stop Trigger
 ++++++++++++++++++++++++++++++
 .. versionadded:: C# SDK-v1.1.0-3.7.8
 
@@ -969,8 +969,8 @@ Safety stop trigger
     :linenos:
 
     /**
-    * @brief Safety stop trigger signal
-    * @return error code
+    * @brief Safe Stop Trigger Signal
+    * @return Error code 
     */
     int GetSafetyCode();
 

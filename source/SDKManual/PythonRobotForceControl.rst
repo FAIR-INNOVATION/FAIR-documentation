@@ -840,6 +840,7 @@ Code example
     status = 1 # control status, 0-off; 1-on
     asaptiveFlag = 1 #Adaptive on flag, 0-off; 1-on
     interfereDragFlag = 1 # interference zone drag flag, 0-off; 1-on
+    ingularityConstraintsFlag = 0 #singularity strategy, 0- evade; 1- Crossing
     M = [15, 15, 15, 0.5, 0.5, 0.1] #Inertia factor
     B = [150, 150, 150, 5, 5, 1] # Damping factor
     K = [0, 0, 0, 0, 0, 0, 0] #Stiffness factor
@@ -847,12 +848,12 @@ Code example
     Fmax = 50 # Maximum towing force limit
     Vmax = 1810 # Maximum joint speed limit
 
-    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)
+    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, ingularityConstraintsFlag, M, B, K, F, Fmax, Vmax)
     print("EndForceDragControl return:",error)
 
     time.sleep(10)
     status=0
-    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)
+    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, ingularityConstraintsFlag, M, B, K, F, Fmax, Vmax)
     print("EndForceDragControl return:",error)
 
 The force sensor turns on automatically after the error is cleared.
@@ -890,11 +891,12 @@ Setting up hybrid drag switches and parameters for six-dimensional force and joi
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``EndForceDragControl(status, asaptiveFlag, interfereDragFlag, M, B, K, F, Fmax, Vmax)``"
+    "Prototype", "``EndForceDragControl(status, asaptiveFlag, interfereDragFlag, ingularityConstraintsFlag, M, B, K, F, Fmax, Vmax)``"
     "Description", "Setting up the six-dimensional force and joint impedance hybrid drag switch and parameters"
     "Mandatory parameters", "- ``status``: control status, 0 - off; 1 - on
     - ``asaptiveFlag``: adaptive on flag, 0 - off; 1 - on
     - ``interfereDragFlag``: interference area drag flag, 0 - off; 1 - on
+    - ``ingularityConstraintsFlag``: singularity strategy, 0- evade; 1- Crossing
     - ``M=[m1,m2,m3,m4,m5,m6]``: inertia factor
     - ``B=[b1,b2,b3,b4,b5,b6]``: damping factor
     - ``K=[k1,k2,k3,k4,k5,k6]``: stiffness factor

@@ -730,7 +730,7 @@ Arc tracking control
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd, sumMaxUd. axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent)``"
+    "Prototype", "``ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd, sumMaxUd. axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent, offsetType, offsetParameter)``"
     "Description", "Arc tracking control"
     "Mandatory parameters", "- ``flag``: switch, 0-off; 1-on
     - ``delayTime``: lag time in ms
@@ -748,7 +748,9 @@ Arc tracking control
     - ``referenceType``: upper and lower reference current setting mode, 0 - feedback; 1 - constant
     - ``referSampleStartUd``: upper and lower reference current sampling start count (feedback), cyc
     - ``referSampleCountUd``: upper and lower reference current sample cycle count (feedback), cyc
-    - ``referenceCurrent``: upper and lower reference currents mA"
+    - ``referenceCurrent``: upper and lower reference currents mA
+    - ``offsetType``: bias tracking type, 0- no bias; 1- Sampling; 2- percent
+    - ``offsetParameter``: bias parameter; Sampling (offset sampling start time, default sampling cycle); Percentage (offset percentage (-100 ~ 100))"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
 
@@ -798,7 +800,7 @@ Code example
     print("MoveJ return:",error)
 
     error = robot.ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd,
-                                sumMaxUd, axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent)
+                                sumMaxUd, axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent,0,0)
     print("WireSearchStart return:",error)
 
     robot.ARCStart(1, 0, 10000)
@@ -812,7 +814,7 @@ Code example
 
     flag = 0
     error = robot.ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd,
-                                sumMaxUd, axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent)
+                                sumMaxUd, axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent,0,0)
     print("WireSearchStart return:",error)
 
 Arc tracking AI passband selection
@@ -1453,3 +1455,61 @@ Code example
             print("WeldingStartReWeldAfterBreakOff return", rtn)
             break
         time.sleep(0.1)
+
+Wobble start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.9-3.8.0
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeaveChangeStart(weaveNum)``"
+    "Description", "Wobble start"
+    "Mandatory parameters", "- ``weaveNum``: Swing number"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Wobble end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.9-3.8.0
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeaveChangeEnd()``"
+    "Description", "Wobble end"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+code example
+----------------------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    p1Joint = [74.620, -80.903, 94.608, -109.882, -90.436, -13.432]
+    p1Desc = [-72.912, -587.664, 31.849, 43.283, -6.731, 15.068]
+    p2Joint = [66.431, -92.875, 116.362, -120.516, -88.627, -24.731]
+    p2Desc = [-104.915, -483.712, -25.231, 42.228, -6.572, 18.433]
+    p3Joint = [56.457, -84.796, 104.618, -114.497, -92.422, -25.430]
+    p3Desc = [-240.651, -483.840, -7.161, 46.577, -5.286, 8.318]
+    
+    robot.WeldingSetVoltage(1, 19, 0, 0)
+    robot.WeldingSetCurrent(1, 190, 0, 0)
+    robot.MoveJ(joint_pos=p1Joint, tool=1, user=1, vel=100.0, acc=100.0, ovl=100.0)
+    robot.MoveL(desc_pos=p2Desc, tool=1, user=1, vel=100.0, acc=100.0, ovl=50.0)
+    robot.ARCStart(1, 0, 10000)
+    robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
+    robot.WeaveStart(0)
+    robot.WeaveChangeStart(1)
+    robot.MoveL(desc_pos=p3Desc, tool=1, user=1, vel=100.0, acc=100.0, ovl=1.0)
+    robot.WeaveChangeEnd()
+    robot.WeaveEnd(0)
+    robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
+    robot.ARCEnd(1, 0, 10000)

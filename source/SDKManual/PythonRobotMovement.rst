@@ -463,7 +463,7 @@ Code example
     error = robot.ServoMoveStart() #ServoMoveStart
     print("Servo motion start error code",error)
     while(count).
-        error = robot.ServoJ(joint_pos=joint_pos,axisPos=[0,0,0,0]) #joint space servo mode motion
+        error = robot.ServoJ(joint_pos=joint_pos,axisPos=[0,0,0,0,0,0]) #joint space servo mode motion
         if error!=0.
             error_joint =error
         joint_pos[0] = joint_pos[0] + 0.1 # 1-axis movement 0.1 degree each time, 100 movements
@@ -959,7 +959,7 @@ LIN, ARC motion FIR filtering is started
     
     "Prototype", "``LinArcFIRPlanningStart(maxAccLin,maxAccDeg,maxJerkLin,maxJerkDeg)``"
     "Description", "LIN, ARC motion FIR filtering is started"
-    "Return", "- ``maxAccLin``:Linear acceleration extremum(mm/s2)
+    "Mandatory parameter", "- ``maxAccLin``:Linear acceleration extremum(mm/s2)
     - ``maxAccDeg``:Angular acceleration extremum(deg/s2)
     - ``maxJerkLin``:Linear plus acceleration extremum(mm/s3)
     - ``maxJerkDeg``:Angle plus acceleration extremum(deg/s3)"
@@ -976,7 +976,7 @@ Turn off LIN and ARC motion FIR filtering
     
     "Prototype", "``LinArcFIRPlanningEnd()``"
     "Description", "Turn off LIN and ARC motion FIR filtering"
-    "Return", "NULL"
+    "Mandatory parameter", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"  
 

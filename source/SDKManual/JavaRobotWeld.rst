@@ -272,6 +272,33 @@ Code example
         robot.WeaveEnd(0);
     }
 
+Oscillating gradient start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.2-3.8.0
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Oscillating gradient start
+    * @param [in] weaveNum swingNum
+    * @return ErrorCode
+    */
+    int WeaveChangeStart(int weaveNum).
+
+Oscillating Fade End
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.2-3.8.0
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Oscillating Fade End
+    * @return Error code
+    */
+    int WeaveChangeEnd(); 
+
 Positive wire feed
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -575,6 +602,8 @@ Code example
 
 Arc tracking control
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.2-3.8.0
+
 .. code-block:: Java
     :linenos:
 
@@ -597,9 +626,11 @@ Arc tracking control
     * @param [in] referSampleStartUd upper and lower reference current sample start count (feedback), cyc
     * @param [in] referSampleCountUd Upper and lower reference current sampling cycle count (feedback), cyc
     * @param [in] referenceCurrent upper and lower reference current mA
+    * @param [in] offsetType offset tracking type, 0-no offset; 1-sample; 2-percentage
+    * @param [in] offsetParameter offset parameter; sampling (offset sampling start time, default pick one cycle); percentage (offset percentage (-100 ~ 100))
     * @return error code 
     */
-    int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent).
+    int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent, int offsetType, int offsetParameter);
 
 Simulated swing start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -524,6 +524,8 @@ Get force sensor drag switch status
 
 Force Sensor Assisted Drag
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.2-3.8.0
+
 .. code-block:: Java
     :linenos:
 
@@ -532,6 +534,7 @@ Force Sensor Assisted Drag
     * @param [in] status Control status, 0-off; 1-on
     * @param [in] asaptiveFlag Adaptive on flag, 0-off; 1-on
     * @param [in] interfereDragFlag interference area drag flag, 0-off; 1-on
+    * @param [in] ingularityConstraintsFlag singularity strategy, 0-avoidance; 1-crossing
     * @param [in] M coefficient of inertia
     * @param [in] B Damping factor
     * @param [in] K Stiffness factor
@@ -540,7 +543,7 @@ Force Sensor Assisted Drag
     * @param [in] Vmax Maximum joint speed limit °/s
     * @return error code
     */
-    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, Object[] M, Object[] B, Object[] K, Object[] F, double Fmax, double Vmax);
+    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag, Object[] M, Object[] B, Object[] K, Object[] F, double Fmax, double Vmax);
 
 Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -570,13 +573,13 @@ Code example
         Object[] B = { 150.0, 150.0, 150.0, 5.0, 5.0, 1.0 };
         Object[] K = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
         Object[] F = { 10.0, 10.0, 10.0, 10.0, 1.0, 1.0, 1.0 };
-        robot.EndForceDragControl(1, 0, 0, M, B, K, F, 50, 100);
+        robot.EndForceDragControl(1, 0, 0, 0, M, B, K, F, 50, 100);
 
         rtnArray = robot.GetForceAndTorqueDragState();
         System.out.println("The drag state is " + rtnArray.get(1) + " ForceAndJointImpedance state " + rtnArray.get(2));
 
         robot.Sleep(1000 * 10);
-        robot.EndForceDragControl(0, 0, 0, M, B, K, F, 50, 100);
+        robot.EndForceDragControl(0, 0, 0, 0, M, B, K, F, 50, 100);
 
         rtnArray = robot.GetForceAndTorqueDragState();
         System.out.println("The drag state is " + rtnArray.get(1) + " ForceAndJointImpedance state " + rtnArray.get(2));

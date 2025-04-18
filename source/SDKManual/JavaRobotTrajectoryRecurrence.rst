@@ -213,6 +213,81 @@ External Trace File Trace Replication
     */
     int MoveTrajectoryJ().
 
+External track file preprocessing (track look-ahead)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.3-3.8.0
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief External track file preprocessing (track look-ahead) 
+    * @param [in] name trajectory file name
+    * @param [in] mode Sampling mode, 0-no sampling; 1-equal data interval sampling; 2-equal error limit sampling.
+    * @param [in] errorLim ErrorLimit, use straight line fitting to take effect.
+    * @param [in] type Smoothing mode, 0-Bessel smoothing
+    * @param [in] precision Smoothing precision, effective when using Bezier smoothing
+    * @param [in] vamx set maximum speed, mm/s
+    * @param [in] amax set maximum acceleration, mm/s2
+    * @param [in] jmax Maximum acceleration set, mm/s3
+    * @return Error code 
+    */ 
+    int LoadTrajectoryLA(String name, int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax); 
+
+External trajectory file trajectory reproduction (trajectory look-ahead)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.3-3.8.0
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief External trajectory file trajectory reproduction (trajectory look-ahead)
+    * @return Error code  
+    */
+    int MoveTrajectoryLA();
+
+code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection successful");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+
+        int rtn = 0;
+
+        String nameA = "/fruser/traj/A.txt";
+        String nameB = "/fruser/traj/B.txt";
+
+        rtn = robot.LoadTrajectoryLA(nameA, 2, 0.0, 0, 1.0, 100.0, 200.0, 1000.0);//B spline
+        //rtn = robot.LoadTrajectoryLA(nameA, 1, 2, 0, 2, 100.0, 200.0, 1000.0);
+
+        //rtn = robot.LoadTrajectoryLA(nameB, 0, 0, 0, 1, 100.0, 100.0, 1000.0);    // linear fitting
+        System.out.println("LoadTrajectoryLA rtn is :"+ rtn);
+
+        DescPose startPos = new DescPose(0, 0, 0, 0, 0, 0);
+        robot.GetTrajectoryStartPose(nameA, startPos);
+
+        robot.MoveCart(startPos, 1, 0, (float)100.0, (float)100.0, (float)100.0, -1, -1);
+
+        rtn = robot.MoveTrajectoryLA();
+        System.out.println("MoveTrajectoryLA rtn is: "+ rtn);
+    }
+
 Get the trajectory file trajectory start position
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java

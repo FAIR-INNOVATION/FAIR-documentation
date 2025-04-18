@@ -294,7 +294,7 @@ Take 192.168.56.0/24 as an example：docker network create --driver bridge --sub
    :align: center 
 
 Virtual Machine Version Upgrade/Downgrade
-----------------------------
+----------------------------------------------------
 
 Overview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -348,10 +348,10 @@ Precautions
      - See "Compatibility Solution" section for detailed steps
 
 Operation Instructions
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Direct Software Version Upgrade/Downgrade Steps
-+++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 1. Log in to webApp, select Auxiliary Applications - Tool Applications from menu bar, then Software Upgrade;
 2. Select upgrade package, upload it and start upgrade;

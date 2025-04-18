@@ -579,6 +579,7 @@ Force Sensor Assisted Drag
     * @param [in] status control status, 0-off; 1-on
     * @param [in] asaptiveFlag Adaptive on flag, 0-off; 1-on
     * @param [in] interfereDragFlag Interference area drag flag, 0-off; 1-on
+    * @param [in] ingularityConstraintsFlag singularity strategy, 0-avoidance; 1-crossing
     * @param [in] M inertia factor
     * @param [in] B damping factor
     * @param [in] K Stiffness factor
@@ -587,7 +588,7 @@ Force Sensor Assisted Drag
     * @param [in] Vmax Maximum joint speed limit °/s
     * @return Error code
     */
-    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, double[] M, double[] B, double[] K, double[] F, double Fmax, double Vmax);
+    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag,double[] M, double[] B, double[] K, double[] F, double Fmax, double Vmax);
 
 Get force sensor drag switch status
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -657,6 +658,21 @@ Set the force sensor under load weight
 Set the force sensor payload center of mass
 +++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C# SDK-v1.1.0-3.7.8
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the center of mass of the load under the force sensor.
+    * @param [in] x load center of mass x mm 
+    * @param [in] y load center of mass y mm
+    * @param [in] z load center of mass z mm
+    * @return Error code
+    */
+    int SetForceSensorPayLoadCog(double x, double y, double z);
+
+Setting the load center of mass under a force transducer
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:

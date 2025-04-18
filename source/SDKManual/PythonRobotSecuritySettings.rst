@@ -499,3 +499,64 @@ Code example
     robot.MoveC(desc_pos_p=middescPose,tool_p=0,user_p=0,desc_pos_t=enddescPose,tool_t=0,user_t=0,vel_p=50,vel_t=50)
     error = robot.SingularAvoidEnd()
     print("SingularAvoidEnd return ", error)
+
+The Custom collision detection threshold function starts to set the collision detection thresholds of the joint end and TCP end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.0-3.8.0
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``CustomCollisionDetectionStart(flag, jointDetectionThreshould, tcpDetectionThreshould, block)``"
+    "Description", "The Custom collision detection threshold function starts to set the collision detection thresholds of the joint end and TCP end"
+    "Mandatory parameters", "- ``flag``: 1- Only joint detection is turned on; 2- Only TCP detection is enabled. 3- Joint and TCP detection are enabled simultaneously
+    - ``jointDetectionThreshould``: Joint collision detection threshold j1-j6
+    - ``tcpDetectionThreshould``: indicates TCP collision detection threshold, xyzabc
+    - ``block``: 0- non-blocking; 1- block"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"
+
+The custom collision detection threshold function is disabled
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.0
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``CustomCollisionDetectionEnd()``"
+    "Description", "The custom collision detection threshold function is disabled"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"
+
+code example
+------------------------------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+
+    robot = Robot.RPC('192.168.58.2')
+    safety = [5, 5, 5, 5, 5, 5]
+    robot.SetCollisionStrategy(3, 1000, 150, 250, safety)
+    jAointDetectionThreshould = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
+    tcpDetectionThreshould = [80, 80, 80, 80, 80, 80]
+    rtn = robot.CustomCollisionDetectionStart(3, jAointDetectionThreshould, tcpDetectionThreshould, 0)
+    print("CustomCollisionDetectionStart rtn is ", rtn)
+    p1Desc = [228.879, -503.594, 453.984, -175.580, 8.293, 171.267]
+    p1Joint = [102.700, -85.333, 90.518, -102.365, -83.932, 22.134]
+
+    p2Desc = [-333.302, -435.580, 449.866, -174.997, 2.017, 109.815]
+    p2Joint = [41.862, -85.333, 90.526, -100.587, -90.014, 22.135]
+
+    exaxisPos = [0.0, 0.0, 0.0, 0.0]
+    offdese = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    while True:
+        robot.MoveL(desc_pos=p1Desc, tool=0, user=0, vel=100, acc=100, ovl=100)
+        robot.MoveL(desc_pos=p2Desc, tool=0, user=0, vel=100, acc=100, ovl=100)
+    rtn = robot.CustomCollisionDetectionEnd()
+    print("CustomCollisionDetectionEnd rtn is ", rtn)

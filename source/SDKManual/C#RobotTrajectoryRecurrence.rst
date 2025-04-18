@@ -425,3 +425,58 @@ Code Example
         Console.WriteLine($"MoveTrajectoryJ retval is: {retval}");
         return 0;
     }
+
+Trajectory Preprocessing (trajectory Foresight)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    / * *
+    * @brief Trajectory Preprocessing (trajectory Foresight)
+    * @param [in] name Indicates the track file name
+    * @param [in] mode Sampling mode. 0- Sampling is not performed. 1- equal data interval sampling; 2- Equal error limit sampling
+    * @param [in] errorLim Error limit, using line fitting takes effect
+    * @param [in] type Indicates the smoothing mode, 0-Bessel smoothing
+    * @param [in] precision Smoothing precision. This parameter takes effect when Bezier smoothing is used
+    * @param [in] vamx set maximum speed, mm/s
+    * @param [in] Maximum acceleration set by amax, mm/s2
+    * @param [in] Max acceleration set by jmax, mm/s3
+    * @return Error code 
+    * /
+    int LoadTrajectoryLA(string name, int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax);
+
+Track reproduction (track outlook)
+++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    / * *
+    * @brief Track reproduction (track outlook)
+    * @return Error code
+    * /
+    int MoveTrajectoryLA();
+
+Code example
+++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button8_Click(object sender, EventArgs e)
+    {
+        int rtn = 0;
+
+        string nameA = "/fruser/traj/A.txt";
+        string nameB = "/fruser/traj/B.txt";
+
+        rtn = robot.LoadTrajectoryLA(nameB, 0, 0, 0, 1, 100.0, 100.0, 1000.0);    // 直线拟合
+        Console.WriteLine($"LoadTrajectoryLA rtn is {rtn}");
+
+        DescPose startPos = new DescPose(0, 0, 0, 0, 0, 0);
+        robot.GetTrajectoryStartPose(nameA, ref startPos);
+
+        //
+        robot.MoveCart(startPos, 1, 0, (float)100.0, (float)100.0, (float)100.0, -1, -1);
+
+        rtn = robot.MoveTrajectoryLA();
+        Console.WriteLine($"MoveTrajectoryLA rtn is {rtn}");
+    }

@@ -28,10 +28,11 @@ Setting the post-collision strategy
     * @param [in] strategy 0-stop with error, 1-keep running
     * @param [in] safeTime safe stop time [1000 - 2000] ms
     * @param [in] safeDistance Safe stopping distance [1-150]mm
+    * @param [in] safeVel tcp safe stopping speed [50-250]mm/s
     * @param [in] safetyMargin j1-j6 safety factor [1-10]
     * @return error code
     */
-    int SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int[] safetyMargin); 
+    int SetCollisionStrategy(int strategy, int safeTime, int safeDistance,  int safeVel, int[] safetyMargin); 
 
 Setting the positive limit
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -146,7 +147,8 @@ Code Example
         robot.SetAnticollision(mode, level1, config);
         mode = 1;
         robot.SetAnticollision(mode, level2, config);
-        robot.SetCollisionStrategy(2);
+        int[] safetyMargin = { 1, 1, 1, 1, 1, 1 };
+        robot.SetCollisionStrategy(5, 1000, 150,150,safetyMargin);
 
         double[] plimit = new double[6] { 170.0, 80.0, 150.0, 80.0, 170.0, 160.0 };
         int rtn = robot.SetLimitPositive(plimit);
@@ -170,4 +172,65 @@ Code Example
         Console.WriteLine($"SetFrictionValue_ceiling rtn {rtn}");
         rtn = robot.SetFrictionValue_freedom(fcoeff);
         Console.WriteLine($"SetFrictionValue_freedom rtn {rtn}");
+    }
+
+Customized Collision Detection Thresholds Feature Begins
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+     /**
+    * @brief Customize the collision detection threshold function to start, set the collision detection threshold on the joint side and the TCP side
+    * @param [in] flag 1-joint detection only on; 2-TCP detection only on; 3-joint and TCP detection both on
+    * @param [in] jointDetectionThreshould Joint collision detection threshold j1-j6
+    * @param [in] tcpDetectionThreshould TCP collision detection threshold, xyzabc
+    * @param [in] block 0-non-blocking; 1-blocking
+    * @return Error code
+    */
+    int CustomCollisionDetectionStart(int flag, double[] jointDetectionThreshould, double[] tcpDetectionThreshould, int block);
+
+Customize collision detection threshold function off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Customize collision detection threshold function off
+    * @return Error code
+    */
+    int CustomCollisionDetectionEnd()
+
+Code Example
+++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void btnRobotSafetySet_Click(object sender, EventArgs e)
+    {
+        while (true)
+        {
+            int[] safety = { 5, 5, 5, 5, 5, 5 };
+            robot.SetCollisionStrategy(3, 1000, 150, 250, safety);
+
+            double[] jointDetectionThreshold = { 0.3, 0.3, 0.3, 0.3, 0.3, 0.3 };
+            double[] tcpDetectionThreshold = { 80, 80, 80, 80, 80, 80 };
+            int rtn = robot.CustomCollisionDetectionStart(3, jointDetectionThreshold, tcpDetectionThreshold, 0);
+            Console.WriteLine($"CustomCollisionDetectionStart rtn is {rtn}");
+
+            DescPose p1Desc = new DescPose(228.879, -503.594, 453.984, -175.580, 8.293, 171.267);
+            JointPos p1Joint = new JointPos(102.700, -85.333, 90.518, -102.365, -83.932, 22.134);
+
+            DescPose p2Desc = new DescPose(-333.302, -435.580, 449.866, -174.997, 2.017, 109.815);
+            JointPos p2Joint = new JointPos(41.862, -85.333, 90.526, -100.587, -90.014, 22.135);
+
+            ExaxisPos exaxisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+            DescPose offdese = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+
+            // Assuming the signature of the MoveL method is as follows:
+            robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+            robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+
+            rtn = robot.CustomCollisionDetectionEnd();
+            Console.WriteLine($"CustomCollisionDetectionEnd rtn is {rtn}");
+        }
     }
