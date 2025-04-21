@@ -1,3 +1,35 @@
+Version V3.8.1
+-----------------
+
+Date: 2025-04-14
+    
+- **T-shaped Velocity Function Optimization**: 
+    Path: Teaching Program -> Program Programming, Graphical Programming, Node Graph Programming, Initial Setup -> Basic Module.
+  
+    Description: Added trapezoidal velocity optimization mode in motion configuration, optimizing jerk during start/stop phases and increasing acceleration during acceleration phase. Mainly applied to scenarios prone to collision alarms during start/stop or with noticeable residual vibrations.
+    
+- **Conveyor Tracking Function Optimization**: 
+    Path: Initial Setup -> Tracking -> Conveyor.
+  
+    Description: Added follow-up motion function in conveyor tracking mode, enabling motion teaching without workpiece coordinate system and allowing custom trigger delay distance.
+
+- **Added Impedance Callback Function for Axis Interference Zone**:
+    Path: Auxiliary Applications -> Tool Applications -> Interference Zone -> Interference Zone Configuration.
+  
+    Description: Provides impedance callback effect when entering interference zone during force sensor-assisted dragging.
+
+- **Welding Handle Adaptation Function**:
+    Description: Added welding handle adaptation: Robots with mounted welding handles can now program welding sequences and control robot start/stop, manual/auto switching, dragging, etc.
+
+- **Added Joint Limit Ring Display on WEB Interface**:
+    Description: Enables real-time display of joint positions when limit ring display function is activated.
+    
+- **New SDK Functions**:
+    Description: SDK now supports downloading controller logs, all data sources, and data backup packages.
+    
+- **Joint Information Recording Before/After Collision**:
+    Description: Records joint position, velocity, acceleration and torque information before/after collisions, facilitating direct analysis of collision causes in field applications.
+
 Version V3.8.0
 -----------------
 

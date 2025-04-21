@@ -4723,3 +4723,133 @@ Example Lua Teaching Program for Collaborative Motion Between Robot and CNC:
              end   
          end
     end
+
+Robot Conveyor Tracking System Configuration
+-------------------------------------------------
+
+Conveyor Encoder Data Communication Connection Method
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To achieve automated loading/unloading in machining processes, a CNC function package based on FOCAS communication was developed, enabling communication interaction and coordinated movement between collaborative robots and CNC machines.
+
+As shown in the diagram, FOCAS communication is Ethernet-based. By connecting the robot controller's Ethernet port with the machine's built-in Ethernet port via network cable, FOCAS communication between the robot and machine can be established, enabling CNC control and machine status monitoring from the robot side.
+
+.. figure:: robot_peripherals/243.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑1 Robot Conveyor Tracking System Topology
+
+In the system: (a) represents the computer, (b) represents the robot and its controller, and (c) represents the conveyor system consisting of conveyor belt, photoelectric sensor and encoder. The robot controller connects to the photoelectric sensor and conveyor via digital I/O communication, and to the conveyor encoder via RS485.
+
+Conveyor Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Access the conveyor tracking function configuration interface through "Basic Settings" > "Peripherals" > "Tracking" > "Conveyor" on the robot web page.
+
+.. figure:: robot_peripherals/244.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑2 Conveyor Tracking Configuration Page
+
+On the conveyor tracking configuration page, click the "Conveyor I/O One-click Configuration" button to automatically configure the physical connections. Then select "Tracking Motion" from the "Function Selection" dropdown under "Parameter Configuration", followed by configuring encoder properties, tracking workpiece coordinate system axes, vision pairing, and selecting "Chasing Motion" from the "Tracking Type" dropdown. At this point, you can input the tracking start distance and tracking end distance.
+
+Tracking start distance: After the tracking signal is triggered, the robot starts moving when the conveyor reaches the set distance. When set to -1, it triggers automatically.
+Tracking end distance: The maximum distance the robot moves synchronously with the conveyor after starting motion.
+
+Tracking Coordinate System Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tracking motion uses the workpiece coordinate system as the conveyor coordinate system, so the workpiece coordinate system needs to be set.
+
+Click "Initial Settings" -> "Basic", select "Workpiece Coordinate System" under "Coordinate System", then choose a workpiece coordinate system other than "wobjcoord0" for calibration (calibration methods are not described here).
+
+.. figure:: robot_peripherals/245.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑3 Tracking Coordinate System Setup
+
+Conveyor Tracking Chasing Motion Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Chasing motion is a type of conveyor tracking motion. Compared with regular tracking motion, chasing motion doesn't require teaching motion points directly above the workpiece coordinate system. Teaching can be done at any position in the workpiece coordinate system, and synchronization between the end effector and conveyor is achieved through the "tracking start distance" parameter, making it a more flexible tracking method.
+
+Introduction to Conveyor Tracking Chasing Motion Function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Below is an example to illustrate the motion characteristics.
+
+.. figure:: robot_peripherals/246.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑4 Conveyor Tracking Chasing Motion Teaching Example
+
+Where: x represents the conveyor movement direction in the workpiece coordinate system, a is the conveyor plane, b is the target workpiece to be grasped, c is the photoelectric sensor, d is the tracking start distance, and e is the tracking end distance. P1 to P4 are taught waypoints in sequential order, with P2 to P3 being the same point including gripper motion.
+
+.. figure:: robot_peripherals/247.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑5 Conveyor Tracking Chasing Motion Execution Example
+
+When the above taught program starts running and the workpiece triggers the photoelectric switch signal, the robot will wait for the target to move below P1 before starting the tracking motion. The robot gripper will move along the trajectory shown above.
+
+Chasing Motion Program Teaching
++++++++++++++++++++++++++++++++++++++++++++++++
+
+The chasing motion program logic is essentially the same as regular tracking motion logic, consisting of trigger signal acquisition, conveyor data acquisition, and tracking motion initiation.
+
+**Step 1**: Click "Teaching Program" > "Program Programming", then select and click the "Conveyor" button under "Peripheral Instructions" to access the conveyor instruction configuration page.
+
+.. figure:: robot_peripherals/248.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑6 I/O Real-time Monitoring Instruction
+
+**Step 2**: Click "I/O Real-time Monitoring" and set the "Maximum Wait Teaching (ms)" to detect the tracking trigger signal in real time. Click "Add" and "Apply" to add the instruction to the program.
+
+.. figure:: robot_peripherals/249.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑7 Position Real-time Detection Instruction
+
+**Step 3**: Click "Position Real-time Detection" and select "Tracking Motion" as the working mode. Click "Add" and "Apply" to add the instruction to the program.
+
+.. figure:: robot_peripherals/250.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑8 Tracking Enable Instruction
+
+**Step 4**: Click "Tracking Enable" and select "Tracking Motion" as the working mode. Click "Add" and "Apply" to add the instruction to the program.
+
+**Step 5**: Teach the Cartesian space motion and gripper peripheral motion after tracking is enabled. During motion, synchronization with the conveyor tracking will be maintained.
+
+.. figure:: robot_peripherals/251.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑9 Tracking Disable Instruction
+
+**Step 6**: Click "Tracking Disable" and click "Add" and "Apply" to add the instruction to the program.
+
+.. figure:: robot_peripherals/252.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑10 A Typical Conveyor Program Tracking Motion Program
+
+When two identical tracking motion targets are taught consecutively (which may include offset distance), the robot motion will block at this target position, achieving continuous synchronous tracking until the tracking distance reaches the termination distance.
+
+.. figure:: robot_peripherals/253.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.18‑11 A Typical Conveyor Blocking Tracking Grasping Motion Program
+
+When two identical tracking motion targets are taught consecutively (which may include offset distance) with gripper motion inserted in between, the robot will continue tracking the conveyor at this target position until the gripper motion is completed, achieving blocking tracking grasping.

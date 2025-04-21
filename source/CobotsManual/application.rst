@@ -606,6 +606,119 @@ Next, look at the second method "center point + side length", that is, the cente
 
 .. centered:: Figure 14.13‑5 Cube Interferometric Configuration
 
+Safety Callback Function for Force Sensor-Assisted Dragging into Axis Interference Zone
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++
+
+The safety callback function for force sensor-assisted dragging into axis interference zones automatically switches the robot to dragging mode with impedance callback effect when entering an interference zone during force sensor-assisted dragging, and reverts to force sensor-assisted dragging when exiting. This satisfies various user scenarios during force sensor-assisted operations.
+
+Operation Procedure
+++++++++++++++++++++++++
+
+Joint Limit Ring
+********************************
+**Step1**: Log into the web interface, toggle the "Joint Limit Ring" switch, and the joint limit rings will appear on robot joints as shown below.
+
+.. image:: application/065.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑6 Joint Limit Ring on Web Interface
+
+**Step2**: The white marker on the ring indicates actual joint angle; the gap represents soft limit positions (gap size varies with limit settings); rings remain stationary relative to joints during motion.
+
+Axis Interference Configuration
+********************************
+**Step1**: Configure and activate axis interference. Navigate to: "Auxiliary Applications"→"Tool Applications"→"Interference Zone"→"Single", select "Axis Interference" and toggle "Enable".
+
+**Step2**: Set "Motion Strategy" to "Continue Motion", select "Dragging Strategy" as "Impedance Callback" and configure parameters (e.g., recommended value "5" for callback force intensity).
+
+.. image:: application/066.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑7 Axis Interference Configuration
+
+**Step3**: Set interference ranges. Choose "Feedback Position" detection mode, select "Inside Range" or "Outside Range" interference mode, then enable ranges for each axis.
+
+.. image:: application/067.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑8 Interference Range Configuration
+
+**Step4**: In "Inside Range" mode, green indicates free movement zones and yellow shows interference zones on the web interface.
+
+.. image:: application/068.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑9 Limit Ring Display (Inside Range)
+
+**Step5**: In "Outside Range" mode, the color scheme reverses while maintaining the same display logic.
+
+.. image:: application/069.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑10 Limit Ring Display (Outside Range)
+
+Entering Axis Interference Zone with Force Sensor Assistance
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Enable force sensor assistance at: "Auxiliary Applications"→"Tool Applications"→"Drag Lock", then activate interference zone options.
+
+.. image:: application/070.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑11 Force Sensor Drag Configuration
+
+**Step2**: During force-assisted dragging, the system automatically switches to current-loop dragging with impedance callback when entering interference zones, then reverts upon exit.
+
+Cuboid Interference Configuration
+++++++++++++++++++++++++++++++++++
+
+**Step1**: Configure cuboid interference at: "Auxiliary Applications"→"Tool Applications"→"Interference Zone"→"Single".
+
+**Step2**: Set "Motion Strategy" to "Continue Motion" and "Dragging Strategy" to "Unrestricted Dragging".
+
+.. image:: application/071.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑12 Cuboid Interference Settings
+
+**Step3**: Configure parameters including "Base Coordinate" reference and "Two-Point" or "Center+Edge Length" teaching methods.
+
+.. image:: application/072.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑13 Two-Point Teaching Method
+
+**Step4**: Virtual cuboids appear on the web interface (40% opacity yellow/green for normal state, 90% when triggered).
+
+Safety Wall Configuration
+++++++++++++++++++++++++++++++++++++++++++
+**Step1**: Configure up to 8 safety walls at: "Initial Setup"→"Safety"→"Safety Wall". Enabled walls appear as 40% orange translucent objects.
+
+.. image:: application/077.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑18 Safety Wall Setup
+
+**Step2**: Walls turn 90% opaque orange with warnings when breached.
+
+.. image:: application/079.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑20 Triggered Safety Wall
+
 Welding Expert
 ------------------------
 

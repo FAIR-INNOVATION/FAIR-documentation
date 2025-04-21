@@ -5458,3 +5458,65 @@ The larger the TCP detection threshold, the less sensitive the collision detecti
      - 60 
      - 60
      - 60 
+
+T-Shaped Velocity Profile Optimization Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++
+
+Traditional T-shaped velocity curves have abrupt acceleration changes at the start and end points of acceleration/deceleration phases, which can cause rigid impacts on mechanical equipment. This function optimizes the T-shaped velocity curve to eliminate abrupt acceleration changes, thereby improving motion smoothness.
+
+This function primarily provides acceleration smoothing for PTP, LIN, ARC, and full-circle commands. Since the operation methods are similar for all commands, this manual uses PTP commands as an example to explain the operation procedure.
+
+Operation Process
+++++++++++++++++++++++++++++
+
+Depending on the operation method, there are two ways to implement T-shaped velocity profile optimization: using Lua commands or using motion configuration switches.
+
+**Step1**: Select the teaching point for PTP operation. This manual uses "P1" as the example teaching point name.
+
+**Step2**: Click "Teaching Program" -> "Program Programming", select the "Point-to-Point" command under "Motion Commands", choose the teaching point in "Command Editing" and set the debugging speed. For motion protection, select "Acceleration Smoothing Mode".
+   
+.. image:: coding/315.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-1 Acceleration Smoothing PTP Command Settings
+
+**Step3**: Generate and run the Lua program to implement acceleration smoothing for PTP commands. A typical program is shown below.
+   
+.. image:: coding/316.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-2 Typical Program Using Lua Command Method for PTP Smoothing
+
+Using Motion Configuration Switch Method
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Click "Initial Settings" -> "Basic" -> "Motion Configuration" to turn on the "Acceleration Smoothing Mode" switch as shown below.
+   
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-3 Acceleration Smoothing Mode Configuration Switch Settings
+
+**Step2**: Select the teaching point for PTP operation. This manual uses "P1" as the example teaching point name.
+
+**Step3**: Click "Teaching Program" -> "Program Programming", select the "Point-to-Point" command under "Motion Commands", choose the teaching point in "Command Editing" and set the debugging speed. For motion protection, select "None" to add a conventional PTP command as shown below.
+   
+.. image:: coding/318.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-4 Conventional PTP Command Settings
+
+**Step4**: Generate and run the Lua program to implement acceleration smoothing for PTP commands. The typical program is the same as conventional PTP programs as shown below.
+   
+.. image:: coding/319.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-5 Typical Program Using Configuration Switch Method for PTP Smoothing
