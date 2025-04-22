@@ -221,6 +221,18 @@ Ontology & Dimensional Drawings
 
     :download:`FR30 Drawings <_static/_doc/FR30 Drawings.zip>`
 
+2D CAD Files
+---------------------------------
+    :download:`FRCobots-V6.0 DWG Format <_static/_doc/FRCobots-V6.0 DWG Models.zip>`
+
+    :download:`Mini Control Box 2kW (DC+AC) DWG Format <_static/_doc/Mini Control Box 2kW (DC+AC) DWG.zip>`
+
+    :download:`Control Box 5kW (DC+AC) DWG Format <_static/_doc/Control Box 5kW (DC+AC) DWG.zip>`
+
+    :download:`Teach Pendant DWG Format <_static/_doc/Teach Pendant DWG.zip>`
+
+    :download:`Button Box DWG Format <_static/_doc/Button Box DWG.zip>`
+
 3D Models
 ---------------------------------
     :download:`FRCobots-V5.0 STEP Models <_static/_doc/FRCobots-V5.0 STEP Models.zip>`
