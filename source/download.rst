@@ -293,6 +293,11 @@ Java SDK
 
     \ `Historical Version <https://github.com/FAIR-INNOVATION/fairino-java-sdk/releases>`__\
 
+Status Feedback Protocol
+---------------------------------
+
+    :download:`Robot 8083 Port Status Feedback Protocol<_static/_doc/Robot 8083 Port Status Feedback User Manual.pdf>`
+
 Communication Command Protocol
 ---------------------------------
 
@@ -301,3 +306,5 @@ Communication Command Protocol
 Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-V3.8.1-QX-Release-250414 <https://drive.google.com/file/d/1icU94xSADErYb4mAv60a3Piv5jtbW4Sk/view?usp=sharing>`
+    
+    :download:`FAIRINO-CobotSoftware-v3.8.1-LA-Release-250424 <https://drive.google.com/file/d/127eoNKnaGqUBCeM7b4pSjgPSH6VGFPHg/view?usp=sharing>`
