@@ -89,6 +89,10 @@ There are four main steps to use the CNDE function of robot:
      - DOUBLE_6
      - Current current of joints 1-6 (A)
 
+   * - actual_joint_torque
+     - DOUBLE_6
+     - Joint 1-6 target torque (Nm)
+
    * - actual_TCP_pos
      - DOUBLE_6
      - Current position of tool DKR(mm)
@@ -169,6 +173,30 @@ There are four main steps to use the CNDE function of robot:
      - INT32
      - Current motion queue length
 
+   * - ft_sensor_data
+     - DOUBLE_6
+     - Force sensor raw data
+
+   * - main_code
+     - INT32
+     - Main fault code
+
+   * - sub_code
+     - INT32
+     - Sub fault code
+
+   * - emergency_stop
+     - UINT8
+     - Emergency stop status
+
+   * - motion_done
+     - INT32
+     - Motion completion status
+
+   * - timestamp_us
+     - UINT64
+     - Robot system time (us)
+  
    * - output_BIT_reg_8xX
      - UINT8_X
      - BIT-type robot output registers (8xX indicates the number of registers, if you need 16 BIT-type output registers, the actual name is "output_BIT_reg_8x2", and the robot can support up to 128 bit-type output registers)
