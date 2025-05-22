@@ -601,3 +601,114 @@ Example 2
 
         robot->EndForceDragControl(0, 0, 0, M, B, K, F, 50, 100);
     }
+
+Controller Log Download
++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.1-3.8.1
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Download controller logs
+    * @param [in] savePath Save path ("D://zDown/")
+    * @return Error code
+    */
+    errno_t RbLogDownload(std::string savePath);
+
+All Data Source Download
++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.1-3.8.1
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Download all data sources
+    * @param [in] savePath Save path ("D://zDown/")
+    * @return Error code
+    */
+    errno_t AllDataSourceDownload(std::string savePath);
+
+Data Backup Package Download
++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.1-3.8.1
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Download data backup package
+    * @param [in] savePath Save path ("D://zDown/")
+    * @return Error code
+    */
+    errno_t DataPackageDownload(std::string savePath);
+
+Code Example
+*********************
+
+.. code-block:: c++
+    :linenos:
+
+    int TestDownload(FRRobot* robot)
+    {
+      int rtn = robot->RbLogDownload("D://zDOWN/");
+      cout << "RbLogDownload rtn is " << rtn << endl;
+      
+      rtn = robot->AllDataSourceDownload("D://zDOWN/");
+      cout << "AllDataSourceDownload rtn is " << rtn << endl;
+
+      rtn = robot->DataPackageDownload("D://zDOWN/");
+      cout << "DataPackageDownload rtn is " << rtn << endl;
+    }
+
+Get Controller SN Code
++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.1-3.8.1
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get controller serial number
+    * @param [out] SNCode Controller serial number
+    * @return Error code
+    */
+    errno_t GetRobotSN(std::string& SNCode);
+
+Code Example
+*********************
+
+.. code-block:: c++
+    :linenos:
+
+    int TestSN(FRRobot* robot)
+    {
+        string SN = "";
+        robot->GetRobotSN(SN);
+        cout << "robot SN is " << SN << endl;
+    }
+
+Shutdown Robot OS
++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.1-3.8.1
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Shutdown robot operating system
+    * @return Error code
+    */
+    errno_t ShutDownRobotOS();
+
+Code Example
+*********************
+
+.. code-block:: c++
+    :linenos:
+
+    int TestShutDown(FRRobot* robot)
+    {
+        robot->ShutDownRobotOS();
+    }

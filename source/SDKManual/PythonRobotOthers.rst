@@ -463,3 +463,89 @@ Get the currently configured end device
     - ``forceSensorEnable[8]``: force sensor enable state, 0 - not enabled; 1 - enabled
     - ``gripperEnable[8]``: gripper enable status, 0 - not enabled; 1 - enabled
     - ``IOEnable[8]``: IO device enable status, 0-not enabled; 1-enabled"
+
+Controller Log Download
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``RbLogDownload(savePath)``"
+    "Description", "Controller log download"
+    "Required Parameters", "- ``savePath``: File save path D://zDown/"
+    "Default Parameters", "None"
+    "Return Value", "Error code. Success-0, Failure- errcode"
+
+All Data Source Download
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AllDataSourceDownload(savePath)``"
+    "Description", "All data source download"
+    "Required Parameters", "- ``savePath``: File save path D://zDown/"
+    "Default Parameters", "None"
+    "Return Value", "Error code. Success-0, Failure- errcode"
+
+Data Backup Package Download
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``DataPackageDownload(savePath)``"
+    "Description", "Data backup package download"
+    "Required Parameters", "- ``savePath``: File save path D://zDown/"
+    "Default Parameters", "None"
+    "Return Value", "Error code. Success-0, Failure- errcode"
+
+Get Robot Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotRealTimeState()``"
+    "Description", "Get robot status"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code. Success-0, Failure- errcode 
+    - ``robot_state_pkg``: Robot status structure"
+
+Get Controller SN Code
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotSN()``"
+    "Description", "Get controller SN code"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code. Success-0, Failure- errcode
+    - ``SNCode``: Controller SN code"
+
+Shut Down Robot OS
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ShutDownRobotOS()``"
+    "Description", "Shut down robot operating system"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "Error code. Success-0, Failure- errcode"

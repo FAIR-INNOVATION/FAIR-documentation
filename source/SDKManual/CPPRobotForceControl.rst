@@ -887,25 +887,27 @@ Drive belt tracking stopped
      */
     errno_t ConveyorTrackEnd();
 
-Transmission belt parameter configuration
+Conveyor Belt Parameter Configuration
 +++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionchanged:: C++ SDK-v2.1.2.0
+.. versionchanged:: C++SDK-v2.2.1-3.8.1
 
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief transmission belt parameter configuration
-     * @param [in] para[0] Encoder channel 1~2
-     * @param [in] para[1] Number of pulses for one revolution of the encoder
-     * @param [in] para[2] The distance traveled by the conveyor belt in one revolution of the encoder
-     * @param [in] para[3] Workpiece coordinate system number. Select the workpiece coordinate system number for the tracking motion function. Set tracking grab and TPD tracking to 0.
-     * @param [in] para[4] Whether it is suitable for vision 0 Not suitable 1 Yes
-     * @param [in] para[5] Speed ​​ratio for conveyor belt tracking capture options (1-100) Other options default to 1
-     * @return error code
-     */
-    errno_t ConveyorSetParam(float param[5]);
+    * @brief Conveyor belt parameter configuration
+    * @param [in] para[0] Encoder channel 1~2
+    * @param [in] para[1] Pulses per encoder revolution
+    * @param [in] para[2] Conveyor travel distance per encoder revolution
+    * @param [in] para[3] Workpiece coordinate system number (0 for tracking capture and TPD tracking)
+    * @param [in] para[4] Vision configuration (0: disabled, 1: enabled)
+    * @param [in] para[5] Speed ratio for conveyor tracking capture (1-100, default 1 for other options)
+    * @param [in] followType Tracking motion type (0: tracking motion, 1: inspection motion)
+    * @param [in] startDis Inspection capture start distance (mm, -1: auto calculate, default 0)
+    * @param [in] endDis Inspection capture end distance (mm, default 100)
+    * @return Error code
+    */
+    errno_t ConveyorSetParam(float para[6], int followType = 0, int startDis = 0, int endDis = 100);
 
 Grab point compensation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -3192,3 +3194,85 @@ Code example
         robot->MoveL(&endjointPos, &enddescPose, 0, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
         robot->SingularAvoidEnd();
     }
+
+Conveyor Communication Input Detection
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.1-3.8.1
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Conveyor communication input detection
+    * @param [in] timeout Wait timeout (ms)
+    * @return Error code
+    */
+    errno_t ConveyorComDetect(int timeout);
+
+Conveyor Communication Input Detection Trigger
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.2.1-3.8.1
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Trigger conveyor communication input detection
+    * @return Error code
+    */
+    errno_t ConveyorComDetectTrigger();
+
+Code Example
+************************
+    
+.. code-block:: c++
+    :linenos:
+
+    void Trigger(FRRobot* robot)
+    {
+      int i;
+      cout << "please input a number to trigger:" << endl;
+      std::cin >> i;
+      int rtn = robot->ConveyorComDetectTrigger();
+      printf("ConveyorComDetectTrigger retval is: %d\n", rtn);
+    }
+
+    int ConveyorTest(FRRobot * robot)
+    {
+      int retval = 0;
+      float param[6] = { 1,10000,200,0,0,20 };
+      retval = robot->ConveyorSetParam(param, 1, 0, 0);
+      printf("ConveyorSetParam retval is: %d\n", retval);
+      int index = 1;
+      int max_time = 30000;
+      uint8_t block = 0;
+      retval = 0;
+      DescPose startdescPose(139.176, 4.717, 9.088, -179.999, -0.004, -179.990);
+      JointPos startjointPos(-34.129, -88.062, 97.839, -99.780, -90.003, -34.140);
+        DescPose homePose(139.177, 4.717, 69.084, -180.000, -0.004, -179.989);
+      JointPos homejointPos(-34.129, -88.618, 84.039, -85.423, -90.003, -34.140);
+      ExaxisPos exaxisPos(0, 0, 0, 0);
+      DescPose offdese(0, 0, 0, 0, 0, 0);
+      retval = robot->MoveL(&homejointPos, &homePose, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+      printf("MoveL to safety retval is: %d\n", retval);
+     std::thread textT(Trigger, robot);
+      textT.detach();
+
+      retval = robot->ConveyorComDetect(1000 * 10);
+      printf("ConveyorComDetect retval is: %d\n", retval);
+
+      retval = robot->ConveyorGetTrackData(2);
+      printf("ConveyorGetTrackData retval is: %d\n", retval);
+
+      retval = robot->ConveyorTrackStart(2);
+      printf("ConveyorTrackStart retval is: %d\n", retval);
+
+      robot->MoveL(&startjointPos, &startdescPose, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+      robot->MoveL(&startjointPos, &startdescPose, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+
+      retval = robot->ConveyorTrackEnd();
+      printf("ConveyorTrackEnd retval is: %d\n", retval);
+      robot->MoveL(&homejointPos, &homePose, 1, 1, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+        return 0;
+    }
+

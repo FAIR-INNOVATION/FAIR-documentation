@@ -107,23 +107,25 @@ Code example
     ret = robot.ConveyorPointBRecord()
     print("Convey record B point ",ret)
 
-Drive Belt Parameter Configuration
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Conveyor Parameter Configuration
+++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ConveyorSetParam(param)``"
-    "Description", "Configuration of drive belt parameters"
-    "Mandatory parameters", "- `` param= [encChannel,resolution,lead,wpAxis,vision,speedRadio]``: 
-    - ``encChannel``: encoder channels 1-2
-    - ``resolution``: encoder resolution Number of pulses per encoder revolution
-    - ``lead``: Mechanical transmission ratio Distance traveled by the conveyor belt in one revolution of the encoder
-    - ``wpAxis``: Workpiece coordinate system number Select the coordinate system number of the workpiece for the tracking motion function, and set the tracking gripping and TPD tracking to 0.
-    - ``vision``: whether or not to match vision 0 - no 1 - match, 
-    - ``speedRadio``: speed ratio For conveyor tracking gripping speed range (1-100) Tracking motion, TPD tracking set to 1"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``ConveyorSetParam(param, followType, startDis, endDis)``"
+    "Description", "Conveyor parameter configuration"
+    "Required Parameters", "- ``param``: = [encChannel,resolution,lead,wpAxis,vision,speedRadio] 
+                    - ``encChannel``: Encoder channel 1-2
+                    - ``resolution``: Encoder resolution (pulses per revolution)
+                    - ``lead``: Mechanical transmission ratio (distance moved per encoder revolution)
+                    - ``wpAxis``: Workpiece coordinate system number (0 for tracking capture/TPD tracking)
+                    - ``vision``: Vision configuration 0-No 1-Yes
+                    - ``speedRadio``: Speed ratio (1-100 for tracking capture, 1 for motion tracking/TPD tracking)
+    - ``followType``: Tracking motion type, 0-Motion tracking; 1-Inspection tracking"
+    "Default Parameters", "- ``startDis``: For inspection capture - tracking start distance (-1: auto calculate), default 0 (mm)
+    - ``endDis``: For inspection capture - tracking end distance, default 100 (mm)"
+    "Return Value", "Error code (0-success, errcode-failure)"
 
 Code example
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -135,7 +137,7 @@ Code example
     # Establish a connection with the robot controller. Successful connection returns the robot object
     robot = Robot.RPC('192.168.58.2')
     param=[1,10000,200,0,0,20]
-    ret = robot.ConveyorSetParam(param)
+    ret = robot.ConveyorSetParam(param,0,0,0)
     print("Set Conveyor Param",ret)
 
 Belt Grip Point Compensation
@@ -256,10 +258,110 @@ Code example
     robot = Robot.RPC('192.168.58.2')
     # Parameter Configuration
     param=[1,10000,200,0,0,20]
-    ret = robot.ConveyorSetParam(param)
+    ret = robot.ConveyorSetParam(param,0,0,0)
     print("Conveyor parameter configuration error code",ret)
     time.sleep(1)
     # Grab point compensation
     comp = [0.00, 0.00, 0.00]
     ret1 = robot.ConveyorCatchPointComp(comp)
     print("Error code for compensation of drive belt gripping point", ret1)
+
+Conveyor Communication Input Detection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ConveyorComDetect(timeout)``"
+    "Description", "Conveyor communication input detection"
+    "Required Parameters", "- ``timeout``: Wait timeout (ms)"
+    "Default Parameters", "None"
+    "Return Value", "Error code (0-success, errcode-failure)"
+
+Conveyor Communication Input Detection Trigger
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ConveyorComDetectTrigger()``"
+    "Description", "Conveyor communication input detection trigger"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "Error code (0-success, errcode-failure)"
+
+Code Example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    import threading
+    # Connect to robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    def Trigger(robot):
+        i = int(input("Please input a number to trigger: "))
+
+        rtn = robot.ConveyorComDetectTrigger()
+        print(f"ConveyorComDetectTrigger retval is: {rtn}")
+
+    def ConveyorTest(robot):
+        retval = 0
+
+        # Uncomment if needed
+        # param = [1, 10000, 200, 0, 0, 20]
+        # retval = robot.ConveyorSetParam(param, 0, 0, 0)
+        # print(f"ConveyorSetParam retval is: {retval}")
+
+        index = 1
+        max_time = 30000
+        block = 0
+        retval = 0
+
+        # Define poses and joint positions
+        startdescPose = [139.176, 4.717, 9.088, -179.999, -0.004, -179.990]
+        startjointPos = [-34.129, -88.062, 97.839, -99.780, -90.003, -34.140]
+
+        homePose = [139.177, 4.717, 69.084, -180.000, -0.004, -179.989]
+        homejointPos = [-34.129, -88.618, 84.039, -85.423, -90.003, -34.140]
+
+        exaxisPos = [0, 0, 0, 0]
+        offdese = [0, 0, 0, 0, 0, 0]
+
+        # Move to home position
+        retval = robot.MoveL(desc_pos=homePose, tool=1, user=1)
+        print(f"MoveL to safety retval is: {retval}")
+
+        # Start trigger thread
+        textT = threading.Thread(target=Trigger, args=(robot,))
+        textT.daemon = True
+        textT.start()
+
+        # Conveyor operations
+        retval = robot.ConveyorComDetect(10000)
+        print(f"ConveyorComDetect retval is: {retval}")
+
+        retval = robot.ConveyorGetTrackData(2)
+        print(f"ConveyorGetTrackData retval is: {retval}")
+
+        retval = robot.ConveyorTrackStart(2)
+        print(f"ConveyorTrackStart retval is: {retval}")
+
+        # Movement commands
+        robot.MoveL(desc_pos=startdescPose, tool=1, user=1)
+        robot.MoveL(desc_pos=startdescPose, tool=1, user=1)
+
+        # End conveyor tracking
+        retval = robot.ConveyorTrackEnd()
+        print(f"ConveyorTrackEnd retval is: {retval}")
+
+        # Return to home position
+        robot.MoveL(desc_pos=homePose, tool=1, user=1)
+
+    ConveyorTest(robot)

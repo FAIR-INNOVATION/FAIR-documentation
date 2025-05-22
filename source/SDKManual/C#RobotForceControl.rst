@@ -715,3 +715,108 @@ Get force sensor payload center of mass
     * @return Error code
     */
     int GetForceSensorPayLoadCog(ref double x, ref double y, ref double z);
+
+Conveyor Communication Input Detection
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Conveyor communication input detection
+    * @param [in] timeout Wait timeout in ms
+    * @return Error code
+    */
+    int ConveyorComDetect(int timeout);
+
+Conveyor Communication Input Detection Trigger
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Trigger conveyor communication input detection
+    * @return Error code
+    */
+    int ConveyorComDetectTrigger();
+
+Code Example
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+        // Disable button to prevent repeated clicks
+        button3.Enabled = false;
+
+        // Execute time-consuming operation in background thread
+        Thread conveyorThread = new Thread(ConveyorTest);
+        conveyorThread.IsBackground = true;
+        conveyorThread.Start();
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+        // Get user input
+        string input = texBox.Text;
+        Console.WriteLine($"please input a number to trigger:{input}");
+    
+        int rtn = robot.ConveyorComDetectTrigger();
+        Console.WriteLine($"ConveyorComDetectTrigger return value: {rtn}");
+    }
+
+    private void ConveyorTest()
+    {
+        // Use Invoke to update controls on UI thread
+        this.Invoke((MethodInvoker)delegate {
+            Console.WriteLine("Starting conveyor test...");
+        });
+
+        int retval = 0;
+        int index = 1;
+        int max_time = 30000;
+        bool block = false;
+        retval = 0;
+
+        /* Conveyor pickup process */
+        DescPose startdescPose = new DescPose(139.176f, 4.717f, 9.088f, -179.999f, -0.004f, -179.990f);
+        JointPos startjointPos = new JointPos(-34.129f, -88.062f, 97.839f, -99.780f, -90.003f, -34.140f);
+
+        DescPose homePose = new DescPose(139.177f, 4.717f, 69.084f, -180.000f, -0.004f, -179.989f);
+        JointPos homejointPos = new JointPos(-34.129f, -88.618f, 84.039f, -85.423f, -90.003f, -34.140f);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        // Move to safety position
+        retval = robot.MoveL(homejointPos, homePose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+        Console.WriteLine($"MoveL to safety position return value: {retval}");
+
+        // Conveyor detection
+        retval = robot.ConveryComDetect(1000 * 10);
+        Console.WriteLine($"ConveyorComDetect return value: {retval}");
+
+        // Get tracking data
+        retval = robot.ConveyorGetTrackData(2);
+        Console.WriteLine($"ConveyorGetTrackData return value: {retval}");
+
+        // Start tracking
+        retval = robot.ConveyorTrackStart(2);
+        Console.WriteLine($"ConveyorTrackStart return value: {retval}");
+
+        // Move to start position
+        robot.MoveL(startjointPos, startdescPose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+        robot.MoveL(startjointPos, startdescPose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+
+        // End tracking
+        retval = robot.ConveyorTrackEnd();
+        Console.WriteLine($"ConveyorTrackEnd return value: {retval}");
+
+        // Return to safety position
+        robot.MoveL(homejointPos, homePose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+
+        this.Invoke((MethodInvoker)delegate {
+            Console.WriteLine("Conveyor test completed!");
+            button3.Enabled = true;
+        });
+    }

@@ -933,3 +933,74 @@ Code example
         robot.MoveC(midjointPos, middescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, 100, -1);
         robot.LinArcFIRPlanningEnd();
     }
+
+Acceleration Smoothing Enable
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Enable acceleration smoothing
+     * @param [in] saveFlag Save after power-off
+     * @return  Error code
+     */
+    public int AccSmoothStart(boolean saveFlag)
+
+Acceleration Smoothing Disable
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Disable acceleration smoothing
+     * @param [in] saveFlag Save after power-off
+     * @return  Error code
+     */
+    public int AccSmoothEnd(boolean saveFlag)
+
+Code Example
++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set reconnect attempts and interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("RPC connection success");
+        }
+        else
+        {
+            System.out.println("RPC connection fail");
+            return ;
+        }
+
+        JointPos JP1 = new JointPos(88.927,-85.834,80.289,-85.561,-91.388,108.718);
+        DescPose DP1 =new DescPose(88.739,-527.617,514.939,-179.039,1.494,70.209);
+
+        JointPos JP2 =new JointPos(27.036,-83.909,80.284,-85.579,-90.027,108.604);
+        DescPose DP2 = new DescPose(-433.125,-334.428,497.139,-179.723,-0.745,8.437);
+
+        JointPos JP3 =new JointPos(60.219,-94.324,62.906,-62.005,-87.159,108.598);
+        DescPose DP3 =new DescPose(-112.215,-409.323,686.497,176.217,2.338,41.625);
+
+        ExaxisPos exaxisPos=new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese=new DescPose(0, 0, 0, 0, 0, 0);
+
+        int error = robot.AccSmoothStart(false);
+
+        System.out.println("AccSmoothStart return:"+error);
+        //MoveJ
+        robot.MoveJ(JP1, DP1, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveJ(JP2, DP2, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveJ(JP1, DP1, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveJ(JP2, DP2, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+
+        error = robot.AccSmoothEnd(false);
+    }

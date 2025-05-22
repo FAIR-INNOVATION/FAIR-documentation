@@ -1089,3 +1089,75 @@ Code Example
         //FIRLin(false);
         //FIRLin(true);
     }
+
+Acceleration Smoothing Enable
+++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Enable acceleration smoothing
+    * @param [in] saveFlag Whether to save after power off
+    * @return Error code
+    */
+    int AccSmoothStart(bool saveFlag);
+
+Acceleration Smoothing Disable
+++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Disable acceleration smoothing
+    * @param [in] saveFlag Whether to save after power off
+    * @return Error code
+    */
+    int AccSmoothEnd(bool saveFlag);
+
+Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        bool saveFlag = false;
+
+        int rtn = 0;
+        JointPos p1Joint = new JointPos(88.927, -85.834, 80.289, -85.561, -91.388, 108.718);
+        DescPose p1Desc = new DescPose(88.739, -527.617, 514.939, -179.039, 1.494, 70.209);
+
+        JointPos p2Joint = new JointPos(27.036, -83.909, 80.284, -85.579, -90.027, 108.604);
+        DescPose p2Desc = new DescPose(-433.125, -334.428, 497.139, -179.723, -0.745, 8.437);
+        JointPos p3Joint = new JointPos(60.219, -94.324, 62.906, -62.005, -87.159, 108.598);
+        DescPose p3Desc = new DescPose(-112.215, -409.323, 686.497, 176.217, 2.338, 41.625);
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        robot.AccSmoothStart(saveFlag);
+        robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+        robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+        robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+        robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+
+        robot.AccSmoothEnd(saveFlag);
+    }
+
+Conveyor Belt Parameter Configuration
++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Conveyor belt parameter configuration
+    * @param [in] encChannel Encoder channel 1~2
+    * @param [in] resolution Pulses per encoder revolution
+    * @param [in] lead Conveyor travel distance per encoder revolution
+    * @param [in] wpAxis Workpiece coordinate system number (0 for tracking pickup and TPD tracking)
+    * @param [in] vision Vision configuration (0: disabled, 1: enabled)
+    * @param [in] speedRadio Speed ratio for conveyor tracking pickup (1-100, default 1 for other options)
+    * @param [in] followType Tracking motion type (0: tracking motion, 1: inspection motion)
+    * @param [in] startDis Inspection pickup start distance (mm, -1: auto calculate, default 0)
+    * @param [in] endDis Inspection pickup end distance (mm, default 100)
+    * @return Error code
+    */
+    int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio, int followType, int startDis=0, int endDis=100);

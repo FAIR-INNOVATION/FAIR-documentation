@@ -1001,3 +1001,68 @@ Code example
     robot.MoveL(startdescPose, 0, 0,vel=100)
     robot.MoveL(enddescPose, 0, 0,vel=100)
     robot.LinArcFIRPlanningEnd()
+
+Stop Motion
++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``StopMove()``"
+    "Description", "Stop motion"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "Error code (0-success, errcode-failure)"  
+
+Acceleration Smooth Start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AccSmoothStart(saveFlag_flag)``"
+    "Description", "Enable acceleration smoothing"
+    "Required Parameters", "- ``saveFlag_flag``: Whether to save after power off"
+    "Default Parameters", "None"
+    "Return Value", "Error code (0-success, errcode-failure)"
+
+Acceleration Smooth End
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AccSmoothEnd(saveFlag_flag)``"
+    "Description", "Disable acceleration smoothing"
+    "Required Parameters", "- ``saveFlag_flag``: Whether to save after power off"
+    "Default Parameters", "None"
+    "Return Value", "Error code (0-success, errcode-failure)"
+
+Code Example
+------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Connect to robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    JP1 = [88.927,-85.834,80.289,-85.561,-91.388,108.718]
+    DP1 = [88.739,-527.617,514.939,-179.039,1.494,70.209]
+
+    JP2 = [27.036,-83.909,80.284,-85.579,-90.027,108.604]
+    DP2 = [-433.125,-334.428,497.139,-179.723,-0.745,8.437]
+    error = robot.AccSmoothStart(saveFlag=0)
+    print("AccSmoothStart return:",error)
+    error = robot.MoveJ(JP1, tool=0, user=0, vel=100)
+    error = robot.MoveJ(JP2, tool=0, user=0, vel=100)
+    error = robot.MoveJ(JP1, tool=0, user=0, vel=100)
+    error = robot.MoveJ(JP2, tool=0, user=0, vel=100)
+    error = robot.AccSmoothEnd(saveFlag=0)
+    print("AccSmoothEnd return:", error)

@@ -113,17 +113,20 @@ Drive Belt Parameter Configuration
 .. code-block:: c#
     :linenos:
 
-    /** 
-    * @brief Drive Belt Parameter Configuration 
-    * @param [in] encChannel encoder channel 1~2
-    * @param [in] resolution Number of pulses for one revolution of the encoder
-    * @param [in] lead Distance travelled by the encoder for one conveyor revolution
-    * @param [in] wpAxis Workpiece coordinate system number Select the workpiece coordinate system number for the tracking motion function, and set the tracking gripping and TPD tracking to 0.
-    * @param [in] vision whether or not to match vision 0-no, 1-match
-    * @param [in] speedRadio speedRatio: for conveyor belt tracking capture option (1-100) other options default to 1
-    * @return error code 
-    */
-    int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio);
+    /**
+    * @brief Drive Belt Parameter Configuration
+    * @param [in] para[0] Encoder channels 1-2
+    * @param [in] para[1] The number of pulses for one revolution of the encoder
+    * @param [in] para[2] The distance traveled by the conveyor belt when the encoder rotates one full circle
+    * @param [in] para[3] Select the workpiece coordinate system number for the tracking motion function, and set the tracking grasping and TPD tracking to 0
+    * @param [in] para[4] Does it have vision? 0 does not have 1
+    * @param [in] para[5] Speed ratio for the conveyor belt tracking grasping option (1-100), the default for other options is 1
+    * @param [in] followType Tracking motion type, 0- tracking motion; 1- Follow-up inspection campaign 0
+    * @param [in] startDis tracking and grasping need to be set. The starting distance for tracking is -1: automatic calculation (automatic tracking and grasping after the workpiece reaches the bottom of the robot), unit: mm, default value: 0
+    * @param [in] endDis tracking and grasping need to be set, tracking termination distance, unit: mm, default value: 100
+    * @return error code
+    * /
+    int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio, int followType, int startDis=0, int endDis=100);  
 
 Setting the drive belt gripping point compensation
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -568,3 +571,121 @@ Code example
         robot.AxleSensorRegWrite(1, 4, 6, 1, 0, 0, 0);       
     }
 
+
+Controller Log Download
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Controller log download
+    * @param [in] savePath Save file path "D://zDown/"
+    * @return Error code
+    */
+    int RbLogDownload(string savePath);
+
+Code Example
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button6_Click(object sender, EventArgs e)
+    {  
+        Console.WriteLine("RbLogDownload start");
+        int rtn = robot.RbLogDownload(@"D:\zDOWN1\");
+        Console.WriteLine($"RbLogDownload return value: {rtn}");
+    }
+
+All Data Source Download
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Download all data sources
+    * @param [in] savePath Save file path "D://zDown/"
+    * @return Error code
+    */
+    int AllDataSourceDownload(string savePath);
+
+Code Example
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button6_Click(object sender, EventArgs e)
+    {   
+        Console.WriteLine("AllDataSourceDownload start");
+        int rtn = robot.AllDataSourceDownload(@"D:\zDOWN\");
+        Console.WriteLine($"AllDataSourceDownload return value: {rtn}");
+    }
+
+Data Backup Package Download
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Data backup package download
+    * @param [in] savePath Save file path "D://zDown/"
+    * @return Error code
+    */
+    int DataPackageDownload(string savePath);
+
+Code Example
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button6_Click(object sender, EventArgs e)
+    {   
+        Console.WriteLine("DataPackageDownload start");
+        int rtn = robot.DataPackageDownload(@"D:\zDOWN\");
+        Console.WriteLine($"DataPackageDownload return value: {rtn}");
+    }
+
+Get Controller SN Code
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get controller serial number
+    * @param [out] SNCode Controller serial number
+    * @return Error code
+    */
+    int GetRobotSN(out string SNCode);
+
+Code Example
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button6_Click(object sender, EventArgs e)
+    {   
+        string SN = "";
+        int rtn = robot.GetRobotSN(out SN); 
+        Console.WriteLine($"Controller SN is {SN}");
+    }
+
+Shutdown Robot OS
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Shutdown robot operating system
+    * @return Error code
+    */
+    int ShutDownRobotOS();
+
+Code Example
++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button6_Click(object sender, EventArgs e)
+    {   
+        int rtn = robot.ShutDownRobotOS();
+        Console.WriteLine($"ShutDownRobotOS return value: {rtn}");
+    }

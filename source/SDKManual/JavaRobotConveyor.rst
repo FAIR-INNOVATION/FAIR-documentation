@@ -61,21 +61,26 @@ Record point B
     int ConveyorPointBRecord(). 
 
 Drive Belt Parameter Configuration
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.4-3.8.1
+
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Drive belt parameterization
-    * @param [in] encChannel encoder channel 1~2
-    * @param [in] resolution Number of pulses for one revolution of the encoder
-    * @param [in] lead Distance traveled by the encoder for one conveyor revolution
-    * @param [in] wpAxis Workpiece coordinate system number Select the workpiece coordinate system number for the tracking motion function, and set the tracking grab and TPD tracking to 0.
-    * @param [in] vision whether to match vision 0 no 1 yes
-    * @param [in] speedRadio speedRatio For conveyor tracking grab options (1-100) Other options default to 1
-    * @return error code
+    * @brief  Drive Belt Parameter Configuration
+    * @param [in] encChannel Encoder channel 1~2
+    * @param [in] resolution Pulses per encoder revolution
+    * @param [in] lead Conveyor movement distance per encoder revolution
+    * @param [in] wpAxis Workpiece coordinate system ID (0 for tracking capture/TPD tracking)
+    * @param [in] vision Vision system flag (0: disabled, 1: enabled)
+    * @param [in] speedRadio Speed ratio for conveyor tracking (1-100, default:1)
+    * @param [in] followType Tracking mode (0: tracking, 1: inspection tracking)
+    * @param [in] startDis Tracking start distance (mm, -1:auto, default:0)
+    * @param [in] endDis Tracking end distance (mm, default:100)
+    * @return Error code
     */
-    int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio); 
+    int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio, int followType, int startDis, int endDis);
 
 Setting the drive belt gripping point compensation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -230,3 +235,32 @@ Code example
         rtn = robot.MoveGripper(1, 100, 60, 30, 30000, 0);
         System.out.println("MoveGripper: rtn " + rtn);
     } 
+
+Conveyor Communication Input Detection
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Conveyor communication input detection
+    * @param [in] timeout Timeout in ms
+    * @return Error code
+    */
+    int ConveyorComDetect(int timeout);
+
+Conveyor Communication Input Trigger
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Conveyor communication input trigger
+    * @param [in] timeout Timeout in ms
+    * @return Error code
+    */
+    int ConveyorComDetectTrigger();
+
