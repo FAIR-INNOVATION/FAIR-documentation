@@ -7,15 +7,6 @@ FRCap case
 FAIRINO Palletizer
 -----------------------------
 
-Please visit the following address for the source code and palletizing FRCap package: \ `FAIR-INNOVATION/frcap_palletizer <https://gitee.com/fair-innovation/frcap_palletizer>`__\.
-
-Or clone directly locally:
-
-.. code-block:: c++
-   :linenos:
-
-   git clone https://gitee.com/fair-innovation/frcap_palletizer.git
-
 It can be used after uploading the "Palletizer.frcap" under the build folder in the project to the WebApp and registering it.
 
 .. image:: frcap_pictures/011.png
