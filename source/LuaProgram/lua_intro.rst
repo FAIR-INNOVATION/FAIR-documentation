@@ -3,4 +3,4 @@ FR LUA Programming Script
 
 PDF Download
 ------------------
-    :download:`FR Lua Programming Script User Manual-V1.0 <../_static/_doc/FR Lua Programming Script User Manual-V1.0.pdf>`
+    :download:`FRLua programming script user manual-V1.1 <../_static/_doc/FRLua programming script user manual-V1.1.pdf>`

@@ -5350,6 +5350,30 @@ The recommended joint detection threshold is equivalent to setting the collision
      - 0.3 
      - 0.3 
 
+   * - **FR3WMS**
+     - 0.4					
+     - 0.7
+     - 0.6 
+     - 0.3 
+     - 0.3 
+     - 0.3 
+
+   * - **FR3WML**
+     - 0.4					
+     - 0.7
+     - 0.6 
+     - 0.3 
+     - 0.3 
+     - 0.3 
+
+   * - **FR3C**
+     - 0.4					
+     - 0.7
+     - 0.6 
+     - 0.3 
+     - 0.3 
+     - 0.3 
+
    * - **FR5**
      - 0.6					
      - 1
@@ -5412,6 +5436,30 @@ The larger the TCP detection threshold, the less sensitive the collision detecti
      - **RZ**
 
    * - **FR3**
+     - 300					
+     - 300
+     - 300
+     - 20 
+     - 20
+     - 20
+
+   * - **FR3WMS**
+     - 300					
+     - 300
+     - 300
+     - 20 
+     - 20
+     - 20
+
+   * - **FR3WML**
+     - 300					
+     - 300
+     - 300
+     - 20 
+     - 20
+     - 20
+
+   * - **FR3C**
      - 300					
      - 300
      - 300
