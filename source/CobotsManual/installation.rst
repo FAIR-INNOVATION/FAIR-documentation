@@ -2615,6 +2615,662 @@ The following example is to demonstrate the simulation input connection simulati
 
 .. centered:: Figure 3.5-17 Simulation input schematic diagram
 
+FR3MT&3C Optional Modules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Preface
++++++++++++++++++++++++++
+
+The definition of collaborative robots complies with international ISO standards and national regulations to ensure operator safety. We do not recommend directly applying the robot body in scenarios where the operation target is the human body. However, if the robot user or developer has a specific need to involve human targets, they must conduct thorough evaluations and ensure personnel safety by configuring a reliable, fully tested, and certified safety protection system for the robot body.
+
+Safety Notice
+***************************
+
+This manual serves only as a safety certification guide for customers. Maintenance operators must possess professional expertise. FaRo (法奥) assumes no responsibility for any incidents caused by non-professionals.
+
+.. important:: If the robot (robot body, power module, or extension module) is damaged, altered, or modified due to human factors, FaRo refuses to bear any responsibility. FaRo is not liable for any damage caused to the robot or other equipment due to programming errors made by the customer.
+
+Validity and Responsibility
+***************************
+
+The information in this manual does not cover the design, installation, or operation of a complete robot application, nor does it account for all peripheral devices that may affect the safety of the system. The design and installation of the complete system must comply with the safety requirements established by the standards and regulations of the country where the robot is installed.
+
+FaRo’s integrators are responsible for ensuring compliance with relevant national laws and regulations, guaranteeing that the complete robot application poses no significant hazards. This includes but is not limited to:
+
+- Conducting a risk assessment for the complete robot system
+- Connecting additional mechanical and safety devices as defined in the risk assessment
+- Establishing appropriate safety settings in the software
+- Ensuring users do not modify any safety measures
+- Verifying the correct design and installation of the entire robot system
+- Providing clear usage instructions
+- Marking the integrator’s logo and contact information on the robot
+- Collecting all documentation, including this manual, in the technical file
+
+Limited Liability
+***************************
+
+The safety information in this manual does not constitute a general safety guarantee for robots. Even if all safety instructions are followed, personnel injury or equipment damage may still occur.
+
+Safety Warning Signs
+***************************
+
+The following safety warning signs are used on the product.
+
+.. important:: 
+	.. figure:: installation/008.png
+		:width: 60
+		:height: 50
+		:align: left
+
+	Name: **DANGER**  
+
+	Purpose: Indicates an imminent electrical hazard that could result in death or serious injury if not avoided.
+
+.. important:: 
+	.. figure:: installation/009.png
+		:width: 60
+		:height: 50
+		:align: left
+
+	Name: **ELECTRIC SHOCK HAZARD** 
+
+	Purpose: Indicates an imminent electric shock hazard that could result in death or serious injury if not avoided.
+
+.. important:: 
+	.. figure:: installation/010.png
+		:width: 60
+		:height: 50
+		:align: left
+
+	Name: **BURN HAZARD**  
+
+	Purpose: Indicates a hot surface that could cause injury if touched.
+
+.. important:: 
+	.. figure:: installation/112.png
+		:width: 60
+		:height: 50
+		:align: left
+
+	Name: **GROUNDING**  
+  
+	Purpose: Indicates that the device must be properly grounded.
+	                                           
+FR3MT&3C Base and Module Interface Definitions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Base Interface Definitions
+***************************
+
+The base of the robot has seven external buttons and interfaces, defined as follows:
+
+.. figure:: installation/113.png
+	:align: center
+	:width: 4in
+
+.. centered:: Figure 3.5-18 Base Buttons and Interfaces
+
+.. note:: The pin definitions for base interfaces are viewed from the installation reference plane.
+
+**1. Controller Power Button**: Powers on automatically by default.
+
+**2. M8-A Type-4P-Female Socket Pin Definitions**:  
+User Ethernet port (IP: 192.168.57.2). Connector: M8-A Type-4P-Female (with M8-A Type-4P-Male plug). Complies with IEC 61076-2-101.
+
+.. figure:: installation/114.png
+	:align: center
+	:width: 2in
+
+.. list-table::
+   :widths: 20 30 50
+   :header-rows: 0
+   :align: center
+
+   * - **Pin**
+     - **Definition**
+     - **Description**
+
+   * - 1
+     - TX+
+     - Data Transmit Positive
+
+   * - 2
+     - RX+
+     - Data Receive Positive
+
+   * - 3
+     - RX-
+     - Data Receive Negative
+
+   * - 4
+     - TX-
+     - Data Transmit Negative
+
+**3. M12-L Type-5P-Male Socket Pin Definitions**:  
+Connector: M12-L Type-5P-Male (with M12-L Type-5P-Female plug). Complies with IEC 61076-2-101.
+
+.. figure:: installation/115.png
+	:align: center
+	:width: 2in
+
+.. list-table::
+   :widths: 10 15 15 20 40 
+   :header-rows: 0
+   :align: center
+
+   * - **Pin**
+     - **Color**
+     - **Definition**
+     - **Description**
+     - **Remarks**
+
+   * - 1
+     - Black
+     - 0V
+     - Control Power Negative
+     - Robot control power negative (backup power, no connection needed)
+
+   * - 2
+     - Brown
+     - 24V
+     - Control Power Positive
+     - Robot control power positive (backup power, no connection needed)
+
+   * - 3
+     - White
+     - 48V
+     - Power Supply Positive
+     - Robot power supply positive
+
+   * - 4
+     - Blue
+     - 0V
+     - Power Supply Negative
+     - Robot power supply negative
+
+   * - 5
+     - Gray
+     - PE
+     - Ground
+     - Safety ground
+  
+.. note:: 
+  ① The base includes a 48V-to-24V power converter.  
+  ② The 48V-to-24V converter serves as a backup for the 24V input.
+
+.. figure:: installation/116.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.5-19 48V-to-24V Power Conversion Diagram
+
+**4. M12-A Type-12P-Female Socket Pin Definitions**:  
+Connector: M12-A Type-12P-Female (with M12-A Type-12P-Male plug). Complies with IEC 61076-2-101.
+
+.. figure:: installation/117.png
+	:align: center
+	:width: 2in
+
+.. list-table::
+   :widths: 10 15 15 20 40 
+   :header-rows: 0
+   :align: center
+
+   * - **Pin**
+     - **Color**
+     - **Definition**
+     - **Description**
+     - **Remarks**
+
+   * - 1
+     - Blue
+     - AGND
+     - Analog Ground
+     - Analog reference ground
+
+   * - 2
+     - Brown
+     - 0V
+     - 24V Power Negative
+     - Control power negative
+
+   * - 3
+     - Red
+     - 485-A
+     - RS485 Communication A
+     - Reserved for expansion
+
+   * - 4
+     - Gray
+     - 485-B
+     - RS485 Communication B
+     - Reserved for expansion
+
+   * - 5
+     - Black
+     - DI0/DO0
+     - Digital Input/Output 0
+     - Configurable as input or output (mutually exclusive)
+
+   * - 6
+     - Yellow
+     - DI1/DO1
+     - Digital Input/Output 1
+     - Configurable as input or output (mutually exclusive)
+
+   * - 7
+     - Pink
+     - DI2/DO2
+     - Digital Input/Output 2
+     - Configurable as input or output (mutually exclusive)
+
+   * - 8
+     - Dark Green
+     - AI0/AO0
+     - Analog Input/Output 0
+     - Configurable as input or output (mutually exclusive)
+
+   * - 9
+     - White
+     - AI1/AO1
+     - Analog Input/Output 1
+     - Configurable as input or output (mutually exclusive)
+
+   * - 10
+     - Purple
+     - 24V
+     - 24V Power Positive
+     - Control power positive
+
+   * - 11
+     - Orange
+     - DI3/DO3
+     - Digital Input/Output 3
+     - Configurable as input or output (mutually exclusive)
+
+   * - 12
+     - Light Green
+     - DI4/DO4
+     - Digital Input/Output 4
+     - Configurable as input or output (mutually exclusive)
+
+**5. M8-A Type-4P-Female Socket Pin Definitions**:  
+Debug Ethernet port (IP: 192.168.58.2). Connector: M8-A Type-4P-Female (with M8-A Type-4P-Male plug). Complies with IEC 61076-2-101.
+
+.. figure:: installation/114.png
+	:align: center
+	:width: 2in
+
+.. list-table::
+   :widths: 20 30 50
+   :header-rows: 0
+   :align: center
+
+   * - **Pin**
+     - **Definition**
+     - **Description**
+
+   * - 1
+     - TX+
+     - Data Transmit Positive
+
+   * - 2
+     - RX+
+     - Data Receive Positive
+
+   * - 3
+     - RX-
+     - Data Receive Negative
+
+   * - 4
+     - TX-
+     - Data Transmit Negative
+
+**6. USB-A Port**: USB 2.0 for internal debugging.  
+**7. HDMI-A Port**: HDMI display for internal debugging.
+
+Power Module Interface Definitions
+******************************************************
+
+The power module uses a Meanwell NDR-480-48. Pin definitions:
+
+.. figure:: installation/118.png
+	:align: center
+	:width: 3in
+
+.. list-table::
+   :widths: 20 20 20 40
+   :header-rows: 0
+   :align: center
+
+   * - **Pin**
+     - **Definition**
+     - **Description**
+     - **Remarks**
+
+   * - 1
+     - L
+     - Live Wire
+     - Input 100-240V AC
+
+   * - 2
+     - N
+     - Neutral Wire
+     - Input 100-240V AC
+
+   * - 3
+     - PE
+     - Ground
+     - Earth connection
+
+   * - 4
+     - +V
+     - 48V
+     - Output 48V/10A
+
+   * - 5
+     - +V
+     - 48V
+     - Output 48V/10A
+
+   * - 6
+     - -V
+     - 0V
+     - Output 48V return
+
+   * - 7
+     - -V
+     - 0V
+     - Output 48V return
+
+Extension Module Interface Definitions
+******************************************************
+
+The extension module includes emergency stop and energy discharge functions. External terminals and internal topology:
+
+.. figure:: installation/119.png
+	:align: center
+	:width: 6in
+
+.. list-table::
+   :widths: 20 30 50
+   :header-rows: 0
+   :align: center
+
+   * - **Pin**
+     - **Definition**
+     - **Description**
+
+   * - 1
+     - 48-IN
+     - 48V Input Positive
+
+   * - 2
+     - 0V
+     - 48V Input Negative
+
+   * - 3
+     - PE
+     - Ground
+
+   * - 4
+     - PE
+     - Ground
+
+   * - 5
+     - 24V
+     - Control Power Positive
+
+   * - 6
+     - 0V
+     - Control Power Negative
+
+   * - 7
+     - 0V
+     - Power Supply Negative
+
+   * - 8
+     - 48-OUT
+     - Power Supply Positive
+
+   * - 9
+     - ESW1
+     - Emergency Stop Button 1 Positive
+
+   * - 10
+     - 0V
+     - Emergency Stop Button 1 Negative
+
+   * - 11
+     - ESW2
+     - Emergency Stop Button 2 Positive
+
+   * - 12
+     - 0V
+     - Emergency Stop Button 2 Negative
+
+   * - 13
+     - E-O-2
+     - Passive Normally Open 2
+
+   * - 14
+     - E-O-1
+     - Passive Normally Open 1
+
+   * - 15
+     - E-C-2
+     - Passive Normally Closed 2
+
+   * - 16
+     - E-C-1
+     - Passive Normally Closed 1
+
+FR3MT&3C Application Scenarios
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Most scenarios only require the user cable kit. Specific use cases:
+
+.. list-table::
+   :widths: 10 15 15 20 40 
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Scenario**
+     - **Power Supply**
+     - **Functional Requirements**
+     - **Recommended Configuration**
+
+   * - 1
+     - Basic Application
+     - 48V/10A DC available
+     - No E-stop/energy discharge
+     - User cable kit
+
+   * - 2
+     - Safety Extended
+     - 48V/10A DC available
+     - E-stop + energy discharge
+     - User cable kit + extension module
+
+   * - 3
+     - Independent Power
+     - No 48V/10A DC
+     - No E-stop/energy discharge
+     - User cable kit + power module + power cord
+
+   * - 4
+     - Full Function
+     - No 48V/10A DC
+     - E-stop + energy discharge
+     - User cable kit + power module + power cord + extension module
+
+Basic Application
+******************************************************
+
+Only user cable kit required. Connection steps:
+
+1. Connect the M12-L-5P-Female power cable to the base (48V/0V/PE to user power supply; insulate 24V/0V).  
+2. Connect M12-A-12P-Male and M8-A-4P-Male to base.
+
+.. figure:: installation/120.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.5-20 Only user cable kit required connection steps
+
+Safety Extended
+******************************************************
+
+User cable kit + extension module. Connection steps:
+
+1. Connect the 0.5M extension cable (48V/0V/PE) to user power and module.  
+2. Connect M12-L-5P-Female to base (all 5 wires to module).  
+3. Connect M12-A-12P-Male and M8-A-4P-Male to base.
+
+.. figure:: installation/121.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.5-21 User cable kit + extension module connection steps
+
+Independent Power
+******************************************************
+
+User cable kit + power module + power cord. Connection steps:
+
+1. Connect 1.5M power cord (L/N/PE) to NDR-480-48 input.  
+2. Connect M12-L-5P-Female to base (48V/0V/PE to power module; insulate 24V/0V).  
+3. Connect M12-A-12P-Male and M8-A-4P-Male to base.
+
+.. figure:: installation/122.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.5-22 User cable kit + power module + power cord connection steps
+
+Full Function
+******************************************************
+
+User cable kit + power module + power cord + extension module. Connection steps:
+
+1. Connect 1.5M power cord (L/N/PE) to NDR-480-48.  
+2. Connect 0.5M extension cable (48V/0V/PE) between power module and extension.  
+3. Connect M12-L-5P-Female to base (all 5 wires to module).  
+4. Connect M12-A-12P-Male and M8-A-4P-Male to base.
+
+.. figure:: installation/123.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.5-23 User cable kit + power module + power cord + extension module connection steps
+
+Optional Parts List
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+User Cable Kit (5M):
+
+.. list-table::
+   :widths: 20 60 20 
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Name**
+     - **Qty**
+
+   * - 1
+     - FR3MT&3C-DC Power Cable-5M
+     - 1
+
+   * - 2
+     - FR3MT&3C-I/O Cable-5M
+     - 1
+
+   * - 3
+     - FR3MT&3C-Ethernet Cable-5M
+     - 1
+
+   * - 4
+     - M8 Straight Plug, M8-P4A-PLA05, 4-pin
+     - 1
+
+User Cable Kit (1M):
+
+.. list-table::
+   :widths: 20 60 20 
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Name**
+     - **Qty**
+
+   * - 1
+     - FR3MT&3C-DC Power Cable-1M
+     - 1
+
+   * - 2
+     - FR3MT&3C-I/O Cable-1M
+     - 1
+
+   * - 3
+     - FR3MT&3C-Ethernet Cable-1M
+     - 1
+
+   * - 4
+     - M8 Straight Plug, M8-P4A-PLA05, 4-pin
+     - 1
+
+Power Module:
+
+.. list-table::
+   :widths: 20 60 20 
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Name**
+     - **Qty**
+
+   * - 1
+     - Meanwell Power Supply, NDR-480-48
+     - 1
+
+Power Cord:
+
+.. list-table::
+   :widths: 20 60 20 
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Name**
+     - **Qty**
+
+   * - 1
+     - FR3MT&3C-Power Cord-1.5M 
+     - 1
+
+Extension Module:
+
+.. list-table::
+   :widths: 20 60 20 
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Name**
+     - **Qty**
+
+   * - 1
+     - FR3MT&3C Base-Extension Module
+     - 1
+
+   * - 2
+     - FR3MT&3C Power-Extension Cable-0.5M
+     - 1
+
 Demonstrate and end LED
 ---------------------------
 
