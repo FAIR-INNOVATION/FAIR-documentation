@@ -3875,7 +3875,7 @@ For the first time use, you need to create a recipe first. Click "Create Recipe"
 **Step4**: Click "Configure" in the size configuration column of the palletizing equipment to enter the size configuration pop-up window. Set the devices "X", "Y", "Z", and "Angle", and click "Confirm Configuration" to complete the size configuration information setting of the palletizing equipment.
 
 .. important:: 
-   X, Y and Z are the absolute values of the upper right corner or upper left corner of the tray relative to the robot's coordinate system. Angle is the rotation angle of the robot during installation, and it is recommended to set it to 0 during installation.
+   X, Y, and Z are the absolute values of the coordinates of the point at the upper right corner of the left tray or the upper left corner of the right tray relative to the robot's base coordinate system. Angle is the rotation angle during the robot's installation, which is recommended to be 0 during installation.
 
 .. figure:: robot_peripherals/152.png
    :align: center

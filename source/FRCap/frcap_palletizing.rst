@@ -475,8 +475,18 @@ Click "Config" in the advanced configuration column to enter the "Advanced Confi
 
 1) Dimensions of palletizing equipment: Dimensions of palletizing workbench.
 
+.. image:: frcap_pictures/074.png
+   :width: 6in
+   :align: center
+
+.. image:: frcap_pictures/075.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 10-3-24 Palletizing Station
+
 .. important:: 
-    X, Y, and Z are the absolute values of the upper right corner of the pallet or the upper left corner of the right pallet relative to the coordinates of the robot's base coordinate system. Angle is the rotation angle of the robot during installation. It is recommended to be 0 during installation.
+    X, Y, and Z are the absolute values of the coordinates of the point at the upper right corner of the left tray or the upper left corner of the right tray relative to the robot's base coordinate system. Angle is the rotation angle during the robot's installation, which is recommended to be 0 during installation.
     
 2) Lifting height for picking up materials: User-defined lifting height after successfully picking up materials from the grabbing point.
 
@@ -490,13 +500,13 @@ Click "Config" in the advanced configuration column to enter the "Advanced Confi
    :width: 6in
    :align: center
 
-.. centered:: Figure 10-3-24 Partition configuration
+.. centered:: Figure 10-3-25 Partition configuration
 
 .. image:: frcap_pictures/071.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 10-3-25 Recipe Management - Advanced Configuration Displays Partition Configuration
+.. centered:: Figure 10-3-26 Recipe Management - Advanced Configuration Displays Partition Configuration
 
 Then set the transition points of the partitions. There are three transition points for the partitions. The purpose of setting them is to roughly plan a movement path after grabbing the partitions to avoid collisions and being unable to complete the action of placing the partitions.
 
@@ -507,19 +517,19 @@ Then set the transition points of the partitions. There are three transition poi
    :width: 3in
    :align: center
 
-.. centered:: Figure 10-3-26 Partition transition point 1 (take the right station as an example)
+.. centered:: Figure 10-3-27 Partition transition point 1 (take the right station as an example)
 
 .. image:: frcap_pictures/036.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 10-3-27 Partition transition point 2 (take the right station as an example)
+.. centered:: Figure 10-3-28 Partition transition point 2 (take the right station as an example)
 
 .. image:: frcap_pictures/037.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 10-3-28 Partition transition point 3 (take the right station as an example)
+.. centered:: Figure 10-3-29 Partition transition point 3 (take the right station as an example)
 
 Then set the grab point (keep the grab point at the center of the partition, and the bottom of the suction cup will be in a squeeze state when it contacts the partition) and placement point, and click "Confirm" to complete the partition information setting.
 
@@ -527,13 +537,13 @@ Then set the grab point (keep the grab point at the center of the partition, and
    :width: 3in
    :align: center
 
-.. centered:: Figure 10-3-29 Partition grab point (take the right station as an example)
+.. centered:: Figure 10-3-30 Partition grab point (take the right station as an example)
 
 .. image:: frcap_pictures/039.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 10-3-30 Partition placement point (take the right workstation as an example)
+.. centered:: Figure 10-3-31 Partition placement point (take the right workstation as an example)
 
 6) Lifting axis: Users can customize the start and stop of the lifting axis, communication parameters (IP address, port number and communication cycle), the floor number to start lifting and select the start and stop of the lifting axis. 
 
@@ -545,19 +555,19 @@ Then set the grab point (keep the grab point at the center of the partition, and
    :width: 6in
    :align: center
 
-.. centered:: Figure 10-3-31 Lifting shaft configuration
+.. centered:: Figure 10-3-32 Lifting shaft configuration
 
 .. image:: frcap_pictures/072.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 10-3-32 Recipe Management - Advanced Configuration Display Lifting Axis
+.. centered:: Figure 10-3-33 Recipe Management - Advanced Configuration Display Lifting Axis
 
 .. image:: frcap_pictures/073.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 10-3-33 Lifting shaft test
+.. centered:: Figure 10-3-34 Lifting shaft test
 
 Procedural generation
 --------------------------------------------
@@ -578,13 +588,13 @@ Check "Program Generation" below the recipe display, enter the program name, sel
 
 .. centered:: Figure 10-4-1 Procedural generation
 
-Palletizing status page start and stop
---------------------------------------------
+.. Palletizing status page start and stop
+.. --------------------------------------------
 
-Enable this function in the "Status Page" column, enter the palletizing work status page, and view "Production Information", "Alarm Information" and "Palletizing Program".
+.. Enable this function in the "Status Page" column, enter the palletizing work status page, and view "Production Information", "Alarm Information" and "Palletizing Program".
 
-.. image:: frcap_pictures/044.png
-   :width: 6in
-   :align: center
+.. .. image:: frcap_pictures/044.png
+..    :width: 6in
+..    :align: center
 
-.. centered:: Figure 10-5-1 Palletizing status page
+.. .. centered:: Figure 10-5-1 Palletizing status page
