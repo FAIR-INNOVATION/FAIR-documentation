@@ -13,6 +13,7 @@ The development environment must meet the following minimum configuration:
 - RAM:>=1 GB(more than 2 GB recommended);
 - ROM:>=128GB;
 - OS:Requires Windows 10 or higher, macOS 10.1 5 or higher, Linux (x64) system (Ubuntu, Debian, etc.).
+- Controller Version: Check in WebApp "System Settings-About". Note the distinction between QX and LA in development environment. Avoid using ES6+ syntax and other modern JavaScript features in QX environment examples.
 
 We have encapsulated some interfaces and modules, but if you want to achieve a better development effect, it is recommended to have a certain understanding of web development, and it is best to be familiar with the following technologies:
 
@@ -180,13 +181,13 @@ The use of F rcap-api is similar to frcap-ui , as follows:
         console.error(err);
     });
 
-Backend custom instruction development
------------------------------------------
+Backend Custom Command Development
+-------------------------------------
 
-Database operation example
-+++++++++++++++++++++++++++++
+Database Operation Example (LA)
++++++++++++++++++++++++++++++++++++
 
-1. Introduce database module
+1. Import database module
 
 .. code-block:: javascript
    :linenos:
@@ -195,28 +196,77 @@ Database operation example
     var Sqlite3_Action = require(node + '/better-sqlite3/better-sqlite3.js');
     var sqlite = new Sqlite3_Action();
 
-2. Get the content in the point database
+2. Get content from point database
    
 .. code-block:: javascript
    :linenos:
 
     // Match cmd
     case 'get_points':
-    // Write the sql statement in ascending order of numbers + ascending order starting with the first letter + ascending order starting with Chinese, and feed the data back to the front-end page for display
+    // Write SQL statement to return data to frontend sorted by numeric ascending + first letter ascending + Chinese characters ascending
     var sql = "select * from points order by name ASC"; 
     var sql_data = sqlite.queryall(DB_POINTS, sql); 
-    // json data formatting
+    // Format json data
     for (var i = 0; i < sql_data.length; i++) {
         response_data[sql_data[i].name] = sql_data[i];
     }
-    //json data is fed back to the front end
+    // Return json data to frontend
     event_socket.emit('response', res, response_status, response_data);
     break;  
 
-Socket communication operation example
-++++++++++++++++++++++++++++++++++++++++
+Database Operation Example (QX)
++++++++++++++++++++++++++++++++++++++++++
 
-- Introduce socket communication module
+.. note:: QX version uses JSON format files for data storage.
+
+1. Import database module
+
+.. code-block:: javascript
+   :linenos:
+
+   var node = "/usr/local/etc/node/sys"
+   var sqlite_adapter = require(node + '/jsdb/sqlite_adapter');
+   var db = new sqlite_adapter.Database(palletizing_db);
+
+2. Database usage example
+   
+.. code-block:: javascript
+   :linenos:
+
+   // Execute SELECT query and get all rows
+   var rows = db.queryall('SELECT * FROM box_cfg');
+   console.log('result:', rows);
+
+   // Execute SELECT query and get single row
+   var row = db.queryget('SELECT * FROM box_cfg WHERE flag=1');
+   console.log('result:', row);
+
+   // Execute UPDATE statement
+   db.run('UPDATE box_cfg SET height=100 WHERE flag=1', function(err) {
+      if (err) {
+         console.error('Update failed:', err);
+      } else {
+         console.log('Update success');
+      }
+   });
+
+   // Execute parameterized query
+   var params = [100, 200, 300, 1];
+   db.run('UPDATE box_cfg SET height=?, width=?, length=? WHERE flag=?', params, function(err) {
+      if (err) {
+         console.error('update failed:', err);
+      } else {
+         console.log('update success');
+      }
+   });
+
+   // Close database connection
+   db.close();
+
+Socket Communication Example
++++++++++++++++++++++++++++++++++
+
+- Import socket communication module
    
 .. code-block:: javascript
    :linenos:
@@ -225,26 +275,34 @@ Socket communication operation example
     var Socket_Cmd = require(node + '/socket/socket_cmd');
     var socket_cmd = new Socket_Cmd();
 
-- Issue instructions to set system variables
+- Send system variable setting command
   
 .. code-block:: javascript
    :linenos:
 
    // Match cmd
-    case 511:
-   //Get the content of sent data
-    content = data_json.content;
-   //Get the length of sent data
-    len = data_json.content.length;
-    //Group sends data
-    send_content = '/f/bIII1III511III' + len + 'III' + content + 'III/b/f'
-    //socket send
-    socket_cmd.send(send_content);
-    //socket recv
-    socket_cmd.recv().then((recv_data)=>{
-        response_data = recv_data;
-    event_socket.emit('response', res, response_status, response_data);
-    }).catch((err)=>{
-        console.log(err);
-    })
-    break;
+   case 511:
+   // Get sent data content
+   content = data_json.content;
+   // Get sent data length
+   len = data_json.content.length;
+   // Assemble sending data
+   send_content = '/f/bIII1III511III' + len + 'III' + content + 'III/b/f'
+   // socket send
+   socket_cmd.send(send_content);
+   // socket recv (note LA/QX difference)
+   // LA Version:
+   socket_cmd.recv().then((recv_data)=>{
+      response_data = recv_data;
+   event_socket.emit('response', res, response_status, response_data);
+   }).catch((err)=>{
+      console.log(err);
+   })
+   // QX Version 
+   // socket_cmd.recv().then(function(recv_data){
+   //     response_data = recv_data;
+   // event_socket.emit('response', res, response_status, response_data);
+   // }).catch (function(err){
+   //     console.log(err);
+   // })
+   break;

@@ -5568,3 +5568,1680 @@ Using Motion Configuration Switch Method
    :align: center
 
 .. centered:: Figure 9.27-5 Typical Program Using Configuration Switch Method for PTP Smoothing
+
+Swing Tilt Angle Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++
+
+The robot swing tilt angle function allows the robot's end tool to customize the swing angle around the Rx direction of the swing coordinate system during swinging motion, reducing the difference in contact length between the fillet weld and the connected materials on both sides in operations such as lap welding.
+
+Operation Procedure
+++++++++++++++++++++++++++++
+
+On the robot’s web control interface, click "Teaching Program" -> "Program Editing" to enter the "Motion Command" interface, as shown below.
+
+.. image:: coding/320.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.28-1 Motion Command Interface
+
+In the "Motion Command" interface, click "Weave" to enter the "Weave" command editing interface.
+
+.. image:: coding/321.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.28-2 Weave Command Editing Interface
+
+In the "Weave" command editing interface, click the "Selection Number" dropdown to choose different swing parameter configurations. Click the button next to the dropdown to modify the swing parameters under the selected number.
+
+.. image:: coding/322.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.28-3 Swing Parameter Configuration
+
+In the swing parameter configuration, enter a custom rotation angle around the Rx direction of the swing coordinate system in the "Swing Direction Tilt Angle" field, then click "Configure" to complete the setup.
+
+.. note:: Note: The "Swing Direction Tilt Angle" parameter is applicable to "Triangle Wave Swing," "Sine Wave Swing," "Circular Swing - Clockwise," and "Circular Swing - Counterclockwise" in the "Swing Type" parameter.
+
+The following example demonstrates the swing tilt angle function using Lin motion:
+
+**Step 1**: In the "Weave" command editing interface, select a pre-configured swing parameter set from the "Selection Number" dropdown. Under "Command Type," click "Start Weave," then click "Add" to enable the swing function.
+
+.. image:: coding/323.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.28-4 Adding Start Weave
+
+**Step 2**: In the "Motion Command" interface, click "Linear" to create a Lin linear motion (basic motion command, not detailed here).
+
+**Step 3**: In the "Weave" command editing interface, under "Command Type," click "Stop Weave," then click "Add" to disable the swing function.
+
+.. image:: coding/324.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.28-5 Adding Stop Weave
+
+**Step 4**: After completing Steps 1–3, check the correctness of the settings in the "Program Preview" section of the "Weave" command editing interface.
+
+.. image:: coding/325.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.28-6 Swing Program Preview
+
+**Step 5**: After verifying the program in the "Program Preview" section, click "Apply" to automatically generate executable LUA code.
+
+.. image:: coding/326.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.28-7 Example LUA Swing Motion Program
+
+Welding process parameter gradient function (current, voltage, travel speed along weld seam)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++
+
+The welding parameter gradual change function (current, voltage, and travel speed along the weld seam) supports customizing the variation range of process parameters during welding.
+
+Current/Voltage Parameter Gradual Change Process
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Current Parameter Gradual Change
+*****************************************
+
+On the robot web control interface, navigate to "Teach Program" -> "Program Editing" to enter the "Welding Command" interface as shown below.
+   
+.. image:: coding/327.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.29-1 Welding Command Interface
+
+In the "Welding Command" interface, click "Weld" to enter the "Weld" command configuration interface.
+   
+.. image:: coding/328.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-2 Weld Command Configuration Interface
+
+In the "Command Type" section of the "Weld" command configuration interface, click "Welding Current Gradual Start" to configure parameters including "Start Current", "End Current", "Welding Current Control AO", and "Smoothing Option".
+
+For example, configure "Start Current" as 260 A, "End Current" as 220 A, "Welding Current Control AO" as "Ctrl-AO0" control box analog channel, and "Smoothing Option" as "Break". Click "Add" to complete configuration, then verify parameters in the "Program Preview" section for any errors.
+   
+.. image:: coding/329.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-3 Welding Current Gradual Start Command Parameters
+
+In the "Command Type" section of the "Weld" command configuration interface, click "Welding Current Gradual End". No parameters need to be configured. Click "Add" to complete, then verify in "Program Preview".
+   
+.. image:: coding/330.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-4 Welding Current Gradual End Command Parameters
+
+After configuring both start and end commands, click "Apply" to automatically generate executable LUA program.
+
+.. note:: During configuration, motion commands must be included. A typical LUA program combining arc tracking motion with current gradual change is shown below.
+   
+.. image:: coding/331.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-5 Typical Current Gradual Change Arc Tracking LUA Program
+
+Voltage Parameter Gradual Change
+**********************************
+
+In the "Command Type" section of the "Weld" command configuration interface, click "Welding Voltage Gradual Start" to configure parameters including "Start Voltage", "End Voltage", "Welding Voltage Control AO", and "Smoothing Option".
+
+For example, configure "Start Voltage" as 25 V, "End Voltage" as 22 V, "Welding Voltage Control AO" as "Ctrl-AO1" control box analog channel, and "Smoothing Option" as "Break". Click "Add" to complete configuration, then verify in "Program Preview".
+   
+.. image:: coding/332.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-6 Welding Voltage Gradual Start Command Parameters
+
+In the "Command Type" section, click "Welding Voltage Gradual End". No parameters need configuration. Click "Add" then verify.
+   
+.. image:: coding/333.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-7 Welding Voltage Gradual End Command Parameters
+
+After configuration, click "Apply" to generate LUA program.
+   
+.. image:: coding/334.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-8 Typical Voltage Gradual Change Arc Tracking LUA Program
+
+Travel Speed Gradual Change Process
++++++++++++++++++++++++++++++++++++++++++++++++
+
+Navigate to "Teach Program" -> "Program Editing" -> "Motion Command" interface.
+   
+.. image:: coding/335.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.29-9 Motion Command Interface
+
+Click "Weave" to enter configuration interface.
+   
+.. image:: coding/336.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-10 Weave Command Configuration Interface
+
+In "Command Type", click "Weave Gradual Start" to configure "Start Speed", "End Speed", and "Gradual Mode".
+
+For example, set "Gradual Mode" as "Weave+Travel Speed", "Start Speed" as 24 cm/min, and "End Speed" as 30 cm/min. Click "Add" then verify.
+   
+.. image:: coding/337.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-11 Weave+Travel Speed Gradual Start Parameters
+
+Click "Weave Gradual End" (no parameters needed), then "Add" and verify.
+   
+.. image:: coding/338.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-12 Weave+Travel Speed Gradual End Parameters
+
+Click "Apply" to generate LUA program.
+
+.. note:: Motion commands must be included. A sample program is shown below.
+   
+.. image:: coding/339.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-13 Typical Travel Speed Gradual Change Arc Tracking LUA Program
+
+.. note:: Before configuring parameters in "Weld" or "Weave" interfaces, confirm the communication method between control box and welder (analog: "Controller I/O"; digital: "Digital Communication Protocol").
+
+Robot ModbusRTU Communication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++
+
+ModbusRTU is a commonly used communication protocol in industrial production. FAIR collaborative robots provide two communication methods: ModbusRTU Master and ModbusRTU Slave. The collaborative robot supports up to 8 ModbusRTU Masters communicating simultaneously with external devices, with each master supporting up to 128 registers. The robot's ModbusRTU Slave has 64 coils, 64 discrete inputs, 32 holding registers, and 32 input registers (holding registers and input registers support both signed and floating-point data types).
+
+Additionally, some input register addresses of the robot's ModbusRTU Slave are dedicated to feedback information such as current joint positions and motion speeds. Some coil register addresses are dedicated to controlling robot operations like starting programs, stopping programs, and setting control box DOs. The robot's ModbusRTU Slave only supports connection with one master. Detailed usage methods are described below.
+
+Robot ModbusRTU Master Operation Instructions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Before using the collaborative robot as a ModbusRTU Master to communicate with your device, please check the 485 hardware connection between your device and the robot. The steps to use the robot as a ModbusRTU Master are as follows: ① Add a master; ② Add registers; ③ Communication test; ④ Write user program; ⑤ Execute user program.
+
+Adding a ModbusRTU Master
+*******************************************
+Open WebApp, click "Teach Simulation" and "Program Teaching" in sequence, and create a new user program "testModbusRTUMaster.lua".
+   
+.. image:: coding/340.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-1 Creating a ModbusRTU Master User Program
+
+Click the "ModbusRTU Settings" button to open the ModbusRTU configuration page.
+   
+.. image:: coding/341.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-2 Opening ModbusRTU Settings
+
+Click "Master Settings" and then "Add Modbus Master" to complete adding a ModbusRTU Master.
+   
+.. image:: coding/342.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-3 Adding a "ModbusRTU Master"
+
+Select "Baud Rate", "Data Bits", "Parity", and "Stop Bits" according to your slave device configuration. The meanings of these parameters are as follows:
+
+**Baud Rate**: The baud rate used for ModbusRTU communication. Supported values: 9600, 14400, 19200, 38400, 56000, 67600, 115200, 128000. Default is 115200. Set to match the slave device.
+
+**Data Bits**: Currently only supports 8 bits. Set to match the slave device.
+
+**Parity**: Parity method. Supports None, Odd, Even. Default is None. Set to match the slave device.
+
+**Stop Bits**: Supports 0.5, 1, 1.5, 2. Default is 1. Set to match the slave device.
+   
+.. image:: coding/343.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-4 Setting ModbusRTU Master Parameters
+
+After correctly entering the above parameters, the robot ModbusRTU Master can communicate with the slave device. (If you have confirmed that the ModbusRTU Master parameters are correctly configured but communication fails, please check the following:
+
+① Physical 485 connection between the robot and slave device; ② Check the slave device's communication configuration and test the communication link with a serial port debugging tool first. For example, configure the same ModbusRTU parameters on the PC, create a new register in the robot web interface, and perform a 0x03 read holding register operation to see if the serial port debugging tool receives data. As shown below, reading register address 0x1000 with 0x03 instruction, the PC can receive data normally, indicating correct communication configuration.)
+   
+.. image:: coding/344.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-5 Verifying Modbus Connection Status
+
+At this point, we have completed the creation of a robot ModbusRTU Master. If you click "Add Modbus Master" again, you can create another new ModbusRTU Master (Figure 2-6). The robot supports up to 8 masters communicating with external devices simultaneously. Double-click the "Delete" button in the upper right corner of the Modbus Master to delete it.
+   
+.. image:: coding/345.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-6 Adding Another ModbusRTU Master
+
+Adding Registers to ModbusRTU Master
+*******************************************
+
+Click the "Add Master Register" button to add a register to the master.
+   
+.. image:: coding/346.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-7 Adding a ModbusRTU Master Register
+
+Select the master register type, input address number, and name in sequence. The meanings of each parameter are as follows:
+
+**Type**: Modbus function code. 0x01-Read Coils; 0x02-Read Discrete Inputs; 0x03-Read Holding Registers (signed -32768-32767); 0x03-Read Holding Registers (floating-point, 32-bit data length, occupies two registers, 4 bytes); 0x04-Read Input Registers (signed -32768-32767); 0x04-Read Input Registers (floating-point, 32-bit data length, occupies two registers, 4 bytes); 0x05-Write Single Coil; 0x06-Write Single Holding Register; 0x0F-Write Multiple Coils; 0x10-Write Multiple Holding Registers. Floating-point registers are displayed in big-endian format.
+
+**Register Address**: The register address of the ModbusRTU Slave to read or write.
+
+**Register Quantity**: The number of registers to operate when reading or writing multiple registers (0x05, 0x06 can only be 1). Supports up to 12 registers.
+
+**Address Value**: Display value for reading, or write value (use English comma "," to separate multiple values).
+   
+.. image:: coding/347.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-8 Setting ModbusRTU Master Register Parameters
+
+Click the "Add Master Register" button again to add another master register. Double-click the "Delete" button on the right side of the register to delete it. The figure below shows the supported function code registers.
+   
+.. image:: coding/348.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-9 Adding Multiple Master Registers
+
+ModbusRTU Master Communication Test
+**********************************************************
+
+The robot Modbus Master register has an "Address Value" field to display the current register value. Registers of types 0x01, 0x02, 0x03, and 0x04 are read-only, and their address values are displayed in gray non-editable fields. When the value of the corresponding address in the slave changes, the robot master can read the corresponding register address value by clicking the read button and display the current value synchronously. Function codes 0x05, 0x06, 0x0F, and 0x10 are write operations, and their address values are displayed in white editable fields. You can modify the register value on the robot Modbus Master settings page.
+   
+.. image:: coding/349.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-10 Modbus Master Address Value
+
+Master Read Register Test
+""""""""""""""""""""""""""""""""""
+On the external ModbusRTU Slave device, continuously read 10 coils starting from address 0x4000, 12 discrete inputs starting from address 0x3000, 2 holding registers starting from address 0x2010 using int16, and 1 floating-point input register at address 0x1029. The corresponding register address values on the robot Modbus Master settings page will display accordingly. The sent data frames are shown below (since the register at address 0x1029 is set to floating-point type, it actually reads two 16-bit registers, 0x1029 and 0x102A, to store one floating-point number, but the read quantity is set to 1).
+   
+.. image:: coding/350.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-11 Modbus Master Displaying Read Register Values (Command Frame Screenshot)
+
+Master Write Register Test
+""""""""""""""""""""""""""""""""""
+
+On the robot ModbusRTU Master settings page, write a single coil at address 0x1000 with a value of 1; write a single register at address 0x1001 with a value of 2001; write 5 coils starting at address 0x2000 with values 1,1,0,1,1; write 2 holding registers starting at address 0x2010 with int16 data type and values 3001, 3002; write a floating-point holding register at address 0x1029 (actually two 16-bit registers) with a value of 21.55; the corresponding register addresses on the Modbus Slave have been written with the specified values.
+   
+.. image:: coding/351.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-12 ModbusRTU Master Write Operation (Command Frame Screenshot)
+
+Writing a ModbusRTU Master Program
+************************************************
+
+Click "All" and then "Communication Instructions" to open the communication instruction addition page.
+   
+.. image:: coding/352.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-13 Opening the Communication Instruction Addition Page
+
+Click "Modbus".
+   
+.. image:: coding/353.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-14 Selecting Modbus
+
+Click "Modbus_RTU", select "Master (Client)", to open the ModbusRTU Master instruction addition page.
+   
+.. image:: coding/354.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-15 Selecting Modbus_RTU
+
+Write Single Coil
+""""""""""""""""""""""""""""
+
+Select "Write Register", function code 0x05-Single Coil, register/coil address 0x1000, register value/coil quantity 1, byte array {1}, click "Add" button. Finally, scroll to the bottom of the page and click "Apply" button (Figure 2-16).
+   
+.. image:: coding/355.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-16 Writing a Single Coil
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Master instruction to write a single digital output. Switch the robot to automatic mode and click the start button. The robot will write the value 1 to the coil register address 0x1000.
+   
+.. image:: coding/356.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-17 LUA Program for Writing a Single Coil
+
+Write Multiple Coils
+""""""""""""""""""""""""""""""""""""""""
+Select "Write Register", function code 0x0F-Multiple Coils, register/coil address 0x1010, register value/coil quantity 3, byte array {1,0,1}, click "Add" button. Finally, scroll to the bottom of the page and click "Apply" button (Figure 2-18).
+   
+.. image:: coding/357.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-18 Writing Multiple Coils
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Master instruction to write multiple digital outputs. Switch the robot to automatic mode and click the start button. The robot will write the values 1, 0, 1 to the coil registers starting at address 0x1000.
+   
+.. image:: coding/358.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-19 LUA Program for Writing Multiple Coils
+
+Read Coils and Discrete Inputs
+""""""""""""""""""""""""""""""
+
+Select "Read Register Instruction", function code 0x01-Coils (select 0x02-Discrete Inputs if reading discrete inputs), register/coil address 0x2000, register/coil quantity 3, click "Add" button. Then select "Read Register Data", register/coil/discrete input quantity 3, click "Add" button. Finally, scroll to the bottom of the page and click "Apply" button (Figure 2-20).
+   
+.. image:: coding/359.png
+   :width: 4in
+   :align: center
+   
+.. image:: coding/394.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-20 Reading Coils
+
+Now the robot program "testModbusRTUSlave.lua" has added two robot Modbus Master instructions to read coils.
+   
+.. image:: coding/360.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-21 Program for Reading a Single Coil
+
+Usually, after reading Modbus registers, the read values are stored in variables. Therefore, you need to define variables to store the read values. Click the "Switch Mode" button to switch the robot LUA program to editable mode. Before the "ModbusRegRead" instruction, add return value variables "value1", "value2", "value3". After executing the program, the read values will be stored in "value1", "value2", and "value3".
+   
+.. image:: coding/361.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-22 Storing Multiple Coil Values in Variables
+
+Coil and discrete input type register values are only 0 or 1. In the robot program, you can perform different operations by judging different register values.
+
+Read Holding Registers and Input Registers
+""""""""""""""""""""""""""""""""""""""""""""""
+Select "Read Register Instruction", function code 0x03-Holding Registers (select 0x04-Input Registers if reading input registers), register/coil address 0x4000, register/coil quantity 5, click "Add" button. Then select "Read Register Data", register/coil/discrete input quantity 5, click "Add" button. Finally, scroll to the bottom of the page and click "Apply" button (Figure 2-23).
+   
+.. image:: coding/362.png
+   :width: 4in
+   :align: center
+   
+.. image:: coding/395.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-23 Reading Holding Registers
+
+Now the robot program "testModbusRTUSlave.lua" has added two robot Modbus Master instructions to read coils.
+   
+.. image:: coding/363.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-24 Program for Reading a Single Coil
+
+Usually, after reading Modbus registers, the read values are stored in variables. Therefore, you need to define variables to store the read values. Click the "Switch Mode" button to switch the robot LUA program to editable mode. Before the "ModbusRegRead" instruction, add return value variables "value1", "value2", "value3", "value4", "value5". After executing the program, the read values will be stored in these variables.
+   
+.. image:: coding/364.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-25 Storing Multiple Holding Register Values in Variables
+
+Robot ModbusRTU Slave Operation Instructions
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The robot ModbusRTU Slave provides four types of registers: general-purpose digital inputs (coils), general-purpose digital outputs (discrete inputs), general-purpose analog inputs (holding registers), and general-purpose analog outputs (input registers). The general-purpose digital inputs and analog inputs are mainly used for the robot to read data from external ModbusRTU Master devices to control robot operations. The general-purpose digital outputs and analog outputs are mainly used for the robot to send data signals to external ModbusRTU Master devices, which read the relevant register values to control their device operations.
+
+In addition to the above general-purpose inputs and outputs, the robot also provides some "functional digital inputs (coils)" for external master devices to control robot operations such as starting programs and stopping programs. Some input registers are dedicated to displaying the current robot status information, including the robot's current Cartesian position and operation status (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific definitions). The robot ModbusRTU Slave only supports connection with one master. The process of using the robot ModbusRTU Slave mainly includes: ① Parameter configuration; ② Communication test; ③ Program writing.
+
+ModbusRTU Slave Communication Parameter Configuration
+******************************************************
+
+Open WebApp, click "Teach Simulation" and "Program Teaching" in sequence, and create a new user program "testModbusRTUSlave.lua".
+   
+.. image:: coding/365.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-26 Creating a ModbusRTU Slave User Program
+
+Click the "ModbusRTU Settings" button to open the ModbusRTU configuration page.
+   
+.. image:: coding/366.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-27 Opening ModbusRTU Settings
+
+Click "Slave Settings" and enter the robot slave's baud rate, data bits, parity, stop bits, and slave number. "Baud Rate", "Data Bits", "Parity", and "Stop Bits" are the parameter configurations for the robot as a ModbusRTU Slave. "Slave Number" is the slave device number in the instructions sent by the external master.
+   
+.. image:: coding/367.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-28 ModbusRTU Slave Settings
+
+ModbusRTU Slave Communication Test
+****************************************
+
+General-Purpose Digital Inputs (Coils)
+""""""""""""""""""""""""""""""""""""""""""""""
+The robot ModbusRTU Slave provides 64 coil registers with addresses 0x4000~0x403F (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific definitions). The general-purpose registers of the robot ModbusRTU Slave can be aliased. Change the name of the robot slave coil register DI0 to "A Ready" and DI1 to "B Ready". According to the address mapping table, the Modbus coil addresses for "A Ready" and "B Ready" are 0x4000 and 0x4001, respectively. On the external ModbusRTU Master device, set the robot slave coil register addresses 0x4000 and 0x4001 to 1. The indicator lights for these two registers on the robot ModbusRTU Slave monitoring page will light up.
+   
+.. image:: coding/368.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-29 ModbusRTU Slave Coil Status Monitoring (Command Frame Screenshot)
+
+General-Purpose Digital Outputs (Discrete Inputs)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The robot ModbusRTU Slave provides 64 discrete input registers with addresses 0x3000-0x303F (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific definitions). Similarly, the discrete input registers of the robot ModbusRTU Slave can also be aliased. Click "General-Purpose Digital Outputs (Discrete Inputs)" to change the name of the robot slave discrete input register DO0 to "A Start" and DO1 to "B Start". According to the address mapping table, the Modbus discrete input addresses for "A Start" and "B Start" are 0x3000 and 0x3001, respectively. Click the indicator light corresponding to "A Start". The light will turn on, and the value of the corresponding register address 0x3000 will change to 1. The external ModbusRTU Master device can read this register value.
+   
+.. image:: coding/369.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-30 ModbusRTU Slave Discrete Input Control
+
+Analog Inputs (Holding Registers)
+""""""""""""""""""""""""""""""""""""""""
+The robot provides three types of holding registers: unsigned, signed, and floating-point, totaling 32. The addresses for AI0~AI32 are 0x2000-0x202F (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific definitions). The data range for signed registers is -32768~32767, and floating-point registers are displayed in big-endian format. Change the names of AI0 and AI1 to "Voltage" and "Current", respectively. From the ModbusRTU Slave address mapping table, the addresses of these two registers are 0x2000 and 0x2001, respectively. Therefore, when the connected master device modifies the values of holding register addresses 0x2000 and 0x2001, the "Voltage" and "Current" register address values on the robot ModbusRTU Slave monitoring page will update accordingly. The robot's analog inputs are mainly used for the robot to obtain numerical signals from external master devices.
+   
+.. image:: coding/370.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-31 ModbusRTU Slave Analog Input Monitoring (Command Frame Screenshot)
+
+Analog Outputs (Input Registers)
+""""""""""""""""""""""""""""""""""""""""
+The robot provides three types of input registers: unsigned, signed, and floating-point, totaling 64. The addresses for AO0~AO63 are 0x1000-0x100F, 0x104D-0x106C (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific definitions). The data range for signed registers is -32768~32767, and floating-point registers are displayed in big-endian format. Change the names of AO0 and AO1 to "Target Position A" and "Target Position B", respectively, with input register values of 2000 and 1500. From the ModbusRTU Slave address mapping table, the addresses of these two registers are 0x1000 and 0x1001, respectively. Therefore, when the connected master device reads the input register addresses 0x1000 and 0x1001, it will obtain the set values. The robot slave analog outputs are mainly used for the robot to send numerical signals to external master devices.
+   
+.. image:: coding/371.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-32 Modbus Slave Modifying Analog Inputs
+
+Writing a ModbusRTU Slave Program
+**************************************************
+Click "All" and then "Communication Instructions" to open the communication instruction addition page.
+   
+.. image:: coding/372.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-33 Opening the Communication Instruction Addition Page
+
+Click "Modbus".
+   
+.. image:: coding/373.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-34 Selecting Modbus
+
+Click "Modbus_RTU", select "Slave", to open the ModbusRTU Slave instruction addition page (Figure 60).
+   
+.. image:: coding/374.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-35 Selecting Modbus_RTU, Slave
+
+Write Single Digital Output DO (Discrete Input)
+""""""""""""""""""""""""""""""""""""""""""""""""
+Select DO name as "A Start", register quantity as 1, register value as 0, click "Write Single Digital Output". Finally, scroll to the bottom of the page and click "Apply" button.
+   
+.. image:: coding/375.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-36 Adding a Write Single Digital Output Instruction, Applying the Write Single Digital Output Instruction
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave instruction to write a single digital output. Switch the robot to automatic mode and click the start button. The robot will write the value 0 to the digital output named "A Start".
+   
+.. image:: coding/376.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-37 LUA Program for Writing a Single Digital Output
+
+Write Multiple Digital Outputs DO (Discrete Inputs)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Open the ModbusRTU Slave instruction addition page, find "Digital Output Settings", select DO name as "A Start", register quantity as 5, register value as 1,0,1,0,1. The number of register values must match the set register quantity, and multiple register values should be separated by English commas. Click "Write Digital Output". Finally, scroll to the bottom of the page and click "Apply" button.
+   
+.. image:: coding/377.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-38 Configuring Write Multiple Digital Outputs, Applying Write Multiple Digital Outputs
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave instruction to write multiple digital outputs. Switch the robot to automatic mode and click the start button. The robot will write the values 1, 0, 1, 0, 1 to the discrete input registers starting from "A Start" and the next four.
+   
+.. image:: coding/378.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-39 LUA Program for Writing Multiple Digital Outputs
+
+Read Single Digital Output DO (Discrete Input)
+""""""""""""""""""""""""""""""""""""""""""""""
+Open the ModbusRTU Master instruction addition page, find "Digital Output Settings", DO name as "A Start", register quantity as 1, register value does not need to be filled, click "Read Digital Output". Finally, scroll to the bottom of the page and click "Apply" button.
+   
+.. image:: coding/379.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-40 Configuring Read Single Digital Output, Applying Read Single Digital Output
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave instruction to read a single digital output.
+   
+.. image:: coding/380.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-41 Program for Reading a Single Digital Output
+
+Usually, after reading Modbus registers, the read values are stored in variables. Therefore, you need to define a variable to store the read value. Click the "Switch Mode" button to switch the robot LUA program to editable mode. Before the "ModbusSlaveReadDO_RTU" instruction, add a return value variable "AStartValue". After executing the program, the read value will be stored in "AStartValue".
+   
+.. image:: coding/381.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-42 Storing a Single Digital Output Read in a Variable
+
+Coil-type register values are only 0 or 1. In the robot program, you can perform different operations by judging different register values.
+
+Read Multiple Digital Outputs DO (Discrete Inputs)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Open the ModbusRTU Master instruction addition page, find "Digital Output Settings", select DO name as "A Start", register quantity as 2, register value does not need to be filled, click "Read Digital Output". Finally, scroll to the bottom of the page and click "Apply" button.
+   
+.. image:: coding/382.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-43 Configuring Read Multiple Digital Outputs, Applying Read Multiple Digital Outputs
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave instruction to read multiple digital outputs.
+   
+.. image:: coding/383.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-44 Program for Reading Multiple Digital Outputs
+
+Click the "Switch Mode" button to switch the robot LUA program to editable mode. Since the read quantity is 2, you need to add two return value variables "value1,value2" before the "ModbusSlaveReadDO_RTU" instruction. After executing the program, the two digital output register values will be stored in these two variables. Similarly, you can judge the values of "value1" and "value2" to make the robot perform different actions.
+   
+.. image:: coding/384.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-45 Storing Multiple Digital Output Reads in Variables
+
+Read Digital Input DI (Coils)
+"""""""""""""""""""""""""""""""""""""""""""
+
+Open the ModbusRTU Slave instruction addition page, find "Digital Input Settings", select DI name as "A Ready", register quantity as 2, click "Read Digital Input". Finally, scroll to the bottom of the page and click "Apply" button.
+   
+.. image:: coding/385.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-46 Configuring Read Digital Input, Applying Read Digital Input
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave instruction to read digital inputs.
+   
+.. image:: coding/386.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-47 Program Instruction for Reading Digital Inputs
+
+Click the "Switch Mode" button to switch the robot LUA program to editable mode. Before the "ModbusSlaveReadDI_RTU" instruction, add return value variables "AState,BState". After executing the program, the two digital input values will be stored in variables "AState" and "BState", respectively. You can control the robot to perform different operations by judging the variable values.
+   
+.. image:: coding/387.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-48 Program for Reading Digital Inputs
+
+Read/Write Operations for Analog Output AO (Input Registers) and Analog Input AI (Holding Registers)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The read/write operations for analog outputs (input registers) and analog inputs (holding registers) are basically the same as those for digital outputs (discrete inputs) and digital inputs (coils). The difference is that the data range of the latter is limited to 0 or 1, while the former has a larger data range. Therefore, specific operations can refer to the writing of digital output and digital input programs. Here, only the program examples for reading analog inputs (Figure 3-24) and reading/writing analog outputs (Figure 3-25) are shown.
+   
+.. image:: coding/388.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-49 Reading Analog Inputs
+   
+.. image:: coding/389.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-50 Reading/Writing Analog Outputs
+
+Wait for Digital Input
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Open the ModbusRTU Slave instruction addition page, find "Wait for Digital Input Settings", select DI name as the configured "A Ready" register, wait state as "True", timeout as 5000ms. Click "Add" button, then click "Apply" button.
+   
+.. image:: coding/390.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-51 Adding a Wait for Digital Input Instruction
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave instruction to wait for a digital input. After starting the program, the robot will wait for the "A Ready" coil register value of the slave to become true (value 1). Since the timeout is set to 5s, if the "A Ready" signal is still 0 after 5s, the robot program will report a timeout error and automatically stop running.
+   
+.. image:: coding/391.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-52 Program for Waiting for Digital Input
+
+Wait for Analog Input
+""""""""""""""""""""""""""""""""""
+Open the ModbusRTU Slave instruction addition page, find "Wait for Analog Input Settings", select AI name as the configured "Current" register, wait state as ">", register value as 255, timeout as 5000ms. Click "Add" button, then click "Apply" button.
+   
+.. image:: coding/392.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-53 Adding a Wait for Analog Input Instruction
+
+Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave instruction to wait for an analog input value. After starting the program, the robot will wait for the "Current" register value of the slave to be greater than 255. Since the timeout is set to 5s, if the "Current" signal is still not greater than 255 after 5s, the robot program will report a timeout error and automatically stop running.
+   
+.. image:: coding/393.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-54 Program for Waiting for Analog Input Register
+
+Robot Status Feedback and Control via ModbusRTU Slave
+***********************************************************************************
+The input register addresses 0x1010-0x104C of the collaborative robot ModbusRTU Slave are used to feedback real-time robot status (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific address definitions). You only need to read the corresponding register values with the master device to obtain the corresponding real-time robot status data.
+
+The coil register addresses 0x4040-0x405C of the collaborative robot ModbusRTU Slave are used for the master device to control the robot (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific address definitions). Take coil address 0x4054 as an example. This address function is "Start Program". When the robot is in automatic mode, the master device changes the value of address 0x4054 from 0 to 1, and the robot automatically starts running the currently configured program. Another example is coil address 0x4040, which is used to control the output of control box DO0. When the external master changes the coil address 0x4040 from 0 to 1, the control box DO0 automatically outputs effectively. Similarly, when the external master changes the coil address 0x4040 from 1 to 0, the control box DO0 output becomes invalid. On the ModbusRTU Slave settings page, click "Functional Digital Inputs (Coils)" to monitor all current functional digital inputs.
+   
+.. image:: coding/396.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.30-55 Digital input of the robot slave function
+
+Attachment 1: Modbus Slave Address Mapping Table
+
+.. list-table::
+   :widths: 15 20 25 15 20 10
+   :header-rows: 0
+   :align: center
+
+   * - **Third-party Controller Address**
+     - **Type**
+     - **Name**
+     - **Data Type**
+     - **Function Code**
+     - **R/W**
+
+   * - 0x3000
+     - General Digital Output (Discrete)
+     - DO0
+     - BOOL 
+     - 0x02 
+     - Read Only  
+
+   * - 0x3001
+     - General Digital Output (Discrete)
+     - DO1
+     - BOOL 
+     - 0x02 
+     - Read Only  
+
+   * - 0x3002
+     - General Digital Output (Discrete)
+     - DO2
+     - BOOL 
+     - 0x02 
+     - Read Only  
+
+   * - 0x3003
+     - General Digital Output (Discrete)
+     - DO3
+     - BOOL 
+     - 0x02 
+     - Read Only  
+
+   * - ...
+     - General Digital Output (Discrete)
+     - ...
+     - BOOL 
+     - 0x02 
+     - Read Only  
+
+   * - 0x303F
+     - General Digital Output (Discrete)
+     - DO127
+     - BOOL 
+     - 0x02 
+     - Read Only  
+
+   * - 0x4000
+     - General Digital Input (Coil)
+     - DI0
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4001
+     - General Digital Input (Coil)
+     - DI1
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4002
+     - General Digital Input (Coil)
+     - DI2
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4003
+     - General Digital Input (Coil)
+     - DI3
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - ...
+     - General Digital Input (Coil)
+     - ...
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x403F
+     - General Digital Input (Coil)
+     - DI64
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4040
+     - Robot Control
+     - Control Box DO0
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4041
+     - Robot Control
+     - Control Box DO1
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4042
+     - Robot Control
+     - Control Box DO2
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4043
+     - Robot Control
+     - Control Box DO3
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4044
+     - Robot Control
+     - Control Box DO4
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4045
+     - Robot Control
+     - Control Box DO5
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4046
+     - Robot Control
+     - Control Box DO6
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4047
+     - Robot Control
+     - Control Box DO7
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4048
+     - Robot Control
+     - Control Box CO0
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4049
+     - Robot Control
+     - Control Box CO1
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x404A
+     - Robot Control
+     - Control Box CO2
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x404B
+     - Robot Control
+     - Control Box CO3
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x404C
+     - Robot Control
+     - Control Box CO4
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x404D
+     - Robot Control
+     - Control Box CO5
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x404E
+     - Robot Control
+     - Control Box CO6
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x404F
+     - Robot Control
+     - Control Box CO7
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4050
+     - Robot Control
+     - Tool DO0
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4051
+     - Robot Control
+     - Tool DO1
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4052
+     - Robot Control
+     - Pause
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4053
+     - Robot Control
+     - Resume
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4054
+     - Robot Control
+     - Start
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4055
+     - Robot Control
+     - Stop
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4056
+     - Robot Control
+     - Move to Home Position
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4057
+     - Robot Control
+     - Manual/Auto Toggle
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4058
+     - Robot Control
+     - Start Main Program
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x4059
+     - Robot Control
+     - Level 1 Reduction Mode
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x405A
+     - Robot Control
+     - Level 2 Reduction Mode
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x405B
+     - Robot Control
+     - Level 3 Reduction Mode (Stop)
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x405C
+     - Robot Control
+     - Clear All Faults
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x405D
+     - Robot Control
+     - Reserved
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x405E
+     - Robot Control
+     - Reserved
+     - BOOL 
+     - 0x01, 0x05, 0x0F 
+     - R/W  
+
+   * - 0x1000
+     - Analog Input
+     - AO0
+     - INT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1001
+     - Analog Input
+     - AO1
+     - INT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1002
+     - Analog Input
+     - AO2
+     - INT16 
+     - 0x04
+     - Read Only  
+
+   * - ...
+     - Analog Input
+     - ...
+     - INT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x100F
+     - Analog Input
+     - AO15
+     - INT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1010
+     - Robot Status
+     - Enable Status (0-Disabled, 1-Enabled)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1011
+     - Robot Status
+     - Robot Mode (1-Manual, 0-Auto)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1012
+     - Robot Status
+     - Robot Operation Status (1-Stop, 2-Running, 3-Paused, 4-Dragging)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1013
+     - Robot Status
+     - Tool Number
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1014
+     - Robot Status
+     - Workpiece Number
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1015
+     - Robot Status
+     - Emergency Stop Status (0-Normal, 1-Emergency Stop)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1016
+     - Robot Status
+     - Soft Limit Fault
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1017
+     - Robot Status
+     - Main Fault Code
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1018
+     - Robot Status
+     - Sub Fault Code
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1019
+     - Robot Status
+     - Collision Detection (1-Collision, 0-No Collision)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x101A
+     - Robot Status
+     - Motion Completion Signal
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x101B
+     - Robot Status
+     - Safety Stop Signal SI0
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x101C
+     - Robot Status
+     - Safety Stop Signal SI1
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x101D
+     - Robot Status
+     - Control Box Analog Input AI0
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x101E
+     - Robot Status
+     - Control Box Analog Input AI1
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x101F
+     - Robot Status
+     - Tool Analog Input AI0
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1020
+     - Robot Status
+     - Control Box Analog Output AO0
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1021
+     - Robot Status
+     - Control Box Analog Output AO1
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1022
+     - Robot Status
+     - Tool Analog Output AO0
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1023
+     - Robot Status
+     - Control Box Digital Input (Bit0-Bit7: DI0-DI7, Bit8-Bit15: CI0-CI7)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1024
+     - Robot Status
+     - Tool Digital Input (Bit0-Bit15: DI0-DI15)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1025
+     - Robot Status
+     - Control Box Digital Output (Bit0-Bit7: DO0-DO7, Bit8-Bit15: CO0-CO7)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1026
+     - Robot Status
+     - Tool Digital Output (Bit0-Bit15: DO0-DO15)
+     - UINT16 
+     - 0x04
+     - Read Only  
+
+   * - 0x1027
+     - Robot Status
+     - TCP Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1028
+     - Robot Status
+     - TCP Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1029
+     - Robot Status
+     - Joint 1 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x102A
+     - Robot Status
+     - Joint 1 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x102B
+     - Robot Status
+     - Joint 2 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x102C
+     - Robot Status
+     - Joint 2 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x102D
+     - Robot Status
+     - Joint 3 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x102E
+     - Robot Status
+     - Joint 3 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x102F
+     - Robot Status
+     - Joint 4 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1030
+     - Robot Status
+     - Joint 4 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1031
+     - Robot Status
+     - Joint 5 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1032
+     - Robot Status
+     - Joint 5 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1033
+     - Robot Status
+     - Joint 6 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1034
+     - Robot Status
+     - Joint 6 Position
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1035
+     - Robot Status
+     - Joint 1 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1036
+     - Robot Status
+     - Joint 1 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1037
+     - Robot Status
+     - Joint 2 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1038
+     - Robot Status
+     - Joint 2 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1039
+     - Robot Status
+     - Joint 3 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x103A
+     - Robot Status
+     - Joint 3 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x103B
+     - Robot Status
+     - Joint 4 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x103C
+     - Robot Status
+     - Joint 4 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x103D
+     - Robot Status
+     - Joint 5 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x103E
+     - Robot Status
+     - Joint 5 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x103F
+     - Robot Status
+     - Joint 6 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1040
+     - Robot Status
+     - Joint 6 Speed
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1041
+     - Robot Status
+     - TCP Position X
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1042
+     - Robot Status
+     - TCP Position X
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1043
+     - Robot Status
+     - TCP Position Y
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1044
+     - Robot Status
+     - TCP Position Y
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1045
+     - Robot Status
+     - TCP Position Z
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1046
+     - Robot Status
+     - TCP Position Z
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1047
+     - Robot Status
+     - TCP Position RX
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1048
+     - Robot Status
+     - TCP Position RX
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1049
+     - Robot Status
+     - TCP Position RY
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x104A
+     - Robot Status
+     - TCP Position RY
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x104B
+     - Robot Status
+     - TCP Position RZ
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x104C
+     - Robot Status
+     - TCP Position RZ
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x104D
+     - Analog Input
+     - AO16
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x104E
+     - Analog Input
+     - AO16
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x104F
+     - Analog Input
+     - AO17
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x1050
+     - Analog Input
+     - AO17
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - ...
+     - Analog Input
+     - ...
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x106B
+     - Analog Input
+     - AO31
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x106C
+     - Analog Input
+     - AO31
+     - FLOAT32 (Big Endian) 
+     - 0x04
+     - Read Only  
+
+   * - 0x2000
+     - Analog Output
+     - AI0
+     - INT16 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x2001
+     - Analog Output
+     - AI1
+     - INT16 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x2002
+     - Analog Output
+     - AI2
+     - INT16 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - ...
+     - Analog Output
+     - ...
+     - INT16 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x200F
+     - Analog Output
+     - AI15
+     - INT16 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x2010
+     - Analog Output
+     - AI16
+     - FLOAT32 (Big Endian) 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x2011
+     - Analog Output
+     - AI16
+     - FLOAT32 (Big Endian) 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x2012
+     - Analog Output
+     - AI17
+     - FLOAT32 (Big Endian) 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x2013
+     - Analog Output
+     - AI17
+     - FLOAT32 (Big Endian) 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - ...
+     - Analog Output
+     - ...
+     - FLOAT32 (Big Endian) 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x202E
+     - Analog Output
+     - AI31
+     - FLOAT32 (Big Endian) 
+     - 0x03, 0x06, 0x10
+     - R/W  
+
+   * - 0x202F
+     - Analog Output
+     - AI31
+     - FLOAT32 (Big Endian) 
+     - 0x03, 0x06, 0x10
+     - R/W  

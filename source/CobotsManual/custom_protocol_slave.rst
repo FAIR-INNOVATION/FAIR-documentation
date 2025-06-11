@@ -12,13 +12,13 @@ In order to facilitate PLC motion control of the robot via different industrial 
 1) CC-Link slave protocol support;
 2) Profinet slave protocol support;
 3) Ethernet/IP slave protocol support;
-4) EtherCAT slave protocol support;
+4) EtherCAT slave protocol support(Not supported by EnTalk board);
 
 Environment Configuration
 ------------------------------
 
-Hardware environment setup
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Hilscher board hardware environment setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Install the Hilscher board into the integrated mini control box as shown.
 
@@ -71,6 +71,96 @@ Hardware environment setup
 
 .. important:: When the protocol is switched to EtherCAT bus, the board's network port needs to be distinguished as EtherCAT_IN and EtherCAT_OUT. At this time, the PLC's EtherCAT network port is directly connected to the board's EtherCAT_IN through a network cable.
 
+EnTalk Board Hardware Setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Install the board into the integrated mini control box as shown.
+
+.. image:: custom_protocol_slave/044.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 17.2-7 EnTalk Board Ethernet Port
+
+2. Wiring between robot control box and PLC is shown below.
+
+.. image:: custom_protocol_slave/003.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 17.2-8 Control Box & Mitsubishi PLC Wiring Diagram
+
+.. image:: custom_protocol_slave/004.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 17.2-9 Control Box & Siemens PLC Wiring Diagram
+
+.. image:: custom_protocol_slave/005.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 17.2-10 Control Box & Inovance PLC Wiring Diagram
+
+.. note:: 
+    1: Robot control box (board Ethernet port);
+    2: Switch;
+    3: Laptop PC;
+    4: Mitsubishi PLC (CC-link port);
+    5: Siemens PLC (Profinet port);
+    6: Inovance PLC (Ethernet/IP port);
+
+3. Firmware upgrade is required when switching protocols on EnTalk board. For upgrade:
+   - Set PC IP to "192.168.0.xxx"
+   - Open "Gateway Toolset" software
+   - Select PC network adapter
+   - Click "Start" (bottom right)
+   - Click "Search" (top right) to find board devices
+
+.. image:: custom_protocol_slave/045.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.2-11 Connecting Board Device
+
+4. Click "Upgrade" (bottom left)
+   - Select board device
+   - Click "..." (top right) to choose protocol firmware
+   - Click "Upgrade" and wait for completion
+
+.. image:: custom_protocol_slave/046.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.2-12 Board Protocol Switching
+
+.. note:: IP address changes after protocol switching as shown below.
+
+.. centered:: Table 17.2-1 Board IP Addresses
+
+.. list-table:: 
+   :widths: 20 80
+   :header-rows: 1
+   :align: center
+
+   * - **Protocol**
+     - **IP Address**
+
+   * - CC-link
+     - 192.168.0.113
+
+   * - Ethernet/IP
+     - 192.168.0.112
+
+   * - Profinet
+     - 192.168.0.2
+
+When configured for CC-link, controller changes board IP to "192.168.0.113".
+
+When configured for Ethernet/IP, controller changes board IP to "192.168.0.112".
+
+When switching to Profinet, if slave device name matches master, master will automatically configure slave IP.
+
 Software environment setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,7 +170,7 @@ Software environment setup
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-7 Web Login Interface
+.. centered:: Figure 17.2-13 Web Login Interface
 
 2. Enter the Tools App -> System Upgrade, select the software.tar.gz file and upload.
 
@@ -88,9 +178,9 @@ Software environment setup
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-8 Upgrade software
+.. centered:: Figure 17.2-14 Upgrade software
 
-.. note:: QNX control box web version needs 3.7.6 and above, Linux control box web version needs 3.7.4 and above.
+.. note:: QX control box web version needs 3.8.0 and above, LA control box web version needs 3.8.0 and above.
 
 3. Go to Peripherals->Remote Control, select ‘Profinet control’ for Control mode, select ‘Hilscher’ for Manufacturer, select ‘4ms’ for Cycle Period, and click the ‘Set’ button.
 
@@ -98,7 +188,7 @@ Software environment setup
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-9 Interface configuration
+.. centered:: Figure 17.2-15 Interface configuration
 
 4. Click ‘Local Mode’ in the upper right corner -> Switch Remote Mode.
 
@@ -106,7 +196,7 @@ Software environment setup
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-10 Switch remote mode
+.. centered:: Figure 17.2-16 Switch remote mode
 
 5. Select the controller slave protocol and click the ‘Set’ button.
 
@@ -114,7 +204,7 @@ Software environment setup
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-11 Configure the communication protocol
+.. centered:: Figure 17.2-17 Configure the communication protocol
 
 .. note:: Switching different protocols requires restarting the control box before configuring the protocols.
 

@@ -164,7 +164,7 @@ Robot limits include momentum and power, where the momentum limit is used to lim
 
 .. centered:: Figure 7.9-1 Robot limit
 
-Power detection (Only used in QNX systems)
+Power detection (Only used in QX systems)
 ---------------------------------------------
 
 Click "Initial" -> "Safety" in the menu bar, and then click the "Power detection" submenu to enter the configuration interface.
@@ -176,3 +176,134 @@ When acting directly on the current loop of the robot (only with the command ser
    :align: center
 
 .. centered:: Figure 7.10-1 Power detection
+
+Motion Configuration
+---------------------------------------------
+
+T-Shaped Velocity Optimization + Blending Smoothing Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++
+
+Performing blending between two trajectory segments can avoid frequent start-stop issues caused by complete stops, thereby improving the robot's motion efficiency.
+
+This function mainly applies to blending between PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC, and ARC-LIN commands. Blending between other commands is not effective.
+
+Operation Process
+++++++++++++++++++++++
+
+Since the operation methods for each command are similar, this manual uses PTP-PTP blending as an example to explain the operation method. This function can be implemented in two ways: using Lua commands or using the motion configuration switch.
+
+Using Lua Commands
+*****************************
+
+**Step 1**: Select the teaching points for the PTP function. This manual uses "A0" to "A5" as the names of the teaching points.
+
+**Step 2**: Click "Teaching Program" -> "Program Programming," select the "Point-to-Point" command under "Motion Commands," choose the teaching point in the "Command Edit" section, set the debugging speed, select "Acceleration Smoothing Mode" for motion protection, and set the "Smooth Transition" parameter at the points where smoothing is required.
+
+.. image:: safety/020.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.11-1 Blending Command Settings for Acceleration Smoothing PTP
+
+**Step 3**: Generate and run the Lua program to implement PTP-PTP blending. This method only applies the optimized T-shaped velocity to commands between `AccSmoothStart()` and `AccSmoothEnd()`, while using the original T-shaped velocity for other commands.
+
+.. image:: safety/021.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.11-2 Typical Program for PTP-PTP Blending Using Lua Commands
+
+Using Motion Configuration Switch
+***********************************
+
+**Step 1**: Click "Initial Settings" -> "Safety" -> "Motion Configuration," and turn on the "Acceleration Smoothing Mode" switch.
+
+.. image:: safety/022.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.11-3 Acceleration Smoothing Mode Configuration Switch Settings
+
+**Step 2**: Select the teaching points for the PTP-PTP function. This manual uses "A0" to "A5" as the names of the teaching points.
+
+**Step 3**: Click "Teaching Program" -> "Program Programming," select the "Point-to-Point" command under "Motion Commands," choose the teaching point in the "Command Edit" section, set the debugging speed, select "None" for motion protection, and set the "Smooth Transition" parameter at the points where smoothing is required.
+
+.. image:: safety/023.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.11-4 Blending Command Settings for Regular PTP
+
+**Step 4**: Generate and run the Lua program to implement PTP-PTP blending. The typical program is the same as a regular PTP program. This method applies the optimized T-shaped velocity to all commands.
+
+.. image:: safety/024.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.11-5 Typical Program for PTP-PTP Blending Using Configuration Switch
+
+FIR Adaptive Parameter Function + FIR Pause/Resume Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++
+
+The robot's time-optimal mode parameter adaptive configuration function eliminates the need to manually debug and configure parameters. This function adaptively configures the parameters of the time-optimal mode based on the robot's current operating state, improving debugging efficiency.
+
+Operation Process
+++++++++++++++++++++++
+
+The usage of basic robot motion commands (PTP, LIN, and ARC) is similar. This example uses the time-optimal mode PTP motion command as the primary example.
+
+**Step 1**: On the robot's web control interface, navigate to "Initial Settings" -> "Safety" -> "Motion Configuration" to enter the "Motion Configuration" interface.
+
+.. image:: safety/015.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.11-6 Motion Configuration Interface
+
+**Step 2**: In the "Motion Configuration" interface, click the "Time-Optimal Mode" switch to enter the "Time-Optimal Mode" interface.
+
+.. image:: safety/016.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 7.11-7 Time-Optimal Mode Interface
+
+.. note:: In the "Parameter Configuration" section of the "Time-Optimal Mode" interface, the "Adjustment Coefficient" can be set from -100 to 100, representing a scaling ratio to control the time-optimal degree of motion commands. The default value is 1.
+
+**Step 3**: Determine the teaching points for the PTP motion. This example uses "A0" to "A5" as the names of the teaching points.
+
+**Step 4**: On the robot's web control interface, navigate to "Teaching Program" -> "Program Programming" to enter the "Motion Commands" interface.
+
+.. image:: safety/017.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 7.11-8 Motion Commands Interface
+
+**Step 5**: In the "Motion Commands" interface, click "Point-to-Point" to enter the "PTP" command editing interface. Select the teaching point from the "Point Name" dropdown, set the desired speed ratio in the "Debugging Speed" section, choose "Stop" in the "At This Point" section, select "No" in the "Offset" dropdown, and choose "None" in the "Motion Protection" section. Then, click "Add."
+
+.. image:: safety/018.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.11-9 PTP Motion Command Editing Interface
+
+**Step 6**: In the "PTP" motion command editing interface, click "Apply" to automatically generate the corresponding Lua program.
+
+.. image:: safety/019.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.11-10 Typical Time-Optimal Mode PTP Motion Lua Program
+
+.. note:: 
+   The typical time-optimal mode PTP motion Lua program is the same as a regular PTP motion Lua program, except that the "Time-Optimal Mode" function is enabled in Step 2.
+
+   When the "Time-Optimal Mode" function switch is enabled, all basic robot motion commands (PTP, LIN, and ARC) operate in time-optimal mode. Disabling the switch restores the commands to their basic state.
+   The "Acceleration Smoothing Mode" function switch cannot be enabled simultaneously in this interface.

@@ -419,3 +419,126 @@ Instruction content:
 
     socket_cmd.recv();//8065
     socket_file.recv();//8067
+
+
+File Operation Commands
+---------------------------
+
+Write File Content
+++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @param String filename File path
+    * @param string content Content to write
+    * @param Function callback Callback function with (error) parameter (not needed for LA version)
+    * @return true/false
+    */
+
+    write(filename, content, callback);
+
+Read File Content
+++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @param String filename File path
+    * @param string content Content to write
+    * @param Function callback Callback function with (error) parameter (not needed for LA version)
+    * @return String File content
+    */
+
+    read(filename, callback);
+
+Modify File Permissions
+++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+    
+    /**
+    * @param String filename File path
+    * @param Number mode Permission mode (e.g. 0644)
+    * @param Function callback Callback function with (error) parameter (not needed for LA version)
+    * @return true/false
+    */
+
+    chmod(filename, mode, callback);
+
+Read Directory Contents (Including Subdirectories)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+    
+    /**
+    * @param String path File path
+    * @param Function callback Callback function with (error) parameter (not needed for LA version)
+    * @return Array Filename array
+    */
+
+    readdir(path, callback);
+
+Compression/Decompression Commands
+---------------------------------------------
+
+.. note:: 
+    Distinguish between LA and QX versions (LA version doesn't need callback parameter).
+
+    LA module import: var execSync = require('child_process').execSync;
+
+    QX module import: var tar_utils = require('/usr/local/etc/node/sys/tools/tar_utils');
+
+Create tar.gz Archive
++++++++++++++++++++++++++++++++++
+
+Create tar.gz example (LA):
+
+.. code-block:: javascript
+    :linenos:
+    
+    var cmd = 'cd / && tar -zcvf ' + FILENAME + '-C ' + DIR;
+    execSync(cmd);
+    
+Create tar.gz command description (QX):
+
+.. code-block:: c++
+    :linenos:
+    
+    /**
+    * @param {Array|String} sourcePaths Source file/directory path array or single path
+    * @param String targetFile Target archive path
+    * @param Function callback Callback function with (error) parameter (not needed for LA version)
+    * @param String basePath Base path, defaults to '/'
+    * @return \
+    */
+
+    createTarGz(sourcePaths, targetFile, callback, basePath);
+
+Extract tar.gz File
++++++++++++++++++++++++++++++++++
+
+Extract tar.gz example (LA):
+
+.. code-block:: javascript
+    :linenos:
+
+    var cmd = 'cd / && tar -zxvf ' + FILENAME;
+    execSync(cmd);
+
+Extract tar.gz command description (QX):
+
+.. code-block:: c++
+    :linenos:
+    
+    /**
+    * @param String sourceFile Source archive path
+    * @param String targetDir Target extraction directory
+    * @param Function callback Callback function with (error) parameter (not needed for LA version)
+    * @return \
+    */
+    extractTarGz(sourceFile, targetDir, callback);

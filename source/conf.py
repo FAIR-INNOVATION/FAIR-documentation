@@ -9,7 +9,7 @@
 project = 'FAIRINO Collaborative Robot User Manual'
 copyright = '2022-2025, FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
 author = 'FAIR Innovation (Suzhou) Robotic System Co.,Ltd.'
-release = '3.8.1'
+release = '3.8.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

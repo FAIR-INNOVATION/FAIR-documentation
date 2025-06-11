@@ -276,6 +276,48 @@ Administrators can use the default values or enter angle values. Input the angle
 
 .. centered:: Figure 6.3-1 Schematic diagram of robot limit
 
+Joint Soft Limit Protection
++++++++++++++++++++++++++++++++++++
+
+Overview
+************************
+
+The Joint Soft Limit Protection function is an active safety mechanism that dynamically restricts operators from exceeding the set soft limit range during drag teaching by real-time monitoring of the robotic arm's joint motion status. This feature ensures soft limits remain effective during drag teaching, thereby enhancing human-robot collaboration safety.
+
+Joint Soft Limit Protection
+********************************
+
+The Joint Soft Limit Protection function requires matching software package and firmware versions for optimal performance.
+
+Soft Limit Configuration and Function Control
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Log in to the web interface, navigate to "Initial Setup"->"Basic"->"Joints"->"Soft Limits" to access the robot soft limit configuration module.
+
+.. image:: base/056.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.3‑1-2 Robot Soft Limit Configuration Module
+
+**Step2**: Set appropriate soft limits for each joint based on the robot's actual working range. Verify whether each joint's current angular position is within the preset soft limit range. If yes, click "Apply" to implement the preset soft limits; if not, move each joint within the preset range first. Otherwise, an out-of-limit error will appear when clicking "Apply", as shown below. In this case, perform single-axis jogging or dragging toward the valid range to clear the error.
+
+.. image:: base/057.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.3‑1-3 Error Display When Joint Angles Exceed Soft Limit Range
+
+**Step3**: After successful soft limit configuration, toggle the "Joint Soft Limit Protection" slider to activate this function (see Figure below). During drag teaching, the set soft limits will take effect, and resistance will be felt when approaching the limits.
+
+.. image:: base/058.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.3‑1-4 Enabling Joint Soft Limit Protection
+
+**Step4**: To disable Joint Soft Limit Protection, simply toggle the "Joint Soft Limit Protection" slider.
+
 Collision level
 ~~~~~~~~~~~~~~~~~~
 
@@ -292,7 +334,7 @@ The collision level is divided into one to ten levels, and the detection of one 
 Post-collision response strategy function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. important:: Note: This post-collision response strategy function is only used in the Linux version.
+.. important:: Note: This post-collision response strategy function is only used in the LA version.
 
 On the basis of the original collision strategy in motion, " Gravitational moment mode " and " Vibration response mode " are added to ensure the safety of man-machine cooperation. 
 
@@ -417,6 +459,37 @@ Under the menu bar of "Initial" -> "Base" -> "Joint", click "Friction comp." to 
 I/O setup
 --------------------
 
+Pausing LUA Program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+During the execution of a robot LUA program, clicking the "Pause/Resume" button will pause the LUA program, and the robot's status will change to "Pause". Clicking the button again will resume the program from the paused position, and the robot's status will return to "Running".
+
+All running background processes will also be paused and resumed synchronously during this operation. Different types of LUA instructions behave differently when paused:
+
+**① Motion Commands**:  
+The robot stops immediately when paused. Upon resuming, the robot will continue moving to the target position specified by the command.
+
+**② Logic Commands (SetDO, GetDI, GetInverseKinRef, etc.)**:  
+If the program is paused during execution, these commands will complete their current operation before waiting for the LUA program to resume before proceeding to the next command.
+
+**③ Wait Commands (WaitDI, ModbusMasterWaitDI, etc.)**:  
+If paused during a wait operation, the pause duration does not count toward the wait timeout period.
+
+**④ Sleep Commands (sleep_ms, WaitMs)**:  
+If paused during a sleep operation, the pause duration does not count toward the specified sleep time.
+
+.. image:: base/066.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.4‑1 LUA Program Paused State
+
+.. image:: base/067.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.4‑2 LUA Program Running State
+
 I/O configuration
 ~~~~~~~~~~~~~~~~~~
 
@@ -499,19 +572,19 @@ In production, when the collaborative robot needs to connect peripherals or stop
      - Robot laser sensor detection signal Y
    * - 20
      - External emergency stop input signal 1
-     - Robot external emergency stop input signal 1, ① only displayed under QNX. ② Under LINUX, relevant configuration can be made in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot external emergency stop input signal 1, ① only displayed under QX. ② Under LA, relevant configuration can be made in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 21
      - External emergency stop input signal 2
-     - Robot external emergency stop input signal 2, ① only displayed under QNX. ② Under LINUX, relevant configuration can be made in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot external emergency stop input signal 2, ① only displayed under QX. ② Under LA, relevant configuration can be made in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 22
      - Level 1 reduction mode
-     - Robot level 1 reduction mode, ① only displayed under QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot level 1 reduction mode, ① only displayed under QX. ② In LA, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 23
      - Secondary reduction mode
-     - Robot secondary reduction mode, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot secondary reduction mode, ① only displayed in QX. ② In LA, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 24
      - Third-level reduction mode (stop)
-     - Robot third-level reduction mode (stop), ① only displayed in QNX. ② Under LINUX, you can make relevant configurations in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot third-level reduction mode (stop), ① only displayed in QX. ② Under LA, you can make relevant configurations in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 25
      - Resume welding
      - After the robot is interrupted from welding, the welding operation signal is restored
@@ -533,6 +606,15 @@ In production, when the collaborative robot needs to connect peripherals or stop
    * - 31
      - Manual automatic switching (high and low level)
      - In the configurable input of DI configuration, select CIO as "Manual automatic switching (high and low level)" and click "Apply". The configurable input valid state can be selected as "high level valid". When CI0 is switched to a high level, the "manual automatic switching (high and low levels)" function is triggered, and the robot state is switched to the automatic state; the configurable input valid state can be selected as "low level valid". When CI0 is switched to a low level, the "manual automatic switching (high and low levels)" function is triggered, and the robot state is switched to the automatic state.
+   * - 32
+     - Enable
+     - Controls robot enable
+   * - 33
+     - Disable
+     - Controls robot disable
+   * - 34
+     - Enable/Disable (Rising/Falling Edge)
+     - Rising/Falling edge of input signal triggers robot enable/disable respectively
 
 Terminal input valid state
 ****************************************
@@ -596,7 +678,7 @@ The default configuration of the control box: CO0 is 1-robot error, CO1 is 2-rob
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.4‑1 Control box DI and DO configuration
+.. centered:: Figure 6.4‑3 Control box DI and DO configuration
 
 **Terminal DI default configuration**: DI0 drag teaching, DI1 teaching point recording.
 
@@ -604,7 +686,7 @@ The default configuration of the control box: CO0 is 1-robot error, CO1 is 2-rob
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑2 Terminal DI configuration
+.. centered:: Figure 6.4‑4 Terminal DI configuration
 
 After configuration is completed, the corresponding output DO status can be viewed in the control box I/O page under the corresponding state.
 
@@ -621,7 +703,7 @@ After configuration is completed, the corresponding output DO status can be view
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑3 Reduced mode configuration
+.. centered:: Figure 6.4‑5 Reduced mode configuration
 
 DO configuration
 ++++++++++++++++++
@@ -700,28 +782,28 @@ The output configurable functions are shown in the following table:
      - Robot hand automatic mode switching signal
    * - 20
      - Emergency stop output signal 1
-     - Robot emergency stop output signal 1, ① only displayed under QNX. ② Under LINUX, you can configure it in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot emergency stop output signal 1, ① only displayed under QX. ② Under LA, you can configure it in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 21
      - Emergency stop output signal 2
-     - Robot emergency stop output signal 2, ① only displayed under QNX. ② Under LINUX, you can configure it in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot emergency stop output signal 2, ① only displayed under QX. ② Under LA, you can configure it in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 22
      - Lua script program run/stop
      - Robot motion Lua script program run/stop signal
    * - 23
      - Safety status output
-     - Robot safety status output signal, ① only displayed under QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot safety status output signal, ① only displayed under QX. ② In LA, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 24
      - Protective stop status output
-     - Robot protective stop status output signal, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot protective stop status output signal, ① only displayed in QX. ② In LA, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 25
      - Robot in motion
-     - Robot in motion status signal, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot in motion status signal, ① only displayed in QX. ② In LA, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 26
      - Robot reduction mode
-     - Robot reduction mode signal, ① only displayed in QNX. ② In LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot reduction mode signal, ① only displayed in QX. ② In LA, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 27
      - Robot non-reduction mode
-     - Robot non-reduction mode signal, ① only displayed in QNX. ② Under LINUX, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
+     - Robot non-reduction mode signal, ① only displayed in QX. ② Under LA, you can configure the relevant settings in the "Initial Settings" -> "Safety" -> "I/O Safety" -> "DIO Safety Function Configuration" interface
    * - 28
      - Reserved
      - Reserved
@@ -764,6 +846,24 @@ The output configurable functions are shown in the following table:
    * - 41
      - External axis exceeds soft limit error
      - External axis 1-4 exceeds soft limit fault signal
+   * - 42
+     - Planning & Timeout Warning
+     - Robot planning and timeout alarm status
+   * - 43
+     - Safety Door Warning
+     - Safety door trigger status
+   * - 44
+     - Motion Warning
+     - Motion warning status
+   * - 45
+     - Interference Zone Warning
+     - Robot entering interference zone warning
+   * - 46
+     - Safety Wall Warning
+     - Robot entering safety wall warning
+   * - 47
+     - Robot Enabled
+     - Robot enable status
 
 Control box DO high and low effective configurable function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -781,7 +881,7 @@ Enter Initial Settings->Basics->I/O Settings->DO interface, and configure the co
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑7 Control box DO output configuration during power-on
+.. centered:: Figure 6.4‑6 Control box DO output configuration during power-on
 
 Alias
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -792,7 +892,7 @@ Click "Initial - Base - I/O setup" on the menu bar, click on the "Alias"  submen
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4-8 I/O alias configuration
+.. centered:: Figure 6.4-7 I/O alias configuration
 
 Filter
 ~~~~~~~~~~~~~~~~
@@ -818,7 +918,7 @@ Users can set the corresponding parameters according to their needs, just click 
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-9 Filter interface
+.. centered:: Figure 6.4-8 Filter interface
 
 .. important:: 
    The I/O filter time range is [0~200], the unit is ms.
@@ -840,7 +940,7 @@ Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-10 Output reset configuration
+.. centered:: Figure 6.4-9 Output reset configuration
 
 .. Configuration import and export
 .. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1076,3 +1176,82 @@ Click the “Apply” button in the “Current tool coordinate system” interfa
    :align: center
 
 .. centered:: Figure 6.6‑7 Calibration result application
+
+Control Box Analog Feedback Arc Tracking Function
+--------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~
+
+The control box analog feedback arc tracking function collects welding voltage and current analog signals to achieve arc tracking compensation. This function is implemented by configuring the corresponding AI and AO channels for the control box analog signals.
+
+.. image:: base/059.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.7‑1 Topology Diagram of Arc Tracking Function Based on Analog Signal Communication
+.. centered:: a represents the computer; b represents the robot and control box; c represents the welder
+
+Control Box Analog AI Configuration Process
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the robot web control interface, navigate to "Initial Setup" -> "Basic" -> "I/O Settings" -> "AI" to enter the "AI Configuration" interface.
+
+In the "Arc Tracking Channel" section of the "AI Configuration" interface, select "Ctrl-AI0" and "Ctrl-AI1" from the dropdown menus for "Welding Current Control AI" and "Welding Voltage Control AI" respectively, then click "Configure" to complete the control box analog AI configuration.
+
+.. image:: base/060.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.7‑2 AI Channel Configuration
+
+In the "Analog Current-Voltage Relationship Graph" section of the AI channel configuration shown above, the parameter settings for the "A-V" and "V-V" interfaces should refer to the analog input/output tables or graphs of the welder being used.
+
+For example, configure the lower and upper limits of the welding current for the control box current analog AI as 0A and 500A respectively; configure the lower and upper limits of the output voltage as 0V and 5V respectively as the parameters for the "A-V" interface in the "Analog Current-Voltage Relationship Graph" section. Click "Configure" to complete the control box current analog AI channel configuration.
+
+.. image:: base/061.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 6.7‑3 Control Box Current Analog AI Configuration
+
+For example, configure the lower and upper limits of the welding voltage for the control box voltage analog AI as 0V and 50V respectively; configure the lower and upper limits of the output voltage as 1.018V and 10V respectively as the parameters for the "V-V" interface in the "Analog Current-Voltage Relationship Graph" section. Click "Configure" to complete the control box voltage analog AI channel configuration.
+
+.. image:: base/062.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 6.7‑4 Control Box Voltage Analog AI Configuration
+
+Control Box Analog AO Configuration Process
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the robot web control interface, navigate to "Initial Setup" -> "Peripherals" -> "Welder" to enter the "Welder Configuration" interface.
+
+.. image:: base/063.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.7‑5 Welder Configuration
+
+In the "Welding Function I/O Configuration" section of the "Welder Configuration" interface, the parameters for the "DI" and "DO" interfaces can be customized to configure the control box CI and CO channels. Select "Controller I/O" from the "Control Type" dropdown menu to begin the controller analog AO channel configuration process.
+
+In the "Analog Current-Voltage Relationship Graph" section of the "Welder Configuration" interface, the parameter settings for the "A-V" and "V-V" interfaces should refer to the analog input/output tables or graphs of the welder being used.
+
+For example, configure the lower and upper limits of the welding current for the control box current analog AO as 0A and 495A respectively; configure the lower and upper limits of the output voltage as 1V and 10V respectively as the parameters for the control box AO channel current analog configuration. Then select "Ctrl-AO0" from the "Welder Current Control AO" dropdown menu and click "Configure" to complete the control box current analog AO channel configuration.
+
+.. image:: base/064.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.7‑6 Control Box Current Analog AO Configuration
+
+For example, configure the lower and upper limits of the welding voltage for the control box voltage analog AO as 10V and 45V respectively; configure the lower and upper limits of the output voltage as 1V and 10V respectively as the parameters for the control box AO channel voltage analog configuration.
+
+Then select "Ctrl-AO1" from the "Welder Voltage Control AO" dropdown menu and click "Configure" to complete the control box voltage analog AO channel configuration.
+
+.. image:: base/065.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.7‑7 Control Box Voltage Analog AO Configuration

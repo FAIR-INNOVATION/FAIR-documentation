@@ -1,3 +1,62 @@
+Version V3.8.2
+-----------------
+
+Date: 2025-05-29
+    
+- **End Lua Open Protocol Supports Welding Handle Function**: 
+    Path: Initial Settings -> Peripherals -> Lua End Open Protocol Configuration -> Welding Handle.
+  
+    Description: Supports adapting to Jasic or SmartTool welding handles using open protocol, with all parameters configurable.
+    
+- **Controller Peripheral Open Protocol Adds Welding Machine Protocol**: 
+    Path: Initial Settings -> Peripherals -> Welding Machine Configuration.
+  
+    Description: Enables communication with welding machines via controller peripheral open protocol (ModbusTCP) for welding machine control.
+
+- **Added LUA Program Pause Function**: 
+    Path: Teaching Program -> Program Programming.
+  
+    Description: During program execution, users can pause at any line including wait commands and communication commands, without counting toward timeout duration.    
+
+- **Added T-Shaped Velocity Optimization + Blending Function**: 
+    Path: Teaching Program -> Program Programming, Graphical Programming, Node Diagram Programming.
+
+    Description: When enabled, provides smoother velocity curves. Currently supports blending between (PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC, ARC-LIN).
+    
+- **FIR Adaptive Parameter Function + FIR Pause/Resume Function**: 
+    Path: Teaching Program -> Program Programming, Graphical Programming, Node Diagram Programming; Initial Settings -> Safety -> Motion Configuration.
+
+    Description: Adds global FIR and adaptive parameter switches. When enabled, regular PTP/LIN/ARC commands automatically use FIR planning (cannot include blend radius).
+    
+- **Modbus RTU Function Optimization**: 
+    Path: Teaching Program -> Program Programming, Graphical Programming, Node Diagram Programming; Teaching Program -> Program Programming -> Modbus RTU Settings.
+
+    Description: Allows configuring ModbusRTU master station, baud rate, parity, station number etc. via WebApp. Enables real-time monitoring of ModbusRTU register values.
+    
+- **Joint Soft Limit Protection Function**: 
+    Path: Initial Settings -> Joints -> Soft Limits.
+
+    Description: In drag mode, provides damping force when joints approach configured soft limits, with automatic return to safe range after releasing external torque.
+    
+- **Robot Swing Tilt Angle Function**: 
+    Path: Teaching Program -> Program Programming, Graphical Programming, Node Diagram Programming.
+
+    Description: Supports custom swing angles around Rx axis of swing coordinate system during swing motion.
+    
+- **Gradual Process Parameter Welding Function**: 
+    Path: Teaching Program -> Program Programming, Graphical Programming, Node Diagram Programming.
+
+    Description: Enables gradual changes in travel speed and current/voltage during welding process.
+    
+- **Analog Arc Tracking Function**: 
+    Path: Initial Settings -> Basic -> I/O Settings -> AI Configuration.
+
+    Description: Direct connection between control box DI、DO/AI、AO and welder IO ports enables arc tracking based on analog current feedback.
+    
+- **FRCap Plugin System + Palletizing Plugin Package**: 
+  
+    Description: Supports QX x86 version FRCap plugin system and palletizing plugin package. FRCap can interact with robot controller through official interfaces, or customers can develop custom interfaces and logic as needed.
+    
 Version V3.8.1
 -----------------
 
@@ -233,7 +292,7 @@ Date: 2024-11-18
 
 - **Backup package function optimization**:
 
-    Description: Support the import and use of old version data packets (QNX 3.6.1 and later version data packets).
+    Description: Support the import and use of old version data packets (QX 3.6.1 and later version data packets).
 
 - **Restore Factory Settings Function Optimization**: Added file verification to increase the system restore factory stability.
 
@@ -241,11 +300,11 @@ Date: 2024-11-18
 
 - **Upgrade function optimization**:
 
-    Description: QNX3.6.9 and later versions can be directly upgraded to QNX3.7.6, and the current version user data will be retained after the upgrade.
+    Description: QX3.6.9 and later versions can be directly upgraded to QX3.7.6, and the current version user data will be retained after the upgrade.
 
 - **Page downgrade function**:
 
-    Description: WebApp pages support downgrades, which can be downgraded to any version of QNX3.6.9 and later, and the current version user data will be retained after the downgrade.
+    Description: WebApp pages support downgrades, which can be downgraded to any version of QX3.6.9 and later, and the current version user data will be retained after the downgrade.
 
 Version V3.7.5
 -----------------

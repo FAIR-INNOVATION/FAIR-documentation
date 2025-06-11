@@ -1201,15 +1201,15 @@ Robot controller -> PLC
 
    * - 56
      - D254
-     - DINT
+     - INT
      - 
-     - 4#Torque Offset (Reserved)
+     - Reserved
 
    * - 57
      - D255
-     - DINT
+     - INT
      - 
-     - 4#Torque Offset (Reserved)
+     - Welding mode setting (0-DC standard, 1-Pulse standard, 2-JOB mode, 3-Local control mode, 4-Separate mode, 5-CC/CV, 6-TIG, 7-CMT mode)
 
    * - 58
      - D256
@@ -4853,3 +4853,937 @@ When two identical tracking motion targets are taught consecutively (which may i
 .. centered:: Figure 8.18‑11 A Typical Conveyor Blocking Tracking Grasping Motion Program
 
 When two identical tracking motion targets are taught consecutively (which may include offset distance) with gripper motion inserted in between, the robot will continue tracking the conveyor at this target position until the gripper motion is completed, achieving blocking tracking grasping.
+
+Controller Peripheral Open Protocol - Welding Machine Protocol
+-------------------------------------------------------------------
+
+Overview
+~~~~~~~~
+
+The Controller Peripheral Open Protocol is typically a runnable LUA program. The program includes communication setup commands, cyclic instructions to write control data to slave devices, and read real-time status data. When executing this LUA program, the robot establishes communication with the device and exchanges data. The LUA program allows customization of communication parameters such as IP address, port number, and cycle time. Users must modify the protocol content according to the actual device configuration. Supported devices include grinding heads, laser sensors, CNC machines, welding machines, etc. The protocol file name must start with ``CtrlDev_``, e.g., ``CtrlDev_Welding.lua``. A maximum of 4 open protocols can run simultaneously.
+
+In the robot WebApp, navigate to "Initial Setup" → "Peripherals" → "Control Box" → "Controller Peripheral Open Protocol," click the "Upload" button, and upload the completed LUA program file to the controller. Select an open protocol ID and name, then click "Configure" (the protocol ID must match the ID written in the open protocol file).
+
+.. figure:: robot_peripherals/254.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑1 Uploading and Configuring the Controller Peripheral Open Protocol
+
+For configured protocols, click the "Load" button. The running status indicator will light up, indicating the protocol is loaded successfully.
+
+.. figure:: robot_peripherals/255.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑2 Loading and Running Status Indicator for the Controller Peripheral Open Protocol
+
+Welding Machine Open Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The robot communicates with the welding machine via ModbusTCP using the Controller Peripheral Open Protocol. The LUA file defines the welding machine's ModbusTCP registers, including communication parameters (IP address, port number) and control registers (arc start, wire feed, etc.). Upload and load this protocol to enable communication between the robot and the welding machine.
+
+Welding Machine Open Protocol Example
+++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: lua
+   :linenos:
+
+   local id = 1 -- Protocol ID, must match the ID configured in WebApp
+   local ctrlValues = {0, 0, 0, 0, 0, 0}
+   local realTimeState = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+   ModbusTCPMasterClose(id)
+   ModbusTCPMasterCreate('192.168.58.45', 502, 1, id)
+   while(1) do
+   setArcStart, setWireForward, setWireReverse, setShieldingGas, setTouchEnable, setRobotError,setRobotEnableState,default1,default2, default3, default4, setCurrent, setVoltage, SetMode = WeldingGetCtrlState()
+   local ctrlWord = 0  
+   ctrlWord = SetBitWithIndex(ctrlWord, 0, setArcStart)
+   ctrlWord = SetBitWithIndex(ctrlWord, 1, setWireForward)
+   ctrlWord = SetBitWithIndex(ctrlWord, 2, setWireReverse)
+   ctrlWord = SetBitWithIndex(ctrlWord, 3, setShieldingGas)
+   ctrlWord = SetBitWithIndex(ctrlWord, 4, setTouchEnable)
+   ctrlWord = SetBitWithIndex(ctrlWord, 7, setRobotError)
+   ctrlValues[1] = setRobotEnableState
+   ctrlValues[2] = ctrlWord
+   ctrlValues[3] = 0
+   ctrlValues[4] = setCurrent
+   ctrlValues[5] = setVoltage
+   ctrlValues[6] = 0
+   ModbusTCPMasterSetHoldRegs(id, 201, 6, ctrlValues, "U16")
+   localtmpCtrlMode={0,0,0,0}
+   tmpCtrlMode[1]=SetMode
+   ModbusTCPMasterSetHoldRegs(id,0x1000,1,tmpCtrlMode,"U16")
+   sleep_ms(10)
+
+   getWeldState, getCurrent, getVoltage,default1, default2, getWelderErrorCode = ModbusTCPMasterGetHoldRegs(id, 211, 6, "U16")
+   realTimeState[1] = GetBitWithIndex(getWeldState, 0) + GetBitWithIndex(getWeldState, 1) * 2  --welderType
+   realTimeState[2] = GetBitWithIndex(getWeldState, 5) --arc state(WCR)
+   realTimeState[3] = GetBitWithIndex(getWeldState, 4) --touch state
+   realTimeState[4] = GetBitWithIndex(getWeldState, 7) --welder error state
+   realTimeState[12] = getCurrent                      --current
+   realTimeState[13] = getVoltage                      --voltage
+   realTimeState[14] = getWelderErrorCode              --welder error code
+   realTimeState[15] = getWeldState / 255             --heart jump
+   WeldingSetRealtimeState(realTimeState)
+
+   local stopFlag = GetOpenLUAStopFlag(id)
+   if(stopFlag ~= 0) then 
+   ModbusTCPMasterClose(id)
+   break
+   end
+
+   sleep_ms(10)
+   end
+
+Welding Machine Open Protocol Breakdown
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+The welding machine open protocol consists of three parts:
+
+**① Establish Communication**: Specify the protocol ID (must match the ID set when loading the protocol), welding machine IP address, port number, etc., and use ``ModbusTCPMasterCreate()`` to establish a ModbusTCP connection.
+
+**② Cyclic Writing of Control Data**: The protocol reads welding control data from the robot controller and writes it to the welding machine. The ``WeldingGetCtrlState()`` function returns values as defined in Table 8.19-1.
+
+.. centered:: Table 8.19-1 WeldingGetCtrlState() Return Values
+
+.. list-table:: 
+   :widths: 10 20 30 40
+   :align: center
+   :class: sheet-center
+   
+   * - **No.**
+     - **Type**
+     - **Name**
+     - **Description**
+
+   * - 1
+     - uint16_t
+     - setArcStart
+     - Arc start signal: 0-OFF, 1-ON
+
+   * - 2
+     - uint16_t
+     - setWireForward
+     - Forward wire feed: 0-Stop, 1-Forward
+
+   * - 3
+     - uint16_t
+     - setWireReverse
+     - Reverse wire feed: 0-Stop, 1-Reverse
+
+   * - 4
+     - uint16_t
+     - setShieldingGas
+     - Shielding gas control: 0-OFF, 1-ON
+
+   * - 5
+     - uint16_t
+     - setTouchEnable
+     - Wire touch sensing enable: 0-Disable, 1-Enable
+
+   * - 6
+     - uint16_t
+     - setRobotError
+     - Robot error: 0-No error, 1-Error
+
+   * - 7
+     - uint16_t
+     - setRobotEnableState
+     - Robot enable state: 0-Disabled, 1-Enabled
+
+   * - 8
+     - uint16_t
+     - default1
+     - Reserved
+
+   * - 9
+     - uint16_t
+     - default2
+     - Reserved
+
+   * - 10
+     - uint16_t
+     - default3
+     - Reserved
+
+   * - 11
+     - uint16_t
+     - default4
+     - Reserved
+
+   * - 12
+     - uint16_t
+     - setCurrent
+     - Set welding current (0.1A)
+
+   * - 13
+     - uint16_t
+     - setVoltage
+     - Set welding voltage (0.01V)
+
+   * - 14
+     - uint16_t
+     - SetMode
+     - Set welding mode: 0-DC monoplex, 1-Pulse monoplex, 2-JOB mode, 3-Local control mode, 4-Separate mode, 5-CC/CV, 6-TIG, 7-CMT mode
+
+   * - 15
+     - uint16_t
+     - default6
+     - Reserved
+
+   * - 16
+     - uint16_t
+     - default7
+     - Reserved
+
+   * - 17
+     - uint16_t
+     - default8
+     - Reserved
+
+   * - 18
+     - uint16_t
+     - default9
+     - Reserved
+
+   * - 19
+     - uint16_t
+     - default10
+     - Reserved
+
+   * - 20
+     - uint16_t
+     - default11
+     - Reserved
+
+**③ Cyclic Reading of Status Data**: The protocol reads real-time status data from the welding machine via ModbusTCP and writes it to the robot controller. The ``WeldingSetRealtimeState()`` function parameters are defined in Table 8.19-2.
+
+.. centered:: Table 8.19-2 WeldingSetRealtimeState() Parameters
+
+.. list-table:: 
+   :widths: 10 20 30 40
+   :align: center
+   :class: sheet-center
+   
+   * - **Type**
+     - **Name**
+     - **Array Index**
+     - **Description**
+
+   * - uint16_t[20]
+     - realTimeState
+     - 1
+     - Welding machine model
+
+   * - uint16_t[20]
+     - realTimeState
+     - 2
+     - Arc state: 0-OFF, 1-ON
+
+   * - uint16_t[20]
+     - realTimeState
+     - 3
+     - Wire touch state: 0-Not touched, 1-Touched
+
+   * - uint16_t[20]
+     - realTimeState
+     - 4
+     - Welding machine error state: 0-No error, 1-Error
+
+   * - uint16_t[20]
+     - realTimeState
+     - 5
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 6
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 7
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 8
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 9
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 10
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 11
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 12
+     - Real-time welding current (0.1A)
+
+   * - uint16_t[20]
+     - realTimeState
+     - 13
+     - Real-time welding voltage (0.01V)
+
+   * - uint16_t[20]
+     - realTimeState
+     - 14
+     - Welding machine error code
+
+   * - uint16_t[20]
+     - realTimeState
+     - 15
+     - Communication heartbeat data
+
+   * - uint16_t[20]
+     - realTimeState
+     - 16
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 17
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 18
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 19
+     - Reserved
+
+   * - uint16_t[20]
+     - realTimeState
+     - 20
+     - Reserved
+
+Uploading and Loading the Welding Machine Open Protocol
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Navigate to "Initial Setup" → "Peripherals" → "Control Box" → "Peripheral Open Protocol," click "Upload," and upload the welding machine open protocol file (e.g., ``CtrlDev_WELDING.lua``).
+
+.. figure:: robot_peripherals/256.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑3 Uploading the Welding Machine Open Protocol
+
+In "Protocol Configuration," select a protocol ID (must match the ID in the protocol file), e.g., ID 1, and select the protocol file. Click "Configure."
+
+.. figure:: robot_peripherals/257.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑4 Configuring the Welding Machine Open Protocol
+
+Click "Connect" to load the protocol. The running status indicator lights up when communication is established.
+
+.. figure:: robot_peripherals/258.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑5 Loading the Welding Machine Open Protocol
+
+Welding Debugging and Program Writing
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+The robot controls the welding machine in three ways:
+
+**① Digital/Analog (Control Box I/O)**: Use DO/AO ports for arc start, wire feed, gas control, etc.
+
+**② Digital Communication (UDP)**: Communicate with a PLC via UDP, which then controls the welding machine.
+
+**③ Digital Communication (ModbusTCP)**: Load the welding machine open protocol for direct control.
+
+Welding Debugging
+*********************
+
+Ensure the protocol is loaded and register addresses are correct. Navigate to "Initial Setup" → "Peripherals" → "Welding Machine," select "Digital Communication (ModbusTCP)."
+
+.. figure:: robot_peripherals/259.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑6 Selecting "Digital Communication (ModbusTCP)"
+
+Click "Arc Start," "Arc Stop," "Gas ON," etc., and verify the welding machine responds correctly.
+
+.. figure:: robot_peripherals/260.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑7 Welding Debugging
+
+Writing a Welding Program
+*******************************
+
+Navigate to "Initial Setup" → "Teach Program" → "Program Editing," and create a new program (e.g., ``testWeld.lua``).
+
+.. figure:: robot_peripherals/261.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑8 Creating a Welding LUA Program
+
+Select "Welding Instructions."
+
+.. figure:: robot_peripherals/262.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑9 Selecting "Welding Instructions"
+
+Click "Welding," then add arc start/stop instructions.
+
+.. figure:: robot_peripherals/263.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑10 Adding Welding Instructions
+
+Add welding start/end points. Switch to auto mode and run the program.
+
+.. figure:: robot_peripherals/266.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑13 Welding Program
+
+Unloading the Welding Machine Open Protocol
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Navigate to "Initial Setup" → "Peripherals" → "Control Box" → "Peripheral Open Protocol," and click "Unload."
+
+.. figure:: robot_peripherals/267.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.19‑14 Unloading the Open Protocol
+
+The status indicator turns off.
+
+.. figure:: robot_peripherals/268.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.19‑15 Open Protocol Unloaded
+
+An error will appear if the protocol is not loaded during welding.
+
+.. figure:: robot_peripherals/269.png
+   :align: center
+   :width: 2in
+
+.. centered:: Figure 8.19‑16 "Protocol Not Loaded" Error
+
+Using Open Protocol to Adapt Welding Handles
+-------------------------------------------------------------
+
+Protocol Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When using the open protocol to adapt a welding handle, you need to first enter the web interface to upload and configure the open protocol after the robot is powered on.
+
+Step-by-step operation: Click "Initial Settings" -> "Peripherals" -> "End Tool" -> "Open Protocol", then click "End Protocol Communication", click "Enter Boot", and finally click "Upload" to upload the open protocol. After the upload is complete, restart the device to enable the end Lua open protocol for welding handle adaptation.
+
+.. figure:: robot_peripherals/270.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.20‑1 Uploading End Open Protocol
+
+Step-by-step operation: Click "Initial Settings" -> "Peripherals" -> "End Tool" -> "Open Protocol", then click "Enable End Protocol", select the device type as "Welding Handle", and click "Enable" to complete the adaptation. After enabling, the parameters will be retained after power cycling.
+
+.. figure:: robot_peripherals/271.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.20‑2 Enabling End Open Protocol
+
+Protocol Template
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Example for Jasic-compatible protocol:
+
+.. code-block:: lua
+
+   function Getbit(X,Bit)                   --Extract specified bit from X
+   return ((X&(1<<Bit))>>Bit)
+   end
+   while(1)
+   do
+   IwdgTaskHandle()
+   MainLoop()
+   UpDownLoadHandle()
+   SdoRwPara()
+   EndErrClear()
+   local BFlag=LuaBreak()
+   if(BFlag==1)then
+   break
+   end
+   RxData={}
+   T0={0x7D,0x08,0x22,0xB3,0x01,0x00}
+   T1={0x7D,0x08,0x22,0xB4,0x03,0x00}
+   T2={0x7D,0X08,0X22,0XB5,0x1E,0x00}
+   DelayMs(5)
+   RxLen=WeldToolMasterGetCmd(RxData)       --Gets commands from welding torch (master mode)
+   if (RxData[1]==0x7D)and(RxData[2]==0x08)and(RxData[3]==0x22) then
+   if(RxData[4] == 0xB3)then                --Function code 0xB3 (set welding params)
+   local SetParams={A2=RxData[7],A1=RxData[8],A6=(ByteToDwFloat(RxData[9],RxData[10],RxData[11],RxData[12]))*1000,
+   A8=(ByteToDwFloat(RxData[13],RxData[14],RxData[15],RxData[16])),A7=(ByteToDwFloat(RxData[17],RxData[18],RxData[19],RxData[20])),
+   A4=(ByteToDwFloat(RxData[21],RxData[22],RxData[23],RxData[24]))*1000,A5=(ByteToDwFloat(RxData[25],RxData[26],RxData[27],RxData[28]))*1000}
+   SetWeldParams(SetParams)                 --Sets welding parameters (3 zones: A,B,C)
+   Dword=GetRobotState()                    --Gets robot status (bit0: enable, bit1: fault, bit2: motion)
+   T0[7]=((Dword)&(1<<1))
+   T0[8],T0[9]=WeldToolCrcValue(T0)         --Custom CRC check
+   T0[10]=0x0E
+   EndTxWeldData(T0)                        --Sends response packet
+   DelayMs(5)
+   end
+   if(RxData[4] == 0xB4)then                --0xB4 real-time control
+   local key={K0=Getbit(RxData[7],0),K1=Getbit(RxData[7],1),K2=Getbit(RxData[7],2),K3=Getbit(RxData[7],3),
+   K4=Getbit(RxData[7],4),K5=Getbit(RxData[7],5),K6=Getbit(RxData[7],6),K7=Getbit(RxData[7],7),
+   K8=Getbit(RxData[8],0),K9=Getbit(RxData[8],1),K10=Getbit(RxData[8],2),K11=Getbit(RxData[8],3),
+   K12=Getbit(RxData[8],4),K13=Getbit(RxData[8],5),K14=Getbit(RxData[8],6),K15=Getbit(RxData[9],0),
+   K16=Getbit(RxData[9],1),K17=Getbit(RxData[9],2),K18=Getbit(RxData[9],3),K19=Getbit(RxData[9],4),
+   K20=Getbit(RxData[9],5),K21=Getbit(RxData[9],6),K22=Getbit(RxData[9],7),K23=Getbit(RxData[10],0),
+   K24=Getbit(RxData[10],1)}                --Key values per protocol
+   SetWeldToolKeys(key)                     --Uploads button states
+   Dword=GetRobotState()
+   T1[7]=(Dword)&(0x1)
+   T1[8]=(Dword>>1)&(0x1)
+   T1[9]=(Dword>>2)&(0x1)
+   T1[10],T1[11]=WeldToolCrcValue(T1)
+   T1[12]=0X0E
+   EndTxWeldData(T1)
+   DelayMs(5)
+   end
+   if(RxData[4] == 0xB5)then                --Read welding params
+   local wldpams={"A2","A1","A6","A8","A7","A4","A5"}  
+   GetWeldParams(wldpams)                   --Retrieves parameter values
+   T2[7]=wldpams[1]
+   T2[8]=wldpams[2]
+   wldpams[3]=wldpams[3]/1000
+   wldpams[6]=wldpams[6]/1000
+   wldpams[7]=wldpams[7]/1000
+   for i=0,4 do
+   T2[9+(i*4)+3],T2[9+(i*4)+2],T2[9+(i*4)+1],T2[9+(i*4)+0]=DwFloatToByte(wldpams[3+i])
+   end
+   for i=0,7 do
+   T2[29+i]=0
+   end
+   T2[37],T2[38]=WeldToolCrcValue(T2)
+   T2[39]=0x0E
+   EndTxWeldData(T2)
+   DelayMs(5)
+   end
+   end
+   LuaGc()
+   end
+
+Supported Commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. centered:: Table 8.20-1 Supported Commands
+
+.. list-table:: 
+   :widths: 20 80
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **Bit**
+     - **Description**
+   * - 0
+     - Clear program
+   * - 1
+     - Save program
+   * - 2
+     - Generate safety point (LIN)
+   * - 3
+     - Generate linear motion point (LIN)
+   * - 4
+     - Add arc transition point
+   * - 5
+     - Add arc endpoint (ARC)
+   * - 6
+     - Toggle mode (default: manual)
+   * - 7
+     - Toggle robot operation state
+   * - 8
+     - Toggle drag mode
+   * - 9
+     - Start spot welding
+   * - 10
+     - Add weave start
+   * - 11
+     - Add weave end
+   * - 12
+     - Jog +X
+   * - 13
+     - Jog -X
+   * - 14
+     - Jog +Y
+   * - 15
+     - Jog -Y
+   * - 16
+     - Jog +Z
+   * - 17
+     - Jog -Z
+   * - 18
+     - Jog +RX
+   * - 19
+     - Jog -RX
+   * - 20
+     - Jog +RY
+   * - 21
+     - Jog -RY
+   * - 22
+     - Jog +RZ
+   * - 23
+     - Jog -RZ
+   * - 24
+     - Generate home point
+   * - 25
+     - PTP
+   * - 26
+     - Fixed-pose drag
+   * - 27
+     - Welding recovery
+   * - 28
+     - Welding abort
+   * - 29
+     - SetDO
+   * - 30
+     - Offline
+   * - 31
+     - Parameter update
+   * - 32
+     - ArcStart
+   * - 33
+     - ArcEnd
+   * - 34
+     - Lin+ArcStart+weaveStart
+   * - 35
+     - Lin+ArcEnd+weaveEnd
+   * - 36
+     - Lin+ArcStart
+   * - 37
+     - Lin+ArcEnd
+   * - 38
+     - Undo program
+   * - 39
+     - Reserved
+   * - ...
+     - Reserved
+   * - 63
+     - Reserved
+
+Configurable Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. centered:: Table 8.20-2 Configurable Parameters
+
+.. list-table:: 
+   :widths: 10 40 20 30
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **Index**
+     - **Parameter**
+     - **Type**
+     - **Range**
+
+   * - 0
+     - Welding speed
+     - float
+     - 0-100%
+
+   * - 1
+     - Travel speed
+     - float
+     - 0-100%
+
+   * - 2
+     - Arc start/end timeout
+     - float
+     - 0-65535(ms)
+
+   * - 3
+     - Weave left dwell
+     - float
+     - 0-99999(ms)
+
+   * - 4
+     - Weave right dwell
+     - float
+     - 0-99999(ms)
+
+   * - 5
+     - Spot weld time
+     - float
+     - 0-99999(ms)
+
+   * - 6
+     - Weave width
+     - float
+     - 0-1000(0.1mm)
+
+   * - 7
+     - Weave frequency
+     - float
+     - 0-100(0.1Hz)
+
+   * - 8
+     - Welder control type (0=IO box, 1=UDP)
+     - float
+     - 0-255
+
+   * - 9
+     - Process ID
+     - float
+     - 0-99
+
+   * - 10
+     - Weave type
+     - float
+     - 0-255
+
+   * - 11
+     - Current analog output
+     - float
+     - 0-1
+
+   * - 12
+     - Voltage analog output
+     - float
+     - 0-1
+
+   * - 13
+     - DO port
+     - float
+     - 0-15
+
+   * - 14
+     - Weave parameter ID
+     - float
+     - 0-255
+
+   * - 15
+     - Manual mode speed
+     - float
+     - 0-100%
+
+   * - 16
+     - Auto mode speed
+     - float
+     - 0-100%
+
+   * - 17
+     - Welding current
+     - float
+     - 0-999990(0.1A)
+
+   * - 18
+     - Welding voltage
+     - float
+     - 0-999990(0.1V)
+
+   * - 19
+     - Max jog distance
+     - float
+     - 0-1000(0.1mm)
+
+   * - 20
+     - Welder ready DI
+     - float
+     - 0-127
+
+   * - 21
+     - Arc success DI
+     - float
+     - 0-127
+
+   * - 22
+     - Recovery DI
+     - float
+     - 0-127
+
+   * - 23
+     - Abort DI
+     - float
+     - 0-127
+
+   * - 24
+     - Arc start DO
+     - float
+     - 0-127
+
+   * - 25
+     - Gas check DO
+     - float
+     - 0-127
+
+   * - 26
+     - Wire feed+ DO
+     - float
+     - 0-127
+
+   * - 27
+     - Wire feed- DO
+     - float
+     - 0-127
+
+   * - 28
+     - Recovery enable
+     - float
+     - 0-1
+
+   * - 29
+     - Recovery speed
+     - float
+     - 0-100%
+
+   * - 30
+     - Motion type
+     - float
+     - 0-1
+
+   * - 31
+     - Arc loss detection
+     - float
+     - 0-1
+
+   * - 32
+     - Include wait time
+     - float
+     - 0-1
+
+   * - 33
+     - Weave callback ratio
+     - float
+     - 0-100%
+
+   * - 34
+     - Weave position wait type
+     - float
+     - 0-255
+
+   * - 35
+     - Arc start time
+     - float
+     - 0-65535(ms)
+
+   * - 36
+     - Arc end time
+     - float
+     - 0-65535(ms)
+
+   * - 37
+     - Arc loss confirm time
+     - float
+     - 0-65535(ms)
+
+   * - 38
+     - Overlap distance
+     - float
+     - 0-1000(0.1mm)
+
+   * - 39
+     - Arc start current
+     - float
+     - 0-999990(0.1A)
+
+   * - 40
+     - Arc start voltage
+     - float
+     - 0-999990(0.1V)
+
+   * - 41
+     - Arc end current
+     - float
+     - 0-999990(0.1A)
+
+   * - 42
+     - Arc end voltage
+     - float
+     - 0-999990(0.1V)
+
+   * - 43
+     - Min welding current
+     - float
+     - 0-999990(0.1A)
+
+   * - 44
+     - Max welding current
+     - float
+     - 0-999990(0.1A)
+
+   * - 45
+     - Min current analog out
+     - float
+     - 0-100(0.1A)
+
+   * - 46
+     - Max current analog out
+     - float
+     - 0-100(0.1A)
+
+   * - 47
+     - Min welding voltage
+     - float
+     - 0-2000(0.1V)
+
+   * - 48
+     - Max welding voltage
+     - float
+     - 0-2000(0.1V)
+
+   * - 49
+     - Min voltage analog out
+     - float
+     - 0-100(0.1V)
+
+   * - 50
+     - Max voltage analog out
+     - float
+     - 0-100(0.1V)
+
+   * - 51
+     - Triangle weave left length
+     - float
+     - 0-1000(0.1mm)
+
+   * - 52
+     - Triangle weave right length
+     - float
+     - 0-1000(0.1mm)
+
+   * - 53
+     - Weave direction azimuth
+     - float
+     - -1800-1800(0.1°)
+
+   * - 54
+     - Weave direction tilt
+     - float
+     - -1800-1800(0.1°)
+
+   * - 55
+     - Triangle apex dwell
+     - float
+     - 0-99999(ms)
