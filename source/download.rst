@@ -71,7 +71,7 @@ Robot Certification:
      - ✅
      - ✅
      - --
-     - :download:`download <_static/_doc/ROHS 2.0 Declaration.pdf>`
+     - :download:`download <_static/_doc/RoHS 2.0 Declaration.pdf>`
 
    * - **Explosion-proof Certificate**
      - ✅
