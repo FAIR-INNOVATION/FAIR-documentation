@@ -57,7 +57,7 @@ Date: 2025-05-29
   
     Description: Supports QX x86 version FRCap plugin system and palletizing plugin package. FRCap can interact with robot controller through official interfaces, or customers can develop custom interfaces and logic as needed.
 
-**Robot Model and Type**: 
+- **Robot Model and Type**: 
 
     Description: Add FR3C robot model and configuration settings.
 
