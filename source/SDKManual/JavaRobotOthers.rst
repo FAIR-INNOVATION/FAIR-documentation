@@ -277,62 +277,8 @@ Code example
         robot.AxleSensorRegWrite(1, 4, 6, 1, 0, 0, 0);
     }
 
-Get Controller SN
-++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.4-3.8.1
-
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get controller serial number
-    * @param [out] SNCode Controller SN
-    * @return Error code
-    */
-    int GetRobotSN(String[] SNCode);
-
-Shutdown Robot OS
-++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.4-3.8.1
-
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Shutdown robot operating system
-    * @return Error code
-    */
-    int ShutDownRobotOS();
-
-Code Example
-++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set reconnect attempts and interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("RPC connection success");
-        }
-        else
-        {
-            System.out.println("RPC connection fail");
-            return ;
-        }
-
-        String[] SN = new String[1];
-        robot.GetRobotSN(SN);
-        System.out.println("Robot SN is :"+SN[0]);
-        robot.ShutDownRobotOS();
-    }
-
-Controller Log Download
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Controller log download 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java

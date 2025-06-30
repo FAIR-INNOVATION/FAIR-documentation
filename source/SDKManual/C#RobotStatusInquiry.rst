@@ -565,3 +565,54 @@ Code Example
         robot.GetRobotRealTimeState(ref pKG);
         Console.WriteLine($"the state is {pKG.main_code}");
     }
+
+Get the status of the SmartTool button
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the status of the SmartTool button
+    * @param [out] state SmartTool handle button status; (bit0:0- Communication is normal; 1- Communication disconnection; bit1- Undo operation bit2- Clear the program);
+        bit3-A key bit4-B key bit5-C key bit6-D key bit7-E key bit8-IO key bit9- Manual automatic Starting from bit10
+    * @return error code
+    */
+    int GetSmarttoolBtnState(ref int state);
+
+Code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    private void button11_Click(object sender, EventArgs e)
+    {
+
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        int state = 0;
+        while (true)
+        {
+            int rtn = robot.GetSmarttoolBtnState(ref state);
+            string binaryString = Convert.ToString(state, 2).PadLeft(32, '0');
+            Console.WriteLine($"GetSmarttoolBtnState rtn (binary): {binaryString}");
+            Thread.Sleep(100);
+        }
+
+    }
+
+Obtain the extended axis coordinate system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Obtain the extended axis coordinate system
+    * @param [out] coord extended axis coordinate system
+    * @return error code
+    */
+    int ExtAxisGetCoord(ref DescPose coord);

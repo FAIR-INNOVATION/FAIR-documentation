@@ -231,14 +231,15 @@ Setting Oscillation Parameters
     - ``weaveFrequency``: swing frequency (Hz)
     - ``weaveIncStayTime``: wait mode 0-cycle without wait time; 1-cycle with wait time mandatory parameter
     - ``weaveRange``: swing range (mm)
-    - ``weaveLeftRange``： vertical triangle swing left chord length(mm)
-    - ``weaveRightRange``： vertical triangle swing right chord length(mm)
-    - ``additionalStayTime``： vertical triangle swing vertical triangle point residence time(mm)
+    - ``weaveLeftRange``:  vertical triangle swing left chord length(mm)
+    - ``weaveRightRange``:  vertical triangle swing right chord length(mm)
+    - ``additionalStayTime``:  vertical triangle swing vertical triangle point residence time(mm)
     - ``weaveLeftStayTime``: wave left stay time (ms)
     - ``weaveRightStayTime``: wave right stay time (ms)
     - ``weaveCircleRadio``: Circle swing-back ratio (0-100%)
     - ``weaveStationary``: swing position wait, 0 - position continues to move during wait time; 1 - position is stationary during wait time"
-    "Default parameters", "- ``weaveYawAngle``: azimuth angle of the swing direction (rotation around the swing Z-axis) in °, default 0"
+    "Default parameters", "- ``weaveYawAngle``: azimuth angle of the swing direction (rotation around the swing Z-axis) in °, default 0
+    - ``weaveRotAngle``: Swing direction azimuth (rotation around the X-axis of the swing), unit °, default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Code example
@@ -1458,7 +1459,7 @@ Code example
 
 Wobble start
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.9-3.8.0
+.. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
@@ -1466,7 +1467,10 @@ Wobble start
 
     "Prototype", "``WeaveChangeStart(weaveNum)``"
     "Description", "Wobble start"
-    "Mandatory parameters", "- ``weaveNum``: Swing number"
+    "Mandatory parameters", "- ``weaveChangeFlag``: Swing number 1- Variable swing parameters; 2- Variable swing parameters + welding speed
+    - ``weaveNum``: Swing number
+    - ``velStart``: Welding start speed, (cm/min)
+    - ``velEnd``: Welding end speed, (cm/min)"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
@@ -1507,9 +1511,216 @@ code example
     robot.ARCStart(1, 0, 10000)
     robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
     robot.WeaveStart(0)
-    robot.WeaveChangeStart(1)
+    robot.WeaveChangeStart(1,1,0,0)
     robot.MoveL(desc_pos=p3Desc, tool=1, user=1, vel=100.0, acc=100.0, ovl=1.0)
     robot.WeaveChangeEnd()
     robot.WeaveEnd(0)
     robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
     robot.ARCEnd(1, 0, 10000)
+
+Selection of AI channels for current feedback in arc tracking welding machines
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ArcWeldTraceAIChannelCurrent(channel)``"
+    "Description", "Selection of AI channels for current feedback in arc tracking welding machines"
+    "Mandatory parameters", "- ``channel``: Passage 0- Expand AI0; 1- Expand AI1; 2- Expand AI2; 3- Expand AI3; 4- Control Box AI0 5- Control Box AI1"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Selection of AI channel for voltage feedback of arc tracking welding machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ArcWeldTraceAIChannelVoltage(channel)``"
+    "Description", "Selection of AI channel for voltage feedback of arc tracking welding machine"
+    "Mandatory parameters", "- ``channel``: Passage 0- Expand AI0; 1- Expand AI1; 2- Expand AI2; 3- Expand AI3; 4- Control Box AI0 5- Control Box AI1"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Current feedback conversion parameters of arc tracking welding machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ArcWeldTraceCurrentPara(AILow, AIHigh, currentLow, currentHigh)``"
+    "Description", "Current feedback conversion parameters of arc tracking welding machine"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``AILow``: Lower limit of AI channel, default value 0V, range [0-10V]
+    - ``AIHigh``: AI channel upper limit, default value 10V, range [0-10V]
+    - ``currentLow``: The lower limit of the AI channel corresponds to the current value of the welding machine. The default value is 0V, and the range is [0-200V]
+    - ``currentHigh``: The upper limit of the AI channel corresponds to the current value of the welding machine. The default value is 100V, and the range is [0-200V]"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Voltage feedback conversion parameters of arc tracking welding machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ArcWeldTraceVoltagePara(AILow, AIHigh, voltageLow, voltageHigh)``"
+    "Description", "Voltage feedback conversion parameters of arc tracking welding machine"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "- ``AILow``: Lower limit of AI channel, default value 0V, range [0-10V]
+    - ``AIHigh``: AI channel upper limit, default value 10V, range [0-10V]
+    - ``voltageLow``: The lower limit of the AI channel corresponds to the welding machine voltage value. The default value is 0V, and the range is [0-200V]
+    - ``voltageHigh``: The upper limit of the AI channel corresponds to the voltage value of the welding machine. The default value is 100V, and the range is [0-200V]"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+code example
+------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    safetydescPose = [-504.043,275.181,40.908,-28.002,-42.025,-14.044]
+    safetyjointPos = [-39.078,-76.732,87.227,-99.47,-94.301,18.714]
+    startdescPose = [-473.86,257.879,-20.849,-37.317,-42.021,2.543]
+    startjointPos = [-43.487,-76.526,95.568,-104.445,-89.356,3.72]
+    enddescPose = [-499.844,141.225,7.72,-34.856,-40.17,13.13]
+    endjointPos = [-31.305,-82.998,99.401,-104.426,-89.35,3.696]
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+    robot.MoveJ(joint_pos=safetyjointPos, tool=1, user=0, vel=20, acc=100)
+    robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0)
+    robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1)
+    robot.WeldingSetVoltage(0, 25, 1, 0)
+    robot.WeldingSetCurrent(0, 260, 0, 0)
+    rtn = robot.ArcWeldTraceAIChannelCurrent(4)
+    print("ArcWeldTraceAIChannelCurrent rtn is", rtn)
+    rtn = robot.ArcWeldTraceAIChannelVoltage(5)
+    print("ArcWeldTraceAIChannelVoltage rtn is", rtn)
+    rtn = robot.ArcWeldTraceCurrentPara(0, 5, 0, 500)
+    print("ArcWeldTraceCurrentPara rtn is", rtn)
+    rtn = robot.ArcWeldTraceVoltagePara(1.018, 10, 0, 50)
+    print("ArcWeldTraceVoltagePara rtn is", rtn)
+    robot.MoveJ(joint_pos=startjointPos, tool=1, user=0, vel=20, acc=100)
+    robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0)
+    robot.ARCStart(0, 0, 10000)
+    robot.WeaveStart(0)
+    robot.MoveL(desc_pos=enddescPose, tool=1, user=0, vel=100, ovl= 2, acc=100)
+    robot.ARCEnd(0, 0, 10000)
+    robot.WeaveEnd(0)
+    robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0)
+    robot.MoveJ(joint_pos=safetyjointPos, tool=1, user=0, vel=20, acc=100)
+
+Set the welding voltage to start gradually
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetVoltageGradualChangeStart(IOType, voltageStart, voltageEnd, AOIndex, blend)``"
+    "Description", "Set the welding voltage to start gradually"
+    "Mandatory parameters", "- ``IOType``: Control type 0- Control Box IO 1- Digital Communication Protocol (UDP) 2- Digital Communication Protocol (ModbusTCP)
+    - ``voltageStart``: Initial welding voltage (V)
+    - ``voltageEnd``: Termination welding voltage (V)
+    - ``AOIndex``: The AO port number of the control box (0-1)
+    - ``blend``: Whether smooth 0- Not smooth; 1- Smooth"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Set the welding voltage gradient to end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetVoltageGradualChangeEnd()``"
+    "Description", "Set the welding voltage gradient to end"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Set the welding current to start gradually
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetCurrentGradualChangeStart(IOType, currentStart, currentEnd, AOIndex, blend)``"
+    "Description", "Set the welding current to start gradually"
+    "Mandatory parameters", "- ``IOType``: Control type 0- Control Box IO 1- Digital Communication Protocol (UDP) 2- Digital Communication Protocol (ModbusTCP)
+    - ``currentStart``: Initial welding current (A)
+    - ``currentEnd``: Termination welding current (A)
+    - ``AOIndex``: The AO port number of the control box (0-1)
+    - ``blend``: Whether smooth 0- Not smooth; 1- Smooth"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Set the welding current to gradually end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetCurrentGradualChangeEnd()``"
+    "Description", "Set the welding current to gradually end"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+code example
+------------------------------------
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+
+    startdescPose = [-484.707, 276.996, -14.013, -37.657, -40.508, -1.548]
+    startjointPos = [-45.421, -75.673, 93.627, -104.302, -87.938, 6.005]
+    enddescPose = [-508.767, 137.109, -13.966, -37.639, -40.508, -1.559]
+    endjointPos = [-32.768, -80.947, 100.254, -106.201, -87.201, 18.648]
+    safedescPose = [-484.709, 294.436, 13.621, -37.660, -40.508, -1.545]
+    safejointPos = [-46.604, -75.410, 89.109, -100.003, -88.012, 4.823]
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+
+    robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0)
+    robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1)
+    robot.WeldingSetVoltage(0, 25, 1, 0)
+    robot.WeldingSetCurrent(0, 260, 0, 0)
+    robot.MoveJ(joint_pos=safejointPos, tool=1, user=0, vel=5, acc=100)
+    rtn = robot.WeldingSetCurrentGradualChangeStart(0, 260, 220, 0, 0)
+    print("WeldingSetCurrentGradualChangeStart rtn is", rtn)
+    rtn = robot.WeldingSetVoltageGradualChangeStart(0, 25, 22, 1, 0)
+    print("WeldingSetVoltageGradualChangeStart rtn is", rtn)
+    rtn = robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0)
+    print("ArcWeldTraceControl rtn is", rtn)
+    robot.MoveJ(joint_pos=startjointPos, tool=1, user=0, vel=5, acc=100)
+    robot.ARCStart(0, 0, 10000)
+    robot.WeaveStart(0)
+    robot.WeaveChangeStart(2, 1, 24, 36)
+    robot.MoveL(desc_pos=enddescPose, tool=1, user=0, vel=100, ovl=2, acc=100)
+    robot.ARCEnd(0, 0, 10000)
+    robot.WeaveChangeEnd()
+    robot.WeaveEnd(0)
+    robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0)
+    robot.WeldingSetCurrentGradualChangeEnd()
+    robot.WeldingSetVoltageGradualChangeEnd()

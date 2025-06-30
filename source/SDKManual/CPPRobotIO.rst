@@ -1,468 +1,512 @@
 IO
 ============
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-Set the control box digital output
-+++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief  Set the control box digital output
-    * @param  [in] id  I/O number and range[0~15]
-    * @param  [in] status 0- off, 1- on
-    * @param  [in] smooth 0- Not smooth, 1- smooth
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @return  Error code
-    */
-    errno_t  SetDO(int id, uint8_t status, uint8_t smooth, uint8_t block);
-
-Set tool digital output
+Set Control Box Digital Output
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set tool digital output
-    * @param  [in] id  I/O number and range[0~1]
-    * @param  [in] status 0- off, 1- on
-    * @param  [in] smooth 0- not smooth, 1- smooth
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @return  Error code
+    @brief Set control box digital output
+    @param [in] id IO number, range [0~15]
+    @param [in] status 0-off, 1-on
+    @param [in] smooth 0-non-smooth, 1-smooth
+    @param [in] block 0-blocking, 1-non-blocking
+    @return Error code
     */
-    errno_t  SetToolDO(int id, uint8_t status, uint8_t smooth, uint8_t block);
+    errno_t SetDO(int id, uint8_t status, uint8_t smooth, uint8_t block);
 
-Set control box analog output
+Set Tool Digital Output
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set control box analog output
-    * @param  [in] id  I/O number and range[0~1]
-    * @param  [in] value Percentage of current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V]
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @return  Error code
+    @brief Set tool digital output
+    @param [in] id IO number, range [0~1]
+    @param [in] status 0-off, 1-on
+    @param [in] smooth 0-non-smooth, 1-smooth
+    @param [in] block 0-blocking, 1-non-blocking
+    @return Error code
     */
-    errno_t  SetAO(int id, float value, uint8_t block);
+    errno_t SetToolDO(int id, uint8_t status, uint8_t smooth, uint8_t block);
 
-Set tool analog output
+Set Control Box Analog Output
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set tool analog output
-    * @param  [in] id  I/O number, range [0]
-    * @param  [in] value Percentage of current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V]
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @return  Error code
+    @brief Set control box analog output
+    @param [in] id IO number, range [0~1]
+    @param [in] value Current or voltage percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    @param [in] block 0-blocking, 1-non-blocking
+    @return Error code
     */
-    errno_t  SetToolAO(int id, float value, uint8_t block);
+    errno_t SetAO(int id, float value, uint8_t block);
 
-Get the control box digital input
+Set Tool Analog Output
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Get the control box digital input
-    * @param  [in] id  I/O number range[0~15]
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @param  [out] result  0- low, 1- high
-    * @return  Error code
-    */   
-    errno_t  GetDI(int id, uint8_t block, uint8_t *result);
+    @brief Set tool analog output
+    @param [in] id IO number, range [0]
+    @param [in] value Current or voltage percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    @param [in] block 0-blocking, 1-non-blocking
+    @return Error code
+    */
+    errno_t SetToolAO(int id, float value, uint8_t block);
 
-Get tool numeric input
+Code Example for Setting Digital and Analog Outputs
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestAODO(void)
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+    return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    uint8_t status = 1;
+    uint8_t smooth = 0;
+    uint8_t block = 0;
+    for (int i = 0; i < 16; i++)
+    {
+    robot.SetDO(i, status, smooth, block);
+    robot.Sleep(300);
+    }
+    status = 0;
+    for (int i = 0; i < 16; i++)
+    {
+    robot.SetDO(i, status, smooth, block);
+    robot.Sleep(300);
+    }
+    status = 1;
+    for (int i = 0; i < 2; i++)
+    {
+    robot.SetToolDO(i, status, smooth, block);
+    robot.Sleep(1000);
+    }
+    status = 0;
+    for (int i = 0; i < 2; i++)
+    {
+    robot.SetToolDO(i, status, smooth, block);
+    robot.Sleep(1000);
+    }
+    for (int i = 0; i < 100; i++)
+    {
+    robot.SetAO(0, i * 40.96, block);
+    robot.Sleep(30);
+    }
+    for (int i = 0; i < 100; i++)
+    {
+    robot.SetToolAO(0, i * 40.96, block);
+    robot.Sleep(30);
+    }
+    robot.CloseRPC();
+    return 0;
+    }
+
+Get Control Box Digital Input
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Get tool numeric input
-    * @param  [in] id  I/O number, range[0~1]
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @param  [out] result  0- low, 1- high
-    * @return  Error code
-    */   
-    errno_t  GetToolDI(int id, uint8_t block, uint8_t *result);
+    @brief Get control box digital input
+    @param [in] id IO number, range [0~15]
+    @param [in] block 0-blocking, 1-non-blocking
+    @param [out] result 0-low level, 1-high level
+    @return Error code
+    */
+    errno_t GetDI(int id, uint8_t block, uint8_t *result);
 
-Wait for the control box digital input
-++++++++++++++++++++++++++++++++++++++++
+Get Tool Digital Input
+++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Wait for the control box digital input
-    * @param  [in] id  I/O number，range[0~15]
-    * @param  [in]  status 0- off, 1- on
-    * @param  [in]  max_time  Maximum waiting time, expressed in ms
-    * @param  [in]  opt  After timeout policy, 0- program stops and prompts timeout, 1- ignores timeout prompts and continues execution, 2- waits
-    * @return  Error code
+    @brief Get tool digital input
+    @param [in] id IO number, range [0~1]
+    @param [in] block 0-blocking, 1-non-blocking
+    @param [out] result 0-low level, 1-high level
+    @return Error code
     */
-    errno_t  WaitDI(int id, uint8_t status, int max_time, int opt);
+    errno_t GetToolDI(int id, uint8_t block, uint8_t *result);
 
-Wait for control box multiplex digital input
+Get Control Box Analog Input
++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Get control box analog input
+    @param [in] id IO number, range [0~1]
+    @param [in] block 0-blocking, 1-non-blocking
+    @param [out] result Input current or voltage percentage, range [0~100] corresponding to current [0~20mS] or voltage [0~10V]
+    @return Error code
+    */
+    errno_t GetAI(int id, uint8_t block, float *result);
+
+Get Tool Analog Input
++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Get tool analog input
+    @param [in] id IO number, range [0]
+    @param [in] block 0-blocking, 1-non-blocking
+    @param [out] result Input current or voltage percentage, range [0~100] corresponding to current [0~20mS] or voltage [0~10V]
+    @return Error code
+    */
+    errno_t GetToolAI(int id, uint8_t block, float *result);
+
+Get Robot End Point Record Button Status
 ++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Wait for control box multiplex digital input
-    * @param  [in] mode 0- multiplexed and, 1- multiplexed or
-    * @param  [in] id  I/O numbers. bit0 to bit7 corresponds to DI0 to DI7, and bit8 to bit15 corresponds to CI0 to CI7
-    * @param  [in]  status 0- off, 1- on
-    * @param  [in]  max_time  Maximum waiting time, expressed in ms
-    * @param  [in]  opt  After timeout policy, 0- program stops and prompts timeout, 1- ignores timeout prompts and continues execution, 2- waits
-    * @return  Error code
+    @brief Get robot end point record button status
+    @param [out] state Button status, 0-pressed, 1-released
+    @return Error code
     */
-    errno_t  WaitMultiDI(int mode, int id, uint8_t status, int max_time, int opt);
+    errno_t GetAxlePointRecordBtnState(uint8_t *state);
 
-Wait for the tool number to enter
+Get Robot End DO Output Status
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Wait for the tool number to enter
-    * @param  [in] id  I/O numbers，range[0~1]
-    * @param  [in]  status 0- off, 1- on
-    * @param  [in]  max_time  Maximum waiting time, expressed in ms
-    * @param  [in]  opt  After timeout policy, 0- program stops and prompts timeout, 1- ignores timeout prompts and continues execution, 2- waits
-    * @return  Error code
+    @brief Get robot end DO output status
+    @param [out] do_state DO output status, do0~do1 correspond to bit1~bit2, starting from bit0
+    @return Error code
     */
-    errno_t  WaitToolDI(int id, uint8_t status, int max_time, int opt);
+    errno_t GetToolDO(uint8_t *do_state);
 
-Get control box analog input
-++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /** 
-    * @brief  Get control box analog input
-    * @param  [in] id  I/O numbers，range[0~1]
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @param  [out] result  Percentage of input current or voltage value, range [0-100] corresponding to current value [0-20ms] or voltage [0-10V]
-    * @return  Error code
-    */   
-    errno_t  GetAI(int id, uint8_t block, float *result); 
-
-Get the tool analog input
-+++++++++++++++++++++++++++++
+Get Robot Controller DO Output Status
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Get the tool analog input
-    * @param  [in] id  I/O numbers，range[0~1]
-    * @param  [in] block  0- blocking, 1- non-blocking
-    * @param  [out] result  Percentage of input current or voltage value, range [0-100] corresponding to current value [0-20ms] or voltage [0-10V]
-    * @return  Error code
-    */   
-    errno_t  GetToolAI(int id, uint8_t block, float *result);   
-
-Get the robot end point record button status
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief Get the robot end point record button status
-     * @param [out] state button state, 0-pressed, 1-released
-     * @return Error code
-     */
-    errno_t  GetAxlePointRecordBtnState(uint8_t *state);
-
-Get the DO output status at the end of the robot
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief Get the DO output status at the end of the robot
-     * @param [out] do_state DO output state, do0~do1 corresponds to bit1~bit2, starting from bit0
-     * @return Error code
-     */
-    errno_t  GetToolDO(uint8_t *do_state);
-
-Get the DO output status of the robot controller
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief Get the DO output status of the robot controller
-     * @param [out] do_state_h DO output status, co0~co7 corresponds to bit0~bit7
-     * @param [out] do_state_l DO output status, do0~do7 correspond to bit0~bit7
-     * @return Error code
-     */
-    errno_t  GetDO(uint8_t *do_state_h, uint8_t *do_state_l);
-
-Wait for control box analog input
-++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief Wait for control box analog input
-    * @param  [in] id  I/O numbers，range[0~1]
-    * @param  [in]  sign 0-greater than，1-less than
-    * @param  [in]  value Percentage of input current or voltage value, range [0-100] corresponding to current value [0-20ms] or voltage [0-10V]
-    * @param  [in]  max_time Maximum waiting time, expressed in ms
-    * @param  [in]  opt  After timeout policy, 0- program stops and prompts timeout, 1- ignores timeout prompts and continues execution, 2- waits
-    * @return  Error code
+    @brief Get robot controller DO output status
+    @param [out] do_state_h DO output status, co0~co7 correspond to bit0~bit7
+    @param [out] do_state_l DO output status, do0~do7 correspond to bit0~bit7
+    @return Error code
     */
-    errno_t  WaitAI(int id, int sign, float value, int max_time, int opt);  
+    errno_t GetDO(uint8_t *do_state_h, uint8_t *do_state_l);
 
-Wait for tool analog input
-+++++++++++++++++++++++++++++
+Code Example for Getting Robot DI and DO Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief Wait for tool analog input
-    * @param  [in] id  I/O numbers，range[0~1]
-    * @param  [in]  sign 0-greater than，1-less than
-    * @param  [in]  value Percentage of input current or voltage value, range [0-100] corresponding to current value [0-20ms] or voltage [0-10V]
-    * @param  [in]  max_time  Maximum waiting time, expressed in ms
-    * @param  [in]  opt  After timeout policy, 0- program stops and prompts timeout, 1- ignores timeout prompts and continues execution, 2- waits
-    * @return  Error code
-    */
-    errno_t  WaitToolAI(int id, int sign, float value, int max_time, int opt); 
-
-Code example
-++++++++++++++
-
-.. versionchanged:: C++ SDK-v2.1.2.0
-
-.. code-block:: c++
-    :linenos:
-
-    #include "libfairino/robot.h"
-
-    //If using Windows, include the following header files
-    #include <string.h>
-    #include <windows.h>
-    //If using Linux, include the following header files
-    /*
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    */
-    #include <chrono>
-    #include <thread>
-
-    using namespace std;
-    int main(void)
+    int TestGetDIAI(void)
     {
-        FRRobot robot; 
-        robot.RPC("192.168.58.2"); 
-
-        uint8_t status = 1;
-        uint8_t smooth = 0;
-        uint8_t block  = 0;
-        uint8_t di = 0, tool_di = 0;
-        float ai = 0.0, tool_ai = 0.0;
-        float value = 0.0;
-        int i;
-
-        for(i = 0; i < 16; i++)
-        {
-            robot.SetDO(i, status, smooth, block);
-            robot.WaitMs(1000);
-        }
-
-        status = 0;
-
-        for(i = 0; i < 16; i++)
-        {
-            robot.SetDO(i, status, smooth, block);
-            robot.WaitMs(1000);
-        }
-
-        status = 1;
-
-        for(i = 0; i < 2; i++)
-        {
-            robot.SetToolDO(i, status, smooth, block);
-            robot.WaitMs(1000);
-        }
-
-        status = 0;
-
-        for(i = 0; i < 2; i++)
-        {
-            robot.SetToolDO(i, status, smooth, block);
-            robot.WaitMs(1000);
-        }
-
-        value = 50.0;
-        robot.SetAO(0, value, block);
-        value = 100.0;
-        robot.SetAO(1, value, block);
-        robot.WaitMs(1000);
-        value = 0.0;
-        robot.SetAO(0, value, block);
-        value = 0.0;
-        robot.SetAO(1, value, block);
-
-        value = 100.0;
-        robot.SetToolAO(0, value, block);
-        robot.WaitMs(1000);
-        value = 0.0;
-        robot.SetToolAO(0, value, block);
-
-        robot.GetDI(0, block, &di);
-        printf("di0:%u\n", di);
-        robot.WaitDI(0,1,0,2);              // always waiting
-        robot.WaitMultiDI(1,3,3,10000,2);   // always waiting
-        tool_di = robot.GetToolDI(1, block, &tool_di);
-        printf("tool_di1:%u\n", tool_di);
-        robot.WaitToolDI(1,1,0,2);          // always waiting
-
-        robot.GetAI(0,block, &ai);
-        printf("ai0:%f\n", ai);
-        robot.WaitAI(0,0,50,0,2);           // always waiting
-        robot.WaitToolAI(0,0,50,0,2);       // always waiting
-        tool_ai = robot.GetToolAI(0,block, &tool_ai);
-        printf("tool_ai0:%f\n", tool_ai);
-
-        uint8_t _button_state = 0;
-        robot.GetAxlePointRecordBtnState(&_button_state);
-        printf("_button_state is: %u\n", _button_state);
-
-        uint8_t tool_do_state = 0;
-        robot.GetToolDO(&tool_do_state);
-        printf("tool DO state is: %u\n", tool_do_state);
-
-        uint8_t do_state_h = 0;
-        uint8_t do_state_l = 0;
-        robot.GetDO(&do_state_h, &do_state_l);
-        printf("DO state high is: %u \n DO state low is: %u\n", do_state_h, do_state_l);
-        return 0;
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+    return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    uint8_t status = 1;
+    uint8_t smooth = 0;
+    uint8_t block = 0;
+    uint8_t di = 0, tool_di = 0;
+    float ai = 0.0, tool_ai = 0.0;
+    float value = 0.0;
+    robot.GetDI(0, block, &di);
+    printf("di0:%u\n", di);
+    tool_di = robot.GetToolDI(1, block, &tool_di);
+    printf("tool_di1:%u\n", tool_di);
+    robot.GetAI(0, block, &ai);
+    printf("ai0:%f\n", ai);
+    tool_ai = robot.GetToolAI(0, block, &tool_ai);
+    printf("tool_ai0:%f\n", tool_ai);
+    uint8_t _button_state = 0;
+    robot.GetAxlePointRecordBtnState(&_button_state);
+    printf("_button_state is: %u\n", _button_state);
+    uint8_t tool_do_state = 0;
+    robot.GetToolDO(&tool_do_state);
+    printf("tool DO state is: %u\n", tool_do_state);
+    uint8_t do_state_h = 0;
+    uint8_t do_state_l = 0;
+    robot.GetDO(&do_state_h, &do_state_l);
+    printf("DO state high is: %u \n DO state low is: %u\n", do_state_h, do_state_l);
+    robot.CloseRPC();
+    return 0;
     }
 
-Get robot software version
-+++++++++++++++++++++++++++++
+Wait for Control Box Digital Input
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
 
-.. versionadded:: C++ SDK-v2.1.1.0
+    /**
+    @brief Wait for control box digital input
+    @param [in] id IO number, range [0~15]
+    @param [in] status 0-off, 1-on
+    @param [in] max_time Maximum wait time, unit ms
+    @param [in] opt Strategy after timeout, 0-stop program and prompt timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    @return Error code
+    */
+    errno_t WaitDI(int id, uint8_t status, int max_time, int opt);
+
+Wait for Control Box Multi-Channel Digital Input
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Wait for control box multi-channel digital input
+    @param [in] mode 0-multi AND, 1-multi OR
+    @param [in] id IO number, bit0~bit7 correspond to DI0~DI7, bit8~bit15 correspond to CI0~CI7
+    @param [in] status 0-off, 1-on
+    @param [in] max_time Maximum wait time, unit ms
+    @param [in] opt Strategy after timeout, 0-stop program and prompt timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    @return Error code
+    */
+    errno_t WaitMultiDI(int mode, int id, uint8_t status, int max_time, int opt);
+
+Wait for Tool Digital Input
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Wait for tool digital input
+    @param [in] id IO number, range [0~1]
+    @param [in] status 0-off, 1-on
+    @param [in] max_time Maximum wait time, unit ms
+    @param [in] opt Strategy after timeout, 0-stop program and prompt timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    @return Error code
+    */
+    errno_t WaitToolDI(int id, uint8_t status, int max_time, int opt);
+
+Wait for Control Box Analog Input
++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Wait for control box analog input
+    @param [in] id IO number, range [0~1]
+    @param [in] sign 0-greater than, 1-less than
+    @param [in] value Input current or voltage percentage, range [0~100] corresponding to current [0~20mS] or voltage [0~10V]
+    @param [in] max_time Maximum wait time, unit ms
+    @param [in] opt Strategy after timeout, 0-stop program and prompt timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    @return Error code
+    */
+    errno_t WaitAI(int id, int sign, float value, int max_time, int opt);
+
+Wait for Tool Analog Input
+++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Wait for tool analog input
+    @param [in] id IO number, range [0]
+    @param [in] sign 0-greater than, 1-less than
+    @param [in] value Input current or voltage percentage, range [0~100] corresponding to current [0~20mS] or voltage [0~10V]
+    @param [in] max_time Maximum wait time, unit ms
+    @param [in] opt Strategy after timeout, 0-stop program and prompt timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    @return Error code
+    */
+    errno_t WaitToolAI(int id, int sign, float value, int max_time, int opt);
+
+Code Example for Waiting for Control Box Digital and Analog Input Signals
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionchanged:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
-	/**
-	* @brief Get robot software version
-	* @param[out]	robotModel Robot model
-	* @param[out]	webversion web version
-	* @param[out]	controllerVersion controller version
-	* @return Error code 
-	*/
-	errno_t GetSoftwareVersion(char robotModel[64], char webVersion[64], char controllerVersion[64]);
+    int TestWaitDIAI(void)
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+    return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    uint8_t status = 1;
+    uint8_t smooth = 0;
+    uint8_t block = 0;
+    uint8_t di = 0, tool_di = 0;
+    float ai = 0.0, tool_ai = 0.0;
+    float value = 0.0;
+    rtn = robot.WaitDI(0, 1, 1000, 1);
+    cout << "WaitDI over; rtn is: " << rtn << endl;
+    robot.WaitMultiDI(1, 3, 3, 1000, 1);
+    cout << "WaitDI over; rtn is: " << rtn << endl;
+    robot.WaitToolDI(1, 1, 1000, 1);
+    cout << "WaitDI over; rtn is: " << rtn << endl;
+    robot.WaitAI(0, 0, 50, 1000, 1);
+    cout << "WaitDI over; rtn is: " << rtn << endl;
+    robot.WaitToolAI(0, 0, 50, 1000, 1);
+    cout << "WaitDI over; rtn is: " << rtn << endl;
+    robot.CloseRPC();
+    return 0;
+    }
 
-Get the robot hardware version
-++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C++ SDK-v2.1.1.0
+Set Control Box DO Output Reset on Stop/Pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief Get the robot hardware version
-	* @param[out] ctrlBoxBoardversion Control box carrier board hardware version
-	* @param[out] driver1version Drive 1 Hardware Version
-	* @param[out] driver2version Drive 2 Hardware Version
-	* @param[out] driver3version Drive 3 Hardware Version
-	* @param[out] driver4version Drive 4 Hardware Version
-	* @param[out] driver5version Drive 5 Hardware Version
-	* @param[out] driver6version Drive 6 Hardware Version
-	* @param[out] endBoardversion End version hardware version
-	* @return Error code 
-	*/
-	errno_t GetHardwareVersion(char ctrlBoxBoardversion[128], char driver1version[128], char driver2version[128], char driver3version[128], char driver4version[128], char driver5version[128], char driver6version[128], char endBoardversion[128]);
-
-Get the robot firmware version
-++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C++ SDK-v2.1.1.0
-
-.. code-block:: c++
-    :linenos:
-
-	/**
-	* @brief Get the robot firmware version
-	* @param[out] ctrlBoxBoardversion Control box carrier board firmware version
-	* @param[out] driver1version Drive 1 firmware version
-	* @param[out] driver2version Drive 2 firmware version
-	* @param[out] driver3version Drive 3 firmware version
-	* @param[out] driver4version Drive 4 firmware version
-	* @param[out] driver5version Drive 5 firmware version
-	* @param[out] driver6version Drive 6 firmware version
-	* @param[out] endBoardversion End version firmware version
-	* @return Error code 
-	*/
-	errno_t GetFirmwareVersion(char ctrlBoxBoardversion[128], char driver1version[128], char driver2version[128], char driver3version[128], char driver4version[128], char driver5version[128], char driver6version[128], char endBoardversion[128]);
-
-Code example
-++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C++ SDK-v2.1.2.0
-
-.. code-block:: c++
-    :linenos:
-
-    #include "libfairino/robot.h"
-
-    //If using Windows, include the following header files
-    #include <string.h>
-    #include <windows.h>
-    //If using Linux, include the following header files
-    /*
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
+    @brief Set whether to reset control box DO output on stop/pause
+    @param [in] resetFlag 0-no reset; 1-reset
+    @return Error code
     */
-    #include <chrono>
-    #include <thread>
+    errno_t SetOutputResetCtlBoxDO(int resetFlag);
 
-    using namespace std;
-    int main(void)
+Set Control Box AO Output Reset on Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Set whether to reset control box AO output on stop/pause
+    @param [in] resetFlag 0-no reset; 1-reset
+    @return Error code
+    */
+    errno_t SetOutputResetCtlBoxAO(int resetFlag);
+
+Set End Tool DO Output Reset on Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Set whether to reset end tool DO output on stop/pause
+    @param [in] resetFlag 0-no reset; 1-reset
+    @return Error code
+    */
+    errno_t SetOutputResetAxleDO(int resetFlag);
+
+Set End Tool AO Output Reset on Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Set whether to reset end tool AO output on stop/pause
+    @param [in] resetFlag 0-no reset; 1-reset
+    @return Error code
+    */
+    errno_t SetOutputResetAxleAO(int resetFlag);
+
+Set Extended DO Output Reset on Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Set whether to reset extended DO output on stop/pause
+    @param [in] resetFlag 0-no reset; 1-reset
+    @return Error code
+    */
+    errno_t SetOutputResetExtDO(int resetFlag);
+
+Set Extended AO Output Reset on Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Set whether to reset extended AO output on stop/pause
+    @param [in] resetFlag 0-no reset; 1-reset
+    @return Error code
+    */
+    errno_t SetOutputResetExtAO(int resetFlag);
+
+Set SmartTool Output Reset on Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    @brief Set whether to reset SmartTool output on stop/pause
+    @param [in] resetFlag 0-no reset; 1-reset
+    @return Error code
+    */
+    errno_t SetOutputResetSmartToolDO(int resetFlag);
+
+Code Example for Setting LUA Program Output Reset on Stop/Pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+
+.. code-block:: c++
+    :linenos:
+
+    int TestDOReset(void)
     {
-        FRRobot robot; 
-        robot.RPC("192.168.58.2"); 
-
-        int retval = 0;
-        char robotModel[64] = {0};
-        char webversion[64] = {0};
-        char controllerVersion[64] = {0};
-
-        char ctrlBoxBoardversion[128] = {0};
-        char driver1version[128] = {0};
-        char driver2version[128] = {0};
-        char driver3version[128] = {0};
-        char driver4version[128] = {0};
-        char driver5version[128] = {0};
-        char driver6version[128] = {0};
-        char endBoardversion[128] = {0};
-
-        retval = robot.GetSoftwareVersion(robotModel, webversion, controllerVersion);
-        printf("Getsoftwareversion retval is: %d\n", retval);
-        printf("robotmodel is: %s, webversion is: %s, controllerVersion is: %s \n", robotModel, webversion, controllerVersion);
-
-        retval = robot.GetHardwareVersion(ctrlBoxBoardversion,  driver1version,  driver2version, driver3version,  driver4version,  driver5version, driver6version,  endBoardversion);
-        printf("GetHardwareversion retval is: %d\n", retval);
-        printf("GetHardwareversion get hardware versoin is: %s, %s, %s, %s, %s, %s, %s, %s\n", ctrlBoxBoardversion, driver1version, driver2version, driver3version, driver4version, driver5version, driver6version, endBoardversion);
-
-        retval = robot.GetFirmwareVersion(ctrlBoxBoardversion,  driver1version,  driver2version, driver3version,  driver4version,  driver5version, driver6version, endBoardversion);
-        printf("GetFirmwareversion retval is: %d\n", retval);
-        printf("GetHardwareversion get hardware versoin is: %s, %s, %s, %s, %s, %s, %s, %s\n", ctrlBoxBoardversion, driver1version, driver2version, driver3version, driver4version, driver5version, driver6version, endBoardversion);
-
-        return 0;
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+    return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    for (int i = 0; i < 16; i++)
+    {
+    robot.SetDO(i, 1, 0, 0);
+    robot.Sleep(300);
+    }
+    int resetFlag = 1;
+    rtn = robot.SetOutputResetCtlBoxDO(resetFlag);
+    robot.SetOutputResetCtlBoxAO(resetFlag);
+    robot.SetOutputResetAxleDO(resetFlag);
+    robot.SetOutputResetAxleAO(resetFlag);
+    robot.SetOutputResetExtDO(resetFlag);
+    robot.SetOutputResetExtAO(resetFlag);
+    robot.SetOutputResetSmartToolDO(resetFlag);
+    robot.ProgramLoad("/fruser/test.lua");
+    robot.ProgramRun();
+    robot.CloseRPC();
+    return 0;
     }

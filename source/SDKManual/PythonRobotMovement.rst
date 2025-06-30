@@ -204,7 +204,7 @@ Cartesian linear motion in space
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype","``MoveL(desc_pos, tool, user, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0 , ovl = 100.0, blendR = -1.0, exaxis_pos = [0.0,0.0, 0.0,0.0], search = 0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0],overSpeedStrategy=0,speedPercent=10)``"
+    "prototype","``MoveL(desc_pos, tool, user, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0 , ovl = 100.0, blendR = -1.0, blendMode = 0, exaxis_pos = [0.0,0.0, 0.0,0.0], search = 0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0],overSpeedStrategy=0,speedPercent=10)``"
     "Description", "Cartesian linear motion in space"
     "Mandatory parameters", "- ``desc_pos``: target Cartesian position in [mm][°];
     - ``tool``: tool number, [0 to 14];
@@ -213,10 +213,11 @@ Cartesian linear motion in space
     - ``vel``: percentage of speed, [0~100] default 20.0;
     - ``acc``: acceleration percentage, [0~100], not open Default 0.0;
     - ``ovl``: velocity scaling factor, [0~100] default 100.0;
-    - ``blendR``:blendR:[-1.0]-movement in place (blocking), [0~1000]-smoothing radius (non-blocking) in [mm] default -1.0;
+    - ``blendR``:[-1.0]-movement in place (blocking), [0~1000]-smoothing radius (non-blocking) in [mm] default -1.0;
+    - ``blendMode``:Transitional mode 0- Internal cutting transition 1- Corner transition, default -0;
     - ``exaxis_pos``: external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0].
     - ``search``: [0] - no wire search, [1] - wire search;
-    - ``offset_flag``:offset_flag:[0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
+    - ``offset_flag``:[0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]
     - ``overSpeedStrategy``: over speed handling strategy, 0 - strategy off; 1 - standard; 2 - stop on error when over speeding; 3 - adaptive speed reduction, default 0
     - ``speedPercent``: Percentage of allowable speed reduction threshold [0-100], default 10%
@@ -901,15 +902,16 @@ End movement AO end
 
 Start Ptp motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.7
+.. versionadded:: python SDK-v3.8.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
     
-    "Prototype", "``PtpFIRPlanningStart(maxAcc)``"
+    "Prototype", "``PtpFIRPlanningStart(maxAcc, maxJek)``"
     "Description", "Start Ptp motion FIR filtering"
-    "Mandatory parameters", "- ``maxAcc``:Maximum acceleration extremum(deg/s2)"
+    "Mandatory parameters", "- ``maxAcc``:Maximum acceleration extremum(deg/s2)
+    - ``maxJek``:Unify the extreme values of joint urgency (deg/s3)"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -944,7 +946,7 @@ Code example
     offdese = [0, 0, 0, 0, 0, 0]
 
     # Ptp motion FIR filtering is turned on
-    robot.PtpFIRPlanningStart(maxAcc=1000)
+    robot.PtpFIRPlanningStart(maxAcc=1000.0, maxJek=1000.0)
     robot.MoveJ(startjointPos, 0, 0,vel=50)
     robot.MoveJ(endjointPos, 0, 0,vel=50)
     robot.PtpFIRPlanningEnd()

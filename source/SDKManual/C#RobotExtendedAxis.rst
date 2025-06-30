@@ -294,9 +294,10 @@ Configuration of UDP extended axis communication parameters
     * @param [in] reconnectEnable	 Auto reconnect enable for communication disconnection 0-don't enable 1-enable
     * @param [in] reconnectPeriod	 reconnect period interval (ms)
     * @param [in] reconnectNum	 reconnectNum
+    * @param [in] selfConnect Does it automatically establish a connection upon power-off and restart? 0- No connection established; 1- Establish a connection
     * @return error code
     */
-    int ExtDevSetUDPComParam(std::string ip, int port, int period, int lossPkgTime, int lossPkgNum, int disconnectTime, int reconnectEnable, int reconnectPeriod, int reconnectNum);
+    int ExtDevSetUDPComParam(std::string ip, int port, int period, int lossPkgTime, int lossPkgNum, int disconnectTime, int reconnectEnable, int reconnectPeriod, int reconnectNum, int selfConnect);
         
 Get UDP extended axis communication parameter configuration
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

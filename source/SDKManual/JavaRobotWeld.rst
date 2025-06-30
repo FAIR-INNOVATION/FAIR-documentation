@@ -178,12 +178,15 @@ Setting Oscillation Parameters
     * @param [in] weaveCircleRadio Circle swing-back ratio (0-100%)
     * @param [in] weaveStationary swing position wait, 0 - wait time for position to continue moving; 1 - wait time for position to be stationary
     * @param [in] weaveYawAngle swing direction azimuth (rotation around swing Z axis) in °.
+    * @param [in] weaveRotAngle Oscillation direction azimuth (rotation around the oscillation X-axis), in °
     * @return error code
     */
-    int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, double weaveLeftRange, double weaveRightRange, int additionalStayTime, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary, double weaveYawAngle).
+    int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, double weaveLeftRange, double weaveRightRange, int additionalStayTime, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary, double weaveYawAngle,double weaveRotAngle)
 
 Instant setup of swing parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.5-3.8.2
+
 .. code-block:: Java
     :linenos:
 
@@ -272,19 +275,22 @@ Code example
         robot.WeaveEnd(0);
     }
 
-Oscillating gradient start
+swing fade start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.2-3.8.0
+.. versionchanged:: Java SDK-v1.0.5-3.8.2
 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Oscillating gradient start
+    * @brief swing fade start
+    * @param [in] weaveChangeFlag 1-change swing parameter; 2-change swing parameter + welding speed
     * @param [in] weaveNum swingNum
-    * @return ErrorCode
+    * @param [in] velStart Welding start speed, (cm/min)
+    * @param [in] velEnd Weld end speed, (cm/min)
+    * @return Error code
     */
-    int WeaveChangeStart(int weaveNum).
+    int WeaveChangeStart(int weaveChangeFlag, int weaveNum, double velStart, double velEnd)
 
 Oscillating Fade End
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1079,4 +1085,228 @@ Code example
             }
             robot.Sleep(100);
         }
+    }
+
+Arc Tracking Welder Current Feedback AI Channel Selection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Arc tracking welder current feedback AI channel selection.
+    * @param [in] channel channel; 0-extended AI0; 1-extended AI1; 2-extended AI2; 3-extended AI3; 4-control box AI0; 5-control box AI1
+    * @return error code
+    */
+    int ArcWeldTraceAIChannelCurrent(int channel)
+
+Arc tracking welder voltage feedback AI channel selection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Arc Tracker Welder Voltage Feedback AI Channel Selection
+    * @param [in] channel channel; 0-extended AI0; 1-extended AI1; 2-extended AI2; 3-extended AI3; 4-control box AI0; 5-control box AI1
+    * @return error code
+    */
+    int ArcWeldTraceAIChannelVoltage(int channel)
+
+Arc tracking welder current feedback conversion parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Arc tracking welder current feedback conversion parameters
+    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V].
+    * @param [in] AIHigh AI channel upper limit, default value 10V, range [0-10V]
+    * @param [in] currentLow AI channel lower limit corresponds to the welder current value, default value 0V, range [0-200V].
+    * @param [in] currentHigh AI channel upper limit corresponds to the welder current value, default value 100V, range [0-200V].
+    * @return Error code
+    */
+    int ArcWeldTraceCurrentPara(double AILow, double AIHigh, double currentLow, double currentHigh)
+
+Arc Trace Welder Voltage Feedback Conversion Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Arc tracking welder voltage feedback conversion parameters
+    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V].
+    * @param [in] AIHigh AI channel upper limit, default value 10V, range [0-10V].
+    * @param [in] voltageLow AI channel lower limit corresponds to the welder voltage value, default value 0V, range [0-200V].
+    * @param [in] voltageHigh AI channel upper limit corresponds to the welder voltage value, default value 100V, range [0-200V].
+    * @return Error code
+    */
+    int ArcWeldTraceVoltagePara(double AILow, double AIHigh, double voltageLow, double voltageHigh)
+
+code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void WeldTraceControlWithCtrlBoxAI(Robot robot)
+    {
+        DescPose startdescPose = new DescPose(-473.86,257.879,-20.849,-37.317,-42.021,2.543);
+        JointPos startjointPos = new JointPos(-43.487,-76.526,95.568,-104.445,-89.356,3.72);
+
+        DescPose safedescPose = new DescPose(-504.043,275.181,40.908,-28.002,-42.025,-14.044);
+        JointPos safejointPos = new JointPos(-39.078,-76.732,87.227,-99.47,-94.301,18.714);
+
+        DescPose enddescPose =new DescPose(-499.844,141.225,7.72,-34.856,-40.17,13.13);
+        JointPos endjointPos =new JointPos(-31.305,-82.998,99.401,-104.426,-89.35,3.696);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0 );
+        DescPose offdese = new DescPose( 0, 0, 0, 0, 0, 0);
+        
+        robot.MoveJ(safejointPos, safedescPose, 1, 0, 5, 20, 100, exaxisPos, -1, 0, offdese);
+
+        WeldCurrentAORelation current=new WeldCurrentAORelation(0, 495, 1, 10, 0);
+        WeldVoltageAORelation voltage=new WeldVoltageAORelation(10, 45, 1, 10, 1);
+        robot.WeldingSetCurrentRelation(current);
+        robot.WeldingSetVoltageRelation(voltage);
+        robot.WeldingSetVoltage(0, 25, 1, 0);
+        robot.WeldingSetCurrent(0, 260, 0, 0);
+
+        int rtn = robot.ArcWeldTraceAIChannelCurrent(4);
+        System.out.println("ArcWeldTraceAIChannelCurrent rtn is "+rtn);
+
+        rtn = robot.ArcWeldTraceAIChannelVoltage(5);
+        System.out.println("ArcWeldTraceAIChannelVoltage rtn is "+rtn);
+
+        rtn = robot.ArcWeldTraceCurrentPara(0.0,  5, 0, 500);
+        System.out.println("ArcWeldTraceCurrentPara rtn is "+rtn);
+
+        rtn = robot.ArcWeldTraceVoltagePara( 1.018,  10, 0, 50);
+        System.out.println("ArcWeldTraceVoltagePara rtn is "+rtn);
+
+        robot.MoveJ(startjointPos, startdescPose, 1, 0, 20, 20, 100, exaxisPos, -1, 0, offdese);
+        robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        robot.ARCStart(0, 0, 10000);
+        robot.WeaveStart(0);
+        robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese,0,10);
+        robot.ARCEnd(0, 0, 10000);
+        robot.WeaveEnd(0);
+        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+
+        robot.MoveJ(safejointPos, safedescPose, 1, 0, 20, 20, 100, exaxisPos, -1, 0, offdese);
+    }
+
+Setting the welding voltage gradient to start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Setting the weld voltage gradient start
+    * @param [in] IOType Control type; 0 - control box IO; 1 - digital communication protocol (UDP); 2 - digital communication protocol (ModbusTCP)
+    * @param [in] voltageStart Start welding voltage (V)
+    * @param [in] voltageEnd End weld voltage (V)
+    * @param [in] AOIndex Control box AO port number (0-1)
+    * @param [in] blend Whether smooth or not 0-not smooth; 1-smooth
+    * @return Error code
+    */
+    int WeldingSetVoltageGradualChangeStart(int IOType, double voltageStart, double voltageEnd, int AOIndex, int blend)
+
+Set weld voltage gradual change start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Setting the end of the weld voltage gradient.
+    * @return Error code
+    */
+    int WeldingSetVoltageGradualChangeEnd()
+
+Sets the weld current gradual change end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Setting the weld current gradient start
+    * @param [in] IOType Control type; 0-control box IO; 1-digital communication protocol (UDP); 2-digital communication protocol (ModbusTCP)
+    * @param [in] currentStart Start welding current (A)
+    * @param [in] currentEnd End weld current (A)
+    * @param [in] AOIndex control box AO port number (0-1)
+    * @param [in] blend Whether smooth or not 0-not smooth; 1-smooth
+    * @return Error code
+    */
+    int WeldingSetCurrentGradualChangeStart(int IOType, double currentStart, double currentEnd, int AOIndex, int blend)
+
+Set weld current gradual change end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Setting the end of the welding current gradient
+    * @return Error code
+    */
+    int WeldingSetCurrentGradualChangeEnd()
+
+code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void  WeldparamChange(Robot robot)
+    {
+        DescPose startdescPose = new DescPose(-484.707, 276.996, -14.013, -37.657, -40.508, -1.548);
+        JointPos startjointPos =new JointPos(-45.421, -75.673, 93.627, -104.302, -87.938, 6.005);
+
+        DescPose enddescPose = new DescPose(-508.767, 137.109, -13.966, -37.639, -40.508, -1.559);
+        JointPos endjointPos =new JointPos(-32.768, -80.947, 100.254, -106.201, -87.201, 18.648);
+
+        DescPose safedescPose = new DescPose( -484.709, 294.436, 13.621, -37.660, -40.508, -1.545);
+        JointPos safejointPos = new JointPos( -46.604, -75.410, 89.109, -100.003, -88.012, 4.823);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0 );
+
+        WeldCurrentAORelation cur=new WeldCurrentAORelation(0, 495, 1, 10, 0);
+        WeldVoltageAORelation vol=new WeldVoltageAORelation(10, 45, 1, 10, 1);
+        robot.WeldingSetCurrentRelation(cur);
+        robot.WeldingSetVoltageRelation(vol);
+
+        robot.WeldingSetVoltage(0, 25, 1, 0);
+        robot.WeldingSetCurrent(0, 260, 0, 0);
+
+        robot.MoveJ(safejointPos, safedescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+
+        robot.WeldingSetCurrentGradualChangeStart(0, 260, 220, 0, 0);
+        robot.WeldingSetVoltageGradualChangeStart(0, 25, 22, 1, 0);
+        int rtn = robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+
+        robot.MoveJ(startjointPos, startdescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+        System.out.println("ArcWeldTraceControl rtn is "+rtn);
+
+        robot.ARCStart(0, 0, 10000);
+        robot.WeaveStart(0);
+        robot.WeaveChangeStart(2, 1, 24, 36);
+        robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese,0,10);
+        robot.ARCEnd(0, 0, 10000);
+        robot.WeaveChangeEnd();
+        robot.WeaveEnd(0);
+        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        robot.WeldingSetCurrentGradualChangeEnd();
+        robot.WeldingSetVoltageGradualChangeEnd();
     }

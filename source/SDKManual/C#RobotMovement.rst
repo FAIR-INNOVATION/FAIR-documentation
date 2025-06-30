@@ -976,16 +976,18 @@ Safety Stop Trigger
 
 Start ptp motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C# SDK-v1.1.0-3.7.8
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief start ptp motion FIR filtering
-    * @param [in] maxAcc Maximum acceleration extreme (deg/s2)
-    * @return Error code.
+    * @brief Start Ptp motion FIR filtering
+    * @param [in] maxAcc Maximum acceleration Extreme Value (deg/s ²)
+    * @param [in] maxJek Unified Extreme Values of Joint urgency (deg/s3)
+    * @return error code
     */
-    int PtpFIRPlanningStart(double maxAcc);
+    int PtpFIRPlanningStart(double maxAcc, double maxJek=1000);
 
 Start LIN, ARC motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1029,65 +1031,38 @@ Disable LIN, ARC motion FIR filtering
 
 Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
-    void FIRPTP( bool enable)
+    private void button69_Click(object sender, EventArgs e)
     {
-        DescPose startdescPose = new DescPose(-569.710, -132.595, 395.147, 178.418, -1.893, 171.051);
-        JointPos startjointPos = new JointPos(-2.334, -79.300, 108.196, -120.594, -91.790, -83.386);
+        int rtn;
+        JointPos startjointPos = new JointPos(-11.904f, -99.669f, 117.473f, -108.616f, -91.726f, 74.256f);
+        JointPos midjointPos = new JointPos(-45.615f, -106.172f, 124.296f, -107.151f, -91.282f, 74.255f);
+        JointPos endjointPos = new JointPos(-29.777f, -84.536f, 109.275f, -114.075f, -86.655f, 74.257f);
 
-        DescPose enddescPose = new DescPose(-366.397, -572.427, 418.339, -178.972, 1.829, -142.970);
-        JointPos endjointPos = new JointPos(43.651, -70.284, 91.057, -109.075, -88.768, -83.382);
+        DescPose startdescPose = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose middescPose = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
+        DescPose enddescPose = new DescPose(-487.434f, 154.362f, 308.576f, 176.600f, 0.268f, -14.061f);
 
         ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
         DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
 
-        if (enable)
-        {
-            robot.PtpFIRPlanningStart(1000);
-            robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
-            robot.MoveJ(endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
-            robot.PtpFIRPlanningEnd();
-        }
-        else
-        {
-            robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
-            robot.MoveJ(endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
-        }
-    }
-    void FIRLin( bool enable)
-    {
-        DescPose startdescPose = new DescPose(-569.710, -132.595, 395.147, 178.418, -1.893, 171.051);
-        JointPos startjointPos = new JointPos(-2.334, -79.300, 108.196, -120.594, -91.790, -83.386);
+        rtn = robot.PtpFIRPlanningStart(1000,1000);
+        Console.WriteLine("PtpFIRPlanningStart rtn is " + rtn);
+        robot.MoveJ( startjointPos,  startdescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        robot.MoveJ( endjointPos,  enddescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        robot.PtpFIRPlanningEnd();
+        Console.WriteLine("PtpFIRPlanningEnd rtn is " + rtn);
 
-        DescPose enddescPose = new DescPose(-366.397, -572.427, 418.339, -178.972, 1.829, -142.970);
-        JointPos endjointPos = new JointPos(43.651, -70.284, 91.057, -109.075, -88.768, -83.382);
-
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
-
-        if (enable)
-        {
-            robot.LinArcFIRPlanningStart(5000, 5000, 5000, 5000);
-            robot.MoveL(startjointPos, startdescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
-            robot.MoveL(endjointPos, enddescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
-            robot.LinArcFIRPlanningEnd();
-        }
-        else
-        {
-            robot.MoveL(startjointPos, startdescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
-            robot.MoveL(endjointPos, enddescPose, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
-        }
-    }
-    private void button4_Click(object sender, EventArgs e)
-    {
-        FIRPTP(false);
-        FIRPTP(true);
-        //FIRLin(false);
-        //FIRLin(true);
+        robot.LinArcFIRPlanningStart(1000, 1000, 1000, 1000);
+        Console.WriteLine("LinArcFIRPlanningStart rtn is " + rtn);
+        robot.MoveL( startjointPos,  startdescPose, 0, 0, 100, 100, 100, -1,  exaxisPos, 0, 0,  offdese, 1, 1);
+        robot.MoveC( midjointPos,  middescPose, 0, 0, 100, 100,  exaxisPos, 0,  offdese,  endjointPos,  enddescPose, 0, 0, 100, 100,  exaxisPos, 0,  offdese, 100, -1);
+        robot.LinArcFIRPlanningEnd();
+        Console.WriteLine("LinArcFIRPlanningEnd rtn is " + rtn);
     }
 
 Acceleration Smoothing Enable
@@ -1119,45 +1094,26 @@ Code Example
 .. code-block:: c#
     :linenos:
 
-    private void button1_Click(object sender, EventArgs e)
-    {
-        bool saveFlag = false;
+        private void button1_Click(object sender, EventArgs e)
+        {
 
-        int rtn = 0;
-        JointPos p1Joint = new JointPos(88.927, -85.834, 80.289, -85.561, -91.388, 108.718);
-        DescPose p1Desc = new DescPose(88.739, -527.617, 514.939, -179.039, 1.494, 70.209);
+            bool saveFlag = false;
 
-        JointPos p2Joint = new JointPos(27.036, -83.909, 80.284, -85.579, -90.027, 108.604);
-        DescPose p2Desc = new DescPose(-433.125, -334.428, 497.139, -179.723, -0.745, 8.437);
-        JointPos p3Joint = new JointPos(60.219, -94.324, 62.906, -62.005, -87.159, 108.598);
-        DescPose p3Desc = new DescPose(-112.215, -409.323, 686.497, 176.217, 2.338, 41.625);
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
-        robot.AccSmoothStart(saveFlag);
-        robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
-        robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
-        robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
-        robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+            int rtn = 0;
+            JointPos p1Joint = new JointPos(88.927, -85.834, 80.289, -85.561, -91.388, 108.718);
+            DescPose p1Desc = new DescPose(88.739, -527.617, 514.939, -179.039, 1.494, 70.209);
 
-        robot.AccSmoothEnd(saveFlag);
-    }
+            JointPos p2Joint = new JointPos(27.036, -83.909, 80.284, -85.579, -90.027, 108.604);
+            DescPose p2Desc = new DescPose(-433.125, -334.428, 497.139, -179.723, -0.745, 8.437);
+            JointPos p3Joint = new JointPos(60.219, -94.324, 62.906, -62.005, -87.159, 108.598);
+            DescPose p3Desc = new DescPose(-112.215, -409.323, 686.497, 176.217, 2.338, 41.625);
+            ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+            DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+            robot.AccSmoothStart(saveFlag);
+            robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+            robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+            robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+            robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
 
-Conveyor Belt Parameter Configuration
-+++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Conveyor belt parameter configuration
-    * @param [in] encChannel Encoder channel 1~2
-    * @param [in] resolution Pulses per encoder revolution
-    * @param [in] lead Conveyor travel distance per encoder revolution
-    * @param [in] wpAxis Workpiece coordinate system number (0 for tracking pickup and TPD tracking)
-    * @param [in] vision Vision configuration (0: disabled, 1: enabled)
-    * @param [in] speedRadio Speed ratio for conveyor tracking pickup (1-100, default 1 for other options)
-    * @param [in] followType Tracking motion type (0: tracking motion, 1: inspection motion)
-    * @param [in] startDis Inspection pickup start distance (mm, -1: auto calculate, default 0)
-    * @param [in] endDis Inspection pickup end distance (mm, default 100)
-    * @return Error code
-    */
-    int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio, int followType, int startDis=0, int endDis=100);
+            robot.AccSmoothEnd(saveFlag);
+        }

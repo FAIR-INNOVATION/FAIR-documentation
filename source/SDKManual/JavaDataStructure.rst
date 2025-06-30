@@ -416,6 +416,9 @@ Robot Status Feedback Structure Type
 
       public  WELDING_BREAKOFF_STATE weldingBreakOffstate=new WELDING_BREAKOFF_STATE();//Welding interrupt status
 
+      public double[]  jt_tgt_tor=new double[6];    // Joint command torque
+      int smartToolState;         //SmartTool Joystick Button Status
+
       public short check_sum = 0; /* sum check */
 
       public ROBOT_STATE_PKG()

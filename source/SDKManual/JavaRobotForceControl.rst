@@ -311,6 +311,77 @@ Code example
         robot.MoveCart(desc_p3, 0, 0, 20, 100.0f, 100.0f, -1.0f, -1);
     }
 
+Customized collision detection threshold function starts
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.3-3.8.0
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Customize collision detection threshold function start, set collision detection threshold for joint side and TCP side
+    * @param [in] flag 1-Joint detection only on; 2-TCP detection only on; 3-Joint and TCP detection both on
+    * @param [in] jointDetectionThreshould Joint collision detection threshold j1-j6
+    * @param [in] tcpDetectionThreshould TCP collision detection threshold, xyzabc
+    * @param [in] block 0-non-blocking; 1-blocking
+    * @return error code
+    */   
+    public int CustomCollisionDetectionStart(int flag, double[] jointDetectionThreshould, double[] tcpDetectionThreshould, int block);
+
+Customized collision detection threshold function off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.3-3.8.0
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Customized collision detection threshold function off
+    * @return  error code
+    */   
+    public int CustomCollisionDetectionEnd();
+
+code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection success");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+        int[] safety = { 5,5,5,5,5,5 };
+        robot.SetCollisionStrategy(3, 1000, 150, 250, safety);
+        double[] jointDetectionThreshould= { 0.3, 0.3, 0.3, 0.3, 0.3, 0.3};
+        double[] tcpDetectionThreshould = { 60,60,60,60,60,60 };
+        int rtn = robot.CustomCollisionDetectionStart(1, jointDetectionThreshould, tcpDetectionThreshould, 1);
+
+        DescPose p1Desc=new DescPose(228.879, -503.594, 453.984, -175.580, 8.293, 171.267);
+        JointPos p1Joint=new JointPos(102.700, -85.333, 90.518, -102.365, -83.932, 22.134);
+
+        DescPose p2Desc=new DescPose(-333.302, -435.580, 449.866, -174.997, 2.017, 109.815);
+        JointPos p2Joint=new JointPos(41.862, -85.333, 90.526, -100.587, -90.014, 22.135);
+
+        ExaxisPos exaxisPos=new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+        DescPose offdese=new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        for(int i=0;i<10;++i) {
+            robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+            robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+        }
+        rtn = robot.CustomCollisionDetectionEnd();
+    }
+
 constant force control
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -565,24 +636,26 @@ Code example
             System.out.println("rpc connection fail");
             return ;
         }
-        List<Integer> rtnArray = robot.GetForceAndTorqueDragState();
-        System.out.println("The drag state is " + rtnArray.get(1) + " ForceAndJointImpedance state " + rtnArray.get(2));
-
-        robot.Sleep(1000);
         Object[] M = { 15.0, 15.0, 15.0, 0.5, 0.5, 0.1 };
         Object[] B = { 150.0, 150.0, 150.0, 5.0, 5.0, 1.0 };
-        Object[] K = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-        Object[] F = { 10.0, 10.0, 10.0, 10.0, 1.0, 1.0, 1.0 };
+        Object[] K = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        Object[] F = { 10.0, 10.0, 10.0, 1.0, 1.0, 1.0 };
+        int rtn = robot.EndForceDragControl(1, 0, 0, 0, M, B, K, F, 50, 100);
+        System.out.println("force drag control start rtn is:"+ rtn);
+        robot.Sleep(5000);
+
+        rtn = robot.EndForceDragControl(0, 0, 0, 0, M, B, K, F, 50, 100);
+        System.out.println("force drag control end rtn is:"+ rtn);
+
+        rtn = robot.ResetAllError();
+        System.out.println("ResetAllError rtn is:"+ rtn);
+
         robot.EndForceDragControl(1, 0, 0, 0, M, B, K, F, 50, 100);
+        System.out.println("force drag control start again rtn is:"+ rtn);
+        robot.Sleep(5000);
 
-        rtnArray = robot.GetForceAndTorqueDragState();
-        System.out.println("The drag state is " + rtnArray.get(1) + " ForceAndJointImpedance state " + rtnArray.get(2));
-
-        robot.Sleep(1000 * 10);
-        robot.EndForceDragControl(0, 0, 0, 0, M, B, K, F, 50, 100);
-
-        rtnArray = robot.GetForceAndTorqueDragState();
-        System.out.println("The drag state is " + rtnArray.get(1) + " ForceAndJointImpedance state " + rtnArray.get(2));
+        rtn = robot.EndForceDragControl(0, 0, 0, 0, 1, M, B, K, F, 50, 100);
+        System.out.println("force drag control end again rtn is:"+ rtn);   
     }
 
 Setting up hybrid drag switches and parameters for six-dimensional force and joint impedance
@@ -721,4 +794,19 @@ Automatic zeroing of force sensors
     * @param [in] massCenter Sensor mass (kg) and center of mass (mm)
     * @return error code
     */
-    int ForceSensorAutoComputeLoad(MassCenter massCenter).
+    int ForceSensorAutoComputeLoad(MassCenter massCenter);
+
+Set robot collision detection method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set robot collision detection method
+    * @param [in] method Collision detection method: 0-current mode; 1-dual encoder; 2-current and dual encoder enabled simultaneously
+    * @param [in] thresholdMode Collision level threshold mode; 0 - Fixed collision level threshold mode; 1 - Custom collision detection threshold
+    * @return error code
+    */
+    int SetCollisionDetectionMethod(int method,int thresholdMode)

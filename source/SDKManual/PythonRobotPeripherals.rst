@@ -224,3 +224,99 @@ Obtains the percentage of rotating torque of the rotating gripper
     "Return Value", "- errorcode Success-0 Failure- errcode 
     - ``fault``：0-correct，1-error
     - ``torque``：Percent torque of rotation"
+
+Obtain the activated status of the gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.8.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperActivateStatus()``"
+    "Description", "Obtain the activated status of the gripper"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``gripper_active``：bit0 to bit15 correspond to the claw numbers 0 to 15. bit=0 indicates not activated, and bit=1 indicates activated"
+
+Obtain the position of the gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.8.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperCurPosition()``"
+    "Description", "Obtain the position of the gripper"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``position``：Position percentage, ranging from 0 to 100%"
+
+Obtain the gripper current
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.8.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperCurCurrent()``"
+    "Description", "Obtain the gripper current"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``current``：Current percentage, range 0 to 100%"
+
+Obtain the gripper voltage
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.8.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperVoltage()``"
+    "Description", "Obtain the gripper voltage"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``voltage``：Voltage, unit: 0.1V"
+
+Obtain the temperature of the gripper
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.8.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperTemp()``"
+    "Description", "Obtain the temperature of the gripper"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``temp``：Temperature, unit: 0.1V"
+
+Obtain the gripper speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.8.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetGripperCurSpeed()``"
+    "Description", "Obtain the gripper speed"
+    "Mandatory parameter", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``fault``：0-correct，1-error
+    - ``speed``：Speed percentage, range 0 to 100%"

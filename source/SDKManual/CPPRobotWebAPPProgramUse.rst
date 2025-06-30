@@ -4,272 +4,246 @@ WebAPP program use
 .. toctree:: 
     :maxdepth: 5
 
-Set the default job program to be automatically loaded upon startup
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Default Program to Load Automatically on Startup
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Set the default job program to be automatically loaded upon startup
-    * @param  [in] flag  0- boot does not automatically load the default program, 1- boot automatically load the default program
-    * @param  [in] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
+    * @brief  Set default program to load automatically on startup
+    * @param  [in] flag  0-Do not load default program on startup, 1-Load default program on startup
+    * @param  [in] program_name Program name and path, e.g. "/fruser/movej.lua", where "/fruser/" is the fixed path
     * @return  Error code
     */
     errno_t  LoadDefaultProgConfig(uint8_t flag, char program_name[64]);
 
-Load the specified job program
+Load Specified Program
 +++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Load the specified job program
-    * @param  [in] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
+    * @brief  Load specified program
+    * @param  [in] program_name Program name and path, e.g. "/fruser/movej.lua", where "/fruser/" is the fixed path
     * @return  Error code
     */
     errno_t  ProgramLoad(char program_name[64]);
 
-Get the loaded job program name
+Get Loaded Program Name
 +++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Get the loaded job program name
-    * @param  [out] program_name Job program name and path, for example, /fruser/movej.lua, where /fruser/ is a fixed path
+    * @brief  Get loaded program name
+    * @param  [out] program_name Program name and path, e.g. "/fruser/movej.lua", where "/fruser/" is the fixed path
     * @return  Error code
     */
     errno_t  GetLoadedProgram(char program_name[64]);  
 
-Get the line number of the current robot job program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get Current Program Execution Line Number
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Get the line number of the current robot job program
-    * @param  [out] line  line number
+    * @brief  Get current program execution line number
+    * @param  [out] line  Line number
     * @return  Error code
     */   
     errno_t  GetCurrentLine(int *line);
 
-Run the currently loaded job program
-+++++++++++++++++++++++++++++++++++++++
+Run Currently Loaded Program
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Run the currently loaded job program
+    * @brief  Run currently loaded program
     * @return  Error code
     */
     errno_t  ProgramRun();
 
-Pause the current running job program
-++++++++++++++++++++++++++++++++++++++++
+Pause Currently Running Program
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Pause the current running job program
+    * @brief  Pause currently running program
     * @return  Error code
     */ 
     errno_t  ProgramPause();
 
-Resume the currently suspended job program
-+++++++++++++++++++++++++++++++++++++++++++++
+Resume Currently Paused Program
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Resume the currently suspended job program
+    * @brief  Resume currently paused program
     * @return  Error code
     */ 
     errno_t  ProgramResume();  
 
-Terminates the currently running job program
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop Currently Running Program
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Terminates the currently running job program
+    * @brief  Stop currently running program
     * @return  Error code
     */ 
     errno_t  ProgramStop();    
 
-Get the robot job program execution state
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Get Program Execution State
++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Get the robot job program execution state
-    * @param  [out]  state 1- program stop or no program running, 2- program running, 3- program pause
+    * @brief  Get program execution state
+    * @param  [out]  state 1-Program stopped or no program running, 2-Program running, 3-Program paused
     * @return  Error code
     */
     errno_t  GetProgramState(uint8_t *state);
 
-Code example
-++++++++++++++
+Robot LUA Program Operation Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
-
-    using namespace std;
-
-    int main(void)
+    int TestLuaOp(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        char program_name[64] = "/fruser/ptps.lua";
-        char loaded_name[64] = "";
-        uint8_t state;
-        int line;
-
-        robot.Mode(0);
-        robot.ProgramLoad(program_name);
-        robot.ProgramRun();
-        sleep(5);
-        robot.ProgramPause();
-        robot.GetProgramState(&state);
-        printf("program state:%u\n", state);
-        robot.GetCurrentLine(&line);
-        printf("current line:%d\n", line);
-        robot.GetLoadedProgram(loaded_name);
-        printf("program name:%s\n", loaded_name);
-        sleep(5);
-        robot.ProgramResume();
-        sleep(5);
-        robot.ProgramStop();
-        sleep(2);
-
-        return 0;
+      ROBOT_STATE_PKG pkg = {};
+      FRRobot robot;
+      robot.LoggerInit();
+      robot.SetLoggerLevel(1);
+      int rtn = robot.RPC("192.168.58.2");
+      if (rtn != 0)
+      {
+        return -1;
+      }
+      robot.SetReConnectParam(true, 30000, 500);
+      char program_name[64] = "/fruser/test.lua";
+      char loaded_name[64] = "";
+      uint8_t state;
+      int line;
+      robot.Mode(0);
+      robot.LoadDefaultProgConfig(0, program_name);
+      robot.ProgramLoad(program_name);
+      robot.ProgramRun();
+      robot.Sleep(1000);
+      robot.ProgramPause();
+      robot.GetProgramState(&state);
+      printf("program state:%u\n", state);
+      robot.GetCurrentLine(&line);
+      printf("current line:%d\n", line);
+      robot.GetLoadedProgram(loaded_name);
+      printf("program name:%s\n", loaded_name);
+      robot.Sleep(1000);
+      robot.ProgramResume();
+      robot.Sleep(1000);
+      robot.ProgramStop();
+      robot.Sleep(1000);
+      robot.CloseRPC();
+      return 0;
     }
 
-Download Lua file
+Download Lua File
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++ SDK-v2.1.2.0
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
-	/**
-	* @brief Download Lua file
-	* @param [in] fileName The name of the lua file to be downloaded, for example: "test.lua"
-	* @param [in] savePath Save the file local path, for example: "D://Down/"
-	* @return error code
-	*/
-	errno_t LuaDownLoad(std::string fileName, std::string savePath);
+    /**
+    * @brief Download Lua file
+    * @param [in] fileName Lua file name to download, e.g. "test.lua"
+    * @param [in] savePath Local path to save file, e.g. "D://Down/"
+    * @return Error code
+    */
+    errno_t LuaDownLoad(std::string fileName, std::string savePath);
 
-Upload Lua file
+Delete Lua File
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++ SDK-v2.1.2.0
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
-	/**
-	* @brief Upload Lua file
-	* @param [in] filePath local lua file path name
-	* @return error code
-	*/
-	errno_t LuaUpload(std::string filePath);
+    /**
+    * @brief Delete Lua file
+    * @param [in] fileName Lua file name to delete, e.g. "test.lua"
+    * @return Error code
+    */
+    errno_t LuaDelete(std::string fileName);
 
-Delete Lua files
+Get All Current Lua File Names
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++ SDK-v2.1.2.0
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
-	/**
-	* @brief Delete Lua files
-	* @param [in] fileName The name of the lua file to be deleted, for example: "test.lua"
-	* @return error code
-	*/
-	errno_t LuaDelete(std::string fileName);
+    /**
+    * @brief Get all current Lua file names
+    * @param [out] luaNames List of Lua file names
+    * @return Error code
+    */
+    errno_t GetLuaList(std::list<std::string>* luaNames);
 
-Get the names of all current lua files
+Upload Lua File
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C++ SDK-v2.1.2.0
+.. versionadded:: C++SDK-v2.1.2.0
 
 .. code-block:: c++
     :linenos:
 
-	/**
-	* @brief Get the names of all current lua files
-	* @param [out] luaNames lua file name list
-	* @return error code
-	*/
-	errno_t GetLuaList(std::list<std::string>* luaNames);
+    /**
+    * @brief Upload Lua file
+    * @param [in] filePath Local Lua file path name
+    * @return Error code
+    */
+    errno_t LuaUpload(std::string filePath);
 
-Code example
-+++++++++++++++
-
-.. versionadded:: C++ SDK-v2.1.2.0
+Robot LUA File Upload/Download Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
 
-	#include "libfairino/robot.h"
-
-	//If using Windows, include the following header files
-	#include <string.h>
-	#include <windows.h>
-	//If using Linux, include the following header files
-	/*
-	#include <cstdlib>
-	#include <iostream>
-	#include <stdio.h>
-	#include <cstring>
-	#include <unistd.h>
-	*/
-	#include <chrono>
-	#include <thread>
-	#include <string>
-
-	using namespace std;
-	int main(void)
-	{
-		FRRobot robot;
-		robot.LoggerInit();
-		robot.SetLoggerLevel(3);
-		robot.RPC("192.168.58.2");
-
-		/* Get lua name */
-		list<std::string> luaNames;
-		int res = robot.GetLuaList(&luaNames);
-		std::cout << "res is: " << res << std::endl;
-		std::cout << "size is: " << luaNames.size() <<std::endl;
-		for(auto it = luaNames.begin(); it != luaNames.end(); it++)
-		{
-			std::cout << it->c_str() << std::endl;
-		}
-
-		/* Download lua */
-		res = robot.LuaDownLoad("test.lua", "D://Down/");
-		std::cout << "res is: " << res << std::endl;
-
-		/* Upload lua */
-		res = robot.LuaUpload("D://Down/test.lua");
-		std::cout << "res is: " << res << std::endl;
-
-		/* Delete lua */
-		res = robot.LuaDelete("test.lua");
-		std::cout << "res is: " << res << std::endl;
-
-		robot.CloseRPC();
-		return 0;
-	}
+    int TestLUAUpDownLoad(void)
+    {
+      ROBOT_STATE_PKG pkg = {};
+      FRRobot robot;
+      robot.LoggerInit();
+      robot.SetLoggerLevel(1);
+      int rtn = robot.RPC("192.168.58.2");
+      if (rtn != 0)
+      {
+        return -1;
+      }
+      robot.SetReConnectParam(true, 30000, 500);
+      list<std::string> luaNames;
+      rtn = robot.GetLuaList(&luaNames);
+      std::cout << "res is: " << rtn << std::endl;
+      std::cout << "size is: " << luaNames.size() << std::endl;
+      for (auto it = luaNames.begin(); it != luaNames.end(); it++)
+      {
+        std::cout << it->c_str() << std::endl;
+      }
+      rtn = robot.LuaDownLoad("test.lua", "D://zDOWN/");
+      printf("LuaDownLoad rtn is %d\n", rtn);
+      rtn = robot.LuaUpload("D://zUP/airlab.lua");
+      printf("LuaUpload rtn is %d\n", rtn);
+      rtn = robot.LuaDelete("test.lua");
+      printf("LuaDelete rtn is %d\n", rtn);
+      robot.CloseRPC();
+      return 0;
+    }

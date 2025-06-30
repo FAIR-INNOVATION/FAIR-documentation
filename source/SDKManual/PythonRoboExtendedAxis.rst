@@ -388,13 +388,13 @@ Get 485 Extended Axis Motion Acceleration and Deceleration
 
 Parameter configuration for UDP extended axis communication
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
+.. versionadded:: python SDK-v3.8.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype", "``ExtDevSetUDPComParam(ip, port, period, lossPkgTime, lossPkgNum, disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum)``"
+    "prototype", "``ExtDevSetUDPComParam(ip, port, period, lossPkgTime, lossPkgNum, disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum, selfConnect)``"
     "Description", "UDP Extended Axis Communication Parameter Configuration"
     "Mandatory parameters", "
     - ``ip``: PLC IP address;
@@ -405,7 +405,8 @@ Parameter configuration for UDP extended axis communication
     - ``disconnectTime``: the length of the communication disconnect confirmation;
     - ``reconnectEnable``: communication disconnection auto reconnect enable 0-not enable 1-enable;
     - ``reconnectPeriod``: reconnect period interval (ms);
-    - ``reconnectNum``: number of reconnections"
+    - ``reconnectNum``: number of reconnections
+    - ``selfConnect``: Whether the connection is automatically established upon power-off and restart; 0- No connection established; 1- Establish a connection"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -420,7 +421,7 @@ Code example
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     # UDP extended axis communication parameter configuration
-    error = robot.ExtDevSetUDPComParam('192.168.58.88',2021,2,50,5,50,1,2,5)
+    error = robot.ExtDevSetUDPComParam('192.168.58.88',2021,2,50,5,50,1,2,5,0)
     print("ExtDevSetUDPComParam return:",error)
     # UDP extended axis communication parameter configuration
     error = robot.ExtDevGetUDPComParam()
@@ -1156,7 +1157,7 @@ Code example
     # robot.SetToolCoord(id, coord,type,install) # set the application tool coordinate system
     # robot.SetToolList(id, coord,type,install) # set the list of application tool coordinate systems
     #2. Set UDP communication parameters and load UDP communication
-    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10);
+    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10, 0);
     robot.ExtDevLoadUDPDriver();
     #3. Set the extended axis parameters, including extended axis type, extended axis driver parameters, and extended axis DH parameters.
     robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0, 0)#Single Axis Shifter and DH parameters
@@ -1371,7 +1372,7 @@ Code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    robot.ExtDevSetUDPComParam("192.168.58.2", 2021, 2, 50, 5, 50, 1, 50, 10)
+    robot.ExtDevSetUDPComParam("192.168.58.2", 2021, 2, 50, 5, 50, 1, 50, 10, 0)
     robot.ExtDevLoadUDPDriver()
     robot.ExtAxisParamConfig(1, 0, 0, 50000, -50000, 1000, 1000, 6.280, 16384, 200, 0, 0, 0)
     robot.ExtAxisParamConfig(2, 0, 0, 50000, -50000, 1000, 1000, 6.280, 16384, 200, 0, 0, 0)
@@ -1391,3 +1392,18 @@ Code example
     time.sleep(4)
     error = robot.TractorStop()
     print("TractorStop return ", error)
+
+Obtain the extended axis coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v3.8.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ExtAxisGetCoord()``"
+    "Description", "Obtain the extended axis coordinate system"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``coord``：Extended axis coordinate system"

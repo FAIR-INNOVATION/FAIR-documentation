@@ -36,4 +36,11 @@ This manual is the secondary development interface document of C++.
     CPPRobotExtendedAxis
     CPPRobotWelding
     CPPRobotOthers
+        
+Changelog
+-----------
+
+.. toctree:: 
+    :maxdepth: 6
     
+    CPPVersionIntro

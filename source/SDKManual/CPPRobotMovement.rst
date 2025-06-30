@@ -1,324 +1,251 @@
-Movement
-=================
+Robot Motion
+============
 
 .. toctree:: 
     :maxdepth: 5
 
 
-Jog point movement
+JOG Motion
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Jog point movement
-    * @param  [in]  ref 0- node movement, 2- base coordinate system, 4- tool coordinate system, 8- workpiece coordinate system
-    * @param  [in]  nb 1-joint 1(or axis x), 2-joint 2(or axis y), 3-joint 3(or axis z), 4-joint 4(or rotation about axis x), 5-joint 5(or rotation about axis y), 6-joint 6(or rotation about axis z)
-    * @param  [in]  dir 0-negative correlation, 1-positive correlation
-    * @param  [in]  vel The percentage of velocity,[0~100]
-    * @param  [in]  acc The percentage of acceleration, [0~100]
-    * @param  [in]  max_dis Maximum Angle of single click, unit: [°] or distance, unit: [mm]
-    * @return  Error code
+    * @brief JOG motion
+    * @param [in] ref 0-Joint JOG, 2-Base coordinate JOG, 4-Tool coordinate JOG, 8-Workpiece coordinate JOG
+    * @param [in] nb 1-Joint1 (or x-axis), 2-Joint2 (or y-axis), 3-Joint3 (or z-axis), 4-Joint4 (or rotation about x-axis), 5-Joint5 (or rotation about y-axis), 6-Joint6 (or rotation about z-axis)
+    * @param [in] dir 0-Negative direction, 1-Positive direction
+    * @param [in] vel Speed percentage [0~100]
+    * @param [in] acc Acceleration percentage [0~100]
+    * @param [in] max_dis Maximum single JOG angle in [°] or distance in [mm]
+    * @return Error code
     */
-    errno_t  StartJOG(uint8_t ref, uint8_t nb, uint8_t dir, float vel, float acc, float max_dis);
+    errno_t StartJOG(uint8_t ref, uint8_t nb, uint8_t dir, float vel, float acc, float max_dis);
 
-Jog point dynamic deceleration stop
-++++++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief  Jog point dynamic deceleration stop
-    * @param  [in]  ref  1- point stop, 3- point stop in base coordinate system, 5- point stop in tool coordinate system, 9- point stop in workpiece coordinate system
-    * @return  Error code
-    */
-    errno_t  StopJOG(uint8_t ref);
-
-The jog stops immediately
+JOG Deceleration Stop
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief The jog stops immediately
-    * @return  Error code
+    * @brief JOG deceleration stop
+    * @param [in] ref 1-Joint JOG stop, 3-Base coordinate JOG stop, 5-Tool coordinate JOG stop, 9-Workpiece coordinate JOG stop
+    * @return Error code
     */
-    errno_t  ImmStopJOG(); 
+    errno_t StopJOG(uint8_t ref);
 
-Code example
-+++++++++++++++
+JOG Immediate Stop
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
+    /**
+    * @brief JOG immediate stop
+    * @return Error code
+    */
+    errno_t ImmStopJOG();
 
-    using namespace std;
+Robot JOG Control Example
++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
 
-    int main(void)
+    int TestJOG(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        robot.StartJOG(0,1,0,20.0,20.0,30.0);   //For single-joint motion, StartJOG is a non-blocking command. Receiving other motion commands (including StartJOG) while in motion is discarded
-        sleep(1);
-        //robot.StopJOG(1)  //Robot single axis point deceleration stop
-        robot.ImmStopJOG();  //The single axis of the robot stops immediately
-        robot.StartJOG(0,2,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(0,3,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();
-        robot.StartJOG(0,4,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();  
-        robot.StartJOG(0,5,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(0,6,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-
-        robot.StartJOG(2,1,0,20.0,20.0,30.0);   //Point in the base coordinate system
-        sleep(1);
-        //robot.StopJOG(3)  //Robot single axis point deceleration stop
-        robot.ImmStopJOG();  //The single axis of the robot stops immediately
-        robot.StartJOG(2,2,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(2,3,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();
-        robot.StartJOG(2,4,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();  
-        robot.StartJOG(2,5,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(2,6,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-
-        robot.StartJOG(4,1,0,20.0,20.0,30.0);   //Point in the tool coordinate system
-        sleep(1);
-        //robot.StopJOG(5)  //Robot single axis point deceleration stop
-        robot.ImmStopJOG();  //The single axis of the robot stops immediately
-        robot.StartJOG(4,2,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(4,3,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();
-        robot.StartJOG(4,4,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();  
-        robot.StartJOG(4,5,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(4,6,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-
-        robot.StartJOG(8,1,0,20.0,20.0,30.0);   //Point in the workpiece coordinate system
-        sleep(1);
-        //robot.StopJOG(9)  //Robot single axis point deceleration stop
-        robot.ImmStopJOG();  //The single axis of the robot stops immediately
-        robot.StartJOG(8,2,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(8,3,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();
-        robot.StartJOG(8,4,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG();  
-        robot.StartJOG(8,5,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-        robot.StartJOG(8,6,1,20.0,20.0,30.0);
-        sleep(1);
-        robot.ImmStopJOG(); 
-
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(0, i + 1, 0, 20.0, 20.0, 30.0);
+            robot.Sleep(1000);
+            robot.ImmStopJOG();
+            robot.Sleep(1000);
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(2, i + 1, 0, 20.0, 20.0, 30.0);
+            robot.Sleep(1000);
+            robot.ImmStopJOG();
+            robot.Sleep(1000);
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(4, i + 1, 0, 20.0, 20.0, 30.0);
+            robot.Sleep(1000);
+            robot.StopJOG(5);
+            robot.Sleep(1000);
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(8, i + 1, 0, 20.0, 20.0, 30.0);
+            robot.Sleep(1000);
+            robot.StopJOG(9);
+            robot.Sleep(1000);
+        }
+        robot.CloseRPC();
         return 0;
     }
 
-Joint space motion
+Joint Space Motion
 +++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Joint space motion
-    * @param  [in] joint_pos  Target joint location, unit: deg
-    * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [0~14]
-    * @param  [in] user  Workpiece coordinate number, range [0~14]
-    * @param  [in] vel  Percentage of speed, range [0~100]
-    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] ovl  Velocity scaling factor, range[0~100]
-    * @param  [in] epos  Position of expansion shaft, unit: mm
-    * @param  [in] blendT [-1.0]- movement in place (blocking), [0~500.0]- smoothing time (non-blocking), in ms
-    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos  The pose offset
-    * @return  Error code
+    * @brief Joint space motion
+    * @param [in] joint_pos Target joint position in deg
+    * @param [in] desc_pos Target Cartesian pose
+    * @param [in] tool Tool coordinate number [0~14]
+    * @param [in] user Workpiece coordinate number [0~14]
+    * @param [in] vel Speed percentage [0~100]
+    * @param [in] acc Acceleration percentage [0~100] (not yet available)
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @param [in] epos Extended axis position in mm
+    * @param [in] blendT [-1.0]-Move to position (blocking), [0~500.0]-Smoothing time (non-blocking) in ms
+    * @param [in] offset_flag 0-No offset, 1-Offset in base/workpiece coordinate, 2-Offset in tool coordinate
+    * @param [in] offset_pos Pose offset
+    * @return Error code
     */
-    errno_t  MoveJ(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos *epos, float blendT, uint8_t offset_flag, DescPose *offset_pos);
+    errno_t MoveJ(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos *epos, float blendT, uint8_t offset_flag, DescPose *offset_pos);
 
-Rectilinear motion in Cartesian space
-++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Linear Motion
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Rectilinear motion in Cartesian space
-    * @param  [in] joint_pos  Target joint location, unit: deg
-    * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [0~14]
-    * @param  [in] user  Workpiece coordinate number, range [0~14]
-    * @param  [in] vel  Percentage of speed, range [0~100]
-    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] ovl  Velocity scaling factor, range[0~100]
-    * @param  [in] blendR [-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm    
-    * @param  [in] epos  Position of expansion shaft, unit: mm
-    * @param  [in] search  0- no wire seeking, 1- wire seeking
-    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos  The pose offset
-    * @return  Error code
-    */   
-    errno_t  MoveL(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos *epos, uint8_t search, uint8_t offset_flag, DescPose *offset_pos);
+    * @brief Cartesian space linear motion
+    * @param [in] joint_pos Target joint position in deg
+    * @param [in] desc_pos Target Cartesian pose
+    * @param [in] tool Tool coordinate number [0~14]
+    * @param [in] user Workpiece coordinate number [0~14]
+    * @param [in] vel Speed percentage [0~100]
+    * @param [in] acc Acceleration percentage [0~100] (not yet available)
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @param [in] blendR [-1.0]-Move to position (blocking), [0~1000.0]-Smoothing radius (non-blocking) in mm
+    * @param [in] epos Extended axis position in mm
+    * @param [in] search 0-No wire search, 1-Wire search
+    * @param [in] offset_flag 0-No offset, 1-Offset in base/workpiece coordinate, 2-Offset in tool coordinate
+    * @param [in] offset_pos Pose offset
+    * @return Error code
+    */
+    errno_t MoveL(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos *epos, uint8_t search, uint8_t offset_flag, DescPose *offset_pos);
 
-Circular arc motion in Cartesian space
-++++++++++++++++++++++++++++++++++++++
+Cartesian Space Circular Motion
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Circular arc motion in Cartesian space
-    * @param  [in] joint_pos_p  Waypoint joint position, unit: deg
-    * @param  [in] desc_pos_p   Waypoint Cartesian position
-    * @param  [in] ptool  Tool coordinate number, range [0~14]
-    * @param  [in] puser  Workpiece coordinate number, range [0~14]
-    * @param  [in] pvel  Percentage of speed, range [0~100]
-    * @param  [in] pacc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] epos_p  Position of expansion shaft, unit: mm
-    * @param  [in] poffset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos_p  The pose offset
-    * @param  [in] joint_pos_t  Target joint position, unit: deg
-    * @param  [in] desc_pos_t   Target point Cartesian position
-    * @param  [in] ttool  Tool coordinate number, range [0~14]
-    * @param  [in] tuser  Workpiece coordinate number, range [0~14]
-    * @param  [in] tvel  Percentage of speed, range [0~100]
-    * @param  [in] tacc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] epos_t  Position of expansion shaft, unit: mm
-    * @param  [in] toffset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos_t  The pose offset   
-    * @param  [in] ovl  Velocity scaling factor, range[0~100]    
-    * @param  [in] blendR [-1.0]- movement in place (blocking), [0~1000.0]- Smoothing radius (non-blocking), unit: mm    
-    * @return  Error code
-    */      
-    errno_t  MoveC(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, uint8_t poffset_flag, DescPose *offset_pos_p,JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, uint8_t toffset_flag, DescPose *offset_pos_t,float ovl, float blendR);
+    * @brief Cartesian space circular motion
+    * @param [in] joint_pos_p Path point joint position in deg
+    * @param [in] desc_pos_p Path point Cartesian pose
+    * @param [in] ptool Tool coordinate number [0~14]
+    * @param [in] puser Workpiece coordinate number [0~14]
+    * @param [in] pvel Speed percentage [0~100]
+    * @param [in] pacc Acceleration percentage [0~100] (not yet available)
+    * @param [in] epos_p Extended axis position in mm
+    * @param [in] poffset_flag 0-No offset, 1-Offset in base/workpiece coordinate, 2-Offset in tool coordinate
+    * @param [in] offset_pos_p Pose offset
+    * @param [in] joint_pos_t Target point joint position in deg
+    * @param [in] desc_pos_t Target point Cartesian pose
+    * @param [in] ttool Tool coordinate number [0~14]
+    * @param [in] tuser Workpiece coordinate number [0~14]
+    * @param [in] tvel Speed percentage [0~100]
+    * @param [in] tacc Acceleration percentage [0~100] (not yet available)
+    * @param [in] epos_t Extended axis position in mm
+    * @param [in] toffset_flag 0-No offset, 1-Offset in base/workpiece coordinate, 2-Offset in tool coordinate
+    * @param [in] offset_pos_t Pose offset
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @param [in] blendR [-1.0]-Move to position (blocking), [0~1000.0]-Smoothing radius (non-blocking) in mm
+    * @return Error code
+    */
+    errno_t MoveC(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, uint8_t poffset_flag, DescPose *offset_pos_p, JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, uint8_t toffset_flag, DescPose *offset_pos_t, float ovl, float blendR);
 
-Circular motion in Cartesian space
-+++++++++++++++++++++++++++++++++++++++
+Cartesian Space Full Circle Motion
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Circular motion in Cartesian space
-    * @param  [in] joint_pos_p  Path point 1 joint position, unit: deg
-    * @param  [in] desc_pos_p   Waypoint 1 Cartesian position
-    * @param  [in] ptool  Tool coordinate number, range [0~14]
-    * @param  [in] puser  Workpiece coordinate number, range [0~14]
-    * @param  [in] pvel  Percentage of speed, range [0~100]
-    * @param  [in] pacc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] epos_p  Position of expansion shaft, unit: mm
-    * @param  [in] joint_pos_t  Joint position at waypoint 2, unit: deg
-    * @param  [in] desc_pos_t   Waypoint 2 Cartesian position
-    * @param  [in] ttool  Tool coordinate number, range [0~14]
-    * @param  [in] tuser  Workpiece coordinate number, range [0~14]
-    * @param  [in] tvel  Percentage of speed, range [0~100]
-    * @param  [in] tacc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] epos_t  Position of expansion shaft, unit: mm
-    * @param  [in] ovl  Velocity scaling factor, range[0~100]   
-    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos  The pose offset     
-    * @return  Error code
-    */      
-    errno_t  Circle(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, float ovl, uint8_t offset_flag, DescPose *offset_pos);
+    * @brief Cartesian space full circle motion
+    * @param [in] joint_pos_p Path point 1 joint position in deg
+    * @param [in] desc_pos_p Path point 1 Cartesian pose
+    * @param [in] ptool Tool coordinate number [1~15]
+    * @param [in] puser Workpiece coordinate number [1~15]
+    * @param [in] pvel Speed percentage [0~100]
+    * @param [in] pacc Acceleration percentage [0~100] (not yet available)
+    * @param [in] epos_p Extended axis position in mm
+    * @param [in] joint_pos_t Path point 2 joint position in deg
+    * @param [in] desc_pos_t Path point 2 Cartesian pose
+    * @param [in] ttool Tool coordinate number [1~15]
+    * @param [in] tuser Workpiece coordinate number [1~15]
+    * @param [in] tvel Speed percentage [0~100]
+    * @param [in] tacc Acceleration percentage [0~100] (not yet available)
+    * @param [in] epos_t Extended axis position in mm
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @param [in] offset_flag 0-No offset, 1-Offset in base/workpiece coordinate, 2-Offset in tool coordinate
+    * @param [in] offset_pos Pose offset
+    * @param [in] oacc Acceleration percentage
+    * @param [in] blendR -1: Blocking; 0~1000: Smoothing radius
+    * @return Error code
+    */
+    errno_t Circle(JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, float ovl, uint8_t offset_flag, DescPose *offset_pos, double oacc, double blendR);
 
-Code example
-++++++++++++++
+Cartesian Space Point-to-Point Motion
+++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
+    /**
+    * @brief Cartesian space point-to-point motion
+    * @param [in] desc_pos Target Cartesian pose or pose increment
+    * @param [in] tool Tool coordinate number [0~14]
+    * @param [in] user Workpiece coordinate number [0~14]
+    * @param [in] vel Speed percentage [0~100]
+    * @param [in] acc Acceleration percentage [0~100] (not yet available)
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @param [in] blendT [-1.0]-Move to position (blocking), [0~500.0]-Smoothing time (non-blocking) in ms
+    * @param [in] config Joint space configuration, [-1]-Calculate with reference to current joint position, [0~7]-Calculate with reference to specific joint space configuration, default -1
+    * @return Error code
+    */
+    errno_t MoveCart(DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
 
-    using namespace std;
+Robot Basic Motion Command Example
++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
 
-    int main(void)
+    int TestMove(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        JointPos j1,j2,j3,j4;
-        DescPose desc_pos1,desc_pos2,desc_pos3,desc_pos4,offset_pos;
-        ExaxisPos  epos;
-
-        memset(&j1, 0, sizeof(JointPos));
-        memset(&j2, 0, sizeof(JointPos));
-        memset(&j3, 0, sizeof(JointPos));
-        memset(&j4, 0, sizeof(JointPos));
-        memset(&desc_pos1, 0, sizeof(DescPose));
-        memset(&desc_pos2, 0, sizeof(DescPose));
-        memset(&desc_pos3, 0, sizeof(DescPose));
-        memset(&desc_pos4, 0, sizeof(DescPose));
-        memset(&offset_pos, 0, sizeof(DescPose));
-        memset(&epos, 0, sizeof(ExaxisPos));
-
-        j1 = {114.578,-117.798,-97.745,-54.436,90.053,-45.216};
-        desc_pos1.tran.x = -140.418;
-        desc_pos1.tran.y = 619.351;
-        desc_pos1.tran.z = 198.369;
-        desc_pos1.rpy.rx = -179.948;
-        desc_pos1.rpy.ry = 0.023;
-        desc_pos1.rpy.rz = 69.793;
-
-        j2 = {121.381,-97.108,-123.768,-45.824,89.877,-47.296};
-        desc_pos2.tran.x = -127.772;
-        desc_pos2.tran.y = 459.534;
-        desc_pos2.tran.z = 221.274;
-        desc_pos2.rpy.rx = -177.850;
-        desc_pos2.rpy.ry = -2.507;
-        desc_pos2.rpy.rz = 78.627;
-
-        j3 = {138.884,-114.522,-103.933,-49.694,90.688,-47.291};
-        desc_pos3.tran.x = -360.468;
-        desc_pos3.tran.y = 485.600;
-        desc_pos3.tran.z = 196.363;
-        desc_pos3.rpy.rx = -178.239;
-        desc_pos3.rpy.ry = -0.893;
-        desc_pos3.rpy.rz = 96.172;
-
-        j4 = {159.164,-96.105,-128.653,-41.170,90.704,-47.290};
-        desc_pos4.tran.x = -360.303;
-        desc_pos4.tran.y = 274.911;
-        desc_pos4.tran.z = 203.968;
-        desc_pos4.rpy.rx = -176.720;
-        desc_pos4.rpy.ry = -2.514;
-        desc_pos4.rpy.rz = 116.407;   
-
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos j3(-29.777, -84.536, 109.275, -114.075, -86.655, 74.257);
+        JointPos j4(-31.154, -95.317, 94.276, -88.079, -89.740, 74.256);
+        DescPose desc_pos1(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose desc_pos3(-487.434, 154.362, 308.576, 176.600, 0.268, -14.061);
+        DescPose desc_pos4(-443.165, 147.881, 480.951, 179.511, -0.775, -15.409);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
         int tool = 0;
         int user = 0;
         float vel = 100.0;
@@ -328,94 +255,74 @@ Code example
         float blendR = 0.0;
         uint8_t flag = 0;
         uint8_t search = 0;
-
         robot.SetSpeed(20);
-        
-        int err1 = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
-        printf("movej errcode:%d\n", err1);
-
-        int err2 = robot.MoveL(&j2, &desc_pos2, tool, user, vel, acc, ovl, blendR, &epos,search,flag, &offset_pos);
-        printf("movel errcode:%d\n", err2);   
-
-        int err3 = robot.MoveC(&j3,&desc_pos3,tool,user,vel,acc,&epos,flag,&offset_pos,&j4,&desc_pos4,tool,user,vel,acc,&epos,flag,&offset_pos,ovl,blendR);
-        printf("movec errcode:%d\n", err3); 
-
-        int err4 = robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
-        printf("movej errcode:%d\n", err4);
-
-        int err5 = robot.Circle(&j3,&desc_pos3,tool,user,vel,acc,&epos,&j4,&desc_pos4,tool,user,vel,acc,&epos,ovl,flag,&offset_pos);
-        printf("circle errcode:%d\n", err5);
-        
+        rtn = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        printf("movej errcode:%d\n", rtn);
+        rtn = robot.MoveL(&j2, &desc_pos2, tool, user, vel, acc, ovl, blendR, &epos, search, flag, &offset_pos);
+        printf("movel errcode:%d\n", rtn);
+        rtn = robot.MoveC(&j3, &desc_pos3, tool, user, vel, acc, &epos, flag, &offset_pos, &j4, &desc_pos4, tool, user, vel, acc, &epos, flag, &offset_pos, ovl, blendR);
+        printf("movec errcode:%d\n", rtn);
+        rtn = robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        printf("movej errcode:%d\n", rtn);
+        rtn = robot.Circle(&j3, &desc_pos3, tool, user, vel, acc, &epos, &j1, &desc_pos1, tool, user, vel, acc, &epos, ovl, flag, &offset_pos);
+        printf("circle errcode:%d\n", rtn);
+        rtn = robot.MoveCart(&desc_pos4, tool, user, vel, acc, ovl, blendT, -1);
+        printf("MoveCart errcode:%d\n", rtn);
+        robot.CloseRPC();
         return 0;
     }
 
-Spiral motion in Cartesian space
-+++++++++++++++++++++++++++++++++++
+Cartesian Space Spiral Motion
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Spiral motion in Cartesian space
-    * @param  [in] joint_pos  Target joint location, unit: deg
-    * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [0~14]
-    * @param  [in] user  Workpiece coordinate number, range [0~14]
-    * @param  [in] vel  Percentage of speed, range [0~100]
-    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] epos  Position of expansion shaft, unit: mm
-    * @param  [in] ovl  Velocity scaling factor, range[0~100]    
-    * @param  [in] offset_flag  0- no offset, 1- offset in base/job coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos  The pose offset
-    * @param  [in] spiral_param  Spiral parameter
-    * @return  Error code
+    * @brief Cartesian space spiral motion
+    * @param [in] joint_pos Target joint position in deg
+    * @param [in] desc_pos Target Cartesian pose
+    * @param [in] tool Tool coordinate number [0~14]
+    * @param [in] user Workpiece coordinate number [0~14]
+    * @param [in] vel Speed percentage [0~100]
+    * @param [in] acc Acceleration percentage [0~100] (not yet available)
+    * @param [in] epos Extended axis position in mm
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @param [in] offset_flag 0-No offset, 1-Offset in base/workpiece coordinate, 2-Offset in tool coordinate
+    * @param [in] offset_pos Pose offset
+    * @param [in] spiral_param Spiral parameters
+    * @return Error code
     */
-    errno_t  NewSpiral(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, ExaxisPos *epos, float ovl, uint8_t offset_flag, DescPose *offset_pos, SpiralParam spiral_param);  
+    errno_t NewSpiral(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, ExaxisPos *epos, float ovl, uint8_t offset_flag, DescPose *offset_pos, SpiralParam spiral_param);
 
-Code example
-++++++++++++++
+Spiral Motion Example
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
-
-    using namespace std;
-
-    int main(void)
+    int TestSpiral(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        JointPos j;
-        DescPose desc_pos, offset_pos1, offset_pos2;
-        ExaxisPos  epos;
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        DescPose desc_pos(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose offset_pos1(50, 0, 0, -30, 0, 0);
+        DescPose offset_pos2(50, 0, 0, -5, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
         SpiralParam sp;
-
-        memset(&j, 0, sizeof(JointPos));
-        memset(&desc_pos, 0, sizeof(DescPose));
-        memset(&offset_pos1, 0, sizeof(DescPose));
-        memset(&offset_pos2, 0, sizeof(DescPose));
-        memset(&epos, 0, sizeof(ExaxisPos));
-        memset(&sp, 0, sizeof(SpiralParam));
-
-        j = {127.888,-101.535,-94.860,17.836,96.931,-61.325};
-        offset_pos1.tran.x = 50.0;
-        offset_pos1.rpy.rx = -30.0;
-        offset_pos2.tran.x = 50.0;
-        offset_pos2.rpy.rx = -5.0;
-
         sp.circle_num = 5;
         sp.circle_angle = 5.0;
         sp.rad_init = 50.0;
         sp.rad_add = 10.0;
         sp.rotaxis_add = 10.0;
         sp.rot_direction = 0;
-
         int tool = 0;
         int user = 0;
         float vel = 100.0;
@@ -423,90 +330,73 @@ Code example
         float ovl = 100.0;
         float blendT = 0.0;
         uint8_t flag = 2;
-
         robot.SetSpeed(20);
-
-        int ret = robot.GetForwardKin(&j, &desc_pos);  //The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
-
-        if(ret == 0)
-        {
-            int err1 = robot.MoveJ(&j, &desc_pos, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos1);
-            printf("movej errcode:%d\n", err1);
-
-            int err2 = robot.NewSpiral(&j, &desc_pos, tool, user, vel, acc, &epos, ovl, flag, &offset_pos2, sp);
-            printf("newspiral errcode:%d\n", err2);
-        }
-        else
-        {
-            printf("GetForwardKin errcode:%d\n", ret);
-        }
-
+        rtn = robot.MoveJ(&j, &desc_pos, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos1);
+        printf("movej errcode:%d\n", rtn);
+        rtn = robot.NewSpiral(&j, &desc_pos, tool, user, vel, acc, &epos, ovl, flag, &offset_pos2, sp);
+        printf("newspiral errcode:%d\n", rtn);
+        robot.CloseRPC();
         return 0;
     }
 
-Servo movement starts
-+++++++++++++++++++++++++++++++++++++++
+Servo Motion Start
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief Servo movement starts, used with ServoJ and ServoCart instructions
-     * @return  Error code
-     */
+    * @brief Servo motion start, used with ServoJ and ServoCart commands
+    * @return Error code
+    */
     errno_t ServoMoveStart();
 
-Servo movement end
-+++++++++++++++++++++++++++++++++++++++
+Servo Motion End
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief Servo movement end, used with ServoJ and ServoCart instructions
-     * @return  Error code
-     */
+    * @brief Servo motion end, used with ServoJ and ServoCart commands
+    * @return Error code
+    */
     errno_t ServoMoveEnd();
 
-Joint space servo mode motion
-+++++++++++++++++++++++++++++++
+Joint Space Servo Mode Motion
++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Joint space servo mode motion
-    * @param  [in] joint_pos  Target joint location, unit: deg
-    * @param  [in] acc  Acceleration percentage range[0~100], not open yet, default: 0
-    * @param  [in] vel  The value ranges from 0 to 100. The value is not available. The default value is 0
-    * @param  [in] cmdT Instruction delivery period, unit: s, recommended range [0.001~0.0016]
-    * @param  [in] filterT Filtering time (unit: s), temporarily disabled. The default value is 0
-    * @param  [in] gain  The proportional amplifier at the target position, not yet open, defaults to 0
-    * @return  Error code
+    * @brief Joint space servo mode motion
+    * @param [in] joint_pos Target joint position in deg
+    * @param [in] acc Acceleration percentage [0~100] (not yet available, default 0)
+    * @param [in] vel Speed percentage [0~100] (not yet available, default 0)
+    * @param [in] cmdT Command cycle in seconds, recommended range [0.001~0.0016]
+    * @param [in] filterT Filter time in seconds (not yet available, default 0)
+    * @param [in] gain Target position proportional amplifier (not yet available, default 0)
+    * @return Error code
     */
-    errno_t  ServoJ(JointPos *joint_pos, float acc, float vel, float cmdT, float filterT, float gain);
+    errno_t ServoJ(JointPos *joint_pos, float acc, float vel, float cmdT, float filterT, float gain);
 
-Code example
-++++++++++++++
+Joint Space Servo Mode Motion Example
+++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
-
-    using namespace std;
-
-    int main(void)
+    int TestServoJ(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        JointPos j;
-
-        memset(&j, 0, sizeof(JointPos));
-
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
         float vel = 0.0;
         float acc = 0.0;
         float cmdT = 0.008;
@@ -515,70 +405,145 @@ Code example
         uint8_t flag = 0;
         int count = 500;
         float dt = 0.1;
-
         int ret = robot.GetActualJointPosDegree(flag, &j);
-        if(ret == 0)
+        if (ret == 0)
         {
+            robot.ServoMoveStart();
             while (count)
             {
-                robot.ServoJ(&j, acc, vel, cmdT, filterT, gain);
+                robot.ServoJ(&j, &epos, acc, vel, cmdT, filterT, gain);
                 j.jPos[0] += dt;
                 count -= 1;
-                robot.WaitMs(cmdT*1000);
+                robot.WaitMs(cmdT * 1000);
             }
+            robot.ServoMoveEnd();
         }
         else
         {
             printf("GetActualJointPosDegree errcode:%d\n", ret);
         }
-
+        robot.CloseRPC();
         return 0;
     }
 
-Cartesian space servo mode motion
+Joint Torque Control Start
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Joint torque control start
+    * @return Error code
+    */
+    errno_t ServoJTStart();
+
+Joint Torque Control
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Joint torque control
+    * @param [in] torque j1~j6 joint torque in Nm
+    * @param [in] interval Command cycle in seconds, range [0.001~0.008]
+    * @return Error code
+    */
+    errno_t ServoJT(float torque[], double interval);
+
+Joint Torque Control End
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Joint torque control end
+    * @return Error code
+    */
+    errno_t ServoJTEnd();
+
+Joint Torque Control Example
++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestServoJT(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.DragTeachSwitch(1);
+        float torques[] = { 0, 0, 0, 0, 0, 0 };
+        robot.GetJointTorques(1, torques);
+        int count = 100;
+        robot.ServoJTStart(); 
+        int error = 0;
+        while (count > 0)
+        {
+            error = robot.ServoJT(torques, 0.001);
+            count = count - 1;
+            robot.Sleep(1);
+        }
+        error = robot.ServoJTEnd();
+        robot.DragTeachSwitch(0);
+        robot.CloseRPC();
+        return 0;
+    }
+
+Cartesian Space Servo Mode Motion
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Cartesian space servo mode motion
-    * @param  [in]  mode  0- absolute motion (base coordinates), 1- incremental motion (base coordinates), 2- incremental motion (tool coordinates)
-    * @param  [in]  desc_pos  Target Cartesian pose or pose increment
-    * @param  [in]  pos_gain  Proportional coefficient of pose increment, effective only for incremental motion, range [0~1]
-    * @param  [in] acc  Acceleration percentage range[0~100], not open yet, default: 0
-    * @param  [in] vel  The value ranges from 0 to 100. The value is not available. The default value is 0
-    * @param  [in] cmdT Instruction delivery period, unit: s, recommended range [0.001~0.0016]
-    * @param  [in] filterT Filtering time (unit: s), temporarily disabled. The default value is 0
-    * @param  [in] gain  The proportional amplifier at the target position, not yet open, defaults to 0
-    * @return  Error code
+    * @brief Cartesian space servo mode motion
+    * @param [in] mode 0-Absolute motion (base coordinate), 1-Incremental motion (base coordinate), 2-Incremental motion (tool coordinate)
+    * @param [in] desc_pos Target Cartesian pose or pose increment
+    * @param [in] pos_gain Pose increment proportional coefficient, only effective in incremental motion, range [0~1]
+    * @param [in] acc Acceleration percentage [0~100] (not yet available, default 0)
+    * @param [in] vel Speed percentage [0~100] (not yet available, default 0)
+    * @param [in] cmdT Command cycle in seconds, recommended range [0.001~0.0016]
+    * @param [in] filterT Filter time in seconds (not yet available, default 0)
+    * @param [in] gain Target position proportional amplifier (not yet available, default 0)
+    * @return Error code
     */
-    errno_t  ServoCart(int mode, DescPose *desc_pose, float pos_gain[6], float acc, float vel, float cmdT, float filterT, float gain);
+    errno_t ServoCart(int mode, DescPose *desc_pose, float pos_gain[6], float acc, float vel, float cmdT, float filterT, float gain);
 
-Code example
-++++++++++++++
+Cartesian Space Servo Mode Motion Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
-
-    using namespace std;
-
-    int main(void)
+    int TestServoCart(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
         DescPose desc_pos_dt;
         memset(&desc_pos_dt, 0, sizeof(DescPose));
-
         desc_pos_dt.tran.z = -0.5;
-        float pos_gain[6] = {0.0,0.0,1.0,0.0,0.0,0.0};
+        float pos_gain[6] = { 0.0,0.0,1.0,0.0,0.0,0.0 };
         int mode = 2;
         float vel = 0.0;
         float acc = 0.0;
@@ -587,277 +552,84 @@ Code example
         float gain = 0.0;
         uint8_t flag = 0;
         int count = 100;
-
         robot.SetSpeed(20);
-
         while (count)
         {
             robot.ServoCart(mode, &desc_pos_dt, pos_gain, acc, vel, cmdT, filterT, gain);
             count -= 1;
-            robot.WaitMs(cmdT*1000);
+            robot.WaitMs(cmdT * 1000);
         }
-
+        robot.CloseRPC();
         return 0;
     }
 
-Point to point motion in Cartesian space
-+++++++++++++++++++++++++++++++++++++++++++++
+Spline Motion Start
+++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  Point to point motion in Cartesian space
-    * @param  [in]  desc_pos  Target Cartesian pose or pose increment
-    * @param  [in] tool  Tool coordinate number, range [0~14]
-    * @param  [in] user  Workpiece coordinate number, range [0~14]
-    * @param  [in] vel  Percentage of speed, range [0~100]
-    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] ovl  Velocity scaling factor, range[0~100]
-    * @param  [in] blendT [-1.0]- movement in place (blocking), [0~500.0]- smoothing time (non-blocking), in ms
-    * @param  [in] config  Joint space configuration, [-1]- refer to the current joint position, [0~7]- refer to the specific joint space configuration, the default is -1 
-    * @return  Error code
+    * @brief Spline motion start
+    * @return Error code
     */
-    errno_t  MoveCart(DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
+    errno_t SplineStart();
 
-Code example
-++++++++++++++
+Spline PTP Motion
+++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
+    /**
+    * @brief Joint space spline motion
+    * @param [in] joint_pos Target joint position in deg
+    * @param [in] desc_pos Target Cartesian pose
+    * @param [in] tool Tool coordinate number [0~14]
+    * @param [in] user Workpiece coordinate number [0~14]
+    * @param [in] vel Speed percentage [0~100]
+    * @param [in] acc Acceleration percentage [0~100] (not yet available)
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @return Error code
+    */
+    errno_t SplinePTP(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl);
 
-    using namespace std;
+Spline Motion End
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
 
-    int main(void)
+    /**
+    * @brief Spline motion end
+    * @return Error code
+    */
+    errno_t SplineEnd();
+
+Spline Motion Example
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestSpline(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        DescPose desc_pos1, desc_pos2, desc_pos3;
-        memset(&desc_pos1, 0, sizeof(DescPose));
-        memset(&desc_pos2, 0, sizeof(DescPose));
-        memset(&desc_pos3, 0, sizeof(DescPose));
-
-        desc_pos1.tran.x = 75.414;
-        desc_pos1.tran.y = 568.526;
-        desc_pos1.tran.z = 338.135;
-        desc_pos1.rpy.rx = -178.348;
-        desc_pos1.rpy.ry = -0.930;
-        desc_pos1.rpy.rz = 52.611;
-
-        desc_pos2.tran.x = -273.856;
-        desc_pos2.tran.y = 643.260;
-        desc_pos2.tran.z = 259.235;
-        desc_pos2.rpy.rx = -177.972;
-        desc_pos2.rpy.ry = -1.494;
-        desc_pos2.rpy.rz = 80.866;
-
-        desc_pos3.tran.x = -423.044;
-        desc_pos3.tran.y = 229.703;
-        desc_pos3.tran.z = 241.080;
-        desc_pos3.rpy.rx = -173.990;
-        desc_pos3.rpy.ry = -5.772;
-        desc_pos3.rpy.rz = 123.971;
-
-        int tool = 0;
-        int user = 0;
-        float vel = 100.0;
-        float acc = 100.0;
-        float ovl = 100.0;
-        float blendT = -1.0;
-        float blendT1 = 0.0;
-        int config = -1;
-
-        robot.SetSpeed(20);
-        robot.MoveCart(&desc_pos1, tool, user, vel, acc, ovl, blendT, config);
-        robot.MoveCart(&desc_pos2, tool, user, vel, acc, ovl, blendT, config);
-        robot.MoveCart(&desc_pos3, tool, user, vel, acc, ovl, blendT1, config);
-
-        return 0;
-    }
-
-The spline motion begins
-++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief  The spline motion begins
-    * @return  Error code
-    */
-    errno_t  SplineStart();
-
-Spline motion PTP
-++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief  Joint space spline movement
-    * @param  [in] joint_pos  Target joint location, unit: deg
-    * @param  [in] desc_pos   Target Cartesian position
-    * @param  [in] tool  Tool coordinate number, range [0~14]
-    * @param  [in] user  Workpiece coordinate number, range [0~14]
-    * @param  [in] vel  Percentage of speed, range [0~100]
-    * @param  [in] acc  Acceleration percentage, range [0~100], not open for now
-    * @param  [in] ovl  Velocity scaling factor, range[0~100]   
-    * @return  Error code
-    */
-    errno_t  SplinePTP(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl);
-
-The spline movement ends
-++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-    * @brief  The spline movement is complete
-    * @return  Error code
-    */
-    errno_t  SplineEnd();
-
-New spline movement starts
-++++++++++++++++++++++++++++++++++
-
-.. versionchanged:: C++ SDK-v2.1.3.0
-
-.. code-block:: c++
-    :linenos:
-
-    /**
-      * @brief New spline movement starts
-      * @param [in] type 0-arc transition, 1-the given point is the path point
-      * @param [in] averageTime global average connection time (ms) (10 ~ ), default 2000
-      * @return error code
-      */
-    errno_t NewSplineStart(int type, int averageTime=2000);
-
-New spline motion command points
-++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief New spline motion command points
-     * @param  [in] joint_pos  Target joint position, unit:deg
-     * @param  [in] desc_pos   Target Cartesian pose
-     * @param  [in] tool  Tool coordinate number, range [0~14]
-     * @param  [in] user  Workpiece coordinate number, range [0~14]
-     * @param  [in] vel  speed percentage, range [0~100]
-     * @param  [in] acc  Acceleration percentage, range [0~100], not available yet
-     * @param  [in] ovl  Speed scaling factor, range [0~100]
-     * @param  [in] blendR [-1.0]- Movement in place (blocked), [0~1000.0]-smooth radius (non-blocked), unit: mm
-     * @param  [in] lastFlag [0,1] 0-the middle point of the spline curve, continue to execute the next point after execution, 1-the end point of the spline curve, decelerate and stop after execution
-     * @return  Error code
-     */  
-    errno_t  NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);
-
-New spline motion ends
-++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief New spline motion ends
-     * @return Error code
-     */
-    errno_t  NewSplineEnd();
-
-Pause motion
-++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief Pause motion
-     * @return  Error code
-     */
-    errno_t  PauseMotion(); 
-
-Resume motion
-++++++++++++++++++++++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief Resume motion
-     * @return  Error code
-     */
-    errno_t  ResumeMotion();
-
-Code example
-++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
-
-    using namespace std;
-
-    int main(void)
-    {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        JointPos j1,j2,j3,j4;
-        DescPose desc_pos1,desc_pos2,desc_pos3,desc_pos4,offset_pos;
-        ExaxisPos  epos;
-
-        memset(&j1, 0, sizeof(JointPos));
-        memset(&j2, 0, sizeof(JointPos));
-        memset(&j3, 0, sizeof(JointPos));
-        memset(&j4, 0, sizeof(JointPos));
-        memset(&desc_pos1, 0, sizeof(DescPose));
-        memset(&desc_pos2, 0, sizeof(DescPose));
-        memset(&desc_pos3, 0, sizeof(DescPose));
-        memset(&desc_pos4, 0, sizeof(DescPose));
-        memset(&offset_pos, 0, sizeof(DescPose));
-        memset(&epos, 0, sizeof(ExaxisPos));
-
-        j1 = {114.578,-117.798,-97.745,-54.436,90.053,-45.216};
-        desc_pos1.tran.x = -140.418;
-        desc_pos1.tran.y = 619.351;
-        desc_pos1.tran.z = 198.369;
-        desc_pos1.rpy.rx = -179.948;
-        desc_pos1.rpy.ry = 0.023;
-        desc_pos1.rpy.rz = 69.793;
-
-        j2 = {115.401,-105.206,-117.959,-49.727,90.054,-45.222};
-        desc_pos2.tran.x = -95.586;
-        desc_pos2.tran.y = 504.143;
-        desc_pos2.tran.z = 186.880;
-        desc_pos2.rpy.rx = 178.001;
-        desc_pos2.rpy.ry = 2.091;
-        desc_pos2.rpy.rz = 70.585;
-
-        j3 = {135.609,-103.249,-120.211,-49.715,90.058,-45.219};
-        desc_pos3.tran.x = -252.429;
-        desc_pos3.tran.y = 428.903;
-        desc_pos3.tran.z = 188.492;
-        desc_pos3.rpy.rx = 177.804;
-        desc_pos3.rpy.ry = 2.294;
-        desc_pos3.rpy.rz = 90.782;
-
-        j4 = {154.766,-87.036,-135.672,-49.045,90.739,-45.223};
-        desc_pos4.tran.x = -277.255;
-        desc_pos4.tran.y = 272.958;
-        desc_pos4.tran.z = 205.452;
-        desc_pos4.rpy.rx = 179.289;
-        desc_pos4.rpy.ry = 1.765;
-        desc_pos4.rpy.rz = 109.966;   
-
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos j3(-61.954, -84.409, 108.153, -116.316, -91.283, 74.260);
+        JointPos j4(-89.575, -80.276, 102.713, -116.302, -91.284, 74.267);
+        DescPose desc_pos1(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose desc_pos3(-327.622, 402.230, 320.402, -178.067, 2.127, -46.207);
+        DescPose desc_pos4(-104.066, 544.321, 327.023, -177.715, 3.371, -73.818);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
         int tool = 0;
         int user = 0;
         float vel = 100.0;
@@ -865,10 +637,8 @@ Code example
         float ovl = 100.0;
         float blendT = -1.0;
         uint8_t flag = 0;
-
         robot.SetSpeed(20);
-        
-        int err1 = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
+        int err1 = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
         printf("movej errcode:%d\n", err1);
         robot.SplineStart();
         robot.SplinePTP(&j1, &desc_pos1, tool, user, vel, acc, ovl);
@@ -876,349 +646,456 @@ Code example
         robot.SplinePTP(&j3, &desc_pos3, tool, user, vel, acc, ovl);
         robot.SplinePTP(&j4, &desc_pos4, tool, user, vel, acc, ovl);
         robot.SplineEnd();
-        
+        robot.CloseRPC();
         return 0;
     }
 
-Termination motion
+New Spline Motion Start
+++++++++++++++++++++++++++++++++++
+.. versionchanged:: C++SDK-v2.1.3.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief New spline motion start
+    * @param [in] type 0-Circular transition, 1-Given points as path points
+    * @param [in] averageTime Global average transition time in ms (10 ~ ), default 2000
+    * @return Error code
+    */
+    errno_t NewSplineStart(int type, int averageTime=2000);
+
+New Spline Command Point
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Termination motion
-    * @return  Error code
+    * @brief New spline command point
+    * @param [in] joint_pos Target joint position in deg
+    * @param [in] desc_pos Target Cartesian pose
+    * @param [in] tool Tool coordinate number [0~14]
+    * @param [in] user Workpiece coordinate number [0~14]
+    * @param [in] vel Speed percentage [0~100]
+    * @param [in] acc Acceleration percentage [0~100] (not yet available)
+    * @param [in] ovl Speed scaling factor [0~100]
+    * @param [in] blendR [-1.0]-Move to position (blocking), [0~1000.0]-Smoothing radius (non-blocking) in mm
+    * @param [in] lastFlag Whether it's the last point, 0-No, 1-Yes
+    * @return Error code
     */
-    errno_t  StopMotion();
+    errno_t NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);
 
-The whole point shift begins
+New Spline Motion End
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief  The whole point shift begins
-    * @param  [in]  flag 0- offset in base coordinate system/workpiece coordinate system, 2- offset in tool coordinate system
-    * @param  [in] offset_pos  The pose offset
-    * @return  Error code
+    * @brief New spline motion end
+    * @return Error code
     */
-    errno_t  PointsOffsetEnable(int flag, DescPose *offset_pos);
+    errno_t NewSplineEnd();
 
-The whole point shift ends
+New Spline Motion Example
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  The whole point shift ends
-    * @return  Error code
-    */
-    errno_t  PointsOffsetDisable();
-
-Code example
-++++++++++++++
-.. code-block:: c++
-    :linenos:
-
-    #include <cstdlib>
-    #include <iostream>
-    #include <stdio.h>
-    #include <cstring>
-    #include <unistd.h>
-    #include "FRRobot.h"
-    #include "RobotTypes.h"
-
-    using namespace std;
-
-    int main(void)
+    int TestNewSpline(void)
     {
-        FRRobot robot;                 //Instantiate the robot object
-        robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
-
-        JointPos j1,j2;
-        DescPose desc_pos1,desc_pos2,offset_pos,offset_pos1;
-        ExaxisPos  epos;
-
-        memset(&j1, 0, sizeof(JointPos));
-        memset(&j2, 0, sizeof(JointPos));
-        memset(&desc_pos1, 0, sizeof(DescPose));
-        memset(&desc_pos2, 0, sizeof(DescPose));
-        memset(&offset_pos, 0, sizeof(DescPose));
-        memset(&offset_pos1, 0, sizeof(DescPose));
-        memset(&epos, 0, sizeof(ExaxisPos));
-
-        j1 = {114.578,-117.798,-97.745,-54.436,90.053,-45.216};
-        desc_pos1.tran.x = -140.418;
-        desc_pos1.tran.y = 619.351;
-        desc_pos1.tran.z = 198.369;
-        desc_pos1.rpy.rx = -179.948;
-        desc_pos1.rpy.ry = 0.023;
-        desc_pos1.rpy.rz = 69.793;
-
-        j2 = {115.401,-105.206,-117.959,-49.727,90.054,-45.222};
-        desc_pos2.tran.x = -95.586;
-        desc_pos2.tran.y = 504.143;
-        desc_pos2.tran.z = 186.880;
-        desc_pos2.rpy.rx = 178.001;
-        desc_pos2.rpy.ry = 2.091;
-        desc_pos2.rpy.rz = 70.585;
-
-        offset_pos1.tran.x = 100.0;
-        offset_pos1.tran.y = 100.0;
-        offset_pos1.tran.z = 100.0;
-        offset_pos1.rpy.rx = 5.0;
-        offset_pos1.rpy.ry = 5.0;
-        offset_pos1.rpy.rz = 5.0;    
-
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos j3(-61.954, -84.409, 108.153, -116.316, -91.283, 74.260);
+        JointPos j4(-89.575, -80.276, 102.713, -116.302, -91.284, 74.267);
+        JointPos j5(-95.228, -54.621, 73.691, -112.245, -91.280, 74.268);
+        DescPose desc_pos1(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose desc_pos3(-327.622, 402.230, 320.402, -178.067, 2.127, -46.207);
+        DescPose desc_pos4(-104.066, 544.321, 327.023, -177.715, 3.371, -73.818);
+        DescPose desc_pos5(-33.421, 732.572, 275.103, -177.907, 2.709, -79.482);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
         int tool = 0;
         int user = 0;
         float vel = 100.0;
         float acc = 100.0;
         float ovl = 100.0;
         float blendT = -1.0;
-        float blendR = 0.0;
         uint8_t flag = 0;
-        int type = 0;
-
         robot.SetSpeed(20);
-        
-        robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
-        robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
-        sleep(2);
-        robot.PointsOffsetEnable(type, &offset_pos1);
-        robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
-        robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
-        robot.PointsOffsetDisable();
-
+        int err1 = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        printf("movej errcode:%d\n", err1);
+        robot.NewSplineStart(1, 2000);
+        robot.NewSplinePoint(&j1, &desc_pos1, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(&j2, &desc_pos2, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(&j3, &desc_pos3, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(&j4, &desc_pos4, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(&j5, &desc_pos5, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplineEnd();
+        robot.CloseRPC();
         return 0;
     }
 
-Set control box AO when the robot moves start
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop Motion
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Stop motion
+    * @return Error code
+    */
+    errno_t StopMotion();
+
+Pause Motion
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Pause motion
+    * @return Error code
+    */
+    errno_t PauseMotion();
+
+Resume Motion
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+    
+    /**
+    * @brief Resume motion
+    * @return Error code
+    */
+    errno_t ResumeMotion();
+
+Motion Pause, Resume, Stop Example
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestPause(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j5(-95.228, -54.621, 73.691, -112.245, -91.280, 74.268);
+        DescPose desc_pos1(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos5(-33.421, 732.572, 275.103, -177.907, 2.709, -79.482);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0;
+        float acc = 100.0;
+        float ovl = 100.0;
+        float blendT = -1.0;
+        uint8_t flag = 0;
+        robot.SetSpeed(20);
+        rtn = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        rtn = robot.MoveJ(&j5, &desc_pos5, tool, user, vel, acc, ovl, &epos, 1, flag, &offset_pos);
+        robot.Sleep(1000);
+        robot.PauseMotion();
+        robot.Sleep(1000);
+        robot.ResumeMotion();
+        robot.Sleep(1000);
+        robot.StopMotion();
+        robot.Sleep(1000);
+        robot.CloseRPC();
+        return 0;
+    }
+
+Point Global Offset Start
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Point global offset start
+    * @param [in] flag 0-Offset in base/workpiece coordinate, 2-Offset in tool coordinate
+    * @param [in] offset_pos Pose offset
+    * @return Error code
+    */
+    errno_t PointsOffsetEnable(int flag, DescPose *offset_pos);
+
+Point Global Offset End
+++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Point global offset end
+    * @return Error code
+    */
+    errno_t PointsOffsetDisable();
+
+Point Offset Example
++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestOffset(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        DescPose desc_pos1(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        DescPose offset_pos1(0, 0, 50, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0;
+        float acc = 100.0;
+        float ovl = 100.0;
+        float blendT = -1.0;
+        uint8_t flag = 0;
+        robot.SetSpeed(20);
+        robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.Sleep(1000);
+        robot.PointsOffsetEnable(0, &offset_pos1);
+        robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.PointsOffsetDisable();
+        robot.CloseRPC();
+        return 0;
+    }
+
+Control Box AO Flying Start
+++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Set control box AO when the robot moves Start
-    * @param [in] AONum Control box AO num
-    * @param [in] maxTCPSpeed the maximum TCP speed[1-5000mm/s]，default 1000
-    * @param [in] maxAOPercent the AO percentage corresponding to the maximum TCP speed, default 100%
-    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, integer, default is 20, range [0-100]
-    * @return error code
+    * @brief Control box AO flying start
+    * @param [in] AONum Control box AO number
+    * @param [in] maxTCPSpeed Maximum TCP speed value [1-5000mm/s], default 1000
+    * @param [in] maxAOPercent AO percentage corresponding to maximum TCP speed, default 100%
+    * @param [in] zeroZoneCmp Dead zone compensation value AO percentage, integer, default 20%, range [0-100]
+    * @return Error code
     */
     errno_t MoveAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
 
-Set control box AO when the robot moves stop
-++++++++++++++++++++++++++++++++++++++++++++++
+Control Box AO Flying Stop
+++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
    
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Set control box AO when the robot moves stop
-    * @return error code
+    * @brief Control box AO flying stop
+    * @return Error code
     */
     errno_t MoveAOStop();
     
-Set tool AO when the robot moves start
-++++++++++++++++++++++++++++++++++++++++++
+End AO Flying Start
+++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
    
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Set tool AO when the robot moves start
-    * @param [in] AONum tool AO num
-    * @param [in] maxTCPSpeed the maximum TCP speed[1-5000mm/s]，default 1000
-    * @param [in] maxAOPercent the AO percentage corresponding to the maximum TCP speed, default 100%
-    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, integer, default is 20, range [0-100]
-    * @return error code
+    * @brief End AO flying start
+    * @param [in] AONum End AO number
+    * @param [in] maxTCPSpeed Maximum TCP speed value [1-5000mm/s], default 1000
+    * @param [in] maxAOPercent AO percentage corresponding to maximum TCP speed, default 100%
+    * @param [in] zeroZoneCmp Dead zone compensation value AO percentage, integer, default 20%, range [0-100]
+    * @return Error code
     */
     errno_t MoveToolAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
     
-Set tool AO when the robot moves stop
-+++++++++++++++++++++++++++++++++++++++++
+End AO Flying Stop
+++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
    
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Set tool AO when the robot moves stop
-    * @return error code
+    * @brief End AO flying stop
+    * @return Error code
     */
     errno_t MoveToolAOStop();
 
-Code example
-************
+AO Flying Example
+++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    int testMoveAO(FRRobot* robot)
+    int TestMoveAO(void)
     {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        DescPose desc_pos1(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        DescPose offset_pos1(0, 0, 50, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
         int tool = 0;
         int user = 0;
-        float vel = 50.0;
-        float acc = 50.0;
-        float ovl = 50.0;
+        float vel = 20.0;
+        float acc = 20.0;
+        float ovl = 100.0;
         float blendT = -1.0;
-        float blendR = -1;
         uint8_t flag = 0;
-        int type = 1;
-
-        JointPos j1, j2, j3, j4;
-        DescPose desc_pos1, desc_pos2, desc_pos3, desc_pos4, offset_pos = {};
-        ExaxisPos  epos = {};
-
-        robot->GetActualJointPosDegree(1, &j1);
-        robot->GetActualTCPPose(1, &desc_pos1);
-
-        /*j1.jPos[0] = 50.344;
-        j1.jPos[1] = -68.336;
-        j1.jPos[2] = 94.778;
-        j1.jPos[3] = -117.014;
-        j1.jPos[4] = -92.567;
-        j1.jPos[5] = 73.231;
-        desc_pos1.tran.x = -294.878;
-        desc_pos1.tran.y = -552.449;
-        desc_pos1.tran.z = 272.138;
-        desc_pos1.rpy.rx = -177.393;
-        desc_pos1.rpy.ry = -0.216;
-        desc_pos1.rpy.rz = 67.096;*/
-
-        j2.jPos[0] = 66.022;
-        j2.jPos[1] = -74.633;
-        j2.jPos[2] = 104.187;
-        j2.jPos[3] = -121.965;
-        j2.jPos[4] = -92.643;
-        j2.jPos[5] = 73.233;
-        desc_pos2.tran.x = -114.128;
-        desc_pos2.tran.y = -564.708;
-        desc_pos2.tran.z = 271.102;
-        desc_pos2.rpy.rx = -176.799;
-        desc_pos2.rpy.ry = 1.479;
-        desc_pos2.rpy.rz = 82.756;
-
-        j3.jPos[0] = 79.546;
-        j3.jPos[1] = -83.13;
-        j3.jPos[2] = 113.465;
-        j3.jPos[3] = -121.974;
-        j3.jPos[4] = -92.635;
-        j3.jPos[5] = 73.234;
-        desc_pos3.tran.x = 33.176;
-        desc_pos3.tran.y = -511.069;
-        desc_pos3.tran.z = 277.399;
-        desc_pos3.rpy.rx = -177.015;
-        desc_pos3.rpy.ry = 0.784;
-        desc_pos3.rpy.rz = 96.289;
-
-        j4.jPos[0] = 94.565;
-        j4.jPos[1] = -73.426;
-        j4.jPos[2] = 103.309;
-        j4.jPos[3] = -123.204;
-        j4.jPos[4] = -92.3;
-        j4.jPos[5] = 73.235;
-        desc_pos4.tran.x = 171.039;
-        desc_pos4.tran.y = -559.579;
-        desc_pos4.tran.z = 268.912;
-        desc_pos4.rpy.rx = -176.829;
-        desc_pos4.rpy.ry = 2.545;
-        desc_pos4.rpy.rz = 111.329;
-        
-        int err1 = 0;
-        err1 = robot->MoveAOStart(0, 100, 80, 1);
-        cout << "err num is " << err1 << endl;
-        //robot->MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
-        //robot->MoveL(&j1, &desc_pos1, tool, user, vel, acc, ovl, blendR, &epos, 0, flag, &offset_pos);
-        //robot->MoveC(&j1, &desc_pos1, 0, 0, 100, 100, &epos, 0, &offset_pos, &j2, &desc_pos2, 0, 0, 100, 100, &epos, 0, &offset_pos, 100, 0);
-        //robot->Circle(&j1, &desc_pos1, 0, 0, 100, 100, &epos, &j2, &desc_pos2, 0, 0, 100, 100, &epos, 100, 0, &offset_pos);
-        //robot->SplineStart();
-        //robot->SplinePTP(&j1, &desc_pos1, 0, 0, 100, 100, 100);
-        //robot->SplinePTP(&j2, &desc_pos2, 0, 0, 100, 100, 100);
-        //robot->SplinePTP(&j3, &desc_pos3, 0, 0, 100, 100, 100);
-        //robot->SplinePTP(&j4, &desc_pos4, 0, 0, 100, 100, 100);
-        //robot->SplineEnd();
-
-        //robot->NewSplineStart(0, 5000);
-        //robot->NewSplinePoint(&j1, &desc_pos1, 0, 0, 100, 100, 100, 5, 0);
-        //robot->NewSplinePoint(&j2, &desc_pos2, 0, 0, 100, 100, 100, 5, 0);
-        //robot->NewSplinePoint(&j3, &desc_pos3, 0, 0, 100, 100, 100, 5, 0);
-        //robot->NewSplinePoint(&j4, &desc_pos4, 0, 0, 100, 100, 100, 5, 1);
-        //robot->NewSplineEnd();
-        int count = 1000;
-        while (count > 0)
-        {
-            robot->ServoJ(&j1, 0, 0, 0.008f, 0, 0);
-            j1.jPos[0] += 0.02;//0 Increased joint position
-            count -= 1;
-        }
-        robot->MoveAOStop();
-        
+        robot.SetSpeed(20);
+        robot.MoveAOStart(0, 100, 100, 20);
+        robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.MoveAOStop();
+        robot.Sleep(1000);
+        robot.MoveToolAOStart(0, 100, 100, 20);
+        robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        robot.MoveToolAOStop();
+        robot.CloseRPC();
         return 0;
     }
 
-Start Ptp motion FIR filtering
-+++++++++++++++++++++++++++++++++++++
+Start Ptp Motion FIR Filter
++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
     
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief Start Ptp motion FIR filtering
-	* @param [in] maxAcc Maximum acceleration(deg/s2)
-	* @return Error code
-	*/
-	errno_t PtpFIRPlanningStart(double maxAcc);
+    * @brief Start Ptp motion FIR filter
+    * @param [in] maxAcc Maximum acceleration limit (deg/s2)
+    * @param [in] maxJek Unified joint jerk limit (deg/s3), default 1000
+    * @return Error code
+    */
+    errno_t PtpFIRPlanningStart(double maxAcc, double maxJek = 1000);
 
-Stop Ptp motion FIR filtering
-++++++++++++++++++++++++++++++++++
+Close Ptp Motion FIR Filter
++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief Stop Ptp motion FIR filtering
-	* @return Error code
-	*/
-	errno_t PtpFIRPlanningEnd();
+    * @brief Close Ptp motion FIR filter
+    * @return Error code
+    */
+    errno_t PtpFIRPlanningEnd();
 
-Start LIN, ARC motion FIR filtering
-+++++++++++++++++++++++++++++++++++++++
+Start LIN, ARC Motion FIR Filter
++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief Start LIN, ARC motion FIR filtering
-	* @param [in] maxAccLin Extreme linear acceleration(mm/s2)
-	* @param [in] maxAccDeg Extreme angular acceleration(deg/s2)
-	* @param [in] maxJerkLin Extreme linear plus acceleration(mm/s3)
-	* @param [in] maxJerkDeg Extreme angular plus acceleration(deg/s3)
-	* @return Error code
-	*/
-	errno_t LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
+    * @brief Start LIN, ARC motion FIR filter
+    * @param [in] maxAccLin Linear acceleration limit (mm/s2)
+    * @param [in] maxAccDeg Angular acceleration limit (deg/s2)
+    * @param [in] maxJerkLin Linear jerk limit (mm/s3)
+    * @param [in] maxJerkDeg Angular jerk limit (deg/s3)
+    * @return Error code
+    */
+    errno_t LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
 
-Stop LIN, ARC motion FIR filtering
-+++++++++++++++++++++++++++++++++++++++
+Close LIN, ARC Motion FIR Filter
++++++++++++++++++++++++++++++++++++
 .. versionadded:: V3.7.7
 
 .. code-block:: c++
     :linenos:
 
     /**
-	* @brief Stop LIN, ARC motion FIR filtering
-	* @return Error code
-	*/
-	errno_t LinArcFIRPlanningEnd();
+    * @brief Close LIN, ARC motion FIR filter
+    * @return Error code
+    */
+    errno_t LinArcFIRPlanningEnd();
 
-Acceleration Smoothing Enable
+FIR Filter Example
++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    int TestFIR(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos startjointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos midjointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos endjointPos(-29.777, -84.536, 109.275, -114.075, -86.655, 74.257);
+        DescPose startdescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose middescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose enddescPose(-487.434, 154.362, 308.576, 176.600, 0.268, -14.061);
+        ExaxisPos exaxisPos(0, 0, 0, 0);
+        DescPose offdese(0, 0, 0, 0, 0, 0);
+        rtn = robot.PtpFIRPlanningStart(1000, 1000);
+        cout << "PtpFIRPlanningStart rtn is " << rtn << endl;
+        robot.MoveJ(&startjointPos, &startdescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.MoveJ(&endjointPos, &enddescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.PtpFIRPlanningEnd();
+        cout << "PtpFIRPlanningEnd rtn is " << rtn << endl;
+        robot.LinArcFIRPlanningStart(1000, 1000, 1000, 1000);
+        cout << "LinArcFIRPlanningStart rtn is " << rtn << endl;
+        robot.MoveL(&startjointPos, &startdescPose, 0, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+        robot.MoveC(&midjointPos, &middescPose, 0, 0, 100, 100, &exaxisPos, 0, &offdese, &endjointPos, &enddescPose, 0, 0, 100, 100, &exaxisPos, 0, &offdese, 100, -1);
+        robot.LinArcFIRPlanningEnd();
+        cout << "LinArcFIRPlanningEnd rtn is " << rtn << endl;
+        robot.CloseRPC();
+        return 0;
+    }
+
+Acceleration Smoothing Start
 +++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.2.1-3.8.1
 
@@ -1226,13 +1103,13 @@ Acceleration Smoothing Enable
     :linenos:
 
     /**
-    * @brief Enable acceleration smoothing
-    * @param [in] saveFlag Power-off save flag
+    * @brief Acceleration smoothing start
+    * @param [in] saveFlag Whether to save after power off
     * @return Error code
     */
     errno_t AccSmoothStart(bool saveFlag);
 
-Acceleration Smoothing Disable
+Acceleration Smoothing End
 +++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.2.1-3.8.1
 
@@ -1240,32 +1117,166 @@ Acceleration Smoothing Disable
     :linenos:
 
     /**
-    * @brief Disable acceleration smoothing
-    * @param [in] saveFlag Power-off save flag
+    * @brief Acceleration smoothing end
+    * @param [in] saveFlag Whether to save after power off
     * @return Error code
     */
     errno_t AccSmoothEnd(bool saveFlag);
 
-Code Example
-*****************************
+Acceleration Smoothing Example
++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c++
     :linenos:
 
-    void TestAccSmoothJ(FRRobot* robot)
+    int TestAccSmooth(void)
     {
-      DescPose startdescPose(88.739, -527.617, 514.939, -179.039, 1.494, 70.209);
-      JointPos startjointPos(88.927, -85.834, 80.289, -85.561, -91.388, 108.718);
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos startjointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos endjointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        DescPose startdescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose enddescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        ExaxisPos exaxisPos(0, 0, 0, 0);
+        DescPose offdese(0, 0, 0, 0, 0, 0);
+        rtn = robot.AccSmoothStart(0);
+        cout << "AccSmoothStart rtn is " << rtn << endl;
+        robot.MoveJ(&startjointPos, &startdescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.MoveJ(&endjointPos, &enddescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        rtn = robot.AccSmoothEnd(0);
+        cout << "AccSmoothEnd rtn is " << rtn << endl;
+        robot.CloseRPC();
+        return 0;
+    }
 
-      DescPose enddescPose(-433.125, -334.428, 497.139, -179.723, -0.745, 8.437);
-      JointPos endjointPos(27.036, -83.909, 80.284, -85.579, -90.027, 108.604);
+Specified Pose Speed Start
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
 
-      ExaxisPos exaxisPos(0, 0, 0, 0);
-      DescPose offdese(0, 0, 0, 0, 0, 0);
-      int rtn = robot->AccSmoothStart(0);
-      cout << "AccSmoothStart rtn is " << rtn << endl;
-      robot->MoveJ(&startjointPos, &startdescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
-      robot->MoveJ(&endjointPos, &enddescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
-      rtn = robot->AccSmoothEnd(0);
-      cout << "AccSmoothEnd rtn is " << rtn << endl;
+    /**
+    * @brief Specified pose speed start
+    * @param [in] ratio Pose speed percentage [0-300]
+    * @return Error code
+    */
+    errno_t AngularSpeedStart(int ratio);
+
+Specified Pose Speed End
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Specified pose speed end
+    * @return Error code
+    */
+    errno_t AngularSpeedEnd();
+
+Robot Specified Pose Speed Example
+++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestAngularSpeed(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos startjointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos endjointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        DescPose startdescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose enddescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        ExaxisPos exaxisPos(0, 0, 0, 0);
+        DescPose offdese(0, 0, 0, 0, 0, 0);
+        rtn = robot.AngularSpeedStart(50);
+        cout << "AngularSpeedStart rtn is " << rtn << endl;
+        robot.MoveJ(&startjointPos, &startdescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.MoveJ(&endjointPos, &enddescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        rtn = robot.AngularSpeedEnd();
+        cout << "AngularSpeedEnd rtn is " << rtn << endl;
+        robot.CloseRPC();
+        return 0;
+    }
+
+Start Singular Pose Protection
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Start singular pose protection
+    * @param [in] protectMode Singular protection mode, 0: Joint mode; 1-Cartesian mode
+    * @param [in] minShoulderPos Shoulder singular adjustment range (mm), default 100
+    * @param [in] minElbowPos Elbow singular adjustment range (mm), default 50
+    * @param [in] minWristPos Wrist singular adjustment range (°), default 10
+    * @return Error code
+    */
+    errno_t SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);
+
+Stop Singular Pose Protection
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Stop singular pose protection
+    * @return Error code
+    */
+    errno_t SingularAvoidEnd();
+
+Robot Singular Pose Protection Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestAngularSpeed(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos startjointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos endjointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        DescPose startdescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose enddescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        ExaxisPos exaxisPos(0, 0, 0, 0);
+        DescPose offdese(0, 0, 0, 0, 0, 0);
+        rtn = robot.SingularAvoidStart(2, 10, 5, 5);
+        cout << "SingularAvoidStart rtn is " << rtn << endl;
+        robot.MoveJ(&startjointPos, &startdescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        robot.MoveJ(&endjointPos, &enddescPose, 0, 0, 100, 100, 100, &exaxisPos, -1, 0, &offdese);
+        rtn = robot.SingularAvoidEnd();
+        cout << "SingularAvoidEnd rtn is " << rtn << endl;
+        robot.CloseRPC();
+        return 0;
     }

@@ -317,4 +317,77 @@ Get robot software upgrade status
     "Return Value", "- errorcode Success-0 Failure- errcode 
     - ``state``: robot package upgrade status, 0: idle in progress or uploading upgrade package in progress, 1~100: percentage of upgrade completed, -1: upgrade software failure, -2: checksum failure, -3: version checksum failure, -4: unpacking failure, -5: user configuration upgrade failure, -6: peripheral configuration upgrade failure, -7: extended axis configuration upgrade failure, -8: robot configuration upgrade failure, -9: DH parameter configuration upgrade failure"
 
-    
+Get robot state
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotRealTimeState()``"
+    "Description", "Get robot state"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode 
+    - ``robot_state_pkg``: robot state structure" 
+
+
+Obtain the SN code of the control box
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotSN()``"
+    "Description", "Obtain the SN code of the control box"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``SNCode``: SN of the control box"
+
+Shut down the robot operating system
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ShutDownRobotOS()``"
+    "Description", "Shut down the robot operating system"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Obtain the status of the SmartTool button
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetSmarttoolBtnState()``"
+    "Description", "Obtain the status of the SmartTool button"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode 
+    - ``state``: SmartTool handle button status (bit0:0- Communication is normal; 1- Communication disconnection; bit1- Undo operation bit2- Clear the program; bit3-A key bit4-B key bit5-C key bit6-D key bit7-E key bit8-IO key bit9- Manual automatic Starting from bit10"
+
+code example
+--------------------
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+        while True:
+        error,state = robot.GetSmarttoolBtnState()
+        print(f"{state:016b}")
+        time.sleep(0.1)

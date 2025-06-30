@@ -140,3 +140,56 @@ Code example
            System.out.println("Non-dragging mode");
         }
     }
+
+Get control box SN code 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Get control box SN code  
+    * @param [out] SNCode ControlBoxSNCode
+    * @return ErrorCode 
+    */ 
+    int GetRobotSN(String[] SNCode); 
+
+Shutdown Robot Operating System
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Shutdown Robot Operating System 
+    * @return ErrorCode 
+    */ 
+    int ShutDownRobotOS();
+
+code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection success");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+        String[] SN = new String[1];
+        robot.GetRobotSN(SN);
+        System.out.println("robot SN is :"+SN[0]);
+        robot.ShutDownRobotOS();
+    }

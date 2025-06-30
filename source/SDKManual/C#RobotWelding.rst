@@ -147,25 +147,59 @@ Setting the welding voltage
 Setting the oscillation parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. versionadded:: C#SDK-v1.0.4
-
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
 .. code-block:: c#
     :linenos:
 
     /**
-    * :: @brief Setting the swing parameters
-    * @param [in] weaveNum weave parameter configuration number
-    * @param [in] weaveType weaveType 0-planar triangular wave swing; 1-vertical L-shaped triangular wave swing; 2-clockwise circular swing; 3-counterclockwise circular swing; 4-planar sine wave swing; 5-vertical L-shaped sine wave swing; 6-vertical triangular wave swing; 7-vertical sine wave swing
-    * @param [in] weaveFrequency swing frequency (Hz)
-    * @param [in] weaveIncStayTime wait mode 0-cycle without wait time; 1-cycle with wait time
-    * @param [in] weaveRange swing range (mm)
-    * @param [in] weaveLeftStayTime weaveLeftStayTime (ms)
-    * @param [in] weaveRightStayTime weaveRightStayTime (ms)
-    * @param [in] weaveCircleRadio Circle swing-back ratio (0-100%)
-    * @param [in] weaveStationary swing position wait, 0 - position continues to move during wait time; 1 - position is stationary during wait time
+    * @brief Set the swing parameters
+    * @param [in] weaveNum swing welding parameter configuration number
+    * @param [in] weaveType Swing type 0- Planar triangular wave swing; 1- Vertical L-shaped triangular wave swing 2- Clockwise circular swing; 3- Counterclockwise circular swing; 4- Planar sine wave swing 5- Vertical L-shaped sine wave swing 6- Vertical triangular wave swing 7- Vertical sine wave swing
+    * @param [in] weaveFrequency (Hz)
+    * @param [in] weaveIncStayTime Waiting mode 0- cycle does not include waiting time; 1- The cycle includes waiting time
+    * @param [in] weaveRange Swing amplitude (mm)
+    * @param [in] weaveLeftRange Vertical triangular swing left chord Length (mm)
+    * @param [in] weaveRightRange Vertical triangular swing right chord Length (mm)
+    * @param [in] additionalStayTime Vertical triangular swing Vertical triangular point stay Time (mm)
+    * @param [in] weaveLeftStayTime Swing left stay Time (ms)
+    * @param [in] weaveRightStayTime Swing right stay Time (ms)
+    * @param [in] weaveCircleRadio Circular Swing - Callback Ratio (0-100%)
+    * @param [in] weaveStationary swing position waiting, 0- the position continues to move during the waiting time; The position remains stationary during the waiting time
+    * @param [in] weaveYawAngle Swing direction azimuth Angle (rotation around the z-axis of swing), unit °
     * @return error code
     */
-    int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary).
+    int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, double weaveLeftRange, double weaveRightRange, int additionalStayTime, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary, double weaveYawAngle, double weaveRotAngle=0);
+
+Code Example
+++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    private void button7_Click(object sender, EventArgs e)
+    {
+        DescPose startdescPose = new DescPose(146.273, -208.110, 270.102, 177.523, -3.782, -158.101);
+        JointPos startjointPos = new JointPos(98.551, -128.309, 127.341, -87.490, -94.249, -13.208);
+        DescPose enddescPose = new DescPose(146.272, -476.204, 270.102, 177.523, -3.781, -158.101);
+        JointPos endjointPos = new JointPos(93.931, -89.722, 102.216, -101.300, -94.359, -17.840);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        robot.WeaveSetPara(0, 3, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0, 0, 0);
+        robot.MoveL(startjointPos, startdescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+        robot.WeaveStart(0);
+        robot.MoveL(endjointPos, enddescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+        robot.WeaveEnd(0);
+
+        robot.WeaveSetPara(0, 3, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0, 0, 30);
+        robot.MoveL(startjointPos, startdescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+        robot.WeaveStart(0);
+        robot.MoveL(endjointPos, enddescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+        robot.WeaveEnd(0);
+
+    }
 
 Instant setting of swing parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -882,15 +916,20 @@ code example
 
 Swing gradient begins
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
 .. code-block:: c#
     :linenos:
 
-    / * *
+    /**
     * @brief Swing gradient begins
-    * @param [in] weaveNum Swing number
-    * @return Error code
-    * /
-    int WeaveChangeStart(int weaveNum)
+    * @param [in] weaveChangeFlag 1- Variable swing parameter; 2- Variable swing parameters + welding speed
+    * @param [in] weaveNum swing number
+    * @param [in] velStart welding start speed, (cm/min)
+    * @param [in] velEnd welding end speed, (cm/min)
+    * @return error code
+    */
+    int WeaveChangeStart(int weaveChangeFlag, int weaveNum, double velStart, double velEnd);
 
 Swing gradient ends
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -905,34 +944,274 @@ Swing gradient ends
 
 Code example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
 .. code-block:: c#
     :linenos:
 
     private void btnweld_Click(object sender, EventArgs e)
     {
-        //摆动渐变
-        DescPose p1Desc = new DescPose(-72.912, -587.664, 31.849, 43.283, -6.731, 15.068);
-        JointPos p1Joint = new JointPos(74.620, -80.903, 94.608, -109.882, -90.436, -13.432);
+        DescPose startdescPose = new DescPose(-319.303, -240.689, 116.379, -175.879, -0.337, 148.239);
+        JointPos startjointPos = new JointPos(20.474, -103.554, 126.774, -116.682, -87.746, -37.709);
 
-        DescPose p2Desc = new DescPose(-104.915, -483.712, -25.231, 42.228, -6.572, 18.433);
-        JointPos p2Joint = new JointPos(66.431, -92.875, 116.362, -120.516, -88.627, -24.731);
+        DescPose enddescPose = new DescPose(-454.166, -327.159, 62.217, 177.199, -2.276, 154.955);
+        JointPos endjointPos = new JointPos(27.176, -74.423, 104.557, -119.315, -93.514, -37.698);
 
-        DescPose p3Desc = new DescPose(-240.651, -483.840, -7.161, 46.577, -5.286, 8.318);
-        JointPos p3Joint = new JointPos(56.457, -84.796, 104.618, -114.497, -92.422, -25.430);
+        DescPose safedescPose = new DescPose(-375.533, -543.319, 19.798, 177.486, -2.489, 175.825);
+        JointPos safejointPos = new JointPos(48.074, -59.714, 89.955, -119.777, -93.508, -37.683);
 
-        ExaxisPos exaxisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
-        DescPose offdese = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        robot.WeldingSetVoltage(1, 19, 0, 0);
-        robot.WeldingSetCurrent(1, 190, 0, 0);
-        robot.MoveJ(p1Joint, p1Desc, 1, 1, 100, 100, 100, exaxisPos, -1, 0, offdese);
-        robot.MoveL(p2Joint, p2Desc, 1, 1, 100, 100, 50, -1, exaxisPos, 0, 0, offdese);
-        robot.ARCStart(1, 0, 10000);
-        robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0);
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
+        robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
+
+        robot.WeldingSetVoltage(0, 25, 1, 0);//
+        robot.WeldingSetCurrent(0, 260, 0, 0);// 
+
+        robot.MoveJ(safejointPos, safedescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+
+        int rtn = robot.WeldingSetCurrentGradualChangeStart(0, 260, 220, 0, 0);
+        Console.WriteLine($"WeldingSetCurrentGradualChangeStart rtn is {rtn}");
+        rtn = robot.WeldingSetVoltageGradualChangeStart(0, 25, 22, 1, 0);
+        Console.WriteLine($"WeldingSetVoltageGradualChangeStart rtn is {rtn}");
+
+        rtn = robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        Console.WriteLine($"ArcWeldTraceControl rtn is {rtn}");
+
+        robot.MoveJ(startjointPos, startdescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+
+        robot.ARCStart(0, 0, 10000);
         robot.WeaveStart(0);
-        robot.WeaveChangeStart(1);
-        robot.MoveL(p3Joint, p3Desc, 1, 1, 100, 100, 1, -1, exaxisPos, 0, 0, offdese);
+        rtn = robot.WeaveChangeStart(2, 1, 24, 36);
+        Console.WriteLine($"WeaveChangeStart rtn is {rtn}");
+        //robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
+        robot.ARCEnd(0, 0, 10000);
         robot.WeaveChangeEnd();
         robot.WeaveEnd(0);
-        robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0);
-        robot.ARCEnd(1, 0, 10000);
+        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        robot.WeldingSetCurrentGradualChangeEnd();
+        robot.WeldingSetVoltageGradualChangeEnd();
+    }
+
+Arc Tracking Welding machine Current Feedback AI Channel selection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Arc Tracking Welding machine Current Feedback AI Channel selection
+    * @param [in] channel; 0- Expand AI0; 1- Expand AI1; 2- Expand AI2; 3- Expand AI3; 4- Control Box AI0 5- Control Box AI1
+    * @return error code
+    */
+    int ArcWeldTraceAIChannelCurrent(int channel);
+
+Arc Tracking Welding Machine Voltage Feedback AI Channel Selection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Arc Tracking Welding Machine Voltage Feedback AI Channel Selection
+    * @param [in] channel; 0- Expand AI0; 1- Expand AI1; 2- Expand AI2; 3- Expand AI3; 4- Control Box AI0 5- Control Box AI1
+    * @return error code
+    */
+    int ArcWeldTraceAIChannelVoltage(int channel);
+
+Current feedback Conversion parameters of Arc tracking Welding machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Current feedback Conversion parameters of Arc tracking Welding machine
+    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V]
+    * @param [in] AIHigh AI channel upper limit, default value 10V, range [0-10V]
+    * @param [in] The lower limit of the currentLow AI channel corresponds to the current value of the welding machine. The default value is 0V, and the range is [0-200V]
+    * @param [in] currentHigh AI channel upper limit corresponding welder current value, default value 100V, range [0-200V]
+    * @return error code
+    */
+    int ArcWeldTraceCurrentPara(float AILow, float AIHigh, float currentLow, float currentHigh);
+
+Voltage feedback Conversion Parameters of Arc Tracking Welding machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Voltage feedback Conversion Parameters of Arc Tracking Welding machine
+    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V]
+    * @param [in] AIHigh AI channel upper limit, default value 10V, range [0-10V]
+    * @param [in] The lower limit of the voltageLow AI channel corresponds to the welding machine voltage value. The default value is 0V, and the range is [0-200V]
+    * @param [in] The upper limit of the voltageHigh AI channel corresponds to the voltage value of the welding machine. The default value is 100V, and the range is [0-200V]
+    * @return error code
+    */
+    int ArcWeldTraceVoltagePara(float AILow, float AIHigh, float voltageLow, float voltageHigh);
+
+Code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    private void btnweld_Click(object sender, EventArgs e)
+    {
+        DescPose safetydescPose = new DescPose(-504.043, 275.181, 40.908, -28.002, -42.025, -14.044);
+        JointPos safetyjointPos = new JointPos(-39.078, -76.732, 87.227, -99.47, -94.301, 18.714);
+        DescPose startdescPose = new DescPose(-473.86, 257.879, -20.849, -37.317, -42.021, 2.543);
+        JointPos startjointPos = new JointPos(-43.487, -76.526, 95.568, -104.445, -89.356, 3.72);
+
+        DescPose enddescPose = new DescPose(-499.844, 141.225, 7.72, -34.856, -40.17, 13.13);
+        JointPos endjointPos = new JointPos(-31.305, -82.998, 99.401, -104.426, -89.35, 3.696);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+
+        robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
+        robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
+        robot.WeldingSetVoltage(0, 25, 1, 0);//
+        robot.WeldingSetCurrent(0, 260, 0, 0);//
+
+        int rtn = robot.ArcWeldTraceAIChannelCurrent(4);
+        Console.WriteLine("ArcWeldTraceAIChannelCurrent rtn is " + rtn);
+        rtn = robot.ArcWeldTraceAIChannelVoltage(5);
+        Console.WriteLine("ArcWeldTraceAIChannelVoltage rtn is " + rtn);
+        rtn = robot.ArcWeldTraceCurrentPara((float)0, (float)5, (float)0, (float)500);
+        Console.WriteLine("ArcWeldTraceCurrentPara rtn is " + rtn);
+        rtn = robot.ArcWeldTraceVoltagePara((float)1.018, (float)10, (float)0, (float)50);
+        Console.WriteLine("ArcWeldTraceVoltagePara rtn is " + rtn);
+
+        robot.MoveJ(startjointPos, startdescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        robot.ARCStart(0, 0, 10000);
+        robot.WeaveStart(0);
+        // robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
+        robot.ARCEnd(0, 0, 10000);
+        robot.WeaveEnd(0);
+        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+    }
+
+Set the welding voltage to start gradually
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the welding voltage to start gradually
+    * @param [in] IOType control type; 0- Control Box IO 1- Digital Communication Protocol (UDP) 2- Digital Communication Protocol (ModbusTCP)
+    * @param [in] voltageStart Initial Welding Voltage (V)
+    * @param [in] voltageEnd Stop welding Voltage (V)
+    * @param [in] AOIndex control box AO port number (0-1)
+    * @param [in] Is blend smooth? 0- Not smooth; 1- Smooth
+    * @return error code
+    */
+    int WeldingSetVoltageGradualChangeStart(int IOType, double voltageStart, double voltageEnd, int AOIndex, int blend);
+
+Set the welding voltage gradient to end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief: Set the welding voltage gradient to end
+    * @return error code
+    */
+    int WeldingSetVoltageGradualChangeEnd();
+
+Set the welding current to start gradually
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the welding current to start gradually
+    * @param [in] IOType control type; 0- Control Box IO 1- Digital Communication Protocol (UDP) 2- Digital Communication Protocol (ModbusTCP)
+    * @param [in] voltageStart Initial welding Current (A)
+    * @param [in] voltageEnd Stop welding current (A)
+    * @param [in] AOIndex control box AO port number (0-1)
+    * @param [in] Is blend smooth? 0- Not smooth; 1- Smooth
+    * @return error code
+    */
+    int WeldingSetCurrentGradualChangeStart(int IOType, double currentStart, double currentEnd, int AOIndex, int blend);
+
+Set the welding current gradient to end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the welding current gradient to end
+    * @return error code
+    */
+    int WeldingSetCurrentGradualChangeEnd();
+
+Code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    private void btnweld_Click(object sender, EventArgs e)
+    {
+        DescPose startdescPose = new DescPose(-319.303, -240.689, 116.379, -175.879, -0.337, 148.239);
+        JointPos startjointPos = new JointPos(20.474, -103.554, 126.774, -116.682, -87.746, -37.709);
+
+        DescPose enddescPose = new DescPose(-454.166, -327.159, 62.217, 177.199, -2.276, 154.955);
+        JointPos endjointPos = new JointPos(27.176, -74.423, 104.557, -119.315, -93.514, -37.698);
+
+        DescPose safedescPose = new DescPose(-375.533, -543.319, 19.798, 177.486, -2.489, 175.825);
+        JointPos safejointPos = new JointPos(48.074, -59.714, 89.955, -119.777, -93.508, -37.683);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
+        robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
+
+        robot.WeldingSetVoltage(0, 25, 1, 0);
+        robot.WeldingSetCurrent(0, 260, 0, 0);
+
+        robot.MoveJ(safejointPos, safedescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+
+        int rtn = robot.WeldingSetCurrentGradualChangeStart(0, 260, 220, 0, 0);
+        Console.WriteLine($"WeldingSetCurrentGradualChangeStart rtn is {rtn}");
+        rtn = robot.WeldingSetVoltageGradualChangeStart(0, 25, 22, 1, 0);
+        Console.WriteLine($"WeldingSetVoltageGradualChangeStart rtn is {rtn}");
+
+        rtn = robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        Console.WriteLine($"ArcWeldTraceControl rtn is {rtn}");
+
+        robot.MoveJ(startjointPos, startdescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+
+        robot.ARCStart(0, 0, 10000);
+        robot.WeaveStart(0);
+        rtn = robot.WeaveChangeStart(2, 1, 24, 36);
+        Console.WriteLine($"WeaveChangeStart rtn is {rtn}");
+        //robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
+        robot.ARCEnd(0, 0, 10000);
+        robot.WeaveChangeEnd();
+        robot.WeaveEnd(0);
+        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+        robot.WeldingSetCurrentGradualChangeEnd();
+        robot.WeldingSetVoltageGradualChangeEnd();
     }
