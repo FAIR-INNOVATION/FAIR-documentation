@@ -368,20 +368,7 @@ Points Table Update Lua Program
     * @param [out] errorStr point table update lua error message  
     * @return error code 
     */
-    int PointTableUpdateLua(string pointTableName, string luaFileName, ref string errorStr);
-
-Switch the point table and apply it
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief Switch the point table and apply it
-    * @param [in] pointTableName The name of the point table to be switched is "pointTable1.db"
-    * @param [out] errorStr switches the error message of the point table
-    * @return error code
-    */
-    int PointTableSwitch(string pointTableName, ref string errorStr);
+    int PointTableUpdateLua(string pointTableName, string luaFileName, ref string errorStr);;
 
 Code Example
 ++++++++++++++++++++++++++++++++++++
@@ -657,17 +644,17 @@ Code Example
         Console.WriteLine($"DataPackageDownload return value: {rtn}");
     }
 
-Obtain the SN code of the control box
-+++++++++++++++++++++++++++++++++++++++++
+Get Controller SN Code
++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    / * *
-    * @brief Obtain the SN code of the control box
-    * @param [out] SNCode SN code of the control box
+    /**
+    * @brief Get controller serial number
+    * @param [out] SNCode Controller serial number
     * @return Error code
-    * /
-    int GetRobotSN(string SNCode);
+    */
+    int GetRobotSN(out string SNCode);
 
 Code Example
 +++++++++++++++++++++++++++++
@@ -677,17 +664,17 @@ Code Example
     private void button6_Click(object sender, EventArgs e)
     {   
         string SN = "";
-        int rtn = robot.GetRobotSN(ref SN); 
-        Console.WriteLine($"robot SN is {SN}");
+        int rtn = robot.GetRobotSN(out SN); 
+        Console.WriteLine($"Controller SN is {SN}");
     }
 
-Shut down the robot operating system
-+++++++++++++++++++++++++++++++++++++++++
+Shutdown Robot OS
++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    / * *
-    * @brief shuts down the robot operating system
+    /**
+    * @brief Shutdown robot operating system
     * @return Error code
     */
     int ShutDownRobotOS();
@@ -702,122 +689,3 @@ Code Example
         int rtn = robot.ShutDownRobotOS();
         Console.WriteLine($"ShutDownRobotOS return value: {rtn}");
     }
-
-Issue the SCP command
-+++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
-    
-.. code-block:: c#
-    :linenos:
-
-
-    / * *
-    * @brief Issue the SCP command
-    * @param [in] mode 0- Upload (Host Computer -> Controller), 1- Download (Controller -> Host Computer)
-    * @param [in] sshname Host computer username
-    * @param [in] sship host computer ip address
-    * @param [in] usr_file_url upper computer file path
-    * @param [in] robot_file_url robot controller file path
-    * @return error code
-    * /
-    int SetSSHScpCmd(int mode, string sshname, string sship, string usr_file_url, string robot_file_url);
-
-Code example
-+++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
-    
-.. code-block:: c#
-    :linenos:
-
-
-    private void button46_Click(object sender, EventArgs e)
-    {
-        string file_path = "/fruser/airlab.lua";
-        string md5 = "";
-        byte emerg_state = 0;
-        byte si0_state = 0;
-        byte si1_state = 0;
-        int sdk_com_state = 0;
-
-        string ssh_keygen = "";
-        int retval = robot.GetSSHKeygen(ref ssh_keygen);
-        Console.WriteLine("GetSSHKeygen retval is: {0}", retval);
-        Console.WriteLine("ssh key is: {0}", ssh_keygen);
-
-        string ssh_name = "fr";
-        string ssh_ip = "192.168.58.45";
-        string ssh_route = "/home/fr";
-        string ssh_robot_url = "/root/robot/dhpara.config";
-        retval = robot.SetSSHScpCmd(1, ssh_name, ssh_ip, ssh_route, ssh_robot_url);
-        Console.WriteLine("SetSSHScpCmd retval is: {0}", retval);
-        Console.WriteLine("robot url is: {0}", ssh_robot_url);
-
-        robot.ComputeFileMD5(file_path, ref md5);
-        Console.WriteLine("md5 is: {0}", md5);
-    }
-
-Set the temperature and fan speed monitoring parameters of the wide-voltage control box
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
-    
-.. code-block:: c#
-    :linenos:
-
-    / * *
-    * @brief Set the temperature and fan speed monitoring parameters of the wide-voltage control box
-    * @param [in] enable 0- Do not enable monitoring; Enable monitoring
-    * @param [in] period Monitoring period (s), ranging from 1 to 100
-    * @return error code
-    * /
-    int SetWideBoxTempFanMonitorParam(int enable, int period);
-
-Obtain the temperature and fan speed monitoring parameters of the wide-voltage control box
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
-    
-.. code-block:: c#
-    :linenos:
-
-    / * *
-    * @brief Obtain the temperature and fan speed monitoring parameters of the wide-voltage control box
-    * @param [out] enable 0- Do not enable monitoring; Enable monitoring
-    * @param [out] period Monitoring period (s), ranging from 1 to 100
-    * @return error code
-    */
-    int GetWideBoxTempFanMonitorParam(ref int enable, ref int period);
-
-Code example
-+++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
-    
-.. code-block:: c#
-    :linenos:
-
-    private void button46_Click(object sender, EventArgs e)
-    {
-        var pkg = new ROBOT_STATE_PKG(); 
-        robot.SetWideBoxTempFanMonitorParam(1, 2);    
-        int enable = 0;
-        int period = 0;
-        robot.GetWideBoxTempFanMonitorParam(ref enable, ref period);
-        Console.WriteLine($"GetWideBoxTempFanMonitorParam enable is {enable}   period is {period}");  
-        for (int i = 0; i < 100; i++)
-        {
-            robot.GetRobotRealTimeState(ref pkg);
-            Console.WriteLine($"robot ctrl box temp is {pkg.wideVoltageCtrlBoxTemp}, fan current is {pkg.wideVoltageCtrlBoxFanVel}");
-            Thread.Sleep(100);
-        }       
-        int rtn = robot.SetWideBoxTempFanMonitorParam(0, 2);
-        Console.WriteLine($"SetWideBoxTempFanMonitorParam rtn is {rtn}");       
-        enable = 0;
-        period = 0;
-        robot.GetWideBoxTempFanMonitorParam(ref enable, ref period);
-        Console.WriteLine($"GetWideBoxTempFanMonitorParam enable is {enable}   period is {period}");  
-        for (int i = 0; i < 100; i++)
-        {
-            robot.GetRobotRealTimeState(ref pkg);
-            Console.WriteLine($" robot ctrl box temp is {pkg.wideVoltageCtrlBoxTemp}, fan current is {pkg.wideVoltageCtrlBoxFanVel}");
-            Thread.Sleep(100);
-        }
-    }
-
