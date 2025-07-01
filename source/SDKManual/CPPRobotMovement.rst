@@ -374,9 +374,11 @@ Joint Space Servo Mode Motion
     * @param [in] cmdT Command cycle in seconds, recommended range [0.001~0.0016]
     * @param [in] filterT Filter time in seconds (not yet available, default 0)
     * @param [in] gain Target position proportional amplifier (not yet available, default 0)
-    * @return Error code
+    * @param  [in] gain  The target position of the proportional amplifier, temporarily closed, the default is 0
+    * @param  [in] id servoJInstruction ID, which defaults to 0
+    * @return  error code
     */
-    errno_t ServoJ(JointPos *joint_pos, float acc, float vel, float cmdT, float filterT, float gain);
+    errno_t ServoJ(JointPos *joint_pos, ExaxisPos* axisPos, float acc, float vel, float cmdT, float filterT, float gain, int id = 0);
 
 Joint Space Servo Mode Motion Example
 ++++++++++++++++++++++++++++++++++++++++++

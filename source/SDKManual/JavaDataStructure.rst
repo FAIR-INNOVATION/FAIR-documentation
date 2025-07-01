@@ -419,6 +419,9 @@ Robot Status Feedback Structure Type
       public double[]  jt_tgt_tor=new double[6];    // Joint command torque
       int smartToolState;         //SmartTool Joystick Button Status
 
+      public float wideVoltageCtrlBoxTemp;        //Wide voltage control box temperature
+      public int wideVoltageCtrlBoxFanVel;   //Wide voltage control box fan speed
+
       public short check_sum = 0; /* sum check */
 
       public ROBOT_STATE_PKG()

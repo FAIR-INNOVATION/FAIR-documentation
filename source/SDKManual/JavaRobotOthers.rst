@@ -352,3 +352,89 @@ Code Example
         rtn = robot.RbLogDownload("D://zDOWN/");
         System.out.println("RbLogDownload rtn is: "+rtn);
     }
+
+Issue SCP commands
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.6-3.8.3
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Issue SCP commands
+    * @param [in] mode 0-upload (host computer -> controller), 1-download (controller -> host computer)
+    * @param [in] sshname Host computer username
+    * @param [in] sship Host computer IP address
+    * @param [in] usr_file_url Host computer file path
+    * @param [in] robot_file_url Robot controller file path
+    * @return Error code
+    */
+    int SetSSHScpCmd(int mode, String sshname, String sship, String usr_file_url, String robot_file_url)
+
+code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void main(String[] args)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        int rtn = robot.RPC("192.168.58.2");
+        if(rtn == 0)
+        {
+            System.out.println("rpc connection success");
+        }
+        else
+        {
+            System.out.println("rpc connection fail");
+            return ;
+        }
+
+        String file_path= "/fruser/airlab.lua";
+        String[] md5 =new String[]{""};
+
+        String[] ssh_keygen=new String[]{""};
+        int retval = robot.GetSSHKeygen(ssh_keygen);
+        System.out.println(ssh_keygen[0]);
+
+        String ssh_name = "fr";
+        String ssh_ip = "192.168.58.45";
+        String ssh_route = "/home/fr";
+        String ssh_robot_url = "/root/robot/dhpara.config";
+        retval = robot.SetSSHScpCmd(1, ssh_name, ssh_ip, ssh_route, ssh_robot_url);
+        System.out.println("SetSSHScpCmd retval is:"+ retval);
+        System.out.println("robot url is:"+ ssh_robot_url);
+
+        robot.ComputeFileMD5(file_path, md5);
+        System.out.println("md5 is:+"+ md5[0]);
+    }
+
+Set wide voltage control box temperature and fan speed monitoring parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.6-3.8.3
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Set wide voltage control box temperature and fan speed monitoring parameters
+    * @param [in] enable 0-Disable monitoring; 1-Enable monitoring
+    * @param [in] period Monitoring period (s), range 1-100
+    * @return Error code
+    */
+    int SetWideBoxTempFanMonitorParam(int enable, int period);
+
+Retrieve wide voltage control box temperature and fan speed monitoring parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.6-3.8.3
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Issue SCP commands
+    * @return List[0] - Error code, List[1] - Enable 0 - Disable monitoring; 1 - Enable monitoring, List[2] - Period Monitoring period (s), range 1-100
+    */
+    List<Number> GetWideBoxTempFanMonitorParam()

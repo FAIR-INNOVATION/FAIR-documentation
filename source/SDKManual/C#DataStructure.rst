@@ -146,9 +146,9 @@ Welding interrupt status
     }
 
 Robot State Feedback Structures Types
-+++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: c# SDK-v1.1.0-3.7.8
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
+    
 .. code-block:: c#
     :linenos:
 
@@ -244,10 +244,11 @@ Robot State Feedback Structures Types
     public float gripperRotNum;           // The current number of turns of the rotating clamp
     public byte gripperRotSpeed;       //Percentage of the current rotation speed of the rotary clamp
     public byte gripperRotTorque;	   //Percentage of the current rotating torque of the rotating clamp     
-    public WELDING_BREAKOFF_STATE weldingBreakOffState;//Welding interrupt status  
-
+    public WELDING_BREAKOFF_STATE weldingBreakOffState;//Welding interrupt status   
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
     public double[] jt_tgt_tor;//Joint command torque
-    public int smartToolState; //The status of the SmartTool handle buttons 
+    public int smartToolState; //The status of the SmartTool handle buttons  
+    public float wideVoltageCtrlBoxTemp;         // Wide voltage control box temperature
+    public UInt16 wideVoltageCtrlBoxFanVel;    // Fan current (mA) of wide-voltage control box
     public UInt16 check_sum; /* sum check */                  
     }

@@ -728,25 +728,7 @@ Surface Localization Code Example
       DescPose xcenter(0, 0, 0, 0, 0, 0);
       DescPose ycenter(0, 0, 0, 0, 0, 0);
       ForceTorque ft;
-        memset(&ft, 0, sizeof(ForceTorque));
-        memset(&ft, 0, sizeof(ForceTorque));
-
-        desc_pos.tran.x = -230.959;
-        desc_pos.tran.y = -364.017;
-        desc_pos.tran.z = 217.5;
-        desc_pos.rpy.rx = -179.004;
-        desc_pos.rpy.ry = 0.002;
-        desc_pos.rpy.rz = 89.999;
-
       memset(&ft, 0, sizeof(ForceTorque));
-
-        desc_pos.tran.x = -230.959;
-        desc_pos.tran.y = -364.017;
-        desc_pos.tran.z = 217.5;
-        desc_pos.rpy.rx = -179.004;
-        desc_pos.rpy.ry = 0.002;
-        desc_pos.rpy.rz = 89.999;
-
       ft.fx = -2.0;
       robot.MoveCart(&desc_pos, 9, 0, 100.0, 100.0, 100.0, -1.0, -1);
       robot.FT_CalCenterStart();
@@ -981,15 +963,16 @@ Force Sensor Assisted Drag
 	  * @param  [in] asaptiveFlag  Adaptive activation flag, 0-Off; 1-On
 	  * @param  [in] interfereDragFlag  Interference area drag flag, 0-Off; 1-On
 	  * @param  [in] ingularityConstraintsFlag  Singularity strategy, 0-Avoid; 1-Cross
+	  * @param  [in] forceCollisionFlag Robot collision detection sign for auxiliary dragging; 0-off; 1-on
 	  * @param  [in] M  Inertia coefficient
 	  * @param  [in] B  Damping coefficient
 	  * @param  [in] K  Stiffness coefficient
 	  * @param  [in] F  Drag six-dimensional force threshold
 	  * @param  [in] Fmax  Maximum drag force limit
 	  * @param  [in] Vmax  Maximum joint velocity limit
-	  * @return  Error code
-	  */
-	 errno_t EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag, std::vector<double> M, std::vector<double> B, std::vector<double> K, std::vector<double> F, double Fmax, double Vmax);
+      * @return  error code
+      */
+      errno_t EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag, int forceCollisionFlag, std::vector<double> M, std::vector<double> B, std::vector<double> K, std::vector<double> F, double Fmax, double Vmax);
 
 Get Force Sensor Drag Switch Status
 +++++++++++++++++++++++++++++++++++++++
@@ -1042,13 +1025,13 @@ Force Sensor Assisted Drag Code Example
       vector <double> B = { 150.0, 150.0, 150.0, 5.0, 5.0, 1.0 };
       vector <double> K = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
       vector <double> F = { 10.0, 10.0, 10.0, 1.0, 1.0, 1.0 };
-      robot.EndForceDragControl(1, 0, 0, 0, M, B, K, F, 50, 100);
+      robot.EndForceDragControl(1, 0, 0, 0, 1, M, B, K, F, 50, 100);
       robot.Sleep(5000);
       int dragState = 0;
       int sixDimensionalDragState = 0;
       robot.GetForceAndTorqueDragState(dragState, sixDimensionalDragState);
       printf("the drag state is %d %d \n", dragState, sixDimensionalDragState);
-      robot.EndForceDragControl(0, 0, 0, 0, M, B, K, F, 50, 100);
+      robot.EndForceDragControl(0, 0, 0, 0, 1, M, B, K, F, 50, 100);
       robot.CloseRPC();
       return 0;
     }
@@ -1105,13 +1088,7 @@ Six-Dimensional Force and Joint Impedance Hybrid Drag Code Example
       robot.CloseRPC();
       return 0;
     }
-    
-    
-.. code-block:: c++
-    :linenos:
 
-.. code-block:: c++
-    :linenos:
 
 Set Wire Search Extended IO Port
 ++++++++++++++++++++++++++++++++++++++++++

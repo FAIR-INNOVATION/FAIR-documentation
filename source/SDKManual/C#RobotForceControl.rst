@@ -569,8 +569,8 @@ Get the load identification result
 
 Force Sensor Assisted Drag
 +++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C# SDK-v1.1.0-3.7.8
-
+.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
+    
 .. code-block:: c#
     :linenos:
 
@@ -580,6 +580,7 @@ Force Sensor Assisted Drag
     * @param [in] asaptiveFlag Adaptive on flag, 0-off; 1-on
     * @param [in] interfereDragFlag Interference area drag flag, 0-off; 1-on
     * @param [in] ingularityConstraintsFlag singularity strategy, 0-avoidance; 1-crossing
+    * @param [in] forceCollisionFlag is the robot collision detection flag when assisting in dragging. 0- Close 1- Open
     * @param [in] M inertia factor
     * @param [in] B damping factor
     * @param [in] K Stiffness factor
@@ -588,7 +589,40 @@ Force Sensor Assisted Drag
     * @param [in] Vmax Maximum joint speed limit °/s
     * @return Error code
     */
-    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag,double[] M, double[] B, double[] K, double[] F, double Fmax, double Vmax);
+    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag,int forceCollisionFlag,double[] M, double[] B, double[] K, double[] F, double Fmax, double Vmax);
+
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
+    
+.. code-block:: c#
+    :linenos:
+
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+
+        double[] M = { 15.0, 15.0, 15.0, 0.5, 0.5, 0.1 };
+        double[] B = { 150.0, 150.0, 150.0, 5.0, 5.0, 1.0 };
+        double[] K = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        double[] F = { 10.0, 10.0, 10.0, 1.0, 1.0, 1.0 };
+        int rtn = robot.EndForceDragControl(1, 0, 0, 0, 1, M, B, K, F, 50, 100);
+        Console.WriteLine("force drag control start rtn is{rtn}");
+        Thread.Sleep(5000);
+
+        rtn = robot.EndForceDragControl(0, 0, 0, 0, 1, M, B, K, F, 50, 100);
+        Console.WriteLine($"force drag control end rtn is{rtn}");
+
+        rtn = robot.ResetAllError();
+        Console.WriteLine($"ResetAllError rtn is{rtn}");
+
+        robot.EndForceDragControl(1, 0, 0, 0, 1, M, B, K, F, 50, 100);
+        Console.WriteLine($"force drag control start again rtn is{rtn}");
+        Thread.Sleep(5000);
+
+        rtn = robot.EndForceDragControl(0, 0, 0, 0, 1, M, B, K, F, 50, 100);
+        Console.WriteLine($"force drag control end again rtn is {rtn}");
+    }
 
 Get force sensor drag switch status
 +++++++++++++++++++++++++++++++++++++++++++++

@@ -323,6 +323,35 @@ For drag teaching, the function of locking degrees of freedom is added. When the
    :align: center
 
 .. centered:: Figure 14.10‑1 Drag teach lock configuration
+   
+Force Sensor-Assisted Dragging with Normal Collision Protection Triggering
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+***********
+
+Currently, FR robots cannot trigger collision protection during force sensor-assisted dragging. This enhancement enables collision protection during force sensor-assisted dragging to improve robot safety and reduce operational risks.
+
+Collision Protection
+*********************************
+
+**Step1**: Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock" to enter the force sensor-assisted lock configuration interface. Set both "Status Switch" and "Collision Detection" to ON, as shown below.
+
+.. image:: application/080.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.10‑2 Configuring Force Sensor-Assisted Lock
+
+**Step2**: Drag the robot. During robot movement, apply external force to the joints to trigger collision protection. The web interface will display the error "Force Sensor-Assisted Dragging Collision Fault", and provides quick recovery/disable options for force sensor-assisted dragging via the web interface, as shown. Click "Recover" to clear the error and resume force sensor-assisted dragging; click "Disable" to clear the error and keep force sensor-assisted dragging disabled.
+
+.. image:: application/081.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 14.10‑2 Collision Triggering During Force Sensor-Assisted Dragging
+
+.. note:: During force sensor-assisted dragging, the robot itself is in a stopped state. During dragging, there is a difference between joint torque commands and feedback. It is recommended to set the collision level to level 7 or higher. Setting the collision level too low may cause false collision errors during dragging.
 
 Smart Tool
 ------------------------

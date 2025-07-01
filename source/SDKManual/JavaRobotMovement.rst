@@ -96,6 +96,8 @@ Joint space motion
 
 Cartesian linear motion in space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.5-3.8.2
+
 .. code-block:: Java
     :linenos:
 
@@ -109,6 +111,7 @@ Cartesian linear motion in space
     * @param [in] acc Acceleration percentage, range [0~100], not open yet.
     * @param [in] ovl velocity scaling factor, range [0 to 100].
     * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm
+    * @param [in] blendMode Transition mode; 0-inner transition; 1-corner transition
     * @param [in] epos Extended axis position in mm
     * @param [in] search 0-no wire seek, 1-wire seek
     * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
@@ -117,7 +120,7 @@ Cartesian linear motion in space
     * @param [in] speedPercent Percentage of allowable speed reduction threshold [0-100], default 10%
     * @return error code
     */  
-    int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int overSpeedStrategy, int speedPercent).
+    int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode,ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int overSpeedStrategy, int speedPercent);
 
 Circular motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -152,6 +155,8 @@ Circular motion in Cartesian space
 
 Whole circle motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.6-3.8.3
+
 .. code-block:: Java
     :linenos:
 
@@ -174,9 +179,11 @@ Whole circle motion in Cartesian space
     * @param [in] ovl velocity scaling factor, range [0~100]
     * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
     * @param [in] offset_pos Bit position offset
+    * @param oacc Acceleration percentage
+    * @param blendR -1: Block; 0~1000: Smooth radius
     * @return error code
     */  
-    int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos);
+    int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR);
 
 Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -248,12 +255,12 @@ Code example
         DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
 
         robot.MoveJ(startjointPos,startdescPose,3,0,100,100,100,exaxisPos,-1,0,offdese);
-        robot.Circle(midjointPosCir1,middescPoseCir1,3,0,100,100,exaxisPos,endjointPosCir1,enddescPoseCir1,3,0,100,100,exaxisPos,100,-1,offdese);
-        robot.Circle(midjointPosCir2,middescPoseCir2,3,0,100,100,exaxisPos,endjointPosCir2,enddescPoseCir2,3,0,100,100,exaxisPos,100,-1,offdese);
+        robot.Circle(midjointPosCir1,middescPoseCir1,3,0,100,100,exaxisPos,endjointPosCir1,enddescPoseCir1,3,0,100,100,exaxisPos,100,-1,offdese,100,20);
+        robot.Circle(midjointPosCir2,middescPoseCir2,3,0,100,100,exaxisPos,endjointPosCir2,enddescPoseCir2,3,0,100,100,exaxisPos,100,-1,offdese,100,20);
         robot.MoveC(midjointPosMoveC,middescPoseMoveC,3,0,100,100,exaxisPos,0,offdese,endjointPosmoveC,enddescPoseMoveC,3,0,100,100,exaxisPos,0,offdese,100,20);
-        robot.Circle(midjointPosCir3,middescPoseCir3,3,0,100,100,exaxisPos,endjointPosCir3,enddescPoseCir3,3,0,100,100,exaxisPos,100,-1,offdese);
+        robot.Circle(midjointPosCir3,middescPoseCir3,3,0,100,100,exaxisPos,endjointPosCir3,enddescPoseCir3,3,0,100,100,exaxisPos,100,-1,offdese,100,20);
         robot.MoveL(linejointPos,linedescPose,3,0,100,100,100,-1,0,exaxisPos,0,0,offdese,0,10);
-        robot.Circle(midjointPosCir4,middescPoseCir4,3,0,100,100,exaxisPos,endjointPosCir4,enddescPoseCir4,3,0,100,100,exaxisPos,100,-1,offdese);
+        robot.Circle(midjointPosCir4,middescPoseCir4,3,0,100,100,exaxisPos,endjointPosCir4,enddescPoseCir4,3,0,100,100,exaxisPos,100,-1,offdese,100,20);
     } 
 
 Spiral motion in Cartesian space
@@ -329,6 +336,8 @@ End of servo motion
 
 Joint space servo mode motion
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionchanged:: Java SDK-v1.0.6-3.8.3
+
 .. code-block:: Java
     :linenos:
 
@@ -341,6 +350,7 @@ Joint space servo mode motion
     * @param [in] cmdT Command down cycle, unit s, recommended range [0.001~0.0016]
     * @param [in] filterT Filter time in s, not open, default is 0.
     * @param [in] gain Proportional amplifier for target position, not open yet, default is 0
+    * @param [in] id  servoJ command ID, default is 0
     * @return error code
     */
     int ServoJ(JointPos joint_pos, ExaxisPos axisPos, double acc, double vel, double cmdT, double filterT, double gain);
@@ -841,8 +851,7 @@ Code example
 
 Start Ptp motion FIR filtering
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
-
+.. versionchanged:: Java SDK-v1.0.5-3.8.2
 .. code-block:: Java
     :linenos:
 

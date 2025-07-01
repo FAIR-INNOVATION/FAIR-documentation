@@ -236,26 +236,7 @@ feedback packet of robot controller state
         WELDING_BREAKOFF_STATE weldingBreakOffState;  //Welding breakoff state
         double jt_tgt_tor[6];          //Joint command torque
         int smartToolState;            //SmartTool handle button state
-        uint16_t check_sum;            /* Checksum */
+        float wideVoltageCtrlBoxTemp;        //Temperature of wide voltage control box
+        uint16_t wideVoltageCtrlBoxFanCurrent;   //Wide voltage control box fan current (Ma) 
+        uint16_t check_sum;            /* 和校验 */
     }ROBOT_STATE_PKG;
-
-Servo controller status
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C++ SDK-v2.1.3.0
-
-.. code-block:: c++
-    :linenos:
-
-    /**
-     * @brief  Servo controller status
-     */
-    typedef struct ROBOT_AUX_STATE
-    {
-        uint8_t servoId;	/* servo drive ID, range [1-16], corresponding slave ID */
-        int servoErrCode;	/* servo drive fault code */
-        int servoState;	    /* servo drive status [decimal number converted to binary, bit0: 0-disable,1-enable;bit1:0-not running,1-running; bit2: 0-attch postive limit, 1-not touch negative limit; bit3:0-attach negative limit,1-not attach negative limit; bit4:0-not locate,1-loacated; bit5:0-not zero,1-have zero */
-        double servoPos;	/* servo current position mm or ° */
-        float servoVel;	    /* Servo current speed mm/s or °/s */
-        float servoTorque;  /* servoTorque Servo current torque Nm */
-    } robot_aux_state;

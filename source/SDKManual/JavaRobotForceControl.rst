@@ -606,6 +606,7 @@ Force Sensor Assisted Drag
     * @param [in] asaptiveFlag Adaptive on flag, 0-off; 1-on
     * @param [in] interfereDragFlag interference area drag flag, 0-off; 1-on
     * @param [in] ingularityConstraintsFlag singularity strategy, 0-avoidance; 1-crossing
+    * @param [in] forceCollisionFlag Robot collision detection flag during auxiliary dragging; 0-off; 1-on
     * @param [in] M coefficient of inertia
     * @param [in] B Damping factor
     * @param [in] K Stiffness factor
@@ -614,7 +615,7 @@ Force Sensor Assisted Drag
     * @param [in] Vmax Maximum joint speed limit °/s
     * @return error code
     */
-    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag, int ingularityConstraintsFlag, Object[] M, Object[] B, Object[] K, Object[] F, double Fmax, double Vmax);
+    int EndForceDragControl(int status, int asaptiveFlag, int interfereDragFlag,int ingularityConstraintsFlag, int forceCollisionFlag, Object[] M, Object[] B, Object[] K, Object[] F, double Fmax, double Vmax)
 
 Code example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -640,17 +641,17 @@ Code example
         Object[] B = { 150.0, 150.0, 150.0, 5.0, 5.0, 1.0 };
         Object[] K = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
         Object[] F = { 10.0, 10.0, 10.0, 1.0, 1.0, 1.0 };
-        int rtn = robot.EndForceDragControl(1, 0, 0, 0, M, B, K, F, 50, 100);
+        int rtn = robot.EndForceDragControl(1, 0, 0, 0, 1, M, B, K, F, 50, 100);
         System.out.println("force drag control start rtn is:"+ rtn);
         robot.Sleep(5000);
 
-        rtn = robot.EndForceDragControl(0, 0, 0, 0, M, B, K, F, 50, 100);
+        rtn = robot.EndForceDragControl(0, 0, 0, 0, 1, M, B, K, F, 50, 100);
         System.out.println("force drag control end rtn is:"+ rtn);
 
         rtn = robot.ResetAllError();
         System.out.println("ResetAllError rtn is:"+ rtn);
 
-        robot.EndForceDragControl(1, 0, 0, 0, M, B, K, F, 50, 100);
+        robot.EndForceDragControl(1, 0, 0, 0, 1, M, B, K, F, 50, 100);
         System.out.println("force drag control start again rtn is:"+ rtn);
         robot.Sleep(5000);
 

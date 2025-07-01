@@ -5507,67 +5507,864 @@ The larger the TCP detection threshold, the less sensitive the collision detecti
      - 60
      - 60 
 
-T-Shaped Velocity Profile Optimization Function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+T-Shape Velocity Characteristic Optimization + Blending Smoothing Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Overview
 ++++++++++++++
 
-Traditional T-shaped velocity curves have abrupt acceleration changes at the start and end points of acceleration/deceleration phases, which can cause rigid impacts on mechanical equipment. This function optimizes the T-shaped velocity curve to eliminate abrupt acceleration changes, thereby improving motion smoothness.
+Blending between two trajectory segments avoids frequent start-stop issues caused by complete stops, thereby improving robot motion efficiency. This function primarily performs blending between PTP, LIN, ARC, and CIRCLE instructions, achievable in two ways: using Lua instruction mode or motion configuration switch mode.
 
-This function primarily provides acceleration smoothing for PTP, LIN, ARC, and full-circle commands. Since the operation methods are similar for all commands, this manual uses PTP commands as an example to explain the operation procedure.
-
-Operation Process
+Operation Procedures
 ++++++++++++++++++++++++++++
 
-Depending on the operation method, there are two ways to implement T-shaped velocity profile optimization: using Lua commands or using motion configuration switches.
+PTP-PTP Blending
+***************************************
 
-**Step1**: Select the teaching point for PTP operation. This manual uses "P1" as the example teaching point name.
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
 
-**Step2**: Click "Teaching Program" -> "Program Programming", select the "Point-to-Point" command under "Motion Commands", choose the teaching point in "Command Editing" and set the debugging speed. For motion protection, select "Acceleration Smoothing Mode".
-   
+**Step 1**: Select teaching points for PTP-PTP function execution. This manual uses "A0" to "A5" as teaching point names.
+
+**Step 2**: Click "Teach Program" → "Program Programming" button, select "Point-to-Point" in "Motion Instructions", choose teaching points in "Instruction Editing", set debug speed, select "Acceleration Smooth Mode" for motion protection, and configure "Smooth Transition" parameter at points requiring smoothing.
+
 .. image:: coding/315.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.27-1 Acceleration Smoothing PTP Command Settings
+.. centered:: Figure 9.27-1 Blending Instruction Settings for Accelerated Smooth PTP Instructions
 
-**Step3**: Generate and run the Lua program to implement acceleration smoothing for PTP commands. A typical program is shown below.
-   
+**Step 3**: Add multiple PTP instructions, generate and run a Lua program to implement PTP-PTP blending. This mode uses optimized T-shape velocity motion only for instructions between AccSmoothStart() and AccSmoothEnd(), with original T-shape velocity for others.
+
 .. image:: coding/316.png
-   :width: 6in
+   :width: 4in
    :align: center
 
-.. centered:: Figure 9.27-2 Typical Program Using Lua Command Method for PTP Smoothing
+.. centered:: Figure 9.27-2 Typical PTP-PTP Blending Program in Lua Instruction Mode
 
-Using Motion Configuration Switch Method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-**Step1**: Click "Initial Settings" -> "Basic" -> "Motion Configuration" to turn on the "Acceleration Smoothing Mode" switch as shown below.
-   
+**Step 1**: Click "Initial Settings" → "Safety" → "Motion Configuration" button to enable the "Acceleration Smooth Mode" switch.
+
 .. image:: coding/317.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.27-3 Acceleration Smoothing Mode Configuration Switch Settings
+.. centered:: Figure 9.27-3 Acceleration Smooth Mode Configuration Switch Settings
 
-**Step2**: Select the teaching point for PTP operation. This manual uses "P1" as the example teaching point name.
+**Step 2**: Select teaching points for PTP-PTP function execution, using "A0" to "A5" as names.
 
-**Step3**: Click "Teaching Program" -> "Program Programming", select the "Point-to-Point" command under "Motion Commands", choose the teaching point in "Command Editing" and set the debugging speed. For motion protection, select "None" to add a conventional PTP command as shown below.
-   
+**Step 3**: Click "Teach Program" → "Program Programming" button, select "Point-to-Point" in "Motion Instructions", choose teaching points, set debug speed, select "None" for motion protection, and configure "Smooth Transition" parameter at points requiring smoothing.
+
 .. image:: coding/318.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.27-4 Conventional PTP Command Settings
+.. centered:: Figure 9.27-4 Blending Instruction Settings for Conventional PTP Instructions
 
-**Step4**: Generate and run the Lua program to implement acceleration smoothing for PTP commands. The typical program is the same as conventional PTP programs as shown below.
-   
+**Step 4**: Add multiple PTP instructions, generate and run a Lua program to implement PTP-PTP blending. The typical program mirrors conventional PTP-PTP programs, applying optimized T-shape velocity motion to all instructions.
+
 .. image:: coding/319.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-5 Typical PTP-PTP Blending Program Using Configuration Switch
+
+PTP-LIN Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select teaching points for PTP-LIN function execution, using "A0" to "A5" as names.
+
+**Step 2**: Click "Teach Program" → "Program Programming" button, select "Point-to-Point" in "Motion Instructions", choose teaching points, set debug speed, select "Acceleration Smooth Mode", and configure "Smooth Transition" parameter.
+
+.. image:: coding/315.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.27-5 Typical Program Using Configuration Switch Method for PTP Smoothing
+.. centered:: Figure 9.27-6 Blending Instruction Settings for Accelerated Smooth PTP Instructions
+
+**Step 3**: Add multiple PTP and LIN instructions, generate Lua program to implement PTP-LIN blending. Only instructions between AccSmoothStart() and AccSmoothEnd() use optimized T-shape velocity.
+
+.. image:: coding/415.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-7 Typical PTP-LIN Blending Program in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable "Acceleration Smooth Mode" in "Initial Settings" → "Safety" → "Motion Configuration".
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-8 Acceleration Smooth Mode Switch Configuration
+
+**Step 2**: Select teaching points for PTP-LIN, using "A0" to "A5".
+
+**Step 3**: Choose "Point-to-Point" instruction, set debug speed, select "None" for motion protection, configure "Smooth Transition".
+
+.. image:: coding/318.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-9 Blending Settings for Conventional PTP Instructions
+
+**Step 4**: Add PTP and LIN instructions, run Lua program. All instructions use optimized T-shape velocity.
+
+.. image:: coding/397.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-10 Typical PTP-LIN Blending Program via Configuration Switch
+
+PTP-ARC Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select teaching points "A0" to "A8" for PTP-ARC blending.
+
+**Step 2**: Insert "Point-to-Point" instruction, set "Acceleration Smooth Mode" and "Smooth Transition".
+
+.. image:: coding/315.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-11 Blending Settings for Accelerated Smooth PTP
+
+**Step 3**: Add PTP and ARC instructions. Only AccSmoothStart/End-enclosed instructions use optimized velocity.
+
+.. image:: coding/398.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-12 Typical PTP-ARC Blending Program in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode in motion configuration.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-13 Acceleration Smooth Mode Switch Setup
+
+**Step 2**: Select "A0" to "A8" as teaching points.
+
+**Step 3**: Configure "Point-to-Point" instruction with "Smooth Transition", motion protection "None".
+
+.. image:: coding/318.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-14 Blending Settings for Conventional PTP
+
+**Step 4**: Generate program; all instructions use optimized T-shape velocity.
+
+.. image:: coding/399.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-15 Typical PTP-ARC Blending via Configuration Switch
+
+PTP-CIRCLE Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select teaching points "A0" to "A8" for PTP-CIRCLE.
+
+**Step 2**: Set up "Point-to-Point" instruction with acceleration smooth mode.
+
+.. image:: coding/315.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-16 Blending Settings for Accelerated Smooth PTP
+
+**Step 3**: Add PTP and CIRCLE instructions, run between AccSmoothStart/End.
+
+.. image:: coding/400.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-17 Typical PTP-CIRCLE Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-18 Acceleration Smooth Mode Configuration
+
+**Step 2**: Choose "A0" to "A8" as teaching points.
+
+**Step 3**: Configure PTP instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/318.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-19 Blending Settings for Conventional PTP
+
+**Step 4**: Generate program for all-instruction optimized velocity.
+
+.. image:: coding/401.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-20 PTP-CIRCLE Blending via Configuration Switch
+
+LIN-PTP Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A5" for LIN-PTP blending.
+
+**Step 2**: Insert "Linear" instruction, set "Acceleration Smooth Mode", "Transition Radius" and "Transition Mode".
+
+.. image:: coding/402.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-21 Blending Settings for Accelerated Smooth LIN
+
+**Step 3**: Add LIN and PTP instructions, run within AccSmoothStart/End.
+
+.. image:: coding/403.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-22 Typical LIN-PTP Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode in settings.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-23 Acceleration Smooth Mode Switch Setup
+
+**Step 2**: Select "A0" to "A5" as teaching points.
+
+**Step 3**: Configure LIN instruction with transition parameters, no motion protection.
+
+.. image:: coding/404.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-24 Blending Settings for Conventional LIN
+
+**Step 4**: Generate program for all-instruction optimized velocity.
+
+.. image:: coding/405.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-25 LIN-PTP Blending via Configuration Switch
+
+LIN-LIN Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A5" for LIN-LIN blending.
+
+**Step 2**: Set up LIN instruction with acceleration smooth mode and transition parameters.
+
+.. image:: coding/402.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-26 Blending Settings for Accelerated Smooth LIN
+
+**Step 3**: Add multiple LIN instructions, run between AccSmoothStart/End.
+
+.. image:: coding/416.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-27 Typical LIN-LIN Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-28 Acceleration Smooth Mode Configuration
+
+**Step 2**: Choose "A0" to "A5" as teaching points.
+
+**Step 3**: Configure LIN instruction with transition radius and mode.
+
+.. image:: coding/404.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-29 Blending Settings for Conventional LIN
+
+**Step 4**: Generate program for optimized velocity across all instructions.
+
+.. image:: coding/417.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-30 LIN-LIN Blending via Configuration Switch
+
+LIN-ARC Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A8" for LIN-ARC blending.
+
+**Step 2**: Configure LIN instruction with acceleration smooth mode and transition parameters.
+
+.. image:: coding/402.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-31 Blending Settings for Accelerated Smooth LIN
+
+**Step 3**: Add LIN and ARC instructions within AccSmoothStart/End.
+
+.. image:: coding/406.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-32 Typical LIN-ARC Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode in settings.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-33 Acceleration Smooth Mode Switch Setup
+
+**Step 2**: Select "A0" to "A8" as teaching points.
+
+**Step 3**: Set LIN instruction with transition radius and mode, no motion protection.
+
+.. image:: coding/404.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-34 Blending Settings for Conventional LIN
+
+**Step 4**: Generate program for all-instruction optimized velocity.
+
+.. image:: coding/407.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-35 LIN-ARC Blending via Configuration Switch
+
+LIN-CIRCLE Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A8" for LIN-CIRCLE blending.
+
+**Step 2**: Configure LIN instruction with acceleration smooth mode and transition parameters.
+
+.. image:: coding/402.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-36 Blending Settings for Accelerated Smooth LIN
+
+**Step 3**: Add LIN and CIRCLE instructions between AccSmoothStart/End.
+
+.. image:: coding/408.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-37 Typical LIN-CIRCLE Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-38 Acceleration Smooth Mode Configuration
+
+**Step 2**: Choose "A0" to "A8" as teaching points.
+
+**Step 3**: Set LIN instruction with transition radius and mode, no motion protection.
+
+.. image:: coding/404.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-39 Blending Settings for Conventional LIN
+
+**Step 4**: Generate program for optimized velocity across all instructions.
+
+.. image:: coding/409.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-40 LIN-CIRCLE Blending via Configuration Switch
+
+ARC-PTP Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A9" for ARC-PTP blending.
+
+**Step 2**: Configure "Arc" instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/410.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-41 Blending Settings for Accelerated Smooth ARC
+
+**Step 3**: Add ARC and PTP instructions within AccSmoothStart/End.
+
+.. image:: coding/411.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-42 Typical ARC-PTP Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode in settings.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-43 Acceleration Smooth Mode Switch Setup
+
+**Step 2**: Select "A0" to "A9" as teaching points.
+
+**Step 3**: Set Arc instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/418.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-44 Blending Settings for Conventional ARC
+
+**Step 4**: Generate program for all-instruction optimized velocity.
+
+.. image:: coding/412.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-45 ARC-PTP Blending via Configuration Switch
+
+ARC-LIN Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A9" for ARC-LIN blending.
+
+**Step 2**: Configure Arc instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/410.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-46 Blending Settings for Accelerated Smooth ARC
+
+**Step 3**: Add ARC and LIN instructions between AccSmoothStart/End.
+
+.. image:: coding/413.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-47 Typical ARC-LIN Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-48 Acceleration Smooth Mode Configuration
+
+**Step 2**: Choose "A0" to "A9" as teaching points.
+
+**Step 3**: Set Arc instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/419.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-49 Blending Settings for Conventional ARC
+
+**Step 4**: Generate program for optimized velocity across all instructions.
+
+.. image:: coding/414.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-50 ARC-LIN Blending via Configuration Switch
+
+ARC-ARC Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A12" for ARC-ARC blending.
+
+**Step 2**: Configure Arc instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/410.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-51 Blending Settings for Accelerated Smooth ARC
+
+**Step 3**: Add multiple Arc instructions within AccSmoothStart/End.
+
+.. image:: coding/420.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-52 Typical ARC-ARC Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode in settings.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-53 Acceleration Smooth Mode Switch Setup
+
+**Step 2**: Select "A0" to "A12" as teaching points.
+
+**Step 3**: Set Arc instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/419.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-54 Blending Settings for Conventional ARC
+
+**Step 4**: Generate program for all-instruction optimized velocity.
+
+.. image:: coding/421.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-55 ARC-ARC Blending via Configuration Switch
+
+ARC-CIRCLE Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A12" for ARC-CIRCLE blending.
+
+**Step 2**: Configure Arc instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/410.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-56 Blending Settings for Accelerated Smooth ARC
+
+**Step 3**: Add Arc and CIRCLE instructions between AccSmoothStart/End.
+
+.. image:: coding/422.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-57 Typical ARC-CIRCLE Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-58 Acceleration Smooth Mode Configuration
+
+**Step 2**: Choose "A0" to "A12" as teaching points.
+
+**Step 3**: Set Arc instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/419.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-59 Blending Settings for Conventional ARC
+
+**Step 4**: Generate program for optimized velocity across all instructions.
+
+.. image:: coding/423.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-60 ARC-CIRCLE Blending via Configuration Switch
+
+CIRCLE-PTP Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A9" for CIRCLE-PTP blending.
+
+**Step 2**: Configure "Full Circle" instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/424.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-61 Blending Settings for Accelerated Smooth CIRCLE
+
+**Step 3**: Add CIRCLE and PTP instructions within AccSmoothStart/End.
+
+.. image:: coding/425.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-62 Typical CIRCLE-PTP Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode in settings.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-63 Acceleration Smooth Mode Switch Setup
+
+**Step 2**: Select "A0" to "A9" as teaching points.
+
+**Step 3**: Set Full Circle instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/426.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-64 Blending Settings for Conventional CIRCLE
+
+**Step 4**: Generate program for all-instruction optimized velocity.
+
+.. image:: coding/427.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-65 CIRCLE-PTP Blending via Configuration Switch
+
+CIRCLE-LIN Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A12" for CIRCLE-LIN blending.
+
+**Step 2**: Configure Full Circle instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/424.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-66 Blending Settings for Accelerated Smooth CIRCLE
+
+**Step 3**: Add CIRCLE and LIN instructions between AccSmoothStart/End.
+
+.. image:: coding/428.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-67 Typical CIRCLE-LIN Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-68 Acceleration Smooth Mode Configuration
+
+**Step 2**: Choose "A0" to "A12" as teaching points.
+
+**Step 3**: Set Full Circle instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/426.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-69 Blending Settings for Conventional CIRCLE
+
+**Step 4**: Generate program for optimized velocity across all instructions.
+
+.. image:: coding/429.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-70 CIRCLE-LIN Blending via Configuration Switch
+
+CIRCLE-ARC Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A12" for CIRCLE-ARC blending.
+
+**Step 2**: Configure Full Circle instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/424.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-71 Blending Settings for Accelerated Smooth CIRCLE
+
+**Step 3**: Add CIRCLE and Arc instructions within AccSmoothStart/End.
+
+.. image:: coding/430.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-72 Typical CIRCLE-ARC Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode in settings.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-73 Acceleration Smooth Mode Switch Setup
+
+**Step 2**: Select "A0" to "A12" as teaching points.
+
+**Step 3**: Set Full Circle instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/426.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-74 Blending Settings for Conventional CIRCLE
+
+**Step 4**: Generate program for all-instruction optimized velocity.
+
+.. image:: coding/431.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-75 CIRCLE-ARC Blending via Configuration Switch
+
+CIRCLE-CIRCLE Blending
+***************************************
+
+Using Lua Instruction Mode
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Select "A0" to "A12" for CIRCLE-CIRCLE blending.
+
+**Step 2**: Configure Full Circle instruction with acceleration smooth mode and "Smooth Transition".
+
+.. image:: coding/424.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-76 Blending Settings for Accelerated Smooth CIRCLE
+
+**Step 3**: Add multiple CIRCLE instructions within AccSmoothStart/End.
+
+.. image:: coding/432.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-77 Typical CIRCLE-CIRCLE Blending in Lua Mode
+
+Using Motion Configuration Switch Mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Enable acceleration smooth mode switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-78 Acceleration Smooth Mode Configuration
+
+**Step 2**: Choose "A0" to "A12" as teaching points.
+
+**Step 3**: Set Full Circle instruction with "Smooth Transition", no motion protection.
+
+.. image:: coding/426.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-79 Blending Settings for Conventional CIRCLE
+
+**Step 4**: Generate program for optimized velocity across all instructions.
+
+.. image:: coding/433.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-80 CIRCLE-CIRCLE Blending via Configuration Switch
 
 Swing Tilt Angle Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

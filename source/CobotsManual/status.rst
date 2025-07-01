@@ -20,15 +20,20 @@ There is a search input box in the upper right corner of the data table. Users c
 .. centered:: Figure 13.1-1 System log interface
 
 Status Query
-----------------------
+-------------------
 
-Click the "Status Query" menu in the "Status Information" menu bar on the left to enter the status query interface. The query types are divided into "Chart Display" and "Track Data". As shown in the figure below:
+Function Usage
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Turn on the control box and connect the Ethernet cable to the PC;
+2. Open a browser on the PC and visit the target URL: 192.168.58.2. Log in with the account "admin" and password "123" to access the page;
+3. Click the "Status Information" -> "Status Query" option in the left menu bar to enter the status query interface, as shown below;
 
 .. image:: status/002.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 13.2‑1 Status query
+.. centered:: Figure 13.2‑1 Status Query
 
 .. note:: 
    .. image:: status/006.png
@@ -36,9 +41,9 @@ Click the "Status Query" menu in the "Status Information" menu bar on the left t
       :height: 0.75in
       :align: left
 
-   Name:**Query button**
+   Name: **Query Button**
    
-   Function:Click to issue a command to query chart/trace data, indicating that the query status is not yet completed.
+   Function: Click to send an instruction to query chart/trajectory data, indicating an unqueried state.
 
 .. note:: 
    .. image:: status/007.png
@@ -46,9 +51,9 @@ Click the "Status Query" menu in the "Status Information" menu bar on the left t
       :height: 0.75in
       :align: left
 
-   Name:**Right button**
+   Name: **Right Arrow Button**
    
-   Function: Click to add the selected item on the left to the subitem on the right
+   Function: Click to add the selected item on the left to the sub-items on the right.
 
 .. note:: 
    .. image:: status/008.png
@@ -56,9 +61,9 @@ Click the "Status Query" menu in the "Status Information" menu bar on the left t
       :height: 0.75in
       :align: left
 
-   Name:**Delete Button**
+   Name: **Delete Button**
    
-   Function: Click to delete the sub-item selected on the right
+   Function: Click to delete the selected sub-item on the right.
 
 .. note:: 
    .. image:: status/009.png
@@ -66,40 +71,56 @@ Click the "Status Query" menu in the "Status Information" menu bar on the left t
       :height: 0.75in
       :align: left
 
-   Name:**Clear Button**
+   Name: **Clear Button**
    
-   Function: Click to clear all sub-items on the right
+   Function: Click to clear all sub-items on the right.
 
-Status query operation steps:
+4. Select "Chart Display," fill in the waveform time, and choose the desired query parameters in the "Parameter Configuration" section on the left. Click the "Right Arrow" button to add the parameters to the list on the right;
 
-**Step1**:Click the query type radio button, select the parameters you want to query on the left side of the parameter configuration, and click the "Move Right" button to configure the parameters to the list on the right.
+.. note:: The waveform time can be customized (10-30s), and a maximum of 6 parameters can be selected.
 
-.. important:: 
-   Currently, parameter configuration can only support adding up to four parameters to be checked.
+5. Click the "Query" button to start the query. Based on the parameter configuration, real-time data will be displayed as a line chart, as shown below;
 
 .. image:: status/003.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 13.2‑1 Parameter configuration
+.. centered:: Figure 13.2‑2 Chart Display
 
-**Step2**:Click the "Query" button to query the data.
+Chart Export
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-After selecting the chart display, click the query button, and the line chart will be displayed in real time according to the parameter configuration. As shown below:
+1. Click the chart title to open a dialog box where you can directly modify the title, as shown below:
 
 .. image:: status/004.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 13.2‑2 Chart display
+.. centered:: Figure 13.2‑3 Rename Chart Title
 
-After selecting the trajectory data, there is no line graph during the query process. Click the Stop Query button to successfully stop the query, and then the Download button will be displayed. As shown in the following figure:
+2. After clicking the "Stop Query" button to successfully stop the query, a download button will appear. Click it, and the browser will download the chart file with the chart title as the filename, as shown below:
 
 .. image:: status/005.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 13.2‑3 Trajectory data
+.. centered:: Figure 13.2‑4 Chart Export
 
-.. important:: 
-   During the query process, you need to confirm whether to stop the query when switching to other interfaces.
+Data View Display
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. After stopping the query, click the "Show Data View" button in the upper-right corner of the chart, as shown below:
+
+.. image:: status/010.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 13.2‑5 Data View Button
+
+2. The data in the view is shown below, and the content supports copying.
+
+.. image:: status/011.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 13.2‑6 Data View Display

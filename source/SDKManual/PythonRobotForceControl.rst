@@ -58,8 +58,6 @@ Code example
 
 Force Sensor Configuration
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: Python SDK-v2.0.8-3.7.8
-
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -808,21 +806,25 @@ Getting Load Recognition Results
 
 Force Sensor Assisted Drag
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
+.. versionadded:: python SDK-v2.1.3
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain, dragMaxTcpVel, dragMaxTcpOriVel)``"
-    "Description", "Force sensor assisted drag"
+    "Prototype", "``EndForceDragControl(status, asaptiveFlag, interfereDragFlag, ingularityConstraintsFlag, M, B, K, F, Fmax, Vmax, forceCollisionFlag=0)``"
+    "Description", "Force Sensor Assisted Drag"
     "Mandatory parameters", "- ``status``: control status, 0 - off; 1 - on
-    - ``impedanceFlag``: impedance on flag, 0 - off; 1 - on
-    - ``lamdeDain``: [D1, D2, D3, D4, D5, D6] drag gain
-    - ``KGain``: [K1,K2,K3,K4,K5,K6] Stiffness Gain
-    - ``BGain``: [B1,B2,B3,B4,B5,B] damping gain
-    - ``dragMaxTcpVel``: maximum line speed limit at the end of a drag
-    - ``dragMaxTcpOriVel``: drag end maximum angular velocity limit"
+    - ``asaptiveFlag``: adaptive on flag, 0 - off; 1 - on
+    - ``interfereDragFlag``: interference area drag flag, 0 - off; 1 - on
+    - ``ingularityConstraintsFlag``: singularity strategy, 0- evade; 1- Crossing
+    - ``forceCollisionFlag``: Robot collision detection mark during assisted dragging 0- Close 1- Enable
+    - ``M=[m1,m2,m3,m4,m5,m6]``: inertia factor
+    - ``B=[b1,b2,b3,b4,b5,b6]``: damping factor
+    - ``K=[k1,k2,k3,k4,k5,k6]``: stiffness factor
+    - ``F=[f1,f2,f3,f4,f5,f6]``: drag six-dimensional force thresholds
+    - ``Fmax``: Maximum towing force limitation
+    - ``Vmax``: maximum joint speed limit"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -834,27 +836,28 @@ Code example
     from fairino import Robot
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
-
     robot = Robot.RPC('192.168.58.2')
+    M = [15.0, 15.0, 15.0, 0.5, 0.5, 0.1]
+    B = [150.0, 150.0, 150.0, 5.0, 5.0, 1.0]
+    K = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    F = [10.0, 10.0, 10.0, 1.0, 1.0, 1.0]
 
-    status = 1 # control status, 0-off; 1-on
-    asaptiveFlag = 1 #Adaptive on flag, 0-off; 1-on
-    interfereDragFlag = 1 # interference zone drag flag, 0-off; 1-on
-    ingularityConstraintsFlag = 0 #singularity strategy, 0- evade; 1- Crossing
-    M = [15, 15, 15, 0.5, 0.5, 0.1] #Inertia factor
-    B = [150, 150, 150, 5, 5, 1] # Damping factor
-    K = [0, 0, 0, 0, 0, 0, 0] #Stiffness factor
-    F = [5, 5, 5, 1, 1, 1] #drag six-dimensional force thresholds
-    Fmax = 50 # Maximum towing force limit
-    Vmax = 1810 # Maximum joint speed limit
+    rtn = robot.EndForceDragControl(status=1,asaptiveFlag= 0,interfereDragFlag= 0,ingularityConstraintsFlag= 0,forceCollisionFlag= 1,M= M,B= B,K= K,F= F,Fmax= 50,Vmax=100)
+    print(f"force drag control start rtn is:{rtn}")
+    time.sleep(5)
 
-    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, ingularityConstraintsFlag, M, B, K, F, Fmax, Vmax)
-    print("EndForceDragControl return:",error)
+    rtn = robot.EndForceDragControl(status=0, asaptiveFlag=0, interfereDragFlag=0, ingularityConstraintsFlag=0,forceCollisionFlag=1, M=M, B=B, K=K, F=F, Fmax=50, Vmax=100)
+    print(f"force drag control end rtn is:{rtn}")
 
-    time.sleep(10)
-    status=0
-    error = robot.EndForceDragControl(status, asaptiveFlag, interfereDragFlag, ingularityConstraintsFlag, M, B, K, F, Fmax, Vmax)
-    print("EndForceDragControl return:",error)
+    rtn = robot.ResetAllError()
+    print(f"ResetAllError rtn is:{rtn}")
+
+    rtn = robot.EndForceDragControl(status=1, asaptiveFlag=0, interfereDragFlag=0, ingularityConstraintsFlag=0,forceCollisionFlag=1, M=M, B=B, K=K, F=F, Fmax=50, Vmax=100)
+    print(f"force drag control start again rtn is:{rtn}")
+    time.sleep(5)
+
+    rtn = robot.EndForceDragControl(status=0, asaptiveFlag=0, interfereDragFlag=0, ingularityConstraintsFlag=0,forceCollisionFlag=1, M=M, B=B, K=K, F=F, Fmax=50, Vmax=100)
+    print(f"force drag control end again rtn is:{rtn}")
 
 The force sensor turns on automatically after the error is cleared.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -891,18 +894,15 @@ Setting up hybrid drag switches and parameters for six-dimensional force and joi
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``EndForceDragControl(status, asaptiveFlag, interfereDragFlag, ingularityConstraintsFlag, M, B, K, F, Fmax, Vmax)``"
+    "Prototype", "``ForceAndJointImpedanceStartStop(status, impedanceFlag, lamdeDain, KGain, BGain, dragMaxTcpVel, dragMaxTcpOriVel)``"
     "Description", "Setting up the six-dimensional force and joint impedance hybrid drag switch and parameters"
     "Mandatory parameters", "- ``status``: control status, 0 - off; 1 - on
-    - ``asaptiveFlag``: adaptive on flag, 0 - off; 1 - on
-    - ``interfereDragFlag``: interference area drag flag, 0 - off; 1 - on
-    - ``ingularityConstraintsFlag``: singularity strategy, 0- evade; 1- Crossing
-    - ``M=[m1,m2,m3,m4,m5,m6]``: inertia factor
-    - ``B=[b1,b2,b3,b4,b5,b6]``: damping factor
-    - ``K=[k1,k2,k3,k4,k5,k6]``: stiffness factor
-    - ``F=[f1,f2,f3,f4,f5,f6]``: drag six-dimensional force thresholds
-    - ``Fmax``: Maximum towing force limitation
-    - ``Vmax``: maximum joint speed limit"
+    - ``impedanceFlag``: impedance on flag, 0 - off; 1 - on
+    - ``lamdeDain``: [D1, D2, D3, D4, D5, D6] drag gain
+    - ``KGain``: [K1,K2,K3,K4,K5,K6] Stiffness Gain
+    - ``BGain``: [B1,B2,B3,B4,B5,B] damping gain
+    - ``dragMaxTcpVel``: maximum line speed limit at the end of a drag
+    - ``dragMaxTcpOriVel``: drag end maximum angular velocity limit"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
     

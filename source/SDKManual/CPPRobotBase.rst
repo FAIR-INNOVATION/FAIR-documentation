@@ -138,6 +138,17 @@ Set Reconnection Parameters
     */
     errno_t SetReConnectParam(bool enable, int reconnectTime = 30000, int period = 50);
 
+Shut down the robot operating system
++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Shut down the robot operating system
+    * @return Error code
+    */
+    int ShutDownRobotOS();
+
 Initialize Log Parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -174,44 +185,40 @@ Basic Robot Control Example
 .. code-block:: c++
     :linenos:
 
-    int TestRobotCtrl(void)
-     {
-         ROBOT_STATE_PKG pkg = {};
-         FRRobot robot;
-         robot.LoggerInit();
-         robot.SetLoggerLevel(1);
-         int rtn = robot.RPC("192.168.58.2");
-         robot.SetReConnectParam(true, 30000, 500);
-         char ip[64] = "";
-         char version[64] = "";
-         uint8_t state;
-         robot.GetSDKVersion(version);
-         printf("SDK version:%s\n", version);
-         robot.GetControllerIP(ip);
-         printf("controller ip:%s\n", ip);
-         robot.Mode(1);
-         robot.Sleep(1000);
-         robot.DragTeachSwitch(1);
-         robot.Sleep(1000);
-         robot.IsInDragTeach(&state);
-         printf("drag state :%u\n", state);
-         robot.Sleep(3000);
-         robot.DragTeachSwitch(0);
-         robot.Sleep(1000);
-         robot.IsInDragTeach(&state);
-         printf("drag state :%u\n", state);
-         robot.Sleep(3000);
-         robot.RobotEnable(0);
-         robot.Sleep(3000);
-         robot.RobotEnable(1);
-         robot.Mode(0);
-         robot.Sleep(1000);
-         robot.Mode(1);
-         robot.Sleep(3000);
-         robot.ShutDownRobotOS();
-         robot.CloseRPC();
-         return 0;
-     }
+    private void btnStandard_Click(object sender, EventArgs e)
+    {
+        Robot robot = new Robot();
+        robot.SetReconnectParam(true, 100, 1000);
+        robot.RPC("192.168.58.2")
+        string ip = "";
+        string version = "";
+        byte state = 0
+        robot.GetSDKVersion(ref version);
+        Console.WriteLine($"SDK version : {version}");
+        robot.GetControllerIP(ref ip);
+        Console.WriteLine($"controller ip : {ip}");
+
+        robot.Mode(1);
+        Thread.Sleep(1000);
+        robot.DragTeachSwitch(1);
+        int rtn = robot.IsInDragTeach(ref state);
+        Console.WriteLine($"drag state : {state}");
+        Thread.Sleep(3000);
+        robot.DragTeachSwitch(0);
+        Thread.Sleep(1000);
+        robot.IsInDragTeach(ref state);
+        Console.WriteLine($"drag state : {state}");
+        Thread.Sleep(3000);
+        robot.RobotEnable(0);
+        Thread.Sleep(3000);
+        robot.RobotEnable(1);
+
+        robot.Mode(0);
+        Thread.Sleep(1000);
+        robot.Mode(1);
+        Thread.Sleep(2000);
+
+    }
 
 Get Robot Software Version Example
 ++++++++++++++++++++++++++++++++++++++++++++++

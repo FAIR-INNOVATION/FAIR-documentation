@@ -37,3 +37,4 @@ This document is the Java version of the secondary development interface documen
     JavaRobotWeld
     JavaRobotExtendedAxis
     JavaRobotOthers
+    JavaAppendix

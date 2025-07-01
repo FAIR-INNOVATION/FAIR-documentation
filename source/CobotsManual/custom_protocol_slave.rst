@@ -458,6 +458,155 @@ HMI setting (Profinet emulation)
    :width: 6in
    :align: center
 
+Robot Slave Mode Operation Manual
+---------------------------------------------------------
+
+Loading Slave Mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step 1**: Open the WebApp, navigate to Initial Setup -> Peripherals -> Board Communication -> Manual Configuration.
+
+.. image:: custom_protocol_slave/047.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.3-1 Board Communication Manual Configuration
+
+Select the required mapping functions for DI, DO, and AO (see Appendix 1). The parameters are defined as follows:
+
+- DI (Robot Control): The robot slave accepts external input signals and executes the mapped functions.
+  
+- DO (Robot Status Output): The robot slave feeds back status signals to the master station.
+  
+- AO (Robot Status Feedback): The robot slave feeds back status data to the master station. AO0~AO15 are signed integers (int16), and AO16~AO31 are single-precision floating-point numbers (float).
+
+**Step 2**: Click the "Configure" button to generate the open protocol Lua file.
+
+.. image:: custom_protocol_slave/048.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.3-2 Device Operation and Status
+
+.. note:: The open protocol Lua file supports download and can be imported in the auto-configuration interface.
+
+Example generated program:
+
+.. code-block:: console
+   :linenos:
+
+   local id = 3 
+   local ctrlDI = {0, 0, 0, 0, 0, 0}
+   local funcDI = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+   local DOState = {0, 0, 0, 0, 0, 0, 0, 0}
+   local AOState = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+   -- Launch the board communication process
+   LoadFieldBusSlave()
+   sleep_ms(8000)
+   while(1) do
+      -- Set the DO status
+      CtrlBoxDO, CtrlBoxCO, CtrlBoxDI, CtrlBoxCI, errState, motionState, moveToOriginState, robotStartDoneState, modeChangeState, programStartStopState, emergencyState, reduceState, collision, enablestate, safetyStop0, safetyStop1, pauseState, interfereState = GetRobotFuncDOState()
+      DOState[1] = CtrlBoxDO
+      DOState[2] = CtrlBoxCO
+      DOState[3] = CtrlBoxDI
+      DOState[4] = CtrlBoxCI
+      local ctrlWord0 = 0
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 0, errState)
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 1, motionState)
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 2, moveToOriginState)
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 3, robotStartDoneState)
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 4, modeChangeState)
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 5, programStartStopState)
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 6, emergencyState)
+      ctrlWord0 = SetBitWithIndex(ctrlWord0, 7, reduceState)
+      DOState[5] = ctrlWord0
+      local ctrlWord1 = 0
+      ctrlWord1 = SetBitWithIndex(ctrlWord1, 0, collision)
+      ctrlWord1 = SetBitWithIndex(ctrlWord1, 1, enablestate)
+      ctrlWord1 = SetBitWithIndex(ctrlWord1, 2, safetyStop0)
+      ctrlWord1 = SetBitWithIndex(ctrlWord1, 3, safetyStop1)
+      ctrlWord1 = SetBitWithIndex(ctrlWord1, 4, pauseState)
+      ctrlWord1 = SetBitWithIndex(ctrlWord1, 5, interfereState)
+      DOState[6] = ctrlWord1
+      SetFieldBusDOState(DOState)
+
+      -- Set the AO status
+      mainErrCode, subErrCode, TCPSpeed, axisPos1, axisPos2, axisPos3, axisPos4, axisPos5, axisPos6, jointVelFeedback1, jointVelFeedback2, jointVelFeedback3, jointVelFeedback4, jointVelFeedback5, jointVelFeedback6, jointCurFeedback1, jointCurFeedback2, jointCurFeedback3,jointCurFeedback4,jointCurFeedback5,jointCurFeedback6, jointTorqueFeedback1, jointTorqueFeedback2,jointTorqueFeedback3,jointTorqueFeedback4, jointTorqueFeedback5, jointTorqueFeedback6, cartPosx, cartPosy, cartPosz, cartPosrx, cartPosry, cartPosrz = GetRobotFuncAOState()
+      AOState[1] = mainErrCode
+      AOState[2] = subErrCode
+      AOState[17] = axisPos1
+      AOState[18] = axisPos2
+      AOState[19] = axisPos3
+      AOState[20] = axisPos4
+      AOState[21] = axisPos5
+      AOState[22] = axisPos6
+      AOState[23] = cartPosx
+      AOState[24] = cartPosy
+      AOState[25] = cartPosz
+      AOState[26] = cartPosrx
+      AOState[27] = cartPosry
+      AOState[28] = cartPosrz
+      SetFieldBusAOState(AOState)
+      sleep_ms(10) 
+
+      -- Set the DI status
+      -- Configure the DI function and update it in real-time
+      ctrlDI[1],ctrlDI[2],ctrlDI[3],ctrlDI[4],ctrlDI[5],ctrlDI[6] = GetFieldBusDIState()
+      funcDI[1] = ctrlDI[1] 
+      funcDI[2] = ctrlDI[2] 
+      funcDI[3] = GetBitWithIndex(ctrlDI[3], 0)
+      funcDI[4] = GetBitWithIndex(ctrlDI[3], 1)
+      funcDI[5] = GetBitWithIndex(ctrlDI[3], 2)
+      funcDI[6] = GetBitWithIndex(ctrlDI[3], 3)
+      funcDI[7] = GetBitWithIndex(ctrlDI[3], 4)
+      funcDI[8] = GetBitWithIndex(ctrlDI[3], 5)
+      funcDI[9] = GetBitWithIndex(ctrlDI[3], 6)
+      funcDI[10] = GetBitWithIndex(ctrlDI[3], 7)
+      funcDI[11] = GetBitWithIndex(ctrlDI[4], 0)
+      funcDI[12] = GetBitWithIndex(ctrlDI[4], 1)
+      funcDI[13] = GetBitWithIndex(ctrlDI[4], 2)
+      funcDI[14] = GetBitWithIndex(ctrlDI[4], 3)
+      funcDI[15] = GetBitWithIndex(ctrlDI[4], 4)
+      funcDI[16] = GetBitWithIndex(ctrlDI[4], 5)
+      SetRobotFuncDIState(funcDI)
+      local stopFlag = GetOpenLUAStopFlag(id)
+      if(stopFlag ~= 0) then 
+         UnloadFieldBusSlave()
+         break
+      end
+      sleep_ms(10)
+   end
+
+**Step 3**: Click the "Load" button to load the robot slave mode.
+
+.. image:: custom_protocol_slave/049.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.3-3 Loading Slave Mode
+
+.. note:: After successfully loading the robot slave mode, the auto-start function is supported. To use remote mode, unload the slave mode first.
+
+**Step 4**: Click the status bar button on the right to monitor DI, DO, AI, and AO interaction information. The parameters are as follows:
+
+- CtrlDO: Input signal value from the master device controlling the robot control box DO.
+  
+- DI: Input signal value from the external master control.
+  
+- DO: Output signal value fed back by the robot slave.
+  
+- AI: Input value from the external master. AI0~AI15 are int16 type, and AI16~AI31 are float type.
+  
+- AO: Output value from the robot slave. AO0~AO15 are int16 type, and AO16~AO31 are float type.
+
+.. image:: custom_protocol_slave/050.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.3-4 DI, DO, AI, AO Interaction Information
+
+:download:`Appendix 1: Slave Mode Address Mapping Table <../_static/_doc/Control box slave mode address comparison table.xlsx>`
+
 Appendice
 -------------------
 

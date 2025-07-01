@@ -456,6 +456,35 @@ Under the menu bar of "Initial" -> "Base" -> "Joint", click "Friction comp." to 
 .. important:: 
    The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
 
+Dragging Force Compensation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++++++++++++++
+
+Dragging force optimization builds upon the current current-loop dragging by compensating additional torque based on the robot's motion trend. This compensates for torque errors introduced by modeling inaccuracies and other factors, resulting in smoother robot dragging.
+
+Robot Dragging Force Optimization
++++++++++++++++++++++++++++++++++++++
+
+The dragging force optimization feature requires matching software and firmware versions to ensure optimal performance.
+
+Dragging Force Optimization Configuration
+************************************************
+**Step1**: Log in to the web interface, navigate to "Initial Setup" -> "Basic" -> "Joints" -> "Friction Compensation" to access the dragging force compensation settings module, as shown in the figure.
+
+.. image:: base/068.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.3-10 Dragging Force Compensation Settings Module
+
+**Step2**: Set "Compensation Switch" to "ON" and "Adaptive Switch" to "OFF", configure parameters as shown in Figure 2-1, then click "Apply" to successfully enable the function. Press the drag button to drag the robot, and the dragging feel will be noticeably smoother than before enabling the function.
+
+**Step3**: Parameter adjustment - the compensation coefficient range is [0-1]. If dragging feels slightly heavy, increase the parameter for the corresponding axis. If the robot fails to stop during dragging or joint vibration occurs, decrease the parameter for the corresponding axis. During dragging, a damping sensation will be present to decelerate and stop the robot.
+
+**Step4**: To disable the dragging force compensation function, set "Compensation Switch" to "OFF".
+
 I/O setup
 --------------------
 

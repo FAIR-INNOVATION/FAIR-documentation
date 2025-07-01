@@ -991,3 +991,17 @@ Code example
         robot.TractorStop();//trolley stops
         robot.TractorMoveC(300, -90, 20).
     }
+
+Get Extended Axis Coordinate System
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.5-3.8.2
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Get the extended axis coordinate system.
+    * @param [out] coord Extended axis coordinate system.
+    * @return Error code.
+    */
+    int ExtAxisGetCoord(DescPose coord);

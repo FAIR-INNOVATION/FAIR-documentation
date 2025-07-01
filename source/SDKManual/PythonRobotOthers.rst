@@ -505,3 +505,69 @@ Data Backup Package Download
     "Mandatory parameters", "- ``savePath``: Save the file path D://zDown/"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
+
+
+Issue the SCP command
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.3
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetSSHScpCmd(mode, sshname, sship, usr_file_url, robot_file_url)``"
+    "Description", "Issue the SCP command"
+    "Mandatory parameters", "- ``mode``: 0- Upload (Host Computer -> Controller), 1- Download (Controller -> Host Computer
+    - ``sshname``: User name of the upper computer
+    - ``sship``: The ip address of the upper computer
+    - ``usr_file_url``: File path of the upper computer
+    - ``robot_file_url``: Robot controller file path"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+code example
+------------------------------------------------------------------------
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    ssh_name = "fr"
+    ssh_ip = "192.168.58.45"
+    ssh_route = "/home/fr"
+    ssh_robot_url = "/root/robot/dhpara.config"
+    retval = robot.SetSSHScpCmd(1, ssh_name, ssh_ip, ssh_route, ssh_robot_url)
+    print(f"SetSSHScpCmd retval is: {retval}")
+    print(f"robot url is: {ssh_robot_url}")
+
+Set the monitoring parameters for the temperature and fan speed of the wide-voltage control box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.3
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetWideBoxTempFanMonitorParam(enable, period)``"
+    "Description", "Set the monitoring parameters for the temperature and fan speed of the wide-voltage control box"
+    "Mandatory parameters", "- ``enable``: 0- Monitoring is not enabled; 1- Enable monitoring
+    - ``period``: Monitoring period (s), ranging from 1 to 100"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Obtain the monitoring parameters of the temperature and fan speed of the wide-voltage control box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.3
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetWideBoxTempFanMonitorParam()``"
+    "Description", "Obtain the monitoring parameters of the temperature and fan speed of the wide-voltage control box"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``enable``: 0- Monitoring is not enabled; 1- Enable monitoring
+    - ``period``: Monitoring period (s), ranging from 1 to 100"

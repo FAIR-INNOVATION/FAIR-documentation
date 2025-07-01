@@ -1,3 +1,36 @@
+Version V3.8.3
+-----------------
+
+Date: 2025-06-27
+
+- **Control Box Slave Mode Function**:
+    Path: Initial Setup -> Peripherals -> Board Communication.
+
+    Description: Added board communication module configuration in the robot peripheral interface. Based on domestic expansion boards, it enables EIP, CClink, and PN protocols for slave interaction with the robot.
+
+- **Added Collision Detection for Force Sensor-Assisted Dragging in Manual Mode**:
+    Path: Auxiliary Applications -> Tool Applications -> Drag Lock -> Force Sensor-Assisted Lock.
+
+    Description: When the force sensor-assisted dragging function is enabled, collision detection is also triggered in manual mode to prevent damage to end equipment.
+
+- **Added T-Shaped Velocity Profile Trajectory Planning + Blending Smoothing Function**:
+    Path: Teach Programming -> Program Programming, Graphical Programming, Node Diagram Programming.
+
+    Description: Achieves smooth motion between movement commands, improving work efficiency.
+
+- **WebApp Status Query Interface Optimization**:
+    Path: Status Information -> Status Query.
+
+    Description: Optimized status query parameters to 6, with waveform display time up to 30s. Added data view display with copy functionality and renamed icon names.
+
+- **Drag Force Optimization for FR Series Robots**:
+    Path: Initial Setup -> Basics -> Joints -> Friction Compensation -> Drag Force Compensation.
+
+    Description: Makes dragging more effortless by providing compensation torque during the dragging process.
+
+- **Web System Log Storage Optimization**:
+    Description: Fixed abnormal system log file issues. Default log retention period set to 7 days.
+
 Version V3.8.2
 -----------------
 
