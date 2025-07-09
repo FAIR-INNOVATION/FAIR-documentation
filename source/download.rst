@@ -257,7 +257,6 @@ Ontology & Dimensional Drawings
 
 FAIRINO SimMachine
 -----------------------
-    :download:`FAIRINO SimMachine Virtual Box <https://drive.google.com/drive/folders/1C7bpnjDKOTsugNyl99gS5cHgCI6b2-0o?usp=sharing>`
 
     :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1T1JKsQqiFdPhVYEe9KN7S5_LSVyE0pUL/view?usp=sharing>`
 
@@ -309,3 +308,4 @@ Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-V3.8.3-QX-Release-250627 <https://drive.google.com/file/d/14P8wcBgBTrg8f-l-fzuRYZmpIE9WjaC1/view?usp=sharing>`
 
+    :download:`FAIRINO-CobotSoftware-V3.8.3-LA-Release-250704 <https://drive.google.com/file/d/1Vn1NbR0sY6j5UiKhxirJgzcpvGskNHdl/view?usp=sharing>`
