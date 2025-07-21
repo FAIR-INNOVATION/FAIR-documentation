@@ -1,273 +1,222 @@
-Robot WebAPP program use
-=====================================
+Robot WebAPP program usage  
+==============================
 
-.. toctree:: 
-    :maxdepth: 5
+.. toctree::  
+    :maxdepth: 5  
 
-Setting the default job program to load automatically on boot
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Set default program to load automatically on startup  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting the default job program to load automatically at boot time
-    * @param [in] flag 0-power-on does not automatically load the default program, 1-power-on automatically loads the default program
-    * @param [in] program_name Name and path of the job program, e.g. "/fruser/movej.lua", where "/fruser/" is a fixed path.
-    * @return error code
-    */
-    int LoadDefaultProgConfig(int flag, String program_name); 
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.LoadDefaultProgConfig(1,"/fruser/1010Test.lua");
-    }
-
-Load the specified job program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief loads the specified operational program
-    * @param [in] program_name Name and path of the job program, e.g. "/fruser/movej.lua", where "/fruser/" is a fixed path.
-    * @return error code
-    */
-    int ProgramLoad(String program_name). 
-
-Get the name of the loaded job program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the name of the loaded job program
-    * @param [out] program_name program_name[0]: name and path of the program, e.g. "/fruser/movej.lua", where "/fruser/" is a fixed path.
-    * @return error code
-    */
-    int GetLoadedProgram(String[] program_name). 
-
-Get the line number of the current robot job program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the line number of the current robot job program execution.
-    * @param [out] List[0]:error code; List[1]:int line line number
-    * @return error code
+    /**  
+    * @brief  Set default program to load automatically on startup  
+    * @param  [in] flag  0-Do not load default program automatically, 1-Load default program automatically  
+    * @param  [in] program_name Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is fixed path)  
+    * @return  Error code  
     */  
-    List<Integer> GetCurrentLine();
+    int LoadDefaultProgConfig(int flag, String program_name);  
 
-Run the currently loaded job program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Load specified program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Run the currently loaded job program
-    * @return error code
-    */
-    int ProgramRun();
+    /**  
+    * @brief  Load specified program  
+    * @param  [in] program_name Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is fixed path)  
+    * @return  Error code  
+    */  
+    int ProgramLoad(String program_name);  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Get loaded program name  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.Mode(0);
-        robot.ProgramLoad("/fruser/1010Test.lua");
-        String[] loadedNameStr = new String[1];
-        robot.GetLoadedProgram(loadedNameStr);
-        System.out.println("Loaded lua Name is " + loadedNameStr[0]);
-        robot.ProgramRun();
-        while(true)
-        {
-            List<Integer> results = robot.GetCurrentLine();
-            ROBOT_STATE_PKG pkg = robot.GetRobotRealTimeState();
-            System.out.println("current line is " + results.get(1) + " Robot Running State: " + pkg.robot_state);
-            robot.Sleep(500);
-        }
-    }
+    /**  
+    * @brief  Get loaded program name  
+    * @param  [out] program_name program_name[0]: Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is fixed path)  
+    * @return  Error code  
+    */  
+    int GetLoadedProgram(String[] program_name);  
 
-pause-for-pause campaign
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Get current program execution line number  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Suspend the currently running operational program
-    * @return error code
-    */ 
-    int PauseMotion().
+    /**  
+    * @brief  Get current program execution line number  
+    * @param  [out] List[0]: Error code; List[1]: int line - Line number  
+    * @return  Error code  
+    */  
+    List<Integer> GetCurrentLine();  
 
-Resumption of movement
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Run currently loaded program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Resumption of currently suspended operating procedures
-    * @return error code
-    */ 
-    int ResumeMotion(). 
+    /**  
+    * @brief  Run currently loaded program  
+    * @return  Error code  
+    */  
+    int ProgramRun();  
 
-Terminate the currently running job program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Pause current running program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief terminate the currently running job program
-    * @return error code
-    */ 
-    int StopMotion().   
+    /**  
+    * @brief  Pause current running program  
+    * @return  Error code  
+    */  
+    int PauseMotion();  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Resume paused program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection successful");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.Mode(0);
-        robot.ProgramLoad("/fruser/1010Test.lua");
-        String[] loadedNameStr = new String[1];
-        robot.GetLoadedProgram(loadedNameStr);
-        System.out.println("Loaded lua Name is " + loadedNameStr[0]);
-        robot.ProgramRun();
+    /**  
+    * @brief  Resume paused program  
+    * @return  Error code  
+    */  
+    int ResumeMotion();  
 
-        for(int i = 0; i < 10; i++)
-        {
-            robot.PauseMotion();//pause motion
-            robot.Sleep(1000);
-            robot.ResumeMotion();//resume motion
-            robot.Sleep(1000);
-        }
-        robot.StopMotion();//Stop
-    }
+Stop current running program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Download Lua Programs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief  Stop current running program  
+    * @return  Error code  
+    */  
+    int StopMotion();  
 
-    /** 
-    * @brief Downloading the operating procedures
-    * @param [in] fileName The name of the lua file to be downloaded, "test.lua" or "test.tar.gz".
-    * @param [in] savePath Save the local path of the file "D:///Down/".
-    * @return error code 
-    */
-    int LuaDownLoad(String fileName, String savePath); int LuaDownLoad(String fileName, String savePath)
+Get robot program execution state  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Uploading a Lua program
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief  Get robot program execution state  
+    * @param   [out] state 1-Program stopped/no program running, 2-Program running, 3-Program paused  
+    * @return  Error code  
+    */  
+    public int GetProgramState(int[] state)  
 
-    /** 
-    * @brief Uploading of operational procedures
-    * @param [in] filePath Path name of local lua file "... /test.lua" or "... /test.tar.gz"
-    * @param [out] errStr error message
-    * @return error code 
-    */
-    int LuaUpload(String filePath, String errStr);
+Robot LUA program operation code example  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Deleting Lua Programs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    public static int TestLuaOp(Robot robot)  
+    {  
+        String program_name = "/fruser/Text1.lua";  
+        String[] loaded_name = new String[]{""};  
+        int[] state=new int[]{0};  
+        List<Integer> line=new ArrayList<>();  
 
-    /** 
-    * @brief Deletion of operational procedures
-    * @param [in] fileName The name of the job program to be deleted, "test.lua".
-    * @return error code 
-    */
-    int LuaDelete(String fileName).
+        robot.Mode(0);  
+        robot.LoadDefaultProgConfig(0, program_name);  
+        robot.ProgramLoad(program_name);  
+        robot.ProgramRun();  
+        robot.Sleep(1000);  
+        robot.ProgramPause();  
+        robot.GetProgramState(state);  
+        System.out.println("program state:"+ state[0]);  
+        line=robot.GetCurrentLine();  
+        System.out.println("current line:"+ line);  
+        robot.GetLoadedProgram(loaded_name);  
+        System.out.println("program name:"+ loaded_name[0]);  
+        robot.Sleep(1000);  
+        robot.ProgramResume();  
+        robot.Sleep(1000);  
+        robot.ProgramStop();  
+        robot.Sleep(1000);  
 
-Get the names of all current job programs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+        robot.CloseRPC();  
+        return 0;  
+    }  
 
-    /** 
-    *  @brief gets the names of all current operating procedures
-    * @param [out] luaNames list of job program names
-    * @return error code 
-    */
-    int GetLuaList(List<String> luaNames).
+Download Lua program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief Download program  
+    * @param [in] fileName Lua file name to download ("test.lua" or "test.tar.gz")  
+    * @param [in] savePath Local save path ("D://Down/")  
+    * @return Error code  
+    */  
+    int LuaDownLoad(String fileName, String savePath);  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.LuaDownLoad("1010TestLUA.lua", "D://LUA/");
-        List<String> names = new ArrayList<String>();
-        robot.GetLuaList(names);
-        System.out.println("lua Num " + names.size() + " " + names.get(0));
-        String errStr = "";
-        robot.LuaUpload("D://LUA/1010TestLUA.lua", errStr);
-        System.out.println("robot upload 1010TestLUA lua result " + errStr);
-        robot.LuaDelete("1010TestLUA.lua");
-    }
+Delete Lua program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Delete program  
+    * @param [in] fileName Program name to delete ("test.lua")  
+    * @return Error code  
+    */  
+    int LuaDelete(String fileName);  
+
+Get all current Lua file names  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get all current Lua file names  
+    * @param [out] luaNames Program name list  
+    * @return Error code  
+    */  
+    int GetLuaList(List<String> luaNames);  
+
+Upload Lua program  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Upload program  
+    * @param [in] filePath Local Lua file path (".../test.lua" or ".../test.tar.gz")  
+    * @param [out] errStr Error message  
+    * @return Error code  
+    */  
+    int LuaUpload(String filePath, String errStr);  
+
+Robot LUA file upload/download code example  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
+
+    public static int TestLUAUpDownLoad(Robot robot)  
+    {  
+        List<String> luaNames=new ArrayList<>();  
+        int rtn = robot.GetLuaList(luaNames);  
+        System.out.println("res is: "+rtn);  
+        System.out.println("size is: "+luaNames.size());  
+        for (int it =1; it < luaNames.size(); it++)  
+        {  
+            System.out.println(luaNames.get(it));  
+        }  
+
+        rtn = robot.LuaDownLoad("test.lua", "D://zDOWN/");  
+        System.out.println("LuaDownLoad rtn is:"+rtn);  
+
+        rtn = robot.LuaUpload("D://zUP/XG.lua","");  
+        System.out.println("LuaUpload rtn is:"+ rtn);  
+
+        rtn = robot.LuaDelete("XG.lua");  
+        System.out.println("LuaDelete rtn is:"+ rtn);  
+
+        return 0;  
+    }  

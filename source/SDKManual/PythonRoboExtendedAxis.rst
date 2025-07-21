@@ -23,33 +23,6 @@ Setting the 485 Extended Axis Parameters
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
--------------
-
-.. code-block:: python
-    :linenos:
-
-    from time import sleep
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    ret = robot = Robot.RPC('192.168.58.2')
-
-    ret = robot.AuxServoSetParam(1,1,1,1,1,131072,15.45)#Set 485 extended axis parameter
-    print("AuxServoSetParam",ret)
-    sleep(1)
-
-    ret = robot.AuxServoGetParam(1)#Get 485 extended axis configuration parameter
-    print("AuxServoGetParam",ret)
-    sleep(1)
-
-    ret = robot.AuxServoGetStatus(1)#query status
-    print("AuxServoGetStatus",ret)
-    sleep(1)
-
-    ret = robot.AuxServoClearError(1)#clear error
-    print("AuxServoClearError",ret)
-    sleep(1)
-
 Getting 485 Expansion Axis Configuration Parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.3
@@ -69,10 +42,6 @@ Getting 485 Expansion Axis Configuration Parameters
     - ``servoResolution``: encoder resolution;
     - ``axisMechTransRatio``: mechanical transmission ratio;"
 
-Code example
---------------------------------------------
-Refer to the code example for setting the 485 extended axis parameters
-
 Setting the 485 expansion axis enable/disable
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.3
@@ -87,45 +56,6 @@ Setting the 485 expansion axis enable/disable
     - ``status``: enabling status, 0-de-enabling, 1-enabling;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
----------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from time import sleep
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    ret = robot = Robot.RPC('192.168.58.2')
-    ret =robot.AuxServoEnable(1,0)#Enable before modifying control mode.
-    print("AuxServoEnable(0)",ret)
-    sleep(3)
-
-    ret =robot.AuxServoSetControlMode(1,0)#set to position mode
-    print("AuxServoSetControlMode",ret)
-    sleep(3)
-
-    ret =robot.AuxServoEnable(1,1)#Enable after modifying control mode.
-    print("AuxServoEnable(1)",ret)
-    sleep(3)
-
-    ret = robot.AuxServoHoming(1,1,10,10)# return to zero
-    print("AuxServoHoming",ret)
-    sleep(5)
-
-    ret = robot.AuxServoGetStatus(1)#query status
-    print("AuxServoGetStatus",ret)
-    sleep(1)
-    i=1
-    while(i<5):
-        ret =robot.AuxServoSetTargetPos(1,300*i,30)#position mode motion, speed 30
-        print("AuxServoSetTargetPos",ret)
-        sleep(11)
-        ret = robot.AuxServoGetStatus(1)#query status
-        print("AuxServoGetStatus",ret)
-        sleep(1)
-        i=i+1
 
 Setting the 485 Extended Axis Control Mode
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -142,10 +72,6 @@ Setting the 485 Extended Axis Control Mode
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------------------------
-Refer to the code example for setting 485 extension axis enable/disable
-
 Setting the 485 extended axis target position (position mode)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.3
@@ -161,77 +87,6 @@ Setting the 485 extended axis target position (position mode)
     - ``speed``: target speed, mm/s or °/s;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
----------------------------------
-Refer to the code example for setting 485 extension axis enable/disable
-
-Setting the 485 extended axis target speed (velocity mode)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.3
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``AuxServoSetTargetSpeed(servoId,speed)``"
-    "Description", "Setting the 485 extended axis target speed (velocity mode)"
-    "Mandatory parameters","- ``servoId``: servo drive ID, range [1-15], corresponds to slave ID;
-    - ``speed``: target speed, mm/s or °/s;"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
-----------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from time import sleep
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    ret = robot = Robot.RPC('192.168.58.2')
-    ret =robot.AuxServoEnable(1,0)#Enable before modifying control mode.
-    print("AuxServoEnable(0)",ret)
-    sleep(3)
-
-    ret = robot.AuxServoSetControlMode(1, 1) # set to speed mode
-    print("AuxServoSetControlMode",ret)
-    sleep(3)
-
-    ret =robot.AuxServoEnable(1,1)#Enable after modifying control mode.
-    print("AuxServoEnable(1)",ret)
-    sleep(3)
-
-    ret = robot.AuxServoHoming(1,1,10,10)# return to zero
-    print("AuxServoHoming",ret)
-    sleep(5)
-
-    ret = robot.AuxServoGetStatus(1)#query status
-    print("AuxServoGetStatus",ret)
-    sleep(1)
-
-    ret = robot.AuxServoSetTargetSpeed(1, 30) # speed mode motion, speed 30
-    print("AuxServoSetTargetSpeed", ret)
-    sleep(10)
-
-    ret = robot.AuxServoGetStatus(1) # query status
-    print("AuxServoGetStatus", ret)
-    sleep(1)
-
-    ret = robot.AuxServoSetTargetSpeed(1, 60) # Speed mode motion, speed 60
-    print("AuxServoSetTargetSpeed", ret)
-    sleep(10)
-    ret = robot.AuxServoGetStatus(1) # query status
-    print("AuxServoGetStatus", ret)
-    sleep(1)
-
-    ret = robot.AuxServoSetTargetSpeed(1, 0) # speed should be set to 0 before ending speed mode movement
-    print("AuxServoSetTargetSpeed", ret)
-    sleep(3)
-    ret = robot.AuxServoGetStatus(1) # query status
-    print("AuxServoGetStatus", ret)
-    sleep(1)
 
 Setting the 485 extended axis target torque (torque mode)-not yet available
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -264,10 +119,6 @@ Setting the 485 extended axis back to zero
     - ``latchVel``: hoop speed, mm/s or °/s;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-    
-Code example
----------------------------------
-Refer to the code example for setting 485 extension axis enable/disable
 
 Clearing 485 Expansion Axis Error Messages
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -282,10 +133,6 @@ Clearing 485 Expansion Axis Error Messages
     "Mandatory parameters", "- ``servoId``: servo drive ID, range [1-15], corresponding to slave ID;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-    
-Code example
----------------------------------
-Refer to the code example for setting the 485 extended axis parameters
 
 Get 485 extended axis servo status
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -306,11 +153,22 @@ Get 485 extended axis servo status
     - ``servoSpeed``: servo current speed mm/s or °/s;
     - ``servoTorque``: servo current torque Nm;"
 
-Code example
----------------------------------
-Refer to the code example for setting 485 extension axis enable/disable
+Setting the 485 extended axis target speed (velocity mode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.3
 
-Setting the 485 extended axis data axis number in the status feedback - not open yet
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AuxServoSetTargetSpeed(servoId,speed)``"
+    "Description", "Setting the 485 extended axis target speed (velocity mode)"
+    "Mandatory parameters","- ``servoId``: servo drive ID, range [1-15], corresponds to slave ID;
+    - ``speed``: target speed, mm/s or °/s;"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Setting the 485 extended axis data axis number in the status feedback
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.3
 
@@ -354,22 +212,6 @@ Setting the 485 extended axis emergency stop acceleration and deceleration speed
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Get 485 extended axis emergency stop acceleration and deceleration speeds
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``AuxServoGetEmergencyStopAcc()``"
-    "Description", "Get 485 extended axis emergency stop acceleration and deceleration speed"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode
-    - ``acc``: 485 extended axis emergency stop acceleration
-    - ``dec``: 485 extended axis emergency stop deceleration"
-
 Get 485 Extended Axis Motion Acceleration and Deceleration
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
@@ -386,9 +228,109 @@ Get 485 Extended Axis Motion Acceleration and Deceleration
     - ``acc``: 485 extended axis motion acceleration
     - ``dec``: 485 extended axis motion deceleration"
 
+Get 485 extended axis emergency stop acceleration and deceleration speeds
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AuxServoGetEmergencyStopAcc()``"
+    "Description", "Get 485 extended axis emergency stop acceleration and deceleration speed"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``acc``: 485 extended axis emergency stop acceleration
+    - ``dec``: 485 extended axis emergency stop deceleration"
+
+Extended axis control code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    retval = robot.AuxServoSetParam(1, 1, 1, 1, 131072, 15.45)
+    print(f"AuxServoSetParam is: {retval}")
+    servoCompany = 0
+    servoModel = 0
+    servoSoftVersion = 0
+    servoResolution = 0
+    axisMechTransRatio = 0.0
+    retval, servoCompany, servoModel, servoSoftVersion, servoResolution, axisMechTransRatio = robot.AuxServoGetParam(1)
+    print(f"servoCompany {servoCompany}\n"
+          f"servoModel {servoModel}\n"
+          f"servoSoftVersion {servoSoftVersion}\n"
+          f"servoResolution {servoResolution}\n"
+          f"axisMechTransRatio {axisMechTransRatio}\n")
+    retval = robot.AuxServoSetParam(1, 10, 11, 12, 13, 14)
+    print(f"AuxServoSetParam is: {retval}")
+    retval, servoCompany, servoModel, servoSoftVersion, servoResolution, axisMechTransRatio = robot.AuxServoGetParam(1)
+    print(f"servoCompany {servoCompany}\n"
+          f"servoModel {servoModel}\n"
+          f"servoSoftVersion {servoSoftVersion}\n"
+          f"servoResolution {servoResolution}\n"
+          f"axisMechTransRatio {axisMechTransRatio}\n")
+    retval = robot.AuxServoSetParam(1, 1, 1, 1, 131072, 36)
+    print(f"AuxServoSetParam is: {retval}")
+    time.sleep(3)
+    robot.AuxServoSetAcc(3000, 3000)
+    robot.AuxServoSetEmergencyStopAcc(5000, 5000)
+    time.sleep(1)
+    emagacc = 0.0
+    emagdec = 0.0
+    acc = 0.0
+    dec = 0.0
+    error,emagacc, emagdec = robot.AuxServoGetEmergencyStopAcc()
+    print(f"emergency acc is {emagacc}  dec is {emagdec}")
+    error,acc, dec = robot.AuxServoGetAcc()
+    print(f"acc is {acc}  dec is {dec}")
+    robot.AuxServoSetControlMode(1, 0)
+    time.sleep(2)
+    retval = robot.AuxServoEnable(1, 0)
+    print(f"AuxServoEnable disenable {retval}")
+    time.sleep(1)
+    servoErrCode = 0
+    servoState = 0
+    servoPos = 0.0
+    servoSpeed = 0.0
+    servoTorque = 0.0
+    retval, servoErrCode, servoState, servoPos, servoSpeed, servoTorque = robot.AuxServoGetStatus(1)
+    print(f"AuxServoGetStatus servoState {servoState}")
+    time.sleep(1)
+    retval = robot.AuxServoEnable(1, 1)
+    print(f"AuxServoEnable enable {retval}")
+    time.sleep(1)
+    retval, servoErrCode, servoState, servoPos, servoSpeed, servoTorque = robot.AuxServoGetStatus(1)
+    print(f"AuxServoGetStatus servoState {servoState}")
+    time.sleep(1)
+    retval = robot.AuxServoHoming(1, 1, 5, 1,100)
+    print(f"AuxServoHoming {retval}")
+    time.sleep(3)
+    retval = robot.AuxServoSetTargetPos(1, 200, 30,100)
+    print(f"AuxServoSetTargetPos {retval}")
+    time.sleep(1)
+    retval, servoErrCode, servoState, servoPos, servoSpeed, servoTorque = robot.AuxServoGetStatus(1)
+    print(f"AuxServoGetStatus servoSpeed {servoSpeed}")
+    time.sleep(8)
+    robot.AuxServoSetControlMode(1, 1)
+    time.sleep(2)
+    robot.AuxServoEnable(1, 0)
+    time.sleep(1)
+    robot.AuxServoEnable(1, 1)
+    time.sleep(1)
+    robot.AuxServoSetTargetSpeed(1, 100, 80)
+    time.sleep(5)
+    robot.AuxServoSetTargetSpeed(1, 0, 80)
+    robot.CloseRPC()
+
 Parameter configuration for UDP extended axis communication
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v3.8.2
+.. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
@@ -410,23 +352,6 @@ Parameter configuration for UDP extended axis communication
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # UDP extended axis communication parameter configuration
-    error = robot.ExtDevSetUDPComParam('192.168.58.88',2021,2,50,5,50,1,2,5,0)
-    print("ExtDevSetUDPComParam return:",error)
-    # UDP extended axis communication parameter configuration
-    error = robot.ExtDevGetUDPComParam()
-    print("ExtDevGetUDPComParam return:",error)
-    
 Get UDP extended axis communication parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
@@ -465,23 +390,6 @@ Load UDP communication
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    #Load UDP communications
-    error = robot.ExtDevLoadUDPDriver()
-    print("ExtDevLoadUDPDriver return:",error)
-    # Offload UDP communications
-    error = robot.ExtDevUnloadUDPDriver()
-    print("ExtDevUnloadUDPDriver return:",error)
-     
 Offloading UDP communication
 ++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
@@ -495,7 +403,7 @@ Offloading UDP communication
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-     
+
 UDP Extended Axis Communication Recovery after Abnormal Disconnection
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
@@ -509,24 +417,7 @@ UDP Extended Axis Communication Recovery after Abnormal Disconnection
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-    
-Code example
-------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    #UDP Extended Axis communication restores connection after abnormal disconnection
-    error = robot.ExtDevUDPClientComReset()
-    print("ExtDevUDPClientComReset return:",error)
-    # UDP Extended Axis communication shut down after abnormal disconnections
-    error = robot.ExtDevUDPClientComClose()
-    print("ExtDevUDPClientComClose return:",error)
-         
+  
 UDP extension axis communication is closed after abnormal disconnection.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
@@ -538,63 +429,6 @@ UDP extension axis communication is closed after abnormal disconnection.
     "Prototype", "``ExtDevUDPClientComClose()``"
     "Description", "UDP Extended Axis Communication Abnormal Disconnect Closes Communication"
     "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-         
-Setting the extended robot position relative to the extended axis
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetRobotPosToAxis(installType)``"
-    "Description", "Set the position of the extended robot relative to the extended axis"
-    "Mandatory parameters", "- ``installType``: 0 - robot mounted on external axis, 1 - robot mounted outside external axis;"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-        
-Code example
-------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # Setting the extended robot position relative to the extended axis
-    error = robot.SetRobotPosToAxis(1)
-    print("SetRobotPosToAxis return:",error)
-    #Setup extended axis system DH parameter configuration
-    error = robot.SetAxisDHParaConfig(4,128.5,206.4,0,0,0,0,0,0,)
-    print("SetAxisDHParaConfig return:",error)
-    #UDP Extended Axis Parameter Configuration
-    error = robot.ExtAxisParamConfig(1,1,0,1000,-1000,1000,1000,1000,1.905,262144, 200,1,1,0)
-    print("ExtAxisParamConfig return:",error)
-
-Setting the extended axis system DH parameter configuration
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetAxisDHParaConfig(axisConfig,axisDHd1,axisDHd2,axisDHd3,axisDHd4,axisDHa1,axisDHa2,axisDHa3,axisDHa4)``"
-    "Description", "Sets the extended axis system DH parameter configuration"
-    "Mandatory parameters", "
-    - ``axisConfig``: external axis configuration, 0 - single degree of freedom linear slide, 1 - two degree of freedom L-type indexer, 2 - three degree of freedom, 3 - four degree of freedom, 4 - single degree of freedom indexer;
-    - ``axisDHd1``: external axis DH parameter d1 mm;
-    - ``axisDHd2``: external axis DH parameter d2 mm;
-    - ``axisDHd3``: external axis DH parameter d3 mm;
-    - ``axisDHd4``: external axis DH parameter d4 mm;
-    - ``axisDHa1``: external axis DH parameter a1 mm;
-    - ``axisDHa2``: external axis DH parameter a2 mm;
-    - ``axisDHa3``: external axis DH parameter a3 mm;
-    - ``axisDHa4``: external axis DH parameter a4 mm;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -624,36 +458,22 @@ UDP Extended Axis Parameter Configuration
     - ``axisEncType``: encoder type 0-incremental; 1-absolute;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-         
-Setting the reference point of the extended axis coordinate system - four-point method
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Setting the extended robot position relative to the extended axis
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ExtAxisSetRefPoint(pointNum)``"
-    "Description", "Setting the reference point of the extended axis coordinate system - four-point method"
-    "Mandatory parameters", "- ``pointNum``: point number [1-4];"
+    "Prototype", "``SetRobotPosToAxis(installType)``"
+    "Description", "Set the position of the extended robot relative to the extended axis"
+    "Mandatory parameters", "- ``installType``: 0 - robot mounted on external axis, 1 - robot mounted outside external axis;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-            
-Code example
-------------------------------------
 
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # Setting the reference point of the extended axis coordinate system - four-point method
-    error = robot.ExtAxisSetRefPoint(1)
-    print("ExtAxisComputeECoordSys(1) return:",error)
-             
-Calculating the Extended Axis Coordinate System - Four Point Method
+Setting the extended axis system DH parameter configuration
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
 
@@ -661,153 +481,20 @@ Calculating the Extended Axis Coordinate System - Four Point Method
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ExtAxisComputeECoordSys()``"
-    "Description", "Calculating Extended Axis Coordinate Systems - Four Point Method"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode.
-    - ``coord``: extended axis coordinate system values [x,y,z,rx,ry,rz];"
-                  
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # Calculate the extended axis coordinate system - four point method
-    error,coord = robot.ExtAxisComputeECoordSys()
-    print("ExtAxisComputeECoordSys() return:",error,coord)
-    # Apply extended axis coordinate system
-    error = robot.ExtAxisActiveECoordSys(1,1,coord,1)
-    print("ExtAxisActiveECoordSys() return:",error)
-         
-Applying the Extended Axis Coordinate System
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ExtAxisActiveECoordSys(applyAxisId,axisCoordNum,coord,calibFlag)``"
-    "Description", "Apply extended axis coordinate system"
+    "Prototype", "``SetAxisDHParaConfig(axisConfig,axisDHd1,axisDHd2,axisDHd3,axisDHd4,axisDHa1,axisDHa2,axisDHa3,axisDHa4)``"
+    "Description", "Sets the extended axis system DH parameter configuration"
     "Mandatory parameters", "
-    - ``applyAxisId``:Extended Axis Numbering bit0-bit3 corresponds to extended axis numbering 1-4, e.g., if you apply extended axes 1 and 3, it would be 0b 0000 0101, or 5;
-    - ``axisCoordNum``: extended axis coordinate system number;
-    - ``coord``: coordinate system value [x,y,z,rx,ry,rz];
-    - ``calibFlag``: calibration flag 0 - no, 1 - yes;"
+    - ``axisConfig``: external axis configuration, 0 - single degree of freedom linear slide, 1 - two degree of freedom L-type indexer, 2 - three degree of freedom, 3 - four degree of freedom, 4 - single degree of freedom indexer;
+    - ``axisDHd1``: external axis DH parameter d1 mm;
+    - ``axisDHd2``: external axis DH parameter d2 mm;
+    - ``axisDHd3``: external axis DH parameter d3 mm;
+    - ``axisDHd4``: external axis DH parameter d4 mm;
+    - ``axisDHa1``: external axis DH parameter a1 mm;
+    - ``axisDHa2``: external axis DH parameter a2 mm;
+    - ``axisDHa3``: external axis DH parameter a3 mm;
+    - ``axisDHa4``: external axis DH parameter a4 mm;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-             
-Setting of the calibration reference point in the position in the coordinate system of the end of the translator
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "prototype", "``SetRefPointInExAxisEnd(pos)``"
-    "Description", "Set the calibration reference point to be positioned in the coordinate system of the end of the variator"
-    "Mandatory parameters", "- ``pos``: bit position values [x,y,z,rx,ry,rz];"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-                      
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    #Set the calibration reference point in the position in the coordinate system of the end of the translator
-    error = robot.SetRefPointInExAxisEnd(desc_pos)
-    print("SetRefPointInExAxisEnd(1) return:",error)
-                 
-Reference Point Setting for the Shifter Coordinate System - Four-Point Method
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``PositionorSetRefPoint(pointNum)``"
-    "Description", "Reference Point Setting for the Variable Position Machine Coordinate System - Four Point Method"
-    "Mandatory parameters", "- ``pointNum``: point number [1-4];"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-                          
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # Shifter coordinate system reference point setting - four-point method
-    error = robot.SetRefPointInExAxisEnd(desc_pos)
-    print("SetRefPointInExAxisEnd(1) return:",error)
-                     
-Shifter Coordinate System Calculation - Four Point Method
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``PositionorComputeECoordSys()``"
-    "Description", "Translator Coordinate System Calculation - Four Point Method"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode.
-    - ``coord``: the value of the coordinate system of the translocator [x,y,z,rx,ry,rz];"
-                            
-Code example
-------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # Shifter Coordinate System Calculation - Four Point Method
-    error,coord = robot.PositionorComputeECoordSys()
-    print("PositionorComputeECoordSys() return:",error,coord)
-        
-End Sensor Register Write
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``AxleSensorRegWrite(devAddr, regHAddr, regLAddr, regNum, data1, data2, isNoBlock)``"
-    "Description", "End Sensor Register Write"
-    "Mandatory parameters", "
-    - ``devAddr``: device address number 0-255
-    - ``regHAddr``: register address high 8 bits
-    - ``regLAddr``: register address lower 8 bits
-    - ``regNum``: number of registers 0-255
-    - ``data1``: write to register value 1
-    - ``data2``: write register value 2
-    - ``isNoBlock``: 0 - blocking; 1 - non-blocking
-    "
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode;"
                           
 UDP Extended Axis Enable
 ++++++++++++++++++++++++++++++++++++++++
@@ -823,34 +510,6 @@ UDP Extended Axis Enable
     - ``status``: 0-de-enable; 1-enable;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-                                
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    #UDP extension axis de-enabling
-    error = robot.ExtAxisServoOn(1,0)
-    print("ExtAxisServoOn return:",error)
-    #UDP Extended Axis Enable
-    error = robot.ExtAxisServoOn(1,1)
-    print("ExtAxisServoOn return:",error)
-    #UDP extended axis back to zero
-    error = robot.ExtAxisSetHoming(1,0,40,40)
-    print("ExtAxisSetHoming return:",error)
-    time.sleep(1)
-    #UDP extended axis pointing start
-    error = robot.ExtAxisStartJog(1,1,20,20,20)
-    print("ExtAxisStartJog return:",error)
-    time.sleep(1)
-    #UDP Extended Axis Tap Stop
-    error = robot.ExtAxisStopJog(1)
-    print("ExtAxisStopJog return:",error)
 
 UDP Extended Axis Zero Return
 ++++++++++++++++++++++++++++++++++++++++
@@ -902,7 +561,519 @@ UDP Extended Axis Tap Stop
     "Mandatory parameters", "- ``axisID``: axis number [1-4];"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-    
+
+Example of UDP extension axis configuration and tapping code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    rtn = robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 200, 1, 100, 5, 1)
+    print(f"ExtDevSetUDPComParam rtn is {rtn}")
+    ip = ""
+    port = 0
+    period = 0
+    lossPkgTime = 0
+    lossPkgNum = 0
+    disconnectTime = 0
+    reconnectEnable = 0
+    reconnectPeriod = 0
+    reconnectNum = 0
+    rtn,[ip, port, period, lossPkgTime, lossPkgNum,disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum] = robot.ExtDevGetUDPComParam()
+    param_str = (f"\nip {ip}\nport {port}\nperiod {period}\nlossPkgTime {lossPkgTime}"
+                 f"\nlossPkgNum {lossPkgNum}\ndisConntime {disconnectTime}"
+                 f"\nreconnecable {reconnectEnable}\nreconnperiod {reconnectPeriod}"
+                 f"\nreconnnun {reconnectNum}")
+    print(f"ExtDevGetUDPComParam rtn is {rtn}{param_str}")
+    robot.ExtDevLoadUDPDriver()
+    rtn = robot.ExtAxisServoOn(1, 1)
+    print(f"ExtAxisServoOn axis id 1 rtn is {rtn}")
+    rtn = robot.ExtAxisServoOn(2, 1)
+    print(f"ExtAxisServoOn axis id 2 rtn is {rtn}")
+    time.sleep(2)
+    robot.ExtAxisSetHoming(1, 0, 10, 2)
+    time.sleep(2)
+    rtn = robot.ExtAxisSetHoming(2, 0, 10, 2)
+    print(f"ExtAxisSetHoming rtn is {rtn}")
+    time.sleep(4)
+    rtn = robot.SetRobotPosToAxis(1)
+    print(f"SetRobotPosToAxis rtn is {rtn}")
+    rtn = robot.SetAxisDHParaConfig(10, 20, 0, 0, 0, 0, 0, 0, 0)
+    print(f"SetAxisDHParaConfig rtn is {rtn}")
+    rtn = robot.ExtAxisParamConfig(1, 1, 1, 1000, -1000, 1000, 1000, 1.905, 262144, 200, 1, 0, 0)
+    print(f"ExtAxisParamConfig axis 1 rtn is {rtn}")
+    rtn = robot.ExtAxisParamConfig(2, 1, 1, 1000, -1000, 1000, 1000, 4.444, 262144, 200, 1, 0, 0)
+    print(f"ExtAxisParamConfig axis 2 rtn is {rtn}")
+    time.sleep(3)
+    robot.ExtAxisStartJog(1, 0, 10, 10, 30)
+    time.sleep(1)
+    robot.ExtAxisStopJog(1)
+    time.sleep(3)
+    robot.ExtAxisServoOn(1, 0)
+    time.sleep(3)
+    robot.ExtAxisStartJog(2, 0, 10, 10, 30)
+    time.sleep(1)
+    robot.ExtAxisStopJog(2)
+    time.sleep(3)
+    robot.ExtAxisServoOn(2, 0)
+    robot.ExtDevUnloadUDPDriver()
+    robot.CloseRPC()
+
+Setting the reference point of the extended axis coordinate system - four-point method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ExtAxisSetRefPoint(pointNum)``"
+    "Description", "Setting the reference point of the extended axis coordinate system - four-point method"
+    "Mandatory parameters", "- ``pointNum``: point number [1-4];"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+      
+Calculating the Extended Axis Coordinate System - Four Point Method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ExtAxisComputeECoordSys()``"
+    "Description", "Calculating Extended Axis Coordinate Systems - Four Point Method"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode.
+    - ``coord``: extended axis coordinate system values [x,y,z,rx,ry,rz];"
+                 
+Reference Point Setting for the Shifter Coordinate System - Four-Point Method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``PositionorSetRefPoint(pointNum)``"
+    "Description", "Reference Point Setting for the Variable Position Machine Coordinate System - Four Point Method"
+    "Mandatory parameters", "- ``pointNum``: point number [1-4];"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Shifter Coordinate System Calculation - Four Point Method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``PositionorComputeECoordSys()``"
+    "Description", "Translator Coordinate System Calculation - Four Point Method"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode.
+    - ``coord``: the value of the coordinate system of the translocator [x,y,z,rx,ry,rz];"
+             
+Setting of the calibration reference point in the position in the coordinate system of the end of the translator
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "prototype", "``SetRefPointInExAxisEnd(pos)``"
+    "Description", "Set the calibration reference point to be positioned in the coordinate system of the end of the variator"
+    "Mandatory parameters", "- ``pos``: bit position values [x,y,z,rx,ry,rz];"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Applying the Extended Axis Coordinate System
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ExtAxisActiveECoordSys(applyAxisId,axisCoordNum,coord,calibFlag)``"
+    "Description", "Apply extended axis coordinate system"
+    "Mandatory parameters", "
+    - ``applyAxisId``:Extended Axis Numbering bit0-bit3 corresponds to extended axis numbering 1-4, e.g., if you apply extended axes 1 and 3, it would be 0b 0000 0101, or 5;
+    - ``axisCoordNum``: extended axis coordinate system number;
+    - ``coord``: coordinate system value [x,y,z,rx,ry,rz];
+    - ``calibFlag``: calibration flag 0 - no, 1 - yes;"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Obtain the extended axis coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ExtAxisGetCoord()``"
+    "Description", "Obtain the extended axis coordinate system"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``coord``：Extended axis coordinate system"
+
+Extended axis coordinate system calibration code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    rtn = robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 200, 1, 100, 5, 1)
+    print(f"ExtDevSetUDPComParam rtn is {rtn}")
+    rtn,udp_params = robot.ExtDevGetUDPComParam()
+    ip, port, period, lossPkgTime, lossPkgNum, disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum = udp_params
+    patam = (
+        f"\nip {ip}\nport {port}\nperiod {period}\nlossPkgTime {lossPkgTime}\n"
+        f"lossPkgNum {lossPkgNum}\ndisConntime {disconnectTime}\nreconnecable {reconnectEnable}\n"
+        f"reconnperiod {reconnectPeriod}\nreconnnun {reconnectNum}"
+    )
+    print(f"ExtDevGetUDPComParam rtn is {rtn}{patam}")
+    robot.ExtDevLoadUDPDriver()
+    rtn = robot.ExtAxisServoOn(1, 1)
+    print(f"ExtAxisServoOn axis id 1 rtn is {rtn}")
+    rtn = robot.ExtAxisServoOn(2, 1)
+    print(f"ExtAxisServoOn axis id 2 rtn is {rtn}")
+    time.sleep(2)
+    robot.ExtAxisSetHoming(1, 0, 10, 2)
+    time.sleep(2)
+    rtn = robot.ExtAxisSetHoming(2, 0, 10, 2)
+    print(f"ExtAxisSetHoming rtn is {rtn}")
+    time.sleep(4)
+    rtn = robot.SetRobotPosToAxis(1)
+    print(f"SetRobotPosToAxis rtn is {rtn}")
+    rtn = robot.SetAxisDHParaConfig(1, 128.5, 206.4, 0, 0, 0, 0, 0, 0)
+    print(f"SetAxisDHParaConfig rtn is {rtn}")
+    rtn = robot.ExtAxisParamConfig(1, 1, 1, 1000, -1000, 1000, 1000, 1.905, 262144, 200, 1, 0, 0)
+    print(f"ExtAxisParamConfig axis 1 rtn is {rtn}")
+    rtn = robot.ExtAxisParamConfig(2, 1, 1, 1000, -1000, 1000, 1000, 4.444, 262144, 200, 1, 0, 0)
+    print(f"ExtAxisParamConfig axis 2 rtn is {rtn}")
+    toolCoord = [0, 0, 210, 0, 0, 0]
+    robot.SetToolCoord(1, toolCoord, 0, 0, 1, 0)
+    jSafe = [115.193, -96.149, 92.489, -87.068, -89.15, -83.488]
+    j1 = [117.559, -92.624, 100.329, -96.909, -94.057, -83.488]
+    j2 = [112.239, -90.096, 99.282, -95.909, -89.824, -83.488]
+    j3 = [110.839, -83.473, 93.166, -89.22, -90.499, -83.487]
+    j4 = [107.935, -83.572, 95.424, -92.873, -87.933, -83.488]
+    descSafe = [0.0,0.0,0.0,0.0,0.0,0.0]
+    desc1 = [0.0,0.0,0.0,0.0,0.0,0.0]
+    desc2 = [0.0,0.0,0.0,0.0,0.0,0.0]
+    desc3 = [0.0,0.0,0.0,0.0,0.0,0.0]
+    desc4 = [0.0,0.0,0.0,0.0,0.0,0.0]
+    exaxisPos = [0.0,0.0,0.0,0.0]
+    offdese = [0.0,0.0,0.0,0.0,0.0,0.0]
+    error, descSafe = robot.GetForwardKin(jSafe)
+    robot.MoveJ(joint_pos=jSafe,tool= 1,user= 0,vel= 100)
+    time.sleep(2)
+    error, desc1 = robot.GetForwardKin(j1)
+    robot.MoveJ(joint_pos=j1,tool= 1,user= 0,vel= 100)
+    time.sleep(2)
+    actualTCPPos = [0.0,0.0,0.0,0.0,0.0,0.0]
+    error, actualTCPPos = robot.GetActualTCPPose(0)
+    robot.SetRefPointInExAxisEnd(actualTCPPos)
+    rtn = robot.PositionorSetRefPoint(1)
+    print(f"PositionorSetRefPoint 1 rtn is {rtn}")
+    time.sleep(2)
+    robot.MoveJ(joint_pos=jSafe,tool= 1,user= 0,vel= 100)
+    robot.ExtAxisStartJog(1, 0, 50, 50, 10)
+    time.sleep(1)
+    robot.ExtAxisStartJog(2, 0, 50, 50, 10)
+    time.sleep(1)
+    error, desc2 = robot.GetForwardKin(j2)
+    rtn = robot.MoveJ(joint_pos=j2,tool= 1,user= 0,vel= 100)
+    rtn = robot.PositionorSetRefPoint(2)
+    print(f"PositionorSetRefPoint 2 rtn is {rtn}")
+    time.sleep(2)
+    robot.MoveJ(joint_pos=jSafe,tool= 1,user= 0,vel= 100)
+    robot.ExtAxisStartJog(1, 0, 50, 50, 10)
+    time.sleep(1)
+    robot.ExtAxisStartJog(2, 0, 50, 50, 10)
+    time.sleep(1)
+    error, desc3 = robot.GetForwardKin(j3)
+    robot.MoveJ(joint_pos=j3,tool= 1,user= 0,vel= 100)
+    rtn = robot.PositionorSetRefPoint(3)
+    print(f"PositionorSetRefPoint 3 rtn is {rtn}")
+    time.sleep(2)
+    robot.MoveJ(joint_pos=jSafe,tool= 1,user= 0,vel= 100)
+    robot.ExtAxisStartJog(1, 0, 50, 50, 10)
+    time.sleep(1)
+    robot.ExtAxisStartJog(2, 0, 50, 50, 10)
+    time.sleep(1)
+    error, desc4 = robot.GetForwardKin(j4)
+    robot.MoveJ(joint_pos=j4,tool= 1,user= 0,vel= 100)
+    rtn = robot.PositionorSetRefPoint(4)
+    print(f"PositionorSetRefPoint 4 rtn is {rtn}")
+    time.sleep(2)
+    axisCoord = [0.0,0.0,0.0,0.0,0.0,0.0]
+    error,axisCoord = robot.PositionorComputeECoordSys()
+    robot.MoveJ(joint_pos=jSafe,tool= 1,user= 0,vel= 100)
+    print(f"PositionorComputeECoordSys rtn is {axisCoord[0]} {axisCoord[1]} {axisCoord[2]} {axisCoord[3]} {axisCoord[4]} {axisCoord[5]}")
+    rtn = robot.ExtAxisActiveECoordSys(3, 1, axisCoord, 1)
+    print(f"ExtAxisActiveECoordSys rtn is {rtn}")
+    robot.CloseRPC()
+          
+UDP Extended Axis Motion
+++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ExtAxisMove(pos,ovl,blend)``"
+    "Description", "UDP Extended Axis Motion"
+    "Mandatory parameters", "- ``pos=[exaxis[0],exaxis[1],exaxis[2],exaxis[3]]``: target position Axis 1 position to Axis 4 position;
+    - ``ovl``: percentage of speed
+    - ``blend``：Smoothing parameter (mm or ms), -1, waiting for the motion to complete"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+                                        
+UDP Extended axis motion code example
+++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    axisPos = [20,0,0,0]
+    robot.ExtAxisMove(axisPos, 50, -1)
+    robot.CloseRPC()
+    return 0
+
+UDP extension axes synchronized with robot joint motion
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype","``ExtAxisSyncMoveJ(joint_pos,desc_pos,tool,user,exaxis_pos, vel=20.0, acc=0.0, ovl= 100.0, blendT=-1.0, offset_flag=0, offset_pos=[ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
+    "Description", "UDP extension axis synchronized motion with robot joint motion"
+    "Mandatory parameters", "
+    - ``joint_pos``: target joint position in [°];
+    - ``desc_pos``: Cartesian position of the target in [mm][°];
+    - ``tool``: tool number, [0 to 14]
+    - ``user``: artifact number, [0~14]
+    - ``exaxis_pos``: external axis 1 position ~ external axis 4 positions"
+    "Default Parameters", "
+    - ``vel``: percentage of speed, [0~100] default 20.0;
+    - ``acc``: percentage of acceleration, [0~100] not open yet, default 0.0;
+    - ``ovl``: velocity scaling factor, [0~100] default 100.0 ;
+    - ``blendT``: [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in [ms] default -1.0;
+    - ``offset_flag``: [0] - no offset, [1] - offset in workpiece/base coordinate system, [2] - offset in tool coordinate system Default 0;
+    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;"
+    "Return Value", "Error Code Success-0 Failure- errcode;"
+                                        
+UDP extension axes synchronized with robot joint motion code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    # Set the UDP communication parameters and load
+    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10)
+    robot.ExtDevLoadUDPDriver()
+    # Set the parameters of the extended axis
+    robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0)
+    robot.SetRobotPosToAxis(1)
+    robot.ExtAxisParamConfig(1, 0, 1, 100, -100, 10, 10, 12, 131072, 0, 1, 0, 0)
+    # Expand the axis to enable and return to zero
+    robot.ExtAxisServoOn(1, 0)
+    robot.ExtAxisSetHoming(1, 0, 20, 3)
+    # Extended axis coordinate system calibration
+    pos = []  # Please fill in the specific coordinates
+    robot.SetRefPointInExAxisEnd(pos)
+    robot.PositionorSetRefPoint(1)  # This operation should be repeated 4 times (using 4 dots)
+    error,coord = robot.PositionorComputeECoordSys()
+    robot.ExtAxisActiveECoordSys(1, 1, coord, 1)
+    # Synchronize the starting and ending points of the movement
+    startdescPose = []  # Please fill in the specific coordinates
+    startjointPos = []  # Please fill in the specific coordinates
+    startexaxisPos = []  # Please fill in the specific coordinates
+    enddescPose = []  # Please fill in the specific coordinates
+    endjointPos = []  # Please fill in the specific coordinates
+    endexaxisPos = []  # Please fill in the specific coordinates
+    # Move to the starting point
+    robot.ExtAxisMove(startexaxisPos, 20, -1)
+    offdese = [0, 0, 0, 0, 0, 0]
+    robot.MoveJ(joint_pos=startjointPos,tool= 1,user= 1,vel= 100,acc= 100,ovl= 100,exaxis_pos= startexaxisPos,blendT= 0,offset_flag= 0,offset_pos= offdese)
+    robot.ExtAxisSyncMoveJ(endjointPos, enddescPose, 1, 1, endexaxisPos, 100, 100, 100, -1, 0, offdese)
+    robot.CloseRPC()
+                  
+UDP extension axes synchronized with robot linear motion
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype","``ExtAxisSyncMoveL(self, joint_pos,desc_pos, tool, user, exaxis_pos, vel=20.0, acc=0.0, ovl=100.0, blendR=-1.0, search=0, offset_flag= 0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
+    "Description", "UDP extension axis synchronized motion with robot linear motion"
+    "Mandatory parameters", "
+    - ``joint_pos``: target joint position in [°];
+    - ``desc_pos``: target Cartesian position in [mm][°];
+    - ``tool``: tool number, [0 to 14];
+    - ``user``: artifact number, [0 to 14];
+    - ``exaxis_pos``: external axis 1 position ~ external axis 4 positions;"
+    "Default Parameters", "
+    - ``vel``: percentage of speed, [0~100] default 20.0;
+    - ``acc``: percentage of acceleration, [0~100] not open yet, default 0.0;
+    - ``ovl``: velocity scaling factor, [0~100] default 100.0;
+    - ``blendR``: [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in [ms] default -1.0;
+    - ``search``: [0] - no wire search, [1] - wire search;
+    - ``offset_flag``: [0] - no offset, [1] - offset in workpiece/base coordinate system, [2] - offset in tool coordinate system Default 0;
+    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;"
+    "Return Value", "Error Code Success-0 Failure- errcode;"
+
+UDP extension axes synchronized with robot linear motion code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    # Set the UDP communication parameters and load
+    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10)
+    robot.ExtDevLoadUDPDriver()
+    # Set the parameters of the extended axis
+    robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0)
+    robot.SetRobotPosToAxis(1)
+    robot.ExtAxisParamConfig(1, 0, 1, 100, -100, 10, 10, 12, 131072, 0, 1, 0, 0)
+    # Expand the axis to enable and return to zero
+    robot.ExtAxisServoOn(1, 0)
+    robot.ExtAxisSetHoming(1, 0, 20, 3)
+    # Extended axis coordinate system calibration
+    pos = []  # Please fill in the coordinates of the marking points
+    robot.SetRefPointInExAxisEnd(pos)
+    robot.PositionorSetRefPoint(1)  # It needs to be called four times for calibration
+    error,coord = robot.PositionorComputeECoordSys()
+    robot.ExtAxisActiveECoordSys(1, 1, coord, 1)
+    # Synchronize the starting and ending points of the movement
+    startdescPose = []  # Please fill in the coordinates of the marking points
+    startjointPos = []  # Please fill in the coordinates of the marking points
+    startexaxisPos = []  # Please fill in the coordinates of the marking points
+    enddescPose = []  # Please fill in the coordinates of the marking points
+    endjointPos = []  # Please fill in the coordinates of the marking points
+    endexaxisPos = []  # Please fill in the coordinates of the marking points
+    # Move to the starting point
+    robot.ExtAxisMove(startexaxisPos, 20, -1)
+    offdese = [0, 0, 0, 0, 0, 0]
+    robot.MoveJ(joint_pos=startjointPos, tool= 1,user= 1,vel= 100,acc= 100,ovl= 100,exaxis_pos= startexaxisPos,blendT= 0)
+    # Perform synchronous linear motion
+    robot.ExtAxisSyncMoveL(endjointPos, enddescPose, 1, 1, endexaxisPos, 100, 100, 100, 0, 0, offdese)
+    robot.CloseRPC()
+                      
+UDP extension axes synchronized with robot circular motion
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype","``ExtAxisSyncMoveC(joint_pos_p, desc_pos_p, tool_p, user_p,exaxis_pos_p, joint_pos_t, desc_pos_t, tool_t, user_t,exaxis_pos_t,vel_p =20.0, acc_p=100.0, offset_flag_p=0, offset_pos_p =[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel_t=20.0, acc_t=100.0, offset_flag_t=0, offset_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], ovl=100.0, blendR=-1.0)``"
+    "Description", " UDP extension axis synchronized with robot circular motion"
+    "Mandatory parameters", "
+    - ``joint_pos_p``: path point joint position in [°];
+    - ``desc_pos_p``: path point Cartesian position in [mm][°];
+    - ``tool_p``: pathpoint tool number, [0~14];
+    - ``user_p``: pathpoint artifact number, [0~14];
+    - ``exaxis_pos_p``: path point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0];
+    - ``joint_pos_t``: target point joint position in [°];
+    - ``desc_pos_t``: Cartesian position of the target point in [mm][°];
+    - ``tool_t``: tool number, [0~14];
+    - ``user_t``: artifact number, [0~14];
+    - ``exaxis_pos_t``: target point external axis 1 position ~ external axis 4 position default [0.0,0.0,0.0,0.0];"
+    "Default Parameters", "
+    - ``vel_p``: path point velocity percentage, [0~100] default 20.0;
+    - ``acc_p``: path point acceleration percentage, [0~100] not open yet, default 0.0;   
+    - ``offset_flag_p``: whether the path point is offset [0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
+    - ``offset_pos_p``: path point position offset in [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``vel_t``: Target point velocity percentage, [0~100] default 20.0;
+    - ``acc_t``: target point acceleration percentage, [0~100] Not open yet Default 0.0;
+    - ``offset_flag_t``: whether the target point is offset or not [0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
+    - ``offset_pos_t``: target point attitude offset in [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``ovl``: velocity scaling factor, [0~100] default 100.0;
+    - ``blendR``: [-1.0] - motion in place (blocking), [0~1000] - smoothing radius (non-blocking) in [mm] default -1.0;"
+    "Return Value", "Error Code Success-0 Failure- errcode;"
+                                                
+UDP extension axes synchronized with robot circular motion code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    # Set the UDP communication parameters and load
+    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10)
+    robot.ExtDevLoadUDPDriver()
+    # Set the parameters of the extended axis
+    robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0)
+    robot.SetRobotPosToAxis(1)
+    robot.ExtAxisParamConfig(1, 0, 1, 100, -100, 10, 10, 12, 131072, 0, 1, 0, 0)
+    # Expand the axis to enable and return to zero
+    robot.ExtAxisServoOn(1, 0)
+    robot.ExtAxisSetHoming(1, 0, 20, 3)
+    # Extended axis coordinate system calibration
+    pos = []  # Enter the coordinates of the reference point
+    robot.SetRefPointInExAxisEnd(pos)
+    robot.PositionorSetRefPoint(1)  # Call four times to complete the calibration
+    coord = []
+    error,coord = robot.PositionorComputeECoordSys()
+    robot.ExtAxisActiveECoordSys(1, 1, coord, 1)
+    # Synchronous arc starting point, middle point and end point
+    startdescPose = []# Input coordinates
+    startjointPos = []# Input coordinates
+    startexaxisPos =[]  # Enter the coordinates of the extended axis
+    middescPose = []# Input the midpoint
+    midjointPos = []
+    midexaxisPos =[]
+    enddescPose = []
+    endjointPos = []
+    endexaxisPos =[]
+    # Move to the starting point
+    robot.ExtAxisMove(startexaxisPos, 20, -1)
+    offdese = [0, 0, 0, 0, 0, 0]
+    robot.MoveJ(joint_pos=startjointPos,tool= 1,user= 1,vel= 100,acc= 100,ovl= 100,exaxis_pos= startexaxisPos,blendT= 0,offset_flag= 0,offset_pos= offdese)
+    # Start synchronous circular arc movement
+    robot.ExtAxisSyncMoveC(midjointPos,middescPose,1,1,midexaxisPos,
+                           endjointPos,enddescPose,1,1,endexaxisPos,
+                           100,100,0,offdese,
+                           100,100,0,offdese,
+                           100,0)
+    robot.CloseRPC()
+
 Setting the Extended DO
 ++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
@@ -920,41 +1091,7 @@ Setting the Extended DO
     - ``block``: whether to block True - Yes, False - No;"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-                                    
-Code example
-------------------------------------
 
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    #Set up extended DO
-    error = robot.SetAuxDO(1,True,False,True)
-    print("GetAuxAI",error)
-    #Setup Extended AO
-    error = robot.SetAuxAO(1,60,True)
-    print("SetAuxAO",error)
-    # Set the extended DI input filter time
-    error = robot.SetAuxDIFilterTime(10,False)
-    print("SetAuxDIFilterTime",error)
-    # Set the extended AI input filter time
-    error = robot.SetAuxAIFilterTime(10,True)
-    print("SetAuxAIFilterTime",error)
-    #Waiting for extended DI input
-    error = robot.WaitAuxDI(0,False,100,False)
-    print("WaitAuxDI",error)
-    #Waiting for extended AI input
-    error = robot.WaitAuxAI(0,0,100,500,False)
-    print("WaitAuxAI",error)
-    # Get the extended AI value
-    error = robot.GetAuxAI(0,False)
-    print("GetAuxAI",error)
-    # Get extended DI values
-    error = robot.GetAuxDI(0,True)
-    print("GetAuxDI",error)
-        
 Setting up Extended AO
 ++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
@@ -1072,24 +1209,9 @@ Get Extended AI Value
     "Default parameters", "NULL"
     "Return Value", "- errorcode Success-0 Failure- errcode;
     - ``value``: input value;"
-          
-UDP Extended Axis Motion
-++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
 
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ExtAxisMove(pos,ovl)``"
-    "Description", "UDP Extended Axis Motion"
-    "Mandatory parameters", "- ``pos=[exaxis[0],exaxis[1],exaxis[2],exaxis[3]]``: target position Axis 1 position to Axis 4 position;
-    - ``ovl``: percentage of speed"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-                                        
-Code example
-------------------------------------
+Extended IO code examples
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -1098,205 +1220,37 @@ Code example
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error,joint_pos = robot.GetActualJointPosDegree()
-    print("GetActualJointPosDegree",error,joint_pos)
-    e_pos = [-10,0,0,0]
-    joint_pos[0] = joint_pos[0]+30
-    #UDP Extended Axis Asynchronous Motion
-    error = robot.ExtAxisMove(e_pos,30)
-    print("ExtAxisMove",error)
-    print("joint_pos",joint_pos)
-    error = robot.MoveJ(joint_pos,0,0,exaxis_pos=e_pos)
-    print("MoveJ",error)
-              
-UDP extension axes synchronized with robot joint motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype","``ExtAxisSyncMoveJ(joint_pos,desc_pos,tool,user,exaxis_pos, vel=20.0, acc=0.0, ovl= 100.0, blendT=-1.0, offset_flag=0, offset_pos=[ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
-    "Description", "UDP extension axis synchronized motion with robot joint motion"
-    "Mandatory parameters", "
-    - ``joint_pos``: target joint position in [°];
-    - ``desc_pos``: Cartesian position of the target in [mm][°];
-    - ``tool``: tool number, [0 to 14]
-    - ``user``: artifact number, [0~14]
-    - ``exaxis_pos``: external axis 1 position ~ external axis 4 positions"
-    "Default Parameters", "
-    - ``vel``: percentage of speed, [0~100] default 20.0;
-    - ``acc``: percentage of acceleration, [0~100] not open yet, default 0.0;
-    - ``ovl``: velocity scaling factor, [0~100] default 100.0 ;
-    - ``blendT``: [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in [ms] default -1.0;
-    - ``offset_flag``: [0] - no offset, [1] - offset in workpiece/base coordinate system, [2] - offset in tool coordinate system Default 0;
-    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;"
-    "Return Value", "Error Code Success-0 Failure- errcode;"
-                                        
-Code example
-------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    #1. Calibrate and apply the robot's tool coordinate system. You can calibrate and apply the tool coordinate system using the four-point or six-point method. The interfaces involved in tool coordinate system calibration are as follows:
-    point_num=1
-    id=1
-    coord=[100,200,300,0,0,0,]
-    type=0
-    install=0
-    #1. Setting up the tool coordinate system
-    # robot.SetToolPoint(point_num) # set the tool reference point - six point method
-    # robot.ComputeTool() # compute the tool coordinate system
-    # robot.SetTcp4RefPoint() # set the tool reference point - four point method
-    # robot.ComputeTcp4() # compute tool coordinate system - four point method
-    # robot.SetToolCoord(id, coord,type,install) # set the application tool coordinate system
-    # robot.SetToolList(id, coord,type,install) # set the list of application tool coordinate systems
-    #2. Set UDP communication parameters and load UDP communication
-    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 100, 1, 100, 10, 0);
-    robot.ExtDevLoadUDPDriver();
-    #3. Set the extended axis parameters, including extended axis type, extended axis driver parameters, and extended axis DH parameters.
-    robot.SetAxisDHParaConfig(4, 200, 200, 0, 0, 0, 0, 0, 0, 0)#Single Axis Shifter and DH parameters
-    robot.SetRobotPosToAxis(1); # Extended axis mounting position
-    robot.ExtAxisParamConfig(1, 0, 1, 100, -100, 10, 10, 12, 131072, 0, 1, 0, 0)#Servo drive parameter, this example is a single-axis variant of the positioner, so you need to set only one drive parameter, if you choose to include multiple axes of the type of the extended axis, you need to set the drive parameters of each axis
-    #4. Set the selected axis to enable, return to zero
-    robot.ExtAxisServoOn(1, 0);
-    robot.ExtAxisSetHoming(1, 0, 20, 3);
-    #5. Extended axis coordinate system calibration and application (Note: the calibration interfaces of the indexer and the linear slide are different, and the following is the calibration interface of the indexer).
-    pos =[0,0,0,0,0,0,0] #Input your calibration point coordinates
-    robot.SetRefPointInExAxisEnd(pos)
-    robot.PositionorSetRefPoint(1)#You need to calibrate the extended axis with four differently positioned points, so you need to call this interface four times to complete the calibration
-    error,coord = robot.PositionorComputeECoordSys()# Calculate extended axis calibration results
-    robot.ExtAxisActiveECoordSys(1, 1, coord, 1); # Apply calibration results to the extended axis coordinate system
-    method=1
-    #6. To calibrate the workpiece coordinate system in the extended axes, you need the following interfaces
-    # robot.SetWObjCoordPoint( point_num)
-    # error,coord=robot.ComputeWObjCoord( method)
-    # robot.SetWObjCoord(id,coord)
-    # robot.SetWObjList(id, coord)
-    #7. Record your synchronized joint motion starting point
-    startdescPose = [0,0,0,0,0,0,0]#Input your coordinates
-    startjointPos = [0,0,0,0,0,0,0]#Input your coordinates
-    startexaxisPos = [0,0,0,0,0,]#Enter your coordinates
-    #8. Record your synchronized joint motion endpoint coordinates
-    enddescPose = [0,0,0,0,0,0,0]#Input your coordinates
-    endjointPos = [0,0,0,0,0,0,0]#Input your coordinates
-    endexaxisPos = [0,0,0,0,0,]#Enter your coordinates
-    #9. Write synchronized motion programs
-    # Motion to the starting point, assuming the applied tool coordinate system, workpiece coordinate system are 1
-    robot.ExtAxisMove(startexaxisPos, 20);
-    robot.MoveJ(startjointPos, 1, 1, desc_pos=startdescPose,exaxis_pos=startexaxisPos);
-    # Start synchronized movement
-    robot.ExtAxisSyncMoveJ(endjointPos, enddescPose, 1, 1, endexaxisPos);
-                  
-UDP extension axes synchronized with robot linear motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype","``ExtAxisSyncMoveL(self, joint_pos,desc_pos, tool, user, exaxis_pos, vel=20.0, acc=0.0, ovl=100.0, blendR=-1.0, search=0, offset_flag= 0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
-    "Description", "UDP extension axis synchronized motion with robot linear motion"
-    "Mandatory parameters", "
-    - ``joint_pos``: target joint position in [°];
-    - ``desc_pos``: target Cartesian position in [mm][°];
-    - ``tool``: tool number, [0 to 14];
-    - ``user``: artifact number, [0 to 14];
-    - ``exaxis_pos``: external axis 1 position ~ external axis 4 positions;"
-    "Default Parameters", "
-    - ``vel``: percentage of speed, [0~100] default 20.0;
-    - ``acc``: percentage of acceleration, [0~100] not open yet, default 0.0;
-    - ``ovl``: velocity scaling factor, [0~100] default 100.0;
-    - ``blendR``: [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in [ms] default -1.0;
-    - ``search``: [0] - no wire search, [1] - wire search;
-    - ``offset_flag``: [0] - no offset, [1] - offset in workpiece/base coordinate system, [2] - offset in tool coordinate system Default 0;
-    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;"
-    "Return Value", "Error Code Success-0 Failure- errcode;"
-                                            
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    robot.Mode(0)
-    time.sleep(1)
-    e_pos = [-20,0,0,0]
-    joint_pos0 = [114.089,-85.740, 119.106,-129.884,-91.655, 79.642]
-    desc_pos0= [-87.920,-178.539,-64.513,-175.471,7.664,139.650]
-    Synchronized motion of #UDP extended axes with robot linear motion
-    error = robot.ExtAxisSyncMoveL(joint_pos0,desc_pos0,1,1,e_pos)
-    print("ExtAxisSyncMoveL",error)
-                      
-UDP extension axes synchronized with robot circular motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype","``ExtAxisSyncMoveC(joint_pos_p, desc_pos_p, tool_p, user_p,exaxis_pos_p, joint_pos_t, desc_pos_t, tool_t, user_t,exaxis_pos_t,vel_p =20.0, acc_p=100.0, offset_flag_p=0, offset_pos_p =[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel_t=20.0, acc_t=100.0, offset_flag_t=0, offset_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], ovl=100.0, blendR=-1.0)``"
-    "Description", " UDP extension axis synchronized with robot circular motion"
-    "Mandatory parameters", "
-    - ``joint_pos_p``: path point joint position in [°];
-    - ``desc_pos_p``: path point Cartesian position in [mm][°];
-    - ``tool_p``: pathpoint tool number, [0~14];
-    - ``user_p``: pathpoint artifact number, [0~14];
-    - ``exaxis_pos_p``: path point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0];
-    - ``joint_pos_t``: target point joint position in [°];
-    - ``desc_pos_t``: Cartesian position of the target point in [mm][°];
-    - ``tool_t``: tool number, [0~14];
-    - ``user_t``: artifact number, [0~14];
-    - ``exaxis_pos_t``: target point external axis 1 position ~ external axis 4 position default [0.0,0.0,0.0,0.0];"
-    "Default Parameters", "
-    - ``vel_p``: path point velocity percentage, [0~100] default 20.0;
-    - ``acc_p``: path point acceleration percentage, [0~100] not open yet, default 0.0;   
-    - ``offset_flag_p``: whether the path point is offset [0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
-    - ``offset_pos_p``: path point position offset in [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0];
-    - ``vel_t``: Target point velocity percentage, [0~100] default 20.0;
-    - ``acc_t``: target point acceleration percentage, [0~100] Not open yet Default 0.0;
-    - ``offset_flag_t``: whether the target point is offset or not [0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
-    - ``offset_pos_t``: target point attitude offset in [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0];
-    - ``ovl``: velocity scaling factor, [0~100] default 100.0;
-    - ``blendR``: [-1.0] - motion in place (blocking), [0~1000] - smoothing radius (non-blocking) in [mm] default -1.0;"
-    "Return Value", "Error Code Success-0 Failure- errcode;"
-                                                
-Code example
-------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    robot.Mode(0)
-    time.sleep(1)
-    desc_pos_mid = [-131.2748107910156, -60.21242523193359, -22.55266761779785, 175.9907989501953, 5.92541742324829, 145.5211791992187]
-    desc_pos_end = [-91.3530502319336, -174.5040588378906, -64.93866729736328, 177.1370544433593, 15.96347618103027, 136.1746368408203]
-    joint_pos_mid = [120.9549040841584, -109.8869943146658, 134.1448068146658, -126.2150709699876, -88.6738087871287, 79.6419593131188]
-    joint_pos_end = [110.1896078279703, -89.01601659189356, 125.5532806698638, -139.7967831451114, -82.93198387221534, 79.6452225788985]
-    # #UDP extension axis synchronized with robot circular motion
-    time.sleep(3)
-    error = robot.ExtAxisSyncMoveC(joint_pos_mid,desc_pos_mid,1,1,[-10,0,0,0],joint_pos_end,desc_pos_end,1,1,[-20,0,0,0])
-    print("ExtAxisSyncMoveC",error)
-
-Removable unit control
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
+    for i in range(128):
+        robot.SetAuxDO(i, True, False, True)
+        time.sleep(0.1)
+    for i in range(128):
+        robot.SetAuxDO(i, False, False, True)
+        time.sleep(0.1)
+    for i in range(409):
+        value1 = i * 10
+        value2 = 4095 - i * 10
+        robot.SetAuxAO(0, value1, True)
+        robot.SetAuxAO(1, value2, True)
+        robot.SetAuxAO(2, value1, True)
+        robot.SetAuxAO(3, value2, True)
+        time.sleep(0.01)
+    robot.SetAuxDIFilterTime(10)
+    robot.SetAuxAIFilterTime(0, 10)
+    for i in range(20):
+        curValue = False
+        error, curValue = robot.GetAuxDI(i, False)  # 注意：如库内部需引用方式，这里需修改
+        print(f"DI{i}   {curValue}")
+    curValue = -1
+    for i in range(4):
+        error, curValue = robot.GetAuxAI(i, True)  # 同样注意引用传参问题
+        print(f"AI{i}   {curValue}")
+    robot.WaitAuxDI(1, False, 1000, False)
+    robot.WaitAuxAI(1, 1, 132, 1000, False)
+    robot.CloseRPC()
 
 Removable Device Enable
----------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
@@ -1309,7 +1263,8 @@ Removable Device Enable
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Zeroing of removable units
----------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
@@ -1322,7 +1277,8 @@ Zeroing of removable units
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Movable unit linear motion
----------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
@@ -1336,7 +1292,8 @@ Movable unit linear motion
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Movable unit circular motion
----------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
@@ -1351,7 +1308,8 @@ Movable unit circular motion
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Stopping motion of movable devices
-------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
@@ -1363,8 +1321,8 @@ Stopping motion of movable devices
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------------------
+Portable device code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -1372,38 +1330,31 @@ Code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    robot.ExtDevSetUDPComParam("192.168.58.2", 2021, 2, 50, 5, 50, 1, 50, 10, 0)
+    robot.ExtDevSetUDPComParam("192.168.58.2", 2021, 2, 50, 5, 50, 1, 50, 10, 1)
     robot.ExtDevLoadUDPDriver()
+    rtn = robot.ExtAxisServoOn(1, 1)
+    rtn = robot.ExtAxisServoOn(2, 1)
+    time.sleep(2)
+    robot.ExtAxisSetHoming(1, 0, 10, 2)
+    time.sleep(2)
+    rtn = robot.ExtAxisSetHoming(2, 0, 10, 2)
+    time.sleep(4)
     robot.ExtAxisParamConfig(1, 0, 0, 50000, -50000, 1000, 1000, 6.280, 16384, 200, 0, 0, 0)
     robot.ExtAxisParamConfig(2, 0, 0, 50000, -50000, 1000, 1000, 6.280, 16384, 200, 0, 0, 0)
-    robot.SetAxisDHParaConfig(5, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
+    robot.SetAxisDHParaConfig(5, 0, 0, 0, 0, 0, 0, 0, 0)
     robot.TractorEnable(False)
     time.sleep(2)
     robot.TractorEnable(True)
     time.sleep(2)
     robot.TractorHoming()
     time.sleep(2)
-    robot.TractorMoveL(100, 20)
+    robot.TractorMoveL(100, 2)
     time.sleep(5)
+    robot.TractorStop()
     robot.TractorMoveL(-100, 20)
     time.sleep(5)
     robot.TractorMoveC(300, 90, 20)
-    time.sleep(4)
-    error = robot.TractorStop()
-    print("TractorStop return ", error)
-
-Obtain the extended axis coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v3.8.2
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ExtAxisGetCoord()``"
-    "Description", "Obtain the extended axis coordinate system"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- Error Code Success-0 Failure- errcode
-    - ``coord``：Extended axis coordinate system"
+    time.sleep(10)
+    robot.TractorMoveC(300, -90, 20)
+    time.sleep(1)
+    robot.CloseRPC()

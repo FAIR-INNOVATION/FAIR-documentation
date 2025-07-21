@@ -121,7 +121,7 @@ Copy the package code to ros2_ws/src and run the following command inside ros2_w
 
     colcon build --packages-select fairino_msgs
 
-Wait for the previous command to finish compiling
+Wait for the previous command to finish compiling, then start to build fairino_hardware package:
 
 .. code-block:: shell
     :linenos:
@@ -367,12 +367,141 @@ API Description
     SetAnticollision(1,1,1,1,1,1)
 
     /*
-    Function description:Set the post-collision policy
-    int strategy - 0- Stop with error,1- Keep running
+	 * @brief  Set the post-collision strategy  
+	 * @param  [in] strategy  0-Error and stop, 1-Continue running  
+	 * @param  [in] safeTime  Safe stop time [1000 - 2000] ms  
+	 * @param  [in] safeDistance  Safe stop distance [1-150] mm  
+	 * @param  [in] safeVel  Safe speed [50-250] mm/s  
+	 * @param  [in] safetyMargin  Safety factor for J1-J6 [1-10]  
+	 * @return  Error code  
+    */  
+	int SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safeVel, int safetyMargin[]);  
+    // Example  
+    SetCollisionStrategy(1);  
+
+    /**
+    * @brief sets the collision detection method of the robot
+    * @param [in] method Collision detection method: 0- current mode; 1- Dual encoder; 2- Current and dual encoder turn on simultaneously
+    * @param [in] thresholdMode Collision level threshold method 0-Collision level fixed threshold mode 1- Customize collision detection thresholds
+    * @return  error code
     */
-    int SetCollisionStrategy(int strategy);
+    int SetCollisionDetectionMethod(int method, int thresholdMode);
     // Examples
-    SetCollisionStrategy(1)
+    SetCollisionDetectionMethod(0,0)
+
+    /**
+    * @brief Indicates that collision detection is disabled in static mode
+    * @param [in] status 0- Off; 1- Open
+    * @return  error code
+    */
+    int SetStaticCollisionOnOff(int status);
+    // Examples
+    SetStaticCollisionOnOff(1)
+    
+    /**
+	* @brief joint torque power detection
+	* @param [in] status 0- Off; 1- Open
+	* @param [in] power Set maximum power (W);
+    * @return  error code
+    */
+	int SetPowerLimit(int status, double power);
+    //Examples
+    SetPowerLimit(1,100)
+
+	/**
+    *@brief  Configured force sensor
+    *@param  [in] company  Manufacturer of force sensors, 17-KUNWEI，19-CAAA，20-ATI，21-HKM，22-GZCX，23-NBIT，24-XJC，26-NSR
+    *@param  [in] device  Device number,  KUNWEI(0-KWR75B)，CAAA(0-MCS6A-200-4)，ATI(0-AXIA80-M8)，HKM(0-MST2010)，GZCX(0-WHC6L-YB-10A)，NBIT(0-XLH93003ACS)，XJC(0-XJC-6F-D82)，NSR(0-NSR-FTSensorA)
+    *@param  [in] softvesion  Software version. The value is not used. The default value is 0
+    *@param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
+    *@return  Error code
+	 */
+	int FT_SetConfig(int company, int device, int softvesion, int bus);
+    // Examples
+    FT_SetConfig(0,1,0,0)
+
+	/**
+    *@brief  Get the force sensor configuration
+    *@param  [in] company  Force sensor manufacturer, to be determined
+    *@param  [in] device  Device number, not used yet. The default value is 0
+    *@param  [in] softvesion  Software version. The value is not used. The default value is 0
+    *@param  [in] bus The device is attached to the terminal bus and is not in use. The default value is 0
+    *@return  Error code
+	 */
+	int FT_GetConfig(int *company, int *device, int *softvesion, int *bus);
+    // Examples
+    FT_GetConfig()
+
+	/**
+    *@brief  Force sensor activation
+    *@param  [in] act  0- reset, 1- activate
+    *@return  Error code
+	 */
+	int FT_Activate(uint8_t act);
+    // Examples
+    FT_Activate(1)
+	
+	/**
+    *@brief  Force sensor calibration
+    *@param  [in] act  0- zero removal, 1- zero correction
+    *@return  Error code
+	 */
+	int  FT_SetZero(uint8_t act);
+    // Examples
+    FT_SetZero(1)
+
+	/**
+    *@brief  Collision guard
+    *@param  [in] flag 0- Disable collision guard. 1- Enable collision guard
+    *@param  [in] sensor_id Force sensor number
+    *@param  [in] select  Select the six degrees of freedom whether to detect collision, 0- no detection, 1- detection
+    *@param  [in] ft  Impact force/torque，fx,fy,fz,tx,ty,tz
+    *@param  [in] max_threshold Maximum threshold
+    *@param  [in] min_threshold Minimum threshold
+    *@note   Force/torque detection range：(ft-min_threshold, ft+max_threshold)
+    *@return  Error code
+	 */	
+	int FT_Guard(uint8_t flag, int sensor_id, uint8_t select[6], ForceTorque *ft, float max_threshold[6], float min_threshold[6]);	
+    // Examples
+    FT_Guard(1,1,0,0,1,0,0,0,0,0,100,0,0,0,0,0,200,0,0,0,0,0,50,0,0,0)
+
+
+	/**
+    *@brief  Constant force control
+    *@param  [in] flag 0- turn off constant force control, 1- turn on constant force control
+    *@param  [in] sensor_id Force sensor number
+    *@param  [in] select  Select the six degrees of freedom whether to detect collision, 0- no detection, 1- detection
+    *@param  [in] ft  Impact force/torque，fx,fy,fz,tx,ty,tz
+    *@param  [in] ft_pid Force pid parameter, torque pid parameter
+    *@param  [in] adj_sign Adaptive start-stop control, 0- off, 1- on
+    *@param  [in] ILC_sign ILC start stop control, 0- stop, 1- training, 2- operation
+    *@param  [in] Maximum Adjustment distance, unit: mm
+    *@param  [in] Maximum Adjustment Angle, unit: deg
+    *@return  Error code
+	 */	
+	int FT_Control(uint8_t flag, int sensor_id, uint8_t select[6], ForceTorque *ft, float ft_pid[6], uint8_t adj_sign, uint8_t ILC_sign, float max_dis, float max_ang, int filter_Sign = 0, int posAdapt_sign = 0, int isNoBlock = 0);
+    // Examples
+    FT_Control(1,1,0,0,1,0,0,0,0,0,-10,0,0,0,0.0005,0,0,0,0,0,0,0,100,10,0,0,0)  
+
+
+	/**
+    *@brief  Compliant control on
+    *@param  [in] p Coefficient of position adjustment or compliance
+    *@param  [in] force Compliant opening force threshold, unit: N
+    *@return  Error code
+	 */	
+	int FT_ComplianceStart(float p, float force);	
+    // Examples
+    FT_ComplianceStart(0.005,20)
+	
+	/**
+    *@brief  Compliant control off
+    *@return  Error code
+	 */	
+	int  FT_ComplianceStop();	
+    // Examples
+    FT_ComplianceStop()
+
 
     /*
     Function description:Set the positive limit, note that the set value must be within the hard limit range

@@ -3,74 +3,55 @@ Weld
 
 .. toctree::
     :maxdepth: 5
-
-Welding Start
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.1
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ARCStart(ioType, arcNum, timeout)``"
-    "Description", "Welding Start"
-    "Required Parameters", "- ``ioType``: io type 0 - controller IO; 1 - extended IO
-    - ``arcNum``: Welder profile number
-    - ``timeout``: timeout for starting an arc"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-
-    weldIOType =0
-    arcNum = 0
-    weldTimeout=5000
-    # start an arc
-    ret = robot.ARCStart(weldIOType,arcNum,weldTimeout)
-    print("ARCStart error code", ret)
-    time.sleep(3)
-
-End of welding
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.1
     
+Setting Welding Process Curve Parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype", "``ARCEnd(ioType, arcNum, timeout)``"
-    "Description", "End of welding"
-    "Mandatory parameters", "- ``ioType``: type 0 - controller IO; 1 - extended IO
-    - ``arcNum``: Welder profile number
-    - ``timeout``: timeout for starting an arc"
+    "Prototype", "``WeldingSetProcessParam(id, startCurrent, startVoltage, startTime, weldCurrent, weldVoltage, endCurrent, endVoltage, endTime)``"
+    "Description", "Set weld process profile parameters"
+    "Mandatory parameters", "
+    - ``id``: Welding process number (1-99)
+    - ``startCurrent``: Arc starting current (A)
+    - ``startVoltage``: startVoltage Arc-starting voltage (V)
+    - ``startTime``: startTime Arc start time (ms)
+    - ``weldCurrent``: weldCurrent Welding current (A)
+    - ``weldVoltage``: weldVoltage Welding voltage (V)
+    - ``endCurrent``: endCurrent Arc recovery current (A)
+    - ``endVoltage``: endVoltage Arc charging voltage (V)
+    - ``endTime``: endTime closing time (ms)
+    "
     "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
+   
+Obtaining Welding Process Curve Parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
 
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
 
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-
-    weldIOType =0
-    arcNum = 0
-    weldTimeout=5000
-    # Close the arc
-    ret = robot.ARCEnd(weldIOType,arcNum,weldTimeout)
-    print("ARCEnd error code", ret)
-    time.sleep(3)
+    "Prototype", "``WeldingGetProcessParam(id)``"
+    "Description", "Get welding process curve parameters"
+    "Mandatory parameters", "
+    - ``id``: Welding process number (1-99)
+    "
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``startCurrent``: arc starting current (A)
+    - ``startVoltage``: Arc starting voltage (V)
+    - ``startTime``: start time (ms)
+    - ``weldCurrent``: welding current (A)
+    - ``weldVoltage``: welding voltage (V)
+    - ``endCurrent``: arc closing current (A)
+    - ``endVoltage``: arc closing voltage (V)
+    - ``endTime``: arc closing time (ms)
+    " 
 
 Setting of welding current and output analog correspondences
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -89,42 +70,6 @@ Setting of welding current and output analog correspondences
     - ``AOIndex``: analog output port for welding current"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    weldIOType =0
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-
-    weldIOType =0
-    arcNum = 0
-    weldTimeout=5000
-
-    # Set weld current linearly to analog
-    ret = robot.WeldingSetCurrentRelation(0,400,0,10,0)
-    print("WeldingSetCurrentRelation", ret)
-    time.sleep(1)
-    # Get a linear relationship between welding current and analog
-    ret = robot.WeldingGetCurrentRelation()
-    print("WeldingGetCurrentRelation", ret)
-    time.sleep(1)
-
-    #Set weld voltage vs. analog linear relationship
-    ret = robot.WeldingSetVoltageRelation(0,400,0,10,0)
-    print("WeldingSetVoltageRelation", ret)
-    time.sleep(1)
-    #Get a linear relationship between weld voltage and analog
-    ret = robot.WeldingGetVoltageRelation()
-    print("WeldingGetVoltageRelation", ret)
-    time.sleep(1)
 
 Setting the welding voltage and output analog correspondence
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -218,7 +163,7 @@ Setting the welding voltage
 
 Setting Oscillation Parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: Python SDK-v2.0.8-3.7.8
+.. versionchanged:: python SDK-v2.0.5
     
 .. csv-table:: 
     :stub-columns: 1
@@ -242,8 +187,8 @@ Setting Oscillation Parameters
     - ``weaveRotAngle``: Swing direction azimuth (rotation around the X-axis of the swing), unit °, default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------------------------------------------
+Example code for setting welding parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
@@ -251,38 +196,67 @@ Code example
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    weaveNum =0
-    weaveType = 0
-    weaveFraquency = 1
-    weavelncStayTime = 0
-    weaveRange = 10
-    weaveLeftStayTime = 10
-    weaveRightStayTime = 10
-    weaveCircleRadio = 0
-    weaveStationary =1
-    # Setting the swing parameters
-    ret = robot.WeaveSetPara(weaveNum,weaveType,weaveFraquency,weavelncStayTime,weaveRange,weaveLeftStayTime,weaveRightStayTime, weaveCircleRadio,weaveStationary)
-    print("WeaveSetPara ", ret)
-    time.sleep(1)
-
-    # Swing to start
-    ret = robot.WeaveStart(0)
-    print("WeaveStart ", ret)
-    time.sleep(1)
-    ret,pose =robot.GetActualTCPPose(1);
-    print(ret,pose)
-    pose[2]=pose[2]+50
-    ret = robot.MoveL(pose,tool,user)
-    print("MoveL ", ret)
-    time.sleep(1)
-    # Instantly set swing parameters
-    ret = robot.WeaveOnlineSetPara (weaveNum,weaveType,weaveFraquency,weavelncStayTime,weaveRange,weaveLeftStayTime,weaveRightStayTime, weaveCircleRadio,weaveStationary)
-    print("WeaveOnlineSetPara ", ret)
-    time.sleep(1)
-    #Swing ends
-    ret = robot.WeaveEnd(0)
-    print("WeaveEnd ", ret)
-    time.sleep(1)
+    robot.WeldingSetProcessParam(1, 177, 27, 1000, 178, 28, 176, 26, 1000)
+    robot.WeldingSetProcessParam(2, 188, 28, 555, 199, 29, 133, 23, 333)
+    start_current = 0
+    start_voltage = 0
+    start_time = 0
+    weld_current = 0
+    weld_voltage = 0
+    end_current = 0
+    end_voltage = 0
+    end_time = 0
+    error, start_current, start_voltage, start_time, weld_current, weld_voltage, end_current,end_voltage, end_time = robot.WeldingGetProcessParam(1)
+    print(f"the Num 1 process param is {start_current} {start_voltage} {start_time} {weld_current} {weld_voltage} {end_current} {end_voltage} {end_time}")
+    error, start_current, start_voltage, start_time, weld_current, weld_voltage, end_current,end_voltage, end_time = robot.WeldingGetProcessParam(2)
+    print(f"the Num 2 process param is {start_current} {start_voltage} {start_time} {weld_current} {weld_voltage} {end_current} {end_voltage} {end_time}")
+    rtn = robot.WeldingSetCurrentRelation(0, 400, 0, 10, 0)
+    print(f"WeldingSetCurrentRelation rtn is: {rtn}")
+    rtn = robot.WeldingSetVoltageRelation(0, 40, 0, 10, 1)
+    print(f"WeldingSetVoltageRelation rtn is: {rtn}")
+    current_min = 0
+    current_max = 0
+    vol_min = 0
+    vol_max = 0
+    output_vmin = 0
+    output_vmax = 0
+    cur_index = 0
+    vol_index = 0
+    rtn,current_min, current_max, output_vmin, output_vmax, cur_index = robot.WeldingGetCurrentRelation()
+    print(f"WeldingGetCurrentRelation rtn is: {rtn}")
+    print(f"current min {current_min} current max {current_max} output vol min {output_vmin} output vol max {output_vmax}")
+    rtn,vol_min, vol_max, output_vmin, output_vmax, vol_index = robot.WeldingGetVoltageRelation()
+    print(f"WeldingGetVoltageRelation rtn is: {rtn}")
+    print(f"vol min {vol_min} vol max {vol_max} output vol min {output_vmin} output vol max {output_vmax}")
+    rtn = robot.WeldingSetCurrent(1, 100, 0, 0)
+    print(f"WeldingSetCurrent rtn is: {rtn}")
+    time.sleep(3)
+    rtn = robot.WeldingSetVoltage(1, 10, 0, 0)
+    print(f"WeldingSetVoltage rtn is: {rtn}")
+    rtn = robot.WeaveSetPara(0, 0, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0,0.0, 60.000000)
+    print(f"rtn is: {rtn}")
+    robot.WeaveOnlineSetPara(0, 0, 1, 0, 20, 0, 0, 0, 0)
+    rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200)
+    print(f"WeldingSetCheckArcInterruptionParam {rtn}")
+    rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0)
+    print(f"WeldingSetReWeldAfterBreakOffParam {rtn}")
+    enable = 0
+    length = 0
+    velocity = 0
+    move_type = 0
+    check_enable = 0
+    arc_interrupt_time_length = 0
+    rtn,check_enable, arc_interrupt_time_length = robot.WeldingGetCheckArcInterruptionParam()
+    print(f"WeldingGetCheckArcInterruptionParam checkEnable {check_enable} arcInterruptTimeLength {arc_interrupt_time_length}")
+    rtn,enable, length, velocity, move_type = robot.WeldingGetReWeldAfterBreakOffParam()
+    print(f"WeldingGetReWeldAfterBreakOffParam enable = {enable}, length = {length}, velocity = {velocity}, moveType = {move_type}")
+    robot.SetWeldMachineCtrlModeExtDoNum(17)
+    for i in range(5):
+        robot.SetWeldMachineCtrlMode(0)
+        time.sleep(1)
+        robot.SetWeldMachineCtrlMode(1)
+        time.sleep(1)
+    robot.CloseRPC()
 
 Instant setup of swing parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -303,6 +277,132 @@ Instant setup of swing parameters
     - ``weaveRightStayTime``: wave right stay time (ms)
     - ``weaveCircleRadio``: Circle swing-back ratio (0-100%)
     - ``weaveStationary``: swing position wait, 0 - position continues to move during wait time; 1 - position is stationary during wait time"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+The detection parameters of unexpected interruption of robot welding arc were obtained
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingGetCheckArcInterruptionParam()``"
+    "Description", "The detection parameters of unexpected interruption of robot welding arc were obtained"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode 
+    - ``checkEnable``: Whether to enable detection. 0: Indicates that the function is disabled. 1- Enable
+    - ``arcInterruptTimeLength``:Arc break confirmation time (ms)"
+
+Set the detection parameters of robot welding arc unexpected interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetCheckArcInterruptionParam(checkEnable, arcInterruptTimeLength)``"
+    "Description", "Set the detection parameters of robot welding arc unexpected interruption"
+    "Mandatory parameters", "- ``checkEnable``: Whether to enable detection. 0: Indicates that the function is disabled. 1- Enable
+    - ``arcInterruptTimeLength``:Arc break confirmation time (ms)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Obtain the robot welding interrupt recovery parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingGetReWeldAfterBreakOffParam()``"
+    "Description", "Obtain the robot welding interrupt recovery parameters"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode 
+    - ``enable``: Whether to enable recovery from welding interruption
+    - ``length``: weld overlap distance (mm)
+    - ``velocity``: Percentage of robot return to rearcing point (0-100)
+    - ``moveType``: The way the robot moves to the rearcing point; 0-LIN; 1-PTP"
+
+Set the robot welding interrupt recovery parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingSetReWeldAfterBreakOffParam(enable, length, velocity, moveType)``"
+    "Description", "Set the robot welding interrupt recovery parameters"
+    "Mandatory parameters", "- ``enable``:Whether to enable recovery from welding interruption
+    - ``length``: weld overlap distance (mm)
+    - ``velocity``: Percentage of robot return to rearcing point (0-100)
+    - ``moveType``: The way the robot moves to the rearcing point; 0-LIN; 1-PTP"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Set welder control mode to expand DO port
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetWeldMachineCtrlModeExtDoNum(DONum)``"
+    "Description", "Set welder control mode to extend DO port"
+    "Mandatory parameters", "- ``DONum``: welder control mode DO port (0-127)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
+
+Setting the welder control mode
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetWeldMachineCtrlMode(mode)``"
+    "Description", "Set welder control mode"
+    "Mandatory parameters", "- ``mode``: welder control mode; 0 - unitary"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
+
+Welding Start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.1
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ARCStart(ioType, arcNum, timeout)``"
+    "Description", "Welding Start"
+    "Required Parameters", "- ``ioType``: io type 0 - controller IO; 1 - extended IO
+    - ``arcNum``: Welder profile number
+    - ``timeout``: timeout for starting an arc"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+End of welding
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.1
+    
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "prototype", "``ARCEnd(ioType, arcNum, timeout)``"
+    "Description", "End of welding"
+    "Mandatory parameters", "- ``ioType``: type 0 - controller IO; 1 - extended IO
+    - ``arcNum``: Welder profile number
+    - ``timeout``: timeout for starting an arc"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -349,43 +449,6 @@ Positive wire feed
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-
-    weldIOType =0
-    # Positive wire feed
-    ret = robot.SetForwardWireFeed(weldIOType,1)
-    print("SetForwardWireFeed error code", ret)
-    time.sleep(1)
-    ret = robot.SetForwardWireFeed(weldIOType,0)
-    print("SetForwardWireFeed error code", ret)
-    time.sleep(1)
-
-    # Reverse wire feed
-    ret = robot.SetReverseWireFeed(weldIOType,1)
-    print("SetReverseWireFeed error code", ret)
-    time.sleep(1)
-    # Stop reverse wire feed
-    ret = robot.SetReverseWireFeed(weldIOType,0)
-    print("SetReverseWireFeed error code", ret)
-    time.sleep(1)
-
-    # Send gas
-    ret = robot.SetAspirated(weldIOType,1)
-    print("SetAspirated error code", ret)
-    time.sleep(1)
-    #Stopped air delivery
-    ret = robot.SetAspirated(weldIOType,0)
-    print("SetAspirated error code", ret)
-    time.sleep(1)
-
 Reverse wire feed
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
@@ -401,7 +464,7 @@ Reverse wire feed
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-aspiration (phonetics, explosion of breath on consonants distinguishing Chinese p, t from b, d)
+aspiration
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.1
     
@@ -416,25 +479,68 @@ aspiration (phonetics, explosion of breath on consonants distinguishing Chinese 
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Segment welding for position and attitude acquisition
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.1
-    
+Set the robot to resume welding after welding interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8
+
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetSegmentWeldPoint(startPos, endPos, startDistance)``"
-    "Description", "Segment Welding Acquisition Position and Attitude"
-    "Mandatory parameters", "- ``startPos=[x,y,z,rx,ry,rz]``: coordinates of the start point
-    - ``endPos=[x,y,z,rx,ry,rz]``: coordinates of end point
-    - ``startDistance``: the length from the weld point to the start point"
+    "Prototype", "``WeldingStartReWeldAfterBreakOff()``"
+    "Description", "Set the robot to resume welding after welding interruption"
+    "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode
-    - ``weldPointDesc=[x,y,z,rx,ry,rz]``: Cartesian coordinate information for the weld points 
-    - ``weldPointJoint=[j1,j2,j3,j4,j5,j6]``: information on the joint coordinates of the weld point
-    - ``tool``: tool number
-    - ``user``: workpiece number"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Set the robot to exit welding after welding interruption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.8
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WeldingAbortWeldAfterBreakOff()``"
+    "Description", "Set the robot to exit welding after welding interruption"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Sample code for robot welding control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.SetForwardWireFeed(0, 1)
+    time.sleep(1)
+    robot.SetForwardWireFeed(0, 0)
+    robot.SetReverseWireFeed(0, 1)
+    time.sleep(1)
+    robot.SetReverseWireFeed(0, 0)
+    robot.SetAspirated(0, 1)
+    time.sleep(1)
+    robot.SetAspirated(0, 0)
+    robot.WeldingSetCurrent(1, 230, 0, 0)
+    robot.WeldingSetVoltage(1, 24, 0, 1)
+    p1Desc = [228.879, -503.594, 453.984, -175.580, 8.293, 171.267]
+    p1Joint = [102.700, -85.333, 90.518, -102.365, -83.932, 22.134]
+    p2Desc = [-333.302, -435.580, 449.866, -174.997, 2.017, 109.815]
+    p2Joint = [41.862, -85.333, 90.526, -100.587, -90.014, 22.135]
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+    robot.MoveJ(joint_pos=p1Joint, tool=13, user=0)
+    robot.ARCStart(1, 0, 10000)
+    robot.WeaveStart(0)
+    robot.MoveL(desc_pos=p2Desc, tool=13, user=0)
+    robot.ARCEnd(1, 0, 10000)
+    robot.WeaveEnd(0)
+    robot.WeldingStartReWeldAfterBreakOff()
+    robot.WeldingAbortWeldAfterBreakOff()
+    robot.CloseRPC()
 
 Segmented welding startup
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -468,8 +574,8 @@ Segmented welding startup
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]"
     "Return Value", "- errcode Success-0 Failure- errcode"
 
-Code example
-----------------------------------------------------
+Sample robot segment welding code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
@@ -477,360 +583,17 @@ Code example
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-
-    weldIOType =0
-    arcNum = 0
-    weldTimeout=5000
-    weaveNum =0
-    tool =1
-    user =0
-    weaveType = 0
-    weaveFraquency = 1
-    weavelncStayTime = 0
-    weaveRange = 10
-    weaveLeftStayTime = 10
-    weaveRightStayTime = 10
-    weaveCircleRadio = 0
-    weaveStationary =1
-    start_desc=[0,0,0,0,0,0,0]
-    end_desc=[0,0,0,0,0,0,0]
-    start_joint=[0,0,0,0,0,0,0]
-    end_joint=[0,0,0,0,0,0,0]
-    ret,start_desc =robot.GetActualTCPPose(1);
-    print("start_desc",start_desc)
-    ret,end_desc =robot.GetActualTCPPose(1);
-    end_desc[1]=end_desc[1]+200
-    print("start_desc",start_desc)
-    print("end_desc",end_desc)
-    ret,start_joint=robot.GetInverseKin(0,start_desc)
-    ret,end_joint=robot.GetInverseKin(0,end_desc)
-    print("start_joint",start_joint)
-    print("end_joint",end_joint)
-    weldLength =40
-    noweldLength =40
-    # Segment welding
-
-    ret = robot.SegmentWeldStart(start_desc,end_desc,start_joint,end_joint,weldLength,noweldLength,weldIOType,arcNum,weldTimeout,True, weaveNum,tool,user)
-    print("SegmentWeldStart", ret)
-
-Segmented welding termination
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SegmentWeldEnd(ioType, arcNum, timeout)``"
-    "Description", "Segmented weld termination"
-    "Required Parameters", "- ``ioType``: io type 0 - controller IO; 1 - extended IO
-    - ``arcNum``: welder profile number
-    - ``timeout``: timeout for arc extinguishing"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Welding wire position finding start
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WireSearchStart(refPos,searchVel,searchDis,autoBackFlag,autoBackVel,autoBackDis,offectFlag)``"
-    "Description", "Welding wire seek start"
-    "Mandatory parameters", "- ``refPos``: 1 - reference point 2 - contact point
-    - ``searchVel``: search velocity %
-    - ``searchDis``: search distance mm
-    - ``autoBackFlag``: autoBackFlag, 0 - not auto; - auto
-    - ``autoBackVel``: Automatic Back Velocity %
-    - ``autoBackDis``: automatic back distance mm
-    - ``offectFlag``: 1 - seek with offset; 2 - teach point seek"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-
-    robot = Robot.RPC('192.168.58.2')
-
-    refPos = 1 # 1-datum 2-contact point
-    searchVel = 10 #searchVelocity %
-    searchDis = 100 #search distance mm
-    autoBackFlag = 0 #autoBackFlag, 0-not auto; 1-auto
-    autoBackVel = 10 #autoBackVel %
-    autoBackDis = 100 #autoBackDistance mm
-    offectFlag = 0 #1-with offset seek; 2-teach point seek
-    descStart = [203.061, 56.768, 62.719, -177.249, 1.456, -83.597]
-    jointStart = [-127.012, -112.931, -94.078, -62.014, 87.186, 91.326]
-    descEnd = [122.471, 55.718, 62.209, -177.207, 1.375, -76.310]
-    jointEnd = [-119.728, -113.017, -94.027, -62.061, 87.199, 91.326]
-
-    robot.MoveL(descStart,1,1,joint_pos= jointStart,vel=100)
-    robot.MoveL(descEnd,1,1,joint_pos= jointEnd,vel=100)
-
-    descREF0A = [147.139, -21.436, 60.717, -179.633, -3.051, -83.170]
-    jointREF0A = [-121.731, -106.193, -102.561, -64.734, 89.972, 96.171]
-
-    descREF0B = [139.247, 43.721, 65.361, -179.634, -3.043, -83.170]
-    jointREF0B = [-122.364, -113.991, -90.860, -68.630, 89.933, 95.540]
-
-    descREF1A = [289.747, 77.395, 58.390, -179.074, -2.901, -89.790]
-    jointREF1A = [-135.719, -119.588, -83.454, -70.245, 88.921, 88.819]
-
-    descREF1B = [259.310, 79.998, 64.774, -179.073, -2.900, -89.790]
-    jointREF1B = [-133.133, -119.029, -83.326, -70.976, 89.069, 91.401]
-
-    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
-    print("WireSearchStart return:",error)
-
-    robot.MoveL(descREF0A,1,1, joint_pos = jointREF0A, vel=100)
-    print("MoveL(descREF0A return:",error)
-    robot.MoveL(descREF0B,1,1, joint_pos = jointREF0B, vel=10,search=1)
-    print("MoveL(descREF0B return:",error)
-
-    error =robot.WireSearchWait("REF0")
-    print("WireSearchWait return:",error)
-
-    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
-    print("WireSearchEnd return:",error)
-
-    error = robot.WireSearchStart(1,10,100,0,10,100,0)
-    print("WireSearchStart return:",error)
-
-    robot.MoveL(descREF1A,1,1, joint_pos = jointREF1A, vel=100)
-    robot.MoveL(descREF1B,1,1, joint_pos = jointREF1B, vel=10,search=1)
-
-    error =robot.WireSearchWait("REF1")
-    print("WireSearchWait return:",error)
-
-    error = robot.WireSearchEnd(1,10,100,0,10,100,0)
-    print("WireSearchEnd return:",error)
-
-    error = robot.WireSearchStart(1,10,100,0,10,100,0)
-    print("WireSearchStart return:",error)
-
-    robot.MoveL(descREF0A,1,1, joint_pos = jointREF0A, vel=100)
-    robot.MoveL(descREF0B,1,1, joint_pos = jointREF0B, vel=10,search=1)
-
-    error =robot.WireSearchWait("RES0")
-    print("WireSearchWait return:",error)
-
-    error = robot.WireSearchEnd(1,10,100,0,10,100,0)
-    print("WireSearchEnd return:",error)
-
-    error = robot.WireSearchStart(1,10,100,0,10,100,0)
-    print("WireSearchStart return:",error)
-
-    robot.MoveL(descREF1A,1,1, joint_pos = jointREF1A, vel=100)
-    robot.MoveL(descREF1B,1,1, joint_pos = jointREF1B, vel=10,search=1)
-
-    error =robot.WireSearchWait("RES1")
-    print("WireSearchWait return:",error)
-
-    error = robot.WireSearchEnd(1,10,100,0,10,100,0)
-    print("WireSearchEnd return:",error)
-
-    varNameRef = ["REF0", "REF1", "#", "#", "#", "#"]
-    varNameRes = ["RES0", "RES1", "#", "#", "#", "#"]
-    error = robot.GetWireSearchOffset(0, 0, varNameRef, varNameRes)
-    print("GetWireSearchOffect return:",error)
-    if error[0]==0.
-        ref = error[1]
-        offdesc =error[2]
-
-        error = robot.PointsOffsetEnable(ref,offdesc)
-        print("PointsOffsetEnable return:",error)
-
-        error = robot.MoveL(descStart, 1, 1, joint_pos=jointStart, vel=100)
-        print("MoveL return:",error)
-        robot.MoveL(descEnd, 1, 1, joint_pos=jointEnd, vel=10)
-        print("MoveL return:",error)
-        error = robot.PointsOffsetDisable()
-        print("PointsOffsetDisable return:",error)
-
-End of wire position finding
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WireSearchEnd(refPos,searchVel,searchDis,autoBackFlag,autoBackVel,autoBackDis,offectFlag)``"
-    "Description", "Welding wire seek end"
-    "Mandatory parameters", "- ``refPos``: 1 - reference point 2 - contact point
-    - ``searchVel``: search velocity %
-    - ``searchDis``: search distance mm
-    - ``autoBackFlag``: autoBackFlag, 0 - not auto; - auto
-    - ``autoBackVel``: Automatic Back Velocity %
-    - ``autoBackDis``: automatic back distance mm
-    - ``offectFlag``: 1 - seek with offset; 2 - teach point seek"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Calculate the wire finding offset
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``GetWireSearchOffset(seamType, method,varNameRef,varNameRes)``"
-    "Description", "Calculate the welding wire seek offset"
-    "Mandatory parameters", "- ``seamType``: weld type
-    - ``method``: method of calculation
-    - ``varNameRef``: datums 1-6, “#” denotes a pointless variable
-    - ``varNameRes``: Contacts 1-6, “#” for dotless variables"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode
-    - ``offsetFlag``: 0 - the offset is superimposed directly on the instruction point; 1 - the offset requires a coordinate transformation of the instruction point
-    - ``offset``: offset position [x, y, z, a, b, c]"
-
-Waiting for wire seek to complete
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WireSearchWait(varname)``"
-    "Description", "Waiting for wire seek to complete."
-    "Mandatory parameters", "- ``varName``: contact name “RES0” ~ “RES99”"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-
-Wire seek contact points written to database
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetPointToDatabase(varName,pos)``"
-    "Description", "Welding wire seeker contact points written to database"
-    "Mandatory parameters", "- ``varName``: contact name “RES0” ~ “RES99”
-    - ``pos``: contact point data [x, y, x, a, b, c]"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-
-Arc tracking control
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd, sumMaxUd. axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent, offsetType, offsetParameter)``"
-    "Description", "Arc tracking control"
-    "Mandatory parameters", "- ``flag``: switch, 0-off; 1-on
-    - ``delayTime``: lag time in ms
-    - ``isLeftRight``: left-right deviation compensation 0 - off, 1 - on
-    - ``klr``: left/right adjustment factor (sensitivity)
-    - ``tStartLr``: left and right start compensation time cyc
-    - ``stepMaxLr``: Maximum compensation in mm for each left and right step.
-    - ``sumMaxLr``: total maximum compensation left and right mm
-    - ``isUpLow``: up and down deviation compensation 0 - off, 1 - on
-    - ``kud``: upward and downward adjustment factor (sensitivity)
-    - ``tStartUd``: up and down start compensation time cyc
-    - ``stepMaxUd``: Maximum compensation per step up and down mm
-    - ``sumMaxUd``: total maximum compensation up and down
-    - ``axisSelect``: upper and lower coordinate system selection, 0 - swing; 1 - tool; 2 - base
-    - ``referenceType``: upper and lower reference current setting mode, 0 - feedback; 1 - constant
-    - ``referSampleStartUd``: upper and lower reference current sampling start count (feedback), cyc
-    - ``referSampleCountUd``: upper and lower reference current sample cycle count (feedback), cyc
-    - ``referenceCurrent``: upper and lower reference currents mA
-    - ``offsetType``: bias tracking type, 0- no bias; 1- Sampling; 2- percent
-    - ``offsetParameter``: bias parameter; Sampling (offset sampling start time, default sampling cycle); Percentage (offset percentage (-100 ~ 100))"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-
-    robot = Robot.RPC('192.168.58.2')
-
-    flag = 1 # switch, 0-off; 1-on
-    delaytime=0 # lag time in ms
-    isLeftRight=0 #Left/Right Deviation Compensation 0-Off, 1-On
-    klr = 0.06 # left/right adjustment factor (sensitivity)
-    tStartLr = 5 # around start compensation time cyc
-    stepMaxLr =5 #Maximum compensation in mm at a time, left or right
-    sumMaxLr = 300 # Total maximum compensation left and right mm
-    isUpLow = 1 #Up and down offset compensation
-    kud =-0.06 #Up and down adjustment factor (sensitivity)
-    tStartUd = 5 # up and down start compensation time cyc
-    stepMaxUd = 5 # Maximum compensation per step up and down in mm
-    sumMaxUd = 300 # total maximum compensation up and down
-    axisSelect = 1 # up/down coordinate system selection, 0-swing; 1-tool; 2-base
-    referenceType = 0 # upper and lower reference current setting mode, 0 - feedback; 1 - constant
-    referSampleStartUd = 4 # upper and lower reference current sample start count (feedback), cyc
-    referSampleCountUd = 1 # Upper and lower reference current sample cycle count (feedback), cyc
-    referenceCurrent = 10 # upper and lower reference current mA
-
-    startdescPose = [-583.168, 325.637, 1.176, 75.262, 0.978, -3.571]
-    startjointPos = [-49.049, -77.203, 136.826, -189.074, -79.407, -11.811]
-    enddescPose = [-559.439, 420.491, 32.252, 77.745, 1.460, -10.130]
-    endjointPos = [-54.986, -77.639, 131.865, -185.707, -80.916, -12.218]
-
-    error = robot.WeldingSetCurrent(1, 230, 0)
-    print("WeldingSetCurrent return:",error)
-    robot.WeldingSetVoltage(1, 24, 0)
-
-    print("WeldingSetVoltage return:",error)
-    robot.ArcWeldTraceExtAIChannelConfig(0)
-    print("ArcWeldTraceExtAIChannelConfig return:",error)
-
-    robot.MoveJ(startjointPos,13,0,desc_pos=startdescPose,vel =5)
-    print("MoveJ return:",error)
-
-    error = robot.ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd,
-                                sumMaxUd, axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent,0,0)
-    print("WireSearchStart return:",error)
-
-    robot.ARCStart(1, 0, 10000)
-    print("ARCStart return:",error)
-
-    robot.MoveL(enddescPose,13,0,joint_pos=endjointPos,vel =5)
-    print("MoveJ return:",error)
-
-    robot.ARCEnd(1, 0, 10000)
-    print("ARCEnd return:",error)
-
-    flag = 0
-    error = robot.ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd,
-                                sumMaxUd, axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent,0,0)
-    print("WireSearchStart return:",error)
-
-Arc tracking AI passband selection
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ArcWeldTraceExtAIChannelConfig(channel)``"
-    "Description", "Arc Tracking AI Passband Selection"
-    "Mandatory parameters", "- ``channel``: arc tracking AI passband selection, [0-3]"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
+    robot.WeldingSetCurrent(1, 230, 0, 0)
+    robot.WeldingSetVoltage(1, 24, 0, 1)
+    p1Desc = [228.879, -503.594, 453.984, -175.580, 8.293, 171.267]
+    p1Joint = [102.700, -85.333, 90.518, -102.365, -83.932, 22.134]
+    p2Desc = [-333.302, -435.580, 449.866, -174.997, 2.017, 109.815]
+    p2Joint = [41.862, -85.333, 90.526, -100.587, -90.014, 22.135]
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+    rtn = robot.SegmentWeldStart(p1Desc, p2Desc, p1Joint, p2Joint, 20, 20, 0, 0, 5000, 0, 0, 0, 0)
+    print(f"SegmentWeldStart rtn is {rtn}")
+    robot.CloseRPC()
 
 Simulated swing start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -845,35 +608,6 @@ Simulated swing start
     "Mandatory parameters", "- ``weaveNum``: swing parameter number"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
-    
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-
-    robot = Robot.RPC('192.168.58.2')
-
-    desc1 = [238.209, -403.633, 251.291, 177.222, -1.433, 133.675]
-    joint1= [-48.728, -86.235, -95.288, -90.025, 92.715, 87.595]
-    desc2 = [238.207, -596.305, 251.294, 177.223, -1.432, 133.675]
-    joint2= [-60.240, -110.743, -66.784, -94.531, 92.351, 76.078 ]
-
-
-    error = robot.MoveL(desc1,1,0,joint_pos=joint1)
-    print("MoveL return:",error)
-
-    error = robot.WeaveStartSim(0)
-    print("WeaveStartSim return:",error)
-
-    error = robot.MoveL(desc2,1,0,joint_pos=joint2)
-    print("MoveL return:",error)
-
-    error = robot.WeaveEndSim(0)
-    print("WeaveEndSim return:",error)
 
 End of simulation swing
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -902,35 +636,7 @@ Start trajectory detection warning (no movement)
     "Mandatory parameters", "- ``weaveNum``: swing parameter number"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
-        
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
 
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-
-    robot = Robot.RPC('192.168.58.2')
-
-    desc1 = [238.209, -403.633, 251.291, 177.222, -1.433, 133.675]
-    joint1= [-48.728, -86.235, -95.288, -90.025, 92.715, 87.595]
-    desc2 = [238.207, -596.305, 251.294, 177.223, -1.432, 133.675]
-    joint2= [-60.240, -110.743, -66.784, -94.531, 92.351, 76.078 ]
-
-    error = robot.MoveL(desc1,1,0,joint_pos=joint1)
-    print("MoveL return:",error)
-
-    error = robot.WeaveInspectStart(0)
-    print("WeaveInspectStart return:",error)
-
-    error = robot.MoveL(desc2,1,0,joint_pos=joint2)
-    print("MoveL return:",error)
-
-    error = robot.WeaveInspectEnd(0)
-    print("WeaveInspectEnd return:",error)
-    
 End trajectory detection warning (no movement)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
@@ -944,85 +650,74 @@ End trajectory detection warning (no movement)
     "Mandatory parameters", "- ``weaveNum``: swing parameter number"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
-    
-Setting Welding Process Curve Parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
+
+Wobble start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``WeldingSetProcessParam(id, startCurrent, startVoltage, startTime, weldCurrent, weldVoltage, endCurrent, endVoltage, endTime)``"
-    "Description", "Set weld process profile parameters"
-    "Mandatory parameters", "
-    - ``id``: Welding process number (1-99)
-    - ``startCurrent``: Arc starting current (A)
-    - ``startVoltage``: startVoltage Arc-starting voltage (V)
-    - ``startTime``: startTime Arc start time (ms)
-    - ``weldCurrent``: weldCurrent Welding current (A)
-    - ``weldVoltage``: weldVoltage Welding voltage (V)
-    - ``endCurrent``: endCurrent Arc recovery current (A)
-    - ``endVoltage``: endVoltage Arc charging voltage (V)
-    - ``endTime``: endTime closing time (ms)
-    "
+    "Prototype", "``WeaveChangeStart(weaveNum)``"
+    "Description", "Wobble start"
+    "Mandatory parameters", "- ``weaveChangeFlag``: Swing number 1- Variable swing parameters; 2- Variable swing parameters + welding speed
+    - ``weaveNum``: Swing number
+    - ``velStart``: Welding start speed, (cm/min)
+    - ``velEnd``: Welding end speed, (cm/min)"
     "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-            
-Code example
-----------------------------------------------------
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Robot swing gradient welding code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
-
     robot = Robot.RPC('192.168.58.2')
+    p1Desc = [228.879, -503.594, 453.984, -175.580, 8.293, 171.267]
+    p1Joint = [102.700, -85.333, 90.518, -102.365, -83.932, 22.134]
+    p2Desc = [-333.302, -435.580, 449.866, -174.997, 2.017, 109.815]
+    p2Joint = [41.862, -85.333, 90.526, -100.587, -90.014, 22.135]
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+    robot.MoveJ(joint_pos= p1Joint,tool= 13,user= 0)
+    robot.WeaveStartSim(0)
+    robot.MoveL(desc_pos= p2Desc,tool= 13,user= 0)
+    robot.WeaveEndSim(0)
+    robot.MoveJ(joint_pos= p1Joint,tool= 13,user= 0)
+    robot.WeaveInspectStart(0)
+    robot.MoveL(desc_pos= p2Desc,tool= 13,user= 0,)
+    robot.WeaveInspectEnd(0)
+    robot.WeldingSetVoltage(1, 19, 0, 0)
+    robot.WeldingSetCurrent(1, 190, 0, 0)
+    robot.MoveL(desc_pos= p1Desc,tool= 1,user= 1,vel= 100,acc= 100,ovl= 50)
+    robot.ARCStart(1, 0, 10000)
+    robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
+    robot.WeaveStart(0)
+    robot.WeaveChangeStart(1, 0, 50, 30)
+    robot.MoveL(desc_pos= p2Desc,tool= 1,user= 1,vel= 100)
+    robot.WeaveChangeEnd()
+    robot.WeaveEnd(0)
+    robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
+    robot.ARCEnd(1, 0, 10000)
+    robot.CloseRPC()
 
-    id = 1 # Welding process number (1-99)
-    startCurrent = 177 # Arc start current (A)
-    startVoltage = 27 # Arc Start Voltage (V)
-    startTime = 1000 # Arc start time (ms)
-    weldCurrent = 178 #Weld Current (A)
-    weldVoltage = 28 # Weld Voltage (V)
-    endCurrent = 176 # Arc closing current (A)
-    endVoltage = 26 # Arc charging voltage (V)
-    endTime = 1000 #Arc closing time (ms)
-
-    error = robot.WeldingSetProcessParam(id, startCurrent, startVoltage, startTime, weldCurrent, weldVoltage,
-                                            endCurrent, endVoltage, endTime)
-
-    print("WeldingSetProcessParam return:",error)
-
-    error = robot.WeldingGetProcessParam(1)
-    print("WeldingGetProcessParam return:",error)
-        
-Obtaining Welding Process Curve Parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
+Wobble end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.9-3.7.9
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``WeldingGetProcessParam(id)``"
-    "Description", "Get welding process curve parameters"
-    "Mandatory parameters", "
-    - ``id``: Welding process number (1-99)
-    "
+    "Prototype", "``WeaveChangeEnd()``"
+    "Description", "Wobble end"
+    "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode
-    - ``startCurrent``: arc starting current (A)
-    - ``startVoltage``: Arc starting voltage (V)
-    - ``startTime``: start time (ms)
-    - ``weldCurrent``: welding current (A)
-    - ``weldVoltage``: welding voltage (V)
-    - ``endCurrent``: arc closing current (A)
-    - ``endVoltage``: arc closing voltage (V)
-    - ``endTime``: arc closing time (ms)
-    " 
-    
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
 Extended IO-Configuration Welder Gas Detection Signal
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
@@ -1038,45 +733,7 @@ Extended IO-Configuration Welder Gas Detection Signal
     "
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
-            
-Code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-
-    robot = Robot.RPC('192.168.58.2')
-
-    #Expanded IO-Configuration Welder Gas Detection Signal
-    error = robot.SetAirControlExtDoNum(10)
-    print("SetAirControlExtDoNum 10 return:",error)
-
-    # Expanded IO-Configure welder arc start signals
-    error = robot.SetArcStartExtDoNum(11)
-    print("SetArcStartExtDoNum 11 return:",error)
-
-    #Expansion IO-Configuration of the welder's reverse wire feed signal
-    error = robot.SetWireReverseFeedExtDoNum(12)
-    print("SetWireReverseFeedExtDoNum 12 return:",error)
-
-    #Expansion IO-Configuration of the welder's forward wire feed signal
-    error = robot.SetWireForwardFeedExtDoNum(13)
-    print("SetWireForwardFeedExtDoNum 13 return:",error)
-
-    #Expanded IO-Configure Welder Arc Start Success Signal
-    error = robot.SetArcDoneExtDiNum(10)
-    print("SetArcDoneExtDiNum 10 return:",error)
-
-    # Extended IO-Configuration Welder Ready Signal
-    error = robot.SetWeldReadyExtDiNum(11)
-    print("SetWeldReadyExtDiNum 11 return:",error)
-
-    # Expanded IO-Configuration Weld Interrupt Recovery Signals
-    error = robot.SetExtDIWeldBreakOffRecover(12,13)
-    print("SetExtDIWeldBreakOffRecover 12 13 return:",error)
-        
+  
 Extended IO-Configuration of welder arc start signal
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
@@ -1174,101 +831,78 @@ Extended IO-Configuration Weld Interrupt Recovery Signal
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode" 
 
-Setting Up the Weld Wire Seek Expansion IO Port
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetWireSearchExtDIONum(searchDoneDINum, searchStartDONum)``"
-    "Description", "Setting up the Weld Wire Seeker Expansion IO Port"
-    "Mandatory parameter", "- ``searchDoneDINum``: weld wire seek success DO port (0-127)
-    - ``searchStartDONum``: wire seek start/stop control DO port (0-127)"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-
-Welder control mode switching
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-Set welder control mode to expand DO port
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetWeldMachineCtrlModeExtDoNum(DONum)``"
-    "Description", "Set welder control mode to extend DO port"
-    "Mandatory parameters", "- ``DONum``: welder control mode DO port (0-127)"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-
-Setting the welder control mode
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetWeldMachineCtrlMode(mode)``"
-    "Description", "Set welder control mode"
-    "Mandatory parameters", "- ``mode``: welder control mode; 0 - unitary"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-
-Code example
-----------------------------------------------------
+Example code for setting up extended IO solder signals
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
+    import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error = robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 50, 5, 50, 1, 50, 10)
-    print("ExtDevSetUDPComParam return ", error)
-    error = robot.ExtDevLoadUDPDriver()
-    print("ExtDevLoadUDPDriver return ", error)
+    rtn = robot.SetArcStartExtDoNum(10)
+    print(f"SetArcStartExtDoNum rtn is {rtn}")
+    rtn = robot.SetAirControlExtDoNum(20)
+    print(f"SetAirControlExtDoNum rtn is {rtn}")
+    rtn = robot.SetWireForwardFeedExtDoNum(30)
+    print(f"SetWireForwardFeedExtDoNum rtn is {rtn}")
+    rtn = robot.SetWireReverseFeedExtDoNum(40)
+    rtn = robot.SetWeldReadyExtDiNum(50)
+    print(f"SetWeldReadyExtDiNum rtn is {rtn}")
+    rtn = robot.SetArcDoneExtDiNum(60)
+    print(f"SetArcDoneExtDiNum rtn is {rtn}")
+    rtn = robot.SetExtDIWeldBreakOffRecover(70, 80)
+    print(f"SetExtDIWeldBreakOffRecover rtn is {rtn}")
+    rtn = robot.SetWireSearchExtDIONum(0, 1)
+    print(f"SetWireSearchExtDIONum rtn is {rtn}")
+    robot.CloseRPC()
 
-    robot.SetWeldMachineCtrlModeExtDoNum(DONum=17)
-    robot.SetWeldMachineCtrlMode(mode=0)
-    robot.SetWeldMachineCtrlModeExtDoNum(DONum=18)
-    robot.SetWeldMachineCtrlMode(mode=0)
-    robot.SetWeldMachineCtrlModeExtDoNum(DONum=19)
-    robot.SetWeldMachineCtrlMode(mode=0)
+Arc tracking control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.9-3.7.9
 
-    error = robot.SetWeldMachineCtrlModeExtDoNum(DONum=17)
-    print("SetWeldMachineCtrlModeExtDoNum return ", error)
-    for i in range(0,5):
-        error = robot.SetWeldMachineCtrlMode(mode=0)
-        print("SetWeldMachineCtrlMode return ", error)
-        time.sleep(0.5)
-        error = robot.SetWeldMachineCtrlMode(mode=1)
-        print("SetWeldMachineCtrlMode return ", error)
-        time.sleep(0.5)
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
 
-    error = robot.SetWeldMachineCtrlModeExtDoNum(DONum=18)
-    print("SetWeldMachineCtrlModeExtDoNum return ", error)
-    for i in range(0,5):
-        error = robot.SetWeldMachineCtrlMode(mode=0)
-        print("SetWeldMachineCtrlMode return ", error)
-        time.sleep(0.5)
-        error = robot.SetWeldMachineCtrlMode(mode=1)
-        print("SetWeldMachineCtrlMode return ", error)
-        time.sleep(0.5)
+    "Prototype", "``ArcWeldTraceControl(flag,delaytime, isLeftRight, klr, tStartLr, stepMaxLr, sumMaxLr, isUpLow, kud, tStartUd, stepMaxUd, sumMaxUd. axisSelect, referenceType, referSampleStartUd, referSampleCountUd, referenceCurrent, offsetType, offsetParameter)``"
+    "Description", "Arc tracking control"
+    "Mandatory parameters", "- ``flag``: switch, 0-off; 1-on
+    - ``delayTime``: lag time in ms
+    - ``isLeftRight``: left-right deviation compensation 0 - off, 1 - on
+    - ``klr``: left/right adjustment factor (sensitivity)
+    - ``tStartLr``: left and right start compensation time cyc
+    - ``stepMaxLr``: Maximum compensation in mm for each left and right step.
+    - ``sumMaxLr``: total maximum compensation left and right mm
+    - ``isUpLow``: up and down deviation compensation 0 - off, 1 - on
+    - ``kud``: upward and downward adjustment factor (sensitivity)
+    - ``tStartUd``: up and down start compensation time cyc
+    - ``stepMaxUd``: Maximum compensation per step up and down mm
+    - ``sumMaxUd``: total maximum compensation up and down
+    - ``axisSelect``: upper and lower coordinate system selection, 0 - swing; 1 - tool; 2 - base
+    - ``referenceType``: upper and lower reference current setting mode, 0 - feedback; 1 - constant
+    - ``referSampleStartUd``: upper and lower reference current sampling start count (feedback), cyc
+    - ``referSampleCountUd``: upper and lower reference current sample cycle count (feedback), cyc
+    - ``referenceCurrent``: upper and lower reference currents mA
+    - ``offsetType``: bias tracking type, 0- no bias; 1- Sampling; 2- percent
+    - ``offsetParameter``: bias parameter; Sampling (offset sampling start time, default sampling cycle); Percentage (offset percentage (-100 ~ 100))"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
 
-    error = robot.SetWeldMachineCtrlModeExtDoNum(DONum=19)
-    print("SetWeldMachineCtrlModeExtDoNum return ", error)
-    for i in range(0,5):
-        error = robot.SetWeldMachineCtrlMode(mode=0)
-        print("SetWeldMachineCtrlMode return ", error)
-        time.sleep(0.5)
-        error = robot.SetWeldMachineCtrlMode(mode=1)
-        print("SetWeldMachineCtrlMode return ", error)
-        time.sleep(0.5)
+Arc tracking AI passband selection
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ArcWeldTraceExtAIChannelConfig(channel)``"
+    "Description", "Arc Tracking AI Passband Selection"
+    "Mandatory parameters", "- ``channel``: arc tracking AI passband selection, [0-3]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
 
 Arc tracking + multi-layer multi-channel compensation on
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1300,7 +934,7 @@ Arc Tracking + Multi-Layer Multi-Channel Compensation Off
 
 Offset Coordinate Change - Multi-layer Multi-pass Welding
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: Python SDK-v2.0.8-3.7.8
+.. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
@@ -1318,205 +952,93 @@ Offset Coordinate Change - Multi-layer Multi-pass Welding
     "Return Value", "- Error Code Success-0 Failure- errcode 
     - ``offset``: the offset of the result of the calculation"
 
-Set the detection parameters of robot welding arc unexpected interruption
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Python SDK-v2.0.8-3.7.8
+Example code for multi-layer multi-pass welding arc tracking
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeldingSetCheckArcInterruptionParam(checkEnable, arcInterruptTimeLength)``"
-    "Description", "Set the detection parameters of robot welding arc unexpected interruption"
-    "Mandatory parameters", "- ``checkEnable``: Whether to enable detection. 0: Indicates that the function is disabled. 1- Enable
-    - ``arcInterruptTimeLength``:Arc break confirmation time (ms)"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
-
-The detection parameters of unexpected interruption of robot welding arc were obtained
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.8-3.7.8
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeldingGetCheckArcInterruptionParam()``"
-    "Description", "The detection parameters of unexpected interruption of robot welding arc were obtained"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- Error Code Success-0 Failure- errcode 
-    - ``checkEnable``: Whether to enable detection. 0: Indicates that the function is disabled. 1- Enable
-    - ``arcInterruptTimeLength``:Arc break confirmation time (ms)"
-
-Set the robot welding interrupt recovery parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.8-3.7.8
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeldingSetReWeldAfterBreakOffParam(enable, length, velocity, moveType)``"
-    "Description", "Set the robot welding interrupt recovery parameters"
-    "Mandatory parameters", "- ``enable``:Whether to enable recovery from welding interruption
-    - ``length``: weld overlap distance (mm)
-    - ``velocity``: Percentage of robot return to rearcing point (0-100)
-    - ``moveType``: The way the robot moves to the rearcing point; 0-LIN; 1-PTP"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
-
-Obtain the robot welding interrupt recovery parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.8-3.7.8
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeldingGetReWeldAfterBreakOffParam()``"
-    "Description", "Obtain the robot welding interrupt recovery parameters"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- Error Code Success-0 Failure- errcode 
-    - ``enable``: Whether to enable recovery from welding interruption
-    - ``length``: weld overlap distance (mm)
-    - ``velocity``: Percentage of robot return to rearcing point (0-100)
-    - ``moveType``: The way the robot moves to the rearcing point; 0-LIN; 1-PTP"
-
-Set the robot to resume welding after welding interruption
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.8-3.7.8
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeldingStartReWeldAfterBreakOff()``"
-    "Description", "Set the robot to resume welding after welding interruption"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
-
-Set the robot to exit welding after welding interruption
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.8-3.7.8
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeldingAbortWeldAfterBreakOff()``"
-    "Description", "Set the robot to exit welding after welding interruption"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
-
-Code example
-----------------------------------------------------
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
+    import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-
-    rtn = -1
-    rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200)
-    print("WeldingSetCheckArcInterruptionParam return", rtn)
-    rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0)
-    print("WeldingSetReWeldAfterBreakOffParam return", rtn)
-    enable = 0
-    length = 0
-    velocity = 0
-    moveType = 0
-    checkEnable = 0
-    arcInterruptTimeLength = 0
-    rtn, checkEnable, arcInterruptTimeLength = robot.WeldingGetCheckArcInterruptionParam()
-    print("WeldingGetCheckArcInterruptionParam checkEnable:", checkEnable)
-    print("WeldingGetCheckArcInterruptionParam arcInterruptTimeLength:", arcInterruptTimeLength)
-    rtn, enable, length, velocity, moveType = robot.WeldingGetReWeldAfterBreakOffParam()
-    print("*****")
-    print("WeldingGetReWeldAfterBreakOffParam enable:", enable)
-    print("WeldingGetReWeldAfterBreakOffParam length:", length)
-    print("WeldingGetReWeldAfterBreakOffParam velocity:", velocity)
-    print("WeldingGetReWeldAfterBreakOffParam moveType:", moveType)
-
-    robot.ProgramLoad("/fruser/test.lua")
-    robot.ProgramRun()
-
-    time.sleep(5)
-
-    while True:
-        print("welding breakoff state is ", robot.robot_state_pkg.weldingBreakOffState.breakOffState)
-        if robot.robot_state_pkg.weldingBreakOffState.breakOffState == 1:
-            print("welding breakoff !")
-            time.sleep(2)
-            rtn = robot.WeldingStartReWeldAfterBreakOff()
-            print("WeldingStartReWeldAfterBreakOff return", rtn)
-            break
-        time.sleep(0.1)
-
-Wobble start
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.1.2
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeaveChangeStart(weaveNum)``"
-    "Description", "Wobble start"
-    "Mandatory parameters", "- ``weaveChangeFlag``: Swing number 1- Variable swing parameters; 2- Variable swing parameters + welding speed
-    - ``weaveNum``: Swing number
-    - ``velStart``: Welding start speed, (cm/min)
-    - ``velEnd``: Welding end speed, (cm/min)"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
-
-Wobble end
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.9-3.8.0
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``WeaveChangeEnd()``"
-    "Description", "Wobble end"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
-
-code example
-----------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-
-    p1Joint = [74.620, -80.903, 94.608, -109.882, -90.436, -13.432]
-    p1Desc = [-72.912, -587.664, 31.849, 43.283, -6.731, 15.068]
-    p2Joint = [66.431, -92.875, 116.362, -120.516, -88.627, -24.731]
-    p2Desc = [-104.915, -483.712, -25.231, 42.228, -6.572, 18.433]
-    p3Joint = [56.457, -84.796, 104.618, -114.497, -92.422, -25.430]
-    p3Desc = [-240.651, -483.840, -7.161, 46.577, -5.286, 8.318]
-    
-    robot.WeldingSetVoltage(1, 19, 0, 0)
-    robot.WeldingSetCurrent(1, 190, 0, 0)
-    robot.MoveJ(joint_pos=p1Joint, tool=1, user=1, vel=100.0, acc=100.0, ovl=100.0)
-    robot.MoveL(desc_pos=p2Desc, tool=1, user=1, vel=100.0, acc=100.0, ovl=50.0)
-    robot.ARCStart(1, 0, 10000)
-    robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
-    robot.WeaveStart(0)
-    robot.WeaveChangeStart(1,1,0,0)
-    robot.MoveL(desc_pos=p3Desc, tool=1, user=1, vel=100.0, acc=100.0, ovl=1.0)
-    robot.WeaveChangeEnd()
-    robot.WeaveEnd(0)
-    robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0)
-    robot.ARCEnd(1, 0, 10000)
+    mulitilineorigin1_joint = [-24.090, -63.501, 84.288, -111.940, -93.426, 57.669]
+    mulitilineorigin1_desc = [-677.559, 190.951, -1.205, 1.144, -41.482, -82.577]
+    mulitilineX1_desc = [-677.556, 211.949, -1.206]
+    mulitilineZ1_desc = [-677.564, 190.956, 19.817]
+    mulitilinesafe_joint = [-25.734, -63.778, 81.502, -108.975, -93.392, 56.021]
+    mulitilinesafe_desc = [-677.561, 211.950, 19.812, 1.144, -41.482, -82.577]
+    mulitilineorigin2_joint = [-29.743, -75.623, 101.241, -116.354, -94.928, 55.735]
+    mulitilineorigin2_desc = [-563.961, 215.359, -0.681, 2.845, -40.476, -87.443]
+    mulitilineX2_desc = [-563.965, 220.355, -0.680]
+    mulitilineZ2_desc = [-563.968, 215.362, 4.331]
+    epos = [0, 0, 0, 0]
+    offset = [0, 0, 0, 0, 0, 0]
+    time.sleep(0.01)
+    error = robot.MoveJ(joint_pos= mulitilinesafe_joint,tool= 13,user= 0,vel= 10)
+    print(f"MoveJ return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin1_desc,tool= 13,user= 0,vel= 10,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveJ(joint_pos= mulitilinesafe_joint,tool= 13,user= 0,vel= 10)
+    print(f"MoveJ return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin2_desc,tool= 13,user= 0,vel= 10,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveJ(joint_pos= mulitilinesafe_joint,tool= 13,user= 0,vel= 10)
+    print(f"MoveJ return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin1_desc,tool= 13,user= 0,vel= 10,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.ARCStart(1, 0, 3000)
+    print(f"ARCStart return: {error}")
+    error = robot.WeaveStart(0)
+    print(f"WeaveStart return: {error}")
+    error = robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 50, 1, 0.06, 5, 5, 55, 0, 0, 4, 1, 10,0,0)
+    print(f"ArcWeldTraceControl return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin2_desc,tool= 13,user= 0,vel= 1,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 50, 1, 0.06, 5, 5, 55, 0, 0, 4, 1, 10,0,0)
+    print(f"ArcWeldTraceControl return: {error}")
+    error = robot.WeaveEnd(0)
+    print(f"WeaveEnd return: {error}")
+    error = robot.ARCEnd(1, 0, 10000)
+    print(f"ARCEnd return: {error}")
+    error = robot.MoveJ(joint_pos= mulitilinesafe_joint,tool= 13,user= 0,vel= 10)
+    print(f"MoveJ return: {error}")
+    error,offset = robot.MultilayerOffsetTrsfToBase(mulitilineorigin1_desc[:3], mulitilineX1_desc, mulitilineZ1_desc, 10.0, 0.0, 0.0)
+    print(f"MultilayerOffsetTrsfToBase return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin1_desc,tool= 13,user= 0,vel= 10,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.ARCStart(1, 0, 3000)
+    print(f"ARCStart return: {error}")
+    error, offset = robot.MultilayerOffsetTrsfToBase(mulitilineorigin2_desc[:3], mulitilineX2_desc, mulitilineZ2_desc, 10, 0, 0)
+    print(f"MultilayerOffsetTrsfToBase return: {error}")
+    error = robot.ArcWeldTraceReplayStart()
+    print(f"ArcWeldTraceReplayStart return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin2_desc,tool= 13,user= 0,vel= 2,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.ArcWeldTraceReplayEnd()
+    print(f"ArcWeldTraceReplayEnd return: {error}")
+    error = robot.ARCEnd(1, 0, 10000)
+    print(f"ARCEnd return: {error}")
+    error = robot.MoveJ(joint_pos= mulitilinesafe_joint,tool= 13,user= 0,vel= 10)
+    print(f"MoveJ return: {error}")
+    error, offset = robot.MultilayerOffsetTrsfToBase(mulitilineorigin1_desc[:3], mulitilineX1_desc, mulitilineZ1_desc, 0, 10, 0)
+    print(f"MultilayerOffsetTrsfToBase return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin1_desc,tool= 13,user= 0,vel= 10,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.ARCStart(1, 0, 3000)
+    print(f"ARCStart return: {error}")
+    error, offset = robot.MultilayerOffsetTrsfToBase(mulitilineorigin2_desc[:3], mulitilineX2_desc, mulitilineZ2_desc, 0, 10, 0)
+    error = robot.ArcWeldTraceReplayStart()
+    print(f"ArcWeldTraceReplayStart return: {error}")
+    error = robot.MoveL(desc_pos= mulitilineorigin2_desc,tool= 13,user= 0,vel= 2,speedPercent=100)
+    print(f"MoveL return: {error}")
+    error = robot.ArcWeldTraceReplayEnd()
+    print(f"ArcWeldTraceReplayEnd return: {error}")
+    error = robot.ARCEnd(1, 0, 3000)
+    print(f"ARCEnd return: {error}")
+    error = robot.MoveJ(joint_pos= mulitilinesafe_joint,tool= 13,user= 0,vel= 10)
+    print(f"MoveJ return: {error}")
+    robot.CloseRPC()
 
 Selection of AI channels for current feedback in arc tracking welding machines
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1580,8 +1102,8 @@ Voltage feedback conversion parameters of arc tracking welding machine
     - ``voltageHigh``: The upper limit of the AI channel corresponds to the voltage value of the welding machine. The default value is 100V, and the range is [0-200V]"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
-------------------------------------
+Example arc tracking code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
@@ -1619,6 +1141,179 @@ code example
     robot.WeaveEnd(0)
     robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0)
     robot.MoveJ(joint_pos=safetyjointPos, tool=1, user=0, vel=20, acc=100)
+
+Welding wire position finding start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WireSearchStart(refPos,searchVel,searchDis,autoBackFlag,autoBackVel,autoBackDis,offectFlag)``"
+    "Description", "Welding wire seek start"
+    "Mandatory parameters", "- ``refPos``: 1 - reference point 2 - contact point
+    - ``searchVel``: search velocity %
+    - ``searchDis``: search distance mm
+    - ``autoBackFlag``: autoBackFlag, 0 - not auto; - auto
+    - ``autoBackVel``: Automatic Back Velocity %
+    - ``autoBackDis``: automatic back distance mm
+    - ``offectFlag``: 1 - seek with offset; 2 - teach point seek"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+End of wire position finding
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WireSearchEnd(refPos,searchVel,searchDis,autoBackFlag,autoBackVel,autoBackDis,offectFlag)``"
+    "Description", "Welding wire seek end"
+    "Mandatory parameters", "- ``refPos``: 1 - reference point 2 - contact point
+    - ``searchVel``: search velocity %
+    - ``searchDis``: search distance mm
+    - ``autoBackFlag``: autoBackFlag, 0 - not auto; - auto
+    - ``autoBackVel``: Automatic Back Velocity %
+    - ``autoBackDis``: automatic back distance mm
+    - ``offectFlag``: 1 - seek with offset; 2 - teach point seek"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Calculate the wire finding offset
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetWireSearchOffset(seamType, method,varNameRef,varNameRes)``"
+    "Description", "Calculate the welding wire seek offset"
+    "Mandatory parameters", "- ``seamType``: weld type
+    - ``method``: method of calculation
+    - ``varNameRef``: datums 1-6, “#” denotes a pointless variable
+    - ``varNameRes``: Contacts 1-6, “#” for dotless variables"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``offsetFlag``: 0 - the offset is superimposed directly on the instruction point; 1 - the offset requires a coordinate transformation of the instruction point
+    - ``offset``: offset position [x, y, z, a, b, c]"
+
+Waiting for wire seek to complete
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WireSearchWait(varname)``"
+    "Description", "Waiting for wire seek to complete."
+    "Mandatory parameters", "- ``varName``: contact name “RES0” ~ “RES99”"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
+
+Wire seek contact points written to database
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetPointToDatabase(varName,pos)``"
+    "Description", "Welding wire seeker contact points written to database"
+    "Mandatory parameters", "- ``varName``: contact name “RES0” ~ “RES99”
+    - ``pos``: contact point data [x, y, x, a, b, c]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
+
+Example of robot wire locating code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    toolCoord = [0, 0, 200, 0, 0, 0]
+    robot.SetToolCoord(1, toolCoord, 0, 0, 1, 0)
+    wobjCoord = [0, 0, 0, 0, 0, 0]
+    robot.SetWObjCoord(1, wobjCoord, 0)
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+    descStart = [216.543, 445.175, 93.465, 179.683, 1.757, -112.641]
+    jointStart = [-128.345, -86.660, 114.679, -119.625, -89.219, 74.303]
+    descEnd = [111.143, 523.384, 87.659, 179.703, 1.835, -97.750]
+    jointEnd = [-113.454, -81.060, 109.328, -119.954, -89.218, 74.302]
+    error = robot.MoveL(desc_pos=descStart,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos=descEnd,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    descREF0A = [142.135, 367.604, 86.523, 179.728, 1.922, -111.089]
+    jointREF0A = [-126.794, -100.834, 128.922, -119.864, -89.218, 74.302]
+    descREF0B = [254.633, 463.125, 72.604, 179.845, 2.341, -114.704]
+    jointREF0B = [-130.413, -81.093, 112.044, -123.163, -89.217, 74.303]
+    descREF1A = [92.556, 485.259, 47.476, -179.932, 3.130, -97.512]
+    jointREF1A = [-113.231, -83.815, 119.877, -129.092, -89.217, 74.303]
+    descREF1B = [203.103, 583.836, 63.909, 179.991, 2.854, -103.372]
+    jointREF1B = [-119.088, -69.676, 98.692, -121.761, -89.219, 74.303]
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos=descREF0A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos=descREF0B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("REF0")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchEnd return: {error}")
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos= descREF1A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descREF1B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("REF1")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos= descREF0A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descREF0B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("RES0")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchEnd return: {error}")
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos= descREF1A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descREF1B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("RES1")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchEnd return: {error}")
+    varNameRef = ["REF0", "REF1", "#", "#", "#", "#"]
+    varNameRes = ["RES0", "RES1", "#", "#", "#", "#"]
+    offectFlag = 0
+    offectPos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    error, offectFlag, offectPos = robot.GetWireSearchOffset(0, 0, varNameRef, varNameRes)
+    print(f"GetWireSearchOffset return: {error}")
+    error = robot.PointsOffsetEnable(0, offectPos)
+    print(f"PointsOffsetEnable return: {error}")
+    error = robot.MoveL(desc_pos= descStart,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descEnd,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.PointsOffsetDisable()
+    robot.CloseRPC()
 
 Set the welding voltage to start gradually
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1684,15 +1379,14 @@ Set the welding current to gradually end
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-code example
-------------------------------------
+Robot welding current voltage gradient code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-
     startdescPose = [-484.707, 276.996, -14.013, -37.657, -40.508, -1.548]
     startjointPos = [-45.421, -75.673, 93.627, -104.302, -87.938, 6.005]
     enddescPose = [-508.767, 137.109, -13.966, -37.639, -40.508, -1.559]
@@ -1701,7 +1395,6 @@ code example
     safejointPos = [-46.604, -75.410, 89.109, -100.003, -88.012, 4.823]
     exaxisPos = [0, 0, 0, 0]
     offdese = [0, 0, 0, 0, 0, 0]
-
     robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0)
     robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1)
     robot.WeldingSetVoltage(0, 25, 1, 0)

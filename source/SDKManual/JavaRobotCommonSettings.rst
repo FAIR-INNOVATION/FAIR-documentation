@@ -1,278 +1,148 @@
-Common Robot Settings
-=====================================
+Robot common settings
+==================================
 
-.. toctree:: 
+.. toctree::
     :maxdepth: 5
 
-Setting the global speed
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set tool reference point - six point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Setting the global speed
-    * @param [in] vel velocity percentage, range [0~100]
-    * @return error code
+    * @brief Set tool reference point - six point method
+    * @param [in] point_num Point number, range [1~6]
+    * @return Error code
     */
-    int SetSpeed(int vel). 
+    int SetToolPoint(int point_num);
 
-Setting system variable values
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate tool coordinate system - six point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Setting system variable values
-    * @param [in] id Variable number in the range [1~20].
-    * @param [in] value Variable value
-    * @return error code
+    * @brief Calculate tool coordinate system
+    * @param [out] tcp_pose Tool coordinate system
+    * @return Error code
     */
-    int SetSysVarValue(int id, double value); 
+    int ComputeTool(DescPose tcp_pose);
 
-Setting Tool Reference Points - Six-Point Method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set tool reference point - four point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Setting Tool Reference Points -- Six-Point Approach
-    * @param [in] point_num point_num, range [1~6].
-    * @return error code 
-    */ 
-    int SetToolPoint(int point_num). 
+    /**
+    * @brief Set tool reference point - four point method
+    * @param [in] point_num Point number, range [1~4]
+    * @return Error code
+    */
+    int SetTcp4RefPoint(int point_num);
 
-Calculation tool coordinate system - six-point method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate tool coordinate system - four point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Calculate the tool coordinate system
-    * @param [out] tcp_pose tool coordinate system
-    * @return error code 
-    */ 
-    int ComputeTool(DescPose tcp_pose). 
+    /**
+    * @brief Calculate tool coordinate system
+    * @param [out] tcp_pose Tool coordinate system
+    * @return Error code
+    */
+    int ComputeTcp4(DescPose tcp_pose);
 
-Setting Tool Reference Points - Four Point Method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate tool coordinate system based on point information
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Setting Tool Reference Points -- Four-Point Approach
-    * @param [in] point_num point_num, range [1~4].
-    * @return error code 
-    */ 
-    int SetTcp4RefPoint(int point_num).
+    /**
+    * @brief Calculate tool coordinate system based on point information
+    * @param [in] method Calculation method; 0-four point method; 1-six point method
+    * @param [in] pos Joint position group, array length is 4 for four point method, 6 for six point method
+    * @param [out] tool_pose Output tool coordinate system
+    * @return Error code
+    */
+    int ComputeToolCoordWithPoints(int method, JointPos[] pos, DescPose tool_pose);
 
-Calculation Tool Coordinate System - Four Point Method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set tool coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Calculate the tool coordinate system
-    * @param [out] tcp_pose tool coordinate system
-    * @return error code 
-    */ 
-    int ComputeTcp4(DescPose tcp_pose).
-
-Setting the tool coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Setting the tool coordinate system 
-    * @param [in] id coordinate system number in the range [0 to 14].
-    * @param [in] coord Tool center point relative to end flange center position
+    /**
+    * @brief Set tool coordinate system
+    * @param [in] id Coordinate system number, range [0~14]
+    * @param [in] coord Tool center point pose relative to end flange center
     * @param [in] type 0-tool coordinate system, 1-sensor coordinate system
-    * @param [in] install install position, 0 - end of robot, 1 - outside of robot
-    * @param [in] toolID toolID
-    * @param [in] loadNum loadNumber
-    * @return error code 
-    */ 
-    int SetToolCoord(int id, DescPose coord, int type, int install, int toolID, int loadNum);;  
+    * @param [in] install Installation position, 0-robot end, 1-external to robot
+    * @param [in] toolID Tool ID
+    * @param [in] loadNum Load number
+    * @return Error code
+    */
+    int SetToolCoord(int id, DescPose coord, int type, int install, int toolID, int loadNum);
 
-Setting the tool coordinate system list
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set tool coordinate system list
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief sets up a list of tool coordinate systems
-    * @param [in] id coordinate system number in the range [0 to 14].
-    * @param [in] coord Tool center point relative to end flange center orientation
+    * @brief Set tool coordinate system list
+    * @param [in] id Coordinate system number, range [0~14]
+    * @param [in] coord Tool center point pose relative to end flange center
     * @param [in] type 0-tool coordinate system, 1-sensor coordinate system
-    * @param [in] install install position, 0 - end of robot, 1 - outside of robot
-    * @param [in] loadNum loadNumber
-    * @return error code
+    * @param [in] install Installation position, 0-robot end, 1-external to robot
+    * @param [in] loadNum Load number
+    * @return Error code
     */
-    int SetToolList(int id, DescPose coord, int type, int install, int loadNum);;  
+    int SetToolList(int id, DescPose coord, int type, int install, int loadNum);
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get current tool coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static void main(String[] args)
+    /**
+    * @brief Get current tool coordinate system
+    * @param [in] flag 0-blocking, 1-non-blocking
+    * @param [out] desc_pos Tool coordinate system pose
+    * @return Error code
+    */
+    int GetTCPOffset(int flag, DescPose desc_pos);
+
+Robot tool coordinate system operation code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestTCPCompute(Robot robot)
     {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.Mode(1);
-        robot.SetSpeed(20);
-        robot.Mode(0);
+        DescPose p1Desc=new DescPose(186.331, 487.913, 209.850, 149.030, 0.688, -114.347);
+        JointPos p1Joint=new JointPos(-127.876, -75.341, 115.417, -122.741, -59.820, 74.300);
 
-        for(int i = 1; i < 10; i++)
-        {
-            robot.SetSysVarValue(i, i * 10);
-        }
-        for(int i = 1; i < 10; i++)
-        {
-            List<Number> rtnArr = robot.GetSysVarValue(i);//get the system variable
-            System.out.println("SysVarValue " + i + " is " + rtnArr.get(1));
-        }
+        DescPose p2Desc=new DescPose(69.721, 535.073, 202.882, -144.406, -14.775, -89.012);
+        JointPos p2Joint=new JointPos(-101.780, -69.828, 110.917, -125.740, -127.841, 74.300);
 
-        JointPos jp1=new JointPos(-89.407,-148.279,-83.169,-45.689,133.689,41.705);
-        JointPos jp2=new JointPos(-67.595,-143.7,-88.006,-48.514,57.073,56.189);
-        JointPos jp3=new JointPos(-88.229,-152.355,-67.815,-78.07,129.029,58.739);
-        JointPos jp4=new JointPos(-77.528,-141.519,-89.826,-37.184,90.274,41.769);
-        JointPos jp5=new JointPos(-76.744,-138.219,-97.714,-32.595,90.255,42.558);
-        JointPos jp6=new JointPos(-77.595,-138.454,-90.065,-40.014,90.275,41.709);
-        ExaxisPos epos = new ExaxisPos();
-        DescPose offset_pos = new DescPose();
+        DescPose p3Desc=new DescPose(146.861, 578.426, 205.598, 175.997, -36.178, -93.437);
+        JointPos p3Joint=new JointPos(-112.851, -60.191, 86.566, -80.676, -97.463, 74.300);
 
-        DescPose desc_p1 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p2 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p3 = new DescPose(0, 0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p4 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p5 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p6 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        robot.GetForwardKin(jp1, desc_p1);
-        robot.GetForwardKin(jp2, desc_p2);
-        robot.GetForwardKin(jp3, desc_p3);
-        robot.GetForwardKin(jp4, desc_p4);
-        robot.GetForwardKin(jp5, desc_p5);
-        robot.GetForwardKin(jp6, desc_p6);
-        robot.MoveJ(jp1, desc_p1,0, 0, 30, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetToolPoint(1);
+        DescPose p4Desc=new DescPose(136.284, 509.876, 225.613, 178.987, 1.372, -100.696);
+        JointPos p4Joint=new JointPos(-116.397, -76.281, 113.845, -128.611, -88.654, 74.299);
 
-        robot.MoveJ(jp2, desc_p2,0, 0, 30, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetToolPoint(2);
+        DescPose p5Desc=new DescPose(138.395, 505.972, 298.016, 179.134, 2.147, -101.110);
+        JointPos p5Joint=new JointPos(-116.814, -82.333, 109.162, -118.662, -88.585, 74.302);
 
-        robot.MoveJ(jp3, desc_p3,0, 0, 30, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetToolPoint(3);
-
-        robot.MoveJ(jp4, desc_p4,0, 0, 30, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetToolPoint(4);
-
-        robot.MoveJ(jp5, desc_p5,0, 0, 30, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetToolPoint(5);
-
-        robot.MoveJ(jp6, desc_p6,0, 0, 30, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetToolPoint(6);
-
-        DescPose coord = new DescPose();
-        robot.ComputeTool(coord);
-        System.out.println("result is " + coord.tran.x + " " + coord.tran.y + " " + coord.tran.z + " " + coord.rpy.rx + " " + coord.rpy.ry + " " + coord.rpy.rz);
-
-        robot.SetToolCoord(5, coord, 0, 0,0,0);//set tool coordinate system
-        robot.SetToolList(5, coord, 0, 0, 0);
-    }
-
-Calculation of tool coordinate system from point information
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
-
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Calculate a tool coordinate system from point information.
-    * @param [in] method Calculation method; 0 - four-point method; 1 - six-point method.
-    * @param [in] pos Joint position group, array length is 4 for 4-point method, 6 for 6-point method.
-    * @param [in] tool_pose The output tool coordinate system.
-    * @return Error code 
-    */ 
-    int ComputeToolCoordWithPoints(int method, JointPos[] pos,DescPose tool_pose);
-
-Compute the tool coordinate system from the point information
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
-
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Calculate the coordinate system of the artifact from the point information.
-    * @param [in] method Calculation method; 0: origin-x-axis-z-axis 1: origin-x-axis-xy-plane
-    * @param [in] pos three TCP position groups
-    * @param [in] refFrame reference coordinate system
-    * @param [in] tcp_pose output artifact coordinate system
-    * @return Error code 
-    */ 
-    int ComputeWObjCoordWithPoints(int method, DescPose[] pos, int refFrame,DescPose tcp_pose);
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
-
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        
-        DescPose p1Desc=new DescPose(-394.073, -276.405, 399.451, -133.692, 7.657, -139.047);
-        JointPos p1Joint=new JointPos(15.234, -88.178, 96.583, -68.314, -52.303, -122.926);
-
-        DescPose p2Desc=new DescPose(-187.141, -444.908, 432.425, 148.662, 15.483, -90.637);
-        JointPos p2Joint=new JointPos(61.796, -91.959, 101.693, -102.417, -124.511, -122.767);
-
-        DescPose p3Desc=new DescPose(-368.695, -485.023, 426.640, -162.588, 31.433, -97.036);
-        JointPos p3Joint=new JointPos(43.896, -64.590, 60.087, -50.269, -94.663, -122.652);
-
-        DescPose p4Desc=new DescPose(-291.069, -376.976, 467.560, -179.272, -2.326, -107.757);
-        JointPos p4Joint=new JointPos(39.559, -94.731, 96.307, -93.141, -88.131, -122.673);
-
-        DescPose p5Desc=new DescPose(-284.140, -488.041, 478.579, 179.785, -1.396, -98.030);
-        JointPos p5Joint=new JointPos(49.283, -82.423, 81.993, -90.861, -89.427, -122.678);
-
-        DescPose p6Desc=new DescPose(-296.307, -385.991, 484.492, -178.637, -0.057, -107.059);
-        JointPos p6Joint=new JointPos(40.141, -92.742, 91.410, -87.978, -88.824, -122.808);
+        DescPose p6Desc=new DescPose(105.553, 454.325, 232.017, -179.426, 0.444, -99.952);
+        JointPos p6Joint=new JointPos(-115.649, -84.367, 122.447, -128.663, -90.432, 74.303);
 
         ExaxisPos exaxisPos=new ExaxisPos(0, 0, 0, 0);
         DescPose offdese=new DescPose(0, 0, 0, 0, 0, 0);
 
         JointPos[] posJ = { p1Joint , p2Joint , p3Joint , p4Joint , p5Joint , p6Joint };
-        DescPose coordRtn = new DescPose();
+        DescPose coordRtn =new DescPose() {};
         int rtn = robot.ComputeToolCoordWithPoints(1, posJ, coordRtn);
-        System.out.println("ComputeToolCoordWithPoints: "+rtn+ ", coord is :"+ coordRtn.tran.x+","+coordRtn.tran.y+","+coordRtn.tran.z+","+ coordRtn.rpy.rx+","+ coordRtn.rpy.ry+","+coordRtn.rpy.rz);
-
 
         robot.MoveJ(p1Joint, p1Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
         robot.SetToolPoint(1);
@@ -286,335 +156,790 @@ Code example
         robot.SetToolPoint(5);
         robot.MoveJ(p6Joint, p6Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
         robot.SetToolPoint(6);
-        robot.ComputeTool(coordRtn);
-        System.out.println("ComputeTool :"+rtn+",coord is :"+coordRtn.tran.x+","+ coordRtn.tran.y+","+ coordRtn.tran.z+","+ coordRtn.rpy.rx+","+ coordRtn.rpy.ry+","+ coordRtn.rpy.rz);
+        rtn = robot.ComputeTool(coordRtn);
+        robot.SetToolList(3, coordRtn, 0, 0, 0);
+
+        robot.MoveJ(p1Joint, p1Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(1);
+        robot.MoveJ(p2Joint, p2Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(2);
+        robot.MoveJ(p3Joint, p3Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(3);
+        robot.MoveJ(p4Joint, p4Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(4);
+        rtn = robot.ComputeTcp4(coordRtn);
+
+        robot.SetToolCoord(4, coordRtn, 0, 0, 1, 0);
+
+        DescPose getCoord = new DescPose(){};
+        rtn = robot.GetTCPOffset(0, getCoord);
+        return 0;
     }
 
-Setting External Tool Coordinate Reference Points
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set external tool reference point - six point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Setting external tool reference points -- the three-point method 
-    * @param [in] point_num point_number, range [1~3].
-    * @return error code 
-    */ 
-    int SetExTCPPoint(int point_num). 
+    /**
+    * @brief Set external tool reference point - three point method
+    * @param [in] point_num Point number, range [1~3]
+    * @return Error code
+    */
+    int SetExTCPPoint(int point_num);
 
-Calculation of the external tool coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate external tool coordinate system - six point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Calculate external tool coordinate system - three point method
+    * @param [out] tcp_pose External tool coordinate system
+    * @return Error code
+    */
+    int ComputeExTCF(DescPose tcp_pose);
+
+Set external tool coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set external tool coordinate system
+    * @param [in] id Coordinate system number, range [0~14]
+    * @param [in] etcp Tool center point pose relative to end flange center
+    * @param [in] etool To be determined
+    * @return Error code
+    */
+    int SetExToolCoord(int id, DescPose etcp, DescPose etool);
+
+Set external tool coordinate system list
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set external tool coordinate system list
+    * @param [in] id Coordinate system number, range [0~14]
+    * @param [in] etcp Tool center point pose relative to end flange center
+    * @param [in] etool To be determined
+    * @return Error code
+    */
+    int SetExToolList(int id, DescPose etcp, DescPose etool);
+
+Robot external tool coordinate system operation code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestExtCoord(Robot robot)
+    {
+        DescPose p1Desc=new DescPose(-89.606, 779.517, 193.516, 178.000, 0.476, -92.484);
+        JointPos p1Joint=new JointPos(-108.145, -50.137, 85.818, -125.599, -87.946, 74.329);
+
+        DescPose p2Desc=new DescPose(-24.656, 850.384, 191.361, 177.079, -2.058, -95.355);
+        JointPos p2Joint=new JointPos(-111.024, -41.538, 69.222, -114.913, -87.743, 74.329);
+
+        DescPose p3Desc=new DescPose(-99.813, 766.661, 241.878, -176.817, 1.917, -91.604);
+        JointPos p3Joint=new JointPos(-107.266, -56.116, 85.971, -122.560, -92.548, 74.331);
+
+        robot.GetForwardKin(p1Joint,p1Desc);
+        robot.GetForwardKin(p2Joint,p2Desc);
+        robot.GetForwardKin(p3Joint,p3Desc);
+
+        ExaxisPos exaxisPos=new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese=new DescPose(0, 0, 0, 0, 0, 0);
+
+        DescPose[] posTCP = { p1Desc , p2Desc , p3Desc };
+        DescPose coordRtn = new DescPose();
+
+        robot.MoveJ(p1Joint, p1Desc, 1, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetExTCPPoint(1);
+        robot.MoveJ(p2Joint, p2Desc, 1, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetExTCPPoint(2);
+        robot.MoveJ(p3Joint, p3Desc, 1, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetExTCPPoint(3);
+        int rtn = robot.ComputeExTCF(coordRtn);
+
+        robot.SetExToolCoord(1, coordRtn, offdese);
+        robot.SetExToolList(1, coordRtn, offdese);
+        return 0;
+    }
+
+Set workpiece reference point - three point method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set workpiece reference point - three point method
+    * @param [in] point_num Point number, range [1~3]
+    * @return Error code
+    */
+    int SetWObjCoordPoint(int point_num);
+
+Calculate workpiece coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Calculate workpiece coordinate system
+    * @param [in] method Calculation method 0: origin-x axis-z axis 1: origin-x axis-xy plane
+    * @param [in] refFrame Reference coordinate system
+    * @param [out] wobj_pose Workpiece coordinate system
+    * @return Error code
+    */
+    int ComputeWObjCoord(int method, int refFrame, DescPose wobj_pose);
+
+Set workpiece coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set workpiece coordinate system
+    * @param [in] id Coordinate system number, range [1~15]
+    * @param [in] coord Workpiece coordinate system pose relative to end flange center
+    * @param [in] refFrame Reference coordinate system
+    * @return Error code
+    */
+    int SetWObjCoord(int id, DescPose coord, int refFrame);
+
+Set workpiece coordinate system list
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set workpiece coordinate system list
+    * @param [in] id Coordinate system number, range [1~15]
+    * @param [in] coord Workpiece coordinate system pose relative to end flange center
+    * @param [in] refFrame Reference coordinate system
+    * @return Error code
+    */
+    int SetWObjList(int id, DescPose coord, int refFrame);
+
+Calculate workpiece coordinate system based on point information
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Calculate workpiece coordinate system based on point information
+    * @param [in] method Calculation method; 0: origin-x axis-z axis 1: origin-x axis-xy plane
+    * @param [in] pos Three TCP position groups
+    * @param [in] refFrame Reference coordinate system
+    * @param [in] tcp_pose Output workpiece coordinate system
+    * @return Error code
+    */
+    int ComputeWObjCoordWithPoints(int method, DescPose[] pos, int refFrame,DescPose tcp_pose);
+
+Get current workpiece coordinate system
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get current workpiece coordinate system
+    * @param [in] flag 0-blocking, 1-non-blocking
+    * @param [out] desc_pos Workpiece coordinate system pose
+    * @return Error code
+    */
+    int GetWObjOffset(int flag, DescPose desc_pos);
+
+Workpiece coordinate system operation code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestWobjCoord(Robot robot)
+    {
+        DescPose p1Desc=new DescPose(-89.606, 779.517, 193.516, 178.000, 0.476, -92.484);
+        JointPos p1Joint=new JointPos(-108.145, -50.137, 85.818, -125.599, -87.946, 74.329);
+
+        DescPose p2Desc=new DescPose(-24.656, 850.384, 191.361, 177.079, -2.058, -95.355);
+        JointPos p2Joint=new JointPos(-111.024, -41.538, 69.222, -114.913, -87.743, 74.329);
+
+        DescPose p3Desc=new DescPose(-99.813, 766.661, 241.878, -176.817, 1.917, -91.604);
+        JointPos p3Joint=new JointPos(-107.266, -56.116, 85.971, -122.560, -92.548, 74.331);
+
+        robot.GetForwardKin(p1Joint,p1Desc);
+        robot.GetForwardKin(p2Joint,p2Desc);
+        robot.GetForwardKin(p3Joint,p3Desc);
+
+        ExaxisPos exaxisPos=new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese=new DescPose(0, 0, 0, 0, 0, 0);
+
+        DescPose[] posTCP =new DescPose[]{p1Desc , p2Desc , p3Desc };
+        DescPose coordRtn =new DescPose();
+        int rtn = robot.ComputeWObjCoordWithPoints(1, posTCP, 0, coordRtn);
+
+        robot.MoveJ(p1Joint, p1Desc, 1, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetWObjCoordPoint(1);
+        robot.MoveJ(p2Joint, p2Desc, 1, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetWObjCoordPoint(2);
+        robot.MoveJ(p3Joint, p3Desc, 1, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetWObjCoordPoint(3);
+        rtn = robot.ComputeWObjCoord(1, 0, coordRtn);
+
+        robot.SetWObjCoord(1, coordRtn, 0);
+        robot.SetWObjList(1, coordRtn, 0);
+
+        DescPose getWobjDesc = new DescPose();
+        rtn = robot.GetWObjOffset(0, getWobjDesc);
+        return 0;
+    }
+
+Set global speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set global speed
+    * @param [in] vel Speed percentage, range [0~100]
+    * @return Error code
+    */
+    int SetSpeed(int vel);
+
+Set robot acceleration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set robot acceleration
+    * @param [in] acc Robot acceleration percentage
+    * @return Error code
+    */
+    int SetOaccScale(double acc);
+
+Get robot default speed
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get robot default speed
+    * @return List[0]:int Error code; List[1]: double vel Speed, unit mm/s
+    */
+    List<Number> GetDefaultTransVel();
+
+Set end load weight
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set end load weight
+    * @param [in] loadNum Load number
+    * @param [in] weight Load weight, unit kg
+    * @return Error code
+    */
+    int SetLoadWeight(int loadNum,double weight);
+
+Set end load center of mass coordinates
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set end load center of mass coordinates
+    * @param [in] coord Center of mass coordinates, unit mm
+    * @return Error code
+    */
+    int SetLoadCoord(DescTran coord);
+
+Get current load weight
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get current load weight
+    * @param [in] flag 0-blocking, 1-non-blocking
+    * @return List[0]:int Error code; List[1]: double weight Load weight, unit kg
+    */
+    List<Number> GetTargetPayload(int flag);
+
+Get current load center of mass
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get current load center of mass
+    * @param [in] flag 0-blocking, 1-non-blocking
+    * @param [out] cog Load center of mass, unit mm
+    * @return Error code
+    */
+    int GetTargetPayloadCog(int flag, DescTran cog);
+
+Set robot installation method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set robot installation method
+    * @param [in] install Installation method, 0-standard, 1-side, 2-inverted
+    * @return Error code
+    */
+    int SetRobotInstallPos(int install);
+
+Set robot installation angle
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set robot installation angle, free installation
+    * @param [in] yangle Tilt angle
+    * @param [in] zangle Rotation angle
+    * @return Error code
+    */
+    int SetRobotInstallAngle(double yangle, double zangle);
+
+Get robot installation angle
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get robot installation angle
+    * @return List[0]:Error code; List[1]:double yangle Tilt angle; List[2]:double zangle Rotation angle
+    */
+    public List<Number> GetRobotInstallAngle()
+
+Set system variable value
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set system variable value
+    * @param [in] id Variable number, range [1~20]
+    * @param [in] value Variable value
+    * @return Error code
+    */
+    int SetSysVarValue(int id, double value);
+
+Get system variable value
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get system variable value
+    * @param [in] id System variable number, range [1~20]
+    * @return List[0]:Error code; List[1]:double value System variable value
+    */
+    List<Number> GetSysVarValue(int id);
+
+Robot common settings code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestLoadInstall(Robot robot)
+    {
+        for (int i = 1; i < 100; i++)
+        {
+            robot.SetSpeed(i);
+            robot.SetOaccScale(i);
+            robot.Sleep(30);
+        }
+
+        List<Number> defaultVel=new ArrayList<>();
+
+        defaultVel=robot.GetDefaultTransVel();
+        System.out.println("GetDefaultTransVel is:"+ defaultVel.get(1));
+
+        for (int i = 1; i < 21; i++)
+        {
+            robot.SetSysVarValue(i, i + 0.5);
+            robot.Sleep(100);
+        }
+
+        for (int i = 1; i < 21; i++)
+        {
+            float value = 0;
+            defaultVel=robot.GetSysVarValue(i);
+            System.out.println("sys value :"+i+", is :"+defaultVel.get(1));
+            robot.Sleep(100);
+        }
+
+        robot.SetLoadWeight(0, 2.5);
+
+        DescTran loadCoord = new DescTran();
+        loadCoord.x = 3.0;
+        loadCoord.y = 4.0;
+        loadCoord.z = 5.0;
+        robot.SetLoadCoord(loadCoord);
+
+        robot.Sleep(1000);
+
+        List<Number> getLoad = new ArrayList<>();
+
+        getLoad=robot.GetTargetPayload(0);
+
+        DescTran getLoadTran =new DescTran();
+        robot.GetTargetPayloadCog(0, getLoadTran);
+        System.out.println("get load is:"+getLoad.get(1)+", get load cog is: "+getLoadTran.x+","+getLoadTran.y+","+getLoadTran.z);
+
+        robot.SetRobotInstallPos(0);
+        robot.SetRobotInstallAngle(15.0, 25.0);
+
+        List<Number> angle=new ArrayList<>();
+        angle=robot.GetRobotInstallAngle();
+        System.out.println("GetRobotInstallAngle x:"+angle.get(1)+";  y:"+angle.get(2));
+
+        robot.CloseRPC();
+        return 0;
+    }
+
+Joint friction compensation switch
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Joint friction compensation switch
+    * @param [in] state 0-off, 1-on
+    * @return Error code
+    */
+    int FrictionCompensationOnOff(int state);
+
+Set joint friction compensation coefficient - standard installation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set joint friction compensation coefficient - standard installation
+    * @param [in] coeff Six joint compensation coefficients, range [0~1]
+    * @return Error code
+    */
+    int SetFrictionValue_level(Object[] coeff);
+
+Set joint friction compensation coefficient - side installation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set joint friction compensation coefficient - side installation
+    * @param [in] coeff Six joint compensation coefficients, range [0~1]
+    * @return Error code
+    */
+    int SetFrictionValue_wall(Object[] coeff);
+
+Set joint friction compensation coefficient - inverted installation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set joint friction compensation coefficient - inverted installation
+    * @param [in] coeff Six joint compensation coefficients, range [0~1]
+    * @return Error code
+    */
+    int SetFrictionValue_ceiling(Object[] coeff);
+
+Set joint friction compensation coefficient - free installation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set joint friction compensation coefficient - free installation
+    * @param [in] coeff Six joint compensation coefficients, range [0~1]
+    * @return Error code
+    */
+    int SetFrictionValue_freedom(Object[] coeff);
+
+Robot set joint friction compensation code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestFriction(Robot robot)
+    {
+
+        Object[] lcoeff = { 0.9,0.9,0.9,0.9,0.9,0.9 };
+        Object[] wcoeff = { 0.4,0.4,0.4,0.4,0.4,0.4 };
+        Object[] ccoeff = { 0.6,0.6,0.6,0.6,0.6,0.6 };
+        Object[] fcoeff = { 0.5,0.5,0.5,0.5,0.5,0.5 };
+
+        int rtn = robot.FrictionCompensationOnOff(1);
+        System.out.println("FrictionCompensationOnOff rtn is:"+ rtn);
+
+        rtn = robot.SetFrictionValue_level(lcoeff);
+        System.out.println("SetFrictionValue_level rtn is:"+ rtn);
+
+        rtn = robot.SetFrictionValue_wall(wcoeff);
+        System.out.println("SetFrictionValue_wall rtn is:"+ rtn);
+
+        rtn = robot.SetFrictionValue_ceiling(ccoeff);
+        System.out.println("SetFrictionValue_ceiling rtn is:"+ rtn);
+
+        rtn = robot.SetFrictionValue_freedom(fcoeff);
+        System.out.println("SetFrictionValue_freedom rtn is:"+ rtn);
+
+        robot.CloseRPC();
+        return 0;
+    }
+
+Query robot error code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Query robot error code
+     * @param [out] maincode Main error code
+     * @param [out] subcode Sub error code
+     * @return Error code
+     */
+    int GetRobotErrorCode(int[] maincode, int[] subcode);
+
+Error state clear
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Error state clear
+    * @return Error code
+    */
+    int ResetAllError();
+
+Robot fault state get and clear error code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestGetError(Robot robot)
+    {
+        int[] maincode={0}, subcode={0};
+        robot.GetRobotErrorCode(maincode, subcode);
+
+        robot.ResetAllError();
+
+        robot.Sleep(1000);
+
+        robot.GetRobotErrorCode(maincode, subcode);
+        return 0;
+    }
+
+Set wide voltage control box temperature and fan speed monitoring parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.6-3.8.3
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set wide voltage control box temperature and fan speed monitoring parameters
+    * @param [in] enable 0-disable monitoring; 1-enable monitoring
+    * @param [in] period Monitoring period(s), range 1-100
+    * @return Error code
+    */
+    int SetWideBoxTempFanMonitorParam(int enable, int period);
+
+Get wide voltage control box temperature and fan speed monitoring parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.6-3.8.3
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get wide voltage control box temperature and fan speed monitoring parameters
+    * @return List[0]-Error code,List[1]-enable 0-disable monitoring; 1-enable monitoring,List[2]-period Monitoring period(s), range 1-100
+    */
+    List<Number> GetWideBoxTempFanMonitorParam()
+
+Wide voltage control box temperature and fan current state get code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestWideVoltageCtrlBoxtemp(Robot robot)
+    {
+        robot.SetWideBoxTempFanMonitorParam(1, 2);
+        List<Number> list=robot.GetWideBoxTempFanMonitorParam();
+        System.out.println("GetWideBoxTempFanMonitorParam enable is:"+list.get(1)+", period is:"+list.get(2));
+        ROBOT_STATE_PKG pkg=new ROBOT_STATE_PKG();
+        for (int i = 0; i < 100; i++)
+        {
+            pkg=robot.GetRobotRealTimeState();
+            System.out.println("robot ctrl box temp is:"+pkg.wideVoltageCtrlBoxTemp+",fan current is:"+pkg.wideVoltageCtrlBoxFanCurrent);
+            robot.Sleep(100);
+        }
+
+        int rtn = robot.SetWideBoxTempFanMonitorParam(0, 2);
+
+        list=robot.GetWideBoxTempFanMonitorParam();
+        for (int i = 0; i < 100; i++)
+        {
+            pkg=robot.GetRobotRealTimeState();
+            System.out.println("robot ctrl box temp is:"+pkg.wideVoltageCtrlBoxTemp+" ,fan current is:"+pkg.wideVoltageCtrlBoxFanCurrent);
+            robot.Sleep(100);
+        }
+
+        robot.CloseRPC();
+        robot.Sleep(2000);
+        return 0;
+    }
+
+Set Focus Calibration Point
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set focus calibration point
+    * @param [in] pointNum Focus calibration point number (1-8)
+    * @param [in] point    Calibration point coordinates
+    * @return Error code
+    */
+    int SetFocusCalibPoint(int pointNum, DescPose point)
+
+Compute Focus Calibration Result
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Compute focus calibration result
+    * @param [in] pointNum  Number of calibration points
+    * @param [in] resultPos Calibration result XYZ
+    * @param [out] accuracy  Calibration accuracy error
+    * @return Error code
+    */
+    int ComputeFocusCalib(int pointNum, DescTran resultPos, double[] accuracy)
+
+Start focus following
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Start focus following
+    * @param [in] kp       Proportional parameter (default: 50.0)
+    * @param [in] kpredict Feedforward parameter (default: 19.0)
+    * @param [in] aMax     Maximum angular acceleration limit (default: 1440°/s²)
+    * @param [in] vMax     Maximum angular velocity limit (default: 180°/s)
+    * @param [in] type     Lock X-axis direction (0-Reference input vector; 1-Horizontal; 2-Vertical)
+    * @return Error code
+    */
+    int FocusStart(double kp, double kpredict, double aMax, double vMax, int type)
+
+Stop Focus Following
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Stop focus following
+    * @return Error code
+    */
+    int FocusEnd()
+
+Set Focus Position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
 .. code-block:: Java
     :linenos:
     
-    /** 
-    * @brief Calculating the external tool coordinate system -- three-point method
-    * @param [out] tcp_pose external tool coordinate system
-    * @return error code 
-    */ 
-    int ComputeExTCF(DescPose tcp_pose). 
-
-Setting the external tool coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
     /**
-    * @brief Setting the external tool coordinate system 
-    * @param [in] id coordinate system number in the range [0 to 14].
-    * @param [in] etcp Tool center point relative to end flange center position
-    * @param [in] etool TBD
-    * @return error code 
+    * @brief Set focus position
+    * @param pos Focus position XYZ
+    * @return Error code
     */
-    int SetExToolCoord(int id, DescPose etcp, DescPose etool);; 
+    public int SetFocusPosition(DescTran pos)
 
-Setting up a list of external tool coordinate systems
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Focus Following Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /**
-    * @brief Setting up a list of external tool coordinate systems
-    * @param [in] id coordinate system number in the range [0 to 14].
-    * @param [in] etcp Tool center point relative to end flange center position
-    * @param [in] etool TBD
-    * @return error code
-    */
-    int SetExToolList(int id, DescPose etcp, DescPose etool);; 
+    public static void TestFocus(Robot robot){
+        DescPose p1Desc=new DescPose(186.331, 487.913, 209.850, 149.030, 0.688, -114.347);
+        JointPos p1Joint = new JointPos(-127.876, -75.341, 115.417, -122.741, -59.820, 74.300);
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: Java SDK-v1.0.1-3.7.8
+        DescPose p2Desc = new DescPose(69.721, 535.073, 202.882, -144.406, -14.775, -89.012);
+        JointPos p2Joint = new JointPos(-101.780, -69.828, 110.917, -125.740, -127.841, 74.300);
 
-.. code-block:: Java
-    :linenos:
+        DescPose p3Desc = new DescPose(146.861, 578.426, 205.598, 175.997, -36.178, -93.437);
+        JointPos p3Joint = new JointPos(-112.851, -60.191, 86.566, -80.676, -97.463, 74.300);
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.Mode(1);
-        robot.SetSpeed(20);
-        robot.Mode(0);
+        DescPose p4Desc = new DescPose(136.284, 509.876, 225.613, 178.987, 1.372, -100.696);
+        JointPos p4Joint = new JointPos(-116.397, -76.281, 113.845, -128.611, -88.654, 74.299);
 
-        for(int i = 1; i < 10; i++)
-        {
-            robot.SetSysVarValue(i, i * 10);
-        }
-        for(int i = 1; i < 10; i++)
-        {
-            List<Number> rtnArr = robot.GetSysVarValue(i);//get the system variable
-            System.out.println("SysVarValue " + i + " is " + rtnArr.get(1));
-        }
+        DescPose p5Desc = new DescPose(138.395, 505.972, 298.016, 179.134, 2.147, -101.110);
+        JointPos p5Joint = new JointPos(-116.814, -82.333, 109.162, -118.662, -88.585, 74.302);
 
-        JointPos j1 = new JointPos(-84.787, -152.056,-75.689 , -37.899, 94.486,41.709);
-        JointPos j2 = new JointPos(-79.438,-152.139,-75.634,-37.469,94.065,47.058);
-        JointPos j3 = new JointPos(-84.788,-145.179,-77.119,-43.345,94.487,41.709);
+        DescPose p6Desc = new DescPose(105.553, 454.325, 232.017, -179.426, 0.444, -99.952);
+        JointPos p6Joint = new JointPos(-115.649, -84.367, 122.447, -128.663, -90.432, 74.303);
 
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 100, 0, 0, 0);
 
-        DescPose desc_p1 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p2 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p3 = new DescPose(0, 0, 0, 0, 0, 0, 0, 0);
+        robot.GetForwardKin(p1Joint, p1Desc);
+        robot.GetForwardKin(p2Joint,  p2Desc);
+        robot.GetForwardKin(p3Joint,  p3Desc);
+        robot.GetForwardKin(p4Joint,  p4Desc);
+        robot.GetForwardKin(p5Joint,  p5Desc);
+        robot.GetForwardKin(p6Joint,  p6Desc);
 
-        robot.GetForwardKin(j1, desc_p1);
-        robot.GetForwardKin(j2, desc_p2);
-        robot.GetForwardKin(j3, desc_p3);
+        robot.MoveJ(p1Joint, p1Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(1);
+        robot.MoveJ(p2Joint, p2Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(2);
+        robot.MoveJ(p3Joint, p3Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(3);
+        robot.MoveJ(p4Joint, p4Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.SetTcp4RefPoint(4);
 
-        ExaxisPos epos = new ExaxisPos();
-        DescPose offset_pos = new DescPose();
+        DescPose coordRtn = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        int rtn = robot.ComputeTcp4( coordRtn);
 
-        robot.MoveJ(j1, desc_p1,0, 0, 20, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetExTCPPoint(1);
+        robot.SetToolCoord(1, coordRtn, 0, 0, 1, 0);
 
-        robot.MoveJ(j2, desc_p2,0, 0, 20, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetExTCPPoint(2);
+        robot.GetForwardKin(p1Joint, p1Desc);
+        robot.GetForwardKin(p2Joint, p2Desc);
+        robot.GetForwardKin(p3Joint, p3Desc);
 
-        robot.MoveJ(j3, desc_p3,0, 0, 20, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetExTCPPoint(3);
+        robot.SetFocusCalibPoint(1, p1Desc);
+        robot.SetFocusCalibPoint(2, p2Desc);
+        robot.SetFocusCalibPoint(3, p3Desc);
 
-        DescPose coordE = new DescPose();
-        robot.ComputeExTCF(coordE).
-        System.out.println("result is " + coordE.tran.x + " " + coordE.tran.y + " " + coordE.tran.z + " " + coordE.rpy.rx + " " + coordE.rpy.ry + " " + coordE.rpy.rz);
+        DescTran resultPos = new DescTran(0.0, 0.0, 0.0);
+        double[] accuracy = {0.0};
+        rtn = robot.ComputeFocusCalib(3,  resultPos,  accuracy);
+        rtn = robot.SetFocusPosition(resultPos);
 
-        robot.SetExToolCoord(5, coordE, coordE);
-        robot.SetExToolList(5,coordE, coordE);
+        robot.GetForwardKin(p5Joint,  p5Desc);
+        robot.GetForwardKin(p6Joint,  p6Desc);
+
+        robot.MoveL(p5Joint, p5Desc, 1, 0, 10, 100, 100, -1, 0, exaxisPos, 0, 1, offdese,0,100);
+        robot.MoveL(p6Joint, p6Desc, 1, 0, 10, 100, 100, -1, 0, exaxisPos, 0, 1, offdese,0,100);
+
+        robot.FocusStart(50, 19, 710, 90, 0);
+        robot.MoveL(p5Joint, p5Desc, 1, 0, 10, 100, 100, -1, 0, exaxisPos, 0, 1, offdese,0,100);
+        robot.MoveL(p6Joint, p6Desc, 1, 0, 10, 100, 100, -1, 0, exaxisPos, 0, 1, offdese,0,100);
+        robot.FocusEnd();
     }
-
-Setting the reference point of the workpiece coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Setting the workpiece reference point - three-point method 
-    * @param [in] point_num point_number, range [1~3].
-    * @return error code 
-    */ 
-    int SetWObjCoordPoint(int point_num). 
-
-Calculation of the workpiece coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Calculate workpiece coordinate system
-    * @param [in] method Calculation method 0: origin-x-axis-z-axis 1: origin-x-axis-xy plane
-    * @param [in] refFrame reference coordinate system
-    * @param [out] wobj_pose Workpiece coordinate system
-    * @return error code 
-    */ 
-    int ComputeWObjCoord(int method, int refFrame, DescPose wobj_pose); 
-
-Setting the workpiece coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Setting the workpiece coordinate system
-    * @param [in] id coordinate system number, range [1-15]
-    * @param [in] coord Workpiece coordinate system with respect to the center of the end flange.
-    * @param [in] refFrame reference coordinate system
-    * @return error code
-    */  
-    int SetWObjCoord(int id, DescPose coord, int refFrame);
-
-Setting the list of workpiece coordinate systems
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Setting up a list of workpiece coordinate systems
-    * @param [in] id coordinate system number, range [1-15]
-    * @param [in] coord Workpiece coordinate system with respect to the center of the end flange.
-    * @param [in] refFrame reference coordinate system
-    * @return error code
-    */  
-    int SetWObjList(int id, DescPose coord, int refFrame);
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-
-        JointPos j1 = new JointPos(-84.787, -152.056,-75.689,-37.899,94.486,41.709);
-        JointPos j2 = new JointPos(-79.438,-152.139,-75.634,-37.469,94.065,47.058);
-        JointPos j3 = new JointPos(-84.788,-145.179,-77.119,-43.345,94.487,41.709);
-        DescPose desc_p1 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p2 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose desc_p3 = new DescPose(0, 0, 0, 0, 0, 0, 0, 0);
-
-        robot.GetForwardKin(j1, desc_p1);
-        robot.GetForwardKin(j2, desc_p2);
-        robot.GetForwardKin(j3, desc_p3);
-
-        ExaxisPos epos = new ExaxisPos();
-        DescPose offset_pos = new DescPose();
-
-        robot.MoveJ(j1, desc_p1,0, 0, 20, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetWObjCoordPoint(1);
-
-        robot.MoveJ(j2, desc_p2,0, 0, 20, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetWObjCoordPoint(2);
-
-        robot.MoveJ(j3, desc_p3,0, 0, 20, 100, 100, epos, -1, 0, offset_pos);
-        robot.SetWObjCoordPoint(3);
-
-        DescPose coordE = new DescPose();
-        robot.ComputeWObjCoord(0, coordE);
-        System.out.println("result is " + coordE.tran.x + " " + coordE.tran.y + " " + coordE.tran.z + " " + coordE.rpy.rx + " " + coordE.rpy.ry + " " + coordE.rpy.rz);
-
-        robot.SetWObjCoord(5, coordE,0);
-        robot.SetWObjList(5,coordE,0);
-    }
-
-Setting the end load weight
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: Java SDK-v1.0.1-3.7.8
-
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Setting of end load weights
-    * @param [in] loadNum Load Number
-    * @param [in] weight Load weight in kg
-    * @return error code
-    */
-    int SetLoadWeight(int loadNum,double weight).
-
-Setting the end load center of mass coordinates
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Setting end-load center of mass coordinates
-    * @param [in] coord coordinates of center of mass in mm
-    * @return error code
-    */
-    int SetLoadCoord(DescTran coord). 
-
-Setting the robot installation method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Setting up the robot installation method
-    * @param [in] install Installation method, 0-front, 1-side, 2-inverted
-    * @return error code
-    */
-    int SetRobotInstallPos(int install). 
-
-Setting the robot mounting angle
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Setting robot mounting angle, free mounting
-    * @param [in] yangle Tilt angle
-    * @param [in] zangle rotation angle
-    * @return error code
-    */
-    int SetRobotInstallAngle(double yangle, double zangle); 
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.SetLoadWeight(2);
-        robot.SetLoadCoord(new DescTran(1.0, 2.0, 3.0));
-        robot.SetRobotInstallPos(0);
-        robot.SetRobotInstallAngle(0, 0);
-    }
-
-Waiting for a specified time
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Waiting for specified time
-    * @param [in] t_ms Unit ms
-    * @return error code
-    */
-    int WaitMs(int t_ms).
-
-Setting robot acceleration
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Setting robot acceleration
-    * @param [in] acc Robot acceleration percentage
-    * @return error code
-    */
-    int SetOaccScale(double acc).

@@ -1,16 +1,16 @@
-Status feedback information
+Data structure description
 ==============================================================================
 
 .. toctree::
     :maxdepth: 5
 
-Status Feedback Comparison Table
+Controller status feedback data packet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. versionadded:: python SDK-v2.1.2
+.. versionadded:: python SDK-v2.1.3
     
 .. csv-table:: 
     :header-rows: 1
-    :name: Status Feedback Comparison Table
+    :name: Controller status feedback data packet
     :widths: 20 30
 
     "Variable", "Meaning"
@@ -100,9 +100,65 @@ Status Feedback Comparison Table
     "weldingBreakOffState","Welding interruption state"
     "jt_tgt_tor","Joint command torque"
     "smartToolState","The status of the SmartTool handle buttons"
+    "wideVoltageCtrlBoxTemp","Wide voltage control box temperature"
+    "wideVoltageCtrlBoxFanCurrent","Wide voltage control box fan current(ma)"
+
+Status of the servo controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. versionadded:: python SDK-v2.1.3
     
-Code example
----------------------------------------------
+.. csv-table:: 
+    :header-rows: 1
+    :name: Status of the servo controller
+    :widths: 20 30
+
+    "Variable", "Meaning"
+    "servoId","Servo driver ID number"
+    "servoErrCode","Servo driver fault code"
+    "servoState","Status of the servo driver"
+    "servoPos","Current position of the servo"
+    "servoVel","Current speed of the servo"
+    "servoTorque","Current torque of the servo"
+
+Extended axis status
+~~~~~~~~~~~~~~~~~~~~~~~~
+.. versionadded:: python SDK-v2.1.3
+    
+.. csv-table:: 
+    :header-rows: 1
+    :name: Extended axis status
+    :widths: 20 30
+
+    "Variable", "Meaning"
+    "pos","Extended axis position"
+    "vel","Extended axis speed"
+    "errorCode","Extended shaft fault code"
+    "ready","The servo is ready"
+    "inPos","Servo in place"
+    "alarm","Servo alarm"
+    "flerr","Following error"
+    "nlimit","To the negative limit"
+    "pLimit","To the positive limit position"
+    "mdbsOffLine","The 485 bus of the driver is disconnected"
+    "mdbsTimeout","The 485 communication between the control card and the control box has timed out"
+    "homingStatus","The expansion axis returns to the zero state"
+
+Welding interruption state
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. versionadded:: python SDK-v2.1.3
+    
+.. csv-table:: 
+    :header-rows: 1
+    :name: Welding interruption state
+    :widths: 20 30
+
+    "Variable", "Meaning"
+    "breakOffState","Welding interruption state"
+    "weldArcState","Welding arc interruption state"
+
+    
+code example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
     :linenos:
@@ -262,3 +318,5 @@ Code example
     print("gripperRotTorque:", robot.robot_state_pkg.gripperRotTorque)
     print("jt_tgt_tor:", robot.robot_state_pkg.jt_tgt_tor)
     print("smartToolState:", robot.robot_state_pkg.smartToolState)
+    print("wideVoltageCtrlBoxTemp:", robot.robot_state_pkg.wideVoltageCtrlBoxTemp)
+    print("wideVoltageCtrlBoxFanCurrent:", robot.robot_state_pkg.wideVoltageCtrlBoxFanCurrent)

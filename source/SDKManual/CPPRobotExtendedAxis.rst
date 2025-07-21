@@ -834,7 +834,7 @@ Extended Axis Coordinate System Calibration Code Example
 
 UDP Extended Axis Motion
 ++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.4.0
+.. versionadded:: C++SDK-v2.2.4.0
 
 .. code-block:: c++
     :linenos:
@@ -843,9 +843,10 @@ UDP Extended Axis Motion
     * @brief UDP extended axis motion
     * @param [in] pos Target position
     * @param [in] ovl Speed percentage
+    * @param [in] blend Smoothing parameter (mm or ms); -1: Wait for motion completion
     * @return Error code
     */
-    errno_t ExtAxisMove(ExaxisPos pos, double ovl);
+        errno_t ExtAxisMove(ExaxisPos pos, double ovl, double blend = -1);
 
 UDP Extended Axis Motion Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++

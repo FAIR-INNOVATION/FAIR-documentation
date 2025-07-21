@@ -29,6 +29,19 @@ Load the specified job program
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
+Get the name of the loaded job program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetLoadedProgram()``"
+    "Description", "Get the name of the loaded job program"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``program_name``: the name of the loaded operating program."
+
 Get the line number of the current robot job program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
@@ -103,21 +116,8 @@ Obtaining robot job program execution status
     "Return Value", "- errorcode Success-0 Failure- errcode
     - ``state``: state of execution of the robot's operating program, 1 - program stopped or no program running, 2 - program running, 3 - program suspended"
 
-Get the name of the loaded job program
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``GetLoadedProgram()``"
-    "Description", "Get the name of the loaded job program"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode
-    - ``program_name``: the name of the loaded operating program."
-
-Code example
-----------------------------------------------------------------------------
+Robot LUA program operation code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
@@ -125,42 +125,31 @@ Code example
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    def print_program_state():
-        pstate = robot.GetProgramState() #query program running state,1-program stopped or no program running,2-program running,3-program suspended
-        linenum = robot.GetCurrentLine() #Query the line number of the current job program execution
-        name = robot.GetLoadedProgram() #query the name of the loaded program
-        print("the robot program state is:",pstate[1])
-        print("the robot program line number is:",linenum[1])
-        print("the robot program name is:",name[1])
-        time.sleep(1)
-    Interface for #robot webapp programs
-    robot.Mode(0) #Robot cuts to autorun mode
-    print_program_state()
-    ret = robot.ProgramLoad('/fruser/test0923.lua') #Load the robot program to be executed, the testPTP.lua program needs to be written first on the webapp
-    print("Error code loading robot program to be executed", ret)
-    ret = robot.ProgramRun() #Execute the robot program
-    print("Execute robot program error code", ret)
-    time.sleep(2)
-    print_program_state()
-    ret = robot.ProgramPause() #pause the executing robot program
-    print("Error code to pause the executing robot program", ret)
-    time.sleep(2)
-    print_program_state()
-    ret = robot.ProgramResume() # Resume the suspended robot program.
-    print("Resume suspended robot program error code", ret)
-    time.sleep(2)
-    print_program_state()
-    ret = robot.ProgramStop() #stop the executing robot program
-    print("Stop the executing robot program", ret)
-    time.sleep(2)
-    print_program_state()
-    flag = 1 #0-boot-up does not automatically load the default program, 1-boot-up automatically loads the default program
-    ret = robot.LoadDefaultProgConfig(flag,'/fruser/testPTP.lua') #Set the default program to load automatically on power-up
-    print("Setting the default program to load automatically on boot", ret)
+    program_name = "/fruser/test0610.lua"
+    loaded_name = ""
+    state = 0
+    line = 0
+    robot.Mode(0)
+    robot.LoadDefaultProgConfig(0, program_name)
+    robot.ProgramLoad(program_name)
+    robot.ProgramRun()
+    time.sleep(1)
+    robot.ProgramPause()
+    error,state = robot.GetProgramState()
+    print(f"program state:{state}")
+    error,line = robot.GetCurrentLine()
+    print(f"current line:{line}")
+    error,loaded_name = robot.GetLoadedProgram()
+    print(f"program name:{loaded_name}")
+    time.sleep(1)
+    robot.ProgramResume()
+    time.sleep(1)
+    robot.ProgramStop()
+    time.sleep(1)
+    robot.CloseRPC()
 
 Download Lua files
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 .. versionadded:: python SDK-v2.0.2
 
 .. csv-table:: 
@@ -174,45 +163,8 @@ Download Lua files
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------------------------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    robot.LuaDownLoad("test", "D://Desktop/test_download/")
-
-Uploading Lua files
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: python SDK-v2.0.2
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``LuaUpload(filePath)``"
-    "Description", "Uploading a Lua file"
-    "Mandatory parameter", "- ``filePath``: full path name of the uploaded file e.g. D://test/test.lua"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode
-    - errorStr(lua file exists error returned)"
-
-Code example
-----------------------------------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    robot.LuaUpload("D://test/test.lua")
-
 Deleting Lua files
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 .. versionadded:: python SDK-v2.0.2
 
 .. csv-table:: 
@@ -225,20 +177,8 @@ Deleting Lua files
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------------------------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    ret = robot.GetSoftwareVersion()
-    robot.LuaDelete("test2")
-
 Get the names of all current lua files
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 .. versionadded:: python SDK-v2.0.2
 
 .. csv-table:: 
@@ -253,14 +193,38 @@ Get the names of all current lua files
     - ``lua_num``: number of lua files
     - ``luaNames``: list of lua file names"
 
-Code example
-----------------------------------------------------------------------------
+Uploading Lua files
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.2
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LuaUpload(filePath)``"
+    "Description", "Uploading a Lua file"
+    "Mandatory parameter", "- ``filePath``: full path name of the uploaded file e.g. D://test/test.lua"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - errorStr(lua file exists error returned)"
+
+Robot LUA file upload and download code examples
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    ret,num,name = robot.GetLuaList()
-    print(num)
-    print(name)
+    rtn,lua_num,luaNames = robot.GetLuaList()
+    print(f"res is:{rtn}")
+    print(f"size is:{lua_num}")
+    for name in luaNames:
+        print(name)
+    rtn = robot.LuaDownLoad("test0610.lua", "D://zDOWN/")
+    print(f"LuaDownLoad rtn is:{rtn}")
+    rtn = robot.LuaUpload("D://zDOWN/test0610.lua")
+    print(f"LuaUpload rtn is:{rtn}")
+    rtn = robot.LuaDelete("test0610.lua")
+    print(f"LuaDelete rtn is:{rtn}")
+    robot.CloseRPC()

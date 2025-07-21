@@ -1,265 +1,251 @@
-Robot Security Settings
-=====================================
+Robot safety settings  
+===========================  
 
-.. toctree:: 
-    :maxdepth: 5
+.. toctree::  
+    :maxdepth: 5  
 
-Setting the collision level
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Set collision level  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting the collision level
-    * @param [in] mode 0-rank, 1-percentage
-    * @param [in] level collision threshold, level corresponds to the range [1 - 10 corresponds to level 1-10, 100 - off], percentage corresponds to the range [0 to 10 corresponds to 0% - 100%].
-    * @param [in] config 0-does not update the config file, 1-updates the config file
-    * @return error code
-    */
-    int SetAnticollision(int mode, Object[] level, int config); 
+    /**  
+    * @brief Set collision level  
+    * @param  [in]  mode  0-level, 1-percentage  
+    * @param  [in]  level Collision threshold. Level range: [1-10 corresponds to levels 1-10, 100-disabled]. Percentage range: [0~10 corresponds to 0% - 100%]  
+    * @param  [in]  config 0-Do not update config file, 1-Update config file  
+    * @return  Error code  
+    */  
+    int SetAnticollision(int mode, Object[] level, int config);  
 
-Setting the post-collision strategy
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Set post-collision strategy  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting up post-collision strategies
-    * @param [in] strategy 0-stop with error, 1-keep running
-    * @param [in] safeTime safe stop time [1000 - 2000] ms
-    * @param [in] safeDistance Safe stopping distance [1-150]mm
-    * @param [in] safetyMargin j1-j6 safety factor [1-10]
-    * @return error code  
-    */
-    int SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safetyMargin[]); 
+    /**  
+    * @brief  Set post-collision strategy  
+    * @param  [in] strategy  0-Report error and stop, 1-Continue running  
+    * @param  [in] safeTime  Safe stop time [1000 - 2000]ms  
+    * @param  [in] safeDistance  Safe stop distance [1-150]mm  
+    * @param  [in] safetyMargin  J1-J6 safety coefficients [1-10]  
+    * @return  Error code    
+    */  
+    int SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safetyMargin[]);  
 
-Setting the positive limit
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Custom collision detection threshold function start  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. versionadded:: Java SDK-v1.0.3-3.8.0  
 
-    /**
-    * @brief Setting positive limits
-    * @param [in] limit Six joint positions in deg.
-    * @return error code
-    */
-    int SetLimitPositive(Object[] limit). 
+.. code-block:: Java  
+    :linenos:  
 
-Setting the negative limit
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief  Start custom collision detection threshold function. Set collision detection thresholds for joints and TCP  
+    * @param  [in] flag 1-Joint detection only; 2-TCP detection only; 3-Both joint and TCP detection  
+    * @param  [in] jointDetectionThreshould  Joint collision detection thresholds for J1-J6  
+    * @param  [in] tcpDetectionThreshould  TCP collision detection thresholds for xyzabc  
+    * @param  [in] block 0-Non-blocking; 1-Blocking  
+    * @return  Error code  
+    */     
+    public int CustomCollisionDetectionStart(int flag, double[] jointDetectionThreshould, double[] tcpDetectionThreshould, int block);  
 
-    /**
-    * @brief Setting negative limits
-    * @param [in] limit Six joint positions in deg.
-    * @return error code
-    */
-    int SetLimitNegative(Object[] limit). 
+Custom collision detection threshold function end  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. versionadded:: Java SDK-v1.0.3-3.8.0  
 
-error state clearing
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Error status clearing
-    * @return error code
-    */
-    int ResetAllError(); 
+    /**  
+    * @brief  End custom collision detection threshold function  
+    * @return  Error code  
+    */     
+    public int CustomCollisionDetectionEnd();  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Robot collision level setting code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        Object[] config = {2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0};
-        robot.SetAnticollision(0, config, 1);
-        int safetyMargin[]={10,10,10,10,10,10,10};
-        robot.SetCollisionStrategy(0,1000,10,safetyMargin);
+    public static int TestCollision(Robot robot)  
+    {  
+        int mode = 0;  
+        int config = 1;  
+        Object[] level1 = new Object[]{ 1.0,2.0,3.0,4.0,5.0,6.0 };  
+        Object[] level2 = new Object[]{ 50.0,20.0,30.0,40.0,50.0,60.0 };  
 
-        robot.ProgramLoad("/fruser/test.lua");
-        robot.ProgramRun();//run lua file
+        int rtn = robot.SetAnticollision(mode, level1, config);  
+        System.out.println("SetAnticollision mode 0 rtn is: "+ rtn);  
+        mode = 1;  
+        rtn = robot.SetAnticollision(mode, level2, config);  
+        System.out.println("SetAnticollision mode 1 rtn is :"+ rtn);  
 
-        Object[] plimit = { 170.0, 80.0, 150.0, 80.0, 170.0, 160.0 };
-        robot.SetLimitPositive(plimit);
+        JointPos p1Joint=new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);  
+        JointPos p2Joint=new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);  
 
-        Object[] nlimit = { -170.0, -260.0, -150.0, -260.0, -170.0, -160.0 };
-        robot.SetLimitNegative(nlimit);
+        DescPose p1Desc=new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);  
+        DescPose p2Desc=new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);  
 
-        robot.SetLoadWeight(123.0);
-        robot.Sleep(3000);
-        robot.ResetAllError();
-    }
+        ExaxisPos exaxisPos=new ExaxisPos(0.0, 0.0, 0.0, 0.0);  
+        DescPose offdese=new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);  
+        robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, 2,0, exaxisPos, 0, 0, offdese,0,10);  
+        robot.ResetAllError();  
+        int[] safety = new int[]{ 5,5,5,5,5,5 };  
+        rtn = robot.SetCollisionStrategy(3, 1000, 150, 250, safety);  
+        System.out.println("SetCollisionStrategy rtn is:"+ rtn);  
 
-Joint Friction Compensation Switch
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+        double[] jointDetectionThreshould = new double[]{ 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 };  
+        double[] tcpDetectionThreshould =new double[] { 60,60,60,60,60,60 };  
+        rtn = robot.CustomCollisionDetectionStart(3, jointDetectionThreshould, tcpDetectionThreshould, 0);  
+        System.out.println("CustomCollisionDetectionStart rtn is :"+ rtn);  
 
-    /** 
-    * @brief Joint Friction Compensation Switch 
-    * @param [in] state 0-off, 1-on
-    * @return error code 
-    */ 
-    int FrictionCompensationOnOff(int state). 
+        robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1,0, exaxisPos, 0, 0, offdese,0,10);  
+        robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1,0, exaxisPos, 0, 0, offdese,0,10);  
+        rtn = robot.CustomCollisionDetectionEnd();  
+        System.out.println("CustomCollisionDetectionEnd rtn is: "+ rtn);  
+        return 0;  
+    }  
 
-Setting the joint friction compensation coefficients - positive loading
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Set positive limit  
+++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting the joint friction compensation factor - formal wear
-    * @param [in] coeff Six joint compensation coefficients, range [0~1].
-    * @return error code
-    */
-    int SetFrictionValue_level(Object[] coeff).
+    /**  
+    * @brief  Set positive limit  
+    * @param  [in] limit Six joint positions in deg  
+    * @return  Error code  
+    */  
+    int SetLimitPositive(Object[] limit);  
 
-Setting the joint friction compensation coefficient - side mounting
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Set negative limit  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting the joint friction compensation factor - side mounted
-    * @param [in] coeff Six joint compensation coefficients, range [0~1].
-    * @return error code
-    */
-    int SetFrictionValue_wall(Object[] coeff). 
+    /**  
+    * @brief  Set negative limit  
+    * @param  [in] limit Six joint positions in deg  
+    * @return  Error code  
+    */  
+    int SetLimitNegative(Object[] limit);  
 
-Setting the Joint Friction Compensation Factor - Inverted
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Get joint soft limit angles  
++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting the joint friction compensation factor - inverted
-    * @param [in] coeff Six joint compensation coefficients, range [0~1].
-    * @return error code
-    */
-    int SetFrictionValue_ceiling(Object[] coeff).
+    /**  
+    * @brief  Get joint soft limit angles  
+    * @param  [in] flag 0-Blocking, 1-Non-blocking  
+    * @param  [out] negative  Negative limit angles in deg  
+    * @param  [out] positive  Positive limit angles in deg  
+    * @return  Error code  
+    */  
+    int GetJointSoftLimitDeg(int flag, Object[] negative, Object[] positive);  
 
-Setting the joint friction compensation factor - free mounting
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Robot limit setting code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting the joint friction compensation factor - free mounting
-    * @param [in] coeff Six joint compensation coefficients, range [0~1].
-    * @return error code
-    */
-    int SetFrictionValue_freedom(Object[] coeff).
+    public static int TestLimit(Robot robot)  
+    {  
+        Object[] plimit =new Object[] { 170.0,80.0,150.0,80.0,170.0,160.0 };  
+        robot.SetLimitPositive(plimit);  
+        Object[] nlimit =new Object[] { -170.0,-260.0,-150.0,-260.0,-170.0,-160.0 };  
+        robot.SetLimitNegative(nlimit);  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+        Object[] neg_deg =new Object[] {0, 0 , 0, 0, 0, 0}, pos_deg = new Object[]{0, 0 , 0, 0, 0, 0};  
+        robot.GetJointSoftLimitDeg(1,  neg_deg,  pos_deg);  
+        System.out.println("neg limit deg:"+ neg_deg[0]+","+ neg_deg[1]+","+ neg_deg[2]+","+ neg_deg[3]+","+ neg_deg[4]+","+ neg_deg[5]);  
+        System.out.println("pos limit deg:"+pos_deg[0]+","+ pos_deg[1]+","+ pos_deg[2]+","+ pos_deg[3]+","+ pos_deg[4]+","+pos_deg[5]);  
+        return 0;  
+    }  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        Object[] lcoeff = { 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };
-        Object[] wcoeff = { 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };
-        Object[] ccoeff = { 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };
-        Object[] fcoeff = { 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };
+Set robot collision detection method  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. versionchanged:: Java SDK-v1.0.5-3.8.2  
 
-        robot.FrictionCompensationOnOff(1).
+.. code-block:: Java  
+    :linenos:  
 
-        robot.SetFrictionValue_level(lcoeff);//formalwear
+    /**  
+    * @brief Set robot collision detection method  
+    * @param [in] method Collision detection method: 0-Current mode; 1-Dual encoder; 2-Both current and dual encoder  
+    * @param [in] thresholdMode Collision level threshold method: 0-Fixed threshold; 1-Custom collision detection threshold  
+    * @return Error code  
+    */  
+    int SetCollisionDetectionMethod(int method,int thresholdMode)  
 
-        robot.SetFrictionValue_wall(wcoeff);// side loading
+Set static collision detection on/off  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-        robot.SetFrictionValue_ceiling(ccoeff);//inversion
+    /**  
+    * @brief Set static collision detection on/off  
+    * @param  [in] status 0-Off; 1-On  
+    * @return  Error code  
+    */  
+    public int SetStaticCollisionOnOff(int status)  
 
-        robot.SetFrictionValue_freedom(fcoeff);//freedom installation
-    }
+Robot collision detection method code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-Starting odd position protection
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    public static int TestCollisionMethod(Robot robot)  
+    {  
+        int rtn = robot.SetCollisionDetectionMethod(0);  
 
-    /**
-    * @brief begins odd-position protection
-    * @param [in] protectMode singular protection mode, 0: articulated mode; 1 - Cartesian mode
-    * @param [in] minShoulderPos Shoulder singularity adjustment range (mm), default 100
-    * @param [in] minElbowPos elbow singularity adjustment range (mm), default 50
-    * @param [in] minWristPos wrist singularity adjustment range (°), default 10
-    * @return error code
-    */
-    int SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);;
+        rtn = robot.SetStaticCollisionOnOff(1);  
+        System.out.println("SetStaticCollisionOnOff On rtn is:"+ rtn);  
+        robot.Sleep(5000);  
+        rtn = robot.SetStaticCollisionOnOff(0);  
+        System.out.println("SetStaticCollisionOnOff Off rtn is:"+ rtn);  
 
-Stop odd position protection
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+        robot.CloseRPC();  
+        return 0;  
+    }  
 
-    /**
-    * @brief stops odd-position protection
-    * @return error code
-    */
-    int SingularAvoidEnd().
+Joint torque power detection  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief Joint torque power detection  
+    * @param  [in] status 0-Off; 1-On  
+    * @param  [in] power Set maximum power (W)  
+    * @return  Error code  
+    */  
+    public int SetPowerLimit(int status, double power)  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        DescPose startdescPose=new DescPose(-402.473, -185.876, 103.985, -175.367, 59.682, 94.221);
-        JointPos startjointPos=new JointPos(-0.095, -50.828, 109.737, -150.708, -30.225, -0.623);
+Joint torque power detection code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-        DescPose enddescPose=new DescPose(-399.264, -184.434, 296.022, -4.402, 58.061, -94.161);
-        JointPos endjointPos=new JointPos(-0.095, -65.547, 105.145, -131.397, 31.851, -0.622);
+    public static int TestPowerLimit(Robot robot)  
+    {  
+        robot.DragTeachSwitch(1);  
+        robot.SetPowerLimit(1, 200);  
+        List<Number> joint_toq=new ArrayList<>();  
+        joint_toq=robot.GetJointTorques(1);  
 
-        ExaxisPos exaxisPos=new ExaxisPos(0, 0, 0, 0, 0);
-        DescPose offdese=new DescPose(0, 0, 0, 0, 0, 0, 0, 0);
+        int count = 100;  
+        robot.ServoJTStart(); //   #servoJT start  
+        int error = 0;  
+        while (count > 0)  
+        {  
+            count = count - 1;  
+            robot.Sleep(1);  
+        }  
+        error = robot.ServoJTEnd();  
+        robot.DragTeachSwitch(0);  
 
-        robot.MoveL(startjointPos, startdescPose, 0, 0, 50, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
-        robot.SingularAvoidStart(0, 150, 50, 20);
-        robot.MoveL(endjointPos, enddescPose, 0, 0, 50, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
-        robot.SingularAvoidEnd();
-    }
+        robot.CloseRPC();  
+        return 0;  
+    }  

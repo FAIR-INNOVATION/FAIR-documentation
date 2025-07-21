@@ -349,3 +349,95 @@ Download Controller Data Code Example
       robot.CloseRPC();
       return 0;
     }
+
+Set Joint Firmware Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set joint firmware upgrade
+    * @param [in] type Upgrade file type: 1-Firmware upgrade (requires boot mode); 2-Slave config file upgrade (requires robot disable)
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    errno_t SetJointFirmwareUpgrade(int type, std::string path);
+  
+Set Controller Firmware Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set controller firmware upgrade
+    * @param [in] type Upgrade file type: 1-Firmware upgrade (requires boot mode); 2-Slave config file upgrade (requires robot disable)
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    errno_t SetCtrlFirmwareUpgrade(int type, std::string path);
+  
+Set End-Effector Firmware Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set end-effector firmware upgrade
+    * @param [in] type Upgrade file type: 1-Firmware upgrade (requires boot mode); 2-Slave config file upgrade (requires robot disable)
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    errno_t SetEndFirmwareUpgrade(int type, std::string path);
+
+Joint Full Parameter Configuration Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Joint full parameter configuration upgrade (requires robot disable)
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    errno_t JointAllParamUpgrade(std::string path);
+    
+Robot Slave Firmware Upgrade Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    int TestFirmWareUpgrade()
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+    return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    robot.RobotEnable(0);
+    robot.Sleep(200);
+    rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/jointallparameters.db");
+    printf("robot JointAllParamUpgrade rtn is %d\n", rtn);
+    rtn = robot.SetCtrlFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Cbd_Asix_V2.0.bin");
+    printf("robot SetCtrlFirmwareUpgrade config param rtn is %d\n", rtn);
+    rtn = robot.SetEndFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Axle_Asix_V2.4.bin");
+    printf("robot SetEndFirmwareUpgrade config param rtn is %d\n", rtn);
+    robot.SetSysServoBootMode();
+    rtn = robot.SetCtrlFirmwareUpgrade(1, "D://zUP/upgrade/FR_CTRL_PRIMCU_FV201212_MAIN_U4_T01_20250428(MT).bin");
+    printf("robot SetCtrlFirmwareUpgrade rtn is %d\n", rtn);
+    rtn = robot.SetEndFirmwareUpgrade(1, "D://zUP/upgrade/FR_END_FV201009_MAIN_U1_T01_20250428.bin");
+    printf("robot SetEndFirmwareUpgrade rtn is %d\n", rtn);
+    rtn = robot.SetJointFirmwareUpgrade(1, "D://zUP/upgrade/FR_SERVO_FV504214_MAIN_U7_T07_20250519.bin");
+    printf("robot SetJointFirmwareUpgrade rtn is %d\n", rtn);
+    robot.CloseRPC();
+    return 0;
+    }

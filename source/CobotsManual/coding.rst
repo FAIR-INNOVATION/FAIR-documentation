@@ -5239,6 +5239,112 @@ Using Motion Configuration Switch Mode
 
 .. centered:: Figure 9.27-80 CIRCLE-CIRCLE Blending via Configuration Switch
 
+Blending for Extended Axis Asynchronous Motion
+*******************************************************
+
+Using Lua Command Method
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Select the taught points for extended axis asynchronous motion blending. This manual uses "A0" to "A5" as the taught point names.
+
+**Step2**: Click "Teach Program" → "Program Editing", select the "Extended Axis" command under "Peripheral Commands", set "Motion Mode" to "Asynchronous", select the taught points and configure the debug speed. For motion protection, choose "Acceleration Smoothing Mode" and set the "Smooth Transition" parameter at the points requiring smoothing.
+
+.. image:: coding/435.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-81 Extended Axis Asynchronous Motion Blending Command Settings
+
+**Step3**: Add motion commands, generate and run the Lua program to achieve blending for extended axis asynchronous motion. This method only applies S-curve velocity planning and blending between `AccSmoothStart()` and `AccSmoothEnd()`, while using T-curve planning for other commands.
+
+.. image:: coding/436.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-82 Typical Lua Program for Extended Axis Asynchronous Motion Blending
+
+Using Motion Configuration Switch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Click "Initial Setup" → "Safety" → "Motion Configuration" and enable the "Acceleration Smoothing Mode" switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-83 Acceleration Smoothing Mode Configuration Switch
+
+**Step2**: Select the taught points for extended axis asynchronous motion blending. This manual uses "A0" to "A5" as the taught point names.
+
+**Step3**: Click "Teach Program" → "Program Editing", select the "Extended Axis" command under "Peripheral Commands", set "Motion Mode" to "Asynchronous", select the taught points and configure the debug speed. For motion protection, choose "None" and set the "Smooth Transition" parameter at the points requiring smoothing.
+
+.. image:: coding/437.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-84 Standard Extended Axis Asynchronous Motion Blending Command Settings
+
+**Step4**: Add multiple motion commands, generate and run the Lua program to achieve blending for extended axis asynchronous motion. The typical program is the same as standard extended axis motion programs. This method applies S-curve velocity planning and blending to all motions.
+
+.. image:: coding/438.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-85 Typical Program for Extended Axis Asynchronous Motion Blending Using Configuration Switch
+
+Blending for Extended Axis Synchronous Motion
+***********************************************************
+
+Using Lua Command Method
+""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Select the taught points for extended axis synchronous motion blending. This manual uses "A0" to "A5" as the taught point names.
+
+**Step2**: Click "Teach Program" → "Program Editing", select the "Extended Axis" command under "Peripheral Commands", set "Motion Mode" to "Synchronous", select the taught points and configure the debug speed. For motion protection, choose "Acceleration Smoothing Mode" and set the "Smooth Transition" parameter at the points requiring smoothing.
+
+.. image:: coding/439.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-86 Extended Axis Synchronous Motion Blending Command Settings
+
+**Step3**: Add motion commands, generate and run the Lua program to achieve blending for extended axis synchronous motion. This method only applies S-curve velocity planning and blending between `AccSmoothStart()` and `AccSmoothEnd()`, while using T-curve planning for other commands.
+
+.. image:: coding/440.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-87 Typical Lua Program for Extended Axis Synchronous Motion Blending
+
+Using Motion Configuration Switch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Click "Initial Setup" → "Safety" → "Motion Configuration" and enable the "Acceleration Smoothing Mode" switch.
+
+.. image:: coding/317.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-88 Acceleration Smoothing Mode Configuration Switch
+
+**Step2**: Select the taught points for extended axis synchronous motion blending. This manual uses "A0" to "A5" as the taught point names.
+
+**Step3**: Click "Teach Program" → "Program Editing", select the "Extended Axis" command under "Peripheral Commands", set "Motion Mode" to "Synchronous", select the taught points and configure the debug speed. For motion protection, choose "None" and set the "Smooth Transition" parameter at the points requiring smoothing.
+
+.. image:: coding/441.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.27-89 Standard Extended Axis Synchronous Motion Blending Command Settings
+
+**Step4**: Add multiple motion commands, generate and run the Lua program to achieve blending for extended axis synchronous motion. The typical program is the same as standard extended axis motion programs. This method applies S-curve velocity planning and blending to all motions.
+
+.. image:: coding/442.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.27-90 Typical Program for Extended Axis Synchronous Motion Blending Using Configuration Switch
+
 Swing Tilt Angle Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

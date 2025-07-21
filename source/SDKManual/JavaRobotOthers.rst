@@ -1,359 +1,22 @@
 Other interfaces
-=====================================
+================
 
 .. toctree:: 
     :maxdepth: 5
 
-Download Point Table Database
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Download the point table database 
-    * @param [in] pointTableName Name of the point table to be downloaded pointTable1.db
-    * @param [in] saveFilePath The storage path to download the point table C://test/
-    * @return error code 
-    */
-    int PointTableDownLoad(String pointTableName, String saveFilePath);
-
-Upload point table database
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief uploading the point table database 
-    * @param [in] pointTableFilePath Full pathname of the uploaded point table C://test/pointTable1.db
-    * @return error code 
-    */
-    int PointTableUpLoad(String pointTableFilePath);;
-
-Toggle point table and apply
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Toggle point table and apply 
-    * @param [in] pointTableName Name of point table to be switched "pointTable1.db"
-    * @param [in] errorStr Toggle point table error message
-    * @return error code 
-    */
-    int PointTableSwitch(String pointTableName, String errorStr);
-
-Point table update lua file
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief point table update lua file
-    * @param [in] pointTableName The name of the point table to be switched, "pointTable1.db", when the point table is empty, i.e. "", it means updating the lua program to the initial program without applying the point table.
-    * @param [in] luaFileName Name of the lua file to be updated "testPointTable.lua"
-    * @param [out] errorStr Toggle point table error message
-    * @return error code 
-    */
-    int PointTableUpdateLua(String pointTableName, String luaFileName, String errorStr);
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return;
-        }
-
-        robot.PointTableUpLoad("D://zUP/point_table_test1.db");//Point Table Upload
-        robot.PointTableDownLoad("point_table_test1.db", "D:///zUP/");//point table download
-        String errStr = "";
-        robot.PointTableSwitch("point_table_test1.db", errStr);//switch the point table
-        // Point table update LUA program
-        robot.PointTableUpdateLua("point_table_test2.db", "1010Test.lua", errStr);
-    }
-
-Initialize Logging Parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Initialize log parameters
-    * @param [in] logType: output mode, DIRECT-direct output; BUFFER-buffered output; ASYNC-asynchronous output
-    * @param [in] logLevel: log filter level, ERROR-Error; WARNING-Warning; INFO-Information; DEBUG-Debugging
-    * @param [in] filePath: file save path, e.g. "D:///Log/".
-    * @param [in] saveFileNum: the number of files to be saved; files that exceed both the number of files to be saved and the number of days to be saved will be deleted.
-    * @param [in] saveDays: the number of days to save the file, the file that exceeds both the number of files to save and the number of days to save the file will be deleted
-    * @return error code
-    */
-    int LoggerInit(FrLogType logType, FrLogLevel logLevel, String filePath, int saveFileNum, int saveDays);;
-
-Setting the log filter level
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief sets the level of log filtering.
-    * @param [in] logLevel: log filter level, ERROR-Error; WARNING-Warning; INFO-Information; DEBUG-Debugging
-    * @return error code
-    */
-    int SetLoggerLevel(FrLogLevel logLevel);
-
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        robot.SetLoggerLevel(FrLogLevel.DEBUG);
-    }
-
-Setting up robot peripheral protocols
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Set up robot peripheral protocols
-    * @param [in] protocol Robot peripheral protocol number 4096-Extended Axis Control Card; 4097-ModbusSlave; 4098-ModbusMaster
-    * @return error code 
-    */
-    int SetExDevProtocol(int protocol).
-
-Obtaining robot peripheral protocols
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Get robot peripheral protocols
-    * @return List[0]:Error code; List[1] : int protocol Robot peripheral protocol number 4096-Expanded axis control card; 4097-ModbusSlave; 4098-ModbusMaster 
-    */
-    List<Integer> GetExDevProtocol();
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-
-        robot.SetExDevProtocol(4096);
-        List<Number> rtnArr = robot.GetTargetPayload(1);
-        rtnArr=GetExDevProtocol();
-    }
-
-End Sensor Configuration
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief End sensor configuration
-    * @param [in] config idCompany vendor, 18-JUNKONG; 25-HUIDE
-    * @param [in] config idDevice type, 0-JUNKONG/RYR6T.
-    * @param [in] config idSoftware software version, 0-J1.0/HuiDe1.0 (not yet open)
-    * @param [in] config idBus mount location, 1-end port 1; 2-end port 2.... .8-end port 8 (not open yet)
-    * @return error code
-    */
-    int AxleSensorConfig(DeviceConfig config).
-
-Get End Sensor Configuration
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Get end sensor configuration
-    * @param [out] config idCompany vendor, 18-JUNKONG; 25-HUIDE
-    * @param [out] config idDevice type, 0-JUNKONG/RYR6T.
-    * @return error code
-    */
-    int AxleSensorConfigGet(DeviceConfig config);
-
-End sensor activation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief End sensor activation
-    * @param [in] actFlag 0-reset; 1-activate
-    * @return error code
-    */
-    int AxleSensorActivate(int actFlag).
-
-End Sensor Register Write
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief End Sensor Register Writes
-    * @param [in] devAddr device address number 0-255
-    * @param [in] regHAddr register address high 8 bits
-    * @param [in] regLAddr register address lower 8 bits
-    * @param [in] regNum number of registers 0-255
-    * @param [in] data1 Write register value 1
-    * @param [in] data2 Write register value 2
-    * @param [in] isNoBlock 0-blocking; 1-non-blocking
-    * @return error code
-    */
-    int AxleSensorRegWrite(int devAddr, int regHAddr, int regLAddr, int regNum, int data1, int data2, int isNoBlock);
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        DeviceConfig axleSensorConfig = new DeviceConfig(18, 0, 0, 1);
-        robot.AxleSensorConfig(axleSensorConfig);
-
-        DeviceConfig getConfig = new DeviceConfig();
-        robot.AxleSensorConfigGet(getConfig);
-        System.out.println("company is " + getConfig.company + ", type is " + getConfig.device);
-
-        robot.AxleSensorActivate(1);
-
-        robot.AxleSensorRegWrite(1, 4, 6, 1, 0, 0, 0);
-    }
-
-Controller log download 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.4-3.8.1
-
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Download controller logs
-    * @param [in] savePath Save path "D://zDown/"
-    * @return Error code
-    */
-    int RbLogDownload(String savePath);
-
-All Data Source Download
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.4-3.8.1
-
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Download all data sources
-    * @param [in] savePath Save path "D://zDown/"
-    * @return Error code
-    */
-    int AllDataSourceDownload(String savePath);
-
-Data Package Download
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.4-3.8.1
-
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Download data package
-    * @param [in] savePath Save path "D://zDown/"
-    * @return Error code
-    */
-    int DataPackageDownload(String savePath);
-
-Code Example
+Get SSH public key
 +++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set reconnect attempts and interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("RPC connection success");
-        }
-        else
-        {
-            System.out.println("RPC connection fail");
-            return ;
-        }
-        int rtn=0;
+    /**
+    * @brief Get SSH public key
+    * @param [out] keygen Public key
+    * @return Error code
+    */
+    int GetSSHKeygen(String[] keygen)
 
-        rtn = robot.DataPackageDownload("D://zDOWN/");
-        System.out.println("DataPackageDownload rtn is: "+rtn);
-
-        System.out.println("AllDataSourceDownload start");
-        rtn = robot.AllDataSourceDownload("D://zDOWN/");
-        System.out.println("AllDataSourceDownload rtn is: "+rtn);
-
-        System.out.println("RbLogDownload start");
-        rtn = robot.RbLogDownload("D://zDOWN/");
-        System.out.println("RbLogDownload rtn is: "+rtn);
-    }
-
-Issue SCP commands
+Issue SCP command
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: Java SDK-v1.0.6-3.8.3
 
@@ -361,37 +24,36 @@ Issue SCP commands
     :linenos:
 
     /** 
-    * @brief Issue SCP commands
-    * @param [in] mode 0-upload (host computer -> controller), 1-download (controller -> host computer)
-    * @param [in] sshname Host computer username
-    * @param [in] sship Host computer IP address
-    * @param [in] usr_file_url Host computer file path
+    * @brief Issue SCP command
+    * @param [in] mode 0-upload (host->controller), 1-download (controller->host)
+    * @param [in] sshname Host username
+    * @param [in] sship Host IP address
+    * @param [in] usr_file_url Host file path
     * @param [in] robot_file_url Robot controller file path
     * @return Error code
     */
     int SetSSHScpCmd(int mode, String sshname, String sship, String usr_file_url, String robot_file_url)
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate MD5 value of specified file
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
+    /**
+    * @brief Calculate MD5 value of specified file
+    * @param [in] file_path File path including filename, default Traj folder path:"/fruser/traj/", e.g. "/fruser/traj/trajHelix_aima_1.txt"
+    * @param [out] md5 File MD5 value
+    * @return Error code
+    */
+    int ComputeFileMD5(String file_path, String[] md5)
 
+Robot SSH and MD5 command code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestSSHMd5(Robot robot)
+    {
         String file_path= "/fruser/airlab.lua";
         String[] md5 =new String[]{""};
 
@@ -409,32 +71,307 @@ code example
 
         robot.ComputeFileMD5(file_path, md5);
         System.out.println("md5 is:+"+ md5[0]);
+        return 0;
     }
 
-Set wide voltage control box temperature and fan speed monitoring parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.6-3.8.3
+Set robot port 20004 feedback period
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set robot port 20004 feedback period
+    * @param [in] period Robot port 20004 feedback period(ms)
+    * @return  Error code
+    */
+    public int SetRobotRealtimeStateSamplePeriod(int period)
+
+Get robot port 20004 feedback period
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get robot port 20004 feedback period
+    * @return  List[0]:Error code; List[1]:Robot port 20004 feedback period(ms)
+    */
+    public List<Integer> GetRobotRealtimeStateSamplePeriod()
+
+Robot port 20004 status feedback period configuration example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestRealtimePeriod(Robot robot)
+    {
+        robot.SetRobotRealtimeStateSamplePeriod(10);
+        List<Integer> getPeriod = new ArrayList<>();
+        getPeriod=robot.GetRobotRealtimeStateSamplePeriod();
+        robot.Sleep(1000);
+
+        return 0;
+    }
+
+Robot software upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Robot software upgrade
+     * @param [in] filePath Full path of software upgrade package
+     * @param [in] block Whether to block until upgrade completes true:block; false:non-block
+     * @return  Error code
+     */
+    public int SoftwareUpgrade(String filePath, boolean block)
+
+Get robot software upgrade status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get robot software upgrade status
+    * @return  List[0]:Error code; List[1]:Robot software upgrade status 0-idle or uploading upgrade package; 1~100: upgrade completion percentage; -1:upgrade failed; -2:verification failed; -3:version verification failed; -4:decompression failed; -5:user configuration upgrade failed; -6:peripheral configuration upgrade failed; -7:extended axis configuration upgrade failed; -8:robot configuration upgrade failed; -9:DH parameter configuration upgrade failed
+    */
+    public List<Integer> GetSoftwareUpgradeState()
+
+Robot software upgrade code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestUpgrade(Robot robot)
+    {
+        robot.SoftwareUpgrade("D://zUP/QNX382/software.tar.gz", false);
+        while (true)
+        {
+            List<Integer> inter=new ArrayList<>();
+            inter=robot.GetSoftwareUpgradeState();
+            System.out.println("upgrade state is:"+ inter.get(1));
+            robot.Sleep(300);
+        }
+    }
+
+Download point table database
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Download point table database 
+    * @param [in] pointTableName Point table name to download    pointTable1.db
+    * @param [in] saveFilePath Storage path for downloaded point table   C://test/
+    * @return Error code 
+    */
+    int PointTableDownLoad(String pointTableName, String saveFilePath);
+
+Upload point table database
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Upload point table database 
+    * @param [in] pointTableFilePath Full path name of point table to upload   C://test/pointTable1.db
+    * @return Error code 
+    */
+    int PointTableUpLoad(String pointTableFilePath);
+
+Point table update lua file
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Point table update lua file
+    * @param [in] pointTableName Point table name to switch to   "pointTable1.db", when empty "", means updating lua program to initial program without applied point table
+    * @param [in] luaFileName Lua file name to update   "testPointTable.lua"
+    * @param [out] errorStr Point table switching error message
+    * @return Error code 
+    */
+    int PointTableUpdateLua(String pointTableName, String luaFileName, String errorStr);
+
+Robot point table operation code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestPointTable(Robot robot)
+    {
+        String save_path = "D://zDOWN/";
+        String point_table_name = "point_table_FR5.db";
+        int rtn = robot.PointTableDownLoad(point_table_name, save_path);
+
+        String upload_path = "D://zUP/point_table_FR5.db";
+        rtn = robot.PointTableUpLoad(upload_path);
+
+        String point_tablename = "point_table_FR5.db";
+        String lua_name = "airlab.lua";
+        String err="";
+        rtn = robot.PointTableUpdateLua(point_tablename, lua_name,err);
+
+        robot.CloseRPC();
+        return 0;
+    }
+
+Controller log download
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Set wide voltage control box temperature and fan speed monitoring parameters
-    * @param [in] enable 0-Disable monitoring; 1-Enable monitoring
-    * @param [in] period Monitoring period (s), range 1-100
+    * @brief Controller log download
+    * @param [in] savePath Save file path"D://zDown/"
     * @return Error code
     */
-    int SetWideBoxTempFanMonitorParam(int enable, int period);
+    int RbLogDownload(String savePath);
 
-Retrieve wide voltage control box temperature and fan speed monitoring parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.6-3.8.3
+All data source download
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Issue SCP commands
-    * @return List[0] - Error code, List[1] - Enable 0 - Disable monitoring; 1 - Enable monitoring, List[2] - Period Monitoring period (s), range 1-100
+    * @brief All data source download
+    * @param [in] savePath Save file path"D://zDown/"
+    * @return Error code
     */
-    List<Number> GetWideBoxTempFanMonitorParam()
+    int AllDataSourceDownload(String savePath);
+
+Data backup package download
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
+
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Data backup package download
+    * @param [in] savePath Save file path"D://zDown/"
+    * @return Error code
+    */
+    int DataPackageDownload(String savePath);
+
+Download controller data code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestDownLoadRobotData(Robot robot)
+    {
+        int rtn = robot.RbLogDownload("D://zDOWN/");
+
+        rtn = robot.AllDataSourceDownload("D://zDOWN/");
+
+        rtn = robot.DataPackageDownload("D://zDOWN/");
+        return 0;
+    }
+
+Set Encoder Upgrade
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set encoder upgrade
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    int SetEncoderUpgrade(String path)
+
+Set Joint Firmware Upgrade
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set joint firmware upgrade
+    * @param [in] type Upgrade file type: 1-Firmware upgrade; 2-Slave configuration file upgrade
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    public int SetJointFirmwareUpgrade(int type, String path)
+
+Set Controller Firmware Upgrade
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set controller firmware upgrade
+    * @param [in] type Upgrade file type: 1-Firmware upgrade; 2-Slave configuration file upgrade
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    public int SetCtrlFirmwareUpgrade(int type, String path)
+
+Set End-Effector Firmware Upgrade
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set end-effector firmware upgrade
+    * @param [in] type Upgrade file type: 1-Firmware upgrade; 2-Slave configuration file upgrade
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    public int SetEndFirmwareUpgrade(int type, String path)
+
+Joint Complete Parameter Configuration Upgrade
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.7-3.8.4
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Joint complete parameter configuration upgrade
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code
+    */
+    public int JointAllParamUpgrade(String path)
+
+Robot Slave Firmware Upgrade Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestFirmWareUpgrade(Robot robot)
+    {
+        robot.RobotEnable(0);
+        robot.Sleep(200);
+        int rtn = robot.JointAllParamUpgrade("D://zUP/standardQX/jointallparametersFR56.0.db");
+        System.out.println("robot JointAllParamUpgrade rtn is:"+ rtn);
+
+        rtn = robot.SetCtrlFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Cbd_Asix_V2.0.bin");
+        System.out.println("robot SetCtrlFirmwareUpgrade config param rtn is:"+ rtn);
+
+        rtn = robot.SetEndFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Axle_Asix_V2.4.bin");
+        System.out.println("robot SetEndFirmwareUpgrade config param rtn is:"+ rtn);
+
+        robot.SetSysServoBootMode();
+        rtn = robot.SetCtrlFirmwareUpgrade(1, "D://zUP/standardQX/FR_CTRL_PRIMCU_FV201010_MAIN_U4_T01_20240529.bin");
+        System.out.println("robot SetCtrlFirmwareUpgrade rtn is:"+ rtn);
+
+        rtn = robot.SetEndFirmwareUpgrade(1, "D://zUP/standardQX/FR_END_FV201010_MAIN_U01_T01_20250522.bin");
+        System.out.println("robot SetEndFirmwareUpgrade rtn is:"+ rtn);
+
+        rtn = robot.SetJointFirmwareUpgrade(1, "D://zUP/standardQX/FR_SERVO_FV502211_MAIN_U7_T07_20250217.bin");
+        System.out.println("robot SetJointFirmwareUpgrade rtn is:"+ rtn);
+
+        robot.CloseRPC();
+    }

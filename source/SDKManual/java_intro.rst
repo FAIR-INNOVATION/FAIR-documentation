@@ -15,7 +15,7 @@ This document is the Java version of the secondary development interface documen
 
 .. note:: 
     
-    The current documentation applies to SDK-v3.8.0 and is backward compatible with v1.x/v2.x versions.
+    The current documentation applies to SDK-v3.8.3 and is backward compatible with v1.x/v2.x versions.
 
 
 .. toctree:: 
@@ -33,8 +33,7 @@ This document is the Java version of the secondary development interface documen
     JavaRobotWebAPPProgramUse
     JavaRobotPeripherals
     JavaRobotForceControl
-    JavaRobotConveyor
-    JavaRobotWeld
     JavaRobotExtendedAxis
+    JavaRobotWeld
     JavaRobotOthers
     JavaAppendix

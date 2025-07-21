@@ -1,34 +1,34 @@
 Data Structure Description
-=====================================
+============================================
 
 .. toctree:: 
     :maxdepth: 5
 
 Joint Position Data Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Joint Position Data Type 
+    * @brief Joint position data type 
     */  
     public class JointPos
     {
-      double J1.
-      double J2.
-      double J3.
-      double J4.
-      double J5.
-      double J6.
+      double J1;
+      double J2;
+      double J3;
+      double J4;
+      double J5;
+      double J6;
 
       public JointPos(double j1, double j2, double j3, double j4, double j5, double j6)
       {
         J1 = j1;
-        J2 = j2.
-        J3 = j3.
-        J4 = j4.
-        J5 = j5.
-        J6 = j6.
+        J2 = j2;
+        J3 = j3;
+        J4 = j4;
+        J5 = j5;
+        J6 = j6;
       }
 
       public JointPos()
@@ -37,24 +37,24 @@ Joint Position Data Type
       }
     }
 
-Cartesian spatial position data types
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Position Data Type
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * :: @brief Cartesian spatial position data types
+    * @brief Cartesian space position data type
     */
     public class DescTran
     {
-      public double x = 0.0; /* x-axis coordinates in mm */
-      public double y = 0.0; /* y-axis coordinates in mm */
-      public double z = 0.0; /* z-axis coordinates in mm */
+      public double x = 0.0;    /* X-axis coordinate, unit: mm */
+      public double y = 0.0;    /* Y-axis coordinate, unit: mm */
+      public double z = 0.0;    /* Z-axis coordinate, unit: mm */
       public DescTran(double posX, double posY, double posZ)
       {
-        x = posX.
+        x = posX;
         y = posY;
-        z = posZ.
+        z = posZ;
       }
 
       public DescTran()
@@ -64,39 +64,39 @@ Cartesian spatial position data types
 
     }
 
-Eulerian angle pose data type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Euler Angle Attitude Data Type
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Eulerian angle pose data type
+    * @brief Euler angle attitude data type
     */
     public class Rpy
     {
-      public double rx = 0.0; /* Angle of rotation around fixed axis X in deg */
-      public double ry = 0.0; /* Angle of rotation around fixed axis Y, unit: deg */
-      public double rz = 0.0; /* Angle of rotation around fixed axis Z, unit: deg */
+      public double rx = 0.0;   /* Rotation angle around fixed X-axis, unit: deg */
+      public double ry = 0.0;   /* Rotation angle around fixed Y-axis, unit: deg */
+      public double rz = 0.0;   /* Rotation angle around fixed Z-axis, unit: deg */
       public Rpy(double rotateX, double rotateY, double rotateZ)
       {
-        rx = rotateX.
-        ry = rotateY.
-        rz = rotateZ.
+        rx = rotateX;
+        ry = rotateY;
+        rz = rotateZ;
       }
     }
 
-Cartesian space position data types
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Pose Data Type
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    *@brief Cartesian space position type
+    *@brief Cartesian space pose type
     */
     public class DescPose
     {
-      public DescTran tran = new DescTran(0.0, 0.0, 0.0); /* Cartesian space position */
-      public Rpy rpy = new Rpy(0.0, 0.0, 0.0);			       /* Cartesian space gesture */
+      public DescTran tran = new DescTran(0.0, 0.0, 0.0);      /* Cartesian space position */
+      public Rpy rpy = new Rpy(0.0, 0.0, 0.0);			       /* Cartesian space attitude */
 
       public DescPose()
       {
@@ -105,8 +105,8 @@ Cartesian space position data types
 
       public DescPose(DescTran descTran, Rpy rotateRpy)
       {
-        tran = descTran.
-        rpy = rotateRpy.
+        tran = descTran;
+        rpy = rotateRpy;
       }
 
       public DescPose(double tranX, double tranY, double tranZ, double rX, double ry, double rz)
@@ -121,17 +121,17 @@ Cartesian space position data types
 
       public String toString()
       {
-        return String.valueOf(tran.x) + "," + String.valueOf(tran.y) + "," +String.valueOf(tran.z) + "," +String.valueOf(rpy.rx) + "," +String.valueOf( rpy.ry) + "," +String.valueOf(rpy.rz);
+        return String.valueOf(tran.x) + "," + String.valueOf(tran.y) + "," + String.valueOf(tran.z) + "," + String.valueOf(rpy.rx) + "," + String.valueOf(rpy.ry) + "," + String.valueOf(rpy.rz);
       }
     }
 
 Extended Axis Position Data Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Extended Axis Position Data Type
+    * @brief Extended axis position data type
     */
     public class ExaxisPos
     {
@@ -155,41 +155,41 @@ Extended Axis Position Data Type
       public ExaxisPos(double pos1, double pos2, double pos3, double pos4)
       {
         axis1 = pos1;
-        axis2 = pos2.
-        axis3 = pos3.
-        axis4 = pos4.
+        axis2 = pos2;
+        axis3 = pos3;
+        axis4 = pos4;
       }
     }
 
-Torque Sensor Data Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Force Torque Sensor Data Type
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Force components and moment components of force sensors
+    * @brief Force component and torque component of force sensor
     */
     public class ForceTorque
     {
-      public double fx; /* force component along x-axis, in N */
-      public double fy; /* force component along y-axis, in N */
-      public double fz; /* Force component along z-axis, unit N */
-      public double tx; /* Moment component around x-axis, unit Nm */
-      public double ty; /* Moment component around y-axis, unit Nm */
-      public double tz; /* Moment component around z-axis, unit Nm */
+      public double fx;  /* Force component along X-axis, unit: N */
+      public double fy;  /* Force component along Y-axis, unit: N */
+      public double fz;  /* Force component along Z-axis, unit: N */
+      public double tx;  /* Torque component around X-axis, unit: Nm */
+      public double ty;  /* Torque component around Y-axis, unit: Nm */
+      public double tz;  /* Torque component around Z-axis, unit: Nm */
       public ForceTorque(double fX, double fY, double fZ, double tX, double tY, double tZ)
       {
-        fx = fX.
-        fy = fY.
-        fz = fZ.
-        tx = tX.
-        ty = tY.
-        tz = tZ.
+        fx = fX;
+        fy = fY;
+        fz = fZ;
+        tx = tX;
+        ty = tY;
+        tz = tZ;
       }
     }
 
 Spiral Parameter Data Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -198,12 +198,12 @@ Spiral Parameter Data Type
     */
     public class SpiralParam
     {
-      public int circle_num; /* number of circles */
-      public double circle_angle; /* spiral inclination */
-      public double rad_init; /* Spiral initial radius in mm */
-      public double rad_add; /* radius increment */
-      public double rotaxis_add; /* rotaxis direction increment */
-      public int rot_direction; /* rot_direction, 0-clockwise, 1-counterclockwise */
+      public int circle_num;              /* Number of spiral circles */
+      public double circle_angle;         /* Spiral tilt angle */
+      public double rad_init;             /* Initial radius of spiral, unit: mm */
+      public double rad_add;              /* Radius increment */
+      public double rotaxis_add;          /* Rotation axis direction increment */
+      public int rot_direction;           /* Rotation direction, 0-clockwise, 1-counterclockwise */
       public SpiralParam(int circleNum, double circleAngle, double radInit, double radAdd, double rotaxisAdd, int rotDirection)
       {
         circle_num = circleNum;
@@ -211,36 +211,36 @@ Spiral Parameter Data Type
         rad_init = radInit;
         rad_add = radAdd;
         rotaxis_add = rotaxisAdd;
-        rot_direction = rotDirection.
+        rot_direction = rotDirection;
       }
     }
 
-Extended Axis State Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Extended Axis Status Type
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Extended axis state type
+    * @brief Extended axis status type
     */
     public class EXT_AXIS_STATUS
     {
-     public double pos = 0; //extended axis position
-     public double vel = 0; //extended axis velocity
-     public int errorCode = 0; //extended shaft error code
-     public int ready = 0; //servo ready
-     public int inPos = 0; //servo in place
-     public int alarm = 0; //servo alarm
-     public int flerr = 0; //following error
-     public int nlimit = 0; //to the negative limit
-     public int pLimit = 0; //to the positive limit
-     public int mdbsOffLine = 0; // drive 485 bus offline
-     public int mdbsTimeout = 0; //control card and control box 485 communication timeout
-     public int homingStatus = 0; //extended axis back to zero status
+     public double pos = 0;        // Extended axis position
+     public double vel = 0;        // Extended axis velocity
+     public int errorCode = 0;     // Extended axis error code
+     public int ready = 0;        // Servo ready
+     public int inPos = 0;        // Servo in position
+     public int alarm = 0;        // Servo alarm
+     public int flerr = 0;        // Following error
+     public int nlimit = 0;       // Negative limit reached
+     public int pLimit = 0;       // Positive limit reached
+     public int mdbsOffLine = 0;  // Driver 485 bus offline
+     public int mdbsTimeout = 0;  // Communication timeout between control card and control box via 485
+     public int homingStatus = 0; // Extended axis homing status
     }
 
-Sensor type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sensor Type
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -249,10 +249,10 @@ Sensor type
     */
     public class DeviceConfig
     {
-      int company = 0; // vendor
-      int device = 0; // type/device number
-      int softwareVersion = 0; // software version
-      int bus = 0; // mount position
+      int company = 0;          // Manufacturer
+      int device = 0;           // Type/device number
+      int softwareVersion = 0;  // Software version
+      int bus = 0;              // Mounting location
 
       public DeviceConfig()
       {
@@ -269,7 +269,7 @@ Sensor type
     }
 
 485 Extended Axis Configuration
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -278,11 +278,11 @@ Sensor type
     */
     public class Axis485Param
     {
-      int servoCompany; // Servo Drive Manufacturer, 1 - Dynatec
-      int servoModel; // servo drive model, 1-FD100-750C
-      int servoSoftVersion; // Servo drive software version, 1-V1.0
-      int servoResolution; // encoder resolution
-      double axisMechTransRatio; // mechanical transmission ratio
+      int servoCompany;           // Servo driver manufacturer, 1-DynaTech
+      int servoModel;             // Servo driver model, 1-FD100-750C
+      int servoSoftVersion;       // Servo driver software version, 1-V1.0
+      int servoResolution;        // Encoder resolution
+      double axisMechTransRatio;  // Mechanical transmission ratio
 
       public Axis485Param(int company, int model, int softVersion, int resolution, double mechTransRatio)
       {
@@ -290,7 +290,7 @@ Sensor type
         servoModel = model;
         servoSoftVersion = softVersion;
         servoResolution = resolution;
-        axisMechTransRatio = mechTransRatio.
+        axisMechTransRatio = mechTransRatio;
       }
 
       public Axis485Param()
@@ -299,8 +299,8 @@ Sensor type
       }
     }
 
-Servo controller status
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Servo Controller Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
@@ -309,120 +309,138 @@ Servo controller status
     */
     public class ROBOT_AUX_STATE
     {
-      public int servoId = 0; // servo drive ID number
-      public int servoErrCode = 0; // servo drive error code
-      public int servoState = 0; // servo drive state
-      public double servoPos = 0; // servo current position
-      public float servoVel = 0; // servo current speed
-      public float servoTorque = 0; // servo current torque 25
+      public int servoId = 0;           // Servo driver ID
+      public int servoErrCode = 0;       // Servo driver error code
+      public int servoState = 0;         // Servo driver status
+      public double servoPos = 0;        // Current servo position
+      public float servoVel = 0;         // Current servo velocity
+      public float servoTorque = 0;      // Current servo torque
     }
 
-Welding interrupt status
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
-
+Welding Breakoff Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Welding interrupt status
+    * @brief Welding breakoff status
     */
     public class WELDING_BREAKOFF_STATE
     {
-      public int breakOffState = 0; //welding interrupt state
-      public int weldArcState = 0; //welding arc interrupt state
+      public int breakOffState = 0;  // Welding breakoff status
+      public int weldArcState = 0;   // Welding arc breakoff status
     }
 
-Robot Status Feedback Structure Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: Java SDK-v1.0.1-3.7.8
-
+UDP Extended Axis Communication Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Robot status feedback structure type
+    * @brief UDP extended axis communication parameters
+    */
+    public class UDP_EXT_AXIS_PARAM
+    {
+      public String ip = "192.168.58.88"; // IP address
+      public int port = 2021;            // Port number
+      public int period = 2;             // Communication period (ms, default is 2, do not modify this parameter)
+      public int lossPkgTime = 50;       // Packet loss detection time (ms)
+      public int lossPkgNum = 2;         // Number of packet losses
+      public int disconnectTime = 100;   // Communication disconnection confirmation duration
+      public int reconnectEnable = 0;    // Communication disconnection auto-reconnect enable 0-disable 1-enable
+      public int reconnectPeriod = 100;  // Reconnection interval (ms)
+      public int reconnectNum = 3;       // Number of reconnection attempts
+      public int selfConnect = 0;       // Whether to automatically establish connection after power restart; 0-do not establish connection; 1-establish connection
+    }
+
+Robot State Feedback Structure Type
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Robot state feedback structure type
     */
     public class ROBOT_STATE_PKG
     {
-      public short frame_head = 0; //frame head 0x5A5A
-      public byte frame_cnt = 0; //frame counter
-      public short data_len = 0; //data length 5
-      public int program_state = 0; //program running state, 1-stop; 2-run; 3-pause
-      public int robot_state = 0; // robot motion state, 1-stop; 2-run; 3-pause; 4-drag 7
-      public int main_code = 0; //main fault code
-      public int sub_code = 0; //sub fault code
-      public int robot_mode = 0; //robot mode, 0-automatic mode; 1-manual mode 16
-      public double[] jt_cur_pos =new double[6]; //current position of joints
-      public double[] tl_cur_pos = new double[6]; //tool current position posture
-      public double[] flange_cur_pos = new double[6]; //end flange current bit position
-      public double[] actual_qd = new double[6]; //robot current joint velocity
-      public double[] actual_qdd = new double[6]; //robot current joint acceleration
-      public double[] target_TCP_CmpSpeed = new double[2]; //robot TCP synthesis command speed
-      public double[] target_TCP_Speed = new double[6]; //robot TCP command speed
-      public double[] actual_TCP_CmpSpeed = new double[2]; // robot TCP synthesis actual speed
-      public double[] actual_TCP_Speed = new double[6]; // robot TCP actual speed
-      public double[] jt_cur_tor = new double[6]; //current torque
-      public int tool = 0; //tool number
-      public int user = 0; //artifact number
-      public int cl_dgt_output_h = 0; // digital output 15-8
-      public int cl_dgt_output_l = 0; //digital output 7-0
-      public int tl_dgt_output_l = 0; //tool digital output 7-0 (only bit0-bit1 valid)
-      public int cl_dgt_input_h = 0; // digital input 15-8
-      public int cl_dgt_input_l = 0; //digital input 7-0
-      public int tl_dgt_input_l = 0; //tool digital input 7-0 (only bit0-bit1 valid)
-      public short[] cl_analog_input = new short[2]; //control box analog input
-      public short tl_anglog_input = 0; //tool analog input
-      public double[] ft_sensor_raw_data = new double[6]; // force/torque sensor raw data
-      public double[] ft_sensor_data = new double[6]; //Force/torque sensor data in reference coordinate system
-      public int ft_sensor_active = 0; //Force/torque sensor active, 0-reset, 1-active
-      public int EmergencyStop = 0; //Emergency stop flag
-      public int motion_done = 0; //in place signal
-      public int gripper_motiondone = 0; //gripper motion done signal
-      public int mc_queue_len = 0; //motion queue length
-      public int collisionState = 0; //collision detection, 1-collision; 0-no collision
-      public int trajectory_pnum = 0; //trajectory point number
-      public int safety_stop0_state = 0; /* Safety stop signal SI0 */
-      public int safety_stop1_state = 0; /* Safety stop signal SI1 */
-      public int gripper_fault_id = 0; /* error gripper number */ // + 19 = 567
-      public short gripper_fault = 0; /* gripper_fault */
-      public short gripper_active = 0; /* Gripper active status */
-      public int gripper_position = 0; /* Gripper position */
-      public int gripper_speed = 0; /* Gripper speed */
-      public int gripper_current = 0; /* Gripper current */
-      public int gripper_tmp = 0; /* Gripper temperature */
-      public int gripper_voltage = 0; /* gripper_voltage */
-      public ROBOT_AUX_STATE auxState = new ROBOT_AUX_STATE(); /* 485 Extended Axis State */
+      public short frame_head = 0;            // Frame header 0x5A5A
+      public byte frame_cnt = 0;              // Frame count
+      public short data_len = 0;              // Data length
+      public int program_state = 0;          // Program running state, 1-stop; 2-run; 3-pause
+      public int robot_state = 0;            // Robot motion state, 1-stop; 2-run; 3-pause; 4-drag
+      public int main_code = 0;               // Main error code
+      public int sub_code = 0;                // Sub error code
+      public int robot_mode = 0;             // Robot mode, 0-auto mode; 1-manual mode
+      public double[] jt_cur_pos = new double[6];                  // Joint current position
+      public double[] tl_cur_pos = new double[6];                  // Tool current pose
+      public double[] flange_cur_pos = new double[6];              // End flange current pose
+      public double[] actual_qd = new double[6];                   // Robot current joint velocity
+      public double[] actual_qdd = new double[6];                  // Robot current joint acceleration
+      public double[] target_TCP_CmpSpeed = new double[2];         // Robot TCP composite command velocity
+      public double[] target_TCP_Speed = new double[6];            // Robot TCP command velocity
+      public double[] actual_TCP_CmpSpeed = new double[2];         // Robot TCP composite actual velocity
+      public double[] actual_TCP_Speed = new double[6];            // Robot TCP actual velocity
+      public double[] jt_cur_tor = new double[6];                  // Current torque
+      public int tool = 0;                        // Tool number
+      public int user = 0;                        // Workpiece number
+      public int cl_dgt_output_h = 0;            // Digital output 15-8
+      public int cl_dgt_output_l = 0;            // Digital output 7-0
+      public int tl_dgt_output_l = 0;            // Tool digital output 7-0 (only bit0-bit1 valid)
+      public int cl_dgt_input_h = 0;             // Digital input 15-8
+      public int cl_dgt_input_l = 0;             // Digital input 7-0
+      public int tl_dgt_input_l = 0;             // Tool digital input 7-0 (only bit0-bit1 valid)
+      public short[] cl_analog_input = new short[2];          // Control box analog input
+      public short tl_anglog_input = 0;                       // Tool analog input
+      public double[] ft_sensor_raw_data = new double[6];     // Force/torque sensor raw data
+      public double[] ft_sensor_data = new double[6];         // Reference coordinate system force/torque sensor data
+      public int ft_sensor_active = 0;           // Force/torque sensor activation state, 0-reset, 1-active
+      public int EmergencyStop = 0;              // Emergency stop flag
+      public int motion_done = 0;                 // In-position signal
+      public int gripper_motiondone = 0;         // Gripper motion completion signal
+      public int mc_queue_len = 0;                // Motion queue length
+      public int collisionState = 0;             // Collision detection, 1-collision; 0-no collision
+      public int trajectory_pnum = 0;             // Trajectory point number
+      public int safety_stop0_state = 0;  /* Safety stop signal SI0 */
+      public int safety_stop1_state = 0;  /* Safety stop signal SI1 */
+      public int gripper_fault_id = 0;    /* Error gripper number */
+      public short gripper_fault = 0;      /* Gripper fault */
+      public short gripper_active = 0;     /* Gripper activation state */
+      public int gripper_position = 0;    /* Gripper position */
+      public int gripper_speed = 0;       /* Gripper speed */
+      public int gripper_current = 0;     /* Gripper current */
+      public int gripper_tmp = 0;          /* Gripper temperature */
+      public int gripper_voltage = 0;      /* Gripper voltage */
+      public ROBOT_AUX_STATE auxState = new ROBOT_AUX_STATE(); /* 485 extended axis status */
       public EXT_AXIS_STATUS extAxisStatus0 = new EXT_AXIS_STATUS();
       public EXT_AXIS_STATUS extAxisStatus1 = new EXT_AXIS_STATUS();
       public EXT_AXIS_STATUS extAxisStatus2 = new EXT_AXIS_STATUS();
       public EXT_AXIS_STATUS extAxisStatus3 = new EXT_AXIS_STATUS();
-      public short[] extDIState = new short[8]; //extended DI inputs
-      public short[] extDOState = new short[8]; //extend DO outputs
-      public short[] extAIState = new short[4]; //extended AI inputs
-      public short[] extAOState = new short[4]; //extended AO outputs
-      public int rbtEnableState = 0; //robot enable state--robot enable s
-      public double[] jointDriverTorque =new double[6]; // joint driver current torque
-      public double[] jointDriverTemperature = new double[6]; // joint driver current temperature
+      public short[] extDIState = new short[8];        // Extended DI input
+      public short[] extDOState = new short[8];        // Extended DO output
+      public short[] extAIState = new short[4];        // Extended AI input
+      public short[] extAOState = new short[4];        // Extended AO output
+      public int rbtEnableState = 0;       // Robot enable state
+      public double[] jointDriverTorque = new double[6];       // Joint driver current torque
+      public double[] jointDriverTemperature = new double[6];  // Joint driver current temperature
       public ROBOT_TIME robotTime = new ROBOT_TIME();
-      public int softwareUpgradeState = 0; //Robot software upgrade state 0-Idle or uploading upgrade package; 1~100: percentage of upgrade completion; -1: upgrade software failure; -2: verification failure; -3: version verification failure; -4: decompression failure; -5: user configuration upgrade failure; -6: peripheral configuration upgrade failure; -7: Failed to upgrade extended axis configuration; -8: Failed to upgrade robot configuration; -9: Failed to upgrade DH parameter configuration
-      public int endLuaErrCode; //end LUA running state
+      public int softwareUpgradeState = 0;   // Robot software upgrade state 0-idle or uploading upgrade package; 1~100: upgrade completion percentage; -1: upgrade software failed; -2: verification failed; -3: version verification failed; -4: decompression failed; -5: user configuration upgrade failed; -6: peripheral configuration upgrade failed; -7: extended axis configuration upgrade failed; -8: robot configuration upgrade failed; -9: DH parameter configuration upgrade failed
+      public int endLuaErrCode;              // End LUA running state
 
-      public int[] cl_analog_output=new int[2];  //Control box analog output
-      public int tl_analog_output;              //Tool Analog Output
-      public float gripperRotNum;               //Current number of revolutions of the rotary gripper
-      ublic int gripperRotSpeed;                //Percentage of current rotation speed of rotating jaws
-      public int gripperRotTorque;	            //Percentage of current rotating torque of rotating jaws
+      public int[] cl_analog_output = new int[2];  // Control box analog output
+      public int tl_analog_output;              // Tool analog output
+      public float gripperRotNum;               // Rotary gripper current rotation number
+      public int gripperRotSpeed;                // Rotary gripper current rotation speed percentage
+      public int gripperRotTorque;	            // Rotary gripper current rotation torque percentage
 
-      public  WELDING_BREAKOFF_STATE weldingBreakOffstate=new WELDING_BREAKOFF_STATE();//Welding interrupt status
+      public WELDING_BREAKOFF_STATE weldingBreakOffstate = new WELDING_BREAKOFF_STATE(); // Welding breakoff state
 
-      public double[]  jt_tgt_tor=new double[6];    // Joint command torque
-      int smartToolState;         //SmartTool Joystick Button Status
+      public double[] jt_tgt_tor = new double[6];    // Joint command torque
+      public int smartToolState;         // SmartTool handle button state
 
-      public float wideVoltageCtrlBoxTemp;        //Wide voltage control box temperature
-      public int wideVoltageCtrlBoxFanVel;   //Wide voltage control box fan speed
+      public float wideVoltageCtrlBoxTemp;        // Wide voltage control box temperature
+      public int wideVoltageCtrlBoxFanVel;   // Wide voltage control box fan speed (mA)
 
-      public short check_sum = 0; /* sum check */
+      public short check_sum = 0;          /* Checksum */
 
       public ROBOT_STATE_PKG()
       {

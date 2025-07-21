@@ -1,508 +1,429 @@
-Robot trajectory replication
-=====================================
+Robot trajectory playback  
+==============================
 
-.. toctree:: 
-    :maxdepth: 5
+.. toctree::  
+    :maxdepth: 5  
 
-Setting Track Recording Parameters
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Set TPD trajectory recording parameters  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Setting track logging parameters
-    * @param [in] type Record data type, 1-joint position
-    * @param [in] name Track file name
-    * @param [in] period_ms data sampling period, fixed value 2ms or 4ms or 8ms
-    * @param [in] di_choose DI selection,bit0~bit7 corresponds to control box DI0~DI7, bit8~bit9 corresponds to end DI0~DI1, 0-no choice, 1-choice
-    * @param [in] do_choose DO selection, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choice, 1-choice
-    * @return error code
-    */
-    int SetTPDParam(int type, String name, int period_ms, int di_choose, int do_choose);
-
-Start Track Recording
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief start track record
-    * @param [in] type Record data type, 1-joint position
-    * @param [in] name Track file name
-    * @param [in] period_ms data sampling period, fixed value 2ms or 4ms or 8ms
-    * @param [in] di_choose DI choice,bit0~bit7 corresponds to control box DI0~DI7, bit8~bit9 corresponds to end DI0~DI1, 0-no choice, 1-choice
-    * @param [in] do_choose DO selection, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choice, 1-choice
-    * @return error code
-    */
-    int SetTPDStart(int type, String name, int period_ms, int di_choose, int do_choose);
-
-Stop Track Recording
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Stop Track Recording
-    * @return error code
-    */
-    int SetWebTPDStop(); 
-
-Deleting track records
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Delete track record
-    * @param [in] name Track file name
-    * @return error code
+    /**  
+    * @brief  Set TPD trajectory recording parameters  
+    * @param  [in] type  Recording data type, 1-Joint position  
+    * @param  [in] name  Trajectory file name  
+    * @param  [in] period_ms  Data sampling period, fixed value 2ms/4ms/8ms  
+    * @param  [in] di_choose  DI selection, bit0~bit7 correspond to controller DI0~DI7, bit8~bit9 correspond to end DI0~DI1, 0-Not selected, 1-Selected  
+    * @param  [in] do_choose  DO selection, bit0~bit7 correspond to controller DO0~DO7, bit8~bit9 correspond to end DO0~DO1, 0-Not selected, 1-Selected  
+    * @return  Error code  
     */  
-    int SetTPDDelete(string name). 
+    int SetTPDParam(int type, String name, int period_ms, int di_choose, int do_choose);  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Start TPD trajectory recording  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection successful");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        int type = 1;
-        String name = "tpd_2024";
-        int period_ms = 2;
-        int di_choose = 0;
-        int do_choose = 0;
-
-        robot.SetTPDDelete(name);//delete the track record
-
-        robot.SetTPDParam(type, name, period_ms, di_choose, do_choose);//set track record parameters
-
-        robot.Mode(1);
-        robot.Sleep(1000);
-        robot.DragTeachSwitch(1);
-        robot.SetTPDStart(type, name, period_ms, di_choose, do_choose);//start track recording
-        robot.Sleep(10000);
-        robot.SetWebTPDStop();//stop track recording
-        robot.DragTeachSwitch(0);
-    }
-
-Trajectory preloading
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Trajectory preloading
-    * @param [in] name Track file name
-    * @return error code
+    /**  
+    * @brief  Start TPD trajectory recording  
+    * @param  [in] type  Recording data type, 1-Joint position  
+    * @param  [in] name  Trajectory file name  
+    * @param  [in] period_ms  Data sampling period, fixed value 2ms/4ms/8ms  
+    * @param  [in] di_choose  DI selection, bit0~bit7 correspond to controller DI0~DI7, bit8~bit9 correspond to end DI0~DI1, 0-Not selected, 1-Selected  
+    * @param  [in] do_choose  DO selection, bit0~bit7 correspond to controller DO0~DO7, bit8~bit9 correspond to end DO0~DO1, 0-Not selected, 1-Selected  
+    * @return  Error code  
     */  
-    int LoadTPD(String name).
+    int SetTPDStart(int type, String name, int period_ms, int di_choose, int do_choose);  
 
-Get the starting position of the trajectory
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Stop TPD trajectory recording  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: java  
+    :linenos:  
 
-    /** 
-    * @brief Get the starting position of the trajectory. 
-    * @param [in] name track file name, no file extension required
-    * @param [out] desc_pose The starting position of the acquired trajectory.
-    * @return error code 
-    */ 
-    int GetTPDStartPose(String name, DescPose desc_pose); 
+    /**  
+    * @brief  Stop TPD trajectory recording  
+    * @return  Error code  
+    */  
+    int SetWebTPDStop();  
 
-Trajectory Reproduction
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Delete TPD trajectory recording  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Trajectory replication
-    * @param [in] name Track file name
-    * @param [in] blend 0-unsmoothed, 1-smoothed
-    * @param [in] ovl speed scaling percentage, range [0~100]
-    * @return error code
-    */
-    int MoveTPD(String name, int blend, double ovl). 
+    /**  
+    * @brief  Delete TPD trajectory recording  
+    * @param  [in] name  Trajectory file name  
+    * @return  Error code  
+    */  
+    int SetTPDDelete(string name);  
 
-Setting the speed of the trajectory in operation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+TPD trajectory preloading  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Sets the speed of the trajectory as it runs.
-    * @param [in] ovl speed percentage
-    * @return error code
-    */
-    int SetTrajectoryJSpeed(double ovl). 
+    /**  
+    * @brief  Trajectory preloading  
+    * @param  [in] name  Trajectory file name  
+    * @return  Error code  
+    */  
+    int LoadTPD(String name);  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+TPD trajectory playback 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        String name = "tpd_2024";
-        int tool = 0;
-        int user = 0;
-        double vel = 30.0;
-        double acc = 100.0;
-        double ovl = 100.0;
-        double blendT = -1.0;
-        int config = -1;
-        byte blend = 1;
+    /**  
+    * @brief  Trajectory playback  
+    * @param  [in] name  Trajectory file name  
+    * @param  [in] blend 0-No smoothing, 1-Smoothing  
+    * @param  [in] ovl  Speed scaling percentage, range [0~100]  
+    * @return  Error code  
+    */  
+    int MoveTPD(String name, int blend, double ovl);  
 
-        DescPose desc_pose = new DescPose();
-        robot.GetTPDStartPose(name, desc_pose);
-        robot.SetTrajectoryJSpeed(100.0);
+Get TPD starting pose  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-        robot.LoadTPD(name);
-        robot.MoveCart(desc_pose, tool, user, vel, acc, ovl, blendT, config);
-        robot.MoveTPD(name, blend, 80.0);
-    }
-
-External track file preprocessing
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief External track file preprocessing 
-    * @param [in] name Track file name  
-    * @param [in] ovl speed scaling percentage, range [0~100]
-    * @param [in] opt 1-control point, default 1 
-    * @return error code 
-    */ 
-    int LoadTrajectoryJ(String name, double ovl, int opt); 
-
-External Trace File Trace Replication
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief External track file track replication  
-    * @return error code 
-    */
-    int MoveTrajectoryJ().
-
-External track file preprocessing (track look-ahead)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.3-3.8.0
-
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief External track file preprocessing (track look-ahead) 
-    * @param [in] name trajectory file name
-    * @param [in] mode Sampling mode, 0-no sampling; 1-equal data interval sampling; 2-equal error limit sampling.
-    * @param [in] errorLim ErrorLimit, use straight line fitting to take effect.
-    * @param [in] type Smoothing mode, 0-Bessel smoothing
-    * @param [in] precision Smoothing precision, effective when using Bezier smoothing
-    * @param [in] vamx set maximum speed, mm/s
-    * @param [in] amax set maximum acceleration, mm/s2
-    * @param [in] jmax Maximum acceleration set, mm/s3
-    * @return Error code 
-    */ 
-    int LoadTrajectoryLA(String name, int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax); 
-
-External trajectory file trajectory reproduction (trajectory look-ahead)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.3-3.8.0
-
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief External trajectory file trajectory reproduction (trajectory look-ahead)
+    /**  
+    * @brief Get trajectory starting pose  
+    * @param [in] name  Trajectory file name (without extension)  
+    * @param [out] desc_pose  Retrieved trajectory starting pose  
     * @return Error code  
-    */
-    int MoveTrajectoryLA();
+    */  
+    int GetTPDStartPose(String name, DescPose desc_pose);  
 
-code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Robot TPD trajectory recording code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection successful");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
+    public static int TestTPD(Robot robot)  
+    {  
+        int type = 1;  
+        String name = "tpd2025";  
+        int period_ms = 4;  
+        int di_choose = 0;  
+        int do_choose = 0;  
 
-        int rtn = 0;
+        robot.SetTPDParam(type, name, period_ms, di_choose, do_choose);  
 
-        String nameA = "/fruser/traj/A.txt";
-        String nameB = "/fruser/traj/B.txt";
+        robot.Mode(1);  
+        robot.Sleep(1000);  
+        robot.DragTeachSwitch(1);  
+        robot.SetTPDStart(type, name, period_ms, di_choose, do_choose);  
+        robot.Sleep(10000);  
+        robot.SetWebTPDStop();  
+        robot.DragTeachSwitch(0);  
 
-        rtn = robot.LoadTrajectoryLA(nameA, 2, 0.0, 0, 1.0, 100.0, 200.0, 1000.0);//B spline
-        //rtn = robot.LoadTrajectoryLA(nameA, 1, 2, 0, 2, 100.0, 200.0, 1000.0);
+        double ovl = 100.0;  
+        int blend = 0;  
 
-        //rtn = robot.LoadTrajectoryLA(nameB, 0, 0, 0, 1, 100.0, 100.0, 1000.0);    // linear fitting
-        System.out.println("LoadTrajectoryLA rtn is :"+ rtn);
+        DescPose start_pose =new DescPose() {};  
 
-        DescPose startPos = new DescPose(0, 0, 0, 0, 0, 0);
-        robot.GetTrajectoryStartPose(nameA, startPos);
+        int rtn = robot.LoadTPD(name);  
+        System.out.println("LoadTPD rtn is:"+ rtn);  
 
-        robot.MoveCart(startPos, 1, 0, (float)100.0, (float)100.0, (float)100.0, -1, -1);
+        robot.GetTPDStartPose(name, start_pose);  
+        robot.MoveCart(start_pose, 0, 0, 100, 100, ovl, -1, -1);  
+        robot.Sleep(1000);  
 
-        rtn = robot.MoveTrajectoryLA();
-        System.out.println("MoveTrajectoryLA rtn is: "+ rtn);
-    }
+        rtn = robot.MoveTPD(name, blend, ovl);  
+        System.out.println("MoveTPD rtn is: "+ rtn);  
+        robot.Sleep(5000);  
 
-Get the trajectory file trajectory start position
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+        robot.SetTPDDelete(name);  
+        return 0;  
+    }  
 
-    /** 
-    * @brief Get the starting position of the trajectory. 
-    * @param [in] name Track file name  
-    * @param [out] desc_pose The starting position of the acquired trajectory.
-    * @return error code 
-    */ 
-    int GetTrajectoryStartPose(String name, DescPose desc_pose); 
+Trajectory preprocessing  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Setting forces and moments in trajectory file trajectory operation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief External trajectory file preprocessing  
+    * @param [in] name Trajectory file name  
+    * @param [in] ovl Speed scaling percentage, range [0~100]  
+    * @param [in] opt 1-Control point (default)  
+    * @return Error code  
+    */  
+    int LoadTrajectoryJ(String name, double ovl, int opt);  
 
-    /** 
-    * @brief Setting forces and moments in trajectory file trajectory runs  
-    * @param [in] ft Force and torque in three directions, in N and Nm
-    * @return error code 
-    */
-    int SetTrajectoryJForceTorque(ForceTorque ft). 
+Trajectory playback  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Setting the force along the x-direction in the trajectory run
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief External trajectory file playback  
+    * @return Error code  
+    */  
+    int MoveTrajectoryJ();  
 
-    /** 
-    * @brief Set the force along the x-direction in the trajectory run.  
-    * @param [in] fx Force along the x-direction, in N
-    * @return error code 
-    */
-    int SetTrajectoryJForceFx(double fx).
+Get trajectory starting pose  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Setting the force along the y-direction in the trajectory run
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief Get trajectory starting pose  
+    * @param [in] name Trajectory file name  
+    * @param [out] desc_pose Retrieved trajectory starting pose  
+    * @return Error code  
+    */  
+    int GetTrajectoryStartPose(String name, DescPose desc_pose);  
 
-    /** 
-    * @brief Setting the force along the y-direction in a trajectory run.
-    * @param [in] fy Force along y direction in N
-    * @return error code 
-    */
-    int SetTrajectoryJForceFy(double fy).
+Get trajectory point number  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Setting the force along the z-direction in a trajectory run
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief  Get trajectory point number  
+    * @return  Error code  
+    */  
+    public int GetTrajectoryPointNum(int pnum)  
 
-    /** 
-    * @brief Setting the force along the z-direction in a trajectory run  
-    * @param [in] fz Force along the z-direction in N
-    * @return error code 
-    */
-    int SetTrajectoryJForceFz(double fz).
+Set trajectory playback speed  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Setting the torque around the x-axis in a trajectory run
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief  Set trajectory playback speed  
+    * @param  [in] ovl Speed percentage  
+    * @return  Error code  
+    */  
+    public int SetTrajectoryJSpeed(double ovl)  
 
-    /** 
-    * @brief Sets the torque around the x-axis for the trajectory run.  
-    * @param [in] tx Torque around x-axis in Nm
-    * @return error code 
-    */
-    int SetTrajectoryJTorqueTx(double tx).
+Set force/torque during trajectory playback  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Setting the torque around the y-axis in trajectory operation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief  Set force/torque during trajectory playback  
+    * @param  [in] ft Force and torque in three directions (unit: N and Nm)  
+    * @return  Error code  
+    */  
+    public int SetTrajectoryJForceTorque(ForceTorque ft)  
 
-    /** 
-    * @brief Sets the torque around the y-axis for the trajectory run.  
-    * @param [in] ty Torque around y-axis in Nm
-    * @return error code 
-    */
-    int SetTrajectoryJTorqueTy(double ty).
+Set x-direction force during trajectory playback  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Setting the torque around the z-axis in trajectory operation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief Set x-direction force during trajectory playback  
+    * @param [in] fx x-direction force (unit: N)  
+    * @return Error code  
+    */  
+    int SetTrajectoryJForceFx(double fx);  
 
-    /** 
-    * @brief Sets the torque around the z-axis for the trajectory run.  
-    * @param [in] tz Torque around z-axis in Nm
-    * @return error code 
-    */
-    int SetTrajectoryJTorqueTz(double tz).
+Set y-direction force during trajectory playback  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief Set y-direction force during trajectory playback  
+    * @param [in] fy y-direction force (unit: N)  
+    * @return Error code  
+    */  
+    int SetTrajectoryJForceFy(double fy);  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection successful");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
+Set z-direction force during trajectory playback  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-        ForceTorque tor = new ForceTorque(10.0,10.0, 10.0, 10.0, 10.0, 10.0, 10.0);
-        robot.SetTrajectoryJForceTorque(tor);
+    /**  
+    * @brief Set z-direction force during trajectory playback  
+    * @param [in] fz z-direction force (unit: N)  
+    * @return Error code  
+    */  
+    int SetTrajectoryJForceFz(double fz);  
 
-        robot.SetTrajectoryJForceFx(2.0);
-        robot.SetTrajectoryJForceFy(2.0);
-        robot.SetTrajectoryJForceFz(2.0);
-        robot.SetTrajectoryJTorqueTx(2.0);
-        robot.SetTrajectoryJTorqueTy(2.0);
-        robot.SetTrajectoryJTorqueTz(2.0);
+Set x-axis torque during trajectory playback  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
+    /**  
+    * @brief Set x-axis torque during trajectory playback  
+    * @param [in] tx x-axis torque (unit: Nm)  
+    * @return Error code  
+    */  
+    int SetTrajectoryJTorqueTx(double tx);  
 
-        robot.LoadTrajectoryJ("/fruser/traj/test1011002.txt", 20, 1);
-        DescPose startPos = new DescPose();
-        robot.GetTrajectoryStartPose("/fruser/traj/test1011002.txt", startPos);
-        robot.MoveCart(startPos, 0, 0, 40, 100.0, 100.0, -1.0, -1);
+Set y-axis torque during trajectory playback  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-        ROBOT_STATE_PKG pkg = robot.GetRobotRealTimeState();
-        System.out.println("Trajectory point num is " + pkg.trajectory_pnum);
-        robot.SetTrajectoryJSpeed(40);
-        robot.MoveTrajectoryJ();
-    }
+    /**  
+    * @brief Set y-axis torque during trajectory playback  
+    * @param [in] ty y-axis torque (unit: Nm)  
+    * @return Error code  
+    */  
+    int SetTrajectoryJTorqueTy(double ty);  
 
-Uploading Track J files
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
+Set z-axis torque during trajectory playback 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-.. code-block:: Java
-    :linenos:
+    /**  
+    * @brief Set z-axis torque during trajectory playback  
+    * @param [in] tz z-axis torque (unit: Nm)  
+    * @return Error code  
+    */  
+    int SetTrajectoryJTorqueTz(double tz);  
 
-    /** 
-    * @brief  Uploading Track J files  
-    * @param  [in] filePath Full pathname of the uploaded track file C://test/testJ.txt
-    * @return error code  
-    */
-    int TrajectoryJUpLoad(String filePath);
+Upload trajectory J file  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-Deletion of Track J files
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
+    /**  
+    * @brief Upload trajectory J file  
+    * @param [in] filePath Full path of trajectory file (e.g., C://test/testJ.txt)  
+    * @return Error code  
+    */  
+    int TrajectoryJUpLoad(String filePath);  
 
-.. code-block:: Java
-    :linenos:
+Delete trajectory J file  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-    /** 
-    * @brief Deletion of Track J files  
-    * @param [in] fileName Name of the document testJ.txt
-    * @return 错误码 
-    */
-    int TrajectoryJDelete(String fileName);
+    /**  
+    * @brief Delete trajectory J file  
+    * @param [in] fileName File name (e.g., testJ.txt)  
+    * @return Error code  
+    */  
+    int TrajectoryJDelete(String fileName);  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Java SDK-v1.0.1-3.7.8
+Robot trajectory J file playback code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
 
-.. code-block:: Java
-    :linenos:
+    public static int TestTraj(Robot robot)  
+    {  
+        int rtn = robot.TrajectoryJUpLoad("D://zUP/traj.txt");  
+        System.out.println("Upload TrajectoryJ A :"+ rtn);  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection successful");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
+        String traj_file_name = "/fruser/traj/traj.txt";  
+        rtn = robot.LoadTrajectoryJ(traj_file_name, 100, 1);  
+        System.out.println("LoadTrajectoryJ:"+traj_file_name+", rtn is:"+ rtn);  
 
-        robot.TrajectoryJDelete("testA.txt");//Deleting track files
-        robot.TrajectoryJUpLoad("D://zUP/testA.txt");//Uploading Track J files
+        DescPose traj_start_pose=new DescPose(0,0,0,0,0,0);  
+        rtn = robot.GetTrajectoryStartPose(traj_file_name, traj_start_pose);  
 
-        int retval = 0;
-        String traj_file_name= "/fruser/traj/testA.txt";
-        retval = robot.LoadTrajectoryJ(traj_file_name, 100, 1);
-        System.out.println("LoadTrajectoryJ %s, retval is:"+traj_file_name+retval);
+        robot.Sleep(1000);  
 
-        DescPose traj_start_pose=new DescPose(0,0,0,0,0,0);
-        retval = robot.GetTrajectoryStartPose(traj_file_name, traj_start_pose);
-        System.out.println("GetTrajectoryStartPose is: %d"+retval);
-        System.out.println("desc_pos:"+"("+traj_start_pose.tran.x+","+traj_start_pose.tran.y+","+traj_start_pose.tran.z+","+traj_start_pose.rpy.rx+","+traj_start_pose.rpy.ry+","+traj_start_pose.rpy.rz+")");
+        ExaxisPos epos=new ExaxisPos(0,0,0,0);  
+        DescPose po=new DescPose(0,0,0,0,0,0);  
+        robot.SetSpeed(50);  
+        robot.MoveCart(traj_start_pose, 0, 0, 100, 100, 100, -1, -1);  
 
-        robot.SetSpeed(30);
-        robot.MoveCart(traj_start_pose, 1, 0, 100, 100, 100, -1, -1);
+        int traj_num = 0;  
+        rtn = robot.GetTrajectoryPointNum(traj_num);  
 
-        robot.Sleep(5000);
+        rtn = robot.SetTrajectoryJSpeed(50.0);  
+        System.out.println("SetTrajectoryJSpeed is:"+ rtn);  
 
-        int traj_num = 0;
+        ForceTorque traj_force=new ForceTorque(0,0,0,0,0,0);  
+        traj_force.fx = 10;  
+        rtn = robot.SetTrajectoryJForceTorque(traj_force);  
+        System.out.println("SetTrajectoryJForceTorque rtn is: "+ rtn);  
 
-        ROBOT_STATE_PKG pkg = robot.GetRobotRealTimeState();
-        traj_num=pkg.trajectory_pnum;
-        System.out.println("GetTrajectoryStartPose traj num is:"+traj_num);
+        rtn = robot.SetTrajectoryJForceFx(10.0);  
+        System.out.println("SetTrajectoryJForceFx rtn is:"+ rtn);  
 
-        retval = robot.MoveTrajectoryJ();
-        System.out.println("MoveTrajectoryJ retval is:"+retval);
-    }
+        rtn = robot.SetTrajectoryJForceFy(0.0);  
+        System.out.println("SetTrajectoryJForceFy rtn is:"+ rtn);  
+
+        rtn = robot.SetTrajectoryJForceFz(0.0);  
+        System.out.println("SetTrajectoryJForceFz rtn is: "+ rtn);  
+
+        rtn = robot.SetTrajectoryJTorqueTx(10.0);  
+        System.out.println("SetTrajectoryJTorqueTx rtn is: "+ rtn);  
+
+        rtn = robot.SetTrajectoryJTorqueTy(10.0);  
+        System.out.println("SetTrajectoryJTorqueTy rtn is:"+ rtn);  
+
+        rtn = robot.SetTrajectoryJTorqueTz(10.0);  
+        System.out.println("SetTrajectoryJTorqueTz rtn is:"+ rtn);  
+
+        rtn = robot.MoveTrajectoryJ();  
+        System.out.println("MoveTrajectoryJ rtn is: "+ rtn);  
+
+        return 0;  
+    }  
+
+Trajectory preprocessing (lookahead)  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.3-3.8.0  
+
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Trajectory preprocessing (lookahead)  
+    * @param [in] name  Trajectory file name  
+    * @param [in] mode  Sampling mode: 0-No sampling; 1-Equal interval sampling; 2-Equal error limit sampling  
+    * @param [in] errorLim  Error limit (effective when using linear fitting)  
+    * @param [in] type  Smoothing method: 0-Bezier smoothing  
+    * @param [in] precision  Smoothing precision (effective when using Bezier smoothing)  
+    * @param [in] vamx  Maximum speed setting (mm/s)  
+    * @param [in] amax  Maximum acceleration setting (mm/s²)  
+    * @param [in] jmax  Maximum jerk setting (mm/s³)  
+    * @return Error code  
+    */  
+    int LoadTrajectoryLA(String name, int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax);  
+
+Trajectory playback (lookahead)  
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.3-3.8.0  
+
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Trajectory playback (lookahead)  
+    * @return Error code  
+    */  
+    int MoveTrajectoryLA();  
+
+Trajectory playback (lookahead) code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
+
+    public static int TestLoadTrajLA(Robot robot)  
+    {  
+        int rtn = robot.TrajectoryJUpLoad("D://zUP/traj.txt");  
+
+        String traj_file_name = "/fruser/traj/traj.txt";  
+        rtn = robot.LoadTrajectoryLA(traj_file_name, 1, 2, 0, 2, 100, 200, 1000);  
+
+        DescPose traj_start_pose=new DescPose(0,0,0,0,0,0);  
+        rtn = robot.GetTrajectoryStartPose(traj_file_name, traj_start_pose);  
+
+        robot.Sleep(1000);  
+        robot.SetSpeed(50);  
+        robot.MoveCart(traj_start_pose, 0, 0, 100, 100, 100, -1, -1);  
+
+        rtn = robot.MoveTrajectoryLA();  
+
+        robot.CloseRPC();  
+        return 0;  
+    }  

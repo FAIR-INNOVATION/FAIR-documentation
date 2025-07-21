@@ -22,6 +22,7 @@ This manual is the secondary development interface document of Python.
     :numbered: 5
     :maxdepth: 5
 
+    PythonRobotStatusFeedback
     PythonRobotBase
     PythonRobotMovement
     PythonRobotIO
@@ -32,10 +33,8 @@ This manual is the secondary development interface document of Python.
     PythonRobotWebAPPProgramUse
     PythonRobotPeripherals
     PythonRobotForceControl
-    PythonRobotConveyor
-    PythonRobotWeld
     PythonRoboExtendedAxis
+    PythonRobotWeld
     PythonRobotOthers
-    PythonRobotStatusFeedback
     PythonAppendix
     

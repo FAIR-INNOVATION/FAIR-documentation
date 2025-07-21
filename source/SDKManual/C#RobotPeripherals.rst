@@ -1,304 +1,316 @@
 Robot Peripherals
-=========================
+=================
 
 .. toctree:: 
     :maxdepth: 5
 
-
-Configuring the gripper
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Configure Gripper
+++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Configure the jaws.
-    * @param [in] company Jaw manufacturer, to be determined.
-    * @param [in] device Device number, not used yet, default is 0.
-    * @param [in] softvesion software version number, not used, default is 0
-    * @param [in] bus The device hangs on the end bus position, not used yet, default is 0.
-    * @return Error code
+    * @brief  Configure gripper
+    * @param  [in] company  Gripper manufacturer, to be determined
+    * @param  [in] device  Device number, not currently used, default is 0
+    * @param  [in] softvesion  Software version number, not currently used, default is 0
+    * @param  [in] bus Device bus position, currently unused, default is 0
+    * @return  Error code
     */
     int SetGripperConfig(int company, int device, int softvesion, int bus);
 
-Get the gripper configuration
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get gripper configuration
+++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the jaw configuration.
-    * @param [in] company Jaw manufacturer, to be determined.
-    * @param [in] device Device number, not used yet, default is 0.
-    * @param [in] softvesion software version number, not used, default is 0
-    * @param [in] bus The device hangs on the end bus position, not used yet, default is 0.
-    * @return Error code
+    * @brief  Get gripper configuration
+    * @param  [in] company  Gripper manufacturer, to be determined
+    * @param  [in] device  Device number, currently unused, default is 0
+    * @param  [in] softvesion  Software version number, currently unused, default is 0
+    * @param  [in] bus Device bus position, currently unused, default is 0
+    * @return  Error code
     */
     int GetGripperConfig(int *company, int *device, int *softvesion, int *bus);
 
-Activate the gripper
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Activate Gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Activate the jaws.
-    * @param [in] index Jaw number.
-    * @param [in] act 0-reset, 1-activate
-    * @return Error code.
+    * @brief  Activate gripper
+    * @param  [in] index  Gripper number
+    * @param  [in] act  0-reset, 1-activate
+    * @return  Error code
     */
-    int ActGripper(int index, byte act). 
+    int ActGripper(int index, byte act);
 
-Controls the gripper.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Control gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Controls the jaws.
-    * @param [in] index Jaw number.
-    * @param [in] pos position percentage, range [0~100].
-    * @param [in] vel velocity percentage, range [0~100].
-    * @param [in] force % torque, range [0~100] * @param [in] max % position, range [0~100
-    * @param [in] max_time Maximum wait time, range [0~30000], in ms
-    * @param [in] block 0-blocking, 1-non-blocking
-    * @param [in] type Gripper type, 0-parallel gripper; 1-rotary gripper
-    * @param [in] rotNum Number of rotations.
-    * @param [in] rotVel Percentage of rotational velocity [0-100].
-    * @param [in] rotTorque Percentage of rotational torque [0-100].
+    * @brief  Control gripper
+    * @param  [in] index  Gripper ID
+    * @param  [in] pos  Position percentage, range [0~100]
+    * @param  [in] vel  Speed percentage, range [0~100]
+    * @param  [in] force  Torque percentage, range [0~100]
+    * @param  [in] max_time  Maximum wait time, range [0~30000], unit ms
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @param  [in] type Gripper type, 0-parallel gripper; 1-rotating gripper
+    * @param  [in] rotNum Number of rotation cycles
+    * @param  [in] rotVel Rotation speed percentage [0-100]
+    * @param  [in] rotTorque Rotation torque percentage [0-100]
     * @return Error code
     */
     int MoveGripper(int index, int pos, int vel, int force, int max_time, byte block, int type, double rotNum, int rotVel, int rotTorque);
 
-Get the movement status of the gripper
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get gripper motion status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the state of the gripper motion.
-    * @param [out] fault 0-no error, 1-error
-    * @param [out] staus 0-motion not completed, 1-motion completed
-    * @return Error code.
+    * @brief  Get gripper motion status
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] staus  0-motion not completed, 1-motion completed
+    * @return  Error code
     */
     int GetGripperMotionDone(ref int fault, ref int status); 
 
-Get Gripper Motion Done(ref fault, ref status)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get gripper activation status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the jaw activation status.
-    * @param [out] fault 0-no fault, 1-fault
-    * @param [out] status bit0~bit15 corresponds to gripper number 0~15, bit=0 is not activated, bit=1 is activated.
-    * @return Error code
+    * @brief  Get gripper activation status
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] status  bit0~bit15 corresponds to gripper numbers 0~15, bit=0 is not activated, bit=1 is activated
+    * @return  Error code
     */
     int GetGripperActivateStatus(ref int fault, ref int status);
 
-Get gripper position
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get Gripper Position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the position of the jaws.
-    * @param [out] fault 0-no error, 1-with error
-    * @param [out] position position percentage, range 0~100
-    * @return Error code.
+    * @brief  Get gripper position
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] position  Position percentage, range 0~100%
+    * @return  Error code
     */
     int GetGripperCurPosition(ref int fault, ref int position);
 
-Get the gripper cur speed
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get gripper speed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the jaw speed.
-    * @param [out] fault 0-no error, 1-error
-    * @param [out] speed Speed percentage, range 0~100%.
-    * @return Error code.
+    * @brief  Get gripper speed
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] speed  Speed percentage, range 0~100%
+    * @return  Error code
     */
-    int GetGripperCurSpeed(ref int fault, ref int speed).
+    int GetGripperCurSpeed(ref int fault, ref int speed);
      
-Get the gripper current
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get gripper current
+++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the jaw current.
-    * @param [out] fault 0-no error, 1-error
-    * @param [out] current Percentage of current, range 0-100%.
-    * @return Error code.
+    * @brief  Get gripper current
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] current  Current percentage, range 0~100%
+    * @return Error code
     */
-    int GetGripperCurCurrent(ref int fault, ref int current);
+    int GetGripperCurrent(ref int fault, ref int current);
 
-Get the gripper voltage
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get gripper voltage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the jaw voltage.
+    * @brief Get gripper voltage
     * @param [out] fault 0-no error, 1-error
-    * @param [out] voltage Voltage in 0.1V.
-    * @return Error code.
+    * @param  [out] voltage  Voltage, unit 0.1V
+    * @return  Error code
     */
-    int GetGripperVoltage(ref int fault, ref int voltage).
+    int GetGripperVoltage(ref int fault, ref int voltage);
 
-Get the temperature of the gripper
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get gripper temperature
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the jaw temperature.
-    * @param [out] fault 0-no error, 1-with error
-    * @param [out] temp Temperature in ℃.
-    * @return Error code.
+    * @brief  Get gripper temperature
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] temp  Temperature, unit °C
+    * @return  Error code
     */
     int GetGripperTemp(ref int fault, ref int temp);
 
-Code Example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculate pre-gripping point - vision
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    private void btnOperateGripper_Click(object sender, EventArgs e)
-    {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
+    /** 
+    * @brief Calculate pre-gripping point - vision 
+    * @param [in] desc_pos Gripping point Cartesian pose 
+    * @param [in] zlength Z-axis offset 
+    * @param [in] zangle Rotation offset around the z-axis
+    * @param [out] pre_pos Pre-pick point
+    * @return Error code 
+    */ 
+    int ComputePrePick(DescPose desc_pos, double zlength, double zangle, ref DescPose pre_pos);
 
+Calculate retreat point - vision
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Calculate retreat point - visual 
+    * @param [in] desc_pos Retreat point Cartesian pose 
+    * @param [in] zlength Z-axis offset 
+    * @param [in] zangle Rotation offset around the Z-axis
+    * @param [out] post_pos Retreat point
+    * @return Error code 
+    */ 
+    int ComputePostPick(DescPose desc_pos, double zlength, double zangle, ref DescPose post_pos);
+
+Robot Gripper Operation Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button36_Click(object sender, EventArgs e)
+    {
         int company = 4;
         int device = 0;
         int softversion = 0;
-        int bus = 1;
-        int index = 1;
+        int bus = 2;
+        int index = 2;
         byte act = 0;
         int max_time = 30000;
         byte block = 0;
-        int status = 0, fault = 0;
-        int rtn = -1;
+        int status=0;
+        int fault=0;
+        int active_status = 0;
+        int current_pos = 0;
+        int current = 0;
+        int voltage = 0;
+        int temp = 0;
+        int speed = 0;
 
         robot.SetGripperConfig(company, device, softversion, bus);
         Thread.Sleep(1000);
         robot.GetGripperConfig(ref company, ref device, ref softversion, ref bus);
-        Console.WriteLine($"gripper config : {company}, {device}, {softversion}, {bus}");
+        Console.WriteLine("gripper config:{0},{1},{2},{3}\n", company, device, softversion, bus);
 
-        rtn = robot.ActGripper(index, act);
-        Console.WriteLine($"ActGripper  {rtn}");
+        robot.ActGripper(index, act);
         Thread.Sleep(1000);
         act = 1;
-        rtn = robot.ActGripper(index, act);
-        Console.WriteLine($"ActGripper  {rtn}");
-        Thread.Sleep(4000);
+        robot.ActGripper(index, act);
+        Thread.Sleep(1000);
 
-        rtn = robot.MoveGripper(index, 20, 50, 50, max_time, block);
-        Console.WriteLine($"MoveGripper  {rtn}");
-        Thread.Sleep(2000);
-        robot.MoveGripper(index, 10, 50, 0, max_time, block);
+        robot.MoveGripper(index, 90, 50, 50, max_time, block, 0, 0, 0, 0);
+        Thread.Sleep(1000);
+        robot.MoveGripper(index, 30, 50, 0, max_time, block, 0, 0, 0, 0);
 
-        Thread.Sleep(4000);
         robot.GetGripperMotionDone(ref fault, ref status);
-        Console.WriteLine($"motion status : {fault}, {status}");
+        Console.WriteLine("motion status:{0},{1}\n", fault, status);
 
-        int current = -1;
-        int tempture = -1;
-        int voltage = -1;
-        int position = -1;
-        int activestatus = -2;
-        int speed = -1;
-        rtn = robot.GetGripperCurCurrent(ref fault, ref current);
-        Console.WriteLine($"current { current}  rtn { rtn} fault { fault} ");
-        rtn = robot.GetGripperCurPosition(ref fault, ref position);
-        Console.WriteLine($"position {position}  rtn {rtn} fault {fault} ");
-        rtn = robot.GetGripperActivateStatus(ref fault, ref activestatus);
-        Console.WriteLine($"activestatus {activestatus}  rtn {rtn} fault {fault} ");
-        rtn = robot.GetGripperCurSpeed(ref fault, ref speed);
-        Console.WriteLine($"speed {speed}  rtn {rtn} fault {fault} ");
-        rtn = robot.GetGripperVoltage(ref fault, ref voltage);
-        Console.WriteLine($"voltage {voltage}  rtn {rtn} fault {fault} ");
-        rtn = robot.GetGripperTemp(ref fault, ref tempture);
-        Console.WriteLine($"voltage {tempture}  rtn {rtn} fault {fault} ");
+        robot.GetGripperActivateStatus(ref fault, ref active_status);
+        Console.WriteLine("gripper active fault is: {0}, status is: {1}\n", fault, active_status);
+
+        robot.GetGripperCurPosition(ref fault, ref current_pos);
+        Console.WriteLine("fault is:{0}, current position is: {1}\n", fault, current_pos);
+
+        robot.GetGripperCurCurrent(ref fault, ref current);
+        Console.WriteLine("fault is:{0}, current current is: {1}\n", fault, current);
+
+        robot.GetGripperVoltage(ref fault, ref voltage);
+        Console.WriteLine("fault is:{0}, current voltage is: {1} \n", fault, voltage);
+
+        robot.GetGripperTemp(ref fault, ref temp);
+        Console.WriteLine("fault is:{0}, current temperature is: {1}\n", fault, temp);
+
+        robot.GetGripperCurSpeed(ref fault, ref speed);
+        Console.WriteLine("fault is:{0}, current speed is: {1}\n", fault, speed);
+
+        int retval = 0;
+        DescPose prepick_pose = new DescPose();
+        DescPose postpick_pose = new DescPose();
+
+        DescPose p1Desc = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose p2Desc = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
+
+        retval = robot.ComputePrePick(p1Desc, 10, 0, ref prepick_pose);
+        Console.WriteLine("ComputePrePick retval is: {0}\n", retval);
+        Console.WriteLine("xyz is: {0}, {1}, {2}; rpy is: {3}, {4}, {5}\n",
+            prepick_pose.tran.x, prepick_pose.tran.y, prepick_pose.tran.z,
+            prepick_pose.rpy.rx, prepick_pose.rpy.ry, prepick_pose.rpy.rz);
+
+        retval = robot.ComputePostPick( p2Desc, -10, 0, ref postpick_pose);
+        Console.WriteLine("ComputePostPick retval is: {0}\n", retval);
+        Console.WriteLine("xyz is: {0}, {1}, {2}; rpy is: {3}, {4}, {5}\n",
+            postpick_pose.tran.x, postpick_pose.tran.y, postpick_pose.tran.z,
+            postpick_pose.rpy.rx, postpick_pose.rpy.ry, postpick_pose.rpy.rz);
+
     }
 
-Calculate pre-capture point-visual
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief Calculate pre-capture points - visual 
-    * @param [in] desc_pos Grab point Cartesian position. 
-    * @param [in] zlength z-axis offset 
-    * @param [in] zangle rotational offset around z-axis
-    * @param [out] pre_pos pre_capture point
-    * @return error code 
-    */ 
-    int ComputePrePick(DescPose desc_pos, double zlength, double zangle, ref DescPose pre_pos);
-
-Calculate retreat point-visual
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * :: @brief Computational Retreat Point-Vision 
-    * @param [in] desc_pos withdrawal point Cartesian position 
-    * @param [in] zlength z-axis offset 
-    * @param [in] zangle rotational offset around z-axis
-    * @param [out] post_pos withdrawal point
-    * @return error code 
-    */ 
-    int ComputePostPick(DescPose desc_pos, double zlength, double zangle, ref DescPose post_pos);
-
-Get the number of revolutions of the rotating jaws
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+Get the number of rotations of the rotating gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the number of revolutions of the rotating jaws
-    * @param [out] fault 0-no error, 1-with error
-    * @param [out] num The number of revolutions.
-    * @return Error code
+    * @brief  Get the number of rotations of the rotating gripper
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] num  Number of rotations
+    * @return  Error code
     */
     int GetGripperRotNum(ref UInt16 fault, ref double num);
 
-Get the rotational speed percentage of the rotating jaws
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+Get the rotation speed percentage of the rotating gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the rotational speed percentage of the rotating jaws
-    * @param [out] fault 0-no error, 1-with error
-    * @param [out] speed Get the rotational speed percentage of the rotating jaw.
-    * @return Error code
+    * @brief  Get the rotation speed percentage of the rotating gripper
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] speed  Rotation speed percentage
+    * @return  Error code
     */
     int GetGripperRotSpeed(ref UInt16 fault, ref int speed);
 
-Get the percentage of rotational torque of the rotating jaws
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+Get the rotation torque percentage of the rotating gripper
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get the percentage of rotational torque of the rotating jaws
-    * @param [out] fault 0-no error, 1-error
-    * @param [out] torque Percentage of rotating torque
-    * @return Error code
+    * @brief  Get the rotational torque percentage of the rotating gripper
+    * @param  [out] fault  0-no error, 1-error
+    * @param  [out] torque  Rotational torque percentage
+    * @return  Error code
     */
     int GetGripperRotTorque(ref UInt16 fault, ref int torque);
 
-Code Example
-++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-
+Example of retrieving the rotational gripper status code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -318,4 +330,734 @@ Code Example
         robot.GetGripperRotTorque(ref fault, ref rotTorque);
         Console.WriteLine($"gripper rot num :{ rotNum}, gripper rotSpeed :{rotSpeed}, gripper rotTorque : { rotTorque}");
         return 0;
+    }
+
+Drive belt start/stop
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Conveyor belt start/stop 
+    * @param [in] status Status, 1-start, 0-stop
+    * @return Error code 
+    */ 
+    int ConveyorStartEnd(byte status);
+
+Record IO detection points
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Record IO detection point 
+    * @return Error code 
+    */ 
+    int ConveyorPointIORecord(); 
+
+Record point A
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Record Point A 
+    * @return Error code 
+    */ 
+    int ConveyorPointARecord();
+
+Record reference point
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Record reference point 
+    * @return Error code 
+    */ 
+    int ConveyorRefPointRecord(); 
+
+Record Point B
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Record Point B 
+    * @return Error code 
+    */ 
+    int ConveyorPointBRecord();
+
+Conveyor belt workpiece IO detection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Conveyor workpiece IO detection 
+    * @param [in] max_t Maximum detection time, unit ms
+    * @return Error code 
+    */ 
+    int ConveyorIODetect(int max_t);
+
+Get Object Current Position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Get object current position 
+    * @param [in] mode 1-track grab, 2-track movement, 3-TPD tracking
+    * @return Error code 
+    */ 
+    int ConveyorGetTrackData(int mode);
+
+Start conveyor tracking
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Start conveyor tracking 
+    * @param [in] status Status, 1-start, 0-stop
+    * @return Error code 
+    */
+    int ConveyorTrackStart(byte status);
+
+Conveyor tracking stop
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Conveyor tracking stop 
+    * @return Error code 
+    */
+    int ConveyorTrackEnd();
+
+Drive Belt Parameter Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Drive belt parameter configuration
+    * @param [in] para[0] Encoder channel 1~2
+    * @param [in] para[1] Number of pulses per encoder revolution
+    * @param [in] para[2] Conveyor belt travel distance per encoder revolution
+    * @param [in] para[3] Workpiece coordinate system number Select the workpiece coordinate system number for tracking motion functionality; set to 0 for tracking grasping and TPD tracking
+    * @param [in] para[4] Whether to configure vision 0: No configuration 1: Configuration
+    * @param [in] para[5] Speed ratio for conveyor belt tracking and grasping options (1-100). Other options default to 1.
+    * @param [in] followType Tracking motion type: 0-Tracking motion; 1 - Inspection movement
+    * @param [in] startDis Inspection tracking requires setting, tracking start distance, -1: automatically calculated (inspection starts automatically when the workpiece reaches below the robot), unit mm, default value 0
+    * @param [in] endDis Inspection tracking requires setting, tracking end distance, unit mm, default value 100
+    * @return Error code
+    */
+    int ConveyorSetParam(int encChannel, int resolution, double lead, int wpAxis, int vision, double speedRadio, int followType, int startDis=0, int endDis=100);
+
+Set conveyor belt pickup point compensation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Set conveyor belt catch point compensation 
+    * @param [in] cmp Compensation position double[3]{x, y, z}
+    * @return Error code 
+    */
+    int ConveyorCatchPointComp(double[] cmp);
+
+Conveyor belt tracking linear motion
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Conveyor belt tracking linear motion 
+    * @param [in] name Motion point name
+    * @param [in] tool Tool coordinate number, range [0~14] 
+    * @param [in] wobj Workpiece coordinate number, range [0~14] 
+    * @param [in] vel Velocity percentage, range [0~100] 
+    * @param [in] acc Acceleration percentage, range [0~100], currently unavailable 
+    * @param [in] ovl Velocity scaling factor, range [0~100] 
+    * @param [in] blendR [-1.0] - move to position (blocked), [0~1000.0] - smooth radius (unblocked), unit mm  
+    * @return Error code 
+    */
+    int ConveyorTrackMoveL(string name, int tool, int wobj, float vel, float acc, float ovl, float blendR);
+
+Conveyor communication input detection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Conveyor communication input detection
+    * @param [in] timeout Wait timeout in ms
+    * @return Error code
+    */
+    int ConveyorComDetect(int timeout);
+
+Conveyor Communication Input Detection Trigger
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Conveyor Communication Input Detection Trigger
+    * @return Error code
+    */
+    int ConveyorComDetectTrigger();
+
+Conveyor Communication Input Detection Trigger Example Program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+
+        // Disable the button to prevent repeated clicks
+        button3.Enabled = false;
+
+        // Execute time-consuming operations in a background thread
+        Thread conveyorThread = new Thread(ConveyorTest);
+        conveyorThread.IsBackground = true;
+        conveyorThread.Start();
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+        // Get user input
+        string input = texBox.Text;
+        Console.WriteLine($"please input a number to trigger:{input}");
+    
+        int rtn = robot.ConveyorComDetectTrigger();
+        Console.WriteLine($"ConveyorComDetectTrigger return value: {rtn}");
+        
+    }
+
+    private void ConveyorTest()
+    {
+        // Use Invoke to update controls on the UI thread
+        this.Invoke((MethodInvoker)delegate {
+            Console.WriteLine( "Starting conveyor test...");
+        });
+
+        int retval = 0;
+        int index = 1;
+        int max_time = 30000;
+        bool block = false;
+        retval = 0;
+
+        /* Conveyor belt grabbing process */
+        DescPose startdescPose = new DescPose(139.176f, 4.717f, 9.088f, -179.999f, -0.004f, -179.990f);
+        JointPos startjointPos = new JointPos(-34.129f, -88.062f, 97.839f, -99.780f, -90.003f, -34.140f);
+
+        DescPose homePose = new DescPose(139.177f, 4.717f, 69.084f, -180.000f, -0.004f, -179.989f);
+        JointPos homejointPos = new JointPos(-34.129f, -88.618f, 84.039f, -85.423f, -90.003f, -34.140f);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        // Move to a safe position
+        retval = robot.MoveL(homejointPos, homePose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+        Console.WriteLine($"MoveL to safe position return value: {retval}");
+
+        // Conveyor detection
+        retval = robot.ConveyComDetect(1000 * 10);
+        Console.WriteLine($"ConveyorComDetect return value: {retval}");
+
+        // Get tracking data
+        retval = robot.ConveyorGetTrackData(2);
+        Console.WriteLine($"ConveyorGetTrackData return value: {retval}");
+
+        // Start tracking
+        retval = robot.ConveyorTrackStart(2);
+        Console.WriteLine($"ConveyorTrackStart return value: {retval}");
+
+        // Move to the starting position
+        robot.MoveL(startjointPos, startdescPose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+        robot.MoveL(startjointPos, startdescPose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+
+        // End tracking
+        retval = robot.ConveyorTrackEnd();
+        Console.WriteLine($"ConveyorTrackEnd return value: {retval}");
+
+        // Return to safe position
+        robot.MoveL(homejointPos, homePose, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
+
+        this.Invoke((MethodInvoker)delegate {
+            Console.WriteLine( "Conveyor belt test completed!");
+            button3.Enabled = true;
+        });
+    }
+
+Robot Conveyor Belt Operation Example Program
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void btnConvert_Click(object sender, EventArgs e)
+    {
+        Robot robot = new Robot();
+        robot.RPC( "192.168.58.2");
+        DescPose pos1 = new DescPose(0, 0, 0, 0, 0, 0);
+        DescPose pos2 = new DescPose(0, 0, 0, 0, 0, 0);
+
+        pos1.tran.x = -351.175;
+        pos1.tran.y = 3.389;
+        pos1.tran.z = 431.172;
+        pos1.rpy.rx = -179.111;
+        pos1.rpy.ry = -0.241;
+        pos1.rpy.rz = 90.388;
+
+        pos2.tran.x = -333.654;
+        pos2.tran.y = -229.003;
+        pos2.tran.z = 404.335;
+        pos2.rpy.rx = -179.139;
+        pos2.rpy.ry = -0.779;
+        pos2.rpy.rz = 91.269;
+        int rtn = -1;
+
+        double[] cmp = new double[3] { 0, 9.99, 0};
+        rtn = robot.ConveyorCatchPointComp(cmp);
+        if(rtn != 0)
+        {
+            return;
+        }
+        Console.WriteLine($"ConveyorCatchPointComp: rtn  {rtn}");
+
+        rtn = robot.MoveCart(pos1, 0, 0, 100.0f, 180.0f, 100.0f, -1.0f, -1);
+        Console.WriteLine($"MoveCart: rtn  {rtn}");
+
+        rtn = robot.ConveyorIODetect(10000);
+        Console.WriteLine($"ConveyorIODetect: rtn  {rtn}");
+
+        robot.ConveyorGetTrackData(1);
+        rtn = robot. ConveyorTrackStart(1);
+        Console.WriteLine($"ConveyorTrackStart: rtn  {rtn}");
+
+        rtn = robot.ConveyorTrackMoveL( "cvrCatchPoint", 0, 0, 100.0f, 0.0f, 100.0f, -1.0f, 0, 0);
+        Console.WriteLine($"ConveyorTrackMoveL: rtn  {rtn}");
+
+        rtn = robot.MoveGripper(1, 59, 43, 21, 30000, 0);
+        Console.WriteLine($"MoveGripper: rtn  {rtn}");
+
+        rtn = robot.ConveyorTrackMoveL( "cvrRaisePoint", 0, 0, 100.0f, 0.0f, 100.0f, -1.0f, 0, 0);
+        Console.WriteLine($"ConveyorTrackMoveL: rtn  {rtn}");
+
+        rtn = robot.ConveyorTrackEnd();
+        Console.WriteLine($"ConveyorTrackEnd: rtn  {rtn}");
+
+        rtn = robot.MoveCart(pos2, 0, 0, 100.0f, 180.0f, 100.0f, -1.0f, -1);
+        Console.WriteLine($"MoveCart: rtn  {rtn}");
+
+        rtn = robot.MoveGripper(1, 100, 43, 21, 30000, 0);
+        Console.WriteLine($"MoveGripper: rtn  {rtn}");
+    }
+
+End Sensor Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  End Sensor Configuration
+    * @param  [in] idCompany Manufacturer, 18-JUNKONG; 25-HUIDE
+    * @param  [in] idDevice Type, 0-JUNKONG/RYR6T.V1.0
+    * @param  [in] idSoftware Software version, 0-J1.0/HuiDe1.0 (not yet available)
+    * @param  [in] idBus Mounting location, 1-End 1 port; 2-End 2 port... 8-Endpoint 8 port (not yet available)
+    * @return Error code
+    */
+    int AxleSensorConfig(int idCompany, int idDevice, int idSoftware, int idBus);
+
+Get endpoint sensor configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Get terminal sensor configuration
+    * @param  [out] idCompany Manufacturer, 18-JUNKONG; 25-HUIDE
+    * @param  [out] idDevice Type, 0-JUNKONG/RYR6T.V1.0
+    * @return  Error code
+    */
+    int AxleSensorConfigGet(ref int idCompany, ref int idDevice);
+
+End-of-line sensor activation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+    
+    /**
+    * @brief  End-of-line sensor activation
+    * @param  [in] actFlag 0-reset; 1-activate
+    * @return  Error code
+    */
+    int AxleSensorActivate(int actFlag);
+
+End Sensor Register Write
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  End Sensor Register Write
+    * @param  [in] devAddr  Device Address Number 0-255
+    * @param  [in] regHAddr High 8 bits of the register address
+    * @param  [in] regLAddr Low 8 bits of the register address
+    * @param  [in] regNum  Number of registers 0-255
+    * @param  [in] data1 Value to write to the register 1
+    * @param  [in] data2 Value to write to the register 2
+    * @param  [in] isNoBlock 0-blocking; 1-non-blocking
+    * @return  Error code
+    */
+     int AxleSensorRegWrite(int devAddr, int regHAddr, int regLAddr, int regNum, int data1, int data2, int isNoBlock);
+
+End Sensor Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button2_Click_1(object sender, EventArgs e)
+    {
+        robot.AxleSensorConfig(18, 0, 0, 1);
+        int company = -1;
+        int type = -1;
+        robot.AxleSensorConfigGet(ref company, ref type);
+        Console.WriteLine( "company is " + company +  ", type is " + type);
+
+        int rtn = robot.AxleSensorActivate(1);
+        Console.WriteLine( "AxleSensorActivate rtn is " + rtn);
+
+        Thread.Sleep(1000);
+
+        rtn = robot.AxleSensorRegWrite(1, 4, 6, 1, 0, 0, 0);
+        Console.WriteLine( "AxleSensorRegWrite rtn is " + rtn);   
+    }
+
+Obtain robot peripheral protocol
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.6
+
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Get robot peripheral protocol
+    * @param [out] protocol Robot peripheral protocol number 4096-Extended Axle Control Card; 4097-ModbusSlave; 4098-ModbusMaster
+    * @return Error code 
+    */
+    int GetExDevProtocol(ref int protocol);
+
+Set robot peripheral protocol
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.6
+
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Set robot peripheral protocol
+    * @param [in] protocol Robot peripheral protocol number 4096-Extended Axis Control Card; 4097-Modbus Slave; 4098-Modbus Master
+    * @return Error code 
+    */
+    int SetExDevProtocol(int protocol);
+
+Example program for setting robot peripheral protocol
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+
+    private void btnSetProto_Click(object sender, EventArgs e)
+    {
+      int protocol = 4096;
+      int rtn = robot.SetExDevProtocol(protocol);
+      
+      Console.WriteLine( "SetExDevProtocol rtn " + rtn);
+      rtn = robot.GetExDevProtocol(ref protocol);
+      Console.WriteLine( "GetExDevProtocol rtn " + rtn +  " protocol is: " + protocol);
+    }
+
+Get end-point communication parameters
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get terminal communication parameters
+    * @param param Terminal communication parameters
+    * @return  Error code
+    */
+    int GetAxleCommunicationParam(ref AxleComParam getParam);
+
+Set terminal communication parameters
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set terminal communication parameters
+    * @param param  Terminal communication parameters
+    * @return  Error code
+    */
+    int SetAxleCommunicationParam(AxleComParam param);
+
+Set terminal file transfer type
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the terminal file transfer type
+    * @param type 1-MCU upgrade file; 2-LUA file
+    * @return  Error code
+    */
+    int SetAxleFileType(int type);
+
+Set enable terminal LUA execution
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Enable LUA execution at the end
+    * @param enable 0-Disabled; 1-Enabled
+    * @return  Error code
+    */
+    int SetAxleLuaEnable(int enable);
+
+End LUA file exception error recovery
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief End-of-file LUA file exception error recovery
+    * @param status 0-do not recover; 1-recover
+    * @return Error code
+    */
+    int SetRecoverAxleLuaErr(int status);
+
+Get the enable status of the terminal LUA execution
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the enable status of the terminal LUA execution
+    * @param [out] status 0-disabled; 1-enabled
+    * @return  Error code
+    */
+    int GetAxleLuaEnableStatus(ref int status);
+
+Set the enable type of the terminal LUA terminal device
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the enable type of the terminal LUA terminal device
+    * @param [in] forceSensorEnable Force sensor enable status, 0-disabled; 1-enabled
+    * @param [in] gripperEnable Gripper enable status, 0-disabled; 1-enabled
+    * @param [in] IOEnable IO device enable status, 0-disabled; 1-enabled
+    * @return  Error code
+    */
+    int SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable);
+
+Get the enable type of the end-of-line LUA device
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the enable type of the end LUA device
+    * @param [out] forceSensorEnable Force sensor enable status, 0-disabled; 1-enabled
+    * @param [out] gripperEnable Gripper enable status, 0-disabled; 1-enabled
+    * @param [out] IOEnable IO device enable status, 0-disabled; 1-enabled
+    * @return  Error code
+    */
+    int GetAxleLuaEnableDeviceType(ref int forceSensorEnable, ref int gripperEnable, ref int IOEnable);
+
+Get the currently configured end device
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the currently configured end device
+    * @param [out] forceSensorEnable Force sensor enable device number 0-disabled; 1-enabled
+    * @param [out] gripperEnable Gripper enable device number, 0-disabled;1-enabled
+    * @param [out] IODeviceEnable IO device enable ID, 0-disabled; 1-enabled
+    * @return  Error code
+    */
+    int GetAxleLuaEnableDevice(ref int[] forceSensorEnable, ref int[] gripperEnable, ref int[] IODeviceEnable);
+
+Set enable gripper action control functionality
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set enable claw action control function
+    * @param [in] id claw device number
+    * @param [in] func func[0]-claw enable; func[1]-claw initialization; 2-position setting;3-Set speed; 4-Set torque; 6-Read gripper status; 7-Read initialization status; 8-Read fault code; 9-Read position; 10-Read speed;11-read torque
+    * @return  Error code
+    */
+    int SetAxleLuaGripperFunc(int id, int[] func);
+
+Get enable claw action control function
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get enable claw action control function
+    * @param [in] id Gripper device ID
+    * @param [out] func func[0]-Gripper enable; func[1]-Gripper initialization; 2-Position setting; 3-Speed setting; 4-Torque setting; 6-Read gripper status; 7-Read initialization status; 8-Read fault code; 9-Read position; 10-Read speed; 11-Read torque
+    * @return  Error code
+    */
+    int GetAxleLuaGripperFunc(int id, ref int[] func);
+
+Writing robot Ethercat slave file
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Writing robot Ethercat slave file
+    * @param [in] type Slave file type, 1-upgrade slave file; 2-upgrade slave configuration file
+    * @param [in] slaveID Slave ID
+    * @param [in] fileName Upload file name
+    * @return  Error code
+    */
+    int SlaveFileWrite(int type, int slaveID, string fileName);
+
+Upload terminal Lua open protocol file
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Upload end Lua open protocol file
+    * @param filePath Local lua file path name  ".../AXLE_LUA_End_DaHuan.lua"
+    * @return Error code
+    */       
+    int AxleLuaUpload(string filePath);
+
+Robot Ethercat slave enters boot mode
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Robot Ethercat slave enters boot mode
+    * @return  Error code
+    */
+    int SetSysServoBootMode();
+
+Robot End-of-Arm LUA File Operation Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+     private void button41_Click(object sender, EventArgs e)
+    {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        robot.AxleLuaUpload("D://zUP/AXLE_LUA_End_JunDuo_Xinjingcheng.lua");
+
+        AxleComParam param = new AxleComParam(7, 8, 1, 0, 5, 3, 1);
+        robot.SetAxleCommunicationParam(param);
+
+        AxleComParam getParam = new AxleComParam();
+        robot.GetAxleCommunicationParam(ref getParam);
+        Console.WriteLine("GetAxleCommunicationParam param is {0} {1} {2} {3} {4} {5} {6}",
+            getParam.baudRate, getParam.dataBit, getParam.stopBit, getParam.verify,
+            getParam.timeout, getParam.timeoutTimes, getParam.period);
+
+        robot.SetAxleLuaEnable(1);
+        int luaEnableStatus = 0;
+        robot.GetAxleLuaEnableStatus(ref luaEnableStatus);
+        robot.SetAxleLuaEnableDeviceType(0, 1, 0);
+
+        int forceEnable = 0;
+        int gripperEnable = 0;
+        int ioEnable = 0;
+        robot.GetAxleLuaEnableDeviceType(ref forceEnable, ref gripperEnable, ref ioEnable);
+        Console.WriteLine("GetAxleLuaEnableDeviceType param is {0} {1} {2}", forceEnable, gripperEnable, ioEnable);
+
+        int[] func = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        robot.SetAxleLuaGripperFunc(1, func);
+        int[] getFunc = new int[16];
+        robot.GetAxleLuaGripperFunc(1, ref getFunc);
+        int[] getforceEnable = new int[16];
+        int[] getgripperEnable = new int[16];
+        int[] getioEnable = new int[16];
+        robot.GetAxleLuaEnableDevice(ref getforceEnable, ref getgripperEnable, ref getioEnable);
+        Console.WriteLine("\ngetforceEnable status : ");
+        foreach (int i in getforceEnable)
+        {
+            Console.Write(i + ",");
+        }
+        Console.WriteLine("\ngetgripperEnable status : ");
+        foreach (int i in getgripperEnable)
+        {
+            Console.Write(i + ",");
+        }
+        Console.WriteLine("\ngetioEnable status : ");
+        foreach (int i in getioEnable)
+        {
+            Console.Write(i + ",");
+        }
+        Console.WriteLine();
+        robot.ActGripper(1, 0);
+        Thread.Sleep(2000);
+        robot.ActGripper(1, 1);
+        Thread.Sleep(2000);
+        robot.MoveGripper(1, 90, 10, 100, 50000, 0, 0, 0, 0, 0);
+        int pos = 0;
+        while (true)
+        {
+            robot.GetRobotRealTimeState(ref pkg);
+            Console.WriteLine("gripper pos is " + pkg.gripper_position);
+            Thread.Sleep(100);
+        }
+    }
+    
+Get SmartTool button status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get SmartTool button status
+    * @param [out] state SmartTool handle button status; (bit0: 0 - communication normal; 1 - communication disconnected; bit1 - cancel operation; bit2 - clear program; 
+    bit3 - A key; bit4 - B key; bit5 - C key; bit6 - D key; bit7 - E key; bit8 - IO key; bit9 - manual/automatic; bit10 - start)
+    * @return Error code
+    */
+    int GetSmarttoolBtnState(ref int state);
+
+Code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    private void button11_Click(object sender, EventArgs e)
+    {
+
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        int state = 0;
+        while (true)
+        {
+            int rtn = robot.GetSmarttoolBtnState(ref state);
+            string binaryString = Convert.ToString(state, 2).PadLeft(32, '0');
+            Console.WriteLine($"GetSmarttoolBtnState rtn (binary): {binaryString}");
+            Thread.Sleep(100);
+        }
+
     }

@@ -1,497 +1,495 @@
-Robot Status Inquiry
-=====================================
+Robot status inquiry  
+=========================  
 
-.. toctree:: 
-    :maxdepth: 5
+.. toctree::  
+    :maxdepth: 5  
 
-Getting the robot mounting angle
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Get current joint positions (degrees)  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Get robot mounting angle
-    * @return List[0]:error code; List[1]:double yangle tilt angle; List[2]:double zangle rotation angle
-    */
-    List<Number> GetRobotInstallAngle(); 
-
-Getting system variable values
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Getting the value of a system variable
-    * @param [in] id System variable number, range [1~20].
-    * @return List[0]:error code; List[1]:double value system variable value
-    */
-    List<Number> GetSysVarValue(int id). 
-
-Get the current joint position (angle).
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get current joint position (angle).
-    * @param [out] jPos The six joint positions obtained, in degrees.
-    * @return error code
-    */
-    int GetActualJointPosDegree(JointPos jPos); 
-
-Get joint feedback speed -deg/s
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Get joint feedback speed -deg/s 
-    * @param [out] speed six joint speeds
-    * @return error code 
-    */
-    int GetActualJointSpeedsDegree(Object[] speed).
-
-Get current tool position
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get current tool position
-    * @param [out] desc_pos Tool position
-    * @return error code
-    */
-    int GetActualTCPPose(DescPose desc_pos); 
-
-Inverse kinematics solution
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Inverse kinematics solving
-    * @param [in] type 0-absolute pose (base coordinate system), 1-incremental pose (base coordinate system), 2-incremental pose (tool coordinate system)
-    * @param [in] desc_pos Cartesian Positions
-    * @param [in] config Joint space configuration, [-1] - solve with reference to the current joint position, [0~7] - solve based on specific joint space configuration.
-    * @param [out] joint_pos Joint position
-    * @return error code
-    */ 
-    int GetInverseKin(int type, DescPose desc_pos, int config, JointPos joint_pos);
-
-Inverse kinematics solution
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Inverse kinematics solving with reference to specified joint position solving
-    * @param [in] posMode 0 absolute pose, 1 relative pose - base coordinate system 2 relative pose - tool coordinate system
-    * @param [in] desc_pos Cartesian Positions
-    * @param [in] joint_pos_ref Reference joint position
-    * @param [out] joint_pos Joint position
-    * @return error code
+    /**  
+    * @brief  Get current joint positions (degrees)  
+    * @param  [out] jPos Six joint positions in deg  
+    * @return  Error code  
     */  
-    int GetInverseKinRef(int posMode, DescPose desc_pos, JointPos joint_pos_ref, JointPos joint_pos); 
+    int GetActualJointPosDegree(JointPos jPos);  
 
-Inverse kinematics solution
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Get joint feedback speed (deg/s)  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Inverse kinematics solving, refer to specified joint positions to determine if there is a solution
-    * @param [in] posMode 0 absolute pose, 1 relative pose - base coordinate system 2 relative pose - tool coordinate system
-    * @param [in] desc_pos Cartesian Positions
-    * @param [in] joint_pos_ref Reference joint position
-    * @return ErrorCode List[0]:ErrorCode; List[1]: int hasResult 0-no solution, 1-with solution
+    /**  
+    * @brief Get joint feedback speed (deg/s)  
+    * @param [out] speed Six joint speeds  
+    * @return Error code  
+    */  
+    int GetActualJointSpeedsDegree(Object[] speed);  
+
+Get joint feedback acceleration  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get joint feedback acceleration (deg/s^2)  
+    * @param  [in] flag 0-Blocking, 1-Non-blocking  
+    * @param  [out] acc Six joint accelerations  
+    * @return  Error code  
+    */  
+    public int GetActualJointAccDegree(int flag, Object[] acc)  
+
+Get TCP command composite speed  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get TCP command speed  
+    * @param  [in] flag 0-Blocking, 1-Non-blocking  
+    * @param  [out] tcp_speed Linear speed  
+    * @param  [out] ori_speed Orientation speed  
+    * @return  Error code  
+    */  
+    public int GetTargetTCPCompositeSpeed(int flag, double tcp_speed, double ori_speed)  
+
+Get TCP feedback composite speed  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get TCP feedback composite speed  
+    * @param  [in] flag 0-Blocking, 1-Non-blocking  
+    * @param  [out] tcp_speed Linear speed  
+    * @param  [out] ori_speed Orientation speed  
+    * @return  Error code  
+    */  
+    public int GetActualTCPCompositeSpeed(int flag, double tcp_speed, double ori_speed)  
+
+Get TCP command speed  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get TCP command speed  
+    * @param  [in] flag 0-Blocking, 1-Non-blocking  
+    * @param  [out] speed [x,y,z,rx,ry,rz] speed  
+    * @return  Error code  
+    */  
+    public int GetTargetTCPSpeed(int flag, Object[] speed)  
+
+Get TCP feedback speed  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get TCP feedback speed  
+    * @param  [in] flag 0-Blocking, 1-Non-blocking  
+    * @param  [out] speed [x,y,z,rx,ry,rz] speed  
+    * @return  Error code  
+    */  
+    public int GetActualTCPSpeed(int flag, Object[] speed)  
+
+Get current tool pose  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get current tool pose  
+    * @param  [out] desc_pos  Tool pose  
+    * @return  Error code  
+    */  
+    int GetActualTCPPose(DescPose desc_pos);  
+
+Get current tool coordinate system number  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get current tool coordinate system number  
+    * @param  [in] flag  0-Blocking, 1-Non-blocking  
+    * @param  [out] id  Tool coordinate system number  
+    * @return  Error code  
+    */  
+    int GetActualTCPNum(int flag, int[] id)  
+
+Get current workpiece coordinate system number  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get current workpiece coordinate system number  
+    * @param  [in] flag  0-Blocking, 1-Non-blocking  
+    * @param  [out] id  Workpiece coordinate system number  
+    * @return  Error code  
+    */  
+    public int GetActualWObjNum(int flag, int[] id)  
+
+Get current end flange pose  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get current end flange pose  
+    * @param  [in] flag  0-Blocking, 1-Non-blocking  
+    * @param  [out] desc_pos  Flange pose  
+    * @return  Error code  
+    */  
+    public int GetActualToolFlangePose(int flag, DescPose desc_pos)  
+
+Get current joint torque  
++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get current joint torque  
+    * @param  [in]  flag 0-Blocking, 1-Non-blocking  
+    * @param  [out]  torques Joint torques  
+    * @return  Error code  
+    */  
+    int GetJointTorques(int flag, Object[] torques);  
+
+Get system time  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Get system time  
+    * @return  List[0]:int Error code; List[1]:double t_ms in ms  
+    */  
+    List<Number> GetSystemClock();  
+
+Check if robot motion is completed  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Check if robot motion is completed  
+    * @param   [out] state  0-Not completed, 1-Completed  
+    * @return  Error code  
+    */  
+    public int GetRobotMotionDone(int[] state)  
+
+Query robot motion queue buffer length  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Query robot motion queue buffer length  
+    * @param   [out] len  Buffer length  
+    * @return  Error code  
+    */  
+    public int GetMotionQueueLength(int[] len)  
+
+Get robot emergency stop state  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get robot emergency stop state  
+    * @param [out] state Emergency stop state, 0-Normal, 1-Emergency stop  
+    * @return Error code  
+    */  
+    public int GetRobotEmergencyStopState(int[] state)  
+
+Get SDK-robot communication state  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get SDK-robot communication state  
+    * @return state Communication state, 0-Normal, 1-Abnormal  
+    */  
+    public int GetSDKComState()  
+
+Get safety stop signal  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get safety stop signal  
+    * @param  [out] si0_state Safety stop signal SI0, 0-Invalid, 1-Valid  
+    * @param  [out] si1_state Safety stop signal SI1, 0-Invalid, 1-Valid  
+    * @return Error code  
+    */  
+    public int GetSafetyStopState(int[] si0_state, int[] si1_state)  
+
+Get robot joint driver temperature (°C)  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get robot joint driver temperature (°C)  
+    * @param  [out] temperature Temperature  
+    * @return Error code  
+    */  
+    public int GetJointDriverTemperature(double[] temperature)  
+
+Get robot joint driver torque (Nm)  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get robot joint driver torque (Nm)  
+    * @param  [out] torque Torque  
+    * @return Error code  
+    */  
+    public int GetJointDriverTorque(double[] torque)  
+
+Get robot real-time state structure  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief Get robot real-time state structure  
+    * @return Real-time state structure  
+    */  
+    public ROBOT_STATE_PKG GetRobotRealTimeState()  
+
+Robot status inquiry code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    public static int TestGetStatus(Robot robot)  
+    {  
+        List<Number> angle=new ArrayList<>();  
+        angle=robot.GetRobotInstallAngle();  
+        System.out.println("yangle:"+angle.get(1)+",zangle:"+angle.get(2));  
+
+        JointPos j_deg =new JointPos(){};  
+        robot.GetActualJointPosDegree( j_deg);  
+
+        Object[] jointSpeed =new Object[] { 0,0,0,0,0,0 };  
+        robot.GetActualJointSpeedsDegree(jointSpeed);  
+
+        Object[] jointAcc = new Object[]{0,0,0,0,0,0 };  
+        robot.GetActualJointAccDegree(0, jointAcc);  
+
+        double tcp_speed = 0.0;  
+        double ori_speed = 0.0;  
+        robot.GetTargetTCPCompositeSpeed(0, tcp_speed, ori_speed);  
+
+        robot.GetActualTCPCompositeSpeed(0, tcp_speed, ori_speed);  
+
+        Object[] targetSpeed =new Object[] { 0,0,0,0,0,0 };  
+        robot.GetTargetTCPSpeed(0, targetSpeed);  
+
+        Object[] actualSpeed =new Object[] {0,0,0,0,0,0 };  
+        robot.GetActualTCPSpeed(0, actualSpeed);  
+
+        DescPose tcp = new DescPose(){};  
+        robot.GetActualTCPPose(tcp);  
+
+        DescPose flange = new DescPose(){};  
+        robot.GetActualToolFlangePose(0, flange);  
+
+        int[] id = {};  
+        robot.GetActualTCPNum(0, id);  
+
+        robot.GetActualWObjNum(0, id);  
+
+        List<Number> jtorque=new ArrayList<>();  
+        jtorque=robot.GetJointTorques(0);  
+
+        List<Number> t_ms = new ArrayList<>();  
+        t_ms=robot.GetSystemClock();  
+
+        List<Integer> config = new ArrayList<>();  
+        config=robot.GetRobotCurJointsConfig();  
+
+        int motionDone = 0;  
+        robot.GetRobotMotionDone(motionDone);  
+
+        int[] len ={0 };  
+        robot.GetMotionQueueLength(len);  
+
+        int[] emergState = {0};  
+        robot.GetRobotEmergencyStopState(emergState);  
+
+        int comstate = 0;  
+        comstate=robot.GetSDKComState();  
+
+        int[] si0_state=new int[]{0}, si1_state=new int[]{0};  
+        robot.GetSafetyStopState(si0_state, si1_state);  
+
+        double[] temp =new double[] { 0,0,0,0,0,0 };  
+        robot.GetJointDriverTemperature(temp);  
+
+        double[] torque = new double[]{ 0,0,0,0,0,0 };  
+        robot.GetJointDriverTorque(torque);  
+
+        ROBOT_STATE_PKG pkg=new ROBOT_STATE_PKG();  
+        pkg=robot.GetRobotRealTimeState();  
+
+        return 0;  
+    }  
+
+Inverse kinematics calculation  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Inverse kinematics calculation  
+    * @param  [in] type 0-Absolute pose (base frame), 1-Incremental pose (base frame), 2-Incremental pose (tool frame)  
+    * @param  [in] desc_pos Cartesian pose  
+    * @param  [in] config Joint space configuration, [-1]-Solve with reference to current joint position, [0~7]-Solve with specific joint space configuration  
+    * @param  [out] joint_pos Joint position  
+    * @return  Error code  
+    */  
+    int GetInverseKin(int type, DescPose desc_pos, int config, JointPos joint_pos);  
+
+Inverse kinematics calculation (reference position)  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Inverse kinematics calculation with reference joint position  
+    * @param  [in] posMode 0-Absolute pose, 1-Relative pose-base frame, 2-Relative pose-tool frame  
+    * @param  [in] desc_pos Cartesian pose  
+    * @param  [in] joint_pos_ref Reference joint position  
+    * @param  [out] joint_pos Joint position  
+    * @return  Error code  
+    */  
+    int GetInverseKinRef(int posMode, DescPose desc_pos, JointPos joint_pos_ref, JointPos joint_pos);  
+
+Check if inverse kinematics has solution  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
+
+    /**  
+    * @brief  Check if inverse kinematics has solution with reference joint position  
+    * @param  [in] posMode 0-Absolute pose, 1-Relative pose-base frame, 2-Relative pose-tool frame  
+    * @param  [in] desc_pos Cartesian pose  
+    * @param  [in] joint_pos_ref Reference joint position  
+    * @return  Error code  List[0]:Error code; List[1]: int hasResult 0-No solution, 1-Solution exists  
     */  
     List<Integer> GetInverseKinHasSolution(int posMode, DescPose desc_pos, JointPos joint_pos_ref);  
 
-Positive kinematics solving
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Forward kinematics calculation  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Positive kinematics solving
-    * @param [in] joint_pos Joint position
-    * @param [out] desc_pos Cartesian Positions
-    * @return error code
-    */
-    int GetForwardKin(JointPos joint_pos, DescPose desc_pos); 
-
-Get current joint torque
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get current joint torque
-    * @param [in] flag 0-blocking, 1-non-blocking
-    * @param [out] torques Joint torque
-    * @return error code
-    */
-    int GetJointTorques(int flag, Object[] torques); 
-
-Get the weight of the current load
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the weight of the current load
-    * @param [in] flag 0-blocking, 1-non-blocking
-    * @return List[0]: int error code; List[1]: double weight load weight in kg
-    */
-    List<Number> GetTargetPayload(int flag). 
-
-Get the center of mass of the current load
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the center of mass of the current load.
-    * @param [in] flag 0-blocking, 1-non-blocking
-    * @param [out] cog load center of mass in mm
-    * @return error code
+    /**  
+    * @brief  Forward kinematics calculation  
+    * @param  [in] joint_pos Joint position  
+    * @param  [out] desc_pos Cartesian pose  
+    * @return  Error code  
     */  
-    int GetTargetPayloadCog(int flag, DescTran cog);
+    int GetForwardKin(JointPos joint_pos, DescPose desc_pos);  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Robot forward/inverse kinematics calculation code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.SetRobotInstallAngle(23.4, 56.7);
-        List<Number> rtnArr = robot.GetRobotInstallAngle();
-        System.out.println("Mounting Angle: " + rtnArr.get(1) + " " + rtnArr.get(2));
-        robot.SetRobotInstallAngle(0, 0);
+    public static int TestInverseKin(Robot robot)  
+    {  
+        JointPos j1=new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);  
+        DescPose desc_pos1=new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);  
 
-        robot.SetLoadWeight(0);
-        robot.SetLoadCoord(new DescTran(0.0, 0.0, 0.0));
+        JointPos inverseRtn = new JointPos(){};  
 
-        DescTran cog = new DescTran();
-        robot.GetTargetPayloadCog(1, cog);
+        robot.GetInverseKin(0, desc_pos1, -1, inverseRtn);  
+        robot.GetInverseKinRef(0, desc_pos1, j1, inverseRtn);  
 
-        System.out.println("weight is " + rtnArr.get(1) + " cog is " + cog.x + " " + cog.y + " " + cog.z);
+        int hasResut = 0;  
+        robot.GetInverseKinHasSolution(0, desc_pos1, j1);  
 
-        List<Integer> Arr = robot.GetRobotCurJointsConfig();
-        System.out.println("config is " + Arr.get(1));
+        DescPose forwordResult = new DescPose(){};  
+        robot.GetForwardKin(j1, forwordResult);  
 
-        DescPose desc_p1=new DescPose();
+        return 0;  
+    }  
 
-        JointPos JP1=new JointPos(117.408,-86.777,81.499,-87.788,-92.964,92.959);
-        JointPos JP_test=new JointPos();
-        DescPose DP1 =new DescPose(327.359,-420.973,518.377,-177.199,3.209,114.449);
-        robot.GetInverseKin(0, DP1, -1, JP_test);
-        List<Integer> rtnArrInt = robot.GetInverseKinHasSolution(0, DP1, JP1);//whether there is a solution in the reverse direction
-        System.out.println("has Solution ? " + rtnArrInt.get(1));
-        robot.GetForwardKin(JP1, desc_p1);// forward kinematics
-        JointPos j2 = new JointPos();
-        robot.GetInverseKinRef(0, DP1, JP1, JP_test);//inverse kinematics
-    }
+Query robot teaching management point data  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-Get the current tool coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the current tool coordinate system.
-    * @param [in] flag 0-blocking, 1-non-blocking
-    * @param [out] desc_pos Tool coordinate system position
-    * @return error code
-    */
-    int GetTCPOffset(int flag, DescPose desc_pos); 
-
-Get the current workpiece coordinate system
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the current coordinate system of the workpiece.
-    * @param [in] flag 0-blocking, 1-non-blocking
-    * @param [out] desc_pos Workpiece coordinate system position
-    * @return error code
+    /**  
+    * @brief Query robot teaching management point data  
+    * @param [in]  name  Point name  
+    * @return  List[0]:Error code; List[1] - List[20] : Point data double[20]{x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,tool,wobj,speed,acc,e1,e2,e3,e4}  
     */  
-    int GetWObjOffset(int flag, DescPose desc_pos); 
+    List<Number> GetRobotTeachingPoint(String name);  
 
-Obtaining the soft limiting angle of a joint
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Get robot DH parameter compensation values  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-    /**
-    * @brief Getting the soft limiting angle of the joints
-    * @param [in] flag 0-blocking, 1-non-blocking
-    * @param [out] negative negative limit angle in deg
-    * @param [out] positive positive limit angle in deg
-    * @return error code
-    */
-    int GetJointSoftLimitDeg(int flag, Object[] negative, Object[] positive); 
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        DescPose offset = new DescPose();
-        robot.GetTCPOffset(1, offset);//tools
-        System.out.println("offset is " + offset);
-        robot.GetWObjOffset(1, offset);//workpiece
-        System.out.println("offset is " + offset);
-
-        Object[] neg_deg = new Object[]{0, 0 , 0, 0, 0, 0, 0};
-        Object[] pos_deg = new Object[]{0, 0 , 0, 0, 0, 0, 0, 0};
-        robot.GetJointSoftLimitDeg(1, neg_deg, pos_deg);
-        System.out.println("neg is " + Arrays.toString(neg_deg) + " pos is " + Arrays.toString(pos_deg));
-    }
-
-Get system time
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get system time
-    * @return List[0]:int error code; List[1]:double t_ms unit ms
-    */
-    List<Number> GetSystemClock();
-
-Get the current joint configuration of the robot
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the current joint configuration of the robot
-    * @return List[0]:int error code; List[1]:int config joint space configuration, range [0~7]
-    */
-    List<Integer> GetRobotCurJointsConfig();
-
-Get the default speed of the robot
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Get the default speed of the robot
-    * @return List[0]: int error code; List[1]: double vel velocity in mm/s
+    /**  
+    * @brief Get robot DH parameter compensation values  
+    * @param dhCompensation Robot DH parameter compensation values (mm) [cmpstD1,cmpstA2,cmpstA3,cmpstD4,cmpstD5,cmpstD6]  
+    * @return Error code  
     */  
-    List<Number> GetDefaultTransVel(); 
+    public int GetDHCompensation(Object[] dhCompensation)  
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+Get controller SN code  
+++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. versionadded:: Java SDK-v1.0.4-3.8.1  
 
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        List<Integer> rtnArr = robot.GetRobotCurJointsConfig();
-        System.out.println("config is " + rtnArr.get(1));
+.. code-block:: Java  
+    :linenos:  
 
-        List<Number> rtnArrN = robot.GetSystemClock();
-        System.out.println("systom clock is " + rtnArrN.get(1));
+    /**  
+    * @brief Get controller SN code  
+    * @param [out] SNCode Controller SN code  
+    * @return Error code  
+    */  
+    int GetRobotSN(String[] SNCode);  
 
-        rtnArrN = robot.GetDefaultTransVel();
-        System.out.println("Robot's current speed is: " + rtnArrN.get(1));
-    }
+Query robot teaching management point data code example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+.. code-block:: Java  
+    :linenos:  
 
-Query Robot Teaching Management Point Data
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+    public static int TestGetTeachPoint(Robot robot)  
+    {  
+        String name = "P1";  
+        List<Number> data=new ArrayList<>();  
+        data = robot.GetRobotTeachingPoint(name);  
+        System.out.println(name+" name is: "+data.get(0));  
+        for (int i = 0; i < 20; i++)  
+        {  
+            System.out.println("data is: "+ data.get(i+1));  
+        }  
 
-    /** 
-    * @brief Query robotics instructional management point data 
-    * @param [in] name point name
-    * @return List[0]: error code; List[1] - List[20] : point data double[20]{x,y,z,rx,ry,rz,j1,j2,j3,j4,j5,j6,tool,wobj,speed,acc,e1,e2,e3,e4} 
-    */ 
-    List<Number> GetRobotTeachingPoint(String name). 
+        int[] que_len = {0};  
+        int rtn = robot.GetMotionQueueLength(que_len);  
+        System.out.println("GetMotionQueueLength rtn is:"+rtn+", queue length is:"+ que_len[0]);  
 
-Get SSH public key
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
+        Object[] dh = new Object[]{ 0,0,0,0,0,0 };  
+        int retval = 0;  
+        retval = robot.GetDHCompensation(dh);  
+        System.out.println("retval is: "+retval);  
 
-    /** 
-    * @brief Getting SSH public key 
-    * @param [in] keygen public key 
-    * @return error code    
-    */ 
-    List<Number> GetRobotTeachingPoint(String name). 
-
-Calculate the MD5 value of a file in a specified path
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Calculates the MD5 value of a file in a specified path. 
-    * @param [in] file_path file path contains the file name, the default Traj folder path is: "/fruser/traj/", such as "/fruser/traj/trajHelix_aima_1.txt". 
-    * @return error code   
-    */ 
-    int ComputeFileMD5(String file_path, String md5); 
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection successful");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-
-        List<Number> rtnArr = robot.GetRobotTeachingPoint("P1");
-        System.out.println("point data " + rtnArr);
-
-        String[] key = {""};
-        robot.GetSSHKeygen(key);
-        System.out.println("ssh key " + key[0]);
-    }
-
-Getting the robot software version
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Get robot software version
-    * @param [out] robotModel robotModel
-    * @param [out] webVersion web version
-    * @param [out] controllerVersion controllerVersion
-    * @return error code 
-    */
-    int GetSoftwareVersion(String robotModel, String webVersion, String controllerVersion);
-
-Getting the robot hardware version
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Get robot hardware version
-    * @param [out] ctrlBoxBoardVersion Control Box Board Hardware Version
-    * @param [out] driver1Version driver1 hardware version
-    * @param [out] driver1Version driver2HardwareVersion
-    * @param [out] driver1Version driver3 hardware version
-    * @param [out] driver1Version driver4 hardware version
-    * @param [out] driver1Version driver5 hardware version
-    * @param [out] driver1Version driver6 hardware version
-    * @param [out] endBoardVersion endBoardHardwareVersion
-    * @return error code 
-    */
-    int GetHardwareVersion(String ctrlBoxBoardVersion, String driver1Version, String driver2Version, String driver3Version,
-                                          String driver4Version, String driver5Version, String driver6Version, String endBoardVersion);
-
-Getting the robot firmware version
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Get robot firmware version
-    * @param [out] ctrlBoxBoardVersion Control Box Board Firmware Version
-    * @param [out] driver1Version driver1 firmware version
-    * @param [out] driver1Version driver2FirmwareVersion
-    * @param [out] driver1Version driver3 firmware version
-    * @param [out] driver1Version driver4 firmware version
-    * @param [out] driver1Version driver5 firmware version
-    * @param [out] driver1Version driver6 firmware version
-    * @param [out] endBoardVersion endBoardFirmwareVersion
-    * @return error code 
-    */
-    int GetFirmwareVersion(String ctrlBoxBoardVersion, String driver1Version, String driver2Version, String driver3Version,
-                                          String driver4Version, String driver5Version, String driver6Version, String endBoardVersion);
-
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static void main(String[] args)
-    {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        String ctrlBoxBoardVersion = "";
-        String driver1Version = "";
-        String driver2Version = "";
-        String driver3Version = "";
-        String driver4Version = "";
-        String driver5Version = "";
-        String driver6Version = "";
-        String endBoardVersion = "";
-        robot.GetHardwareVersion(ctrlBoxBoardVersion ,driver1Version, driver2Version, driver3Version,)
-                 driver4Version, driver5Version, driver6Version, endBoardVersion).
-
-        robot.GetFirmwareVersion(ctrlBoxBoardVersion, driver1Version, driver2Version, driver3Version,
-                driver4Version, driver5Version, driver6Version, endBoardVersion).
-    }
+        String[] SN = new String[]{""};  
+        robot.GetRobotSN(SN);  
+        System.out.println("robot SN is "+SN[0]);  
+        return 0;  
+    }  

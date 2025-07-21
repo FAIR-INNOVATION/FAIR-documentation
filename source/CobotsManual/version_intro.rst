@@ -1,3 +1,24 @@
+Version V3.8.4
+-----------------
+
+Date: 2025-07-18
+    
+- **Extended Axis Blending Smoothing Function Implementation**: 
+    Path: Teach Program -> Program Editing, Graphical Programming, Node Graph Programming.
+  
+    Description: Achieves smooth motion between extended axis commands, improving work efficiency.
+    
+- **Controller Slave Mode Optimization**: 
+    Path: Initial Setup -> Peripherals -> Board Communication, Remote Mode.
+  
+    Description: Added board IP configuration, LUA command interface, and enabled controller slave protocol auto-start in remote mode.
+    
+- **Controller N2L Board QX Adaptation (EtherCAT)**: 
+    Description: FAIRINO Industrial real-time communication board, miniPCIe card supporting EtherCAT protocol communication.
+    
+- **Robot JOG Motion**: 
+    Description: Added CO status output function for robot JOG motion.
+
 Version V3.8.3
 -----------------
 

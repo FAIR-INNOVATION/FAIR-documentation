@@ -1,209 +1,264 @@
-Robotic welding
-==========================
+Robotic Welding
+=====================
+
 .. toctree:: 
     :maxdepth: 5
 
-
-Start of welding
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C#SDK-v1.0.4
-
+Setting the welding process parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Welding begins
-    * @param [in] ioType io type 0-controller IO; 1-extended IO
-    * @param [in] arcNum Welder profile number
-    * @param [in] timeout Arc start timeout
-    * @return error code
+    * @brief Sets the welding process curve parameters.
+    * @param [in] id Welding process number (1-99)
+    * @param [in] startCurrent startCurrent(A)
+    * @param [in] startVoltage startVoltage(V)
+    * @param [in] startTime startTime(ms)
+    * @param [in] weldCurrent weldCurrent(A)
+    * @param [in] weldVoltage Welding voltage (V)
+    * @param [in] endCurrent Welding current(A)
+    * @param [in] endVoltage weldVoltage(V)
+    * @param [in] endTime Arc recovery time (ms)
+    * @return Error code
     */
-    int ARCStart(int ioType, int arcNum, int timeout);
+    int WeldingSetProcessParam(int id, double startCurrent, double startVoltage, double startTime, double weldCurrent, double weldVoltage, double endCurrent, double endVoltage, double endTime);
 
-End of welding
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C#SDK-v1.0.4
-
+Get weld process curve parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief End of welding
-    * @param [in] ioType io type 0-controller IO; 1-extended IO
-    * @param [in] arcNum Welder profile number
-    * @param [in] timeout Arc off timeout
-    * @return error code
+    * @brief Get weld process curve parameters.
+    * @param [in] id Welding process number (1-99)
+    * @param [out] startCurrent startCurrent (A)
+    * @param [out] startVoltage startVoltage(V)
+    * @param [out] startTime startTime(ms)
+    * @param [out] weldCurrent weldCurrent(A)
+    * @param [out] weldVoltage Welding voltage (V)
+    * @param [out] endCurrent Welding current(A)
+    * @param [out] endVoltage weldVoltage(V)
+    * @param [out] endTime Arc recovery time (ms)
+    * @return Error code
     */
-    int ARCEnd(int ioType, int arcNum, int timeout);
+    int WeldingGetProcessParam(int id, ref double startCurrent, ref double startVoltage, ref double startTime, ref double weldCurrent, ref double weldVoltage, ref double endCurrent, ref double endVoltage, ref double endTime);
 
-Setting of welding current and output analogue correspondence
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Setting the weld current in relation to the output analog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set weld current to analogue output
-    * @param [in] currentMin Welding current - analogue output linear relationship left point current value (A)
-    * @param [in] currentMax Welding current - analogue output linear relationship right point current value (A)
-    * @param [in] outputVoltageMin Welding current - analogue output linear relationship left point analogue output voltage value (V)
-    * @param [in] outputVoltageMax The analogue output voltage value (V) at the right point of the weld current-analog output linear relationship.
-    * @return error code
+    * @brief Set weld current to output analog.
+    * @param [in] currentMin Welding current-analog output linear relationship left point current value (A)
+    * @param [in] currentMax Welding current - analog output linear relationship right point current value (A)
+    * @param [in] outputVoltageMin Welding current - analog output linear relationship left point analog output voltage value (V)
+    * @param [in] outputVoltageMax Welding current - analog output linear relationship of the right point analog output voltage value (V)
+    * @return Error Code
     */
     int WeldingSetCurrentRelation(double currentMin, double currentMax, double outputVoltageMin, double outputVoltageMax);
 
-Setting the welding voltage and output analogue correspondence
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Set Welding Voltage and Output Analog Relation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Setting the weld voltage to output analogue correspondence
-    * @param [in] weldVoltageMin Welding Voltage - Analogue Output Linear Relationship Left Point Welding Voltage Value (A)
-    * @param [in] weldVoltageMax Welding Voltage - Analogue Output Linear Relationship Right Point Welding Voltage Value (A)
-    * @param [in] outputVoltageMin Welding Voltage - Analogue Output Linear Relationship Left Point Analogue Output Voltage Value (V)
-    * @param [in] outputVoltageMax Analogue output voltage value (V) at the right point of the weld voltage-analogue output linear relation
-    * @return error code
+    * @brief Set weld voltage to output analog.
+    * @param [in] weldVoltageMin weldVoltageMin Welding voltage-analog output linear relationship between the left point weld voltage value (A)
+    * @param [in] weldVoltageMax Welding voltage - analog output linear relationship between the right point welding voltage value (A)
+    * @param [in] outputVoltageMin Welding voltage-analog output linear relationship left point analog output voltage value (V)
+    * @param [in] outputVoltageMax Welding voltage - analog output linear relationship of the right point analog output voltage value (V)
+    * @return Error Code
     */
     int WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
 
-Getting the correspondence between welding current and output analogue
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Get the relationship between the welding current and the output analog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get weld current to output analogue
-    * @param [out] currentMin Welding current - analogue output linear relationship left point current value (A)
-    * @param [out] currentMax Welding current - analogue output linear relationship right point current value (A)
-    * @param [out] outputVoltageMin Welding current - analogue output linear relationship left point analogue output voltage value (V)
-    * @param [out] outputVoltageMax Analogue output voltage value (V) at the right point of the weld current-analog output linear relationship
-    * @return error code
+    * @brief Get weld current to output analog.
+    * @param [out] currentMin Welding current-analog output linear relationship of the left point current value (A).
+    * @param [out] currentMax Welding current - analog output linear relationship right point current value (A)
+    * @param [out] outputVoltageMin Welding current - analog output linear relationship left point analog output voltage value (V)
+    * @param [out] outputVoltageMax Welding current - analog output linear relationship between the right point analog output voltage value (V)
+    * @return Error Code
     */
     int WeldingGetCurrentRelation(ref double currentMin, ref double currentMax, ref double outputVoltageMin, ref double outputVoltageMax);
 
-Getting welding voltage and output analogue correspondence
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Get Welding Voltage Relation to Output Analog
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Get weld voltage to analogue output
-    * @param [out] weldVoltageMin Welding Voltage - Analogue Output Linear Relationship Left Point Welding Voltage Value (A)
-    * @param [out] weldVoltageMax Welding Voltage - Analogue Output Linear Relationship Right Point Welding Voltage Value (A)
-    * @param [out] outputVoltageMin Welding voltage - analogue output linear relationship left point analogue output voltage value (V)
-    * @param [out] outputVoltageMax Analogue output voltage value (V) at the right point of the weld voltage-analogue output linearity relation
-    * @return error code
+    * @brief Get weld voltage to output analog
+    * @param [out] weldVoltageMin Welding Voltage - Analog Output Linear Relationship Left Point Welding Voltage Value (A)
+    * @param [out] weldVoltageMax Welding Voltage - Analog Output Linear Relationship Welding Voltage Value (A) at the Right Point
+    * @param [out] outputVoltageMin Welding voltage-analog output linear relationship left point analog output voltage value (V)
+    * @param [out] outputVoltageMax Welding voltage - analog output linear relationship right point analog output voltage value (V)
+    * @return Error Code
     */
     int WeldingGetVoltageRelation(ref double weldVoltageMin, ref double weldVoltageMax, ref double outputVoltageMin, ref double outputVoltageMax);
 
-Setting the welding current
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Set weld current
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set weld current
-    * @param [in] ioType Control IO type 0-Control box IO; 1-Extended IO
+    * @brief Set weld current.
+    * @param [in] ioType Control IO type 0-control box IO; 1-expansion IO
     * @param [in] current Welding current value (A)
-    * @param [in] AOIndex Welding current control box analogue output port (0-1)
-    * @return error code
+    * @param [in] AOIndex Welding current control box analog output port (0-1)
+    * @return Error Code
     */
-    int WeldingSetCurrent(int ioType, double current, int AOIndex).
+    int WeldingSetCurrent(int ioType, double current, int AOIndex);
 
-Setting the welding voltage
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Set Welding Voltage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set weld voltage
-    * @param [in] ioType Control IO type 0-Control box IO; 1-Extended IO
+    * @brief Set the solder voltage.
+    * @param [in] ioType Control IO type 0-Control box IO; 1-Extension IO
     * @param [in] voltage Welding voltage value (A)
-    * @param [in] AOIndex Analogue output port of welding voltage control box (0-1)
-    * @return error code
+    * @param [in] AOIndex Welding voltage control box analog output port (0-1)
+    * @return Error Code
     */
     int WeldingSetVoltage(int ioType, double voltage, int AOIndex);
 
-Setting the oscillation parameters
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Set the swing parameter
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Set the swing parameters
-    * @param [in] weaveNum swing welding parameter configuration number
-    * @param [in] weaveType Swing type 0- Planar triangular wave swing; 1- Vertical L-shaped triangular wave swing 2- Clockwise circular swing; 3- Counterclockwise circular swing; 4- Planar sine wave swing 5- Vertical L-shaped sine wave swing 6- Vertical triangular wave swing 7- Vertical sine wave swing
-    * @param [in] weaveFrequency (Hz)
-    * @param [in] weaveIncStayTime Waiting mode 0- cycle does not include waiting time; 1- The cycle includes waiting time
-    * @param [in] weaveRange Swing amplitude (mm)
-    * @param [in] weaveLeftRange Vertical triangular swing left chord Length (mm)
-    * @param [in] weaveRightRange Vertical triangular swing right chord Length (mm)
-    * @param [in] additionalStayTime Vertical triangular swing Vertical triangular point stay Time (mm)
-    * @param [in] weaveLeftStayTime Swing left stay Time (ms)
-    * @param [in] weaveRightStayTime Swing right stay Time (ms)
-    * @param [in] weaveCircleRadio Circular Swing - Callback Ratio (0-100%)
-    * @param [in] weaveStationary swing position waiting, 0- the position continues to move during the waiting time; The position remains stationary during the waiting time
-    * @param [in] weaveYawAngle Swing direction azimuth Angle (rotation around the z-axis of swing), unit °
-    * @return error code
+    /** 
+    * @brief Set the swing parameter
+    * @param [in] weaveNum The configuration number of the weave parameter.
+    * @param [in] weaveType Oscillation type 0-planar triangular oscillation; 1-vertical L-shaped triangular oscillation; 2-clockwise circular oscillation; 3-counterclockwise circular oscillation; 4-planar sinusoidal oscillation; 5-vertical L-shaped sinusoidal oscillation; 6-vertical triangular oscillation; 7-vertical sine wave oscillation
+    * @param [in] weaveFrequency swing frequency (Hz)
+    * @param [in] weaveIncStayTime wait mode 0-cycle without wait time; 1-cycle with wait time
+    * @param [in] weaveRange Weave range (mm)
+    * @param [in] weaveLeftRange vertical triangle swing left chord length (mm)
+    * @param [in] weaveRightRange the length of the right chord of the vertical triangle swing (mm)
+    * @param [in] additionalStayTime The stay time of the vertical triangle (mm).
+    * @param [in] weaveLeftStayTime weaveLeftStayTime (ms)
+    * @param [in] weaveRightStayTime weaveRightStayTime (ms)
+    * @param [in] weaveCircleRadio Circle swing-back ratio (0-100%)
+    * @param [in] weaveStationary swing position wait, 0 - wait time for position to continue moving; 1 - wait time for position to be stationary
+    * @param [in] weaveYawAngle swing direction azimuth (rotation around swing Z-axis), in °.
+    * @return Error code 
     */
     int WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, double weaveLeftRange, double weaveRightRange, int additionalStayTime, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary, double weaveYawAngle, double weaveRotAngle=0);
 
-Code Example
-++++++++++++++++++++++++++++++++++
+Sample code for setting welding parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
-    :linenos:
+   :linenos:
 
-    private void button7_Click(object sender, EventArgs e)
-    {
-        DescPose startdescPose = new DescPose(146.273, -208.110, 270.102, 177.523, -3.782, -158.101);
-        JointPos startjointPos = new JointPos(98.551, -128.309, 127.341, -87.490, -94.249, -13.208);
-        DescPose enddescPose = new DescPose(146.272, -476.204, 270.102, 177.523, -3.781, -158.101);
-        JointPos endjointPos = new JointPos(93.931, -89.722, 102.216, -101.300, -94.359, -17.840);
+   private void button7_Click(object sender, EventArgs e)
+   {
+      robot.WeldingSetProcessParam(1, 177, 27, 1000, 178, 28, 176, 26, 1000);
+      robot.WeldingSetProcessParam(2, 188, 28, 555, 199, 29, 133, 23, 333);
 
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
-        robot.WeaveSetPara(0, 3, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0, 0, 0);
-        robot.MoveL(startjointPos, startdescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-        robot.WeaveStart(0);
-        robot.MoveL(endjointPos, enddescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-        robot.WeaveEnd(0);
+      double startCurrent = 0;
+      double startVoltage = 0;
+      double startTime = 0;
+      double weldCurrent = 0;
+      double weldVoltage = 0;
+      double endCurrent = 0;
+      double endVoltage = 0;
+      double endTime = 0;
 
-        robot.WeaveSetPara(0, 3, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0, 0, 30);
-        robot.MoveL(startjointPos, startdescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-        robot.WeaveStart(0);
-        robot.MoveL(endjointPos, enddescPose, 2, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-        robot.WeaveEnd(0);
+      robot.WeldingGetProcessParam(1, ref startCurrent, ref startVoltage, ref startTime, ref weldCurrent, ref weldVoltage, ref endCurrent, ref endVoltage, ref endTime);
+      Console.WriteLine("the Num 1 process param is " + startCurrent + " " + startVoltage + " " + startTime + " " + weldCurrent + " " + weldVoltage + " " + endCurrent + " " + endVoltage + " " + endTime);
+      robot.WeldingGetProcessParam(2, ref startCurrent, ref startVoltage, ref startTime, ref weldCurrent, ref weldVoltage, ref endCurrent, ref endVoltage, ref endTime);
+      Console.WriteLine("the Num 2 process param is " + startCurrent + " " + startVoltage + " " + startTime + " " + weldCurrent + " " + weldVoltage + " " + endCurrent + " " + endVoltage + " " + endTime);
 
-    }
+      int rtn = robot.WeldingSetCurrentRelation(0, 400, 0, 10, 0);
+      Console.WriteLine("WeldingSetCurrentRelation rtn is: " + rtn);
 
-Instant setting of swing parameters
+      rtn = robot.WeldingSetVoltageRelation(0, 40, 0, 10, 1);
+      Console.WriteLine("WeldingSetVoltageRelation rtn is: " + rtn);
+
+      double current_min = 0;
+      double current_max = 0;
+      double vol_min = 0;
+      double vol_max = 0;
+      double output_vmin = 0;
+      double output_vmax = 0;
+      int curIndex = 0;
+      int volIndex = 0;
+      rtn = robot.WeldingGetCurrentRelation(ref current_min, ref current_max, ref output_vmin, ref output_vmax, ref curIndex);
+      Console.WriteLine("WeldingGetCurrentRelation rtn is: " + rtn);
+      Console.WriteLine("current min " + current_min + " current max " + current_max + " output vol min " + output_vmin + " output vol max " + output_vmax);
+
+      rtn = robot.WeldingGetVoltageRelation(ref vol_min, ref vol_max, ref output_vmin, ref output_vmax, ref volIndex);
+      Console.WriteLine("WeldingGetVoltageRelation rtn is: " + rtn);
+      Console.WriteLine("vol min " + vol_min + " vol max " + vol_max + " output vol min " + output_vmin + " output vol max " + output_vmax);
+
+      rtn = robot.WeldingSetCurrent(1, 100, 0, 0);
+      Console.WriteLine("WeldingSetCurrent rtn is: " + rtn);
+
+      System.Threading.Thread.Sleep(3000);
+
+      rtn = robot.WeldingSetVoltage(1, 10, 0, 0);
+      Console.WriteLine("WeldingSetVoltage rtn is: " + rtn);
+
+      rtn = robot.WeaveSetPara(0, 0, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0, 60.000000);
+      Console.WriteLine("rtn is: " + rtn);
+
+      robot.WeaveOnlineSetPara(0, 0, 1, 0, 20, 0, 0, 0, 0);
+
+      rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200);
+      Console.WriteLine("WeldingSetCheckArcInterruptionParam    " + rtn);
+      rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0);
+      Console.WriteLine("WeldingSetReWeldAfterBreakOffParam    " + rtn);
+      int enable = 0;
+      double length = 0;
+      double velocity = 0;
+      int moveType = 0;
+      int checkEnable = 0;
+      int arcInterruptTimeLength = 0;
+      rtn = robot.WeldingGetCheckArcInterruptionParam(ref checkEnable, ref arcInterruptTimeLength);
+      Console.WriteLine("WeldingGetCheckArcInterruptionParam  checkEnable  " + checkEnable + "   arcInterruptTimeLength  " + arcInterruptTimeLength);
+      rtn = robot.WeldingGetReWeldAfterBreakOffParam(ref enable, ref length, ref velocity, ref moveType);
+      Console.WriteLine("WeldingGetReWeldAfterBreakOffParam  enable = " + enable + ", length = " + length + ", velocity = " + velocity + ", moveType = " + moveType);
+
+      robot.SetWeldMachineCtrlModeExtDoNum(17);
+      for (int i = 0; i < 5; i++)
+      {
+         robot.SetWeldMachineCtrlMode(0);
+         Thread.Sleep(1000);
+         robot.SetWeldMachineCtrlMode(1);
+         Thread.Sleep(1000);
+      }
+
+   }
+
+Setting the swing parameters on the fly
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
@@ -211,37 +266,147 @@ Instant setting of swing parameters
 
     /**
     * @brief Instant setup of swing parameters
-    * @param [in] weaveNum weave parameter configuration number
-    * @param [in] weaveType weaveType 0-planar triangular wave swing; 1-vertical L-shaped triangular wave swing; 2-clockwise circular swing; 3-counterclockwise circular swing; 4-planar sine wave swing; 5-vertical L-shaped sine wave swing; 6-vertical triangular wave swing; 7-vertical sine wave swing
+    * @param [in] weaveNum The configuration number of the weave parameter.
+    * @param [in] weaveType Oscillation type 0-planar triangular oscillation; 1-vertical L-shaped triangular oscillation; 2-clockwise circular oscillation; 3-counterclockwise circular oscillation; 4-planar sinusoidal oscillation; 5-vertical L-shaped sinusoidal oscillation; 6-vertical triangular oscillation; 7-vertical sinusoidal oscillation
     * @param [in] weaveFrequency swing frequency (Hz)
     * @param [in] weaveIncStayTime wait mode 0-cycle without wait time; 1-cycle with wait time
-    * @param [in] weaveRange swing range (mm)
+    * @param [in] weaveRange Weave range (mm)
     * @param [in] weaveLeftStayTime weaveLeftStayTime (ms)
-    * @param [in] weaveRightStayTime weaveRightStayTime (ms)
+    * @param [in] weaveRightStayTime weaveRightStayTime(ms)
     * @param [in] weaveCircleRadio Circle swing-back ratio (0-100%)
-    * @param [in] weaveStationary swing position wait, 0 - position continues to move during wait time; 1 - position is stationary during wait time
+    * @param [in] weaveStationary swing position wait, 0 - wait time for position to continue moving; 1 - wait time for position to be stationary
     * @return error code
     */
     int WeaveOnlineSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary).
 
-swing start
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set parameters for detecting unexpected interruptions of the robot's welding arc
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
 
+    /**
+    * @brief Setting parameters for detecting unexpected interruptions of a robotic welding arc.
+    * @param [in] checkEnable whether or not to enable detection; 0-don't enable; 1-enable
+    * @param [in] arcInterruptTimeLength arcInterruptAcknowledgmentTimeLength(ms)
+    * @return Error code
+    */
+    int WeldingSetCheckArcInterruptionParam(int checkEnable, int arcInterruptTimeLength)
+
+Get parameters for detecting accidental interruptions of the robot's welding arc
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get parameters for detecting unexpected interruptions of a robotic welding arc.
+    * @param [out] checkEnable Whether to enable detection; 0-don't enable; 1-enable
+    * @param [out] arcInterruptTimeLength arcInterruptAcknowledgmentTimeLength(ms)
+    * @return Error code
+    */
+    int WeldingGetCheckArcInterruptionParam(ref int checkEnable, ref int arcInterruptTimeLength)
+
+Set the robot welding interruption recovery parameter
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Setting the robot weld interrupt recovery parameters
+    * @param[in] enable Whether to enable weld interrupt recovery or not.
+    * @param[in] length The overlap distance of the weld (mm).
+    * @param[in] velocity the speed of the robot to return to the restart point (0-100)
+    * @param[in] moveType Robot movement to restart point type; 0-LIN; 1-PTP
+    * @return Error code
+    */
+    int WeldingSetReWeldAfterBreakOffParam(int enable, double length, double velocity, int moveType)
+
+Get the robot welding break recovery parameter
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get robot weld interrupt recovery parameters.
+    * @param [out] enable Whether to enable weld interrupt recovery.
+    * @param [out] length The overlap distance of the weld (mm).
+    * @param [out] velocity the speed of the robot to return to the restart point (0-100)
+    * @param [out] moveType the way the robot moves to the restart point; 0-LIN; 1-PTP
+    * @return Error code
+    */
+    int WeldingGetReWeldAfterBreakOffParam(ref int enable, ref double length, ref double velocity, ref int moveType)
+
+Set welder control mode extension DO port
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set welder control mode extended DO port.
+    * @param DONum Welder control mode DO port (0-127)
+    * @return Error code
+    */
+    int SetWeldMachineCtrlModeExtDoNum(int DONum).
+
+Set weld machine control mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set welder control mode
+    * @param mode Welder control mode; 0-unitary; 1-binary
+    * @return Error code
+    */
+    int SetWeldMachineCtrlMode(int mode).
+
+Weld start
+++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief The swing is on
-    * @param [in] weaveNum weave parameter configuration number
-    * @return error code
+    * @brief Welding start
+    * @param [in] ioType io type 0-controller IO; 1-extended IO
+    * @param [in] arcNum Welder profile number
+    * @param [in] timeout Arc start timeout
+    * @return Error code
+    */
+    int ARCStart(int ioType, int arcNum, int timeout);
+
+Weld End
+++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.4
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief End of welding.
+    * @param [in] ioType io type 0-controller IO; 1-extended IO
+    * @param [in] arcNum Welder profile number
+    * @param [in] timeout Arc-off timeout timeout
+    * @return Error code
+    */
+    int ARCEnd(int ioType, int arcNum, int timeout).
+
+Oscillation start
+++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.4
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief The start of the swing.
+    * @param [in] weaveNum Pendulum weld parameter configuration number
+    * @return ErrorCode
     */
     int WeaveStart(int weaveNum).
 
-end of swing
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+WeaveStart(int weaveNum); int WeaveStart(int weaveNum).
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
@@ -249,14 +414,13 @@ end of swing
 
     /**
     * @brief End of swing
-    * @param [in] weaveNum weave parameter configuration number
-    * @return error code
+    * @param [in] weaveNum Pendulum weld parameter configuration number
+    * @return ErrorCode
     */
     int WeaveEnd(int weaveNum).
 
-Positive wire feed
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Forward Wire Feed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
@@ -264,15 +428,14 @@ Positive wire feed
 
     /**
     * @brief Forward wire feed
-    * @param [in] ioType io type 0-Controller IO; 1-Extended IO
-    * @param [in] wireFeed Wire Feed Control 0-Stop Wire Feed; 1-Feed Wire
-    * @return error code
+    * @param [in] ioType io type 0-controller IO; 1-extended IO
+    * @param [in] wireFeed wire feed control 0-stop wire feed; 1-wire feed
+    * @return Error code
     */
-    int SetForwardWireFeed(int ioType, int wireFeed). 	
+    int SetForwardWireFeed(int ioType, int wireFeed).  
 
 Reverse wire feed
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
@@ -280,435 +443,316 @@ Reverse wire feed
 
     /**
     * @brief Reverse wire feed
-    * @param [in] ioType io type 0-Controller IO; 1-Extended IO
-    * @param [in] wireFeed Wire Feed Control 0-Stop Wire Feed; 1-Feed Wire
-    * @return error code
+    * @param [in] ioType ioType 0-Controller IO; 1-Extended IO
+    * @param [in] wireFeed wireFeedControl 0-Stop wire feed; 1-Wire feed
+    * @return Error code
     */
     int SetReverseWireFeed(int ioType, int wireFeed).
 
-Aspiration (phonetics, explosion of breath on consonants distinguishing Chinese p, t from b, d)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Wire Feed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief sends gas
-    * @param [in] ioType io type 0-Controller IO; 1-Extended IO
+    * @brief air delivery
+    * @param [in] ioType io type 0-controller IO; 1-extended IO
     * @param [in] airControl airControl 0-stop air delivery; 1-feed air
-    * @return error code
+    * @return Error code
     */
     int SetAspirated(int ioType, int airControl).
 
-Segment welding
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting the robot to resume welding after an interruption
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
 
+    /**
+    * @brief Set the robot to resume welding after a weld interruption.
+    * @return Error code
+    */
+    int WeldingStartReWeldAfterBreakOff()
+
+Sets the robot to exit welding after a weld break
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the robot to quit welding after a weld interruption.
+    * @return Error code
+    */
+    int WeldingAbortWeldAfterBreakOff()
+
+Code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+   :linenos:
+
+   private void button7_Click(object sender, EventArgs e)
+   {
+      robot.WeldingSetCurrent(1, 230, 0, 0);
+      robot.WeldingSetVoltage(1, 24, 0, 1);
+
+      DescPose p1Desc = new DescPose(228.879, -503.594, 453.984, -175.580, 8.293, 171.267);
+      JointPos p1Joint = new JointPos(102.700, -85.333, 90.518, -102.365, -83.932, 22.134);
+
+      DescPose p2Desc = new DescPose(-333.302, -435.580, 449.866, -174.997, 2.017, 109.815);
+      JointPos p2Joint = new JointPos(41.862, -85.333, 90.526, -100.587, -90.014, 22.135);
+
+      ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+      DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+      robot.MoveJ(p1Joint, p1Desc, 13, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+      robot.ARCStart(1, 0, 10000);
+      robot.WeaveStart(0);
+      robot.MoveL (p2Joint, p2Desc, 13, 0, 20, 100, 100, -1, 0, exaxisPos, 0, 0, offdese);
+      robot.ARCEnd(1, 0, 10000);
+      robot.WeaveEnd(0);
+   }
+
+Start of segment welding
+++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
     :linenos:
 
     /** 
-    * :: Start of @brief segment welding
-    * @param [in] startDesePos Starting point Cartesian position
-    * @param [in] endDesePos End Point Cartesian Positions
-    * @param [in] startJPos Starting point joint position
-    * @param [in] endJPos endJoint Positions
-    * @param [in] weldLength Weld section length (mm)
-    * @param [in] noWeldLength Non-Weld Length (mm)
-    * @param [in] weldIOType Weld IO type (0-control box IO; 1-extended IO)
+    * @brief Start of segment welding
+    * @param [in] startDesePos start point Cartesian position
+    * @param [in] endDesePos end point Cartesian position
+    * @param [in] startJPos start point joint position
+    * @param [in] endJPos end point joint position
+    * @param [in] weldLength weldLength (mm)
+    * @param [in] noWeldLength length (mm)
+    * @param [in] weldIOType Weld IO type (0-control box IO; 1-expansion IO)
     * @param [in] arcNum Welder profile number
-    * @param [in] weldTimeout 起/收弧超时时间时间
-    * @param [in] isWeave isWeave or not?
+    * @param [in] weldTimeout start/recovery arc timeout time
+    * @param [in] isWeave whether or not to wiggle
     * @param [in] weaveNum weave parameter configuration number
     * @param [in] tool tool number
     * @param [in] user Workpiece number
-    * @param [in] vel velocity percentage, range [0~100]
+    * @param [in] vel velocity percentage, range [0~100] * @param [in] acc.
     * @param [in] acc Acceleration percentage, range [0~100], not open yet.
     * @param [in] ovl velocity scaling factor, range [0~100]
-    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm	 
+    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm    
     * @param [in] epos Extended axis position in mm
-    * @param [in] search 0-no wire search, 1-wire search
-    * @param [in] offset_flag 0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
-    * @param [in] offset_pos Bit position offset
-    * @return error code 
+    * @param [in] search 0-no wire seek, 1-wire seek
+    * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos Position offset
+    * @return Error code 
     */
-    int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos);
+    int SegmentWeldStart(DescPose startDesePos, DescPose endDesePos, JointPos startJPos, JointPos endJPos, double weldLength, double noWeldLength, int weldIOType, int arcNum, int weldTimeout,bool isWeave, int weaveNum, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos);
 
-Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Robot segment welding code example
+++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.4
 
 .. code-block:: c#
-    :linenos:
+   :linenos:
 
-    private void btnWeldStart_Click(object sender, EventArgs e)
-    {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
-        DescPose startdescPose = new DescPose(-525.55, 562.3, 417.199, -178.325, 0.847, 31.109);
-        JointPos startjointPos = new JointPos(-58.978, -76.817, 112.494, -127.348, -89.145, -0.063);
-        DescPose enddescPose = new DescPose(-345.155, 535.733, 421.269, 179.475, 0.571, 18.332);
-        JointPos endjointPos = new JointPos(-71.746, -87.177, 123.953, -126.25, -89.429, -0.089);
+   private void btnWeldStart_Click(object sender, EventArgs e)
+   {
+      robot.WeldingSetCurrent(1, 230, 0, 0);
+      robot.WeldingSetVoltage(1, 24, 0, 1);
 
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0, 0);
+      DescPose p1Desc = new DescPose(228.879, -503.594, 453.984, -175.580, 8.293, 171.267);
+      JointPos p1Joint = new JointPos(102.700, -85.333, 90.518, -102.365, -83.932, 22.134);
 
-        robot.WeldingSetCurrentRelation(0, 400, 0, 10);
-        robot.WeldingSetVoltageRelation(0, 40, 0, 10);
-        double curmin = 0;
-        double curmax = 0;
-        double vurvolmin = 0;
-        double curvolmax = 0;
-        double volmax = 0;
-        double volmin = 0;
-        double volvolmin = 0;
-        double volvolmax = 0;
+      DescPose p2Desc = new DescPose(-333.302, -435.580, 449.866, -174.997, 2.017, 109.815);
+      JointPos p2Joint = new JointPos(41.862, -85.333, 90.526, -100.587, -90.014, 22.135);
 
-        robot.WeldingGetCurrentRelation(ref curmin, ref curmax, ref vurvolmin, ref curvolmax);
-        robot.WeldingGetVoltageRelation(ref volmin, ref volmax, ref volvolmin, ref volvolmax);
+      ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+      DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
 
-        robot.WeldingSetCurrent(0, 100, 0); 
-        robot.WeldingSetVoltage(0, 19, 1);
+      int rtn = robot.SegmentWeldStart( p1Desc,  p2Desc,  p1Joint,  p2Joint, 20, 20, 0, 0, 5000, false, 0, 0, 0, 100, 100, 100, -1,  exaxisPos, 0, 0,  offdese);
+      Console.WriteLine("SegmentWeldStart rtn is {0}", rtn);
+   }
 
-        robot.WeaveSetPara(0,0,1,0,10,100,100,0,0);
-
-        robot.SetForwardWireFeed(0, 1);
-        Thread.Sleep(1000);
-        robot.SetForwardWireFeed(0, 0);
-        robot.SetReverseWireFeed(0, 1);
-        Thread.Sleep(1000);
-        robot.SetReverseWireFeed(0, 0);
-        robot.SetAspirated(0, 1);
-        Thread.Sleep(1000);
-        robot.SetAspirated(0, 0);
-
-        robot.SetSpeed(5);
-        robot.MoveL(startjointPos, startdescPose, 1, 0, 100, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
-        robot.ARCStart(0, 0, 1000);
-        robot.WeaveStart(0);
-        robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
-        robot.ARCEnd(0, 0, 1000);
-        robot.WeaveEnd(0);
-    }
-
-Welding Wire Finding Position Begins
-++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Solder wire seek start
-    * @param [in] refPos 1-datum point 2-contact point
-    * @param [in] searchVel searchVelocity % * @param [in] searchDel
-    * @param [in] searchDis Search distance mm
-    * @param [in] autoBackFlag autoBackFlag, 0 - not auto; - auto
-    * @param [in] autoBackVel autoBackVelocity % * @param [in] searchDis searchDistance mm
-    * @param [in] autoBackDis autoBack distance mm
-    * @param [in] offectFlag 1-with offset seek; 2-teach point seek
-    * @return error code
-    */
-    int WireSearchStart(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
-
-End of wire search
-++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief End of solder wire seek
-    * @param [in] refPos 1-datum point 2-contact point
-    * @param [in] searchVel searchVelocity %
-    * @param [in] searchDis Search distance in mm
-    * @param [in] autoBackFlag autoBackFlag, 0 - not auto; - auto
-    * @param [in] autoBackVel autoBackVelocity % * @param [in] searchDis searchDistance mm
-    * @param [in] autoBackDis autoBack distance mm
-    * @param [in] offectFlag 1-with offset seek; 2-teach point seek
-    * @return error code
-    */
-    int WireSearchEnd(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
-
-Calculating wire finding offsets
-++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Calculate weld wire seek offset.
-    * @param [in] seamType weldType
-    * @param [in] method Calculation method
-    * @param [in] varNameRef datums 1-6, ‘#’ means no point variable
-    * @param [in] varNameRes contact points 1-6, ‘#’ means no point variable
-    * @param [out] offectFlag 0-offset directly superimposed on the command point; 1-offset requires a coordinate transformation of the command point
-    * @param [out] offect offset position [x, y, z, a, b, c]
-    * @return Error code
-    */
-    int GetWireSearchOffset(int seamType, int method, string[] varNameRef, string[] varNameRes, ref int offsetFlag, ref DescPose offset);;
-
-Wait for the wire search to complete
-++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Waiting for wire seek to complete.
-    * @return Error code.
-    */
-    int WireSearchWait(string name).
-
-Write wire search contact to database
-++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Welding wire seek contact written to database.
-    * @param [in] varName Contact name ‘RES0’ ~ ‘RES99’.
-    * @param [in] pos contact data [x, y, x, a, b, c]
-    * @return Error code
-    */
-    int SetPointToDatabase(string varName, DescPose pos);
-
-Arc tracking control
-++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-
-.. code-block:: c#
-    :linenos:
-
-    / * *
-    * @brief arc tracking control
-    * @param [in] flag Switch, 0- off. 1-on
-    * @param [in] dalayTime Delay time (unit: ms)
-    * @param [in] isLeftRight left and right deviation compensation
-    * @param [in] klr adjustment coefficient (sensitivity)
-    * @param [in] tStartLr or around start compensation time cyc
-    * @param [in] stepMaxLr About the maximum compensation amount mm each time
-    * @param [in] sumMaxLr Maximum total compensation mm
-    * @param [in] isUpLow up-and-down deviation compensation
-    * @param [in] kud up-down adjustment factor (sensitivity)
-    * @param [in] tStartUd start up and down compensation time cyc
-    * @param [in] stepMaxUd Maximum compensation amount mm each time
-    * @param [in] sumMaxUd Maximum total compensation
-    * @param [in] axisSelect upper and lower coordinate system selection, 0-swing; 1- Tools; 2- Base
-    * @param [in] referenceType Reference current setting mode, 0- feedback; 1-constant
-    * @param [in] referSampleStartUd Reference current sampling starts counting (feedback), cyc
-    * @param [in] referSampleCountUd Reference current sampling cycle count (feedback), cyc
-    * @param [in] referenceCurrent Upper and lower reference current mA
-    * @param [in] offsetType Indicates the offset tracking type. 0- no offset. 1- Sampling; 2- percentage 
-    * @param [in] offsetParameter Offset parameter; Sampling (offset sampling start time, default sampling cycle); Percentage (offset percentage (-100 to 100)) /version 3.8.0
-    * @return Error code
-    * /
-    int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent, int offsetType, int offsetParameter);
-
-Code example
-++++++++++++++++++++++++++++++++++
-
-.. versionadded:: C#SDK-v1.1.0
-
-.. code-block:: c#
-    :linenos:
-
-    private void btnweld_Click(object sender, EventArgs e)
-    {
-
-        //Arc Tracking
-        DescPose p1Desc = new DescPose(-72.912, -587.664, 31.849, 43.283, -6.731, 15.068);
-        JointPos p1Joint = new JointPos(74.620, -80.903, 94.608, -109.882, -90.436, -13.432);
-
-        DescPose p2Desc = new DescPose(-104.915, -483.712, -25.231, 42.228, -6.572, 18.433);
-        JointPos p2Joint = new JointPos(66.431, -92.875, 116.362, -120.516, -88.627, -24.731);
-
-        DescPose p3Desc = new DescPose(-242.834, -498.697, -23.681, 46.576, -5.286, 8.318);
-        JointPos p3Joint = new JointPos(57.153, -82.046, 104.060, -116.659, -92.478, -24.735);
-        ExaxisPos exaxisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
-        DescPose offdese = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        robot.WeldingSetVoltage(1, 19, 0, 0);
-        robot.WeldingSetCurrent(1, 190, 0, 0);
-        robot.MoveJ(p1Joint, p1Desc, 1, 1, 100, 100, 100, exaxisPos, -1, 0, offdese);
-        robot.MoveL(p2Joint, p2Desc, 1, 1, 100, 100, 50, -1, exaxisPos, 0, 0, offdese);
-        robot.ARCStart(1, 0, 10000);
-        robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 60, 0, 0, 4, 1, 10, 2, 2);
-        robot.WeaveStart(0);
-        robot.MoveL(p3Joint, p3Desc, 1, 1, 100, 100, 1, -1, exaxisPos, 0, 0, offdese);
-        robot.WeaveEnd(0);
-        robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 60, 0, 0, 4, 1, 10, 2, 2);
-        robot.ARCEnd(1, 0, 10000);
-    }
-
-Arc tracking control
+Simulate the start of the swing
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Arc tracking control
-    * @param [in] flag switch, 0-off; 1-on
-    * @param [in] dalayTime hysteresis time in ms
-    * @param [in] isLeftRight left-right deviation compensation
-    * @param [in] klr left/right adjustment factor (sensitivity)
-    * @param [in] tStartLr Left/Right compensation time cyc
-    * @param [in] stepMaxLr Maximum compensation in mm per shift * @param [in] stepMaxLr Maximum compensation in mm per shift
-    * @param [in] sumMaxLr Total max compensation in mm
-    * @param [in] isUpLow Compensation for up and down deviation
-    * @param [in] kud up/down adjustment factor (sensitivity)
-    * @param [in] tStartUd up/down compensation time cyc
-    * @param [in] stepMaxUd Maximum compensation in mm for each step.
-    * @param [in] sumMaxUd up and down total max. compensation mm
-    * @param [in] axisSelect upper and lower coordinate system selection, 0-swing; 1-tool; 2-base
-    * @param [in] referenceType upper and lower reference current setting mode, 0-feedback; 1-constant
-    * @param [in] referSampleStartUd upper and lower reference current sample start count (feedback), cyc
-    * @param [in] referSampleCountUd upper and lower reference current sampling cycle count (feedback), cyc
-    * @param [in] referenceCurrent upper and lower reference currents mA
-    * @return Error code
-    */
-    int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent).
-
-Arc tracking AI passband selection
-++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Arc-tracking AI passband selection.
-    * @param [in] channel Arc-tracking AI passband selection, [0-3].
-    * @return Error code.
-    */
-    int ArcWeldTraceExtAIChannelConfig(int channel);
-
-Simulated Swing Start
-++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Simulation of swing start
+    * @brief Simulate swing start
     * @param [in] weaveNum swing parameter number
     * @return ErrorCode
     */
     int WeaveStartSim(int weaveNum).
 
-End of simulation
-++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-
+End of swing simulation
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Simulation of end of swing
+    * @brief Simulate end of swing
     * @param [in] weaveNum swing parameter number
     * @return ErrorCode
     */
     int WeaveEndSim(int weaveNum).
 
 Start trajectory detection warning (no motion)
-++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief start trajectory detection warning (no motion)
+    * @brief Start trajectory detection warning (no motion).
     * @param [in] weaveNum swing parameter number
     * @return Error code
     */
     int WeaveInspectStart(int weaveNum).
 
 End trajectory detection warning (no motion)
-++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief end trajectory detection warning (no motion)
+    * @brief End trajectory detection warning (no motion).
     * @param [in] weaveNum swing parameter number
-    * @return Error code
+    * @return Error code.
     */
     int WeaveInspectEnd(int weaveNum).
 
-Extended IO-Configuration Welder Gas Detection Signal
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+Weave fading start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Swinging gradient start
+    * @param [in] weaveChangeFlag 1-change swing parameter; 2-change swing parameter + weld speed
+    * @param [in] weaveNum weaveNumber 
+    * @param [in] velStart Welding start speed, (cm/min)
+    * @param [in] velEnd Weld end speed, (cm/min)
+    * @return Error code
+    */
+    int WeaveChangeStart(int weaveChangeFlag, int weaveNum, double velStart, double velEnd);
+
+Weave fade end
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief End of swing gradient
+    * @return Error code
+    */
+    int WeaveChangeEnd()
+
+Sample Welding Code for Robot Weave Change
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+    
+.. code-block:: c#
+   :linenos:
+
+   private void btnweld_Click(object sender, EventArgs e)
+   {
+      DescPose p1Desc = new DescPose(228.879, -503.594, 453.984, -175.580, 8.293, 171.267);
+      JointPos p1Joint = new JointPos(102.700, -85.333, 90.518, -102.365, -83.932, 22.134);
+
+      DescPose p2Desc = new DescPose(-333.302, -435.580, 449.866, -174.997, 2.017, 109.815);
+      JointPos p2Joint = new JointPos(41.862, -85.333, 90.526, -100.587, -90.014, 22.135);
+
+      ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+      DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+      robot.MoveJ(p1Joint, p1Desc, 13, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+      robot.WeaveStartSim(0);
+      robot.MoveL(p2Joint, p2Desc, 13, 0, 20, 100, 100, -1, 0, exaxisPos, 0, 0, offdese);
+      robot.WeaveEndSim(0);
+      robot.MoveJ(p1Joint, p1Desc, 13, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+      robot.WeaveInspectStart(0);
+      robot.MoveL(p2Joint, p2Desc, 13, 0, 20, 100, 100, -1, 0, exaxisPos, 0, 0, offdese);
+      robot.WeaveInspectEnd(0);
+
+      robot.WeldingSetVoltage(1, 19, 0, 0);
+      robot.WeldingSetCurrent(1, 190, 0, 0);
+      robot.MoveL( p1Joint,  p1Desc, 1, 1, 100, 100, 50, -1,  exaxisPos, 0, 0,  offdese);
+      robot.ARCStart(1, 0, 10000);
+      robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0);
+      robot.WeaveStart(0);
+      robot.WeaveChangeStart(1, 0, 50, 30);
+      robot.MoveL( p2Joint,  p2Desc, 1, 1, 100, 100, 1, -1,  exaxisPos, 0, 0,  offdese);
+      robot.WeaveChangeEnd();
+      robot.WeaveEnd(0);
+      robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 60, 1, 0.06, 5, 5, 80, 0, 0, 4, 1, 10, 0, 0);
+      robot.ARCEnd(1, 0, 10000);
+   }
+
+
+Extended IO-Configuration of Welder Gas Detection Signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
     * @brief Extended IO-Configuration Welder Gas Detection Signal
-    * @param [in] DONum gas detection signal extended DO number
+    * @param [in] DONum Gas detection signal extended DO number
     * @return error-code
     */
     int SetAirControlExtDoNum(int DONum).
 
-Extended IO-Configuration Welder Arc Start Signal
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+Extended IO-Configuration of the welder arc start signal
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Extended IO-Configuration of the welder arc start signal.
-    * @param [in] DONum Welder Arc Start Signal Extended DO Number
+    * @brief Extended IO-Configuration Welder Arc Start Signal
+    * @param [in] DONum Welder arc start signal extended DO number
     * @return Error code.
     */
     int SetArcStartExtDoNum(int DONum).
 
 Extended IO-Configuring the Welder Reverse Wire Feed Signal
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Extended IO-Configuration Welder Reverse Wire Feed Signal
+    * @brief Extended IO-Configuration of the welder reverse wire feed signal.
     * @param [in] DONum Reverse Wire Feed Signal Extension DO Number
-    * @return Error Code
+    * @return Error code.
     */
     int SetWireReverseFeedExtDoNum(int DONum).
 
 Extended IO-Configuration Welder Forward Wire Feed Signal
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Extended IO-Config welder positive wire feed signal.
+    * @brief Extended IO-Configuration of the welder's forward wire feed signal.
     * @param [in] DONum Forward Wire Feed Signal Extension DO Number
-    * @return Error Code
+    * @return Error code.
     */
-    int SetWireForwardFeedExtDoNum(int DONum).
+    int SetWireForwardFeedExtDoNum(int DONum);
 
 Extended IO-Configuration Welder Arc Start Success Signal
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Extended IO-Configuration Welder Arc Success Signal
-    * @param [in] DINum Extended DI number for arc success signal.
-    * @return error-code
+    * @brief Extended IO-Configuration Welder Arc Start Success Signal
+    * @param [in] DINum Extended DI number for arc success signaling.
+    * @return Error code.
     */
     int SetArcDoneExtDiNum(int DINum).
 
 Extended IO-Configuration Welder Ready Signal
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -720,389 +764,514 @@ Extended IO-Configuration Welder Ready Signal
     int SetWeldReadyExtDiNum(int DINum).
 
 Extended IO-Configure weld interrupt recovery signal
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
     * @brief Extended IO-Configuration Weld Interrupt Recovery Signal
-    * @param [in] reWeldDINum Resume weld signal after weld interrupt Extended DI number
+    * @param [in] reWeldDINum Resume Weld Signal after Weld Interrupt Extended DI Number
     * @param [in] abortWeldDINum Exit Weld Signal Extended DI Number after a Weld Interrupt
     * @return Error Code
     */
-    nt SetExtDIWeldBreakOffRecover(int reWeldDINum, int abortWeldDINum);
+    int SetExtDIWeldBreakOffRecover(int reWeldDINum, int abortWeldDINum);
 
-Arc Tracking + Multi-Layer Multi-Pass Compensation On
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+Set Extended IO Weld Signal Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+   :linenos:
+
+   private void button51_Click(object sender, EventArgs e)
+   {
+      robot.SetArcStartExtDoNum(10);
+      robot.SetAirControlExtDoNum(20);
+      robot.SetWireForwardFeedExtDoNum(30);
+      robot.SetWireReverseFeedExtDoNum(40);
+
+      robot.SetWeldReadyExtDiNum(50);
+      robot.SetArcDoneExtDiNum(60);
+      robot.SetExtDIWeldBreakOffRecover(70, 80);
+      robot.SetWireSearchExtDIONum(0, 1);
+   }
+
+Arc tracking control
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+   :linenos:
+
+    /**
+    * @brief Arc tracking control
+    * @param [in] flag switch, 0-off; 1-on
+    * @param [in] dalayTime hysteresis time, in ms
+    * @param [in] isLeftRight left-right deviation compensation
+    * @param [in] klr left/right adjustment factor (sensitivity)
+    * @param [in] tStartLr left/right start time cyc
+    * @param [in] stepMaxLr Maximum compensation in mm per pass * @param [in] stepMaxLr Maximum compensation in mm per pass
+    * @param [in] sumMaxLr total max compensation mm
+    * @param [in] isUpLow Compensation for up and down deviation
+    * @param [in] kud up/down adjustment factor (sensitivity)
+    * @param [in] tStartUd up/down compensation time cyc
+    * @param [in] stepMaxUd Maximum compensation in mm for each step.
+    * @param [in] sumMaxUd up and down total max. compensation mm
+    * @param [in] axisSelect upper and lower coordinate system selection, 0-swing; 1-tool; 2-base
+    * @param [in] referenceType upper and lower reference current setting mode, 0-feedback; 1-constant
+    * @param [in] referSampleStartUd upper and lower reference current sample start count (feedback), cyc
+    * @param [in] referSampleCountUd upper and lower reference current sampling cycle count (feedback), cyc
+    * @param [in] referenceCurrent upper and lower reference current mA
+    * @param [in] offsetType offset tracking type, 0-no offset; 1-sample; 2-percentage /version 3.7.9
+    * @param [in] offsetParameter offset parameter; sampling (offset sampling start time, default one cycle); percentage (offset percentage (-100 ~ 100)) /version 3.7.9
+    * @return Error code
+    */
+    int ArcWeldTraceControl(int flag, double delaytime, int isLeftRight, double klr, double tStartLr, double stepMaxLr, double sumMaxLr, int isUpLow, double kud, double tStartUd, double stepMaxUd, double sumMaxUd, int axisSelect, int referenceType, double referSampleStartUd, double referSampleCountUd, double referenceCurrent, int offsetType, int offsetParameter).
+
+Arc tracking AI passband selection
+++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Arc tracking + multilayer multichannel compensation turned on
+    * @brief Arc-tracking AI passband selection.
+    * @param [in] channel Arc-tracking AI passband selection, [0-3].
+    * @return Error code.
+    */
+    int ArcWeldTraceExtAIChannelConfig(int channel).
+
+Arc Trace + Multi-Layer Multi-Channel Compensation on
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Arc tracing + multilayer compensation on.
     * @return Error code
     */
     int ArcWeldTraceReplayStart();
 
 ArcWeldTrace + MultiLayerMultiChannelCompensation OFF
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
-    :linenos:
+   :linenos:
 
-        /**
-         * @brief Arc tracking + multilayer multichannel compensation off
-         * @return Error code
-         */
-    int ArcWeldTraceReplayEnd();
+   /**
+   * @brief Arc tracing + multilayer multichannel compensation off .
+   * @return Error code
+   */
+   int ArcWeldTraceReplayEnd();
 
 Offset Coordinate Change - Multi-Layer Multi-Pass Welding
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
      /**
-     * @brief offset coordinate change - multilayer multi-pass welding
+     * @brief Offset Coordinate Change - Multi-Layer Multi-Pass Weld
      * @param [in] pointO Cartesian orientation of datum.
-     * @param [in] pointX Cartesian position of datum X in the direction of the offset.
+     * @param [in] pointX Cartesian position of datum X in offset direction.
      * @param [in] pointZ Cartesian position of the datum Z to the offset direction point.
      * @param [in] dx x-direction offset (mm)
-     * @param [in] dz z-direction offset (mm)
-     * @param [in] dry offset around y-axis (°)
-     * @param [out] offset Offset of the result of the calculation.
-     * @return Error code
+     * @param [in] z offset (mm)
+     * @param [in] offset around y-axis (°)
+     * @param [out] Calculation result offset (mm)
+     * @return Error Code
      */
-    int MultilayerOffsetTrsfToBase(DescTran pointO, DescTran pointX, DescTran pointZ, double dx, double dz, double dry, ref DescPose offset);
+    int MultilayerOffsetTrsfToBase(DescTran pointO, DescTran pointX, DescTran pointZ, double dx, double dy, double db, ref DescPose offset);
 
-Setting parameters for detecting unexpected interruptions of the robotic welding arc
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
-
+Multi-layer multi-pass welding arc tracking code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
-    :linenos:
+   :linenos:
 
-    /**
-    * @brief Setting parameters for detecting unexpected interruptions of the robotic welding arc
-    * @param [in] checkEnable whether to enable detection; 0-don't enable; 1-enable
-    * @param [in] arcInterruptTimeLength arcInterruptAcknowledgmentTimeLength(ms)
-    * @return Error code
-    */
-    int WeldingSetCheckArcInterruptionParam(int checkEnable, int arcInterruptTimeLength)
+   private void button52_Click(object sender, EventArgs e)
+   {
+      JointPos mulitilineorigin1_joint = new JointPos(-24.090, -63.501, 84.288, -111.940, -93.426, 57.669);
+      DescPose mulitilineorigin1_desc = new DescPose(-677.559, 190.951, -1.205, 1.144, -41.482, -82.577);
 
-Get parameters for detecting unexpected interruptions of the robotic welding arc
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+      DescTran mulitilineX1_desc = new DescTran();
+      mulitilineX1_desc.x = -677.556;
+      mulitilineX1_desc.y = 211.949;
+      mulitilineX1_desc.z = -1.206;
 
-.. code-block:: c#
-    :linenos:
+      DescTran mulitilineZ1_desc = new DescTran();
+      mulitilineZ1_desc.x = -677.564;
+      mulitilineZ1_desc.y = 190.956;
+      mulitilineZ1_desc.z = 19.817;
 
-    /**
-    * @brief Get parameters for detecting unexpected interruptions of the robotic welding arc
-    * @param [out] checkEnable whether to enable detection; 0-don't enable; 1-enable
-    * @param [out] arcInterruptTimeLength arcInterruptAcknowledgmentTimeLength(ms)
-    * @return Error code
-    */
-    int WeldingGetCheckArcInterruptionParam(ref int checkEnable, ref int arcInterruptTimeLength)
+      JointPos mulitilinesafe_joint = new JointPos(-25.734, -63.778, 81.502, -108.975, -93.392, 56.021);
+      DescPose mulitilinesafe_desc = new DescPose(-677.561, 211.950, 19.812, 1.144, -41.482, -82.577);
+      JointPos mulitilineorigin2_joint = new JointPos(-29.743, -75.623, 101.241, -116.354, -94.928, 55.735);
+      DescPose mulitilineorigin2_desc = new DescPose(-563.961, 215.359, -0.681, 2.845, -40.476, -87.443);
 
-Setting the robot weld interrupt recovery parameters
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+      DescTran mulitilineX2_desc = new DescTran();
+      mulitilineX2_desc.x = -563.965;
+      mulitilineX2_desc.y = 220.355;
+      mulitilineX2_desc.z = -0.680;
 
-.. code-block:: c#
-    :linenos:
+      DescTran mulitilineZ2_desc = new DescTran();
+      mulitilineZ2_desc.x = -563.968;
+      mulitilineZ2_desc.y = 215.362;
+      mulitilineZ2_desc.z = 4.331;
 
-    /**
-    * @brief Setting the robot weld interrupt recovery parameters
-    * @param[in] enable Whether to enable weld interrupt recovery.
-    * @param[in] length The overlap distance of the weld (mm).
-    * @param[in] velocity the speed of the robot to return to the restart point (0-100)
-    * @param[in] moveType Robot movement to restart point type; 0-LIN; 1-PTP
-    * @return Error code
-    */
-    int WeldingSetReWeldAfterBreakOffParam(int enable, double length, double velocity, int moveType)
+      ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+      DescPose offset = new DescPose(0, 0, 0, 0, 0, 0);
 
-Get robot weld interrupt recovery parameters
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+      Thread.Sleep(10);
+      int error = robot.MoveJ( mulitilinesafe_joint,  mulitilinesafe_desc, 13, 0, 10, 100, 100,  epos, -1, 0,  offset);
+      Console.WriteLine("MoveJ return: {0}", error);
 
-.. code-block:: c#
-    :linenos:
+      error = robot.MoveL( mulitilineorigin1_joint,  mulitilineorigin1_desc, 13, 0, 10, 100, 100, -1,  epos, 0, 0,  offset, 0, 100);
+      Console.WriteLine("MoveL return: {0}", error);
 
-    /**
-    * @brief Get robot weld interrupt recovery parameters.
-    * @param [out] enable Whether to enable weld interrupt recovery or not.
-    * @param [out] length The overlap distance of the weld (mm).
-    * @param [out] velocity the speed of the robot to return to the restart point (0-100)
-    * @param [out] moveType the way the robot moves to the restart point; 0-LIN; 1-PTP
-    * @return Error code
-    */
-    int WeldingGetReWeldAfterBreakOffParam(ref int enable, ref double length, ref double velocity, ref int moveType)
+      error = robot.MoveJ(mulitilinesafe_joint, mulitilinesafe_desc, 13, 0, 10, 100, 100, epos, -1, 0, offset);
+      Console.WriteLine("MoveJ return: {0}", error);
 
-Setting the robot to resume welding after a welding interruption
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+      error = robot.MoveL(mulitilineorigin2_joint, mulitilineorigin2_desc, 13, 0, 10, 100, 100, -1,  epos, 0, 0,  offset, 0, 100);
+      Console.WriteLine("MoveL return: {0}", error);
 
-.. code-block:: c#
-    :linenos:
+      error = robot.MoveJ(mulitilinesafe_joint, mulitilinesafe_desc, 13, 0, 10, 100, 100, epos, -1, 0, offset);
+      Console.WriteLine("MoveJ return: {0}", error);
 
-    /**
-    * @brief Setting the robot to resume welding after a welding interruption
-    * @return Error code
-    */
-    int WeldingStartReWeldAfterBreakOff()
+      error = robot.MoveL( mulitilineorigin1_joint,  mulitilineorigin1_desc, 13, 0, 10, 100, 100, -1,  epos, 0, 0,  offset, 0, 100);
+      Console.WriteLine("MoveL return: {0}", error);
 
-Setting the robot to exit welding after a weld interruption
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+      error = robot.ARCStart(1, 0, 3000);
+      Console.WriteLine("ARCStart return: {0}", error);
 
-.. code-block:: c#
-    :linenos:
+      error = robot.WeaveStart(0);
+      Console.WriteLine("WeaveStart return: {0}", error);
 
-    /**
-    * @brief Setting the robot to exit welding after a weld interruption
-    * @return Error code
-    */
-    int WeldingAbortWeldAfterBreakOff()
+      error = robot.ArcWeldTraceControl(1, 0, 1, 0.06, 5, 5, 50, 1, 0.06, 5, 5, 55, 0, 0, 4, 1, 10);
+      Console.WriteLine("ArcWeldTraceControl return: {0}", error);
 
-code example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: c# SDK-v1.1.0-3.7.8
+      error = robot.MoveL( mulitilineorigin2_joint,  mulitilineorigin2_desc, 13, 0, 1, 100, 100, -1,  epos, 0, 0,  offset, 0, 100);
+      Console.WriteLine("MoveL return: {0}", error);
 
-.. code-block:: c#
-    :linenos:
+      error = robot.ArcWeldTraceControl(0, 0, 1, 0.06, 5, 5, 50, 1, 0.06, 5, 5, 55, 0, 0, 4, 1, 10);
+      Console.WriteLine("ArcWeldTraceControl return: {0}", error);
 
-    private void button7_Click(object sender, EventArgs e)
-    {
-        int rtn = -1;
-        rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200);
-        Console.WriteLine("WeldingSetCheckArcInterruptionParam  {0}", rtn);
-        rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0);
-        Console.WriteLine("WeldingSetReWeldAfterBreakOffParam {0}", rtn);
-        int enable = 0;
-        double length = 0;
-        double velocity = 0;
-        int moveType = 0;
-        int checkEnable = 0;
-        int arcInterruptTimeLength = 0;
-        rtn = robot.WeldingGetCheckArcInterruptionParam(ref checkEnable, ref arcInterruptTimeLength);
-        Console.WriteLine($"WeldingGetCheckArcInterruptionParam  checkEnable {checkEnable} - arcInterruptTimeLength {arcInterruptTimeLength}");
+      error = robot.WeaveEnd(0);
+      Console.WriteLine("WeaveEnd return: {0}", error);
 
-        rtn = robot.WeldingGetReWeldAfterBreakOffParam(ref enable, ref length, ref velocity,ref moveType);
-        Console.WriteLine("WeldingGetReWeldAfterBreakOffParam  enable = {0}, length = {1}, velocity = {2}, moveType = {3}", enable, length, velocity, moveType);
+      error = robot.ARCEnd(1, 0, 10000);
+      Console.WriteLine("ARCEnd return: {0}", error);
 
-        robot.ProgramLoad("/fruser/test.lua");
-        robot.ProgramRun();
+      error = robot.MoveJ(mulitilinesafe_joint, mulitilinesafe_desc, 13, 0, 10, 100, 100, epos, -1, 0, offset);
+      Console.WriteLine("MoveJ return: {0}", error);
 
-        Thread.Sleep(5000);
+      error = robot.MultilayerOffsetTrsfToBase(mulitilineorigin1_desc.tran, mulitilineX1_desc, mulitilineZ1_desc, 10.0, 0.0, 0.0, ref offset);
+      Console.WriteLine("MultilayerOffsetTrsfToBase return: {0}  offect is {1} {2} {3}", error, offset.tran.x, offset.tran.y, offset.tran.z);
 
-        while (true)
-        {
-            ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG { };
-            robot.GetRobotRealTimeState(ref pkg);
-            Console.WriteLine("welding breakoff state is     {0}", pkg.weldingBreakOffState.breakOffState);
-            if (pkg.weldingBreakOffState.breakOffState == 1)
-            {
-                Console.WriteLine("welding breakoff ! \n");
-                Thread.Sleep(2000);
-                rtn = robot.WeldingStartReWeldAfterBreakOff();
-                Console.WriteLine("WeldingStartReWeldAfterBreakOff    %d\n", rtn);
-                break;
-            }
-            Thread.Sleep(100);
-        }
-    }
+      error = robot.MoveL( mulitilineorigin1_joint,  mulitilineorigin1_desc, 13, 0, 10, 100, 100, -1,  epos, 0, 1,  offset, 0, 100);
+      Console.WriteLine("MoveL return: {0}", error);
 
-Swing gradient begins
+      error = robot.ARCStart(1, 0, 3000);
+      Console.WriteLine("ARCStart return: {0}", error);
+
+      error = robot.MultilayerOffsetTrsfToBase(mulitilineorigin2_desc.tran, mulitilineX2_desc, mulitilineZ2_desc, 10, 0, 0, ref offset);
+      Console.WriteLine("MultilayerOffsetTrsfToBase return: {0}  offect is {1} {2} {3}", error, offset.tran.x, offset.tran.y, offset.tran.z);
+
+      error = robot.ArcWeldTraceReplayStart();
+      Console.WriteLine("ArcWeldTraceReplayStart return: {0}", error);
+
+      error = robot.MoveL( mulitilineorigin2_joint,  mulitilineorigin2_desc, 13, 0, 2, 100, 100, -1,  epos, 0, 1,  offset, 0, 100);
+      Console.WriteLine("MoveL return: {0}", error);
+
+      error = robot.ArcWeldTraceReplayEnd();
+      Console.WriteLine("ArcWeldTraceReplayEnd return: {0}", error);
+
+      error = robot.ARCEnd(1, 0, 10000);
+      Console.WriteLine("ARCEnd return: {0}", error);
+
+      error = robot.MoveJ(mulitilinesafe_joint, mulitilinesafe_desc, 13, 0, 10, 100, 100, epos, -1, 0, offset);
+      Console.WriteLine("MoveJ return: {0}", error);
+
+      error = robot.MultilayerOffsetTrsfToBase(mulitilineorigin1_desc.tran, mulitilineX1_desc, mulitilineZ1_desc, 0, 10, 0, ref offset);
+      Console.WriteLine("MultilayerOffsetTrsfToBase return: {0}  offect is {1} {2} {3}", error, offset.tran.x, offset.tran.y, offset.tran.z);
+
+      error = robot.MoveL( mulitilineorigin1_joint,  mulitilineorigin1_desc, 13, 0, 10, 100, 100, -1,  epos, 0, 1,  offset, 0, 100);
+      Console.WriteLine("MoveL return: {0}", error);
+
+      error = robot.ARCStart(1, 0, 3000);
+      Console.WriteLine("ARCStart return: {0}", error);
+
+      error = robot.MultilayerOffsetTrsfToBase(mulitilineorigin2_desc.tran, mulitilineX2_desc, mulitilineZ2_desc, 0, 10, 0, ref offset);
+      Console.WriteLine("MultilayerOffsetTrsfToBase return: {0}  offect is {1} {2} {3}", error, offset.tran.x, offset.tran.y, offset.tran.z);
+
+      error = robot.ArcWeldTraceReplayStart();
+      Console.WriteLine("MoveJ return: {0}", error);
+
+      error = robot.MoveL(mulitilineorigin2_joint, mulitilineorigin2_desc, 13, 1, 2, 100, 100, -1, epos, 1, 1, offset, 1, 100);
+      Console.WriteLine("MoveL return: {0}", error);
+
+      error = robot.ArcWeldTraceReplayEnd();
+      Console.WriteLine("ArcWeldTraceReplayEnd return: {0}", error);
+
+      error = robot.ARCEnd(1, 0, 3000);
+      Console.WriteLine("ARCEnd return: {0}", error);
+
+      error = robot.MoveJ(mulitilinesafe_joint, mulitilinesafe_desc, 13, 0, 10, 100, 100, epos, -1, 0, offset);
+      Console.WriteLine("MoveJ return: {0}", error);
+   }
+
+Arc Tracking Welder Current Feedback AI Channel Selection
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
-    :linenos:
+   :linenos:
 
     /**
-    * @brief Swing gradient begins
-    * @param [in] weaveChangeFlag 1- Variable swing parameter; 2- Variable swing parameters + welding speed
-    * @param [in] weaveNum swing number
-    * @param [in] velStart welding start speed, (cm/min)
-    * @param [in] velEnd welding end speed, (cm/min)
+    * @brief Arc tracking welder current feedback AI channel selection
+    * @param [in] channel channel; 0-extension AI0; 1-extension AI1; 2-extension AI2; 3-extension AI3; 4-control box AI0; 5-control box AI1
     * @return error code
     */
-    int WeaveChangeStart(int weaveChangeFlag, int weaveNum, double velStart, double velEnd);
+    int ArcWeldTraceAIChannelCurrent(int channel).
 
-Swing gradient ends
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    / * *
-    * @brief Swing gradient ends
-    * @return Error code
-    * /
-    int WeaveChangeEnd()
-
-Code example
+Arc tracking welder voltage feedback AI channel selection
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
-    :linenos:
-
-    private void btnweld_Click(object sender, EventArgs e)
-    {
-        DescPose startdescPose = new DescPose(-319.303, -240.689, 116.379, -175.879, -0.337, 148.239);
-        JointPos startjointPos = new JointPos(20.474, -103.554, 126.774, -116.682, -87.746, -37.709);
-
-        DescPose enddescPose = new DescPose(-454.166, -327.159, 62.217, 177.199, -2.276, 154.955);
-        JointPos endjointPos = new JointPos(27.176, -74.423, 104.557, -119.315, -93.514, -37.698);
-
-        DescPose safedescPose = new DescPose(-375.533, -543.319, 19.798, 177.486, -2.489, 175.825);
-        JointPos safejointPos = new JointPos(48.074, -59.714, 89.955, -119.777, -93.508, -37.683);
-
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
-
-        robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
-        robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
-
-        robot.WeldingSetVoltage(0, 25, 1, 0);//
-        robot.WeldingSetCurrent(0, 260, 0, 0);// 
-
-        robot.MoveJ(safejointPos, safedescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
-
-        int rtn = robot.WeldingSetCurrentGradualChangeStart(0, 260, 220, 0, 0);
-        Console.WriteLine($"WeldingSetCurrentGradualChangeStart rtn is {rtn}");
-        rtn = robot.WeldingSetVoltageGradualChangeStart(0, 25, 22, 1, 0);
-        Console.WriteLine($"WeldingSetVoltageGradualChangeStart rtn is {rtn}");
-
-        rtn = robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
-        Console.WriteLine($"ArcWeldTraceControl rtn is {rtn}");
-
-        robot.MoveJ(startjointPos, startdescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
-
-        robot.ARCStart(0, 0, 10000);
-        robot.WeaveStart(0);
-        rtn = robot.WeaveChangeStart(2, 1, 24, 36);
-        Console.WriteLine($"WeaveChangeStart rtn is {rtn}");
-        //robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
-        robot.ARCEnd(0, 0, 10000);
-        robot.WeaveChangeEnd();
-        robot.WeaveEnd(0);
-        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
-        robot.WeldingSetCurrentGradualChangeEnd();
-        robot.WeldingSetVoltageGradualChangeEnd();
-    }
-
-Arc Tracking Welding machine Current Feedback AI Channel selection
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
-    
-.. code-block:: c#
-    :linenos:
+   :linenos:
 
     /**
-    * @brief Arc Tracking Welding machine Current Feedback AI Channel selection
-    * @param [in] channel; 0- Expand AI0; 1- Expand AI1; 2- Expand AI2; 3- Expand AI3; 4- Control Box AI0 5- Control Box AI1
+    * @brief Arc Tracking Welder Voltage Feedback AI Channel Selection
+    * @param [in] channel channel; 0-extension AI0; 1-extension AI1; 2-extension AI2; 3-extension AI3; 4-control box AI0; 5-control box AI1
     * @return error code
     */
-    int ArcWeldTraceAIChannelCurrent(int channel);
+    int ArcWeldTraceAIChannelVoltage(int channel).
 
-Arc Tracking Welding Machine Voltage Feedback AI Channel Selection
+Arc tracking welder current feedback conversion parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
-    :linenos:
+   :linenos:
 
     /**
-    * @brief Arc Tracking Welding Machine Voltage Feedback AI Channel Selection
-    * @param [in] channel; 0- Expand AI0; 1- Expand AI1; 2- Expand AI2; 3- Expand AI3; 4- Control Box AI0 5- Control Box AI1
-    * @return error code
-    */
-    int ArcWeldTraceAIChannelVoltage(int channel);
-
-Current feedback Conversion parameters of Arc tracking Welding machine
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
-    
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Current feedback Conversion parameters of Arc tracking Welding machine
-    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V]
+    * @brief Arc tracking welder current feedback conversion parameters
+    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V].
     * @param [in] AIHigh AI channel upper limit, default value 10V, range [0-10V]
-    * @param [in] The lower limit of the currentLow AI channel corresponds to the current value of the welding machine. The default value is 0V, and the range is [0-200V]
-    * @param [in] currentHigh AI channel upper limit corresponding welder current value, default value 100V, range [0-200V]
-    * @return error code
+    * @param [in] currentLow AI channel lower limit corresponds to the welder current value, default value 0V, range [0-200V].
+    * @param [in] currentHigh AI channel upper limit corresponds to the welder current value, default value 100V, range [0-200V].
+    * @return Error code
     */
     int ArcWeldTraceCurrentPara(float AILow, float AIHigh, float currentLow, float currentHigh);
 
-Voltage feedback Conversion Parameters of Arc Tracking Welding machine
+Arc Trace Welder Voltage Feedback Conversion Parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
-    :linenos:
+   :linenos:
 
     /**
-    * @brief Voltage feedback Conversion Parameters of Arc Tracking Welding machine
-    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V]
-    * @param [in] AIHigh AI channel upper limit, default value 10V, range [0-10V]
-    * @param [in] The lower limit of the voltageLow AI channel corresponds to the welding machine voltage value. The default value is 0V, and the range is [0-200V]
-    * @param [in] The upper limit of the voltageHigh AI channel corresponds to the voltage value of the welding machine. The default value is 100V, and the range is [0-200V]
-    * @return error code
+    * @brief Arc Tracker Welder Voltage Feedback Conversion Parameters
+    * @param [in] AILow AI channel lower limit, default value 0V, range [0-10V].
+    * @param [in] AIHigh AI channel upper limit, default value 10V, range [0-10V].
+    * @param [in] voltageLow AI channel lower limit corresponds to the welder voltage value, default value 0V, range [0-200V].
+    * @param [in] voltageHigh AI channel upper limit corresponds to the welder voltage value, default value 100V, range [0-200V] * @param [in] voltageHigh AI channel upper limit corresponds to the welder voltage value, default value 100V, range [0-200V
+    * @return Error code
     */
     int ArcWeldTraceVoltagePara(float AILow, float AIHigh, float voltageLow, float voltageHigh);
 
-Code example
+Arc Trace Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
+   :linenos:
+
+   private void btnweld_Click(object sender, EventArgs e)
+   {
+      DescPose safetydescPose = new DescPose(-504.043, 275.181, 40.908, -28.002, -42.025, -14.044);
+      JointPos safetyjointPos = new JointPos(-39.078, -76.732, 87.227, -99.47, -94.301, 18.714);
+      DescPose startdescPose = new DescPose(-473.86, 257.879, -20.849, -37.317, -42.021, 2.543);
+      JointPos startjointPos = new JointPos(-43.487, -76.526, 95.568, -104.445, -89.356, 3.72);
+
+
+
+      DescPose enddescPose = new DescPose(-499.844, 141.225, 7.72, -34.856, -40.17, 13.13);
+      JointPos endjointPos = new JointPos(-31.305, -82.998, 99.401, -104.426, -89.35, 3.696);
+
+      ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+      DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+      robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+
+      robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
+      robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
+      robot.WeldingSetVoltage(0, 25, 1, 0);// ----设置电压
+      robot.WeldingSetCurrent(0, 260, 0, 0);// ----设置电流
+
+      int rtn = robot.ArcWeldTraceAIChannelCurrent(4);
+      Console.WriteLine("ArcWeldTraceAIChannelCurrent rtn is " + rtn);
+      rtn = robot.ArcWeldTraceAIChannelVoltage(5);
+      Console.WriteLine("ArcWeldTraceAIChannelVoltage rtn is " + rtn);
+      rtn = robot.ArcWeldTraceCurrentPara((float)0, (float)5, (float)0, (float)500);
+      Console.WriteLine("ArcWeldTraceCurrentPara rtn is " + rtn);
+      rtn = robot.ArcWeldTraceVoltagePara((float)1.018, (float)10, (float)0, (float)50);
+      Console.WriteLine("ArcWeldTraceVoltagePara rtn is " + rtn);
+
+      robot.MoveJ(startjointPos, startdescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+      robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+      robot.ARCStart(0, 0, 10000);
+      robot.WeaveStart(0);
+      // robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
+      robot.ARCEnd(0, 0, 10000);
+      robot.WeaveEnd(0);
+      robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+      robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+   }
+
+Start of wire position finding
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+   :linenos:
+
+    /**
+    * @brief Welding wire seek start.
+    * @param [in] refPos 1-datum point 2-contact point
+    * @param [in] searchVel SearchVelocity %.
+    * @param [in] searchDis Search distance mm
+    * @param [in] autoBackFlag autoBackFlag, 0 - not auto; - auto
+    * @param [in] autoBackVel autoBackVelocity % * @param [in] searchDis searchDistance mm
+    * @param [in] autoBackDis autoBack distance mm
+    * @param [in] offectFlag 1-with offset seek; 2-teach point seek
+    * @return error code
+    */
+    int WireSearchStart(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
+
+End of wire search
+++++++++++++++++++++++++++++++++++
+.. code-block:: c#
     :linenos:
 
-    private void btnweld_Click(object sender, EventArgs e)
-    {
-        DescPose safetydescPose = new DescPose(-504.043, 275.181, 40.908, -28.002, -42.025, -14.044);
-        JointPos safetyjointPos = new JointPos(-39.078, -76.732, 87.227, -99.47, -94.301, 18.714);
-        DescPose startdescPose = new DescPose(-473.86, 257.879, -20.849, -37.317, -42.021, 2.543);
-        JointPos startjointPos = new JointPos(-43.487, -76.526, 95.568, -104.445, -89.356, 3.72);
+    /**
+    * @brief End of wire seek.
+    * @param [in] refPos 1-datum point 2-contact point
+    * @param [in] searchVel searchVelocity %
+    * @param [in] searchDis Search distance mm
+    * @param [in] autoBackFlag autoBackFlag, 0 - not auto; - auto
+    * @param [in] autoBackVel autoBackVelocity % * @param [in] searchDis searchDistance mm
+    * @param [in] autoBackDis autoBack distance mm
+    * @param [in] offectFlag 1-with offset seek; 2-teach point seek
+    * @return error code
+    */
+    int WireSearchEnd(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);
 
-        DescPose enddescPose = new DescPose(-499.844, 141.225, 7.72, -34.856, -40.17, 13.13);
-        JointPos endjointPos = new JointPos(-31.305, -82.998, 99.401, -104.426, -89.35, 3.696);
+Calculate the wire seek offset
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
 
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
-        robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+    /**
+    * @brief Calculate wire-seeking offsets.
+    * @param [in] seamType weldType
+    * @param [in] method Calculate the method.
+    * @param [in] varNameRef datums 1-6, "#" means no point variable
+    * @param [in] varNameRes contact points 1-6, "#" means no point variable
+    * @param [out] offectFlag 0-offset directly superimposed on the command point; 1-offset requires a coordinate transformation of the command point
+    * @param [out] offect Offset pose [x, y, z, a, b, c]
+    * @return Error code
+    */
+    int GetWireSearchOffset(int seamType, int method, string[] varNameRef, string[] varNameRes, ref int offsetFlag, ref DescPose offset);;
 
-        robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
-        robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
-        robot.WeldingSetVoltage(0, 25, 1, 0);//
-        robot.WeldingSetCurrent(0, 260, 0, 0);//
+Wait for the wire search to complete
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
 
-        int rtn = robot.ArcWeldTraceAIChannelCurrent(4);
-        Console.WriteLine("ArcWeldTraceAIChannelCurrent rtn is " + rtn);
-        rtn = robot.ArcWeldTraceAIChannelVoltage(5);
-        Console.WriteLine("ArcWeldTraceAIChannelVoltage rtn is " + rtn);
-        rtn = robot.ArcWeldTraceCurrentPara((float)0, (float)5, (float)0, (float)500);
-        Console.WriteLine("ArcWeldTraceCurrentPara rtn is " + rtn);
-        rtn = robot.ArcWeldTraceVoltagePara((float)1.018, (float)10, (float)0, (float)50);
-        Console.WriteLine("ArcWeldTraceVoltagePara rtn is " + rtn);
+    /**
+    * @brief Waiting for wire seek to complete.
+    * @return Error code.
+    */
+    int WireSearchWait(string name).
 
-        robot.MoveJ(startjointPos, startdescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
-        robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
-        robot.ARCStart(0, 0, 10000);
-        robot.WeaveStart(0);
-        // robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
-        robot.ARCEnd(0, 0, 10000);
-        robot.WeaveEnd(0);
-        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
-        robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
-    }
+Write wire search contact to database.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
 
-Set the welding voltage to start gradually
+    /**
+    * @brief Welding wire seek contacts written to database.
+    * @param [in] varName Contact name "RES0" ~ "RES99".
+    * @param [in] pos contact data [x, y, x, a, b, c]
+    * @return Error Code
+    */
+    int SetPointToDatabase(string varName, DescPose pos);
+
+Robot Welding Wire Position Finding Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+   :linenos:
+
+   private void button53_Click(object sender, EventArgs e)
+   {
+      DescPose toolCoord=new DescPose(0, 0, 200, 0, 0, 0);
+      robot.SetToolCoord(1, toolCoord, 0, 0, 1, 0);
+      DescPose wobjCoord=new DescPose(0, 0, 0, 0, 0, 0);
+      robot.SetWObjCoord(1, wobjCoord, 0);
+
+      int rtn0, rtn1, rtn2 = 0;
+      ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+      DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+      DescPose descStart = new DescPose(216.543, 445.175, 93.465, 179.683, 1.757, -112.641);
+      JointPos jointStart = new JointPos(-128.345, -86.660, 114.679, -119.625, -89.219, 74.303);
+
+      DescPose descEnd = new DescPose(111.143, 523.384, 87.659, 179.703, 1.835, -97.750);
+      JointPos jointEnd = new JointPos(-113.454, -81.060, 109.328, -119.954, -89.218, 74.302);
+
+      robot.MoveL(jointStart, descStart, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+      robot.MoveL(jointEnd, descEnd, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+
+      DescPose descREF0A = new DescPose(142.135, 367.604, 86.523, 179.728, 1.922, -111.089);
+      JointPos jointREF0A = new JointPos(-126.794, -100.834, 128.922, -119.864, -89.218, 74.302);
+
+      DescPose descREF0B = new DescPose(254.633, 463.125, 72.604, 179.845, 2.341, -114.704);
+      JointPos jointREF0B = new JointPos(-130.413, -81.093, 112.044, -123.163, -89.217, 74.303);
+
+      DescPose descREF1A = new DescPose(92.556, 485.259, 47.476, -179.932, 3.130, -97.512);
+      JointPos jointREF1A = new JointPos(-113.231, -83.815, 119.877, -129.092, -89.217, 74.303);
+
+      DescPose descREF1B = new DescPose(203.103, 583.836, 63.909, 179.991, 2.854, -103.372);
+      JointPos jointREF1B = new JointPos(-119.088, -69.676, 98.692, -121.761, -89.219, 74.303);
+
+      rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+      robot.MoveL(jointREF0A, descREF0A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
+      robot.MoveL(jointREF0B, descREF0B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+      rtn1 = robot.WireSearchWait("REF0");
+      rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+      rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+      robot.MoveL(jointREF1A, descREF1A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
+      robot.MoveL(jointREF1B, descREF1B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+      rtn1 = robot.WireSearchWait("REF1");
+      rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+      rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+      robot.MoveL(jointREF0A, descREF0A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
+      robot.MoveL(jointREF0B, descREF0B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+      rtn1 = robot.WireSearchWait("RES0");
+      rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+      rtn0 = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+      robot.MoveL(jointREF1A, descREF1A, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);  //起点
+      robot.MoveL(jointREF1B, descREF1B, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);  //方向点
+      rtn1 = robot.WireSearchWait("RES1");
+      rtn2 = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+      string[] varNameRef = { "REF0", "REF1", "#", "#", "#", "#" };
+      string[] varNameRes = { "RES0", "RES1", "#", "#", "#", "#" };
+      int offectFlag = 0;
+      DescPose offectPos = new DescPose(0, 0, 0, 0, 0, 0);
+      rtn0 = robot.GetWireSearchOffset(0, 0, varNameRef, varNameRes, ref offectFlag, ref offectPos);
+      robot.PointsOffsetEnable(0, offectPos);
+      robot.MoveL(jointStart, descStart, 1, 1, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
+      robot.MoveL(jointEnd, descEnd, 1, 1, 100, 100, 100, -1, exaxisPos, 1, 0, offdese);
+      robot.PointsOffsetDisable();
+   }
+
+Setting the end of the welding voltage gradient
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1110,17 +1279,17 @@ Set the welding voltage to start gradually
     :linenos:
 
     /**
-    * @brief Set the welding voltage to start gradually
-    * @param [in] IOType control type; 0- Control Box IO 1- Digital Communication Protocol (UDP) 2- Digital Communication Protocol (ModbusTCP)
-    * @param [in] voltageStart Initial Welding Voltage (V)
-    * @param [in] voltageEnd Stop welding Voltage (V)
+    * @brief Sets the weld voltage gradient to start.
+    * @param [in] IOType Control type; 0-control box IO; 1-digital communication protocol (UDP); 2-digital communication protocol (ModbusTCP)
+    * @param [in] voltageStart Start welding voltage (V)
+    * @param [in] voltageEnd End weld voltage (V)
     * @param [in] AOIndex control box AO port number (0-1)
-    * @param [in] Is blend smooth? 0- Not smooth; 1- Smooth
-    * @return error code
+    * @param [in] blend Whether smooth or not 0-not smooth; 1-smooth
+    * @return Error code
     */
     int WeldingSetVoltageGradualChangeStart(int IOType, double voltageStart, double voltageEnd, int AOIndex, int blend);
 
-Set the welding voltage gradient to end
+Set weld voltage gradual change end
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1128,12 +1297,12 @@ Set the welding voltage gradient to end
     :linenos:
 
     /**
-    * @brief: Set the welding voltage gradient to end
-    * @return error code
+    * @brief Setting the end of the welding voltage gradient.
+    * @return Error Code
     */
     int WeldingSetVoltageGradualChangeEnd();
 
-Set the welding current to start gradually
+Sets the weld current gradual change end
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1141,17 +1310,17 @@ Set the welding current to start gradually
     :linenos:
 
     /**
-    * @brief Set the welding current to start gradually
-    * @param [in] IOType control type; 0- Control Box IO 1- Digital Communication Protocol (UDP) 2- Digital Communication Protocol (ModbusTCP)
-    * @param [in] voltageStart Initial welding Current (A)
-    * @param [in] voltageEnd Stop welding current (A)
-    * @param [in] AOIndex control box AO port number (0-1)
-    * @param [in] Is blend smooth? 0- Not smooth; 1- Smooth
-    * @return error code
+    * @brief Setting the weld current gradient to start.
+    * @param [in] IOType Control type; 0-control box IO; 1-digital communication protocol (UDP); 2-digital communication protocol (ModbusTCP)
+    * @param [in] voltageStart Start welding current (A)
+    * @param [in] voltageEnd End weld current (A)
+    * @param [in] AOIndex Control box AO port number (0-1)
+    * @param [in] blend Whether smooth or not 0-not smooth; 1-smooth
+    * @return Error code
     */
     int WeldingSetCurrentGradualChangeStart(int IOType, double currentStart, double currentEnd, int AOIndex, int blend);
 
-Set the welding current gradient to end
+Set weld current gradual change end
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
@@ -1159,59 +1328,59 @@ Set the welding current gradient to end
     :linenos:
 
     /**
-    * @brief Set the welding current gradient to end
-    * @return error code
+    * @brief Setting the end of the welding current gradient.
+    * @return Error code
     */
     int WeldingSetCurrentGradualChangeEnd();
 
-Code example
+Robot Welding Current Voltage Gradual Change Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.3  Web-3.8.2
     
 .. code-block:: c#
     :linenos:
 
-    private void btnweld_Click(object sender, EventArgs e)
-    {
-        DescPose startdescPose = new DescPose(-319.303, -240.689, 116.379, -175.879, -0.337, 148.239);
-        JointPos startjointPos = new JointPos(20.474, -103.554, 126.774, -116.682, -87.746, -37.709);
+      private void btnweld_Click(object sender, EventArgs e)
+      {
+         DescPose startdescPose = new DescPose(-319.303, -240.689, 116.379, -175.879, -0.337, 148.239);
+         JointPos startjointPos = new JointPos(20.474, -103.554, 126.774, -116.682, -87.746, -37.709);
 
-        DescPose enddescPose = new DescPose(-454.166, -327.159, 62.217, 177.199, -2.276, 154.955);
-        JointPos endjointPos = new JointPos(27.176, -74.423, 104.557, -119.315, -93.514, -37.698);
+         DescPose enddescPose = new DescPose(-454.166, -327.159, 62.217, 177.199, -2.276, 154.955);
+         JointPos endjointPos = new JointPos(27.176, -74.423, 104.557, -119.315, -93.514, -37.698);
 
-        DescPose safedescPose = new DescPose(-375.533, -543.319, 19.798, 177.486, -2.489, 175.825);
-        JointPos safejointPos = new JointPos(48.074, -59.714, 89.955, -119.777, -93.508, -37.683);
+         DescPose safedescPose = new DescPose(-375.533, -543.319, 19.798, 177.486, -2.489, 175.825);
+         JointPos safejointPos = new JointPos(48.074, -59.714, 89.955, -119.777, -93.508, -37.683);
 
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+         ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+         DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
 
-        robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
-        robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
+         robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
+         robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
 
-        robot.WeldingSetVoltage(0, 25, 1, 0);
-        robot.WeldingSetCurrent(0, 260, 0, 0);
+         robot.WeldingSetVoltage(0, 25, 1, 0);//
+         robot.WeldingSetCurrent(0, 260, 0, 0);// 
 
-        robot.MoveJ(safejointPos, safedescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+         robot.MoveJ(safejointPos, safedescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
 
-        int rtn = robot.WeldingSetCurrentGradualChangeStart(0, 260, 220, 0, 0);
-        Console.WriteLine($"WeldingSetCurrentGradualChangeStart rtn is {rtn}");
-        rtn = robot.WeldingSetVoltageGradualChangeStart(0, 25, 22, 1, 0);
-        Console.WriteLine($"WeldingSetVoltageGradualChangeStart rtn is {rtn}");
+         int rtn = robot.WeldingSetCurrentGradualChangeStart(0, 260, 220, 0, 0);
+         Console.WriteLine($"WeldingSetCurrentGradualChangeStart rtn is {rtn}");
+         rtn = robot.WeldingSetVoltageGradualChangeStart(0, 25, 22, 1, 0);
+         Console.WriteLine($"WeldingSetVoltageGradualChangeStart rtn is {rtn}");
 
-        rtn = robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
-        Console.WriteLine($"ArcWeldTraceControl rtn is {rtn}");
+         rtn = robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+         Console.WriteLine($"ArcWeldTraceControl rtn is {rtn}");
 
-        robot.MoveJ(startjointPos, startdescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
+         robot.MoveJ(startjointPos, startdescPose, 1, 0, 5, 100, 100, exaxisPos, -1, 0, offdese);
 
-        robot.ARCStart(0, 0, 10000);
-        robot.WeaveStart(0);
-        rtn = robot.WeaveChangeStart(2, 1, 24, 36);
-        Console.WriteLine($"WeaveChangeStart rtn is {rtn}");
-        //robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
-        robot.ARCEnd(0, 0, 10000);
-        robot.WeaveChangeEnd();
-        robot.WeaveEnd(0);
-        robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
-        robot.WeldingSetCurrentGradualChangeEnd();
-        robot.WeldingSetVoltageGradualChangeEnd();
-    }
+         robot.ARCStart(0, 0, 10000);
+         robot.WeaveStart(0);
+         rtn = robot.WeaveChangeStart(2, 1, 24, 36);
+         Console.WriteLine($"WeaveChangeStart rtn is {rtn}");
+         //robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
+         robot.ARCEnd(0, 0, 10000);
+         robot.WeaveChangeEnd();
+         robot.WeaveEnd(0);
+         robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
+         robot.WeldingSetCurrentGradualChangeEnd();
+         robot.WeldingSetVoltageGradualChangeEnd();
+      }

@@ -1,236 +1,240 @@
-Robot Security Settings
-==============================
+Robot Safety Settings
+==================================
+
 .. toctree:: 
     :maxdepth: 5
 
-
-Setting the collision level
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set collision level
+++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * :: @brief Setting the collision level
-    * @param [in] mode 0-rank, 1-percentage
-    * @param [in] level Collision threshold, level corresponds to range [], percentage corresponds to range [0~1].
-    * @param [in] config 0-does not update the config file, 1-updates the config file
-    * @return error code
+    * @brief Set collision level
+    * @param  [in]  mode  0-level, 1-percentage
+    * @param  [in]  level Collision threshold, level corresponds to range [], percentage corresponds to range [0~1]
+    * @param  [in]  config 0-do not update configuration file, 1-update configuration file
+    * @return  Error code
     */
-    int SetAnticollision(int mode, double[] level, int config); 
-
-Setting the post-collision strategy
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    int SetAnticollision(int mode, double[] level, int config);
+ 
+Set collision post-strategy
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * :: @brief Setting up post-collision strategies
-    * @param [in] strategy 0-stop with error, 1-keep running
-    * @param [in] safeTime safe stop time [1000 - 2000] ms
-    * @param [in] safeDistance Safe stopping distance [1-150]mm
-    * @param [in] safeVel tcp safe stopping speed [50-250]mm/s
-    * @param [in] safetyMargin j1-j6 safety factor [1-10]
-    * @return error code
-    */
-    int SetCollisionStrategy(int strategy, int safeTime, int safeDistance,  int safeVel, int[] safetyMargin); 
-
-Setting the positive limit
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting positive limits
-    * @param [in] limit Six joint positions in deg.
-    * @return error code
-    */
-    int SetLimitPositive(double[] limit). 
-
-Setting the negative limit
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting negative limits
-    * @param [in] limit Six joint positions in deg.
-    * @return error code
-    */
-    int SetLimitNegative(double[] limit). 
-
-error state clearing
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Error status clearing
-    * @return error code
-    */
-    int ResetAllError(). 
-
-Joint Friction Compensation Switch
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief Joint friction compensation switch 
-    * @param [in] state 0-off, 1-on 
-    * @return error code 
-    */ 
-    int FrictionCompensationOnOff(byte state). 
-
-Setting the joint friction compensation coefficients - positive loading
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting the joint friction compensation factor - formal wear
-    * @param [in] coeff Six joint compensation coefficients, range [0 to 1].
-    * @return error code
-    */
-    int SetFrictionValue_level(double[] coeff).
-
-Setting the joint friction compensation coefficient - side mounting
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting the joint friction compensation factor - side mounted
-    * @param [in] coeff Six joint compensation coefficients, range [0 to 1].
-    * @return error code
-    */
-    int SetFrictionValue_wall(double[] coeff). 
-
-Setting the joint friction compensation factor - inverted
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting the joint friction compensation factor - inverted
-    * @param [in] coeff Six joint compensation coefficients, range [0 to 1].
-    * @return error code
-    */
-    int SetFrictionValue_ceiling(double[] coeff).
-
-Setting the joint friction compensation factor - free mounting
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Setting the joint friction compensation factor - free mounting
-    * @param [in] coeff Six joint compensation coefficients, range [0 to 1].
-    * @return error code
-    */
-    int SetFrictionValue_freedom(double[] coeff).
-
-Code Example
-+++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    private void btnRobotSafetySet_Click(object sender, EventArgs e)
-    {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
-
-        int mode = 0;
-        int config = 1;
-        double[] level1 = new double[6] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-        double[] level2 = new double[6] { 0.5, 0.2, 0.3, 0.4, 0.5, 0.12 };
-
-        robot.SetAnticollision(mode, level1, config);
-        mode = 1;
-        robot.SetAnticollision(mode, level2, config);
-        int[] safetyMargin = { 1, 1, 1, 1, 1, 1 };
-        robot.SetCollisionStrategy(5, 1000, 150,150,safetyMargin);
-
-        double[] plimit = new double[6] { 170.0, 80.0, 150.0, 80.0, 170.0, 160.0 };
-        int rtn = robot.SetLimitPositive(plimit);
-        Console.WriteLine($"SetLimitPositive rtn {rtn}");
-        double[] nlimit = new double[6] { -170.0, -260.0, -150.0, -260.0, -170.0, -160.0 };
-        rtn = robot.SetLimitNegative(nlimit);
-        Console.WriteLine($"SetLimitNegative rtn {rtn}");
-
-        robot.ResetAllError();
-
-        double[] lcoeff = new double[6] { 0.9, 0.9, 0.9, 0.9, 0.9, 0.9 };
-        double[] wcoeff = new double[6] { 0.4, 0.4, 0.4, 0.4, 0.4, 0.4 };
-        double[] ccoeff = new double[6] { 0.6, 0.6, 0.6, 0.6, 0.6, 0.6 };
-        double[] fcoeff = new double[6] { 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };
-        robot.FrictionCompensationOnOff(1).
-        rtn = robot.SetFrictionValue_level(lcoeff);
-        Console.WriteLine($"SetFrictionValue_level rtn {rtn}");
-        rtn = robot.SetFrictionValue_wall(wcoeff);
-        Console.WriteLine($"SetFrictionValue_wall rtn {rtn}");
-        rtn = robot.SetFrictionValue_ceiling(ccoeff);
-        Console.WriteLine($"SetFrictionValue_ceiling rtn {rtn}");
-        rtn = robot.SetFrictionValue_freedom(fcoeff);
-        Console.WriteLine($"SetFrictionValue_freedom rtn {rtn}");
-    }
-
-Customized Collision Detection Thresholds Feature Begins
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-     /**
-    * @brief Customize the collision detection threshold function to start, set the collision detection threshold on the joint side and the TCP side
-    * @param [in] flag 1-joint detection only on; 2-TCP detection only on; 3-joint and TCP detection both on
-    * @param [in] jointDetectionThreshould Joint collision detection threshold j1-j6
-    * @param [in] tcpDetectionThreshould TCP collision detection threshold, xyzabc
-    * @param [in] block 0-non-blocking; 1-blocking
+    * @brief  Set collision post-strategy
+    * @param  [in] strategy  0-report error and stop, 1-continue running
+    * @param  [in] safeTime  safe stop time [1000 - 2000]ms
+    * @param  [in] safeDistance  Safe stop distance [1-150] mm
+    * @param  [in] safeVel  TCP safe stop speed [50-250] mm/s
+    * @param  [in] safetyMargin  j1-j6 safety factor [1-10]
     * @return Error code
+    */
+    int SetCollisionStrategy(int strategy, int safeTime, int safeDistance, int safeVel,int[] safetyMargin);
+
+Custom collision detection threshold function start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Custom collision detection threshold function starts, sets the collision detection threshold for the joint end and TCP end
+    * @param  [in] flag 1-only joint detection enabled; 2-only TCP detection enabled; 3-joint and TCP detection enabled simultaneously
+    * @param  [in] jointDetectionThreshould Joint collision detection threshold j1-j6
+    * @param  [in] tcpDetectionThreshould TCP collision detection threshold, xyzabc
+    * @param  [in] block 0-non-blocking; 1-blocking
+    * @return  Error code
     */
     int CustomCollisionDetectionStart(int flag, double[] jointDetectionThreshould, double[] tcpDetectionThreshould, int block);
 
-Customize collision detection threshold function off
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Custom collision detection threshold function disabled
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Customize collision detection threshold function off
+    * @brief Custom collision detection threshold function disabled
     * @return Error code
     */
-    int CustomCollisionDetectionEnd()
+    int CustomCollisionDetectionEnd();
 
-Code Example
-++++++++++++++
+Robot collision level settings code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button24_Click(object sender, EventArgs e)
+    {
+        int mode = 0;
+        int config = 1;
+        double[] level1 = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f };
+        double[] level2 = { 50.0f, 20.0f, 30.0f, 40.0f, 50.0f, 60.0f };
+
+        int rtn = robot.SetAnticollision(mode, level1, config);
+        Console.WriteLine($"SetAnticollision mode 0 rtn is {rtn}");
+        mode = 1;
+        rtn = robot.SetAnticollision(mode, level2, config);
+        Console.WriteLine($"SetAnticollision mode 1 rtn is {rtn}");
+
+        JointPos p1Joint = new JointPos(-11.904f, -99.669f, 117.473f, -108.616f, -91.726f, 74.256f);
+        JointPos p2Joint = new JointPos(-45.615f, -106.172f, 124.296f, -107.151f, -91.282f, 74.255f);
+
+        DescPose p1Desc = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose p2Desc = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0.0f, 0.0f, 0.0f, 0.0f);
+        DescPose offdese = new DescPose(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        robot.MoveL( p2Joint,  p2Desc, 0, 0, 100, 100, 100, 2,  exaxisPos, 0, 0,  offdese);
+        robot.ResetAllError();
+        int[] safety = { 5, 5, 5, 5, 5, 5 };
+        rtn = robot.SetCollisionStrategy(3, 1000, 150, 250, safety);
+        Console.WriteLine($"SetCollisionStrategy rtn is {rtn}");
+
+        double[] jointDetectionThreshould = { 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 };
+        double[] tcpDetectionThreshould = { 60, 60, 60, 60, 60, 60 };
+        rtn = robot.CustomCollisionDetectionStart(3, jointDetectionThreshould, tcpDetectionThreshould, 0);
+        Console.WriteLine($"CustomCollisionDetectionStart rtn is {rtn}");
+
+        robot.MoveL( p1Joint,  p1Desc, 0, 0, 100, 100, 100, -1,  exaxisPos, 0, 0,  offdese);
+        robot.MoveL( p2Joint,  p2Desc, 0, 0, 100, 100, 100, -1,  exaxisPos, 0, 0,  offdese);
+        rtn = robot.CustomCollisionDetectionEnd();
+        Console.WriteLine($"CustomCollisionDetectionEnd rtn is {rtn}");
+    }
+
+Set positive limit
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Set positive limit
+    * @param  [in] limit Six joint positions, units in deg
+    * @return  Error code
+    */
+    int SetLimitPositive(double[] limit);
+ 
+Set negative limit
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Set negative limit
+    * @param  [in] limit Six joint positions, units in deg
+    * @return  Error code
+    */
+    int SetLimitNegative(double[] limit);
+ 
+Get joint soft limit angles
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Get joint soft limit angles
+    * @param  [in] flag 0-block, 1-non-block
+    * @param  [out] negative  Negative limit angle, in degrees
+    * @param  [out] positive  Positive limit angle, in degrees
+    * @return  Error code
+    */
+    int GetJointSoftLimitDeg(byte flag, ref double[] negative, ref double[] positive);
+
+Robot limit setting code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     private void btnRobotSafetySet_Click(object sender, EventArgs e)
     {
-        while (true)
+        double[] plimit = { 170.0f, 80.0f, 150.0f, 80.0f, 170.0f, 160.0f };
+        robot.SetLimitPositive(plimit);
+        double[] nlimit = { -170.0f, -260.0f, -150.0f, -260.0f, -170.0f, -160.0f };
+        robot.SetLimitNegative(nlimit);
+
+        double[] neg_deg = new double[6] {0,0,0,0,0,0 };
+        double[] pos_deg = new double[6] { 0, 0, 0, 0, 0, 0 };
+        robot.GetJointSoftLimitDeg(0, ref neg_deg,ref pos_deg);
+        Console.WriteLine($"neg limit deg:{neg_deg[0]},{neg_deg[1]},{neg_deg[2]},{neg_deg[3]},{neg_deg[4]},{neg_deg[5]}");
+        Console.WriteLine($"pos limit deg:{pos_deg[0]},{pos_deg[1]},{pos_deg[2]},{pos_deg[3]},{pos_deg[4]},{pos_deg[5]}");
+    }
+
+Set robot collision detection method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set robot collision detection method
+    * @param  [in] method Collision detection method: 0-current mode; 1-dual encoder; 2-current and dual encoder enabled simultaneously
+    * @param [in] thresholdMode Collision level threshold mode; 0 - fixed collision level threshold mode; 1 - custom collision detection threshold 
+    * @return  Error code
+    */
+    int SetCollisionDetectionMethod(int method, int thresholdMode=0);
+
+Set collision detection start/stop in static mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set collision detection start/stop in static mode
+    * @param  [in] status 0-disabled; 1-enabled
+    * @return  Error code
+    */
+    int SetStaticCollisionOnOff(int status);
+
+Code example for setting the robot collision detection method
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button26_Click(object sender, EventArgs e)
+    {
+        int rtn = robot.SetCollisionDetectionMethod(0, 0);
+
+        rtn = robot.SetStaticCollisionOnOff(1);
+        Console.WriteLine($"SetStaticCollisionOnOff On rtn is {rtn}");
+        Thread.Sleep(5000);
+        rtn = robot.SetStaticCollisionOnOff(0);
+        Console.WriteLine($"SetStaticCollisionOnOff Off rtn is {rtn}");
+    }
+
+Joint Torque Power Detection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Joint Torque Power Detection
+    * @param  [in] status 0-off; 1-on
+    * @param  [in] power Set maximum power (W)
+    * @return Error code
+    */
+    int SetPowerLimit(int status, double power);
+
+Joint torque power detection code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    private void button26_Click(object sender, EventArgs e)
+    {
+        robot.DragTeachSwitch(1);
+        robot.SetPowerLimit(1, 200);
+        double[] torques = { 0, 0, 0, 0, 0, 0 };
+        robot.GetJointTorques(1, torques);
+
+        int count = 100;
+        robot.ServoJTStart();
+        int error = 0;
+        while (count > 0)
         {
-            int[] safety = { 5, 5, 5, 5, 5, 5 };
-            robot.SetCollisionStrategy(3, 1000, 150, 250, safety);
-
-            double[] jointDetectionThreshold = { 0.3, 0.3, 0.3, 0.3, 0.3, 0.3 };
-            double[] tcpDetectionThreshold = { 80, 80, 80, 80, 80, 80 };
-            int rtn = robot.CustomCollisionDetectionStart(3, jointDetectionThreshold, tcpDetectionThreshold, 0);
-            Console.WriteLine($"CustomCollisionDetectionStart rtn is {rtn}");
-
-            DescPose p1Desc = new DescPose(228.879, -503.594, 453.984, -175.580, 8.293, 171.267);
-            JointPos p1Joint = new JointPos(102.700, -85.333, 90.518, -102.365, -83.932, 22.134);
-
-            DescPose p2Desc = new DescPose(-333.302, -435.580, 449.866, -174.997, 2.017, 109.815);
-            JointPos p2Joint = new JointPos(41.862, -85.333, 90.526, -100.587, -90.014, 22.135);
-
-            ExaxisPos exaxisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
-            DescPose offdese = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-
-            // Assuming the signature of the MoveL method is as follows:
-            robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-            robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese);
-
-            rtn = robot.CustomCollisionDetectionEnd();
-            Console.WriteLine($"CustomCollisionDetectionEnd rtn is {rtn}");
+            error = robot.ServoJT(torques, 0.001f);
+            count--;
+            Thread.Sleep(1);
         }
+        error = robot.ServoJTEnd();
+        robot.DragTeachSwitch(0);
     }

@@ -19,36 +19,6 @@ Setting Track Recording Parameters
     - ``do_choose``: DO choose, bit0~bit7 corresponds to control box DO0~DO7, bit8~bit9 corresponds to end DO0~DO1, 0-no choose, 1-choose Default 0"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------------------------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    type = 1 # data type, 1-joint position
-    name = 'tpd2023' # track name
-    period = 4 # sampling period, 2ms or 4ms or 8ms
-    di = 0 # di input configuration
-    do = 0 # do output configuration
-    ret = robot.SetTPDParam(name, period, di_choose=di) #configure TPD parameters
-    print("Configuration TPD parameter error code", ret)
-    robot.Mode(1) # robot cut to manual mode
-    time.sleep(1)  
-    robot.DragTeachSwitch(1) # robot cuts to drag teach mode
-    ret = robot.GetActualTCPPose()
-    print("Get current tool position", ret)
-    time.sleep(1)
-    ret = robot.SetTPDStart(name, period, do_choose=do) # start logging the demonstration trajectory
-    print("Starting to record the demonstration track error code", ret)
-    time.sleep(15)
-    ret = robot.SetWebTPDStop() # stop logging the demonstration trajectory
-    print("Stopped recording of the demonstration track error code", ret)
-    robot.DragTeachSwitch(0) # robot cuts to non-drag teach mode
-    # robot.SetTPDDelete('tpd2023') # Delete TPD tracks
-
 Start Track Recording
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
@@ -88,6 +58,31 @@ Deleting track records
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
+code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    type = 1
+    name = "tpd2025"
+    period_ms = 4
+    di_choose = 0
+    do_choose = 0
+    robot.SetTPDParam(name, period_ms)
+    robot.Mode(1)
+    time.sleep(1)
+    robot.DragTeachSwitch(1)
+    robot.SetTPDStart(name, period_ms)
+    print("SetTPDStart")
+    time.sleep(10)
+    robot.SetWebTPDStop()
+    robot.DragTeachSwitch(0)
+    robot.CloseRPC()
+
 Trajectory preloading
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
@@ -99,42 +94,6 @@ Trajectory preloading
     "Mandatory parameters", "- ``name``: track name"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
-----------------------------------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # P1=[-321.821, 125.694, 282.556, 174.106, -15.599, 152.669]
-    name = 'tpd2023' #track name
-    blend = 1 # whether to smooth, 1-smooth, 0-not smooth
-    ovl = 100.0 #speed scaling
-    ret = robot.LoadTPD(name) # track preloading
-    print("track preload error code",ret)
-    ret,P1 = robot.GetTPDStartPose(name) #Get trajectory start pose
-    print ("Get trajectory start position error code",ret, "start position",P1)
-    ret = robot.MoveL(P1,0,0) #move to start point
-    print("Movement to start point error code",ret)
-    time.sleep(10)
-    ret = robot.MoveTPD(name, blend, ovl) # trajectory replication
-    print("Trajectory reproduction error code",ret)
-
-Get the starting position of the trajectory
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``GetTPDStartPose(name)``"
-    "Description", "Get trajectory start position"
-    "Mandatory parameters", "- ``name``: track name"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode
-    - ``desc_pose=[x,y,z,rx,ry,rz]``: trajectory start position"
 
 Trajectory Reproduction
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -149,6 +108,48 @@ Trajectory Reproduction
     - ``ovl``: velocity scaling factor, range [0 to 100]"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
+
+Get the starting position of the trajectory
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetTPDStartPose(name)``"
+    "Description", "Get trajectory start position"
+    "Mandatory parameters", "- ``name``: track name"
+    "Default parameters", "NULL"
+    "Return Value", "- errorcode Success-0 Failure- errcode
+    - ``desc_pose=[x,y,z,rx,ry,rz]``: trajectory start position"
+
+Example of robot TPD trajectory recording code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    type = 1
+    name = "tpd2025"
+    period_ms = 4
+    di_choose = 0
+    do_choose = 0
+    ovl = 100.0
+    blend = 0
+    rtn = robot.LoadTPD(name)
+    print(f"LoadTPD rtn is: {rtn}")
+    error,start_pose = robot.GetTPDStartPose(name)
+    print(f"start pose, xyz is: {start_pose[0]},{start_pose[1]},{start_pose[2]}. "
+          f"rpy is: {start_pose[3]},{start_pose[4]},{start_pose[5]}")
+    robot.MoveCart(start_pose, 0, 0, 100, 100)
+    time.sleep(1)
+    rtn = robot.MoveTPD(name, blend, ovl)
+    print(f"MoveTPD rtn is: {rtn}")
+    time.sleep(5)
+    robot.SetTPDDelete(name)
+    robot.CloseRPC()
 
 Trajectory preprocessing
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -297,59 +298,9 @@ Setting the torque around the z-axis in trajectory operation
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-----------------------------------------------------------------------------
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    name = "/fruser/traj/trajHelix_aima_1.txt" #track name
-    blend = 1 # whether to smooth, 1-smooth, 0-not smooth
-    ovl = 50.0 #speed scaling
-    ft = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-    ret = robot.LoadTrajectoryJ(name,ovl) #trajectory preloading
-    print("track preload error code",ret)
-    ret,P1 = robot.GetTrajectoryStartPose(name) #Get Trajectory Start Pose
-    print ("Get trajectory start position error code",ret, "start position",P1)
-    ret = robot.MoveL(P1,1,0) #move to start point
-    print("Movement to start point error code",ret)
-    ret = robot.GetTrajectoryPointNum() #get the trajectory point number
-    print("Get track point number error code",ret)
-    time.sleep(10)
-    ret = robot.MoveTrajectoryJ() # trajectory replication
-    print("Trajectory reproduction error code",ret)
-    time.sleep(10)
-    ret = robot.SetTrajectoryJSpeed(ovl) #Set the speed in the trajectory run
-    print("Setting the speed error code for the trajectory run",ret)
-    time.sleep(1)
-    ret = robot.SetTrajectoryJForceTorque(ft) #Set the force and torque in the trajectory run
-    print("Setting the force and torque error codes for the trajectory run",ret)
-    time.sleep(1)
-    ret = robot.SetTrajectoryJForceFx(0) #Set the force along the x-direction in the trajectory run
-    print("Setting the force along x direction error code in the trajectory run",ret)
-    time.sleep(1)
-    ret = robot.SetTrajectoryJForceFy(0) #Set the force along the y-direction in the trajectory run
-    print("Setting the force error code along the y-direction in the trajectory run",ret)
-    time.sleep(1)
-    ret = robot.SetTrajectoryJForceFz(0) #Set the force along the z-direction in the trajectory run
-    print("Setting the force error code along the z-direction in the trajectory run",ret)
-    time.sleep(1)
-    ret = robot.SetTrajectoryJTorqueTx(0) #Set the torque around the x-axis for the trajectory run
-    print("Setting the torque around x-axis error code for the trajectory run",ret)
-    time.sleep(1)
-    ret = robot.SetTrajectoryJTorqueTy(0) #Set the torque around the y-axis for the trajectory run
-    print("Setting the torque around y-axis error code for the trajectory run",ret)
-    time.sleep(1)
-    ret = robot.SetTrajectoryJTorqueTz(0) #Set the torque around the z-axis for the trajectory run
-    print("Setting the torque around z-axis error code for the trajectory run",ret)
-    time.sleep(1)
-
 Upload trace J file
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Python SDK-v2.0.8-3.7.8
+.. versionadded:: python SDK-v2.0.7
 
 .. csv-table:: 
     :stub-columns: 1
@@ -363,7 +314,7 @@ Upload trace J file
 
 Delete the track J file
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Python SDK-v2.0.8-3.7.8
+.. versionadded:: python SDK-v2.0.7
 
 .. csv-table:: 
     :stub-columns: 1
@@ -375,41 +326,50 @@ Delete the track J file
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-------------------------------------------------------------------------
+Robot trajectory J file reproduction code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # A connection is established with the robot controller and a robot object is returned if the connection is successful
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    robot.LoggerInit()
-    robot.SetLoggerLevel(lvl=1)
-    
-    retval = robot.TrajectoryJDelete("testA.txt")
-    print("TrajectoryJDelete return ", retval)
-    robot.TrajectoryJUpLoad("D://zUP/testA.txt")
-
-    traj_file_name = "/fruser/traj/testA.txt"
-    retval = robot.LoadTrajectoryJ(traj_file_name, 100, 1)
-    print("LoadTrajectoryJ return ", retval)
-
-    retval,traj_start_pose = robot.GetTrajectoryStartPose(traj_file_name)
-    print("GetTrajectoryStartPose return ", retval)
-    print("The starting pose of the trajectory:", traj_start_pose[0], traj_start_pose[1], traj_start_pose[2], traj_start_pose[3], traj_start_pose[4], traj_start_pose[5])
-
-    robot.SetSpeed(20)
-    robot.MoveCart(traj_start_pose, 1, 0)
-
-    time.sleep(5)
-
-    retval,traj_num = robot.GetTrajectoryPointNum()
-    print("GetTrajectoryPointNum return ", retval)
-    print("Trajectory point number: ", traj_num)
-
-    retval = robot.MoveTrajectoryJ()
-    print("MoveTrajectoryJ return ", retval)
+    rtn = robot.TrajectoryJUpLoad("D://zUP/traj.txt")
+    print(f"Upload TrajectoryJ A {rtn}")
+    traj_file_name = "/fruser/traj/traj.txt"
+    rtn = robot.LoadTrajectoryJ(traj_file_name, 100, 1)
+    print(f"LoadTrajectoryJ {traj_file_name}, rtn is: {rtn}")
+    rtn,traj_start_pose = robot.GetTrajectoryStartPose(traj_file_name)
+    print(f"GetTrajectoryStartPose is: {rtn}")
+    print(f"desc_pos:{traj_start_pose[0]},{traj_start_pose[1]},{traj_start_pose[2]},"
+          f"{traj_start_pose[3]},{traj_start_pose[4]},{traj_start_pose[5]}")
+    time.sleep(1)
+    robot.SetSpeed(50)
+    robot.MoveCart(traj_start_pose, 0, 0, 50, 100, 100)
+    rtn,traj_num = robot.GetTrajectoryPointNum()
+    print(f"GetTrajectoryStartPose rtn is: {rtn}, traj num is: {traj_num}")
+    rtn = robot.SetTrajectoryJSpeed(50.0)
+    print(f"SetTrajectoryJSpeed is: {rtn}")
+    traj_force = [0.0,0.0,0.0,0.0,0.0,0.0]
+    traj_force[0] = 10  # fx = 10
+    rtn = robot.SetTrajectoryJForceTorque(traj_force)
+    print(f"SetTrajectoryJForceTorque rtn is: {rtn}")
+    rtn = robot.SetTrajectoryJForceFx(10.0)
+    print(f"SetTrajectoryJForceFx rtn is: {rtn}")
+    rtn = robot.SetTrajectoryJForceFy(0.0)
+    print(f"SetTrajectoryJForceFy rtn is: {rtn}")
+    rtn = robot.SetTrajectoryJForceFz(0.0)
+    print(f"SetTrajectoryJForceFz rtn is: {rtn}")
+    rtn = robot.SetTrajectoryJTorqueTx(10.0)
+    print(f"SetTrajectoryJTorqueTx rtn is: {rtn}")
+    rtn = robot.SetTrajectoryJTorqueTy(10.0)
+    print(f"SetTrajectoryJTorqueTy rtn is: {rtn}")
+    rtn = robot.SetTrajectoryJTorqueTz(10.0)
+    print(f"SetTrajectoryJTorqueTz rtn is: {rtn}")
+    rtn = robot.MoveTrajectoryJ()
+    print(f"MoveTrajectoryJ rtn is: {rtn}")
+    robot.CloseRPC()
 
 Trajectory preprocessing(Trajectory foresight)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -446,8 +406,8 @@ Trajectory reproduction(Trajectory foresight)
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-code example
-------------------------------------------------------------------------
+Code example for trajectory reproduction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
@@ -455,21 +415,17 @@ code example
     import time
     # A connection is established with the robot controller and a robot object is returned if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-
-    rtn = 0
-    rtn = robot.TrajectoryJUpLoad("D://zUP/A.txt")
-    print("TrajectoryJUpLoad A.txt rtn is ",rtn)
-    rtn = robot.TrajectoryJUpLoad("D://zUP/B.txt")
-    print("TrajectoryJUpLoad B.txt rtn is ", rtn)
-    nameA = "/fruser/traj/A.txt"
-    nameB = "/fruser/traj/B.txt"
-
-    # rtn = robot.LoadTrajectoryLA(nameA, 2, 0.0, 0, 1.0, 100.0, 200.0, 1000.0) #B样条
-    # print("LoadTrajectoryLA rtn is ", rtn)
-    robot.LoadTrajectoryLA(nameB, 0, 0, 0, 1, 100, 100, 1000) #直线连接
-    # robot.LoadTrajectoryLA(nameA, 1, 2, 0, 2, 100, 200, 1000) #直线拟合
-    # error,startPos = robot.GetTrajectoryStartPose(nameA)
-    error,startPos = robot.GetTrajectoryStartPose(nameB)
-    robot.MoveCart(startPos, 1, 0, 100, 100, 100, -1, -1)
+    rtn = robot.TrajectoryJUpLoad("D://zUP/traj.txt")
+    print(f"Upload TrajectoryJ A {rtn}")
+    traj_file_name = "/fruser/traj/traj.txt"
+    rtn = robot.LoadTrajectoryLA(traj_file_name, 1, 2, 0, 2, 50, 200, 1000)
+    print(f"LoadTrajectoryLA {traj_file_name}, rtn is: {rtn}")
+    rtn, traj_start_pose = robot.GetTrajectoryStartPose(traj_file_name)
+    print(f"GetTrajectoryStartPose is: {rtn}")
+    print(f"desc_pos: {traj_start_pose[0]},{traj_start_pose[1]},{traj_start_pose[2]},{traj_start_pose[3]},{traj_start_pose[4]},{traj_start_pose[5]}")
+    time.sleep(1)
+    robot.SetSpeed(50)
+    robot.MoveCart(traj_start_pose, 0, 0, 100, 100, 100)
     rtn = robot.MoveTrajectoryLA()
-    print("MoveTrajectoryLA rtn is ", rtn)
+    print(f"MoveTrajectoryLA rtn is: {rtn}")
+    robot.CloseRPC()

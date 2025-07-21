@@ -198,7 +198,7 @@ Software environment setup
 
 .. centered:: Figure 17.2-16 Switch remote mode
 
-5. Select the controller slave protocol and click the ‘Set’ button.
+5. Select the controller slave protocol and whether the auto-start function is required, then click the "Set" button. Note: To switch between different protocols, you need to click the "Uninstall" button first before configuring other protocols.
 
 .. image:: custom_protocol_slave/011.png
    :width: 6in
@@ -472,6 +472,10 @@ Loading Slave Mode
 
 .. centered:: Figure 17.3-1 Board Communication Manual Configuration
 
+First, configure the IP address of the Entalk board. If left blank, the board will use the default IP: 192.168.0.100 for startup configuration. Currently, IP configuration only applies to EIP and CC-link protocols. For PN protocol, the IP is assigned by the PLC master station scanning slave devices.
+
+.. note:: After changing the IP address on the page, you need to load the slave mode for the changes to take effect.
+
 Select the required mapping functions for DI, DO, and AO (see Appendix 1). The parameters are defined as follows:
 
 - DI (Robot Control): The robot slave accepts external input signals and executes the mapped functions.
@@ -604,6 +608,18 @@ Example generated program:
    :align: center
 
 .. centered:: Figure 17.3-4 DI, DO, AI, AO Interaction Information
+
+**Step 5**:After loading is complete, you can use the Teach Program -> Communication Command -> Board Card to generate Lua commands for the board. This allows you to:
+
+1) Set Slave DO (Digital Output) and AO (Analog Output).
+2) Read Slave DI (Digital Input) and AI (Analog Input).
+3) Wait for Slave DI and AI signals.
+
+.. image:: custom_protocol_slave/051.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.3-5 Board Lua Commands
 
 :download:`Appendix 1: Slave Mode Address Mapping Table <../_static/_doc/Control box slave mode address comparison table.xlsx>`
 

@@ -4,11 +4,8 @@ Movement
 .. toctree::
     :maxdepth: 5
 
-robot spotting
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 jog point and click
----------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
@@ -25,7 +22,7 @@ jog point and click
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 jog tap to decelerate and stop
------------------------------------------------------------------------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
@@ -38,7 +35,7 @@ jog tap to decelerate and stop
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Immediate stop for jog taps
------------------------------------------------------------------------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
@@ -50,8 +47,8 @@ Immediate stop for jog taps
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Robot point control code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -60,98 +57,27 @@ Code example
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    # Robot single-axis pointing
-    robot.StartJOG(0,1,0,20.0,20.0,30.0) # single-joint motion, StartJOG is a non-blocking command, other motion commands (including StartJOG) will be discarded if received during motion.
-    time.sleep(1)
-    # Robot single-axis pointing deceleration stop
-    ret = robot.StopJOG(1)
-    print(ret)
-    # Robot single-axis pointing stops immediately
-    robot.ImmStopJOG()
-    robot.StartJOG(0,2,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(0,3,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(0,4,1,20.0,vel=40)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(0,5,1,20.0,acc=50)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(0,6,1,20.0,20.0,30.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    # Base coordinates
-    robot.StartJOG(2,1,0,20.0) #point motion in base coordinate system
-    time.sleep(1) 
-    # Robot single-axis pointing stops immediately
-    robot.ImmStopJOG()
-    robot.StartJOG(2,1,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(2,2,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(2,3,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(2,4,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(2,5,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(2,6,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    # Tool coordinates
-    robot.StartJOG(4,1,0,20.0,20.0,100.0) #point motion in tool coordinate system
-    time.sleep(1)
-    # Robot single-axis pointing stops immediately
-    robot.ImmStopJOG()
-    robot.StartJOG(4,1,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(4,2,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(4,3,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(4,4,1,20.0,20.0,100.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(4,5,1,20.0,vel=10.0,acc=20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(4,6,1,20.0,acc=40.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    # Workpiece coordinates
-    robot.StartJOG(8,1,0,20.0,20.0,100.0) #point motion in work coordinate system
-    time.sleep(1)
-    # Robot single-axis pointing stops immediately
-    robot.ImmStopJOG()
-    robot.StartJOG(8,1,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(8,2,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(8,3,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(8,4,1,20.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(8,5,1,20.0,vel=30.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
-    robot.StartJOG(8,6,1,20.0,20.0,acc=90.0)
-    time.sleep(1)
-    robot.ImmStopJOG()
+    for i in range(6):
+        robot.StartJOG(0, i + 1, 0, 20.0, 20.0, 30.0)
+        time.sleep(1)
+        robot.ImmStopJOG()
+        time.sleep(1)
+    for i in range(6):
+        robot.StartJOG(2, i + 1, 0, 20.0, 20.0, 30.0)
+        time.sleep(1)
+        robot.ImmStopJOG()
+        time.sleep(1)
+    for i in range(6):
+        robot.StartJOG(4, i + 1, 0, 20.0, 20.0, 30.0)
+        time.sleep(1)
+        robot.StopJOG(5)
+        time.sleep(1)
+    for i in range(6):
+        robot.StartJOG(8, i + 1, 0, 20.0, 20.0, 30.0)
+        time.sleep(1)
+        robot.StopJOG(9)
+        time.sleep(1)
+    robot.CloseRPC()
 
 Joint space motion
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -175,30 +101,9 @@ Joint space motion
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0];"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
--------------------------------------------------------------------------------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    joint_pos4 = [-83.24, -96.476, 93.688, -114.079, -62, -100]
-    joint_pos5 = [-43.24, -70.476, 93.688, -114.079, -62, -80]
-    joint_pos6 = [-83.24, -96.416, 43.188, -74.079, -80, -10]
-    tool = 0 #Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    ret = robot.MoveJ(joint_pos4, tool, user, vel=30) #joint space motion
-    print("Joint space motion point 4: error code", ret)
-    ret = robot.MoveJ(joint_pos5, tool, user)
-    print("Joint space motion point 5: error code", ret)
-    robot.MoveJ(joint_pos6, tool, user, offset_flag=1, offset_pos=[10,10,10,0,0,0])
-    print("Joint space motion point 6: error code", ret)
-
 Cartesian linear motion in space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
@@ -223,28 +128,6 @@ Cartesian linear motion in space
     - ``speedPercent``: Percentage of allowable speed reduction threshold [0-100], default 10%
     "
     "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
-------------------------------------------------------------------------------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    desc_pos1 = [36.794,-475.119, 65.379, -176.938, 2.535, -179.829]
-    desc_pos2 = [136.794,-475.119, 65.379, -176.938, 2.535, -179.829]
-    desc_pos3 = [236.794,-475.119, 65.379, -176.938, 2.535, -179.829]
-    tool = 0 #Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    ret = robot.MoveL(desc_pos1, tool, user) # Cartesian space linear motion
-    print("Cartesian space linear motion point 1: error code", ret) 
-    robot.MoveL(desc_pos2, tool, user, vel=20, acc=100)
-    print("Cartesian space linear motion point 2: error code", ret) 
-    robot.MoveL(desc_pos3, tool, user, offset_flag=1, offset_pos=[10,10,10,0,0,0])
-    print("Cartesian space linear motion point 3: error code", ret)
 
 Circular motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -275,25 +158,6 @@ Circular motion in Cartesian space
     - ``ovl:``: velocity scaling factor, [0~100] default 100.0.
     - ``blendR``:[-1.0]-motion in place (blocking), [0~1000]-smoothing radius (non-blocking) in [mm] default -1.0;"
     "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
--------------------------------------------------------------------------------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    desc_pos1 = [236.794,-475.119, 65.379, -176.938, 2.535, -179.829]
-    desc_posc1 = [266.794,-455.119, 65.379, -176.938, 2.535, -179.829] #MoveC transition point
-    desc_posc2 = [286.794,-475.119, 65.379, -176.938, 2.535, -179.829] #MoveC target points
-    tool = 0#Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    ret = robot.MoveL(desc_pos1, tool, user, vel=30, acc=100)
-    print("Linear motion in Cartesian space: error code", ret) 
-    ret = robot.MoveC(desc_posc1, tool, user, desc_posc2,tool, user) #Cartesian space circular motion
-    print("Cartesian space circular motion: error code", ret)
 
 Whole circle motion in Cartesian space
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -326,8 +190,27 @@ Whole circle motion in Cartesian space
     - ``blendR``:-1: Blockage 0 to 1000: Smooth radius, default: -1;"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
--------------------------------------------------------------------------------------------------------------------------
+Point-to-point motion in Cartesian space
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MoveCart(desc_pos, tool, user, vel = 20.0, acc = 0.0, ovl = 100.0, blendT = -1.0, config = -1)``"
+    "Description", "Point-to-point motion in Cartesian space"
+    "Mandatory parameters", "- ``desc_pos``: target Cartesian position;
+    - ``tool``: tool number, [0 to 14];
+    - ``user``: artifact number, [0 to 14];"
+    "Default parameters", "- ``vel``: velocity, range [0 to 100], default 20.0;
+    - ``acc``: acceleration, range [0-100], not available, default 0.0; 
+    - ``ovl``: velocity scaling factor, [0 to 100], default 100.0.
+    - ``blendT``:[-1.0]-motion in place (blocking), [0~500]-smoothing time (non-blocking) in [ms] default -1.0;
+    - ``config``: joint configuration, [-1] - solve with reference to current joint position, [0~7] - solve based on joint configuration default is -1"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Sample robot basic motion commands code
++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -335,39 +218,39 @@ Code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    middescPoseCir1 = [-435.414, -342.926, 309.205, -171.382, -4.513, 171.520]
-    midjointPosCir1 = [26.804, -79.866, 106.642, -125.433, -85.562, -54.721]
-    enddescPoseCir1 = [-524.862, -217.402, 308.459, -171.425, -4.810, 156.088]
-    endjointPosCir1 = [11.399, -78.055, 104.603, -125.421, -85.770, -54.721]
-    middescPoseCir2 = [-482.691, -587.899, 318.594, -171.001, -4.999, -172.996]
-    midjointPosCir2 = [42.314, -53.600, 67.296, -112.969, -85.533, -54.721]
-    enddescPoseCir2 = [-403.942, -489.061, 317.038, -163.189, -10.425, -175.627]
-    endjointPosCir2 = [39.959, -70.616, 96.679, -134.243, -82.276, -54.721]
-    middescPoseMoveC = [-435.414, -342.926, 309.205, -171.382, -4.513, 171.520]
-    midjointPosMoveC = [26.804, -79.866, 106.642, -125.433, -85.562, -54.721]
-    enddescPoseMoveC = [-524.862, -217.402, 308.459, -171.425, -4.810, 156.088]
-    endjointPosmoveC = [11.399, -78.055, 104.603, -125.421, -85.770, -54.721]
-    middescPoseCir3 = [-435.414, -342.926, 309.205, -171.382, -4.513, 171.520]
-    midjointPosCir3 = [26.804, -79.866, 106.642, -125.433, -85.562, -54.721]
-    enddescPoseCir3 = [-569.505, -405.378, 357.596, -172.862, -10.939, 171.108]
-    endjointPosCir3 = [27.138, -63.750, 78.586, -117.861, -90.588, -54.721]
-    middescPoseCir4 = [-482.691, -587.899, 318.594, -171.001, -4.999, -172.996]
-    midjointPosCir4 = [42.314, -53.600, 67.296, -112.969, -85.533, -54.721]
-    enddescPoseCir4 = [-569.505, -405.378, 357.596, -172.862, -10.939, 171.108]
-    endjointPosCir4 = [27.138, -63.750, 78.586, -117.861, -90.588, -54.721]
-    startdescPose = [-569.505, -405.378, 357.596, -172.862, -10.939, 171.108]
-    startjointPos = [27.138, -63.750, 78.586, -117.861, -90.588, -54.721]
-    linedescPose = [-403.942, -489.061, 317.038, -163.189, -10.425, -175.627]
-    linejointPos = [39.959, -70.616, 96.679, -134.243, -82.276, -54.721]
-    exaxisPos = [0, 0, 0, 0]
-    offdese = [0, 0, 0, 0, 0, 0]
-    robot.MoveJ(joint_pos=startjointPos, tool=3, user=0, vel=100)
-    robot.Circle(desc_pos_p=middescPoseCir1, tool_p=3, user_p=0, vel_p=100, desc_pos_t=enddescPoseCir1, tool_t=3,user_t=0, vel_t=100, offset_flag=-1,oacc=100, blendR=20)
-    robot.Circle(desc_pos_p=middescPoseCir2, tool_p=3, user_p=0, vel_p=100, desc_pos_t=enddescPoseCir2, tool_t=3,user_t=0, vel_t=100, offset_flag=-1,oacc=100, blendR=20)
-    robot.MoveC(desc_pos_p=middescPoseMoveC, tool_p=3, user_p=0, vel_p=100,desc_pos_t=enddescPoseMoveC,tool_t=3,user_t=0,vel_t=100, blendR=20)
-    robot.Circle(desc_pos_p=middescPoseCir3, tool_p=3, user_p=0, vel_p=100, desc_pos_t=enddescPoseCir3, tool_t=3,user_t=0, vel_t=100, offset_flag=-1,oacc=100, blendR=20)
-    robot.MoveL(desc_pos=linedescPose, tool=3, user=0, vel=100,blendMode=0)
-    robot.Circle(desc_pos_p=middescPoseCir4, tool_p=3, user_p=0, vel_p=100, desc_pos_t=enddescPoseCir4, tool_t=3,user_t=0, vel_t=100, offset_flag=-1,oacc=100, blendR=20)
+    j1 = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    j2 = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    j3 = [-29.777, -84.536, 109.275, -114.075, -86.655, 74.257]
+    j4 = [-31.154, -95.317, 94.276, -88.079, -89.740, 74.256]
+    desc_pos1 = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    desc_pos2 = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    desc_pos3 = [-487.434, 154.362, 308.576, 176.600, 0.268, -14.061]
+    desc_pos4 = [-443.165, 147.881, 480.951, 179.511, -0.775, -15.409]
+    offset_pos = [0, 0, 0, 0, 0, 0]
+    epos = [0, 0, 0, 0]
+    tool = 0
+    user = 0
+    vel = 100.0
+    acc = 100.0
+    ovl = 100.0
+    blendT = 0.0
+    blendR = 0.0
+    flag = 0
+    search = 0
+    robot.SetSpeed(20)
+    rtn = robot.MoveJ(joint_pos=j1, tool=tool, user=user, vel=vel, blendT=blendT)
+    print(f"movej errcode: {rtn}")
+    rtn = robot.MoveL(desc_pos=desc_pos2, tool=tool, user=user, vel=vel, blendR=blendR)
+    print(f"movel errcode: {rtn}")
+    rtn = robot.MoveC(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, desc_pos_t=desc_pos4, tool_t=tool, user_t=user, blendR=blendR)
+    print(f"movec errcode: {rtn}")
+    rtn = robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel, blendT=blendT)
+    print(f"movej errcode: {rtn}")
+    rtn = robot.Circle(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, desc_pos_t=desc_pos1, tool_t=tool, user_t=user)
+    print(f"circle errcode: {rtn}")
+    rtn = robot.MoveCart(desc_pos=desc_pos4, tool=tool, user=user, blendT=blendT)
+    print(f"MoveCart errcode: {rtn}")
+    robot.CloseRPC()
 
 Spiral motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -391,8 +274,8 @@ Spiral motion in Cartesian space
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------------------------------------------------------------------------------------------------------------------
+code example
+++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -400,15 +283,25 @@ Code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    desc_pos_spiral= [236.794,-475.119, -65.379, -176.938, 2.535, -179.829]#Spiral target point
-    #spiral parameters [circle_num,circle_angle,rad_init,rad_add,rotaxis_add,rot_direction]
-    # circle_num: the number of circles in the spiral, circle_angle: the inclination of the spiral, rad_init: the initial radius of the spiral, rad_add: the increment of the radius, # circle_num: the number of circles in the spiral, circle_angle: the inclination of the spiral, rad_init: the initial radius of the spiral, rad_add: the radius increment.
-    # rotaxis_add: rotaxis direction increment, rot_direction: direction of rotation, 0 - clockwise, 1 - counterclockwise
-    param = [5.0,10,30,10,5,0]
-    tool = 0#Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    ret = robot.NewSpiral(desc_pos_spiral, tool, user, param,vel=40 ) #Cartesian space spiral motion
-    print("Spiral motion in Cartesian space: error code", ret)
+    joint_pos = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    desc_pos = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    offset_pos1 = [50, 0, 0, -30, 0, 0]
+    offset_pos2 = [50, 0, 0, -5, 0, 0]
+    epos = [0, 0, 0, 0]
+    sp = [5,5.0,50.0,10.0,10.0,0]
+    tool = 0
+    user = 0
+    vel = 100.0
+    acc = 100.0
+    ovl = 100.0
+    blendT = 0.0
+    flag = 2
+    robot.SetSpeed(20)
+    rtn = robot.MoveJ(joint_pos=joint_pos, tool=tool, user=user, exaxis_pos=epos, blendT=blendT, offset_flag=flag, offset_pos=offset_pos1)
+    print(f"MoveJ error code: {rtn}")
+    rtn = robot.NewSpiral(desc_pos=desc_pos, tool=tool, user=user, param=sp, exaxis_pos=epos, offset_flag=flag, offset_pos=offset_pos2)
+    print(f"NewSpiral error code: {rtn}")
+    robot.CloseRPC()
 
 Start of servo motion
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -443,7 +336,7 @@ Joint space servo mode motion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoJ(joint_pos, axisPos, acc = 0.0, vel = 0.0, cmdT = 0.008, filterT = 0.0, gain = 0.0)``"
+    "Prototype", "``ServoJ(joint_pos, axisPos, acc = 0.0, vel = 0.0, cmdT = 0.008, filterT = 0.0, gain = 0.0, id=0)``"
     "Description", "Joint space servo mode motion"
     "Mandatory parameters", "- ``joint_pos``: target joint position in [°];
     - ``axisPos``: external axis position in mm;"
@@ -451,8 +344,102 @@ Joint space servo mode motion
     - ``vel``: velocity, range [0~100], not open, default 0.0.
     - ``cmdT``: command send cycle, unit s, recommended range [0.001~0.0016], default is 0.008.
     - ``filterT``: filter time in [s], not open, default is 0.0; ``filterT``: filter time in [s], not open, default is 0.0.
-    - ``gain``: proportional amplifier for target position, not open yet, default 0.0;"
+    - ``gain``: proportional amplifier for target position, not open yet, default 0.0;
+    - ``id``: servoJ command ID, default 0."
     "Return Value", "Error Code Success-0 Failure- errcode"
+
+Example of joint space servo mode motion code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0]
+    epos = [0.0,0.0,0.0,0.0]
+    vel = 0.0
+    acc = 0.0
+    cmdT = 0.008
+    filterT = 0.0
+    gain = 0.0
+    flag = 0
+    count = 500
+    dt = 0.1
+    ret, joint_pos = robot.GetActualJointPosDegree(0)
+    if ret == 0:
+        print("Start the movement of the servo joint...")
+        robot.ServoMoveStart()
+        while count > 0:
+            robot.ServoJ(joint_pos=joint_pos, axisPos=epos, cmdT=cmdT, filterT=filterT, gain=gain)
+            joint_pos[0] += dt
+            count -= 1
+            time.sleep(cmdT)
+        robot.ServoMoveEnd()
+        robot.CloseRPC()
+
+Joint torque control begins
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoJTStart()``"
+    "Description", "Joint torque control begins"
+    "Mandatory parameters", "NULL"
+    "Default_parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Joint torque control
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoJT(torque, interval)``"
+    "Description", "Joint torque control"
+    "Mandatory parameters", "- ``torque``:Joint torque of j1 to j6, unit: Nm
+    - ``interval``:Instruction cycle, unit s, range [0.001 to 0.008]"
+    "Default_parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Joint torque control is completed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoJTEnd()``"
+    "Description", "Joint torque control is completed"
+    "Mandatory parameters", "NULL"
+    "Default_parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Sample code for joint torque control
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.DragTeachSwitch(1)
+    # torques = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    error,torques = robot.GetJointTorques(1)
+    robot.ServoJTStart()
+    count = 100
+    while count > 0:
+        error = robot.ServoJT(torques, 0.001)
+        count -= 1
+        time.sleep(0.001)
+    error = robot.ServoJTEnd()
+    robot.DragTeachSwitch(0)
+    robot.CloseRPC()
 
 Servo-mode motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -465,7 +452,7 @@ Servo-mode motion in Cartesian space
     "Description", "Servo mode motion in Cartesian space"
     "Mandatory parameters", "- ``mode``: [0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system);
     - ``desc_pos``: target Cartesian position/target Cartesian position increment;"
-    "default_parameters", "- ``pos_gain``: bit-pose incremental scale factor, valid only for incremental motion, range [0~1], default [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+    "Default_parameters", "- ``pos_gain``: bit-pose incremental scale factor, valid only for incremental motion, range [0~1], default [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
     - ``acc``: acceleration, range [0 to 100], not open, default 0.0.
     - ``vel``: velocity, range [0~100], not open, default 0.0.
     - ``cmdT``: command send cycle, unit s, recommended range [0.001~0.0016], default is 0.008.
@@ -473,8 +460,8 @@ Servo-mode motion in Cartesian space
     - ``gain``: proportional amplifier for target position, not open yet, default 0.0;"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
----------------------------------------------------------------------------------------------------------------------------
+Example of Cartesian space servo mode motion code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -483,87 +470,26 @@ Code example
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    error,joint_pos = robot.GetActualJointPosDegree()
-    print("Current joint position of the robot",joint_pos)
-    joint_pos = [joint_pos[0],joint_pos[1],joint_pos[2],joint_pos[3],joint_pos[4],joint_pos[5]]
-    error_joint = 0
-    count =100
-    error = robot.ServoMoveStart() #ServoMoveStart
-    print("Servo motion start error code",error)
-    while(count).
-        error = robot.ServoJ(joint_pos=joint_pos,axisPos=[0,0,0,0,0,0]) #joint space servo mode motion
-        if error!=0.
-            error_joint =error
-        joint_pos[0] = joint_pos[0] + 0.1 # 1-axis movement 0.1 degree each time, 100 movements
-        count = count - 1
-        time.sleep(0.008)
-    print("Joint space servo mode motion error code",error_joint)
-    error = robot.ServoMoveEnd() # servo move end
-    print("Servo motion end error code",error) 
-    mode = 2 #[0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system)
-    n_pos = [0.0,0.0,0.5,0.0,0.0,0.0] #Cartesian space bit-position increments
-    error,desc_pos = robot.GetActualTCPPose()
-    print("Current Cartesian position of the robot",desc_pos)
-    count = 100
-    error_cart =0
-    error = robot.ServoMoveStart() #ServoMoveStart
-    print("Servo motion start error code",error)
-    while(count).
-        error = robot.ServoCart(mode, n_pos, vel=40) #Cartesian space servo mode motion
-        if error!=0.
-            error_cart =error
-        count = count - 1
-        time.sleep(0.008)
-    print("Cartesian space servo mode motion error code", error_cart)
-    error = robot.ServoMoveEnd() # servo move end
-    print("Servo motion end error code",error)
-
-Point-to-point motion in Cartesian space
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``MoveCart(desc_pos, tool, user, vel = 20.0, acc = 0.0, ovl = 100.0, blendT = -1.0, config = -1)``"
-    "Description", "Point-to-point motion in Cartesian space"
-    "Mandatory parameters", "- ``desc_pos``: target Cartesian position;
-    - ``tool``: tool number, [0 to 14];
-    - ``user``: artifact number, [0 to 14];"
-    "Default parameters", "- ``vel``: velocity, range [0 to 100], default 20.0;
-    - ``acc``: acceleration, range [0-100], not available, default 0.0; 
-    - ``ovl``: velocity scaling factor, [0 to 100], default 100.0.
-    - ``blendT``:[-1.0]-motion in place (blocking), [0~500]-smoothing time (non-blocking) in [ms] default -1.0;
-    - ``config``: joint configuration, [-1] - solve with reference to current joint position, [0~7] - solve based on joint configuration default is -1"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
--------------------------------------------------------------------------------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    desc_pos7 = [236.794,-475.119, 65.379, -176.938, 2.535, -179.829]
-    desc_pos8 = [236.794,-575.119, 165.379, -176.938, 2.535, -179.829]
-    desc_pos9 = [236.794,-475.119, 265.379, -176.938, 2.535, -179.829]
-    tool = 0 #Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    robot.MoveCart(desc_pos7, tool, user)
-    print("Cartesian space point-to-point motion point 7: error code", ret) 
-    robot.MoveCart(desc_pos8, tool, user, vel=30)
-    print("Cartesian space point-to-point motion point 8: error code", ret) 
-    robot.MoveCart(desc_pos9, tool, user,)
-    print("Cartesian space point-to-point motion point 9: error code", ret)
-
-Robot spline motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    desc_pos_dt = [0.0,0.0,0.0,0.0,0.0,0.0]  # [x, y, z, rx, ry, rz]
+    desc_pos_dt[2] = -0.5 
+    pos_gain = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+    mode = 2
+    vel = 0.0
+    acc = 0.0
+    cmdT = 0.008
+    filterT = 0.0 
+    gain = 0.0 
+    flag = 0
+    count = 100 
+    robot.SetSpeed(20)
+    while count > 0:
+        robot.ServoCart(mode=mode, desc_pos=desc_pos_dt, pos_gain=pos_gain, acc=acc, vel=vel, cmdT=cmdT, filterT=filterT, gain=gain)
+        count -= 1
+        time.sleep(cmdT)
+    robot.CloseRPC()
 
 Start of spline motion
------------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -575,7 +501,7 @@ Start of spline motion
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Sample motion PTP
----------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -592,7 +518,7 @@ Sample motion PTP
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 End of spline motion
-----------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -603,8 +529,8 @@ End of spline motion
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Spline motion code example
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -612,26 +538,37 @@ Code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    tool = 0 #Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    joint_pos1 = [116.489,-85.278,111.501,-112.486,-85.561,24.693]
-    joint_pos2 = [86.489,-65.278,101.501,-112.486,-85.561,24.693]
-    joint_pos3 = [116.489,-45.278,91.501,-82.486,-85.561,24.693]
-    ret = robot.SplineStart() # Spline motion start
-    print("Sample motion started: error code", ret)
-    ret = robot.SplinePTP(joint_pos1, tool, user) #spline motion PTP
-    print("Sample motion PTP motion point 1: error code", ret) 
-    ret = robot.SplinePTP(joint_pos2, tool, user) #spline motion PTP
-    print("Sample motion PTP motion point 2: error code", ret) 
-    ret = robot.SplinePTP(joint_pos3, tool, user) #spline motion PTP
-    print("Sample motion PTP motion point 3: error code", ret)
-    ret = robot.SplineEnd() # end of spline motion
-    print("End of spline motion: error code", ret)
+    joint_points = [
+        [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256],  # j1
+        [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255],  # j2
+        [-61.954, -84.409, 108.153, -116.316, -91.283, 74.260],  # j3
+        [-89.575, -80.276, 102.713, -116.302, -91.284, 74.267]  # j4
+    ]
+    cart_points = [
+        [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833],  # desc_pos1
+        [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869],  # desc_pos2
+        [-327.622, 402.230, 320.402, -178.067, 2.127, -46.207],  # desc_pos3
+        [-104.066, 544.321, 327.023, -177.715, 3.371, -73.818]  # desc_pos4
+    ]
+    offset_pos = [0] * 6 
+    epos = [0] * 4 
+    tool = user = 0
+    vel = acc = ovl = 100.0 
+    blendT = -1.0  
+    flag = 0 
+    robot.SetSpeed(20)
+    err1 = robot.MoveJ(joint_pos=joint_points[0],tool=tool, user=user,vel=vel)
+    print(f"MoveJ 错误码: {err1}")
+    robot.SplineStart()
+    robot.SplinePTP(joint_pos=joint_points[0],tool=tool, user=user)
+    robot.SplinePTP(joint_pos=joint_points[1],tool=tool, user=user)
+    robot.SplinePTP(joint_pos=joint_points[2],tool=tool, user=user)
+    robot.SplinePTP(joint_pos=joint_points[3],tool=tool, user=user)
+    robot.SplineEnd()
+    robot.CloseRPC()
 
-Robotics new spline motion
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 New spline movement begins
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: python SDK-v2.0.3
 
 .. csv-table:: 
@@ -644,20 +581,8 @@ New spline movement begins
     "Default Parameters", "- ``averageTime``: global average articulation time (ms) defaults to 2000"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-End of new spline movement
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-    
-    "Prototype", "``NewSplineEnd()``"
-    "Description", "End of New Sample Campaign"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-new spline command point
-----------------------------------------------------------------------------------------------------------------------------
+New spline command point
++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -675,9 +600,20 @@ new spline command point
     - ``blendR``: [0~1000]-smoothing radius in [mm] default 0.0;"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
+End of new spline movement
++++++++++++++++++++++++++++++++++++++++++++++++++
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+    
+    "Prototype", "``NewSplineEnd()``"
+    "Description", "End of New Sample Campaign"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Example of new spline motion code
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -685,23 +621,36 @@ Code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    tool = 0 #Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    lastFlag= 0 # whether it is the last point, 0 - no, 1 - yes
-    desc_pos4 = [236.794,-375.119, 65.379, -176.938, 2.535, -179.829]
-    desc_pos5 = [236.794,-275.119, 165.379, -176.938, 2.535, -179.829]
-    desc_pos6 = [286.794,-375.119, 265.379, -176.938, 2.535, -179.829]
-    ret = robot.NewSplineStart(1) # new spline motion start
-    print("New spline motion started: error code", ret)
-    ret = robot.NewSplinePoint(desc_pos4, tool, user, lastFlag)#New Spline Instruction point
-    print("New Sample Instruction Point 4: Error Code", ret) 
-    ret = robot.NewSplinePoint(desc_pos5, tool, user, lastFlag, vel=30)#NewSplineInstructionPoint
-    print("New Sample Instruction Point 5: Error Code", ret) 
-    lastFlag = 1
-    ret = robot.NewSplinePoint(desc_pos6, tool, user, lastFlag, vel=30)#NewSplineInstructionPoint
-    print("New Sample Instruction Point 6: Error Code", ret) 
-    ret = robot.NewSplineEnd() # end of new spline motion
-    print("End of new spline motion: error code", ret)
+    j1 = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    j2 = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    j3 = [-61.954, -84.409, 108.153, -116.316, -91.283, 74.260]
+    j4 = [-89.575, -80.276, 102.713, -116.302, -91.284, 74.267]
+    j5 = [-95.228, -54.621, 73.691, -112.245, -91.280, 74.268]
+    desc_pos1 = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    desc_pos2 = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    desc_pos3 = [-327.622, 402.230, 320.402, -178.067, 2.127, -46.207]
+    desc_pos4 = [-104.066, 544.321, 327.023, -177.715, 3.371, -73.818]
+    desc_pos5 = [-33.421, 732.572, 275.103, -177.907, 2.709, -79.482]
+    offset_pos = [0, 0, 0, 0, 0, 0]
+    epos = [0, 0, 0, 0]
+    tool = 0
+    user = 0
+    vel = 100.0
+    acc = 100.0
+    ovl = 100.0
+    blendT = -1.0
+    flag = 0
+    robot.SetSpeed(20)
+    err1 = robot.MoveJ(joint_pos=j1, tool=tool, user=user, vel=vel)
+    print(f"movej errcode:{err1}")
+    robot.NewSplineStart(1, 2000)
+    robot.NewSplinePoint(desc_pos=desc_pos1, tool=tool, user=user, vel=vel, lastFlag=-1, blendR=0)
+    robot.NewSplinePoint(desc_pos=desc_pos2, tool=tool, user=user, vel=vel, lastFlag=-1, blendR=0)
+    robot.NewSplinePoint(desc_pos=desc_pos3, tool=tool, user=user, vel=vel, lastFlag=-1, blendR=0)
+    robot.NewSplinePoint(desc_pos=desc_pos4, tool=tool, user=user, vel=vel, lastFlag=-1, blendR=0)
+    robot.NewSplinePoint(desc_pos=desc_pos5, tool=tool, user=user, vel=vel, lastFlag=-1, blendR=0)
+    robot.NewSplineEnd()
+    robot.CloseRPC()
 
 Robot termination motion
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -715,31 +664,8 @@ Robot termination motion
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
--------------------------------------------------------------------------------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    desc_pos1 = [-187.519, 319.248, 397, -157.278, -31.188, 107.199]
-    desc_pos2 = [-187.519, 310.248, 297, -157.278, -31.188, 107.199]
-    joint_pos1 = [-83.24, -96.476, 93.688, -114.079, -62, -100]
-    tool = 0 #Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    ret = robot.MoveL(desc_pos1, tool, user, joint_pos=joint_pos1) # linear motion in Cartesian space
-    print("Cartesian space linear motion point 1: error code", ret)
-    ret = robot.StopMotion() #Stop motion
-    print("Terminating motion: error code", ret) 
-    robot.MoveL(desc_pos2, tool, user, vel=40, acc=100)
-    print("Cartesian space linear motion point 2: error code", ret)
-
 Robot pause
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Python SDK-v2.0.8-3.7.8
-
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -752,8 +678,6 @@ Robot pause
 
 Robot resume motion
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: Python SDK-v2.0.8-3.7.8
-    
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -764,10 +688,42 @@ Robot resume motion
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Robot points are shifted overall
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Motion pause, resume, and stop code examples
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    j1 =[-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    j5 =[-95.228, -54.621, 73.691, -112.245, -91.280, 74.268]
+    desc_pos1 = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    desc_pos5 = [-33.421, 732.572, 275.103, -177.907, 2.709, -79.482]
+    offset_pos = [0, 0, 0, 0, 0, 0]
+    epos = [0, 0, 0, 0]
+    tool = 0
+    user = 0
+    vel = 100.0
+    acc = 100.0
+    ovl = 100.0
+    blendT = -1.0
+    flag = 0
+    robot.SetSpeed(20)
+    rtn = robot.MoveJ(joint_pos=j1, tool=tool, user=user, vel=vel)
+    rtn = robot.MoveJ(joint_pos=j5, tool=tool, user=user, vel=vel, blendT=1)
+    time.sleep(1)
+    robot.PauseMotion()
+    time.sleep(1)
+    robot.ResumeMotion()
+    time.sleep(1)
+    robot.StopMotion()
+    time.sleep(1)
+    robot.CloseRPC()
+
 Overall shift in points begins
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -780,7 +736,7 @@ Overall shift in points begins
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Overall offset of points ends
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
@@ -791,8 +747,8 @@ Overall offset of points ends
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Point offset code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
@@ -800,24 +756,29 @@ Code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    desc_pos3 = [-127.519, 256.248, 312, -147.278, -51.588, 107.199]
-    desc_pos4 = [-140.519, 219.248, 300, -137.278, -11.188, 127.199]
-    desc_pos5 = [-187.519, 319.248, 397, -157.278, -31.188, 107.199]
-    desc_pos6 = [-207.519, 229.248, 347, -157.278, -31.188, 107.199]
-    tool = 0 #Tool coordinate system number
-    user = 0 #Workpiece coordinate system number
-    flag = 1 #0 - offset in base/workpiece coordinate system, 2 - offset in tool coordinate system
-    offset_pos = [10,20,30,0,0,0] #bit position offset
-    ret = robot.PointsOffsetEnable(flag,offset_pos)
-    print("Point overall offset started: error code", ret)
-    robot.MoveL(desc_pos3, tool, user, offset_flag=1, offset_pos=[10,10,10,0,0,0])
-    print("Cartesian space linear motion point 3: error code", ret) 
-    robot.MoveL(desc_pos4, tool, user, vel=30, acc=100)
-    print("Cartesian space linear motion point 4: error code", ret) 
-    robot.MoveL(desc_pos5, tool, user)
-    print("Cartesian space linear motion point 5: error code", ret) 
-    ret = robot.PointsOffsetDisable()
-    print("End of overall point offset: error code", ret)
+    j1 = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    j2 = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    desc_pos1 = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    desc_pos2 = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    offset_pos = [0, 0, 0, 0, 0, 0]
+    offset_pos1 = [0, 0, 50, 0, 0, 0]
+    epos = [0, 0, 0, 0]
+    tool = 0
+    user = 0
+    vel = 100.0
+    acc = 100.0
+    ovl = 100.0
+    blendT = -1.0
+    flag = 0
+    robot.SetSpeed(20)
+    robot.MoveJ(joint_pos=j1,tool=tool, user=user, vel=vel)
+    robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel)
+    time.sleep(1)
+    robot.PointsOffsetEnable(flag=0, offset_pos=offset_pos1)
+    robot.MoveJ(joint_pos=j1,tool=tool, user=user, vel=vel)
+    robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel)
+    robot.PointsOffsetDisable()
+    robot.CloseRPC()
 
 Control box motion AO start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -835,29 +796,6 @@ Control box motion AO start
     - ``maxAOPercent``: percentage of AO corresponding to the maximum TCP speed value, default 100%;
     - ``zeroZoneCmp``: deadzone compensation value AO percentage, shaped, default 20%, range [0-100]."
     "Return Value", "Error Code Success-0 Failure- errcode"
-    
-Code example
----------------------------------------------------------------------------------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # Control box motion AO start
-    error = robot.MoveAOStart(0,100,98,1)
-    print("MoveAOStart",error)
-    error,joint_pos = robot.GetActualJointPosDegree()
-    print("GetActualJointPosDegree",error,joint_pos)
-    joint_pos[0] = joint_pos[0]+10
-    # Robot joint motion
-    error = robot.MoveJ(joint_pos,1,1)
-    print("MoveJ",error)
-    time.sleep(3)
-    # Control box motion AO stop
-    error = robot.MoveAOStop()
-    print("MoveAOStop",error)
 
 End of control box movement AO
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -889,30 +827,7 @@ End Motion AO Start
     - ``maxAOPercent``: percentage of AO corresponding to the maximum TCP speed value, default 100%;
     - ``zeroZoneCmp``: deadzone compensation value AO percentage, shaped, default 20%, range [0-100]."
     "Return Value", "Error Code Success-0 Failure- errcode"
-        
-Code example
----------------------------------------------------------------------------------------------------------------------------
 
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    # End movement AO starts
-    error = robot.MoveToolAOStart(0,100,98,1)
-    print("MoveToolAOStart",error)
-    error,desc_pos = robot.GetActualTCPPose()
-    print("GetActualTCPPose",error,desc_pos)
-    desc_pos[2] = desc_pos[2]-50
-    # Linear motion in Cartesian space
-    error = robot.MoveL(desc_pos,1,1)
-    print("MoveL",error)
-    time.sleep(3)
-    # End motion AO stops
-    error = robot.MoveToolAOStop()
-    print("MoveToolAOStop",error)
-    
 End movement AO end
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.4
@@ -927,9 +842,44 @@ End movement AO end
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
+AO flyshot code example
++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    j1 = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    j2 = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    desc_pos1 = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    desc_pos2 = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    offset_pos = [0, 0, 0, 0, 0, 0]
+    offset_pos1 = [0, 0, 50, 0, 0, 0]
+    epos = [0, 0, 0, 0]
+    tool = 0
+    user = 0
+    vel = 20.0
+    acc = 20.0
+    ovl = 100.0
+    blendT = -1.0
+    flag = 0
+    robot.SetSpeed(20)
+    robot.MoveAOStart(0, 100, 100, 20)
+    robot.MoveJ(joint_pos=j1,tool=tool, user=user, vel=vel)
+    robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel)
+    robot.MoveAOStop()
+    time.sleep(1)
+    robot.MoveToolAOStart(0, 100, 100, 20)
+    robot.MoveJ(joint_pos=j1,tool=tool, user=user, vel=vel)
+    robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel)
+    robot.MoveToolAOStop()
+    robot.CloseRPC()
+
 Start Ptp motion FIR filtering
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v3.8.2
+.. versionadded:: python SDK-v2.1.2
 
 .. csv-table:: 
     :stub-columns: 1
@@ -955,28 +905,6 @@ Disable Ptp motion FIR filtering
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
-
-Code example
-------------------------------------------------------------------------------------------
-
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    startdescPose = [-569.710, -132.595, 395.147, 178.418, -1.893, 171.051]
-    startjointPos = [-2.334, -79.300, 108.196, -120.594, -91.790, -83.386]
-    enddescPose = [-366.397, -572.427, 418.339, -178.972, 1.829, -142.970]
-    endjointPos = [43.651, -70.284, 91.057, -109.075, -88.768, -83.382]
-    exaxisPos = [0, 0, 0, 0]
-    offdese = [0, 0, 0, 0, 0, 0]
-
-    # Ptp motion FIR filtering is turned on
-    robot.PtpFIRPlanningStart(maxAcc=1000.0, maxJek=1000.0)
-    robot.MoveJ(startjointPos, 0, 0,vel=50)
-    robot.MoveJ(endjointPos, 0, 0,vel=50)
-    robot.PtpFIRPlanningEnd()
 
 LIN, ARC motion FIR filtering is started
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1008,44 +936,43 @@ Turn off LIN and ARC motion FIR filtering
     "Mandatory parameter", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"  
-
-Code example
----------------------------------------------------------------------------------------------------------
-
+    
+FIR filtering code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    startdescPose = [-569.710, -132.595, 395.147, 178.418, -1.893, 171.051]
-    startjointPos = [-2.334, -79.300, 108.196, -120.594, -91.790, -83.386]
-    enddescPose = [-366.397, -572.427, 418.339, -178.972, 1.829, -142.970]
-    endjointPos = [43.651, -70.284, 91.057, -109.075, -88.768, -83.382]
-    exaxisPos = [0, 0, 0, 0]
-    offdese = [0, 0, 0, 0, 0, 0]
-
-    # LIN, ARC motion FIR filtering is turned on
-    robot.LinArcFIRPlanningStart(5000, 5000, 5000, 5000)
-    robot.MoveL(startdescPose, 0, 0,vel=100)
-    robot.MoveL(enddescPose, 0, 0,vel=100)
+    startjointPos = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    startjointPos = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    midjointPos = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    endjointPos = [-29.777, -84.536, 109.275, -114.075, -86.655, 74.257]
+    startdescPose = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    middescPose = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    enddescPose = [-487.434, 154.362, 308.576, 176.600, 0.268, -14.061]
+    exaxisPos = [0.0, 0.0, 0.0, 0.0]
+    offdese = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    rtn = robot.PtpFIRPlanningStart(1000.0, 1000.0)
+    print(f"PtpFIRPlanningStart rtn is {rtn}")
+    error = robot.MoveJ(joint_pos=startjointPos,tool= 0,user= 0,desc_pos=startdescPose,vel= 100,acc=100,ovl=100, blendT=-1.0, offset_flag=0)
+    print(f"MoveJ rtn is {rtn}")
+    error = robot.MoveJ(joint_pos=endjointPos,tool= 0,user= 0,desc_pos=enddescPose,vel= 100,acc=100,ovl=100, blendT=-1.0, offset_flag=0)
+    print(f"MoveJ rtn is {rtn}")
+    robot.PtpFIRPlanningEnd()
+    print(f"PtpFIRPlanningEnd rtn is {rtn}")
+    rtn = robot.LinArcFIRPlanningStart(1000, 1000, 1000, 1000)
+    print(f"LinArcFIRPlanningStart rtn is {rtn}")
+    error = robot.MoveL(desc_pos=startdescPose,tool= 0,user= 0, joint_pos=startjointPos,vel= 100,overSpeedStrategy=1,speedPercent=1)
+    print(f"MoveL rtn is {rtn}")
+    error = robot.MoveC(desc_pos_p=middescPose,tool_p= 0,user_p= 0, joint_pos_p=midjointPos,vel_p= 100,desc_pos_t=enddescPose,tool_t= 0,user_t= 0,joint_pos_t=endjointPos,vel_t= 100)
+    print(f"MoveC rtn is {rtn}")
     robot.LinArcFIRPlanningEnd()
+    print(f"LinArcFIRPlanningEnd rtn is {rtn}")
+    robot.CloseRPC()
 
-Stop Motion
-+++++++++++++++++++++++
-.. versionadded:: python SDK-v2.1.1
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-    
-    "Prototype", "``StopMove()``"
-    "Description", "Stop motion"
-    "Required Parameters", "None"
-    "Default Parameters", "None"
-    "Return Value", "Error code (0-success, errcode-failure)"  
-
-Acceleration Smooth Start
+Acceleration smooth on
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.1
 
@@ -1054,12 +981,12 @@ Acceleration Smooth Start
     :widths: 10 30
 
     "Prototype", "``AccSmoothStart(saveFlag_flag)``"
-    "Description", "Enable acceleration smoothing"
-    "Required Parameters", "- ``saveFlag_flag``: Whether to save after power off"
-    "Default Parameters", "None"
-    "Return Value", "Error code (0-success, errcode-failure)"
+    "Description", "Acceleration smooth on"
+    "Mandatory parameters", "- ``saveFlag_flag``: Power off and save"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Acceleration Smooth End
+Acceleration smooth closing
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.1
 
@@ -1068,30 +995,133 @@ Acceleration Smooth End
     :widths: 10 30
 
     "Prototype", "``AccSmoothEnd(saveFlag_flag)``"
-    "Description", "Disable acceleration smoothing"
-    "Required Parameters", "- ``saveFlag_flag``: Whether to save after power off"
-    "Default Parameters", "None"
-    "Return Value", "Error code (0-success, errcode-failure)"
+    "Description", "Acceleration smooth closing"
+    "Mandatory parameters", "- ``saveFlag_flag``: Power off and save"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
 
-Code Example
-------------
+Acceleration smoothing code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
-    # Connect to robot controller
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
+    startjointPos = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    endjointPos = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    startdescPose = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    enddescPose = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    exaxisPos = [0.0, 0.0, 0.0, 0.0]
+    offdese = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    rtn = robot.AccSmoothStart(0)
+    print(f"AccSmoothStart rtn is {rtn}")
+    robot.MoveJ(joint_pos=startjointPos,tool= 0,user= 0,vel= 100)
+    robot.MoveJ(joint_pos=endjointPos,tool= 0,user= 0,vel= 100)
+    rtn = robot.AccSmoothEnd(0)
+    print(f"AccSmoothEnd rtn is {rtn}")
 
-    JP1 = [88.927,-85.834,80.289,-85.561,-91.388,108.718]
-    DP1 = [88.739,-527.617,514.939,-179.039,1.494,70.209]
+Setting the machine's specified attitude speed on
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
 
-    JP2 = [27.036,-83.909,80.284,-85.579,-90.027,108.604]
-    DP2 = [-433.125,-334.428,497.139,-179.723,-0.745,8.437]
-    error = robot.AccSmoothStart(saveFlag=0)
-    print("AccSmoothStart return:",error)
-    error = robot.MoveJ(JP1, tool=0, user=0, vel=100)
-    error = robot.MoveJ(JP2, tool=0, user=0, vel=100)
-    error = robot.MoveJ(JP1, tool=0, user=0, vel=100)
-    error = robot.MoveJ(JP2, tool=0, user=0, vel=100)
-    error = robot.AccSmoothEnd(saveFlag=0)
-    print("AccSmoothEnd return:", error)
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AngularSpeedStart(ratio)``"
+    "Description", "Specifies that attitude speed is on."
+    "Mandatory parameters", "- ``ratio``: percentage of attitude velocity [0-300]"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Specify Attitude Velocity Off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``AngularSpeedEnd()``"
+    "Description", "Specify Attitude Velocity Off"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "
+
+Robot specified pose velocity code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    startjointPos = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    endjointPos = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    startdescPose = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    enddescPose = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    exaxisPos = [0.0, 0.0, 0.0, 0.0]
+    offdese = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    rtn = robot.AngularSpeedStart(50)
+    print(f"AngularSpeedStart rtn is {rtn}")
+    robot.MoveJ(joint_pos=startjointPos, tool=0,user= 0,vel= 100)
+    robot.MoveJ(joint_pos=endjointPos, tool=0,user= 0,vel= 100)
+    rtn = robot.AngularSpeedEnd()
+    print(f"AngularSpeedEnd rtn is {rtn}")
+    robot.CloseRPC()
+
+Odd-position protection on.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SingularAvoidStart(protectMode, minShoulderPos=100, minElbowPos=50, minWristPos=10)``"
+    "Description", "Turn on odd-bit posture protection."
+    "Mandatory parameters", "
+    - ``protectMode``: singular position protection protection mode: 0 - articulated mode; 1 - Cartesian mode
+    "
+    "Default Parameters", "- ``minShoulderPos``: Shoulder singularity adjustment range (mm), default 100.0
+    - ``minElbowPos``: elbow singularity adjustment range (mm), default 50.0
+    - ``minWristPos``: range of wrist singularity adjustment (°), default 10.0"
+    "Return Value", "- errcode Success-0 Failure- errcode"
+
+Odd position protection off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SingularAvoidEnd()``"
+    "Description", "Turn off odd-position protection"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"
+
+Example of robot singular pose protection code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    startjointPos = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
+    endjointPos = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
+    startdescPose = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
+    enddescPose = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
+    exaxisPos = [0.0, 0.0, 0.0, 0.0]
+    offdese = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    rtn = robot.SingularAvoidStart(2, 10, 5, 5)
+    print(f"SingularAvoidStart rtn is {rtn}")
+    robot.MoveJ(joint_pos=startjointPos, tool=0,user= 0,vel= 100)
+    robot.MoveJ(joint_pos=endjointPos, tool=0,user= 0,vel= 100)
+    rtn = robot.SingularAvoidEnd()
+    print(f"SingularAvoidEnd rtn is {rtn}")
+    robot.CloseRPC()

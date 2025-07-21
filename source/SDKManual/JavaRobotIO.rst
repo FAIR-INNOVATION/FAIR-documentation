@@ -1,292 +1,478 @@
 Robot IO
-=====================================
+========================
 
 .. toctree:: 
     :maxdepth: 5
 
-Setting the control box digital output
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set control box digital output
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Setting up control box digital outputs
-    * @param [in] id io number, range [0~15]
-    * @param [in] status 0-off, 1-on
-    * @param [in] smooth 0-not smooth, 1-smooth
-    * @param [in] block 0-blocking, 1-non-blocking
-    * @return error code
+    * @brief  Set control box digital output
+    * @param  [in] id  IO number, range [0~15]
+    * @param  [in] status 0-off, 1-on
+    * @param  [in] smooth 0-no smoothing, 1-smoothing
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @return  Error code
     */
-    int SetDO(int id, int status, int smooth, int block). 
+    int SetDO(int id, int status, int smooth, int block); 
 
-Setting Tool Digital Outputs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set tool digital output
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief setup tool digital output
-    * @param [in] id io number, range [0~1]
-    * @param [in] status 0-off, 1-on
-    * @param [in] smooth 0-not smooth, 1-smooth
-    * @param [in] block 0-blocking, 1-non-blocking
-    * @return error code
+    * @brief  Set tool digital output
+    * @param  [in] id  IO number, range [0~1]
+    * @param  [in] status 0-off, 1-on
+    * @param  [in] smooth 0-no smoothing, 1-smoothing
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @return  Error code
     */
     int SetToolDO(int id, int status, int smooth, int block); 
 
-Setting the control box analog output
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set control box analog output
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Setting up control box analog outputs
-    * @param [in] id id io number, range [0~1]
-    * @param [in] id value Percentage of current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V].
-    * @param [in] id block 0-blocking, 1-non-blocking
-    * @return error code
+    * @brief  Set control box analog output
+    * @param  [in] id  IO number, range [0~1]
+    * @param  [in] value Current or voltage value percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @return  Error code
     */
     int SetAO(int id, double value, int block); 
 
-Setting Tool Analog Outputs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set tool analog output
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Setting up tool analog outputs
-    * @param [in] id io number, range [0]
-    * @param [in] value Percentage of current or voltage value, range [0~100] corresponding to current value [0~20mA] or voltage [0~10V].
-    * @param [in] block 0-blocking, 1-non-blocking
-    * @return error code
+    * @brief  Set tool analog output
+    * @param  [in] id  IO number, range [0]
+    * @param  [in] value Current or voltage value percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @return  Error code
     */
     int SetToolAO(int id, double value, int block); 
 
-Waiting for control box digital inputs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Digital and analog output setting example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestAODO(Robot robot)
+    {
+        int status = 1;
+        int smooth = 0;
+        int block = 0;
+
+        for (int i = 0; i < 16; i++)
+        {
+            robot.SetDO(i, status, smooth, block);
+            robot.Sleep(300);
+        }
+
+        status = 0;
+
+        for (int i = 0; i < 16; i++)
+        {
+            robot.SetDO(i, status, smooth, block);
+            robot.Sleep(300);
+        }
+
+        status = 1;
+
+        for (int i = 0; i < 2; i++)
+        {
+            robot.SetToolDO(i, status, smooth, block);
+            robot.Sleep(1000);
+        }
+
+        status = 0;
+
+        for (int i = 0; i < 2; i++)
+        {
+            robot.SetToolDO(i, status, smooth, block);
+            robot.Sleep(1000);
+        }
+
+        for (int i = 0; i < 100; i++)
+        {
+            robot.SetAO(0, i, block);
+            robot.Sleep(30);
+        }
+
+        for (int i = 0; i < 100; i++)
+        {
+            robot.SetToolAO(0, i, block);
+            robot.Sleep(30);
+        }
+
+        robot.CloseRPC();
+        return 0;
+    }
+
+Get control box digital input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief waiting for control box digital inputs
-    * @param [in] id io number, range [0~15]
-    * @param [in] status 0-off, 1-on
-    * @param [in] max_time Maximum wait time in ms
-    * @param [in] opt after timeout policy, 0-program stops and prompts for timeout, 1-ignores timeout prompts program continues, 2-always waits
-    * @return error code
+    * @brief  Get control box digital input
+    * @param  [in] id  IO number, range [0~15]
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @param  [out] level  0-low level, 1-high level
+    * @return  Error code
+    */   
+    int GetDI(int id, int block, int[] level);
+
+Get tool digital input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get tool digital input
+    * @param  [in] id    IO number, range [0~1]
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @param  [out] level 0-low level, 1-high level
+    * @return  Error code
+    */   
+    int GetToolDI(int id, int block, int[] level);
+
+Get control box analog input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get control box analog input
+    * @param  [in] id  IO number, range [0~1]
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @param  [out] persent Input current or voltage value percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    * @return  Error code
+    */   
+    int GetAI(int id, int block, double[] persent)
+
+Get tool analog input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get tool analog input
+    * @param  [in] id  IO number, range [0]
+    * @param  [in] block  0-blocking, 1-non-blocking
+    * @param  [out] persent Input current or voltage value percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    * @return  Error code
+    */   
+    int GetToolAI(int id, int block, double[] persent)
+
+Get robot end-point record button state
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get robot end-point record button state
+    * @param  [out] state Button state, 0-pressed, 1-released
+    * @return  Error code
+    */   
+    int GetAxlePointRecordBtnState(int[] state)
+
+Get robot end DO output state
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get robot end DO output state
+    * @param  [out] do_state DO output state, do0~do1 corresponds to bit1~bit2, starting from bit0
+    * @return  Error code
+    */   
+    int GetToolDO(int[] do_state)
+
+Get robot controller DO output state
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get robot controller DO output state
+    * @param  [out] do_state_h DO output state, co0~co7 corresponds to bit0~bit7
+    * @param  [out] do_state_l DO output state, do0~do7 corresponds to bit0~bit7
+    * @return  Error code
+    */   
+    int GetDO(int[] do_state_h, int[] do_state_l)
+
+Get robot DI/DO state example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestGetDIAI(Robot robot)
+    {
+        int status = 1;
+        int smooth = 0;
+        int block = 0;
+        int[] di =new int[]{0}, tool_di =new int[] {0};
+        double[] ai =new double[] {0}, tool_ai = new double[]{0};
+        double value = 0.0;
+
+        robot.GetDI(0, block, di);
+        System.out.println("di0:"+di[0]);
+
+        robot.GetToolDI(1, block, tool_di);
+        System.out.println("tool_di1:"+ tool_di[0]);
+
+        robot.GetAI(0, block, ai);
+        System.out.println("ai0:"+ ai[0]);
+
+        robot.GetToolAI(0, block, tool_ai);
+        System.out.println("tool_ai0:"+ tool_ai[0]);
+
+        int[] _button_state=new int[]{0};
+        robot.GetAxlePointRecordBtnState(_button_state);
+        System.out.println("_button_state is: "+ _button_state[0]);
+
+        int[] tool_do_state=new int[]{0};
+        robot.GetToolDO(tool_do_state);
+        System.out.println("tool DO state is: "+ tool_do_state[0]);
+
+        int[] do_state_h=new int[]{0};
+        int[] do_state_l=new int[]{0};
+        robot.GetDO(do_state_h, do_state_l);
+        System.out.println("DO state high is: "+do_state_h[0]+", DO state low is: "+ do_state_l[0]);
+
+        return 0;
+    }
+
+Wait for control box digital input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Wait for control box digital input
+    * @param  [in]  id  IO number, range [0~15]
+    * @param  [in]  status 0-off, 1-on
+    * @param  [in]  max_time  Maximum wait time in ms
+    * @param  [in]  opt  Timeout strategy, 0-program stops and prompts timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    * @return  Error code
     */
     int WaitDI(int id, int status, int max_time, int opt); 
 
-Waiting for control box with multiple digital inputs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wait for multiple control box digital inputs
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Waiting for control box with multiple digital inputs
-    * @param [in] mode 0-multiple with, 1-multiple or
-    * @param [in] id io number, bit0~bit7 corresponds to DI0~DI7, bit8~bit15 corresponds to CI0~CI7
-    * @param [in] status 0-off, 1-on
-    * @param [in] max_time Maximum wait time in ms
-    * @param [in] opt after timeout policy, 0-program stops and prompts for timeout, 1-ignores timeout prompts program continues execution, 2-always waits
-    * @return error code
+    * @brief Wait for multiple control box digital inputs
+    * @param  [in] mode 0-multi AND, 1-multi OR
+    * @param  [in] id  IO number, bit0~bit7 corresponds to DI0~DI7, bit8~bit15 corresponds to CI0~CI7
+    * @param  [in] status 0-off, 1-on
+    * @param  [in] max_time  Maximum wait time in ms
+    * @param  [in] opt  Timeout strategy, 0-program stops and prompts timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    * @return  Error code
     */
     int WaitMultiDI(int mode, int id, int status, int max_time, int opt); 
 
-Waiting for tool digital inputs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wait for tool digital input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Waiting for tool digital inputs
-    * @param [in] id io number, range [0~1]
-    * @param [in] status 0-off, 1-on
-    * @param [in] max_time Maximum wait time in ms
-    * @param [in] opt after timeout policy, 0-program stops and prompts for timeout, 1-ignores timeout prompts program continues, 2-always waits
-    * @return error code
+    * @brief Wait for tool digital input
+    * @param  [in]  id  IO number, range [0~1]
+    * @param  [in]  status 0-off, 1-on
+    * @param  [in]  max_time  Maximum wait time in ms
+    * @param  [in]  opt  Timeout strategy, 0-program stops and prompts timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    * @return  Error code
     */
     int WaitToolDI(int id, int status, int max_time, int opt); 
 
-Waiting for control box analog inputs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wait for control box analog input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Waiting for control box analog inputs.
-    * @param [in] id io number, range [0~1]
-    * @param [in] sign 0-more than, 1-less than
-    * @param [in] value Input current or voltage value percentage, range [0~100] corresponding to current value [0~20mS] or voltage [0~10V].
-    * @param [in] max_time Maximum wait time in ms
-    * @param [in] opt after timeout policy, 0-program stops and prompts for timeout, 1-ignores timeout prompts program continues execution, 2-always waits
-    * @return error code
+    * @brief Wait for control box analog input
+    * @param  [in]  id  IO number, range [0~1]
+    * @param  [in]  sign 0-greater than, 1-less than
+    * @param  [in]  value Input current or voltage value percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    * @param  [in]  max_time  Maximum wait time in ms
+    * @param  [in]  opt  Timeout strategy, 0-program stops and prompts timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    * @return  Error code
     */
     int WaitAI(int id, int sign, double value, int max_time, int opt);   
 
-Waiting for tool analog inputs
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wait for tool analog input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Waiting for tool analog input
-    * @param [in] id io number, range [0]
-    * @param [in] sign 0 - greater than, 1 - less than
-    * @param [in] value Input current or voltage value percentage, range [0~100] corresponding to current value [0~20mS] or voltage [0~10V].
-    * @param [in] max_time Maximum wait time in ms
-    * @param [in] opt after timeout policy, 0-program stops and prompts for timeout, 1-ignores timeout prompts program continues, 2-always waits
-    * @return error code
+    * @brief Wait for tool analog input
+    * @param  [in]  id  IO number, range [0]
+    * @param  [in]  sign 0-greater than, 1-less than
+    * @param  [in]  value Input current or voltage value percentage, range [0~100] corresponding to current [0~20mA] or voltage [0~10V]
+    * @param  [in]  max_time  Maximum wait time in ms
+    * @param  [in]  opt  Timeout strategy, 0-program stops and prompts timeout, 1-ignore timeout and continue, 2-wait indefinitely
+    * @return  Error code
     */
     int WaitToolAI(int id, int sign, double value, int max_time, int opt); 
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Wait for digital/analog input signal example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static void main(String[] args)
+    public static int TestWaitDIAI(Robot robot)
     {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
-        {
-            System.out.println("rpc connection success");
-        }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.SetDO(8, 1, 0, 0);
-        robot.Sleep(3000);
-        robot.SetDO(8, 0, 0, 0);
+        int rtn=-1;
 
-        robot.SetToolDO(0, 1, 0, 0);
-        robot.Sleep(3000);
-        robot.SetToolDO(0, 0, 0, 0);
+        int status = 1;
+        int smooth = 0;
+        int block = 0;
+        int di = 0, tool_di = 0;
+        double ai = 0.0, tool_ai = 0.0;
+        double value = 0.0;
 
-        for(int i = 0; i < 90; i++)
-        {
-            robot.SetAO(0, i+1, 0);
-            robot.SetAO(1, i+1, 0);
-            robot.Sleep(50);
-        }
-        robot.SetAO(0, 0.0, 0);
-        robot.SetAO(1, 0.0, 0);
+        rtn = robot.WaitDI(0, 1, 1000, 1);
+        System.out.println("WaitDI over; rtn is: "+ rtn);
 
-        for(int i = 0; i < 99; i++)
-        {
-            robot.SetToolAO(0, i+1, 0);
-            robot.Sleep(50);
-        }
-        robot.SetToolAO(0, 0.0, 0);
+        robot.WaitMultiDI(1, 3, 3, 1000, 1);
+        System.out.println("WaitDI over; rtn is: "+ rtn);
 
-        System.out.println("wait start ");
-        robot.WaitDI(1, 1, 10000, 0);//WaitDI
-        robot.WaitMultiDI(0, 6, 6, 10000, 0);//WaitMultiDI
-        robot.WaitToolDI(0, 1, 5000, 0);//WaitToolDI
-        robot.WaitAI(0, 0, 8.0, 5000, 0);//WaitAI
-        robot.WaitToolAI(0, 0, 20, 5000, 0);//WaitToolAI
-        System.out.println("wait end ");
+        robot.WaitToolDI(1, 1, 1000, 1);
+        System.out.println("WaitDI over; rtn is: " + rtn);
+
+        robot.WaitAI(0, 0, 50, 1000, 1);
+        System.out.println("WaitDI over; rtn is: " + rtn);
+
+        robot.WaitToolAI(0, 0, 50, 1000, 1);
+        System.out.println("WaitDI over; rtn is: " + rtn);
+        return 0;
     }
 
-Setting whether the output is reset after the control box DO stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set whether control box DO resets after stop/pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Sets whether outputs are reset after control box DO stop/pause 
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return error code 
+    * @brief Set whether control box DO resets after stop/pause 
+    * @param [in] resetFlag  0-no reset; 1-reset
+    * @return Error code 
     */ 
     int SetOutputResetCtlBoxDO(int resetFlag);
 
-Setting whether the output is reset after the control box AO stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set whether control box AO resets after stop/pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Sets whether outputs are reset after control box AO stop/pause 
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return error code 
+    * @brief Set whether control box AO resets after stop/pause 
+    * @param [in] resetFlag  0-no reset; 1-reset
+    * @return Error code 
     */ 
     int SetOutputResetCtlBoxAO(int resetFlag);
 
-Sets whether the output is reset after the end tool DO stops/pause.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set whether end tool DO resets after stop/pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Sets whether output is reset after end tool DO stops/pause
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return error code 
+    * @brief Set whether end tool DO resets after stop/pause
+    * @param [in] resetFlag  0-no reset; 1-reset
+    * @return Error code 
     */ 
     int SetOutputResetAxleDO(int resetFlag);
 
-Set whether the output is reset after the end tool AO stops/pauses
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set whether end tool AO resets after stop/pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief sets whether the output is reset after the end tool AO stops/pauses. 
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return error code 
+    * @brief Set whether end tool AO resets after stop/pause 
+    * @param [in] resetFlag  0-no reset; 1-reset
+    * @return Error code 
     */ 
     int SetOutputResetAxleAO(int resetFlag);
     
-Sets whether the outputs are reset after an extended DO stop/pause.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set whether extended DO resets after stop/pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Sets whether output is reset after extended DO stop/pause
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return error code 
+    * @brief Set whether extended DO resets after stop/pause
+    * @param [in] resetFlag  0-no reset; 1-reset
+    * @return Error code 
     */ 
     int SetOutputResetExtDO(int resetFlag);
     
-Sets whether the output is reset after the expansion AO stops/pause.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set whether extended AO resets after stop/pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /** 
-    * @brief Sets whether output is reset after extended AO stop/pause
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return error code 
+    * @brief Set whether extended AO resets after stop/pause
+    * @param [in] resetFlag  0-no reset; 1-reset
+    * @return Error code 
     */ 
     int SetOutputResetExtAO(int resetFlag);
 
-Code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set whether SmartTool resets after stop/pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static void main(String[] args)
+    /** 
+    * @brief Set whether SmartTool resets after stop/pause
+    * @param [in] resetFlag  0-no reset; 1-reset
+    * @return Error code 
+    */ 
+    int SetOutputResetSmartToolDO(int resetFlag)
+
+LUA program output reset setting example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestDOReset(Robot robot)
     {
-        Robot robot = new Robot();
-        robot.SetReconnectParam(true,20,500);//Set the number of reconnections, interval
-        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
-        int rtn = robot.RPC("192.168.58.2");
-        if(rtn == 0)
+        int rtn=-1;
+        for (int i = 0; i < 16; i++)
         {
-            System.out.println("rpc connection success");
+            robot.SetDO(i, 1, 0, 0);
+            robot.Sleep(300);
         }
-        else
-        {
-            System.out.println("rpc connection fail");
-            return ;
-        }
-        robot.SetOutputResetCtlBoxDO(1);
-        robot.SetOutputResetAxleDO(1);//tools
-        robot.SetOutputResetCtlBoxAO(1);
-        robot.SetOutputResetAxleAO(1);//tools
+
+        int resetFlag = 1;
+        rtn = robot.SetOutputResetCtlBoxDO(resetFlag);
+        robot.SetOutputResetCtlBoxAO(resetFlag);
+        robot.SetOutputResetAxleDO(resetFlag);
+        robot.SetOutputResetAxleAO(resetFlag);
+        robot.SetOutputResetExtDO(resetFlag);
+        robot.SetOutputResetExtAO(resetFlag);
+        robot.SetOutputResetSmartToolDO(resetFlag);
+
+        robot.ProgramLoad("/fruser/test.lua");
+        robot.ProgramRun();
+        return 0;
     }

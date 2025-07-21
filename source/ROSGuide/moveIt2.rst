@@ -374,6 +374,7 @@ At this point it is possible to control the synchronized motion of the actual ro
 Fairino_hardware Plugin (official robot moveit configuration package)
 ---------------------------------------------------------------------------------
 In the ros2_ws directory, compile the functionality packages for your corresponding robot model, using the fairino5 robot as an example.
+In plugin corresponding to robotsofeware V3.8.3, torque command mode is added, which means robot can receive torque command.
 
 .. code-block:: shell
     :linenos:
@@ -384,7 +385,22 @@ In the ros2_ws directory, compile the functionality packages for your correspond
 
 Then you need to add the fairino_hardware plugin to synchronize the movement with the actual robot, go to “ros2_ws/install/fairino5_v6_moveit2_config/share/fairino5_v6_moveit2_config/” directory.
 
-Locate the fairino5_v6_robot.ros2_control.xacro file, replace "<plugin>mock_components/GenericSystem</plugin>" in line 9 of the file, with "<plugin>fairino_hardware/FairinoHardwareInterface</plugin>", save and exit.
+Locate the fairino5_v6_robot.ros2_control.xacro file, focus on the 3rd line of xacro file:
+
+.. code-block:: shell
+    :linenos:
+
+    use_fake_hardware:=false
+
+replace it to:
+
+.. code-block:: shell
+    :linenos:
+
+    use_fake_hardware:=true
+
+Be carful, the parameter "robot_control_mode" in line3 decides which operation mode robot start with when plugin loaded, 0 means position mode, which plugin will export position command interface, 1 means troque mode, which plugin will export effort command interface.
+The demo of torque mode operation will release in the fairino_hardware package which corresponding to robot softwareV3.8.4, please don't set this parameter to 1 before that.
 
 .. image:: img/fairino_harware_028.png
     :width: 6in

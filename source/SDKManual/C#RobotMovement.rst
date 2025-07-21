@@ -1,65 +1,64 @@
-RobotMovement
-===============================================
+Robot Motion
+=================
 
 .. toctree:: 
     :maxdepth: 5
-
-
-Jog point and click
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+jog point motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /** 
-    * :: @brief jog point and click 
-    * @param [in] refType pointing type: 0 - joint pointing, 2 - pointing in base coordinate system, 4 - pointing in tool coordinate system, 8 - pointing in workpiece coordinate system 
-    * @param [in] nb 1-joint 1 (or x-axis), 2-joint 2 (or y-axis), 3-joint 3 (or z-axis), 4-joint 4 (or rotation about x-axis), 5-joint 5 (or rotation about y-axis), 6-joint 6 (or rotation about z-axis)
+    * @brief jog pointing 
+    * @param [in] refType Type of pointing: 0-joint pointing, 2-pointing in base coordinate system, 4-pointing in tool coordinate system, 8-pointing in artifact coordinate system. 
+    * @param [in] nb 1-joint 1 (or x-axis), 2-joint 2 (or y-axis), 3-joint 3 (or z-axis), 4-joint 4 (or rotate around x-axis), 5-joint 5 (or rotate around y-axis), 6-joint 6 (or rotate around z-axis)
     * @param [in] dir 0-negative direction, 1-positive direction 
     * @param [in] vel velocity percentage, [0~100] 
-    * @param [in] acc Acceleration percentage, [0~100] 
-    * @param [in] max_dis The maximum angle of a single tap in [°] or distance in [mm]. 
-    * @return error code 
+    * @param [in] acc acceleration percentage, [0~100] 
+    * @param [in] max_dis Maximum angle of a single tap, in [°] or distance, in [mm] 
+    * @return Error code 
     */ 
     int StartJOG(byte refType, byte nb, byte dir, float vel, float acc, float max_dis);
-
-Jog tap to decelerate and stop
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+jog nudging deceleration stop
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * :: @brief jog tap to decelerate and stop.
-    * @param [in] ref 1-joint stopping, 3-stopping in base coordinate system, 5-stopping in tool coordinate system, 9-stopping in workpiece coordinate system
-    * @return error code
+    * @brief jog pointwise deceleration stops.
+    * @param [in] ref 1-joint-point deceleration stop, 3-point deceleration stop in base coordinate system, 5-point deceleration stop in tool coordinate system, 9-point deceleration stop in workpiece coordinate system
+    * @return Error code
     */
     int StopJOG(byte stopType).
-
-Jog tapping stops immediately
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+jog pointing stops immediately
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief jogging stops instantly
-    * @return error code
+    * @brief jog tapping stops immediately.
+    * @return Error code
     */
     int ImmStopJOG(); 
-
-Code Example
-++++++++++++++
+ 
+Sample Robot Tap Control Code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnJOG_Click(object sender, EventArgs e)
     {
         Robot robot = new Robot();
         robot.RPC("192.168.58.2"); 
 
         robot.SetSpeed(35);
-        robot.StartJOG(0, 1, 0, 15, 20.0f, 30.0f); //single-joint motion, StartJOG is a non-blocking command, receiving other motion commands (including StartJOG) in the motion state will be discarded
+        robot.StartJOG(0, 1, 0, 15, 20.0f, 30.0f);   //单关节运动，StartJOG为非阻塞指令，运动状态下接收其他运动指令（包含StartJOG）会被丢弃
         Thread.Sleep(1000);
-        robot.StopJOG(1); //Robot single-axis tap deceleration stops
-        //robot.ImmStopJOG(); //robot single-axis pointing stops immediately
+        robot.StopJOG(1);  //机器人单轴点动减速停止
+        //robot.ImmStopJOG();  //机器人单轴点动立即停止
         robot.StartJOG(0, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -76,10 +75,10 @@ Code Example
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(2, 1, 0, 15, 20.0f, 30.0f); //point motion in base coordinate system
+        robot.StartJOG(2, 1, 0, 15, 20.0f, 30.0f);   //基坐标系下点动
         Thread.Sleep(1000);
-        robot.StopJOG(3); //Robot single-axis pointing deceleration stops
-        //robot.ImmStopJOG(); //robot single-axis pointing stops immediately
+        robot.StopJOG(3);  //机器人单轴点动减速停止
+        //robot.ImmStopJOG();  //机器人单轴点动立即停止
         robot.StartJOG(2, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -96,10 +95,10 @@ Code Example
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(4, 1, 0, 15, 20.0f, 30.0f); //point motion in tool coordinate system
+        robot.StartJOG(4, 1, 0, 15, 20.0f, 30.0f);   //工具坐标系下点动
         Thread.Sleep(1000);
-        robot.StopJOG(5); //Robot single-axis pointing deceleration stops
-        //robot.ImmStopJOG(); //robot single-axis pointing stops immediately
+        robot.StopJOG(5);  //机器人单轴点动减速停止
+        //robot.ImmStopJOG();  //机器人单轴点动立即停止
         robot.StartJOG(4, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -116,10 +115,10 @@ Code Example
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(8, 1, 0, 15, 20.0f, 30.0f); //point motion in the workpiece coordinate system
+        robot.StartJOG(8, 1, 0, 15, 20.0f, 30.0f);   //工件坐标系下点动
         Thread.Sleep(1000);
-        robot.StopJOG(9); //Robot single-axis pointing deceleration stops
-        //robot.ImmStopJOG(); //robot single-axis pointing stops immediately
+        robot.StopJOG(9);  //机器人单轴点动减速停止
+        //robot.ImmStopJOG();  //机器人单轴点动立即停止
         robot.StartJOG(8, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -136,127 +135,146 @@ Code Example
         Thread.Sleep(1000);
         robot.ImmStopJOG();
     }
-
+ 
 Joint space motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Joint space movement
-    * @param [in] joint_pos Target joint position, in deg.
-    * @param [in] desc_pos Target Cartesian pose
-    * @param [in] tool tool coordinate number in the range [0~14].
+    * @brief Joint space motion.
+    * @param [in] joint_pos Target joint position in degrees.
+    * @param [in] desc_pos Target Cartesian position.
+    * @param [in] tool Tool coordinate number, range [0~14].
     * @param [in] user Workpiece coordinate number, range [0~14].
-    * @param [in] vel velocity percentage, range [0~100]
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet.
-    * @param [in] ovl velocity scaling factor, range [0~100]
-    * @param [in] epos Extended axis position in mm
+    * @param [in] vel velocity percentage, range [0~100] * @param [in] acc.
+    * @param [in] acc Acceleration percentage, range [0~100], not available yet.
+    * @param [in] ovl Velocity scaling factor, range [0~100].
+    * @param [in] epos Extended axis position in mm.
     * @param [in] blendT [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in ms
     * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
     * @param [in] offset_pos Bit position offset
-    * @return error code
+    * @return Error code
     */
     int MoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos epos, float blendT, byte offset_flag, DescPose offset_pos); 
-
-Cartesian linear motion in space
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Linear motion in Cartesian space
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Cartesian space linear motion
-    * @param [in] joint_pos Target joint position in deg.
-    * @param [in] desc_pos Target Cartesian pose
-    * @param [in] tool tool coordinate number in the range [0~14].
+    * @brief Linear motion in Cartesian space.
+    * @param [in] joint_pos target joint position in deg
+    * @param [in] desc_pos Target Cartesian position.
+    * @param [in] tool tool coordinate number, range [0~14].
     * @param [in] user Workpiece coordinate number, range [0~14].
-    * @param [in] vel velocity percentage, range [0~100]
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet.
+    * @param [in] vel velocity percentage, range [0~100] * @param [in] acc [in] tool coordinate number, range [0~14]
+    * @param [in] acc Acceleration percentage, range [0~100], not available yet.
     * @param [in] ovl velocity scaling factor, range [0~100]
-    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm  
-    * @param [in] epos Extended axis position in mm
+    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm    
+    * @param [in] epos extended axis position in mm
     * @param [in] search 0-no wire seek, 1-wire seek
     * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
-    * @param [in] offset_pos Bit position offset
-    * @param [in] overSpeedStrategy Overspeed handling strategy, 1-standard; 2-over speed error stop; 3-adaptive speed reduction, default 0
-    * @param [in] speedPercent Percentage of allowed speed reduction threshold [0-100], default 10%
-    * @return error code
-    */  
+    * @param [in] offset_pos Position offset
+    * @param [in] overSpeedStrategy over speed strategy, 1-standard, 2-over speed error stop, 3-adaptive speed reduction, default 0
+    * @param [in] speedPercent Allowed speed reduction threshold percentage [0-100], default 10%
+    * @return errorCode
+    */   
     int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos, int overSpeedStrategy = 0, int speedPercent = 10); 
-
+ 
 Circular motion in Cartesian space
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Cartesian space circular motion
-    * @param [in] joint_pos_p Path point joint position in deg.
-    * @param [in] desc_pos_p Path point Cartesian pose
-    * @param [in] ptool tool coordinate number, range [0~14]
-    * @param [in] puser Workpiece coordinate number, range [0~14].
+    * @brief Cartesian circular motion.
+    * @param [in] joint_pos_p Pathpoint joint position in deg.
+    * @param [in] desc_pos_p Path point Cartesian position.
+    * @param [in] ptool tool coordinate number, range [0~14].
+    * @param [in] puser workpiece coordinate number, range [0~14]
     * @param [in] pvel speed percentage, range [0~100]
-    * @param [in] pacc Acceleration percentage, range [0~100], not open yet.
-    * @param [in] epos_p Extended axis position in mm
+    * @param [in] pacc Acceleration percentage, range [0~100], not available yet.
+    * @param [in] epos_p Extended axis position, in mm
     * @param [in] poffset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
-    * @param [in] offset_pos_p bit position offset
+    * @param [in] offset_pos_p Positional offset
     * @param [in] joint_pos_t Joint position of target point, in deg.
-    * @param [in] desc_pos_t Target point Cartesian pose
-    * @param [in] ttool tool coordinate number, in the range [0 to 14].
+    * @param [in] desc_pos_t Cartesian position of target point.
+    * @param [in] ttool tool coordinate number, range [0~14].
     * @param [in] tuser Workpiece coordinate number, range [0~14].
-    * @param [in] tvel speed percentage, range [0~100]
-    * @param [in] tacc Acceleration percentage, range [0~100], not open yet.
-    * @param [in] epos_t Extended axis position in mm
-    * @param [in] toffset_flag 0 - no offset, 1 - offset in base/work coordinate system, 2 - offset in tool coordinate system
-    * @param [in] offset_pos_t bit position offset   
+    * @param [in] tvel Velocity percentage, range [0~100]
+    * @param [in] tacc Acceleration percentage, range [0~100], not available yet.
+    * @param [in] epos_t Extended axis position in mm.
+    * @param [in] toffset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos_t Bit position offset   
     * @param [in] ovl velocity scaling factor, range [0~100]    
-    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm  
+    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm    
     * @return error code
-    */  
+    */     
     int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, byte poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, byte toffset_flag, DescPose offset_pos_t, float ovl, float blendR). 
-
+ 
+Point-to-point motion in Cartesian space
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+ 
+    /** 
+    * @brief Cartesian space point-to-point motion. 
+    * @param [in] desc_pos Cartesian position of target in base coordinate system. 
+    * @param [in] tool tool coordinate number, range [0~14] 
+    * @param [in] user Workpiece coordinate number, range [0~14]. 
+    * @param [in] vel velocity percentage, range [0~100] * @param [in] acc [in] tool coordinate number, range [0~14] 
+    * @param [in] acc Acceleration percentage, range [0~100], not available yet. 
+    * @param [in] ovl velocity scaling factor, range [0~100] 
+    * @param [in] blendT [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in ms 
+    * @param [in] config Joint space configuration, [-1]-Refer to current joint position, [0~7]-Refer to specific joint space configuration, default is -1. 
+    * @return Error code 
+    */ 
+    int MoveCart(DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
+ 
 Whole circle motion in Cartesian space
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Cartesian space rectilinear motion
-    * @param [in] joint_pos_p Path point 1 joint position in deg.
-    * @param [in] desc_pos_p Path point 1 Cartesian pose
-    * @param [in] ptool tool coordinate number, range [0~14]
-    * @param [in] puser Workpiece coordinate number, range [0~14].
-    * @param [in] pvel speed percentage, range [0~100]
-    * @param [in] pacc Acceleration percentage, range [0~100], not open yet.
-    * @param [in] epos_p Extended axis position in mm
+    * @brief Whole circle motion in Cartesian space.
+    * @param [in] joint_pos_p path point 1 joint position in deg.
+    * @param [in] desc_pos_p path point 1 Cartesian position.
+    * @param [in] ptool tool coordinate number, range [0~14].
+    * @param [in] puser workpiece coordinate number, range [0~14]
+    * @param [in] pvel velocity percentage, range [0~100]
+    * @param [in] pacc Acceleration percentage, range [0~100], not available yet.
+    * @param [in] epos_p extended axis position in mm
     * @param [in] joint_pos_t Path point 2 joint position in deg.
-    * @param [in] desc_pos_t Path point 2 Cartesian pose
-    * @param [in] ttool tool coordinate number, in the range [0 to 14].
-    * @param [in] tuser Workpiece coordinate number, range [0~14].
-    * @param [in] tvel speed percentage, range [0~100]
-    * @param [in] tacc Acceleration percentage, range [0~100], not open yet.
-    * @param [in] epos_t Extended axis position in mm
-    * @param [in] ovl velocity scaling factor, range [0~100]   
+    * @param [in] desc_pos_t Path point 2 Cartesian position in deg.
+    * @param [in] ttool tool coordinate number, range [0~14].
+    * @param [in] tuser Workpiece coordinate number, range [0~14]
+    * @param [in] tvel Velocity percentage, range [0~100]
+    * @param [in] tacc Acceleration percentage, range [0~100], not available yet.
+    * @param [in] epos_t Extended axis position in mm.
+    * @param [in] ovl Velocity scaling factor, range [0~100].   
     * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
-    * @param [in] offset_pos Bit position offset  
+    * @param [in] offset_pos Bit position offset   
     * @param [in] oacc acceleration percentage
-    * @param [in] blendR-1: Blocking; 0-1000: Smooth radius, unit: mm
-    * @return error code
-    */  
-    int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, float ovl, int offset_flag, DescPose offset_pos, double oacc=100, double blendR=-1); 
-
-Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    * @param [in] blendR -1: blocking; 0~1000: smoothing radius in mm
+    * @return Error code
+    */     
+    int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, float ovl, int offset_flag, DescPose offset_pos, double oacc=100 , double blendR=-1);
+ 
+Sample Code for Whole Circle Motion in Cartesian Space
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnMovetest_Click(object sender, EventArgs e)
     {
-       int rtn = 0;
+        int rtn = 0;
         DescPose middescPoseCir1 = new DescPose(-435.414, -342.926, 309.205, -171.382, -4.513, 171.520);
         JointPos midjointPosCir1 = new JointPos(26.804, -79.866, 106.642, -125.433, -85.562, -54.721);
         DescPose enddescPoseCir1 = new DescPose(-524.862, -217.402, 308.459, -171.425, -4.810, 156.088);
@@ -296,9 +314,6 @@ Code Example
         robot.MoveJ(startjointPos, startdescPose, 3, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
         rtn = robot.Circle(midjointPosCir1, middescPoseCir1, 3, 0, 100, 100, exaxisPos, endjointPosCir1, enddescPoseCir1, 3, 0, 100, 100, exaxisPos, 100, -1, offdese, 100, 20);
         Console.WriteLine("Circle1" + rtn);
-
-
-
         rtn = robot.Circle(midjointPosCir2, middescPoseCir2, 3, 0, 100, 100, exaxisPos, endjointPosCir2, enddescPoseCir2, 3, 0, 100, 100, exaxisPos, 100, -1, offdese, 100, 20);
         Console.WriteLine("Circle2" + rtn);
 
@@ -310,57 +325,97 @@ Code Example
         rtn = robot.Circle(midjointPosCir4, middescPoseCir4, 3, 0, 100, 100, exaxisPos, endjointPosCir4, enddescPoseCir4, 3, 0, 100, 100, exaxisPos, 100, -1, offdese, 100, 20);
         Console.WriteLine("Circle4" + rtn);
     }
-
-Spiral motion in Cartesian space
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Sample code for basic robot motion instructions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
+ 
+    private void btnMovetest_Click(object sender, EventArgs e)
+    {
+        JointPos j1= new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2 = new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos j3 = new JointPos(-29.777, -84.536, 109.275, -114.075, -86.655, 74.257);
+        JointPos j4 = new JointPos(-31.154, -95.317, 94.276, -88.079, -89.740, 74.256);
+        DescPose desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2 = new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose desc_pos3 = new DescPose(-487.434, 154.362, 308.576, 176.600, 0.268, -14.061);
+        DescPose desc_pos4 = new DescPose(-443.165, 147.881, 480.951, 179.511, -0.775, -15.409);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
 
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0f;
+        float acc = 100.0f;
+        float ovl = 100.0f;
+        float blendT = 0.0f;
+        float blendR = 0.0f;
+        byte flag = 0;
+        byte search = 0;
+
+        robot.SetSpeed(20);
+        int rtn;
+        rtn = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"MoveJ errcode:{rtn}" );
+
+        rtn = robot.MoveL(j2, desc_pos2, tool, user, vel, acc, ovl, blendR,epos, search, flag, offset_pos);
+        Console.WriteLine($"MoveL errcode:{rtn}");
+
+        rtn = robot.MoveC(j3, desc_pos3, tool, user, vel, acc, epos, flag, offset_pos, j4, desc_pos4, tool, user, vel, acc, epos, flag, offset_pos, ovl, blendR);
+        Console.WriteLine($"MoveC errcode:{rtn}");
+
+        rtn = robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine("MoveJ errcode:%d\n", rtn);
+
+        rtn = robot.Circle(j3, desc_pos3, tool, user, vel, acc, epos, j1, desc_pos1, tool, user, vel, acc, epos, ovl, flag, offset_pos);
+        Console.WriteLine($"Circle errcode:{rtn}");
+
+        rtn = robot.MoveCart(desc_pos4, tool, user, vel, acc, ovl, blendT, -1);
+        Console.WriteLine($"MoveCart errcode:{rtn}");
+
+    }
+ 
+Spiral motion in Cartesian space
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+ 
     /**
-    * @brief Cartesian space spiral motion 
-    * @param [in] joint_pos Target joint position, in deg 
-    * @param [in] desc_pos Target Cartesian pose 
-    * @param [in] tool tool coordinate number in the range [0~14]. 
+    * @brief Cartesian spiral motion. 
+    * @param [in] joint_pos target joint position in deg 
+    * @param [in] desc_pos target cartesian position in deg 
+    * @param [in] tool Tool coordinate number, range [0~14]. 
     * @param [in] user Workpiece coordinate number, range [0~14]. 
-    * @param [in] vel velocity percentage, range [0~100] 
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet. 
-    * @param [in] epos Extended axis position in mm 
-    * @param [in] ovl velocity scaling factor, range [0~100] 
-    * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system 
+    * @param [in] vel velocity percentage, range [0~100] * @param [in] acc [in] tool coordinate number, range [0~14] 
+    * @param [in] acc Acceleration percentage, range [0~100], not available yet. 
+    * @param [in] epos extended axis position in mm 
+    * @param [in] ovl Velocity scaling factor, range [0~100]. 
+    * @param [in] offset_flag 0-no offset, 1- offset in base/work coordinate system, 2- offset in tool coordinate system 
     * @param [in] offset_pos Bit position offset 
     * @param [in] spiral_param spiral_param 
-    * @return error code 
+    * @return Error code 
     */
     int NewSpiral(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, ExaxisPos epos, float ovl, byte offset_flag, DescPose offset_pos, SpiralParam spiral_param); 
-
-Code Example
-++++++++++++++
+ 
+Sample code for spiral motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnDescSpiral_Click(object sender, EventArgs e)
     {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
-        JointPos j.
-        DescPose desc_pos.
-        DescPose offset_pos1 = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        DescPose offset_pos2 = new DescPose(0, 0, 0, 0, 0, 0, 0);
+        int rtn;
+        JointPos j = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        DescPose desc_pos = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose offset_pos1 = new DescPose(50, 0, 0, -30, 0, 0);
+        DescPose offset_pos2 = new DescPose(50, 0, 0, -5, 0, 0);
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
-        SpiralParam sp.
-
-        j = new JointPos(-58.982, -90.717, 127.647, -129.041, -87.989, -0.062);
-        desc_pos = new DescPose(-437.039, 411.064, 426.189, -177.886, 2.007, 31.155);
-
-        offset_pos1.tran.x = 50.0;
-        offset_pos1.rpy.rx = -30.0;
-        offset_pos2.tran.x = 50.0;
-        offset_pos2.rpy.rx = -5.0;
-
+        SpiralParam sp;
         sp.circle_num = 5;
-        sp.circle_angle = 1.0f;
-        sp.rad_init = 10.0f;
-        sp.rad_add = 40.0f;
+        sp.circle_angle = 5.0f;
+        sp.rad_init = 50.0f;
+        sp.rad_add = 10.0f;
         sp.rotaxis_add = 10.0f;
         sp.rot_direction = 0;
 
@@ -373,71 +428,63 @@ Code Example
         byte flag = 2;
 
         robot.SetSpeed(20);
-        int ret = robot.GetForwardKin(j, ref desc_pos); // with only joint positions, use the positive kinematics interface to solve for Cartesian space coordinates
-        if (ret == 0)
-        {
-            int err = -1;
-            err = robot.MoveJ(j, desc_pos, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos1);
-            Console.WriteLine($"movej errcode: {err}");
 
-            err = robot.NewSpiral(j, desc_pos, tool, user, vel, acc, epos, ovl, flag, offset_pos2, sp);
-            Console.WriteLine($"newspiral errcode: {err}");
-        }
-        else
-        {
-            Console.WriteLine($"GetForwardKin errcode: {ret}");
-        }
+        rtn = robot.MoveJ(j, desc_pos, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos1);
+        Console.WriteLine($"MoveJ errcode:{rtn}");
+
+        rtn = robot.NewSpiral(j, desc_pos, tool, user, vel, acc, epos, ovl, flag, offset_pos2, sp);
+        Console.WriteLine($"NewSpiral errcode:{rtn}");
     }
-
-Start of servo motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Starting servo motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /** 
-    * @brief Servo motion start, used in conjunction with ServoJ, ServoCart instruction
-    * @return error code 
+    * @brief Servo motion start, used with ServoJ, ServoCart instructions.
+    * @return Error code. 
     */ 
     int ServoMoveStart();
-
-End of servo motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+ServoMoveStart
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /** 
-    * @brief End of servo motion, used in conjunction with ServoJ, ServoCart commands
-    * @return error code 
+    * @brief End of servo motion, used with ServoJ, ServoCart instructions.
+    * @return Error code. 
     */ 
     int ServoMoveEnd().
-
-Joint space servo mode motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Joint space servo mode movement
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
     :linenos:
-
+ 
     /**
     * @brief Joint space servo mode motion
-    * @param [in] joint_pos Target joint position, in deg.
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet, default is 0.
-    * @param [in] vel speed percentage, range [0~100], not open yet, default 0
-    * @param [in] cmdT command send cycle, unit s, recommended range [0.001~0.0016].
-    * @param [in] filterT filter time, unit s, not open, default 0
-    * @param [in] gain Proportional amplifier for target position, not open yet, default 0
-    * @param [in] id servoJ instruction ID, default is 0
-    * @return error code
+    * @param [in] joint_pos Target joint position in degrees.
+    * @param [in] acc Acceleration percentage, range [0~100], not open, default is 0.
+    * @param [in] vel Speed percentage, range[0~100], not open, default is 0.
+    * @param [in] cmdT Command send cycle, unit s, recommended range [0.001~0.0016].
+    * @param [in] filterT filter time, unit s, not open, default is 0
+    * @param [in] gain proportional amplifier for target position, not open, default is 0
+    * @param [in] id servoJ command ID, default is 0
+    * @return Error code
     */
     int ServoJ(JointPos joint_pos, float acc, float vel, float cmdT, float filterT, float gain,int id=0);
-
-Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Joint space servo mode motion code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
     
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnJointServoMove_Click(object sender, EventArgs e)
     {
         JointPos j = new JointPos(0, 0, 0, 0, 0, 0);
@@ -480,40 +527,105 @@ Code Example
         }
         else
         {
-            Console.WriteLine($"GetActualJointPosDegree errcode: {ret}");
+            Console.WriteLine($"GetActualJointPosDegree error code: {ret}");
+
         }
     }
-
-Servo-mode motion in Cartesian space
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Start of joint torque control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Servo-mode motion in Cartesian space
+    * @brief Joint torque control start
+    * @return Error code
+    */
+    int ServoJTStart().
+ 
+Joint torque control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief Joint torque control
+    * @param [in] torque j1~j6 Joint torque in Nm.
+    * @param [in] interval Instruction cycle, unit s, range [0.001~0.008].
+    * @return Error code
+    */
+    int ServoJT(double[] torque, double interval).
+ 
+End of joint torque control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief End of joint torque control.
+    * @return Error code
+    */
+    int ServoJTEnd();
+ 
+Joint Torque Control Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    private void button27_Click(object sender, EventArgs e)
+    {
+        robot.DragTeachSwitch(1);
+        robot.SetPowerLimit(1, 200);
+        double[] torques = { 0, 0, 0, 0, 0, 0 };
+        robot.GetJointTorques(1, torques);
+
+        int count = 100;
+        robot.ServoJTStart();
+        int error = 0;
+        while (count > 0)
+        {
+            error = robot.ServoJT(torques, 0.001f);
+            count--;
+            Thread.Sleep(1);
+        }
+        error = robot.ServoJTEnd();
+        robot.DragTeachSwitch(0);
+    }
+ 
+Servo mode motion in Cartesian space
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief Servo mode motion in Cartesian space.
     * @param [in] mode 0-absolute motion (base coordinate system), 1-incremental motion (base coordinate system), 2-incremental motion (tool coordinate system)
     * @param [in] desc_pos target Cartesian position or position increment
-    * @param [in] pos_gain Positional incremental scale factor, valid only for incremental motion, range [0~1].
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet, default is 0.
-    * @param [in] vel speed percentage, range [0~100], not open yet, default 0
-    * @param [in] cmdT command send cycle, unit s, recommended range [0.001~0.0016].
-    * @param [in] filterT filter time, unit s, not open, default 0
-    * @param [in] gain Proportional amplifier for target position, not open yet, default 0
-    * @return error code
+    * @param [in] pos_gain Position increment scale factor, only valid for incremental motion, range [0~1].
+    * @param [in] acc Acceleration percentage, range [0~100], not open, default is 0.
+    * @param [in] vel Speed percentage, range[0~100], not open, default is 0.
+    * @param [in] cmdT Command send cycle, unit s, recommended range [0.001~0.0016].
+    * @param [in] filterT filter time, unit s, not open, default is 0
+    * @param [in] gain Proportional amplifier for target position, not open, default is 0
+    * @return Error code.
     */
     int ServoCart(int mode, DescPose desc_pos, double[] pos_gain, float acc, float vel, float cmdT, float filterT, float gain);
-
-Code Example
-++++++++++++++
+ 
+Example of servo mode motion code in Cartesian space
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnDescServoMove_Click(object sender, EventArgs e)
     {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
+        DescPose desc_pos_dt = new DescPose(0, 0, 0, 0, 0, 0);
 
-        DescPose desc_pos_dt = new DescPose(0, 0, 0, 0, 0, 0, 0);
         desc_pos_dt.tran.z = -0.5;
         double[] pos_gain = new double[6]{ 0.0, 0.0, 1.0, 0.0, 0.0, 0.0 };
         int mode = 2;
@@ -522,134 +634,79 @@ Code Example
         float cmdT = 0.008f;
         float filterT = 0.0f;
         float gain = 0.0f;
-        int flag = 0;
-        int count = 500.
+        int count = 500;
 
         robot.SetSpeed(20);
+
         while (count > 0)
         {
-            robot.ServoCart(mode, desc_pos_dt, pos_gain, acc, vel, cmdT, filterT, gain);
-            count -= 1;
-            robot.WaitMs((int)(cmdT * 1000));
+        robot.ServoCart(mode, desc_pos_dt, pos_gain, acc, vel, cmdT, filterT, gain);
+        count -= 1;
+        robot.WaitMs((int)(cmdT * 1000));
         }
     }
-
-Point-to-point motion in Cartesian space
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Spline motion starts
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
-    /** 
-    * @brief Cartesian space point-to-point motion 
-    * @param [in] desc_pos Cartesian position of the target in the base coordinate system. 
-    * @param [in] tool tool coordinate number in the range [0~14]. 
-    * @param [in] user Workpiece coordinate number, range [0~14]. 
-    * @param [in] vel velocity percentage, range [0~100] 
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet. 
-    * @param [in] ovl velocity scaling factor, range [0~100] 
-    * @param [in] blendT [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in ms 
-    * @param [in] config Joint space configuration, [-1] - solve with reference to current joint position, [0~7] - solve with reference to specific joint space configuration, default is -1. 
-    * @return error code 
-    */ 
-    int MoveCart(DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendT, int config);
-
-Code Example
-++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    private void btnDescPTPMove_Click(object sender, EventArgs e)
-    {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
-
-        DescPose desc_pos1, desc_pos2, desc_pos3.
-        desc_pos1 = new DescPose(-437.039, 411.064, 426.189, -177.886, 2.007, 31.155);
-        desc_pos2 = new DescPose(-525.55, 562.3, 417.199, -178.325, 0.847, 31.109);
-        desc_pos3 = new DescPose(-345.155, 535.733, 421.269, 179.475, 0.571, 18.332);
-
-        int tool = 0;
-        int user = 0;
-        float vel = 100.0f;
-        float acc = 100.0f;
-        float ovl = 100.0f;
-        float blendT = -1.0f;
-        float blendT1 = 0.0f;
-        int config = -1;
-
-        robot.SetSpeed(20);
-        robot.MoveCart(desc_pos1, tool, user, vel, acc, ovl, blendT, config);
-        robot.MoveCart(desc_pos2, tool, user, vel, acc, ovl, blendT, config);
-        robot.MoveCart(desc_pos3, tool, user, vel, acc, ovl, blendT1, config);
-    }
-
-Start of spline motion
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
+ 
     /**
-    * @brief Spline motion begins
-    * @return error code
+    * @brief Spline start
+    * @return Error code.
     */
     int SplineStart();
-
-Sample motion PTP
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Spline motion PTP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Joint space spline motion
-    * @param [in] joint_pos Target joint position, in deg.
-    * @param [in] desc_pos Target Cartesian pose
-    * @param [in] tool tool coordinate number in the range [0~14].
+    * @brief Joint space spline motion.
+    * @param [in] joint_pos Target joint position in degrees.
+    * @param [in] desc_pos Target Cartesian position.
+    * @param [in] tool Tool coordinate number, range [0~14].
     * @param [in] user Workpiece coordinate number, range [0~14].
-    * @param [in] vel velocity percentage, range [0~100]
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet.
-    * @param [in] ovl velocity scaling factor, range [0~100]   
-    * @return error code
+    * @param [in] vel velocity percentage, range [0~100] * @param [in] acc.
+    * @param [in] acc Acceleration percentage, range [0~100], not available yet.
+    * @param [in] ovl velocity scaling factor, range [0~100].   
+    * @return Error code
     */
     int SplinePTP(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl);
-
+ 
 End of spline motion
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief End of spline motion
-    * @return error code
+    * @brief End of spline motion.
+    * @return Error code.
     */
     int SplineEnd(); 
-
-Code Example
-++++++++++++++
+ 
+Sample code for spline motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnSplineMove_Click(object sender, EventArgs e)
     {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
-
-        JointPos j1, j2, j3, j4.
-        DescPose desc_pos1, desc_pos2, desc_pos3, desc_pos4, offset_pos;
+        JointPos j1 = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2 = new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos j3 = new JointPos(-61.954, -84.409, 108.153, -116.316, -91.283, 74.260);
+        JointPos j4 = new JointPos(-89.575, -80.276, 102.713, -116.302, -91.284, 74.267);
+        DescPose desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2 = new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose desc_pos3 = new DescPose(-327.622, 402.230, 320.402, -178.067, 2.127, -46.207);
+        DescPose desc_pos4 = new DescPose(-104.066, 544.321, 327.023, -177.715, 3.371, -73.818);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
-
-        j1 = new JointPos(-58.982, -90.717, 127.647, -129.041, -87.989, -0.062);
-        desc_pos1 = new DescPose(-437.039, 411.064, 426.189, -177.886, 2.007, 31.155);
-
-        j2 = new JointPos(-58.978, -76.817, 112.494, -127.348, -89.145, -0.063);
-        desc_pos2 = new DescPose(-525.55, 562.3, 417.199, -178.325, 0.847, 31.109);
-
-        j3 = new JointPos(-49.129, -68.49, 103.297, -128.898, -91.478, -0.062);
-        desc_pos3 = new DescPose(-680.308, 547.378, 399.189, -175.909, -1.479, 40.827);
-
-        j4 = new JointPos(-56.126, -54.093, 80.686, -121.655, -91.428, -0.064);
-        desc_pos4 = new DescPose(-719.201, 790.816, 389.118, -174.939, -1.428, 33.809);
-
-        offset_pos = new DescPose(0, 0, 0, 0, 0, 0, 0);
 
         int tool = 0;
         int user = 0;
@@ -658,11 +715,13 @@ Code Example
         float ovl = 100.0f;
         float blendT = -1.0f;
         byte flag = 0;
+
         robot.SetSpeed(20);
+
         int err = -1;
         err = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
-        Console.WriteLine($"movej errcode: {err}");
-                
+        Console.WriteLine($"movej errcode:  {err}");
+
         robot.SplineStart();
         robot.SplinePTP(j1, desc_pos1, tool, user, vel, acc, ovl);
         robot.SplinePTP(j2, desc_pos2, tool, user, vel, acc, ovl);
@@ -670,132 +729,212 @@ Code Example
         robot.SplinePTP(j4, desc_pos4, tool, user, vel, acc, ovl);
         robot.SplineEnd();
     }
-
-New Sample Campaign Begins
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Starting new spline motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: C#SDK-v1.0.6
 
 .. code-block:: c#
     :linenos:
-
+ 
     /** 
-    * @brief New spline campaign begins 
-    * @param [in] type 0-circular transition, 1-given point position as path point
+    * @brief New spline motion start 
+    * @param [in] type 0-circular transition, 1-given point as path point
     * @param [in] averageTime global average articulation time (ms) (10 ~ ), default 2000
-    * @return error code 
+    * @return ErrorCode 
     */ 
     int NewSplineStart(int type, int averageTime=2000);
     
-new spline command point
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+New spline instruction point
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /** 
-    * :: @brief Adding spline motion command points 
-    * @param [in] joint_pos Target joint position, in deg 
-    * @param [in] desc_pos Target Cartesian pose 
-    * @param [in] tool tool coordinate number in the range [0~14]. 
-    * @param [in] user Workpiece coordinate number, range [0~14]. 
-    * @param [in] vel velocity percentage, range [0~100] 
-    * @param [in] acc Acceleration percentage, range [0~100], not open yet. 
+    * @brief Add spline command point. 
+    * @param [in] joint_pos Target joint position, in deg. 
+    * @param [in] desc_pos Target Cartesian position. 
+    * @param [in] tool Tool coordinate number, range [0~14]. 
+    * @param [in] user Tool coordinate number, range [0~14]. 
+    * @param [in] vel Speed percentage, range [0~100]. 
+    * @param [in] acc Acceleration Percentage, range [0~100], not available yet. 
     * @param [in] ovl velocity scaling factor, range [0~100] 
-    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm
+    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm
     * @param [in] lastFlag whether it is the last point, 0-no, 1-yes
     * @return error code 
     */ 
     int NewSplinePoint(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);;
-
-End of new spline movement
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+End of new spline motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /** 
-    * @brief New spline campaign begins 
-    * @return error code 
+    * @brief Start of new spline motion 
+    * @return Error code. 
     */ 
     int NewSplineEnd();
     
-Ending the campaign
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sample code for new spline motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
+ 
+    private void btnNewSpline_Click(object sender, EventArgs e)
+    {
+        JointPos j1 = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2 = new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos j3 = new JointPos(-61.954, -84.409, 108.153, -116.316, -91.283, 74.260);
+        JointPos j4 = new JointPos(-89.575, -80.276, 102.713, -116.302, -91.284, 74.267);
+        JointPos j5 = new JointPos(-95.228, -54.621, 73.691, -112.245, -91.280, 74.268);
+        DescPose desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2 = new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose desc_pos3 = new DescPose(-327.622, 402.230, 320.402, -178.067, 2.127, -46.207);
+        DescPose desc_pos4 = new DescPose(-104.066, 544.321, 327.023, -177.715, 3.371, -73.818);
+        DescPose desc_pos5 = new DescPose(-33.421, 732.572, 275.103, -177.907, 2.709, -79.482);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
 
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0f;
+        float acc = 100.0f;
+        float ovl = 100.0f;
+        float blendT = -1.0f;
+        byte flag = 0;
+
+        robot.SetSpeed(20);
+
+        int err = -1;
+        err = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:  {err}");
+
+        robot.NewSplineStart(1, 2000);
+        robot.NewSplinePoint(j1, desc_pos1, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(j2, desc_pos2, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(j3, desc_pos3, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(j4, desc_pos4, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(j5, desc_pos5, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplineEnd();
+    }
+ 
+Terminate the motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+ 
     /**
-    * :: @brief end of campaign
-    * @return error code
+    * @brief Terminate the campaign.
+    * @return Error code
     */
     int StopMotion();
-
-pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Pause the motion.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
     
     /** 
-      * @brief Suspension of movement 
-      * @return error code 
+    * @brief Pause motion 
+    * @return Error code 
     */  
     int PauseMotion();
-
-Resumption of movement
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Resumes motion.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /** 
-    * :: @brief Recovery Movement 
-    * @return error code 
+    * @brief Resume movement 
+    * @return Error code 
     */ 
     int ResumeMotion();
-
-Overall shift in points begins
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Motion Pause, Resume, Stop Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
+ 
+    private void btnMotionPause_Click(object sender, EventArgs e)
+    {
+        int rtn;
+        JointPos j1 = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j5 = new JointPos(-95.228, -54.621, 73.691, -112.245, -91.280, 74.268);
+        DescPose desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos5 = new DescPose(-33.421, 732.572, 275.103, -177.907, 2.709, -79.482);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
 
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0f;
+        float acc = 100.0f;
+        float ovl = 100.0f;
+        float blendT = -1.0f;
+        byte flag = 0;
+
+        robot.SetSpeed(20);
+
+        rtn = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        rtn = robot.MoveJ(j5, desc_pos5, tool, user, vel, acc, ovl, epos, 1, flag, offset_pos);
+        Thread.Sleep(1000);
+        robot.PauseMotion();
+
+        Thread.Sleep(1000);
+        robot.ResumeMotion();
+
+        Thread.Sleep(1000);
+        robot.StopMotion();
+
+        Thread.Sleep(1000);
+
+    }
+ 
+Start the overall point offset
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+ 
     /**
-    * @brief Points of overall offset start
+    * @brief Start of overall point offset.
     * @param [in] flag 0 - offset in base/workpiece coordinate system, 2 - offset in tool coordinate system
-    * @param [in] offset_pos Bit position offset
-    * @return error code
+    * @param [in] offset_pos Positional Offset
+    * @return Error code
     */
     int PointsOffsetEnable(int flag, DescPose offset_pos); 
-
-
-Overall point shift ends
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Points overall offset end
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief End of overall point shift
-    * @return error code
+    * @brief End of point offset.
+    * @return Error code
     */
     int PointsOffsetDisable(); 
-
-Code Example
-++++++++++++++
+ 
+Points Offset Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnPointOffect_Click(object sender, EventArgs e)
     {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2");
-
-        JointPos j1, j2.
+        JointPos j1, j2;
         DescPose desc_pos1, desc_pos2, offset_pos, offset_pos1;
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
 
-        j1 = new JointPos(-58.982, -90.717, 127.647, -129.041, -87.989, -0.062);
-        desc_pos1 = new DescPose(-437.039, 411.064, 426.189, -177.886, 2.007, 31.155);
+        j1 = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
 
-        j2 = new JointPos(-58.978, -76.817, 112.494, -127.348, -89.145, -0.063);
-        desc_pos2 = new DescPose(-525.55, 562.3, 417.199, -178.325, 0.847, 31.109);
+        j2 = new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
 
-        offset_pos = new DescPose(0, 0, 0, 0, 0, 0, 0);
+        desc_pos2 = new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+
+        offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
         offset_pos1 = new DescPose(50.0, 50.0, 50.0, 5.0, 5.0, 5.0);
 
         int tool = 0;
@@ -804,7 +943,6 @@ Code Example
         float acc = 100.0f;
         float ovl = 100.0f;
         float blendT = -1.0f;
-        float blendR = 0.0f;
         byte flag = 0;
         int type = 0;
 
@@ -814,253 +952,171 @@ Code Example
         robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
         Thread.Sleep(1000);
         robot.PointsOffsetEnable(type, offset_pos1);
+        Thread.Sleep(1000);
         robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
         robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Thread.Sleep(1000);
         robot.PointsOffsetDisable();
     }
-
-Control box AO fly shooting start
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.7
-
+ 
+Control box AO flytap start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief control box AO fly shooting start
-    * @param [in] AONum Control box AO number
+    * @brief Control box AO flyswatter start.
+    * @param [in] AONum control box AO number
     * @param [in] maxTCPSpeed maxTCPSpeed value [1-5000mm/s], default 1000
-    * @param [in] maxAOPercent The percentage of AO corresponding to the maximum TCP speed value, default 100%.
-    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, shaped, default 20%, range [0-100]
-    * @return error code
+    * @param [in] maxAOPercent Percentage of AO corresponding to the maximum TCP speed value, default 100%
+    * @param [in] zeroZoneCmp AO percentage for dead zone compensation value, shaped, default 20%, range [0-100]
+    * @return Error code.
     */
     int MoveAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
-
-Control Box AO Flying Racket Stop
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.7
-   
+ 
+Control box AO flytap stop
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Control box AO flyswatter stops
-    * @return error code
+    * @brief Control box AO flytap stops
+    * @return Error code.
     */
     int MoveAOStop();
     
-End AO Fly Shot Begins
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.7
-   
+End AO flyswatter start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief End of AO Fly Shot Begins *
-    * @param [in] AONum End AO number
+    * @brief End AO flytap start
+    * @param [in] AONum The end AO number.
     * @param [in] maxTCPSpeed maxTCPSpeed value [1-5000mm/s], default 1000
-    * @param [in] maxAOPercent The percentage of AO corresponding to the maximum TCP speed value, default 100%.
-    * @param [in] zeroZoneCmp dead zone compensation value AO percentage, shaped, default 20%, range [0-100]
-    * @return error code
+    * @param [in] maxAOPercent Percentage of AOs corresponding to the maximum TCP speed value, default 100%
+    * @param [in] zeroZoneCmp AO percentage for dead zone compensation value, shaped, default 20%, range [0-100]
+    * @return Error code.
     */
     int MoveToolAOStart(int AONum, int maxTCPSpeed, int maxAOPercent, int zeroZoneCmp);
     
-End AO Flying Racket Stop
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.7
-   
+End AO flytap stop
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.7
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief End AO fly-tap stops
-    * @return error code
+    * @brief End AO flyswatter stops
+    * @return Error code
     */
     int MoveToolAOStop();
-
-Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+AO flyswatter code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     private void btnMoveAO_Click(object sender, EventArgs e)
     {
-        DescPose startdescPose = new DescPose();
-        JointPos startjointPos = new JointPos();
-        DescPose enddescPose = new DescPose();
-        JointPos endjointPos = new JointPos();
-        DescPose CPose = new DescPose();
-        JointPos CJPos = new JointPos();
-        DescPose DPose = new DescPose();
-        JointPos DJPos = new JointPos();           
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0, 0);
-        int rtn = robot.MoveToolAOStart(0, 100, 80, 1);
-        //int rtn = robot.MoveAOStart(0, 100, 80, 1);
-        Console.WriteLine(rtn);
+        JointPos j1 = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2 = new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        DescPose desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2 = new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
 
-        rtn = robot.MoveL(startjointPos, startdescPose, 0, 0, 100, 100, 100, 100, 0, exaxisPos, 0, 0, offdese);
-        //robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, 0, 0, offdese);
-        //robot.MoveC(startjointPos, startdescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, 100, 0);
-        //robot.Circle(startjointPos, startdescPose, 0, 0, 100, 100, exaxisPos, endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, 100, 0, offdese);
-        //robot.SplineStart();
-        //robot.SplinePTP(startjointPos, startdescPose, 0, 0, 100, 100, 100);
-        //robot.SplinePTP(endjointPos, enddescPose, 0, 0, 100, 100, 100);
-        //robot.SplinePTP(CJPos, CPose, 0, 0, 100, 100, 100);
-        //robot.SplinePTP(DJPos, DPose, 0, 0, 100, 100, 100);
-        //robot.SplineEnd();
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0f;
+        float acc = 100.0f;
+        float ovl = 100.0f;
+        float blendT = 0.0f;
+        float blendR = 0.0f;
+        byte flag = 0;
+        byte search = 0;
 
-        //robot.NewSplineStart(0, 5000);
-        //robot.NewSplinePoint(startjointPos, startdescPose, 0, 0, 100, 100, 100, 100, 5, 0);
-        //robot.NewSplinePoint(endjointPos, enddescPose, 0, 0, 100, 100, 100, 100, 5, 0);
-        //robot.NewSplinePoint(CJPos, CPose, 0, 0, 100, 100, 100, 100, 5, 0);
-        //robot.NewSplinePoint(DJPos, DPose, 0, 0, 100, 100, 100, 100, 5, 1);
-        //robot.NewSplineEnd();
-        //int count = 1000;
-        //while (count > 0)
-        //{
-        // robot.ServoJ(startjointPos, 0, 0, 0.008f, 0, 0);
-        // startjointPos.jPos[0] += 0.01;//0 joint position increase
-        // count -= 1;
-        //}
-        rtn = robot.MoveToolAOStop();
-        //rtn = robot.MoveAOStop();
-        Console.WriteLine(rtn);
+        robot.SetSpeed(5);
+
+        robot.MoveAOStart(0,100,100,20);
+        robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        robot.MoveAOStop();
+
+        robot.MoveToolAOStart(0, 100, 100, 20);
+        robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        robot.MoveToolAOStop();
     }
-
-Starting odd position protection
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * :: @brief begins odd-position protection.
-    * @param [in] protectMode singular protection mode, 0: articulated mode; 1 - Cartesian mode
-    * @param [in] minShoulderPos Shoulder singularity adjustment range (mm), default 100
-    * @param [in] minElbowPos elbow singularity adjustment range (mm), default 50
-    * @param [in] minWristPos wrist singularity adjustment range (°), default 10
-    * @return error code
-    */
-    int SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);
-
-Stop odd position protection
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
-
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * :: @brief stops odd-position protection.
-    * @return error code
-    */
-    int SingularAvoidEnd();
-
-Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionchanged:: C#SDK-v1.0.9
+ 
+Start Ptp motion FIR filtering
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3 Web-3.8.2
     
 .. code-block:: c#
     :linenos:
-
-    private void btnTestSingularAvoidEArc_Click(object sender, EventArgs e)
-    {
-        DescPose startdescPose = new DescPose(-352.437, -88.350, 226.471, 177.222, 4.924, 86.631);
-        JointPos startjointPos = new JointPos(-3.463, -84.308, 105.579, -108.475, -85.087, -0.334);
-
-        DescPose middescPose = new DescPose(-518.339, -23.706, 207.899, -178.420, 0.171, 71.697);
-        JointPos midjointPos = new JointPos(-8.587, -51.805, 64.914, -104.695, -90.099, 9.718);
-
-        DescPose enddescPose = new DescPose(-273.934, 323.003, 227.224, 176.398, 2.783, 66.064);
-        JointPos endjointPos = new JointPos(-63.460, -71.228, 88.068, -102.291, -90.149, -39.605);
-
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0, 0, 0);
-
-        robot.MoveL(startjointPos, startdescPose, 0, 0, 50, 100, 100, -1, exaxisPos, 0, 0, offdese, 1, 1);
-        robot.SingularAvoidStart(1, 100, 50, 10);
-        robot.MoveC(midjointPos, middescPose, 0, 0, 50, 100, exaxisPos, 0, offdese, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, 100, -1) ;
-        robot.SingularAvoidEnd();
-    }
-
-Safety Stop Trigger
-++++++++++++++++++++++++++++++
-.. versionadded:: C# SDK-v1.1.0-3.7.8
-
-.. code-block:: c#
-    :linenos:
-
+ 
     /**
-    * @brief Safe Stop Trigger Signal
-    * @return Error code 
-    */
-    int GetSafetyCode();
-
-Start ptp motion FIR filtering
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
-    
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Start Ptp motion FIR filtering
-    * @param [in] maxAcc Maximum acceleration Extreme Value (deg/s ²)
-    * @param [in] maxJek Unified Extreme Values of Joint urgency (deg/s3)
-    * @return error code
+    * @brief Start Ptp motion FIR filtering.
+    * @param [in] maxAcc Maximum Acceleration Extreme (deg/s2)
+    * @param [in] maxJek Uniform Joint Acuity Extreme (deg/s3)
+    * @return Error code.
     */
     int PtpFIRPlanningStart(double maxAcc, double maxJek=1000);
-
-Start LIN, ARC motion FIR filtering
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C# SDK-v1.1.0-3.7.8
+ 
+Turn off Ptp motion FIR filtering
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief start LIN, ARC motion FIR filtering
+    * @brief Turn off Ptp motion FIR filtering.
+    * @return Error code
+    */
+    int PtpFIRPlanningEnd();
+ 
+Start LIN, ARC motion FIR filtering.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief Start LIN, ARC motion FIR filtering.
     * @param [in] maxAccLin Linear Acceleration Extreme (mm/s2)
     * @param [in] maxAccDeg angular acceleration extreme (deg/s2)
-    * @param [in] maxJerkLin Linear Acceleration Polar (mm/s3)
-    * @param [in] maxJerkDeg angular plus acceleration pole (deg/s3)
+    * @param [in] maxJerkLin Linear plus Acceleration Extreme (mm/s3)
+    * @param [in] maxJerkDeg Angle plus acceleration extreme (deg/s3)
     * @return Error code
     */
     int LinArcFIRPlanningStart(double maxAccLin, double maxAccDeg, double maxJerkLin, double maxJerkDeg);
-
-Disable ptp motion FIR filtering
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C# SDK-v1.1.0-3.7.8
+ 
+Turn off LIN, ARC motion FIR filtering
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief disable ptp motion FIR filtering
-    * @return error code
-    */
-    int PtpFIRPlanningEnd();
-
-Disable LIN, ARC motion FIR filtering
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C# SDK-v1.1.0-3.7.8
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Disable LIN, ARC motion FIR filtering
-    * @return error code
+    * @brief Turn off LIN, ARC motion FIR filtering.
+    * @return Error code
     */
     int LinArcFIRPlanningEnd();
-
-Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.3  Web-3.8.2
+ 
+FIR filtering code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.3 Web-3.8.2
     
 .. code-block:: c#
     :linenos:
-
+ 
     private void button69_Click(object sender, EventArgs e)
     {
         int rtn;
@@ -1089,56 +1145,172 @@ Code Example
         robot.LinArcFIRPlanningEnd();
         Console.WriteLine("LinArcFIRPlanningEnd rtn is " + rtn);
     }
-
-Acceleration Smoothing Enable
-++++++++++++++++++++++++++++++
+ 
+Acceleration smoothing on
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Enable acceleration smoothing
-    * @param [in] saveFlag Whether to save after power off
-    * @return Error code
+    * @brief Acceleration smoothing on
+    * @param [in] saveFlag Whether to power down and save.
+    * @return ErrorCode
     */
     int AccSmoothStart(bool saveFlag);
-
-Acceleration Smoothing Disable
-++++++++++++++++++++++++++++++
+ 
+Acceleration SmoothStart(bool saveFlag); int AccSmoothStart
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
-
+ 
     /**
-    * @brief Disable acceleration smoothing
-    * @param [in] saveFlag Whether to save after power off
-    * @return Error code
+    * @brief Accelerate smooth shutdown
+    * @param [in] saveFlag whether to power down and save
+    * @return ErrorCode
     */
     int AccSmoothEnd(bool saveFlag);
-
-Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
+ 
+    private void button1_Click(object sender, EventArgs e)
+    {
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+        int rtn;
+        JointPos startjointPos = new JointPos(-11.904f, -99.669f, 117.473f, -108.616f, -91.726f, 74.256f);
+        JointPos endjointPos = new JointPos(-45.615f, -106.172f, 124.296f, -107.151f, -91.282f, 74.255f);
 
-            bool saveFlag = false;
+        DescPose startdescPose = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose enddescPose = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
 
-            int rtn = 0;
-            JointPos p1Joint = new JointPos(88.927, -85.834, 80.289, -85.561, -91.388, 108.718);
-            DescPose p1Desc = new DescPose(88.739, -527.617, 514.939, -179.039, 1.494, 70.209);
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        rtn = robot.AccSmoothStart(false);
+        Console.WriteLine("AccSmoothStart rtn is " + rtn);
+        robot.MoveJ( startjointPos,  startdescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        robot.MoveJ( endjointPos,  enddescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        rtn = robot.AccSmoothEnd(false);
+        Console.WriteLine("AccSmoothEnd rtn is " + rtn);
+    }
+ 
+Specify the attitude speed to turn on
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief Specify that Attitude Speed is on
+    * @param [in] ratio Attitude Speed Percentage [0-300]
+    * @return Error code
+    */
+    int AngularSpeedStart(int ratio).
+ 
+Specifies that the attitude speed is off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+    
+    /**
+    * @brief Specify attitude speed off
+    * @return Error code
+    */
+    int AngularSpeedEnd();
+ 
+Robot Specify Angular Speed Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+ 
+    private void button71_Click(object sender, EventArgs e)
+    {
+        int rtn;
+        JointPos startjointPos = new JointPos(-11.904f, -99.669f, 117.473f, -108.616f, -91.726f, 74.256f);
+        JointPos endjointPos = new JointPos(-45.615f, -106.172f, 124.296f, -107.151f, -91.282f, 74.255f);
 
-            JointPos p2Joint = new JointPos(27.036, -83.909, 80.284, -85.579, -90.027, 108.604);
-            DescPose p2Desc = new DescPose(-433.125, -334.428, 497.139, -179.723, -0.745, 8.437);
-            JointPos p3Joint = new JointPos(60.219, -94.324, 62.906, -62.005, -87.159, 108.598);
-            DescPose p3Desc = new DescPose(-112.215, -409.323, 686.497, 176.217, 2.338, 41.625);
-            ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-            DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
-            robot.AccSmoothStart(saveFlag);
-            robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
-            robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
-            robot.MoveL(p1Joint, p1Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
-            robot.MoveL(p2Joint, p2Desc, 0, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0, 10);
+        DescPose startdescPose = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose enddescPose = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
 
-            robot.AccSmoothEnd(saveFlag);
-        }
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        rtn = robot.AngularSpeedStart(50);
+        Console.WriteLine("AngularSpeedStart rtn is " + rtn);
+        robot.MoveJ( startjointPos,  startdescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        robot.MoveJ( endjointPos,  enddescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        rtn = robot.AngularSpeedEnd();
+        Console.WriteLine("AngularSpeedEnd rtn is " + rtn);
+    }
+ 
+Starting singular position protection
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.9
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief Starting singular bitmap protection.
+    * @param [in] protectMode Singular protection mode, 0: articulation mode; 1 - Cartesian mode
+    * @param [in] minShoulderPos shoulder singularity adjustment range (mm), default 100
+    * @param [in] minElbowPos Elbow singularity adjustment range (mm), default 50
+    * @param [in] minWristPos Wrist singularity range (°), default 10
+    * @return Error code
+    */
+    int SingularAvoidStart(int protectMode, double minShoulderPos, double minElbowPos, double minWristPos);
+ 
+Stop singular attitude protection
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.9
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief Stop odd-bit pose protection.
+    * @return Error code
+    */
+    int SingularAvoidEnd();
+ 
+Code example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-v1.0.9
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    private void btnTestSingularAvoidEArc_Click(object sender, EventArgs e)
+    {
+        int rtn;
+        JointPos startjointPos = new JointPos(-11.904f, -99.669f, 117.473f, -108.616f, -91.726f, 74.256f);
+        JointPos endjointPos = new JointPos(-45.615f, -106.172f, 124.296f, -107.151f, -91.282f, 74.255f);
+
+        DescPose startdescPose = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose enddescPose = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        rtn = robot.SingularAvoidStart(2, 10, 5, 5);
+        Console.WriteLine("SingularAvoidStart rtn is " + rtn);
+        robot.MoveJ( startjointPos,  startdescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        robot.MoveJ( endjointPos,  enddescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        rtn = robot.SingularAvoidEnd();
+        Console.WriteLine("SingularAvoidEnd rtn is " + rtn);
+    }
+ 
+Safety Stop Trigger
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+.. code-block:: c#
+    :linenos:
+ 
+    /**
+    * @brief Safe stop trigger signal
+    * @return Error code
+    */
+    int GetSafetyCode();
+ 
+ 
+ 
+ 
