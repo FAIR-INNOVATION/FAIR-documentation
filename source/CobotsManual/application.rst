@@ -328,12 +328,12 @@ Force Sensor-Assisted Dragging with Normal Collision Protection Triggering
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Overview
-***********
++++++++++++++++++++++++
 
 Currently, FR robots cannot trigger collision protection during force sensor-assisted dragging. This enhancement enables collision protection during force sensor-assisted dragging to improve robot safety and reduce operational risks.
 
 Collision Protection
-*********************************
+++++++++++++++++++++++++++++++++++++++++++++++
 
 **Step1**: Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock" to enter the force sensor-assisted lock configuration interface. Set both "Status Switch" and "Collision Detection" to ON, as shown below.
 

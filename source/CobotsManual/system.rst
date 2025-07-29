@@ -519,12 +519,12 @@ The robot model table is as follows:
      - /
 
    * - 702
-     - FRCustom(7)-V1-001(FR3WML)
-     - FR3WML
+     - FRCustom(7)-V1-001(FR3-WML)
+     - FR3-WML
 
    * - 703
-     - FRCustom(7)-V1-001(FR3WMS)
-     - FR3WMS
+     - FRCustom(7)-V1-001(FR3-WMS)
+     - FR3-WMS
      
    * - ...
      - Reserved
@@ -547,8 +547,8 @@ The robot model table is as follows:
      - FR10YD
      
    * - 904
-     - FRCustom(9)-V1-001(FR3C)
-     - FR3C
+     - FRCustom(9)-V1-001(FR3-C)
+     - FR3-C
 
    * - ...
      - Reserved

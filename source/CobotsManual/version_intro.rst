@@ -113,7 +113,7 @@ Date: 2025-05-29
 
 - **Robot Model and Type**: 
 
-    Description: Add FR3C robot model and configuration settings.
+    Description: Add FR3-C robot model and configuration settings.
 
 Version V3.8.1
 -----------------

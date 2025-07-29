@@ -48,19 +48,19 @@ Control cabinet installation space:
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.2-2 FR3WML model collaboration robot movement range
+.. centered:: Figure 2.2-2 FR3-WML model collaboration robot movement range
 
 .. figure:: installation/104.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.2-3 FR3WMS model collaboration robot movement range
+.. centered:: Figure 2.2-3 FR3-WMS model collaboration robot movement range
 
 .. figure:: installation/105.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 2.2-4 FR3C model collaboration robot movement range
+.. centered:: Figure 2.2-4 FR3-C model collaboration robot movement range
 
 .. figure:: installation/019.png
 	:align: center
@@ -191,7 +191,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - [-0.55, -1.11, -20.05]
 
 
-.. centered:: Table 2.4-2 FR3WMS model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-2 FR3-WMS model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
    :widths: 70 50 50 50 50 70 50 120
@@ -262,7 +262,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
      - 0.28
      - [1.81，1.33，-20.41]
 
-.. centered:: Table 2.4-3 FR3WMSL model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-3 FR3-WMSL model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
    :widths: 70 50 50 50 50 70 50 120
@@ -333,7 +333,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
      - 0.28
      - [1.9，1.6，-20.08]
 
-.. centered:: Table 2.4-4 FR3C model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-4 FR3-C model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
    :widths: 70 50 50 50 50 70 50 120

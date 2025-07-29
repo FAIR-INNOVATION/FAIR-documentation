@@ -72,19 +72,19 @@ Nameplate information
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-2 FR3WMS model collaborative robot
+.. centered:: Figure 3.1-2 FR3-WMS model collaborative robot
 
 .. figure:: installation/107.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-3 FR3WML model collaborative robot
+.. centered:: Figure 3.1-3 FR3-WML model collaborative robot
 
 .. figure:: installation/108.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-4 FR3C model collaborative robot
+.. centered:: Figure 3.1-4 FR3-C model collaborative robot
 
 .. figure:: installation/003.png
 	:align: center
@@ -226,7 +226,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.10
      - 0.06
 
-   * - **FR3WMS**
+   * - **FR3-WMS**
      - 0.47
      - 0.60
      - 0.56
@@ -234,7 +234,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.10
      - 0.06
 
-   * - **FR3WML**
+   * - **FR3-WML**
      - 0.51
      - 0.63
      - 0.60
@@ -242,7 +242,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.16
      - 0.10
 
-   * - **FR3C**
+   * - **FR3-C**
      - 0.47
      - 0.60
      - 0.56
@@ -304,7 +304,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 120
      - 90
 
-   * - **FR3WMS**
+   * - **FR3-WMS**
      - 400
      - 470
      - 450
@@ -312,7 +312,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 120
      - 90
 
-   * - **FR3WML**
+   * - **FR3-WML**
      - 400
      - 470
      - 450
@@ -320,7 +320,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 120
      - 90
 
-   * - **FR3C**
+   * - **FR3-C**
      - 400
      - 470
      - 450
@@ -395,7 +395,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.12
      - 0.09
 
-   * - **FR3WMS**
+   * - **FR3-WMS**
      - 0.49
      - 0.63
      - 0.58
@@ -403,7 +403,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.12
      - 0.09
 
-   * - **FR3WML**
+   * - **FR3-WML**
      - 0.54
      - 0.65
      - 0.63
@@ -411,7 +411,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.19
      - 0.12
 
-   * - **FR3C**
+   * - **FR3-C**
      - 0.49
      - 0.63
      - 0.58
@@ -473,7 +473,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 130
      - 110
 
-   * - **FR3WMS**
+   * - **FR3-WMS**
      - 410
      - 490
      - 410
@@ -481,7 +481,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 130
      - 110
 
-   * - **FR3WML**
+   * - **FR3-WML**
      - 410
      - 490
      - 410
@@ -489,7 +489,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 130
      - 110
 
-   * - **FR3C**
+   * - **FR3-C**
      - 410
      - 490
      - 410
@@ -551,7 +551,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.15
      - 0.11
 
-   * - **FR3WMS**
+   * - **FR3-WMS**
      - 0.52
      - 0.65
      - 0.61
@@ -559,7 +559,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.15
      - 0.11
 
-   * - **FR3WML**
+   * - **FR3-WML**
      - 0.56
      - 0.68
      - 0.65
@@ -567,7 +567,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.21
      - 0.15
 
-   * - **FR3C**
+   * - **FR3-C**
      - 0.52
      - 0.65
      - 0.61
@@ -629,7 +629,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 150
      - 120
 
-   * - **FR3WMS**
+   * - **FR3-WMS**
      - 430
      - 500
      - 430
@@ -637,7 +637,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 150
      - 120
 
-   * - **FR3WML**
+   * - **FR3-WML**
      - 430
      - 500
      - 430
@@ -645,7 +645,7 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 150
      - 120
 
-   * - **FR3C**
+   * - **FR3-C**
      - 430
      - 500
      - 430
@@ -1709,7 +1709,7 @@ Robot arm installation
 .. note:: 
 	You can purchase accurate bases as attachments. Figure 3.4-2、3.4-5、3.4-8、3.4-11 show the position of the sales hole and the location of the screw.
 
-Installation requirements for FR3/FR3WMS/FR3WML/FR3C robot
+Installation requirements for FR3/FR3-WMS/FR3-WML/FR3-C robot
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 When installing the robot on the mounting base, use four M6 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 10Nm.Suggest using two on the mounting base φ 5mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
@@ -1718,7 +1718,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.4-2 FR3/FR3WMS/FR3WML/FR3C model collaborative robot installation size
+.. centered:: Figure 3.4-2 FR3/FR3-WMS/FR3-WML/FR3-C model collaborative robot installation size
 
 .. important:: 
   According to different application scenarios, we recommend several robot installation bases as follows
@@ -1729,7 +1729,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
     :align: center
     :width: 3in
 
-  .. centered:: Figure 3.4-3 FR3/FR3WMS/FR3WML/FR3C model collaborative robot low requirement mounting base
+  .. centered:: Figure 3.4-3 FR3/FR3-WMS/FR3-WML/FR3-C model collaborative robot low requirement mounting base
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
@@ -1737,7 +1737,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
     :align: center
     :width: 3in
 
-  .. centered:: Figure 3.4-4 FR3/FR3WMS/FR3WML/FR3C Model Collaborative Robot High Demand Mounting Base
+  .. centered:: Figure 3.4-4 FR3/FR3-WMS/FR3-WML/FR3-C Model Collaborative Robot High Demand Mounting Base
 
 Installation requirements for FR5 robot
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -1828,7 +1828,7 @@ There are four M6 thread holes in the robot tool, which can be used to connect t
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.4-13 FR3/FR3WMS/FR3WML/FR3C/FR5/FR10/FR16 model robot end flange drawing
+.. centered:: Figure 3.4-13 FR3/FR3-WMS/FR3-WML/FR3-C/FR5/FR10/FR16 model robot end flange drawing
 
 .. figure:: installation/031.png
 	:align: center
@@ -1904,12 +1904,12 @@ The maximum load that the FR3 collaborative robot can carry is 5kg, and the rate
 
 .. centered:: Figure 3.4-15 FR3 Model Collaborative Robot Load Curve
 
-FR3WMS Model Collaborative Robot Load Curve
+FR3-WMS Model Collaborative Robot Load Curve
 ***********************************************
 
-The maximum load that the FR3WMS collaborative robot can carry is 5kg, and the rated load is 3kg. The load curve is shown in Figure 1. The specific interpretation of the load curve is as follows:
+The maximum load that the FR3-WMS collaborative robot can carry is 5kg, and the rated load is 3kg. The load curve is shown in Figure 1. The specific interpretation of the load curve is as follows:
 
-(1) FR3WMS can carry a load of 3kg or less at full performance, see the "blue envelope";
+(1) FR3-WMS can carry a load of 3kg or less at full performance, see the "blue envelope";
 
 (2) When the load is 3kg to 5kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
 
@@ -1921,14 +1921,14 @@ The maximum load that the FR3WMS collaborative robot can carry is 5kg, and the r
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-16 FR3WMS Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-16 FR3-WMS Model Collaborative Robot Load Curve
 
-FR3WML Model Collaborative Robot Load Curve
+FR3-WML Model Collaborative Robot Load Curve
 ***********************************************
 
-The maximum load that the FR3WML collaborative robot can carry is 4kg, and the rated load is 3kg. The load curve is shown in Figure 1. The specific interpretation of the load curve is as follows:
+The maximum load that the FR3-WML collaborative robot can carry is 4kg, and the rated load is 3kg. The load curve is shown in Figure 1. The specific interpretation of the load curve is as follows:
 
-(1) FR3WML can carry a load of 3kg or less at full performance, see the "blue envelope";
+(1) FR3-WML can carry a load of 3kg or less at full performance, see the "blue envelope";
 
 (2) When the load is 3kg to 4kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
 
@@ -1940,14 +1940,14 @@ The maximum load that the FR3WML collaborative robot can carry is 4kg, and the r
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-17 FR3WML Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-17 FR3-WML Model Collaborative Robot Load Curve
 
-FR3C Model Collaborative Robot Load Curve
+FR3-C Model Collaborative Robot Load Curve
 ***********************************************
 
-The maximum load that the FR3C collaborative robot can carry is 5kg, and the rated load is 3kg. The load curve is shown in Figure 1. The specific interpretation of the load curve is as follows:
+The maximum load that the FR3-C collaborative robot can carry is 5kg, and the rated load is 3kg. The load curve is shown in Figure 1. The specific interpretation of the load curve is as follows:
 
-(1) FR3C can carry a load of 3kg or less at full performance, see the "blue envelope";
+(1) FR3-C can carry a load of 3kg or less at full performance, see the "blue envelope";
 
 (2) When the load is 3kg to 5kg, it is the extended load capacity, see the "red envelope", at this time the robot can operate in the following states:
 
@@ -1959,7 +1959,7 @@ The maximum load that the FR3C collaborative robot can carry is 5kg, and the rat
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-18 FR3C Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-18 FR3-C Model Collaborative Robot Load Curve
 
 FR5 Model Collaborative Robot Load Curve
 *******************************************

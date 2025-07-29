@@ -4,7 +4,7 @@ Collaborative robot
 Product matrix
 -----------------
 
-.. figure:: ../_static/fr_series_collaborative_robot.jpg
+.. figure:: ../_static/fr_series_collaborative_robot.png
     :align: center
     :figclass: align-center
 
