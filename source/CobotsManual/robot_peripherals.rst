@@ -5787,3 +5787,373 @@ Configurable Parameters
      - Triangle apex dwell
      - float
      - 0-99999(ms)
+
+Application of Collaborative Robot Array Suction Cups
+-----------------------------------------------------
+
+Overview
+~~~~~~~~
+Installing an array of suction cups on the robot's end effector enables rapid deployment of material handling workstations for various scenarios. The number and layout of suction cups can be customized for materials of different sizes and shapes, improving efficiency and stability.
+
+The collaborative robot supports up to 20 suction cups in an array. Each suction cup can be controlled individually for grasping/releasing, or the entire array can be synchronized. Each suction cup's station ID can be configured from 1 to 20 using DynamicLAB software.
+
+Hardware Description
+++++++++++++++++++++
+The robot communicates with the suction cup array via an Ethernet-to-485 module. The WebApp generates a communication protocol that sends control data via TCP/IP to the module, which converts it to 485 signals for the suction cups (using ModbusRTU protocol).
+
+The Ethernet-to-485 module acts as:
+- Server for Ethernet communication
+- Master for 485 communication
+Each suction cup is a 485 slave with unique station IDs.
+
+.. figure:: robot_peripherals/272.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-1 Collaborative Robot Suction Cup Array Application
+
+The module typically has two TCP Server ports mapping to 485 slaves (e.g., CH9121):
+- Port 50001 controls slaves 1-10
+- Port 50002 controls slaves 11-20
+
+Configuration requirements:
+- ① Ethernet as TCP Server, IP:192.168.58.10, Port1:50001, Port2:50002
+- ② 485 settings: 115200 baud, 8 data bits, 1 stop bit, no parity
+
+.. .. figure:: robot_peripherals/273.png
+..    :align: center
+..    :width: 6in
+
+.. .. centered:: Figure 8.21-2 Ethernet-to-485 Module Configuration Tool
+
+Function Configuration
+~~~~~~~~~~~~~~~~~~~~~~
+
+Access via: WebApp → "Initial Setup" → "Peripherals" → "Array Suction Cups"
+
+Two control modes:
+**Unicast Mode**: Independent control of each suction cup
+**Broadcast Mode**: Synchronized control of all suction cups
+
+.. figure:: robot_peripherals/274.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-3 Suction Cup Control Modes
+
+Unicast Mode Configuration
+++++++++++++++++++++++++++
+Two configuration methods:
+1. **Auto-config**: Upload pre-existing protocol files
+2. **Manual config**: Set parameters per suction cup
+
+Configuration steps:
+1. Select station ID (1-20)
+2. Set max/min vacuum, timeout
+3. Click "Configure"
+4. Repeat for all required suction cups
+5. Click "Connect" after all configurations
+
+.. figure:: robot_peripherals/275.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-4 Unicast Configuration
+
+.. note:: Important: Complete all configurations before connecting. Physical disconnections may require re-plugging Ethernet cables.
+
+Broadcast Mode
+++++++++++++++
+Configure after completing unicast setup:
+1. Set uniform vacuum parameters
+2. Click "Configure"
+3. Click "Connect"
+4. Use "Start/Stop" for synchronized control
+
+.. figure:: robot_peripherals/279.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-8 Broadcast Mode Configuration
+
+Click the "Connect" button in the "Protocol No.1" operation box. The "Running Status" indicator will light up, indicating that communication has been established between the robot and the array suction cups. After successful connection, all connected suction cup operation boxes will be displayed in the "Device Operation & Status" column.
+
+In "Parameter Configuration" → "One-touch Suction", clicking "Start" will make each suction cup in the array perform the "Set Vacuum Suction" action. Clicking "Stop" will make all suction cups stop the suction action.
+
+.. figure:: robot_peripherals/280.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-9 Broadcast Mode Communication Establishment
+
+The protocol file download process for broadcast mode is identical to unicast mode. Both downloaded protocol files can be uploaded to the robot via the "Auto Configuration" option in the unicast mode page.
+
+Array Suction Cup LUA Program Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By adding array suction cup control and status acquisition commands to the robot's LUA program, combined with robot motion commands, flexible and convenient material handling applications can be achieved.
+
+Open WebApp, navigate to "Teaching Program" → "Program Programming", and create a new LUA program "testSucker.lua".
+
+.. figure:: robot_peripherals/281.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-10 Creating "testSucker.lua" Program
+
+Select "Peripheral Commands" as the command type, then click the "Suction Cup" button. The "Sucker" array suction cup command addition page will appear on the right side of WebApp.
+
+.. figure:: robot_peripherals/282.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-11 Array Suction Cup Command Addition
+
+Adding Suction Cup Control Commands
++++++++++++++++++++++++++++++++++++++++++++
+
+Suction cup control commands in LUA programs can control suction and release actions. Unicast and broadcast modes have different control logic.
+
+Unicast Mode Control Command Addition
+***********************************************************
+
+Unicast mode can control single or multiple suction cups based on starting slave address and quantity, allowing different control states for each cup.
+
+Click "Suction Cup Control Command" in the command addition page, select "Unicast Mode" as control mode, input starting slave address as 1, write quantity as 2, and suction state as "1,2". Click "Add" to include a unicast control command in "Program Preview".
+
+.. figure:: robot_peripherals/283.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-12 Adding Suction Cup Control Command
+
+Parameters:
+- **Slave Address**: Starting slave address for unicast control
+- **Write Quantity**: Number of suction cups to control sequentially
+- **Suction State**: Control flags separated by commas (1-Max vacuum; 2-Set vacuum; 3-Stop). Must match write quantity.
+
+Click "Apply" to add the command to "testSucker.lua". In auto mode, executing this program will control slaves 1 and 2 with max and set vacuum respectively.
+
+.. figure:: robot_peripherals/284.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-13 Adding Suction Cup Command in LUA
+
+Broadcast Mode Control Command Addition
+***********************************************************
+
+Broadcast commands apply the suction state to all connected cups.
+
+Click "Suction Cup Control Command", select "Broadcast Mode", input suction state as 1 (max vacuum). Click "Add".
+
+.. figure:: robot_peripherals/285.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-14 Adding Broadcast Control Command
+
+Click "Apply" to add the command. In auto mode, execution will activate max vacuum suction on all cups.
+
+.. figure:: robot_peripherals/286.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-15 Adding Broadcast Command in LUA
+
+Adding Status Acquisition Command
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click "Get Suction Cup Status", select slave address, then click "Add" and "Apply". This adds "GetSuckerState(1)" to the program.
+
+.. figure:: robot_peripherals/287.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-16 Adding Status Acquisition Command
+
+GetSuckerState() returns:
+- **state**: 0-Released; 1-Object detected; 2-No object; 3-Object detached
+- **pressValue**: Current vacuum/pressure
+- **err**: Error code (0-Normal)
+
+The program stores these values in variables for WebApp display.
+
+.. figure:: robot_peripherals/288.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-17 Status Acquisition Program
+
+Adding Wait-for-State Command
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+For applications requiring sequential operations, the system provides blocking wait commands.
+
+Click "Wait for Suction State", select slave 1, set state to "Object detected", timeout to 10000ms. Click "Add".
+
+.. figure:: robot_peripherals/289.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-18 Adding Wait Command
+
+Click "Apply" to add the wait-for-object command.
+
+.. figure:: robot_peripherals/290.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.21-19 Adding Wait Command in LUA
+
+Application Example
+++++++++++++++++++++++++++++++++++
+
+Example LUA program for material handling:
+
+.. code-block:: lua
+  :linenos:
+
+  while (1) do 
+  ::satety_suck::
+  PTP(sucker_safey,100,-1,0)
+  PTP(sucker_suck,100,-1,0)
+  SetSuckerCtrl(2, 1, {2})
+  SetSuckerCtrl(11, 1, {2})
+  loop1 = 0 
+  while (loop1 < 10) do 
+      state, press, errorcode = GetSuckerState(2)
+      RegisterVar("number","state")
+      RegisterVar("number","press")
+      RegisterVar("number","errorcode")
+      state11, press11, errorcode11 = GetSuckerState(11)
+      RegisterVar("number","state11")
+      RegisterVar("number","press11")
+      RegisterVar("number","errorcode11")
+      loop1 = loop1 + 1
+      WaitMs(50)
+  end
+  
+  if(state11 == 1) then
+      PTP(sucker_safey,100,-1,0)
+      PTP(sucker_release,100,-1,0)
+      WaitMs(1000)
+      SetSuckerCtrl(2, 1, {3})
+      SetSuckerCtrl(11, 1, {3})
+      WaitMs(500)
+  else
+      PTP(sucker_safey,100,-1,0)
+      SetSuckerCtrl(2, 1, {3})
+      SetSuckerCtrl(11, 1, {3})
+      WaitMs(2000)
+      goto satety_suck
+  end
+  ::satety_release::
+  PTP(sucker_safey,100,-1,0)
+  PTP(sucker_release,100,-1,0)
+  SetSuckerCtrl(2, 1, {2})
+  SetSuckerCtrl(11, 1, {2})
+  loop1 = 0 
+  while (loop1 < 10) do 
+      state, press, errorcode = GetSuckerState(2)
+      RegisterVar("number","state")
+      RegisterVar("number","press")
+      RegisterVar("number","errorcode")
+      state11, press11, errorcode11 = GetSuckerState(11)
+      RegisterVar("number","state11")
+      RegisterVar("number","press11")
+      RegisterVar("number","errorcode11")
+      loop1 = loop1 + 1
+      WaitMs(50)
+  end
+  
+  if(state11 == 1) then
+      PTP(sucker_safey,100,-1,0)
+      PTP(sucker_suck,100,-1,0)
+      WaitMs(1000)
+      SetSuckerCtrl(2, 1, {3})
+      SetSuckerCtrl(11, 1, {3})
+      WaitMs(500)
+  else
+      PTP(sucker_safey,100,-1,0)
+      SetSuckerCtrl(2, 1, {3})
+      SetSuckerCtrl(11, 1, {3})
+      WaitMs(2000)
+      goto satety_release
+  end
+  end
+
+Laser Positioning Point Acquisition Function
+-----------------------------------------------------------
+
+Robot Laser Positioning System Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: robot_peripherals/291.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.22-1 Robot Laser Positioning System Topology
+.. centered:: System components: (a) Computer, (b) Robot with controller, (c) Laser sensor.
+
+Laser Sensor Communication Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Access via: WebApp → "Initial Setup" → "Peripherals" → "Tracking" → "Sensor" to configure sensor communication.
+
+.. figure:: robot_peripherals/292.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.22-2 Sensor Communication Configuration
+
+Laser Positioning Point Acquisition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Operation workflow:
+
+**Step 1**: Before positioning, first designate starting points "seamStartPt1" and "seamStartPt2". Then navigate to "Teaching Program" → "Program Programming", select "Point-to-Point" to align the laser beam near the first weld seam's starting point "seamStartPt1".
+
+.. figure:: robot_peripherals/293.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.22-3 Adding Move-to-Start-Point Instruction
+
+**Step 2**: Click "Positioning Start" in command types, select calibrated sensor coordinate system. Set positioning direction, speed, length and max positioning time, then click "Add". Next click "Positioning End" → "Add".
+
+.. figure:: robot_peripherals/294.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.22-4 Adding Positioning Start Command
+
+**Step 3**: Select "Sensor Point Acquisition Motion", choose calibrated "Laser Sensor" coordinate system. Select motion type ("PTP" or "LIN"), set debug speed and configure posture option. Click "Add" then "Apply" to insert into LUA program.
+
+.. figure:: robot_peripherals/295.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.22-5 Adding Sensor Point Acquisition Command
+
+**Step 4**: In "Program Programming" interface, click "Switch Mode" button. Change variable "pos" to "pos1" and delete the move-to-position instruction.
+
+.. figure:: robot_peripherals/296.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.22-6 Program Mode Switching
+
+.. figure:: robot_peripherals/297.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.22-7 Modifying Laser Positioning Program
+
+**Step 5**: Repeat Steps 1-4 for the second weld seam positioning.
+
+.. figure:: robot_peripherals/298.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.22-8 Second Seam Positioning Acquisition

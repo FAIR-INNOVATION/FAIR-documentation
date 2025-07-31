@@ -3897,27 +3897,31 @@ Operation process
 
 .. centered:: Figure 9.23-1 Import and delete trajectory files
 
-**Step3**: Select the trajectory file to be run and add the "Trace Preload" command: First, select the fitting method for the trajectory points in "Curve Fitting Method", including "Straight Line Connection", "Straight Line Fitting", "B-Spline Curve", "Polynomial Optimization Method", etc. When "Straight Line Fitting" is selected, it is necessary to set the error limit additionally, and other methods do not need this setting; secondly, set the smoothing method and smoothing accuracy; finally, set the maximum speed, maximum acceleration and maximum jerk during the operation.
+**Step3**: Select the trajectory file to run and add the "Trajectory Preload" command: 
+
+First, choose the fitting method for trajectory points in "Curve Fitting Method", including "Linear Connection", "Linear Fitting", "B-spline Curve", "Polynomial Optimization Method", etc. When selecting "Linear Fitting", additional error limits need to be set, which is not required for other methods. 
+
+Then set the smoothing method and smoothing precision. Finally, configure the maximum velocity, maximum acceleration and maximum jerk during operation. The "Uniform Motion" option can be enabled for constant velocity lookahead, which will make the robot perform lookahead at constant speed when activated.
 
 .. image:: coding/289.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.23-2 Set trajectory preload parameters "Straight Line Connection
+.. centered:: Figure 9.23-2 Setting "Linear Fitting" Parameters for Trajectory Preloading
 
 .. image:: coding/292.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.23-3 Set trajectory preload parameters "B-Spline Curve"
+.. centered:: Figure 9.23-3 Setting Trajectory Preloading Parameters
 
-**Step 4**: Add the "trajectory motion" command and generate a Lua program. By running the Lua program, you can perform real-time forward trajectory planning on the imported trajectory file. The typical program of real-time forward trajectory planning is shown in the figure below.
+**Step4**: Add the "Trajectory Motion" command and generate Lua program. The imported trajectory file can be processed with real-time lookahead trajectory planning by running the Lua program. A typical real-time lookahead trajectory planning program is shown below.
 
 .. image:: coding/290.png
    :width: 5in
    :align: center
 
-.. centered:: Figure 9.23-4 Typical program for real-time forward-looking trajectory planning
+.. centered:: Figure 9.23-4 Typical Program for Real-time Lookahead Trajectory Planning (B-spline Curve)
 
 **Step 5**: For the "LoadTrajectory" command line in the lua program, click the edit button to modify the setting parameters to achieve different trajectory planning effects.
 
@@ -7021,3 +7025,43 @@ Attachment 1: Modbus Slave Address Mapping Table
      - FLOAT32 (Big Endian) 
      - 0x03, 0x06, 0x10
      - R/W  
+
+Protection Based on 6-Axis Force Sensor Posture Compliance Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++
+
+Current FR robots have no maximum adjustment angle limit in posture compliance function under constant force FT_Control. When the 6-axis force sensor receives external torque, the robot end will continuously deviate, which may cause hazards.
+
+This enhancement adds maximum adjustment angle limit on top of the FT_Control posture compliance function, allowing custom threshold setting to make posture compliance smoother.
+
+Operation Procedure
+++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Click "Initial Setup"->"Basic"->"Coordinate System"->"Tool" to enter the tool coordinate system setup interface. Select "Coordinate System Name" and configure parameters for the end tool coordinate system.
+   
+.. image:: coding/443.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.31-1 Tool Coordinate System Setup
+
+**Step2**: Click "Teach Programming"->"Program Editing" to write constant force control Lua script. Select "Force Control Set"->"Control", add force control motion command, set "Posture Compliance" to ON, and configure maximum adjustment angle as the threshold.
+   
+.. image:: coding/444.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.31-2 Force Control Motion Command
+
+**Step3**: On web interface click "FT" to set 6-axis force sensor reference coordinate system. Select reference coordinate system as "Custom Coordinate System" and configure corresponding parameters.
+When posture compliance adjusts around tool coordinate system, set reference coordinate parameters to "0"; when adjusting around end flange coordinate system, set parameters to match the end tool coordinate system.
+   
+.. image:: coding/445.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.31-3 Setting 6-Axis Force Sensor Reference Coordinate System
+
+**Step4**: Run the script to observe posture compliance effect. The adjustment angle under constant force will be limited within the custom maximum adjustment angle range.

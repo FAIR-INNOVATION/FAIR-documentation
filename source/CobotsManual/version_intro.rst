@@ -1,3 +1,44 @@
+Version V3.8.4.1
+-----------------
+
+Date: 2025-07-30
+
+- **Ethernet Passthrough Module & Suction Gripper Control**:
+    Path: Initial Setup → Peripherals → Array Suction Cups.
+  
+    Description: Supports control of array suction cups (max 20) via Ethernet-to-485 passthrough module through UI and peripheral protocols.
+
+- **Robot Lookahead Trajectory Planning (Constant Velocity)**:
+    Path: Teaching Program → Program Programming/Graphical Programming/Node Diagram.
+  
+    Description: Added constant velocity option for lookahead motion planning.
+
+- **Slave Mode Optimization**:
+    Path: Initial Setup → Peripherals → Board Communication/Remote Mode.
+  
+    Description: Added support for Jiyuan ETMP03E board (EtherCAT protocol).
+
+- **Laser Positioning Point Acquisition**:
+    Path: Initial Setup → Peripherals → Tracking → Sensor.
+  
+    Description: After successful laser seam tracking, position data stored in "seamPos" can be retrieved via SDK or TCP commands.
+
+- **FR5/FR10 Speed Enhancement**:
+  
+    Description: Increased FR5 linear speed from 1.0m/s to 1.7m/s; FR10 from 1.5m/s to 2.0m/s.
+
+- **Robot Model Configuration**:
+  
+    Description: Added FR5L long-reach robot model option.
+
+- **Software Upgrade Optimization**:
+  
+    Description: Reduced upgrade time, supports downgrading from high versions to any lower version (3.7.6-3.8.4).
+
+- **Factory Reset Optimization**:
+  
+    Description: Preserves robot model, stiffness, dynamics settings, and pendant version during factory reset.
+    
 Version V3.8.4
 -----------------
 

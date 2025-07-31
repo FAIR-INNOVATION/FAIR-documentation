@@ -7,15 +7,40 @@ Custom protocol slave commands
 Overview
 -------------------
 
-In order to facilitate PLC motion control of the robot via different industrial bus protocols (CC-Link, Profinet, Ethernet/IP and EtherCAT), the following functions are realised with the addition of Hilscher board modules to the integrated mini control box:
+Industrial Bus Protocol Integration for Robot Motion Control
+-----------------------------------------------------------------
 
-1) CC-Link slave protocol support;
-2) Profinet slave protocol support;
-3) Ethernet/IP slave protocol support;
-4) EtherCAT slave protocol support(Not supported by EnTalk board);
+To facilitate PLC-based robot motion control through various industrial bus protocols (CC-Link, Profinet, Ethernet/IP, and EtherCAT), the integrated mini control cabinet has been equipped with Hilscher cards, FRJ-PCIeN-EIP/CC/PN-RJ-V10 cards, and FRJ-PCIeN-EC-RJ-V10 cards.
 
 Environment Configuration
-------------------------------
+--------------------------
+
+The required card models and software versions are as follows:
+
+.. list-table:: 
+   :widths: 20 50 30
+   :header-rows: 1
+   :align: center
+
+   * - **Protocol Type**
+     - **Card Model**
+     - **Robot Software Version**
+
+   * - CC-link
+     - Hilscher card, FRJ-PCIeN-EIP/CC/PN-RJ-V10
+     - V3.8.0+
+
+   * - Profinet
+     - Hilscher card, FRJ-PCIeN-EIP/CC/PN-RJ-V10
+     - V3.8.0+
+
+   * - Ethernet/IP
+     - Hilscher card, FRJ-PCIeN-EIP/CC/PN-RJ-V10
+     - V3.8.0+
+
+   * - EtherCAT
+     - Hilscher card, FRJ-PCIeN-EC-RJ-V10
+     - V3.8.4.1+
 
 Hilscher board hardware environment setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -71,7 +96,7 @@ Hilscher board hardware environment setup
 
 .. important:: When the protocol is switched to EtherCAT bus, the board's network port needs to be distinguished as EtherCAT_IN and EtherCAT_OUT. At this time, the PLC's EtherCAT network port is directly connected to the board's EtherCAT_IN through a network cable.
 
-EnTalk Board Hardware Setup
+FRJ-PCIeN Board Hardware Setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Install the board into the integrated mini control box as shown.
@@ -80,7 +105,7 @@ EnTalk Board Hardware Setup
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-7 EnTalk Board Ethernet Port
+.. centered:: Figure 17.2-7 FRJ-PCIeN Board Ethernet Port
 
 2. Wiring between robot control box and PLC is shown below.
 
@@ -110,7 +135,7 @@ EnTalk Board Hardware Setup
     5: Siemens PLC (Profinet port);
     6: Inovance PLC (Ethernet/IP port);
 
-3. Firmware upgrade is required when switching protocols on EnTalk board. For upgrade:
+3. Firmware upgrade is required when switching protocols on FRJ-PCIeN board. For upgrade:
    - Set PC IP to "192.168.0.xxx"
    - Open "Gateway Toolset" software
    - Select PC network adapter
@@ -350,6 +375,65 @@ After opening the download interface, click ‘Parameter+Programme’ on the top
    :width: 6in
    :align: center
 
+Inovance EtherCAT Configuration
+++++++++++++++++++++++++++++++++++
+
+1. XML File Import
+
+Open Inovance AutoShop programming software and create a new PLC project. Select "EtherCAT Devices" from the right toolbox:
+
+.. image:: custom_protocol_slave/052.png
+   :width: 6in
+   :align: center
+
+Right-click after selecting "EtherCAT Devices" to open the "Import Device XML" dialog. Locate the folder containing the card's XML file. After successful import, the card name will appear under "EtherCAT Devices". Close and reopen the project to complete the import process.
+
+.. image:: custom_protocol_slave/053.png
+   :width: 6in
+   :align: center
+
+2. Variable Mapping
+
+Double-click the variable table in the left toolbar. Create:
+- 256-byte input array (Soft element address: D0)
+- 256-byte output array (Soft element address: D200)
+
+.. image:: custom_protocol_slave/054.png
+   :width: 6in
+   :align: center
+
+Under "EtherCAT" in the left toolbar, double-click "Xone-PCIe-ECATs". In the dialog, click "I/O Mapping", then bind variable addresses by selecting from the variable table. Repeat sequentially for other addresses.
+
+.. image:: custom_protocol_slave/055.png
+   :width: 6in
+   :align: center
+
+3. Program Download
+
+Open the test program and change PLC IP from default "192.168.1.88" to "192.168.0.88":
+
+.. image:: custom_protocol_slave/056.png
+   :width: 6in
+   :align: center
+
+Click "Modify IP/Device Name" and update both IP and gateway to "192.168.0.88":
+
+.. image:: custom_protocol_slave/057.png
+   :width: 6in
+   :align: center
+
+Confirm modification by clicking "Yes" in the popup dialog when clicking "Modify IP".
+
+.. image:: custom_protocol_slave/058.png
+   :width: 6in
+   :align: center
+
+After successful communication, download the PLC program.
+
+.. image:: custom_protocol_slave/059.png
+   :width: 6in
+   :align: center
+
 HMI setting (CC-link emulation)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -472,7 +556,7 @@ Loading Slave Mode
 
 .. centered:: Figure 17.3-1 Board Communication Manual Configuration
 
-First, configure the IP address of the Entalk board. If left blank, the board will use the default IP: 192.168.0.100 for startup configuration. Currently, IP configuration only applies to EIP and CC-link protocols. For PN protocol, the IP is assigned by the PLC master station scanning slave devices.
+First, configure the IP address of the FRJ-PCIeN board. If left blank, the board will use the default IP: 192.168.0.100 for startup configuration. Currently, IP configuration only applies to EIP and CC-link protocols. For PN protocol, the IP is assigned by the PLC master station scanning slave devices.
 
 .. note:: After changing the IP address on the page, you need to load the slave mode for the changes to take effect.
 
