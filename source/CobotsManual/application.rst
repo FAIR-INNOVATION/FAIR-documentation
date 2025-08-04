@@ -27,38 +27,95 @@ In the menu bar of "Application - Tool App", click the "Robot packing" button to
 .. centered:: Figure 14.1‑1 Robot one-click packaging
 
 System Upgrade
-------------------------
+-----------------
 
-In the menu bar of "Application - Tool App", click the "System upgrade" button to enter the system upgrade interface. System upgrade is divided into software upgrade, driver upgrade and system shutdown.
+Preparation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Software upgrade**:Click "Upload File" under Software Upgrade, select the ``software.tar.gz`` upgrade package in the U disk, click Upload Upgrade Package, and "Uploading...Upload Percentage" is displayed next to the upgrade button.
-After the download of the background file is completed, the interface displays "uploading completed, upgrading in progress", check the MD5 and version number of the file, after passing, decrypt and decompress the upgrade file, and prompt "Upgrade is successful, please restart the control box!", if detected , unzip or other errors occur, and "upgrade failed" is displayed next to the upgrade button.
+1. Before upgrading, check and confirm the current software version in *System Settings > About*.
+2. Download the software upgrade package from the Farobot documentation *Downloads > Robot Software Downloads* for the corresponding version. After extraction, the package includes the software upgrade file ``software.tar.gz``.
+
+Important Notes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Data Backup**: It is recommended to back up data before upgrading (refer to Section 3.2.1) to avoid data loss due to upgrade failures.
+2. **Version Restrictions**:
+
+.. centered:: Table 14.1-1 Version Upgrade Restrictions
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Current Version** 
+     - **Maximum Upgradable Version**
+
+   * - <v3.6.1
+     - v3.6.1
+
+   * - v3.6.1-v3.6.4
+     - v3.6.5
+
+   * - v3.6.5-v3.6.8
+     - v3.6.9
+
+   * - v3.6.9 - v3.7.4
+     - v3.7.5
+
+   * - v3.7.5
+     - v3.7.6
+
+   * - ≥ v3.7.6
+     - No restrictions
+
+3. **Cache Clearance**: After each upgrade (especially for cross-version upgrades), clear the browser cache to ensure proper system operation.
+
+Procedure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**System Upgrade**:
+
+1. Navigate to *Auxiliary Apps > Tool Apps* and enter the Software Upgrade section.
 
 .. image:: application/002.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 14.2‑1 System Upgrade
+.. centered:: Figure 14.2‑1 System Upgrade Interface
+
+1. Click *Choose File* and select the downloaded 'software.tar.gz' package.
 
 .. important:: 
-   The name of the software upgrade package is determined ``software.tar.gz``. If the name of the upgrade package is inconsistent with it, the upgrade will fail. Just change it to the determined name of the upgrade package.
+   The upgrade package must be named 'software.tar.gz'. If the filename differs, the upgrade will fail. Rename the file if necessary.
 
+3. Click *Upload Upgrade Package* to start the upgrade. A progress bar will display the status.
 
-**Firmware upgrade**:After the robot enters the BOOT mode, upload the upgrade compressed package, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
+4. When the progress reaches 100%, a message will appear: *"Upgrade successful. Please restart the control box."*
+
+.. image:: application/082.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 14.2‑2 Software Upgrade Success
+
+5. After rebooting the control box, verify the version in *About*.
+
+**Firmware Upgrade**: After the robot enters BOOT mode, upload the upgrade package, select the target slave devices (control box slave, drive slaves 1-6, end-effector slave), and monitor the upgrade status.
 
 .. image:: application/003.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 14.2‑2 Firmware upgrade
+.. centered:: Figure 14.2‑3 Firmware Upgrade
 
-**Slave configuration file upgrade**:After the robot is disabled, upload the upgrade file, select the slaves that need to be upgraded (control box slaves, main body drive slaves 1~6, and end slaves), perform the upgrade operation, and display the upgrade status.
+**Slave Configuration File Upgrade**: With the robot disabled, upload the upgrade file, select the target slave devices (control box slave, drive slaves 1-6, end-effector slave), and monitor the upgrade status.
 
 .. image:: application/004.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 14.2‑3 Slave configuration file upgrade
+.. centered:: Figure 14.2‑4 Slave Configuration File Upgrade
 
 Data backup
 ------------------------
