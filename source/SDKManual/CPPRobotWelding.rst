@@ -1,3 +1,281 @@
+Robot Welding
+======================
+
+.. toctree:: 
+    :maxdepth: 5
+
+Set Welding Process Curve Parameters
++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Set welding process curve parameters
+     * @param [in] id Welding process ID (1-99)
+     * @param [in] startCurrent Arc starting current (A)
+     * @param [in] startVoltage Arc starting voltage (V)
+     * @param [in] startTime Arc starting time (ms)
+     * @param [in] weldCurrent Welding current (A)
+     * @param [in] weldVoltage Welding voltage (V)
+     * @param [in] endCurrent Arc ending current (A)
+     * @param [in] endVoltage Arc ending voltage (V)
+     * @param [in] endTime Arc ending time (ms)
+     * @return Error code
+     */
+    errno_t WeldingSetProcessParam(int id, double startCurrent, double startVoltage, double startTime, double weldCurrent, double weldVoltage, double endCurrent, double endVoltage, double endTime);
+
+Get Welding Process Curve Parameters
++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Get welding process curve parameters
+     * @param [in] id Welding process ID (1-99)
+     * @param [out] startCurrent Arc starting current (A)
+     * @param [out] startVoltage Arc starting voltage (V)
+     * @param [out] startTime Arc starting time (ms)
+     * @param [out] weldCurrent Welding current (A)
+     * @param [out] weldVoltage Welding voltage (V)
+     * @param [out] endCurrent Arc ending current (A)
+     * @param [out] endVoltage Arc ending voltage (V)
+     * @param [out] endTime Arc ending time (ms)
+     * @return Error code
+     */
+    errno_t WeldingGetProcessParam(int id, double& startCurrent, double& startVoltage, double& startTime, double& weldCurrent, double& weldVoltage, double& endCurrent, double& endVoltage, double& endTime);
+
+Set Welding Current to Analog Output Relationship
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set welding current to analog output relationship
+    * @param [in] currentMin Current value at left point of linear relationship (A)
+    * @param [in] currentMax Current value at right point of linear relationship (A)
+    * @param [in] outputVoltageMin Analog output voltage at left point (V)
+    * @param [in] outputVoltageMax Analog output voltage at right point (V)
+    * @return Error code
+    */
+    errno_t WeldingSetCurrentRelation(double currentMin, double currentMax, double outputVoltageMin, double outputVoltageMax);
+
+Set Welding Voltage to Analog Output Relationship
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set welding voltage to analog output relationship
+    * @param [in] weldVoltageMin Welding voltage at left point of linear relationship (A)
+    * @param [in] weldVoltageMax Welding voltage at right point of linear relationship (A)
+    * @param [in] outputVoltageMin Analog output voltage at left point (V)
+    * @param [in] outputVoltageMax Analog output voltage at right point (V)
+    * @return Error code
+    */
+    errno_t WeldingSetVoltageRelation(double weldVoltageMin, double weldVoltageMax, double outputVoltageMin, double outputVoltageMax);
+
+Get Welding Current to Analog Output Relationship
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get welding current to analog output relationship
+    * @param [out] currentMin Current value at left point of linear relationship (A)
+    * @param [out] currentMax Current value at right point of linear relationship (A)
+    * @param [out] outputVoltageMin Analog output voltage at left point (V)
+    * @param [out] outputVoltageMax Analog output voltage at right point (V)
+    * @return Error code
+    */
+    errno_t WeldingGetCurrentRelation(double *currentMin, double *currentMax, double *outputVoltageMin, double *outputVoltageMax);
+
+Get Welding Voltage to Analog Output Relationship
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get welding voltage to analog output relationship
+    * @param [out] weldVoltageMin Welding voltage at left point of linear relationship (A)
+    * @param [out] weldVoltageMax Welding voltage at right point of linear relationship (A)
+    * @param [out] outputVoltageMin Analog output voltage at left point (V)
+    * @param [out] outputVoltageMax Analog output voltage at right point (V)
+    * @return Error code
+    */
+    errno_t WeldingGetVoltageRelation(double *weldVoltageMin, double *weldVoltageMax, double *outputVoltageMin, double *outputVoltageMax);
+
+Set Welding Current
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set welding current
+    * @param [in] ioType Control IO type: 0-Control box IO; 1-Extension IO
+    * @param [in] current Welding current value (A)
+    * @param [in] AOIndex Control box analog output port for welding current (0-1)
+    * @return Error code
+    */
+    errno_t WeldingSetCurrent(int ioType, double current, int AOIndex);
+
+Set Welding Voltage
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. versionadded:: C++SDK-v2.1.1.0
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set welding voltage
+    * @param [in] ioType Control IO type: 0-Control box IO; 1-Extension IO
+    * @param [in] voltage Welding voltage value (A)
+    * @param [in] AOIndex Control box analog output port for welding voltage (0-1)
+    * @return Error code
+    */
+    errno_t WeldingSetVoltage(int ioType, double voltage, int AOIndex);
+
+Set Weaving Parameters
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Set weaving parameters
+     * @param [in] weaveNum Weaving parameter configuration ID
+     * @param [in] weaveType Weaving type: 
+     *        0-Horizontal triangular wave weaving;
+     *        1-Vertical L-shaped triangular wave weaving;
+     *        2-Clockwise circular weaving;
+     *        3-Counter-clockwise circular weaving;
+     *        4-Horizontal sine wave weaving;
+     *        5-Vertical L-shaped sine wave weaving;
+     *        6-Vertical triangular wave weaving;
+     *        7-Vertical sine wave weaving
+     * @param [in] weaveFrequency Weaving frequency (Hz)
+     * @param [in] weaveIncStayTime Wait mode: 
+     *        0-Period excludes wait time;
+     *        1-Period includes wait time
+     * @param [in] weaveRange Weaving amplitude (mm)
+     * @param [in] weaveLeftRange Left chord length for vertical triangular weaving (mm)
+     * @param [in] weaveRightRange Right chord length for vertical triangular weaving (mm)
+     * @param [in] additionalStayTime Vertical triangular weaving apex dwell time (mm)
+     * @param [in] weaveLeftStayTime Left dwell time (ms)
+     * @param [in] weaveRightStayTime Right dwell time (ms)
+     * @param [in] weaveCircleRadio Circular weaving-callback ratio (0-100%)
+     * @param [in] weaveStationary Position wait during weaving:
+     *        0-Position continues moving during wait time;
+     *        1-Position remains static during wait time
+     * @param [in] weaveYawAngle Weaving direction azimuth angle (rotation around Z-axis), in °
+     * @param [in] weaveRotAngle Weaving direction tilt angle (deflection around X-axis), in °
+     * @return Error code
+     */
+    errno_t WeaveSetPara(int weaveNum, int weaveType, double weaveFrequency, int weaveIncStayTime, double weaveRange, double weaveLeftRange, double weaveRightRange, int additionalStayTime, int weaveLeftStayTime, int weaveRightStayTime, int weaveCircleRadio, int weaveStationary, double weaveYawAngle, double weaveRotAngle = 0);
+
+Welding Parameter Setup Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestSetWeldParam(void)
+    {
+      ROBOT_STATE_PKG pkg = {};
+      FRRobot robot;
+      robot.LoggerInit();
+      robot.SetLoggerLevel(1);
+      int rtn = robot.RPC("192.168.58.2");
+      if (rtn != 0)
+      {
+        return -1;
+      }
+      robot.SetReConnectParam(true, 30000, 500);
+      robot.WeldingSetProcessParam(1, 177, 27, 1000, 178, 28, 176, 26, 1000);
+      robot.WeldingSetProcessParam(2, 188, 28, 555, 199, 29, 133, 23, 333);
+      double startCurrent = 0;
+      double startVoltage = 0;
+      double startTime = 0;
+      double weldCurrent = 0;
+      double weldVoltage = 0;
+      double endCurrent = 0;
+      double endVoltage = 0;
+      double endTime = 0;
+      robot.WeldingGetProcessParam(1, startCurrent, startVoltage, startTime, weldCurrent, weldVoltage, endCurrent, endVoltage, endTime);
+      cout << "the Num 1 process param is " << startCurrent << " " << startVoltage << " " << startTime << " " << weldCurrent << " " << weldVoltage << " " << endCurrent << " " << endVoltage << " " << endTime << endl;
+      robot.WeldingGetProcessParam(2, startCurrent, startVoltage, startTime, weldCurrent, weldVoltage, endCurrent, endVoltage, endTime);
+      cout << "the Num 2 process param is " << startCurrent << " " << startVoltage << " " << startTime << " " << weldCurrent << " " << weldVoltage << " " << endCurrent << " " << endVoltage << " " << endTime << endl;
+      rtn = robot.WeldingSetCurrentRelation(0, 400, 0, 10, 0);
+      cout << "WeldingSetCurrentRelation rtn is: " << rtn << endl;
+      rtn = robot.WeldingSetVoltageRelation(0, 40, 0, 10, 1);
+      cout << "WeldingSetVoltageRelation rtn is: " << rtn << endl;
+      double current_min = 0;
+      double current_max = 0;
+      double vol_min = 0;
+      double vol_max = 0;
+      double output_vmin = 0;
+      double output_vmax = 0;
+      int curIndex = 0;
+      int volIndex = 0;
+      rtn = robot.WeldingGetCurrentRelation(&current_min, &current_max, &output_vmin, &output_vmax, &curIndex);
+      cout << "WeldingGetCurrentRelation rtn is: " << rtn << endl;
+      cout << "current min " << current_min << " current max " << current_max << " output vol min " << output_vmin << " output vol max " << output_vmax << endl;
+      rtn = robot.WeldingGetVoltageRelation(&vol_min, &vol_max, &output_vmin, &output_vmax, &volIndex);
+      cout << "WeldingGetVoltageRelation rtn is: " << rtn << endl;
+      cout << "vol min " << vol_min << " vol max " << vol_max << " output vol min " << output_vmin << " output vol max " << output_vmax << endl;
+      rtn = robot.WeldingSetCurrent(1, 100, 0, 0);
+      cout << "WeldingSetCurrent rtn is: " << rtn << endl;
+      this_thread::sleep_for(chrono::seconds(3));
+      rtn = robot.WeldingSetVoltage(1, 10, 0, 0);
+      cout << "WeldingSetVoltage rtn is: " << rtn << endl;
+      rtn = robot.WeaveSetPara(0, 0, 2.000000, 0, 10.000000, 0.000000, 0.000000, 0, 0, 0, 0, 0, 60.000000);
+      cout << "rtn is: " << rtn << endl;
+      robot.WeaveOnlineSetPara(0, 0, 1, 0, 20, 0, 0, 0, 0);
+      rtn = robot.WeldingSetCheckArcInterruptionParam(1, 200);
+      printf("WeldingSetCheckArcInterruptionParam  %d\n", rtn);
+      rtn = robot.WeldingSetReWeldAfterBreakOffParam(1, 5.7, 98.2, 0);
+      printf("WeldingSetReWeldAfterBreakOffParam  %d\n", rtn);
+      int enable = 0;
+      double length = 0;
+      double velocity = 0;
+      int moveType = 0;
+      int checkEnable = 0;
+      int arcInterruptTimeLength = 0;
+      rtn = robot.WeldingGetCheckArcInterruptionParam(&checkEnable, &arcInterruptTimeLength);
+      printf("WeldingGetCheckArcInterruptionParam checkEnable %d  arcInterruptTimeLength %d\n", checkEnable, arcInterruptTimeLength);
+      rtn = robot.WeldingGetReWeldAfterBreakOffParam(&enable, &length, &velocity, &moveType);
+      printf("WeldingGetReWeldAfterBreakOffParam enable = %d, length = %lf, velocity = %lf, moveType = %d\n", enable, length, velocity, moveType);
+      robot.SetWeldMachineCtrlModeExtDoNum(17);
+      for (int i = 0; i < 5; i++)
+      {
+        robot.SetWeldMachineCtrlMode(0);
+        robot.Sleep(1000);
+        robot.SetWeldMachineCtrlMode(1);
+        robot.Sleep(1000);
+      }
+      robot.CloseRPC();
+      return 0;
+    }
+
 Instantaneously Set Weaving Parameters
 +++++++++++++++++++++++++++++++++++++++++++++
 
