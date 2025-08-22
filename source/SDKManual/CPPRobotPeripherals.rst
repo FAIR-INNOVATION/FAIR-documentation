@@ -1065,3 +1065,292 @@ SmartTool Button Code Example
         Sleep(100);
       }
     }
+
+Control Array Suction Cup
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Control Array Suction Cup
+    * @param [in] slaveID Slave Station ID
+    * @param [in] len Length
+    * @param [in] ctrlValue Control Value
+    * @return Error Code
+    */
+    errno_t FRRobot::SetSuckerCtrl(uint8_t slaveID, uint8_t len, uint8_t ctrlValue[20]);
+
+Get Array Suction Cup Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get Array Suction Cup Status
+    * @param [in] slaveID Slave Station ID
+    * @param [out] state Adsorption Status 0-Release Object 1-Workpiece Detected, Adsorption Successful 2-No Object Adsorbed 3-Object Detached
+    * @param [out] pressValue Current Vacuum Level Unit kpa
+    * @param [out] error Current Error Code of the Suction Cup
+    * @return Error Code
+    */
+	errno_t FRRobot::GetSuckerState(uint8_t slaveID, uint8_t* state, int* pressValue, int* error);
+
+Wait for Suction Cup Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Wait for Suction Cup Status
+    * @param [in] slaveID Slave Station ID
+    * @param [in] state Adsorption Status 0-Release Object 1-Workpiece Detected, Adsorption Successful 2-No Object Adsorbed 3-Object Detached
+    * @param [in] ms Maximum Wait Time (ms)
+    * @return Error Code
+    */
+    errno_t FRRobot::WaitSuckerState(uint8_t slaveID, uint8_t state, int ms);
+
+Array Suction Cup Control Command Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    void testSucker()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        uint8_t ctrl[20];
+        uint8_t state;
+        int pressValue; // Corrected typo from pressVlaue
+        int error;
+
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        //Upload and load the open protocol file
+        robot.OpenLuaUpload("E://Project/Peripheral SDK/CtrlDev_sucker.lua");
+        robot.Sleep(2000);
+        robot.SetCtrlOpenLUAName(1, "CtrlDev_sucker.lua");
+        robot.UnloadCtrlOpenLUA(1);
+        robot.LoadCtrlOpenLUA(1);
+        robot.Sleep(1000);
+
+        //Control suction cup in broadcast mode, adsorb at maximum capacity
+        ctrl[0] = 1;
+        robot.SetSuckerCtrl(0, 1, ctrl);
+
+        //Loop to monitor the status of suction cup 1 and suction cup 12
+        for (int i = 0; i < 100; i++)
+        {
+            robot.GetSuckerState(1, &state, &pressValue, &error);
+            printf("sucker1 state is %d, pressValue is %d, error num is %d\n", state, pressValue, error);
+            robot.GetSuckerState(12, &state, &pressValue, &error);
+            printf("sucker12 state is %d, pressValue is %d, error num is %d\n", state, pressValue, error);
+            robot.Sleep(100);
+        }
+
+        //Wait for suction cup 1 to reach the state of having adsorbed an object, wait time 100ms
+        int ret = robot.WaitSuckerState(1, 1, 100);
+        printf("WaitSuckerState result is  %d\n", ret);
+
+        //Turn off suction cup 1 and 12 in unicast mode
+        ctrl[0] = 3;
+        robot.SetSuckerCtrl(1, 1, ctrl);
+        robot.SetSuckerCtrl(12, 1, ctrl);
+
+        robot.CloseRPC();
+    }
+
+Upload Peripheral Open Protocol LUA File
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+	/**
+	 * @brief Upload Lua File
+	 * @param [in] filePath Local lua file path name
+	 * @return Error Code
+	 */
+    errno_t OpenLuaUpload(std::string filePath);
+
+Get Slave Board Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief  Get Slave Board Parameters
+    * @param  [out] type  0-Ethercat，1-CClink, 3-Ethercat, 4-EIP
+    * @param  [out] version  Protocol Version
+    * @param  [out] connState  0-Not Connected 1-Connected
+    * @return  Error Code
+    */
+    errno_t GetFieldBusConfig(uint8_t* type, uint8_t* version, uint8_t* connState);
+
+Write Slave DO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief  Write Slave DO
+    * @param  [in] DOIndex  DO Number
+    * @param  [in] writeNum  Number to Write // Corrected typo from wirteNum
+    * @param  [in] status[8] Value to Write, maximum 8
+    * @return  Error Code
+    */
+    errno_t FieldBusSlaveWriteDO(uint8_t DOIndex, uint8_t writeNum, uint8_t status[8]);
+
+Write Slave AO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief  Write Slave AO
+    * @param  [in] AOIndex  AO Number
+    * @param  [in] writeNum  Number to Write // Corrected typo from wirteNum
+    * @param  [in] status[8] Value to Write, maximum 8
+    * @return  Error Code
+    */
+    errno_t FieldBusSlaveWriteAO(uint8_t AOIndex, uint8_t writeNum, int status[8]);
+
+Read Slave DI
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief  Read Slave DI
+    * @param  [in] DIIndex  DI Number // Corrected parameter name from DOIndex
+    * @param  [in] readNum  Number to Read // Corrected typo from readeNum
+    * @param  [out] status[8] Value Read, maximum 8
+    * @return  Error Code
+    */
+    errno_t FieldBusSlaveReadDI(uint8_t DIIndex, uint8_t readNum, uint8_t status[8]);
+
+Read Slave AI
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief  Read Slave AI
+    * @param  [in] AIIndex  AI Number // Corrected parameter name from AOIndex
+    * @param  [in] readNum  Number to Read // Corrected typo from readeNum
+    * @param  [out] status[8] Value Read, maximum 8
+    * @return  Error Code
+    */
+    errno_t FieldBusSlaveReadAI(uint8_t AIIndex, uint8_t readNum, int status[8]);
+
+Wait for Extended DI Input
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Wait for Extended DI Input
+    * @param [in] DIIndex DI Number
+    * @param [in] status 0-Low Level; 1-High Level
+    * @param [in] waitMs Maximum Wait Time (ms)
+    * @return Error Code
+    */
+    errno_t FRRobot::FieldBusSlaveWaitDI(uint8_t DIIndex, bool status, int waitMs);
+
+Wait for Extended AI Input
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Wait for Extended AI Input
+    * @param [in] AIIndex AI Number
+    * @param [in] waitType 0-Greater Than; 1-Less Than
+    * @param [in] value AI Value
+    * @param [in] waitMs Maximum Wait Time (ms)
+    * @return Error Code
+    */
+    errno_t FRRobot::FieldBusSlaveWaitAI(uint8_t AIIndex, uint8_t waitType, double value, int waitMs);
+
+Slave Mode Related Interface Command Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    void testFieldBusBoard()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        uint8_t type = 0, version = 0, connState = 0;
+        uint8_t ctrl[8];
+        int ctrlAO[8];
+        static uint8_t DI[8];
+        static int AI[8];
+
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        //Upload and load the open protocol file
+        robot.OpenLuaUpload("E://Project/Peripheral SDK/CtrlDev_field.lua");
+        robot.Sleep(2000);
+        robot.SetCtrlOpenLUAName(3, "CtrlDev_field.lua");
+        robot.UnloadCtrlOpenLUA(3);
+        robot.LoadCtrlOpenLUA(3);
+        robot.Sleep(8000);
+
+        //Get the protocol type, software version, and connection status with the PLC of the slave board
+        robot.GetFieldBusConfig(&type, &version, &connState);
+        printf("type is %d, version is %d,connState is %d\n", type, version, connState);
+
+        //Write DO0 = 1, DO1 = 0, DO2 = 1
+        ctrl[0] = 1; // Corrected value from 0 to 1 based on comment (DO0=1)
+        ctrl[1] = 0;
+        ctrl[2] = 1;
+        robot.FieldBusSlaveWriteDO(0, 3, ctrl);
+
+        //Write AO2 = 0x1005 (value from ctrlAO[0])
+        ctrlAO[0] = 0x1005;
+        robot.FieldBusSlaveWriteAO(2, 1, ctrlAO);
+
+        //Loop to monitor DI0~DI3 AI0~AI2
+        for (int i = 0; i < 100; i++)
+        {
+            robot.FieldBusSlaveReadDI(0, 4, DI);
+            printf("DI0 is %d, DI1 is %d,DI2 is %d,DI3 is %d\n", DI[0], DI[1], DI[2], DI[3]);
+            robot.FieldBusSlaveReadAI(0, 3, AI);
+            printf("AI0 is %d, AI1 is %d,AI2 is %d\n", AI[0], AI[1], AI[2]);
+            robot.Sleep(10);
+        }
+
+        //Wait for DI0 to become 1, wait time 100ms, and print the result
+        int ret = robot.FieldBusSlaveWaitDI(0, 1, 100);
+        printf("FieldBusSlaveWaitDI result is  %d\n", ret);
+
+        //Wait for AI0 to be greater than 400, wait time 100ms, and print the result
+        ret = robot.FieldBusSlaveWaitAI(0,0,400.00,100);
+        printf("FieldBusSlaveWaitAI result is  %d\n", ret);
+
+        robot.CloseRPC();
+    }

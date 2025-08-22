@@ -108,6 +108,29 @@ Joint space movement
     */
     int MoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, ExaxisPos epos, double blendT, int offset_flag, DescPose offset_pos);
 
+Joint space motion (automatic forward kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: java
+    :linenos:
+
+    /** 
+    * @brief Joint space motion (automatic forward kinematics calculation)
+    * @param [in] joint_pos  Target joint position, unit deg
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] epos  Extended axis position, unit mm
+    * @param [in] blendT [-1.0]-move to position (blocking), [0~500.0]-smoothing time (non-blocking), unit ms
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @return Error code
+    */ 
+    int MoveJ(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl, ExaxisPos epos, double blendT, int offset_flag, DescPose offset_pos)
+
 Cartesian space linear movement
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: Java SDK-v1.0.5-3.8.2
@@ -135,6 +158,120 @@ Cartesian space linear movement
     * @return  Error code
     */   
     int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode,ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int overSpeedStrategy, int speedPercent);
+
+Cartesian space linear motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: java
+    :linenos:
+
+    /**
+    * @brief Cartesian space linear motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos  Target cartesian pose
+    * @param [in] tool  Tool coordinate number, range [1~15]
+    * @param [in] user  Workpiece coordinate number, range [1~15]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-move to position (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm
+    * @param [in] blendMode Transition mode; 0-tangent transition; 1-corner transition
+    * @param [in] epos  Extended axis position, unit mm
+    * @param [in] search  0-no wire search, 1-wire search
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @param [in] overSpeedStrategy  Overspeed handling strategy, 1-standard; 2-stop on error when overspeed; 3-adaptive speed reduction, default is 0
+    * @param [in] speedPercent  Allowed speed reduction threshold percentage [0-100], default 10%
+    * @return Error code
+    */
+    int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int overSpeedStrategy, int speedPercent)
+
+Cartesian Space Linear Motion (Added velAccParamMode parameter for velocity and acceleration modes)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Linear Motion (Added velAccParamMode parameter for velocity and acceleration modes)
+    * @param  [in] joint_pos  Target joint position, unit deg
+    * @param  [in] desc_pos   Target Cartesian pose
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Velocity percentage, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] epos  Extended axis position, unit mm
+    * @param  [in] search  0-No wire search, 1-Wire search
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @param  [in] overSpeedStrategy  Overspeed handling strategy, 1-Standard; 2-Stop with error on overspeed; 3-Adaptive deceleration, default is 0
+    * @param  [in] speedPercent  Allowed deceleration threshold percentage [0-100], default 10%
+    * @return  Error code
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
+Cartesian Space Linear Motion (Overload Function 1, Added blendMode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Linear Motion (Overload Function 1, Added blendMode)
+    * @param  [in] joint_pos  Target joint position, unit deg
+    * @param  [in] desc_pos   Target Cartesian pose
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Velocity percentage, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] blendMode Transition mode; 0-Tangent transition; 1-Corner transition
+    * @param  [in] epos  Extended axis position, unit mm
+    * @param  [in] search  0-No wire search, 1-Wire search
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @param  [in] overSpeedStrategy  Overspeed handling strategy, 1-Standard; 2-Stop with error on overspeed; 3-Adaptive deceleration, default is 0
+    * @param  [in] speedPercent  Allowed deceleration threshold percentage [0-100], default 10%
+    * @return  Error code
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
+Cartesian Space Linear Motion (Overload Function 2, No Joint Position Input Required)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Linear Motion (Overload Function 2, No Joint Position Input Required)
+    * @param  [in] desc_pos   Target Cartesian pose
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Velocity percentage, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] blendMode Transition mode; 0-Tangent transition; 1-Corner transition
+    * @param  [in] epos  Extended axis position, unit mm
+    * @param  [in] search  0-No wire search, 1-Wire search
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] config Inverse kinematic joint space configuration, [-1]-Reference current joint position for calculation, [0~7]-Solve based on specific joint space configuration
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @param  [in] overSpeedStrategy  Overspeed handling strategy, 1-Standard; 2-Stop with error on overspeed; 3-Adaptive deceleration, default is 0
+    * @param  [in] speedPercent  Allowed deceleration threshold percentage [0-100], default 10%
+    * @return  Error code
+    */
+    public int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int velAccParamMode, int overSpeedStrategy, int speedPercent)
 
 Cartesian space circular movement
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -167,6 +304,105 @@ Cartesian space circular movement
     */      
     int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR);
 
+Cartesian space circular motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: java
+    :linenos:
+
+    /**
+    * @brief Cartesian space circular motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos_p  Path point cartesian pose
+    * @param [in] ptool  Tool coordinate number, range [1~15]
+    * @param [in] puser  Workpiece coordinate number, range [1~15]
+    * @param [in] pvel  Velocity percentage, range [0~100]
+    * @param [in] pacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_p  Extended axis position, unit mm
+    * @param [in] poffset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos_p  Pose offset
+    * @param [in] desc_pos_t  Target point cartesian pose
+    * @param [in] ttool  Tool coordinate number, range [1~15]
+    * @param [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param [in] tvel  Velocity percentage, range [0~100]
+    * @param [in] tacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_t  Extended axis position, unit mm
+    * @param [in] toffset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos_t  Pose offset
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-move to position (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config)
+
+Cartesian Space Arc Motion (Added velAccParamMode parameter for velocity and acceleration modes)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Arc Motion (Added velAccParamMode parameter for velocity and acceleration modes)
+    * @param  [in] joint_pos_p  Path point joint position, unit deg
+    * @param  [in] desc_pos_p   Path point Cartesian pose
+    * @param  [in] ptool  Tool coordinate number, range [1~15]
+    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] pvel  Velocity percentage, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_p  Extended axis position, unit mm
+    * @param  [in] poffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_p  Pose offset
+    * @param  [in] joint_pos_t  Target point joint position, unit deg
+    * @param  [in] desc_pos_t   Target point Cartesian pose
+    * @param  [in] ttool  Tool coordinate number, range [1~15]
+    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] tvel  Velocity percentage, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_t  Extended axis position, unit mm
+    * @param  [in] toffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_t  Pose offset
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @return  Error code
+    */
+    public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int velAccParamMode)
+
+Cartesian Space Arc Motion (Overload Function 1, No Joint Position Input Required)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Arc Motion (Overload Function 1, No Joint Position Input Required)
+    * @param  [in] desc_pos_p   Path point Cartesian pose
+    * @param  [in] ptool  Tool coordinate number, range [1~15]
+    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] pvel  Velocity percentage, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_p  Extended axis position, unit mm
+    * @param  [in] poffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_p  Pose offset
+    * @param  [in] desc_pos_t   Target point Cartesian pose
+    * @param  [in] ttool  Tool coordinate number, range [1~15]
+    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] tvel  Velocity percentage, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_t  Extended axis position, unit mm
+    * @param  [in] toffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_t  Pose offset
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] config Inverse kinematic joint space configuration, [-1]-Reference current joint position for calculation, [0~7]-Solve based on specific joint space configuration
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @return  Error code
+    */
+    public int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config, int velAccParamMode)
+
 Cartesian space full circle movement
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: Java SDK-v1.0.6-3.8.3
@@ -198,6 +434,102 @@ Cartesian space full circle movement
     * @return  Error code
     */
     int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR)
+
+Cartesian space full circle motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: java
+    :linenos:
+
+    /**
+    * @brief Cartesian space full circle motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos_p  Path point 1 cartesian pose
+    * @param [in] ptool  Tool coordinate number, range [0~14]
+    * @param [in] puser  Workpiece coordinate number, range [0~14]
+    * @param [in] pvel  Velocity percentage, range [0~100]
+    * @param [in] pacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_p  Extended axis position, unit mm
+    * @param [in] desc_pos_t  Path point 2 cartesian pose
+    * @param [in] ttool  Tool coordinate number, range [0~14]
+    * @param [in] tuser  Workpiece coordinate number, range [0~14]
+    * @param [in] tvel  Velocity percentage, range [0~100]
+    * @param [in] tacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_t  Extended axis position, unit mm
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @param [in] oacc Acceleration percentage
+    * @param [in] blendR -1: blocking; 0~1000: smoothing radius
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR,int config)
+
+Cartesian Space Full Circle Motion (Added velAccParamMode parameter for velocity and acceleration modes)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    *@brief  Cartesian Space Full Circle Motion (Added velAccParamMode parameter for velocity and acceleration modes)
+    *@param  [in] joint_pos_p  Path point 1 joint position, unit deg
+    *@param  [in] desc_pos_p   Path point 1 Cartesian pose
+    *@param  [in] ptool  Tool coordinate number, range [1~15]
+    *@param  [in] puser  Workpiece coordinate number, range [1~15]
+    *@param  [in] pvel  Velocity percentage, range [0~100]
+    *@param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    *@param  [in] epos_p  Extended axis position, unit mm
+    *@param  [in] joint_pos_t  Path point 2 joint position, unit deg
+    *@param  [in] desc_pos_t   Path point 2 Cartesian pose
+    *@param  [in] ttool  Tool coordinate number, range [1~15]
+    *@param  [in] tuser  Workpiece coordinate number, range [1~15]
+    *@param  [in] tvel  Velocity percentage, range [0~100]
+    *@param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    *@param  [in] epos_t  Extended axis position, unit mm
+    *@param  [in] ovl  Velocity scaling factor, range [0~100]
+    *@param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    *@param  [in] offset_pos  Pose offset
+    *@param  [in] oacc Acceleration percentage
+    *@param  [in] blendR -1: Blocking; 0~1000: Blending radius
+    *@param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    *@return  Error code
+    */
+    public int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int velAccParamMode)
+
+Cartesian Space Full Circle Motion (Overload Function 1, No Joint Position Input Required)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Full Circle Motion (Overload Function 1, No Joint Position Input Required)
+    * @param  [in] desc_pos_p   Path point 1 Cartesian pose
+    * @param  [in] ptool  Tool coordinate number, range [0~14]
+    * @param  [in] puser  Workpiece coordinate number, range [0~14]
+    * @param  [in] pvel  Velocity percentage, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_p  Extended axis position, unit mm
+    * @param  [in] desc_pos_t   Path point 2 Cartesian pose
+    * @param  [in] ttool  Tool coordinate number, range [0~14]
+    * @param  [in] tuser  Workpiece coordinate number, range [0~14]
+    * @param  [in] tvel  Velocity percentage, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_t  Extended axis position, unit mm
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] oacc Acceleration percentage
+    * @param  [in] blendR -1: Blocking; 0~1000: Blending radius
+    * @param  [in] config Inverse kinematic joint space configuration, [-1]-Reference current joint position for calculation, [0~7]-Solve based on specific joint space configuration
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @return  Error code
+    */
+    public int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int config, int velAccParamMode)
 
 Cartesian space point-to-point movement
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -267,6 +599,21 @@ Basic robot movement command code example
         rtn = robot.MoveCart(desc_pos4, tool, user, vel, acc, ovl, blendT, -1);
         System.out.println("MoveCart errcode:"+ rtn);
 
+        rtn = robot.MoveJ(j1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        System.out.println("movej errcode:"+ rtn);
+
+        rtn = robot.MoveL(desc_pos2, tool, user, vel, acc, ovl, blendR, 0,epos, search, flag, offset_pos,-1,0,10);
+        System.out.println("movel errcode:"+ rtn);
+
+        rtn = robot.MoveC(desc_pos3, tool, user, vel, acc, epos, flag, offset_pos, desc_pos4, tool, user, vel, acc, epos, flag, offset_pos, ovl, blendR,-1);
+        System.out.println("movec errcode:"+ rtn);
+
+        rtn = robot.MoveJ(j2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        System.out.println("movej errcode:"+ rtn);
+
+        rtn = robot.Circle(desc_pos3, tool, user, vel, acc, epos, desc_pos1, tool, user, vel, acc, epos, ovl, flag, offset_pos, 100,-1,-1);
+        System.out.println("circle errcode:"+ rtn);
+
         return 0;
     }
 
@@ -291,6 +638,30 @@ Cartesian space spiral movement
     */
     int NewSpiral(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, ExaxisPos epos, double ovl, int offset_flag, DescPose offset_pos, SpiralParam spiral_param);
 
+Cartesian space spiral motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: java
+    :linenos:
+
+    /**
+    * @brief Cartesian space spiral motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos  Target cartesian pose
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos  Extended axis position, unit mm
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @param [in] spiral_param  Spiral parameters
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int NewSpiral(DescPose desc_pos, int tool, int user, double vel, double acc, ExaxisPos epos, double ovl, int offset_flag, DescPose offset_pos, SpiralParam spiral_param,int config)
+
 Spiral movement code example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -304,13 +675,7 @@ Spiral movement code example
         DescPose offset_pos1=new DescPose(50, 0, 0, -30, 0, 0);
         DescPose offset_pos2=new DescPose(50, 0, 0, -5, 0, 0);
         ExaxisPos epos=new ExaxisPos(0, 0, 0, 0);
-        SpiralParam sp=new SpiralParam();
-        sp.circle_num = 5;
-        sp.circle_angle = 5.0;
-        sp.rad_init = 50.0;
-        sp.rad_add = 10.0;
-        sp.rotaxis_add = 10.0;
-        sp.rot_direction = 0;
+        SpiralParam sp=new SpiralParam(1,5.0,50.0,10.0,10.0,0);
 
         int tool = 0;
         int user = 0;
@@ -320,12 +685,10 @@ Spiral movement code example
         double blendT = 0.0;
         int flag = 2;
 
-        robot.SetSpeed(20);
-
-        rtn = robot.MoveJ(j, desc_pos, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos1);
+        rtn = robot.MoveJ(j, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos1);
         System.out.println("movej errcode:"+ rtn);
 
-        rtn = robot.NewSpiral(j, desc_pos, tool, user, vel, acc, epos, ovl, flag, offset_pos2, sp);
+        rtn = robot.NewSpiral(desc_pos, tool, user, vel, acc, epos, ovl, flag, offset_pos2, sp,-1);
         System.out.println("newspiral errcode:"+ rtn);
 
         return 0;
@@ -554,6 +917,25 @@ Joint movement PTP
     */
     int SplinePTP(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl);
 
+Joint space spline motion (automatic forward kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: java
+    :linenos:
+
+    /**
+    * @brief Joint space spline motion (automatic forward kinematics calculation)
+    * @param [in] joint_pos  Target joint position, unit deg
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @return Error code
+    */
+    int SplinePTP(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl)
+
 Spline movement end
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -576,10 +958,6 @@ Spline movement code example
         JointPos j2=new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
         JointPos j3=new JointPos(-61.954, -84.409, 108.153, -116.316, -91.283, 74.260);
         JointPos j4=new JointPos(-89.575, -80.276, 102.713, -116.302, -91.284, 74.267);
-        DescPose desc_pos1=new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
-        DescPose desc_pos2=new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
-        DescPose desc_pos3=new DescPose(-327.622, 402.230, 320.402, -178.067, 2.127, -46.207);
-        DescPose desc_pos4=new DescPose(-104.066, 544.321, 327.023, -177.715, 3.371, -73.818);
         DescPose offset_pos=new DescPose(0, 0, 0, 0, 0, 0);
         ExaxisPos epos=new ExaxisPos(0, 0, 0, 0);
 
@@ -591,17 +969,14 @@ Spline movement code example
         double blendT = -1.0;
         int flag = 0;
 
-        robot.SetSpeed(20);
-
-        int err1 = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        int err1 = robot.MoveJ(j1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
         System.out.println("movej errcode:"+ err1);
         robot.SplineStart();
-        robot.SplinePTP(j1, desc_pos1, tool, user, vel, acc, ovl);
-        robot.SplinePTP(j2, desc_pos2, tool, user, vel, acc, ovl);
-        robot.SplinePTP(j3, desc_pos3, tool, user, vel, acc, ovl);
-        robot.SplinePTP(j4, desc_pos4, tool, user, vel, acc, ovl);
+        robot.SplinePTP(j1, tool, user, vel, acc, ovl);
+        robot.SplinePTP(j2, tool, user, vel, acc, ovl);
+        robot.SplinePTP(j3, tool, user, vel, acc, ovl);
+        robot.SplinePTP(j4, tool, user, vel, acc, ovl);
         robot.SplineEnd();
-
         return 0;
     }
 
@@ -638,6 +1013,28 @@ New spline command point
     */ 
     int NewSplinePoint(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int lastFlag);
 
+New spline command point (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: java
+    :linenos:
+
+    /**
+    * @brief New spline command point (automatic inverse kinematics calculation)
+    * @param [in] desc_pos  Target cartesian pose
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-move to position (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm
+    * @param [in] lastFlag Whether it is the last point, 0-no, 1-yes
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int NewSplinePoint(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int lastFlag,int config)
+
 New spline movement end
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -657,10 +1054,6 @@ New spline movement code example
     public static int TestNewSpline(Robot robot)
     {
         JointPos j1=new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
-        JointPos j2=new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
-        JointPos j3=new JointPos(-61.954, -84.409, 108.153, -116.316, -91.283, 74.260);
-        JointPos j4=new JointPos(-89.575, -80.276, 102.713, -116.302, -91.284, 74.267);
-        JointPos j5=new JointPos(-95.228, -54.621, 73.691, -112.245, -91.280, 74.268);
         DescPose desc_pos1=new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
         DescPose desc_pos2=new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
         DescPose desc_pos3=new DescPose(-327.622, 402.230, 320.402, -178.067, 2.127, -46.207);
@@ -668,6 +1061,7 @@ New spline movement code example
         DescPose desc_pos5=new DescPose(-33.421, 732.572, 275.103, -177.907, 2.709, -79.482);
         DescPose offset_pos=new DescPose(0, 0, 0, 0, 0, 0);
         ExaxisPos epos=new ExaxisPos(0, 0, 0, 0);
+
 
         int tool = 0;
         int user = 0;
@@ -677,16 +1071,15 @@ New spline movement code example
         double blendT = -1.0;
         int flag = 0;
 
-        robot.SetSpeed(20);
 
-        int err1 = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        int err1 = robot.MoveJ(j1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
         System.out.println("movej errcode:"+ err1);
         robot.NewSplineStart(1, 2000);
-        robot.NewSplinePoint(j1, desc_pos1, tool, user, vel, acc, ovl, -1, 0);
-        robot.NewSplinePoint(j2, desc_pos2, tool, user, vel, acc, ovl, -1, 0);
-        robot.NewSplinePoint(j3, desc_pos3, tool, user, vel, acc, ovl, -1, 0);
-        robot.NewSplinePoint(j4, desc_pos4, tool, user, vel, acc, ovl, -1, 0);
-        robot.NewSplinePoint(j5, desc_pos5, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(desc_pos1, tool, user, vel, acc, ovl, -1, 0,-1);
+        robot.NewSplinePoint(desc_pos2, tool, user, vel, acc, ovl, -1, 0,-1);
+        robot.NewSplinePoint(desc_pos3, tool, user, vel, acc, ovl, -1, 0,-1);
+        robot.NewSplinePoint(desc_pos4, tool, user, vel, acc, ovl, -1, 0,-1);
+        robot.NewSplinePoint(desc_pos5, tool, user, vel, acc, ovl, -1, 0,-1);
         robot.NewSplineEnd();
         return 0;
     }

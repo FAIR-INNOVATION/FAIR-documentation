@@ -25,7 +25,7 @@ Set collision post-strategy
 
     /**
     * @brief  Set collision post-strategy
-    * @param  [in] strategy  0-Error pause; 1-Continue running; 2-Error stop; 3-Gravity torque mode; 4-Oscillation response mode; 5-Collision rebound mode
+    * @param  [in] strategy  0-report error and stop, 1-continue running
     * @param  [in] safeTime  safe stop time [1000 - 2000]ms
     * @param  [in] safeDistance  Safe stop distance [1-150] mm
     * @param  [in] safeVel  TCP safe stop speed [50-250] mm/s

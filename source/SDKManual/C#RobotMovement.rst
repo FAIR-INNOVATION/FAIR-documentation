@@ -20,7 +20,7 @@ jog point motion
     * @return Error code 
     */ 
     int StartJOG(byte refType, byte nb, byte dir, float vel, float acc, float max_dis);
- 
+
 jog nudging deceleration stop
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -157,7 +157,30 @@ Joint space motion
     * @return Error code
     */
     int MoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos epos, float blendT, byte offset_flag, DescPose offset_pos); 
- 
+
+Joint space motion (automatic forward kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /** 
+    * @brief Joint space motion (automatic forward kinematics calculation)
+    * @param [in] joint_pos  Target joint position, unit deg
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] epos  Extended axis position, unit mm
+    * @param [in] blendT [-1.0]-move to position (blocking), [0~500.0]-smoothing time (non-blocking), unit ms
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @return Error code
+    */ 
+    int MoveJ(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl, ExaxisPos epos, double blendT, int offset_flag, DescPose offset_pos)
+
 Linear motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -183,6 +206,120 @@ Linear motion in Cartesian space
     */   
     int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos, int overSpeedStrategy = 0, int speedPercent = 10); 
  
+Cartesian space linear motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Cartesian space linear motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos  Target cartesian pose
+    * @param [in] tool  Tool coordinate number, range [1~15]
+    * @param [in] user  Workpiece coordinate number, range [1~15]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-move to position (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm
+    * @param [in] blendMode Transition mode; 0-tangent transition; 1-corner transition
+    * @param [in] epos  Extended axis position, unit mm
+    * @param [in] search  0-no wire search, 1-wire search
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @param [in] overSpeedStrategy  Overspeed handling strategy, 1-standard; 2-stop on error when overspeed; 3-adaptive speed reduction, default is 0
+    * @param [in] speedPercent  Allowed speed reduction threshold percentage [0-100], default 10%
+    * @return Error code
+    */
+    int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int overSpeedStrategy, int speedPercent)
+
+Cartesian Space Linear Motion (Added velAccParamMode parameter for velocity and acceleration modes)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Linear Motion (Added velAccParamMode parameter for velocity and acceleration modes)
+    * @param  [in] joint_pos  Target joint position, unit deg
+    * @param  [in] desc_pos   Target Cartesian pose
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Velocity percentage, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] epos  Extended axis position, unit mm
+    * @param  [in] search  0-No wire search, 1-Wire search
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @param  [in] overSpeedStrategy  Overspeed handling strategy, 1-Standard; 2-Stop with error on overspeed; 3-Adaptive deceleration, default is 0
+    * @param  [in] speedPercent  Allowed deceleration threshold percentage [0-100], default 10%
+    * @return  Error code
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
+Cartesian Space Linear Motion (Overload Function 1, Added blendMode)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Linear Motion (Overload Function 1, Added blendMode)
+    * @param  [in] joint_pos  Target joint position, unit deg
+    * @param  [in] desc_pos   Target Cartesian pose
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Velocity percentage, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] blendMode Transition mode; 0-Tangent transition; 1-Corner transition
+    * @param  [in] epos  Extended axis position, unit mm
+    * @param  [in] search  0-No wire search, 1-Wire search
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @param  [in] overSpeedStrategy  Overspeed handling strategy, 1-Standard; 2-Stop with error on overspeed; 3-Adaptive deceleration, default is 0
+    * @param  [in] speedPercent  Allowed deceleration threshold percentage [0-100], default 10%
+    * @return  Error code
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
+Cartesian Space Linear Motion (Overload Function 2, No Joint Position Input Required)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Linear Motion (Overload Function 2, No Joint Position Input Required)
+    * @param  [in] desc_pos   Target Cartesian pose
+    * @param  [in] tool  Tool coordinate number, range [1~15]
+    * @param  [in] user  Workpiece coordinate number, range [1~15]
+    * @param  [in] vel  Velocity percentage, range [0~100]
+    * @param  [in] acc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] blendMode Transition mode; 0-Tangent transition; 1-Corner transition
+    * @param  [in] epos  Extended axis position, unit mm
+    * @param  [in] search  0-No wire search, 1-Wire search
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] config Inverse kinematic joint space configuration, [-1]-Reference current joint position for calculation, [0~7]-Solve based on specific joint space configuration
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @param  [in] overSpeedStrategy  Overspeed handling strategy, 1-Standard; 2-Stop with error on overspeed; 3-Adaptive deceleration, default is 0
+    * @param  [in] speedPercent  Allowed deceleration threshold percentage [0-100], default 10%
+    * @return  Error code
+    */
+    public int MoveL(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, int config, int velAccParamMode, int overSpeedStrategy, int speedPercent)
+
 Circular motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -213,7 +350,106 @@ Circular motion in Cartesian space
     * @return error code
     */     
     int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, byte poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, byte toffset_flag, DescPose offset_pos_t, float ovl, float blendR). 
- 
+
+Cartesian space circular motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Cartesian space circular motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos_p  Path point cartesian pose
+    * @param [in] ptool  Tool coordinate number, range [1~15]
+    * @param [in] puser  Workpiece coordinate number, range [1~15]
+    * @param [in] pvel  Velocity percentage, range [0~100]
+    * @param [in] pacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_p  Extended axis position, unit mm
+    * @param [in] poffset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos_p  Pose offset
+    * @param [in] desc_pos_t  Target point cartesian pose
+    * @param [in] ttool  Tool coordinate number, range [1~15]
+    * @param [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param [in] tvel  Velocity percentage, range [0~100]
+    * @param [in] tacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_t  Extended axis position, unit mm
+    * @param [in] toffset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos_t  Pose offset
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-move to position (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config)
+
+Cartesian Space Arc Motion (Added velAccParamMode parameter for velocity and acceleration modes)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Arc Motion (Added velAccParamMode parameter for velocity and acceleration modes)
+    * @param  [in] joint_pos_p  Path point joint position, unit deg
+    * @param  [in] desc_pos_p   Path point Cartesian pose
+    * @param  [in] ptool  Tool coordinate number, range [1~15]
+    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] pvel  Velocity percentage, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_p  Extended axis position, unit mm
+    * @param  [in] poffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_p  Pose offset
+    * @param  [in] joint_pos_t  Target point joint position, unit deg
+    * @param  [in] desc_pos_t   Target point Cartesian pose
+    * @param  [in] ttool  Tool coordinate number, range [1~15]
+    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] tvel  Velocity percentage, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_t  Extended axis position, unit mm
+    * @param  [in] toffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_t  Pose offset
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @return  Error code
+    */
+    public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int velAccParamMode)
+
+Cartesian Space Arc Motion (Overload Function 1, No Joint Position Input Required)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Arc Motion (Overload Function 1, No Joint Position Input Required)
+    * @param  [in] desc_pos_p   Path point Cartesian pose
+    * @param  [in] ptool  Tool coordinate number, range [1~15]
+    * @param  [in] puser  Workpiece coordinate number, range [1~15]
+    * @param  [in] pvel  Velocity percentage, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_p  Extended axis position, unit mm
+    * @param  [in] poffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_p  Pose offset
+    * @param  [in] desc_pos_t   Target point Cartesian pose
+    * @param  [in] ttool  Tool coordinate number, range [1~15]
+    * @param  [in] tuser  Workpiece coordinate number, range [1~15]
+    * @param  [in] tvel  Velocity percentage, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_t  Extended axis position, unit mm
+    * @param  [in] toffset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos_t  Pose offset
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] blendR [-1.0]-Motion complete (blocking), [0~1000.0]-Blending radius (non-blocking), unit mm
+    * @param  [in] config Inverse kinematic joint space configuration, [-1]-Reference current joint position for calculation, [0~7]-Solve based on specific joint space configuration
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @return  Error code
+    */
+    public int MoveC(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, double ovl, double blendR, int config, int velAccParamMode)
+
 Point-to-point motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -264,7 +500,103 @@ Whole circle motion in Cartesian space
     * @return Error code
     */     
     int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, float ovl, int offset_flag, DescPose offset_pos, double oacc=100 , double blendR=-1);
- 
+
+Cartesian space full circle motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Cartesian space full circle motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos_p  Path point 1 cartesian pose
+    * @param [in] ptool  Tool coordinate number, range [0~14]
+    * @param [in] puser  Workpiece coordinate number, range [0~14]
+    * @param [in] pvel  Velocity percentage, range [0~100]
+    * @param [in] pacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_p  Extended axis position, unit mm
+    * @param [in] desc_pos_t  Path point 2 cartesian pose
+    * @param [in] ttool  Tool coordinate number, range [0~14]
+    * @param [in] tuser  Workpiece coordinate number, range [0~14]
+    * @param [in] tvel  Velocity percentage, range [0~100]
+    * @param [in] tacc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos_t  Extended axis position, unit mm
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @param [in] oacc Acceleration percentage
+    * @param [in] blendR -1: blocking; 0~1000: smoothing radius
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR,int config)
+
+Cartesian Space Full Circle Motion (Added velAccParamMode parameter for velocity and acceleration modes)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    *@brief  Cartesian Space Full Circle Motion (Added velAccParamMode parameter for velocity and acceleration modes)
+    *@param  [in] joint_pos_p  Path point 1 joint position, unit deg
+    *@param  [in] desc_pos_p   Path point 1 Cartesian pose
+    *@param  [in] ptool  Tool coordinate number, range [1~15]
+    *@param  [in] puser  Workpiece coordinate number, range [1~15]
+    *@param  [in] pvel  Velocity percentage, range [0~100]
+    *@param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    *@param  [in] epos_p  Extended axis position, unit mm
+    *@param  [in] joint_pos_t  Path point 2 joint position, unit deg
+    *@param  [in] desc_pos_t   Path point 2 Cartesian pose
+    *@param  [in] ttool  Tool coordinate number, range [1~15]
+    *@param  [in] tuser  Workpiece coordinate number, range [1~15]
+    *@param  [in] tvel  Velocity percentage, range [0~100]
+    *@param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    *@param  [in] epos_t  Extended axis position, unit mm
+    *@param  [in] ovl  Velocity scaling factor, range [0~100]
+    *@param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    *@param  [in] offset_pos  Pose offset
+    *@param  [in] oacc Acceleration percentage
+    *@param  [in] blendR -1: Blocking; 0~1000: Blending radius
+    *@param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    *@return  Error code
+    */
+    public int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int velAccParamMode)
+
+Cartesian Space Full Circle Motion (Overload Function 1, No Joint Position Input Required)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Cartesian Space Full Circle Motion (Overload Function 1, No Joint Position Input Required)
+    * @param  [in] desc_pos_p   Path point 1 Cartesian pose
+    * @param  [in] ptool  Tool coordinate number, range [0~14]
+    * @param  [in] puser  Workpiece coordinate number, range [0~14]
+    * @param  [in] pvel  Velocity percentage, range [0~100]
+    * @param  [in] pacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_p  Extended axis position, unit mm
+    * @param  [in] desc_pos_t   Path point 2 Cartesian pose
+    * @param  [in] ttool  Tool coordinate number, range [0~14]
+    * @param  [in] tuser  Workpiece coordinate number, range [0~14]
+    * @param  [in] tvel  Velocity percentage, range [0~100]
+    * @param  [in] tacc  Acceleration percentage, range [0~100], not yet open
+    * @param  [in] epos_t  Extended axis position, unit mm
+    * @param  [in] ovl  Velocity scaling factor, range [0~100]
+    * @param  [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param  [in] offset_pos  Pose offset
+    * @param  [in] oacc Acceleration percentage
+    * @param  [in] blendR -1: Blocking; 0~1000: Blending radius
+    * @param  [in] config Inverse kinematic joint space configuration, [-1]-Reference current joint position for calculation, [0~7]-Solve based on specific joint space configuration
+    * @param  [in] velAccParamMode Velocity and acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s^2)
+    * @return  Error code
+    */
+    public int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int config, int velAccParamMode)
+
 Sample Code for Whole Circle Motion in Cartesian Space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
@@ -328,52 +660,52 @@ Sample Code for Whole Circle Motion in Cartesian Space
  
 Sample code for basic robot motion instructions
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
 .. code-block:: c#
     :linenos:
- 
-    private void btnMovetest_Click(object sender, EventArgs e)
+
+    private void TestMovePhy_Click(object sender, EventArgs e)
     {
-        JointPos j1= new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j1 = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
         JointPos j2 = new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
         JointPos j3 = new JointPos(-29.777, -84.536, 109.275, -114.075, -86.655, 74.257);
         JointPos j4 = new JointPos(-31.154, -95.317, 94.276, -88.079, -89.740, 74.256);
+    
         DescPose desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
         DescPose desc_pos2 = new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
         DescPose desc_pos3 = new DescPose(-487.434, 154.362, 308.576, 176.600, 0.268, -14.061);
         DescPose desc_pos4 = new DescPose(-443.165, 147.881, 480.951, 179.511, -0.775, -15.409);
+        DescPose desc_pos5 = new DescPose(-385.268, -386.759, 238.349, 179.619, -2.046, 162.332);
+        DescPose desc_pos6 = new DescPose(-257.470, -566.986, 241.908, -177.038, -2.886, -176.577);
+        DescPose desc_pos7 = new DescPose(-190.925, -390.644, 240.374, 179.089, 0.019, 177.836);
         DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
-
         int tool = 0;
         int user = 0;
         float vel = 100.0f;
-        float acc = 100.0f;
+        float acc = 200.0f;
         float ovl = 100.0f;
-        float blendT = 0.0f;
-        float blendR = 0.0f;
+        float blendT = -1.0f;
+        float blendR = -1.0f;
         byte flag = 0;
         byte search = 0;
-
         robot.SetSpeed(20);
         int rtn;
-        rtn = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
-        Console.WriteLine($"MoveJ errcode:{rtn}" );
-
-        rtn = robot.MoveL(j2, desc_pos2, tool, user, vel, acc, ovl, blendR,epos, search, flag, offset_pos);
-        Console.WriteLine($"MoveL errcode:{rtn}");
-
-        rtn = robot.MoveC(j3, desc_pos3, tool, user, vel, acc, epos, flag, offset_pos, j4, desc_pos4, tool, user, vel, acc, epos, flag, offset_pos, ovl, blendR);
-        Console.WriteLine($"MoveC errcode:{rtn}");
-
-        rtn = robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
-        Console.WriteLine("MoveJ errcode:%d\n", rtn);
-
-        rtn = robot.Circle(j3, desc_pos3, tool, user, vel, acc, epos, j1, desc_pos1, tool, user, vel, acc, epos, ovl, flag, offset_pos);
-        Console.WriteLine($"Circle errcode:{rtn}");
-
-        rtn = robot.MoveCart(desc_pos4, tool, user, vel, acc, ovl, blendT, -1);
-        Console.WriteLine($"MoveCart errcode:{rtn}");
-
+        rtn = robot.MoveL(desc_pos1, tool, user, vel, acc, ovl, blendR, 0, epos, search, flag, offset_pos, -1, 1);
+        Console.WriteLine($"movel errcode:{rtn}");
+        rtn = robot.MoveC(desc_pos3, tool, user, vel, acc, epos, flag, offset_pos,
+                        desc_pos4, tool, user, vel, acc, epos, flag, offset_pos,
+                        ovl, blendR, -1, 1);
+        Console.WriteLine($"movec errcode:{rtn}");   
+        rtn = robot.MoveL(desc_pos5, tool, user, vel, acc, ovl, blendR, 0, epos, search, flag, offset_pos, -1, 1);
+        Console.WriteLine($"movel errcode:{rtn}");
+    
+            
+        rtn = robot.Circle(desc_pos6, tool, user, vel, acc, epos,
+                            desc_pos7, tool, user, vel, acc, epos,
+                            ovl, flag, offset_pos, 100, -1, -1, 1);
+        Console.WriteLine($"circle errcode:{rtn}");
     }
  
 Spiral motion in Cartesian space
@@ -397,7 +729,31 @@ Spiral motion in Cartesian space
     * @return Error code 
     */
     int NewSpiral(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, ExaxisPos epos, float ovl, byte offset_flag, DescPose offset_pos, SpiralParam spiral_param); 
- 
+
+Cartesian space spiral motion (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Cartesian space spiral motion (automatic inverse kinematics calculation)
+    * @param [in] desc_pos  Target cartesian pose
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] epos  Extended axis position, unit mm
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] offset_flag  0-no offset, 1-offset in base/workpiece coordinate system, 2-offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @param [in] spiral_param  Spiral parameters
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int NewSpiral(DescPose desc_pos, int tool, int user, double vel, double acc, ExaxisPos epos, double ovl, int offset_flag, DescPose offset_pos, SpiralParam spiral_param,int config)
+
 Sample code for spiral motion
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
@@ -676,7 +1032,26 @@ Spline motion PTP
     * @return Error code
     */
     int SplinePTP(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl);
- 
+
+Joint space spline motion (automatic forward kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Joint space spline motion (automatic forward kinematics calculation)
+    * @param [in] joint_pos  Target joint position, unit deg
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @return Error code
+    */
+    int SplinePTP(JointPos joint_pos, int tool, int user, double vel, double acc, double ovl)
+
 End of spline motion
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  
@@ -764,7 +1139,29 @@ New spline instruction point
     * @return error code 
     */ 
     int NewSplinePoint(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);;
- 
+
+New spline command point (automatic inverse kinematics calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief New spline command point (automatic inverse kinematics calculation)
+    * @param [in] desc_pos  Target cartesian pose
+    * @param [in] tool  Tool coordinate number, range [0~14]
+    * @param [in] user  Workpiece coordinate number, range [0~14]
+    * @param [in] vel  Velocity percentage, range [0~100]
+    * @param [in] acc  Acceleration percentage, range [0~100], not open yet
+    * @param [in] ovl  Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-move to position (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm
+    * @param [in] lastFlag Whether it is the last point, 0-no, 1-yes
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-calculate based on current joint position, [0~7]-solve according to specific joint space configuration
+    * @return Error code
+    */
+    int NewSplinePoint(DescPose desc_pos, int tool, int user, double vel, double acc, double ovl, double blendR, int lastFlag,int config)
+
 End of new spline motion
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#

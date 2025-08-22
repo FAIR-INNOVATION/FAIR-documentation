@@ -1,3 +1,31 @@
+Version V3.8.5
+-----------------
+
+Date: 2025-08-19
+
+- **Socket Network Debugging**:
+    Path: Teach Program -> Program Editing -> Socket Network Debugging.
+
+    Description: Allows adding, configuring, and deleting socket connection configurations. Supports up to 4 socket connections. Command modules can be used to generate teach programming for opening connections, closing connections, sending data, and receiving data.
+
+- **CAD-generated G-code to Robot Trajectory Planning Function**:
+    Path: Auxiliary Applications -> Tool Applications -> G-code Conversion.
+
+    Description: Generate G-code files from machining paths (lines, arcs, circles, splines, etc.) in CAM-enabled software like Solidworks or FUSION360, then import the G-code files to the Web端 (Web interface).
+
+- **Added Actual Physical Speed Function to Linear, Circular, and Full Circle Motion Commands**:
+    Path: Teach Program -> Program Editing, Auxiliary Applications -> Tool Applications -> Smart Tool.
+
+    Description: Allows directly defining the actual operating physical speed for the current motion command.
+
+- **Optimized PTP Speed Adjustment Function**:
+
+    Description: Ensures a smooth speed adjustment process and reduces speed fluctuations at command transition points.
+
+- **Robot Model Configuration**:
+
+    Description: Added new configuration option for the FR30L robot model.
+
 Version V3.8.4.1
 -----------------
 

@@ -1,5 +1,5 @@
-Robot safety settings  
-===========================  
+Robot safety settings
+================================ 
 
 .. toctree::  
     :maxdepth: 5  

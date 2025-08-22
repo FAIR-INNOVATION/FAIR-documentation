@@ -933,3 +933,268 @@ SmartTool button code example
             robot.Sleep(100);
         }
     }
+
+Upload Open Protocol Lua File
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Upload Open Protocol Lua File
+    * @param  filePath Local open protocol lua file path name
+    * @return Error code
+    */
+    public int OpenLuaUpload(String filePath)
+
+
+Get Slave Board Parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Get Slave Board Parameters
+    * @param  type  0-Ethercat, 1-CClink, 3-Ethercat, 4-EIP
+    * @param  version  Protocol version
+    * @param  connState  0-Disconnected 1-Connected
+    * @return  Error code
+    */
+    public int GetFieldBusConfig(int[] type, int[] version, int[] connState)
+
+Write Slave DO
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Write Slave DO
+    * @param   DOIndex  DO number
+    * @param   wirteNum  Number to write
+    * @param   status Value to write, max 8
+    * @return  Error code
+    */
+    public int FieldBusSlaveWriteDO(int DOIndex, int wirteNum, int[] status)
+
+Write Slave AO
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Write Slave AO
+    * @param  AOIndex  AO number
+    * @param  wirteNum  Number to write
+    * @param  status Value to write, max 8
+    * @return  Error code
+    */
+    public int FieldBusSlaveWriteAO(int AOIndex, int wirteNum, int[] status)
+
+Read Slave DI
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Read Slave DI
+    * @param  DOIndex  DI number
+    * @param  readNum  Number to read
+    * @param  status Read value, max 8
+    * @return  Error code
+    */
+    public int FieldBusSlaveReadDI(int DOIndex, int readNum, int[] status)
+
+Read Slave AI
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Read Slave AI
+    * @param  AIIndex  AI number
+    * @param  readNum  Number to read
+    * @param  status Read value, max 8
+    * @return  Error code
+    */
+    public int FieldBusSlaveReadAI(int AIIndex, int readNum, double[] status)
+
+Wait for Extended DI Input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Wait for Extended DI Input
+    * @param  DIIndex DI number
+    * @param  status 0-Low level; 1-High level
+    * @param  waitMs Max waiting time (ms)
+    * @return Error code
+    */
+    public int FieldBusSlaveWaitDI(int DIIndex, int status, int waitMs)
+
+Wait for Extended AI Input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Wait for Extended AI Input
+    * @param  AIIndex AI number
+    * @param  waitType 0-Greater than; 1-Less than
+    * @param  value AI value
+    * @param  waitMs Max waiting time (ms)
+    * @return Error code
+    */
+    public int FieldBusSlaveWaitAI(int AIIndex, int waitType, double value, int waitMs)
+
+Slave Mode Related Interface Command Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void testFieldBusBoard(Robot robot)
+    {
+        //Upload and load open protocol file
+        robot.OpenLuaUpload("D://zUP/1111/CtrlDev_field.lua");
+        robot.Sleep(2000);
+        robot.SetCtrlOpenLUAName(3, "CtrlDev_field.lua");
+        robot.UnloadCtrlOpenLUA(3);
+        robot.LoadCtrlOpenLUA(3);
+        robot.Sleep(8000);
+        int[] type=new int[1];
+        int[] version=new int[1];
+        int[] connState=new int[1];
+        //Get protocol type, software version, and PLC connection status of the slave board
+        robot.GetFieldBusConfig(type, version, connState);
+        System.out.println("type is: "+type[0]+", version is : "+version[0]+", connState is : "+connState[0]);
+        //Write DO0 = 1, DO1 = 0, DO2 = 1
+        int[] ctrl =new int[8];
+        ctrl[0] = 1;
+        ctrl[1] = 0;
+        ctrl[2] = 1;
+        robot.FieldBusSlaveWriteDO(0, 3, ctrl);
+        //Write AO2 = 0x1000
+        int[] ctrlAO =new int[8];
+        ctrlAO[0] = 0x1000;
+        robot.FieldBusSlaveWriteAO(2, 1, ctrlAO);
+        int[] DI=new int[4];
+        double[] AI=new double[3];
+        //Loop monitor DI0~DI3 AI0~AI2
+        for (int i = 0; i < 100; i++)
+        {
+            robot.FieldBusSlaveReadDI(0, 4, DI);
+            System.out.println("DI0 is: "+DI[0]+", DI1 is: "+DI[1]+",DI2 is: "+DI[2]+",DI3 is: "+DI[3]);
+            robot.FieldBusSlaveReadAI(0, 3, AI);
+            System.out.println("AI0 is: "+AI[0]+ ",AI1 is: "+AI[1]+",AI2 is: "+AI[2]);
+            robot.Sleep(10);
+        }
+        //Wait for DI0 to be 1, wait time 100ms, and print result
+        int ret = robot.FieldBusSlaveWaitDI(0, 1, 100);
+        System.out.println("FieldBusSlaveWaitDI result is: "+ ret);
+        //Wait for AI0 to be greater than 400, wait time 100ms, and print result
+        ret = robot.FieldBusSlaveWaitAI(0,0,400.00,100);
+        System.out.println("FieldBusSlaveWaitAI result is: "+ ret);
+        robot.CloseRPC();
+    }
+
+Control Array Sucker
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Control Array Sucker
+    * @param  slaveID Slave ID
+    * @param  len Length
+    * @param  ctrlValue Control value 1-Suction at max vacuum; 2-Suction at set vacuum; 3-Stop suction
+    * @return Error code
+    */
+    public int SetSuckerCtrl(int slaveID, int len, int[] ctrlValue)
+
+Get Array Sucker Status
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get Array Sucker Status
+    * @param  slaveID Slave ID
+    * @param  state Adsorption state 0-Release object; 1-Workpiece detected and adsorbed successfully; 2-No object adsorbed; 3-Object detached
+    * @param  pressValue Current vacuum degree Unit kpa
+    * @param  error Sucker current error code
+    * @return Error code
+    */
+    public int GetSuckerState(int slaveID, int[] state, int[] pressValue, int[] error)
+
+Wait for Sucker Status
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.8-3.8.5
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Wait for Sucker Status
+    * @param  slaveID Slave ID
+    * @param  state Adsorption state 0-Release object; 1-Workpiece detected and adsorbed successfully; 2-No object adsorbed; 3-Object detached
+    * @param  ms Max waiting time
+    * @return Error code
+    */
+    public int WaitSuckerState(int slaveID, int state, int ms)
+
+Array Sucker Control Command Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void testSucker(Robot robot)
+    {
+        //Upload and load open protocol file
+        robot.OpenLuaUpload("C：//project/peripheralSDK/CtrlDev_sucker.lua");
+        robot.Sleep(2000);
+        robot.UnloadCtrlOpenLUA(1);
+        robot.LoadCtrlOpenLUA(1);
+        robot.Sleep(1000);
+        //Control sucker in broadcast mode, adsorb with maximum capacity
+        int[] ctrl = {1};
+        robot.SetSuckerCtrl(0, 1, ctrl);
+        int[] state=new int[1];
+        int[] pressVlaue=new int[1];
+        int[] error=new int[1];
+        //Loop monitor status of sucker 1 and sucker 12
+        for (int i = 0; i < 100; i++)
+        {
+            robot.GetSuckerState(1, state,pressVlaue, error);
+            System.out.println("sucker1 state is:"+state[0]+",pressVlaue is:"+pressVlaue[0]+",error num is"+error[0]);
+            robot.GetSuckerState(12, state, pressVlaue, error);
+            System.out.println("sucker12 state is :"+state[0]+", pressVlaue is:"+pressVlaue[0]+",error num is:"+error[0]);
+            robot.Sleep(100);
+        }
+        //Wait for sucker 1 to be in adsorbed state, wait time 100ms
+        int ret = robot.WaitSuckerState(1, 1, 100);
+        System.out.println("WaitSuckerState result is:"+ ret);
+        //Unicast mode to turn off sucker 1 and 12
+        ctrl[0] = 3;
+        robot.SetSuckerCtrl(1, 1, ctrl);
+        robot.SetSuckerCtrl(12, 1, ctrl);
+        robot.CloseRPC();
+    }

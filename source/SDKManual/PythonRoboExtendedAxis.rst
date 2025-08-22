@@ -839,12 +839,11 @@ UDP Extended Axis Motion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ExtAxisMove(pos,ovl,blend)``"
+    "Prototype", "``ExtAxisMove(pos,ovl,blend=-1)``"
     "Description", "UDP Extended Axis Motion"
     "Mandatory parameters", "- ``pos=[exaxis[0],exaxis[1],exaxis[2],exaxis[3]]``: target position Axis 1 position to Axis 4 position;
-    - ``ovl``: percentage of speed
-    - ``blend``：Smoothing parameter (mm or ms), -1, waiting for the motion to complete"
-    "Default parameters", "NULL"
+    - ``ovl``: percentage of speed"
+    "Default parameters", "- ``blend``：Smoothing parameter (mm or ms), -1, waiting for the motion to complete, Default -1"
     "Return Value", "Error Code Success-0 Failure- errcode"
                                         
 UDP Extended axis motion code example
@@ -870,7 +869,7 @@ UDP extension axes synchronized with robot joint motion
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype","``ExtAxisSyncMoveJ(joint_pos,desc_pos,tool,user,exaxis_pos, vel=20.0, acc=0.0, ovl= 100.0, blendT=-1.0, offset_flag=0, offset_pos=[ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
+    "Prototype","``ExtAxisSyncMoveJ(joint_pos,tool,user,exaxis_pos, desc_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel=20.0, acc=0.0, ovl= 100.0, blendT=-1.0, offset_flag=0, offset_pos=[ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
     "Description", "UDP extension axis synchronized motion with robot joint motion"
     "Mandatory parameters", "
     - ``joint_pos``: target joint position in [°];
@@ -879,6 +878,7 @@ UDP extension axes synchronized with robot joint motion
     - ``user``: artifact number, [0~14]
     - ``exaxis_pos``: external axis 1 position ~ external axis 4 positions"
     "Default Parameters", "
+    - ``desc_pos``: target Cartesian position in [mm][°] Default initial value [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls positive kinematics to solve for the return value.
     - ``vel``: percentage of speed, [0~100] default 20.0;
     - ``acc``: percentage of acceleration, [0~100] not open yet, default 0.0;
     - ``ovl``: velocity scaling factor, [0~100] default 100.0 ;
@@ -928,28 +928,29 @@ UDP extension axes synchronized with robot joint motion code example
                   
 UDP extension axes synchronized with robot linear motion
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
+.. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype","``ExtAxisSyncMoveL(self, joint_pos,desc_pos, tool, user, exaxis_pos, vel=20.0, acc=0.0, ovl=100.0, blendR=-1.0, search=0, offset_flag= 0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
+    "Prototype","``ExtAxisSyncMoveL(desc_pos, tool, user, exaxis_pos, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0,0.0], vel=20.0, acc=0.0, ovl=100.0, blendR=-1.0, search=0, offset_flag= 0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],config=-1)``"
     "Description", "UDP extension axis synchronized motion with robot linear motion"
     "Mandatory parameters", "
-    - ``joint_pos``: target joint position in [°];
     - ``desc_pos``: target Cartesian position in [mm][°];
     - ``tool``: tool number, [0 to 14];
     - ``user``: artifact number, [0 to 14];
     - ``exaxis_pos``: external axis 1 position ~ external axis 4 positions;"
     "Default Parameters", "
+    - ``joint_pos``: target joint position in [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls inverse kinematics to solve for the return value.
     - ``vel``: percentage of speed, [0~100] default 20.0;
     - ``acc``: percentage of acceleration, [0~100] not open yet, default 0.0;
     - ``ovl``: velocity scaling factor, [0~100] default 100.0;
     - ``blendR``: [-1.0]-motion in place (blocking), [0~500.0]-smoothing time (non-blocking) in [ms] default -1.0;
     - ``search``: [0] - no wire search, [1] - wire search;
     - ``offset_flag``: [0] - no offset, [1] - offset in workpiece/base coordinate system, [2] - offset in tool coordinate system Default 0;
-    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;"
+    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0] ;
+    - ``config``: Reverse the joint space configuration, [-1]- calculate based on the current joint position, [0~7]- solve based on the specific joint space configuration, default -1"
     "Return Value", "Error Code Success-0 Failure- errcode;"
 
 UDP extension axes synchronized with robot linear motion code example
@@ -994,26 +995,26 @@ UDP extension axes synchronized with robot linear motion code example
                       
 UDP extension axes synchronized with robot circular motion
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.4
+.. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype","``ExtAxisSyncMoveC(joint_pos_p, desc_pos_p, tool_p, user_p,exaxis_pos_p, joint_pos_t, desc_pos_t, tool_t, user_t,exaxis_pos_t,vel_p =20.0, acc_p=100.0, offset_flag_p=0, offset_pos_p =[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel_t=20.0, acc_t=100.0, offset_flag_t=0, offset_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], ovl=100.0, blendR=-1.0)``"
+    "Prototype","``ExtAxisSyncMoveC(desc_pos_p, tool_p, user_p,exaxis_pos_p, desc_pos_t, tool_t, user_t,exaxis_pos_t,joint_pos_p=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], joint_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],vel_p =20.0, acc_p=100.0, offset_flag_p=0, offset_pos_p =[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel_t=20.0, acc_t=100.0, offset_flag_t=0, offset_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], ovl=100.0, blendR=-1.0, config=-1)``"
     "Description", " UDP extension axis synchronized with robot circular motion"
     "Mandatory parameters", "
-    - ``joint_pos_p``: path point joint position in [°];
     - ``desc_pos_p``: path point Cartesian position in [mm][°];
     - ``tool_p``: pathpoint tool number, [0~14];
     - ``user_p``: pathpoint artifact number, [0~14];
     - ``exaxis_pos_p``: path point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0];
-    - ``joint_pos_t``: target point joint position in [°];
     - ``desc_pos_t``: Cartesian position of the target point in [mm][°];
     - ``tool_t``: tool number, [0~14];
     - ``user_t``: artifact number, [0~14];
     - ``exaxis_pos_t``: target point external axis 1 position ~ external axis 4 position default [0.0,0.0,0.0,0.0];"
     "Default Parameters", "
+    - ``joint_pos_p``: target joint position in [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls inverse kinematics to solve for the return value.
+    - ``joint_pos_t``: target joint position in [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls inverse kinematics to solve for the return value.
     - ``vel_p``: path point velocity percentage, [0~100] default 20.0;
     - ``acc_p``: path point acceleration percentage, [0~100] not open yet, default 0.0;   
     - ``offset_flag_p``: whether the path point is offset [0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
@@ -1023,7 +1024,8 @@ UDP extension axes synchronized with robot circular motion
     - ``offset_flag_t``: whether the target point is offset or not [0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
     - ``offset_pos_t``: target point attitude offset in [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0];
     - ``ovl``: velocity scaling factor, [0~100] default 100.0;
-    - ``blendR``: [-1.0] - motion in place (blocking), [0~1000] - smoothing radius (non-blocking) in [mm] default -1.0;"
+    - ``blendR``: [-1.0] - motion in place (blocking), [0~1000] - smoothing radius (non-blocking) in [mm] default -1.0;
+    - ``config``: Reverse the joint space configuration, [-1]- calculate based on the current joint position, [0~7]- solve based on the specific joint space configuration, default -1"
     "Return Value", "Error Code Success-0 Failure- errcode;"
                                                 
 UDP extension axes synchronized with robot circular motion code example
@@ -1357,4 +1359,336 @@ Portable device code example
     time.sleep(10)
     robot.TractorMoveC(300, -90, 20)
     time.sleep(1)
+    robot.CloseRPC()
+
+Laser sensor recording points
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.4
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserRecordPoint(coordID)``"
+    "Description", "Laser sensor recording points"
+    "Mandatory par", "- ``coordID``：Laser sensor coordinate system"
+    "Default param", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``joint``：The laser sensor identifies the position of the point joint
+    - ``desc``：The laser sensor identifies the Cartesian position of the point
+    - ``exaxis``：The laser sensor identifies the extended axis position of the point"
+
+Sample code for laser sensor recording points
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.4
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    direction_point = [0, 0, 0]
+    rtn = robot.LaserTrackingSearchStart(2, direction_point, 10, 100, 10000, 2)
+    print(f"LaserTrackingSearchStart rtn is {rtn}")
+    robot.LaserTrackingSearchStop()
+    coord_id = 2
+    rtn, joint, desc, exaxis = robot.LaserRecordPoint(coord_id)
+    print(f"rtn is {rtn}")
+    print(f"desc_pos:{desc[0]},{desc[1]},{desc[2]},"
+          f"{desc[3]},{desc[4]},{desc[5]}")
+    print(f"joint_pos:{joint[0]},{joint[1]},{joint[2]},{joint[3]},{joint[4]},{joint[5]}")
+    print(f"exaxis pos is {exaxis[0]} {exaxis[1]} {exaxis[2]} {exaxis[3]}")
+    off = [0] * 6
+    robot.MoveJ(joint,tool=1,user=0,vel=100,acc=100,ovl=50,exaxis_pos=exaxis,blendT=-1,offset_flag=0,offset_pos=off)
+    robot.CloseRPC()
+
+Set the synchronous movement strategy of the extended axis and the robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetExAxisRobotPlan(strategy)``"
+    "Description", "Set the synchronous movement strategy of the extended axis and the robot"
+    "Mandatory par", "- ``strategy``：Strategy; 0- Mainly robots; 1- The extended axis is synchronized with the robot"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Code example for setting the synchronous motion strategy of the extended axis and the robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    joint_pos1 = [-22.016, -49.217, 124.714, -161.100, -85.108, -0.333]
+    joint_pos2 = [-21.083, -46.613, 110.079, -147.796, -80.757, -0.330]
+    joint_pos3 = [-25.572, -60.090, 135.397, -163.889, -82.489, -0.345]
+    desc_pos1 = [2.637, -0.001, 30.673, 178.786, -4.134, 68.326]
+    desc_pos2 = [213.812, -1.440, 47.311, 177.410, 0.166, 68.946]
+    desc_pos3 = [444.342, -12.723, 82.470, -177.701, -1.325, 65.151]
+    epos1 = [0.001, 0.000, 0.000, 0.000]
+    epos2 = [299.977, 0.000, 0.000, 0.000]
+    epos3 = [399.969, 0.000, 0.000, 0.000]
+    offset_pos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    rtn = robot.SetExAxisRobotPlan(0)
+    print(f"SetExAxisRobotPlan rtn is {rtn}")
+    time.sleep(1)
+    rtn = robot.ExtAxisSyncMoveL(desc_pos=desc_pos1,tool=1,user=0,vel=100,acc=100,ovl=100,blendR=-1,exaxis_pos=epos1,offset_flag=0,offset_pos=offset_pos)
+    print(f"ExtAxisSyncMoveL 1 rtn is {rtn}")
+    rtn = robot.ExtAxisSyncMoveL(desc_pos=desc_pos2,tool=1,user=0,vel=100,acc=100,ovl=100,blendR=-1,exaxis_pos=epos2,offset_flag=0,offset_pos=offset_pos)
+    print(f"ExtAxisSyncMoveL 2 rtn is {rtn}")
+    rtn = robot.ExtAxisSyncMoveL(desc_pos=desc_pos3,tool=1,user=0,vel=100,acc=100,ovl=100,blendR=-1,exaxis_pos=epos3,offset_flag=0,offset_pos=offset_pos)
+    print(f"ExtAxisSyncMoveL 3 rtn is {rtn}")
+    time.sleep(8)
+    robot.CloseRPC()
+
+Control array type sucker
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetSuckerCtrl(slaveID, len, ctrlValue)``"
+    "Description", "Control array type sucker"
+    "Mandatory par", "- ``slaveID``：Slave station number
+    - ``len``：length
+    - ``ctrlValue``：Control value 1- Suction according to the maximum vacuum degree 2- suction according to the set vacuum degree 3- stop suction"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Get the state of the array suction cup
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetSuckerState(slaveID)``"
+    "Description", "Get the state of the array suction cup"
+    "Mandatory par", "- ``slaveID``：Slave station number"
+    "Default param", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``state``：Adsorption state 0 -released object 1 -successful adsorption of the workpiece was detected 2 -no adsorption to the object 3 -object detachment
+    - ``pressValue``：The current vacuum is in kpa
+    - ``error``：The current error code for the sucker"
+
+Wait for the sucker state
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``WaitSuckerState(slaveID, state, ms)``"
+    "Description", "Wait for the sucker state"
+    "Mandatory par", "- ``slaveID``：Slave station number
+    - ``state``：Adsorption state 0 -released object 1 -successful adsorption of the workpiece was detected 2 -no adsorption to the object 3 -object detachment
+    - ``ms``：Maximum waiting time"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Array type sucker control command code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.OpenLuaUpload("C://Project/PeripheralSDK/CtrlDev_sucker.lua")
+    time.sleep(2)
+    robot.UnloadCtrlOpenLUA(1)
+    robot.LoadCtrlOpenLUA(1)
+    time.sleep(1)
+    ctrl = bytearray(20)
+    ctrl[0] = 1
+    robot.SetSuckerCtrl(0, 1, ctrl)
+    for i in range(100):
+        rtn, state, press_value, error = robot.GetSuckerState(1)
+        print(f"sucker1 state is {state}, pressValue is {press_value}, error num is {error}")
+        rtn, state, press_value, error = robot.GetSuckerState(12)
+        print(f"sucker12 state is {state}, pressValue is {press_value}, error num is {error}")
+        time.sleep(0.1)
+    ret = robot.WaitSuckerState(1, 1, 100)
+    print(f"WaitSuckerState result is {ret}")
+    ctrl[0] = 3
+    robot.SetSuckerCtrl(1, 1, ctrl)
+    robot.SetSuckerCtrl(12, 1, ctrl)
+    robot.CloseRPC()
+
+Upload an open protocol Lua file
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``OpenLuaUpload(filePath)``"
+    "Description", "Upload an open protocol Lua file"
+    "Mandatory par", "- ``filePath``：Local open protocol lua file path name"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Get the slave board parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetFieldBusConfig()``"
+    "Description", "Get the slave board parameters"
+    "Mandatory par", "NULL"
+    "Default param", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``type``：0-Ethercat，1-CClink, 3-Ethercat, 4-EIP
+    - ``version``：Protocol version
+    - ``connState``：0- Not connected 1- Connected"
+
+Write the slave DO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``FieldBusSlaveWriteDO(DOIndex, wirteNum, status)``"
+    "Description", "Write the slave DO"
+    "Mandatory par", "- ``DOIndex``：DO number
+    - ``wirteNum``：Number of writes
+    - ``status``：The number to write, up to 8"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Write the slave AO
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``FieldBusSlaveWriteAO(AOIndex, wirteNum, status)``"
+    "Description", "Write the slave AO"
+    "Mandatory par", "- ``AOIndex``：AO number
+    - ``wirteNum``：Number of writes
+    - ``status``：The number to write, up to 8"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Read the slave DI
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``FieldBusSlaveReadDI(DOIndex, readeNum)``"
+    "Description", "Read the slave DI"
+    "Mandatory par", "- ``DOIndex``：DI number
+    - ``readeNum``：Number of reads"
+    "Default param", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``status[8]``：Read a maximum of 8 values"
+
+Read the slave AI
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``FieldBusSlaveReadAI(AOIndex, readeNum)``"
+    "Description", "Read the slave AI"
+    "Mandatory par", "- ``AOIndex``：AI number
+    - ``readeNum``：Number of reads"
+    "Default param", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``status[8]``：Read a maximum of 8 values"
+
+Wait for the extension DI input
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``FieldBusSlaveWaitDI(DIIndex, status, waitMs)``"
+    "Description", "Wait for the extension DI input"
+    "Mandatory par", "- ``DIIndex``：DI number
+    - ``status``：0- low level; 1- High level
+    - ``waitMs``：Maximum waiting time (ms)"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Wait for extended AI input
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``FieldBusSlaveWaitAI(AIIndex, waitType, value, waitMs)``"
+    "Description", "Wait for extended AI input"
+    "Mandatory par", "- ``AIIndex``：AI number
+    - ``waitType``：0- greater than; 1- less than
+    - ``value``：AI value
+    - ``waitMs``：Maximum waiting time (ms)"
+    "Default param", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Example of slave mode related interface instruction code
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.5
+
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.OpenLuaUpload("D://zUP/Peripheral_equipment/CtrlDev_field.lua")
+    time.sleep(2)
+    robot.SetCtrlOpenLUAName(3,"CtrlDev_field.lua")
+    robot.UnloadCtrlOpenLUA(3)
+    robot.LoadCtrlOpenLUA(3)
+    time.sleep(8)
+    rtn,type, version, conn_state = robot.GetFieldBusConfig()
+    print(f"type is {type}, version is {version}, connState is {conn_state}")
+    # Write digital outputs
+    ctrl = [1, 0, 1]  # DO0=1, DO1=0, DO2=1
+    robot.FieldBusSlaveWriteDO(0, 3, ctrl)
+    # Write analog output
+    ctrl_ao = [0x1000]  # AO2 = 0x1000
+    robot.FieldBusSlaveWriteAO(2, 1, ctrl_ao)
+    for i in range(100):
+        rtn,di = robot.FieldBusSlaveReadDI(0, 4)
+        print(f"DI0 is {di[0]}, DI1 is {di[1]}, DI2 is {di[2]}, DI3 is {di[3]}")
+        rtn, ai = robot.FieldBusSlaveReadAI(0, 3)
+        print(f"AI0 is {ai[0]}, AI1 is {ai[1]}, AI2 is {ai[2]}")
+        time.sleep(0.01)
+    ret = robot.FieldBusSlaveWaitDI(0, 1, 100)
+    print(f"FieldBusSlaveWaitDI result is {ret}")
+    ret = robot.FieldBusSlaveWaitAI(0, 0, 400.00, 100)
+    print(f"FieldBusSlaveWaitAI result is {ret}")
     robot.CloseRPC()

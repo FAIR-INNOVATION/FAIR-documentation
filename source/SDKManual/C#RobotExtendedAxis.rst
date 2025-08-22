@@ -1423,6 +1423,53 @@ Code example
         robot.TractorStop();    
     }
 
+Set the synchronous motion strategy of the extension axis and the robot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Set the synchronous movement strategy of the extended axis with the robot
+    * @param strategy Strategy; 0 - Robot as the main; 1 - Extended axis synchronous with the robot
+    * @return Error code */
+
+    int SetExAxisRobotPlan(int strategy)
+
+Code example for setting up the extended axis to move synchronously with the robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.7  Web-3.8.5
+
+.. code-block:: c#
+    :linenos:
+
+
+    private void button94_Click(object sender, EventArgs e)
+    {
+        JointPos joint_pos1 = new JointPos(-22.016, -49.217, 124.714, -161.100, -85.108, -0.333);
+        JointPos joint_pos2 = new JointPos(-21.083, -46.613, 110.079, -147.796, -80.757, -0.330);
+        JointPos joint_pos3 = new JointPos(-25.572, -60.090, 135.397, -163.889, -82.489, -0.345);
+        DescPose desc_pos1 = new DescPose(2.637, -0.001, 30.673, 178.786, -4.134, 68.326);
+        DescPose desc_pos2 = new DescPose(213.812, -1.440, 47.311, 177.410, 0.166, 68.946);
+        DescPose desc_pos3 = new DescPose(444.342, -12.723, 82.470, -177.701, -1.325, 65.151);   
+        ExaxisPos epos1 = new ExaxisPos(0.001, 0.000, 0.000, 0.000);
+        ExaxisPos epos2 = new ExaxisPos(299.977, 0.000, 0.000, 0.000);
+        ExaxisPos epos3 = new ExaxisPos(399.969, 0.000, 0.000, 0.000);      
+        DescPose offset_pos = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        int rtn = robot.SetExAxisRobotPlan(0);
+        Console.WriteLine($"SetExAxisRobotPlan rtn is {rtn}");
+        Thread.Sleep(1000);
+        rtn = robot.ExtAxisSyncMoveL(joint_pos1, desc_pos1, 1, 0, 100, 100, 100, -1, epos1, 0, offset_pos);
+        Console.WriteLine($"ExtAxisSyncMoveL 1 rtn is {rtn}");
+
+        rtn = robot.ExtAxisSyncMoveL(joint_pos2, desc_pos2, 1, 0, 100, 100, 100, -1, epos2, 0, offset_pos);
+        Console.WriteLine($"ExtAxisSyncMoveL 2 rtn is {rtn}");
+        rtn = robot.ExtAxisSyncMoveL(joint_pos3, desc_pos3, 1, 0, 100, 100, 100, -1, epos3, 0, offset_pos);
+        Console.WriteLine($"ExtAxisSyncMoveL 3 rtn is {rtn}");
+        Thread.Sleep(8000);
+    }
 
 
 

@@ -373,13 +373,13 @@ Robot trajectory J file reproduction code example
 
 Trajectory preprocessing(Trajectory foresight)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.1.0
+.. versionadded:: python SDK-v2.1.4
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``LoadTrajectoryLA(name, mode, errorLim, type, precision, vamx, amax, jmax)``"
+    "Prototype", "``LoadTrajectoryLA(name, mode, errorLim, type, precision, vamx, amax, jmax, flag)``"
     "Description", "Trajectory preprocessing(Trajectory foresight)"
     "Mandatory parameter", "- ``name``:track file name
     - ``mode``: sampling mode, 0- No sampling; 1- equal data interval sampling; 2- Equal error limit sampling
@@ -388,7 +388,8 @@ Trajectory preprocessing(Trajectory foresight)
     - ``precision``: smoothing accuracy, effective when using Bessel smoothing
     - ``vamx``: set maximum speed, mm/s
     - ``amax``: set maximum acceleration, mm/s2
-    - ``jmax``: maximum acceleration, mm/s3"
+    - ``jmax``: maximum acceleration, mm/s3
+    - ``flag``: Uniform speed forward opening switch 0- No opening; 1- Start"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -418,7 +419,7 @@ Code example for trajectory reproduction
     rtn = robot.TrajectoryJUpLoad("D://zUP/traj.txt")
     print(f"Upload TrajectoryJ A {rtn}")
     traj_file_name = "/fruser/traj/traj.txt"
-    rtn = robot.LoadTrajectoryLA(traj_file_name, 1, 2, 0, 2, 50, 200, 1000)
+    rtn = robot.LoadTrajectoryLA(traj_file_name, 1, 2, 0, 2, 50, 200, 1000, 0)
     print(f"LoadTrajectoryLA {traj_file_name}, rtn is: {rtn}")
     rtn, traj_start_pose = robot.GetTrajectoryStartPose(traj_file_name)
     print(f"GetTrajectoryStartPose is: {rtn}")

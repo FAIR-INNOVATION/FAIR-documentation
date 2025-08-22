@@ -899,6 +899,28 @@ UDP Extended Axis and Robot Joint Motion Synchronous Motion
     */
     errno_t ExtAxisSyncMoveJ(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos epos, float blendT, byte offset_flag, DescPose offset_pos);
 
+UDP Extended Axis and Robot Joint Motion Synchronization (Automatic Forward Kinematics Calculation)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief UDP Extended Axis and Robot Joint Motion Synchronization (Automatic Forward Kinematics Calculation)
+    * @param [in] joint_pos Target joint position, unit: deg
+    * @param [in] tool Tool coordinate number, range [0~14]
+    * @param [in] user Workpiece coordinate number, range [0~14]
+    * @param [in] vel Velocity percentage, range [0~100]
+    * @param [in] acc Acceleration percentage, range [0~100], temporarily not available
+    * @param [in] ovl Velocity scaling factor, range [0~100]
+    * @param [in] epos Extended axis position, unit: mm
+    * @param [in] blendT [-1.0]-Move to position (blocking), [0~500.0]-Smoothing time (non-blocking), unit: ms
+    * @param [in] offset_flag 0-No offset, 1-Offset in base coordinate system/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param [in] offset_pos Pose offset value
+    * @return Error code
+    */
+    errno_t ExtAxisSyncMoveJ(JointPos joint_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos epos, float blendT, uint8_t offset_flag, DescPose offset_pos);
+
 UDP Extended Axis and Robot Joint Motion Synchronous Motion Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -961,6 +983,9 @@ UDP Extended Axis and Robot Joint Motion Synchronous Motion Code Example
       robot.MoveJ(&startjointPos, &startdescPose, 1, 1, 100, 100, 100, &startexaxisPos, 0, 0, &offdese);
       //Start synchronous motion
       robot.ExtAxisSyncMoveJ(endjointPos, enddescPose, 1, 1, 100, 100, 100, endexaxisPos, -1, 0, offdese);
+      robot.MoveJ(&startjointPos, 1, 1, 100, 100, 100, &startexaxisPos, 0, 0, &offdese);
+      // Start synchronous motion
+      robot.ExtAxisSyncMoveJ(endjointPos, 1, 1, 100, 100, 100, endexaxisPos, -1, 0, offdese);
       robot.CloseRPC();
     }
 
@@ -987,6 +1012,29 @@ UDP Extended Axis and Robot Linear Motion Synchronous Motion
     * @return Error code
     */
     errno_t ExtAxisSyncMoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, int offset_flag, DescPose offset_pos);
+
+UDP Extended Axis and Robot Linear Motion Synchronization (Automatic Inverse Kinematics Calculation)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief UDP Extended Axis and Robot Linear Motion Synchronization (Automatic Inverse Kinematics Calculation)
+    * @param [in] desc_pos  Target Cartesian pose
+    * @param [in] tool Tool coordinate number, range [0~14]
+    * @param [in] user Workpiece coordinate number, range [0~14]
+    * @param [in] vel Velocity percentage, range [0~100]
+    * @param [in] acc Acceleration percentage, range [0~100], temporarily not available
+    * @param [in] ovl Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-Move to position (blocking), [0~1000.0]-Smoothing radius (non-blocking), unit: mm
+    * @param [in] epos Extended axis position, unit: mm
+    * @param [in] offset_flag 0-No offset, 1-Offset in base coordinate system/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param [in] offset_pos Pose offset value
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-Calculate based on current joint position, [0~7]-Solve based on specific joint space configuration
+    * @return Error code
+    */
+    errno_t ExtAxisSyncMoveL(DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, uint8_t offset_flag, DescPose offset_pos, int config = -1);
 
 UDP Extended Axis and Robot Linear Motion Synchronous Motion Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1050,6 +1098,9 @@ UDP Extended Axis and Robot Linear Motion Synchronous Motion Code Example
       robot.MoveJ(&startjointPos, &startdescPose, 1, 1, 100, 100, 100, &startexaxisPos, 0, 0, &offdese);
       //Start synchronous motion
       robot.ExtAxisSyncMoveL(endjointPos, enddescPose, 1, 1, 100, 100, 100, 0, endexaxisPos, 0, offdese);
+      robot.MoveJ(&startjointPos, 1, 1, 100, 100, 100, &startexaxisPos, 0, 0, &offdese);
+      // Start synchronous motion
+      robot.ExtAxisSyncMoveL(enddescPose, 1, 1, 100, 100, 100, 0, endexaxisPos, 0, offdese);
       robot.CloseRPC();
     }
 
@@ -1085,7 +1136,38 @@ UDP Extended Axis and Robot Arc Motion Synchronous Motion
     * @return Error code
     */
     errno_t ExtAxisSyncMoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t, float ovl, float blendR);
-    
+
+UDP Extended Axis and Robot Circular Motion Synchronization (Automatic Inverse Kinematics Calculation)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief UDP Extended Axis and Robot Circular Motion Synchronization (Automatic Inverse Kinematics Calculation)
+    * @param [in] desc_pos_p  Path point Cartesian pose
+    * @param [in] ptool Tool coordinate number, range [0~14]
+    * @param [in] puser Workpiece coordinate number, range [0~14]
+    * @param [in] pvel Velocity percentage, range [0~100]
+    * @param [in] pacc Acceleration percentage, range [0~100], temporarily not available
+    * @param [in] epos_p Extended axis position, unit: mm
+    * @param [in] poffset_flag 0-No offset, 1-Offset in base coordinate system/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param [in] offset_pos_p Pose offset value
+    * @param [in] desc_pos_t  Target point Cartesian pose
+    * @param [in] ttool Tool coordinate number, range [0~14]
+    * @param [in] tuser Workpiece coordinate number, range [0~14]
+    * @param [in] tvel Velocity percentage, range [0~100]
+    * @param [in] tacc Acceleration percentage, range [0~100], temporarily not available
+    * @param [in] epos_t Extended axis position, unit: mm
+    * @param [in] toffset_flag 0-No offset, 1-Offset in base coordinate system/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param [in] offset_pos_t Pose offset value
+    * @param [in] ovl Velocity scaling factor, range [0~100]
+    * @param [in] blendR [-1.0]-Move to position (blocking), [0~1000.0]-Smoothing radius (non-blocking), unit: mm
+    * @param [in] config Inverse kinematics joint space configuration, [-1]-Calculate based on current joint position, [0~7]-Solve based on specific joint space configuration
+    * @return Error code
+    */
+    errno_t ExtAxisSyncMoveC(DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, uint8_t poffset_flag, DescPose offset_pos_p, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, uint8_t toffset_flag, DescPose offset_pos_t, float ovl, float blendR, int config = -1);    
+
 UDP Extended Axis and Robot Arc Motion Synchronous Motion Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -1152,6 +1234,9 @@ UDP Extended Axis and Robot Arc Motion Synchronous Motion Code Example
       robot.MoveJ(&startjointPos, &startdescPose, 1, 1, 100, 100, 100, &startexaxisPos, 0, 0, &offdese);
       //Start synchronous motion
       robot.ExtAxisSyncMoveC(midjointPos, middescPose, 1, 1, 100, 100, midexaxisPos, 0, offdese, endjointPos, enddescPose, 1, 1, 100, 100, endexaxisPos, 0, offdese, 100, 0);
+      robot.MoveJ(&startjointPos, 1, 1, 100, 100, 100, &startexaxisPos, 0, 0, &offdese);
+      // Start synchronous motion
+      robot.ExtAxisSyncMoveC(middescPose, 1, 1, 100, 100, midexaxisPos, 0, offdese, enddescPose, 1, 1, 100, 100, endexaxisPos, 0, offdese, 100, 0);
       robot.CloseRPC();
     }
     

@@ -7065,3 +7065,352 @@ When posture compliance adjusts around tool coordinate system, set reference coo
 .. centered:: Figure 9.31-3 Setting 6-Axis Force Sensor Reference Coordinate System
 
 **Step4**: Run the script to observe posture compliance effect. The adjustment angle under constant force will be limited within the custom maximum adjustment angle range.
+
+Socket Communication Interface Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Socket Configuration
+++++++++++++++++++++++++++++++++++
+
+When using the Socket communication interface function, after the robot is powered on, you need to first access the web page to configure the Socket protocol. The configuration is saved after power-off.
+
+Click "Teach Program" - "Program Editing", then click "Socket Network Debugging" in the upper right menu bar to enter the Socket configuration interface. Click "Add Socket" to configure Socket parameters. Up to four Sockets can be added.
+
+.. image:: coding/446.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-1 Socket Network Debugging Interface
+
+.. image:: coding/447.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-2 Socket Configuration Parameters Interface
+
+Communication Parameter Settings
+********************************************
+
+The communication protocol supports UDP, TCP server, and TCP client.
+
+Data types support both ASCII and HEX. After configuring the data type, all data transmission and reception for that Socket connection will be processed according to the configured type.
+
+Heartbeat Detection Mechanism
+********************************************
+The heartbeat detection mechanism is only applicable to TCP server and TCP client.
+
+The heartbeat detection mechanism uses the Keepalive mechanism to detect and maintain the active state of the connection, preventing accidental interruption of long-idle connections. It mainly includes the following parameters:
+
+- Probe interval: How long to wait before sending keepalive probe packets (in seconds);
+- Probe time: Interval between probe packets (in seconds);
+- Probe count: Maximum number of probe packets to send.
+
+Reconnection Mechanism
+********************************************
+The reconnection mechanism is only applicable to TCP client.
+
+When the reconnection mechanism is enabled and the TCP client detects a server disconnection upon startup, it will actively attempt to reconnect. If the connection cannot be established after reaching the maximum reconnection attempts, the connection will be dropped. It mainly includes the following parameters:
+
+- Reconnection interval: Reconnection interval time (in ms, recommended to be in seconds);
+- Maximum reconnection attempts: Maximum number of reconnection attempts.
+  
+Custom Protocol Parsing
+********************************************
+When custom protocol parsing is enabled, the transmitted and received data will be encapsulated or parsed according to the protocol configuration.
+
+Custom protocols can be automatically generated based on configuration parameters. In ASCII mode, frame header, frame count, data length, and frame tail combinations are supported. Delimiters can be used for data segmentation. In HEX mode, frame header, frame count, data length, checksum method, and frame tail combinations are supported.
+
+.. image:: coding/448.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-3 ASCII Mode Custom Protocol Configuration
+
+.. image:: coding/449.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-4 HEX Mode Custom Protocol Configuration
+
+After configuring the custom protocol, click the "Generate" button to automatically generate the corresponding Lua file. The Lua file supports import and export functions. The protocol type can be flexibly configured by modifying the file code.
+
+Socket Connection
+++++++++++++++++++++++++++++++++++++++++++
+
+Interface Connection Display
+********************************************
+After configuring Socket information, the Socket connection can be established. The connection status includes the following three states:
+
+- White: Connection not established.
+
+.. image:: coding/450.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-5 Disconnected State
+
+- Yellow: TCP server waiting for connection or TCP client requesting connection.
+
+.. image:: coding/451.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-6 Waiting for Connection State
+
+- Green: Connection successful.
+
+.. image:: coding/452.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-7 Connected State
+
+Connection Command Module
+********************************************
+
+Click "Teach Program" - "Program Editing" - "Communication Commands", select "Socket" command to generate commands for opening and closing Socket connections for Lua programming. SocketID can only select already configured Socket connections.
+
+.. image:: coding/453.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-8 Socket Connection Command Module
+
+Command details:
+
+- Open connection command: OpenSockeConnect(id);
+- Parameter id: Pre-configured socket ID, return value 0 for success;
+- Close connection command: CloseSockeConnect(id);
+- Parameter id: Pre-configured socket ID, return value 0 for success.
+
+Socket Communication
++++++++++++++++++++++++++++++++++++++++++
+
+Communication Testing
+***********************************
+The interface provides communication testing for data transmission and reception testing, as shown in Figure 3-1 below.
+
+.. image:: coding/454.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-9 Communication Testing
+ 
+The interface sends data in blocking mode by default, waiting for motion completion before sending data. The default data reception timeout is 5 seconds, after which an error will be reported and stopped. These parameters can be adjusted when issuing commands.
+
+Communication Command Module
+***********************************
+
+Click "Teach Program" - "Program Editing" - "Communication Commands", select "Socket" command to generate Socket communication commands for data transmission and reception in Lua programming. SocketID can only select already configured Socket connections for sending data.
+
+.. image:: coding/455.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-10 Sending Socket Data
+
+Command parameters are Socket ID, data to send, and whether to wait for motion completion.
+
+Command details:
+
+- Send command: SocketSend(id,data,block);
+- Parameters: id, connected socket ID; data: data to send (string format), content must match the configured data type, such as "hello" or "FA54DE"; block: whether to block motion (0: wait for motion completion before sending, 1: send immediately). Return value 0 for success.
+
+Receiving data is shown below.
+
+.. image:: coding/456.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.32-11 Receiving Socket Data
+
+Command parameters are Socket ID, reception timeout (in milliseconds), and post-timeout strategy.
+
+Command details:
+
+- Receive command: SocketReceive(id,timeout,stopStartegy);
+- Parameters: id, connected socket ID; timeout: reception timeout; stopStartegy: post-timeout strategy (0: report error and stop after timeout, 1: continue running after timeout);
+- Return values: time: reception time, data: received data.
+
+Robot Linear, Circular, and Full Circle Motion Setting Physical Speed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+LUA Programming
++++++++++++++++++++++++++++++++++++++++++++
+
+Linear Command
+********************************
+Click the "Linear" icon to enter the Lin command editing interface.
+
+The function of this command is similar to the "PTP" command, but the path to the point reached by this command is a straight line.
+
+.. image:: coding/457.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-1 Lin Command Addition Interface
+
+The LIN command allows selecting the motion speed mode as "Percentage" or "Physical Speed":
+
+- Percentage: Input the debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current debugging speed setting.
+
+.. image:: coding/458.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-2 Input Percentage to Display Actual Physical Speed Value
+
+- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed of the LIN command is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed for the LIN command is 1000 × 50% = 500mm/s).
+
+.. image:: coding/459.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-3 Input Actual Physical Speed
+
+Circular Arc Command
+*********************************
+
+Click the "Circular Arc" icon to enter the Arc command editing interface.
+
+The "Arc" command is for circular motion and includes three points: the first point is the arc start point, the second point is the arc intermediate transition point, and the third point is the end point.
+
+Both the transition point and the end point can be set for offset, you can choose offset based on the base coordinate system or based on the tool coordinate system, and pop-up settings for x, y, z, rx, ry, rz offsets appear. The end point can set a smooth transition radius to achieve a continuous motion effect. (Arc motion requires first adding a PTP or Lin command to move to the start point).
+
+.. image:: coding/460.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-4 Arc Command Interface
+
+The ARC command allows selecting the motion speed mode as "Percentage" or "Physical Speed":
+
+- Percentage: Input the debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current debugging speed setting.
+
+.. image:: coding/461.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-5 Input Percentage to Display Actual Physical Speed Value
+
+- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed of the ARC command is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed for the ARC command is 1000 × 50% = 500mm/s).
+
+.. image:: coding/462.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-6 Input Actual Physical Speed
+ 
+Full Circle Command Addition
+******************************************
+
+**Step1**: Create a new user program "testCircle.lua", click the "Full Circle" button to open the full circle command addition page.
+
+.. image:: coding/463.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-7 Add Full Circle Command Button
+
+**Step2**: On the full circle command addition page, select the starting point motion mode and the starting point as "P1".
+
+.. image:: coding/464.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-8 Starting Point Motion Mode and Starting Point "P1"
+
+**Step3**: On the full circle command addition page, select "Full Circle Intermediate Point 1" as point "P2", and "Full Circle Intermediate Point 2" as point "P3".
+
+.. image:: coding/465.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-9 Select Arc Intermediate Points and End Point
+
+**Step4**: Select the speed mode and input the speed value.
+
+The Circle command allows selecting the motion speed mode as "Percentage" or "Physical Speed":
+
+- Percentage: Input the debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current debugging speed setting.
+
+.. image:: coding/466.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-10 Input Percentage to Display Actual Physical Speed Value
+
+- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed of the Circle command is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed for the Circle command is 1000 × 50% = 500mm/s).
+
+.. image:: coding/467.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-11 Input Actual Physical Speed
+
+**Step5**: Click the "Add" button and then the "Apply" button sequentially. Now the "testCircle.lua" program has the full circle motion command added.
+
+.. image:: coding/468.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-12 Full Circle Motion Command Added
+
+Switch the robot to automatic mode and, ensuring safety, start the program. The robot will then move along the full circular trajectory.
+
+Smart Tool
++++++++++++++++++++++++++++++++++++
+
+Under the "Auxiliary Applications" -> "Tool Applications" menu bar, click "Smart Tool" to enter the Smart Tool configuration function interface.
+
+Configure keys A-E and the IO key sequentially. After Smart Tool configuration is complete, the robot internally maintains the function corresponding to each button. When it detects that a button is pressed, it automatically executes the function item corresponding to that button.
+
+A-E Key Functions:
+
+- Motion Command: When selecting PTP, LIN, or ARC motion commands, the corresponding point speed needs to be input. Among them, LIN and ARC commands can choose "Percentage" or "Physical Speed":
+- Percentage: Input the point speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Point Speed Percentage. Hover the mouse over the small eye icon to the right of the "Point Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current speed setting.
+
+.. image:: coding/469.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-13 Input Percentage to Display Actual Physical Speed Value
+ 
+- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed is 1000 × 50% = 500mm/s).
+
+.. image:: coding/470.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-14 Input Actual Physical Speed
+
+After successful configuration, a related motion command is added to the teach program. When configuring an ARC motion command, a PTP/LIN command must be configured first.
+
+- DO Output: When "DO Output" is selected, a dropdown box appears allowing selection of output options DO0⁓DO7.
+
+.. image:: coding/471.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-15 Smart Tool Configuration (A-E Keys)
+
+IO Key Function:
+
+- IO Signal Configuration: The dropdown box allows selection of DO0⁓DO7 options, CO0⁓CO7 options, End-DO0, End-DO1, and extended IO (Aux-DO0⁓Aux-DO127);
+- Combined Command: After selecting "IO Signal", under specific conditions, the "Welder Selection" and "Point Speed" configuration items are displayed, generating different program commands.
+
+.. image:: coding/472.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.33-16 Smart Tool Configuration (IO Key)
+
+.. important::
+   - When the IO signal is configured as DO0~DO7 or CO0~CO7 (without "Arc Start" configured), the program adds SetDO; "Weld Selection" and "Point Speed" are hidden at this time.
+   - When the IO signal is configured as End-DO0 or End-DO1, the program adds SetToolDO; "Weld Selection" and "Point Speed" are hidden at this time.
+   - When the IO signal is configured as Extended IO (without "Welder Arc Start" configured), the program adds SetAuxDO; "Weld Selection" and "Point Speed" are hidden at this time.
+   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) and "Welder Selection" is "None", the program adds SetDO; "Weld Selection" and "Point Speed" are hidden at this time.
+   - When the IO signal configuration item is Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "None", the program adds SetAuxDO; "Weld Selection" and "Point Speed" are hidden at this time.
+   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "Welding", the first press adds ARCStart, the second press adds ARCEnd, the third press adds ARCStart, the fourth press adds ARCStart, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are hidden at this time.
+   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "LIN+Welding", the first press adds LIN and ARCStart, the second press adds LIN and ARCEnd, the third press adds LIN and ARCStart, the fourth press adds LIN and ARCEnd, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are displayed at this time.
+   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "LIN+Welding+Weaving", the first press adds LIN, ARCStart, and WeaveStart, the second press adds LIN, ARCEnd, and WeaveEnd, the third press adds LIN, ARCStart, and WeaveStart, the fourth press adds LIN, ARCEnd, and WeaveEnd, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are hidden at this time.

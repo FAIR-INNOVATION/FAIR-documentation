@@ -392,9 +392,10 @@ Trajectory Preprocessing (Trajectory Lookahead)
 	 * @param  [in] vamx Set maximum speed, mm/s
 	 * @param  [in] amax Set maximum acceleration, mm/s2
 	 * @param  [in] jmax Set maximum jerk, mm/s3
-	 * @return  Error code
+	 * @param [in] flag Constant velocity lookahead switch; 0-Disable; 1-Enable
+	 * @return Error code
 	 */
-    errno_t LoadTrajectoryLA(char name[30], int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax);
+	 errno_t LoadTrajectoryLA(char name[30], int mode, double errorLim, int type, double precision, double vamx, double amax, double jmax, int flag = 0);
 
 Trajectory Playback (Trajectory Lookahead)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

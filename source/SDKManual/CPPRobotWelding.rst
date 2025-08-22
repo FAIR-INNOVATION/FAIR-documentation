@@ -130,12 +130,13 @@ Set Welding Current
 
     /**
     * @brief Set welding current
-    * @param [in] ioType Control IO type: 0-Control box IO; 1-Extension IO
+    * @param [in] ioType Control IO type 0-Control box IO; 1-Extension IO
     * @param [in] current Welding current value (A)
-    * @param [in] AOIndex Control box analog output port for welding current (0-1)
+    * @param [in] AOIndex Welding current control box analog output port (0-1)
+    * @param [in] blend Whether to smooth 0-Not smooth; 1-Smooth
     * @return Error code
     */
-    errno_t WeldingSetCurrent(int ioType, double current, int AOIndex);
+    errno_t WeldingSetCurrent(int ioType, double current, int AOIndex, int blend);
 
 Set Welding Voltage
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -147,12 +148,13 @@ Set Welding Voltage
 
     /**
     * @brief Set welding voltage
-    * @param [in] ioType Control IO type: 0-Control box IO; 1-Extension IO
-    * @param [in] voltage Welding voltage value (A)
-    * @param [in] AOIndex Control box analog output port for welding voltage (0-1)
+    * @param [in] ioType Control IO type 0-Control box IO; 1-Extension IO
+    * @param [in] voltage Welding voltage value (V)
+    * @param [in] AOIndex Welding voltage control box analog output port (0-1)
+    * @param [in] blend Whether to smooth 0-Not smooth; 1-Smooth
     * @return Error code
     */
-    errno_t WeldingSetVoltage(int ioType, double voltage, int AOIndex);
+    errno_t WeldingSetVoltage(int ioType, double voltage, int AOIndex, int blend);
 
 Set Weaving Parameters
 +++++++++++++++++++++++++++++++++++++++++++++
