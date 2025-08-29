@@ -26,6 +26,10 @@ Date: 2025-08-19
 
     Description: Added new configuration option for the FR30L robot model.
 
+- **Control Box Adaptation**: 
+
+    Description: Added control box adaptation for ETMP03E board (EtherCAT protocol).
+    
 Version V3.8.4.1
 -----------------
 
