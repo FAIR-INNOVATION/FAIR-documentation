@@ -1129,13 +1129,13 @@ Start of wire position finding
 
     /**
     * @brief Welding wire seek start.
-    * @param [in] refPos 1-datum point 2-contact point
+    * @param [in] refPos 1-datum point 0-contact point
     * @param [in] searchVel SearchVelocity %.
     * @param [in] searchDis Search distance mm
     * @param [in] autoBackFlag autoBackFlag, 0 - not auto; - auto
     * @param [in] autoBackVel autoBackVelocity % * @param [in] searchDis searchDistance mm
     * @param [in] autoBackDis autoBack distance mm
-    * @param [in] offectFlag 1-with offset seek; 2-teach point seek
+    * @param [in] offectFlag 1-with offset seek; 0-teach point seek
     * @return error code
     */
     int WireSearchStart(int refPos, double searchVel, int searchDis, int autoBackFlag, double autoBackVel, int autoBackDis, int offectFlag);

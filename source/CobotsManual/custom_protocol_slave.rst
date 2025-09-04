@@ -10,7 +10,7 @@ Overview
 Industrial Bus Protocol Integration for Robot Motion Control
 -----------------------------------------------------------------
 
-To facilitate PLC-based robot motion control through various industrial bus protocols (CC-Link, Profinet, Ethernet/IP, and EtherCAT), the integrated mini control cabinet has been equipped with Hilscher cards, FRJ-PCIeN-EIP/CC/PN-RJ-V10 cards, and FRJ-PCIeN-EC-RJ-V10 cards.
+To facilitate PLC-based robot motion control through various industrial bus protocols (CC-Link IEF Basic, Profinet, Ethernet/IP, and EtherCAT), the integrated mini control cabinet has been equipped with FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 cards, FRJ-PCIeN-EIP/CC/PN-RJ-V10 cards, and FRJ-PCIeN-EC-RJ-V10 cards.
 
 Environment Configuration
 --------------------------
@@ -26,38 +26,38 @@ The required card models and software versions are as follows:
      - **Card Model**
      - **Robot Software Version**
 
-   * - CC-link
-     - Hilscher card, FRJ-PCIeN-EIP/CC/PN-RJ-V10
+   * - CC-Link IEF Basic
+     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EIP/CC/PN-RJ-V10
      - V3.8.0+
 
    * - Profinet
-     - Hilscher card, FRJ-PCIeN-EIP/CC/PN-RJ-V10
+     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EIP/CC/PN-RJ-V10
      - V3.8.0+
 
    * - Ethernet/IP
-     - Hilscher card, FRJ-PCIeN-EIP/CC/PN-RJ-V10
+     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EIP/CC/PN-RJ-V10
      - V3.8.0+
 
    * - EtherCAT
-     - Hilscher card, FRJ-PCIeN-EC-RJ-V10
+     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EC-RJ-V10
      - V3.8.4.1+
 
-Hilscher board hardware environment setup
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board hardware environment setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Install the Hilscher board into the integrated mini control box as shown.
+1. Install the FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board into the integrated mini control box as shown.
 
 .. image:: custom_protocol_slave/001.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-1 Hilscher board installation
+.. centered:: Figure 17.2-1 FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board installation
 
 .. image:: custom_protocol_slave/002.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-2 Hilscher board network port
+.. centered:: Figure 17.2-2 FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board network port
 
 2. The robot control box and PLC wiring is shown below.
 
@@ -89,7 +89,7 @@ Hilscher board hardware environment setup
       1: Robot control box (board input network port);
       2: Switch;
       3: PC;
-      4: Mitsubishi PLC (CC-link network port);
+      4: Mitsubishi PLC (CC-Link IEF Basic network port);
       5: Siemens PLC (Profinet network port);
       6: Omron PLC (Ethernet/IP network port);
       7: Omron PLC (EtherCAT network port);
@@ -131,7 +131,7 @@ FRJ-PCIeN Board Hardware Setup
     1: Robot control box (board Ethernet port);
     2: Switch;
     3: Laptop PC;
-    4: Mitsubishi PLC (CC-link port);
+    4: Mitsubishi PLC (CC-Link IEF Basic port);
     5: Siemens PLC (Profinet port);
     6: Inovance PLC (Ethernet/IP port);
 
@@ -171,7 +171,7 @@ FRJ-PCIeN Board Hardware Setup
    * - **Protocol**
      - **IP Address**
 
-   * - CC-link
+   * - CC-Link IEF Basic
      - 192.168.0.113
 
    * - Ethernet/IP
@@ -180,7 +180,7 @@ FRJ-PCIeN Board Hardware Setup
    * - Profinet
      - 192.168.0.2
 
-When configured for CC-link, controller changes board IP to "192.168.0.113".
+When configured for CC-Link IEF Basic, controller changes board IP to "192.168.0.113".
 
 When configured for Ethernet/IP, controller changes board IP to "192.168.0.112".
 
@@ -207,7 +207,7 @@ Software environment setup
 
 .. note:: QX control box web version needs 3.8.0 and above, LA control box web version needs 3.8.0 and above.
 
-3. Go to Peripherals->Remote Control, select ‘Profinet control’ for Control mode, select ‘Hilscher’ for Manufacturer, select ‘4ms’ for Cycle Period, and click the ‘Set’ button.
+3. Go to Peripherals->Remote Control, select ‘Profinet control’ for Control mode, select ‘FRH-PCIeN-EC/EIP/CC/PN-RJ-V10’ for Manufacturer, select ‘4ms’ for Cycle Period, and click the ‘Set’ button.
 
 .. image:: custom_protocol_slave/009.png
    :width: 4in
@@ -255,7 +255,7 @@ The test environment built to implement the slave commands for each protocol is 
      - 6ES75152AM020AB0
      - TIA Portal V17
   
-   * - CC-link
+   * - CC-Link IEF Basic
      - Mitsubishi
      - FX5S-30TR/DS
      - 30MR/ES V1.3
@@ -338,24 +338,24 @@ Search and download devices: After the pop-up window, configure the PG/PC interf
    :width: 6in
    :align: center
 
-Mitsubishi CC-link
+Mitsubishi CC-Link IEF Basic
 ++++++++++++++++++++++++++++++++++
 
 1. CC-Link IEF Basic Setup
 
-Enable CC-link: Select ‘Ethernet Port’ in the left menu bar, set the ip address of PLC and make sure it is in the same network segment as the address of Huexun card. Click ‘CC-link IEF Basic’ and select ‘Use’.
+Enable CC-Link IEF Basic: Select ‘Ethernet Port’ in the left menu bar, set the ip address of PLC and make sure it is in the same network segment as the address of Huexun card. Click ‘CC-Link IEF Basic’ and select ‘Use’.
 
 .. image:: custom_protocol_slave/022.png
    :width: 6in
    :align: center
 
-CC-Link Network Configuration Settings: Also in CC-Link IEF Basic Settings, select ‘Network Configuration Settings’, and choose Hueyoson CIFX Digital I/O module. Drag and drop the module to the bottom left of the view to complete the hardware configuration.
+CC-Link IEF Basic Network Configuration Settings: Also in CC-Link IEF Basic Settings, select ‘Network Configuration Settings’, and choose Hueyoson CIFX Digital I/O module. Drag and drop the module to the bottom left of the view to complete the hardware configuration.
 
 .. image:: custom_protocol_slave/023.png
    :width: 6in
    :align: center
 
-CC-Link Refresh Settings: Also in CC-Link IEF Basic Settings, click Refresh Settings to customise the transmission settings: 256 bytes receive, 256 bytes transmit.
+CC-Link IEF Basic Refresh Settings: Also in CC-Link IEF Basic Settings, click Refresh Settings to customise the transmission settings: 256 bytes receive, 256 bytes transmit.
 
 .. image:: custom_protocol_slave/024.png
    :width: 6in
@@ -434,7 +434,7 @@ After successful communication, download the PLC program.
    :width: 6in
    :align: center
 
-HMI setting (CC-link emulation)
+HMI setting (CC-Link IEF Basic emulation)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. After logging into the HMI interface, enable ‘Enable Task’ to establish the communication connection between PLC and controller.
@@ -532,7 +532,7 @@ HMI setting (Profinet emulation)
 
 1. After opening the programme, click on ‘HMI_1[ktp700 Basic PN]’ in the project tree, and then click on ‘Online’→‘Simulation’→‘Start’ in the menu bar. Click ‘Online’→‘Simulation’→‘Start’ in the menu bar. Wait for the software to compile and simulate.
 
-2. The function after emulation is the same as the content of the Velcro screen (CC-link). You can refer to the above content to set up.
+2. The function after emulation is the same as the content of the Velcro screen (CC-Link IEF Basic). You can refer to the above content to set up.
    
 .. image:: custom_protocol_slave/042.png
    :width: 6in
@@ -556,7 +556,7 @@ Loading Slave Mode
 
 .. centered:: Figure 17.3-1 Board Communication Manual Configuration
 
-First, configure the IP address of the FRJ-PCIeN board. If left blank, the board will use the default IP: 192.168.0.100 for startup configuration. Currently, IP configuration only applies to EIP and CC-link protocols. For PN protocol, the IP is assigned by the PLC master station scanning slave devices.
+First, configure the IP address of the FRJ-PCIeN board. If left blank, the board will use the default IP: 192.168.0.100 for startup configuration. Currently, IP configuration only applies to EIP and CC-Link IEF Basic protocols. For PN protocol, the IP is assigned by the PLC master station scanning slave devices.
 
 .. note:: After changing the IP address on the page, you need to load the slave mode for the changes to take effect.
 

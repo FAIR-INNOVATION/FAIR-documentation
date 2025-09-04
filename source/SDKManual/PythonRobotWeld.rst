@@ -1152,13 +1152,13 @@ Welding wire position finding start
 
     "Prototype", "``WireSearchStart(refPos,searchVel,searchDis,autoBackFlag,autoBackVel,autoBackDis,offectFlag)``"
     "Description", "Welding wire seek start"
-    "Mandatory parameters", "- ``refPos``: 1 - reference point 2 - contact point
+    "Mandatory parameters", "- ``refPos``: 1 - reference point 0 - contact point
     - ``searchVel``: search velocity %
     - ``searchDis``: search distance mm
     - ``autoBackFlag``: autoBackFlag, 0 - not auto; - auto
     - ``autoBackVel``: Automatic Back Velocity %
     - ``autoBackDis``: automatic back distance mm
-    - ``offectFlag``: 1 - seek with offset; 2 - teach point seek"
+    - ``offectFlag``: 1 - seek with offset; 0 - teach point seek"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 

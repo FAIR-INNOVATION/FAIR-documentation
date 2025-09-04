@@ -1216,13 +1216,13 @@ Wire Search Start
 
     /**
     * @brief  Wire search start
-    * @param  [in] refPos  1-Reference point 2-Contact point
+    * @param  [in] refPos  1-Reference point 0-Contact point
     * @param  [in] searchVel   Search speed %
     * @param  [in] searchDis  Search distance mm
     * @param  [in] autoBackFlag Auto return flag, 0-No auto; -Auto
     * @param  [in] autoBackVel  Auto return speed %
     * @param  [in] autoBackDis  Auto return distance mm
-    * @param  [in] offectFlag  1-Search with offset; 2-Teach point search
+    * @param  [in] offectFlag  1-Search with offset; 0-Teach point search
     * @return  Error code
     */
      errno_t WireSearchStart(int refPos, float searchVel, int searchDis, int autoBackFlag, float autoBackVel, int autoBackDis, int offectFlag);
