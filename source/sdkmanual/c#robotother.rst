@@ -368,20 +368,7 @@ Points Table Update Lua Program
     * @param [out] errorStr point table update lua error message  
     * @return error code 
     */
-    int PointTableUpdateLua(string pointTableName, string luaFileName, ref string errorStr);
-
-Switch the point table and apply it
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
-
-    /** 
-    * @brief Switch the point table and apply it
-    * @param [in] pointTableName The name of the point table to be switched is "pointTable1.db"
-    * @param [out] errorStr switches the error message of the point table
-    * @return error code
-    */
-    int PointTableSwitch(string pointTableName, ref string errorStr);
+    int PointTableUpdateLua(string pointTableName, string luaFileName, ref string errorStr);;
 
 Code Example
 ++++++++++++++++++++++++++++++++++++
