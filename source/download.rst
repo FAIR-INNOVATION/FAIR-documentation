@@ -19,18 +19,20 @@ Qualification Certification
 Robot Certification:
 
 .. list-table::
-   :widths: 20 10 10 10 10 10 10 10 10
+   :widths: 24 4 4 4 4 4 4 4 4 4 24
    :header-rows: 0
    :class: sheet-center
 
    * - **Certificate/Model**
      - **FR3**
+     - **FR3-C**
+     - **FR3-WML**
+     - **FR3-WMS**
      - **FR5**
      - **FR10**
      - **FR16**
      - **FR20**
      - **FR30**
-     - **FR3MT**
      - **Download**
 
    * - **High Protection IP65 Test Certificate**
@@ -40,10 +42,14 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/High protection IP65 test certification certificate.zip>`
 
    * - **NSF Certificate**
+     - ✅
+     - ✅
      - ✅
      - ✅
      - ✅
@@ -60,20 +66,26 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/Crash force test certification.zip>`
 
-   * - **ROHS Test Certification Certificate**
+   * - **RoHS Test Certification Certificate**
      - ✅
      - ✅
      - ✅
      - ✅
      - ✅
      - ✅
-     - --
-     - :download:`download <_static/_doc/ROHS Certification (FR3-FR30).pdf>`
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/RoHS Certification (FR3-FR30).pdf>`
 
    * - **Explosion-proof Certificate**
+     - ✅
+     - ✅
      - ✅
      - ✅
      - ✅
@@ -90,7 +102,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/CE-EMC certification.pdf>`
 
    * - **CE-MD Certificate**
@@ -100,7 +114,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/CE-MD certification.zip>`
 
    * - **Functional Safety Certificate**
@@ -110,7 +126,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/Functional safety certification.zip>`
 
    * - **KCs Certificate**
@@ -120,7 +138,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/KCs Certification.zip>`
 
    * - **SEMI Certificate**
@@ -130,7 +150,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/SEMI Certification.pdf>`
 
    * - **NRTL Industrial Robot Certificate**
@@ -140,7 +162,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/FR3-30 Industrial Robot NRTL Certification.pdf>`
 
    * - **NRTL Collaborative Robot Certificate**
@@ -150,7 +174,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - :download:`download <_static/_doc/NRTL Collaborative Robot certification.pdf>`
 
    * - **Cleaning Robot CLASS3 Certificate**
@@ -158,7 +184,9 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - --
+     - ✅
+     - ✅
+     - ✅
      - --
      - --
      - :download:`download <_static/_doc/Cleaning Robot CLASS3 Certificate(FR3-FR16).pdf>`
