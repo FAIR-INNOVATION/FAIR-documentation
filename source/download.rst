@@ -81,7 +81,7 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - :download:`download <_static/_doc/RoHS Certification (FR3-FR30).pdf>`
+     - :download:`download <_static/_doc/ROHS Certification (FR3-FR30).pdf>`
 
    * - **Explosion-proof Certificate**
      - ✅
