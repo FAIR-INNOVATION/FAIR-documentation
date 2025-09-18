@@ -290,9 +290,7 @@ FAIRINO SimMachine
 
 Palletizer frcap
 ---------------------------------
-    :download:`Palletizer-QX-v2.1.0 <_static/_doc/Palletizer-QX-v2.1.0.zip>`
-
-    :download:`Palletizer-LA-v2.1.0 <_static/_doc/Palletizer-LA-v2.1.0.zip>`
+    :download:`Palletizer-v2.1.0 <_static/_doc/Palletizer-v2.1.0.zip>`
 
 CPP SDK
 ---------------------------------
