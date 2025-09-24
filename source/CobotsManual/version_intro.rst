@@ -1,3 +1,37 @@
+Version V3.8.6
+-----------------
+
+Date: 2025-09-19
+
+- **New Robot Impedance Control Function**:
+    Path: Teach Program -> Program Editing -> F/T Command.
+
+    Description: Through real-time detection of external forces, the robot actively complies with the external force and deviates from the motion trajectory when the set threshold is reached. It returns to the motion trajectory once the external force drops below the threshold, thereby enabling better human-robot interaction.
+
+- **New Torque Detection Function Before Dragging**:
+    Path: Initial Setup -> Basic -> Collision Level.
+
+    Description: Before entering drag mode, the difference between the torque command and feedback for each joint is calculated. If the load or installation method is configured incorrectly, causing this difference to exceed the threshold, entering drag mode will be prevented to avoid loss of control after the robot enters drag mode.
+
+- **New Custom Weaving Welding Function**:
+    Path: Teach Program -> Program Editing -> Weave Command.
+
+    Description: Users can design their own weaving patterns to perform weaving welding.
+
+- **ModbusTCP**:
+    Path: Teach Program -> Program Editing -> ModbusTCP.
+
+    Description: Optimized the ModbusTCP master station timeout detection function.
+
+- **Pneumatic Suction Cup**:
+    Path: Initial Setup -> Peripherals -> Array Suction Cup.
+
+    Description: Optimized the web page adaptation function for pneumatic suction cups.
+
+- **Wire Finding Fault Error**:
+
+    Description: Optimized the WebAPP wire finding fault error reporting; it can be reset.
+
 Version V3.8.5
 -----------------
 

@@ -550,6 +550,10 @@ The robot model table is as follows:
      - FRCustom(9)-V1-001(FR3-C)
      - FR3-C
 
+   * - 905
+     - FRCustom(9)-V01-001(FR30L)
+     - FR30L
+
    * - ...
      - Reserved
      - /

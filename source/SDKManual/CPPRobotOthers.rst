@@ -441,3 +441,31 @@ Robot Slave Firmware Upgrade Code Example
     robot.CloseRPC();
     return 0;
     }
+
+Robot Operating System Upgrade (LA Control Box)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Robot Operating System Upgrade (LA Control Box)
+    * @param [in] filePath Full path of the operating system upgrade package
+    * @return Error code
+    */
+    errno_t KernelUpgrade(std::string filePath);
+        
+Get Robot Operating System Upgrade Result (LA Control Box)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get Robot Operating System Upgrade Result (LA Control Box)
+    * @param [out] result Upgrade result: 0: Success; -1: Failure
+    * @return Error code
+    */
+    errno_t GetKernelUpgradeResult(int& result);

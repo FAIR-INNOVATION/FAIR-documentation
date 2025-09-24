@@ -116,6 +116,12 @@ Nameplate information
 
 .. centered:: Figure 3.1-9 FR30 model collaborative robot
 
+.. figure:: installation/125.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.1-10 FR30L model collaborative robot
+
 Effectiveness and responsibility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -282,6 +288,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.31
      - 0.22
 
+   * - **FR30L**
+     - 0.69
+     - 0.75
+     - 0.80
+     - 0.48
+     - 0.31
+     - 0.22
+
 .. centered:: Table 3.1-2 Category 0 stop time (ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
@@ -353,6 +367,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 130
 
    * - **FR20**
+     - 540
+     - 600
+     - 700
+     - 400
+     - 260
+     - 170
+
+   * - **FR30L**
      - 540
      - 600
      - 700
@@ -451,6 +473,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.33
      - 0.25
 
+   * - **FR30L**
+     - 0.71
+     - 0.78
+     - 0.82
+     - 0.51
+     - 0.33
+     - 0.25
+
 .. centered:: Table 3.1-4 Safety stop time(ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
@@ -522,6 +552,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 150
 
    * - **FR20**
+     - 560
+     - 630
+     - 720
+     - 430
+     - 280
+     - 200
+
+   * - **FR30L**
      - 560
      - 630
      - 720
@@ -607,6 +645,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.36
      - 0.27
 
+   * - **FR30L**
+     - 0.74
+     - 0.80
+     - 0.85
+     - 0.53
+     - 0.36
+     - 0.27
+
 .. centered:: Table 3.1-6 Soft limit stop time(ms)
 .. list-table::
    :widths: 10 15 15 15 15 15 15
@@ -678,6 +724,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 170
 
    * - **FR20**
+     - 580
+     - 640
+     - 740
+     - 440
+     - 300
+     - 210
+
+   * - **FR30L**
      - 580
      - 640
      - 740
@@ -1799,8 +1853,8 @@ When installing the robot on the mounting base, use four M8 bolts with a strengt
 
   .. centered:: Figure 3.4-10 FR10&FR16 Model Collaborative Robot High Demand Mounting Base
 
-Installation requirements for FR20&FR30 robot
-++++++++++++++++++++++++++++++++++++++++++++++
+Installation requirements for FR20&FR30&FR30L robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 When installing the robot on the mounting base, use six M10 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 45Nm.Suggest using two on the mounting base φ 8mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
 
@@ -1808,7 +1862,7 @@ When installing the robot on the mounting base, use six M10 bolts with a strengt
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.4-11 FR20&FR30 model collaborative robot installation size
+.. centered:: Figure 3.4-11 FR20&FR30&FR30L model collaborative robot installation size
 
 .. important:: 
   Because the FR20 and FR30 robots have a large weight and running inertia, it is recommended to be directly fixed on the ground. The recommended base is as follows.
@@ -1834,7 +1888,7 @@ There are four M6 thread holes in the robot tool, which can be used to connect t
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.4-14 FR20&FR30 model robot end flange drawing
+.. centered:: Figure 3.4-14 FR20/FR30/FR30L model robot end flange drawing
 
 .. important:: 
 	- Make sure the tools are installed correctly and safely.

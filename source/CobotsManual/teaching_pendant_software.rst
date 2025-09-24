@@ -110,7 +110,7 @@ The login interface is shown in figure below.
 Multilingual settings function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The system currently comes with four languages: Chinese (汉语), Chinese (汉语繁體), English (English), French (français), Japanese (日本語) and Russian (Русский).
+- The system currently comes with eight languages: Chinese (汉语), Chinese (汉语繁體), English (English), French (français), Japanese (日本語) , Russian (Русский) and Italian (italiano).
 
 - The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
 
@@ -159,6 +159,11 @@ Multilingual settings function
    * - Russian
      - Русский
      - ru
+     - True
+
+   * - Italian
+     - italiano
+     - it
      - True
 
 1.Connect the control box to the teaching device and start it up.

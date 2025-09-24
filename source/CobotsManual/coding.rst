@@ -2375,7 +2375,7 @@ Click "Master settings" and "Add Modbus master station" in turn to finish adding
 
 .. centered:: Figure 9.18-3 Add "ModbusTCP Master Station
 
-According to your equipment, enter the name, slave ip, port number, slave number and communication cycle in turn. The specific meanings of the above parameters are as follows:
+According to your equipment, enter the name, slave ip, port number, slave number, communication cycle, and timeout in turn. The specific meanings of the above parameters are as follows:
 
 **Name**:ModbusTCP master station name. Robots can create up to 8 master stations to connect with corresponding slave stations. Different master stations can be distinguished by unique names, such as PLC, camera, data acquisition card and FRRobot1;
 
@@ -2388,6 +2388,8 @@ According to your equipment, enter the name, slave ip, port number, slave number
 **Slave station number**:ModbusTCP slave station number to be connected;
 
 **Communication period**: The period (ms) when the robot ModbusTCP master station inquires about the slave station status, which only affects the update speed of the slave station register data on the ModbusTCP Settings page, but does not affect the speed of reading or writing the ModbusTCP slave station register value in the lua program of the user.
+
+**Timeout Period**: When using the ModbusTCP read/write interface for operations, if the system fails to establish a connection after exceeding the timeout period, it will report a Modbus not connected error. Unit: ms, valid range: 100-60000.
 
 .. image:: coding/166.png
    :width: 6in
@@ -7414,3 +7416,134 @@ IO Key Function:
    - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "Welding", the first press adds ARCStart, the second press adds ARCEnd, the third press adds ARCStart, the fourth press adds ARCStart, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are hidden at this time.
    - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "LIN+Welding", the first press adds LIN and ARCStart, the second press adds LIN and ARCEnd, the third press adds LIN and ARCStart, the fourth press adds LIN and ARCEnd, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are displayed at this time.
    - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "LIN+Welding+Weaving", the first press adds LIN, ARCStart, and WeaveStart, the second press adds LIN, ARCEnd, and WeaveEnd, the third press adds LIN, ARCStart, and WeaveStart, the fourth press adds LIN, ARCEnd, and WeaveEnd, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are hidden at this time.
+
+Impedance Control Function During Robot Motion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++++++++++++++++++
+
+The impedance control function enables real-time detection of external forces. When the set threshold is reached, it actively complies with the external force, deviates from the motion trajectory, and returns to the motion trajectory after the external force drops below the threshold, thereby achieving better human-robot interaction. When an external force exceeding the preset force threshold is detected, this function drives the robotic arm to generate an offset in the direction of the force, achieving an active avoidance effect. After the external force is removed, the robotic arm returns to the vicinity of the original motion trajectory, thus enhancing safety during human-robot collaboration.
+
+Impedance Control Function
++++++++++++++++++++++++++++++++++++++++++++
+
+Impedance Control Configuration and Function Start/Stop in Cartesian Space
+******************************************************************************************
+
+**Step1**: Log in to the web interface, sequentially click "Initial Settings" → "Basic" → "Joints" → "Collision Level" to enter the robot collision level setting module, and set a reasonable collision coefficient, as shown in Figure 2-1.
+
+.. image:: coding/473.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-1 Robot Collision Coefficient Setting Module
+
+**Step2**: To use a force sensor to implement the impedance control function, the force sensor must be configured in the end effector peripheral configuration under "Peripherals" → "End Effector". If choosing not to use a force sensor to implement the impedance control function, this step is not required.
+
+**Step3**: Sequentially click "Teach Program" → "Program Programming" → "Force Control Set", and add the "Impedance" command. The "Impedance" command enables the robot to implement impedance control on the running trajectory (Currently, only impedance control in Cartesian space is available).
+
+.. image:: coding/474.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-2 Adding Force Control Command
+
+**Step4**: In the force control command module, select "Cartesian Space" from the space selection dropdown menu. Set appropriate values in the text boxes for force threshold, mass coefficient, damping coefficient, stiffness coefficient, maximum linear velocity, maximum linear acceleration, maximum angular velocity, and maximum angular acceleration. Click "Enable" under command type, then click "Add" to add the impedance control enable command; click "Disable" under command type, then click "Add" to add the impedance control disable command.
+
+.. image:: coding/475.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-3 Impedance Control Command Example
+
+**Step5**: During operation, if the robotic arm stops running and the lower left corner of the Web interface displays "500 Error: Current collision level is too low", this is because the set force threshold is greater than the trigger threshold of the collision level. At this point, increasing the collision level or decreasing the force threshold will resolve this error.
+
+.. image:: coding/476.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-4 Collision Level Too Low Warning
+
+**Step6**: During operation, if the robotic arm stops running and the lower right corner of the Web interface displays "Collision Fault", this is because the external force on the robotic arm has exceeded the trigger threshold of the collision level, thereby triggering a collision fault.
+
+.. image:: coding/477.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-5 Collision Fault Warning
+
+Specific Functions and Recommended Values of Parameters:
+
+- Space Selection: Sets the operational space for impedance control. Currently, only Cartesian space impedance control is available.
+- Force Threshold: The minimum trigger force for impedance control. The range for the translational direction force threshold is 30–150N, and for the rotational direction force threshold is 7–30Nm.
+- Mass Coefficient: Increasing the mass coefficient will cause the offset to be slower, decreasing it will cause the robot offset to be too fast. The range for the translational direction is [0.01-1], recommended value is 0.04; the range for the rotational direction is [0.001-1], recommended value is 0.01.
+- Damping Coefficient: Increasing the damping coefficient will cause the offset to be slower, decreasing it will cause the robot offset to be too fast, resulting in oscillation. The range for the translational direction is [0.1-2], recommended value is 0.1; the range for the rotational direction is [0.008-1.5], recommended value is 0.08.
+- Stiffness Coefficient: Increasing the stiffness coefficient will cause the offset to be slower. Recommended value is 0.
+- Maximum Linear Velocity: Limits the velocity generated by external forces in the translational direction. Recommended value is 250mm/s.
+- Maximum Linear Acceleration: Limits the acceleration generated by external forces in the translational direction. Recommended value is 500mm/s².
+- Maximum Angular Velocity: Limits the angular velocity generated by external forces in the rotational direction. Recommended value is 90°/s.
+- Maximum Angular Acceleration: Limits the angular acceleration generated by external forces in the rotational direction. Recommended value is 180°/s².
+
+Custom Weaving Welding Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++++++++++++
+
+The custom weaving welding function allows the execution of weaving using a pattern designed by the user.
+
+Description of the Custom Weaving Welding Function:
+
+- (1) In the weaving parameters interface, select any one of the weaving types: "Custom Weave 0", "Custom Weave 1", or "Custom Weave 2". A maximum of 3 custom weaving patterns can be set.
+- (2) The number of custom weaving endpoints can be set to a maximum of 10 and a minimum of 2. The X, Y, Z data of the last endpoint is fixed at 0 and cannot be modified, though the dwell time for all endpoints can be set.
+- (3) The X, Y, and Z values of the custom weaving endpoints must be within the range of -10mm to 10mm, and the weaving frequency must not exceed 10 Hz.
+- (4) Currently, linear, circular, and full-circle trajectories support custom weaving welding, but the weaving gradient function is not yet supported.
+- (5) Note: When the weaving dwell time is set to "Include", the total weaving dwell time must not exceed half of the weaving cycle time.
+
+Operational Procedure for Custom Weaving Welding Function
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The operational procedure for the custom weaving welding function is as follows:
+
+**Step 1**: First, record the start and end teach points of the linear trajectory. Then, click "Teach Program" -> "Program Editing", select "Point to Point" to move the robot end to the linear start point "custWeaveP1". Finally, select "Linear" to move the robot to the linear end point "custWeaveP2".
+
+**Step 2**: Select the "Weaving" button, click the weaving process editing button to enter the weaving parameters setting interface. Select "Custom Weave N" (N=0, 1, 2) for the "Weaving Type".
+
+.. image:: coding/478.png
+   :width: 6in
+   :align: center
+
+.. centered:: Chart 9.35-1 Weaving Parameters Setting Interface
+
+**Step 3**: After selecting the "Weaving Type", scroll down in the weaving parameters setting interface. In this interface, select the number of custom weaving endpoints, set the position and dwell time of each point in the weaving coordinate system, and finally click the "Configure" button.
+
+.. image:: coding/479.png
+   :width: 6in
+   :align: center
+
+.. centered:: Chart 9.35-2 Custom Weaving Setting Interface
+
+**Step 4**: In the weaving interface, sequentially select "Start Weaving" and "Stop Weaving" in the "Command Type" dropdown, click the "Add" button, and finally click the "Apply" button.
+
+.. image:: coding/480.png
+   :width: 6in
+   :align: center
+
+.. centered:: Chart 9.35-3 Weaving Command Setting Interface
+
+**Step 5**: In the program editing interface, select the weaving start command, click the "Move Up" button at the top of the interface, and finally save the program. Switch the robot to automatic mode and click the "Start" button. The robot will then begin custom weaving along the linear trajectory.
+
+.. image:: coding/481.png
+   :width: 6in
+   :align: center
+
+.. centered:: Chart 9.35-4 Original LUA Command Interface
+
+.. image:: coding/482.png
+   :width: 6in
+   :align: center
+
+.. centered:: Chart 9.35-5 Modified LUA Command Interface
+
+**Step 6**: The steps for setting up custom weaving for circular and full-circle trajectories are the same as Step 1 to Step 5 above.

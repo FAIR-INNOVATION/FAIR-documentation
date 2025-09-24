@@ -438,6 +438,34 @@ The setup steps of static collision detection are as follows.
 
 .. centered:: Figure 6.3-8 Static collision detection
 
+Torque Detection Function Before Dragging
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Overview
+***********************
+Before the robot enters the drag mode, torque detection is required. The function of this is to prevent abnormal phenomena such as lifting or falling after the robot enters the drag mode due to the operator setting incorrect load parameters or selecting the wrong installation method. If the joint torque is detected to exceed the allowable range, the controller will immediately report an error and prohibit the robot from entering the drag mode.
+
+Torque Detection Before Dragging
+**************************************
+
+**Step1**: Click "Initial Settings"->"Basic"-> "Joints"->"Collision Level" to enter the collision level setting interface, and turn on the torque detection function before dragging, as shown in Figure 2-1.
+
+.. image:: base/069.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.3-9 Torque Detection Function Before Dragging Enabled
+
+**Step2**: Switch to drag mode. The Web interface enters the drag mode by clicking the robot status area - robot drag status, long pressing the teach pendant "Teach Mode" button, or long pressing the robot end drag button. If the controller reports an error and the robot does not switch to drag mode, as shown in Figure 2-2, check whether the robot load configuration and installation method are correct.
+
+.. image:: base/070.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 6.3-10 Torque Exceeds Limit, Controller Reports Error
+
+**Step3**: Check the load configuration and installation method. Click "Initial Settings"->"Basic"-> "Load"->"End" to check whether the end load configuration on the web interface is the same as the actual installed load; click "Initial Settings"->"Basic"-> "Installation"->"Free Installation" to check whether the installation method on the web interface is the same as the actual installation method.
+
 Friction compensation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -451,7 +479,7 @@ Under the menu bar of "Initial" -> "Base" -> "Joint", click "Friction comp." to 
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-9 Friction Compensation Settings
+.. centered:: Figure 6.3-11 Friction Compensation Settings
 
 .. important:: 
    The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
@@ -477,7 +505,7 @@ Dragging Force Optimization Configuration
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-10 Dragging Force Compensation Settings Module
+.. centered:: Figure 6.3-12 Dragging Force Compensation Settings Module
 
 **Step2**: Set "Compensation Switch" to "ON" and "Adaptive Switch" to "OFF", configure parameters as shown in Figure 2-1, then click "Apply" to successfully enable the function. Press the drag button to drag the robot, and the dragging feel will be noticeably smoother than before enabling the function.
 

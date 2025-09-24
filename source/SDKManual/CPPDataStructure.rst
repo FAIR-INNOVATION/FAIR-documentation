@@ -126,8 +126,8 @@ feedback packet of robot controller state
     :linenos:
 
     /**
-     * @brief  feedback packet of robot controller state
-     */
+     * @brief  feedback packet of robot controller state
+     */
     typedef struct _ROBOT_STATE_PKG
     {
         uint16_t frame_head;      /* Frame header, fixed as 0x5A5A */
@@ -236,7 +236,14 @@ feedback packet of robot controller state
         WELDING_BREAKOFF_STATE weldingBreakOffState;  //Welding breakoff state
         double jt_tgt_tor[6];          //Joint command torque
         int smartToolState;            //SmartTool handle button state
-        float wideVoltageCtrlBoxTemp;        //Temperature of wide voltage control box
-        uint16_t wideVoltageCtrlBoxFanCurrent;   //Wide voltage control box fan current (Ma) 
-        uint16_t check_sum;            /* 和校验 */
+        float wideVoltageCtrlBoxTemp;        //Temperature of wide voltage control box
+        uint16_t wideVoltageCtrlBoxFanCurrent;   //Wide voltage control box fan current (Ma) 
+        uint16_t check_sum;            /* Checksum */
+        double toolCoord[6];      //Tool coordinate system
+        double wobjCoord[6];      //Workpiece coordinate system
+        double extoolCoord[6];     //External tool coordinate system
+        double exAxisCoord[6];     //Extended axis coordinate system
+        double load;          //Load mass
+        double loadCog[3];       //Load center of gravity
+        uint16_t check_sum;      /* Checksum */
     }ROBOT_STATE_PKG;

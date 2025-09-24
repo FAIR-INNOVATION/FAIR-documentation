@@ -1354,3 +1354,504 @@ Slave Mode Related Interface Command Code Example
 
         robot.CloseRPC();
     }
+
+Laser Peripheral On/Off
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Peripheral On/Off Function
+     * @param [in] OnOff 0- Off 1- On
+     * @param [in] weldId Weld ID, default is 0
+     * @return Error code
+     */
+    errno_t LaserTrackingLaserOnOff(int OnOff,int weldId);
+        
+Laser Tracking Start/Stop
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Tracking Start/Stop Function
+     * @param [in] OnOff 0- Stop 1- Start
+     * @param [in] coordId Laser peripheral tool coordinate system ID
+     * @return Error code
+     */
+     errno_t LaserTrackingTrackOnOff(int OnOff, int coordId); 
+            
+Laser Seam Search Start - Fixed Direction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Laser Seam Search - Fixed Direction
+    * @param [in] direction 0- X+ 1- X- 2- Y+ 3- Y- 4- Z+ 5- Z-
+    * @param [in] vel Speed, unit %
+    * @param [in] distance Maximum search distance, unit mm
+    * @param [in] timeout Search timeout time, unit ms
+    * @param [in] posSensorNum Laser calibrated tool coordinate number
+    * @return Error code
+    */
+    errno_t LaserTrackingSearchStart_xyz(int direction, int vel, int distance, int timeout, int posSensorNum);
+                
+Laser Seam Search Start - Arbitrary Point Direction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Seam Search - Arbitrary Direction
+     * @param [in] directionPoint Search input point's xyz coordinates
+     * @param [in] vel Speed, unit %
+     * @param [in] distance Maximum search distance, unit mm
+     * @param [in] timeout Search timeout time, unit ms
+     * @param [in] posSensorNum Laser calibrated tool coordinate number
+     * @return Error code
+     */
+    errno_t LaserTrackingSearchStart_point(DescTran directionPoint, int vel, int distance, int timeout, int posSensorNum);
+                    
+Laser Seam Search Stop
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Seam Search Stop
+     * @return Error code
+     */
+    errno_t LaserTrackingSearchStop();
+
+Laser Network Parameter Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Network Parameter Configuration
+     * @param [in] ip Laser peripheral IP address
+     * @param [in] port Laser peripheral port number
+     * @return Error code
+     */
+    errno_t LaserTrackingSensorConfig(std::string ip, int port);
+    
+Laser Peripheral Sampling Period Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Laser Peripheral Sampling Period Configuration
+    * @param [in] period Laser peripheral sampling period, unit ms
+    * @return Error code
+    */
+    errno_t LaserTrackingSensorSamplePeriod(int period);
+        
+Laser Peripheral Driver Load
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Peripheral Driver Load
+     * @param [in] type Laser peripheral driver protocol type 101- Ruiniu 102- Chuangxiang 103- Quanshi 104- Tongzhou 105- Aotai
+     * @return Error code
+     */
+    errno_t LoadPosSensorDriver(int type);
+            
+Laser Peripheral Driver Unload
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Peripheral Driver Unload
+     * @return Error code
+     */
+    errno_t UnLoadPosSensorDriver();
+                
+Laser Seam Trajectory Recording
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Laser Seam Trajectory Recording
+    * @param [in] status 0- Stop recording 1- Real-time tracking  2- Start recording
+    * @param [in] delayTime Delay time, unit ms
+    * @return Error code
+    */
+    errno_t LaserSensorRecord1(int status, int delayTime); 
+                    
+Laser Seam Trajectory Replay
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Seam Trajectory Replay
+     * @param [in] delayTime Delay time, unit ms
+     * @param [in] speed Speed, unit %
+     * @return Error code
+     */
+    errno_t LaserSensorReplay(int delayTime, double speed);
+                        
+Laser Tracking Replay
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Tracking Replay
+     * @return Error code
+     */
+    errno_t MoveLTR();
+                            
+Laser Seam Trajectory Recording and Replay
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+     * @brief Laser Seam Trajectory Recording and Replay
+     * @param [in] delayMode Mode 0- Delay time 1- Delay distance
+     * @param [in] delayTime Delay time, unit ms
+     * @param [in] delayDisExAxisNum Extended axis number
+     * @param [in] delayDis Delay distance, unit mm
+     * @param [in] sensitivePara Compensation sensitivity coefficient
+     * @param [in] speed Speed, unit %
+     * @return Error code
+     */
+    errno_t LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum, double delayDis, double sensitivePara, double speed);
+                                
+Move to Laser Recorded Start Point
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Move to Laser Recorded Start Point
+    * @param [in] moveType 0- moveJ 1- moveL
+    * @param [in] ovl Speed, unit %
+    * @return Error code
+    */
+    errno_t MoveToLaserRecordStart(int moveType, double ovl);
+                                    
+Move to Laser Recorded End Point
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Move to Laser Recorded End Point
+    * @param [in] moveType 0- moveJ 1- moveL
+    * @param [in] ovl Speed, unit %
+    * @return Error code
+    */
+    errno_t MoveToLaserRecordEnd(int moveType, double ovl);
+                                        
+Move to Laser Sensor Seam Search Point
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Move to Laser Sensor Seam Search Point
+    * @param [in] moveFlag Motion type: 0- PTP; 1- LIN
+    * @param [in] ovl Speed scaling factor, 0-100
+    * @param [in] dataFlag Seam buffer data selection: 0- Execute planned data; 1- Execute recorded data
+    * @param [in] plateType Plate type: 0- Corrugated plate; 1- Corrugated cardboard; 2- Fence plate; 3- Oil drum; 4- Corrugated shell steel
+    * @param [in] trackOffectType Laser sensor offset type: 0- No offset; 1- Base coordinate system offset; 2- Tool coordinate system offset; 3- Laser sensor raw data offset
+    * @param [in] offset Offset amount
+    * @return Error code
+    */
+    errno_t MoveToLaserSeamPos(int moveFlag, double ovl, int dataFlag, int plateType, int trackOffectType, DescPose offset);
+                                            
+Get Laser Sensor Seam Search Point Coordinates
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get Laser Sensor Seam Search Point Coordinate Information
+    * @param [in] trackOffectType Laser sensor offset type: 0- No offset; 1- Base coordinate system offset; 2- Tool coordinate system offset; 3- Laser sensor raw data offset
+    * @param [in] offset Offset amount
+    * @param [out] jPos Joint position [°]
+    * @param [out] descPos Cartesian position [mm]
+    * @param [out] tool Tool coordinate system
+    * @param [out] user Work object coordinate system
+    * @param [out] exaxis Extended axis position [mm]
+    * @return Error code
+    */
+    errno_t GetLaserSeamPos(int trackOffectType, DescPose offset, JointPos& jPos, DescPose& descPos, int& tool, int& user, ExaxisPos& exaxis); 
+                                                
+Laser Peripheral Sensor Parameter Configuration and Debugging Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    void testLaserConfig()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        uint8_t ctrl[20];
+        uint8_t state;
+        int pressVlaue;
+        int error;
+        robot.CloseRPC();
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        //Set IP address and port number
+        robot.LaserTrackingSensorConfig("192.168.58.20", 5020);
+        //Set sampling period
+        robot.LaserTrackingSensorSamplePeriod(20);
+        //Load driver
+        robot.LoadPosSensorDriver(101);
+        //Turn off laser peripheral
+        robot.LaserTrackingLaserOnOff(0,0);
+        robot.Sleep(3000);
+        //Turn on laser peripheral
+        robot.LaserTrackingLaserOnOff(1, 0);
+        robot.CloseRPC();
+    }
+                                                    
+Laser Trajectory Scanning and Trajectory Replay Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    void testLaserRecordAndReplay()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        uint8_t ctrl[20];
+        uint8_t state;
+        int pressVlaue;
+        int error;
+        robot.CloseRPC();
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+
+        //Upload and load open protocol file
+        robot.OpenLuaUpload("E://openlua/CtrlDev_laser_ruiniu-0117.lua");
+        robot.Sleep(2000);
+        robot.SetCtrlOpenLUAName(0, "CtrlDev_laser_ruiniu-0117.lua");
+        robot.UnloadCtrlOpenLUA(0);
+        robot.LoadCtrlOpenLUA(0);
+        robot.Sleep(8000);
+        int cnt = 1;
+        while(cnt<31)
+        { 
+            //Move to scan start point
+            JointPos startjointPos(56.205, -117.951, 141.872, -118.149, -94.217, -122.176);
+            DescPose startdescPose(-97.552, -282.855, 26.675, 174.182, -1.338, -91.707);
+            ExaxisPos exaxisPos(0, 0, 0, 0);
+            DescPose offdese(0, 0, 0, 0, 0, 0);
+            robot.MoveL(&startjointPos, &startdescPose, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+            //Start trajectory recording
+            robot.LaserSensorRecord1(2, 10);
+            //Move to the end point to be recorded
+            JointPos endjointPos(68.809, -87.100, 121.120, -127.233, -95.038, -109.555);
+            DescPose enddescPose(-103.555, -464.234, 13.076, 174.179, -1.344, -91.709);
+            robot.MoveL(&endjointPos, &enddescPose, 1, 0, 30, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+            //Stop recording
+            robot.LaserSensorRecord1(0, 10);
+            //Move to the recorded seam start point
+            robot.MoveToLaserRecordStart(1, 30);
+            //Start trajectory replay
+            robot.LaserSensorReplay(10, 100);
+            robot.MoveLTR();
+            //Stop trajectory replay
+            robot.LaserSensorRecord1(0, 10);
+            printf("Laser scanning + trajectory replay stability test, %dth time\n", cnt);
+            cnt++;
+        }
+        robot.CloseRPC();
+    }
+                                                        
+Laser Seam Search and Real-time Tracking Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    void testLasertrack()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        uint8_t ctrl[20];
+        uint8_t state;
+        int pressVlaue;
+        int error;
+        robot.CloseRPC();
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+
+        if (rtn != 0)
+        {
+            return;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+
+        //Upload and load open protocol file
+        robot.OpenLuaUpload("E://openlua/CtrlDev_laser_ruiniu-0117.lua");
+        robot.Sleep(2000);
+        robot.SetCtrlOpenLUAName(0, "CtrlDev_laser_ruiniu-0117.lua");
+        robot.UnloadCtrlOpenLUA(0);
+        robot.LoadCtrlOpenLUA(0);
+        robot.Sleep(8000);
+        int cnt = 1;
+        while (cnt < 2)
+        {
+            //Move to the starting point for seam search
+            JointPos startjointPos(58.337, -119.628, 146.037, -116.358, -92.224, -117.654);
+            DescPose startdescPose(-53.375, -255.363, 0.919, 178.054, 1.077, -94.026);
+            ExaxisPos exaxisPos(0, 0, 0, 0);
+            DescPose offdese(0, 0, 0, 0, 0, 0);
+            DescTran directionPoint;
+            robot.MoveL(&startjointPos, &startdescPose, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+
+            //Start search along the -Y direction
+            int ret = robot.LaserTrackingSearchStart_xyz(3, 100, 300, 1000, 2);
+            robot.LaserTrackingSearchStop();
+            //If search is successful
+            if (ret == 0)
+            {
+                //Move to the search point
+                robot.MoveToLaserSeamPos(1, 30, 0, 0, 0, offdese);
+                //Start laser tracking along the search point
+                robot.LaserTrackingTrackOnOff(1, 2);
+                JointPos endjointPos(70.580, -90.918, 126.593, -125.154, -92.162, -105.403);
+                DescPose enddescPose(-53.375, -419.020, 0.920, 178.054, 1.076, -94.026);
+                robot.MoveL(&endjointPos, &enddescPose, 1, 0, 20, 100, 100, -1, &exaxisPos, 0, 0, &offdese, 1, 1);
+                //Stop tracking
+                robot.LaserTrackingTrackOnOff(0, 2);
+
+            }
+            cnt++;
+        }
+        robot.CloseRPC();
+    }
+                                                            
+Extended Axis and Robot Synchronized Laser Tracking Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
+.. code-block:: c++
+    :linenos:
+
+    void testLasertrackandExitAxis()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        uint8_t ctrl[20];
+        uint8_t state;
+        int pressVlaue;
+        int error;
+        robot.CloseRPC();
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+
+        if (rtn != 0)
+        {
+            return;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+
+        ExaxisPos startexaxisPos = { 0,0,0,0 };
+        ExaxisPos seamexaxisPos = { -10,0,0,0 };
+        ExaxisPos endexaxisPos = { -30, 0, 0, 0 };
+        DescPose offdese = { 0, 0, 0, 0, 0, 0 };
+        JointPos seamjointPos(0, 0, 0, 0, 0, 0);
+        DescPose seamdescPose(0, 0, 0, 0, 0, 0);
+        
+        int cnt = 1;
+        while (cnt < 31)
+        {
+            //Move to the starting point for seam search
+            JointPos startjointPos(58.337, -119.628, 146.037, -116.358, -92.224, -117.654);
+            DescPose startdescPose(-53.375, -255.363, 0.919, 178.054, 1.077, -94.026);
+            robot.ExtAxisSyncMoveJ(startjointPos, startdescPose, 1, 0, 100, 100, 100, startexaxisPos, -1, 0, offdese);
+
+            //Start search along the -Y direction
+            int ret = robot.LaserTrackingSearchStart_xyz(3, 100, 300, 1000, 2);
+            robot.LaserTrackingSearchStop();
+            int tool = 0;
+            int user = 0;
+            robot.GetLaserSeamPos(0, offdese, seamjointPos, seamdescPose, tool, user, startexaxisPos);
+            printf("%f, %f, %f,%f, %f, %f,%f, %f, %f,%f, %f, %f\n", seamjointPos.jPos[0], seamjointPos.jPos[1], seamjointPos.jPos[2], seamjointPos.jPos[3], seamjointPos.jPos[4], seamjointPos.jPos[5], seamdescPose.tran.x, seamdescPose.tran.y, seamdescPose.tran.z, seamdescPose.rpy.rx, seamdescPose.rpy.ry, seamdescPose.rpy.rz);
+
+            //If search is successful
+            if (ret == 0)
+            {
+                //Robot and extended axis synchronously move to the search point
+                robot.ExtAxisSyncMoveJ(seamjointPos, seamdescPose, 1, 0, 100, 100, 100, seamexaxisPos, -1, 0, offdese);
+
+                //Start laser tracking along the search point and synchronously move with the extended axis
+                robot.LaserTrackingTrackOnOff(1, 2);
+                JointPos endjointPos(70.580, -90.918, 126.593, -125.154, -92.162, -105.403);
+                DescPose enddescPose(-53.375, -419.020, 0.920, 178.054, 1.076, -94.026);
+                robot.ExtAxisSyncMoveL(endjointPos, enddescPose, 1, 0, 20, 100, 100, -1, endexaxisPos, 0, offdese);;
+                //Stop tracking
+                robot.LaserTrackingTrackOnOff(0, 2);
+            }
+            cnt++;
+            printf("Extended axis and robot synchronized laser tracking, %dth time\n", cnt);
+        }
+        robot.CloseRPC();
+    } 

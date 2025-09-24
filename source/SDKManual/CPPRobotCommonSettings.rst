@@ -470,17 +470,20 @@ Set End Load Weight
      */
     errno_t SetLoadWeight(int loadNum = 0, float weight);
 
-Set End Load Center of Gravity Coordinates
-++++++++++++++++++++++++++++++++++++++++++++++
+Set End Effector Payload Center of Gravity Coordinates
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v3.8.6
+    
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief Set end load center of gravity coordinates
-     * @param [in] coord Center of gravity coordinates in mm
-     * @return Error code
-     */
-    errno_t SetLoadCoord(DescTran *coord);
+    * @brief Set End Effector Payload Center of Gravity Coordinates
+    * @param [in] loadNum Payload number
+    * @param [in] coord Center of gravity coordinates, unit mm
+    * @return Error code
+    */
+    errno_t SetLoadCoord(int loadNum, DescTran* coord);
 
 Get Current Load Weight
 ++++++++++++++++++++++++++++
