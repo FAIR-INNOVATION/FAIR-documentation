@@ -1384,3 +1384,107 @@ Robot Welding Current Voltage Gradual Change Code Example
          robot.WeldingSetCurrentGradualChangeEnd();
          robot.WeldingSetVoltageGradualChangeEnd();
       }
+
+Set custom weaving parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set custom weaving parameters
+    * @param [in] id Custom weaving number: 0-2
+    * @param [in] pointNum Number of weaving points: 0-10
+    * @param [in] point Moving endpoint data x,y,z
+    * @param [in] stayTime Weaving dwell time in ms
+    * @param [in] frequency Weaving frequency in Hz
+    * @param [in] incStayType Wait mode: 0-cycle does not include wait time; 1-cycle includes wait time
+    * @param [in] stationary Weaving position wait: 0-continue motion during wait time; 1-position static during wait time
+    * @return  Error code
+    */
+    public int CustomWeaveSetPara(int id, int pointNum, DescTran[] points, double[] stayTimes, double frequency, int incStayType, int stationary)
+
+Get custom weaving parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get custom weaving parameters
+    * @param [in] id Custom weaving number: 0-2
+    * @param [out] pointNum Number of weaving points: 0-10
+    * @param [out] point Moving endpoint data x,y,z
+    * @param [out] stayTime Weaving dwell time in ms
+    * @param [out] frequency Weaving frequency in Hz
+    * @param [out] incStayType Wait mode: 0-cycle does not include wait time; 1-cycle includes wait time
+    * @param [out] stationary Weaving position wait: 0-continue motion during wait time; 1-position static during wait time
+    * @return  Error code
+    */
+    public int CustomWeaveGetPara(int id, ref int pointNum, ref DescTran[] points, ref double[] stayTimes, ref double frequency, ref int incStayType, ref int stationary)
+
+Custom Weaving Parameters Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+    public void TestCoordMain5()
+    {  
+        DescTran[] points = new DescTran[10];
+        for (int i = 0; i < 10; i++)
+        {
+            points[i] = new DescTran();
+        }
+        points[0].x = -3;
+        points[0].y = -3;
+        points[0].z = 0;
+        points[1].x = -6;
+        points[1].y = 0;
+        points[1].z = 0;
+        points[2].x = -3;
+        points[2].y = 3;
+        points[2].z = 0;
+        points[3].x = 0;
+        points[3].y = 0;
+        points[3].z = 0;
+        double[] stayTimes = new double[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        int rtn = robot.CustomWeaveSetPara(2, 4, points, stayTimes, 1.000, 0, 0);
+        Console.WriteLine($"CustomWeaveSetPara rtn is {rtn}");
+        System.Threading.Thread.Sleep(1000);
+        int pointNum = 0;
+        double frequency = 0;
+        int incStayType = 0;
+        int stationary = 0;
+        rtn = robot.CustomWeaveGetPara(2, ref pointNum, ref points, ref stayTimes, ref frequency, ref incStayType, ref stationary);
+        Console.WriteLine($"pointNum is {pointNum}");
+        for (int i = 0; i < pointNum; i++)
+        {
+            Console.WriteLine($"point {i}, point x y z {points[i].x:F6} {points[i].y:F6} {points[i].z:F6}");
+        }
+        Console.WriteLine($"fre is {frequency:F6}, stay is {incStayType} {stationary}");
+        robot.WeaveSetPara(0, 9, 1.000000, 1, 5.000000, 6.000000, 5.000000, 50, 100, 100, 0, 1, 0.000000, 0.000000);
+        DescPose desc_p1 = new DescPose(-288.650, 367.807, 288.404, 0.000, -0.001, 0.001);
+        DescPose desc_p2 = new DescPose(-431.714, 367.815, 288.415, 0.001, 0.001, 0.000);    
+        DescPose desc_p3 = new DescPose(-348.666, 427.798, 288.404, -0.000, -0.000, 0.001);
+        JointPos j1 = new JointPos(140.656,  -84.560,  -91.707, -93.734,  90.000,50.655 );
+        JointPos j2 = new JointPos ( 149.873, -98.298, -77.599,  -94.103,  90.000,  59.873 );
+        JointPos j3 = new JointPos (139.773,  -96.173, -80.014,  -93.814,  90.000,  49.772 );
+        ExaxisPos epos = new ExaxisPos(0,0,0,0);
+        DescPose offset_pos = new DescPose(0,0,0,0,0,0);
+        robot.MoveJ(j1, desc_p1, 3, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+        robot.WeaveStart(0);
+        robot.Circle(j3, desc_p3, 3, 0, 100, 100, epos, j2, desc_p2, 3, 0, 100, 100, epos, 10, -1, offset_pos, 100, -1, 0);
+        robot.WeaveEnd(0);
+        robot.MoveJ(j1, desc_p1, 3, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+        robot.WeaveStart(0);
+        robot.MoveC(j3, desc_p3, 3, 0, 100, 100, epos, 0, offset_pos, j2, desc_p2, 3, 0, 100, 100, epos, 0, offset_pos, 10, -1, 0);
+        robot.WeaveEnd(0);
+        robot.MoveJ(j1, desc_p1, 3, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+        robot.WeaveStart(0);
+        robot.MoveL(j2, desc_p2, 3, 0, 100, 100, 10, -1, epos, 0, 0, offset_pos, 0, 0, 10);
+        robot.WeaveEnd(0);
+    }

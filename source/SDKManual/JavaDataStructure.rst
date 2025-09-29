@@ -440,6 +440,13 @@ Robot State Feedback Structure Type
       public float wideVoltageCtrlBoxTemp;        // Wide voltage control box temperature
       public int wideVoltageCtrlBoxFanVel;   // Wide voltage control box fan speed (mA)
 
+      public double[] toolCoord=new double[6];           // Tool coordinate system
+      public double[] wobjCoord=new double[6];		   // Work object coordinate system
+      public double[] extoolCoord=new double[6];		   // External tool coordinate system
+      public double[] exAxisCoord=new double[6];		   // Extended axis coordinate system
+      public double load;                   // Payload mass
+      public double[] loadCog=new double[3];             // Payload center of gravity
+
       public short check_sum = 0;          /* Checksum */
 
       public ROBOT_STATE_PKG()

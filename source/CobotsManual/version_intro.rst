@@ -32,6 +32,10 @@ Date: 2025-09-19
 
     Description: Optimized the WebAPP wire finding fault error reporting; it can be reset.
 
+- **Configurable IO Function**:
+
+    Description: Added configurable IO function for FR3C-FR3MT models. Configurable inputs can be set as CI0-CI4, and configurable outputs can be set as CO0-CO4.
+
 Version V3.8.5
 -----------------
 

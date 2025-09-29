@@ -1007,3 +1007,391 @@ SmartTool button code example
         error,state = robot.GetSmarttoolBtnState()
         print(f"{state:016b}")
         time.sleep(0.1)
+        
+Set the load detection before drag is started
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetTorqueDetectionSwitch(flag)``"
+    "Description", "Set the load detection before drag is started"
+    "Mandatory parameters", "- ``flag``：0- closed; 1- On"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser peripheral open and close function
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserTrackingLaserOnOff(OnOff, weldId)``"
+    "Description", "Laser peripheral open and close function"
+    "Mandatory parameters", "- ``OnOff``：0- closed; 1- On"
+    "Default parameters", "- ``weldId``：The default weld ID is 0"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser tracking start-end function
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserTrackingTrackOnOff(OnOff, coordId)``"
+    "Description", "Laser tracking start-end function"
+    "Mandatory parameters", "- ``OnOff``：0- closed; 1- On
+    - ``coordId``：Laser peripheral tool coordinate system No"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser positioning - Fixed direction
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserTrackingSearchStart_xyz(direction, vel, distance, timeout, posSensorNum)``"
+    "Description", "Laser positioning - Fixed direction"
+    "Mandatory parameters", "- ``direction``：0-x+ 1-x- 2-y+ 3-y- 4-z+ 5-z-
+    - ``vel``：Unit of speed %
+    - ``distance``：The maximum positioning distance unit is mm
+    - ``timeout``：The unit of seek timeout time is ms
+    - ``posSensorNum``：The coordinate number of the tool calibrated by laser"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser positioning - in any direction
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserTrackingSearchStart_point(directionPoint, vel, distance, timeout, posSensorNum)``"
+    "Description", "Laser positioning - in any direction"
+    "Mandatory parameters", "- ``directionPoint``：To the left of the xyz of the input point for positioning,[x,y,z]
+    - ``vel``：Unit of speed %
+    - ``distance``：The maximum positioning distance unit is mm
+    - ``timeout``：The unit of seek timeout time is ms
+    - ``posSensorNum``：The coordinate number of the tool calibrated by laser"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser IP configuration
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserTrackingSensorConfig(ip, port)``"
+    "Description", "Laser IP configuration"
+    "Mandatory parameters", "- ``ip``：The ip address of the laser peripheral
+    - ``port``：The port number of the laser peripheral"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Configuration of sampling period for laser peripherals
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserTrackingSensorSamplePeriod(period)``"
+    "Description", "Configuration of sampling period for laser peripherals"
+    "Mandatory parameters", "- ``period``：The unit of sampling period for laser peripherals is ms"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser peripheral driver loading
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LoadPosSensorDriver(type)``"
+    "Description", "Laser peripheral driver loading"
+    "Mandatory parameters", "- ``type``：Protocol type of the laser device driver: 101-Ruineng 102-Chuangxiang 103-Quanshi 104-Tongzhou 105-Aotai"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser peripheral driver unloading
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``UnLoadPosSensorDriver()``"
+    "Description", "Laser peripheral driver unloading"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser weld seam trajectory recording
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserSensorRecord1(status, delayTime)``"
+    "Description", "Laser weld seam trajectory recording"
+    "Mandatory parameters", "- ``status``：0- Stop recording 1- Real-time tracking 2- Start recording
+    - ``delayTime``：The delay time unit is ms"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser weld seam trajectory reproduction
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserSensorReplay(delayTime, speed)``"
+    "Description", "Laser weld seam trajectory reproduction"
+    "Mandatory parameters", "- ``delayTime``：The delay time unit is ms
+    - ``speed``：Unit of speed %"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+    
+Laser tracking reproduction
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MoveLTR()``"
+    "Description", "Laser tracking reproduction"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Laser weld seam trajectory reproduction
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``LaserSensorRecordandReplay(delayMode, delayTime, delayDisExAxisNum, delayDis, sensitivePara, speed)``"
+    "Description", "Laser weld seam trajectory reproduction"
+    "Mandatory parameters", "- ``delayMode``：Mode 0- Delay time 1- delay distance
+    - ``delayTime``：Delay time in ms
+    - ``delayDisExAxisNum``：Extension axis number
+    - ``delayDis``：The delay distance is in mm
+    - ``sensitivePara``：Compensate the sensitivity factor
+    - ``speed``：Speed unit %"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Movement to the starting point of weld record
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MoveToLaserRecordStart(moveType, ovl)``"
+    "Description", "Movement to the starting point of weld record"
+    "Mandatory parameters", "- ``moveType``：0-PTP 1-LIN
+    - ``ovl``：Speed unit %"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Movement to the end of the weld record
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MoveToLaserRecordEnd(moveType, ovl)``"
+    "Description", "Movement to the end of the weld record"
+    "Mandatory parameters", "- ``moveType``：0-PTP 1-LIN
+    - ``ovl``：Speed unit %"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Move to the laser sensor to find the site
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MoveToLaserSeamPos(moveFlag, ovl, dataFlag, plateType, trackOffectType, offset)``"
+    "Description", "Move to the laser sensor to find the site"
+    "Mandatory parameters", "- ``moveFlag``：Motion type: 0-PTP; 1-LIN
+    - ``ovl``：Speed scaling factor, 0-100
+    - ``dataFlag``：Weld cache data selection: 0-execution planning data; 1- Perform logging data
+    - ``plateType``：Plate type: 0-corrugated plate; 1- Corrugated board; 2- Fence board; 3- oil barrel; 4- Corrugated shell steel
+    - ``trackOffectType``：Laser sensor offset type: 0-no offset; 1-base coordinate shift; 2- Tool coordinate offset; 3-Laser sensor raw data offset
+    - ``offset``：Offset value"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode"
+
+Obtain the coordinate information of the laser sensor location
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.6
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetLaserSeamPos(trackOffectType, offset)``"
+    "Description", "Obtain the coordinate information of the laser sensor location"
+    "Mandatory parameters", "- ``trackOffectType``：Laser sensor offset type: 0-no offset; 1-base coordinate shift; 2- Tool coordinate offset; 3-Laser sensor raw data offset
+    - ``offset``：Offset value"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``jPos``：Joint position[°]
+    - ``descPos``：Cartesian position[mm]
+    - ``tool``：Tool coordinate system
+    - ``user``：Workpiece coordinate system
+    - ``exaxis``：Extension axis position[mm]"
+
+Example of laser peripheral sensor parameter configuration and debugging code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.LaserTrackingSensorConfig("192.168.58.20", 5020)
+    robot.LaserTrackingSensorSamplePeriod(20)
+    robot.LoadPosSensorDriver(101)
+    robot.LaserTrackingLaserOnOff(0, 0)
+    time.sleep(3)
+    robot.LaserTrackingLaserOnOff(1, 0)
+    robot.CloseRPC()
+
+Code example of laser trajectory scanning and trajectory reproduction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.OpenLuaUpload("D://zUP/CtrlDev_laser_ruiniu-0117.lua")
+    time.sleep(2)
+    robot.SetCtrlOpenLUAName(0, "CtrlDev_laser_ruiniu-0117.lua")
+    robot.UnloadCtrlOpenLUA(0)
+    robot.LoadCtrlOpenLUA(0)
+    time.sleep(8)
+    i = 0
+    while i<10:
+        startjointPos = [56.205, -117.951, 141.872, -118.149, -94.217, -122.176]
+        startdescPose = [-97.552, -282.855, 26.675, 174.182, -1.338, -91.707]
+        exaxisPos = [0.0] * 4
+        offdese = [0.0] * 6
+        robot.MoveL(desc_pos=startdescPose,tool= 1,user= 0,vel= 100,acc= 100,ovl= 100,blendR= -1,exaxis_pos= exaxisPos,search= 0,offset_flag= 0, offset_pos= offdese,overSpeedStrategy= 1,speedPercent= 1)
+        robot.LaserSensorRecord1(2, 10)
+        endjointPos = [68.809, -87.100, 121.120, -127.233, -95.038, -109.555]
+        enddescPose = [-103.555, -464.234, 13.076, 174.179, -1.344, -91.709]
+        robot.MoveL(desc_pos=enddescPose,tool= 1,user= 0,vel= 50,acc= 100,ovl= 100,blendR= -1,exaxis_pos= exaxisPos,search= 0,offset_flag= 0, offset_pos= offdese,overSpeedStrategy= 1,speedPercent= 1)
+        robot.LaserSensorRecord1(0, 10)
+        robot.MoveToLaserRecordStart(1, 30)
+        robot.LaserSensorReplay(10, 100)
+        robot.MoveLTR()
+        robot.LaserSensorRecord1(0, 10)
+        i = i+1
+    robot.CloseRPC()
+
+Code examples for laser locating and real-time tracking
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    robot.OpenLuaUpload("D://zUP/CtrlDev_laser_ruiniu-0117.lua")
+    time.sleep(2)
+    robot.SetCtrlOpenLUAName(0, "CtrlDev_laser_ruiniu-0117.lua")
+    robot.UnloadCtrlOpenLUA(0)
+    robot.LoadCtrlOpenLUA(0)
+    time.sleep(8)
+    time.sleep(8)
+    i = 0
+    while i < 10:
+        startjointPos = [56.205, -117.951, 141.872, -118.149, -94.217, -122.176]
+        startdescPose = [-97.552, -282.855, 26.675, 174.182, -1.338, -91.707]
+        exaxisPos = [0.0] * 4
+        offdese = [0.0] * 6
+        directionPoint = [0.0] * 3
+        robot.MoveL(desc_pos=startdescPose,tool= 1,user= 0,vel= 100,acc= 100,ovl= 100,blendR= -1,exaxis_pos= exaxisPos,search= 0,offset_flag= 0, offset_pos= offdese,overSpeedStrategy= 1,speedPercent= 1)
+        robot.LaserTrackingSearchStart_xyz(3, 100, 300, 1000, 3)
+        robot.LaserTrackingSearchStop()
+        robot.MoveToLaserSeamPos(1, 30, 0, 0, 0, offdese)
+        robot.LaserTrackingTrackOnOff(1, 3)
+        endjointPos = [68.809, -87.100, 121.120, -127.233, -95.038, -109.555]
+        enddescPose = [-103.555, -464.234, 13.076, 174.179, -1.344, -91.709]
+        robot.MoveL(desc_pos=enddescPose,tool= 1,user= 0,vel= 20,acc= 100,ovl= 100,blendR= -1,exaxis_pos= exaxisPos,search= 0,offset_flag= 0, offset_pos= offdese,overSpeedStrategy= 1,speedPercent= 1)
+        robot.LaserTrackingTrackOnOff(0, 3)
+        i = i + 1
+        print(i)
+    robot.CloseRPC()
+
+Code example of the extended axis synchronized with the robot for laser tracking
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    startexaxisPos = [0.0, 0.0, 0.0, 0.0]
+    seamexaxisPos = [-10.0, 0.0, 0.0, 0.0]
+    endexaxisPos = [-30.0, 0.0, 0.0, 0.0]
+    offdese = [0.0] * 6
+    seamjointPos = [0.0] * 6
+    seamdescPose = [0.0] * 6
+    i=0
+    while i < 10:
+        startjointPos = [58.337, -119.628, 146.037, -116.358, -92.224, -117.654]
+        startdescPose = [-53.375, -255.363, 0.919, 178.054, 1.077, -94.026]
+        robot.ExtAxisSyncMoveJ(joint_pos=startjointPos, tool=1,user= 0,vel= 100,acc= 100, ovl=100,exaxis_pos= startexaxisPos,blendT= -1,offset_flag= 0,offset_pos= offdese)
+        ret = robot.LaserTrackingSearchStart_xyz(3, 100, 300, 1000, 2)
+        robot.LaserTrackingSearchStop()
+        tool = 0
+        user = 0
+        rnte, seamjointPos, seamdescPose, tool, user, startexaxisPos = robot.GetLaserSeamPos(0, offdese)
+        print(f"{seamjointPos[0]},{seamjointPos[1]},{seamjointPos[2]},{seamjointPos[3]},{seamjointPos[4]},{seamjointPos[5]},{seamdescPose[0]},{seamdescPose[1]},{seamdescPose[2]},{seamdescPose[3]},{seamdescPose[4]},{seamdescPose[5]}")
+        if ret == 0:
+            robot.ExtAxisSyncMoveJ(joint_pos=seamjointPos, tool=1,user= 0,vel= 100,acc= 100, ovl=100,exaxis_pos= seamexaxisPos,blendT= -1,offset_flag= 0,offset_pos= offdese)
+            robot.LaserTrackingTrackOnOff(1, 2)
+            endjointPos = [70.580, -90.918, 126.593, -125.154, -92.162, -105.403]
+            enddescPose = [-53.375, -419.020, 0.920, 178.054, 1.076, -94.026]
+            robot.ExtAxisSyncMoveL(desc_pos=enddescPose, tool=1,user= 0,vel= 20,acc= 100, ovl=100,blendR= -1,exaxis_pos= endexaxisPos,offset_pos= offdese)
+            robot.LaserTrackingTrackOnOff(0, 2)
+        i = i+1
+        print(i)
+    robot.CloseRPC()

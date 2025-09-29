@@ -55,10 +55,9 @@ Sample Robot Tap Control Code
         robot.RPC("192.168.58.2"); 
 
         robot.SetSpeed(35);
-        robot.StartJOG(0, 1, 0, 15, 20.0f, 30.0f);   //单关节运动，StartJOG为非阻塞指令，运动状态下接收其他运动指令（包含StartJOG）会被丢弃
-        Thread.Sleep(1000);
-        robot.StopJOG(1);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StartJOG(0, 1, 0, 15, 20.0f, 30.0f);  
+        robot.StopJOG(1);  
+        //robot.ImmStopJOG(); 
         robot.StartJOG(0, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -75,10 +74,10 @@ Sample Robot Tap Control Code
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(2, 1, 0, 15, 20.0f, 30.0f);   //基坐标系下点动
+        robot.StartJOG(2, 1, 0, 15, 20.0f, 30.0f);   
         Thread.Sleep(1000);
-        robot.StopJOG(3);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StopJOG(3);  
+        //robot.ImmStopJOG(); 
         robot.StartJOG(2, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -95,10 +94,10 @@ Sample Robot Tap Control Code
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(4, 1, 0, 15, 20.0f, 30.0f);   //工具坐标系下点动
+        robot.StartJOG(4, 1, 0, 15, 20.0f, 30.0f);  
         Thread.Sleep(1000);
-        robot.StopJOG(5);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StopJOG(5); 
+        //robot.ImmStopJOG(); 
         robot.StartJOG(4, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();
@@ -115,10 +114,10 @@ Sample Robot Tap Control Code
         Thread.Sleep(1000);
         robot.ImmStopJOG();
 
-        robot.StartJOG(8, 1, 0, 15, 20.0f, 30.0f);   //工件坐标系下点动
+        robot.StartJOG(8, 1, 0, 15, 20.0f, 30.0f);  
         Thread.Sleep(1000);
-        robot.StopJOG(9);  //机器人单轴点动减速停止
-        //robot.ImmStopJOG();  //机器人单轴点动立即停止
+        robot.StopJOG(9);  
+        //robot.ImmStopJOG();  
         robot.StartJOG(8, 2, 1, 15, 20.0f, 30.0f);
         Thread.Sleep(1000);
         robot.ImmStopJOG();

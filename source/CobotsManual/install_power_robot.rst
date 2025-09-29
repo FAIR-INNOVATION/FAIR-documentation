@@ -149,7 +149,7 @@ The button box
      - Start/stop running program.
 
    * - Ethernet
-     - Connect to the web oscilloscope.
+     - Connect to the teaching pendant.
 
    * - Turn off
      - No enabled.

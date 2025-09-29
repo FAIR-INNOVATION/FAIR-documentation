@@ -13,7 +13,7 @@ Brief introduction
 This manual will use the following warnings. The role of these warnings is to ensure the safety of personal and equipment. When you read this manual, you must comply with and execute all the assembly instructions and guidelines in other chapters in this manual. This is very important. Pay special attention to text related to warning signs.
 
 .. important:: 
-    - If the robot (robot body, control box, oscilloscope, or button box) is damaged, changed or modified due to anthropogenic causes, FAIR INNOVATION refuses to bear all responsibilities;
+    - If the robot (robot body, control box, teaching pendant, or button box) is damaged, changed or modified due to anthropogenic causes, FAIR INNOVATION refuses to bear all responsibilities;
     - FAIR INNOVATION is not responsible for any damage caused by the robot or any other device due to errors written by customers or any other device.
 
 Personnel safety
@@ -31,7 +31,7 @@ When running the robot system, we must first ensure the safety of the operators.
 
 5. Ensure safety measures (such as guardrails, ropes, or protective screens) near the robotic operation area to protect operators and surrounding people. Locks should be set up as needed, so that those who are responsible for operations cannot reach the power supply of the robot.
 
-6. When using the operating panel and oscilloscope, because you may have an operational error in wearing gloves, you must work after taking off the gloves.
+6. When using the operating panel and teaching pendant, because you may have an operational error in wearing gloves, you must work after taking off the gloves.
 
 7. Under the emergency and abnormalities of people being pinched or wrapped inside by a robot, pushing or pulling the robot arm by force (at least 700 N) to force joint movements. With a power-free driver, the arm of the manual mobile robot is limited to emergency and may damage the joint.
 
@@ -1604,7 +1604,7 @@ Below is a checklist of checklists that FAIRINO Robots recommends performing bas
   B. Remove the filter for cleaning. Clean with low pressure air or change filters as needed. Remember to clean each side. If it is dirty or damaged, replace it (worse, remove the upper cover of the controller and replace the filter from inside the upper cover). 
   C. Listen to the sound of the fan when running. If the sound is abnormal, please contact the service provider or replace it.
 
-Registration card for French-Austrian robot inspection plan
+Check program registration card
 ******************************************************************
 
 1. Robotic arm
@@ -2191,7 +2191,7 @@ You can use the I/O in the control box to control various devices, including the
 RJ45 network interface group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The network interface group address in the control box is shown in figure below. Note that the graph corresponds to the sequence of the address order of the internal network port of the control box, and the default port of the robot is prohibited from insertion. The user's network port can be used to communicate with the camera and other devices. The IP address is 192.168.57.2. The button box interface is default to the faculty control port, and the IP address is 192.168.58.2. Use the network cable connection button box interface and computer. The computer IP address is set to 192.168.58.10 or the same network segment as it. You can access the oscilloscope page. Easy to manufacture control boxes to access the pages of the oscillator through the network port of the connection button box.
+The network interface group address in the control box is shown in figure below. Note that the graph corresponds to the sequence of the address order of the internal network port of the control box, and the default port of the robot is prohibited from insertion. The user's network port can be used to communicate with the camera and other devices. The IP address is 192.168.57.2. The button box interface is default to the faculty control port, and the IP address is 192.168.58.2. Use the network cable connection button box interface and computer. The computer IP address is set to 192.168.58.10 or the same network segment as it. You can access the teaching pendant page. Easy to manufacture control boxes to access the pages of the oscillator through the network port of the connection button box.
 
 .. figure:: installation/040.png
 	:align: center
@@ -3328,7 +3328,7 @@ Extension Module:
 Demonstrate and end LED
 ---------------------------
 
-The robotic oscilloscope can use a computer or tablet to access and control the robot. The connection method can refer to Section 3.5.3 to explain. In addition, users can also use our FR-HMI osteter.
+The robotic teaching pendant can use a computer or tablet to access and control the robot. The connection method can refer to Section 3.5.3 to explain. In addition, users can also use our FR-HMI osteter.
 
 Introduction to the button box
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3344,7 +3344,7 @@ Introduction to the button box
 
 **Emergency stop switch:**\  When pressing the emergency stop switch, the robot enters the state of emergency stop.
 
-**Type-c:**\ Connect the port of the web oscilloscope.
+**Type-c:**\ Connect the port of the web teaching pendant.
 
 **Button 1:**\ Short press automatic/manual mode switch, long press and enter/exit the drag mode.
 
@@ -3365,7 +3365,7 @@ Introduction to the button box
 
 **Start/Stop:**\ Start/stop running program.
 
-**Ethernet:**\ Connect to the web oscilloscope.
+**Ethernet:**\ Connect to the web teaching pendant.
 
 **Turn off:**\ No enabled.
 

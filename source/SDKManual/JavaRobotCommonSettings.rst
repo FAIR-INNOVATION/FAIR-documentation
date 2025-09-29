@@ -452,6 +452,19 @@ Set end load center of mass coordinates
     */
     int SetLoadCoord(DescTran coord);
 
+Set End Effector Load Center of Mass Coordinates
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: java
+   :linenos:
+
+   /**
+    * @brief  Set end effector load center of mass coordinates
+    * @param  [in] loadNum Load number
+    * @param  [in] coord Center of mass coordinates, unit: mm
+    * @return  Error code
+    */
+   public int SetLoadCoord(int loadNum, DescTran coord)
+
 Get current load weight
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java

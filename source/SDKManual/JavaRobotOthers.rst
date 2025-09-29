@@ -375,3 +375,31 @@ Robot Slave Firmware Upgrade Code Example
 
         robot.CloseRPC();
     }
+
+Robot Operating System Upgrade (LA Control Box)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Robot Operating System Upgrade (LA Control Box)
+     * @param [in] filePath Full path of the operating system upgrade package
+     * @return Error code
+     */
+    public int KernelUpgrade(String filePath)
+
+Get Robot Operating System Upgrade Result (LA Control Box)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Get Robot Operating System Upgrade Result (LA Control Box)
+     * @param [out] result Upgrade result: 0: Success; -1: Failure
+     * @return Error code
+     */
+    public int GetKernelUpgradeResult(int[] result)

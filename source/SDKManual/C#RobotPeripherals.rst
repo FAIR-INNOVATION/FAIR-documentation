@@ -1340,3 +1340,443 @@ Array Sucker Control Command Code Example
     
         robot.CloseRPC();
     }
+
+Laser peripheral on/off function
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser peripheral on/off function
+    * @param [in] OnOff 0-off 1-on
+    * @param [in] weldId Weld seam ID, default is 0
+    * @return Error code
+    */
+    public int LaserTrackingLaserOnOff(int OnOff, int weldId)
+    
+Laser tracking start/stop function
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+    
+    /**
+    * @brief Laser tracking start/stop function
+    * @param [in] OnOff 0-stop 1-start
+    * @param [in] coordId Laser peripheral tool coordinate system number
+    * @return Error code
+    */
+    public int LaserTrackingTrackOnOff(int OnOff, int coordId)
+
+Laser positioning - fixed direction
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser positioning - fixed direction
+    * @param [in] direction 0-x+ 1-x- 2-y+ 3-y- 4-z+ 5-z-
+    * @param [in] vel Speed in %
+    * @param [in] distance Maximum positioning distance in mm
+    * @param [in] timeout Positioning timeout in ms
+    * @param [in] posSensorNum Laser calibrated tool coordinate number
+    * @return Error code
+    */
+    public int LaserTrackingSearchStart_xyz(int direction, int vel, int distance, int timeout, int posSensorNum)
+    
+Laser positioning - arbitrary direction
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser positioning - arbitrary direction
+    * @param [in] directionPoint XYZ coordinates of the positioning input point
+    * @param [in] vel Speed in %
+    * @param [in] distance Maximum positioning distance in mm
+    * @param [in] timeout Positioning timeout in ms
+    * @param [in] posSensorNum Laser calibrated tool coordinate number
+    * @return Error code
+    */
+    public int LaserTrackingSearchStart_point(DescTran directionPoint, int vel, int distance, int timeout, int posSensorNum)
+   
+Laser positioning stop
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser positioning stop
+    * @return Error code
+    */
+    public int LaserTrackingSearchStop()
+
+Laser IP configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser IP configuration
+    * @param [in] ip IP address of the laser peripheral
+    * @param [in] port Port number of the laser peripheral
+    * @return Error code
+    */
+    public int LaserTrackingSensorConfig(string ip, int port)
+
+Laser peripheral sampling period configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser peripheral sampling period configuration
+    * @param [in] period Laser peripheral sampling period in ms
+    * @return Error code
+    */
+    public int LaserTrackingSensorSamplePeriod(int period)
+
+Laser peripheral driver loading
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser peripheral driver loading
+    * @param [in] type Laser peripheral driver protocol type 101-Ruiniu 102-Chuangxiang 103-Quanshi 104-Tongzhou 105-Aotai
+    * @return Error code
+    */
+    public int LoadPosSensorDriver(int type)
+
+Laser Peripheral Driver Unloading
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser peripheral driver unloading
+    * @return Error code
+    */
+    public int UnLoadPosSensorDriver()
+
+Laser Weld Seam Trajectory Recording
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser weld seam trajectory recording
+    * @param [in] status 0-stop recording 1-real-time tracking 2-start recording
+    * @param [in] delayTime Delay time in ms
+    * @return Error code
+    */
+    public int LaserSensorRecord1(int status, int delayTime)
+
+Laser Weld Seam Trajectory Replay
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser weld seam trajectory replay
+    * @param [in] delayTime Delay time in ms
+    * @param [in] speed Speed in %
+    * @return Error code
+    */
+    public int LaserSensorReplay(int delayTime, double speed)
+
+Laser Tracking Replay
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser tracking replay
+    * @return Error code
+    */
+    public int MoveLTR()
+
+Laser Weld Seam Trajectory Recording and Replay
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Laser weld seam trajectory recording and replay
+    * @param [in] delayMode Mode 0-delay time 1-delay distance
+    * @param [in] delayTime Delay time in ms
+    * @param [in] delayDisExAxisNum Extended axis number
+    * @param [in] delayDis Delay distance in mm
+    * @param [in] sensitivePara Compensation sensitivity coefficient
+    * @param [in] speed Speed in %
+    * @return Error code
+    */
+    public int LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum, double delayDis, double sensitivePara, double speed)
+
+Move to Laser Record Start Point
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Move to laser record start point
+    * @param [in] moveType 0-PTP 1-LIN
+    * @param [in] ovl Speed in %
+    * @return Error code
+    */
+    public int MoveToLaserRecordStart(int moveType, double ovl)
+
+Move to Laser Record End Point
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Move to laser record end point
+    * @param [in] moveType 0-PTP 1-LIN
+    * @param [in] ovl Speed in %
+    * @return Error code
+    */
+    public int MoveToLaserRecordEnd(int moveType, double ovl)
+
+Move to Laser Sensor Positioning Point
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Move to laser sensor positioning point
+    * @param [in] moveFlag Motion type: 0-PTP; 1-LIN
+    * @param [in] ovl Speed scaling factor, 0-100
+    * @param [in] dataFlag Weld seam cache data selection: 0-execute planning data; 1-execute recorded data
+    * @param [in] plateType Plate type: 0-corrugated plate; 1-corrugated cardboard; 2-fence plate; 3-oil drum; 4-corrugated shell steel
+    * @param [in] trackOffectType Laser sensor offset type: 0-no offset; 1-base coordinate system offset; 2-tool coordinate system offset; 3-laser sensor raw data offset
+    * @param [in] offset Offset value
+    * @return Error code
+    */
+    public int MoveToLaserSeamPos(int moveFlag, double ovl, int dataFlag, int plateType, int trackOffectType, DescPose offset)
+
+    
+Get laser sensor positioning point coordinate information
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    /**
+    * @brief Get laser sensor positioning point coordinate information
+    * @param [in] trackOffectType Laser sensor offset type: 0-no offset; 1-base coordinate system offset; 2-tool coordinate system offset; 3-laser sensor raw data offset
+    * @param [in] offset Offset value
+    * @param [out] jPos Joint position [°]
+    * @param [out] descPos Cartesian position [mm]
+    * @param [out] tool Tool coordinate system
+    * @param [out] user Workpiece coordinate system
+    * @param [out] exaxis Extended axis position [mm]
+    * @return Error code
+    */
+    public int GetLaserSeamPos(int trackOffectType, DescPose offset, ref JointPos jPos, ref DescPose descPos, ref int tool, ref int user, ref ExaxisPos exaxis)
+
+Laser Peripheral Sensor Parameter Configuration and Debugging Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    void testLaserConfig()
+    {
+        int[] ctrl = new int[20];
+        int state;
+        int pressValue;
+        int error;
+        robot.LaserTrackingSensorConfig("192.168.58.20", 5020);
+        robot.LaserTrackingSensorSamplePeriod(20);
+        robot.LoadPosSensorDriver(101);
+        robot.LaserTrackingLaserOnOff(0, 0);
+        System.Threading.Thread.Sleep(3000);
+        robot.LaserTrackingLaserOnOff(1, 0);
+    }
+
+Laser Trajectory Scanning and Trajectory Replay Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    void testLaserRecordAndReplay()
+    { 
+        int[] ctrl = new int[20];
+        int state;
+        int pressValue;
+        int error;
+        robot.OpenLuaUpload("D://zUP/CtrlDev_laser_ruiniu-0117.lua");
+        System.Threading.Thread.Sleep(2000);
+        robot.SetCtrlOpenLUAName(0, "CtrlDev_laser_ruiniu-0117.lua");
+        robot.UnloadCtrlOpenLUA(0);
+        robot.LoadCtrlOpenLUA(0);
+        System.Threading.Thread.Sleep(8000);
+        for (int i=0;i<10;++i)
+        {
+            JointPos startjointPos = new JointPos(56.205, -117.951, 141.872, -118.149, -94.217, -122.176);
+            DescPose startdescPose = new DescPose(-97.552, -282.855, 26.675, 174.182, -1.338, -91.707);
+            ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+            DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+            robot.MoveL(startjointPos, startdescPose, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0);
+            robot.LaserSensorRecord1(2, 10);
+
+            JointPos endjointPos = new JointPos(68.809, -87.100, 121.120, -127.233, -95.038, -109.555);
+            DescPose enddescPose = new DescPose(-103.555, -464.234, 13.076, 174.179, -1.344, -91.709);
+            robot.MoveL(endjointPos, enddescPose, 1, 0, 50, 100, 100, -1, exaxisPos, 0, 0, offdese, 0);
+
+            robot.LaserSensorRecord1(0, 10);
+            robot.MoveToLaserRecordStart(1, 30);
+            robot.LaserSensorReplay(10, 100);
+            robot.MoveLTR();
+            robot.LaserSensorRecord1(0, 10);
+            Console.WriteLine($"Number of completions : {i+1} ");
+        }
+                
+    }
+
+Laser Positioning and Real-time Tracking Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    public static void testLasertrack()
+    {
+        int[] ctrl = new int[20];
+        int state;
+        int pressValue;
+        int error;
+        robot.OpenLuaUpload("D://zUP/CtrlDev_laser_ruiniu-0117.lua");
+        System.Threading.Thread.Sleep(2000);
+        robot.SetCtrlOpenLUAName(0, "CtrlDev_laser_ruiniu-0117.lua");
+        robot.UnloadCtrlOpenLUA(0);
+        robot.LoadCtrlOpenLUA(0);
+        System.Threading.Thread.Sleep(8000);
+        for (int i = 0; i < 10; ++i)
+        {
+            JointPos startjointPos = new JointPos(56.205, -117.951, 141.872, -118.149, -94.217, -122.176);
+            DescPose startdescPose = new DescPose(-97.552, -282.855, 26.675, 174.182, -1.338, -91.707);
+            ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+            DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+            DescTran directionPoint = new DescTran();
+
+            robot.MoveL(startjointPos, startdescPose, 1, 0, 100, 100, 100, -1, exaxisPos, 0, 0, offdese, 0);
+            robot.LaserTrackingSearchStart_xyz(3, 100, 300, 1000, 3);
+            robot.LaserTrackingSearchStop();
+            robot.MoveToLaserSeamPos(1, 30, 0, 0, 0, offdese);
+
+            robot.LaserTrackingTrackOnOff(1, 3);
+
+            JointPos endjointPos = new JointPos(68.809, -87.100, 121.120, -127.233, -95.038, -109.555);
+            DescPose enddescPose = new DescPose(-103.555, -464.234, 13.076, 174.179, -1.344, -91.709);
+            robot.MoveL(endjointPos, enddescPose, 1, 0, 20, 100, 100, -1, exaxisPos, 0, 0, offdese, 0);
+            robot.LaserTrackingTrackOnOff(0, 3);
+            Console.WriteLine($"Number of completions : {i + 1} ");
+        }
+    }
+
+Extended Axis and Robot Synchronized Laser Tracking Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
+
+.. code-block:: c#
+    :linenos:
+
+
+    public void TestLaserTrackAndExitAxis()
+    {   
+        ExaxisPos startexaxisPos = new ExaxisPos(0, 0, 0, 0);
+        ExaxisPos seamexaxisPos = new ExaxisPos(-10, 0, 0, 0);
+        ExaxisPos endexaxisPos = new ExaxisPos(-30, 0, 0, 0);      
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);     
+        JointPos startjointPos = new JointPos(58.337, -119.628, 146.037, -116.358, -92.224, -117.654);
+        DescPose startdescPose = new DescPose(-53.375, -255.363, 0.919, 178.054, 1.077, -94.026);
+        for (int i=0;i<10;++i)
+        {
+            robot.ExtAxisSyncMoveJ(startjointPos, startdescPose, 1, 0, 100, 100, 100, startexaxisPos, -1, 0, offdese);
+            Console.WriteLine("11111");
+            int ret = robot.LaserTrackingSearchStart_xyz(3, 100, 300, 1000, 2);
+            robot.LaserTrackingSearchStop();
+            Console.WriteLine("2222");
+            int tool = 0;
+            int user = 0;
+            JointPos seamjointPos = new JointPos();
+            DescPose seamdescPose = new DescPose();
+            robot.GetLaserSeamPos(0, offdese, ref seamjointPos, ref seamdescPose, ref tool, ref user, ref startexaxisPos);
+            Console.WriteLine($"{seamjointPos.jPos[0]}, {seamjointPos.jPos[1]}, {seamjointPos.jPos[2]}, " +
+                            $"{seamjointPos.jPos[3]}, {seamjointPos.jPos[4]}, {seamjointPos.jPos[5]}, " +
+                            $"{seamdescPose.tran.x}, {seamdescPose.tran.y}, {seamdescPose.tran.z}, " +
+                            $"{seamdescPose.rpy.rx}, {seamdescPose.rpy.ry}, {seamdescPose.rpy.rz}");
+            if (ret == 0)
+            {
+                robot.ExtAxisSyncMoveJ(seamjointPos, seamdescPose, 1, 0, 100, 100, 100, seamexaxisPos, -1, 0, offdese);
+                Console.WriteLine("3333");
+                robot.LaserTrackingTrackOnOff(1, 2);
+                JointPos endjointPos = new JointPos(70.580, -90.918, 126.593, -125.154, -92.162, -105.403);
+                DescPose enddescPose = new DescPose(-53.375, -419.020, 0.920, 178.054, 1.076, -94.026);
+                robot.ExtAxisSyncMoveL(endjointPos, enddescPose, 1, 0, 20, 100, 100, -1, endexaxisPos, 0, offdese);
+                robot.LaserTrackingTrackOnOff(0, 2);
+            }
+            Console.WriteLine($"Number of completions : {i + 1} ");
+        }     
+    }
+

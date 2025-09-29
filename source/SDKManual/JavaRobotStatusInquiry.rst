@@ -375,7 +375,7 @@ Inverse kinematics calculation (reference position)
     int GetInverseKinRef(int posMode, DescPose desc_pos, JointPos joint_pos_ref, JointPos joint_pos);  
 
 Check if inverse kinematics has solution  
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  
     :linenos:  
 
@@ -389,7 +389,7 @@ Check if inverse kinematics has solution
     List<Integer> GetInverseKinHasSolution(int posMode, DescPose desc_pos, JointPos joint_pos_ref);  
 
 Forward kinematics calculation  
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  
     :linenos:  
 
@@ -402,7 +402,7 @@ Forward kinematics calculation
     int GetForwardKin(JointPos joint_pos, DescPose desc_pos);  
 
 Robot forward/inverse kinematics calculation code example  
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  
     :linenos:  
 
@@ -426,9 +426,9 @@ Robot forward/inverse kinematics calculation code example
     }  
 
 Query robot teaching management point data  
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  
-    :linenos:  
+    :linenos:   
 
     /**  
     * @brief Query robot teaching management point data  
@@ -438,7 +438,7 @@ Query robot teaching management point data
     List<Number> GetRobotTeachingPoint(String name);  
 
 Get robot DH parameter compensation values  
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  
     :linenos:  
 
@@ -449,12 +449,12 @@ Get robot DH parameter compensation values
     */  
     public int GetDHCompensation(Object[] dhCompensation)  
 
-Get controller SN code  
-++++++++++++++++++++++++++++++++++++++++++++++++++++  
-.. versionadded:: Java SDK-v1.0.4-3.8.1  
+Get controller SN code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.4-3.8.1
 
 .. code-block:: Java  
-    :linenos:  
+    :linenos:   
 
     /**  
     * @brief Get controller SN code  
@@ -464,7 +464,7 @@ Get controller SN code
     int GetRobotSN(String[] SNCode);  
 
 Query robot teaching management point data code example  
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  
     :linenos:  
 
@@ -493,3 +493,213 @@ Query robot teaching management point data code example
         System.out.println("robot SN is "+SN[0]);  
         return 0;  
     }  
+
+Get Tool Coordinate System by ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get Tool Coordinate System by ID
+    * @param [in] id Tool coordinate system ID
+    * @param [out] coord Coordinate system value
+    * @return Error code
+    */
+    int GetToolCoordWithID(int id, DescPose coord)
+
+Get Work Object Coordinate System by ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get Work Object Coordinate System by ID
+    * @param [in]  id Work object coordinate system ID
+    * @param [out] coord Coordinate system value
+    * @return Error code
+    */
+    public int GetWObjCoordWithID(int id, DescPose coord)
+
+Get External Tool Coordinate System by ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get External Tool Coordinate System by ID
+    * @param [in]  id External tool coordinate system ID
+    * @param [out] coord Coordinate system value
+    * @return Error code
+    */
+    public int GetExToolCoordWithID(int id, DescPose coord)
+
+Get Extended Axis Coordinate System by ID
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get Extended Axis Coordinate System by ID
+    * @param [in]  id Extended axis coordinate system ID
+    * @param [out] coord Coordinate system value
+    * @return Error code
+    */
+    public int GetExAxisCoordWithID(int id, DescPose coord)
+
+Get Current Tool Coordinate System
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Get Current Tool Coordinate System
+     * @param [out] coord Coordinate system value
+     * @return Error code
+     */
+    public int GetCurToolCoord(DescPose coord)
+
+Get Current Work Object Coordinate System
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Get Current Work Object Coordinate System
+     * @param [out] coord Coordinate system value
+     * @return Error code
+     */
+    public int GetCurWObjCoord(DescPose coord)
+
+Get Current External Tool Coordinate System
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Get Current External Tool Coordinate System
+     * @param  [out] coord Coordinate system value
+     * @return Error code
+     */
+    public int GetCurExToolCoord(DescPose coord)
+
+Get Current Extended Axis Coordinate System
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: Java SDK-v1.0.9-3.8.6
+
+.. code-block:: Java
+    :linenos:
+
+    /**
+     * @brief Get Current Extended Axis Coordinate System
+     * @param [out] coord Coordinate system value
+     * @return Error code
+     */
+    public int GetCurExAxisCoord(DescPose coord)
+
+Get Robot Coordinate System and Payload Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestCoord(Robot robot)
+    {
+        int id = 1;
+        int rtn = 0;
+        DescPose toolCoord = new DescPose();
+        DescPose extoolCoord = new DescPose();
+        DescPose wobjCoord = new DescPose();
+        DescPose exAxisCoord = new DescPose();
+
+
+        robot.GetCurToolCoord(toolCoord);// Tool
+        System.out.println("GetToolCoord:"+id+","+
+                toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
+                toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
+
+
+        robot.GetCurWObjCoord(toolCoord);// Work object
+        System.out.println("GetCurWObjCoord:"+id+","+
+                toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
+                toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
+
+        robot.GetCurExToolCoord(toolCoord);// External tool
+        System.out.println("GetCurExToolCoord:"+id+","+
+                toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
+                toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
+
+
+        robot.GetCurExAxisCoord(toolCoord);// Extended axis
+        System.out.println("GetCurExAxisCoord:"+id+","+ // Corrected print string for consistency
+                toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
+                toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
+
+
+        List<Number> weightT = new ArrayList<>();// Center of gravity
+        DescTran cogT=new DescTran();
+        weightT=robot.GetTargetPayload(0);
+        robot.GetTargetPayloadCog(0,cogT);
+        System.out.println("GetTargetPayload :"+weightT.get(1).doubleValue()+", "+
+                cogT.x+", "+cogT.y+", "+cogT.z);
+
+
+        robot.GetToolCoordWithID(id, toolCoord);
+        System.out.println("GetToolCoordWithID:"+id+","+
+                toolCoord.tran.x+","+ toolCoord.tran.y+","+ toolCoord.tran.z+","+
+                toolCoord.rpy.rx+","+ toolCoord.rpy.ry+","+ toolCoord.rpy.rz);
+
+        robot.GetWObjCoordWithID(id, wobjCoord);
+        System.out.println("GetWObjCoordWithID "+id+", "+
+                wobjCoord.tran.x+","+ wobjCoord.tran.y+","+ wobjCoord.tran.z+","+
+                wobjCoord.rpy.rx+","+ wobjCoord.rpy.ry+","+ wobjCoord.rpy.rz);
+
+
+        robot.GetExToolCoordWithID(id, extoolCoord);// External tool
+        System.out.println("GetExToolCoordWithID :"+ id+","+
+                extoolCoord.tran.x+","+ extoolCoord.tran.y+","+ extoolCoord.tran.z+","+
+                extoolCoord.rpy.rx+","+ extoolCoord.rpy.ry+","+ extoolCoord.rpy.rz);
+
+        robot.GetExAxisCoordWithID(id, exAxisCoord);// Extended axis
+        System.out.println("GetExAxisCoordWithID "+id+","+
+                exAxisCoord.tran.x+","+ exAxisCoord.tran.y+","+ exAxisCoord.tran.z+","+
+                exAxisCoord.rpy.rx+","+ exAxisCoord.rpy.ry+","+ exAxisCoord.rpy.rz);
+
+
+        double[] weight = new double[1];// Payload center of gravity
+        DescTran getCog = new DescTran();
+        robot.GetTargetPayloadWithID(id, weight, getCog);
+        System.out.println("GetTargetPayloadWithID :"+ id+","+ weight[0]+","+
+                getCog.x+","+ getCog.y+","+ getCog.z);
+
+        DescPose coordSet0 = new DescPose(0, 0, 0, 0, 0, 0);
+        DescPose coordSet = new DescPose(1, 2, 3, 4, 5, 6);
+        DescPose etcp = new DescPose(10, 20, 30, 40, 50, 60);
+        DescPose etool = new DescPose(0.1, 0.2, 0.3, 0.4, 0.5, 0.6);
+        DescTran cog = new DescTran(1, 2, 3);
+
+        robot.SetToolCoord(id, coordSet, 0, 0, 1, 0);
+        robot.Sleep(100);
+        robot.SetWObjCoord(id, coordSet, 0);
+        robot.Sleep(100);
+        robot.ExtAxisActiveECoordSys(id, 1, coordSet, 1); // Apply calibration result to extended axis coordinate system
+        robot.Sleep(100);
+        rtn = robot.SetExToolCoord(id, etcp, etool);
+        robot.Sleep(100);
+        rtn = robot.SetLoadWeight(id, 1.5);
+        robot.Sleep(500);
+        rtn = robot.SetLoadCoord(id, cog);
+        robot.Sleep(100);
+    }

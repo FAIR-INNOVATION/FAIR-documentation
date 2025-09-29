@@ -6,7 +6,7 @@ Data structure description
 
 Controller status feedback data packet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. versionadded:: python SDK-v2.1.3
+.. versionadded:: python SDK-v2.1.6
     
 .. csv-table:: 
     :header-rows: 1
@@ -102,6 +102,12 @@ Controller status feedback data packet
     "smartToolState","The status of the SmartTool handle buttons"
     "wideVoltageCtrlBoxTemp","Wide voltage control box temperature"
     "wideVoltageCtrlBoxFanCurrent","Wide voltage control box fan current(ma)"
+    "toolCoord[i]","Tool coordinate system,i:0~5"
+    "wobjCoord[i]","Workpiece coordinate system,i:0~5"
+    "extoolCoord[i]","External tool coordinate system,i:0~5"
+    "exAxisCoord[i]","Extended axis coordinate system,i:0~5"
+    "load","Quality of load"
+    "loadCog[i]","Center of mass of load,i:0~2"
 
 Status of the servo controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -320,3 +326,31 @@ code example
     print("smartToolState:", robot.robot_state_pkg.smartToolState)
     print("wideVoltageCtrlBoxTemp:", robot.robot_state_pkg.wideVoltageCtrlBoxTemp)
     print("wideVoltageCtrlBoxFanCurrent:", robot.robot_state_pkg.wideVoltageCtrlBoxFanCurrent)
+    print("toolCoord0:", robot.robot_state_pkg.toolCoord[0])
+    print("toolCoord1:", robot.robot_state_pkg.toolCoord[1])
+    print("toolCoord2:", robot.robot_state_pkg.toolCoord[2])
+    print("toolCoord3:", robot.robot_state_pkg.toolCoord[3])
+    print("toolCoord4:", robot.robot_state_pkg.toolCoord[4])
+    print("toolCoord5:", robot.robot_state_pkg.toolCoord[5])
+    print("wobjCoord0:", robot.robot_state_pkg.wobjCoord[0])
+    print("wobjCoord1:", robot.robot_state_pkg.wobjCoord[1])
+    print("wobjCoord2:", robot.robot_state_pkg.wobjCoord[2])
+    print("wobjCoord3:", robot.robot_state_pkg.wobjCoord[3])
+    print("wobjCoord4:", robot.robot_state_pkg.wobjCoord[4])
+    print("wobjCoord5:", robot.robot_state_pkg.wobjCoord[5])
+    print("extoolCoord0:", robot.robot_state_pkg.extoolCoord[0])
+    print("extoolCoord1:", robot.robot_state_pkg.extoolCoord[1])
+    print("extoolCoord2:", robot.robot_state_pkg.extoolCoord[2])
+    print("extoolCoord3:", robot.robot_state_pkg.extoolCoord[3])
+    print("extoolCoord4:", robot.robot_state_pkg.extoolCoord[4])
+    print("extoolCoord5:", robot.robot_state_pkg.extoolCoord[5])
+    print("exAxisCoord0:", robot.robot_state_pkg.exAxisCoord[0])
+    print("exAxisCoord1:", robot.robot_state_pkg.exAxisCoord[1])
+    print("exAxisCoord2:", robot.robot_state_pkg.exAxisCoord[2])
+    print("exAxisCoord3:", robot.robot_state_pkg.exAxisCoord[3])
+    print("exAxisCoord4:", robot.robot_state_pkg.exAxisCoord[4])
+    print("exAxisCoord5:", robot.robot_state_pkg.exAxisCoord[5])
+    print("load:", robot.robot_state_pkg.load)
+    print("loadCog0:", robot.robot_state_pkg.loadCog[0])
+    print("loadCog1:", robot.robot_state_pkg.loadCog[1])
+    print("loadCog2:", robot.robot_state_pkg.loadCog[2])

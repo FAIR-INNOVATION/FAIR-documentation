@@ -433,12 +433,12 @@ Setting the end load center of mass coordinates
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetLoadCoord(x,y,z)``"
+    "Prototype", "``SetLoadCoord(x,y,z,loadNum = 0)``"
     "Description", "Set end-load center of mass coordinates, incorrect load center of mass setting may cause robot to go out of control in drag mode"
     "Mandatory parameter", "- ``x``: center of mass coordinates in [mm].
     - ``y``: coordinates of the center of mass in [mm].
     - ``z``: coordinates of the center of mass in [mm]"
-    "Default parameters", "NULL"
+    "Default parameters", "- ``loadNum``: Payload number, 0 by default"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
 Get the weight of the current load

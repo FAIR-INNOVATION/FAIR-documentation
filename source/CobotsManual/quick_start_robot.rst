@@ -33,7 +33,7 @@ The control box is connected to the robot arm, the teaching box, and the physica
 
 -  Press the power button of the control box to open the control box;
 
--  After starting the robot, at this time the robot is manual mode and has not enabled. If the robot needs to be operated in the manual mode, you need to press the three bits on the oscilloscopy to switch off (let go) ⇒ OFF (press) as the switch as a switch Drag or control the robot movement when you are on your state.
+-  After starting the robot, at this time the robot is manual mode and has not enabled. If the robot needs to be operated in the manual mode, you need to press the three bits on the teaching pendant to switch off (let go) ⇒ OFF (press) as the switch as a switch Drag or control the robot movement when you are on your state.
 
 -  If you do not need to operate the robot in the manual mode, you can use the key switch to switch the robot working mode on the key to switch the button: automatic, manual, custom;
 
@@ -41,12 +41,14 @@ The control box is connected to the robot arm, the teaching box, and the physica
 
 -  When switching the robot's automatic state, check the safety measures and return to the normal state and operate the machine operation carefully;
 
--  When the oscilloscope cannot be opened normally, please check whether the device connection is normal.
+-  When the teaching pendant cannot be opened normally, please check whether the device connection is normal.
 
 Button box control robot movement
 ---------------------------------------
 
-Refer to the 3.6.3 of the hardware installation of Chapter 3. The end LED definition of the end to control the robot
+Refer to the 3.6.3 of the hardware installation of Chapter 3. The end LED definition of the end to control the robot. The existing button boxes are divided into 60-button box (POE)(BX01), 60-button box (POE)(BX02)-V1.0, 60-button box (POE)(BX02)-V2.0.
+
+Taking the 60-button box (POE)(BX01) as an example, the operation steps are as follows.
 
 Not paired with teaching pendant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,12 +109,12 @@ Not paired with teaching pendant
 
 .. centered:: Figure 4.3-7 end LED red schematic diagram
 
-Matching the oscilloscopy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Matching the teaching pendant
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -  **Step1**:Start the robot and wait for the end LED green to stop flashing before operating the robot.
 
--  **Step2**:Open the oscilloscope and enter the program editing interface.
+-  **Step2**:Open the teaching pendant and enter the program editing interface.
 
 -  **Step3**:Select the blank template to create a new program file.
 
@@ -141,10 +143,10 @@ Matching the oscilloscopy
 -  **Step9**:Short pressing button box button 3 Run the program, the end LED blue flashes twice.
 
 
-Dempermaster control robot movement
---------------------------------------
+Teaching pendant control robot movement
+--------------------------------------------------
 
-Click the "Program" button in the first-level menu on the left side of the oscilloscopy, and click the sub -menu "Coding" to enter the program demonstration interface. The interface mainly implements the writing and modification of the robot teaching program.
+Click the "Program" button in the first-level menu on the left side of the teaching pendant, and click the sub -menu "Coding" to enter the program demonstration interface. The interface mainly implements the writing and modification of the robot teaching program.
 
 After clicking the "New" icon button, the user names the file and selects a template as the content of the new file. Click the newly created to create a successful and open the program file.
 
