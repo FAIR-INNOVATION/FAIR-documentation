@@ -286,7 +286,9 @@ Ontology & Dimensional Drawings
 FAIRINO SimMachine
 -----------------------
 
-    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1g_6i5CyYniOvjFxxVvTiIewqsq31hPCi/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1g_6i5CyYniOvjFxxVvTiIewqsq31hPCi/view?usp=drive_link>`
+    
+    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/16uGlEqjda2cGqxOy072LiY6FWNnwJm4t/view?usp=drive_link>`
 
 Palletizer frcap
 ---------------------------------
