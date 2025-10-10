@@ -6,13 +6,13 @@ Set the installation method
 
 The default installation mode of the robot is horizontal installation. When the installation mode of the robot is changed, the actual installation mode of the robot must be set in the "Initial - Base - Mounting" menu in time to ensure the normal operation of the robot.
 
-Considering the more flexible and rich robot deployment scenarios, we provide a free installation function. Users click the "Free" tab under the "Initial - Base - Mounting" menu to enter the robot free installation mode setting page. Manually adjust the "Base Tilt" and "Base Rotation" angles, and the 3D model will display the installation effect accordingly. After modification, click the "Apply" button to complete the robot installation mode setting.
+To accommodate more flexible and diverse robot deployment scenarios, we offer a free installation feature. Users can click the 'Free Installation' tab under the "Initial - Base - Mounting" menu to access the robot free installation settings page. Manually adjust the "Base Tilt" and "Base Rotation" angles, and the 3D model will display the corresponding installation effect. After making changes, click the "Apply" button to complete the robot installation setup.
 
 .. image:: teaching_pendant_software/026.png
    :width: 6in
    :align: center
    
-.. centered:: Figure 3.1-1 360 degree free mounting
+.. centered:: Figure 3.1-1 Robot installation
 
 .. important::
    After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
@@ -20,9 +20,51 @@ Considering the more flexible and rich robot deployment scenarios, we provide a 
 Set end load
 --------------------
 
-Under the menu bar of "Initial - Base - Payload", click "End Payload" to enter End payload page .
+In the "Initial - Base - Payload" section, select the identification type for "Trajectory Identification" to enter the end effector load setting interface.
 
-When configuring the end load, please enter the mass of the end tool used and the corresponding center of mass coordinates into the "Load mass" and "Load mass center coordinates X, Y and Z" input boxes and apply.
+.. note:: 
+   .. image:: base/071.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Apply button**
+   
+   effect: Click the application load number to view the corresponding load weight and center of gravity coordinates.
+
+.. note:: 
+   .. image:: base/072.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Modify button**
+   
+   effect: Click to open/close the motion recognition interface.
+
+.. note:: 
+   .. image:: base/073.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Rename button**
+   
+   effect: Rename load name
+
+.. note:: 
+   .. image:: base/074.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Clear button**
+   
+   effect: Clear current load information (set load weight and center of gravity coordinates to 0).
+
+When configuring the end load, you can directly input the mass of the end tool and the corresponding center of mass coordinates X, Y, and Z, then click the "Apply" button to complete the setup.
+
+At the same time, you can click the "Edit" button to open the "Motion Identification" interface for automatic load identification, which will be applied after the identification process is completed.
 
 .. important:: 
    The load mass cannot exceed the maximum load range of the robot.
@@ -53,7 +95,47 @@ When configuring the end load, please enter the mass of the end tool used and th
 Set tool coordinates
 --------------------
 
-In the menu bar of "Initial - Base - Coordinate", click "TCP" to enter the tool coordinate page.
+Enter the tool coordinates page by going to "Initial Settings" -> "Basic" -> "Tool Coordinates".
+
+.. note:: 
+   .. image:: base/071.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Apply button**
+   
+   effect: Click to apply the tool coordinate system
+
+.. note:: 
+   .. image:: base/072.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Modify button**
+   
+   effect: Click to open/close the coordinate system calibration interface
+
+.. note:: 
+   .. image:: base/073.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Rename button**
+   
+   effect: Rename Tool Coordinate System Name
+
+.. note:: 
+   .. image:: base/074.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Clear button**
+   
+   effect: Clear current tool coordinate information
 
 Tool coordinates can be modified, cleared and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
 
@@ -69,7 +151,7 @@ Click "Modify" to reset the tool coordinate system of the number according to th
    :width: 4in
    :align: center
 
-.. centered:: Figure 3.3-2 Set tool coordinates
+.. centered:: Figure 3.3-2 Tool Frame Calibration
 
 .. important:: 
    1. After the tool is installed at the end, the tool coordinate system must be calibrated and applied, otherwise the position and attitude of the tool center point will not meet the expected values when the robot executes the motion command.
