@@ -883,7 +883,7 @@ The following lists the input types supported by the digital input of Faro robot
 	:align: center
 	:width: 4in
 
-.. centered:: Figure 3.3-1 General Input Valid Status
+.. centered:: Figure 3.3-1 DI0-DI7 General Input Valid Status
 
 .. centered:: Table 3.3-1 Control Box Digital Input Configuration Comparison Table
 
@@ -1019,15 +1019,15 @@ The input type of the wide voltage control box digital input is determined by th
 Software Settings Related to Digital Input of Control Box
 ***************************************************************
 
-The only software setting item for digital input is "General Input Valid Status", which represents the digital voltage level value corresponding to the detected valid input. This setting allows users to use digital input more flexibly.
+The only software setting item for digital input is "DI0-DI7 General Input Valid Status", which represents the digital voltage level value corresponding to the detected valid input. This setting allows users to use digital input more flexibly.
 
 	.. figure:: installation/090.png
 		:align: center
 		:width: 6in
 
-  .. centered:: Figure 3.3-3 General Input Valid Status
+  .. centered:: Figure 3.3-3 DI0-DI7 General Input Valid Status
 
-The comparison table of valid status detected by the software under different settings of "General Input Valid Status" when the external switch of digital input is in different states is as follows:
+The comparison table of valid status detected by the software under different settings of "DI0-DI7 General Input Valid Status" when the external switch of digital input is in different states is as follows:
 
 .. centered:: Table 3.3-2 Valid Status Comparison Table
 
@@ -1257,7 +1257,7 @@ The digital output of AC wide voltage control box supports NPN and PNP types. Th
 Software Settings Related to Digital Output of Control Box
 ***************************************************************
 
-There are two software setting items for digital output: "Control Box DO Output During Power-On" and "General Output Valid Status". "Control Box DO Output During Power-On" represents the output level during the power-on period of the control box when the control system has not completed initialization. It can correspond to different output valid states, which can flexibly meet the requirements for output status during power-on. "General Output Valid Status" represents the digital output voltage level value that needs to be controlled when the output is valid. This setting allows users to use digital output more flexibly.
+There are two software setting items for digital output: "Control Box DO Output During Power-On" and "DO0-D07 General Output Valid Status". "Control Box DO Output During Power-On" represents the output level during the power-on period of the control box when the control system has not completed initialization. It can correspond to different output valid states, which can flexibly meet the requirements for output status during power-on. "General Output Valid Status" represents the digital output voltage level value that needs to be controlled when the output is valid. This setting allows users to use digital output more flexibly.
 
 (1) The comparison table of valid status under different settings of "Control Box DO Output During Power-On" is as follows:
 
@@ -1309,13 +1309,13 @@ There are two software setting items for digital output: "Control Box DO Output 
      - Invalid
      - Invalid
 
-(2) The comparison table of valid status under different settings of "General Output Valid Status" is as follows:
+(2) The comparison table of valid status under different settings of "DO0-D07 General Output Valid Status" is as follows:
 
 	.. figure:: installation/101.png
 		:align: center
 		:width: 6in
 
-	.. centered:: Figure 3.3-8 General Output Valid Status
+	.. centered:: Figure 3.3-8 DO0-D07 General Output Valid Status
 
 .. centered:: Table 3.3-6 Valid Status Comparison Table
 

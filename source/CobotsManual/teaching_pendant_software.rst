@@ -166,17 +166,7 @@ Multilingual settings function
      - it
      - True
 
-1.Connect the control box to the teaching device and start it up.
-
-2.Log in with the account admin and password 123. Navigate to the page, click on System Settings - General Settings, and confirm that the teaching device is enabled.
-
-.. image:: teaching_pendant_software/001.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 5.1‑4 Teaching device enabled status
-
-3.On the login screen (or during the initial activation screen, settings can also be made), select the language at the top right corner.
+1.On the login screen (or during the initial activation screen, settings can also be made), select the language at the top right corner.
 
 .. image:: teaching_pendant_software/062.png
    :width: 6in
@@ -190,7 +180,7 @@ Multilingual settings function
 
 .. centered:: Figure 5.1‑6 Language settings on the login interface
 
-4.Take the login interface language settings as an example, select the language. If the following prompts (in different languages) appear, it means the settings are successful. Restart the control box to complete the language settings.
+2.Take the login interface language settings as an example, select the language. If the following prompts (in different languages) appear, it means the settings are successful. Restart the control box to complete the language settings.
 
 .. image:: teaching_pendant_software/061.png
    :width: 4in
@@ -860,6 +850,17 @@ Display current welding status information.
 
 .. centered:: Figure 5.3‑23 Welding status
 
+Board I/O
+++++++++++++++++
+
+Display the current status information of the board.
+
+.. image:: teaching_pendant_software/069.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 5.3‑24 Board I/O status
+
 Robot installation method setting and display
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -875,7 +876,7 @@ On the web teaching page, click "Initial Settings" → "Basics" → "Installatio
    :width: 6in
    :align: center
    
-.. centered:: Figure 5.3-24 360 degree free installation
+.. centered:: Figure 5.3-25 360 degree free installation
 
 .. important:: 
    After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
