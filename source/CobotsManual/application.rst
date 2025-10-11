@@ -779,13 +779,43 @@ Cuboid Interference Configuration
 
 **Step3**: Configure parameters including "Base Coordinate" reference and "Two-Point" or "Center+Edge Length" teaching methods.
 
+**Step4**: Virtual cuboids appear on the web interface (40% opacity yellow/green for normal state, 90% when triggered).
+
 .. image:: application/072.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 14.13‑13 Two-Point Teaching Method
+.. centered:: Figure 14.13‑13 Setting a Cubic Interference Zone Using the "Two-Point Method"
 
-**Step4**: Virtual cuboids appear on the web interface (40% opacity yellow/green for normal state, 90% when triggered).
+.. image:: application/073.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑14 Virtual Cube Displayed on the Web Interface
+
+**Step5**: Select the teaching method for the cubic interference zone range as "Center Point + Side Length". Teach a robot point; set the side lengths for the X, Y, and Z axes centered on the taught point. As shown in the figure below, click "Apply", and a virtual cube will appear on the web interface.
+
+.. image:: application/074.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑15 Setting a Cubic Interference Zone Using "Center Point + Side Length"
+
+**Step6**: Set the "Interference Zone Mode" to "Interference Inside Range". When the robot end is outside the cube range, the virtual cube on the web interface is displayed as yellow with 40% transparency. When the robot end enters the cube range, the cube turns yellow with 90% transparency, and an "Entering Interference Zone" warning appears, as shown in the figure below.
+
+.. image:: application/075.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑16 Entering the Cubic Interference Zone in "Interference Inside Range" Mode
+
+**Step7**: Set the "Interference Zone Mode" to "Interference Outside Range". When the robot end is inside the cube range, the virtual cube on the web interface is displayed as green with 40% transparency. When the robot end moves outside the cube range, the cube turns green with 90% transparency, and an "Entering Interference Zone" warning appears, as shown in the figure below.
+
+.. image:: application/076.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.13‑17 Cubic Interference Zone Display in "Interference Outside Range" Mode
 
 Safety Wall Configuration
 ++++++++++++++++++++++++++++++++++++++++++
@@ -796,6 +826,12 @@ Safety Wall Configuration
    :align: center
 
 .. centered:: Figure 14.13‑18 Safety Wall Setup
+
+.. image:: application/078.png
+   :width: 4in
+   :align: center
+
+.. centered:: 图表 14.13‑19 Virtual Wall Displayed on the Web Interface
 
 **Step2**: Walls turn 90% opaque orange with warnings when breached.
 
