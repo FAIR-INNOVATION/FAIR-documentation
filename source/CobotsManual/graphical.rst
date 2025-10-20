@@ -217,22 +217,6 @@ The function of this instruction is similar to the "point to point" instruction,
 
 "Straight line (adjustable angular velocity at transition point)" command node, parameters:
 
-- Point name: Teaching point
-
-- Debug speed (%): 0 ~ 100
-
-- Stop: false/true, when true is selected, the smooth transition parameter value is not effective
-
-- Smooth transition (mm): Smooth transition radius 0 ~ 1000
-
-- Whether to seek: false/true
-
-- Seek point variable: REF0~99/RES0~99, when false is selected for whether to seek, the parameter is not effective;
-
-- Whether to offset: No
-
-- Adjustable angular velocity at transition point: No/Yes
-
 - Maximum angular velocity: 0~300
 
 .. image:: graphical/028.png
@@ -1443,19 +1427,25 @@ Drag the "welding instruction" code block to enter the graphical editing interfa
 
 This instruction is mainly used for welding machine peripherals. Before adding this instruction, please confirm whether the welding machine configuration in the user peripherals is complete. For details, see the robot peripherals chapter.
 
-1. "Welding machine voltage" command node, parameters:
+1. “Welding Voltage” Command Node, Parameters:
 
-Welding machine voltage: minimum value is 0
+- I/O Type: Controller IO / Extended IO
+- Welding Voltage: Minimum value is 0
+- Welding Current Control AO: Ctrl-AO0 / Ctrl-AO1
+- Smoothing Selection: Break / Serious
 
 .. image:: graphical/097.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 10.8-3 Welding machine voltage command code block
+.. centered:: Figure 10.8-3 Welding Voltage Command Code Block
 
-2. "Welding machine current" command node, parameters:
+2. “Welding Current” Command Node, Parameters:
 
-Welding machine current: minimum value is 0
+- I/O Type: Controller IO / Extended IO
+- Welding Current: Minimum value is 0
+- Welding Current Control AO: Ctrl-AO0 / Ctrl-AO1
+- Smoothing Selection: Break / Serious
 
 .. image:: graphical/098.png
    :width: 6in
@@ -1545,17 +1535,21 @@ This command contains three parts: laser command, tracking command and positioni
 
 .. centered:: Figure 10.8-12 "Start/stop laser tracking" instruction code block
 
-4. "Data recording" instruction node, parameters:
+4. "Laser Sensor Record" Command Node, Parameters:
 
-- Function selection: stop recording/real-time tracking/start recording/track reproduction
-
-- Waiting time (ms): 0 ~ 10000
+- Function Selection: Stop Recording / Real-time Tracking / Start Recording / Path Playback
+- Function Selection: Delay Time / Delay Distance
+- Time: 0 ~ 10000
+- Extended Axis Number: 1 ~ 4
+- Distance: 0 ~ 10000
+- Compensation Sensitivity Coefficient: 0 ~ 1
+- Speed: 0 ~ 100
 
 .. image:: graphical/107.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 10.8-13 "Data Record" instruction code block
+.. centered:: Figure 10.8-13 "Laser Sensor Record" Command Code Block
 
 5. "Sensor Point Movement" instruction node, parameters:
 
@@ -1564,6 +1558,8 @@ This command contains three parts: laser command, tracking command and positioni
 - Movement mode: PTP/Lin
 
 - Debug speed (%): 0 ~ 100
+
+- State reference point: Teaching Point
 
 .. image:: graphical/108.png
    :width: 6in
@@ -1607,13 +1603,15 @@ This instruction realizes the laser tracking and recording start and end point e
 
 The adjustable laser tracking repetition speed function enables the robot to record at a very fast speed and then reproduce at the normal welding speed, which can improve work efficiency.
 
-1. "Weld data record" command node, parameters:
+1. "Laser Sensor Record" Command Node, Parameters:
 
-- Function selection: stop recording/real-time tracking/start recording/track reproduction
-
-- Waiting time (ms): 0~10000, default is 10
-
-- Speed ​​(%): 0~100, default is 30, this parameter takes effect when track reproduction is selected
+- Function Selection: Stop Recording / Real-time Tracking / Start Recording / Path Playback
+- Function Selection: Delay Time / Delay Distance
+- Time: 0 ~ 10000
+- Extended Axis Number: 1 ~ 4
+- Distance: 0 ~ 10000
+- Compensation Sensitivity Coefficient: 0 ~ 1
+- Speed: 0 ~ 100
 
 .. image:: graphical/111.png
    :width: 6in

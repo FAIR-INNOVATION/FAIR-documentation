@@ -12,7 +12,7 @@ TCP
 
 In the menu bar of "Initial" -> "Base" -> "Coordinate", click "TCP" to enter the tool coordinate page.
 
-Tool coordinates can be modified, cleared and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
+Tool coordinates can be modified, cleared, renamed and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
 
 .. image:: base/001.png
    :width: 4in
@@ -969,9 +969,13 @@ Click "Initial - Base - I/O setup" on the menu bar, and click the "Filter" subme
 - Extended AI3 filter time
 - Smart DI filter time
 
-Users can set the corresponding parameters according to their needs, just click the corresponding setting button. As shown in figure below.
+Users can view all the filter parameter value tables and set the corresponding parameters according to their needs by selecting the appropriate parameters and inputting the parameter values as shown in the figure below.
 
 .. image:: base/029.png
+   :width: 3in
+   :align: center
+
+.. image:: base/076.png
    :width: 3in
    :align: center
 

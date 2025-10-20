@@ -28,7 +28,7 @@ Toolbar
 Use the toolbar at the top left of the Node Graph Programming page.
 
 .. image:: node_editor_software/002.png
-   :width: 4in
+   :width: 6in
    :align: center
 
 .. centered:: Figure 11.1-2 Toolbar
@@ -70,16 +70,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
    effect:Create a new node graph programming file
 
 .. note:: 
-   .. image:: node_editor_software/130.png
-      :height: 0.75in
-      :align: left
-
-   name:**Initial**
-   
-   effect:Load the node graph content of the initial settings
-
-.. note:: 
-   .. image:: coding/009.png
+   .. image:: coding/008.png
       :height: 0.75in
       :align: left
 
@@ -88,7 +79,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
    effect:After creating/opening the node graph programming file, click the "Export" button to pop up the "Export Node Graph Programming" pop-up box, select the workspace file name to export the file (json format)
 
 .. note:: 
-   .. image:: coding/008.png
+   .. image:: coding/009.png
       :height: 0.75in
       :align: left
 
@@ -1509,7 +1500,7 @@ Implementing the adjustable laser tracking reproduction speed function allows th
 
 .. centered:: Figure 11.47-1 "Weld data record" command node interface
 
-"Obtain weld starting point/end point" command node, parameters:
+"Move to the starting/end point of weld" command node, parameters:
 
 - Sports mode: PTP/LIN
 - Speed (%): 0~100, default is 30
@@ -1814,11 +1805,11 @@ Modbus instruction
 
 Click the "Mobus" related command node to enter the node graph programming interface.
 
-This instruction function is a bus function based on the ModbusTCP protocol. Users can control the robot to communicate with the ModbusTCP client or server (master station and slave station communication) through relevant instructions, and read and write coils, discrete quantities, and registers. For more operating functions of ModbusTCP, please contact us for consultation.
+This instruction function is a bus function based on the ModbusTCP protocol. Users can control the robot to communicate with the ModbusTCP client or server (master station and slave station communication) through relevant instructions, and read and write Digital Output, Digital Input, and registers. For more operating functions of ModbusTCP, please contact us for consultation.
 
 Master station register information: Master station register information includes type (DI, DO, AI, AO), address number, name and address value (DI and AI types cannot be entered), which can be edited and deleted.
 
-1. Master station coil settings, parameters:
+1. Master station Digital Output settings, parameters:
 
 - Modbus master station name: configured according to actual situation
 - DO name: configured according to actual situation
@@ -1829,9 +1820,9 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.53-1 Master station "read/write coil" command node interface
+.. centered:: Figure 11.53-1 Master station "read/write Digital Output" command node interface
 
-2. Master station discrete setting, parameters:
+2. Master station Digital Input setting, parameters:
 
 - Modbus master station name: configured according to actual situation
 - DI name: configured according to actual situation
@@ -1841,7 +1832,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.53-2 Master station "read discrete quantity" command node interface
+.. centered:: Figure 11.53-2 Master station "read Digital Input" command node interface
 
 3. Master station analog output settings, parameters:
 
@@ -1895,7 +1886,7 @@ Master station register information: Master station register information include
 
 .. centered:: Figure 11.53-6 Master station "wait for analog input" command node interface
 
-7. Slave coil settings, parameters:
+7. Slave Digital Output settings, parameters:
    
 - DO name: configured according to actual situation
 - Number of registers: integer type  0 ~ 128
@@ -1905,9 +1896,9 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.53-7 Slave "read/write coil" command node interface
+.. centered:: Figure 11.53-7 Slave "read/write Digital Output" command node interface
 
-8. Slave station discrete setting, parameters:
+8. Slave station Digital Input setting, parameters:
 
 - DI name: configured according to actual situation
 - Number of registers: integer type  0 ~ 128
@@ -1916,7 +1907,7 @@ Master station register information: Master station register information include
    :width: 6in
    :align: center
 
-.. centered:: Figure 11.53-8 Slave station "read discrete quantity" command node interface
+.. centered:: Figure 11.53-8 Slave station "read Digital Input" command node interface
 
 9. Slave station analog output settings, parameters:
 
@@ -1965,46 +1956,6 @@ Master station register information: Master station register information include
    :align: center
 
 .. centered:: Figure 11.53-12 Slave "read analog input" command node interface
-
-13.  Read register instruction, parameters:
-
-- Function code: 0x01-coil/0x02-discrete quantity/0x03-holding register/0x04-input register
-- Register, coil, discrete address: input according to actual situation
-- Number of registers, coils, and discrete quantities: 0 ~ 255
-- Address: Enter according to actual situation
-- Whether to apply threads: No/Yes
-
-.. image:: node_editor_software/119.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 11.53-13 "Modbus Slave Read register instruction" node interface
-
-14. Read register data command, parameters:
-
-- Number of registers, coils, and discrete quantities: 0 ~ 255
-- Whether to apply threads: No/Yes
-  
-.. image:: node_editor_software/120.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 11.53-14 "Read register data" node interface
-
-15. Write register command, parameters:
-
-- Function code: 0x01-coil/0x02-discrete quantity/0x03-holding register/0x04-input register
-- Register and coil address: input according to actual situation
-- Number of registers and coils: 0 ~ 255
-- Byte array: input according to actual situation
-- Address: Enter according to actual situation
-- Whether to apply threads: No/Yes
-  
-.. image:: node_editor_software/121.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 11.53-15 "Write Register" node interface
 
 Application scenario usage examples
 ------------------------------------
