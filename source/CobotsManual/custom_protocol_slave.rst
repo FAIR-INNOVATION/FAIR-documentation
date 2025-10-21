@@ -191,7 +191,7 @@ Software environment setup
 
 1. Browser IP input 192.168.58.2, account for admin, password for 123, click ‘Login’, enter the robot control box Web interface.
 
-.. image:: custom_protocol_slave/007.png
+.. image:: teaching_pendant_software/001.png
    :width: 6in
    :align: center
 

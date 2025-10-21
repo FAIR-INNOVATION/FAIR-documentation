@@ -114,17 +114,6 @@ When the system needs to upgrade or downgrade the version, or the system languag
 
 - Software upgrade package import: system software package upgrade or downgrade;
 - Restore factory language: clear the imported application language package data, restore the factory language package data, and set the default language to English;
-
-Log Management
-~~~~~~~~~~~~~~~~~~~
-
-Users can set the number of logs to be retained and import and export system configuration files. The maximum number of logs to be retained is 30, and the system configuration file records the setting value.
-
-.. image:: system/032.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 15.1‑10 Log Management
   
 Fault data
 ~~~~~~~~~~~~
@@ -137,7 +126,7 @@ After saving, you can select all data sources to export in the system settings, 
    :width: 4in
    :align: center
 
-.. centered:: Figure 15.1‑11 Fault data
+.. centered:: Figure 15.1‑10 Fault data
 
 Timeout Logout Time Setting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,7 +137,7 @@ Users can set the timeout logout time. If the time is met, the robot will automa
    :width: 3in
    :align: center
 
-.. centered:: Figure 15.1‑8 Timeout Logout Time Setting
+.. centered:: Figure 15.1‑11 Timeout Logout Time Setting
 
 System Settings
 ~~~~~~~~~~~~~~~~~
@@ -161,7 +150,7 @@ The slave log generation and controller log export functions are to download som
    :width: 4in
    :align: center
 
-.. centered:: Figure 15.1‑9 System Settings
+.. centered:: Figure 15.1‑12 System Settings
 
 Account settings account settings
 --------------------------------------
@@ -330,40 +319,20 @@ There are two ways to set parameters: slider dragging and manual input.
    :width: 6in
    :align: center
 
-.. image:: system/017.png
-   :width: 6in
-   :align: center
-
-.. image:: system/018.png
-   :width: 6in
-   :align: center
-
-.. image:: system/019.png
-   :width: 6in
-   :align: center
-
-.. image:: system/020.png
-   :width: 6in
-   :align: center
-
-.. image:: system/021.png
-   :width: 6in
-   :align: center
-
 .. image:: system/022.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 15.4-2 Schematic diagram of parameter range configuration
 
-WEB interface locked
-~~~~~~~~~~~~~~~~~~~~~~~
+Robot License Usage Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Lock screen settings
+1. License Usage Time settings
 
 Check the web interface lock screen settings in "Custom" and set whether this function is turned on. When choosing to turn on this function, select the usage period. If not selected, it will prompt "The usage period cannot be empty".
 
-.. note:: If the lock screen function is turned on, secondary settings cannot be made, and the system time cannot be updated.) After selecting the usage period, click the "Configure" button.
+.. note:: If the Robot License Usage Time is turned on, secondary settings cannot be made, and the system time cannot be updated.) After selecting the usage period, click the "Configure" button.
 
 After selecting the usage period, click the "Configure" button.
 
@@ -381,7 +350,7 @@ After selecting the usage period, click the "Configure" button.
 
 2. Expiration reminder
 
-When the web interface lock screen function is turned on, the following prompt will appear after logging in to the interface:
+When the web interface Robot License Usage Time is turned on, the following prompt will appear after logging in to the interface:
 
 1)5 days before the expiration of the device, if you power on and log in successfully, a pop-up window will prompt the remaining days of the use period, which can be eliminated by resetting.
 
@@ -401,7 +370,7 @@ When the web interface lock screen function is turned on, the following prompt w
 
 3. Unlock login
 
-When the web interface lock screen function is turned on, after the device expires, you will directly enter the lock screen interface when you log in to the webApp for the first time. When the device continues to work, it will automatically log out after obtaining the lock screen data at zero point and enter the lock screen interface. At this time, enter the unlock code to unlock and enter the login interface, enter your login information to log in.
+When the web interface Robot License Usage Time is turned on, after the device expires, you will directly enter the lock screen interface when you log in to the webApp for the first time. When the device continues to work, it will automatically log out after obtaining the lock screen data at zero point and enter the lock screen interface. At this time, enter the unlock code to unlock and enter the login interface, enter your login information to log in.
 
 .. note:: The integrator operates to generate an encrypted unlock code.
  

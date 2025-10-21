@@ -124,3 +124,22 @@ Data View Display
    :align: center
 
 .. centered:: Figure 13.2‑6 Data View Display
+
+Data Filtering
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. After stopping the query, input the minimum/maximum values for x/y, and the chart data range will change accordingly, as shown in the figure below:
+
+.. image:: status/012.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 13.2‑7 Data Filtering Interface
+
+2. Click the restore button, and the chart data range will revert to the default, as shown in the figure below:
+
+.. image:: status/013.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 13.2‑8 Data Restoration
