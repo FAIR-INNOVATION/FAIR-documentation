@@ -1,3 +1,36 @@
+Version V3.8.7
+-----------------
+
+Date: 2025-10-21
+
+- **Robot Collision Detection Function for Linear Rack Guides**:
+    Path: Initial Setup -> Basic -> Joint -> Collision Level -> Robot Collision Detection for Linear Rack Guides.
+
+    Description: Enables emergency stop when a collision occurs during guide movement, thereby improving operational safety.
+
+- **New Actual Physical Speed Setting Function for New Helix**:
+    Path: Teach Program -> Program Editing -> New Spiral N-Spiral Command.
+
+    Description: Ensures the constant velocity segment of the robot end-effector's linear speed matches the set value.
+
+- **Safety Stop Recovery Optional Auto Enable Function**:
+    Path: Initial Setup -> Safety -> Emergency Stop.
+
+    Description: Added configuration for enable strategy after emergency stop reset under Category 1b.
+
+- **Force Sensor On-Load Zero Calibration and Open Posture Compliance Admittance Parameters**:
+    Path: Initial Setup -> Basic -> Load, Teach Program -> Program Editing -> F/T Control Command.
+
+    Description: Added admittance parameters for open posture compliance.
+
+- **New Laser Tracking Function for Arcs and Full Circles**:
+
+    Description: Enables real-time laser tracking for arcs and full circles, with posture following changes during motion, and enables laser scanning reproduction for arcs and full circles.
+
+- **Button Box Function**:
+
+    Description: Optimized the reset IP function for the Button Box Version 1.0.
+
 Version V3.8.6
 -----------------
 

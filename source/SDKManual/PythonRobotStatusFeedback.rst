@@ -6,7 +6,7 @@ Data structure description
 
 Controller status feedback data packet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. versionadded:: python SDK-v2.1.6
+.. versionadded:: python SDK-v2.1.7
     
 .. csv-table:: 
     :header-rows: 1
@@ -108,6 +108,8 @@ Controller status feedback data packet
     "exAxisCoord[i]","Extended axis coordinate system,i:0~5"
     "load","Quality of load"
     "loadCog[i]","Center of mass of load,i:0~2"
+    "lastServoTarget[i]","The last ServoJ target position in the queue,i:0 to 5"
+    "servoJCmdNum","ServoJ instruction count"
 
 Status of the servo controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -354,3 +356,10 @@ code example
     print("loadCog0:", robot.robot_state_pkg.loadCog[0])
     print("loadCog1:", robot.robot_state_pkg.loadCog[1])
     print("loadCog2:", robot.robot_state_pkg.loadCog[2])
+    print("lastServoTarget0:", robot.robot_state_pkg.lastServoTarget[0])
+    print("lastServoTarget1:", robot.robot_state_pkg.lastServoTarget[1])
+    print("lastServoTarget2:", robot.robot_state_pkg.lastServoTarget[2])
+    print("lastServoTarget3:", robot.robot_state_pkg.lastServoTarget[3])
+    print("lastServoTarget4:", robot.robot_state_pkg.lastServoTarget[4])
+    print("lastServoTarget5:", robot.robot_state_pkg.lastServoTarget[5])
+    print("servoJCmdNum:", robot.robot_state_pkg.servoJCmdNum)

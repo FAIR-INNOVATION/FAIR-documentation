@@ -4,6 +4,7 @@ Robot Welding
 .. toctree::  
     :maxdepth: 5  
 
+
 Set welding process curve parameters  
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  
@@ -1074,6 +1075,19 @@ Arc tracking code example
 
         robot.MoveJ(safejointPos, safedescPose, 1, 0, 20, 20, 100, exaxisPos, -1, 0, offdese);  
     }  
+
+Set Wire Search Extension IO Ports
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /** 
+    * @brief Sets the wire search extension IO ports
+    * @param [in] searchDoneDINum Wire search success DO port (0-127)
+    * @param [in] searchStartDONum Wire search start/stop control DO port (0-127)
+    * @return Error code
+    */
+    int SetWireSearchExtDIONum(int searchDoneDINum, int searchStartDONum);
 
 Wire search start  
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -731,18 +731,6 @@ Example of getting robot fault status and clearing error code
          Console.WriteLine($"robot maincode is{maincode}; subcode is{subcode}");
      }
  
-Wait for the specified time
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: c#
-    :linenos:
- 
-     /**
-     * @brief Wait for the specified time.
-     * @param [in] t_ms unit ms
-     * @return Error code.
-     */
-     int WaitMs(int t_ms).
- 
 Setting the parameters for monitoring the temperature and fan speed of the wide voltage control box
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.4  Web-3.8.3
@@ -930,106 +918,264 @@ Focus Follow Code Example
         robot.FocusEnd();
     }
 
-Set encoder upgrade
+Enable joint torque sensor sensitivity calibration function
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set encoder upgrade
-    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
-    * @return Error code 
+    * @brief Enable joint torque sensor sensitivity calibration function
+    * @param [in] status 0-Disable；1-Enable
+    * @return Error code
     */
-    int SetEncoderUpgrade(string path);
+    public int JointSensitivityEnable(int status);
 
-Set joint firmware upgrade
+Sensitivity data acquisition of joint torque sensors
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set joint firmware upgrade
-    * @param [in] type Upgrade file type; 1 - Upgrade firmware; 2 - Upgrade slave configuration file
-    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
-    * @return Error code 
+    * @brief Sensitivity data acquisition of joint torque sensors
+    * @return Error code
     */
-    int SetJointFirmwareUpgrade(int type, string path);
+    public int JointSensitivityCollect();
 
-Set firmware upgrade for control box
+Get the sensitivity calibration results of the joint torque sensor
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
     
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set firmware upgrade for control box
-    * @param [in] type Type of upgrade file; 1 - Upgrade firmware; 2 - Upgrade slave station configuration file
-    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
-    * @return Error code 
+    * @brief Get the sensitivity calibration results of the joint torque sensor
+    * @param [out] calibResult j1~j6 Joint sensitivity [0-1]
+    * @return Error code
     */
-    int SetCtrlFirmwareUpgrade(int type, string path);
+    public int JointSensitivityCalibration(ref double[] calibResult);
 
-Set end firmware upgrade
+Joint torque sensor sensitivity automatic calibration Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
     
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Set end firmware upgrade
-    * @param [in] type Upgrade file type; 1 - Upgrade firmware; 2 - Upgrade slave configuration file
-    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
-    * @return Error code 
-    */
-    int SetEndFirmwareUpgrade(int type, string path);
-
-Upgrade of the joint full parameter configuration file
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
-    
-.. code-block:: c#
-    :linenos:
-
-    /**
-    * @brief Upgrade of the joint full parameter configuration file
-    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
-    * @return Error code 
-    */
-    int JointAllParamUpgrade(string path);
-
-Example of upgrading code for robot from firmware
-++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
-    
-.. code-block:: c#
-    :linenos:
-
-    private void button83_Click(object sender, EventArgs e)
+    public void TestSensitivityCalib()
     {
-        robot.RobotEnable(0);
-        Thread.Sleep(200);
-        int rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/jointallparameters.db");
-        Console.WriteLine($"robot JointAllParamUpgrade rtn is{rtn}");
-        rtn = robot.SetCtrlFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Cbd_Asix_V2.0.bin");
-        Console.WriteLine($"robot SetCtrlFirmwareUpgrade rtn is{rtn}");
-        rtn = robot.SetEndFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Axle_Asix_V2.4.bin");
-        Console.WriteLine($"robot SetEndFirmwareUpgrade rtn is {rtn}");
-        robot.SetSysServoBootMode();
-        rtn = robot.SetCtrlFirmwareUpgrade(1, "D://zUP/upgrade/FR_CTRL_PRIMCU_FV201212_MAIN_U4_T01_20250428(MT).bin");
-        Console.WriteLine($"robot SetCtrlFirmwareUpgrade rtn is{rtn}");
-        rtn = robot.SetEndFirmwareUpgrade(1, "D://zUP/upgrade/FR_END_FV201009_MAIN_U1_T01_20250428.bin");
-        Console.WriteLine($"robot SetEndFirmwareUpgrade rtn is {rtn}");
-        rtn = robot.SetJointFirmwareUpgrade(1, "D://zUP/upgrade/FR_SERVO_FV504214_MAIN_U7_T07_20250519.bin");
-        Console.WriteLine($"robot SetJointFirmwareUpgrade rtn is{rtn}");
+    int rtn = robot.JointSensitivityEnable(1);
+        Console.WriteLine($"JointSensitivityEnable rtn is {rtn}");
+
+        JointPos curJPos = new JointPos(0, 0, 0, 0, 0, 0);
+        rtn = robot.GetActualJointPosDegree(0, ref curJPos);
+        if (rtn != 0)
+        {
+            Console.WriteLine("Failed to get actual joint position.");
+            robot.CloseRPC();
+            return;
+        }
+
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+
+        double[] j2Angles = { 0, -30, -60, -90, -120, -150, -180 };
+
+        foreach (double j2 in j2Angles)
+        {
+            JointPos jointPos = new JointPos(
+                curJPos.jPos[0], j2, 0, -90, 0.02, curJPos.jPos[5]
+            );
+
+            DescPose descPos = new DescPose(0, 0, 0, 0, 0, 0);
+            rtn = robot.GetForwardKin( jointPos, ref descPos);
+            if (rtn != 0)
+            {
+                Console.WriteLine($"GetForwardKin failed at J2={j2}.");
+                continue;
+            }
+
+            rtn = robot.MoveJ( jointPos,  descPos, 0, 0, 100, 100, 100,  epos, -1, 0,  offset_pos);
+            if (rtn != 0)
+            {
+                Console.WriteLine($"MoveJ failed to J2={j2}, rtn={rtn}");
+                continue;
+            }
+            Thread.Sleep(200); 
+            rtn = robot.JointSensitivityCollect();
+            Console.WriteLine($"JointSensitivityCollect at J2={j2} rtn is {rtn}");
+            Thread.Sleep(100);
+        }
+
+        double[] calibResult = new double[6];
+        rtn = robot.JointSensitivityCalibration(ref calibResult);
+        Console.WriteLine($"JointSensitivityCalibration rtn is {rtn}");
+
+        rtn = robot.JointSensitivityEnable(0);
+        Console.WriteLine($"JointSensitivityEnable (disable) rtn is {rtn}");
+
+        Console.WriteLine($"Joint Sensor Calib result: " +
+            $"{calibResult[0]:F6} {calibResult[1]:F6} {calibResult[2]:F6} " +
+            $"{calibResult[3]:F6} {calibResult[4]:F6} {calibResult[5]:F6}");
+        robot.CloseRPC();
     }
  
- 
+Get the number of 8 slave port error frames of the robot
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the number of 8 slave port error frames of the robot
+    * @param [out] inRecvErr Input receiving error frames
+    * @param [out] inCRCErr Input CRC error frames
+    * @param [out] inTransmitErr Input transmit error frames
+    * @param [out] inLinkErr Input link error frames
+    * @param [out] outRecvErr Output receiving error frames
+    * @param [out] outCRCErr Output CRC error frames
+    * @param [out] outTransmitErr Output transmit error frames
+    * @param [out] outLinkErr Output link error frames
+    * @return Error code
+    */
+    public int GetSlavePortErrCounter(ref int[] inRecvErr,ref int[] inCRCErr,ref int[] inTransmitErr,ref int[] inLinkErr,ref int[] outRecvErr,ref int[] outCRCErr,ref int[] outTransmitErr,ref int[] outLinkErr);
+
+Clear the slave port error num
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Clear the slave port error num
+    * @param [in] slaveID slave id 0~7
+    * @return Error code
+    */
+    public int SlavePortErrCounterClear(int slaveID);
+
+Gets the slave port error frame code example
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    public void TestSlavePortErr()
+    {
+        int[] inRecvErr = new int[8];
+        int[] inCRCErr = new int[8];
+        int[] inTransmitErr = new int[8];
+        int[] inLinkErr = new int[8];
+        int[] outRecvErr = new int[8];
+        int[] outCRCErr = new int[8];
+        int[] outTransmitErr = new int[8];
+        int[] outLinkErr = new int[8];
+
+        robot.GetSlavePortErrCounter(ref inRecvErr, ref inCRCErr, ref inTransmitErr, ref inLinkErr,
+            ref outRecvErr, ref outCRCErr, ref outTransmitErr, ref outLinkErr);
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (inRecvErr[i] != 0)
+            {
+                Console.WriteLine($"inRecvErr {i} is {inRecvErr[i]}");
+            }
+
+            if (inCRCErr[i] != 0)
+            {
+                Console.WriteLine($"inCRCErr {i} is {inCRCErr[i]}");
+            }
+
+            if (inTransmitErr[i] != 0)
+            {
+                Console.WriteLine($"inTransmitErr {i} is {inTransmitErr[i]}");
+            }
+
+            if (inLinkErr[i] != 0)
+            {
+                Console.WriteLine($"inLinkErr {i} is {inLinkErr[i]}");
+            }
+
+            if (outRecvErr[i] != 0)
+            {
+                Console.WriteLine($"outRecvErr {i} is {outRecvErr[i]}");
+            }
+
+            if (outCRCErr[i] != 0)
+            {
+                Console.WriteLine($"outCRCErr {i} is {outCRCErr[i]}");
+            }
+
+            if (outTransmitErr[i] != 0)
+            {
+                Console.WriteLine($"outTransmitErr {i} is {outTransmitErr[i]}");
+            }
+
+            if (outLinkErr[i] != 0)
+            {
+                Console.WriteLine($"outLinkErr {i} is {outLinkErr[i]}");
+            }
+        }
+        Console.WriteLine("others has no err!");
+
+        for (int i = 0; i < 8; i++)
+        {
+            robot.SlavePortErrCounterClear(i);
+        }
+
+        robot.CloseRPC();
+    }
+
+Set the feedforward coefficients of the velocities of each axis
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set the feedforward coefficients of the velocities of each axis
+    * @param [in] radio feedforward coefficients of the velocities of each axis
+    * @return Error code
+    */
+    public int SetVelFeedForwardRatio(double radio[6]);
+
+Get the feedforward coefficients of the velocities of each axis
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get the feedforward coefficients of the velocities of each axis
+    * @param [out] radio feedforward coefficients of the velocities of each axis
+    * @return Error code
+    */
+    public int GetVelFeedForwardRatio(ref double radio[6]);
+
+Robot velocity feedforward coefficient code example
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    public void TestVelFeedForwardRatio()
+    {
+
+        double[] setRadio = new double[6] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        robot.SetVelFeedForwardRatio(setRadio);
+        double[] getRadio = new double[6] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        robot.GetVelFeedForwardRatio(ref getRadio);
+        Console.WriteLine($" {getRadio[0]:F6} {getRadio[1]:F6} {getRadio[2]:F6} {getRadio[3]:F6} {getRadio[4]:F6} {getRadio[5]:F6}");
+    }
  
  
  

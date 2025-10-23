@@ -261,7 +261,7 @@ Sample robot basic motion commands code
 
 Spiral motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.1.5
+.. versionadded:: python SDK-v2.1.7
 
 .. csv-table:: 
     :stub-columns: 1
@@ -272,7 +272,7 @@ Spiral motion in Cartesian space
     "Mandatory parameters", "- ``desc_pos``: target Cartesian position in [mm][°];
     - ``tool``: tool number, [0 to 14].
     - ``user``: artifact number, [0 to 14].
-    - ``param=[circle_num, circle_angle, rad_init, rad_add, rotaxis_add, rot_direction]``: circle_num: number of spiral turns; circle_angle: spiral inclination; rad_init: initial radius of the spiral. rad_add: radius increment; rotaxis_add: rotational direction increment; rot_direction: rotational direction, 0-clockwise, 1-counterclockwise;"
+    - ``param=[circle_num, circle_angle, rad_init, rad_add, rotaxis_add, rot_direction, velAccMode]``: circle_num: number of spiral turns; circle_angle: spiral inclination; rad_init: initial radius of the spiral. rad_add: radius increment; rotaxis_add: rotational direction increment; rot_direction: rotational direction, 0-clockwise, 1-counterclockwise,velAccMode speed acceleration parameter mode: 0- constant angular velocity, 1- constant linear velocity;"
     "Default parameters","- ``joint_pos``: target joint position in [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls inverse kinematics to solve for the return value.
     - ``vel``: percentage of speed, [0~100] default 20.0.
     - ``acc``: percentage of acceleration, [0~100] default 100.0.
@@ -292,25 +292,26 @@ code example
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    joint_pos = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
-    desc_pos = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
-    offset_pos1 = [50, 0, 0, -30, 0, 0]
-    offset_pos2 = [50, 0, 0, -5, 0, 0]
-    epos = [0, 0, 0, 0]
-    sp = [5,5.0,50.0,10.0,10.0,0]
+    j = [67.957, -81.482, 87.595, -95.691, -94.899, -9.727]
+    desc_pos = [-123.142, -551.735, 430.549, 178.753, -4.757, 167.754]
+    offset_pos1 = [50.0, 0.0, 0.0, -30.0, 0.0, 0.0]
+    offset_pos2 = [50.0, 0.0, 0.0, -30.0, 0.0, 0.0]
+    epos = [0.0] * 4
+    sp = [2, 30.0, 50.0, 10.0, 10.0, 0, 1]  # [circle_num, circle_angle, rad_init, rad_add, rotaxis_add, rot_direction, velAccMode]
     tool = 0
     user = 0
-    vel = 100.0
-    acc = 100.0
+    vel = 30.0
+    acc = 60.0
     ovl = 100.0
-    blendT = 0.0
+    blendT = -1.0
     flag = 2
     robot.SetSpeed(20)
-    rtn = robot.MoveJ(joint_pos=joint_pos, tool=tool, user=user, exaxis_pos=epos, blendT=blendT, offset_flag=flag, offset_pos=offset_pos1)
-    print(f"MoveJ error code: {rtn}")
-    rtn = robot.NewSpiral(desc_pos=desc_pos, tool=tool, user=user, param=sp, exaxis_pos=epos, offset_flag=flag, offset_pos=offset_pos2)
-    print(f"NewSpiral error code: {rtn}")
+    rtn = robot.MoveJ(joint_pos=j, tool=tool, user=user, vel=vel, acc=acc, ovl=ovl, exaxis_pos=epos, blendT=blendT, offset_flag=flag, offset_pos=offset_pos1)
+    print(f"movej errcode:{rtn}")
+    rtn = robot.NewSpiral(desc_pos=desc_pos, tool=tool, user=user, vel=vel, acc=acc, exaxis_pos=epos, ovl=ovl, offset_flag=flag, offset_pos=offset_pos2, param=sp)
+    print(f"newspiral errcode:{rtn}")
     robot.CloseRPC()
+    return 0
 
 Start of servo motion
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -366,8 +367,8 @@ Example of joint space servo mode motion code
     from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0]
-    epos = [0.0,0.0,0.0,0.0]
+    j = [0.0] * 6
+    epos = [0.0] * 4
     vel = 0.0
     acc = 0.0
     cmdT = 0.008
@@ -376,17 +377,27 @@ Example of joint space servo mode motion code
     flag = 0
     count = 500
     dt = 0.1
-    ret, joint_pos = robot.GetActualJointPosDegree(0)
+    cmdID = 0
+    ret, j = robot.GetActualJointPosDegree(flag)
     if ret == 0:
-        print("Start the movement of the servo joint...")
+        cmdID += 1
         robot.ServoMoveStart()
-        while count > 0:
-            robot.ServoJ(joint_pos=joint_pos, axisPos=epos, cmdT=cmdT, filterT=filterT, gain=gain)
-            joint_pos[0] += dt
+        while count:
+            robot.ServoJ(joint_pos=j,axisPos= epos,acc= acc,vel= vel, cmdT=cmdT, filterT=filterT, gain=gain, id=cmdID)
+            j[4] += dt
             count -= 1
             time.sleep(cmdT)
+            rtn,pkg = robot.GetRobotRealTimeState()
+            print(f"Servoj Count {pkg.servoJCmdNum}; last pos is {pkg.lastServoTarget[0]},{pkg.lastServoTarget[1]},{pkg.lastServoTarget[2]},{pkg.lastServoTarget[3]},{pkg.lastServoTarget[4]},{pkg.lastServoTarget[5]}")
+
+            if count < 50:
+                robot.MotionQueueClear()
+                print(f"After queue clear, Servoj Count {pkg.servoJCmdNum}; last pos is {pkg.lastServoTarget[0]},{pkg.lastServoTarget[1]},{pkg.lastServoTarget[2]},{pkg.lastServoTarget[3]},{pkg.lastServoTarget[4]},{pkg.lastServoTarget[5]}")
+                break
         robot.ServoMoveEnd()
-        robot.CloseRPC()
+    else:
+        print(f"GetActualJointPosDegree errcode:{ret}")
+    robot.CloseRPC()
 
 Joint torque control begins
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1134,3 +1145,17 @@ Example of robot singular pose protection code
     rtn = robot.SingularAvoidEnd()
     print(f"SingularAvoidEnd rtn is {rtn}")
     robot.CloseRPC()
+
+Clear the motor command queue
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``MotionQueueClear()``"
+    "Description", "Clear the motor command queue"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- errcode Success-0 Failure- errcode"

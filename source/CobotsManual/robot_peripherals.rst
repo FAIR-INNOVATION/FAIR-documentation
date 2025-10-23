@@ -3030,7 +3030,7 @@ In "Configured Servo Drives", select the control mode as "Position Mode", select
 
 After the servo is successfully enabled, check the "Servo" status light in the "Servo" column of the robot's status bar to see that the "Servo Enable" status light is on, indicating that the servo driver has been enabled. Click the "Enable" status button to disable the servo driver, and the "Servo Enable" status light will go out.
 
-.. figure:: robot_peripherals/103.png
+.. figure:: robot_peripherals/203.png
    :align: center
    :width: 4in
 
@@ -4409,7 +4409,7 @@ Set the laser tracking sensor data to a non-transformation type.
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.16‑19 Set up transformation type laser data
+.. centered:: Figure 8.16‑19 Set up non-transformation type laser data
 
 Click "Initial Settings", "Peripherals", "Tracking", "Sensors", click "Sensor Configuration" in the drop-down box of the page, and adjust "Data Processing" to data without transformation.
 

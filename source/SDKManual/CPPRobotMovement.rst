@@ -1483,3 +1483,14 @@ Robot Singular Pose Protection Example
         robot.CloseRPC();
         return 0;
     }
+
+Clear the motion command queue
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Clear the motion command queue
+    * @return error code
+    */
+    errno_t MotionQueueClear();

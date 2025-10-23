@@ -1707,6 +1707,17 @@ Safety Stop Trigger
     */
     int GetSafetyCode();
  
- 
+Clear the motion command queue
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Clear the motion command queue
+    * @return Error code
+    */
+    public int MotionQueueClear();
  
  

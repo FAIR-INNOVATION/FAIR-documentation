@@ -626,7 +626,7 @@ Get Current External Tool Coordinate System
      */
     public int GetCurExToolCoord(ref DescPose coord)
 
-Get Current Extended Axis Coordinate System
+ Get Current Extended Axis Coordinate System
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-V1.1.8  Web-3.8.6
 

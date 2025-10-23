@@ -415,6 +415,71 @@ Constant Force Control
     */   
     int FT_Control(int flag, int sensor_id, Object[] select, ForceTorque ft, Object[] ft_pid, int adj_sign, int ILC_sign, double max_dis, double max_ang, int filter_Sign, int posAdapt_sign, int isNoBlock);   
 
+Constant Force Control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Constant Force Control
+    * @param  flag 0-Disable constant force control, 1-Enable constant force control
+    * @param  sensor_id Force sensor ID
+    * @param  select  Collision detection for six degrees of freedom, 0-Disable, 1-Enable
+    * @param  ft  Collision force/torque, fx, fy, fz, tx, ty, tz
+    * @param  ft_pid Force PID parameters, Torque PID parameters
+    * @param  adj_sign Adaptive start/stop control, 0-Disable, 1-Enable
+    * @param  ILC_sign ILC start/stop control: 0-Stop, 1-Training, 2-Operational
+    * @param  max_dis Maximum adjustment distance, unit mm
+    * @param  max_ang Maximum adjustment angle, unit deg
+    * @param  M Mass parameter
+    * @param  B Damping parameter
+    * @param  polishRadio Polishing radius, in mm
+    * @param  filter_Sign Filter enable flag: 0-Off; 1-On (default off)
+    * @param  posAdapt_sign Pose adaptation enable flag: 0-Off; 1-On (default off)
+    * @param  isNoBlock Blocking flag: 0-Blocking; 1-Non-blocking
+    * @return Error code
+    */
+    public int FT_Control(int flag, int sensor_id, int[] select, ForceTorque ft, double[] ft_pid, int adj_sign, int ILC_sign, double max_dis, double max_ang, double[] M, double[] B, double polishRadio, int filter_Sign, int posAdapt_sign, int isNoBlock)
+
+Example Code for Constant Force Control with Damping
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestFTControlWithDamping(Robot robot)
+    {
+        int sensor_id = 10;
+        int[] select = { 0,0,1,0,0,0 };
+        double[] ft_pid = { 0.0008, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        int adj_sign = 0;
+        int ILC_sign = 0;
+        double max_dis = 100.0;
+        double max_ang = 20;
+        ForceTorque ft = new ForceTorque(0, 0, 0, 0, 0, 0);
+        ft.fz = -10.0;
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        JointPos j1 = new JointPos(-118.985, -86.882, -118.139, -65.019, 90.002, 54.951);
+        JointPos j2 = new JointPos(-77.055, -77.218, -126.219, -66.591, 90.028, 96.881);
+        DescPose desc_p1 = new DescPose(-300.856, -332.618, 309.240, 179.976, -0.031, 96.065);
+        DescPose desc_p2 = new DescPose(-16.399, -383.760, 309.312, 179.975, -0.031, 96.064);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        double[] M = {2.0, 2.0};
+        double[] B = {8.0, 8.0};
+        double polishRadio;
+        int filter_Sign;
+        int posAdapt_sign;
+        int isNoBlock;
+        DescPose ftCoord = new DescPose();
+        robot.FT_SetRCS(2, ftCoord);
+        int rtn = robot.FT_Control(1, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, 0, 0, 1, 0);
+        System.out.printf("FT_Control start rtn is %d\n", rtn);
+        rtn = robot.MoveL(j1, desc_p1, 0, 0, 100.0, 100.0, 20.0, -1.0, 0, epos, 0, 0, offset_pos, 0, 0, 10);
+        rtn = robot.MoveL(j2, desc_p2, 0, 0, 100.0, 100.0, 20.0, -1.0, 0, epos, 0, 0, offset_pos, 0, 0, 10);
+        rtn = robot.FT_Control(1, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, 0, 0, 1, 0);
+        System.out.printf("FT_Control end rtn is %d\n", rtn);
+        robot.CloseRPC();
+    }
+
 Constant Force Control Example
 +++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -766,19 +831,6 @@ Six-Dimensional Force and Joint Impedance Hybrid Dragging Example
         robot.CloseRPC();
         return 0;
     }
-
-Set Wire Search Extended IO Port
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Set wire search extended IO port
-    * @param [in] searchDoneDINum Wire search success DO port (0-127)
-    * @param [in] searchStartDONum Wire search start/stop control DO port (0-127)
-    * @return Error code
-    */
-    int SetWireSearchExtDIONum(int searchDoneDINum, int searchStartDONum);
 
 Example Program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

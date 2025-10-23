@@ -1312,3 +1312,152 @@ Then select "Ctrl-AO1" from the "Welder Voltage Control AO" dropdown menu and cl
    :align: center
 
 .. centered:: Figure 6.7‑7 Control Box Voltage Analog AO Configuration
+
+Linear Rack Guide Collision Detection
+----------------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~
+
+The Linear Rack Guide Collision Detection function is designed to trigger an alarm and execute an emergency stop when a collision occurs between the guide or the robot and an environmental object during asynchronous or synchronous operation. By monitoring changes in the guide torque feedback, it determines if a collision has occurred based on a set threshold. If a collision is detected, the guide stops immediately, preventing the guide and robot from applying continuous force to the struck object, thereby enhancing human-robot collaboration safety.
+
+Linear Rack Guide Collision Detection Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To utilize the Linear Rack Guide Collision Detection function, the "Rail_Adaptation_Program.lua" program must be executed after the guide is activated. This ensures the function can adapt to different guides and loading conditions, achieving optimal collision detection performance. If adaptation is not performed, the collision detection performance will significantly degrade, requiring a larger external force to trigger a collision.
+
+Linear Rack Guide Parameter Setting and Enable
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Log in to the web interface, navigate sequentially to "Initial Setup" → "Basic" → "Coordinate System" → "Extended Axis" to enter the Extended Axis Coordinate System setup module, as shown in Figure 2-1.
+
+.. image:: base/071.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.8‑1 Extended Axis Coordinate System Setup Module
+
+**Step2**: Set parameters and calibrate as needed based on the actual working conditions of the extended axis and the robot. In Figure 2-1, click Edit, set the Extended Axis Coordinate System Name to "exaxis1", select the Scheme as "0-Single Degree of Freedom Linear Slide", and set the Extended Axis Number to "1". If the guide operates only asynchronously with the robot, calibration can be skipped. If synchronous operation is required, calibration is mandatory. Refer to the relevant user manual or consult a professional for the calibration procedure. After setting the parameters, click "Save" and apply the corresponding coordinate system, as shown in Figure 2-2.
+
+.. image:: base/072.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.8‑2 Extended Axis Coordinate System Parameter Setting
+
+**Step3**: Establish UDP communication between the extended axis and the robot, ensuring the extended axis PLC program can send the torque feedback data from the drive motor (after the reducer) back to the robot controller. Navigate sequentially to "Initial Setup" → "Peripherals" → "Extended Axis" to enter the UDP Communication Configuration page. Select the coordinate system set in Step 2 and apply it. Click the "Edit" icon for UDP Communication Configuration to configure and load the communication settings. The PLC and laptop IP addresses must be on the same subnet as the controller, as shown in Figure 2-3. It is crucial to ensure the extended axis PLC program sends the torque feedback data (motor torque after the reducer) back to the robot controller with a sampling cycle as close to 1ms as possible, and not exceeding 4ms; otherwise, the collision detection function will fail.
+
+.. image:: base/073.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.8‑3 UDP Communication Configuration Page
+
+**Step4**: Configure the UDP Extended Axis parameters. The parameter setting page is shown in Figure 2-4. Select the Axis Type as "Linear Guide", and the Axis Direction as "Positive". Configure the remaining parameters according to the actual situation. The Lead and Encoder Resolution are fixed and determined by the guide. The upper limits for Running Speed and Acceleration are influenced by motor performance. The limits used in our functional test are shown in Figure 2-4; consult a professional when configuring different limits.
+
+.. image:: base/074.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.8‑4 UDP Extended Axis Parameter Setting
+
+**Step5**: Enable the linear rack guide and move it to the starting point. Enable the guide using the "Remove Enable" button in Figure 2-4 or the "Servo Enable" button in Figure 2-5. If the slider is far from the starting point, use "Reverse Rotation" or "Forward Rotation" to move the slider to the start (note: the running speed should be away from 15%). After reaching the starting point, click "Zero Point Setting" and perform homing using the "Current Position Return to Zero" method.
+
+.. image:: base/075.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.8‑5 Enable Linear Rack Guide and Move
+
+Enabling the Linear Rack Guide Collision Detection Function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Ensure both the guide and robot are installed in the upright mounting orientation. Before enabling the collision detection function, verify the mounting orientation is upright. Specifically, first ensure the guide and robot are physically mounted upright. Then, navigate sequentially to "Initial Setup" → "Basic" → "Mounting" to access the Free Mounting page. If both "Base Rotation" and "Base Tilt" are 0, the software is set to upright mounting. Otherwise, they must be set to 0. An error will be prompted on the interface if they are not zero, as shown in Figure 2-6.
+
+.. image:: base/076.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.8‑6 Error Prompted if Mounting Orientation is Not Upright
+
+**Step2**: Enable the Linear Rack Guide Collision Detection function and set its parameters. Navigate sequentially to "Initial Setup" → "Basic" → "Joint" → "Collision Level" to enter the Collision Level setting page. Click the slider for the "Linear Rack Guide Collision Detection" function, then set the Gear Radius and Slider Mass. The Gear Radius can be calculated from the Lead and Reduction Ratio. The Slider Mass does not include the robot or the end effector load it carries. The guide level has 11 options, where Level1 is the most sensitive (easiest to trigger a collision) and Level10 is the least sensitive (hardest to trigger). Before executing the adaptation program after controller power-on, set the collision level to "Off".
+
+.. image:: base/077.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.8‑7 Linear Rack Guide Collision Detection Function
+
+**Step3**: Execute the "Rail_Adaptation_Program.lua" program to adapt to the current guide. This program must be executed after every controller restart (to prevent changes like robot type from affecting the guide's dynamic characteristics). Before executing the program, ensure the guide collision level is set to "Off". In Auto mode, run the Lua program at 100% interface speed. After the program completes one cycle, the adaptation is finished, and the program can be stopped.
+
+.. image:: base/078.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 6.8‑8 Execute "Rail_Adaptation_Program.lua" to Adapt to Current Guide
+
+**Step4**: Set an appropriate guide collision level and execute the task. Users can set the guide collision level reasonably based on motor drive performance and task running speed. If the guide and robot are running asynchronously, a collision with the robot or guide can trigger an "Axis 8 Collision Fault, Resettable". In this case, the guide stops running, as shown in Figure 2-9. If the guide and robot are running synchronously, a collision with the robot can trigger an alarm, causing the guide to stop, while the robot responds according to the set collision strategy.
+
+.. image:: base/079.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.8‑9 Guide Triggering Collision Fault
+
+Force Sensor On-Load Zero Calibration and Open Posture Compliance Admittance Parameters
+------------------------------------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~
+
+The Force Sensor On-Load Zero Calibration function is used to quickly clear the sensor's zero drift data when the robot, equipped with a quick-change head, replaces the load without dismantling the quick-change head. The admittance parameters for Open Posture Compliance are used for customers to adjust the posture based on the actual torque magnitude during constant force control.
+
+Force Sensor On-Load Zero Calibration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**: Install and activate the force sensor. Navigate to "Initial Setup" -> "Peripherals" -> "End Effector", click "Adapt Device" to enter the end effector configuration interface. After the force sensor configuration is complete, select the configured force sensor number, click the "Reset" button. After the command sent successfully prompt appears, click the "Activate" button. Check the activation status in the force sensor information table to confirm successful activation. Additionally, the force sensor will have initial values; the user can choose "Zero Calibration" and "Remove Zero Offset" as needed, as shown in Figure 2-1. Force sensor zero calibration requires ensuring the force sensor is oriented vertically downward and no load is configured below the sensor.
+
+.. image:: base/080.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.9‑1 Force Sensor Configuration Information
+
+**Step2**: Force sensor load identification. Navigate to "Initial Setup" -> "Basic" -> "Load", click "Sensor" to enter the Force/Torque Sensor Load interface. Perform sensor automatic zeroing, record the initial position, then switch the robot to automatic mode, and click "Auto Zero", as shown in Figure 2-2.
+
+.. image:: base/081.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.9‑2 Force Sensor Load Identification
+
+**Step3**: If the actual load at the end of the force sensor is changed, input the load weight and center of mass coordinates in the load configuration module, click "Apply" to update the load configuration and complete the force sensor on-load zero calibration.
+
+Open Posture Compliance Admittance Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**: Click "Initial Setup" -> "Basic" -> "Coordinate System" -> "Tool" to enter the Tool Coordinate System setting interface. Select "Coordinate System Name" and set the coordinate system parameters corresponding to the end effector, as shown in Figure 3-1.
+
+.. image:: base/082.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.9‑3 Tool Coordinate System Setting
+
+**Step2**: Click "Teach Program" -> "Program Editing", write a constant force control Lua script. Select "Force Control Set" -> "Control", add a force control motion command. Set Posture Compliance to "Enable", set the inertia coefficient and damping coefficient. Set the maximum adjustment angle as the threshold for posture compliance angle, as shown in Figure 3-2.
+
+.. image:: base/083.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.9‑4 Open Posture Compliance Admittance Parameters
+
+**Step3**: On the web interface, click "FT", set the force sensor reference coordinate system. Select the reference coordinate system as "Custom Coordinate System" and set the corresponding coordinate system parameters to "0", as shown in Figure 3-3.
+
+.. image:: base/084.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.9‑4 Setting the Force Sensor Reference Coordinate System
+
+**Step4**: Run the script and observe the posture compliance effect. The inertia parameter adjusts the acceleration response and anti-disturbance capability; a larger inertia results more noticeable robot lag. The damping coefficient affects the smoothness during posture compliance; a larger damping makes posture compliance more difficult.

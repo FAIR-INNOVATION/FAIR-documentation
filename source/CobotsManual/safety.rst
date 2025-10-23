@@ -69,6 +69,33 @@ Emergency stop types 0, 1a, 1b, 2 can be set, stop time limit can be set, and st
 
 .. centered:: Figure 7.4-1 Emergency stop configuration
 
+Safe Stop Recovery Optional Auto Enable Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++
+
+After experiencing a Category 1b emergency stop, the robot provides two modes for user selection: Manual Enable and Auto Enable. When Manual Enable is selected, the user needs to change the robot's operation mode to Automatic after releasing the emergency stop button, and then manually click the enable button to enable the robot. When Auto Enable is selected, the robot will automatically enable itself after the user releases the emergency stop button.
+
+Operation Procedure
++++++++++++++++++++++++++++
+
+**Step1**: Click the "Initial Setup" -> "Safety" -> "Emergency Stop" button. Select "Category 1b" for the "Stop Type", and set the "Stop Time Limit" and "Stop Distance Limit" parameters according to actual needs. The "Enable Strategy After E-Stop Reset" can be selected as "Manual Enable" or "Auto Enable", as shown in Figure 2-1.
+
+.. image:: safety/025.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-2 Enable Strategy Setting
+
+**Step2**: When "Auto Enable" is selected, the robot will automatically enable itself after the user releases the emergency stop button. When "Manual Enable" is selected, the user needs to manually click the enable button in Automatic mode after releasing the emergency stop button to enable the robot, as shown in Figure 2-2.
+
+.. image:: safety/026.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-3 Manual Enable Operation
+
 Protective stop
 ---------------------
 

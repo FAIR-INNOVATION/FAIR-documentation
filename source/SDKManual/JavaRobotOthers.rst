@@ -403,3 +403,14 @@ Get Robot Operating System Upgrade Result (LA Control Box)
      * @return Error code
      */
     public int GetKernelUpgradeResult(int[] result)
+
+Robot MCU Log Generation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Robot MCU log generation
+    * @return Error code
+    */
+    public int RobotMCULogCollect()

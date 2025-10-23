@@ -1540,3 +1540,14 @@ Robot singular pose protection code example
 
         return 0;
     }
+
+Clear Motion Command Queue
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Clears the motion command queue
+    * @return Error code
+    */
+    public int MotionQueueClear()
