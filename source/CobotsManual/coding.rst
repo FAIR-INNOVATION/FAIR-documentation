@@ -7547,3 +7547,105 @@ The operational procedure for the custom weaving welding function is as follows:
 .. centered:: Chart 9.35-5 Modified LUA Command Interface
 
 **Step 6**: The steps for setting up custom weaving for circular and full-circle trajectories are the same as Step 1 to Step 5 above.
+
+Teach point configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click "Points Config." to enter the teaching point configuration interface.
+
+Before using the button box or other IO signals to record the teaching point function, the user first configures the teaching point name prefix, the upper limit of the number and the teaching method. The name prefix supports two modes: custom prefix and current program name as the prefix. For example, customize the name prefix "P", number upper limit "3", teaching method "robot teaching", record the current end (tool) points of the robot in sequence: P1, P2, P3, and record again will overwrite the previous record points.
+
+.. image:: coding/483.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.36-1 Teach point configuration
+
+End-point dot automatic overwrite update Lua program function
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+End-point dot configuration
+********************************************
+
+1. Enable the end-point dot function and click on settings. You can use the switch to select the Lua programs that need to be updated for specific positions. 
+
+.. image:: coding/484.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.36‑2 Enable end point recording
+
+2. The configuration is complete, with the end-tip dot name prefixed as "test", the numbering limit set to 10, and all Lua programs selected for enabling updates. Close the webApp, and the function remains active.
+   
+End-button dot automatic update Lua program
+************************************************************
+
+1. Click the robot end-point dot button.
+
+.. image:: coding/485.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.36‑3 end-point dot button
+
+2. At this point, the end-tip LED flashes: with the purple light flashing (start) -> blue light on (dot recording and updating in Lua) -> green light on (dot recording completed), and the position information corresponding to the selected Lua program's name is synchronized and updated.
+
+.. image:: coding/486.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.36‑3 End-tip dot recording and updating Lua program LED changes
+
+3. When the dot recording fails, the end-tip LED flashes: Purple light flashing (start) -> Red light flashing (dot recording failed) -> Green light on (returning to normal).
+
+.. image:: coding/487.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.36‑4 LED changes when end-tip dot recording fails
+
+Function usage example
+******************************************
+
+1. Click on Auxiliary Applications - Tool Applications - Teaching Point Configuration, customize the prefix to "test", set the number limit to 5, select Robot Teaching as the teaching method, enable the end-point dot function, and click on settings.
+
+2. Activate the Lua program "program1" that requires position updates.
+
+.. image:: coding/488.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.36‑5 Teaching Point Configuration
+
+3. As shown below, it depicts the "program1" program and its current running trajectory.
+
+.. image:: coding/489.png
+   :width: 6in
+   :align: center
+
+.. centered:: Chart 9.36‑6 Program1 program and its current running trajectory
+
+4. Switch the page to manual mode, move the robot to a new position, click the end-tip dot button, and wait for the end-tip LED to complete its flashing sequence: Purple light flashing (start) -> Blue light on (dot recording and updating in Lua) -> Green light on (dot recording completed), at which point the recorded position is labeled as test1.
+
+5. Repeat step 4 to record positions "test2," "test3," "test4," and "test5," completing the recording of 5 points. At this stage, the positions for the "program1" program have been synchronized and updated.
+
+6. Re-run the "program1" program. The motion trajectory will have been updated, and the updated motion trajectory is shown below.
+
+.. image:: coding/490.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.36‑7 Updated running trajectory
+
+Main program configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click "Main program" to enter the main program configuration function interface.
+
+The configuration of the main program can be used in conjunction with the DI configuration of the main program startup. The configured main program needs to be trial run first to ensure safety. After configuring the corresponding DI in the robot settings to start the main program signal function, the user can control the DI signal to run the main program.
+
+.. image:: coding/491.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 9.37‑1 Main program configuration
