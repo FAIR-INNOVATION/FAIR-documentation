@@ -4,13 +4,36 @@ Base
 .. toctree:: 
    :maxdepth: 6
 
+Installation
+-----------------------------------------------------
+
+Robot installation method setting and display
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the web-based teaching page, click "Initial Setup" → "Basic" → "Installation". The page layout is shown as follows. The specific instructions are as follows:
+
+(1) Quick installation is used for common installation settings of robotic arms, corresponding from left to right: formal installation, side installation and reverse installation. When the corresponding button is clicked, the interface will automatically deliver and change the base tilt and rotation angle.
+(2) If the required installation method does not meet the requirements of quick installation, you can configure it by setting the base tilt and rotation angle yourself.
+(3) Whether it is quick installation or setting the base tilt and rotation angle by yourself, you need to click Apply to take effect.
+   
+.. note:: Please make sure that the set installation method is consistent with the actual robotic arm before dragging, otherwise there will be safety risks.
+
+.. image:: teaching_pendant_software/026.png
+   :width: 6in
+   :align: center
+   
+.. centered:: Figure 6.1‑1 360 degree free installation
+
+.. important:: 
+   After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
+
 Coordinate
 ----------------
 
 TCP
 ~~~~~~~~~~~~~~~~~~~
 
-In the menu bar of "Initial" -> "Base" -> "Coordinate", click "TCP" to enter the tool coordinate page.
+In the menu bar of "Initial" -> "Base", click "TCP" to enter the tool coordinate page.
 
 Tool coordinates can be modified, cleared, renamed and applied. In the drop-down list of tool coordinate systems, after selecting the corresponding coordinate system(the coordinate system name can be customized), the corresponding coordinate value, tool type and installation location (only displayed under sensor type tools) will be displayed below. After selecting a coordinate system, click the "Apply" button, and the currently used tool coordinate system will become the selected coordinate, as shown below.
 
@@ -18,7 +41,7 @@ Tool coordinates can be modified, cleared, renamed and applied. In the drop-down
    :width: 4in
    :align: center
    
-.. centered:: Figure 6.1-1 Set tool coordinates
+.. centered:: Figure 6.2‑1 Set tool coordinates
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. Tool calibration methods are divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the center point of the tool. Its posture defaults to be consistent with the end posture. The six-point method adds two points to the four-point method. , used to calibrate the attitude of the tool, here we take the six-point method as an example to explain.
 
@@ -26,7 +49,7 @@ Click "Modify" to reset the tool coordinate system of the number according to th
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.1-2 Set tool coordinates
+.. centered:: Figure 6.2‑2 Set tool coordinates
 
 Select a fixed point in the robot space, move the tool to the fixed point in three different postures, and set 1-3 points in sequence. As shown in the upper left of figure. Move the tool vertically to the fixed point setting point 4, as shown in the upper right of figure. Keep the posture unchanged, use the base coordinates to move, move a certain distance in the horizontal direction, and set point 5, which is the positive direction of the X-axis of the set tool coordinate system. Return to the fixed point, move vertically for a certain distance, and set point 6. This direction is the positive direction of the Z-axis of the tool coordinate system, and the positive direction of the Y-axis of the tool coordinate system is determined by the right-hand rule. Click the Calculate button to calculate the tool pose. If you need to reset it, click Cancel and press the Modify button to re-create the tool coordinate system.
 
@@ -34,7 +57,7 @@ Select a fixed point in the robot space, move the tool to the fixed point in thr
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.1-3 Schematic diagram of the six-point method
+.. centered:: Figure 6.2‑3 Schematic diagram of the six-point method
 
 After completing the last step, click "Finish" to return to the tool coordinate interface, and click "Save" to store the tool coordinate system just created.
 
@@ -46,7 +69,7 @@ After completing the last step, click "Finish" to return to the tool coordinate 
 Ext. TCP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial" -> "Base" -> "Coordinate", click "Ext. TCP" to enter the external tool coordinate system interface.
+Under the menu bar of "Initial" -> "Base", click "Ext. TCP" to enter the external tool coordinate system interface.
 
 The modification, clearing and application of external tool coordinates can be realized in the external tool coordinate system setting interface.
 
@@ -56,7 +79,7 @@ There are 15 numbers in the drop-down list of the external tool coordinate syste
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.1-4 External tool coordinates
+.. centered:: Figure 6.2‑4 External tool coordinates
 
 Click "Modify" to reset the tool coordinate system of the number according to the prompt, as shown in figure below.
 
@@ -64,7 +87,7 @@ Click "Modify" to reset the tool coordinate system of the number according to th
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.1-5 Schematic diagram of the six-point method
+.. centered:: Figure 6.2‑5 Schematic diagram of the six-point method
 
 **1. Three-point method to determine the external TCP**
 
@@ -98,14 +121,14 @@ After completing the last step, click "Finish" to return to the tool coordinate 
 Workpiece
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial" -> "Base" -> "Coordinate", click "Workpiece" to enter the workpiece coordinates interface. Workpiece coordinates can realize the modification, clearing and application of workpiece coordinates. There are 15 numbers in the drop-down list of the workpiece coordinate system, select the corresponding coordinate system (wobjcoord0~
+Under the menu bar of "Initial" -> "Base", click "Workpiece" to enter the workpiece coordinates interface. Workpiece coordinates can realize the modification, clearing and application of workpiece coordinates. There are 15 numbers in the drop-down list of the workpiece coordinate system, select the corresponding coordinate system (wobjcoord0~
 wobjcoord14), and then the corresponding coordinate value will be displayed in the "Coordinate System Coordinates" below. After selecting a certain coordinate system, click the "Apply" button, and the currently used workpiece coordinate system will change to the selected coordinates, as shown in figure below.
 
 .. image:: base/006.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.1-6 Set workpiece coordinates
+.. centered:: Figure 6.2‑6 Set workpiece coordinates
 
 The workpiece coordinate system is generally calibrated based on the tool, and the workpiece coordinate system needs to be established on the basis of the established tool coordinate system. Click "Modify" to reset the workpiece coordinate system of the number according to the prompt. Fix the workpiece and select the calibration method "origin-X-axis-Z-axis" or "origin-X-axis-XY+plane". The selection of the first two points of the two calibration methods is the same, and the third point is different. One method is to calibrate the Z direction of the workpiece coordinate system, and the second method is to calibrate a point on the XY+ plane, just calibrate according to the diagram. Click the Calculate button to calculate the workpiece pose. If you need to reset it, click Cancel and press the Modify button to re-create the workpiece coordinate system.
 
@@ -113,7 +136,7 @@ The workpiece coordinate system is generally calibrated based on the tool, and t
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.1-7 Schematic diagram of the three-point method
+.. centered:: Figure 6.2‑7 Schematic diagram of the three-point method
 
 After completing the last step, click "Finish" to return to the workpiece coordinate interface, and click "Save" to store the workpiece coordinate system just created.
 
@@ -121,101 +144,13 @@ After completing the last step, click "Finish" to return to the workpiece coordi
    1. The workpiece coordinate system is calibrated based on the tool, and the workpiece coordinate system needs to be established on the basis of the established tool coordinate system.
    2. The workpiece coordinate system generally uses wobjcoord1~wobjcoord14, and wobjcoord0 is used to indicate that the origin of the workpiece coordinate system is at the origin of the base coordinates. When calibrating the workpiece coordinate system, it is first necessary to apply the workpiece coordinate system to wobjcoord0, and then select other workpiece coordinate systems for calibration and application.
 
-
-Ext. Axis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Under the menu bar of "Initial" -> "Base" -> "Coordinate", click "Ext. Axis" to enter the extended axis coordinate system interface. In the extended axis coordinate system setting interface, the modification, clearing and application of the extended axis coordinates can be realized.
-
-There are 5 numbers in the drop-down list of the extended axis coordinate system, from eaxis0~eaxis4, after selecting the corresponding coordinate system, the corresponding coordinate value will be displayed below, after selecting a coordinate system, click the "Apply" button, the currently used extended axis coordinates The system becomes the selected coordinates, as shown in figure below.
-
-.. image:: base/008.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.1-8 Extended Axis Coordinates
-
-Click "Modify" to reset the extended axis coordinate system of the number according to the prompt, as shown in figure below. Before calibration, clear the extended axis coordinate system that needs to be calibrated, and apply this extended axis coordinate system. 
-
-Let's first look at the first expansion axis scheme - the calibration method of the linear guide. Select the number of the extension axis, get information to get the driver information of the corresponding extension axis, and we can configure parameters based on this information. 
-
-Set the DH parameters after configuration, and the linear guide rail scheme defaults to 0. Set the position of the robot relative to the expansion axis, and the linear guide is on the expansion axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
-
-.. image:: base/009.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.1-9 Linear guide configuration
-
-If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, and align the end center of the robot (using the tool end point in the application tool coordinate system) with two different postures. Fix a point on the quasi-expansion axis, set point 1 and point 2 respectively. 
-
-Remove the enable, and move the extension axis for a certain distance. After enabling, also align the center point of the end of the robot with the previous fixed point, and set point 3. Remove the enable, move the expansion axis to the zero point, and enable the expansion axis. Move the center point of the end of the robot to the fixed point and vertically upward space, set point 4, calculate the coordinate system and save it.
-
-.. image:: base/010.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 6.1-10 Linear guide calibration
-
-Next, let's look at the second expansion axis scheme - the calibration method of the positioner. The positioner is composed of two extension axes. Select the number of the extension axis and get the information to get the driver information of the corresponding extension axis. 
-
-We can configure parameters according to this information. After configuration, set the DH parameters, measure the DH parameters of the positioner according to the diagram, and input them into the input box. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
-
-.. image:: base/011.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.1-11 Positioner configuration
-
-If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. 
-
-Carl pose, for example, select a point in the positive direction of Y, and measure Y to be 100mm, then input the value as shown in the figure, click the reference point, and the reference point can be set. The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point.
-
-.. image:: base/012.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.1-12 Positioner reference point configuration
-
-Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the two axes for a short distance, align the center of the end of the robot to the reference point, and set Point 2, continue to jog the two axes, the center of the robot end is aligned with the reference point, set point 3, and finally continue to jog the two axes, align the center of the robot end with the reference point, set point 4, click Calculate, and get the coordinates Click the save button to apply the result.
-
-.. image:: base/013.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 6.1-13 Positioner calibration
-
-Next, let's look at the third extended axis solution - the calibration method of the single-axis positioner. The positioner is composed of a rotating extension shaft. Select the number of the extension shaft and get the information to get the driver information of the corresponding extension shaft. 
-
-We can configure parameters according to this information. The DH parameter is set to 0. Set the position of the robot relative to the extension axis, and the positioner is outside the extension axis. If you don't want to calibrate, just click Save. At this time, the expansion axis can only move asynchronously.
-
-.. image:: base/014.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.1-14 Single axis positioner configuration
-
-If you need to move synchronously with the robot, click Calibrate to enter the calibration interface. At the zero point of the extended axis, click the Eaxis in the operation area to enable the extended axis, establish a coordinate system on the positioner, select a point, and input the value of the point under the coordinate system. Carl pose, click "Reference Point" to set the reference point. 
-
-The following four calibration points need to align the center of the end of the robot (the end point of the tool in the application tool coordinate system) with this reference point. Align the center of the end of the robot (using the end point of the tool in the application tool coordinate system) to the reference point, set point 1, click the Eaxis in the operation area to jog the rotation axis for a short distance, align the center of the end of the robot to the reference point, and set the point 2. Continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 3, and finally continue to jog the rotation axis, align the center of the end of the robot with the reference point, set point 4, click Calculate, and get the result of the coordinate system, Click Save to apply.
-
-.. image:: base/015.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.1-15 Single axis positioner calibration
-
-.. important:: 
-   1. The extended axis coordinate system is calibrated on the basis of the tool, and the extended axis coordinate system needs to be established on the basis of the established tool coordinate system.
-   2. The extended axis system generally uses exaxis1~exaxis4, and exaxis0 is used to represent the non-extended axis coordinate system. When calibrating the extended axis coordinate system, the extended axis coordinate system must first be applied to exaxis0, and then other extended axis coordinate systems should be selected for calibration and application.
-
 Payload
 -------------
 
 End payload
 ~~~~~~~~~~~~~~
 
-Under the menu bar of "Initial" -> "Base" -> "Payload", click "End payload" to enter the end load interface.
+In the menu bar under 'Initial Setup' -> 'Basic' -> 'Load', click 'Trajectory Identification' to enter the trajectory identification interface.
 
 When configuring the end load, please enter the mass of the end tool used and the corresponding center of mass coordinates into the "Load mass" and "Load mass center coordinates X, Y and Z" input boxes and apply.
 
@@ -226,7 +161,7 @@ When configuring the end load, please enter the mass of the end tool used and th
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.2-1 Schematic diagram of load setting
+.. centered:: Figure 6.3-1 Schematic diagram of load setting
 
 .. important:: 
    After the load is installed at the end of the robot, the weight of the end load and the coordinates of the center of mass must be set correctly, otherwise it will affect the drag function of the robot and the use of the collision detection function.
@@ -240,7 +175,7 @@ Before taking measurements, make sure the load is installed and then select the 
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.2-2 Load Identification Joint Setup
+.. centered:: Figure 6.3-2 Load Identification Joint Setup
 
 Click "Load Identification Start" to test. In case of emergency, please stop the movement in time.
 
@@ -248,7 +183,7 @@ Click "Load Identification Start" to test. In case of emergency, please stop the
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.2-3 load identification start
+.. centered:: Figure 6.3-3 load identification start
 
 After the exercise is over, click the "Get Identification Result" button to obtain the calculated tool data and display it on the page. If you want to apply it to the load data, click Apply.
 
@@ -256,7 +191,7 @@ After the exercise is over, click the "Get Identification Result" button to obta
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.2-4 Load Identification Results
+.. centered:: Figure 6.3-4 Load Identification Results
 
 Joint
 --------------
@@ -274,7 +209,7 @@ Administrators can use the default values or enter angle values. Input the angle
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-1 Schematic diagram of robot limit
+.. centered:: Figure 6.4-1 Schematic diagram of robot limit
 
 Joint Soft Limit Protection
 +++++++++++++++++++++++++++++++++++
@@ -298,7 +233,7 @@ Soft Limit Configuration and Function Control
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3‑1-2 Robot Soft Limit Configuration Module
+.. centered:: Figure 6.4‑1-2 Robot Soft Limit Configuration Module
 
 **Step2**: Set appropriate soft limits for each joint based on the robot's actual working range. Verify whether each joint's current angular position is within the preset soft limit range. If yes, click "Apply" to implement the preset soft limits; if not, move each joint within the preset range first. Otherwise, an out-of-limit error will appear when clicking "Apply", as shown below. In this case, perform single-axis jogging or dragging toward the valid range to clear the error.
 
@@ -306,7 +241,7 @@ Soft Limit Configuration and Function Control
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.3‑1-3 Error Display When Joint Angles Exceed Soft Limit Range
+.. centered:: Figure 6.4‑1-3 Error Display When Joint Angles Exceed Soft Limit Range
 
 **Step3**: After successful soft limit configuration, toggle the "Joint Soft Limit Protection" slider to activate this function (see Figure below). During drag teaching, the set soft limits will take effect, and resistance will be felt when approaching the limits.
 
@@ -314,7 +249,7 @@ Soft Limit Configuration and Function Control
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3‑1-4 Enabling Joint Soft Limit Protection
+.. centered:: Figure 6.4‑1-4 Enabling Joint Soft Limit Protection
 
 **Step4**: To disable Joint Soft Limit Protection, simply toggle the "Joint Soft Limit Protection" slider.
 
@@ -323,13 +258,13 @@ Collision level
 
 Under the menu bar of "Initial" -> "Base" -> "Joint", click "Collision Level" to enter the collision level interface.
 
-The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 6.1-16.
+The collision level is divided into one to ten levels, and the detection of one to three levels is more sensitive, and the robot needs to run at the recommended speed. At the same time, you can choose to customize the percentage setting, and 100% corresponds to the tenth level. The collision strategy can set the processing method of the robot after the collision, which is divided into error stop and continuous movement, and the user can set it according to the specific use requirements. Such as Figure 6.2‑16.
 
 .. image:: base/021.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-2 Schematic diagram of collision level
+.. centered:: Figure 6.4-2 Schematic diagram of collision level
 
 Post-collision response strategy function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -362,7 +297,7 @@ The Gravitational moment mode in collision strategy is set as follows.
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-3 Gravitational moment mode of Collision Strategy
+.. centered:: Figure 6.4-3 Gravitational moment mode of Collision Strategy
 
 Vibration response mode
 *************************
@@ -379,7 +314,7 @@ The setting steps of oscillation response mode in collision strategy are as foll
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-4 Vibration response mode of Collision Strategy
+.. centered:: Figure 6.4-4 Vibration response mode of Collision Strategy
 
 Collision rebound mode
 **************************
@@ -394,7 +329,7 @@ The collision rebound mode in collision strategy is set as follows.
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.3-5 Collision rebound mode of collision strategy
+.. centered:: Figure 6.4-5 Collision rebound mode of collision strategy
 
 The meaning of each parameter:
   - Safe time: indicates the duration in drag mode after switching from automatic mode to drag mode, and the range is [1000-2000] ms;
@@ -411,7 +346,7 @@ FT_Guard command is used to realize collision detection of force sensor. First s
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.3-6 parameter of FT_Guard command
+.. centered:: Figure 6.4-6 parameter of FT_Guard command
 
 FT_Guard command is usually used with motion command, such as PTP or LIN, and a simple example is shown below.
 
@@ -419,7 +354,7 @@ FT_Guard command is usually used with motion command, such as PTP or LIN, and a 
    :width: 5in
    :align: center
 
-.. centered:: Figure 6.3-7 example of FT_Guard with motion command
+.. centered:: Figure 6.4-7 example of FT_Guard with motion command
 
 The first behavior of figure sets the force sensor collision detection on, and the last behavior turns off the force sensor collision detection function.
 
@@ -436,7 +371,7 @@ The setup steps of static collision detection are as follows.
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-8 Static collision detection
+.. centered:: Figure 6.4-8 Static collision detection
 
 Torque Detection Function Before Dragging
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -454,7 +389,7 @@ Torque Detection Before Dragging
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-9 Torque Detection Function Before Dragging Enabled
+.. centered:: Figure 6.4-9 Torque Detection Function Before Dragging Enabled
 
 **Step2**: Switch to drag mode. The Web interface enters the drag mode by clicking the robot status area - robot drag status, long pressing the teach pendant "Teach Mode" button, or long pressing the robot end drag button. If the controller reports an error and the robot does not switch to drag mode, as shown in Figure 2-2, check whether the robot load configuration and installation method are correct.
 
@@ -462,7 +397,7 @@ Torque Detection Before Dragging
    :width: 2in
    :align: center
 
-.. centered:: Figure 6.3-10 Torque Exceeds Limit, Controller Reports Error
+.. centered:: Figure 6.4-10 Torque Exceeds Limit, Controller Reports Error
 
 **Step3**: Check the load configuration and installation method. Click "Initial Settings"->"Basic"-> "Load"->"End" to check whether the end load configuration on the web interface is the same as the actual installed load; click "Initial Settings"->"Basic"-> "Installation"->"Free Installation" to check whether the installation method on the web interface is the same as the actual installation method.
 
@@ -479,7 +414,7 @@ Under the menu bar of "Initial" -> "Base" -> "Joint", click "Friction comp." to 
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-11 Friction Compensation Settings
+.. centered:: Figure 6.4-11 Friction Compensation Settings
 
 .. important:: 
    The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
@@ -505,7 +440,7 @@ Dragging Force Optimization Configuration
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.3-12 Dragging Force Compensation Settings Module
+.. centered:: Figure 6.4-12 Dragging Force Compensation Settings Module
 
 **Step2**: Set "Compensation Switch" to "ON" and "Adaptive Switch" to "OFF", configure parameters as shown in Figure 2-1, then click "Apply" to successfully enable the function. Press the drag button to drag the robot, and the dragging feel will be noticeably smoother than before enabling the function.
 
@@ -539,13 +474,13 @@ If paused during a sleep operation, the pause duration does not count toward the
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑1 LUA Program Paused State
+.. centered:: Figure 6.5‑1 LUA Program Paused State
 
 .. image:: base/067.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑2 LUA Program Running State
+.. centered:: Figure 6.5‑2 LUA Program Running State
 
 I/O configuration
 ~~~~~~~~~~~~~~~~~~
@@ -557,7 +492,7 @@ DI Configuration
 
 In production, when the collaborative robot needs to connect peripherals or stops suddenly due to failure or other factors, it needs to output DO signal to realize sound and light alarm prompt. The input configurable functions are shown in table below.
 
-.. centered:: Table 6.4-1 Configurable functions of control box input
+.. centered:: Table 6.5‑1 Configurable functions of control box input
 
 .. list-table:: 
    :widths: 15 30 100
@@ -676,7 +611,7 @@ In production, when the collaborative robot needs to connect peripherals or stop
 Terminal input valid state
 ****************************************
 
-.. centered:: Table 6.4-2 Configurable functions of terminal input
+.. centered:: Table 6.5‑2 Configurable functions of terminal input
 
 .. list-table:: 
    :widths: 15 30 100 
@@ -735,7 +670,7 @@ The default configuration of the control box: CO0 is 1-robot error, CO1 is 2-rob
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.4‑3 Control box DI and DO configuration
+.. centered:: Figure 6.5‑3 Control box DI and DO configuration
 
 **Terminal DI default configuration**: DI0 drag teaching, DI1 teaching point recording.
 
@@ -743,7 +678,7 @@ The default configuration of the control box: CO0 is 1-robot error, CO1 is 2-rob
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑4 Terminal DI configuration
+.. centered:: Figure 6.5‑4 Terminal DI configuration
 
 After configuration is completed, the corresponding output DO status can be viewed in the control box I/O page under the corresponding state.
 
@@ -760,14 +695,14 @@ After configuration is completed, the corresponding output DO status can be view
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑5 Reduced mode configuration
+.. centered:: Figure 6.5‑5 Reduced mode configuration
 
 DO configuration
 ++++++++++++++++++
 
 The output configurable functions are shown in the following table:
 
-.. centered:: Table 6.4‑3 Control box output configurable functions
+.. centered:: Table 6.5‑3 Control box output configurable functions
 
 .. list-table:: 
    :widths: 15 30 100
@@ -938,7 +873,7 @@ Enter Initial Settings->Basics->I/O Settings->DO interface, and configure the co
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4‑6 Control box DO output configuration during power-on
+.. centered:: Figure 6.5‑6 Control box DO output configuration during power-on
 
 Alias
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -949,7 +884,7 @@ Click "Initial - Base - I/O setup" on the menu bar, click on the "Alias"  submen
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4-7 I/O alias configuration
+.. centered:: Figure 6.5‑7 I/O alias configuration
 
 Filter
 ~~~~~~~~~~~~~~~~
@@ -979,7 +914,7 @@ Users can view all the filter parameter value tables and set the corresponding p
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-8 Filter interface
+.. centered:: Figure 6.5‑8 Filter interface
 
 .. important:: 
    The I/O filter time range is [0~200], the unit is ms.
@@ -1001,7 +936,20 @@ Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.4-9 Output reset configuration
+.. centered:: Figure 6.5‑9 Output reset configuration
+
+Joint origin
+------------------------
+
+In the menu bar under 'Initial Setup' -> 'Basics', click 'Home point' to enter the Joint origin configuration interface.
+
+This page displays the name and joint position information of the work origin. The work origin is named pHome. Click "Set" to use the current robot pose as the work origin. Click "Move to this point" to move the robot to the work origin. In addition, the configurable option of moving to the origin of the work is added in the DI configuration, and the configurable option of reaching the origin of the work is added in the DO configuration.
+
+.. image:: base/077.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 6.6‑1 Joint origin
 
 .. Configuration import and export
 .. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1042,7 +990,7 @@ Install a robot with an absolute positioning accuracy of 1.2 mm on the work plat
    :width: 2in
    :align: center
 
-.. centered:: Figure 6.5‑1 Example of robot installation
+.. centered:: Figure 6.7‑1 Example of robot installation
 
 Installing sensor device
 +++++++++++++++++++++++++++++++++
@@ -1053,7 +1001,7 @@ Connect the two sets of brown, blue, and black signal wires of the photoelectric
    :width: 2in
    :align: center
 
-.. centered:: Figure 6.5‑2 Example of photoelectric sensor equipment
+.. centered:: Figure 6.7‑2 Example of photoelectric sensor equipment
 
 Setting up the TCP automatic calibration system coordinate system
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1066,7 +1014,7 @@ As shown above, where {b} is the robot base coordinate system, {e} is the end fl
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.5‑3 Coordinate system setting for TCP automatic calibration system of robot tool
+.. centered:: Figure 6.7‑3 Coordinate system setting for TCP automatic calibration system of robot tool
 
 (1) adjust the posture of the robot's end flange to Rx, Ry, and Rz at 180 °, 0 °, and 0 °, respectively, and ensure that this posture remains unchanged throughout the entire calibration sensor device coordinate system movement process after adjustment;
 
@@ -1087,7 +1035,7 @@ Select "Laser automatic calibration", enter the laser automatic calibration inte
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.5‑4  Example of entering the photoelectric automatic calibration interface
+.. centered:: Figure 6.7‑4  Example of entering the photoelectric automatic calibration interface
 
 Set I/O
 ***********************
@@ -1098,7 +1046,7 @@ Select the input port numbers for the control box of the X-axis laser beam and Y
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.5‑5 Example of setting the X and Y axis laser beam I/O ports of the laser sensor
+.. centered:: Figure 6.7‑5 Example of setting the X and Y axis laser beam I/O ports of the laser sensor
 
 Teaching center point
 ******************************
@@ -1111,7 +1059,7 @@ Drag the robot to trigger the X and Y axis beam I/O signals of the photoelectric
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.5‑6  The teaching TCP is located at the center of the sensor measurement plane
+.. centered:: Figure 6.7‑6  The teaching TCP is located at the center of the sensor measurement plane
 
 Set parameters
 ****************************
@@ -1130,7 +1078,7 @@ Then click on "Set", and after successful settings, a green check mark will appe
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.5‑7 Example of custom parameter setting
+.. centered:: Figure 6.7‑7 Example of custom parameter setting
 
 Run
 *********************
@@ -1141,7 +1089,7 @@ In automatic mode, click "Run" to initiate the calibration operation of the sens
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.5‑8 Example of calibration results for laser sensor coordinate system
+.. centered:: Figure 6.7‑8 Example of calibration results for laser sensor coordinate system
 
 .. warning:: Pay attention to the current operation. It is recommended that the robot perform this operation during the lifecycle of each production task (robot power off start operation) to prevent small displacement of sensor installation position caused by high-frequency vibration during operation and calculation errors caused by incorrect operation resulting in the release of sensor coordinate system calibration data in the controller.
 
@@ -1154,7 +1102,7 @@ After completing the "Laser device configured", if a green check mark appears in
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.5‑9 Example of TCP calibration results for tool
+.. centered:: Figure 6.7‑9 Example of TCP calibration results for tool
 
 Click "Save" to update the calibration result of the current tool TCP in the selected reference coordinate system from the drop-down menu of "Coordinate system name" in the "Current tool coordinate system" interface.
 
@@ -1188,7 +1136,7 @@ Fix the calibration flatbed in the working space of the robot, the flatbed shoul
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.6‑1 Calibration layout
+.. centered:: Figure 6.8‑1 Calibration layout
 
 In turn, click on the “Program” – “Coding” button, select “FR_CalibrateTheToolTcpPlane. lua” and open the file.
 
@@ -1196,7 +1144,7 @@ In turn, click on the “Program” – “Coding” button, select “FR_Calibr
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.6‑2 Opening the calibration file
+.. centered:: Figure 6.8‑2 Opening the calibration file
 
 Click the buttons of “Initial”, “Base” and “Coordinate” and “TCP” successively to enter the “Current tool coordinate system” interface. Select the coordinate system to be calibrated in “Coordinate system name” (take toolcord1 coordinate system as an example), click “Modify” button, you can enter the TCP calibration method selection interface.
 
@@ -1204,7 +1152,7 @@ Click the buttons of “Initial”, “Base” and “Coordinate” and “TCP�
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.6‑3 Setting the tool coordinate system
+.. centered:: Figure 6.8‑3 Setting the tool coordinate system
 
 In the “Modify Wizard”, select “Flatbed Tool Calibration” to enter the tablet tool calibration interface. 
 
@@ -1212,7 +1160,7 @@ In the “Modify Wizard”, select “Flatbed Tool Calibration” to enter the t
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.6‑4 Selection of calibration method
+.. centered:: Figure 6.8‑4 Selection of calibration method
 
 In the “Flatbed tool calibration” interface, click “Modify” button to configure the flatbed tool, click “Record” button to record the calibration reference point. After the configuration is complete, click the “complete” button to return to the  “Flatbed tool calibration” interface..
 
@@ -1220,7 +1168,7 @@ In the “Flatbed tool calibration” interface, click “Modify” button to co
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.6‑5 Configuring the flatbed tool
+.. centered:: Figure 6.8‑5 Configuring the flatbed tool
 
 Click the “Run” button in the “Flatbed tool calibration” interface, the robot will automatically carry out the TCP calibration of the tool, after the calibration is completed, the TCP coordinates of the tool will be displayed, click the “Save” button, the calibration result will be returned to the “Current tool coordinate system” interface.
 
@@ -1228,7 +1176,7 @@ Click the “Run” button in the “Flatbed tool calibration” interface, the 
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.6‑6 Calibration results
+.. centered:: Figure 6.8‑6 Calibration results
 
 Click the “Apply” button in the “Current tool coordinate system” interface to save the TCP calibration result of the tool and apply it. 
 
@@ -1236,7 +1184,7 @@ Click the “Apply” button in the “Current tool coordinate system” interfa
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.6‑7 Calibration result application
+.. centered:: Figure 6.8‑7 Calibration result application
 
 Control Box Analog Feedback Arc Tracking Function
 --------------------------------------------------------------
@@ -1250,7 +1198,7 @@ The control box analog feedback arc tracking function collects welding voltage a
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.7‑1 Topology Diagram of Arc Tracking Function Based on Analog Signal Communication
+.. centered:: Figure 6.9‑1 Topology Diagram of Arc Tracking Function Based on Analog Signal Communication
 .. centered:: a represents the computer; b represents the robot and control box; c represents the welder
 
 Control Box Analog AI Configuration Process
@@ -1264,7 +1212,7 @@ In the "Arc Tracking Channel" section of the "AI Configuration" interface, selec
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.7‑2 AI Channel Configuration
+.. centered:: Figure 6.9‑2 AI Channel Configuration
 
 In the "Analog Current-Voltage Relationship Graph" section of the AI channel configuration shown above, the parameter settings for the "A-V" and "V-V" interfaces should refer to the analog input/output tables or graphs of the welder being used.
 
@@ -1274,7 +1222,7 @@ For example, configure the lower and upper limits of the welding current for the
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.7‑3 Control Box Current Analog AI Configuration
+.. centered:: Figure 6.9‑3 Control Box Current Analog AI Configuration
 
 For example, configure the lower and upper limits of the welding voltage for the control box voltage analog AI as 0V and 50V respectively; configure the lower and upper limits of the output voltage as 1.018V and 10V respectively as the parameters for the "V-V" interface in the "Analog Current-Voltage Relationship Graph" section. Click "Configure" to complete the control box voltage analog AI channel configuration.
 
@@ -1282,7 +1230,7 @@ For example, configure the lower and upper limits of the welding voltage for the
    :width: 3in
    :align: center
 
-.. centered:: Figure 6.7‑4 Control Box Voltage Analog AI Configuration
+.. centered:: Figure 6.9‑4 Control Box Voltage Analog AI Configuration
 
 Control Box Analog AO Configuration Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1293,7 +1241,7 @@ On the robot web control interface, navigate to "Initial Setup" -> "Peripherals"
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.7‑5 Welder Configuration
+.. centered:: Figure 6.9‑5 Welder Configuration
 
 In the "Welding Function I/O Configuration" section of the "Welder Configuration" interface, the parameters for the "DI" and "DO" interfaces can be customized to configure the control box CI and CO channels. Select "Controller I/O" from the "Control Type" dropdown menu to begin the controller analog AO channel configuration process.
 
@@ -1305,7 +1253,7 @@ For example, configure the lower and upper limits of the welding current for the
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.7‑6 Control Box Current Analog AO Configuration
+.. centered:: Figure 6.9‑6 Control Box Current Analog AO Configuration
 
 For example, configure the lower and upper limits of the welding voltage for the control box voltage analog AO as 10V and 45V respectively; configure the lower and upper limits of the output voltage as 1V and 10V respectively as the parameters for the control box AO channel voltage analog configuration.
 
@@ -1315,4 +1263,4 @@ Then select "Ctrl-AO1" from the "Welder Voltage Control AO" dropdown menu and cl
    :width: 6in
    :align: center
 
-.. centered:: Figure 6.7‑7 Control Box Voltage Analog AO Configuration
+.. centered:: Figure 6.9‑7 Control Box Voltage Analog AO Configuration

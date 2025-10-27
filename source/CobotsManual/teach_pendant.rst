@@ -22,13 +22,13 @@ Teach pendant multi-language setting
 
 1. On the login interface (or the first activation interface), select the language in the upper right corner.
 
-.. image:: teach_pendant/002.png
+.. image:: teaching_pendant_software/062.png
    :width: 6in
    :align: center
 
 .. centered:: Figure 16.2‑1 Activation interface language setting
 
-.. image:: teach_pendant/003.png
+.. image:: teaching_pendant_software/063.png
    :width: 6in
    :align: center
 

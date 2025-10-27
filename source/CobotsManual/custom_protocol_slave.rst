@@ -197,7 +197,7 @@ Software environment setup
 
 .. centered:: Figure 17.2-13 Web Login Interface
 
-2. Enter the Tools App -> System Upgrade, select the software.tar.gz file and upload.
+2. Click System Settings -> About Interface, click the Software Upgrade button, select the software.tar.gz file, and upload the upgrade package.
 
 .. image:: custom_protocol_slave/008.png
    :width: 4in
@@ -207,29 +207,21 @@ Software environment setup
 
 .. note:: QX control box web version needs 3.8.0 and above, LA control box web version needs 3.8.0 and above.
 
-3. Go to Peripherals->Remote Control, select ‘Profinet control’ for Control mode, select ‘FRH-PCIeN-EC/EIP/CC/PN-RJ-V10’ for Manufacturer, select ‘4ms’ for Cycle Period, and click the ‘Set’ button.
-
-.. image:: custom_protocol_slave/009.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 17.2-15 Interface configuration
-
-4. Click ‘Local Mode’ in the upper right corner -> Switch Remote Mode.
+3. Click the extension button in the upper right corner and switch from 'Local Mode' to 'Remote Mode'.
 
 .. image:: custom_protocol_slave/010.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-16 Switch remote mode
+.. centered:: Figure 17.2-15 Switch remote mode
 
-5. Select the controller slave protocol and whether the auto-start function is required, then click the "Set" button. Note: To switch between different protocols, you need to click the "Uninstall" button first before configuring other protocols.
+4. Select the controller slave protocol and whether the auto-start function is required, then click the "Set" button. Note: To switch between different protocols, you need to click the "Uninstall" button first before configuring other protocols.
 
 .. image:: custom_protocol_slave/011.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-17 Configure the communication protocol
+.. centered:: Figure 17.2-16 Configure the communication protocol
 
 .. note:: Switching different protocols requires restarting the control box before configuring the protocols.
 

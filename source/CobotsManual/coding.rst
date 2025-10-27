@@ -907,7 +907,7 @@ When the value is positive, the left endpoint is skewed in the forward direction
 **Step2**:Add weave command in motion command block.
 
 .. image:: coding/068.png
-   :width: 1.5in
+   :width: 5in
    :align: center
 
 .. centered:: Figure 9.5-26-3 Add weave command
@@ -2509,7 +2509,7 @@ If you change the values of DO (coil) and AO (holding register) in ModbusTCP sla
 Write ModbusTCP master program
 +++++++++++++++++++++++++++++++++
 
-Click "All" and "Communication command" in turn to open the communication command adding page.
+Click "Program" and "Communication command" in turn to open the communication command adding page.
 
 .. image:: coding/176.png
    :width: 6in

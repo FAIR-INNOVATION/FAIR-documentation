@@ -286,6 +286,105 @@ Click About on the secondary menu bar to enter the About interface. This page sh
 
 .. centered:: Figure 15.3-1 About Schematics
 
+Software Upgrade
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Operation Preparation
++++++++++++++++++++++++++++++++
+
+1. Before upgrading, check and confirm the current software version in "System Settings - About".
+2. Software upgrade package: Download from the corresponding version's FARRDOC "Resources Download - Robot Software Download". After extraction, it contains the software upgrade package "software.tar.gz" for the corresponding version.
+
+Important Notes
++++++++++++++++++++++++++++++++
+
+1. **Data Backup**: It is recommended to perform a backup before upgrading (refer to section 3.2.1) to avoid data loss due to upgrade anomalies.
+2. **Version Restrictions**:
+
+.. centered:: Table 15.3-1 Version Upgrade Restrictions
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Current Version**
+     - **Maximum Upgradeable Version**
+
+   * - < v3.6.1
+     - v3.6.1
+
+   * - v3.6.1 - v3.6.4
+     - v3.6.5
+
+   * - v3.6.5 - v3.6.8
+     - v3.6.9
+
+   * - v3.6.9 - v3.7.4
+     - v3.7.5
+
+   * - v3.7.5
+     - v3.7.6
+
+   * - ≥ v3.7.6
+     - No restrictions
+
+3. **Cache Clearance**: After each upgrade (especially for cross-version upgrades), it is recommended to clear the browser cache to ensure normal system operation.
+
+Operation Steps
+*****************************
+
+**Software Upgrade**:
+
+1. Under the "System Settings" -> "About" menu, click the "Upgrade" button to enter the software upgrade interface;
+
+.. image:: system/040.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.3-2 System Upgrade Interface
+
+2. Click "Choose File" and select the software package "software.tar.gz" downloaded from the official website;
+
+.. important::
+   The software upgrade package name must be exactly "software.tar.gz". If the upgrade package name differs, the upgrade will fail. Rename it to the correct package name.
+
+3. Click "Upload Upgrade Package" to start the upgrade. The progress bar will be displayed during the upgrade process;
+
+4. When the upgrade progress reaches 100%, the interface will prompt "Upgrade successful, please restart the control box";
+
+.. image:: system/041.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 15.3-3 Software Upgrade Successful
+
+5. After restarting the control box, the upgrade is complete. Confirm the version information in "About".
+
+**Firmware Upgrade**: After the robot enters BOOT mode, upload the upgrade compressed package, select the required slave stations (control box slave station, body drive slave stations 1~6, end effector slave station) to perform the upgrade operation, and display the upgrade status.
+
+.. image:: system/042.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.3-4 Firmware Upgrade
+
+**Slave Station Configuration File Upgrade**: After the robot is disabled, upload the upgrade file, select the required slave stations (control box slave station, body drive slave stations 1~6, end effector slave station) to perform the upgrade operation, and display the upgrade status.
+
+.. image:: system/043.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.3-5 Slave Station Configuration File Upgrade
+
+**Encoder Upgrade**: After the robot is disabled, upload the upgrade file, select the required joints (Joint1~Joint6) to upgrade, and configure the encoder mode.
+
+.. image:: system/044.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.3-6 Encoder Upgrade
+
 Custom information
 ------------------------
 

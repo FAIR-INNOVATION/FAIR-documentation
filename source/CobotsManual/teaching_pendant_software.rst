@@ -860,23 +860,3 @@ Display the current status information of the board.
    :align: center
 
 .. centered:: Figure 5.3‑24 Board I/O status
-
-Robot installation method setting and display
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-On the web teaching page, click "Initial Settings" → "Basics" → "Installation Page". The page layout is shown below. The specific instructions are as follows:
-
-(1) Quick installation is used for common installation settings of robotic arms, corresponding from left to right: formal installation, side installation and reverse installation. When the corresponding button is clicked, the interface will automatically deliver and change the base tilt and rotation angle.
-(2) If the required installation method does not meet the requirements of quick installation, you can configure it by setting the base tilt and rotation angle yourself.
-(3) Whether it is quick installation or setting the base tilt and rotation angle by yourself, you need to click Apply to take effect.
-   
-.. note:: Please make sure that the set installation method is consistent with the actual robotic arm before dragging, otherwise there will be safety risks.
-
-.. image:: teaching_pendant_software/026.png
-   :width: 6in
-   :align: center
-   
-.. centered:: Figure 5.3-25 360 degree free installation
-
-.. important:: 
-   After the installation of the robot is completed, the installation method of the robot must be set correctly, otherwise it will affect the use of the robot's dragging function and collision detection function.
