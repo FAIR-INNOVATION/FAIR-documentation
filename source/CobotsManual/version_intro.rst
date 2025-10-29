@@ -1,3 +1,36 @@
+Version V3.8.7
+-----------------
+
+Date: 2025-10-21
+
+- **Linear Rack Guideway Robot Collision Detection Function**:
+    Path: Initial Setup -> Basic -> Joints -> Collision Level -> Linear Rack Guideway Robot Collision Detection.
+
+    Description: Enables the guideway to perform an emergency stop upon collision during movement, thereby enhancing operational safety.
+
+- **New Actual Physical Speed Setting Function for New Helix**:
+    Path: Teach Program -> Program Programming -> New Helix N-Spiral Command.
+
+    Description: Ensures the constant velocity segment of the robot end-effector's linear speed matches the set value.
+
+- **Safety Stop Recovery Optional Auto Enable Function**:
+    Path: Initial Setup -> Safety -> Emergency Stop.
+
+    Description: Added configuration for enable strategy after Category 1b emergency stop reset.
+
+- **Force Sensor Loaded Zeroing and Open Posture Compliance Admittance Parameters**:
+    Path: Initial Setup -> Basic -> Load, Teach Program -> Program Programming -> F/T Control Command.
+
+    Description: Added open posture compliance admittance parameters.
+
+- **New Laser Tracking Function for Arcs and Full Circles**:
+
+    Description: Enables real-time laser tracking functionality for arcs and full circles, with posture following changes during motion, allowing laser scanning reproduction for arcs and full circles.
+
+- **Button Box Function**:
+
+    Description: Optimized the Button Box Version 1.0 reset IP function.
+
 Version V3.8.6
 -----------------
 

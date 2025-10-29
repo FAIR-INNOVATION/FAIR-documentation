@@ -803,6 +803,33 @@ The "N-Spiral" command is an optimized version of the spiral motion. This comman
 
 .. centered:: Figure 9.5-21 N-Spiral command interface
 
+Uniform Speed Per Helix Circle Setting Function
+*****************************************************
+
+Overview
+""""""""""""""
+When using the helical motion command, the operating speed of the helical motion can be set, ensuring the speed of each circle maintains the set operating speed.
+
+Operation Process
+""""""""""""""""""""""""""""
+**Step1**: Select the teaching point that executes the helical motion. This manual uses "P0" as the name of the teaching point.
+
+**Step2**: Click the "Teach Program" -> "Program Programming" button, select the "New Helix" command. In the "Speed Mode", select "Physical Speed", and set the speed value and acceleration value. This speed value is the actual operating speed of the helix. Set parameters such as "Number of Helix Circles", "Helix Inclination Angle", "Initial Radius", "Radius Increment", "Rotation Axis Direction Increment", and "Rotation Direction" according to actual needs, as shown in Figure 2-1.
+
+.. image:: coding/492.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-21-1 New Helix Parameter Settings
+
+**Step3**: Add the motion command, generate the Lua program and run it to achieve the helical motion function at the set speed, as shown in Figure 2-2.
+
+.. image:: coding/493.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-21-2 Typical Program for Running Helix at Set Speed
+
 H-Spiral command
 +++++++++++++++++++
 

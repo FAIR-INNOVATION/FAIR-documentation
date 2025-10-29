@@ -1264,3 +1264,152 @@ Then select "Ctrl-AO1" from the "Welder Voltage Control AO" dropdown menu and cl
    :align: center
 
 .. centered:: Figure 6.9‑7 Control Box Voltage Analog AO Configuration
+
+Linear Rack Guideway Collision Detection
+----------------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~
+
+The Linear Rack Guideway Collision Detection function is used to achieve alarm and emergency stop when the guideway or robot collides with environmental objects during asynchronous or synchronous operation. By monitoring changes in the guideway torque feedback, it judges whether a collision has occurred based on a set threshold. If a collision occurs, the guideway stops immediately, thereby avoiding the application of continuous force by the guideway and robot on the collided object, further enhancing human-robot collaboration safety.
+
+Linear Rack Guideway Collision Detection Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To use the Linear Rack Guideway Collision Detection function, the "Rail_Adaptation_Program.lua" program must be executed after the guideway is activated. This ensures the function can adapt to different guideways and loading conditions, obtaining the best collision detection performance. If adaptation is not performed, the collision detection performance will significantly decrease, and the external force required to trigger a collision will be greater.
+
+Linear Rack Guideway Parameter Setting and Enabling
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Log in to the web interface, click "Initial Setup" -> "Peripherals" -> "Extended Axes" in sequence to enter the Extended Axis Coordinate System setup module, as shown in Figure 2-1.
+
+.. image:: base/078.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.10‑1 Extended Axis Coordinate System Setup Module
+
+**Step2**: Based on the actual working conditions of the extended axis and the robot, set parameters and calibrate as needed. In Figure 2-1, click Edit, set the Extended Axis Coordinate System Name to "exaxis1", select the Scheme as "0-Single Degree of Freedom Linear Slide", and select the Extended Axis Number as "1". If the guideway and robot only run asynchronously, calibration may not be necessary. If synchronous operation is required, calibration is mandatory. Refer to the relevant user manual or consult professional personnel for the calibration process. After setting the parameters, click "Save" and apply the corresponding coordinate system, as shown in Figure 2-2.
+
+.. image:: base/079.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.10‑2 Extended Axis Coordinate System Parameter Setting
+
+**Step3**: Establish UDP communication between the extended axis and the robot, and ensure the extended axis PLC program can send back the torque feedback data of the extended axis drive motor (after the gearbox) to the robot controller. Click "Initial Setup" -> "Peripherals" -> "Extended Axes" in sequence to enter the UDP Communication Configuration page. Select the coordinate system set in Step 2 and apply it. Click the "Edit" icon for UDP Communication Configuration to configure and load the communication settings. The PLC and laptop IP addresses must be in the same subnet as the controller, as shown in Figure 2-3. Note: It is necessary to ensure that the extended axis PLC program can send back the torque feedback data of the extended axis drive motor (after the gearbox) to the robot controller, and the sampling period should ideally be 1ms, with a maximum not exceeding 4ms, otherwise the collision detection function will be invalid.
+
+.. image:: base/080.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.10‑3 UDP Communication Configuration Page
+
+**Step4**: Configure UDP Extended Axis parameters. The UDP Extended Axis parameter setting page is shown in Figure 2-4. Select the Axis Type as "Linear Guideway", Axis Direction as "Positive", and configure the remaining parameters according to the actual situation. Among them, the Lead and Encoder Resolution are fixed and determined by the guideway; the upper limits of Running Speed and Acceleration are affected by the motor performance. The upper limits used in this function test are as shown in Figure 2-4. Please contact professional personnel when configuring different upper limits.
+
+.. image:: base/081.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.10‑4 UDP Extended Axis Parameter Setting
+
+**Step5**: Enable the linear rack guideway and move it to the starting point. Enable the linear rack guideway via the "Remove Enable" button in Figure 2-4 or the "Servo Enable" button in Figure 2-5. If the slider on the guideway is far from the starting point, move it to the starting point using "Reverse Rotation" or "Forward Rotation" (note: the running speed needs to be away from 15%). After moving to the starting point, click "Zero Point Setting" and perform homing using the "Return to Zero from Current Position" method.
+
+.. image:: base/082.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.10‑5 Enable Linear Rack Guideway and Move
+
+Enabling Linear Rack Guideway Collision Detection Function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Ensure the installation method of both the guideway and the robot is upright. Before enabling the linear rack guideway collision detection function, check if the installation method is upright. Specifically, first ensure the physical installation of the guideway and robot is upright. Then, click "Initial Setup" -> "Basic" -> "Installation" in sequence to enter the Free Installation page. If both "Base Rotation" and "Base Tilt" are 0, the software is set to upright installation; otherwise, they must be set to 0. If they are not 0, the interface will prompt an error, as shown in Figure 2-6.
+
+.. image:: base/083.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 6.10‑6 Error Prompt if Installation Method is Not Upright
+
+**Step2**: Enable the linear rack guideway collision detection function and set parameters. Click "Initial Setup" -> "Basic" -> "Joints" -> "Collision Level" in sequence to enter the Collision Level setting page. Click the slider for the "Linear Rack Guideway Collision Detection" function, then set the Gear Radius and Slider Mass. The Gear Radius can be calculated from the Lead and Reduction Ratio. The Slider Mass does not include the robot and its carried end load. The guideway level has 11 options, where Level1 is the easiest to trigger a collision, and Level10 is the most difficult. After the controller is powered on, and before executing the adaptation program, set the collision level to "Off" first.
+
+.. image:: base/084.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.10‑7 Linear Rack Guideway Collision Detection Function
+
+**Step3**: Execute the "Rail_Adaptation_Program.lua" program to adapt to the current guideway. After each controller restart, the "Rail_Adaptation_Program.lua" program must be executed (to prevent changes such as robot type from affecting the dynamic characteristics of the guideway). Before executing the program, ensure the guideway collision level is "Off". In automatic mode, run the lua program at 100% interface speed. Wait for the program to complete one cycle, indicating adaptation is complete, then it can be stopped.
+
+.. image:: base/085.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 6.10‑8 Execute "Rail_Adaptation_Program.lua" Program to Adapt to Current Guideway
+
+**Step4**: Reasonably set the guideway collision level and execute tasks. Users can set the guideway collision level reasonably based on the motor drive performance and task running speed. If the guideway and robot are running asynchronously, colliding with the robot or guideway can trigger "Axis 8 Collision Fault, Resettable". At this time, the guideway stops running, as shown in Figure 2-9. If the guideway and robot are running synchronously, colliding with the robot can trigger an alarm, causing the guideway to stop running, and the robot will react according to the set collision strategy.
+
+.. image:: base/086.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.10‑9 Guideway Triggering Collision Fault
+
+Force Sensor Loaded Zeroing and Open Posture Compliance Admittance Parameters
+------------------------------------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~
+
+The Force Sensor Loaded Zeroing function is used to quickly clear the sensor's zero drift data when the robot, carrying the quick changer, replaces the load without disassembling the quick changer. The Open Posture Compliance Admittance Parameters allow customers to adjust the posture based on the actual torque magnitude in constant force control.
+
+Force Sensor Loaded Zeroing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**: Install and activate the force sensor. Under the "Initial Setup" -> "Peripherals" -> "Force Sensor" menu, click "Adapted Devices" to enter the configuration interface. After the force sensor configuration is completed, select the configured force sensor number, click the "Reset" button. After the page pops up indicating the command was sent successfully, click the "Activate" button. Check the activation status in the force sensor information table to determine if activation was successful. Additionally, the force sensor will have initial values. Users can choose "Zero Calibration" and "Remove Zero" according to usage needs, as shown in Figure 2-1. Force sensor zero calibration requires ensuring the force sensor is installed vertically downward, and no load is configured below the sensor.
+
+.. image:: base/087.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.11‑1 Force Sensor Configuration Information
+
+**Step2**: Force sensor load identification. Under the "Initial Setup" -> "Basic" -> "Load" menu, click "Auto Identification" to enter the Force/Torque Sensor Load interface. Perform sensor automatic zeroing, record the initial position, then switch the robot to automatic mode, and click "Auto Zero", as shown in Figure 2-2.
+
+.. image:: base/088.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.11‑2 Force Sensor Load Identification
+
+**Step3**: If the actual load at the end of the force sensor is replaced, input the load weight and center of mass coordinates in the Load Configuration module, click "Apply" to update the load configuration and complete the force sensor loaded zeroing.
+
+Open Posture Compliance Admittance Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**: Click "Initial Setup" -> "Basic" -> "Tool Coordinate" to enter the Tool Coordinate System setting interface. Select "Coordinate System Name" and set the coordinate system parameters corresponding to the end tool, as shown in Figure 3-1.
+
+.. image:: base/089.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.11‑3 Tool Coordinate System Setting
+
+**Step2**: Click "Teach Program" -> "Program Programming", write a constant force control lua script, select "Force Control Set" -> "Control", add a force control motion command, set Posture Compliance to "Enable", set the Inertia Coefficient and Damping Coefficient, and set the Maximum Adjustment Angle as the threshold for the posture compliance angle, as shown in Figure 3-2.
+
+.. image:: base/090.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.11‑4 Open Posture Compliance Admittance Parameters
+
+**Step3**: On the web interface, click "FT", set the force sensor reference coordinate system, select the reference coordinate system as "Custom Coordinate System" and set the corresponding coordinate system parameters to "0", as shown in Figure 3-3.
+
+.. image:: base/091.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.11‑5 Set Force Sensor Reference Coordinate System
+
+**Step4**: Run the script and observe the posture compliance effect. The inertia parameter adjusts the acceleration response and anti-disturbance capability; the larger the inertia, the more obvious the robot lag. The damping coefficient affects the smoothness during posture compliance; the larger the damping, the more difficult the posture compliance.
