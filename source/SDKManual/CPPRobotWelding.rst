@@ -1207,6 +1207,96 @@ Arc Tracking Code Example
       return 0;
     }
 
+
+Set Wire Search Extended IO Port
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set wire search extended IO port
+    * @param searchDoneDINum  Wire search success DO port (0-127)
+    * @param searchStartDONum  Wire search start/stop control DO port (0-127)
+    * @return Error code
+    */
+    errno_t SetWireSearchExtDIONum(int searchDoneDINum, int searchStartDONum);
+
+Example Program
++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    void TestUDPWireSearch(FRRobot* robot)
+    {
+    robot->ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 50, 5, 50, 1, 50, 10);
+    robot->ExtDevLoadUDPDriver();
+
+    robot->SetWireSearchExtDIONum(0, 0);
+
+    int rtn0, rtn1, rtn2 = 0;
+    ExaxisPos exaxisPos = { 0.0, 0.0, 0.0, 0.0 };
+    DescPose offdese = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    
+    DescPose descStart = { -158.767, -510.596, 271.709, -179.427, -0.745, -137.349 };
+    JointPos jointStart = { 61.667, -79.848, 108.639, -119.682, -89.700, -70.985 };
+    
+    DescPose descEnd = { 0.332, -516.427, 270.688, 178.165, 0.017, -119.989 };
+    JointPos jointEnd = { 79.021, -81.839, 110.752, -118.298, -91.729, -70.981 };
+
+    robot->MoveL(&jointStart, &descStart, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
+    robot->MoveL(&jointEnd, &descEnd, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
+    
+    DescPose descREF0A = { -66.106, -560.746, 270.381, 176.479, -0.126, -126.745 };
+    JointPos jointREF0A = { 73.531, -75.588, 102.941, -116.250, -93.347, -69.689 };
+    
+    DescPose descREF0B = { -66.109, -528.440, 270.407, 176.479, -0.129, -126.744 };
+    JointPos jointREF0B = { 72.534, -79.625, 108.046, -117.379, -93.366, -70.687 };
+    
+    DescPose descREF1A = { 72.975, -473.242, 270.399, 176.479, -0.129, -126.744 };
+    JointPos jointREF1A = { 87.169, -86.509, 115.710, -117.341, -92.993, -56.034 };
+    
+    DescPose descREF1B = { 31.355, -473.238, 270.405, 176.480, -0.130, -126.745 };
+    JointPos jointREF1B = { 82.117, -87.146, 116.470, -117.737, -93.145, -61.090 };
+
+    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+    robot->MoveL(&jointREF0A, &descREF0A, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese); //Start point
+    robot->MoveL(&jointREF0B, &descREF0B, 1, 0, 10, 100, 100, -1, &exaxisPos, 1, 0, &offdese); //Location point
+    rtn1 = robot->WireSearchWait("REF0");
+    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+    robot->MoveL(&jointREF1A, &descREF1A, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese); //Start point
+    robot->MoveL(&jointREF1B, &descREF1B, 1, 0, 10, 100, 100, -1, &exaxisPos, 1, 0, &offdese); //Location point
+    rtn1 = robot->WireSearchWait("REF1");
+    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+    robot->MoveL(&jointREF0A, &descREF0A, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese); //Start point
+    robot->MoveL(&jointREF0B, &descREF0B, 1, 0, 10, 100, 100, -1, &exaxisPos, 1, 0, &offdese); //Location point
+    rtn1 = robot->WireSearchWait("RES0");
+    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+    rtn0 = robot->WireSearchStart(0, 10, 100, 0, 10, 100, 0);
+    robot->MoveL(&jointREF1A, &descREF1A, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese); //Start point
+    robot->MoveL(&jointREF1B, &descREF1B, 1, 0, 10, 100, 100, -1, &exaxisPos, 1, 0, &offdese); //Location point
+    rtn1 = robot->WireSearchWait("RES1");
+    rtn2 = robot->WireSearchEnd(0, 10, 100, 0, 10, 100, 0);
+
+    vector <string> varNameRef = { "REF0", "REF1", "#", "#", "#", "#" };
+    vector <string> varNameRes = { "RES0", "RES1", "#", "#", "#", "#" };
+    int offectFlag = 0;
+    DescPose offectPos = { 0, 0, 0, 0, 0, 0 };
+    rtn0 = robot->GetWireSearchOffset(0, 0, varNameRef, varNameRes, offectFlag, offectPos);
+    robot->PointsOffsetEnable(0, &offectPos);
+    robot->MoveL(&jointStart, &descStart, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
+    robot->MoveL(&jointEnd, &descEnd, 1, 0, 100, 100, 100, -1, &exaxisPos, 0, 0, &offdese);
+    robot->PointsOffsetDisable();
+    }
+
 Wire Search Start
 +++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0

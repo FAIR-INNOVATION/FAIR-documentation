@@ -1142,6 +1142,109 @@ Example arc tracking code
     robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0)
     robot.MoveJ(joint_pos=safetyjointPos, tool=1, user=0, vel=20, acc=100)
 
+Setting Up the Weld Wire Seek Expansion IO Port
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.0.5
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetWireSearchExtDIONum(searchDoneDINum, searchStartDONum)``"
+    "Description", "Setting up the Weld Wire Seeker Expansion IO Port"
+    "Mandatory parameter", "- ``searchDoneDINum``: weld wire seek success DO port (0-127)
+    - ``searchStartDONum``: wire seek start/stop control DO port (0-127)"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode" 
+
+code example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    toolCoord = [0, 0, 200, 0, 0, 0]
+    robot.SetToolCoord(1, toolCoord, 0, 0, 1, 0)
+    wobjCoord = [0, 0, 0, 0, 0, 0]
+    robot.SetWObjCoord(1, wobjCoord, 0)
+    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 50, 5, 50, 1, 50, 10)
+    robot.ExtDevLoadUDPDriver()
+    robot.SetWireSearchExtDIONum(0, 0)
+    exaxisPos = [0, 0, 0, 0]
+    offdese = [0, 0, 0, 0, 0, 0]
+    descStart = [216.543, 445.175, 93.465, 179.683, 1.757, -112.641]
+    jointStart = [-128.345, -86.660, 114.679, -119.625, -89.219, 74.303]
+    descEnd = [111.143, 523.384, 87.659, 179.703, 1.835, -97.750]
+    jointEnd = [-113.454, -81.060, 109.328, -119.954, -89.218, 74.302]
+    error = robot.MoveL(desc_pos=descStart,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos=descEnd,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    descREF0A = [142.135, 367.604, 86.523, 179.728, 1.922, -111.089]
+    jointREF0A = [-126.794, -100.834, 128.922, -119.864, -89.218, 74.302]
+    descREF0B = [254.633, 463.125, 72.604, 179.845, 2.341, -114.704]
+    jointREF0B = [-130.413, -81.093, 112.044, -123.163, -89.217, 74.303]
+    descREF1A = [92.556, 485.259, 47.476, -179.932, 3.130, -97.512]
+    jointREF1A = [-113.231, -83.815, 119.877, -129.092, -89.217, 74.303]
+    descREF1B = [203.103, 583.836, 63.909, 179.991, 2.854, -103.372]
+    jointREF1B = [-119.088, -69.676, 98.692, -121.761, -89.219, 74.303]
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos=descREF0A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos=descREF0B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("REF0")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchEnd return: {error}")
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos= descREF1A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descREF1B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("REF1")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos= descREF0A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descREF0B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("RES0")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchEnd return: {error}")
+    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchStart return: {error}")
+    error = robot.MoveL(desc_pos= descREF1A,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descREF1B,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.WireSearchWait("RES1")
+    print(f"WireSearchWait return: {error}")
+    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
+    print(f"WireSearchEnd return: {error}")
+    varNameRef = ["REF0", "REF1", "#", "#", "#", "#"]
+    varNameRes = ["RES0", "RES1", "#", "#", "#", "#"]
+    offectFlag = 0
+    offectPos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    error, offectFlag, offectPos = robot.GetWireSearchOffset(0, 0, varNameRef, varNameRes)
+    print(f"GetWireSearchOffset return: {error}")
+    error = robot.PointsOffsetEnable(0, offectPos)
+    print(f"PointsOffsetEnable return: {error}")
+    error = robot.MoveL(desc_pos= descStart,tool= 1,user= 1,vel= 100)
+    print(f"MoveL return: {error}")
+    error = robot.MoveL(desc_pos= descEnd,tool= 1,user= 1,vel= 100,search=1)
+    print(f"MoveL return: {error}")
+    error = robot.PointsOffsetDisable()
+    robot.CloseRPC()
+
 Welding wire position finding start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5

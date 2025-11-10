@@ -198,21 +198,23 @@ Spiral Parameter Data Type
     */
     public class SpiralParam
     {
-      public int circle_num;              /* Number of spiral circles */
-      public double circle_angle;         /* Spiral tilt angle */
-      public double rad_init;             /* Initial radius of spiral, unit: mm */
-      public double rad_add;              /* Radius increment */
-      public double rotaxis_add;          /* Rotation axis direction increment */
-      public int rot_direction;           /* Rotation direction, 0-clockwise, 1-counterclockwise */
-      public SpiralParam(int circleNum, double circleAngle, double radInit, double radAdd, double rotaxisAdd, int rotDirection)
-      {
-        circle_num = circleNum;
-        circle_angle = circleAngle;
-        rad_init = radInit;
-        rad_add = radAdd;
-        rotaxis_add = rotaxisAdd;
-        rot_direction = rotDirection;
-      }
+        public int circle_num;           /* Number of spiral turns  */
+        public double circle_angle;         /* Spiral pitch angle  */
+        public double rad_init;             /* Initial spiral radius, in mm  */
+        public double rad_add;              /* Radius increment  */
+        public double rotaxis_add;          /* Rotation axis increment  */
+        public int rot_direction;  /* Rotation direction: 0-clockwise, 1-counterclockwise  */
+        public int velAccMode;     /* Velocity acceleration parameter mode: 0-constant angular velocity; 1- Constant linear velocity */
+        public SpiralParam(int circleNum, double circleAngle, double radInit, double radAdd, double rotaxisAdd, int rotDirection, int vel_AccMode)
+        {
+            circle_num = circleNum;
+            circle_angle = circleAngle;
+            rad_init = radInit;
+            rad_add = radAdd;
+            rotaxis_add = rotaxisAdd;
+            rot_direction = rotDirection;
+            velAccMode=vel_AccMode;
+        }
     }
 
 Extended Axis Status Type
@@ -446,6 +448,9 @@ Robot State Feedback Structure Type
       public double[] exAxisCoord=new double[6];		   // Extended axis coordinate system
       public double load;                   // Payload mass
       public double[] loadCog=new double[3];             // Payload center of gravity
+
+      public double[] lastServoTarget = new double[6];      // Last servo target position in the queue
+      public int servoJCmdNum;                            // Servo command count
 
       public short check_sum = 0;          /* Checksum */
 

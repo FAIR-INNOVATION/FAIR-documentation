@@ -469,3 +469,15 @@ Get Robot Operating System Upgrade Result (LA Control Box)
     * @return Error code
     */
     errno_t GetKernelUpgradeResult(int& result);
+
+Robot MCU log generation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief robot MCU log generation
+    * @return error code
+    */
+    Errno RobotMCULogCollect();

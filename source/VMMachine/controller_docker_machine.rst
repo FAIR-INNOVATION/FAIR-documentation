@@ -219,6 +219,10 @@ Modify IP address
    
 Take modifying the IP to 192.168.56.2/24 as an example.
 
+.. image:: controller_virtual_machine/051.png
+   :width: 6in
+   :align: center 
+
 4. Open the terminal, stop the container.
  	
 View the container ID:
@@ -284,6 +288,10 @@ Take 192.168.56.0/24 as an example：docker network create --driver bridge --sub
    docker start [container ID]
 
 8. At this point, open the browser and enter the modified IP address to access the web interface and operate the virtual robot.
+
+.. image:: controller_virtual_machine/056.png
+   :width: 6in
+   :align: center 
 
 Virtual Machine Version Upgrade/Downgrade
 ----------------------------------------------------

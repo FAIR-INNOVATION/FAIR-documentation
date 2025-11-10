@@ -114,7 +114,8 @@ Spiral parameter data type
         float  rad_init;             /* Initial radius of spiral, unit: mm  */
         float  rad_add;              /* Radius increment  */
         float  rotaxis_add;          /* Increment in the direction of the axis of rotation  */
-        unsigned int rot_direction;  /* Rotation direction, 0- clockwise, 1- counterclockwise  */
+        int rot_direction;  /* Rotation direction, 0- clockwise, 1- counterclockwise  */
+        int velAccMode;      /* Velocity acceleration parameter mode: 0-constant angular velocity; 1-constant linear velocity */
     }SpiralParam;
 
 feedback packet of robot controller state
@@ -238,12 +239,13 @@ feedback packet of robot controller state
         int smartToolState;            //SmartTool handle button state
         float wideVoltageCtrlBoxTemp;        //Temperature of wide voltage control box
         uint16_t wideVoltageCtrlBoxFanCurrent;   //Wide voltage control box fan current (Ma) 
-        uint16_t check_sum;            /* Checksum */
         double toolCoord[6];      //Tool coordinate system
         double wobjCoord[6];      //Workpiece coordinate system
         double extoolCoord[6];     //External tool coordinate system
         double exAxisCoord[6];     //Extended axis coordinate system
         double load;          //Load mass
         double loadCog[3];       //Load center of gravity
+        int servoJCmdNum;           //SERVOJ instruction count
+        uint16_t check_sum;      /* And verification */
         uint16_t check_sum;      /* Checksum */
     }ROBOT_STATE_PKG;

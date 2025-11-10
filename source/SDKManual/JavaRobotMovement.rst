@@ -790,12 +790,19 @@ Joint torque control
     :linenos:
 
     /**
-    * @brief  Joint torque control
-    * @param  [in] torque j1~j6 joint torque in Nm
-    * @param  [in] interval Command cycle in s, range [0.001~0.008]
-    * @return  Error code
+    * @brief Joint Torque Control
+    * @param torque Torque for joints j1~j6, unit: Nm
+    * @param interval Command cycle, unit: s, range: [0.001~0.008]
+    * @param checkFlag Detection strategy 
+    *                  0-No restrictions; 
+    *                  1-Power limit; 
+    *                  2-Velocity limit; 
+    *                  3-Both power and velocity limits
+    * @param jPowerLimit Maximum joint power limit for each joint (W)
+    * @param jVelLimit Maximum joint velocity for each joint (°/s)
+    * @return Error code
     */
-    int ServoJT(Object[] torque, double interval)
+    public int ServoJT(double[] torque, double interval, int checkFlag, double[] jPowerLimit, double[] jVelLimit)
 
 Joint torque control end
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -834,6 +841,42 @@ Joint space servo mode movement example program
 
         robot.CloseRPC();
         return 0;
+    }
+
+Joint Torque Control Code Example with Overspeed Protection
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void ServoJTWithSafety(Robot robot)
+    {
+        robot.ResetAllError();
+        robot.Sleep(500);
+        List<Number> torques;
+        torques = robot.GetJointTorques(1);
+        robot.ServoJTStart(); // Start servoJT
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        robot.DragTeachSwitch(1);
+        int checkFlag = 3; // -1,3 - Both power and velocity limits
+        // double[] jPowerLimit = {1.0,1.0,1.0,1.0,1.0,1.0}; // 5001
+        double[] jPowerLimit = { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 }; // Power limits for each joint (W)
+        double[] jVelLimit = { 50, 50, 50, 50, 50, 50 }; // 180.1,-1 - Velocity limits for each joint (°/s)
+        int count = 800000;
+        int error = 0;
+        double[] tor = new double[]{(double)torques.get(1), (double)torques.get(2), (double)torques.get(3), 
+                                   (double)torques.get(4), (double)torques.get(5), (double)torques.get(6)};
+        while (count > 0)
+        {
+            tor[2] = tor[2] + 0.01; // Increase torque of axis 1 by 0.01NM each time, moving 100 times
+            error = robot.ServoJT(tor, 0.01, checkFlag, jPowerLimit, jVelLimit); // Joint space servo mode motion
+            System.out.printf("ServoJT return is %d\n", error);
+            count = count - 1;
+            robot.Sleep(1);
+            pkg = robot.GetRobotRealTimeState();
+            System.out.printf("maincode %d, subcode %d\n", pkg.main_code, pkg.sub_code);
+        }
+        robot.DragTeachSwitch(0);
+        error = robot.ServoJTEnd(); // End servo motion
     }
 
 Cartesian space servo mode movement
@@ -1540,3 +1583,14 @@ Robot singular pose protection code example
 
         return 0;
     }
+
+Clear Motion Command Queue
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Clears the motion command queue
+    * @return Error code
+    */
+    public int MotionQueueClear()

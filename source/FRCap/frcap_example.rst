@@ -7,7 +7,7 @@ FRCap case
 FAIRINO Palletizer
 -----------------------------
 
-It can be used after uploading the "Palletizer.frcap" under the build folder in the project to the WebApp and registering it.
+It can be used after uploading the "Palletizer.plugin" under the build folder in the project to the WebApp and registering it.
 
 .. image:: frcap_pictures/011.png
    :width: 6in

@@ -316,3 +316,115 @@ Get Robot Operating System Upgrade Result (LA Control Box)
      * @return Error code
      */
     public int GetKernelUpgradeResult(ref int[] result)
+
+Set encoder upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set encoder upgrade
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code 
+    */
+    int SetEncoderUpgrade(string path);
+
+Set joint firmware upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set joint firmware upgrade
+    * @param [in] type Upgrade file type; 1 - Upgrade firmware; 2 - Upgrade slave configuration file
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code 
+    */
+    int SetJointFirmwareUpgrade(int type, string path);
+
+Set firmware upgrade for control box
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set firmware upgrade for control box
+    * @param [in] type Type of upgrade file; 1 - Upgrade firmware; 2 - Upgrade slave station configuration file
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code 
+    */
+    int SetCtrlFirmwareUpgrade(int type, string path);
+
+Set end firmware upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set end firmware upgrade
+    * @param [in] type Upgrade file type; 1 - Upgrade firmware; 2 - Upgrade slave configuration file
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code 
+    */
+    int SetEndFirmwareUpgrade(int type, string path);
+
+Upgrade of the joint full parameter configuration file
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Upgrade of the joint full parameter configuration file
+    * @param [in] path Full local upgrade package path (D://zUP/XXXXX.bin)
+    * @return Error code 
+    */
+    int JointAllParamUpgrade(string path);
+
+Example of upgrading code for robot from firmware
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.5  Web-3.8.4
+    
+.. code-block:: c#
+    :linenos:
+
+    private void button83_Click(object sender, EventArgs e)
+    {
+        robot.RobotEnable(0);
+        Thread.Sleep(200);
+        int rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/jointallparameters.db");
+        Console.WriteLine($"robot JointAllParamUpgrade rtn is{rtn}");
+        rtn = robot.SetCtrlFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Cbd_Asix_V2.0.bin");
+        Console.WriteLine($"robot SetCtrlFirmwareUpgrade rtn is{rtn}");
+        rtn = robot.SetEndFirmwareUpgrade(2, "D://zUP/upgrade/FAIR_Cobot_Axle_Asix_V2.4.bin");
+        Console.WriteLine($"robot SetEndFirmwareUpgrade rtn is {rtn}");
+        robot.SetSysServoBootMode();
+        rtn = robot.SetCtrlFirmwareUpgrade(1, "D://zUP/upgrade/FR_CTRL_PRIMCU_FV201212_MAIN_U4_T01_20250428(MT).bin");
+        Console.WriteLine($"robot SetCtrlFirmwareUpgrade rtn is{rtn}");
+        rtn = robot.SetEndFirmwareUpgrade(1, "D://zUP/upgrade/FR_END_FV201009_MAIN_U1_T01_20250428.bin");
+        Console.WriteLine($"robot SetEndFirmwareUpgrade rtn is {rtn}");
+        rtn = robot.SetJointFirmwareUpgrade(1, "D://zUP/upgrade/FR_SERVO_FV504214_MAIN_U7_T07_20250519.bin");
+        Console.WriteLine($"robot SetJointFirmwareUpgrade rtn is{rtn}");
+    }
+
+Robot MCU log generation
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Robot MCU log generation
+    * @return Error code
+    */
+    public int RobotMCULogCollect();

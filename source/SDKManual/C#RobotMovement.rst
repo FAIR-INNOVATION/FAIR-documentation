@@ -906,12 +906,19 @@ Joint torque control
     :linenos:
  
     /**
-    * @brief Joint torque control
-    * @param [in] torque j1~j6 Joint torque in Nm.
-    * @param [in] interval Instruction cycle, unit s, range [0.001~0.008].
+    * @brief Joint Torque Control
+    * @param [in] torque Torque for joints j1~j6, unit: Nm
+    * @param [in] interval Command cycle, unit: s, range: [0.001~0.008]
+    * @param [in] checkFlag Detection strategy 
+    *                       0-No restrictions; 
+    *                       1-Power limit; 
+    *                       2-Velocity limit; 
+    *                       3-Both power and velocity limits
+    * @param [in] jPowerLimit Maximum joint power limit (W)
+    * @param [in] jVelLimit Maximum joint velocity (°/s)
     * @return Error code
     */
-    int ServoJT(double[] torque, double interval).
+    public int ServoJT(double[] torque, double interval, int checkFlag, double[] jPowerLimit, double[] jVelLimit)
  
 End of joint torque control
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -950,7 +957,60 @@ Joint Torque Control Code Example
         error = robot.ServoJTEnd();
         robot.DragTeachSwitch(0);
     }
- 
+
+Joint Torque Control Code Example with Overspeed Protection
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    public int ServoJTWithSafety()
+    {
+        robot.ResetAllError();
+        Thread.Sleep(500);
+
+        double[] torques = new double[6] { 0, 0, 0, 0, 0, 0 };
+        robot.GetJointTorques(1, torques);
+
+        robot.ServoJTStart();
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        robot.DragTeachSwitch(1);
+
+        int checkFlag = 0;
+        double[] jPowerLimit = new double[6] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        //double[] jPowerLimit = new double[6] { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 };
+        // double[] jVelLimit = new double[6] { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 };
+        double[] jVelLimit = new double[6] {50, 50, 50, 50, 50, 50 };
+        int count = 80000;
+        int errorNum = 0;
+        int error = 0;
+        while (count > 0)
+        {
+            
+            torques[2] = torques[2] + 0.01; 
+            error = robot.ServoJT(torques, 0.008, checkFlag, jPowerLimit, jVelLimit); 
+
+            Console.WriteLine($"ServoJT rtn is {error}");
+            count = count - 1;
+            Thread.Sleep(1);
+                
+            robot.GetRobotRealTimeState(ref pkg);
+            Console.WriteLine($"maincode {pkg.main_code}, subcode {pkg.sub_code}");
+            if (error != 0)
+            {
+                errorNum++;
+                if (errorNum > 5)
+                {
+                    break;
+                }
+
+            }
+        }
+        robot.DragTeachSwitch(0);
+        error = robot.ServoJTEnd();
+
+        return 0;
+    } 
+
 Servo mode motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  
@@ -1707,6 +1767,17 @@ Safety Stop Trigger
     */
     int GetSafetyCode();
  
- 
+Clear the motion command queue
+++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Clear the motion command queue
+    * @return Error code
+    */
+    public int MotionQueueClear();
  
  

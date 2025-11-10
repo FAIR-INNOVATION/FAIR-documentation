@@ -594,10 +594,13 @@ Joint Torque Control
     :linenos:
 
     /**
-    * @brief Joint torque control
-    * @param [in] torque j1~j6 joint torque in Nm
-    * @param [in] interval Command cycle in seconds, range [0.001~0.008]
-    * @return Error code
+    * @brief Joint Torque Control 1
+    * @param  [in] torque Torque for joints j1~j6, unit: Nm
+    * @param  [in] interval Command cycle, unit: s, range: [0.001~0.008]
+    * @param  [in] checkFlag Detection strategy 0-No restrictions; 1-Power limit; 2-Velocity limit; 3-Both power and velocity limits
+    * @param  [in] jPowerLimit Maximum joint power limit (W)
+    * @param  [in] jVelLimit Maximum joint velocity (°/s)
+    * @return  Error code
     */
     errno_t ServoJT(float torque[], double interval);
 
@@ -648,6 +651,46 @@ Joint Torque Control Example
         error = robot.ServoJTEnd();
         robot.DragTeachSwitch(0);
         robot.CloseRPC();
+        return 0;
+    }
+
+Joint Torque Control Code Example with Overspeed Protection
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int ServoJTWithSafety(FRRobot* robot)
+    {
+        robot->ResetAllError();
+        robot->Sleep(500);
+        float torques[] = { 0, 0, 0, 0, 0, 0 };
+        robot->GetJointTorques(1, torques);
+        robot->ServoJTStart(); 
+        ROBOT_STATE_PKG pkg = {};
+        robot->DragTeachSwitch(1);
+        int checkFlag = 3;
+        //double jPowerLimit[6] = {1, 1, 1, 1, 1, 1}; 
+        double jPowerLimit[6] = { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 };
+        double jVelLimit[6] = { 181, 80, 80, 80, 80, 80 };
+        int count = 800000;
+        int error = 0;
+        while (count > 0)
+        {
+            torques[2] = torques[2] + 0.01;
+            error = robot->ServoJT(torques, 0.008, checkFlag, jPowerLimit, jVelLimit); 
+            if (error != 0)
+            {
+                robot->ServoJTEnd();
+            }
+            printf("ServoJT rtn is %d\n", error);
+            count = count - 1;
+            robot->Sleep(1);
+            robot->GetRobotRealTimeState(&pkg);
+            printf("maincode %d, subcode %d\n", pkg.main_code, pkg.sub_code);
+        }
+        robot->DragTeachSwitch(0);
+        error = robot->ServoJTEnd();  
         return 0;
     }
 
@@ -1483,3 +1526,14 @@ Robot Singular Pose Protection Example
         robot.CloseRPC();
         return 0;
     }
+
+Clear the motion command queue
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Clear the motion command queue
+    * @return error code
+    */
+    errno_t MotionQueueClear();

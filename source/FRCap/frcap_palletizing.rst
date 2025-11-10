@@ -7,7 +7,7 @@ Palletizing FRCap
 Palletizing FRCap plug-in package management
 ----------------------------------------------
 
-In the collaborative robot WebApp, "System Settings - FRCap Config." page，click the "Import" button and select the palletizing FRCap plug-in package (name format: plug-in package name + version number. frcap, example: palletizer Palletizer-v0.0.0.frcap) to upload. After the upload is successful, the list displays the successfully imported palletized FRCap plug-in package, including Status, Name, Version, Description and Author, etc. The palletizing FRCap plug-in package can be "Deactivate", "Enabled" and "Delete" in the operation bar.
+In the collaborative robot WebApp, "System Settings - FRCap Config." page，click the "Import" button and select the palletizing FRCap plug-in package (name format: plug-in package name + version number. frcap, example: palletizer Palletizer-v0.0.0.plugin) to upload. After the upload is successful, the list displays the successfully imported palletized FRCap plug-in package, including Status, Name, Version, Description and Author, etc. The palletizing FRCap plug-in package can be "Deactivate", "Enabled" and "Delete" in the operation bar.
 
 .. image:: frcap_pictures/013.png
    :width: 6in
@@ -15,7 +15,7 @@ In the collaborative robot WebApp, "System Settings - FRCap Config." page，clic
 
 .. centered:: Figure 10-1-1 WebApp plug-in configuration interface
 
-After successfully importing the palletizing FRCap plug-in package for the first time, the status of the plug-in package is "Disabled". Click the "Enable" button. After successful activation, the "Auxiliary Application" module of the collaborative robot WebApp adds the palletizing FRCap plug-in package start page ( For example: the page module name corresponding to Palletizer-v0.0.0.frcap is "Palletizer"). Click the "Start" button to enter the homepage, view the currently configured palletizing formula, and use it according to your needs.
+After successfully importing the palletizing FRCap plug-in package for the first time, the status of the plug-in package is "Disabled". Click the "Enable" button. After successful activation, the "Auxiliary Application" module of the collaborative robot WebApp adds the palletizing FRCap plug-in package start page ( For example: the page module name corresponding to Palletizer-v0.0.0.plugin is "Palletizer"). Click the "Start" button to enter the homepage, view the currently configured palletizing formula, and use it according to your needs.
 
 .. note:: 
     If the recipe is empty, please add/import the recipe first.
@@ -203,6 +203,55 @@ The configuration interface of any recipe displays the basic information of boxe
 
 Box configuration
 ++++++++++++++++++++++++++++++++++++++++++
+
+Workstation Settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In recipe editing, you can choose whether to use a palletizing workstation, as shown in Figure 2-2. If a palletizing workstation is used, the corresponding palletizing functions will be completed using I/O signals from the workstation PLC; if no palletizing workstation is selected, the palletizing functions will default to using I/O signals from the control box.
+
+.. image:: frcap_pictures/076.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 10-3-1-1 Recipe Editing Page
+
+Palletizing Function I/O Wiring Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(1) After selecting to use a palletizing workstation, click on Extended I/O Configuration. Based on the corresponding functions and the actual wiring of the I/O interfaces with the PLC, you can customize the selection of I/O signal configuration for palletizing functions. Figure 2-3 shows the default wiring configuration for the palletizing workstation.
+
+.. image:: frcap_pictures/077.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 10-3-1-2 Default Wiring Configuration for Palletizing Workstation
+
+(2) If you choose not to use a palletizing workstation, the system defaults to using control box I/O signals. Based on the corresponding functions and the actual wiring of the I/O interfaces with the control box, you can customize the selection of I/O signal configuration for palletizing functions. Figure 2-4 shows the default wiring configuration when no palletizing workstation is used (using control box I/O).
+
+.. image:: frcap_pictures/078.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 10-3-1-3 Default Wiring Configuration for No Palletizing Workstation (Control Box I/O)
+
+Palletizing Function I/O Communication Test
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(1) When using a palletizing workstation, after configuring the extended I/O signals for the workstation palletizing workstation, you can click "Test" to verify the functionality of the wired I/O;
+
+.. image:: frcap_pictures/079.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 10-3-1-4 Palletizing Workstation I/O Wiring Test
+
+(2) When no palletizing workstation is selected, after configuring the control box I/O signals corresponding to the palletizing functions, you can click "Test" to verify the functionality of the wired I/O;
+
+.. image:: frcap_pictures/080.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 10-3-1-5 No Palletizing Workstation (Control Box I/O) Wiring Test
 
 Box operation
 ~~~~~~~~~~~~~~~~~~

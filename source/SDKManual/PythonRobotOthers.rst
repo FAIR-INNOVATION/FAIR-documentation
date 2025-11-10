@@ -426,3 +426,17 @@ Obtain upgrade results of robot operating system (LA control box)
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
+       
+Robot MCU log generation
++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``RobotMCULogCollect()``"
+    "Description", "Robot MCU log generation"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "Error Code Success-0 Failure- errcode "

@@ -384,18 +384,23 @@ constant force control
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype","``FT_Control(flag,sensor_num,select,force_torque,gain,adj_sign,ILC_sign,max_dis,max_ang)``"
+    "prototype","``FT_Control(flag, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M=None, B=None, polishRadio=0, filter_Sign=0, posAdapt_sign=0, isNoBlock=0)``"
     "Description", "Constant force control"
     "Mandatory parameter", "- ``flag``: constant force control on flag, 0-off, 1-on;
-    - ``sensor_num``: force sensor number;
+    - ``sensor_id``: force sensor number;
     - ``select``: whether the six degrees of freedom are detected [fx,fy,fz,mx,my,mz], 0 - not valid, 1 - valid;
-    - ``force_torque``: detection of force/torque in N or Nm;
-    - ``gain``: [f_p,f_i,f_d,m_p,m_i,m_d], force PID parameter, moment PID parameter;
+    - ``ft``: detection of force/torque in N or Nm;
+    - ``ft_pid``: [f_p,f_i,f_d,m_p,m_i,m_d], force PID parameter, moment PID parameter;
     - ``adj_sign``: adaptive start/stop state, 0-off, 1-on;
     - ``ILC_sign``: ILC control start/stop status, 0-stop, 1-training, 2-practical;
     - ``max_dis``: maximum adjustment distance;
     - ``max_ang``: maximum angle of adjustment;"
-    "Default parameters", "NULL"
+    "Default parameters", "- ``M``：Quality parameters；
+    - ``B``：Damping parameter；
+    - ``polishRadio``：Grinding disc radius, unit: mm；
+    - ``filter_Sign``：Filter on indicator 0- off; 1- On, default 0- off；
+    - ``posAdapt_sign``：The posture conforms to the opening mark 0-off. 1- On, default 0- off；
+    - ``isNoBlock``：Block flag, 0- block; 1- Non-blocking default 0- blocking；"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
 constant force control code example
@@ -440,6 +445,45 @@ constant force control code example
     robot.FT_Control(1, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang)
     rtn = robot.MoveJ(joint_pos=j2,tool= 0,user= 0,vel= 100.0)
     robot.FT_Control(0, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang)
+    robot.CloseRPC()
+
+A code example of constant force control with damping
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    robot = Robot.RPC('192.168.58.2')
+    sensor_id = 10
+    select = [0, 0, 1, 0, 0, 0]
+    ft_pid = [0.0008, 0.0, 0.0, 0.0, 0.0, 0.0]
+    adj_sign = 0
+    ILC_sign = 0
+    max_dis = 100.0
+    max_ang = 20.0
+    ft = [0.0] * 6  # [fx, fy, fz, tx, ty, tz]
+    ft[2] = -10.0  # fz = -10.0
+    epos = [0.0] * 4
+    j1 = [-118.985, -86.882, -118.139, -65.019, 90.002, 54.951]
+    j2 = [-77.055, -77.218, -126.219, -66.591, 90.028, 96.881]
+    desc_p1 = [-300.856, -332.618, 309.240, 179.976, -0.031, 96.065]
+    desc_p2 = [-16.399, -383.760, 309.312, 179.975, -0.031, 96.064]
+    offset_pos = [0.0] * 6
+    M = [2.0, 2.0]
+    B = [8.0, 8.0]
+    polishRadio = 0.0
+    filter_Sign = 0
+    posAdapt_sign = 0
+    isNoBlock = 0
+    ftCoord = [0.0] * 6
+    robot.FT_SetRCS(2, ftCoord)
+    rtn = robot.FT_Control(1, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, 0, 0, 1, 0)
+    print(f"FT_Control start rtn is {rtn}")
+    rtn = robot.MoveL(desc_pos=desc_p1, tool=0, user=0, vel=100.0, acc=100.0, ovl=20.0, blendR=-1.0, exaxis_pos=epos, search=0, offset_flag=0, offset_pos=offset_pos)
+    rtn = robot.MoveL(desc_pos=desc_p2, tool=0, user=0, vel=100.0, acc=100.0, ovl=20.0, blendR=-1.0, exaxis_pos=epos, search=0, offset_flag=0, offset_pos=offset_pos)
+    rtn = robot.FT_Control(1, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, 0, 0, 1, 0)
+    print(f"FT_Control end rtn is {rtn}")
     robot.CloseRPC()
 
 Helix Exploration
@@ -952,109 +996,6 @@ Six dimensional force and joint impedance mixed drag code example
     robot.DragTeachSwitch(0)
     rtn = robot.ForceAndJointImpedanceStartStop(0, 0, lamde_dain, k_gain, b_gain, 1000, 180)
     print(f"ForceAndJointImpedanceStartStop rtn is {rtn}")
-    robot.CloseRPC()
-
-Setting Up the Weld Wire Seek Expansion IO Port
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.0.5
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``SetWireSearchExtDIONum(searchDoneDINum, searchStartDONum)``"
-    "Description", "Setting up the Weld Wire Seeker Expansion IO Port"
-    "Mandatory parameter", "- ``searchDoneDINum``: weld wire seek success DO port (0-127)
-    - ``searchStartDONum``: wire seek start/stop control DO port (0-127)"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
-
-code example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    toolCoord = [0, 0, 200, 0, 0, 0]
-    robot.SetToolCoord(1, toolCoord, 0, 0, 1, 0)
-    wobjCoord = [0, 0, 0, 0, 0, 0]
-    robot.SetWObjCoord(1, wobjCoord, 0)
-    robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 50, 5, 50, 1, 50, 10)
-    robot.ExtDevLoadUDPDriver()
-    robot.SetWireSearchExtDIONum(0, 0)
-    exaxisPos = [0, 0, 0, 0]
-    offdese = [0, 0, 0, 0, 0, 0]
-    descStart = [216.543, 445.175, 93.465, 179.683, 1.757, -112.641]
-    jointStart = [-128.345, -86.660, 114.679, -119.625, -89.219, 74.303]
-    descEnd = [111.143, 523.384, 87.659, 179.703, 1.835, -97.750]
-    jointEnd = [-113.454, -81.060, 109.328, -119.954, -89.218, 74.302]
-    error = robot.MoveL(desc_pos=descStart,tool= 1,user= 1,vel= 100)
-    print(f"MoveL return: {error}")
-    error = robot.MoveL(desc_pos=descEnd,tool= 1,user= 1,vel= 100)
-    print(f"MoveL return: {error}")
-    descREF0A = [142.135, 367.604, 86.523, 179.728, 1.922, -111.089]
-    jointREF0A = [-126.794, -100.834, 128.922, -119.864, -89.218, 74.302]
-    descREF0B = [254.633, 463.125, 72.604, 179.845, 2.341, -114.704]
-    jointREF0B = [-130.413, -81.093, 112.044, -123.163, -89.217, 74.303]
-    descREF1A = [92.556, 485.259, 47.476, -179.932, 3.130, -97.512]
-    jointREF1A = [-113.231, -83.815, 119.877, -129.092, -89.217, 74.303]
-    descREF1B = [203.103, 583.836, 63.909, 179.991, 2.854, -103.372]
-    jointREF1B = [-119.088, -69.676, 98.692, -121.761, -89.219, 74.303]
-    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
-    print(f"WireSearchStart return: {error}")
-    error = robot.MoveL(desc_pos=descREF0A,tool= 1,user= 1,vel= 100)
-    print(f"MoveL return: {error}")
-    error = robot.MoveL(desc_pos=descREF0B,tool= 1,user= 1,vel= 100,search=1)
-    print(f"MoveL return: {error}")
-    error = robot.WireSearchWait("REF0")
-    print(f"WireSearchWait return: {error}")
-    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
-    print(f"WireSearchEnd return: {error}")
-    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
-    print(f"WireSearchStart return: {error}")
-    error = robot.MoveL(desc_pos= descREF1A,tool= 1,user= 1,vel= 100)
-    print(f"MoveL return: {error}")
-    error = robot.MoveL(desc_pos= descREF1B,tool= 1,user= 1,vel= 100,search=1)
-    print(f"MoveL return: {error}")
-    error = robot.WireSearchWait("REF1")
-    print(f"WireSearchWait return: {error}")
-    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
-    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
-    print(f"WireSearchStart return: {error}")
-    error = robot.MoveL(desc_pos= descREF0A,tool= 1,user= 1,vel= 100)
-    print(f"MoveL return: {error}")
-    error = robot.MoveL(desc_pos= descREF0B,tool= 1,user= 1,vel= 100,search=1)
-    print(f"MoveL return: {error}")
-    error = robot.WireSearchWait("RES0")
-    print(f"WireSearchWait return: {error}")
-    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
-    print(f"WireSearchEnd return: {error}")
-    error = robot.WireSearchStart(0, 10, 100, 0, 10, 100, 0)
-    print(f"WireSearchStart return: {error}")
-    error = robot.MoveL(desc_pos= descREF1A,tool= 1,user= 1,vel= 100)
-    print(f"MoveL return: {error}")
-    error = robot.MoveL(desc_pos= descREF1B,tool= 1,user= 1,vel= 100,search=1)
-    print(f"MoveL return: {error}")
-    error = robot.WireSearchWait("RES1")
-    print(f"WireSearchWait return: {error}")
-    error = robot.WireSearchEnd(0, 10, 100, 0, 10, 100, 0)
-    print(f"WireSearchEnd return: {error}")
-    varNameRef = ["REF0", "REF1", "#", "#", "#", "#"]
-    varNameRes = ["RES0", "RES1", "#", "#", "#", "#"]
-    offectFlag = 0
-    offectPos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    error, offectFlag, offectPos = robot.GetWireSearchOffset(0, 0, varNameRef, varNameRes)
-    print(f"GetWireSearchOffset return: {error}")
-    error = robot.PointsOffsetEnable(0, offectPos)
-    print(f"PointsOffsetEnable return: {error}")
-    error = robot.MoveL(desc_pos= descStart,tool= 1,user= 1,vel= 100)
-    print(f"MoveL return: {error}")
-    error = robot.MoveL(desc_pos= descEnd,tool= 1,user= 1,vel= 100,search=1)
-    print(f"MoveL return: {error}")
-    error = robot.PointsOffsetDisable()
     robot.CloseRPC()
 
 Impedance start and stop control

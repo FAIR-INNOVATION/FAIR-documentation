@@ -52,11 +52,11 @@ I already have FRCap
 ----------------------------
 If you already have an FRCap project folder and it conforms to the FRCap project structure , please read Build FRCap directly \ `FRCap directly <frcap_quick_start.html#build-frcap>`__\.
 
-If you already have a complete plug-in package with the file extension name ".frcap", please read \ `Hello FRCap <frcap_quick_start.html#hello-frcap>`__\.
+If you already have a complete plug-in package with the file extension name ".plugin", please read \ `Hello FRCap <frcap_quick_start.html#hello-frcap>`__\.
 
 Build FRCap
 -------------
-If you already have a complete plug-in package with the file extension name ".frcap", please read Hello FRCap directly.
+If you already have a complete plug-in package with the file extension name ".plugin", please read Hello FRCap directly.
 
 Depending on the system you are currently using, first open the build script, modify the buildName parameter to the name you want, then save and close, and execute the corresponding script in the terminal.
 
