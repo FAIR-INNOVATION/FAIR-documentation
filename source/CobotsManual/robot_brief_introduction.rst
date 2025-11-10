@@ -135,12 +135,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
     * - **Kinematics**
       - **theta[rad]**
-      - **a[m]**
-      - **d[m]**
+      - **a[mm]**
+      - **d[mm]**
       - **alpha[rad]**
       - **Dynamics**
       - **Mass[kg]**
-      - **Center of Mass[m]**
+      - **Center of Mass[mm]**
 
     * - Joint1
       - 0
@@ -207,12 +207,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
    * - **Kinematics**
      - **theta [rad]**
-     - **a [m]**
-     - **d [m]**
+     - **a[mm]**
+     - **d[mm]**
      - **alpha [rad]**
      - **Dynamics**
      - **Mass [kg]**
-     - **Center of Mass [m]**
+     - **Center of Mass[m]**
 
    * - Joint1
      - 0
@@ -278,12 +278,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
    * - **Kinematics**
      - **theta [rad]**
-     - **a [m]**
-     - **d [m]**
+     - **a[mm]**
+     - **d[mm]**
      - **alpha [rad]**
      - **Dynamics**
      - **Mass [kg]**
-     - **Center of Mass [m]**
+     - **Center of Mass[m]**
 
    * - Joint1
      - 0
@@ -349,12 +349,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
    * - **Kinematics**
      - **theta [rad]**
-     - **a [m]**
-     - **d [m]**
+     - **a[mm]**
+     - **d[mm]**
      - **alpha [rad]**
      - **Dynamics**
      - **Mass [kg]**
-     - **Center of Mass [m]**
+     - **Center of Mass[m]**
 
    * - Joint1
      - 0
@@ -419,12 +419,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
     * - **Kinematics**
       - **theta[rad]**
-      - **a[m]**
-      - **d[m]**
+      - **a[mm]**
+      - **d[mm]**
       - **alpha[rad]**
       - **Dynamics**
       - **Mass[kg]**
-      - **Center of Mass[m]**
+      - **Center of Mass[mm]**
 
     * - Joint1
       - 0
@@ -490,12 +490,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
    * - **运动学**
      - **theta[rad]**
-     - **a[m]**
-     - **d[m]**
+     - **a[mm]**
+     - **d[mm]**
      - **alpha[rad]**
      - **动力学**
      - **Mass[kg]**
-     - **Center of Mass[m]**
+     - **Center of Mass[mm]**
 
    * - Joint1
      - 0
@@ -560,12 +560,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
     * - **Kinematics**
       - **theta[rad]**
-      - **a[m]**
-      - **d[m]**
+      - **a[mm]**
+      - **d[mm]**
       - **alpha[rad]**
       - **Dynamics**
       - **Mass[kg]**
-      - **Center of Mass[m]**
+      - **Center of Mass[mm]**
 
     * - Joint1
       - 0
@@ -630,12 +630,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
     * - **Kinematics**
       - **theta[rad]**
-      - **a[m]**
-      - **d[m]**
+      - **a[mm]**
+      - **d[mm]**
       - **alpha[rad]**
       - **Dynamics**
       - **Mass[kg]**
-      - **Center of Mass[m]**
+      - **Center of Mass[mm]**
 
     * - Joint1
       - 0
@@ -700,12 +700,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
     * - **Kinematics**
       - **theta [rad]**
-      - **a [m]**
-      - **d [m]**
+      - **a[mm]**
+      - **d[mm]**
       - **alpha [rad]**
       - **Dynamics**
       - **Mass [kg]**
-      - **Center of Mass [m]**
+      - **Center of Mass[m]**
 
     * - Joint1
       - 0
@@ -770,12 +770,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
     * - **Kinematics**
       - **theta [rad]**
-      - **a [m]**
-      - **d [m]**
+      - **a[mm]**
+      - **d[mm]**
       - **alpha [rad]**
       - **Dynamics**
       - **Mass [kg]**
-      - **Center of Mass [m]**
+      - **Center of Mass[m]**
 
     * - Joint1
       - 0
@@ -840,12 +840,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
 
     * - **Kinematics**
       - **theta [rad]**
-      - **a [m]**
-      - **d [m]**
+      - **a[mm]**
+      - **d[mm]**
       - **alpha [rad]**
       - **Dynamics**
       - **Mass [kg]**
-      - **Center of Mass [m]**
+      - **Center of Mass[m]**
 
     * - Joint1
       - 0

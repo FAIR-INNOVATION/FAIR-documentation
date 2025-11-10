@@ -17,6 +17,8 @@ When you order a FR series collaborative robot, you will receive a box. Contains
 - **One button box**
 - **One control box (including one control box cable)**
 
+.. important:: The power cable provided with FARINO is for use with FARINO robots only.
+
 Important security description
 ----------------------------------
 
