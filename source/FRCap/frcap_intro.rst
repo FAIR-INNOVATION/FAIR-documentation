@@ -1,10 +1,6 @@
 FRCap Plug-in system
 =======================
 
-.. figure:: frcap_pictures/010.png
-    :align: center
-    :figclass: align-center
-
 .. toctree:: 
     :maxdepth: 12
     :numbered: 10

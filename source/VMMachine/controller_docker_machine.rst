@@ -216,13 +216,6 @@ Modify IP address
 1. Open the browser, enter the default IP: 192.168.58.2, to open the web page. 
 2. Log in with the admin account, password: 123.
 3. Go to "System Settings" → "General Settings" → "Network Settings", change the IP to the target IP address, subnet mask, and gateway. Click "Set Network".
-   
-Take modifying the IP to 192.168.56.2/24 as an example.
-
-.. image:: controller_virtual_machine/051.png
-   :width: 6in
-   :align: center 
-
 4. Open the terminal, stop the container.
  	
 View the container ID:
