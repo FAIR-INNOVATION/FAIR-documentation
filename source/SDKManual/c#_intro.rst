@@ -19,6 +19,7 @@ This document is the C# version of the secondary development interface document.
     :numbered: 5
     :maxdepth: 5
 
+    C#VersionIntro
     C#DataStructure
     C#RobotBase
     C#RobotMovement

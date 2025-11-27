@@ -1,3 +1,33 @@
+Version V3.9.0
+-----------------
+
+Date: 2025-11-26
+
+- **DARU DFC Force Control Polishing Head Application**:
+    Path: Initial Setup -> Peripherals -> Polishing -> DARU DFC Force Control Polishing Head.
+
+    Description: Added DARU DFC Force Control Polishing Head type to meet the adaptation requirements of the DFC polishing system.
+
+- **Parameter Calibration of Joint Torque Sensor on the Complete Machine**:
+    Path: Auxiliary Applications -> Tool Applications -> Drag Lock -> Joint Torque Sensor Whole Machine Drag.
+
+    Description: Joint torque sensor whole machine drag.
+
+- **Robot Extended Axis Intersecting Line Welding Function**:
+    Path: Teach Program -> Program Programming -> Intersecting Line Instruction.
+
+    Description: Implemented intersecting line trajectory planning and intersecting line welding.
+
+- **Modbus Wait for Analog Input Setting Adds Equal Judgment Function**:
+    Path: Teach Program -> Program Programming -> Modbus Instruction.
+
+    Description: Added equal judgment for slave station wait for analog input wait status.
+
+- **Teach Point One-Click Update & Lin Single Point Execution Function**:
+    Path: Teach Program -> Teach Points -> Teach Management.
+
+    Description: Added overwrite point function to point table, added PTP/LIN method for motion points.
+
 Version V3.8.7
 -----------------
 

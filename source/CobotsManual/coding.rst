@@ -2757,6 +2757,16 @@ At this time, the robot program "testModbusMaster.lua" has added an command that
 
 .. centered:: Figure 9.18-39 Waiting for AI Input Register Program
 
+Open the ModbusTCP Master command addition page, find the "Wait for Analog Input Setting" (i.e., wait for AI input register setting). Select the AI name as the configured "Liquid Level" register, set the wait condition to "=", the register value to 255, and the timeout to 5000ms. Click the "Add" button, and finally click the "Apply" button.
+
+.. image:: coding/494.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.18-39-2 Add Wait for Analog Input
+
+At this point, a Modbus Master command to wait for the AI input register value has been added to the robot program "test.lua". After starting the program, the robot will continuously wait for the "Liquid Level" register value from the "PLC" master to equal 255. Since the timeout is set to 5s, if the "Liquid Level" signal still does not equal 255 after the robot waits for 5 seconds, the robot program will report a timeout error and automatically stop running.
+
 ModbusTCP slave
 ++++++++++++++++++
 
@@ -3082,6 +3092,16 @@ As shown in Figure 87, at this time, the robot program "testModbusSlave.lua" has
    :align: center
 
 .. centered:: Figure 9.18-73 Waiting for Analog Input Register Program
+
+Open the ModbusTCP Slave command addition page, find the "Wait for Analog Input Setting" (i.e., wait for AI input register setting). Select the AI name as the configured "Liquid Level" register, set the wait condition to "=", the register value to 255, and the timeout to 5000ms. Click the "Add" button, and finally click the "Apply" button.
+
+.. image:: coding/495.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.18-73-2 Add Wait for Analog Input
+
+At this point, a Modbus Slave command to wait for the AI input register value has been added to the robot program "test.lua". After starting the program, the robot will continuously wait for the "Liquid Level" register value to equal 255. Since the timeout is set to 5s, if the "Liquid Level" signal still does not equal 255 after the robot waits for 5 seconds, the robot program will report a timeout error and automatically stop running.
 
 ModbusTCP slave robot state feedback and control
 ******************************************************
@@ -6133,6 +6153,16 @@ Now the robot program "testModbusRTUSlave.lua" has added a robot Modbus Slave in
 
 .. centered:: Figure 9.30-54 Program for Waiting for Analog Input Register
 
+Open the ModbusRTU Slave command addition page, find the "Wait for Analog Input Setting" (i.e., wait for AI input register setting). Select the AI name as the configured "Liquid Level" register, set the wait condition to "=", the register value to 255, and the timeout to 5000ms. Click the "Add" button, and finally click the "Apply" button.
+
+.. image:: coding/496.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.30-54-2 Add Wait for Analog Input
+
+At this point, a Modbus RTU Slave command to wait for the AI input register value has been added to the robot program "test.lua". After starting the program, the robot will continuously wait for the "Liquid Level" register value to equal 255. Since the timeout is set to 5s, if the "Liquid Level" signal still does not equal 255 after the robot waits for 5 seconds, the robot program will report a timeout error and automatically stop running.
+
 Robot Status Feedback and Control via ModbusRTU Slave
 ***********************************************************************************
 The input register addresses 0x1010-0x104C of the collaborative robot ModbusRTU Slave are used to feedback real-time robot status (see Appendix 1: ModbusRTU Slave Address Mapping Table for specific address definitions). You only need to read the corresponding register values with the master device to obtain the corresponding real-time robot status data.
@@ -7676,3 +7706,198 @@ The configuration of the main program can be used in conjunction with the DI con
    :align: center
 
 .. centered:: Chart 9.37‑1 Main program configuration
+
+Robot Extended Axis Intersecting Line Welding
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+System Configuration
+++++++++++++++++++++++++++++++++++
+
+.. image:: coding/497.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑1 Robot Extended Axis Intersecting Line Welding System Configuration
+
+In the system, (a) is the computer, (b) is the robot and its control box, (c) is the positioner and drive equipment, (d) is the welder and supporting equipment.
+
+Extended Axis Communication Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The communication methods between the robot and the extended axis include using UDP or RS485.
+
+.. image:: coding/498.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑2 Extended Axis Configuration Page
+
+Click "Initial Setup", "Peripherals", "Extended Axis" on the robot operation interface to enter the extended axis configuration page. Taking using a PLC connected to the robot via UDP communication as an example, click the "UDP Communication" icon to enter the extended axis configuration page for UDP communication.
+
+.. image:: coding/499.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑3 UDP Communication Configuration Interface
+
+On the extended axis configuration page for UDP communication, you can select the corresponding extended axis number, connect and configure UDP communication parameters (address, port, cycle, packet loss detection, etc.), and the extended axis positioning completion time.
+
+Extended axis configuration content is not the focus of this function introduction. For detailed configuration, refer to the corresponding section of the user manual.
+
+Welder Connection Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Configure the welder through the following configuration page:
+
+.. image:: coding/500.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑4 Welder Configuration Page
+
+Welder communication can use IO communication or RS485 communication. Click "Initial Setup", "Peripherals", "Welder" to enter the configuration and connection interface, where you can configure modules such as "Control Type", "I/O Configuration", "Welding Process Parameters", "Welder Debugging", etc.
+
+Welder configuration content is not the focus of this function introduction. For detailed configuration, refer to the corresponding section of the user manual.
+
+Tool Coordinate System Calibration
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+After installing the welding torch on the robot end, calibrate the welding torch:
+
+.. image:: coding/501.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑5 Tool Coordinate System Configuration Page
+
+Click "Initial Setup", "Basic", "Tool Coordinates" to enter the tool coordinate system settings page.
+
+.. image:: coding/502.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑6 Select the 6-Point Method to Calibrate the Welding Torch
+
+Select an empty coordinate system, choose the tool type as "Tool", select the 6-point method to calibrate the welding torch tool. It is recommended to calibrate the posture of the tool coordinate system as shown in Figure 4-3 below.
+
+.. image:: coding/503.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.38‑7 Welding Torch Coordinate System Posture Diagram
+
+Tool coordinate system calibration content is not the focus of this function introduction. For detailed calibration methods, refer to the corresponding section of the user manual.
+
+Intersecting Line Welding Function
++++++++++++++++++++++++++++++++++++++++
+
+There are two forms of trajectory motion for intersecting line welding: one is using a two-degree-of-freedom L-type positioner for intersecting line motion, and the other is performing intersecting line motion directly without using a positioner.
+
+Extended Axis Coordinate System Calibration
+***************************************************
+
+When using the extended axis coordinate system to achieve synchronized motion between the positioner and the robot, the extended axis coordinate system needs to be calibrated.
+
+.. image:: coding/504.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑8 Extended Axis Coordinate System Settings Page
+
+Click "Initial Setup", "Peripherals", "Extended Axis" to enter the extended axis coordinate system settings interface. Select the extended axis number that needs to be set, click the edit button, select "1-Two-degree-of-freedom L-type Positioner" and save.
+
+.. image:: coding/505.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑9 Extended Axis Calibration Page
+
+When calibrating the extended axis, pay attention to select "Robot Position Relative to Extended Axis" as "Outside Extended Axis". For the positioner case, select the 4-point method for calibration.
+
+Extended axis calibration content is not the focus of this function introduction. For detailed calibration methods, refer to the corresponding section of the user manual.
+
+Intersecting Line Trajectory Welding
+***************************************************
+
+Based on the taught points recorded on the cross-sections of the main pipe and the branch pipe, a workpiece coordinate system as shown in the figure below can be established. The origin of the coordinate system is located at the intersection point of the main pipe and branch pipe axes, the X-axis is parallel to the main pipe axis pointing towards the section where the taught points are recorded, and the Z-axis is parallel to the branch pipe axis pointing towards the plane where the taught points are recorded.
+
+.. image:: coding/506.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.38‑10 Intersecting Line Trajectory Workpiece Coordinate System
+
+Method Without Using a Positioner
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+**Step 1**: Record 6 taught points on the cross-section of the main pipe and the cross-section of the branch pipe respectively.
+
+**Step 2**: Click "Teach Program", "Program Programming", find "Intersecting Line" in the "Motion Instructions", and enter the intersecting line trajectory settings page.
+
+.. image:: coding/507.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑11 Intersecting Line Trajectory Settings Page
+
+**Step 3**: On the intersecting line trajectory settings page, select "Disable" for "Extended Axis Points", complete the settings for starting point motion, motion direction, speed and acceleration, and offset value. The counterclockwise motion direction is the direction of the four fingers when the right hand grips the Z-axis of the workpiece coordinate system.
+
+**Step 4**: In the "Intersecting Line Point Data" section of the intersecting line trajectory settings page, select the recorded taught points. After setting, click the "Add", "Apply" buttons.
+
+.. image:: coding/508.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑12 Intersecting Line Trajectory Instruction Settings
+
+**Step 5**: Click the "Welding" button under "Welding Instructions" to enter the welding settings page, select "Arc Start" and "Arc End" instructions, click the "Add", "Apply" buttons. After successful addition, move the Arc Start LUA instruction up one line.
+
+.. image:: coding/509.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑13 Welding Instruction Settings
+
+The following is a typical LUA program for intersecting line welding without a positioner:
+
+.. image:: coding/510.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑14 No Positioner - Intersecting Line Welding Example Program
+
+Method Using a Two-Degree-of-Freedom L-Type Positioner
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Record 6 taught points on the cross-section of the main pipe and the cross-section of the branch pipe respectively, and rotate axes 1 and 2 of the positioner to record 4 positioner taught points.
+
+**Step 2**: Click "Teach Program", "Program Programming", find "Intersecting Line" in the "Motion Instructions", and enter the intersecting line trajectory settings page.
+
+.. image:: coding/511.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑15 Intersecting Line Trajectory Settings Page
+
+**Step 3**: On the intersecting line trajectory settings page, select "Enable" for "Extended Axis Points", select the recorded positioner taught points, complete the settings for starting point motion, motion direction, speed and acceleration, and offset value.
+
+**Step 4**: In the "Intersecting Line Point Data" section of the intersecting line trajectory settings page, select the recorded taught points. After setting, click the "Add", "Apply" buttons.
+
+.. image:: coding/512.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑16 Intersecting Line Trajectory Instruction Settings
+
+**Step 5**: Click the "Welding" button under "Welding Instructions" to enter the welding settings page, select "Arc Start" and "Arc End" instructions, click the "Add", "Apply" buttons. After successful addition, move the Arc Start LUA instruction up one line.
+
+.. image:: coding/513.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑17 Welding Instruction Settings
+
+The following is a typical LUA program for positioner-based intersecting line welding:
+
+.. image:: coding/514.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.38‑18 Positioner - Intersecting Line Welding Example Program

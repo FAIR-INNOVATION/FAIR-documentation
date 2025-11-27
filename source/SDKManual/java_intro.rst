@@ -22,6 +22,7 @@ This document is the Java version of the secondary development interface documen
     :numbered: 5
     :maxdepth: 5
 
+    JavaVersionIntro
     JavaDataStructure
     JavaRobotBase
     JavaRobotMovement

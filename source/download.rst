@@ -335,3 +335,5 @@ Communication Command Protocol
 Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-QX-V3.9.0-20251126.zip <https://drive.google.com/file/d/1B3-ZKYIWiK8yv8PUZQcXuyHdzD1xUCEu/view?usp=sharing>`
+    
+    :download:`FAIRINO-CobotSoftware-LA-V3.9.0-20251126.zip <https://drive.google.com/file/d/1B3-ZKYIWiK8yv8PUZQcXuyHdzD1xUCEu/view?usp=sharing>`

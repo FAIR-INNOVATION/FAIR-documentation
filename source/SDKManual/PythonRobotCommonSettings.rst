@@ -898,21 +898,6 @@ Joint torque sensor sensitivity calibration function is enabled
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-The sensitivity calibration results of the joint torque sensor were obtained
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: python SDK-v2.1.7
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``JointSensitivityCalibration()``"
-    "Description", "The sensitivity calibration results of the joint torque sensor were obtained"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- Error Code Success-0 Failure- errcode
-    - ``calibResult``：j1~j6 Joint sensitivity [0-1]"
-
 Joint torque sensor sensitivity data acquisition
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.7
@@ -927,6 +912,69 @@ Joint torque sensor sensitivity data acquisition
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
+The sensitivity calibration results of the joint torque sensor were obtained
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: python SDK-v2.1.7
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``JointSensitivityCalibration()``"
+    "Description", "The sensitivity calibration results of the joint torque sensor were obtained"
+    "Mandatory parameters", "NULL"
+    "Default parameters", "NULL"
+    "Return Value", "- Error Code Success-0 Failure- errcode
+    - ``calibResult``：j1~j6 Joint sensitivity [0-1]
+    - ``linearityn``：j1~j6 joint linearity[0-1]"
+
+Get Joint Torque Sensor Hysteresis Error
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``JointHysteresisError()``"
+    "Description", "Get joint torque sensor hysteresis error"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code Success-0 Failure- errcode
+    - ``hysteresisError``：j1~j6 joint hysteresis error"
+
+Get Joint Torque Sensor Repeatability
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``JointRepeatability()``"
+    "Description", "Get joint torque sensor repeatability"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code Success-0 Failure- errcode
+    - ``repeatability``：j1~j6 joint repeatability"
+
+Set Joint Force Sensor Parameters
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetAdmittanceParams(M, B, K, threshold, sensitivity, setZeroFlag)``"
+    "Description", "Set joint force sensor parameters"
+    "Required Parameters", "
+    - ``M``：J1-J6 mass coefficient [0.001 ~ 10]
+    - ``B``：J1-J6 damping coefficient [0.001 ~ 10]
+    - ``K``：J1-J6 stiffness coefficient [0.001 ~ 10]
+    - ``threshold``：Force control threshold, Nm
+    - ``sensitivity``：Sensitivity, Nm/V, [0 ~ 10]
+    - ``setZeroFlag``：Function enable flag; 0-Off; 1-On; 2-Record zero point at position 1; 3-Record zero point at position 2"
+    "Default Parameters", "None"
+    "Return Value", "- Error code Success-0 Failure- errcode"
+
 Sample code for automatic calibration of joint torque sensor sensitivity
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
@@ -934,19 +982,18 @@ Sample code for automatic calibration of joint torque sensor sensitivity
 
     from fairino import Robot
     import time
-    import threading
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
+    rtn = robot.JointSensitivityEnable(0)
     rtn = robot.JointSensitivityEnable(1)
     print(f"JointSensitivityEnable rtn is {rtn}")
     curJPos = [0.0] * 6
     rtn, curJPos = robot.GetActualJointPosDegree(0)
-    jointPos1 = [curJPos[0], 0.0, 0.0, -90.0, 0.02, curJPos[5]]
-    descPos1 = [0.0] * 6
-    rtn , descPos1 = robot.GetForwardKin(jointPos1)
     epos = [0.0] * 4
     offset_pos = [0.0] * 6
-    robot.MoveJ(joint_pos=jointPos1, desc_pos=descPos1,tool= 0,user= 0,vel= 100,acc= 100,ovl= 100,exaxis_pos= epos,blendT= -1,offset_flag= 0,offset_pos= offset_pos)
+    jointPos1 = [curJPos[0], 0.0, 0.0, -90.0, 0.02, curJPos[5]]
+    descPos1 = [0.0] * 6
+    rtn, descPos1 = robot.GetForwardKin(jointPos1)
+    robot.MoveJ(joint_pos=jointPos1, desc_pos=descPos1, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
     time.sleep(0.2)
     rtn = robot.JointSensitivityCollect()
     print(f"JointSensitivityCollect 1 rtn is {rtn}")
@@ -954,7 +1001,7 @@ Sample code for automatic calibration of joint torque sensor sensitivity
     jointPos2 = [curJPos[0], -30.0, 0.0, -90.0, 0.02, curJPos[5]]
     descPos2 = [0.0] * 6
     rtn, descPos2 = robot.GetForwardKin(jointPos2)
-    robot.MoveJ(joint_pos=jointPos2, desc_pos=descPos2,tool= 0,user= 0,vel= 100,acc= 100,ovl= 100,exaxis_pos= epos,blendT= -1,offset_flag= 0,offset_pos= offset_pos)
+    robot.MoveJ(joint_pos=jointPos2, desc_pos=descPos2, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
     time.sleep(0.1)
     rtn = robot.JointSensitivityCollect()
     print(f"JointSensitivityCollect 2 rtn is {rtn}")
@@ -962,7 +1009,7 @@ Sample code for automatic calibration of joint torque sensor sensitivity
     jointPos3 = [curJPos[0], -60.0, 0.0, -90.0, 0.02, curJPos[5]]
     descPos3 = [0.0] * 6
     rtn, descPos3 = robot.GetForwardKin(jointPos3)
-    robot.MoveJ(joint_pos=jointPos3,desc_pos= descPos3,tool= 0,user= 0,vel= 100,acc= 100,ovl= 100,exaxis_pos= epos,blendT= -1,offset_flag= 0,offset_pos= offset_pos)
+    robot.MoveJ(joint_pos=jointPos3, desc_pos=descPos3, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
     time.sleep(0.1)
     rtn = robot.JointSensitivityCollect()
     print(f"JointSensitivityCollect 3 rtn is {rtn}")
@@ -970,7 +1017,7 @@ Sample code for automatic calibration of joint torque sensor sensitivity
     jointPos4 = [curJPos[0], -90.0, 0.0, -90.0, 0.02, curJPos[5]]
     descPos4 = [0.0] * 6
     rtn, descPos4 = robot.GetForwardKin(jointPos4)
-    robot.MoveJ(joint_pos=jointPos4, desc_pos= descPos4,tool= 0,user= 0,vel= 100,acc= 100,ovl= 100,exaxis_pos= epos,blendT= -1,offset_flag= 0,offset_pos= offset_pos)
+    robot.MoveJ(joint_pos=jointPos4, desc_pos=descPos4, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
     time.sleep(0.1)
     rtn = robot.JointSensitivityCollect()
     print(f"JointSensitivityCollect 4 rtn is {rtn}")
@@ -978,7 +1025,7 @@ Sample code for automatic calibration of joint torque sensor sensitivity
     jointPos5 = [curJPos[0], -120.0, 0.0, -90.0, 0.02, curJPos[5]]
     descPos5 = [0.0] * 6
     rtn, descPos5 = robot.GetForwardKin(jointPos5)
-    robot.MoveJ(joint_pos=jointPos5, desc_pos= descPos5,tool= 0,user= 0,vel= 100,acc= 100,ovl= 100,exaxis_pos= epos,blendT= -1,offset_flag= 0,offset_pos= offset_pos)
+    robot.MoveJ(joint_pos=jointPos5, desc_pos=descPos5, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
     time.sleep(0.1)
     rtn = robot.JointSensitivityCollect()
     print(f"JointSensitivityCollect 5 rtn is {rtn}")
@@ -986,7 +1033,7 @@ Sample code for automatic calibration of joint torque sensor sensitivity
     jointPos6 = [curJPos[0], -150.0, 0.0, -90.0, 0.02, curJPos[5]]
     descPos6 = [0.0] * 6
     rtn, descPos6 = robot.GetForwardKin(jointPos6)
-    robot.MoveJ(joint_pos=jointPos6, desc_pos= descPos6,tool= 0,user= 0,vel= 100,acc= 100,ovl= 100,exaxis_pos= epos,blendT= -1,offset_flag= 0,offset_pos= offset_pos)
+    robot.MoveJ(joint_pos=jointPos6, desc_pos=descPos6, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
     time.sleep(0.1)
     rtn = robot.JointSensitivityCollect()
     print(f"JointSensitivityCollect 6 rtn is {rtn}")
@@ -994,17 +1041,62 @@ Sample code for automatic calibration of joint torque sensor sensitivity
     jointPos7 = [curJPos[0], -180.0, 0.0, -90.0, 0.02, curJPos[5]]
     descPos7 = [0.0] * 6
     rtn, descPos7 = robot.GetForwardKin(jointPos7)
-    robot.MoveJ(joint_pos=jointPos7, desc_pos= descPos7,tool= 0,user= 0,vel= 100,acc= 100,ovl= 100,exaxis_pos= epos,blendT= -1,offset_flag= 0,offset_pos= offset_pos)
+    robot.MoveJ(joint_pos=jointPos7, desc_pos=descPos7, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
     time.sleep(0.1)
     rtn = robot.JointSensitivityCollect()
     print(f"JointSensitivityCollect 7 rtn is {rtn}")
     time.sleep(0.1)
+    robot.MoveJ(joint_pos=jointPos6, desc_pos=descPos6, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+    time.sleep(0.1)
+    rtn = robot.JointSensitivityCollect()
+    print(f"JointSensitivityCollect 8 rtn is {rtn}")
+    time.sleep(0.1)
+    robot.MoveJ(joint_pos=jointPos5, desc_pos=descPos5, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+    time.sleep(0.1)
+    rtn = robot.JointSensitivityCollect()
+    print(f"JointSensitivityCollect 9 rtn is {rtn}")
+    time.sleep(0.1)
+    robot.MoveJ(joint_pos=jointPos4, desc_pos=descPos4, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+    time.sleep(0.1)
+    rtn = robot.JointSensitivityCollect()
+    print(f"JointSensitivityCollect 10 rtn is {rtn}")
+    time.sleep(0.1)
+    robot.MoveJ(joint_pos=jointPos3, desc_pos=descPos3, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+    time.sleep(0.1)
+    rtn = robot.JointSensitivityCollect()
+    print(f"JointSensitivityCollect 11 rtn is {rtn}")
+    time.sleep(0.1)
+    robot.MoveJ(joint_pos=jointPos2, desc_pos=descPos2, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+    time.sleep(0.1)
+    rtn = robot.JointSensitivityCollect()
+    print(f"JointSensitivityCollect 12 rtn is {rtn}")
+    time.sleep(0.1)
+    robot.MoveJ(joint_pos=jointPos1, desc_pos=descPos1, tool=0, user=0, vel=100, acc=100, ovl=100, exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+    time.sleep(0.2)
+    rtn = robot.JointSensitivityCollect()
+    print(f"JointSensitivityCollect 13 rtn is {rtn}")
+    time.sleep(0.1)
     calibResult = [0.0] * 6
-    rtn,calibResult = robot.JointSensitivityCalibration()
+    linearity = [0.0] * 6
+    rtn,calibResult, linearity = robot.JointSensitivityCalibration()
     print(f"JointSensitivityCalibration rtn is {rtn}")
     rtn = robot.JointSensitivityEnable(0)
     print(f"JointSensitivityEnable rtn is {rtn}")
     print(f"jointSensor Calib result is {calibResult[0]},{calibResult[1]},{calibResult[2]},{calibResult[3]},{calibResult[4]},{calibResult[5]}")
+    print( f"jointSensor linearity is {linearity[0]},{linearity[1]},{linearity[2]},{linearity[3]},{linearity[4]},{linearity[5]}")
+    hysteresisError = [0.0] * 6
+    rtn,hysteresisError = robot.JointHysteresisError()
+    print(f"JointHysteresisError result is {hysteresisError[0]},{hysteresisError[1]},{hysteresisError[2]},{hysteresisError[3]},{hysteresisError[4]},{hysteresisError[5]}")
+    repeatability = [0.0] * 6
+    rtn,repeatability = robot.JointRepeatability()
+    print(f"JointRepeatability result is {repeatability[0]},{repeatability[1]},{repeatability[2]},{repeatability[3]},{repeatability[4]},{repeatability[5]}")
+    M = [1.0] * 6
+    B = [1.0] * 6
+    K = [0.0] * 6
+    threshold = [1.0] * 6
+    setZeroFlag = 1
+    rtn = robot.SetAdmittanceParams(M, B, K, threshold, calibResult, setZeroFlag)
+    print(f"SetAdmittanceParams rtn is {rtn}")
     robot.CloseRPC()
 
 The number of error frames at eight slave ports of the robot is obtained

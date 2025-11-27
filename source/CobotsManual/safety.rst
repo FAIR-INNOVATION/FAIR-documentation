@@ -63,11 +63,40 @@ Emergency stop types 0, 1a, 1b, 2 can be set, stop time limit can be set, and st
 
  - Emergency stop type 1b is to not cut off the power supply of the main body after deceleration stop, and the main body is disabled;
 
+- Emergency stop type 2 indicates pressing the emergency stop button, the robot decelerates to stop and maintains enable status. After releasing the emergency stop, the robot should be able to operate normally.
+  
 .. image:: safety/005.png
    :width: 4in
    :align: center
 
 .. centered:: Figure 7.4-1 Emergency stop configuration
+
+Safety Stop Recovery Optional Auto Enable Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++
+
+After the robot experiences a Category 1b emergency stop, it provides two modes for the user to choose from: Manual Enable and Auto Enable. When Manual Enable is selected, the user needs to change the robot's operation mode to Automatic after releasing the emergency stop button and manually click the enable button to enable the robot. When Auto Enable is selected, the robot will enable automatically after the user releases the emergency stop button.
+
+Operation Process
++++++++++++++++++++++++++++
+
+**Step1**: Click the "Initial Setup" -> "Safety" -> "Emergency Stop" button. Select "Category 1b" for "Stop Type", and set the "Stop Time Limit" and "Stop Distance Limit" parameters as needed. The "Enable Strategy After E-stop Reset" can be set to "Manual Enable" or "Auto Enable", as shown in Figure 2-1.
+
+.. image:: safety/046.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-2 Enable Strategy Setting
+
+**Step2**: When "Auto Enable" is selected, the robot will enable automatically after the user releases the emergency stop button. When "Manual Enable" is selected, the user must manually click the enable button in Automatic mode after releasing the emergency stop button to enable the robot, as shown in Figure 2-2.
+
+.. image:: safety/047.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-3 Manual Enable Operation
 
 Protective stop
 ---------------------

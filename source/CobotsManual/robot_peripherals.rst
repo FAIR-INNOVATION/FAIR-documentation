@@ -3141,7 +3141,7 @@ If welding debugging is performed or a welding program is executed at this time,
 
 .. figure:: robot_peripherals/073.png
    :align: center
-   :width: 2in
+   :width: 3in
 
 .. centered:: Figure 8.6‑50 Protocol Not Loaded Error
 
@@ -6062,3 +6062,207 @@ The operation process for acquiring the laser seam finding point position is as 
    :width: 4in
 
 .. centered:: Figure 8.16‑8 Second Weld Seam Seam Finding Point Acquisition
+
+DARU DFC Force Control Polishing Head Application
+-----------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Installing the DFC polishing head on the robot end-effector helps the robot quickly deploy grinding, polishing, and deburring tasks in different scenarios. It allows customizing the force control magnitude for workpieces of different sizes and shapes, improving the precision and effectiveness of grinding work.
+
+Hardware Description
++++++++++++++++++++++++++++++
+The collaborative robot communicates with and controls the DARU DFC polishing head via Ethernet. The WebApp generates the DARU DFC polishing head communication protocol, which sends control data to the DARU force control controller module via TCP/IP. The module then sends the received control data to the DFC force control actuator, thereby achieving control of the polishing head. The force control controller module acts as the server for Ethernet communication and can connect to polishing head actuators on two channels.
+
+.. figure:: robot_peripherals/267.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑1 Collaborative Robot DARU DFC Polishing Head Application
+
+The force control controller module requires the following configuration: Ethernet port configured with IP address: 192.168.58.88, port number: 2000.
+
+Function Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Open the WebApp, click sequentially on "Initial Setup", "Peripherals", "Polishing". The control types for the polishing head are Pre-adapted Devices and Peripheral Open Protocol:
+Pre-adapted Devices: Automatically generates and loads the open protocol for adapted polishing head device types, no user programming required.
+Peripheral Open Protocol: Users write the open protocol for the polishing head to be adapted using Lua to achieve communication control.
+
+.. figure:: robot_peripherals/268.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑2 Polishing Control Types
+
+Pre-adapted Device Configuration
++++++++++++++++++++++++++++++++++++++++
+
+Open the WebApp, click sequentially on "Initial Setup", "Peripherals", "Polishing Head", "Pre-adapted Devices". In the device status, select "DARU DFC Polishing Head" for the type, then click "Configure". This will automatically load the embedded peripheral open protocol "CtrlDev_DARUDFCPOLISH.lua".
+
+.. figure:: robot_peripherals/269.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑3 DARU DFC Device Peripheral Open Protocol Auto-loading
+
+With the hardware connection confirmed correct, the open protocol can be started. When the run status is green and the communication status feedback in the Polish status on the right shows "Connection Established", it indicates successful communication between the robot and the polishing head controller. Parameters can then be configured to set the polishing head channel for force control and the set force value. The open protocol will cyclically send the set value, channel, and the robot's current rx, ry, rz to the polishing head, as shown in Figure 2-3. Additionally, the Polish status feedback will also display the current force feedback value and force limit warning from the polishing head in real-time. When a warning occurs, an alarm reminder will also appear in the upper right corner of the page, as shown in Figure 2-4.
+
+.. figure:: robot_peripherals/270.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑4 DFC Polishing Head Page Settings and Status Feedback
+
+.. figure:: robot_peripherals/271.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑5 DFC Polishing Head Force Control Limit Exceeded Alarm
+
+Peripheral Open Protocol Download
++++++++++++++++++++++++++++++++++++++++
+
+Click the "Download" button in "Peripheral Open Protocol" to download the protocol to the local computer. The peripheral open protocol is a cyclically executed LUA program. In each cycle, the program performs the following steps:
+
+① Read control data for the DFC polishing head from the robot;
+
+② Write control data to the DFC polishing head via socket;
+
+③ Read status data from the DFC polishing head via socket;
+
+④ Feedback DFC polishing head status data to the robot;
+
+The communication protocol executes cyclically to achieve communication control between the robot and the polishing head. Within the communication protocol, users can customize the cycle period, the server port to connect to, and the IP address.
+
+Below is a sample communication protocol code for the DARU DFC polishing head:
+
+.. code-block:: 
+    :linenos:
+
+    local id = 1 
+    local ctrlValues = {0,0, 0,0, 0,0, 0,0}
+    local realTimeState = {0,0, 0,0, 0,0, 0,0}
+    socket1 = TCPClientConnect('192.168.58.88', 2000, 500, 10, 2, 3)
+    sleepCnt = 100
+    while(sleepCnt > 0) do
+        local stopFlag = GetOpenLUAStopFlag(id)
+        if(stopFlag ~= 0) then 
+          TCPClientDisconnect(socket1)
+          setDFCPolishRealtimeState(0, 0, 0)
+          break
+        end 
+      sleepCnt = sleepCnt -1
+      sleep_ms(50)
+    end
+    local cnt = 5
+    while(1) do
+        channel, force = getDFCPolishSet()
+        comState, sendBuff = DFCPolishInput(socket1, channel, force)
+        sleep_ms(50)
+
+        byte, error, forceFeedback = DFCPolishOutput(socket1)
+        setDFCPolishRealtimeState(comState, error, forceFeedback)
+        sleep_ms(50)
+
+      if(comState == 0) then
+          TCPClientDisconnect(socket1)
+          while(cnt > 0) do
+            socket1 = TCPClientConnect('192.168.58.88', 2000, 500, 10, 2, 3)
+            cnt = cnt - 1
+            if(socket1 > 0)then
+              break
+            end
+          end
+      end
+
+        local stopFlag = GetOpenLUAStopFlag(id)
+        if(stopFlag ~= 0 or cnt == 0) then 
+          TCPClientDisconnect(socket1)
+          setDFCPolishRealtimeState(0, 0, 0)
+          break
+        end    
+    end
+
+DFC Polishing Head LUA Program Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Adding DFC force control configuration, channel switching, status acquisition instructions, etc., to the robot LUA program, combined with robot motion instructions, enables flexible and convenient implementation of polishing applications.
+Open the WebApp, click sequentially on "Teach Program", "Program Programming", and create a new LUA program "testDFC.lua".
+
+.. figure:: robot_peripherals/272.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑6 Create New "testDFC.lua" Program
+
+Select the instruction type as "Peripheral Instruction", and click the "Polishing Device" button in the peripheral instructions. The "Polish" polishing instruction addition page will then appear on the right side of the WebApp. Select "DARU DFC Polishing Head" for the device type.
+
+.. figure:: robot_peripherals/273.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑7 Polishing Head Instruction Addition
+
+Polishing Head Control Instruction Addition
+++++++++++++++++++++++++++++++++++++++++++++
+
+Writing polishing head control instructions in the LUA program allows force control setting and channel selection for the DFC.
+
+In the polishing device instruction addition page, click "Set DFC", select the polishing head channel mode as "2", and the set force as "10". Click the "Add" button to add the polishing head setting instruction in the "Program Preview".
+
+.. figure:: robot_peripherals/274.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑8 Add Polishing Head Control Instruction
+
+Polishing Head Status Acquisition Instruction Addition
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click "Get DFC Data", then click "Add" and "Apply" buttons sequentially. This adds an instruction "GetDFCState()" to "testDFC.lua" for acquiring polishing head data.
+
+.. figure:: robot_peripherals/275.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑9 Add Get Polishing Head Status Instruction
+
+The GetDFCState() instruction returns 2 values, as follows:
+
+**DFCwarn**: Force control limit exceeded warning 0-Normal 1-Alarm;
+
+**force**: Force feedback value.
+
+In "testDFC.lua", use three variables to receive the return values of the GetDFCState() function. Use Lua variable query to display the above information in the WebApp variable query display area.
+
+.. figure:: robot_peripherals/276.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.17‑10 Get Polishing Head Status Program
+
+Application Example
++++++++++++++++++++++++++++++++++++++++
+
+The following is a LUA program example for DFC polishing head control and monitoring:
+
+.. code-block:: 
+    :linenos:
+
+    SetDFCForce(0,25)
+    while (1) do 
+        PTP(c1,100,-1,0)
+        SetDO(0,1,0,0)
+        ARC(c2,0,0,0,0,0,0,0,c3,0,0,0,0,0,0,0,100,-1,0,100,200)
+        DFCwarn,force = GetDFCState()
+        RegisterVar("number","DFCwarn")
+        RegisterVar("number","force")
+        if(DFCwarn == 1) then
+            PTP(safe,100,-1,0)
+            break
+        else
+            PTP(p6,100,-1,0)
+        end
+        SetDO(0,0,0,0)
+    end

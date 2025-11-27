@@ -22,6 +22,7 @@ This manual is the secondary development interface document of Python.
     :numbered: 5
     :maxdepth: 5
 
+    PythonVersionIntro
     PythonRobotStatusFeedback
     PythonRobotBase
     PythonRobotMovement

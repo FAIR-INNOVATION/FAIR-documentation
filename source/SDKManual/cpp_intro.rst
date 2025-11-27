@@ -22,6 +22,7 @@ This manual is the secondary development interface document of C++.
     :numbered: 5
     :maxdepth: 5
 
+    CPPVersionIntro
     CPPDataStructure
     CPPRobotBase
     CPPRobotMovement

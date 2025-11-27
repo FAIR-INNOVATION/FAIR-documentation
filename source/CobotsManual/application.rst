@@ -156,6 +156,45 @@ Collision Protection
 .. note::
    Under force sensor assisted dragging, the robot itself is in a stopped state. During dragging, there is a difference between the joint torque command and feedback. It is recommended to set the collision level to level 7 or higher. Setting the collision level too low may cause false collision errors during dragging.
 
+Parameters Calibration of Joint Torque Sensor on the Whole Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Overview
+************************
+
+Joint torque sensor sensitivity refers to the sensor's responsiveness to torque changes, describing the proportional relationship between the sensor's output voltage and the actual joint torque being measured. Linearity measures how well a regression model fits the observed data. Hysteresis error is the maximum difference between measurements during forward stroke (from small to large) and reverse stroke (from large to small) under the same test conditions for the joint torque sensor's raw data. Repeatability is the ratio of the current test result to the previous test result, used to determine the repeatability accuracy of the joint torque sensor.
+
+The parameter calibration method involves running the robot through a predetermined trajectory, and calculating the joint torque sensor's sensitivity, linearity, hysteresis error, and repeatability accuracy by acquiring joint gravity torque and joint torque sensor raw data under different postures.
+
+Parameter Calibration
+********************************
+
+**Step1**: Set the tool coordinate system to "Tool0". Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock". In the joint torque sensor whole-machine drag module, click "Function Enable", as shown in Figure 2-1.
+
+.. image:: application/037.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑4 Function Enable
+
+**Step2**: After clicking "Function Enable", proceed with sensitivity calibration, as shown in Figure 2-2. Click "Generate Program" to deploy the internal controller Lua script. Switch the robot to automatic mode and set the run speed to "10". Click "Run" and wait for the robot to move.
+
+.. image:: application/038.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑5 Sensitivity Calibration
+
+.. note:: If the joint torque sensor sensitivity calibration is already completed, you can proceed directly to drag function parameter settings.
+
+**Step3**: After the robot completes running the predetermined trajectory, the sensitivity, linearity, hysteresis error, and repeatability calibration results are automatically displayed on the web interface. Click "Set" to apply, as shown in Figure 2-3.
+
+.. image:: application/039.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑6 Parameter Calibration Results
+
 Intersection Point Generation (Laser Point Capture Motion)
 ----------------------------------------------------------------------------------
 
@@ -176,7 +215,7 @@ Laser Point Capture Motion Function Operation Process
 
 .. figure:: application/011.png
    :align: center
-   :width: 3in
+   :width: 4in
 
 .. centered:: Figure 14.6‑2 New Laser Point Capture Motion Program
 

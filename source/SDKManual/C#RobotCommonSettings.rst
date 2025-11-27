@@ -953,11 +953,56 @@ Get the sensitivity calibration results of the joint torque sensor
     :linenos:
 
     /**
-    * @brief Get the sensitivity calibration results of the joint torque sensor
-    * @param [out] calibResult j1~j6 Joint sensitivity [0-1]
+    * @brief Get joint torque sensor sensitivity calibration results
+    * @param [out] calibResult j1~j6 joint sensitivity [0-1]
+    * @param [out] linearity j1~j6 joint linearity [0-1]
     * @return Error code
     */
-    public int JointSensitivityCalibration(ref double[] calibResult);
+    public int JointSensitivityCalibration(double calibResult[6], double linearity[6]);
+
+Get Joint Torque Sensor Hysteresis Error
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get joint torque sensor hysteresis error
+    * @param [out] hysteresisError j1~j6 joint hysteresis error
+    * @return Error code
+    */
+    public int JointHysteresisError(ref double[] hysteresisError);
+    
+Get Joint Torque Sensor Repeatability
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+    
+    /**
+    * @brief Get joint torque sensor repeatability
+    * @param [out] repeatability j1~j6 joint torque sensor repeatability
+    * @return Error code
+    */
+    public int JointRepeatability(ref double[] repeatability);
+    
+Set Joint Force Sensor Parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set joint force sensor parameters
+    * @param [in] M J1-J6 mass coefficient [0.001 ~ 10]
+    * @param [in] B J1-J6 damping coefficient [0.001 ~ 10]
+    * @param [in] K J1-J6 stiffness coefficient [0.001 ~ 10]
+    * @param [in] threshold Force control threshold, Nm
+    * @param [in] sensitivity Sensitivity, Nm/V, [0 ~ 10]
+    * @param [in] setZeroFlag Function enable flag; 0-Off; 1-On; 2-Record zero point at position 1; 3-Record zero point at position 2
+    * @return Error code
+    */
+    public int SetAdmittanceParams(double[] M, double[] B, double[] K, double[] threshold, double[] sensitivity, int setZeroFlag);
 
 Joint torque sensor sensitivity automatic calibration Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -966,62 +1011,72 @@ Joint torque sensor sensitivity automatic calibration Code Example
 .. code-block:: c#
     :linenos:
 
-    public void TestSensitivityCalib()
+    public int TestSensitivityCalib()
     {
-    int rtn = robot.JointSensitivityEnable(1);
+        int rtn; 
+        rtn = robot.JointSensitivityEnable(0);
+        rtn = robot.JointSensitivityEnable(1);
         Console.WriteLine($"JointSensitivityEnable rtn is {rtn}");
 
         JointPos curJPos = new JointPos(0, 0, 0, 0, 0, 0);
-        rtn = robot.GetActualJointPosDegree(0, ref curJPos);
-        if (rtn != 0)
-        {
-            Console.WriteLine("Failed to get actual joint position.");
-            robot.CloseRPC();
-            return;
-        }
-
+        robot.GetActualJointPosDegree(0, ref curJPos);
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
         DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
-
-        double[] j2Angles = { 0, -30, -60, -90, -120, -150, -180 };
-
-        foreach (double j2 in j2Angles)
+        JointPos[] jointPoses = new JointPos[]
         {
-            JointPos jointPos = new JointPos(
-                curJPos.jPos[0], j2, 0, -90, 0.02, curJPos.jPos[5]
-            );
-
+            new JointPos(curJPos.jPos[0], 0, 0, -90, 0.02, curJPos.jPos[5]),
+            new JointPos(curJPos.jPos[0], -30, 0, -90, 0.02, curJPos.jPos[5]),
+            new JointPos(curJPos.jPos[0], -60, 0, -90, 0.02, curJPos.jPos[5]),
+            new JointPos(curJPos.jPos[0], -90, 0, -90, 0.02, curJPos.jPos[5]),
+            new JointPos(curJPos.jPos[0], -120, 0, -90, 0.02, curJPos.jPos[5]),
+            new JointPos(curJPos.jPos[0], -150, 0, -90, 0.02, curJPos.jPos[5]),
+            new JointPos(curJPos.jPos[0], -180, 0, -90, 0.02, curJPos.jPos[5])
+        };
+        for (int i = 0; i < jointPoses.Length; i++)
+        {
             DescPose descPos = new DescPose(0, 0, 0, 0, 0, 0);
-            rtn = robot.GetForwardKin( jointPos, ref descPos);
-            if (rtn != 0)
-            {
-                Console.WriteLine($"GetForwardKin failed at J2={j2}.");
-                continue;
-            }
+            robot.GetForwardKin(jointPoses[i], ref descPos);
+            robot.MoveJ(jointPoses[i], descPos, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
 
-            rtn = robot.MoveJ( jointPos,  descPos, 0, 0, 100, 100, 100,  epos, -1, 0,  offset_pos);
-            if (rtn != 0)
-            {
-                Console.WriteLine($"MoveJ failed to J2={j2}, rtn={rtn}");
-                continue;
-            }
-            Thread.Sleep(200); 
+            Thread.Sleep(i == 0 ? 200 : 100);
             rtn = robot.JointSensitivityCollect();
-            Console.WriteLine($"JointSensitivityCollect at J2={j2} rtn is {rtn}");
+            Console.WriteLine($"JointSensitivityCollect {i + 1} rtn is {rtn}");
             Thread.Sleep(100);
         }
 
+        for (int i = jointPoses.Length - 2; i >= 0; i--)
+        {
+            DescPose descPos = new DescPose();
+            robot.GetForwardKin(jointPoses[i], ref descPos);
+            robot.MoveJ(jointPoses[i], descPos, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+            Thread.Sleep(100);
+            rtn = robot.JointSensitivityCollect();
+            Console.WriteLine($"JointSensitivityCollect {jointPoses.Length + (jointPoses.Length - 1 - i)} rtn is {rtn}");
+            Thread.Sleep(100);
+        }
         double[] calibResult = new double[6];
-        rtn = robot.JointSensitivityCalibration(ref calibResult);
+        double[] linearity = new double[6];
+        rtn = robot.JointSensitivityCalibration(ref calibResult, ref linearity);
         Console.WriteLine($"JointSensitivityCalibration rtn is {rtn}");
-
         rtn = robot.JointSensitivityEnable(0);
-        Console.WriteLine($"JointSensitivityEnable (disable) rtn is {rtn}");
-
-        Console.WriteLine($"Joint Sensor Calib result: " +
-            $"{calibResult[0]:F6} {calibResult[1]:F6} {calibResult[2]:F6} " +
-            $"{calibResult[3]:F6} {calibResult[4]:F6} {calibResult[5]:F6}");
+        Console.WriteLine($"JointSensitivityEnable rtn is {rtn}");
+        Console.WriteLine($"jointSensor Calib result is {calibResult[0]:F6} {calibResult[1]:F6} {calibResult[2]:F6} {calibResult[3]:F6} {calibResult[4]:F6} {calibResult[5]:F6}");
+        Console.WriteLine($"jointSensor linearity is {linearity[0]:F6} {linearity[1]:F6} {linearity[2]:F6} {linearity[3]:F6} {linearity[4]:F6} {linearity[5]:F6}"); 
+        double[] hysteresisError = new double[6];
+        rtn = robot.JointHysteresisError(ref hysteresisError);
+        Console.WriteLine($"JointHysteresisError result is {hysteresisError[0]:F6} {hysteresisError[1]:F6} {hysteresisError[2]:F6} {hysteresisError[3]:F6} {hysteresisError[4]:F6} {hysteresisError[5]:F6}");   
+        double[] repeatability = new double[6];
+        rtn = robot.JointRepeatability(ref repeatability);
+        Console.WriteLine($"JointRepeatability result is {repeatability[0]:F6} {repeatability[1]:F6} {repeatability[2]:F6} {repeatability[3]:F6} {repeatability[4]:F6} {repeatability[5]:F6}");
+        double[] M = new double[6] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        double[] B = new double[6] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        double[] K = new double[6] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        double[] threshold = new double[6] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        int setZeroFlag = 1;
+        rtn = robot.SetAdmittanceParams(M, B, K, threshold, calibResult, setZeroFlag);
+        Console.WriteLine($"SetAdmittanceParams rtn is {rtn}");
         robot.CloseRPC();
+        return 0;
     }
  
 Get the number of 8 slave port error frames of the robot

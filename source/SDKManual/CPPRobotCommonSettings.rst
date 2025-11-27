@@ -1014,11 +1014,56 @@ Obtain joint torque sensor sensitivity calibration results
     :linenos:
 
     /**
-    * @brief  Obtain joint torque sensor sensitivity calibration results
-    * @param [ out -RSB- calibResJ1-J61-j6 joint sensitivity [0-1]
-    * @return error code
+    * @brief Get joint torque sensor sensitivity calibration results
+    * @param [out] calibResult j1~j6 joint sensitivity [0-1]
+    * @param [out] linearity j1~j6 joint linearity [0-1]
+    * @return Error code
     */
-    errno_t JointSensitivityCalibration(double result[6]);
+    errno_t JointSensitivityCalibration(double calibResult[6], double linearity[6]);
+
+Get Joint Torque Sensor Hysteresis Error
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get joint torque sensor hysteresis error
+    * @param [out] hysteresisError j1~j6 joint hysteresis error
+    * @return Error code
+    */
+    errno_t JointHysteresisError(double hysteresisError[6]);
+    
+Get Joint Torque Sensor Repeatability
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+    
+    /**
+    * @brief Get joint torque sensor repeatability
+    * @param [out] repeatability j1~j6 joint torque sensor repeatability
+    * @return Error code
+    */
+    errno_t JointRepeatability(double repeatability[6]);
+    
+Set Joint Force Sensor Parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set joint force sensor parameters
+    * @param [in] M J1-J6 mass coefficient [0.001 ~ 10]
+    * @param [in] B J1-J6 damping coefficient [0.001 ~ 10]
+    * @param [in] K J1-J6 stiffness coefficient [0.001 ~ 10]
+    * @param [in] threshold Force control threshold, Nm
+    * @param [in] sensitivity Sensitivity, Nm/V, [0 ~ 10]
+    * @param [in] setZeroFlag Function enable flag; 0-Off; 1-On; 2-Record zero point at position 1; 3-Record zero point at position 2
+    * @return Error code
+    */
+    errno_t SetAdmittanceParams(double M[6], double B[6], double K[6], double threshold[6], double sensitivity[6], int setZeroFlag);
 
 An example of joint torque sensor sensitivity auto-calibration code
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1038,15 +1083,16 @@ An example of joint torque sensor sensitivity auto-calibration code
         {
             return 0;
         }
+        rtn = robot.JointSensitivityEnable(0);
         rtn = robot.JointSensitivityEnable(1);
         printf("JointSensitivityEnable rtn is %d\n", rtn);
         JointPos curJPos = {};
         robot.GetActualJointPosDegree(0, &curJPos);
+        ExaxisPos epos = { 0,0,0,0 };
+        DescPose offset_pos = { 0,0,0,0,0,0 };
         JointPos jointPos1 = { curJPos.jPos[0], 0, 0, -90, 0.02, curJPos.jPos[5] };
         DescPose descPos1 = {};
         robot.GetForwardKin(&jointPos1, &descPos1);
-        ExaxisPos epos = { 0,0,0,0 };
-        DescPose offset_pos = { 0,0,0,0,0,0 };
         robot.MoveJ(&jointPos1, &descPos1, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
         robot.Sleep(200);
         rtn = robot.JointSensitivityCollect();
@@ -1100,13 +1146,65 @@ An example of joint torque sensor sensitivity auto-calibration code
         rtn = robot.JointSensitivityCollect();
         printf("JointSensitivityCollect 7 rtn is %d\n", rtn);
         robot.Sleep(100);
+        //-------------------
+        robot.MoveJ(&jointPos6, &descPos6, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.Sleep(100);
+        rtn = robot.JointSensitivityCollect();
+        printf("JointSensitivityCollect 8 rtn is %d\n", rtn);
+        robot.Sleep(100);
+        robot.MoveJ(&jointPos5, &descPos5, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.Sleep(100);
+        rtn = robot.JointSensitivityCollect();
+        printf("JointSensitivityCollect 9 rtn is %d\n", rtn);
+        robot.Sleep(100);
+        robot.MoveJ(&jointPos4, &descPos4, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.Sleep(100);
+        rtn = robot.JointSensitivityCollect();
+        printf("JointSensitivityCollect 10 rtn is %d\n", rtn);
+        robot.Sleep(100);
+        robot.MoveJ(&jointPos3, &descPos3, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.Sleep(100);
+        rtn = robot.JointSensitivityCollect();
+        printf("JointSensitivityCollect 11 rtn is %d\n", rtn);
+        robot.Sleep(100);
+        robot.MoveJ(&jointPos2, &descPos2, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.Sleep(100);
+        rtn = robot.JointSensitivityCollect();
+        printf("JointSensitivityCollect 12 rtn is %d\n", rtn);
+        robot.Sleep(100);
+        robot.MoveJ(&jointPos1, &descPos1, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.Sleep(200);
+        rtn = robot.JointSensitivityCollect();
+        printf("JointSensitivityCollect 13 rtn is %d\n", rtn);
+        robot.Sleep(100);
         double calibResult[6] = { 0.0 };
-        rtn = robot.JointSensitivityCalibration(calibResult);
+        double linearity[6] = { 0.0 };
+        rtn = robot.JointSensitivityCalibration(calibResult, linearity);
         printf("JointSensitivityCalibration rtn is %d\n", rtn);
         rtn = robot.JointSensitivityEnable(0);
         printf("JointSensitivityEnable rtn is %d\n", rtn);
-        printf("jointSensor Calib result is %f %f %f %f %f %f\n", calibResult[0], calibResult[1], calibResult[2], 
-            calibResult[3], calibResult[4], calibResult[5]);
+        printf("jointSensor Calib result is %f %f %f %f %f %f\njointSensor linearity is %f %f %f %f %f %f\n", 
+            calibResult[0], calibResult[1], calibResult[2], 
+            calibResult[3], calibResult[4], calibResult[5], 
+            linearity[0], linearity[1], linearity[2],
+            linearity[3], linearity[4], linearity[5]);
+        double hysteresisError[6] = { 0.0 };
+        rtn = robot.JointHysteresisError(hysteresisError);
+        printf("JointHysteresisError result is %f %f %f %f %f %f\n",
+            hysteresisError[0], hysteresisError[1], hysteresisError[2],
+            hysteresisError[3], hysteresisError[4], hysteresisError[5]);
+        double repeatability[6] = { 0.0 };
+        rtn = robot.JointRepeatability(repeatability);
+        printf("JointRepeatability result is %f %f %f %f %f %f\n",
+            repeatability[0], repeatability[1], repeatability[2],
+            repeatability[3], repeatability[4], repeatability[5]);
+        double M[6] = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        double B[6] = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        double K[6] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        double threshold[6] = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+        int setZeroFlag = 1;
+        rtn = robot.SetAdmittanceParams(M, B, K, threshold, calibResult, setZeroFlag);
+        printf("SetAdmittanceParams rtn is %d\n", rtn);
         robot.CloseRPC();
     }
     
