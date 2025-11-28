@@ -1,32 +1,54 @@
 Version V3.9.0
 -----------------
 
-Date: 2025-11-26
+Date: 2025-11-27
 
 - **DARU DFC Force Control Polishing Head Application**:
     Path: Initial Setup -> Peripherals -> Polishing -> DARU DFC Force Control Polishing Head.
 
-    Description: Added DARU DFC Force Control Polishing Head type to meet the adaptation requirements of the DFC polishing system.
+    Description: The software component for the DFC intelligent flexible polishing force control peripheral has been adapted and tested, meeting the adaptation requirements of the DFC polishing system.
 
 - **Parameter Calibration of Joint Torque Sensor on the Complete Machine**:
     Path: Auxiliary Applications -> Tool Applications -> Drag Lock -> Joint Torque Sensor Whole Machine Drag.
 
-    Description: Joint torque sensor whole machine drag.
+    Description: Run a predetermined trajectory to complete parameter calibration for the joint torque sensor's sensitivity, linearity, hysteresis error, and repeatability accuracy.
 
-- **Robot Extended Axis Intersecting Line Welding Function**:
+- **New Joint Torque Sensor-Based Guided Drag Teaching Function to Avoid Overshoot**:
+    Path: Auxiliary Applications -> Tool Applications -> Drag Lock -> Joint Torque Sensor Whole Machine Drag.
+
+    Description: Mitigates drag overshoot phenomena in the current loop. After enabling this function, drag-to-point operations can be performed conveniently.
+
+- **Intersecting Line Welding Function**:
     Path: Teach Program -> Program Programming -> Intersecting Line Instruction.
 
-    Description: Implemented intersecting line trajectory planning and intersecting line welding.
+    Description: Record 6 taught points on the cross-sections of the main pipe and branch pipe respectively, input parameters such as motion direction, speed, acceleration, and offset values. The robot can then generate the intersecting line trajectory formed by the intersection of the two circular pipes and perform welding.
 
 - **Modbus Wait for Analog Input Setting Adds Equal Judgment Function**:
     Path: Teach Program -> Program Programming -> Modbus Instruction.
 
-    Description: Added equal judgment for slave station wait for analog input wait status.
+    Description: Added equal judgment for the slave station wait for analog input wait status.
 
-- **Teach Point One-Click Update & Lin Single Point Execution Function**:
+- **Teach Point One-Click Update & LIN Single Point Execution Function**:
     Path: Teach Program -> Teach Points -> Teach Management.
 
-    Description: Added overwrite point function to point table, added PTP/LIN method for motion points.
+    Description: On the teach point interface, update the current robot pose to the corresponding point via the robot body operation bar, with the option to sync the teach program. Added LIN single point execution method.
+
+- **Optimized Point Recording Function in Point Table Mode**:
+    Path: Teach Program -> Teach Points -> Teach Management.
+
+    Description: Re-recording points in point table mode can synchronously update the Lua program. Optimized to resolve occasional overspeed in PTP reduction mode and occasional motion stop after arrival in LIN speed adjustment mode.
+
+- **User Configuration File**:
+    Description: Optimized handling of robot user configuration file loading failures. Added automatic restart backup configuration file and rollback backup configuration file functions.
+
+- **Web Interface Version**:
+    Description: Web interface version updated to 2.0, featuring updated and optimized software operation interface.
+
+- **New V6.5 Robot Models**:
+    Description: Through hardware (such as reducers) and algorithm optimizations, robot vibration is reduced and trajectory accuracy is improved. Added FR3, FR5, FR10, FR16, FR20 robot models.
+
+- **New FR5C Robot Model Configuration**:
+    Description: The LA version software adds FR5C robot model configuration functionality.
 
 Version V3.8.7
 -----------------

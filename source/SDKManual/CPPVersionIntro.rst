@@ -15,12 +15,12 @@ Version Update Description
 
    * - V3.9.0
      - 2025-11-26
-     - | 1. JointSensitivityCalibration() interface adds j1~j6 joint linearity return;
-       | 2. Added JointHysteresisError() interface;
-       | 3. Added JointRepeatability() interface;
-       | 4. Added SetAdmittanceParams() interface;
-       | 5. Added MoveToIntersectLineStart() interface;
-       | 6. Added MoveIntersectLine() interface;
+     - | 1. JointSensitivityCalibration() interface adds j1~j6 joint linearity return
+       | 2. Added JointHysteresisError() interface
+       | 3. Added JointRepeatability() interface
+       | 4. Added SetAdmittanceParams() interface
+       | 5. Added MoveToIntersectLineStart() interface
+       | 6. Added MoveIntersectLine() interface
 
    * - V3.8.7
      - 2025-10-21
