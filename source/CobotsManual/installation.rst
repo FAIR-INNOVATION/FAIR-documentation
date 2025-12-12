@@ -92,35 +92,41 @@ Nameplate information
 
 .. centered:: Figure 3.1-5 FR5 model collaborative robot
 
+.. figure:: installation/126.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.1-6 FR5-WML model collaborative robot
+
 .. figure:: installation/004.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-6 FR10 model collaborative robot
+.. centered:: Figure 3.1-7 FR10 model collaborative robot
 
 .. figure:: installation/005.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-7 FR16 model collaborative robot
+.. centered:: Figure 3.1-8 FR16 model collaborative robot
 
 .. figure:: installation/006.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-8 FR20 model collaborative robot
+.. centered:: Figure 3.1-9 FR20 model collaborative robot
 
 .. figure:: installation/007.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-9 FR30 model collaborative robot
+.. centered:: Figure 3.1-10 FR30 model collaborative robot
 
 .. figure:: installation/125.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-10 FR30L model collaborative robot
+.. centered:: Figure 3.1-11 FR30L model collaborative robot
 
 Effectiveness and responsibility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

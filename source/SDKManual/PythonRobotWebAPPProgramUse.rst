@@ -13,7 +13,7 @@ Setting the default job program to load automatically on boot
     "Prototype", "``LoadDefaultProgConfig(flag,program_name)``"
     "Description", "Sets the default job program to be automatically loaded on boot"
     "Required parameters","- ``flag``: 1-automatically load the default program on power-up, 0-don't automatically load the default program
-    - ``program_name``: the name of the job program and its path, e.g. “/fruser/movej.lua”, where “/fruser/” is the fixed path."
+    - ``program_name``: the name of the job program and its path, e.g. “/fruser/movej.lua”, where /fruser/ is the fixed path for QX, and /usr/local/etc/controller/lua/ is the fixed path for LA"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -25,7 +25,7 @@ Load the specified job program
 
     "Prototype", "``ProgramLoad(program_name)``"
     "Description", "Load the specified job program."
-    "Mandatory parameters", "- ``program_name``: name of the job program and path, e.g. “/fruser/movej.lua”, where “/fruser/” is a fixed path"
+    "Mandatory parameters", "- ``program_name``: name of the job program and path, e.g. “/fruser/movej.lua”, where /fruser/ is the fixed path for QX, and /usr/local/etc/controller/lua/ is the fixed path for LA"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 

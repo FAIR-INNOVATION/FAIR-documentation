@@ -12,7 +12,7 @@ Set default program to load automatically on startup
     /**  
     * @brief  Set default program to load automatically on startup  
     * @param  [in] flag  0-Do not load default program automatically, 1-Load default program automatically  
-    * @param  [in] program_name Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is fixed path)  
+    * @param  [in] program_name Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA)  
     * @return  Error code  
     */  
     int LoadDefaultProgConfig(int flag, String program_name);  
@@ -24,7 +24,7 @@ Load specified program
 
     /**  
     * @brief  Load specified program  
-    * @param  [in] program_name Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is fixed path)  
+    * @param  [in] program_name Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA)  
     * @return  Error code  
     */  
     int ProgramLoad(String program_name);  
@@ -36,7 +36,7 @@ Get loaded program name
 
     /**  
     * @brief  Get loaded program name  
-    * @param  [out] program_name program_name[0]: Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is fixed path)  
+    * @param  [out] program_name program_name[0]: Program name and path, e.g., "/fruser/movej.lua" ("/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA)  
     * @return  Error code  
     */  
     int GetLoadedProgram(String[] program_name);  

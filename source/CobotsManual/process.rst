@@ -638,6 +638,6 @@ When two identical tracking motion targets are taught consecutively (may include
    :align: center
    :width: 6in
 
-.. centered:: Figure 15.3‑11 A Typical Conveyor Blocking Tracking Picking Motion Program
+.. centered:: Figure 15.3‑16 A Typical Conveyor Blocking Tracking Picking Motion Program
 
 When two identical tracking motion targets are taught consecutively (may include offset distance), and gripper motion is inserted in between, the robot will continuously track the conveyor at this target position until the gripper motion is completed, achieving blocking tracking picking.

@@ -268,7 +268,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
      - 0.28
      - [1.81，1.33，-20.41]
 
-.. centered:: Table 2.4-3 FR3-WMSL model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-3 FR3-WML model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
    :widths: 70 50 50 50 50 70 50 120
@@ -480,7 +480,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - 0.36
       - [0.93, 0.81, -20.05]
 
-.. centered:: Table 2.4-6 FR5L model collaboration robot Denavit–Hartenberg parameter
+.. centered:: Table 2.4-6 FR5-WML model collaboration robot Denavit–Hartenberg parameter
 
 .. list-table::
    :widths: 70 50 50 50 50 70 50 120
@@ -488,12 +488,12 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
    :align: center
    :class: no-padding sheet-center
 
-   * - **运动学**
+   * - **Kinematics**
      - **theta[rad]**
      - **a[mm]**
      - **d[mm]**
      - **alpha[rad]**
-     - **动力学**
+     - **Dynamics**
      - **Mass[kg]**
      - **Center of Mass[mm]**
 

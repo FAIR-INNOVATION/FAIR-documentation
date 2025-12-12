@@ -184,7 +184,7 @@ Date: 2025-07-30
 
 - **Robot Model Configuration**:
 
-    Description: Added FR5L long-reach robot model configuration option.
+    Description: Added FR5-WML long-reach robot model configuration option.
 
 - **Optimized Software Upgrade**:
 
