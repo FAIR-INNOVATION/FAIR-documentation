@@ -403,50 +403,6 @@ constant force control
     - ``isNoBlock``：Block flag, 0- block; 1- Non-blocking default 0- blocking；"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-constant force control code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: python
-    :linenos:
-
-    from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = Robot.RPC('192.168.58.2')
-    company = 24
-    device = 0
-    softversion = 0
-    bus = 1
-    index = 1
-    robot.FT_SetConfig(company, device, softversion, bus)
-    time.sleep(1)
-    error,[company, device, softversion, bus] = robot.FT_GetConfig()
-    print(f"FT config:{company},{device},{softversion},{bus}")
-    time.sleep(1)
-    robot.FT_Activate(0)
-    time.sleep(1)
-    robot.FT_Activate(1)
-    time.sleep(1)
-    robot.FT_SetZero(0)
-    time.sleep(1)
-    sensor_id = 1
-    select = [0, 0, 1, 0, 0, 0]
-    ft_pid = [0.0005, 0.0, 0.0, 0.0, 0.0, 0.0]
-    adj_sign = 0
-    ILC_sign = 0
-    max_dis = 100.0
-    max_ang = 0.0
-    ft = [0.0,0.0,-10.0,0.0,0.0,0.0]
-    j1 = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
-    j2 = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
-    desc_p1 = [-419.524, -13.000, 351.569, -178.118, 0.314, 3.833]
-    desc_p2 = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
-    epos = [0, 0, 0, 0]
-    offset_pos = [0, 0, 0, 0, 0, 0]
-    rtn = robot.MoveJ(joint_pos=j1,tool= 0,user= 0,vel= 100.0)
-    robot.FT_Control(1, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang)
-    rtn = robot.MoveJ(joint_pos=j2,tool= 0,user= 0,vel= 100.0)
-    robot.FT_Control(0, sensor_id, select, ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang)
-    robot.CloseRPC()
-
 A code example of constant force control with damping
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
