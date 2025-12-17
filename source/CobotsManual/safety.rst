@@ -85,7 +85,7 @@ Operation Process
 **Step1**: Click the "Initial Setup" -> "Safety" -> "Emergency Stop" button. Select "Category 1b" for "Stop Type", and set the "Stop Time Limit" and "Stop Distance Limit" parameters as needed. The "Enable Strategy After E-stop Reset" can be set to "Manual Enable" or "Auto Enable", as shown in Figure 2-1.
 
 .. image:: safety/046.png
-   :width: 6in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 7.4-2 Enable Strategy Setting

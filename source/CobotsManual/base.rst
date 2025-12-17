@@ -392,7 +392,7 @@ Torque Detection Before Dragging
 **Step2**: Switch to drag mode. The Web interface enters the drag mode by clicking the robot status area - robot drag status, long pressing the teach pendant "Teach Mode" button, or long pressing the robot end drag button. If the controller reports an error and the robot does not switch to drag mode, as shown in Figure 2-2, check whether the robot load configuration and installation method are correct.
 
 .. image:: base/070.png
-   :width: 2in
+   :width: 4in
    :align: center
 
 .. centered:: Figure 6.4-10 Torque Exceeds Limit, Controller Reports Error
