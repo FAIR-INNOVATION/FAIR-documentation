@@ -101,101 +101,103 @@ Joint space motion
     - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0];"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
-Cartesian linear motion in space
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Linear Motion
+++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype","``MoveL(desc_pos, tool, user, joint_pos = [0.0,0.0,0.0,0.0,0.0,0.0,0.0], vel = 20.0, acc = 0.0 , ovl = 100.0, blendR = -1.0, blendMode = 0, exaxis_pos = [0.0,0.0, 0.0,0.0], search = 0, offset_flag = 0, offset_pos = [0.0,0.0,0.0,0.0,0.0,0.0],config=-1,velAccParamMode=0,overSpeedStrategy=0,speedPercent=10)``"
-    "Description", "Cartesian linear motion in space"
-    "Mandatory parameters", "- ``desc_pos``: target Cartesian position in [mm][°];
-    - ``tool``: tool number, [0 to 14];
-    - ``user``: artifact number, [0 to 14];"
-    "Default parameters","- ``joint_pos``: target joint position in [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls inverse kinematics to solve for the return value.
-    - ``vel``: percentage of speed, [0~100] default 20.0;
-    - ``acc``: acceleration percentage, [0~100], not open Default 0.0;
-    - ``ovl``: velocity scaling factor, [0~100] default 100.0;
-    - ``blendR``:[-1.0]-movement in place (blocking), [0~1000]-smoothing radius (non-blocking) in [mm] default -1.0;
-    - ``blendMode``:Transitional mode 0- Internal cutting transition 1- Corner transition, default -0;
-    - ``exaxis_pos``: external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0].
-    - ``search``: [0] - no wire search, [1] - wire search;
-    - ``offset_flag``:[0]-no offset, [1]-offset in workpiece/base coordinate system, [2]-offset in tool coordinate system Default 0;
-    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]
-    - ``config``: Reverse the joint space configuration, [-1]- calculate based on the current joint position, [0~7]- solve based on the specific joint space configuration, default -1
-    - ``velAccParamMode``: Speed acceleration parameter mode; 0- percentage; 1 -Physical velocity (mm/s) Acceleration (mm/s2) Default 0
-    - ``overSpeedStrategy``: over speed handling strategy, 0 - strategy off; 1 - standard; 2 - stop on error when over speeding; 3 - adaptive speed reduction, default 0
-    - ``speedPercent``: Percentage of allowable speed reduction threshold [0-100], default 10%
+    "Prototype", "``MoveL(desc_pos, tool, user, joint_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], vel=20.0, acc=0.0, ovl=100.0,blendR=-1.0, blendMode = 0,exaxis_pos=[0.0, 0.0, 0.0, 0.0], search=0, offset_flag=0,offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],oacc = 100.0,config=-1,velAccParamMode=0,overSpeedStrategy=0,speedPercent=10)``"
+    "Description", "Cartesian Space Linear Motion"
+    "Required Parameters", "- ``desc_pos``: Target Cartesian pose, unit [mm][°]；
+    - ``tool``: Tool number, [0~14]；
+    - ``user``: Workpiece/User number, [0~14]；"
+    "Default Parameters", "- ``joint_pos``: Target joint positions, unit [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0], default value is the return value from inverse kinematics；
+    - ``vel``: Velocity percentage, [0~100] Default 20.0；
+    - ``acc``: Acceleration percentage, [0~100], currently unavailable Default 0.0；
+    - ``ovl``: Velocity scaling factor, [0~100] Default 100.0；
+    - ``blendR``:[-1.0]-Block until motion completes (blocking), [0~1000]-Blend radius (non-blocking), unit [mm] Default -1.0；
+    - ``blendMode``: Transition method; 0-Tangent blend； 1-Corner blend, default 0；
+    - ``exaxis_pos``: External axis 1 position ~ External axis 4 position Default [0.0,0.0,0.0,0.0]；
+    - ``search``:[0]-No wire search, [1]-Wire search；
+    - ``offset_flag``:[0]-No offset, [1]-Offset in workpiece/base coordinate system, [2]-Offset in tool coordinate system Default 0；
+    - ``offset_pos``: Pose offset value, unit [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0]；
+    - ``oacc``: Acceleration scaling factor [0-100] / Physical acceleration (mm/s²) Default 100；
+    - ``config``: Inverse solution joint space configuration, [-1]-Solve with reference to current joint positions, [0~7]-Solve according to a specific joint space configuration, default -1
+    - ``velAccParamMode``: Velocity/Acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s²) Default 0
+    - ``overSpeedStrategy``: Overspeed handling strategy, 0-Strategy disabled; 1-Standard; 2-Stop with error on overspeed; 3-Adaptive speed reduction, default 0
+    - ``speedPercent``: Allowable speed reduction threshold percentage [0-100], default 10%
     "
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Return Value", "Error code 0-Success  Error- errcode"
 
-Circular motion in Cartesian space
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Circular Arc Motion
+++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype","``MoveC(desc_pos_p, tool_p, user_p, desc_pos_t, tool_t, user_t, joint_pos_p =[0.0,0.0,0.0,0.0,0.0,0.0], joint_pos_t =[0.0,0.0,0.0,0.0 ,0.0,0.0], vel_p = 20.0,acc_p=100.0, exaxis_pos_p = [0.0,0.0,0.0,0.0], offset_flag_p = 0, offset_pos_p = [0.0,0.0,0.0,0.0,0.0,0.0], vel_t= 20.0, acc_t= 100.0,exaxis_pos_t=[0.0,0.0,0.0,0.0], offset_flag_t = 0, offset_pos_t = [0.0,0.0,0.0,0.0,0.0,0.0,0.0], ovl = 100.0, blendR = -1.0, config=-1,velAccParamMode=0)``"
-    "Description", "Circular motion in Cartesian space"
-    "Mandatory parameters", "- ``desc_pos_p``: path point Cartesian position in [mm][°];
-    - ``tool_p``: pathpoint tool number, [0~14].
-    - ``user_p``: pathpoint artifact number, [0~14].
-    - ``desc_pos_t``: Cartesian position of the target point in [mm][°].
-    - ``tool_t``: tool number, [0 to 14];
-    - ``user_t``: artifact number, [0~14];"
-    "Default parameters","- ``joint_pos_p``: path point joint position in [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls inverse kinematics to solve for the return value.
-    - ``joint_pos_t``: target point joint position in [°] default initial value [0.0,0.0,0.0,0.0,0.0,0.0,0.0] default value calls inverse kinematics to solve for the return value.
-    - ``vel_p``: path point velocity percentage, [0~100] default 20.0.
-    - ``acc_p``: path point acceleration percentage, [0~100] not open yet, default 0.0; ``acc_p``: path point acceleration percentage, [0~100] not open yet, default 0.0.
-    - ``exaxis_pos_p``: path point external axis 1 position ~ external axis 4 position default [0.0,0.0,0.0,0.0];
-    - ``offset_flag_p``: whether the path point is offset [0] - no offset, [1] - offset in the workpiece/base coordinate system, [2] - offset in the tool coordinate system Default 0;
-    - ``vel_t``: percentage of velocity at target point, [0~100] default 20.0; ``vel_t``: percentage of velocity at target point, [0~100] default 20.0.
-    - ``acc_t``: target point acceleration percentage, [0~100] not open yet default 0.0.
-    - ``exaxis_pos_t``: target point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0];
-    - ``offset_flag_t``: whether the target point is offset or not [0]-no offset, [1]-offset in the workpiece/base coordinate system, [2]-offset in the tool coordinate system Default 0;
-    - ``offset_pos_t``: target point attitude offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0].
-    - ``ovl:``: velocity scaling factor, [0~100] default 100.0.
-    - ``blendR``:[-1.0]-motion in place (blocking), [0~1000]-smoothing radius (non-blocking) in [mm] default -1.0;
-    - ``config``: Reverse the joint space configuration, [-1]- calculate based on the current joint position, [0~7]- solve based on the specific joint space configuration, default -1
-    - ``velAccParamMode``: Speed acceleration parameter mode; 0- percentage; 1 -Physical velocity (mm/s) Acceleration (mm/s2) Default 0"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``MoveC(desc_pos_p, tool_p, user_p, desc_pos_t, tool_t, user_t, joint_pos_p=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], joint_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],vel_p=20.0, acc_p=100.0, exaxis_pos_p=[0.0, 0.0, 0.0, 0.0], offset_flag_p=0,offset_pos_p=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],vel_t=20.0, acc_t=100.0, exaxis_pos_t=[0.0, 0.0, 0.0, 0.0], offset_flag_t=0,offset_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],ovl=100.0, blendR=-1.0,oacc=100.0,config=-1,velAccParamMode=0)``"
+    "Description", "Cartesian Space Circular Arc Motion"
+    "Required Parameters", "- ``desc_pos_p``: Path point Cartesian pose, unit [mm][°]；
+    - ``tool_p``: Path point tool number, [0~14];
+    - ``user_p``: Path point workpiece/user number, [0~14];
+    - ``desc_pos_t``: Target point Cartesian pose, unit [mm][°];
+    - ``tool_t``: Tool number, [0~14]；
+    - ``user_t``: Workpiece/User number, [0~14]；"
+    "Default Parameters", "- ``joint_pos_p``: Path point joint positions, unit [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0], default value is the return value from inverse kinematics;
+    - ``joint_pos_t``: Target point joint positions, unit [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0], default value is the return value from inverse kinematics;
+    - ``vel_p``: Path point velocity percentage, [0~100] Default 20.0;
+    - ``acc_p``: Path point acceleration percentage, [0~100] Currently unavailable, default 0.0;
+    - ``exaxis_pos_p``: Path point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0];
+    - ``offset_flag_p``: Whether the path point is offset [0]-No offset, [1]-Offset in workpiece/base coordinate system, [2]-Offset in tool coordinate system Default 0;
+    - ``vel_t``: Target point velocity percentage, [0~100] Default 20.0;
+    - ``acc_t``: Target point acceleration percentage, [0~100] Currently unavailable default 0.0;
+    - ``exaxis_pos_t``: Target point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0];
+    - ``offset_flag_t``: Whether the target point is offset [0]-No offset, [1]-Offset in workpiece/base coordinate system, [2]-Offset in tool coordinate system Default 0;
+    - ``offset_pos_t``: Target point pose offset value, unit [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0];
+    - ``ovl:``: Velocity scaling factor, [0~100] Default 100.0;
+    - ``blendR``:[-1.0]-Block until motion completes (blocking), [0~1000]-Blend radius (non-blocking), unit [mm] Default -1.0;
+    - ``oacc``: Acceleration scaling factor [0-100] / Physical acceleration (mm/s²) Default 100;
+    - ``config``: Inverse solution joint space configuration, [-1]-Solve with reference to current joint positions, [0~7]-Solve according to a specific joint space configuration, default -1;
+    - ``velAccParamMode``: Velocity/Acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s²) Default 0"
+    "Return Value", "Error code 0-Success  Error- errcode"
 
-Whole circle motion in Cartesian space
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Full Circle Motion
+++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype","``Circle(desc_pos_p,tool_p,user_p,desc_pos_t,tool_t,user_t,joint_pos_p=[0.0,0.0,0.0,0.0,0.0,0.0], joint_pos_t = [0.0,0.0,0.0, 0.0,0.0,0.0,0.0], vel_p = 20.0, acc_p=0.0, exaxis_pos_p= [0.0,0.0, 0.0,0.0], vel_t=20.0, acc_t = 0.0, exaxis_pos_t = [0.0,0.0,0.0,0.0], ovl=100.0, offset_flag=0, offset_pos= [0.0,0.0,0.0,0.0,0.0,0.0],oacc=100.0,blendR=-1,config=-1,velAccParamMode=0)``"
-    "Description", "Cartesian Space Integral Circular Motion"
-    "Mandatory parameters", "- ``desc_pos_p``: path point Cartesian position in [mm][°];
-    - ``tool_p``: tool number, [0 to 14];
-    - ``user_p``: artifact number, [0~14];
-    - ``desc_pos_t``: Cartesian position of the target point in [mm][°];
-    - ``tool_t``: tool number, [0 to 14];
-    - ``user_t``: artifact number, [0~14];"
-    "Default parameters","- ``joint_pos_p``: path point joint position in [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0,0.0], default value calls inverse kinematics to solve for the return value.
-    - ``joint_pos_t``: target point joint position in [°] default initial value [0.0,0.0,0.0,0.0,0.0,0.0,0.0] default value calls inverse kinematics to solve for the return value.
-    - ``vel_p``: velocity percentage, [0~100] default 20.0.
-    - ``acc_p``: path point acceleration percentage, [0~100] not open yet default 0.0.
-    - ``exaxis_pos_p``: path point external axis 1 position ~ external axis 4 position default [0.0,0.0,0.0,0.0];
-    - ``vel_t``: percentage of velocity at target point, [0~100] default 20.0; ``vel_t``: percentage of velocity at target point, [0~100] default 20.0.
-    - ``acc_t``: target point acceleration percentage, [0~100] not open yet default 0.0.
-    - ``exaxis_pos_t``: point external axis 1 position ~ external axis 4 position default [0.0,0.0,0.0,0.0]
-    - ``ovl``: velocity scaling factor, [0~100] default 100.0.
-    - ``offset_flag``: whether or not to offset [0] - no offset, [1] - offset in the workpiece/base coordinate system, [2] - offset in the tool coordinate system Default 0;
-    - ``offset_pos``: position offset in [mm][°] default [0.0,0.0,0.0,0.0,0.0,0.0]
-    - ``oacc``:Acceleration percentage, default: 100;
-    - ``blendR``:-1: Blockage 0 to 1000: Smooth radius, default: -1;
-    - ``config``: Reverse the joint space configuration, [-1]- calculate based on the current joint position, [0~7]- solve based on the specific joint space configuration, default -1
-    - ``velAccParamMode``: Speed acceleration parameter mode; 0- percentage; 1 -Physical velocity (mm/s) Acceleration (mm/s2) Default 0"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``Circle(desc_pos_p, tool_p, user_p, desc_pos_t, tool_t, user_t, joint_pos_p=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],joint_pos_t=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],vel_p=20.0, acc_p=0.0, exaxis_pos_p=[0.0, 0.0, 0.0, 0.0], vel_t=20.0, acc_t=0.0,exaxis_pos_t=[0.0, 0.0, 0.0, 0.0],ovl=100.0, offset_flag=0, offset_pos=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], oacc=100.0, blendR=-1,config=-1,velAccParamMode=0)``"
+    "Description", "Cartesian Space Full Circle Motion"
+    "Required Parameters", "- ``desc_pos_p``: Path point Cartesian pose, unit [mm][°]；
+    - ``tool_p``: Tool number, [0~14]；
+    - ``user_p``: Workpiece/User number, [0~14]；
+    - ``desc_pos_t``: Target point Cartesian pose, unit [mm][°]；
+    - ``tool_t``: Tool number, [0~14]；
+    - ``user_t``: Workpiece/User number, [0~14]；"
+    "Default Parameters", "- ``joint_pos_p``: Path point joint positions, unit [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0], default value is the return value from inverse kinematics;
+    - ``joint_pos_t``: Target point joint positions, unit [°] Default initial value is [0.0,0.0,0.0,0.0,0.0,0.0], default value is the return value from inverse kinematics;
+    - ``vel_p``: Velocity percentage, [0~100] Default 20.0;
+    - ``acc_p``: Path point acceleration percentage, [0~100] Currently unavailable default 0.0;
+    - ``exaxis_pos_p``: Path point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0];
+    - ``vel_t``: Target point velocity percentage, [0~100] Default 20.0;
+    - ``acc_t``: Target point acceleration percentage, [0~100] Currently unavailable default 0.0;
+    - ``exaxis_pos_t``: Target point external axis 1 position ~ external axis 4 position Default [0.0,0.0,0.0,0.0]
+    - ``ovl``: Velocity scaling factor, [0~100] Default 100.0;
+    - ``offset_flag``: Whether to offset [0]-No offset, [1]-Offset in workpiece/base coordinate system, [2]-Offset in tool coordinate system Default 0;
+    - ``offset_pos``: Pose offset value, unit [mm][°] Default [0.0,0.0,0.0,0.0,0.0,0.0]
+    - ``oacc``: Acceleration scaling factor [0-100] / Physical acceleration (mm/s²), default: 100；
+    - ``blendR``:-1：Blocking；0~1000：Blend radius, default: -1；
+    - ``config``: Inverse solution joint space configuration, [-1]-Solve with reference to current joint positions, [0~7]-Solve according to a specific joint space configuration, default -1;
+    - ``velAccParamMode``: Velocity/Acceleration parameter mode; 0-Percentage; 1-Physical velocity (mm/s) and acceleration (mm/s²) Default 0"
+    "Return Value", "Error code 0-Success  Error- errcode"
 
 Point-to-point motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -223,7 +225,7 @@ Sample robot basic motion commands code
     :linenos:
 
     from fairino import Robot
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
+    import time
     robot = Robot.RPC('192.168.58.2')
     j1 = [-11.904, -99.669, 117.473, -108.616, -91.726, 74.256]
     j2 = [-45.615, -106.172, 124.296, -107.151, -91.282, 74.255]
@@ -233,31 +235,45 @@ Sample robot basic motion commands code
     desc_pos2 = [-321.222, 185.189, 335.520, -179.030, -1.284, -29.869]
     desc_pos3 = [-487.434, 154.362, 308.576, 176.600, 0.268, -14.061]
     desc_pos4 = [-443.165, 147.881, 480.951, 179.511, -0.775, -15.409]
-    offset_pos = [0, 0, 0, 0, 0, 0]
-    epos = [0, 0, 0, 0]
+    offset_pos = [0.0] * 6
+    epos = [0.0] * 4
     tool = 0
     user = 0
     vel = 100.0
     acc = 100.0
     ovl = 100.0
+    oacc = 100.0
     blendT = 0.0
     blendR = 0.0
     flag = 0
     search = 0
+    blendMode = 0
+    velAccMode = 0
     robot.SetSpeed(20)
-    rtn = robot.MoveJ(joint_pos=j1, tool=tool, user=user, vel=vel, blendT=blendT)
-    print(f"movej errcode: {rtn}")
-    rtn = robot.MoveL(desc_pos=desc_pos2, tool=tool, user=user, vel=vel, blendR=blendR)
-    print(f"movel errcode: {rtn}")
-    rtn = robot.MoveC(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, desc_pos_t=desc_pos4, tool_t=tool, user_t=user, blendR=blendR)
-    print(f"movec errcode: {rtn}")
-    rtn = robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel, blendT=blendT)
-    print(f"movej errcode: {rtn}")
-    rtn = robot.Circle(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, desc_pos_t=desc_pos1, tool_t=tool, user_t=user)
-    print(f"circle errcode: {rtn}")
-    rtn = robot.MoveCart(desc_pos=desc_pos4, tool=tool, user=user, blendT=blendT)
-    print(f"MoveCart errcode: {rtn}")
+    rtn = robot.MoveJ(joint_pos=j1, tool=tool, user=user, vel=vel, acc=acc, ovl=ovl, exaxis_pos=epos, blendT=blendT, offset_flag=flag, offset_pos=offset_pos)
+    print(f"movej errcode:{rtn}")
+    rtn = robot.MoveL(desc_pos=desc_pos2, tool=tool, user=user, vel=vel, acc=acc, ovl=ovl, blendR=blendR, blendMode=blendMode, exaxis_pos=epos, search=search, offset_flag=flag, offset_pos=offset_pos,oacc=oacc, velAccParamMode=velAccMode)
+    print(f"movel errcode:{rtn}")
+    rtn = robot.MoveC(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, vel_p=vel, acc_p=acc, exaxis_pos_p=epos, offset_flag_p=flag, offset_pos_p=offset_pos, desc_pos_t=desc_pos4, tool_t=tool, user_t=user, vel_t=vel,acc_t=acc, exaxis_pos_t=epos, offset_flag_t=flag, offset_pos_t=offset_pos, ovl=ovl, blendR=blendR, oacc=oacc, velAccParamMode=velAccMode)
+    print(f"movec errcode:{rtn}")
+    rtn = robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel, acc=acc, ovl=ovl, exaxis_pos=epos, blendT=blendT, offset_flag=flag, offset_pos=offset_pos)
+    print(f"movej errcode:{rtn}")
+    rtn = robot.Circle(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, vel_p=vel, acc_p=acc, exaxis_pos_p=epos, desc_pos_t=desc_pos1, tool_t=tool, user_t=user, vel_t=vel, acc_t=acc, exaxis_pos_t=epos, ovl=ovl,offset_flag=flag, offset_pos=offset_pos, oacc=oacc, blendR=-1, velAccParamMode=velAccMode)
+    print(f"circle errcode:{rtn}")
+    rtn = robot.MoveCart(desc_pos=desc_pos4, tool=tool, user=user, vel=vel, acc=acc,ovl=ovl, blendT=blendT, config=-1)
+    print(f"MoveCart errcode:{rtn}")
+    rtn = robot.MoveJ(joint_pos=j1, tool=tool, user=user, vel=vel, acc=acc, ovl=ovl, exaxis_pos=epos, blendT=blendT, offset_flag=flag, offset_pos=offset_pos)
+    print(f"movej errcode:{rtn}")
+    rtn = robot.MoveL(desc_pos=desc_pos2, tool=tool, user=user, vel=vel, acc=acc, ovl=ovl, blendR=blendR, blendMode=blendMode, exaxis_pos=epos, search=search, offset_flag=flag, offset_pos=offset_pos, config=-1,velAccParamMode=velAccMode)
+    print(f"movel errcode:{rtn}")
+    rtn = robot.MoveC(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, vel_p=vel, acc_p=acc, exaxis_pos_p=epos, offset_flag_p=flag, offset_pos_p=offset_pos, desc_pos_t=desc_pos4, tool_t=tool, user_t=user, vel_t=vel, acc_t=acc,exaxis_pos_t=epos, offset_flag_t=flag, offset_pos_t=offset_pos, ovl=ovl, blendR=blendR, config=-1, velAccParamMode=velAccMode)
+    print(f"movec errcode:{rtn}")
+    rtn = robot.MoveJ(joint_pos=j2, tool=tool, user=user, vel=vel, acc=acc, ovl=ovl, exaxis_pos=epos, blendT=blendT, offset_flag=flag, offset_pos=offset_pos)
+    print(f"movej errcode:{rtn}")
+    rtn = robot.Circle(desc_pos_p=desc_pos3, tool_p=tool, user_p=user, vel_p=vel, acc_p=acc, exaxis_pos_p=epos, desc_pos_t=desc_pos1, tool_t=tool, user_t=user, vel_t=vel, acc_t=acc, exaxis_pos_t=epos, ovl=ovl, offset_flag=flag,offset_pos=offset_pos, oacc=oacc, blendR=-1, velAccParamMode=velAccMode)
+    print(f"circle errcode:{rtn}")
     robot.CloseRPC()
+    return 0
 
 Spiral motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

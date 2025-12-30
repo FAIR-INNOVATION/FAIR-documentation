@@ -34,6 +34,28 @@ Network settings
 
 - **Set up network**: Click the "Set up network" button, and it will prompt that the configuration is in progress. After the configuration is complete, you need to restart the device.
 
+No-Login Operation
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Functional Overview
+***************************
+
+After enabling the No-Login Operation feature on the physical teach pendant, the following functions can be achieved:
+
+- When no user is logged into the teach interface, rotating the physical key switch allows the robot to switch between manual/automatic modes, with the end-effector light color changing accordingly.
+- When no user is logged into the teach interface, in automatic mode, pressing the physical start switch allows the robot to begin running the currently loaded program.
+- When no user is logged into the teach interface, in automatic mode, pressing the physical stop switch allows the robot to stop running.
+
+Instructions for Use
+***************************
+Log in to the webapp page, click "System Settings," then click "General Settings." In the Teach Pendant section under the Network module, turn on the "Teach Pendant Enable" switch and the "No-Login Operation" switch. Once the feature is enabled, you can control the robot's manual/automatic mode switching and program start/stop using the physical buttons without being logged into the teach pendant page. This configuration is retained after a power restart.
+
+.. image:: system/045.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 15.1‑2-1 Enabling the No-Login Operation Function
+
 Teach pendant touch screen calibration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

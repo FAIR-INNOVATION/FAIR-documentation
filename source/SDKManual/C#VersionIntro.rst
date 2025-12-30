@@ -12,6 +12,14 @@ Version Update Description
    * - **Version**
      - **Date**
      - **Update Description**
+   
+   * - V3.9.1
+     - 2025-12-25
+     - | 1. Added oacc speed scaling factor parameter / physical acceleration parameter to the MoveL() interface;
+       | 2. Added oacc speed scaling factor parameter / physical acceleration parameter to the MoveC() interface;
+       | 3. Optimized parameter descriptions for physical speed and physical acceleration in the Circle() interface;
+       | 4. Added FT_Control() overloaded function with rx, ry activation thresholds and torque adjustment coefficient parameters;
+       | 5. Added SerCoderCompenParams() interface;
 
    * - V3.9.0
      - 2025-11-26

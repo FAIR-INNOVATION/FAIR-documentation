@@ -267,7 +267,7 @@ The collision level is divided into one to ten levels, and the detection of one 
 .. centered:: Figure 6.4-2 Schematic diagram of collision level
 
 Post-collision response strategy function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 On the basis of the original collision strategy in motion, " Gravitational moment mode " and " Vibration response mode " are added to ensure the safety of man-machine cooperation. 
 
@@ -399,6 +399,35 @@ Torque Detection Before Dragging
 
 **Step3**: Check the load configuration and installation method. Click "Initial Settings"->"Basic"-> "Load"->"End" to check whether the end load configuration on the web interface is the same as the actual installed load; click "Initial Settings"->"Basic"-> "Installation"->"Free Installation" to check whether the installation method on the web interface is the same as the actual installation method.
 
+False Alarm Detection Function
+++++++++++++++++++++++++++++++++++++++
+
+Overview
+***********************
+
+Collision function optimization builds upon collision detection by adding a false alarm switch, which can help avoid the risk of false collision alarms.
+
+Collision Level Setting
+*****************************************
+
+**Step 1**: Log in to the Web interface, then click "Initial Setup" → "Basic" → "Joint" → "Collision Level" in sequence to enter the collision level setting module.
+
+The higher the collision level, the greater the torque required for a collision to occur, making the collision response less sensitive. The torque values corresponding to the current collision levels, such as 38.4 N·m for Level 10, represent the theoretical joint torque required to trigger a collision on Axis 1.
+
+.. image:: base/093.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.4-11 Collision Level Setting Module
+
+**Step 2**: The false alarm detection switch is enabled by default. If not needed, the detection switch can be turned "Off", as shown in the figure below.
+
+.. image:: base/094.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.4-12 False Alarm Detection Switch
+
 Friction compensation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -416,6 +445,37 @@ Under the menu bar of "Initial" -> "Base" -> "Joint", click "Friction comp." to 
 
 .. important:: 
    The friction compensation function of the robot needs to be used with caution. According to the actual situation, a reasonable compensation coefficient should be set. Generally, the recommended median value is about 0.5.
+
+Friction Compensation Coefficient Adjustment Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++++
+The friction compensation coefficient adjustment function is primarily used to adjust the magnitude of the friction compensation value within the controller.
+
+In drag mode, adjusting the friction compensation coefficient can make robot dragging smoother; in automatic mode, it can improve the goodness of fit between the torque command curve and the torque feedback curve.
+
+Friction Compensation Coefficient Adjustment
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+The factory default for the friction compensation coefficient is 0.5, which is a general parameter. Users can adjust the friction compensation gain according to their actual conditions to achieve a better experience.
+
+Friction Compensation Coefficient Configuration
+******************************************************************
+
+**Step1**: Log in to the web interface. Click sequentially on "Initial Setup" → "Basic" → "Joint" → "Friction Compensation" to enter the friction compensation settings module.
+
+.. image:: base/092.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 6.4-12 Friction Compensation Settings Module
+
+**Step2**: The friction compensation coefficient defaults to 0.5. When the friction compensation switch is turned on as shown in the figure, the dragging feel becomes smoother compared to when it is off. If the function is not enabled, the dragging feel is heavier.
+
+**Step3**: Parameter Adjustment. The range for the friction compensation coefficient is [0-1]. If the dragging feels slightly heavy, you can increase the parameter for each axis based on the actual situation. If the joint fails to stop during dragging or joint vibration occurs, the parameter for the corresponding axis needs to be decreased.
+
+**Step4**: To disable the friction compensation function, select "Off" via the compensation switch.
 
 Dragging Force Compensation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -438,7 +498,7 @@ Dragging Force Optimization Configuration
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.4-12 Dragging Force Compensation Settings Module
+.. centered:: Figure 6.4-13 Dragging Force Compensation Settings Module
 
 **Step2**: Set "Compensation Switch" to "ON" and "Adaptive Switch" to "OFF", configure parameters as shown in Figure 2-1, then click "Apply" to successfully enable the function. Press the drag button to drag the robot, and the dragging feel will be noticeably smoother than before enabling the function.
 
@@ -968,152 +1028,54 @@ This page displays the name and joint position information of the work origin. T
 
 .. .. centered:: Figure 6.5-1 Configuration import and export
 
-Tool Tcp Automatic Calibration
--------------------------------------------
+Photoelectric Sensor TCP Auto-Calibration Function
+-------------------------------------------------------------------
 
 Overview
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Robot tool TCP (Tool Center Position, TCP) automatic calibration uses photoelectric sensor equipment (double tube cross type) to quickly calibrate the robot tool TCP. By counting the time when the tool triggers I/O signals in the photoelectric sensor device during robot movement, the conversion relationship between the robot end flange and the tool coordinate system is established, thereby accurately calibrating the robot tool coordinate system and improving the accuracy of the robot system.
+When a robot tool collision causes TCP position deviation, the TCP auto-calibration function based on a photoelectric sensor can be enabled. This function quickly recalibrates the tool coordinate system by automatically calculating and compensating for position deviation, significantly reducing downtime and improving equipment operating efficiency and production stability.
 
-Calibration process of coordinate system for sensor equipment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Operation Procedure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Installing robots
-++++++++++++++++++++++++++
+**Step1**: Place the photoelectric sensor within the robot's workspace, and connect the two sets of brown, blue, and black signal wires from the photoelectric sensor device to the two sets of 24V, 0V, and CI0, CI1 ports on the robot control box (any available configurable digital signal input ports will work) or connect them to the two sets of 24V, 0V and End-DI0, End-DI1 ports at the robot end.
 
-Install a robot with an absolute positioning accuracy of 1.2 mm on the work platform, and install a specialized tool for calibrating the coordinate system of the photoelectric sensor on the end flange of the robot.
+**Step2**: Calibrate the photoelectric sensor coordinate system. The photoelectric sensor coordinate system is essentially a workpiece coordinate system, and its accuracy has a significant impact on the subsequent tool TCP calibration. It can be determined in several ways:
+
+- （1）Use the workpiece coordinate system calibration method, with the origin at the intersection of the two laser beams, the two laser beams serving as the X-axis and Y-axis respectively, and the Z-axis perpendicular to the photoelectric sensor pointing outward;
+- （2）Provided by external measurement equipment (such as a camera);
+- （3）Calibrate using the photoelectric device configuration within the photoelectric auto-calibration function. This option requires using a tool with known precise dimensions and a roughly accurate workpiece coordinate system to be applied: First click "Initial Setup" -> "Tool Coordinates", apply Tool Coordinate System 0, then click the "Coordinate System Calibration" button for the precise tool coordinate system (using coordinate system 1 as an example), then click "Apply", and finally select "Photoelectric Auto Calibration Function".
 
 .. image:: base/034.png
-   :width: 2in
+   :width: 4in
    :align: center
 
-.. centered:: Figure 6.7‑1 Example of robot installation
-
-Installing sensor device
-+++++++++++++++++++++++++++++++++
-
-Connect the two sets of brown, blue, and black signal wires of the photoelectric sensor device to the two sets of 24V, 0V, CI0, and CI1 ports (any available configurable digital signal input port is sufficient) of the robot control box. Power on the control box to start the robot and light up the X and Y axis beams of the photoelectric sensor device.
+.. centered:: Figure 6.7-1 Photoelectric Auto Calibration Selection
+ 
+Navigate into the "Photoelectric Device Configured" section, configure the IO trigger signal, set the teach center point, set the offset parameters, then click "Run" to calibrate the sensor's coordinate system. Subsequently, manually apply the calibration result to a workpiece coordinate system.
 
 .. image:: base/035.png
-   :width: 2in
+   :width: 4in
    :align: center
 
-.. centered:: Figure 6.7‑2 Example of photoelectric sensor equipment
+.. centered:: Figure 6.7-2 Calibrate Sensor Coordinate System
 
-Setting up the TCP automatic calibration system coordinate system
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-According to the TCP automatic calibration system for robot tools, firstly, place the coarse positioning photoelectric sensor device in the flexible workspace of the robot, and ensure that the coordinate system of the photoelectric sensor device is roughly aligned with the robot base coordinate system.
-
-As shown above, where {b} is the robot base coordinate system, {e} is the end flange coordinate system, and {s} is the sensor coordinate system.
+**Step3**: Calibrate the tool coordinate system. After Step2, an accurate workpiece coordinate system has been obtained and applied, and the pre-collision tool coordinate system is known and applied: First click "Initial Setup" -> "Tool Coordinates", apply Tool Coordinate System 0, then click the "Coordinate System Calibration" button for the pre-collision tool coordinate system (using coordinate system 1 as an example), then click "Apply", and select "Photoelectric Auto Calibration Function". Within "Photoelectric Calibration Parameters Configured", set the calibration parameters.
 
 .. image:: base/036.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.7‑3 Coordinate system setting for TCP automatic calibration system of robot tool
-
-(1) adjust the posture of the robot's end flange to Rx, Ry, and Rz at 180 °, 0 °, and 0 °, respectively, and ensure that this posture remains unchanged throughout the entire calibration sensor device coordinate system movement process after adjustment;
-
-(2) Then make the robot tool TCP perform MoveL motion together in the X and Y axis directions of the robot base coordinate system and the sensor coordinate system;
-
-(3) During the movement of the robot, once the X and Y axis beams of the photoelectric sensor device always maintain the triggering I/O signal state, the installation position of the photoelectric sensor device can be accurately positioned as its current position.
-
-Calibrate the sensor coordinate system based on the web interface
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-In the robot web control interface, click on "Initial" -> "Base" -> "Coordinate" -> "TCP" to enter the "Tool coordinate system settings" interface;
-
-Select the reference coordinate system from the drop-down menu of "Coordinate system name", and choose the corresponding "Tool Type" and "Installation position", then click "Modify" to enter the "Modify Wizard" interface;
-
-Select "Laser automatic calibration", enter the laser automatic calibration interface, click "Configuration", enter the "Laser calibration device configuration" interface, if there are previous settings, click "Modify".
+.. centered:: Figure 6.7-3 Photoelectric Auto Calibration Parameter Setup
+ 
+After setup is complete, click the "Finish" button to return to the previous menu, then click the "Calibrate" button to perform TCP calibration. Once calibration is finished, click the "Save" button to save the calibration result.
 
 .. image:: base/037.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 6.7‑4  Example of entering the photoelectric automatic calibration interface
-
-Set I/O
-***********************
-
-Select the input port numbers for the control box of the X-axis laser beam and Y-axis laser beam, then click "Set". After successful settings, a green check mark will appear before the "Setup I/O" indicator.
-
-.. image:: base/038.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.7‑5 Example of setting the X and Y axis laser beam I/O ports of the laser sensor
-
-Teaching center point
-******************************
-
-Drag the robot to trigger the X and Y axis beam I/O signals of the photoelectric sensor device using the TCP tool, and then move it along the Z+ axis direction of the base coordinate system to a position 5 mm above the measurement plane of the sensor device (where the X and Y axis beams intersect). 
-
-.. warning:: Note that during this process, the end flange posture of the robot remains unchanged at Rx, Ry, and Rz, which are 180 °, 0 °, and 0 °, respectively. Then click "Record". After successful setting, a green check mark will appear before the "Setup center Point" marker.
-
-.. image:: base/039.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.7‑6  The teaching TCP is located at the center of the sensor measurement plane
-
-Set parameters
-****************************
-
-Set three custom parameters: "Movement radius", "Angular velocity", and "Depth of movement".
-
-(1) The "Movement radius" parameter is the radius at which the robot tool performs circular motion. Referring to the effective measurement radius of the laser sensor used, which is 35 mm, it is recommended to set it to "10-15 mm". If it is too large, it may cause interference between the tool and the sensor, and if it is too small, it may cause interference between the X and Y axis laser I/O signals of the sensor;
-
-(2) The "Angular velocity" parameter is the uniform angular velocity at which the robot tool moves in a circular motion. It is recommended to set it to "10-40 deg/s". If it is too large, it may cause impact vibration at the end of the tool and result in frame dropping of sensor I/O signals;
-
-(3) The "Depth of movement" parameter is the Euclidean distance between the centers of the robot's two circular motions. The effective measurement height of the laser sensor used is 25 mm, and it is recommended to set it to "5-15mm". If it is too large, it may cause interference between the tool and the sensor.
-
-Then click on "Set", and after successful settings, a green check mark will appear before the "Set Parameters" icon.
-
-.. image:: base/040.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.7‑7 Example of custom parameter setting
-
-Run
-*********************
-
-In automatic mode, click "Run" to initiate the calibration operation of the sensor coordinate system. After the operation is completed, the interface displays the x, y, and z coordinate values of the calibrated sensor coordinate system and the attitude angles of Rx, Ry, and Rz. Then click "complete" to save the current data and exit the current interface.
-
-.. image:: base/041.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.7‑8 Example of calibration results for laser sensor coordinate system
-
-.. warning:: Pay attention to the current operation. It is recommended that the robot perform this operation during the lifecycle of each production task (robot power off start operation) to prevent small displacement of sensor installation position caused by high-frequency vibration during operation and calculation errors caused by incorrect operation resulting in the release of sensor coordinate system calibration data in the controller.
-
-Calibration process of tool coordinate system
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-After completing the "Laser device configured", if a green check mark appears in front of the label, it indicates that the laser sensor coordinate system has been successfully set. Remove the specialized tool for the end flange of the robot and install the unknown tool to be calibrated. Click "Calibrate" to start the TCP automatic calibration tool. After the operation is completed, the interface will display the calibration results.
-
-.. image:: base/042.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 6.7‑9 Example of TCP calibration results for tool
-
-Click "Save" to update the calibration result of the current tool TCP in the selected reference coordinate system from the drop-down menu of "Coordinate system name" in the "Current tool coordinate system" interface.
-
-In the "Current tool coordinate system" interface, click "Apply" to apply the current tool TCP calibration result in the current reference tool coordinate system.
-
-.. important:: 
-  It should be noted that:
-
-  （1）Note that before clicking "calibrate", you can avoid errors during the calibration tool coordinate system process by observing whether the x, y, and z coordinate results of the calibrated sensor coordinate system have significant errors compared to the actual sensor installation position. If the situation occurs, the reason may be that the robot tool TCP automatic calibration system coordinate system is set incorrectly, and the installation position of the laser sensor equipment needs to be adjusted before recalibrating the sensor coordinate system;
-
-  （2）At the same time, after clicking "Calibrate", you can avoid errors in the process of calibrating the tool coordinate system by observing whether the robot adjusts the end flange attitude significantly (>90 °) after performing two circular movements. If the situation occurs, the reason may be that the "movement radius" parameter is set too small, causing interference in the sensor I/O signal. In this case, it is necessary to modify the "movement radius" parameter and click "calibrate" again;
-
-  （3）In addition, it is recommended to calibrate the tool type with a cylindrical end, a spindle direction roughly parallel to the end flange spindle direction, and a radius within 10 mm. The measurable length of the tool end should be within 5-15 mm (not the overall length of the tool) to avoid interference with the sensor device.
+.. centered:: Figure 6.7-4 Photoelectric Auto Calibration and Save
 
 TCP Calibration based on flatbed
 -----------------------------------

@@ -195,6 +195,91 @@ Parameter Calibration
 
 .. centered:: Figure 14.5‑6 Parameter Calibration Results
 
+Torque Sensing and Compensation Using Dual Encoder Position Difference
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Overview
+*****************************************
+
+Torque is estimated by utilizing the position difference between dual encoders (motor side and link side). This estimated torque is then used for feedforward compensation, reducing the startup torque when the robot is performing current loop dragging.
+
+Operation Process
+*****************************************
+
+**Step1**: Set the dynamics configuration to "Dynamics 2.0". Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock". In the dual encoder torque compensation module, click the function switch to enable it.
+
+.. image:: application/040.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 14.5‑7 Enable Function
+
+**Step2**: Set the "Function Switch" to "ON", and set the drag gain for each axis to 0.5. Click "Set" to apply, as shown in the figure.
+
+.. image:: application/041.png
+   :width: 4in
+   :align: center
+
+.. centered:: Chart 14.5‑8 Gain Setting
+
+.. note:: Drag gain setting range: 0-1. A higher gain results in greater compensated torque and smaller startup torque for the current loop.
+
+Position Loop Drag Teaching Function Based on Joint Torque Sensor
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Overview
+*****************************************
+
+Real-time detection of external forces is performed through the joint torque sensor. When the external force exceeds a preset threshold, the robotic arm will be dragged in the direction of the force application. Once the external force falls below the torque threshold, the robotic arm stops dragging immediately, thereby achieving the drag teaching function under position loop control.
+
+Drag Teaching Function
+*****************************************
+
+Enabling/Disabling the Position Loop Drag Teaching Function
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+**Step1**: Set the tool coordinate system to "Tool0". Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock". In the "Joint Torque Sensor Whole-Arm Drag Module", click "Enable Function".
+
+.. image:: application/042.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑9 Enable Function
+
+**Step2**: Perform zero calibration. First, click "Point 1", wait for the robotic arm to stop moving, then click "Record". Next, click "Point 2", wait for the robotic arm to stop moving, then click "Record". If the zero deviation of the joint torque sensor is too large after zero calibration, you can re-perform the zero calibration.
+
+**Step3**: Perform sensitivity calibration. Click "Generate Program" to send an internal Lua script to the controller. Switch the robot to automatic mode and set the run speed to "10". Click "Run" and wait for the robot to move. After the robot movement is completed, the sensitivity, linearity, hysteresis error, and repeatability calibration results are automatically displayed on the Web interface. Sensitivity calibration only needs to be performed once each time the robotic arm is powered on.
+
+.. image:: application/043.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑10 Zero Calibration and Sensitivity Calibration
+
+**Step4**: Enter the "Drag Function". In the drag mode dropdown, select "Position Loop Drag". Set appropriate mass coefficient, damping coefficient, stiffness coefficient, and force control threshold. Click "Set" to apply the settings and enable position loop drag.
+
+.. image:: application/044.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑11 Position Loop Drag Parameter Setting
+
+**Step5**: In the drag mode dropdown, select "Current Loop Drag". Click "Set" to apply the settings. This will disable position loop drag and switch to current loop drag.
+
+.. image:: application/045.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑12 Current Loop Drag
+
+**Step6**: If the robotic arm moves without external force applied while in Position Loop Drag mode, you can appropriately increase the force control threshold. If the issue persists after increasing the single-axis force control threshold above 3Nm, you need to disable Position Loop Drag and re-execute Step2 and Step4 (there is no need to re-execute Step3).
+
+Specific Functions of Parameters and Recommended Values:
+
+- **Mass Coefficient**: Used to adjust drag response. Higher values lead to slower response, lower values lead to faster response. Range: Joints 1~2: [0.5-20], Joints 3~4: [0.2-20], Joints 5~6: [0.2-10]. Recommended parameters: [1, 0.8, 0.5, 0.5, 0.6, 0.6].
+- **Damping Coefficient**: Used to adjust the feel of drag (heaviness/lightness). Higher values feel heavier, lower values feel lighter. Range: Joints 1~2: [5-100], Joints 3~4: [5-100], Joints 5~6: [2-40]. Recommended parameters: [8, 8, 10, 10, 6, 6].
+- **Stiffness Coefficient**: After setting this parameter, the robotic arm will move to the reference position when the function was enabled. Recommended parameters: [0, 0, 0, 0, 0, 0].
+- **Force Control Threshold**: The minimum trigger force for Position Loop Drag. Setting the threshold too low may cause unintended movement of the robotic arm. Recommended force thresholds: Joint 1 > 2Nm, Joint 2 > 1Nm, Joints 3~4 > 0.8Nm, Joints 5~6 > 0.5Nm. Recommended parameters: [2, 1, 0.8, 0.8, 0.5, 0.5].
+
 Intersection Point Generation (Laser Point Capture Motion)
 ----------------------------------------------------------------------------------
 

@@ -186,24 +186,27 @@ Linear motion in Cartesian space
     :linenos:
  
     /**
-    * @brief Linear motion in Cartesian space.
-    * @param [in] joint_pos target joint position in deg
-    * @param [in] desc_pos Target Cartesian position.
-    * @param [in] tool tool coordinate number, range [0~14].
-    * @param [in] user Workpiece coordinate number, range [0~14].
-    * @param [in] vel velocity percentage, range [0~100] * @param [in] acc [in] tool coordinate number, range [0~14]
-    * @param [in] acc Acceleration percentage, range [0~100], not available yet.
-    * @param [in] ovl velocity scaling factor, range [0~100]
-    * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking), unit mm    
-    * @param [in] epos extended axis position in mm
-    * @param [in] search 0-no wire seek, 1-wire seek
-    * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
-    * @param [in] offset_pos Position offset
-    * @param [in] overSpeedStrategy over speed strategy, 1-standard, 2-over speed error stop, 3-adaptive speed reduction, default 0
-    * @param [in] speedPercent Allowed speed reduction threshold percentage [0-100], default 10%
-    * @return errorCode
-    */   
-    int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos epos, byte search, byte offset_flag, DescPose offset_pos, int overSpeedStrategy = 0, int speedPercent = 10); 
+    * @brief Cartesian space linear motion
+    * @param [in] joint_pos Target joint position, unit deg
+    * @param [in] desc_pos Target Cartesian pose
+    * @param [in] tool Tool coordinate number, range [0~14]
+    * @param [in] user Workpiece coordinate number, range [0~14]
+    * @param [in] vel Speed percentage, range [0~100]
+    * @param [in] acc Acceleration percentage, range [0~100], currently not available
+    * @param [in] ovl Speed scaling factor [0~100]/Physical speed (mm/s)
+    * @param [in] blendR [-1.0]-Motion to position (blocking), [0~1000.0]-Blend radius (non-blocking), unit mm
+    * @param [in] blendMode Transition mode; 0-Inscribed transition; 1-Corner transition
+    * @param [in] epos Extended axis position, unit mm
+    * @param [in] search 0-No wire seam tracking, 1-Wire seam tracking
+    * @param [in] offset_flag 0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param [in] offset_pos Pose offset
+    * @param [in] oacc Acceleration scaling factor [0-100]/Physical acceleration (mm/s²)
+    * @param [in] velAccParamMode Speed/acceleration parameter mode; 0-Percentage; 1-Physical speed (mm/s) and acceleration (mm/s²)
+    * @param [in] overSpeedStrategy Overspeed handling strategy, 1-Standard; 2-Error and stop on overspeed; 3-Adaptive speed reduction, default is 0
+    * @param [in] speedPercent Allowable speed reduction threshold percentage [0-100], default 10%
+    * @return Error code
+    */
+    public int MoveL(JointPos joint_pos, DescPose desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int blendMode, ExaxisPos epos, int search, int offset_flag, DescPose offset_pos, float oacc, int velAccParamMode, int overSpeedStrategy = 0, int speedPercent = 10)
  
 Cartesian space linear motion (automatic inverse kinematics calculation)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -346,9 +349,11 @@ Circular motion in Cartesian space
     * @param [in] offset_pos_t Bit position offset   
     * @param [in] ovl velocity scaling factor, range [0~100]    
     * @param [in] blendR [-1.0]-motion in place (blocking), [0~1000.0]-smoothing radius (non-blocking) in mm    
-    * @return error code
-    */     
-    int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, byte poffset_flag, DescPose offset_pos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, byte toffset_flag, DescPose offset_pos_t, float ovl, float blendR). 
+    * @param  [in] oacc Acceleration scaling factor [0-100]/Physical acceleration (mm/s²)
+    * @param  [in] velAccParamMode Speed/acceleration parameter mode; 0-Percentage; 1-Physical speed (mm/s) and acceleration (mm/s²)
+    * @return  Error code
+    */
+    public int MoveC(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc,ExaxisPos epos_p, int poffset_flag, DescPose offset_pos_p,JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc,ExaxisPos epos_t, int toffset_flag, DescPose offset_pos_t,float ovl, float blendR, float oacc, int velAccParamMode)
 
 Cartesian space circular motion (automatic inverse kinematics calculation)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -491,14 +496,15 @@ Whole circle motion in Cartesian space
     * @param [in] tvel Velocity percentage, range [0~100]
     * @param [in] tacc Acceleration percentage, range [0~100], not available yet.
     * @param [in] epos_t Extended axis position in mm.
-    * @param [in] ovl Velocity scaling factor, range [0~100].   
-    * @param [in] offset_flag 0-no offset, 1-offset in base/work coordinate system, 2-offset in tool coordinate system
-    * @param [in] offset_pos Bit position offset   
-    * @param [in] oacc acceleration percentage
-    * @param [in] blendR -1: blocking; 0~1000: smoothing radius in mm
-    * @return Error code
+    * @param [in] ovl  Speed scaling factor [0~100]/Physical speed (mm/s)
+    * @param [in] offset_flag  0-No offset, 1-Offset in base/workpiece coordinate system, 2-Offset in tool coordinate system
+    * @param [in] offset_pos  Pose offset
+    * @param [in] oacc Acceleration scaling factor [0-100]/Physical acceleration (mm/s²)
+    * @param [in] blendR -1: Blocking; 0~1000: Blend radius
+    * @param [in] velAccParamMode Speed/acceleration parameter mode; 0-Percentage; 1-Physical speed (mm/s) and acceleration (mm/s²)
+    * @return  Error code
     */     
-    int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos epos_t, float ovl, int offset_flag, DescPose offset_pos, double oacc=100 , double blendR=-1);
+    public int Circle(JointPos joint_pos_p, DescPose desc_pos_p, int ptool, int puser, float pvel, float pacc,ExaxisPos epos_p, JointPos joint_pos_t, DescPose desc_pos_t, int ttool, int tuser,float tvel, float tacc, ExaxisPos epos_t, float ovl, int offset_flag,DescPose offset_pos, double oacc, double blendR, int velAccParamMode)
 
 Cartesian space full circle motion (automatic inverse kinematics calculation)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -664,46 +670,52 @@ Sample code for basic robot motion instructions
 .. code-block:: c#
     :linenos:
 
-    private void TestMovePhy_Click(object sender, EventArgs e)
-    {
-        JointPos j1 = new JointPos(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
-        JointPos j2 = new JointPos(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
-        JointPos j3 = new JointPos(-29.777, -84.536, 109.275, -114.075, -86.655, 74.257);
-        JointPos j4 = new JointPos(-31.154, -95.317, 94.276, -88.079, -89.740, 74.256);
-    
-        DescPose desc_pos1 = new DescPose(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
-        DescPose desc_pos2 = new DescPose(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
-        DescPose desc_pos3 = new DescPose(-487.434, 154.362, 308.576, 176.600, 0.268, -14.061);
-        DescPose desc_pos4 = new DescPose(-443.165, 147.881, 480.951, 179.511, -0.775, -15.409);
-        DescPose desc_pos5 = new DescPose(-385.268, -386.759, 238.349, 179.619, -2.046, 162.332);
-        DescPose desc_pos6 = new DescPose(-257.470, -566.986, 241.908, -177.038, -2.886, -176.577);
-        DescPose desc_pos7 = new DescPose(-190.925, -390.644, 240.374, 179.089, 0.019, 177.836);
+    public void TestMove()
+        int rtn;
+        JointPos j1 = new JointPos(-11.904f, -99.669f, 117.473f, -108.616f, -91.726f, 74.256f);
+        JointPos j2 = new JointPos(-45.615f, -106.172f, 124.296f, -107.151f, -91.282f, 74.255f);
+        JointPos j3 = new JointPos(-29.777f, -84.536f, 109.275f, -114.075f, -86.655f, 74.257f);
+        JointPos j4 = new JointPos(-31.154f, -95.317f, 94.276f, -88.079f, -89.740f, 74.256f);
+        DescPose desc_pos1 = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose desc_pos2 = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
+        DescPose desc_pos3 = new DescPose(-487.434f, 154.362f, 308.576f, 176.600f, 0.268f, -14.061f);
+        DescPose desc_pos4 = new DescPose(-443.165f, 147.881f, 480.951f, 179.511f, -0.775f, -15.409f);
         DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
         int tool = 0;
         int user = 0;
         float vel = 100.0f;
-        float acc = 200.0f;
+        float acc = 100.0f;
         float ovl = 100.0f;
-        float blendT = -1.0f;
-        float blendR = -1.0f;
+        float oacc = 100.0f;
+        float blendT = 0.0f;
+        float blendR = 0.0f;
         byte flag = 0;
         byte search = 0;
+        int blendMode = 0;
+        int velAccMode = 0;
         robot.SetSpeed(20);
-        int rtn;
-        rtn = robot.MoveL(desc_pos1, tool, user, vel, acc, ovl, blendR, 0, epos, search, flag, offset_pos, -1, 1);
+        rtn = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.MoveL(j2, desc_pos2, tool, user, vel, acc, ovl, blendR, blendMode, epos, search, flag, offset_pos, oacc, velAccMode,0,10);
         Console.WriteLine($"movel errcode:{rtn}");
-        rtn = robot.MoveC(desc_pos3, tool, user, vel, acc, epos, flag, offset_pos,
-                        desc_pos4, tool, user, vel, acc, epos, flag, offset_pos,
-                        ovl, blendR, -1, 1);
-        Console.WriteLine($"movec errcode:{rtn}");   
-        rtn = robot.MoveL(desc_pos5, tool, user, vel, acc, ovl, blendR, 0, epos, search, flag, offset_pos, -1, 1);
+        rtn = robot.MoveC(j3, desc_pos3, tool, user, vel, acc, epos, flag, offset_pos,j4, desc_pos4, tool, user, vel, acc, epos, flag, offset_pos, ovl, blendR, oacc, velAccMode);
+        Console.WriteLine($"movec errcode:{rtn}");
+        rtn = robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.Circle(j3, desc_pos3, tool, user, vel, acc, epos,j1, desc_pos1, tool, user, vel, acc, epos,ovl, flag, offset_pos, oacc, -1, velAccMode);
+        Console.WriteLine($"circle errcode:{rtn}");
+        rtn = robot.MoveCart(desc_pos4, tool, user, vel, acc, ovl, blendT, -1);
+        Console.WriteLine($"MoveCart errcode:{rtn}");
+        rtn = robot.MoveJ(j1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.MoveL(desc_pos2, tool, user, vel, acc, ovl, blendR, blendMode, epos, search, flag, offset_pos, -1, velAccMode);
         Console.WriteLine($"movel errcode:{rtn}");
-    
-            
-        rtn = robot.Circle(desc_pos6, tool, user, vel, acc, epos,
-                            desc_pos7, tool, user, vel, acc, epos,
-                            ovl, flag, offset_pos, 100, -1, -1, 1);
+        rtn = robot.MoveC(desc_pos3, tool, user, vel, acc, epos, flag, offset_pos,desc_pos4, tool, user, vel, acc, epos, flag, offset_pos,ovl, blendR, -1, velAccMode);
+        Console.WriteLine($"movec errcode:{rtn}");
+        rtn = robot.MoveJ(j2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.Circle(desc_pos3, tool, user, vel, acc, epos, desc_pos1, tool, user, vel, acc, epos,ovl, flag, offset_pos, oacc, blendR, -1, velAccMode);
         Console.WriteLine($"circle errcode:{rtn}");
     }
  

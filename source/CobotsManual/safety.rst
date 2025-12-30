@@ -15,6 +15,33 @@ Click "Initial" -> "Safety" in the menu bar, and then click the "Stop mode" subm
 
 .. centered:: Figure 7.1-1 Safe Stop Configuration
 
+Configurable Dual-Channel Safety Stop + Reduced Mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++++++++++++++++
+
+When the safety stop trigger mode is set to "Dual-Channel", both channels must be cleared and the warning must be manually cleared on the operation interface before the robot can be reset. Additionally, a reduced mode option is added to the strategy configuration. When this strategy is selected by the user, the robot will enter reduced mode motion.
+
+Operation Procedure
+++++++++++++++++++++++++++++++++++++
+
+**Step1**: Click the "Initial Setup" -> "Safety" -> "Safety Stop" button. The trigger mode can be selected as either "Default" or "Dual-Channel". The difference between the two is: In "Default" mode, the interface error is automatically cleared after triggering and recovery. In "Dual-Channel" mode, the interface error must be cleared manually after triggering and recovery. The "Safety Stop Strategy" can be selected as "Stop", "Pause", "Level 1 Reduced Mode", or "Level 2 Reduced Mode". Detailed explanations are as follows: When "Stop" is selected, the robot will stop its current motion. When "Pause" is selected, the robot will pause its current motion and will resume after recovery and error clearing. When "Level 1 Reduced Mode" is selected, the robot will enter level 1 reduced mode motion. When "Level 2 Reduced Mode" is selected, the robot will enter level 2 reduced mode motion.
+
+.. image:: safety/048.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.1-2 Safety Stop Strategy Settings
+
+**Step2**: Since when the trigger mode is selected as "Default", the interface error can be automatically cleared after triggering and recovery, it does not require much introduction. Therefore, the main focus is on the operation when the trigger mode is selected as "Dual-Channel": After triggering and recovery, you must manually click the "Clear" operation in the upper right corner before the robot can be reset.
+
+.. image:: safety/049.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.1-3 Manually Clearing a Safety Stop Trigger Operation
+
 Safe speed
 --------------
 

@@ -1,3 +1,42 @@
+Version V3.9.1
+-----------------
+
+Date: 2025-12-30
+
+- **Robot Background Logging of Fault and Alarm Events Function**: 
+  
+    Description: Capable of logging fault and alarm information during user interface logouts, viewable after re-login.
+
+- **PTP and LIN Commands Add Current Position Relative Motion Function, WebApp Adds ServoJ Command Addition Function**: 
+    Path: Teach Program -> Program Programming -> PTP/LIN Commands.
+  
+    Description: Solves the issue of complex command operations when the robotic arm lacks taught points but requires offset based on the current position. A single command input achieves the motion.
+
+- **End-effector Lua Open Protocol Debug Switch and Syntax Verification Function**: 
+    Path: Initial Setup -> Peripherals -> Gripper, Force Sensor, Welding Handle.
+  
+    Description: The controller's integrated system has now adapted to end-effector protocols (gripper, force sensor, welding handle). This optimization allows direct selection and application to the end-effector within the webAPP. The webServer now includes Lua syntax verification for protocols, reporting errors directly if verification fails. The webAPP adds an Lua open protocol debug switch, which, when enabled during debugging, runs the end-effector Lua while suppressing sensor communication timeout errors.
+
+- **FRCap Palletizing Scenario Function Optimization**: 
+    Path: Auxiliary Applications -> Process Package -> Palletizing.
+  
+    Description: Palletizing now supports two pick points. After materials arrive on two conveyor lines, the robot sequentially picks materials from the pick points on the two lines and places them onto two corresponding pallets.
+
+- **Physical Teach Pendant Function Optimization**: 
+    Path: System Settings -> General Settings -> Network
+  
+    Description: Previously, users had to switch to the webAPP first before accessing their host computer interface when using the teach pendant, which was cumbersome. After optimization, by rotating the physical key switch without logging into the teach interface, the robot can switch between manual/auto modes.
+
+- **Collision Function Optimization**: 
+    Path: Initial Setup -> Basic -> Joint -> Collision Level -> False Alarm Detection.
+  
+    Description: When the collision level is set to 1, the robot can run at any speed without false alarms due to high speed. Errors and stops occur only upon actual collision or squeezing.
+    
+- **Photoelectric Sensor TCP Calibration Function**:
+    Path: Initial Setup -> Basic -> Tool Coordinates -> Photoelectric Auto Calibration.
+  
+    Description: Supports automatic calibration for straight shank welding torches and bent shank welding torches;
+
 Version V3.9.0
 -----------------
 

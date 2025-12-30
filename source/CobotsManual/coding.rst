@@ -429,6 +429,24 @@ You can choose the point to be reached, and the smooth transition time setting c
 
 .. centered:: Figure 9.5-1 PTP command interface
 
+Point-to-Point Relative Motion
+******************************************
+The robot moves a relative distance from its current position. On the PTP command addition page, select the point name as "CurrentPos". Choose the offset coordinate system as either the base coordinate system or the tool coordinate system according to the situation, and input the offset value. This means the robot will perform a certain offset motion along the set coordinate system based on its current position. ("CurrentPos" is a system point and does not require teaching.)
+
+.. image:: coding/515.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-1-1 PTP Relative Motion Command
+
+Click the "Add" and "Apply" buttons to add a robot PTP relative motion command to the Lua program. Switch the robot to automatic mode and click the start button. In the example program, the robot will move 100mm along the X+ direction of the base coordinate system from its current position.
+
+.. image:: coding/516.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-1-2 PTP Relative Motion Command Added
+
 Lin command
 ++++++++++++++++
 
@@ -442,6 +460,26 @@ The function of this command is similar to the "PTP" command, but the path of th
 
 .. centered:: Figure 9.5-2 Lin command interface
 
+Linear Relative Motion
+******************************************
+The robot moves a relative distance along a straight line from its current position. On the LIN command addition page, select the point name as "CurrentPos". Choose the offset coordinate system as either the base coordinate system or the tool coordinate system according to the situation, and input the offset value. This means the robot will perform a certain offset motion along the set coordinate system based on its current position. ("CurrentPos" is a system point and does not require teaching.)
+
+.. image:: coding/517.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-2-1 LIN Relative Motion Command
+
+Click the "Add" and "Apply" buttons to add a robot linear relative motion command to the Lua program. Switch the robot to automatic mode and click the start button. In the example program, the robot will move 100mm along the X+ direction of the base coordinate system from its current position.
+
+.. image:: coding/518.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-2-2 LIN Relative Motion Command Added
+
+Robot linear relative motion supports functions such as smoothing, physical speed, and welding wire search.
+
 .. important:: When the selection point name is "seamPos", the straight line command is applied in the welding scene using the laser sensor. Due to the accumulated operating error during welding, "whether to offset" and "offset amount" are added.
 
    **Whether to offset**: No, base coordinate system offset, tool coordinate system offset, laser original data offset;
@@ -452,7 +490,25 @@ The function of this command is similar to the "PTP" command, but the path of th
       :width: 6in
       :align: center
 
-   .. centered:: Figure 9.5-2-1 Lin command interface(Welding scene)
+   .. centered:: Figure 9.5-2-3 Lin command interface(Welding scene)
+
+The LIN command allows selecting the motion speed mode as "Percentage" or "Physical Speed":
+
+- Percentage: Input the debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current debugging speed setting.
+
+.. image:: coding/458.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.5-2-4 Input Percentage to Display Actual Physical Speed Value
+
+- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed of the LIN command is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed for the LIN command is 1000 × 50% = 500mm/s).
+
+.. image:: coding/459.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.5-2-5 Input Actual Physical Speed
 
 LIN command joint	overspeed processing function
 *****************************************************************
@@ -607,6 +663,24 @@ Both the transition point and the end point can be set to offset, and you can ch
 
 .. centered:: Figure 9.5-4 Arc command interface
 
+The ARC command allows you to select the motion speed mode as either "Percentage" or "Physical Speed":
+
+- **Percentage:** Input a debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot movement speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (in mm/s) of the robot in both manual and automatic modes under the current debugging speed settings.
+
+.. image:: coding/461.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.5-4-1 Display Actual Physical Speed Value When Inputting Percentage
+
+- **Physical Speed:** The input speed is the actual operating speed of the robot, in mm/s. The input acceleration is typically set to twice the speed. (The maximum physical speed of the LIN command is limited by the global speed percentage. If the robot's maximum operating speed is 1000 mm/s and the global speed is 50%, then the maximum physical speed for the LIN command is 1000 × 50% = 500 mm/s).
+
+.. image:: coding/462.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.5-4-2 Input Actual Physical Speed
+
 Circle command
 ++++++++++++++++
 
@@ -656,29 +730,43 @@ Circle command addition
 
 .. centered:: Figure 9.5-8 Starting point motion mode and starting point "P1"
 
-**Step3**: Select "Middle point 1" as the "P2" point in the circle command addition page, and click "Next".
+**Step3**: On the Add Circle Command page, select "Circle Intermediate Point 1" as point "P2", and "Circle Intermediate Point 2" as point "P3".
 
-.. image:: coding/047.png
+.. image:: coding/465.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.5-9 Middle Point 1 of the Circle
+.. centered:: Figure 9.33-9 Selecting Arc Intermediate Points and Endpoint
 
-**Step4**: Select "Middle point 2" as the "P3" point, and click the "Add" button and the "Apply" button in turn.
+**Step4**: Select the speed mode and input the speed value.
 
-.. image:: coding/048.png
+The Circle command allows you to select the motion speed mode as either "Percentage" or "Physical Speed":
+
+- **Percentage:** Input a debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot movement speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (in mm/s) of the robot in both manual and automatic modes under the current debugging speed settings.
+
+.. image:: coding/466.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-10 Display Actual Physical Speed Value When Inputting Percentage
+
+- **Physical Speed:** The input speed is the actual operating speed of the robot, in mm/s. The input acceleration is typically set to twice the speed. (The maximum physical speed of the LIN command is limited by the global speed percentage. If the robot's maximum operating speed is 1000 mm/s and the global speed is 50%, then the maximum physical speed for the LIN command is 1000 × 50% = 500 mm/s).
+
+.. image:: coding/467.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.33-11 Input Actual Physical Speed
+
+**Step5**: Click the "Add" button and then the "Apply" button in sequence. At this point, the circle motion command has been added to "testCircle.lua".
+
+.. image:: coding/468.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.5-10 The middle point 2 of the circle
+.. centered:: Figure 9.33-12 Addition of Circle Motion Command
 
-**Step5**: At this time, "testCircle.lua" has added the circle movement command.
-
-.. image:: coding/049.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.5-11 Circle movement command addition
+**Step5**: At this point, the circle motion command has been added to "testCircle.lua".
 
 Switch the robot to automatic mode, start the program on the premise of ensuring safety, and the robot will move according to the circle trajectory shown in Figure 1.
 
@@ -1001,32 +1089,87 @@ This command is an overall offset command. Input each offset, add the opening co
 
 .. centered:: Figure 9.5-28 Offset command interface
 
-ServoCart command
-++++++++++++++++++++
-
-Click the "ServoC" icon to enter the ServoCart command editing interface.
-
-ServoCart servo control (Cartesian space motion) command, which can control the robot motion through absolute pose control or based on the current pose offset.
+Servo Command
++++++++++++++++++++++++++++++++++++++++++
+Click the "Servo" icon to enter the servoMotion command editing interface. Servo motion includes servo motion in Cartesian space and servo motion in joint space.
 
 .. image:: coding/075.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.5-29 ServoCart command interface
+.. centered:: Figure 9.5-29-1 Servo Motion Command Interface
 
-Absolute pose control program example:
+Servo Motion in Cartesian Space
+*************************************************************
+ServoCart servo control (Cartesian space motion) command. This command can control robot motion through absolute pose control or offset control based on the current pose.
 
 .. image:: coding/076.png
    :width: 6in
    :align: center
 
-In this example, x, y, z, rx, ry, rz (Cartesian position) are the current position of the robot. In addition, the user can control the movement of the robot by reading the trajectory data file and sending the trajectory data through socket communication.
+.. centered:: Figure 9.5-29-2 ServoCart Command Interface
 
-Example of control program based on current pose offset (base coordinate offset):
+Example of absolute pose control program:
 
 .. image:: coding/077.png
    :width: 6in
    :align: center
+
+.. centered:: Figure 9.5-29-3 ServoCart Absolute Motion
+
+In this example, x, y, z, rx, ry, rz (Cartesian position) are the acquired current robot position. Additionally, users can control robot motion by reading trajectory data files, sending trajectory data via socket communication, etc.
+
+Example of control program based on offset from current pose (base coordinate offset):
+
+.. image:: coding/519.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-29-4 ServoCart Relative Motion
+
+Servo Motion in Joint Space
+********************************************************
+ServoJ servo control (joint space motion) command. This command can control robot motion through absolute robot joint positions.
+
+Click "Teaching Program", "Program Programming", "Servo Motion" in sequence. On the servoMotion command page, select "Joint Space Motion".
+
+.. image:: coding/520.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-29-5 ServoJ Command Editing
+
+The parameters in the command are explained as follows:
+
+- **Joint Position**: The target joint position for ServoJ motion. The motion from the current position to the target position needs to be completed within the set command cycle. If the deviation between the target position and the current position command is too large, the robot may report errors such as joint overspeed.
+- **Extended Axis Position**: The target extended axis position for ServoJ motion.
+- **Acceleration**: Acceleration percentage for ServoJ motion (currently not available).
+- **Speed**: Speed percentage for ServoJ motion (currently not available; the actual robot operating speed currently depends on the position difference between two ServoJ commands and the command cycle).
+- **Command Cycle**: Execution time interval between two ServoJ commands.
+
+Input the corresponding target position, speed, acceleration, and command cycle. Click the "Add" and "Apply" buttons to add a ServoJ command to the LUA program.
+
+.. image:: coding/521.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-29-6 ServoJ Command Added to Lua Program
+
+In practice, it is often necessary to continuously send multiple ServoJ commands according to the set command cycle. The target joint positions of these ServoJ commands form a continuous robot motion curve, enabling flexible robot motion control. The sending cycle of the commands must match the set command cycle.
+
+ServoJ motion control can be implemented in the LUA program through loops or by adding multiple commands consecutively.
+
+.. image:: coding/522.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-29-7 Example of Continuous ServoJ Motion
+
+.. image:: coding/523.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-29-8 Example of Continuous ServoJ Motion 1
 
 Trajctory command
 +++++++++++++++++++
@@ -7291,189 +7434,6 @@ Command details:
 - Parameters: id, connected socket ID; timeout: reception timeout; stopStartegy: post-timeout strategy (0: report error and stop after timeout, 1: continue running after timeout);
 - Return values: time: reception time, data: received data.
 
-Robot Linear, Circular, and Full Circle Motion Setting Physical Speed
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-LUA Programming
-+++++++++++++++++++++++++++++++++++++++++++
-
-Linear Command
-********************************
-Click the "Linear" icon to enter the Lin command editing interface.
-
-The function of this command is similar to the "PTP" command, but the path to the point reached by this command is a straight line.
-
-.. image:: coding/457.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-1 Lin Command Addition Interface
-
-The LIN command allows selecting the motion speed mode as "Percentage" or "Physical Speed":
-
-- Percentage: Input the debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current debugging speed setting.
-
-.. image:: coding/458.png
-   :width: 5in
-   :align: center
-
-.. centered:: Figure 9.33-2 Input Percentage to Display Actual Physical Speed Value
-
-- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed of the LIN command is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed for the LIN command is 1000 × 50% = 500mm/s).
-
-.. image:: coding/459.png
-   :width: 5in
-   :align: center
-
-.. centered:: Figure 9.33-3 Input Actual Physical Speed
-
-Circular Arc Command
-*********************************
-
-Click the "Circular Arc" icon to enter the Arc command editing interface.
-
-The "Arc" command is for circular motion and includes three points: the first point is the arc start point, the second point is the arc intermediate transition point, and the third point is the end point.
-
-Both the transition point and the end point can be set for offset, you can choose offset based on the base coordinate system or based on the tool coordinate system, and pop-up settings for x, y, z, rx, ry, rz offsets appear. The end point can set a smooth transition radius to achieve a continuous motion effect. (Arc motion requires first adding a PTP or Lin command to move to the start point).
-
-.. image:: coding/460.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-4 Arc Command Interface
-
-The ARC command allows selecting the motion speed mode as "Percentage" or "Physical Speed":
-
-- Percentage: Input the debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current debugging speed setting.
-
-.. image:: coding/461.png
-   :width: 5in
-   :align: center
-
-.. centered:: Figure 9.33-5 Input Percentage to Display Actual Physical Speed Value
-
-- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed of the ARC command is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed for the ARC command is 1000 × 50% = 500mm/s).
-
-.. image:: coding/462.png
-   :width: 5in
-   :align: center
-
-.. centered:: Figure 9.33-6 Input Actual Physical Speed
- 
-Full Circle Command Addition
-******************************************
-
-**Step1**: Create a new user program "testCircle.lua", click the "Full Circle" button to open the full circle command addition page.
-
-.. image:: coding/463.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-7 Add Full Circle Command Button
-
-**Step2**: On the full circle command addition page, select the starting point motion mode and the starting point as "P1".
-
-.. image:: coding/464.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-8 Starting Point Motion Mode and Starting Point "P1"
-
-**Step3**: On the full circle command addition page, select "Full Circle Intermediate Point 1" as point "P2", and "Full Circle Intermediate Point 2" as point "P3".
-
-.. image:: coding/465.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-9 Select Arc Intermediate Points and End Point
-
-**Step4**: Select the speed mode and input the speed value.
-
-The Circle command allows selecting the motion speed mode as "Percentage" or "Physical Speed":
-
-- Percentage: Input the debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Debugging Speed Percentage. Hover the mouse over the small eye icon to the right of the "Debugging Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current debugging speed setting.
-
-.. image:: coding/466.png
-   :width: 5in
-   :align: center
-
-.. centered:: Figure 9.33-10 Input Percentage to Display Actual Physical Speed Value
-
-- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed of the Circle command is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed for the Circle command is 1000 × 50% = 500mm/s).
-
-.. image:: coding/467.png
-   :width: 5in
-   :align: center
-
-.. centered:: Figure 9.33-11 Input Actual Physical Speed
-
-**Step5**: Click the "Add" button and then the "Apply" button sequentially. Now the "testCircle.lua" program has the full circle motion command added.
-
-.. image:: coding/468.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-12 Full Circle Motion Command Added
-
-Switch the robot to automatic mode and, ensuring safety, start the program. The robot will then move along the full circular trajectory.
-
-Smart Tool
-+++++++++++++++++++++++++++++++++++
-
-Under the "Auxiliary Applications" -> "Tool Applications" menu bar, click "Smart Tool" to enter the Smart Tool configuration function interface.
-
-Configure keys A-E and the IO key sequentially. After Smart Tool configuration is complete, the robot internally maintains the function corresponding to each button. When it detects that a button is pressed, it automatically executes the function item corresponding to that button.
-
-A-E Key Functions:
-
-- Motion Command: When selecting PTP, LIN, or ARC motion commands, the corresponding point speed needs to be input. Among them, LIN and ARC commands can choose "Percentage" or "Physical Speed":
-- Percentage: Input the point speed percentage. The robot moves at a percentage of its maximum speed. The actual robot motion speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Point Speed Percentage. Hover the mouse over the small eye icon to the right of the "Point Speed" input box to display the actual physical speed (unit: mm/s) of the robot in both manual and automatic modes under the current speed setting.
-
-.. image:: coding/469.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-13 Input Percentage to Display Actual Physical Speed Value
- 
-- Physical Speed: The input speed is the actual operating speed of the robot, unit mm/s; the input acceleration is usually set to twice the speed. (The maximum physical speed is limited by the global speed percentage. If the robot's maximum operating speed is 1000mm/s and the global speed is 50%, then the maximum physical speed is 1000 × 50% = 500mm/s).
-
-.. image:: coding/470.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-14 Input Actual Physical Speed
-
-After successful configuration, a related motion command is added to the teach program. When configuring an ARC motion command, a PTP/LIN command must be configured first.
-
-- DO Output: When "DO Output" is selected, a dropdown box appears allowing selection of output options DO0⁓DO7.
-
-.. image:: coding/471.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-15 Smart Tool Configuration (A-E Keys)
-
-IO Key Function:
-
-- IO Signal Configuration: The dropdown box allows selection of DO0⁓DO7 options, CO0⁓CO7 options, End-DO0, End-DO1, and extended IO (Aux-DO0⁓Aux-DO127);
-- Combined Command: After selecting "IO Signal", under specific conditions, the "Welder Selection" and "Point Speed" configuration items are displayed, generating different program commands.
-
-.. image:: coding/472.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.33-16 Smart Tool Configuration (IO Key)
-
-.. important::
-   - When the IO signal is configured as DO0~DO7 or CO0~CO7 (without "Arc Start" configured), the program adds SetDO; "Weld Selection" and "Point Speed" are hidden at this time.
-   - When the IO signal is configured as End-DO0 or End-DO1, the program adds SetToolDO; "Weld Selection" and "Point Speed" are hidden at this time.
-   - When the IO signal is configured as Extended IO (without "Welder Arc Start" configured), the program adds SetAuxDO; "Weld Selection" and "Point Speed" are hidden at this time.
-   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) and "Welder Selection" is "None", the program adds SetDO; "Weld Selection" and "Point Speed" are hidden at this time.
-   - When the IO signal configuration item is Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "None", the program adds SetAuxDO; "Weld Selection" and "Point Speed" are hidden at this time.
-   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "Welding", the first press adds ARCStart, the second press adds ARCEnd, the third press adds ARCStart, the fourth press adds ARCStart, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are hidden at this time.
-   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "LIN+Welding", the first press adds LIN and ARCStart, the second press adds LIN and ARCEnd, the third press adds LIN and ARCStart, the fourth press adds LIN and ARCEnd, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are displayed at this time.
-   - When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or Extended IO (with "Welder Arc Start" configured) and "Welder Selection" is "LIN+Welding+Weaving", the first press adds LIN, ARCStart, and WeaveStart, the second press adds LIN, ARCEnd, and WeaveEnd, the third press adds LIN, ARCStart, and WeaveStart, the fourth press adds LIN, ARCEnd, and WeaveEnd, alternating and repeating the above operations; "Weld Selection" and "Point Speed" are hidden at this time.
-
 Impedance Control Function During Robot Motion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -7494,7 +7454,7 @@ Impedance Control Configuration and Function Start/Stop in Cartesian Space
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.34-1 Robot Collision Coefficient Setting Module
+.. centered:: Figure 9.33-1 Robot Collision Coefficient Setting Module
 
 **Step2**: To use a force sensor to implement the impedance control function, the force sensor must be configured in the end effector peripheral configuration under "Peripherals" → "End Effector". If choosing not to use a force sensor to implement the impedance control function, this step is not required.
 
@@ -7504,7 +7464,7 @@ Impedance Control Configuration and Function Start/Stop in Cartesian Space
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.34-2 Adding Force Control Command
+.. centered:: Figure 9.33-2 Adding Force Control Command
 
 **Step4**: In the force control command module, select "Cartesian Space" from the space selection dropdown menu. Set appropriate values in the text boxes for force threshold, mass coefficient, damping coefficient, stiffness coefficient, maximum linear velocity, maximum linear acceleration, maximum angular velocity, and maximum angular acceleration. Click "Enable" under command type, then click "Add" to add the impedance control enable command; click "Disable" under command type, then click "Add" to add the impedance control disable command.
 
@@ -7512,7 +7472,7 @@ Impedance Control Configuration and Function Start/Stop in Cartesian Space
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.34-3 Impedance Control Command Example
+.. centered:: Figure 9.33-3 Impedance Control Command Example
 
 **Step5**: During operation, if the robotic arm stops running and the lower left corner of the Web interface displays "500 Error: Current collision level is too low", this is because the set force threshold is greater than the trigger threshold of the collision level. At this point, increasing the collision level or decreasing the force threshold will resolve this error.
 
@@ -7520,7 +7480,7 @@ Impedance Control Configuration and Function Start/Stop in Cartesian Space
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.34-4 Collision Level Too Low Warning
+.. centered:: Figure 9.33-4 Collision Level Too Low Warning
 
 **Step6**: During operation, if the robotic arm stops running and the lower right corner of the Web interface displays "Collision Fault", this is because the external force on the robotic arm has exceeded the trigger threshold of the collision level, thereby triggering a collision fault.
 
@@ -7528,7 +7488,7 @@ Impedance Control Configuration and Function Start/Stop in Cartesian Space
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.34-5 Collision Fault Warning
+.. centered:: Figure 9.33-5 Collision Fault Warning
 
 Specific Functions and Recommended Values of Parameters:
 
@@ -7571,7 +7531,7 @@ The operational procedure for the custom weaving welding function is as follows:
    :width: 6in
    :align: center
 
-.. centered:: Chart 9.35-1 Weaving Parameters Setting Interface
+.. centered:: Chart 9.34-1 Weaving Parameters Setting Interface
 
 **Step 3**: After selecting the "Weaving Type", scroll down in the weaving parameters setting interface. In this interface, select the number of custom weaving endpoints, set the position and dwell time of each point in the weaving coordinate system, and finally click the "Configure" button.
 
@@ -7579,7 +7539,7 @@ The operational procedure for the custom weaving welding function is as follows:
    :width: 6in
    :align: center
 
-.. centered:: Chart 9.35-2 Custom Weaving Setting Interface
+.. centered:: Chart 9.34-2 Custom Weaving Setting Interface
 
 **Step 4**: In the weaving interface, sequentially select "Start Weaving" and "Stop Weaving" in the "Command Type" dropdown, click the "Add" button, and finally click the "Apply" button.
 
@@ -7587,7 +7547,7 @@ The operational procedure for the custom weaving welding function is as follows:
    :width: 6in
    :align: center
 
-.. centered:: Chart 9.35-3 Weaving Command Setting Interface
+.. centered:: Chart 9.34-3 Weaving Command Setting Interface
 
 **Step 5**: In the program editing interface, select the weaving start command, click the "Move Up" button at the top of the interface, and finally save the program. Switch the robot to automatic mode and click the "Start" button. The robot will then begin custom weaving along the linear trajectory.
 
@@ -7595,13 +7555,13 @@ The operational procedure for the custom weaving welding function is as follows:
    :width: 6in
    :align: center
 
-.. centered:: Chart 9.35-4 Original LUA Command Interface
+.. centered:: Chart 9.34-4 Original LUA Command Interface
 
 .. image:: coding/482.png
    :width: 6in
    :align: center
 
-.. centered:: Chart 9.35-5 Modified LUA Command Interface
+.. centered:: Chart 9.34-5 Modified LUA Command Interface
 
 **Step 6**: The steps for setting up custom weaving for circular and full-circle trajectories are the same as Step 1 to Step 5 above.
 
@@ -7616,7 +7576,7 @@ Before using the button box or other IO signals to record the teaching point fun
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.36-1 Teach point configuration
+.. centered:: Chart 9.35-1 Teach point configuration
 
 End-point dot automatic overwrite update Lua program function
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -7630,7 +7590,7 @@ End-point dot configuration
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.36‑2 Enable end point recording
+.. centered:: Chart 9.35‑2 Enable end point recording
 
 2. The configuration is complete, with the end-tip dot name prefixed as "test", the numbering limit set to 10, and all Lua programs selected for enabling updates. Close the webApp, and the function remains active.
    
@@ -7643,7 +7603,7 @@ End-button dot automatic update Lua program
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.36‑3 end-point dot button
+.. centered:: Chart 9.35‑3 end-point dot button
 
 2. At this point, the end-tip LED flashes: with the purple light flashing (start) -> blue light on (dot recording and updating in Lua) -> green light on (dot recording completed), and the position information corresponding to the selected Lua program's name is synchronized and updated.
 
@@ -7651,7 +7611,7 @@ End-button dot automatic update Lua program
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.36‑3 End-tip dot recording and updating Lua program LED changes
+.. centered:: Chart 9.35‑3 End-tip dot recording and updating Lua program LED changes
 
 3. When the dot recording fails, the end-tip LED flashes: Purple light flashing (start) -> Red light flashing (dot recording failed) -> Green light on (returning to normal).
 
@@ -7659,7 +7619,7 @@ End-button dot automatic update Lua program
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.36‑4 LED changes when end-tip dot recording fails
+.. centered:: Chart 9.35‑4 LED changes when end-tip dot recording fails
 
 Function usage example
 ******************************************
@@ -7672,7 +7632,7 @@ Function usage example
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.36‑5 Teaching Point Configuration
+.. centered:: Chart 9.35‑5 Teaching Point Configuration
 
 3. As shown below, it depicts the "program1" program and its current running trajectory.
 
@@ -7680,7 +7640,7 @@ Function usage example
    :width: 6in
    :align: center
 
-.. centered:: Chart 9.36‑6 Program1 program and its current running trajectory
+.. centered:: Chart 9.35‑6 Program1 program and its current running trajectory
 
 4. Switch the page to manual mode, move the robot to a new position, click the end-tip dot button, and wait for the end-tip LED to complete its flashing sequence: Purple light flashing (start) -> Blue light on (dot recording and updating in Lua) -> Green light on (dot recording completed), at which point the recorded position is labeled as test1.
 
@@ -7692,7 +7652,7 @@ Function usage example
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.36‑7 Updated running trajectory
+.. centered:: Chart 9.35‑7 Updated running trajectory
 
 Main program configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7705,7 +7665,7 @@ The configuration of the main program can be used in conjunction with the DI con
    :width: 4in
    :align: center
 
-.. centered:: Chart 9.37‑1 Main program configuration
+.. centered:: Chart 9.36‑1 Main program configuration
 
 Robot Extended Axis Intersecting Line Welding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7717,7 +7677,7 @@ System Configuration
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑1 Robot Extended Axis Intersecting Line Welding System Configuration
+.. centered:: Figure 9.37‑1 Robot Extended Axis Intersecting Line Welding System Configuration
 
 In the system, (a) is the computer, (b) is the robot and its control box, (c) is the positioner and drive equipment, (d) is the welder and supporting equipment.
 
@@ -7730,7 +7690,7 @@ The communication methods between the robot and the extended axis include using 
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑2 Extended Axis Configuration Page
+.. centered:: Figure 9.37‑2 Extended Axis Configuration Page
 
 Click "Initial Setup", "Peripherals", "Extended Axis" on the robot operation interface to enter the extended axis configuration page. Taking using a PLC connected to the robot via UDP communication as an example, click the "UDP Communication" icon to enter the extended axis configuration page for UDP communication.
 
@@ -7738,7 +7698,7 @@ Click "Initial Setup", "Peripherals", "Extended Axis" on the robot operation int
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑3 UDP Communication Configuration Interface
+.. centered:: Figure 9.37‑3 UDP Communication Configuration Interface
 
 On the extended axis configuration page for UDP communication, you can select the corresponding extended axis number, connect and configure UDP communication parameters (address, port, cycle, packet loss detection, etc.), and the extended axis positioning completion time.
 
@@ -7752,7 +7712,7 @@ Configure the welder through the following configuration page:
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑4 Welder Configuration Page
+.. centered:: Figure 9.37‑4 Welder Configuration Page
 
 Welder communication can use IO communication or RS485 communication. Click "Initial Setup", "Peripherals", "Welder" to enter the configuration and connection interface, where you can configure modules such as "Control Type", "I/O Configuration", "Welding Process Parameters", "Welder Debugging", etc.
 
@@ -7766,7 +7726,7 @@ After installing the welding torch on the robot end, calibrate the welding torch
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑5 Tool Coordinate System Configuration Page
+.. centered:: Figure 9.37‑5 Tool Coordinate System Configuration Page
 
 Click "Initial Setup", "Basic", "Tool Coordinates" to enter the tool coordinate system settings page.
 
@@ -7774,7 +7734,7 @@ Click "Initial Setup", "Basic", "Tool Coordinates" to enter the tool coordinate 
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑6 Select the 6-Point Method to Calibrate the Welding Torch
+.. centered:: Figure 9.37‑6 Select the 6-Point Method to Calibrate the Welding Torch
 
 Select an empty coordinate system, choose the tool type as "Tool", select the 6-point method to calibrate the welding torch tool. It is recommended to calibrate the posture of the tool coordinate system as shown in Figure 4-3 below.
 
@@ -7782,7 +7742,7 @@ Select an empty coordinate system, choose the tool type as "Tool", select the 6-
    :width: 4in
    :align: center
 
-.. centered:: Figure 9.38‑7 Welding Torch Coordinate System Posture Diagram
+.. centered:: Figure 9.37‑7 Welding Torch Coordinate System Posture Diagram
 
 Tool coordinate system calibration content is not the focus of this function introduction. For detailed calibration methods, refer to the corresponding section of the user manual.
 
@@ -7800,7 +7760,7 @@ When using the extended axis coordinate system to achieve synchronized motion be
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑8 Extended Axis Coordinate System Settings Page
+.. centered:: Figure 9.37‑8 Extended Axis Coordinate System Settings Page
 
 Click "Initial Setup", "Peripherals", "Extended Axis" to enter the extended axis coordinate system settings interface. Select the extended axis number that needs to be set, click the edit button, select "1-Two-degree-of-freedom L-type Positioner" and save.
 
@@ -7808,7 +7768,7 @@ Click "Initial Setup", "Peripherals", "Extended Axis" to enter the extended axis
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑9 Extended Axis Calibration Page
+.. centered:: Figure 9.37‑9 Extended Axis Calibration Page
 
 When calibrating the extended axis, pay attention to select "Robot Position Relative to Extended Axis" as "Outside Extended Axis". For the positioner case, select the 4-point method for calibration.
 
@@ -7823,7 +7783,7 @@ Based on the taught points recorded on the cross-sections of the main pipe and t
    :width: 4in
    :align: center
 
-.. centered:: Figure 9.38‑10 Intersecting Line Trajectory Workpiece Coordinate System
+.. centered:: Figure 9.37‑10 Intersecting Line Trajectory Workpiece Coordinate System
 
 Method Without Using a Positioner
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -7835,7 +7795,7 @@ Method Without Using a Positioner
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑11 Intersecting Line Trajectory Settings Page
+.. centered:: Figure 9.37‑11 Intersecting Line Trajectory Settings Page
 
 **Step 3**: On the intersecting line trajectory settings page, select "Disable" for "Extended Axis Points", complete the settings for starting point motion, motion direction, speed and acceleration, and offset value. The counterclockwise motion direction is the direction of the four fingers when the right hand grips the Z-axis of the workpiece coordinate system.
 
@@ -7845,7 +7805,7 @@ Method Without Using a Positioner
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑12 Intersecting Line Trajectory Instruction Settings
+.. centered:: Figure 9.37‑12 Intersecting Line Trajectory Instruction Settings
 
 **Step 5**: Click the "Welding" button under "Welding Instructions" to enter the welding settings page, select "Arc Start" and "Arc End" instructions, click the "Add", "Apply" buttons. After successful addition, move the Arc Start LUA instruction up one line.
 
@@ -7853,7 +7813,7 @@ Method Without Using a Positioner
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑13 Welding Instruction Settings
+.. centered:: Figure 9.37‑13 Welding Instruction Settings
 
 The following is a typical LUA program for intersecting line welding without a positioner:
 
@@ -7861,7 +7821,7 @@ The following is a typical LUA program for intersecting line welding without a p
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑14 No Positioner - Intersecting Line Welding Example Program
+.. centered:: Figure 9.37‑14 No Positioner - Intersecting Line Welding Example Program
 
 Method Using a Two-Degree-of-Freedom L-Type Positioner
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -7874,7 +7834,7 @@ Method Using a Two-Degree-of-Freedom L-Type Positioner
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑15 Intersecting Line Trajectory Settings Page
+.. centered:: Figure 9.37‑15 Intersecting Line Trajectory Settings Page
 
 **Step 3**: On the intersecting line trajectory settings page, select "Enable" for "Extended Axis Points", select the recorded positioner taught points, complete the settings for starting point motion, motion direction, speed and acceleration, and offset value.
 
@@ -7884,7 +7844,7 @@ Method Using a Two-Degree-of-Freedom L-Type Positioner
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑16 Intersecting Line Trajectory Instruction Settings
+.. centered:: Figure 9.37‑16 Intersecting Line Trajectory Instruction Settings
 
 **Step 5**: Click the "Welding" button under "Welding Instructions" to enter the welding settings page, select "Arc Start" and "Arc End" instructions, click the "Add", "Apply" buttons. After successful addition, move the Arc Start LUA instruction up one line.
 
@@ -7892,7 +7852,7 @@ Method Using a Two-Degree-of-Freedom L-Type Positioner
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑17 Welding Instruction Settings
+.. centered:: Figure 9.37‑17 Welding Instruction Settings
 
 The following is a typical LUA program for positioner-based intersecting line welding:
 
@@ -7900,4 +7860,4 @@ The following is a typical LUA program for positioner-based intersecting line we
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.38‑18 Positioner - Intersecting Line Welding Example Program
+.. centered:: Figure 9.37‑18 Positioner - Intersecting Line Welding Example Program

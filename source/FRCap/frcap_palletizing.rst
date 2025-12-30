@@ -218,7 +218,7 @@ In recipe editing, you can choose whether to use a palletizing workstation, as s
 Palletizing Function I/O Wiring Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-(1) After selecting to use a palletizing workstation, click on Extended I/O Configuration. Based on the corresponding functions and the actual wiring of the I/O interfaces with the PLC, you can customize the selection of I/O signal configuration for palletizing functions. Figure 2-3 shows the default wiring configuration for the palletizing workstation.
+(1) After selecting to use a palletizing workstation, click on Extended I/O Configuration. Based on the corresponding functions and the actual wiring of the I/O interfaces with the PLC, you can customize the selection of I/O signal configuration for palletizing functions. Figure shows the default wiring configuration for the palletizing workstation.
 
 .. image:: frcap_pictures/077.png
    :width: 4in
@@ -226,7 +226,7 @@ Palletizing Function I/O Wiring Configuration
 
 .. centered:: Figure 10-3-1-2 Default Wiring Configuration for Palletizing Workstation
 
-(2) If you choose not to use a palletizing workstation, the system defaults to using control box I/O signals. Based on the corresponding functions and the actual wiring of the I/O interfaces with the control box, you can customize the selection of I/O signal configuration for palletizing functions. Figure 2-4 shows the default wiring configuration when no palletizing workstation is used (using control box I/O).
+(2) If you choose not to use a palletizing workstation, the system defaults to using control box I/O signals. Based on the corresponding functions and the actual wiring of the I/O interfaces with the control box, you can customize the selection of I/O signal configuration for palletizing functions. Figure shows the default wiring configuration when no palletizing workstation is used (using control box I/O).
 
 .. image:: frcap_pictures/078.png
    :width: 4in
@@ -340,7 +340,7 @@ Box parameters
    | Name: Next box
    | Function: Switch to select the next box. When the last box is selected, switch to the first box again.
 
-Click "Edit" in the box configuration column to enter the "Box Configuration" pop-up window, set the "length", "width", "height", "load", "workpiece label orientation" and workpiece in place signal of the box, click "Confirm" button to complete the box information configuration; set the grab point of the box (keep the grab point at the center of the box, and the bottom of the suction cup will be in a squeeze state when in contact with the box), and click the "Record" button to complete the setting.
+Click "Edit" in the box configuration column to enter the "Box Configuration" pop-up window, set the "length", "width", "height", "load" and "workpiece label orientation", click "Confirm" button to complete the box information configuration; set the grab point of the box (keep the grab point at the center of the box, and the bottom of the suction cup will be in a squeeze state when in contact with the box), and click the "Record" button to complete the setting.
 
 .. image:: frcap_pictures/029.png
    :width: 6in
@@ -495,7 +495,7 @@ Click "Edit" in the mode configuration column to enter the "Mode Configuration" 
 .. important:: 
     When adding boxes, the background color of the workpiece turns red when there is a collision between boxes, and the above operation cannot be performed at this time. If necessary, please adjust the box to be collision-free.
 
-Select the mode at the top of the pop-up window, select the box in the box operation area to add boxes in this mode, first set the box interval, you can add it individually or in batches, click "Confirm" to complete the mode information setting. When the heights of the selected boxes are inconsistent, the configuration cannot be completed, and the prompt "Box types are highly inconsistent and can't be added in the same pattern."
+In the pop-up header, select a mode, then choose boxes in the box operation area to add them under this mode. You can choose one-click addition, which by default fills the centered pallet with boxes without any gaps. Customize box spacing; boxes can be added individually or in batches. Click "Confirm" to complete the mode information setup. When the selected boxes have inconsistent heights, configuration cannot be completed, and the prompt "Box type heights are inconsistent and cannot be added to the same mode" will appear.
 
 .. image:: frcap_pictures/070.png
    :width: 6in
@@ -618,32 +618,50 @@ Then set the grab point (keep the grab point at the center of the partition, and
 
 .. centered:: Figure 10-3-34 Lifting shaft test
 
-Procedural generation
---------------------------------------------
+Program Generation
+---------------------------
+View "Program Generation" below the recipe display, and select the recipe based on the recipe and requirements. When recipes are selected for both left and right stations, startup priority needs to be selected; when a recipe is selected only for the left or right station, startup priority selection is not required. After entering the program name, click the "Generate" button.
 
-Check "Program Generation" below the recipe display, enter the program name, select the recipe according to the recipe and requirements. The left and right recipes can be the same or different, and click the "Generate" button.
-
-.. note:: 
-    All program names start with "palletizing". There is no need to enter "palletizing". You only need to enter the name after "_". For example, for "palletizing_program", enter "program".
-
-.. important:: 
-    1) If the palletizing formula is not selected for the left or right station, it means that the station is not enabled.
-    2) After successfully generating the program, be sure to manually save all subprograms and main programs in program teaching.
-    3) The depalletizing program starts with "de", for example, the palletizing program is "palletizing_program" and the depalletizing program is "depalletizing_program".
+.. note:: All program names start with "palletizing". There is no need to input "palletizing"; just input the name after "_". For example, for "palletizing_program", input "program".
 
 .. image:: frcap_pictures/043.png
-   :width: 6in
+   :width: 4in
    :align: center
 
-.. centered:: Figure 10-4-1 Procedural generation
+.. centered:: Figure 10-4-1 Program Generation – Selecting Recipes for Both Left and Right Stations
 
-.. Palletizing status page start and stop
-.. --------------------------------------------
+.. image:: frcap_pictures/081.png
+   :width: 4in
+   :align: center
 
-.. Enable this function in the "Status Page" column, enter the palletizing work status page, and view "Production Information", "Alarm Information" and "Palletizing Program".
+.. centered:: Figure 10-4-2 Program Generation – Selecting Recipe for Left Station, No Recipe for Right Station
 
-.. .. image:: frcap_pictures/044.png
-..    :width: 6in
-..    :align: center
+.. important::
+    1. If no palletizing recipe is selected for the left or right station, it means that station is not enabled.
+    2. After successfully generating the program, be sure to manually save all subprograms and the main program in Program Teaching.
+    3. Depalletizing programs start with "de". For example, if the palletizing program is "palletizing_program", the depalletizing program would be "depalletizing_program".
+    4. When running a program with recipes configured for both left and right stations, after simultaneously receiving the workpiece-in-position signals for left and right, work proceeds according to the set priority.
 
-.. .. centered:: Figure 10-5-1 Palletizing status page
+Single Pick Point Program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are two scenarios for a single pick point program:
+
+(1) Left and right stations select the same recipe;
+(2) Left and right stations select different recipes, but the box pick point pose configured in the recipes is the same.
+
+.. image:: frcap_pictures/082.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 10-4-3 Single Pick Point Box Pick Point
+
+Dual Pick Point Program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To configure a dual pick point program, the left and right stations must select different recipes, and the box pick point poses configured in the recipes must be different.
+
+.. image:: frcap_pictures/083.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 10-4-4 Dual Pick Point Box Pick Point

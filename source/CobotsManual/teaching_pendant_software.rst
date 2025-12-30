@@ -276,14 +276,76 @@ Status Bar
 ~~~~~~~~~~~~
 
 .. note:: 
+   .. image:: teaching_pendant_software/011.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Error state**
+   
+   effect: There is an error in the current robot operation, hide when no error.
+
+.. note:: 
    .. image:: teaching_pendant_software/007.png
       :width: 0.75in
       :height: 0.75in
       :align: left
 
-   name:**robot status**
+   name: **robot status**
    
-   effect:Stopped-stop,Running-run,Pause-pause,Drag-drag
+   effect: Stopped-stop，Running-run，Pause-pause，Drag-drag
+
+.. note:: 
+   .. image:: teaching_pendant_software/010.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Robot Tool Coordinate System, Workpiece Coordinate System, Extended Axis Coordinate System, and Load Number**
+   
+   effect: Top Left – Current Tool Coordinate System Number, Top Right – Current Workpiece Coordinate System Number, Bottom Left – Current Extended Axis Coordinate System Number, Bottom Right – Current Load Number
+
+.. note:: 
+   .. image:: teaching_pendant_software/009.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Running speed percentage**
+   
+   effect: The speed of the robot when it is running in the current mode
+
+.. note:: 
+   .. image:: teaching_pendant_software/012.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Automatic mode**
+   
+   effect: Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
+
+.. note:: 
+   .. image:: teaching_pendant_software/013.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Manual mode**
+   
+   effect: Robot manual mode for robot teaching operations.
+
+.. note:: 
+   .. image:: teaching_pendant_software/065.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Robot State Fold/Unfold Button**
+   
+   effect: Fold/Unfold Tool Coordinate System, Workpiece Coordinate System, Extended Axis Coordinate System, Load, Robot Drag Status, Local/Remote Mode, Robot Connection Status, BOOT Mode, and Account Information Content
+
+Click the collapse/expand button to view the following status information.
 
 .. note:: 
    .. image:: teaching_pendant_software/008.png
@@ -291,9 +353,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name:**Tool coordinate system number**
+   name: **Tool coordinate system number**
    
-   effect:Display the tool coordinate system number of the current application
+   effect: Display the tool coordinate system number of the current application
 
 .. note:: 
    .. image:: teaching_pendant_software/027.png
@@ -314,56 +376,16 @@ Status Bar
    name: **Extended axis coordinate system number**
    
    effect: Displays the currently applied extended axis coordinate system number
-   
+
 .. note:: 
-   .. image:: teaching_pendant_software/009.png
+   .. image:: teaching_pendant_software/066.png
       :width: 0.75in
       :height: 0.75in
       :align: left
 
-   name:**Running speed percentage**
+   name: **Payload**
    
-   effect:The speed of the robot when it is running in the current mode
-
-.. note:: 
-   .. image:: teaching_pendant_software/010.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name:**Runn normally**
-   
-   effect:The current robot is running normally
-
-.. note:: 
-   .. image:: teaching_pendant_software/011.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name:**Error state**
-   
-   effect:There is an error in the current robot operation
-
-.. note:: 
-   .. image:: teaching_pendant_software/012.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name:**automatic mode**
-   
-   effect:Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
-
-.. note:: 
-   .. image:: teaching_pendant_software/013.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name:**Teach mode**
-   
-   effect:Robot teaching operation mode, set the global speed adjustment of manual mode and automatic mode and specify the speed.
+   effect: Display the load weight and center of gravity coordinates X, Y, Z of the current application.
 
 .. note:: 
    .. image:: teaching_pendant_software/014.png
@@ -371,9 +393,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name:**Drag state**
+   name: **Drag state**
    
-   effect:The current robot can drag
+   effect: The current robot can drag
 
 .. note:: 
    .. image:: teaching_pendant_software/015.png
@@ -381,9 +403,29 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name:**Drag state**
+   name: **Drag state**
    
-   effect:The current robot is not draggable
+   effect: The current robot is not draggable
+
+.. note:: 
+   .. image:: teaching_pendant_software/068.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Robot Local Mode**
+   
+   effect: The current robot is controlled via the control box.
+
+.. note:: 
+   .. image:: teaching_pendant_software/067.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Robot Remote Mode**
+   
+   effect: Currently, robots can only be controlled through PLC.
 
 .. note:: 
    .. image:: teaching_pendant_software/017.png
@@ -391,9 +433,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name:**Connection status**
+   name: **Connection status**
    
-   effect:Robot connected
+   effect: Robot connected
 
 .. note:: 
    .. image:: teaching_pendant_software/016.png
@@ -401,9 +443,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name:**Not connected status**
+   name: **Not connected status**
    
-   effect:Robot not connected
+   effect: Robot not connected
 
 .. note:: 
    .. image:: teaching_pendant_software/018.png
@@ -411,9 +453,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name:**Account information**
+   name: **Account information**
    
-   effect:Display username and permissions and logout user
+   effect: Display username and permissions and logout user
 
 Menu Bar
 ~~~~~~~~~~~~

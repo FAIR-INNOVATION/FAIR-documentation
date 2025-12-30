@@ -102,6 +102,16 @@ Status Bar
 ~~~~~~~~~~~~
 
 .. note:: 
+   .. image:: teaching_pendant_software/011.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Error state**
+   
+   effect: There is an error in the current robot operation, hide when no error.
+
+.. note:: 
    .. image:: teaching_pendant_software/007.png
       :width: 0.75in
       :height: 0.75in
@@ -110,6 +120,16 @@ Status Bar
    name: **robot status**
    
    effect: Stopped-stop，Running-run，Pause-pause，Drag-drag
+
+.. note:: 
+   .. image:: teaching_pendant_software/010.png
+      :width: 0.75in
+      :height: 0.75in
+      :align: left
+
+   name: **Robot Tool Coordinate System, Workpiece Coordinate System, Extended Axis Coordinate System, and Load Number**
+   
+   effect: Top Left – Current Tool Coordinate System Number, Top Right – Current Workpiece Coordinate System Number, Bottom Left – Current Extended Axis Coordinate System Number, Bottom Right – Current Load Number
 
 .. note:: 
    .. image:: teaching_pendant_software/009.png
@@ -127,7 +147,7 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name: **automatic mode**
+   name: **Automatic mode**
    
    effect: Robot automatic operation mode.When the global speed adjustment in manual mode and automatic mode is turned on and the speed is specified, the global speed will be automatically adjusted to the specified speed
 
@@ -137,29 +157,9 @@ Status Bar
       :height: 0.75in
       :align: left
 
-   name: **Teach mode**
+   name: **Manual mode**
    
-   effect: Robot teaching operation mode, set the global speed adjustment of manual mode and automatic mode and specify the speed.
-
-.. note:: 
-   .. image:: teaching_pendant_software/010.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name: **Runn normally**
-   
-   effect: The current robot is running normally
-
-.. note:: 
-   .. image:: teaching_pendant_software/011.png
-      :width: 0.75in
-      :height: 0.75in
-      :align: left
-
-   name: **Error state**
-   
-   effect: There is an error in the current robot operation
+   effect: Robot manual mode for robot teaching operations.
 
 .. note:: 
    .. image:: teaching_pendant_software/065.png
@@ -170,6 +170,8 @@ Status Bar
    name: **Robot State Fold/Unfold Button**
    
    effect: Fold/Unfold Tool Coordinate System, Workpiece Coordinate System, Extended Axis Coordinate System, Load, Robot Drag Status, Local/Remote Mode, Robot Connection Status, BOOT Mode, and Account Information Content
+
+Click the collapse/expand button to view the following status information.
 
 .. note:: 
    .. image:: teaching_pendant_software/008.png

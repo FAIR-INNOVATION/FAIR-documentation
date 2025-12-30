@@ -422,37 +422,40 @@ Constant force control
     :linenos:
 
     /**
-    *@brief  constant control
-    *@param [ in ] flag 0-off constant force control, 1-on constant force control
-    *@param [ in ] sensor number
-    *@param [ in ] select six degrees of freedom whether to detect collision, 0-no detection, 1-detection
-    *@param [ in ] ft impact torque, FX, F Y, F Z, TX, Ty, TZ
-    *@param [ in ] ft force PID parameter, moment PID parameter
-    *@param [ in ] adj adaptive start-stop control, 0-off, 1-on
-    *@param [ in ] ILC start-stop control, 0-stop, 1-training, 2-operation
-    *@param [ in ] Max adjusted distance, in mm
-    *@param [ in ] max
-    *@param [ in ] m quality parameters
-    *@param [ in ] b damping parameter
-    *@param [ in ] Polish radio radius, mm
-    *@param [ in ] filter on flag 0-off, 1-on, off by default
-    *@param [ in ] POSADAPT gesture 0-off, 1-on, off by default
-    *@param [ in ] is noblock flag, 0-blocking, 1-nonblocking
-    *@return  error code
+    * @brief Constant Force Control
+    * @param [in] flag 0-disable constant force control, 1-enable constant force control
+    * @param [in] sensor_id Force sensor ID
+    * @param [in] select Select whether to detect collisions in six degrees of freedom, 0-disable detection, 1-enable detection
+    * @param [in] ft Collision force/torque: fx, fy, fz, tx, ty, tz
+    * @param [in] ft_pid Force PID parameters, torque PID parameters
+    * @param [in] adj_sign Adaptive start/stop control, 0-disable, 1-enable
+    * @param [in] ILC_sign ILC start/stop control, 0-stop, 1-training, 2-practical operation
+    * @param [in] max_dis Maximum adjustment distance, unit: mm
+    * @param [in] max_ang Maximum adjustment angle, unit: deg
+    * @param [in] M Mass parameter for rx, ry [0.1-10], default 2
+    * @param [in] B Damping parameter for rx, ry [0.1-50], default 8
+    * @param [in] threshold Activation threshold for rx, ry [0-10], default 0.2
+    * @param [in] adjustCoeff Torque adjustment coefficient for rx, ry [0-1], default 1
+    * @param [in] polishRadio Polishing radius, unit: mm
+    * @param [in] filter_Sign Filter enable flag 0-off; 1-on, default off
+    * @param [in] posAdapt_sign Posture compliance enable flag 0-off; 1-on, default off
+    * @param [in] isNoBlock Blocking flag, 0-blocking; 1-non-blocking
+    * @return Error code
     */
-    errno_t FT_Control(uint8_t flag, int sensor_id, uint8_t select[6], ForceTorque* ft, float ft_pid[6], uint8_t adj_sign, uint8_t ILC_sign, float max_dis, float max_ang, double M[2], double B[2], double polishRadio = 0.0, int filter_Sign = 0, int posAdapt_sign = 0, int isNoBlock = 0); 
+    errno_t FT_Control(uint8_t flag, int sensor_id, uint8_t select[6], ForceTorque* ft, float ft_pid[6], uint8_t adj_sign, 
+    uint8_t ILC_sign, float max_dis, float max_ang, double M[2], double B[2], double threshold[2], double adjustCoeff[2], double polishRadio = 0.0, int filter_Sign = 0, int posAdapt_sign = 0, int isNoBlock = 0);
 
 Example of constant force control code with damping
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    int TestFTControlWithDamping(void)
+    int TestFTControlWithAdjustCoeff(void)
     {
       ROBOT_STATE_PKG pkg = {};
       FRRobot robot;
       robot.LoggerInit();
-      robot.SetLoggerLevel(3);
+      robot.SetLoggerLevel(1);
       int rtn = robot.RPC("192.168.58.2");
       if (rtn != 0)
       {
@@ -464,30 +467,33 @@ Example of constant force control code with damping
       float ft_pid[6] = { 0.0008, 0.0, 0.0, 0.0, 0.0, 0.0 };
       uint8_t adj_sign = 0;
       uint8_t ILC_sign = 0;
-      float max_dis = 100.0;
+      float max_dis = 1000.0;
       float max_ang = 20;
-      ForceTorque ft = {};
-      ft.fz = -10.0;
+      ForceTorque ft = {0.0};
       ExaxisPos epos(0, 0, 0, 0);
-      JointPos j1(-118.985, -86.882, -118.139, -65.019, 90.002, 54.951);
-      JointPos j2(-77.055, -77.218, -126.219, -66.591, 90.028, 96.881);
-      DescPose desc_p1(-300.856, -332.618, 309.240, 179.976, -0.031, 96.065);
-      DescPose desc_p2(-16.399, -383.760, 309.312, 179.975, -0.031, 96.064);
+      JointPos j1(80.765, -98.795, 106.548, -97.734, -89.999, 94.842);
+      JointPos j2(43.067, -84.429, 92.620, -98.175, -90.011, 57.144);
+      DescPose desc_p1(5.009, -547.463, 262.053, -179.999, -0.019, 75.923);
+      DescPose desc_p2(-347.966, -547.463, 262.048, -180.000, -0.019, 75.923);
       DescPose offset_pos(0, 0, 0, 0, 0, 0);
-      double M[2] = {2.0, 2.0};
-      double B[2] = {8.0, 8.0};
-      double polishRadio;
-      int filter_Sign;
-      int posAdapt_sign;
+      double M[2] = { 2.0, 2.0 };
+      double B[2] = { 15.0, 15.0 };
+      double threshold[2] = {1.0, 1.0};
+      double adjustCoeff[2] = {1.0, 0.8};
+      double polishRadio = 0.0;
+      int filter_Sign = 0;
+      int posAdapt_sign = 1;
       int isNoBlock;
-      DescPose ftCoord = {};
-      robot.FT_SetRCS(2, ftCoord);
-      rtn = robot.FT_Control(1, sensor_id, select, &ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, 0, 0, 1, 0);
-      printf("FT_Control start rtn is %d\n", rtn);
-      rtn = robot.MoveL(&j1, &desc_p1, 0, 0, 100.0, 100.0, 20.0, -1.0, &epos, 0, 0, &offset_pos);
-      rtn = robot.MoveL(&j2, &desc_p2, 0, 0, 100.0, 100.0, 20.0, -1.0, &epos, 0, 0, &offset_pos);
-      rtn = robot.FT_Control(1, sensor_id, select, &ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, 0, 0, 1, 0);
-      printf("FT_Control end rtn is %d\n", rtn);
+      ft.fz = -10.0;
+      while(true)
+      { 
+        rtn = robot.FT_Control(1, sensor_id, select, &ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, threshold, adjustCoeff, 0, 0, 1, 0);
+        printf("FT_Control start rtn is %d\n", rtn);
+        robot.MoveL(&j1, &desc_p1, 1, 0, 100, 100, 100, -1, 0, &epos, 0, 0, &offset_pos, 200.0, 0);
+        robot.MoveL(&j2, &desc_p2, 1, 0, 100, 100, 100, -1, 0, &epos, 0, 0, &offset_pos, 200.0, 0);
+        rtn = robot.FT_Control(0, sensor_id, select, &ft, ft_pid, adj_sign, ILC_sign, max_dis, max_ang, M, B, threshold, adjustCoeff, 0, 0, 1, 0);
+        printf("FT_Control end rtn is %d\n", rtn);
+      }
       robot.CloseRPC();
       return 0;
     }
@@ -1183,3 +1189,16 @@ Robot Impedance Start/Stop Control Code Example
       return 0;
     }
             
+Enable torque compensation function and compensation coefficient
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Enable torque compensation function and compensation coefficient
+    * @param [in] status Switch, 0-Disable; 1-Enable
+    * @param [in] torqueCoeff J1-J6 torque compensation coefficient [0-1]
+    * @return Error code
+    */
+    errno_t SerCoderCompenParams(int status, double torqueCoeff[6]);

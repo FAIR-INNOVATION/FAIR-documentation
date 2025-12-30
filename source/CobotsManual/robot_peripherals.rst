@@ -10,7 +10,7 @@ End-Effector Lua Custom Open Protocol
 Overview
 ~~~~~~~~~~~~~~~~
 
-The End-Effector Lua Custom Open Protocol supports the use of force sensors, grippers, and welding handles. It also supports the combined use of force sensors and grippers.
+A hardware interface is provided at the robot end for connecting peripherals via 485 communication. Currently supported peripherals include grippers, rotary grippers, force sensors, welding handles, and other devices. All these end-effector devices can be adapted by writing a Lua open protocol to achieve protocol adaptation, enabling control of the peripheral and obtaining its status.
 
 Operation Steps
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,18 +28,23 @@ Operation Steps
 
 .. centered:: Figure 8.1‑1 Upgrade End-Effector Firmware
 
-**Step2**: Navigate to the content interface of Peripherals -> Gripper/Force Sensor/Welding Handle, click the "Custom Protocol" card to enter the interface, upload the Lua end-effector open protocol, select the required Lua end-effector open protocol, and perform the upload operation.
+**Step2**: Open the WebApp, click "Initial Setup", "Peripherals" in sequence, and select the end-effector peripheral to be configured (e.g., gripper). The control type for peripherals includes two options: pre-adapted devices and peripheral open protocol:
 
-.. important::
-   Before uploading the end-effector protocol, you need to enter boot mode. Simultaneously, the file name must begin with `AXLE_LUA_`.
+- **Pre-adapted Devices**: Use the robot controller for communication. No upload or application is required.
+- **Peripheral Open Protocol**: Users write a Lua-based open protocol for the end-effector to be adapted to achieve communication control. The end-effector protocols are divided into two categories: one is protocols uploaded by the user, and the other is built-in protocols preset in the robot.
 
 .. figure:: robot_peripherals/002.png
    :align: center
-   :width: 4in
+   :width: 6in
 
-.. centered:: Figure 8.1‑2 Upload Lua End-Effector Open Protocol
+.. centered:: Figure 8.1‑2 Gripper Control Type
 
-**Step3**: Configure the end-effector communication parameters, including baud rate, data bits, stop bits, etc. After configuration, click the "Configure" button.
+**Step3**: Enter the content interface for Peripherals -> Gripper/Force Sensor/Welding Handle. Click on the "Custom Protocol" card to enter the interface. Upload the Lua end-effector open protocol, select the Lua end-effector open protocol to be uploaded, and perform the upload operation.
+
+.. important:: 
+  The uploaded file name must start with `AXLE_LUA_`.
+
+**Step4**: Configure the end-effector communication parameters, including baud rate, data bits, stop bits, etc. After configuration, click the "Configure" button.
 
 .. figure:: robot_peripherals/003.png
    :align: center
@@ -57,7 +62,7 @@ The detailed end-effector communication parameters are as follows:
 - **Timeout Retries**: 1~10, mainly for timeout retransmission, reducing sporadic exceptions and improving user experience;
 - **Periodic Command Interval**: 1~1000ms, mainly used for the time interval between each issuance of periodic commands;
 
-**Step4**: Enable the End-Effector Lua by clicking the "Enable" button.
+**Step5**: Enable the End-Effector Lua by clicking the "Enable" button.
 
 .. figure:: robot_peripherals/004.png
    :align: center
@@ -157,10 +162,222 @@ Gripper Program Teaching
      - MoveGripper(1,0,255,0,1000,0)
      - # Gripper open
 
-Custom Open Protocol
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Gripper Lua End-Effector Protocol Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Open the WebApp, click "Initial Setup", "Peripherals", "Gripper", "Custom Protocol" in sequence. Click "Protocol Management" to configure the end-effector protocol.
 
-For the steps to upload a gripper custom protocol, refer to the content of the End-Effector Lua Custom Open Protocol.
+The filename uploaded by the user must start with "AXLE_LUA_End". After uploading, the protocol name in the list will change to start with "Custom_End". This type of protocol can be downloaded and deleted. Files with duplicate names uploaded by the user will automatically be overwritten with the latest Lua.
+
+.. figure:: robot_peripherals/277.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.2‑4-1 Gripper Custom Protocol Upload
+
+The robot's preset built-in protocols start with `End_` as a prefix. They can only be downloaded, not deleted. The built-in protocols for peripherals (gripper, rotary gripper, suction cup) are shown in the figure below.
+
+.. figure:: robot_peripherals/278.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.2‑4-2 Gripper (Rotary Gripper, Suction Cup) Preset Built-in Protocol
+
+After ensuring the correct protocol is selected, you can disable the robot and apply the open protocol. After application, the robot will automatically enter boot mode and apply the selected protocol to the end-effector. When the page prompts "Upgrade successful, please restart the control box", you can power cycle the control box.
+
+.. figure:: robot_peripherals/279.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.2‑4-3 Applying the End-Effector Open Protocol to the End-Effector Board
+
+After restarting and entering the WebApp page, the page will display the name of the currently applied protocol. After clicking to enable the end-effector protocol and enabling the device, the end-effector protocol will start running. The Device ID is the Modbus slave address of the end-effector peripheral and needs to be used in conjunction with the content in the protocol.
+
+.. figure:: robot_peripherals/280.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.2‑4-4 Gripper End-Effector Protocol Configuration Display and Enablement
+
+The end-effector board will verify the uploaded Lua protocol. When there is an issue with the Lua file, it will show a "End-Effector Lua File Abnormal" warning. You can choose "Do Not Recover/Recover". Turn off the Lua enable button to close the warning prompt.
+
+.. figure:: robot_peripherals/005.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.2‑4-5 Gripper End-Effector Protocol Configuration Display and Enablement
+
+Example of a Gripper Peripheral's Lua End-Effector Peripheral Protocol
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: console
+
+  function Getbit(X,Bit)--Getbit(), extracts the corresponding bit from a byte. Parameters: X: the byte from which to extract the bit; Bit: the bit position to extract (range 0-7)
+  return ((X&(1<<Bit))>>Bit)
+  end
+
+  function GetOneByte(U32)--GetOneByte(), extracts the data 0x1234, gets its low byte, returns 0x34
+  return ((U32>>0)&0xFF)
+  end
+
+  function GetTwoByte(U32)--GetTwoByte(), extracts the data 0x1234, gets its high byte, returns 0x12
+  return ((U32>>8)&0xFF)
+  end
+  function GetThreeByte(U32)--GetThreeByte(), extracts the data 0x56781234, extracts and returns 0x78
+  return ((U32>>16)&0xFF)
+  end
+  function GetFourByte(U32)--GetFourByte(), extracts the data 0x56781234, extracts and returns 0x56
+  return ((U32>>24)&0xFF)
+  end
+  X,Speed,Torque=0,0,0
+  while(1)
+  do
+  IwdgTaskHandle()
+  MainLoop()
+  UpDownLoadHandle()
+  SdoRwPara()
+  EndErrClear()
+  local BFlag=LuaBreak()
+  if(BFlag==1)then
+  break
+  end--From here to the end of the file LuaGc(), end is fixed syntax
+
+  T1={0x01,0x06,0x03,0xE8,0x00,0x09,0xC9,0xBC}--Populate gripper commands (Modbus RTU commands). T1-T5 are respectively: gripper action execution command, gripper initialization command, gripper position command, gripper speed command, gripper torque command
+  --/Command parsing: T1[1]=0X01, is the gripper address; T1[2]=0x06, write single holding register function code; T1[3], T1[4]: 0x03,0xE8, address of the register to operate for the action execution command; T1[5],T1[6]: 0x00,0x09, data to write to the register; T1[7],T1[8]: 0xC9,0xBC, CRC checksum, needs to be modified according to the gripper user manual
+  T2={}
+  T3={}
+  T4={}
+  T5={}
+
+  T7={0x01,0x03,0x07,0xD0,0x00,0x01,0x84,0x87}--T7-T12, gripper status reading commands, respectively: read gripper status command, read gripper initialization command, read gripper error code command, read gripper position command, read gripper speed command, read gripper torque command
+  T8={}
+  T9={}
+  T10={}
+  T11={}
+  T12={}
+  Rcmd1,Rcmd2,Rcmd3,Rcmd4=GetGripCmd()--Fixed usage, no need for modification. Rcm2 is the gripper address sent by the controller, Rcmd4 is the data sent by the controller
+  if(Rcmd1==1) then
+  T1[1]=Rcmd2                   
+  T2[1]=Rcmd2
+  T3[1]=Rcmd2
+  T4[1]=Rcmd2
+  T5[1]=Rcmd2
+
+  T7[1]=Rcmd2
+  T8[1]=Rcmd2
+  T9[1]=Rcmd2
+  T10[1]=Rcmd2
+  T11[1]=Rcmd2
+  T12[1]=Rcmd2                    --**Gripper address update
+  if (Rcmd3==1) then              --Gripper action execution command
+  T1[7],T1[8]=CrcValue(T1[1],T1[2],T1[3],T1[4],T1[5],T1[6])--Calculate Modbus RTU command CRC value, two bytes
+  EndTxGripData(T1[1],T1[2],T1[3],T1[4],T1[5],T1[6],T1[7],T1[8])--End-effector sends command to gripper
+  DelayMs(10)                                                   --Delay 10ms
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()--End-effector returns the received gripper feedback data to Lua. Specific feedback content needs to be checked in the gripper user manual
+  GripStateBack(Rxd3)
+  end
+  if (Rcmd3==2) then
+  T2[7],T2[8]=CrcValue(T2[1],T2[2],T2[3],T2[4],T2[5],T2[6])
+  EndTxGripData(T2[1],T2[2],T2[3],T2[4],T2[5],T2[6],T2[7],T2[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  GripStateBack(Rxd3)
+  end
+  if(Rcmd3==3) then
+  X=Rcmd4
+  T3[5]=0x00
+  T3[6]=X
+  T3[7],T3[8]=CrcValue(T3[1],T3[2],T3[3],T3[4],T3[5],T3[6])
+  EndTxGripData(T3[1],T3[2],T3[3],T3[4],T3[5],T3[6],T3[7],T3[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  GripStateBack(Rxd3)
+  end
+  if (Rcmd3==4) then
+  Speed=Rcmd4
+  T4[5]=Torque
+  T4[6]=Speed
+  T4[7],T4[8]=CrcValue(T4[1],T4[2],T4[3],T4[4],T4[5],T4[6])
+  EndTxGripData(T4[1],T4[2],T4[3],T4[4],T4[5],T4[6],T4[7],T4[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  GripStateBack(Rxd3)
+  end
+  if(Rcmd3==5) then
+  Torque=Rcmd4
+  T5[5]=Torque
+  T5[6]=Speed
+  T5[7],T5[8]=CrcValue(T5[1],T5[2],T5[3],T5[4],T5[5],T5[6])
+  EndTxGripData(T5[1],T5[2],T5[3],T5[4],T5[5],T5[6],T5[7],T5[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  GripStateBack(Rxd3)
+  end
+  if(Rcmd3 == 7) then
+  T7[7],T7[8]=CrcValue(T7[1],T7[2],T7[3],T7[4],T7[5],T7[6])
+  EndTxGripData(T7[1],T7[2],T7[3],T7[4],T7[5],T7[6],T7[7],T7[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  RxdCrcH,RxdCrcL = CrcValue(Rxd1,Rxd2,Rxd3,Rxd4,Rxd5)
+  if((A==8)and(Rxd1==Rcmd2)and(Rxd2==0x03)and(Rxd3==0x02)and(Rxd6==RxdCrcH)and(Rxd7==RxdCrcL))then
+  GripStateBack(Rxd4)
+  end
+  end
+  if(Rcmd3==8) then
+  T8[7],T8[8]=CrcValue(T8[1],T8[2],T8[3],T8[4],T8[5],T8[6])
+  EndTxGripData(T8[1],T8[2],T8[3],T8[4],T8[5],T8[6],T8[7],T8[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  RxdCrcH,RxdCrcL = CrcValue(Rxd1,Rxd2,Rxd3,Rxd4,Rxd5)
+  if((A==8)and(Rxd1==Rcmd2)and(Rxd2==0x03)and(Rxd3==0x02)and(Rxd6==RxdCrcH)and(Rxd7 ==RxdCrcL)) then
+  GripStateBack(Rxd5)
+  end
+  end
+  if(Rcmd3 == 9) then
+  T9[7],T9[8]=CrcValue(T9[1],T9[2],T9[3],T9[4],T9[5],T9[6])
+  EndTxGripData(T9[1],T9[2],T9[3],T9[4],T9[5],T9[6],T9[7],T9[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  RxdCrcH,RxdCrcL = CrcValue(Rxd1,Rxd2,Rxd3,Rxd4,Rxd5)
+  if((A==8)and(Rxd1==Rcmd2)and(Rxd2==0x03)and(Rxd3==0x02)and(Rxd6==RxdCrcH)and(Rxd7==RxdCrcL)) then
+  GripStateBack(Rxd5)
+  end
+  end
+  if(Rcmd3 == 10) then
+  T10[7],T10[8]=CrcValue(T10[1],T10[2],T10[3],T10[4],T10[5],T10[6])
+  EndTxGripData(T10[1],T10[2],T10[3],T10[4],T10[5],T10[6],T10[7],T10[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  RxdCrcH,RxdCrcL = CrcValue(Rxd1,Rxd2,Rxd3,Rxd4,Rxd5)
+  if((A==8)and(Rxd1==Rcmd2)and(Rxd2==0x03)and(Rxd3==0x02)and(Rxd6==RxdCrcH)and(Rxd7==RxdCrcL)) then
+  GripStateBack(Rxd4)
+  end
+  end
+  if(Rcmd3 == 11) then
+  T11[7],T11[8]=CrcValue(T11[1],T11[2],T11[3],T11[4],T11[5],T11[6])
+  EndTxGripData(T11[1],T11[2],T11[3],T11[4],T11[5],T11[6],T11[7],T11[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  RxdCrcH,RxdCrcL = CrcValue(Rxd1,Rxd2,Rxd3,Rxd4,Rxd5)
+  if((A==8)and(Rxd1==Rcmd2)and(Rxd2==0x03)and(Rxd3==0x02)and(Rxd6==RxdCrcH)and(Rxd7==RxdCrcL)) then
+  GripStateBack(Rxd5)
+  end
+  end
+  if(Rcmd3 == 12) then
+  T12[7],T12[8]=CrcValue(T12[1],T12[2],T12[3],T12[4],T12[5],T12[6])
+  EndTxGripData(T12[1],T12[2],T12[3],T12[4],T12[5],T12[6],T12[7],T12[8])
+  DelayMs(10)
+  A,Rxd1,Rxd2,Rxd3,Rxd4,Rxd5,Rxd6,Rxd7=EndRxGripData()
+  RxdCrcH,RxdCrcL = CrcValue(Rxd1,Rxd2,Rxd3,Rxd4,Rxd5)
+  if((A==8)and(Rxd1==Rcmd2)and(Rxd2==0x03)and(Rxd3==0x02)and(Rxd6==RxdCrcH)and(Rxd7==RxdCrcL)) then
+  GripStateBack(Rxd4)
+  end
+  end
+  end
+  LuaGc()
+  end
+
+Device Enable
++++++++++++++++++++++++++++++
 
 **Step1**: Enable Gripper -> Select Gripper ID -> Check the function codes adapted for the gripper -> Click Configure. The configured device displays the Gripper ID and function codes.
 
@@ -279,6 +496,17 @@ The force sensor configuration information includes manufacturer, type, software
 **Step3**: Select the configured force sensor number, click the "Reset" button, after the page pops up indicating the command was sent successfully, then click the "Activate" button. Check the activation status in the force sensor information table to determine whether the activation was successful; Additionally, the force sensor will have an initial value. The user can choose "Zero Calibration" and "Remove Zero" according to usage requirements. Force sensor zero calibration requires ensuring the force sensor is level and vertically downward, and the robot has no configured load.
 
 **Step4**: After the force sensor configuration is completed, it is necessary to configure the sensor type tool coordinate system. The sensor tool coordinate system values can be directly input and applied based on the distance between the sensor and the end-effector tool center.
+
+Force Sensor End-Effector Lua Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Open the WebApp, click "Initial Setup", "Peripherals", "Force Sensor", "Custom Protocol" in sequence. Click "Protocol Management" to configure the end-effector protocol. Currently, the preset built-in protocols for the force sensor are shown in the figure below.
+
+.. figure:: robot_peripherals/281.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑2-2 Force Sensor Preset Built-in Protocol
 
 Sensor Load Identification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -653,24 +881,32 @@ Configuration Steps
 
 A-E Key Functions:
 
-- New Program
-- Save Program
-- PTP
-- Lin
-- ARC
-- Start Weave Weld
-- End Weave Weld
-- IO Port
+- **Motion Command:** When selecting PTP, LIN, or ARC motion commands, you need to input the corresponding point speed. For LIN and ARC commands, you can choose "Percentage" or "Physical Speed":
+    - **Percentage:** Input a debugging speed percentage. The robot moves at a percentage of its maximum speed. The actual robot movement speed is calculated as: V = Robot Maximum Speed × Global Speed Percentage × Point Speed Percentage. Hover the mouse over the small eye icon to the right of the "Point Speed" input box to display the actual physical speed (in mm/s) of the robot in both manual and automatic modes under the current settings.
 
--  **Motion Command**: When selecting PTP, LIN, or ARC motion commands, the corresponding point speed needs to be entered. After successful configuration, a related motion command is added to the teach program. When configuring the ARC motion command, the PTP/LIN command must be configured first.
-  
--  **DO Output**: When selecting "DO Output", a dropdown menu is displayed allowing selection of DO0⁓DO7 options.
-
-.. image:: robot_peripherals/030.png
-   :width: 4in
+.. image:: coding/469.png
+   :width: 6in
    :align: center
 
-.. centered:: Figure 8.4‑2 A-E Keys
+.. centered:: Figure 8.4‑2-1 Display Actual Physical Speed Value When Inputting Percentage
+
+- **Physical Speed:** The input speed is the actual operating speed of the robot, in mm/s. The input acceleration is typically set to twice the speed. (The maximum physical speed of the LIN command is limited by the global speed percentage. If the robot's maximum operating speed is 1000 mm/s and the global speed is 50%, then the maximum physical speed for the LIN command is 1000 × 50% = 500 mm/s).
+
+.. image:: coding/470.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 8.4‑2-2 Input Actual Physical Speed
+
+After successful configuration, a related motion command is added to the teaching program. When configuring the ARC motion command, you must first configure a PTP or LIN command.
+
+- **DO Output:** When selecting "DO Output," a drop-down menu appears, allowing you to select DO0⁓DO7 options.
+
+.. image:: coding/471.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 8.4‑2-3 Smart Tool Configuration (A-E Keys)
 
 IO Key Functions:
 
@@ -687,7 +923,6 @@ IO Key Functions:
    -  When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or extended IO (with "Welder Arc Start" configured), and "Welder Selection" is "Welding", the first press adds ARCStart, the second adds ARCEnd, the third adds ArcStart, the fourth adds ARCStart, alternating and repeating the above operations; "Welder Selection" and "Point Speed" are hidden at this time.
    -  When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or extended IO (with "Welder Arc Start" configured), and "Welder Selection" is "LIN+Welding", the first press adds LIN and ARCStart, the second adds LIN and ARCEnd, the third adds LIN and ARCStart, the fourth adds LIN and ARCEnd, alternating and repeating the above operations; "Welder Selection" and "Point Speed" are displayed at this time.
    -  When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or extended IO (with "Welder Arc Start" configured), and "Welder Selection" is "LIN+Welding+Weaving", the first press adds LIN, ARCStart, and WeaveStart, the second adds LIN, ARCEnd, and WeaveEnd, the third adds LIN, ARCStart, and WeaveStart, the fourth adds LIN, ARCEnd, and WeaveEnd, alternating and repeating the above operations; "Welder Selection" and "Point Speed" are hidden at this time.
-
   
 .. image:: robot_peripherals/031.png
    :width: 4in
@@ -695,31 +930,75 @@ IO Key Functions:
 
 .. centered:: Figure 8.4‑3 IO Key
 
-Custom Protocol
-~~~~~~~~~~~~~~~~~~~~~~
+Welding Handle End-Effector Lua Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click "Custom Protocol" to enter the end Lua open protocol adaptation welding pendant function interface.
+Click "Custom Protocol" to enter the welding handle function interface for adapting the end-effector Lua open protocol.
 
-Protocol Configuration
-+++++++++++++++++++++++++++++++++++++++
+Protocol Management
++++++++++++++++++++++++++++++++++++++++++++
 
-When using the open protocol to adapt the welding pendant, it is necessary to first enter the web page for open protocol upload configuration after the robot is powered on and starts.
-
-Click "Custom Protocol Upload", click "Enter Boot", click "Upload" open protocol. After the upload is completed, restart the device to use the end Lua open protocol to adapt the welding pendant.
+Open the WebApp, click "Initial Setup", "Peripherals", "Welding Handle", "Custom Protocol" in sequence. Click "Protocol Management" to configure the end-effector protocol. Currently, the preset built-in protocols for the welding handle are shown in the figure below.
 
 .. figure:: robot_peripherals/032.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.4‑4 End Open Protocol Upload
+.. centered:: Figure 8.4‑4 Welding Handle Preset Built-in Protocol
 
-Slide the "End Protocol Enable" switch to ON to adapt the welding pendant. After enabling, parameters are retained after power off and restart.
+Turn on the "End-Effector Protocol Enable" slider to adapt the welding handle. The parameters are retained after a power restart once enabled.
 
 .. figure:: robot_peripherals/033.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.4‑5 End Open Protocol Enable
+.. centered:: Figure 8.4‑5 End-Effector Open Protocol Enable
+
+Example of Combined Device Lua End-Effector Peripheral Protocol
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The functions of the five buttons A, B, C, D, E can be modified and defined through the key values in line 30 of the code. Among them, `K38=Getbit(R[7],1)`, `K0=Getbit(R[7],2)` are for "Clear Program" and "Undo Button" and cannot be modified. The subsequent 5 K values can be modified according to the definitions in the "End-Effector Full Peripheral Protocol" document.
+
+In this example (embedded SmartTool protocol), the corresponding button functions are: A: MoveL, B: ArcStart, C: ArcEnd, D: Rewelding start, E: Rewelding quit.
+
+.. code-block:: console
+
+  function Getbit(X,Bit)
+  return ((X&(1<<Bit))>>Bit)
+  end
+
+  if(Getbit(GetRobotState(),0)==1)then
+  local SetParams={A3=2000,B6=3}--Set welding parameters, A3-Arc start/end timeout is 2000ms, B6-Operate DO port number is 3. To configure welding parameters, please refer to "RD36-Welding Handle Custom Parameter Table-V0.2-20250903"
+  SetWeldParams(SetParams)
+  while(1)
+  do
+  IwdgTaskHandle()
+  MainLoop()
+  UpDownLoadHandle()
+  SdoRwPara()
+  EndErrClear()
+  local BFlag=LuaBreak()
+  if(BFlag==1)then
+  break
+  end
+  local R={0}
+  local T={0x7D,0x01,0x30,0xC0,0x00,0x04,0x00,0x00,0x00,0x00}
+  DelayMs(100)
+  T[7],T[8],T[9],T[10]=GetIoCmd()
+  T[7]=Getbit(T[7],3)
+  T[12],T[11]=WeldToolCrcValue(T)
+  T[13]=0x0E
+  WeldToolSlaveSetCmd(T)
+  DelayMs(3)
+  Len=EndRxWeldData(R)
+  if((Len==13)and(R[1]==0x7D)and(R[2]==0x01)and(R[3]==0x30))then
+  local key={K38=Getbit(R[7],1),K0=Getbit(R[7],2),K3=Getbit(R[7],3),K32=Getbit(R[7],4),K33=Getbit(R[7],5),K27=Getbit(R[7],6),K28=Getbit(R[7],7),
+  K6=Getbit(R[8],1),K7=Getbit(R[8],2)}--SmartTool welding handle button settings, Undo button - K38 Undo program; Clear button - K0 Clear program; A button - K3 Linear Move; B button - K32 ArcStart; C button - K33 ArcEnd; D button - K27 Rewelding start; E button - K28 Rewelding quit; Manual/Auto button - K6 Manual/Auto; Run/Pause button - K7 Run/Pause
+  SetWeldToolKeys(key)
+  end
+  LuaGc()
+  end
+  end
 
 Open Protocol Template
 ++++++++++++++++++++++++++++++
@@ -4649,6 +4928,23 @@ After the device information is successfully configured, it can independently im
    :align: center
 
 .. centered:: Figure 8.11‑10 Measuring Force Magnitude and Direction
+
+Combined Device End-Effector Lua Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Currently, the end-effector can support the application of combined protocols for two devices. The second device can be connected via a one-to-two communication cable or through the F&S SmartTool 485 interface.
+
+The operation steps are as follows:
+
+Open the WebApp, click "Initial Setup", "Peripherals" in sequence, and select one of the device types to be combined (e.g., welding handle). Choose "Custom Protocol". Click "Protocol Management" to configure the end-effector protocol.
+
+Currently, the preset built-in combined device protocols include: Junduo Gripper + Xinjingcheng Force Sensor, SmartTool + Junduo Gripper, SmartTool + Xinjingcheng Force Sensor. The preset protocols for combined devices belong to user-defined protocols, starting with "Custom_End". They can be downloaded and deleted, as shown in the figure below.
+
+.. image:: robot_peripherals/282.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 8.11‑11 Welding Handle Preset Built-in Protocol
 
 Array Suction Cups
 ----------------------------------
