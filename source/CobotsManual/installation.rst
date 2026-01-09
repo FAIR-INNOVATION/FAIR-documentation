@@ -1908,7 +1908,7 @@ When installing and using a collaborative robot, make sure to meet the following
 
 -  Environmental temperature 0-45 ℃
 
--  Humidity 20-80RH is not exposed
+-  Humidity 0% to 90% RH (no condensation)
 
 -  No mechanical impact and shock
 
