@@ -1636,28 +1636,46 @@ This command realizes the robot seam tracking and uses the deviation detection o
 
 .. centered:: Figure 9.8-6-3 Weld-Trc command interface-left and right compensation parameters
 
-Robot arc tracking system composition
-+++++++++++++++++++++++++++++++++++++++
+Robot Arc Tracking System Composition
++++++++++++++++++++++++
 
-During arc tracking welding, the welding machine feeds the real-time welding current signal to PLC, and then the PLC feeds back to the robot through UDP communication. The robot can compensate the welding trajectory position according to the real-time feedback welding current value to achieve arc tracking effect. There are two ways to feedback the current signal between the welding machine and the PLC:
+During the collaborative robot arc tracking welding process, the welding machine feeds back the real-time welding current and voltage signals to the robot. The robot performs welding trajectory position compensation based on the real-time feedback of welding current and voltage values to achieve the arc tracking effect. The feedback of current and voltage signals between the welding machine and the robot can be achieved in the following four ways. The first two require an additional PLC for data relay, while the latter two involve a direct connection between the welding machine and the robot control box:
 
-①CANopen or other bus communication: If your welder supports CANopen, EtherCAT, ModbusTCP and other bus communication protocols (such as MEGMEET A2 series, etc.), the PLC and the welder can communicate data directly through the relevant communication protocols, and the corresponding welding current signal can be directly transmitted to the PLC through communication. The PLC then feeds back to the robot through UDP communication.
+①CANopen or Other Bus Communication: If your welding machine supports bus communication protocols such as CANopen, EtherCAT, or ModbusTCP (e.g., OTC NBC-500RP, Megmeet A2 series, etc.), the PLC and the welding machine can communicate directly via the relevant communication protocol. The corresponding welding current signal can be transmitted directly to the PLC via communication and then fed back to the robot via UDP communication.
 
 .. image:: coding/277.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.8-6-4 Topology diagram of robot arc tracking system (PLC communicates with welding machine bus)
-.. centered:: a-computer;b-Robot and control box;c-PLC and bus communication module; d-welder
+.. centered:: Figure 9.8-6-4 Robot Arc Tracking System Composition Topology Diagram (PLC and Welding Machine Bus Communication)
+.. centered:: a-Computer; b-Robot and Control Box; c-PLC and Bus Communication Module; d-Welding Machine
 
-②Analog IO: PLC can also directly collect the analog signal, and then convert the analog signal into the current value with a certain conversion relationship to feed back to the robot; If your welding machine has a real-time welding current analog output channel, you can directly connect the channel to the PLC analog input module; If your welding machine does not have a real-time welding current analog output channel, you can connect an external Hall current sensor. The sensor collects the real-time welding current signal, converts the welding current signal into an analog signal, and outputs the welding current signal to the PLC analog input module.
+②PLC + IO Analog: The PLC can also directly collect analog signals and then convert the analog signals into current values with a certain conversion relationship to feed back to the robot. If your welding machine has a real-time welding current analog output channel, you can directly connect this channel to the analog input module of the PLC. If your welding machine does not have a real-time welding current analog output channel, you can connect an external Hall current sensor. The sensor collects the real-time welding current signal and converts the welding current signal into an analog signal output to the PLC analog input module.
 
 .. image:: coding/278.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.8-6-5 Topology diagram of robot arc tracking system (PLC acquisition of analog signals)
-.. centered:: a-computer; b-Robot and control box; c-PLC and analog input module; d-welder and Hall current sensor
+.. centered:: Figure 9.8-6-5 Robot Arc Tracking System Composition Topology Diagram (PLC Collecting Analog Signals)
+.. centered:: a-Computer; b-Robot and Control Box; c-PLC and Analog Input Module; d-Welding Machine and Hall Current Sensor
+
+③Control Box AI: The robot control box IO ports have two analog input channels (0 ~ 10V). If your welding machine has a real-time welding current analog output channel, you can directly connect this channel to the analog input port of the control box. If your welding machine does not have a real-time welding current analog output channel, you can connect an external Hall current sensor. The sensor collects the real-time welding current signal and converts the welding current signal into an analog signal output to the analog input channel of the control box. There is usually a linear relationship between the analog input value and the actual welding current value. Detailed parameter settings are described later in "Arc Tracking Channel Configuration."
+
+.. image:: coding/534.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.8-6-6 Robot Arc Tracking System Composition Topology Diagram (Control Box AI Collecting Analog Signals)
+.. centered:: a-Computer; b-Robot and Control Box; c-Welding Machine and Hall Current Sensor
+
+④Ethernet Communication (ModbusTCP): If your welding machine supports ModbusTCP communication, the robot can directly control the welding and read real-time current and voltage feedback values via ModbusTCP. As shown in Figure 1-4. The ModbusTCP communication between the robot and the welding machine uses the control box peripheral open protocol. For details, see "8.6.6. Digital Communication Protocol (Modbus TCP)."
+
+.. image:: coding/535.png
+   :width: 5in
+   :align: center
+
+.. centered:: Figure 9.8-6-7 Robot Arc Tracking System Composition Topology Diagram (ModbusTCP Communication)
+.. centered:: a-Computer; b-Robot and Control Box; c-Welding Machine
 
 Welding machine model and setting
 **************************************
@@ -1741,6 +1759,8 @@ The arc tracking function can tracing the welding groove through the collected w
 
 **2）Communication Configuration**
 
+①CANopen or Other Bus Communication:
+
 Open WebApp and click "Initial", "Peripheral" and "Welder" in turn.
 
 .. image:: coding/280.png
@@ -1773,22 +1793,102 @@ After configuring the above parameters, click the "Configure" and "Load" buttons
 
 .. centered:: Figure 9.8-7-3 Selecting the control type
    
-**3）Arc Tracing Channel Configuration**
+②PLC + IO Analog:
 
-Click "Initial", "Base", "I/O setup" and "AI" successively, select the corresponding extended AI channel according to the actual configuration, and click "Apply" button.
+Same as "①CANopen or Other Bus Communication," the PLC program converts the input analog data into current and voltage data in the UDP communication protocol and sends it to the robot.
 
-.. note:: 
-   The UDP communication protocol between the robot and the PLC is shown in 8.5.5.Appendix 1: UDP communication protocol for robots. In the protocol, the PLC feedback data to the robot includes four analog input channels with serial numbers 70~73, corresponding to Aux-AI0~3 in Figure 4-4; 
-   
-   In the welding process, PLC collects real-time welding current signals and converts them into 0~4095 numerical signals and assign them to an analog input channel (default is "Aux-AI0"). The robot side collects the corresponding analog input channel values for arc tracking operations.
-   
-   If you need to change the arc tracking channel to "Aux-AI1", "Aux-AI2" or "Aux-AI3", you need to update the PLC program simultaneously and assign the real-time welding current collected to the corresponding analog input port.
+③Control Box AI:
+
+No communication configuration is required. Simply connect the I/O cables between the control box and the welding machine correctly. The real-time welding current and voltage feedback analog lines from the welding machine are input to the robot control box AI0 and AI1 ports.
+
+④Ethernet Communication (ModbusTCP):
+
+Correctly connect the network cable between the robot and the welding machine. In WebApp, click sequentially on "Initial Settings," "Peripherals," "Control Box," "Peripheral Open Protocol." Upload the welding machine communication protocol to the robot, then click "Configure" and "Load" buttons sequentially. The robot will then establish a ModbusTCP communication connection with the welding machine.
+
+.. image:: coding/542.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-7-4 Establishing Arc Tracking Ethernet Communication
+
+.. note:: The arc tracking effect depends on fast real-time welding current and voltage data feedback. If the feedback frequency is slow, it may lead to weld seam tracking failure. Therefore, when using ModbusTCP for welding machine communication, it is necessary to reasonably set the communication cycle in the protocol. The recommended communication cycle is less than 10ms.
+
+**3) Channel Configuration**
+
+①CANopen or Other Bus Communication:
+
+Click sequentially on "Initial Settings" -> "Peripherals" -> "Welding Machine" -> "Digital Communication Protocol (UDP)."
 
 .. image:: coding/282.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 9.8-7-4 Arc tracking channel configuration
+.. centered:: Figure 9.8-7-5 Selecting Welding Machine Control Type as "Digital Communication Protocol (UDP)"
+
+Find the "Arc Tracking Channel" at the bottom of the page. Select the corresponding extended AI channel based on the actual configuration. The default welding current AI channel is "Aux-AI0" and the welding voltage AI channel is "Aux-AI1". Click the "Configure" button.
+
+.. note:: 
+   The UDP communication protocol between the robot and the PLC is detailed in "Appendix 1: Robot UDP Communication Protocol." The feedback data from PLC to the robot in the protocol includes the actual welding current and voltage feedback input channels in bytes 74~77.
+   
+   During welding, the PLC collects real-time welding current signals via CANOpen or other buses and provides feedback to the robot for arc tracking through the actual welding current and voltage values in bytes 74~77.
+
+.. image:: coding/536.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-7-6 Bus Communication Arc Tracking Channel Configuration
+
+②PLC + IO Analog:
+
+The configuration is the same as "①CANopen or Other Bus Communication." In the PLC program, the user converts the read analog input into actual welding current and voltage feedback values through numerical conversion, and assigns these values to the actual welding current and voltage feedback input channels (bytes 74~77) in the feedback data packet from PLC to the robot in the UDP communication protocol between the robot and the PLC.
+
+③Control Box AI:
+
+Click sequentially on "Initial Settings" -> "Peripherals" -> "Welding Machine," "Controller I/O."
+
+.. image:: coding/537.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-7-7 Selecting Welding Machine Control Type as "Controller I/O"
+
+Find the "Arc Tracking Channel" at the bottom of the page. Select Welding Current AI as "Ctrl-AI0" and Welding Voltage AI as "Ctrl-AI1". Click the "Configure" button. The control box analog input 0~10V often has a linear relationship with the actual feedback current and voltage values, so it is necessary to configure the actual welding current and voltage values corresponding to different analog inputs.
+
+In the "Analog Current-Voltage Relationship Diagram" section of the AI channel configuration, the parameter settings for the "A-V" and "V-V" interfaces need to refer to the analog input/output table/chart of the welding machine being used.
+
+For example, configure the lower and upper limits of the welding current for the control box current analog AI as 0A and 500A, respectively. Configure the lower and upper limits of the output voltage for the control box current analog AI as 0V and 5V, respectively, as the configuration parameters for the "A-V" interface in the "Analog Current-Voltage Relationship Diagram" section of the AI channel configuration. Click "Configure" to complete the configuration of the control box current analog AI channel.
+
+.. image:: coding/538.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-7-8 Control Box Current Analog AI Configuration
+
+For example, configure the lower and upper limits of the welding voltage for the control box voltage analog AI as 0V and 50V, respectively. Configure the lower and upper limits of the output voltage for the control box voltage analog AI as 1.018V and 10V, respectively, as the configuration parameters for the "V-V" interface in the "Analog Current-Voltage Relationship Diagram" section of the AI channel configuration. Click "Configure" to complete the configuration of the control box voltage analog AI channel.
+
+.. image:: coding/539.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-7-9 Control Box Voltage Analog AI Configuration
+
+④Ethernet Communication (ModbusTCP):
+
+Click sequentially on "Initial Settings," "Peripherals," "Welding Machine," "Digital Communication Protocol (Modbus TCP)."
+
+.. image:: coding/540.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-7-10 Selecting Welding Machine Control Type as "Digital Communication Protocol (Modbus TCP)"
+
+Find the "Arc Tracking Channel" at the bottom of the page. Select Welding Current AI as "Ethernet" and Welding Voltage AI as "Ethernet". Click the "Configure" button.
+
+.. image:: coding/541.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-7-11 Ethernet Communication Arc Tracking Channel Configuration
 
 **4）Introduction to the use of arc tracing function commands**
 
@@ -1798,7 +1898,7 @@ The arc tracking function can be adapted to the swing welding movement, insertin
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.8-7-5 Typical example of arc tracing
+.. centered:: Figure 9.8-7-12 Typical example of arc tracing
 
 **5)Introduction to the parameters of the function interface**
 
@@ -1975,7 +2075,7 @@ The arc tracking function can be adapted to the swing welding movement, insertin
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.8-7-6 Set the tilt swing trajectory (left), weld trajectory when the symbol is correct (right)
+.. centered:: Figure 9.8-7-13 Set the tilt swing trajectory (left), weld trajectory when the symbol is correct (right)
 
 Adjust command
 ++++++++++++++++
