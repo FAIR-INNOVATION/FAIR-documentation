@@ -666,61 +666,124 @@ In production, when the collaborative robot needs to connect peripherals or stop
      - Enable/Disable (Rising/Falling Edge)
      - Rising/Falling edge of input signal triggers robot enable/disable respectively
 
-Terminal input valid state
-****************************************
+Adding Configurable Functions to End CI
+**********************************************************
 
-.. centered:: Table 6.5‑2 Configurable functions of terminal input
+Overview
+""""""""""""""""""""""""""""""""""""""""
+
+Synchronizing all the functions of the robot control box CI to the end CI aims to build a control system that is logically equivalent and physically complementary. The two interfaces are completely equivalent in logical functions and can be used in parallel or selectively, enabling the robot control system to intelligently allocate signal paths according to task scenarios, equipment physical layout, and reliability requirements.
+
+Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Sequentially click the menu bar buttons "Initial Settings" - "Basic" - "I/O Settings" - "DI", etc., to enter the DI configuration interface. Select End DI0 and End DI1 to configure the functions of the robot end input.
+
+.. image:: base/095.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑3 End DI Parameter Configuration
+
+**Step2**: The DI signals supported by the robot end are listed in the table below. Users can configure the corresponding signals according to actual usage requirements.
+
+.. centered:: Table 6.5‑2 End Input Configurable Functions
 
 .. list-table:: 
    :widths: 15 30 100 
    :header-rows: 1
    :align: center
 
-   * - Function number
-     - Function name
-     - Function description
+   * - Function Number
+     - Function Name
+     - Function Description
    * - 0
      - None
      - None
    * - 1
-     - Drag mode
-     - The robot end enables the drag mode signal
+     - Drag Mode
+     - Signal to enable drag mode at the robot end
    * - 2
-     - Teaching point record
-     - The robot end enables the teaching point record signal and saves the current robot point data
+     - Teaching Point Recording
+     - Signal to enable teaching point recording at the robot end, saving the current robot position data
    * - 3
-     - Hand automatic switching
-     - Robot hand automatic switching trigger signal
+     - Manual/Auto Toggle
+     - Trigger signal for robot manual/automatic mode switching
    * - 4
-     - TPD trajectory recording start/stop
-     - After the robot starts TPD movement, the trajectory recording start/stop signal
+     - TPD Trajectory Record Start/Stop
+     - After the robot starts TPD motion, the signal to start/stop trajectory recording
    * - 5
      - Pause
-     - Robot movement pause signal
+     - Signal to pause robot motion
    * - 6
      - Resume
-     - Robot resume movement signal
+     - Signal to resume robot motion
    * - 7
      - Start
-     - Robot program start signal
+     - Signal to start the robot program
    * - 8
      - Stop
-     - Robot program stop signal
+     - Signal to stop the robot program
    * - 9
      - Pause/Resume
-     - After the robot moves, the pause/resume movement signal is triggered cyclically
+     - After robot motion, cyclically triggers pause/resume motion signal
    * - 10
      - Start/Stop
-     - After the robot moves, the start/stop movement signal is triggered cyclically
+     - After robot motion, cyclically triggers start/stop motion signal
    * - 11
-     - Auxiliary drag on
-     - Control box DI function configuration force sensor drag function on signal
+     - Assisted Drag Enable
+     - Control box DI function configures the force sensor drag function enable signal
    * - 12
-     - Auxiliary drag off
-     - Control box DI function configuration force sensor drag function off signal
+     - Assisted Drag Disable
+     - Control box DI function configures the force sensor drag function disable signal
    * - 13
-     - Auxiliary drag on/off
-     - Control box DI function configuration force sensor drag function, cycle on/off signal
+     - Assisted Drag Enable/Disable
+     - Control box DI function configures the force sensor drag function, cyclically enable/disable signal
+   * - 14
+     - Laser Detection Signal X
+     - Robot laser sensor detection signal X
+   * - 15
+     - Laser Detection Signal Y
+     - Robot laser sensor detection signal Y
+   * - 16
+     - Move to Operation Origin
+     - Signal to move the robot to the operation origin
+   * - 17
+     - Motion Interruption
+     - Signal to interrupt the robot motion program
+   * - 18
+     - Start Main Program
+     - Signal to start the robot main program
+   * - 19
+     - Start Rewind
+     - After the robot program runs, signal to start program rewind
+   * - 20
+     - Start Confirmation
+     - Signal to confirm robot program start
+   * - 21
+     - Resume Welding
+     - After a welding interruption occurs on the robot, signal to resume welding operation
+   * - 22
+     - Terminate Welding
+     - During robot welding process, signal to terminate welding operation
+   * - 23
+     - Error Message Clear
+     - Clears all error signals triggered by the robot
+   * - 24
+     - Manual/Auto Toggle (High/Low Level)
+     - When the configurable input selects "High Level Active", the robot switches to automatic when the input signal is high level; when the configurable input selects "Low Level Active", the robot switches to automatic when the input signal is low level
+   * - 25
+     - Enable
+     - Controls robot enabling
+   * - 26
+     - Disable
+     - Controls robot disabling
+   * - 27
+     - Enable/Disable (Rising/Falling Edge)
+     - Rising and falling edges of the valid input signal state respectively trigger robot enable and disable actions
+   * - 28
+     - Laser Servo Tracking Start/Stop Signal
+     - When robot laser recording and tracking is enabled and the I/O start/stop function is turned on, triggering the corresponding end CI starts laser tracking; releasing the corresponding end CI ends tracking
 
 The default configuration of the control box: CO0 is 1-robot error, CO1 is 2-robot in motion.
 

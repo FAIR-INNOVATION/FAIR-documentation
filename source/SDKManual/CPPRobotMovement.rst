@@ -1663,3 +1663,42 @@ Robot Intersecting Line Motion Code Example
         robot.CloseRPC();
         return ;
     }
+
+Stationary Air Motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Stationary Air Motion
+    * @return Error code
+    */
+    errno_t MoveStationary();
+
+Stationary Air Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestLaserStationary(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return 0;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        rtn = robot.LaserSensorRecordandReplay(0, 10, 1, 0, 0.1, 1, 0, 10, 100);
+        printf("LaserSensorRecordandReplay rtn is %d\n", rtn);
+        rtn = robot.MoveStationary();
+        printf("MoveStationary rtn is %d\n", rtn);
+        rtn = robot.LaserSensorRecord1(0, 10);
+        printf("LaserSensorRecordandReplay rtn is %d\n", rtn);
+        robot.CloseRPC();
+        robot.Sleep(9999999);
+        return 0;
+    }

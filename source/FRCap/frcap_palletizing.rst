@@ -71,7 +71,7 @@ Each recipe is divided into three major areas: recipe name, recipe operation and
    | Function: Delete the current recipe
 
 Obtain
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After entering the homepage of the palletizing plug-in package, you can obtain all current recipes. When the number of recipes is greater than four, a scroll bar appears in the recipe display area, and the user can scroll up and down to view the recipes.
 
@@ -85,7 +85,7 @@ After entering the homepage of the palletizing plug-in package, you can obtain a
 .. centered:: Figure 10-2-2 Recipe acquisition
 
 New
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the operation area of any formula, click the "Add" button to enter the "New Formula" pop-up window, enter the name of the palletizing formula, and click the "Confirm" button. After the addition is successful, the new palletizing formula will be added to the formula display area.
 
@@ -104,7 +104,7 @@ In the operation area of any formula, click the "Add" button to enter the "New F
 .. centered:: Figure 10-2-3 New recipe added
 
 Rename
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 In the operation area of any formula, click the "Rename" icon to enter the "Palletizing Recipe Rename" pop-up window, enter the name of the palletizing formula, and click the "Confirm" button. After the renaming is successful, the original palletizing recipe name in the recipe display area is renamed.
 
 .. note:: 
@@ -117,7 +117,7 @@ In the operation area of any formula, click the "Rename" icon to enter the "Pall
 .. centered:: Figure 10-2-4 Recipe rename
 
 Export
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the operation area of any recipe, click the "Export" icon to download all data of the current recipe.
 
@@ -128,7 +128,7 @@ In the operation area of any recipe, click the "Export" icon to download all dat
 .. centered:: Figure 10-2-5 Recipe export
 
 Copy
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the operation area of any formula, click the "Copy" icon to enter the "Palletizing Formula Copy" pop-up window, enter the name of the palletizing formula, and click the "Confirm" button. After the copy is successful, the copied palletizing formula will be added to the formula display area.
 
@@ -142,7 +142,7 @@ In the operation area of any formula, click the "Copy" icon to enter the "Pallet
 .. centered:: Figure 10-2-6 Recipe copy
 
 Delete
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the operation area of any recipe, click the "Delete" icon to delete the current recipe.
 
@@ -157,7 +157,7 @@ In the operation area of any recipe, click the "Delete" icon to delete the curre
 .. centered:: Figure 10-2-7 Recipe delete
 
 Edit
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For any recipe, click the "Edit" button to enter the configuration interface of the current recipe.
 
@@ -168,7 +168,7 @@ For any recipe, click the "Edit" button to enter the configuration interface of 
 .. centered:: Figure 10-2-8 Palletizing recipe editor
 
 Import
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Click the "Import" button, select the compressed package of the palletizing formula and upload it. After the import is successful, the imported formula will be added to the palletizing formula.
 
@@ -200,9 +200,6 @@ The configuration interface of any recipe displays the basic information of boxe
    :align: center
 
 .. centered:: Figure 10-3-1 Palletizing recipe editing interface
-
-Box configuration
-++++++++++++++++++++++++++++++++++++++++++
 
 Workstation Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

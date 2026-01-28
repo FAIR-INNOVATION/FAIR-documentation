@@ -1,3 +1,65 @@
+Version V3.9.2
+-----------------
+
+Date: 2026-01-26
+
+- **Optimized Joint Torque Sensor Position Loop Drag Teaching**:
+    Path: Auxiliary Applications -> Tool Applications -> Drag Lock.
+  
+    Description: Resolved insufficient point alignment accuracy within 2 seconds during joint-to-joint dragging.
+
+- **Optimized Extended Board Card**:
+  
+    Description: Optimized the extended DO data synchronization mechanism.
+
+- **Optimized Arc Tracking Function**:
+    Path: Initial Settings -> Peripherals -> Welding Machine.
+  
+    Description: Added real-time welding current acquisition via the peripheral open protocol ModbusTCP.
+
+- **Optimized Controller and Physical Teach Pendant IP Reset Function**:
+    Path: System Settings -> Network.
+  
+    Description: ① Added a "Reset Controller IP" function in webrecovery, requiring secondary confirmation; ② Added an IP reset function to the physical teach pendant; ③ Added the ability for the physical teach pendant to reset its own IP via physical buttons when not connected. The teach pendant IP is 192.168.58.77.
+
+- **Added New FR3C Robot Configuration**:
+  
+    Description: Joint operating range is consistent with the FR3 series, upper and lower arms are consistent with WMS, rated load is 3kg.
+
+- **Added Cube Interference Function**:
+    Path: Initial Settings -> Safety -> Interference Zone -> Cube Interference.
+  
+    Description: Implemented simultaneous interference checking for at least 4 cubes and configurable CO output corresponding to interference signals.
+
+- **Added Slave_interpret Module Function Extension (PROFINET Protocol) and Web Full IO Display Function**:
+    Path: Initial Settings -> Peripherals -> Board Communication -> Board Upgrade.
+  
+    Description: Added Jiyuan board EtherCAT firmware upgrade, PLC communication detection, configurable cycle, and Web full IO display function (PROFINET protocol).
+
+- **Added Smarttool Open Protocol Functions**:
+    Path: Initial Settings -> Peripherals -> Welding Handle.
+  
+    Description: ① Added program creation parsing and detection signal processing based on the open protocol, and added anti-misoperation function to the "Undo, Delete" keys. ② Added automatic generation function for smarttool open protocol key configuration.
+
+- **Added QX and LA Software Version Backup Package Compatibility**:
+    Path: Auxiliary Applications -> Tool Applications -> Data Backup.
+  
+    Description: ① QX supports and can fully import LA backup packages, LA supports and can fully import QX backup packages; ② Compatible with backup packages from version v3.8.7 onwards.
+
+- **Added Configurable Parameters for End CI and Controller CI**:
+    Path: Initial Settings -> Basic -> I/O Settings -> DI.
+  
+    Description: Enables configurable motion interruption for End CI and synchronization of some configurable controller CI functions to End CI.
+
+- **Added Robot Laser Data Servo Tracking Function**:
+    Path: Initial Settings -> Peripherals -> Line Laser Sensor.
+  
+    Description: Enables the robot to directly track using laser sensor data.
+
+- **Added Teach Pendant Configuration Function**:
+  
+    Description: ① The F1-F4 keys on the teach pendant support configuring custom functions via the WEB interface; ② Key switching to custom mode can be configured as drag mode.
+
 Version V3.9.1
 -----------------
 

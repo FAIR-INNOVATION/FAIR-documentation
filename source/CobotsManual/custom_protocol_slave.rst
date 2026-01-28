@@ -186,6 +186,18 @@ When configured for Ethernet/IP, controller changes board IP to "192.168.0.112".
 
 When switching to Profinet, if slave device name matches master, master will automatically configure slave IP.
 
+5. FRJ-PCIeN-EC-RJ-V10 Board Firmware Upgrade
+
+Enter the URL 192.169.58.2 to access the robot interface. Click "Initial Settings" -> "Peripherals" -> "Board Communication" interface to obtain the firmware version number of the FRJ-PCIeN-EC-RJ-V10 board. Select the bin file to be upgraded, click Upload, wait for the firmware upgrade to succeed, and then restart the control box.
+
+.. image:: custom_protocol_slave/064.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 17.2-13 Board Firmware Upgrade
+
+.. note:: 1. Only V3.9.2 and later versions support EtherCAT protocol firmware upgrade; 2. Upgrading the EtherCAT protocol firmware requires unloading any currently running open protocols.
+
 Software environment setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -195,7 +207,7 @@ Software environment setup
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-13 Web Login Interface
+.. centered:: Figure 17.2-14 Web Login Interface
 
 2. Click System Settings -> About Interface, click the Software Upgrade button, select the software.tar.gz file, and upload the upgrade package.
 
@@ -203,7 +215,7 @@ Software environment setup
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-14 Upgrade software
+.. centered:: Figure 17.2-15 Upgrade software
 
 .. note:: QX control box web version needs 3.8.0 and above, LA control box web version needs 3.8.0 and above.
 
@@ -213,7 +225,7 @@ Software environment setup
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-15 Switch remote mode
+.. centered:: Figure 17.2-16 Switch remote mode
 
 4. Select the controller slave protocol and whether the auto-start function is required, then click the "Set" button. Note: To switch between different protocols, you need to click the "Uninstall" button first before configuring other protocols.
 
@@ -221,7 +233,7 @@ Software environment setup
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-16 Configure the communication protocol
+.. centered:: Figure 17.2-17 Configure the communication protocol
 
 .. note:: Switching different protocols requires restarting the control box before configuring the protocols.
 
@@ -698,6 +710,33 @@ Example generated program:
 .. centered:: Figure 17.3-5 Board Lua Commands
 
 :download:`Appendix 1: Slave Mode Address Mapping Table <../_static/_doc/Control box slave mode address comparison table.xlsx>`
+
+Board Communication Cycle Configuration
+---------------------------------------------------------
+
+The communication cycle of the board can be configured via the host computer. Currently, only PN protocol firmware is provided, with future compatibility for EIP, CC-Link IE Basic, and EtherCAT protocols.
+
+(1) Directly connect the PC (Windows 11 system) network port to the board's network port. Open Device Assistant v1.1.0, double-click "Ethernet," and click the "Refresh" button in the upper left corner to scan for currently connected board devices.
+
+.. image:: custom_protocol_slave/060.png
+   :width: 6in
+   :align: center
+
+.. image:: custom_protocol_slave/061.png
+   :width: 6in
+   :align: center
+
+(2) In the firmware update interface, upload the new version of PN firmware and click the "Update" button. A prompt reading "Upgrade Successful" will appear in the lower left corner when printed.
+
+.. image:: custom_protocol_slave/062.png
+   :width: 6in
+   :align: center
+
+(3) Enter the desired communication cycle (supports 1~100ms) and click the "Set" button. A prompt reading "Cycle Setting Successful" will appear in the lower left corner when printed.
+
+.. image:: custom_protocol_slave/063.png
+   :width: 6in
+   :align: center
 
 Appendice
 -------------------

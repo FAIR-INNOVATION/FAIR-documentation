@@ -456,6 +456,82 @@ Constant force control with damping code example
         }
     }
 
+Rotational Insertion
++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Rotational Insertion
+    * @param [in] rcs Reference coordinate system, 0 - Tool coordinate system, 1 - Base coordinate system
+    * @param [in] angVelRot Rotational angular velocity, unit deg/s
+    * @param [in] ft Force/Torque threshold, fx,fy,fz,tx,ty,tz, range [0~100]
+    * @param [in] max_angle Maximum rotation angle, unit deg
+    * @param [in] orn Force/Torque direction, 1 - Along Z-axis direction, 2 - Around Z-axis direction
+    * @param [in] max_angAcc Maximum rotational acceleration, unit deg/s^2, currently unused, default is 0
+    * @param [in] rotorn Rotation direction, 1 - Clockwise, 2 - Counterclockwise
+    * @param [in] strategy Processing strategy for undetected force/torque, 0 - Error; 1 - Warning, continue motion
+    * @return Error code
+    */
+    public int FT_RotInsertion(int rcs, double angVelRot, double ft, double max_angle, int orn, double max_angAcc, int rotorn, int strategy)
+
+Robot Force Sensor Rotational Insertion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    public void TestMove()
+    {
+        int rtn;
+        JointPos j1 = new JointPos(-11.904f, -99.669f, 117.473f, -108.616f, -91.726f, 74.256f);
+        JointPos j2 = new JointPos(-45.615f, -106.172f, 124.296f, -107.151f, -91.282f, 74.255f);
+        JointPos j3 = new JointPos(-29.777f, -84.536f, 109.275f, -114.075f, -86.655f, 74.257f);
+        JointPos j4 = new JointPos(-31.154f, -95.317f, 94.276f, -88.079f, -89.740f, 74.256f);
+        DescPose desc_pos1 = new DescPose(-419.524f, -13.000f, 351.569f, -178.118f, 0.314f, 3.833f);
+        DescPose desc_pos2 = new DescPose(-321.222f, 185.189f, 335.520f, -179.030f, -1.284f, -29.869f);
+        DescPose desc_pos3 = new DescPose(-487.434f, 154.362f, 308.576f, 176.600f, 0.268f, -14.061f);
+        DescPose desc_pos4 = new DescPose(-443.165f, 147.881f, 480.951f, 179.511f, -0.775f, -15.409f);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0f;
+        float acc = 100.0f;
+        float ovl = 100.0f;
+        float oacc = 100.0f;
+        float blendT = 0.0f;
+        float blendR = 0.0f;
+        byte flag = 0;
+        byte search = 0;
+        int blendMode = 0;
+        int velAccMode = 0;
+        robot.SetSpeed(20);
+        rtn = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.MoveL(j2, desc_pos2, tool, user, vel, acc, ovl, blendR, blendMode, epos, search, flag, offset_pos, oacc, velAccMode,0,10);
+        Console.WriteLine($"movel errcode:{rtn}");
+        rtn = robot.MoveC(j3, desc_pos3, tool, user, vel, acc, epos, flag, offset_pos,j4, desc_pos4, tool, user, vel, acc, epos, flag, offset_pos, ovl, blendR, oacc, velAccMode);
+        Console.WriteLine($"movec errcode:{rtn}");
+        rtn = robot.MoveJ(j2, desc_pos2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.Circle(j3, desc_pos3, tool, user, vel, acc, epos,j1, desc_pos1, tool, user, vel, acc, epos,ovl, flag, offset_pos, oacc, -1, velAccMode);
+        Console.WriteLine($"circle errcode:{rtn}");
+        rtn = robot.MoveCart(desc_pos4, tool, user, vel, acc, ovl, blendT, -1);
+        Console.WriteLine($"MoveCart errcode:{rtn}");
+        rtn = robot.MoveJ(j1, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.MoveL(desc_pos2, tool, user, vel, acc, ovl, blendR, blendMode, epos, search, flag, offset_pos, -1, velAccMode);
+        Console.WriteLine($"movel errcode:{rtn}");
+        rtn = robot.MoveC(desc_pos3, tool, user, vel, acc, epos, flag, offset_pos,desc_pos4, tool, user, vel, acc, epos, flag, offset_pos,ovl, blendR, -1, velAccMode);
+        Console.WriteLine($"movec errcode:{rtn}");
+        rtn = robot.MoveJ(j2, tool, user, vel, acc, ovl, epos, blendT, flag, offset_pos);
+        Console.WriteLine($"movej errcode:{rtn}");
+        rtn = robot.Circle(desc_pos3, tool, user, vel, acc, epos, desc_pos1, tool, user, vel, acc, epos,ovl, flag, offset_pos, oacc, blendR, -1, velAccMode);
+        Console.WriteLine($"circle errcode:{rtn}");
+    }
+
 Flex control on
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#

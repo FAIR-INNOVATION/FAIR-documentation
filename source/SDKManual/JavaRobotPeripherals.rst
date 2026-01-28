@@ -1384,17 +1384,20 @@ Laser Weld Seam Trajectory Recording and Replay
 .. code-block:: java
    :linenos:
 
-   /**
-    * @brief Laser weld seam trajectory recording and replay
-    * @param [in] delayMode Mode 0-delay time 1-delay distance
-    * @param [in] delayTime Delay time in ms
-    * @param [in] delayDisExAxisNum Extended axis number
-    * @param [in] delayDis Delay distance in mm
-    * @param [in] sensitivePara Compensation sensitivity coefficient
-    * @param [in] speed Speed in %
-    * @return Error code
+    /**
+    * @brief Laser Weld Seam Trajectory Replay
+    * @param delayMode Mode 0-Delay Time 1-Delay Distance
+    * @param delayTime Delay time in milliseconds (ms)
+    * @param delayDisExAxisNum Extended Axis Number
+    * @param delayDis Delay distance in millimeters (mm)
+    * @param sensitivePara Compensation Sensitivity Coefficient
+    * @param trackMode Fixed-point Tracking Type. 0-Extended Axis Asynchronous Motion; 1-Robot
+    * @param triggerMode Fixed-point Tracking Trigger Method. 0-Tracking Duration; 1-IO
+    * @param runTime Robot Fixed-point Tracking Duration in seconds (s)
+    * @param speed Speed in percentage (%)
+    * @return Error Code
     */
-   public int LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum, double delayDis, double sensitivePara, double speed)
+    public int LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum, double delayDis, double sensitivePara, int trackMode, int triggerMode, double runTime, double speed)
 
 Move to Laser Record Start Point
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++

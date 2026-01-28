@@ -154,3 +154,8 @@ Error Code Comparison Table
     "193","Torque Control Speed Exceeds Limit","Please check the torque control speed"
     "194","Torque Control Power Exceeds Limit","Please check the torque control power"
     "195","FR30L Base Tilt Angle Must Be 0","Please check the base tilt angle"
+    "196","Spot sensor signal not triggered","Please check the spot sensor"
+    "197","Sensor zero point and/or sensitivity calibration not completed","Please check the sensor"
+    "198","Abnormality detected in joint torque sensor","Please check the joint torque sensor"
+    "199","When multiple cube interference zones are enabled, only interference within the configured range is allowed","Please check the interference zone(s)"
+    "200","Robot is currently jogging","Please check the robot"

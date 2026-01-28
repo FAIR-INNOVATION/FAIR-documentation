@@ -1196,16 +1196,19 @@ Laser weld seam trajectory reproduction
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``LaserSensorRecordandReplay(delayMode, delayTime, delayDisExAxisNum, delayDis, sensitivePara, speed)``"
-    "Description", "Laser weld seam trajectory reproduction"
-    "Mandatory parameters", "- ``delayMode``：Mode 0- Delay time 1- delay distance
-    - ``delayTime``：Delay time in ms
-    - ``delayDisExAxisNum``：Extension axis number
-    - ``delayDis``：The delay distance is in mm
-    - ``sensitivePara``：Compensate the sensitivity factor
-    - ``speed``：Speed unit %"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``LaserSensorRecordandReplay(delayMode, delayTime, delayDisExAxisNum, delayDis, sensitivePara, int trackMode, int triggerMode, double runTime, speed)``"
+    "Description", "Laser Weld Seam Trajectory Replay"
+    "Required Parameters", "- ``delayMode``: Mode 0-Delay Time 1-Delay Distance
+    - ``delayTime``: Delay time in milliseconds (ms)
+    - ``delayDisExAxisNum``: Extended Axis Number
+    - ``delayDis``: Delay distance in millimeters (mm)
+    - ``sensitivePara``: Compensation Sensitivity Coefficient
+    - ``trackMode``: Fixed-point Tracking Type. 0-Extended Axis Asynchronous Motion; 1-Robot
+    - ``triggerMode``: Fixed-point Tracking Trigger Method. 0-Tracking Duration; 1-IO
+    - ``runTime``: Robot Fixed-point Tracking Duration in seconds (s)
+    - ``speed``: Speed in percentage (%)"
+    "Default Parameters", "None"
+    "Return Value", "Error Code. Success - 0, Failure - errcode"
 
 Movement to the starting point of weld record
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

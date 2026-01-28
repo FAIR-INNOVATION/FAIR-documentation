@@ -12,7 +12,20 @@ Version Update Description
    * - **Version**
      - **Date**
      - **Update Description**
-   
+
+
+   * - V3.9.2
+     - 2026-01-26
+     - | 1. Added a processing strategy parameter for undetected force/torque to the FT_RotInsertion() interface
+       | 2. Added robot fixed-point tracking related parameters to the LaserSensorRecordandReplay() interface
+       | 3. Added the MoveStationary() interface
+       | 4. Added the TCPComputeRPY() interface
+       | 5. Added the TCPComputeXYZ() interface
+       | 6. Added the TCPRecordFlangePosStart() interface
+       | 7. Added the TCPRecordFlangePosEnd() interface
+       | 8. Added the TCPGetRecordFlangePos() interface
+       | 9. Added the PhotoelectricSensorTCPCalibration() interface 
+
    * - V3.9.1
      - 2025-12-25
      - | 1. Added oacc speed scaling factor parameter / physical acceleration parameter to the MoveL() interface;

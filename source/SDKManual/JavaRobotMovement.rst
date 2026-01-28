@@ -1665,3 +1665,31 @@ Robot Intersecting Line Motion Code Example
         robot.CloseRPC();
         return ;
     }
+
+Stationary Air Motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Stationary Air Motion
+    * @return Error code
+    */
+    public int MoveStationary()
+
+Stationary Air Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void test_RecordandReplay(Robot robot)
+    {
+        int rtn = robot.LaserSensorRecordandReplay(0, 10, 1, 0, 0.1, 1, 1, 10, 100);
+        System.out.printf("LaserSensorRecordandReplay rtn is %d\n", rtn);
+        rtn = robot.MoveStationary();
+        System.out.printf("MoveStationary rtn is %d\n", rtn);
+        rtn = robot.LaserSensorRecord1(0, 10);
+        System.out.printf("LaserSensorRecordandReplay rtn is %d\n", rtn);
+        robot.CloseRPC();
+        robot.Sleep(9999999);
+    }

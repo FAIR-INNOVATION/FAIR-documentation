@@ -1232,8 +1232,108 @@ Robot velocity feedforward coefficient code example
         Console.WriteLine($" {getRadio[0]:F6} {getRadio[1]:F6} {getRadio[2]:F6} {getRadio[3]:F6} {getRadio[4]:F6} {getRadio[5]:F6}");
     }
  
- 
- 
+Photoelectric Sensor TCP Calibration - Compute Tool RPY
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+.. code-block:: c#
+    :linenos:
 
+    /**
+    * @brief Photoelectric Sensor TCP Calibration - Compute Tool RPY
+    * @param [in] Btool Robot Cartesian position
+    * @param [in] Etool Current tool coordinate values
+    * @param [in] sensor Current sensor coordinate values (not yet available)
+    * @param [in] radius Circular motion radius in mm (not yet available)
+    * @param [in] dz Movement distance along the negative Z-axis of the base coordinate system; when dz = 10000, the function directly returns tool RPY
+    * @param [out] TCPRPY Tool RPY values
+    * @return Error code
+    */
+    public int TCPComputeRPY(DescPose Btool, DescPose Etool, DescPose sensor, double radius, double dz, out Rpy TCPRPY);
 
+Photoelectric Sensor TCP Calibration - Compute Tool XYZ
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Photoelectric Sensor TCP Calibration - Compute Tool XYZ
+    * @param [in] select 0-Compute tool TCP; 1-Compute sensor origin; 2-Compute sensor orientation; 3-Directly return tool TCP; 4-Record current workpiece coordinate system and tool coordinate system
+    * @param [in] originDirection 0-X direction; 1-Y direction; 2-Z direction
+    * @param [in] pos1 Robot Cartesian position 1
+    * @param [in] pos2 Robot Cartesian position 2
+    * @param [in] pos3 Robot Cartesian position 3
+    * @param [in] pos4 Robot Cartesian position 4
+    * @param [out] TCP Tool XYZ values
+    * @return Error code
+    */
+    public int TCPComputeXYZ(int select, double originDirection, DescTran pos1, DescTran pos2,DescTran pos3, DescTran pos4, out DescTran TCP);
+
+Photoelectric Sensor TCP Calibration - Start Recording Flange Center Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Photoelectric Sensor TCP Calibration - Start Recording Flange Center Position
+    * @return Error code
+    */
+    public int TCPRecordFlangePosStart();
+
+Photoelectric Sensor TCP Calibration - Stop Recording Flange Center Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Photoelectric Sensor TCP Calibration - Stop Recording Flange Center Position
+    * @return Error code
+    */
+    public int TCPRecordFlangePosEnd();
+
+Photoelectric Sensor TCP Calibration - Get Tool Center Point Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Photoelectric Sensor TCP Calibration - Get Tool Center Point Position
+    * @param [out] TCP Tool center point position (x, y, z)
+    * @return Error code
+    */
+    public int TCPGetRecordFlangePos(out DescTran TCP);
+
+Photoelectric Sensor TCP Calibration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Photoelectric Sensor TCP Calibration
+    * @param [in] luaPath Automatic calibration Lua program path: For QX version robots - "/fruser/FR_CalibrateTheToolTcp.lua"; For LA version robots - "/usr/local/etc/controller/lua/FR_CalibrateTheToolTcp.lua"
+    * @param [in] offsetX Teaching point offset (x, y, z) in mm
+    * @param [out] TCP Calibrated tool coordinate system (x, y, z, rx, ry, rz)
+    * @return Error code
+    */
+    public int PhotoelectricSensorTCPCalibration(string luaPath, DescTran offset, out DescPose TCP);
+
+Photoelectric Sensor TCP Calibration Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    public void TestPhotoelectricSensorTCPCalib()
+    {
+        ROBOT_STATE_PKG pkg =new ROBOT_STATE_PKG();
+        DescTran offset = new DescTran( 10.0, 10.0, 3.0 );
+        DescPose TCP = new DescPose();
+        int rtn = robot.PhotoelectricSensorTCPCalibration("/fruser/FR_CalibrateTheToolTcp.lua", offset, out TCP);
+        Console.WriteLine($"PhotoelectricSensorTCPCalibration : {rtn}");
+        Console.WriteLine($"Tool TCP Coordinate: X={TCP.tran.x:F3}, Y={TCP.tran.y:F3}, Z={TCP.tran.z:F3}");
+        Console.WriteLine($"Tool RPY Orientation: RX={TCP.rpy.rx:F3}, RY={TCP.rpy.ry:F3}, RZ={TCP.rpy.rz:F3}");
+    }

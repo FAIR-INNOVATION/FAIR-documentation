@@ -27,11 +27,9 @@ Under the "Applications" -> "Tool App" menu bar, click the "Robot Packing" butto
 .. centered:: Figure 14.1‑1 One-Click Robot Packing
 
 Data Backup
-----------------------
+-----------
 
-Under the "Applications" -> "Tool App" menu bar, click "Data Backup" to enter the data backup interface, as shown below.
-
-The backup package data includes tool coordinate system data, system configuration files, taught point data, user programs, template programs, and user configuration files. When users need to transfer this robot's related data to another robot for use, they can quickly achieve this through this function.
+1. Under the menu bar of "Auxiliary Applications" -> "Tool Applications", click "Data Backup" to enter the data backup interface, as shown in the figure below.
 
 .. image:: application/002.png
    :width: 4in
@@ -39,14 +37,29 @@ The backup package data includes tool coordinate system data, system configurati
 
 .. centered:: Figure 14.2‑1 Data Backup Interface
 
-To avoid potential safety hazards during backup package import that may arise from inconsistencies in installation methods and other configurations, a validation function for key parameters during backup package import has been added.
+2. The backup package data includes tool coordinate system data, system configuration files, teaching point data, user programs, template programs, and user configuration files. When users need to transfer data from this robot to another robot for use, this function can be used to achieve it quickly.
 
-Backup Package Import Validation Function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Backup Package Integrity Verification Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A validation function is added during backup package import. The backup package must be compared with the target robot for key parameters, as listed in the table below. Inaccurate settings of these parameters can pose safety risks. The backup package can only be imported normally when all parameters match exactly. If inconsistent, an error will be prompted, and the key parameters in the target robot need to be checked for consistency with the backup package.
+To avoid potential security risks caused by inconsistent configurations such as installation methods during the import of backup packages, an MD5 verification function for backup packages and a verification function for key parameters have been added during backup package import.
 
-Table of 5 key parameters for comparison:
+Backup Package MD5 Verification Function
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+To ensure the integrity of the imported backup package, an MD5 verification will be performed on the backup package after upload. If the backup package is corrupted or abnormally modified, the MD5 verification will fail, and the following prompt will be displayed:
+
+.. image:: application/048.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 14.2‑2 MD5 Verification Failed
+
+Backup Package Key Parameter Verification Function
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+A verification function has been added during backup package import. The backup package must be compared with the target robot for key parameters, as detailed in the table below. Inaccurate settings of these parameters may pose certain security risks. Only when they are completely identical can the backup package be imported normally.
+
+Table of 5 Key Parameters for Comparison:
 
 .. list-table::
    :widths: 15 40 100
@@ -77,11 +90,26 @@ Table of 5 key parameters for comparison:
      - NEW_TEACH_ENABLE
      - Dynamic Configuration
 
+If they are inconsistent, an error will be prompted. At this point, it is necessary to check whether the key parameters in the robot to be imported are consistent with those in the backup package.
+
 .. image:: application/003.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 14.2‑2 Interface Prompts Error When Key Parameters Are Inconsistent
+.. centered:: Figure 14.2‑3 When Key Parameters Are Inconsistent, the Interface Will Prompt an Error
+
+Failure/Power Failure Exception Rollback Function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If an exception occurs during the import of the backup package, or if there is an abnormal power failure during data recovery, causing the data recovery to fail to complete normally, to ensure the normal operation of the equipment, the system will automatically revert to the state before the operation after power is restored.
+
+After power is restored, the interface will prompt, "Previous data recovery was not completed and has been automatically reverted. Please restart the control box and try again."
+
+.. image:: application/049.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.2‑4 Power Failure Restart Restore Warning Prompt
 
 10s Data Recording
 ------------------------
@@ -169,7 +197,7 @@ The parameter calibration method involves running the robot through a predetermi
 Parameter Calibration
 ********************************
 
-**Step1**: Set the tool coordinate system to "Tool0". Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock". In the joint torque sensor whole-machine drag module, click "Function Enable", as shown in Figure 2-1.
+**Step1**: Set the tool coordinate system to "Tool0". Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock". In the joint torque sensor whole-machine drag module, click "Function Enable".
 
 .. image:: application/037.png
    :width: 4in
@@ -177,7 +205,7 @@ Parameter Calibration
 
 .. centered:: Figure 14.5‑4 Function Enable
 
-**Step2**: After clicking "Function Enable", proceed with sensitivity calibration, as shown in Figure 2-2. Click "Generate Program" to deploy the internal controller Lua script. Switch the robot to automatic mode and set the run speed to "10". Click "Run" and wait for the robot to move.
+**Step2**: After clicking "Function Enable", proceed with sensitivity calibration. Click "Generate Program" to deploy the internal controller Lua script. Switch the robot to automatic mode and set the run speed to "10". Click "Run" and wait for the robot to move.
 
 .. image:: application/038.png
    :width: 4in
@@ -187,7 +215,7 @@ Parameter Calibration
 
 .. note:: If the joint torque sensor sensitivity calibration is already completed, you can proceed directly to drag function parameter settings.
 
-**Step3**: After the robot completes running the predetermined trajectory, the sensitivity, linearity, hysteresis error, and repeatability calibration results are automatically displayed on the web interface. Click "Set" to apply, as shown in Figure 2-3.
+**Step3**: After the robot completes running the predetermined trajectory, the sensitivity, linearity, hysteresis error, and repeatability calibration results are automatically displayed on the web interface. Click "Set" to apply.
 
 .. image:: application/039.png
    :width: 4in
@@ -224,61 +252,91 @@ Operation Process
 
 .. note:: Drag gain setting range: 0-1. A higher gain results in greater compensated torque and smaller startup torque for the current loop.
 
-Position Loop Drag Teaching Function Based on Joint Torque Sensor
+Assisted Drag Optimization Function Based on Joint Torque Sensor
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Overview
-*****************************************
+*********************************
 
-Real-time detection of external forces is performed through the joint torque sensor. When the external force exceeds a preset threshold, the robotic arm will be dragged in the direction of the force application. Once the external force falls below the torque threshold, the robotic arm stops dragging immediately, thereby achieving the drag teaching function under position loop control.
+This user manual describes the usage of the assisted drag optimization function based on the joint torque sensor. It involves three drag modes and, compared to traditional drag teaching methods, can improve drag compliance and reduce the drag force required by each joint.
 
-Drag Teaching Function
-*****************************************
+Assisted Drag Optimization Function Based on Joint Torque Sensor
+**************************************************************************************
 
-Enabling/Disabling the Position Loop Drag Teaching Function
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-**Step1**: Set the tool coordinate system to "Tool0". Click "Auxiliary Applications" -> "Tool Applications" -> "Drag Lock". In the "Joint Torque Sensor Whole-Arm Drag Module", click "Enable Function".
+Zero Point Calibration and Sensitivity Calibration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: If the zero point calibration and sensitivity calibration have already been completed (the indicator light before calibration is green), there is no need to perform them again. Recalibrate the zero point only when there is a floating sensation during dragging. The calibration process is described below.
 
 .. image:: application/042.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 14.5‑9 Enable Function
+.. centered:: Figure 14.5‑9 Indicator Light Status After Zero Point and Sensitivity Calibration of Joint Torque Sensor
 
-**Step2**: Perform zero calibration. First, click "Point 1", wait for the robotic arm to stop moving, then click "Record". Next, click "Point 2", wait for the robotic arm to stop moving, then click "Record". If the zero deviation of the joint torque sensor is too large after zero calibration, you can re-perform the zero calibration.
-
-**Step3**: Perform sensitivity calibration. Click "Generate Program" to send an internal Lua script to the controller. Switch the robot to automatic mode and set the run speed to "10". Click "Run" and wait for the robot to move. After the robot movement is completed, the sensitivity, linearity, hysteresis error, and repeatability calibration results are automatically displayed on the Web interface. Sensitivity calibration only needs to be performed once each time the robotic arm is powered on.
+**Step2**: Zero point calibration. Click "Auxiliary Applications" → "Tool Applications" → "Drag Lock" to enter the "Joint Torque Sensor Whole Body Drag" module. Click the "Calibrate" button for zero point calibration to calibrate the zero point data of the joint torque sensor. When the calibration is complete, a "√" will appear, and the zero point calibration result will be updated.
 
 .. image:: application/043.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 14.5‑10 Zero Calibration and Sensitivity Calibration
+.. centered:: Figure 14.5‑10 Zero Point Calibration of Joint Torque Sensor
 
-**Step4**: Enter the "Drag Function". In the drag mode dropdown, select "Position Loop Drag". Set appropriate mass coefficient, damping coefficient, stiffness coefficient, and force control threshold. Click "Set" to apply the settings and enable position loop drag.
+**Step3**: Sensitivity calibration (Note: It is recommended to use only the robot body without any load during calibration). Switch the robot motion mode to "Automatic Mode" and set the operation speed to "10%". Click the "Calibrate" button for sensitivity calibration and wait for the robot to complete its motion. After the robot completes the predetermined trajectory, the sensitivity coefficient, linearity, hysteresis error, and repeatability calibration results are automatically displayed on the web interface.
 
 .. image:: application/044.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 14.5‑11 Position Loop Drag Parameter Setting
+.. centered:: Figure 14.5‑11 Sensitivity Calibration of Joint Torque Sensor
 
-**Step5**: In the drag mode dropdown, select "Current Loop Drag". Click "Set" to apply the settings. This will disable position loop drag and switch to current loop drag.
+**Step4**: Set the assisted drag function. There are three drag modes, which can be set after completing "Zero Point Calibration" and "Sensitivity Calibration". If not set, the default is "Mode Three", meaning that drag teaching can be performed directly in drag mode after calibration.
+
+Assisted Drag Function - Mode One
+******************************************************************
+**Step1**: Select the drag mode as "Mode One". When the robot motion mode is "Manual Mode", set the sliding window size, gain coefficient, and joint speed, then click "Apply". At this point, holding down the end "Drag Button" or in drag mode enables drag teaching.
 
 .. image:: application/045.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 14.5‑12 Current Loop Drag
+.. centered:: Figure 14.5‑12 Mode One: Parameter Setting
 
-**Step6**: If the robotic arm moves without external force applied while in Position Loop Drag mode, you can appropriately increase the force control threshold. If the issue persists after increasing the single-axis force control threshold above 3Nm, you need to disable Position Loop Drag and re-execute Step2 and Step4 (there is no need to re-execute Step3).
+.. note:: 
+   (1) The recommended setting for the sliding window size is 30, with a maximum value of 100;
+   (2) The gain coefficient affects the feel during dragging. A larger coefficient makes dragging more sensitive but can easily cause instability. The recommended setting for J1-J6 is 0.5;
+   (3) The recommended joint speed is 6°/s, which can alleviate overshoot during point alignment.
 
-Specific Functions of Parameters and Recommended Values:
+Assisted Drag Function - Mode Two
+******************************************************************
 
-- **Mass Coefficient**: Used to adjust drag response. Higher values lead to slower response, lower values lead to faster response. Range: Joints 1~2: [0.5-20], Joints 3~4: [0.2-20], Joints 5~6: [0.2-10]. Recommended parameters: [1, 0.8, 0.5, 0.5, 0.6, 0.6].
-- **Damping Coefficient**: Used to adjust the feel of drag (heaviness/lightness). Higher values feel heavier, lower values feel lighter. Range: Joints 1~2: [5-100], Joints 3~4: [5-100], Joints 5~6: [2-40]. Recommended parameters: [8, 8, 10, 10, 6, 6].
-- **Stiffness Coefficient**: After setting this parameter, the robotic arm will move to the reference position when the function was enabled. Recommended parameters: [0, 0, 0, 0, 0, 0].
-- **Force Control Threshold**: The minimum trigger force for Position Loop Drag. Setting the threshold too low may cause unintended movement of the robotic arm. Recommended force thresholds: Joint 1 > 2Nm, Joint 2 > 1Nm, Joints 3~4 > 0.8Nm, Joints 5~6 > 0.5Nm. Recommended parameters: [2, 1, 0.8, 0.8, 0.5, 0.5].
+**Step1**: Select the drag mode as "Mode Two". When the robot motion mode is "Manual Mode", set the mass coefficient, damping coefficient, stiffness coefficient, and force control threshold, then click "Apply". At this point, drag teaching can be performed in position mode.
+
+.. image:: application/046.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑13 Mode Two: Parameter Setting
+
+.. note:: 
+   (1) The mass coefficient affects the joint inertial force during dragging. The recommended settings are: J1-J3: 1.0, J4-J5: 0.5, J6: 0.1;
+   (2) The damping coefficient affects the feel during dragging. Higher damping results in a heavier feel. The recommended settings are: J1-J3: 10.0, J4-J5: 5.0, J6: 1.0;
+   (3) The stiffness coefficient should be set to 0 for all;
+   (4) The force control threshold is the activation torque during dragging. The recommended settings are: J1-J3: 0.3, J4-J5: 0.2, J6: 0.1.
+
+Assisted Drag Function - Mode Three
+******************************************************************
+
+**Step1**: Select the drag mode as "Mode Three". When the robot motion mode is "Manual Mode", set the gain coefficient for each joint, then click "Apply". At this point, holding down the end "Drag Button" or in drag mode enables drag teaching.
+
+.. image:: application/047.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5‑14 Mode Three: Parameter Setting
+
+.. note:: 
+   (1) The gain coefficient affects the joint drag force during low-speed dragging. When the coefficient ranges from 0.1 to 1.0, the resistance during low-speed dragging increases as the coefficient increases. For precise point alignment tasks, it is recommended to set the J1-J6 gain coefficient to 1.0. When considering overall ease of dragging and compliance, it is recommended to set the J1-J6 gain coefficient to 0.3.
 
 Intersection Point Generation (Laser Point Capture Motion)
 ----------------------------------------------------------------------------------
@@ -485,7 +543,7 @@ The collected contact points include four points, where the first two points lie
 
 .. centered:: Figure 14.6‑19 New Four-Point Intersection Seam Finding Motion Program
 
-**Step3**: Generate the four-point intersection seam finding motion program. As shown in Figure 2-14, click "Teach Program" -> "Program Programming" -> "Welding Instructions" -> "Laser Tracking" -> scroll down to the Seam Finding Intersection Motion section, select the "Four-Point Seam Finding" method, use the dropdowns to sequentially select the collected contact points "Point 1", "Point 2", "Point 3", "Point 4", and the posture reference point, select the required "Motion Mode" and "Debug Speed", then click the "Add" and "Apply" buttons to generate the corresponding four-point intersection seam finding motion program.
+**Step3**: Generate the four-point intersection seam finding motion program. Click "Teach Program" -> "Program Programming" -> "Welding Instructions" -> "Laser Tracking" -> scroll down to the Seam Finding Intersection Motion section, select the "Four-Point Seam Finding" method, use the dropdowns to sequentially select the collected contact points "Point 1", "Point 2", "Point 3", "Point 4", and the posture reference point, select the required "Motion Mode" and "Debug Speed", then click the "Add" and "Apply" buttons to generate the corresponding four-point intersection seam finding motion program.
 
 .. figure:: application/027.png
    :align: center

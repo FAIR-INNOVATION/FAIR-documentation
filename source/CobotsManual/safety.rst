@@ -343,6 +343,69 @@ Safety plane
 
 .. centered:: Figure 7.6‑20 Triggered Safety Wall
 
+Cube Interference Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++++++++
+
+The cube interference function supports defining and activating multiple independent cube interference zones simultaneously. The position and dimensions of each interference zone in three-dimensional space can be independently configured. Furthermore, each interference zone is equipped with an individual CO (Controller Output) trigger signal output, capable of outputting corresponding trigger signals based on the robot's real-time position.
+
+Operation Procedure
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Enable the cube interference function and perform basic configuration. Sequentially click the commands "Initial Settings" -> "Safety" -> "Interference Zone" -> "Cube Interference". Use the slider switches to control whether each cube interference zone is enabled, and perform the basic configuration.
+
+Among these settings, the motion strategy upon entering the interference zone can be selected as "Continue Motion" or "Stop". When "Continue Motion" is selected, the robot will display a warning but continue moving upon entering the interference zone. When "Stop" is selected, the robot will display a warning and stop moving upon entering the interference zone. The drag strategy upon entering the interference zone can be selected as "Unrestricted Dragging," "Impedance Callback," or "Switch Back to Manual Mode".
+
+.. image:: safety/050.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.6‑21 Cube Enable Control and Basic Configuration
+
+**Step2**: Configure the cube interference zones. Different configuration parameters can be set for each interference zone ID. It is important to note:
+
+(1) The detection method must be selected based on actual functional requirements as "Command Position" or "Feedback Position".
+
+(2) When the interference zone mode is selected as "Interference Outside Range," it is only effective for a single interference zone.
+
+.. image:: safety/051.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.6‑22 Cube Interference Zone Configuration
+
+**Step3**: Set the interference zone range. The range can be set by choosing the "Two-Point Method" or "Center Point + Side Lengths" method to generate the cube interference zone. The "Two-Point Method" generates the zone by specifying two opposite vertices of the cube. The "Center Point + Side Lengths" method generates the zone by specifying the center point and three side lengths of the cube.
+
+.. image:: safety/052.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.6‑23 Generating Interference Zone via "Two-Point Method"
+
+.. image:: safety/053.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.6‑24 Generating Interference Zone via "Center Point + Side Lengths"
+
+**Step4**: Configure CO signals. Sequentially click the commands "Initial Settings" -> "Basic" -> "I/O Settings" -> "DO" to configure the corresponding CO output for each cube.
+
+.. image:: safety/054.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.6‑25 CO Output Configuration
+
+**Step5**: Each cube interference zone will be displayed on the robot interface according to its set ID number. When the robot's end-effector center point enters an interference zone, the interface will display an "Entered Interference Zone" warning, and the corresponding CO interface will output a signal.
+
+.. image:: safety/055.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.6‑26 Multi-Cube Interference Zone Interface Display
+
 Reduction Mode
 -----------------------
 

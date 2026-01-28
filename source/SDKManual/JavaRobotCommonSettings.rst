@@ -1297,3 +1297,101 @@ Robot Speed Feedforward Coefficient Code Example
         System.out.printf(" %f %f %f %f %f %f\n", getRadio[0], getRadio[1], getRadio[2], getRadio[3], getRadio[4], getRadio[5]);
         robot.CloseRPC();
     }
+
+Photoelectric Sensor TCP Calibration - Compute Tool RPY
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Photoelectric sensor TCP calibration - compute tool RPY
+    * @param  Btool Robot Cartesian position
+    * @param  Etool Current tool coordinate coefficient value
+    * @param  sensor Current sensor coordinate coefficient value (not yet available)
+    * @param  radius Circular motion radius mm (not yet available)
+    * @param  dz Movement distance along the negative direction of the base coordinate system Z-axis; when dz = 10000, the function directly returns tool RPY
+    * @param  TCPRPY Tool RPY value
+    * @return Error code
+    */
+    public int TCPComputeRPY(DescPose Btool, DescPose Etool, DescPose sensor, double radius, double dz, Rpy TCPRPY)
+
+Photoelectric Sensor TCP Calibration - Compute Tool XYZ
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Photoelectric sensor TCP calibration - compute tool XYZ
+    * @param  select 0-Compute tool TCP; 1-Compute sensor origin; 2-Compute sensor orientation; 3-Directly return tool TCP; 4-Record current workpiece coordinate system and tool coordinate system
+    * @param  originDirection 0-X direction; 1-Y direction; 2-Z direction
+    * @param  pos1 Robot Cartesian position 1
+    * @param  pos2 Robot Cartesian position 2
+    * @param  pos3 Robot Cartesian position 3
+    * @param  pos4 Robot Cartesian position 4
+    * @param  TCP Tool XYZ value
+    * @return Error code
+    */
+    public int TCPComputeXYZ(int select, double originDirection, DescTran pos1, DescTran pos2, DescTran pos3, DescTran pos4, DescTran TCP)
+
+Photoelectric Sensor TCP Calibration - Start Recording Flange Center Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Photoelectric sensor TCP calibration - start recording flange center position
+    * @return Error code
+    */
+    public int TCPRecordFlangePosStart()
+
+Photoelectric Sensor TCP Calibration - Stop Recording Flange Center Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Photoelectric sensor TCP calibration - stop recording flange center position
+    * @return Error code
+    */
+    public int TCPRecordFlangePosEnd()
+
+Photoelectric Sensor TCP Calibration - Get Tool Center Point Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Photoelectric sensor TCP calibration - get tool center point position
+    * @param  TCP Tool center point position (x,y,z)
+    * @return Error code
+    */
+    public int TCPGetRecordFlangePos(DescTran TCP)
+
+Photoelectric Sensor TCP Calibration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Photoelectric sensor TCP calibration
+    * @param luaPath Automatic calibration Lua program path: QX version robot - "/fruser/FR_CalibrateTheToolTcp.lua"; LA version robot - "/usr/local/etc/controller/lua/FR_CalibrateTheToolTcp.lua"
+    * @param offset Teach point offset (x,y,z) mm
+    * @param TCP Calibrated tool coordinate system (x,y,z,rx,ry,rz)
+    * @return Error code
+    */
+    public int PhotoelectricSensorTCPCalibration(String luaPath, DescTran offset, DescPose TCP)
+
+Photoelectric Sensor TCP Calibration Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestPhotoelectricSensorTCPCalib(Robot robot)
+    {
+        DescTran offset = new DescTran(10.0, 10.0, 3.0 );
+        DescPose TCP = new DescPose();
+        int rtn = robot.PhotoelectricSensorTCPCalibration("/fruser/FR_CalibrateTheToolTcp.lua", offset, TCP);
+        System.out.printf("PhotoelectricSensorTCPCalibration rtn is %d %f %f %f %f %f %f \n", rtn, TCP.tran.x, TCP.tran.y, TCP.tran.z, TCP.rpy.rx, TCP.rpy.ry, TCP.rpy.rz);
+        robot.CloseRPC();
+        robot.Sleep(9999999);
+    }

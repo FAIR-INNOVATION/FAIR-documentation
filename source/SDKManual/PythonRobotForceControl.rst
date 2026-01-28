@@ -461,22 +461,79 @@ Helix Exploration
     - ``max_vel``: maximum value of linear velocity in mm/s Default 5"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
-Rotary insertion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rotational Insertion
+++++++++++++++++++++++++++++++++++
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_RotInsertion(rcs, ft, orn, angVelRot=3, angleMax=45, angAccmax=0, rotorn=1)``"
-    "Description", "Rotary Insertion"
-    "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
-    - ``ft``: force or moment threshold (0 to 100) in N or Nm.
-    - ``orn``: direction of force/torque, 1 - along the z-axis, 2 - around the z-axis;"
-    "Default parameter", "- ``angVelRot``: angular speed of rotation in °/s, default 3;
-    - ``angleMax``: maximum angle of rotation, in ° default 45.
-    - ``angAccmax``: maximum rotational acceleration in °/s^2, not used yet Default 0.
-    - ``rotorn``: direction of rotation, 1 - clockwise, 2 - counterclockwise Default 1"
-    "Return Value", "Error Code Success-0 Failure- errcode "
+    "Prototype", "``FT_RotInsertion(rcs, ft, orn, angVelRot=3, angleMax=45, angAccmax=0, rotorn=1, strategy=0)``"
+    "Description", "Rotational Insertion"
+    "Required Parameters", "- ``rcs``: Reference coordinate system, 0 - Tool coordinate system, 1 - Base coordinate system;
+    - ``ft``: Force or torque threshold (0~100), unit N or Nm;
+    - ``orn``: Force/torque direction, 1 - Along Z-axis direction, 2 - Around Z-axis direction;"
+    "Default Parameters", "- ``angVelRot``: Rotational angular velocity, unit °/s, default 3;
+    - ``angleMax``: Maximum rotation angle, unit °, default 45;
+    - ``angAccmax``: Maximum rotational acceleration, unit °/s^2, currently unused, default 0;
+    - ``rotorn``: Rotation direction, 1 - Clockwise, 2 - Counterclockwise, default 1;
+    - ``strategy``: Processing strategy for undetected force/torque, 0 - Error; 1 - Warning, continue motion"
+    "Return Value", "Error code. Success - 0, Failure - errcode"
+
+Code Example for Spiral Search, Linear Insertion, and Other Commands
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+    robot = Robot.RPC('192.168.58.2')
+    j1=[-11.904,-99.669,117.473,-108.616,-91.726,74.256]
+    j2=[-45.615,-106.172,124.296,-107.151,-91.282,74.255]
+    j3=[-29.777,-84.536,109.275,-114.075,-86.655,74.257]
+    j4=[-31.154,-95.317,94.276,-88.079,-89.740,74.256]
+    desc_pos1=[-419.524,-13.000,351.569,-178.118,0.314,3.833]
+    desc_pos2=[-321.222,185.189,335.520,-179.030,-1.284,-29.869]
+    desc_pos3=[-487.434,154.362,308.576,176.600,0.268,-14.061]
+    desc_pos4=[-443.165,147.881,480.951,179.511,-0.775,-15.409]
+    offset_pos=[0.0]*6
+    epos=[0.0]*4
+    tool=0
+    user=0
+    vel=100.0
+    acc=100.0
+    ovl=100.0
+    oacc=100.0
+    blendT=0.0
+    blendR=0.0
+    flag=0
+    search=0
+    blendMode=0
+    velAccMode=0
+    robot.SetSpeed(20)
+    rtn=robot.MoveJ(joint_pos=j1,tool=tool,user=user,vel=vel,acc=acc,ovl=ovl,exaxis_pos=epos,blendT=blendT,offset_flag=flag,offset_pos=offset_pos)
+    print(f"movejerrcode:{rtn}")
+    rtn=robot.MoveL(desc_pos=desc_pos2,tool=tool,user=user,vel=vel,acc=acc,ovl=ovl,blendR=blendR,blendMode=blendMode,exaxis_pos=epos,search=search,offset_flag=flag,offset_pos=offset_pos,oacc=oacc,velAccParamMode=velAccMode)
+    print(f"movelerrcode:{rtn}")
+    rtn=robot.MoveC(desc_pos_p=desc_pos3,tool_p=tool,user_p=user,vel_p=vel,acc_p=acc,exaxis_pos_p=epos,offset_flag_p=flag,offset_pos_p=offset_pos,desc_pos_t=desc_pos4,tool_t=tool,user_t=user,vel_t=vel,acc_t=acc,exaxis_pos_t=epos,offset_flag_t=flag,offset_pos_t=offset_pos,ovl=ovl,blendR=blendR,oacc=oacc,velAccParamMode=velAccMode)
+    print(f"movecerrcode:{rtn}")
+    rtn=robot.MoveJ(joint_pos=j2,tool=tool,user=user,vel=vel,acc=acc,ovl=ovl,exaxis_pos=epos,blendT=blendT,offset_flag=flag,offset_pos=offset_pos)
+    print(f"movejerrcode:{rtn}")
+    rtn=robot.Circle(desc_pos_p=desc_pos3,tool_p=tool,user_p=user,vel_p=vel,acc_p=acc,exaxis_pos_p=epos,desc_pos_t=desc_pos1,tool_t=tool,user_t=user,vel_t=vel,acc_t=acc,exaxis_pos_t=epos,ovl=ovl,offset_flag=flag,offset_pos=offset_pos,oacc=oacc,blendR=-1,velAccParamMode=velAccMode)
+    print(f"circleerrcode:{rtn}")
+    rtn=robot.MoveCart(desc_pos=desc_pos4,tool=tool,user=user,vel=vel,acc=acc,ovl=ovl,blendT=blendT,config=-1)
+    print(f"MoveCarterrcode:{rtn}")
+    rtn=robot.MoveJ(joint_pos=j1,tool=tool,user=user,vel=vel,acc=acc,ovl=ovl,exaxis_pos=epos,blendT=blendT,offset_flag=flag,offset_pos=offset_pos)
+    print(f"movejerrcode:{rtn}")
+    rtn=robot.MoveL(desc_pos=desc_pos2,tool=tool,user=user,vel=vel,acc=acc,ovl=ovl,blendR=blendR,blendMode=blendMode,exaxis_pos=epos,search=search,offset_flag=flag,offset_pos=offset_pos,config=-1,velAccParamMode=velAccMode)
+    print(f"movelerrcode:{rtn}")
+    rtn=robot.MoveC(desc_pos_p=desc_pos3,tool_p=tool,user_p=user,vel_p=vel,acc_p=acc,exaxis_pos_p=epos,offset_flag_p=flag,offset_pos_p=offset_pos,desc_pos_t=desc_pos4,tool_t=tool,user_t=user,vel_t=vel,acc_t=acc,exaxis_pos_t=epos,offset_flag_t=flag,offset_pos_t=offset_pos,ovl=ovl,blendR=blendR,config=-1,velAccParamMode=velAccMode)
+    print(f"movecerrcode:{rtn}")
+    rtn=robot.MoveJ(joint_pos=j2,tool=tool,user=user,vel=vel,acc=acc,ovl=ovl,exaxis_pos=epos,blendT=blendT,offset_flag=flag,offset_pos=offset_pos)
+    print(f"movejerrcode:{rtn}")
+    rtn=robot.Circle(desc_pos_p=desc_pos3,tool_p=tool,user_p=user,vel_p=vel,acc_p=acc,exaxis_pos_p=epos,desc_pos_t=desc_pos1,tool_t=tool,user_t=user,vel_t=vel,acc_t=acc,exaxis_pos_t=epos,ovl=ovl,offset_flag=flag,offset_pos=offset_pos,oacc=oacc,blendR=-1,velAccParamMode=velAccMode)
+    print(f"circleerrcode:{rtn}")
+    robot.CloseRPC()
+    return 0
 
 Linear insertion
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

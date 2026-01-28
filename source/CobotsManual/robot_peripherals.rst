@@ -10,7 +10,7 @@ End-Effector Lua Custom Open Protocol
 Overview
 ~~~~~~~~~~~~~~~~
 
-A hardware interface is provided at the robot end for connecting peripherals via 485 communication. Currently supported peripherals include grippers, rotary grippers, force sensors, welding handles, and other devices. All these end-effector devices can be adapted by writing a Lua open protocol to achieve protocol adaptation, enabling control of the peripheral and obtaining its status.
+A hardware interface is provided at the robot end for connecting peripherals via 485 communication. Currently supported peripherals include grippers, rotary grippers, force sensors, welding handles, and other devices. All these end-effector devices can be adapted by writing a Lua open protocol to achieve protocol adaptation, enabling control of the peripheral and obtaining its status.For the SmartTool welding handle, users can also choose to log in to the web page to configure key functions and automatically generate an open protocol file. The generated protocol will be automatically applied to the end.
 
 Operation Steps
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,7 +31,7 @@ Operation Steps
 **Step2**: Open the WebApp, click "Initial Setup", "Peripherals" in sequence, and select the end-effector peripheral to be configured (e.g., gripper). The control type for peripherals includes two options: pre-adapted devices and peripheral open protocol:
 
 - **Pre-adapted Devices**: Use the robot controller for communication. No upload or application is required.
-- **Peripheral Open Protocol**: Users write a Lua-based open protocol for the end-effector to be adapted to achieve communication control. The end-effector protocols are divided into two categories: one is protocols uploaded by the user, and the other is built-in protocols preset in the robot.
+- **Peripheral Open Protocol**: Users write a Lua-based open protocol for the end-effector to be adapted to achieve communication control. The end-effector protocols are divided into two categories: one is protocols uploaded by the user, and the other is built-in protocols preset in the robot.Starting from version 3.9.2, users do not need to perform verification and encryption operations on the Lua protocol to be uploaded to the end using additional software; they can upload it directly. Previously verified and encrypted protocols can still be uploaded and used normally. The robot will actively distinguish whether the file has been verified and encrypted. If it has not been verified, the robot will verify and encrypt it before uploading and applying it to the end. If it is already encrypted, it will be uploaded and applied to the end directly.
 
 .. figure:: robot_peripherals/002.png
    :align: center
@@ -500,13 +500,122 @@ The force sensor configuration information includes manufacturer, type, software
 Force Sensor End-Effector Lua Protocol
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Open the WebApp, click "Initial Setup", "Peripherals", "Force Sensor", "Custom Protocol" in sequence. Click "Protocol Management" to configure the end-effector protocol. Currently, the preset built-in protocols for the force sensor are shown in the figure below.
+Open the WebApp, click "Initial Setup", "Peripherals", "Force Sensor", "Custom Protocol" in sequence. Click "Protocol Management" to configure the end-effector protocol. Currently, the preset built-in protocols for the force sensor are shown in the figure below.Version 3.9.2 has added two embedded combination protocols for gripper + force sensor: End_JD_XJC_V1.0.lua and End_JD_GZCX_V1.0.lua.
 
 .. figure:: robot_peripherals/281.png
    :align: center
    :width: 6in
 
 .. centered:: Figure 8.3‑2-2 Force Sensor Preset Built-in Protocol
+
+Welding Handle End Lua Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Open WebApp, then click "Initial Settings," "Peripherals," "Welding Handle," "Custom Protocol" in sequence. Click "Protocol Management" to configure the end protocol. The currently preset embedded protocols for the welding handle are shown in the figure below. Version 3.9.2 added three new embedded combination protocols for SmartTool+gripper or force sensor: End_SM_JD_V1.3.lua, End_SM_GZCX_V1.3.lua, End_SM_XJC_V1.3.lua.
+
+.. figure:: robot_peripherals/283.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑2-3 Preset Embedded Protocols for Welding Handle
+
+Automatic Generation of End Lua Protocol
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This newly added feature allows for automatic generation of the end Lua protocol through web page configuration for protocols related to embedded SmartTool welding handle peripherals (currently only four protocols support automatic generation: End_SmartTool_V1.3.lua, End_SM_JD_V1.3.lua, End_SM_GZCX_V1.3.lua, End_SM_XJC_V1.3.lua). The generated protocol is uploaded and applied to the end without requiring the user to write it. Users configure the A, B, C, D, E, and IO keys of the SmartTool welding handle according to their needs. After configuration is complete, the robot must be disabled, and then click "Apply." At this point, the page will prompt "Enter boot and apply open protocol?" Clicking Confirm will cause the robot to enter boot state and automatically upload the automatically generated end Lua protocol. After restarting the robot, the SmartTool can be used according to the configured keys.
+
+.. figure:: robot_peripherals/284.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑2-4 Automatic Generation of SmartTool Welding Handle Configuration Protocol
+
+.. figure:: robot_peripherals/285.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.3‑2-5 Page Prompt "Enter boot and apply open protocol?"
+
+SmartTool Program Generation Template Import
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If the SmartTool key is configured with the program generation function, based on the open protocol, two types of generated programs are provided: a blank Lua program is generated by default, or the user can choose to upload a template starting with "template_" as the template for the new program. When the new program selects the template program, the Lua file generated by triggering "New Program" on the SmartTool includes the content of the uploaded template file. Any subsequently added instructions are appended after the template content.
+
+.. figure:: robot_peripherals/286.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.3‑2-6 SmartTool Program Generation Template Import
+
+SmartTool Motion Instruction Point Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+When configuring the "PTP," "LIN," and "ARC" instructions in SmartTool, you can choose the storage database for the generated instruction points to be "Global Teaching Points" or "Local Teaching Points." When "Global Teaching Points" is selected, the generated instruction points can be viewed through "Teaching Program," "Teaching Points." When "Local Teaching Points" is selected, the generated instruction points can be viewed through "Teaching Program," "Program Programming," "Local Teaching Points."
+
+.. figure:: robot_peripherals/287.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.3‑2-7 SmartTool Motion Instruction Point "Global Teaching Points" and "Local Teaching Points" Configuration
+
+SmartTool Anti-Mistouch Mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The SmartTool based on the open protocol adds an anti-mistouch mode. Click "Initial Settings," "Peripherals," "Welding Handle," "Custom Protocol" in sequence. After enabling the end protocol, you can see the switch for "Anti-Mistouch Mode." When this function is enabled, the two key functions "Undo Program" and "Clear Program" on the SmartTool need to be pressed twice to trigger.
+
+.. figure:: robot_peripherals/288.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑2-8 SmartTool "Anti-Mistouch Mode" Function
+
+Example of Lua End Peripheral Protocol for Welding Handle
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The functions of the six keys A, B, C, D, E, and IO can be modified and defined by changing the key value on line 31 of the code. Among them, K38=Getbit(R[7],1) and K0=Getbit(R[7],2) are for "Clear Program" and "Undo Key" respectively and cannot be modified. The subsequent five K values can be modified according to the definitions in the *End Full Peripheral Protocol* document. In this example (embedded SmartTool protocol), the corresponding key functions are: A: LIN, B: PTP, C: Create Program, D: Weld Interruption Recovery, E: Weld Interruption Exit, IO: LIN+Welding+Weaving.
+
+.. centered:: Example of Lua End Peripheral Protocol for Welding Handle (SmartTool)
+  
+.. code-block:: 
+   :linenos:
+
+   function Getbit(X,Bit)
+   return ((X&(1<<Bit))>>Bit)
+   end
+
+   if(Getbit(GetRobotState(),0)==1)then
+   local SetParams={B6=3}-- B6 - Operating DO port number is DO3
+   SetWeldParams(SetParams)
+   while(1)
+   do
+   IwdgTaskHandle()
+   MainLoop()
+   UpDownLoadHandle()
+   SdoRwPara()
+   EndErrClear()
+   local BFlag=LuaBreak()
+   if(BFlag==1)then
+   break
+   end
+   local R={0}
+   local T={0x7D,0x01,0x30,0xC0,0x00,0x04,0x00,0x00,0x00,0x00}
+   DelayMs(100)
+   T[7],T[8],T[9],T[10]=GetIoCmd()
+   Dword=GetRobotState()
+   T[7]=Getbit(Dword,4)
+   T[12],T[11]=WeldToolCrcValue(T)
+   T[13]=0x0E
+   WeldToolSlaveSetCmd(T)
+   DelayMs(3)
+   Len=EndRxWeldData(R)
+   if((Len==13)and(R[1]==0x7D)and(R[2]==0x01)and(R[3]==0x30))then
+   local key={K38=Getbit(R[7],1),K0=Getbit(R[7],2),K3=Getbit(R[7],3),K25=Getbit(R[7],4),K39=Getbit(R[7],5),K27=Getbit(R[7],6),K28=Getbit(R[7],7), K44=Getbit(R[8],0),
+   K6=Getbit(R[8],1),K7=Getbit(R[8],2)}--smarttool welding handle key settings, Undo key - K38 Undo Program; Clear key - K0 Clear Program; A key - K3 LIN; B key - K25 PTP; C key - K39 Create Program; D key - K27 Weld Interruption Recovery; E key - K28 Weld Interruption Exit; IO key - K44 LIN+Welding+Weaving  Manual/Auto key - K6 Manual/Auto; Run/Pause key - K7 Run/Pause
+   SetWeldToolKeys(key)
+   end
+   LuaGc()
+   end
+   end
 
 Sensor Load Identification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

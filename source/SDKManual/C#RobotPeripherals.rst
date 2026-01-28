@@ -1533,23 +1533,24 @@ Laser Tracking Replay
 
 Laser Weld Seam Trajectory Recording and Replay
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.8  Web-3.8.6
 
 .. code-block:: c#
     :linenos:
 
-
     /**
-    * @brief Laser weld seam trajectory recording and replay
-    * @param [in] delayMode Mode 0-delay time 1-delay distance
-    * @param [in] delayTime Delay time in ms
-    * @param [in] delayDisExAxisNum Extended axis number
-    * @param [in] delayDis Delay distance in mm
-    * @param [in] sensitivePara Compensation sensitivity coefficient
-    * @param [in] speed Speed in %
-    * @return Error code
+    * @brief Laser Seam Trajectory Recording and Replay
+    * @param [in] delayMode Mode 0-Delay Time 1-Delay Distance
+    * @param [in] delayTime Delay time in milliseconds (ms)
+    * @param [in] delayDisExAxisNum Extended Axis Number
+    * @param [in] delayDis Delay distance in millimeters (mm)
+    * @param [in] sensitivePara Compensation Sensitivity Coefficient
+    * @param [in] trackMode Fixed-point Tracking Type. 0-Extended Axis Asynchronous Motion; 1-Robot
+    * @param [in] triggerMode Fixed-point Tracking Trigger Method. 0-Tracking Duration; 1-IO
+    * @param [in] runTime Robot Fixed-point Tracking Duration in seconds (s)
+    * @param [in] speed Speed in percentage (%)
+    * @return Error Code
     */
-    public int LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum, double delayDis, double sensitivePara, double speed)
+    public int LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum,double delayDis, double sensitivePara, int trackMode, int triggerMode,double runTime, double speed)
 
 Move to Laser Record Start Point
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++

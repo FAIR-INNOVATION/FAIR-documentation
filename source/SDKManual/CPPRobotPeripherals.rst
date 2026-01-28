@@ -1541,16 +1541,19 @@ Laser Seam Trajectory Recording and Replay
     :linenos:
 
     /**
-     * @brief Laser Seam Trajectory Recording and Replay
-     * @param [in] delayMode Mode 0- Delay time 1- Delay distance
-     * @param [in] delayTime Delay time, unit ms
-     * @param [in] delayDisExAxisNum Extended axis number
-     * @param [in] delayDis Delay distance, unit mm
-     * @param [in] sensitivePara Compensation sensitivity coefficient
-     * @param [in] speed Speed, unit %
-     * @return Error code
-     */
-    errno_t LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum, double delayDis, double sensitivePara, double speed);
+    * @brief Laser Seam Trajectory Recording and Replay
+    * @param [in] delayMode Mode 0-Delay Time 1-Delay Distance
+    * @param [in] delayTime Delay time in milliseconds (ms)
+    * @param [in] delayDisExAxisNum Extended Axis Number
+    * @param [in] delayDis Delay distance in millimeters (mm)
+    * @param [in] sensitivePara Compensation Sensitivity Coefficient
+    * @param [in] trackMode Fixed-point Tracking Type. 0-Extended Axis Asynchronous Motion; 1-Robot
+    * @param [in] triggerMode Fixed-point Tracking Trigger Method. 0-Tracking Duration; 1-IO
+    * @param [in] runTime Robot Fixed-point Tracking Duration in seconds (s)
+    * @param [in] speed Speed in percentage (%)
+    * @return Error Code
+    */
+    errno_t LaserSensorRecordandReplay(int delayMode, int delayTime, int delayDisExAxisNum, double delayDis, double sensitivePara, int trackMode, int triggerMode, double runTime, double speed);
                                 
 Move to Laser Recorded Start Point
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1221,3 +1221,116 @@ Robot velocity feedforward coefficient code example
     rtn,getRadio = robot.GetVelFeedForwardRatio()
     print(f"{getRadio[0]},{getRadio[1]},{getRadio[2]},{getRadio[3]},{getRadio[4]},{getRadio[5]}")
     robot.CloseRPC()
+
+Photoelectric Sensor TCP Calibration - Compute Tool RPY
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``TCPComputeRPY(Btool, Etool, sensor, radius, dz)``"
+    "Description", "Photoelectric Sensor TCP Calibration - Compute Tool RPY"
+    "Required Parameters", "
+    - ``Btool``: Robot Cartesian position
+    - ``Etool``: Current tool coordinate values
+    - ``sensor``: Current sensor coordinate values (not yet available)
+    - ``radius``: Circular motion radius in mm (not yet available)
+    - ``dz``: Movement distance along the negative Z-axis of the base coordinate system; when dz = 10000, the function directly returns tool RPY"
+    "Default Parameters", "None"
+    "Return Value", "- Error code. Success - 0, Failure - errcode"
+
+Photoelectric Sensor TCP Calibration - Compute Tool XYZ
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``TCPComputeXYZ(select, originDirection, pos1, pos2, pos3, pos4)``"
+    "Description", "Photoelectric Sensor TCP Calibration - Compute Tool XYZ"
+    "Required Parameters", "
+    - ``select``: 0-Compute tool TCP; 1-Compute sensor origin; 2-Compute sensor orientation; 3-Directly return tool TCP; 4-Record current workpiece coordinate system and tool coordinate system
+    - ``originDirection``: 0-X direction; 1-Y direction; 2-Z direction
+    - ``pos1``: Robot Cartesian position 1
+    - ``pos2``: Robot Cartesian position 2
+    - ``pos3``: Robot Cartesian position 3
+    - ``pos4``: Robot Cartesian position 4"
+    "Default Parameters", "None"
+    "Return Value", "
+    - Error code. Success - 0, Failure - errcode
+    - Return value (returned on successful call) TCP Tool XYZ values"
+
+Photoelectric Sensor TCP Calibration - Start Recording Flange Center Position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``TCPRecordFlangePosStart()``"
+    "Description", "Photoelectric Sensor TCP Calibration - Start Recording Flange Center Position"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code. Success - 0, Failure - errcode"
+
+Photoelectric Sensor TCP Calibration - Stop Recording Flange Center Position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``TCPRecordFlangePosEnd()``"
+    "Description", "Photoelectric Sensor TCP Calibration - Stop Recording Flange Center Position"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code. Success - 0, Failure - errcode"
+
+Photoelectric Sensor TCP Calibration - Get Tool Center Point Position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``TCPGetRecordFlangePos()``"
+    "Description", "Photoelectric Sensor TCP Calibration - Get Tool Center Point Position"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "
+    - Error code. Success - 0, Failure - errcode
+    - Return value (returned on successful call) TCP Tool center point position (x, y, z)"
+
+Photoelectric Sensor TCP Calibration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``PhotoelectricSensorTCPCalibration(luaPath, offsetX)``"
+    "Description", "Photoelectric Sensor TCP Calibration"
+    "Required Parameters", "
+    - ``luaPath``: Automatic calibration Lua program path: For QX version robots - '/fruser/FR_CalibrateTheToolTcp.lua'; For LA version robots - '/usr/local/etc/controller/lua/FR_CalibrateTheToolTcp.lua'
+    - ``offsetX``: Teaching point offset (x, y, z) in mm"
+    "Default Parameters", "None"
+    "Return Value", "
+    - Error code. Success - 0, Failure - errcode
+    - Return value (returned on successful call) TCP Tool XYZ values"
+
+Photoelectric Sensor TCP Calibration Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos: 
+
+    from fairino import Robot
+    import time
+    robot = Robot.RPC('192.168.58.2')
+    offset = [10.0, 10.0, 3.0]
+    TCP = [0.0] * 6
+    rtn, TCP = robot.PhotoelectricSensorTCPCalibration("/fruser/FR_CalibrateTheToolTcp.lua", offset)
+    print(f"PhotoelectricSensorTCPCalibration rtn is {rtn},{TCP[0]},{TCP[1]},{TCP[2]},{TCP[3]},{TCP[4]},{TCP[5]}")
+    robot.CloseRPC()
+    return 0

@@ -1910,3 +1910,29 @@ Robot Intersecting Line Motion Code Example
         robot.CloseRPC();
         return ;
     }
+
+Stationary Air Motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Stationary Air Motion
+    * @return Error code
+    */
+    public int MoveStationary()
+
+Stationary Air Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    public void LaserSensorRecordandReplay()
+    {
+        int rtn = robot.LaserSensorRecordandReplay(0, 10, 1, 0, 0.1, 1, 1, 10, 100);
+        Console.WriteLine($"LaserSensorRecordandReplay rtn is {rtn}");
+        rtn = robot.MoveStationary();
+        Console.WriteLine($"MoveStationary rtn is {rtn}");
+        rtn = robot.LaserSensorRecord1(0, 10);
+        Console.WriteLine($"LaserSensorRecord1 rtn is {rtn}"); 
+    }

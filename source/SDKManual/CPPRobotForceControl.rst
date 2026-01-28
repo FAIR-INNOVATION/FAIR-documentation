@@ -528,9 +528,76 @@ Rotary Insertion
     * @param  [in] orn  Force/torque direction, 1-Along z-axis, 2-Around z-axis
     * @param  [in] max_angAcc  Maximum rotational acceleration in deg/s^2, not currently used, default is 0
     * @param  [in] rotorn  Rotation direction, 1-Clockwise, 2-Counterclockwise
+    * @param  [in] strategy Processing strategy for undetected force/torque, 0-Error; 1-Warning, continue motion
     * @return  Error code
     */   
-    errno_t  FT_RotInsertion(int rcs, float angVelRot, float ft, float max_angle, uint8_t orn, float max_angAcc, uint8_t rotorn);    
+    errno_t FT_RotInsertion(int rcs, float angVelRot, float ft, float max_angle, uint8_t orn, float max_angAcc, uint8_t rotorn, int strategy = 0);
+
+Example code for force sensor rotation insertion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestMove(void)
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(-11.904, -99.669, 117.473, -108.616, -91.726, 74.256);
+        JointPos j2(-45.615, -106.172, 124.296, -107.151, -91.282, 74.255);
+        JointPos j3(-29.777, -84.536, 109.275, -114.075, -86.655, 74.257);
+        JointPos j4(-31.154, -95.317, 94.276, -88.079, -89.740, 74.256);
+        DescPose desc_pos1(-419.524, -13.000, 351.569, -178.118, 0.314, 3.833);
+        DescPose desc_pos2(-321.222, 185.189, 335.520, -179.030, -1.284, -29.869);
+        DescPose desc_pos3(-487.434, 154.362, 308.576, 176.600, 0.268, -14.061);
+        DescPose desc_pos4(-443.165, 147.881, 480.951, 179.511, -0.775, -15.409);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos(0, 0, 0, 0);
+        int tool = 0;
+        int user = 0;
+        float vel = 100.0;
+        float acc = 100.0;
+        float ovl = 100.0;
+        float oacc = 100.0;
+        float blendT = 0.0;
+        float blendR = 0.0;
+        uint8_t flag = 0;
+        uint8_t search = 0;
+        int blendMode = 0;
+        int velAccMode = 0;
+        robot.SetSpeed(20);
+        rtn = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        printf("movej errcode:%d\n", rtn);
+        rtn = robot.MoveL(&j2, &desc_pos2, tool, user, vel, acc, ovl, blendR, blendMode, &epos, search, flag, &offset_pos, oacc, velAccMode);
+        printf("movel errcode:%d\n", rtn);
+        rtn = robot.MoveC(&j3, &desc_pos3, tool, user, vel, acc, &epos, flag, &offset_pos, &j4, &desc_pos4, tool, user, vel, acc, &epos, flag, &offset_pos, ovl, blendR, oacc, velAccMode);
+        printf("movec errcode:%d\n", rtn);
+        rtn = robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        printf("movej errcode:%d\n", rtn);
+        rtn = robot.Circle(&j3, &desc_pos3, tool, user, vel, acc, &epos, &j1, &desc_pos1, tool, user, vel, acc, &epos, ovl, flag, &offset_pos, oacc, -1, velAccMode);
+        printf("circle errcode:%d\n", rtn);
+        rtn = robot.MoveCart(&desc_pos4, tool, user, vel, acc, ovl, blendT, -1);
+        printf("MoveCart errcode:%d\n", rtn);
+        rtn = robot.MoveJ(&j1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        printf("movej errcode:%d\n", rtn);
+        rtn = robot.MoveL(&desc_pos2, tool, user, vel, acc, ovl, blendR, blendMode, &epos, search, flag, &offset_pos, -1, velAccMode);
+        printf("movel errcode:%d\n", rtn);
+        rtn = robot.MoveC(&desc_pos3, tool, user, vel, acc, &epos, flag, &offset_pos, &desc_pos4, tool, user, vel, acc, &epos, flag, &offset_pos, ovl, blendR, -1, velAccMode);
+        printf("movec errcode:%d\n", rtn);
+        rtn = robot.MoveJ(&j2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
+        printf("movej errcode:%d\n", rtn);
+        rtn = robot.Circle(&desc_pos3, tool, user, vel, acc, &epos, &desc_pos1, tool, user, vel, acc, &epos, ovl, flag, &offset_pos, oacc, blendR, -1, velAccMode);
+        printf("circle errcode:%d\n", rtn);
+        robot.CloseRPC();
+        return 0;
+    }
 
 Linear Insertion
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -1190,7 +1257,7 @@ Robot Impedance Start/Stop Control Code Example
     }
             
 Enable torque compensation function and compensation coefficient
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 .. code-block:: c++
     :linenos:
