@@ -2039,6 +2039,24 @@ The maximum load that the FR5 collaborative robot can carry is 7kg, and the rate
 
 .. centered:: Figure 3.4-19 FR5 Model Collaborative Robot Load Curve
 
+FR5-WML Model Collaborative Robot Payload Curve
+*********************************************************
+
+The FR5-WML model collaborative robot has a maximum payload capacity of 7kg and a rated payload of 5kg. The payload curve is shown in the figure. The specific interpretation of the payload curve is as follows:
+
+(1) Within the "blue envelope": Full performance - can run most trajectories with friction compensation coefficients all at 1, dynamics 2.0, 100% speed, 360 deg/s² acceleration (maintenance mode).
+(2) Within the "red envelope": Extended payload capacity - can operate under the following conditions:
+
+  ① Enable "Time-optimal Mode";
+
+  ② Reduce robot working range or lower operating speed.
+
+.. figure:: installation/127.png
+	:align: center
+	:width: 5in
+
+.. centered:: Figure 3.4-20 FR5-WML Model Collaborative Robot Payload Curve
+
 FR10 Model Collaborative Robot Load Curve
 *******************************************
 
@@ -2056,7 +2074,7 @@ The maximum load that the FR10 collaborative robot can carry is 14kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-20 FR10 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-21 FR10 Model Collaborative Robot Load Curve
   
 FR16 Model Collaborative Robot Load Curve
 **********************************************
@@ -2075,7 +2093,7 @@ The maximum load that the FR16 collaborative robot can carry is 20kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-21 FR16 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-22 FR16 Model Collaborative Robot Load Curve
 
 FR20 Model Collaborative Robot Load Curve
 *************************************************
@@ -2094,7 +2112,7 @@ The maximum load that the FR20 collaborative robot can carry is 25kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-22 FR20 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-23 FR20 Model Collaborative Robot Load Curve
 
 FR30 Model Collaborative Robot Load Curve
 *************************************************
@@ -2113,7 +2131,7 @@ The maximum load that the FR30 collaborative robot can carry is 35kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-23 FR30 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-24 FR30 Model Collaborative Robot Load Curve
 
 Control connection
 ------------------------

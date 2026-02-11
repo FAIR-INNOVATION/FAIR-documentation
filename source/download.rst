@@ -283,6 +283,8 @@ Ontology & Dimensional Drawings
 
     :download:`Intelligent Welding Workstation STEP Models <_static/_doc/Intelligent welding.zip>`
 
+    :download:`Envelope Diagram STEP Model <_static/_doc/Envelope Diagram.zip>`
+
 FAIRINO SimMachine
 -----------------------
 
