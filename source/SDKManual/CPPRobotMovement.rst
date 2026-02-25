@@ -708,19 +708,20 @@ Cartesian Space Servo Mode Motion
 
     /**
     * @brief Cartesian space servo mode motion
-    * @param [in] mode 0-Absolute motion (base coordinate), 1-Incremental motion (base coordinate), 2-Incremental motion (tool coordinate)
+    * @param [in] mode 0-Absolute motion (base coordinate system), 1-Incremental motion (base coordinate system), 2-Incremental motion (tool coordinate system)
     * @param [in] desc_pos Target Cartesian pose or pose increment
-    * @param [in] pos_gain Pose increment proportional coefficient, only effective in incremental motion, range [0~1]
-    * @param [in] acc Acceleration percentage [0~100] (not yet available, default 0)
-    * @param [in] vel Speed percentage [0~100] (not yet available, default 0)
-    * @param [in] cmdT Command cycle in seconds, recommended range [0.001~0.0016]
-    * @param [in] filterT Filter time in seconds (not yet available, default 0)
-    * @param [in] gain Target position proportional amplifier (not yet available, default 0)
+    * @param [in] exaxis Extended axis position
+    * @param [in] pos_gain Pose increment proportionality coefficient, only effective in incremental motion, range [0~1]
+    * @param [in] acc Acceleration percentage, range [0~100], temporarily not available, default 0
+    * @param [in] vel Velocity percentage, range [0~100], temporarily not available, default 0
+    * @param [in] cmdT Command transmission period, unit s, recommended range [0.001~0.016]
+    * @param [in] filterT Filter time, unit s, temporarily not available, default 0
+    * @param [in] gain Proportional amplifier for target position, temporarily not available, default 0
     * @return Error code
     */
-    errno_t ServoCart(int mode, DescPose *desc_pose, float pos_gain[6], float acc, float vel, float cmdT, float filterT, float gain);
+    errno_t ServoCart(int mode, DescPose *desc_pose, ExaxisPos exaxis, float pos_gain[6], float acc, float vel, float cmdT, float filterT, float gain);
 
-Cartesian Space Servo Mode Motion Example
+Cartesian Space Servo Mode Motion Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
@@ -737,24 +738,25 @@ Cartesian Space Servo Mode Motion Example
             return -1;
         }
         robot.SetReConnectParam(true, 30000, 500);
-        DescPose desc_pos_dt;
-        memset(&desc_pos_dt, 0, sizeof(DescPose));
-        desc_pos_dt.tran.z = -0.5;
-        float pos_gain[6] = { 0.0,0.0,1.0,0.0,0.0,0.0 };
-        int mode = 2;
+        DescPose desc_pos_dt = { 83.00800, 50.525000 , 29.246 , 179.629 , -7.138 , -166.975 };
+        ExaxisPos exaxis = { 100.0, 0.0, 0.0, 0.0 };
+        float pos_gain[6] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        int mode = 0;
         float vel = 0.0;
         float acc = 0.0;
-        float cmdT = 0.008;
+        float cmdT = 0.001;
         float filterT = 0.0;
         float gain = 0.0;
         uint8_t flag = 0;
-        int count = 100;
+        int count = 5000;
         robot.SetSpeed(20);
         while (count)
         {
-            robot.ServoCart(mode, &desc_pos_dt, pos_gain, acc, vel, cmdT, filterT, gain);
+            rtn = robot.ServoCart(mode, &desc_pos_dt, exaxis, pos_gain, acc, vel, cmdT, filterT, gain);
+            printf("ServoCart rtn is %d\n", rtn);
             count -= 1;
-            robot.WaitMs(cmdT * 1000);
+            desc_pos_dt.tran.x += 0.01;
+            exaxis.ePos[0] += 0.01;
         }
         robot.CloseRPC();
         return 0;

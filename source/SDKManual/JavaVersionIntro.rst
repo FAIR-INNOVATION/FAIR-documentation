@@ -12,7 +12,18 @@ Version Update Description
    * - **Version**
      - **Date**
      - **Update Description**
-
+   
+   * - V3.9.3
+     - 2026-02-11
+     - | 1.ServoCart() interface added extended axis parameters
+       | 2.SetOutputResetCtlBoxDO() interface added parameter for whether to reload DO state before reset after pause resume
+       | 3.SetOutputResetCtlBoxAO() interface added parameter for whether to reload DO state before reset after pause resume
+       | 4.SetOutputResetAxleDO() interface added parameter for whether to reload DO state before reset after pause resume
+       | 5.SetOutputResetAxleAO() interface added parameter for whether to reload DO state before reset after pause resume
+       | 6.SetOutputResetExtDO() interface added parameter for whether to reload DO state before reset after pause resume
+       | 7.SetOutputResetExtAO() interface added parameter for whether to reload DO state before reset after pause resume
+       | 8.SetOutputResetSmartToolDO() interface added parameter for whether to reload DO state before reset after pause resume
+       | 9.Added GetInverseKinExaxis() inverse kinematics solution interface including extended axis position
 
    * - V3.9.2
      - 2026-01-26

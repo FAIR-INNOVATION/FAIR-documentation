@@ -511,52 +511,55 @@ Joint Torque Control Code Example with Overspeed Protection
     robot.DragTeachSwitch(0)
     error = robot.ServoJTEnd()
 
-Servo-mode motion in Cartesian space
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Servo Mode Motion
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoCart(mode, desc_pos, pos_gain = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] , acc = 0.0, vel = 0.0, cmdT = 0.008, filterT = 0.0, gain = 0.0)``"
-    "Description", "Servo mode motion in Cartesian space"
-    "Mandatory parameters", "- ``mode``: [0]-absolute motion (base coordinate system), [1]-incremental motion (base coordinate system), [2]-incremental motion (tool coordinate system);
-    - ``desc_pos``: target Cartesian position/target Cartesian position increment;"
-    "Default_parameters", "- ``pos_gain``: bit-pose incremental scale factor, valid only for incremental motion, range [0~1], default [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
-    - ``acc``: acceleration, range [0 to 100], not open, default 0.0.
-    - ``vel``: velocity, range [0~100], not open, default 0.0.
-    - ``cmdT``: command send cycle, unit s, recommended range [0.001~0.0016], default is 0.008.
-    - ``filterT``: filter time in [s], not open, default is 0.0; ``filterT``: filter time in [s], not open, default is 0.0.
-    - ``gain``: proportional amplifier for target position, not open yet, default 0.0;"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``ServoCart(mode, desc_pos, exaxis, pos_gain=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0], acc=0.0, vel=0.0, cmdT=0.008,filterT=0.0, gain=0.0)``"
+    "Description", "Cartesian space servo mode motion"
+    "Required Parameters", "- ``mode``:[0]-Absolute motion (base coordinate system), [1]-Incremental motion (base coordinate system), [2]-Incremental motion (tool coordinate system);
+    - ``exaxis``:Extended axis position;
+    - ``desc_pos``:Target Cartesian position/Target Cartesian position increment;"
+    "Default Parameters", "- ``pos_gain``:Pose increment proportionality coefficient, only effective in incremental motion, range [0~1], default [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+    - ``acc``:Acceleration, range [0~100], temporarily not available, default 0.0;
+    - ``vel``:Velocity, range [0~100], temporarily not available, default 0.0;
+    - ``cmdT``:Command transmission period, unit s, recommended range [0.001~0.0016], default 0.008;
+    - ``filterT``:Filter time, unit [s], temporarily not available, default 0.0;
+    - ``gain``:Proportional amplifier for target position, temporarily not available, default 0.0;"
+    "Return Value", "Error code Success-0 Failure- errcode"
 
-Example of Cartesian space servo mode motion code
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Servo Mode Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    desc_pos_dt = [0.0,0.0,0.0,0.0,0.0,0.0]  # [x, y, z, rx, ry, rz]
-    desc_pos_dt[2] = -0.5 
-    pos_gain = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
-    mode = 2
+    desc_pos_dt = [83.00800, 50.525000, 29.246, 179.629, -7.138, -166.975]
+    exaxis = [100.0, 0.0, 0.0, 0.0]
+    pos_gain = [0.0] * 6
+    mode = 0
     vel = 0.0
     acc = 0.0
-    cmdT = 0.008
-    filterT = 0.0 
-    gain = 0.0 
+    cmdT = 0.001
+    filterT = 0.0
+    gain = 0.0
     flag = 0
-    count = 100 
+    count = 5000
     robot.SetSpeed(20)
-    while count > 0:
-        robot.ServoCart(mode=mode, desc_pos=desc_pos_dt, pos_gain=pos_gain, acc=acc, vel=vel, cmdT=cmdT, filterT=filterT, gain=gain)
+    while count:
+        rtn = robot.ServoCart(mode, desc_pos_dt, exaxis, pos_gain, acc, vel, cmdT, filterT, gain)
+        print(f"ServoCart rtn is {rtn}")
         count -= 1
-        time.sleep(cmdT)
+        desc_pos_dt[0] += 0.01
+        exaxis[0] += 0.01
     robot.CloseRPC()
+    return 0
 
 Start of spline motion
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,3 +1,33 @@
+Version V3.9.3
+-----------------
+
+Date: 2026-02-11
+
+- **Optimized SmartTool Motion Command Speed Settings**:
+    Path: Initial Setup -> Peripherals -> Welding Handle.
+  
+    Description: The speed setting range for PTP, LIN, and ARC commands has been adjusted to 0-100% (the original speed setting upper limit was 30%).
+
+- **Optimized Force Sensorless External Force Observation and Improved Drag Experience**:
+    Path: Auxiliary Applications -> Tool Applications -> Drag Lock.
+  
+    Description: Improved external force observation accuracy to ±0.5N.
+
+- **Optimized Modbus TCP Master Reconnection Mechanism**:
+    Path: Teach Program -> Program Programming -> Modbus TCP.
+  
+    Description: Added pause logic.
+
+- **Added Extended Axis Debugging Command Function**:
+    Path: Initial Setup -> Peripherals -> Extended Axis.
+  
+    Description: Implemented robot inverse kinematics solution in the extended axis coordinate system and ServoCart servo motion with extended axes.
+
+- **Added Pause/Resume DO Reset State Configurable Function**:
+    Path: Initial Setup -> Peripherals -> Welding Handle.
+  
+    Description: Option to choose whether the DO output state after resuming motion is consistent with the state before pause.
+    
 Version V3.9.2
 -----------------
 

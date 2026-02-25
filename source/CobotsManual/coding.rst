@@ -1171,6 +1171,148 @@ ServoJ motion control can be implemented in the LUA program through loops or by 
 
 .. centered:: Figure 9.5-29-8 Example of Continuous ServoJ Motion 1
 
+Extended Axis Debugging Instructions
+***********************************************************
+
+Overview
+""""""""""""""""""""""""""""""""""
+
+The GetInverseKinExaxis instruction interface for the inverse kinematics of extended axis target positions and the ServoCart instruction interface with extended axis positions support various scenarios where extended axes and robots are used simultaneously.
+
+Operation Process
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: The parameters and return value of the inverse kinematics GetInverseKinExaxis instruction interface are shown in the tables below.
+
+.. centered:: Table 9.5-1 GetInverseKinExaxis Parameters
+
+.. list-table::
+   :widths: 10 20 30 40
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Data Type**
+     - **Variable Name**
+     - **Detailed Description**
+
+   * - 1
+     - uint8_t
+     - posMode
+     - 0: Absolute pose, 1: Relative pose - Base coordinate system, 2: Relative pose - Tool coordinate system
+
+   * - 2
+     - float
+     - desePos[6]
+     - Robot Cartesian position
+
+   * - 3
+     - float
+     - exaxis[4]
+     - Extended axis position
+
+   * - 4
+     - int
+     - toolNum
+     - Tool number [0-14]
+
+   * - 5
+     - int
+     - workPieceNum
+     - Workpiece number [0-14]
+
+.. centered:: Table 9.5-2 GetInverseKinExaxis Return Value
+
+.. list-table::
+   :widths: 10 20 30 40
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Data Type**
+     - **Variable Name**
+     - **Detailed Description**
+
+   * - 1
+     - float
+     - jointPos[6]
+     - Joint position
+
+**Step2**: The calling format of the inverse kinematics GetInverseKinExaxis instruction in a Lua program is shown in the figure below. By simply inputting the parameters listed in the table, the corresponding joint values can be obtained. For calls in the SDK, refer to the corresponding SDK documentation.
+
+.. image:: coding/543.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-29-9 GetInverseKinExaxis Call in Lua
+
+**Step3**: The ServoCart instruction interface with extended axis positions is shown in the table below, with no return value.
+
+.. centered:: Table 9.5-3 ServoCart Parameters
+
+.. list-table::
+   :widths: 10 20 30 40
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Data Type**
+     - **Variable Name**
+     - **Detailed Description**
+
+   * - 1
+     - uint8_t
+     - posMode
+     - 0: Absolute pose, 1: Relative pose - Base coordinate system, 2: Relative pose - Tool coordinate system
+
+   * - 2
+     - float
+     - desePos[6]
+     - Robot Cartesian position
+
+   * - 3
+     - float
+     - gain[6]
+     - Pose proportionality coefficient, used in relative pose cases
+
+   * - 4
+     - float
+     - exaxis[4]
+     - Extended axis position
+
+   * - 5
+     - float
+     - acc
+     - Acceleration proportion, 0~100, default 0
+
+   * - 6
+     - float
+     - vel
+     - Velocity proportion, 0~100, default 0
+
+   * - 7
+     - float
+     - interval
+     - Instruction period [s]
+
+   * - 8
+     - float
+     - filterTime
+     - Filter time [s], temporarily unavailable
+
+   * - 9
+     - float
+     - posGain
+     - Proportional amplifier for target position, temporarily unavailable
+
+**Step4**: The calling format of the ServoCart instruction with extended axis positions in a Lua program is shown in the figure below. By simply inputting the parameters listed in the table, the robot can execute ServoCart motion with extended axis positions. For calls in the SDK, refer to the corresponding SDK documentation.
+
+.. image:: coding/544.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-29-10 ServoCart Call in Lua
+
 Trajctory command
 +++++++++++++++++++
 
@@ -2365,7 +2507,7 @@ The command includes nine commands: FT_Guard (collision detection), FT_Control (
 .. centered:: Figure 9.9-1 F/T command interface
 
 Force Control Rotation Insertion Optimization Function
-*************************************************
+***************************************************************
 
 Overview
 """"""""""""""""""""""""""""""""""

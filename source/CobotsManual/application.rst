@@ -223,13 +223,13 @@ Parameter Calibration
 
 .. centered:: Figure 14.5‑6 Parameter Calibration Results
 
-Torque Sensing and Compensation Using Dual Encoder Position Difference
+External Force Estimation and Torque Compensation Based on Momentum Observer
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Overview
 *****************************************
 
-Torque is estimated by utilizing the position difference between dual encoders (motor side and link side). This estimated torque is then used for feedforward compensation, reducing the startup torque when the robot is performing current loop dragging.
+After enabling the torque compensation function, the robot reduces the dragging torque during current loop dragging, improving the dragging experience.
 
 Operation Process
 *****************************************
@@ -250,7 +250,7 @@ Operation Process
 
 .. centered:: Chart 14.5‑8 Gain Setting
 
-.. note:: Drag gain setting range: 0-1. A higher gain results in greater compensated torque and smaller startup torque for the current loop.
+.. note:: Drag gain setting range: 0-1. The larger the gain, the greater the compensation torque, and the easier the dragging under the current loop.
 
 Assisted Drag Optimization Function Based on Joint Torque Sensor
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

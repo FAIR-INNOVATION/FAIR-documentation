@@ -374,6 +374,45 @@ Inverse kinematics calculation (reference position)
     */  
     int GetInverseKinRef(int posMode, DescPose desc_pos, JointPos joint_pos_ref, JointPos joint_pos);  
 
+Inverse Kinematics Solution, Cartesian Space Includes Extended Axis Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Inverse kinematics solution, Cartesian space includes extended axis position
+    * @param  type 0-Absolute pose (base coordinate system), 1-Incremental pose (base coordinate system), 2-Incremental pose (tool coordinate system)
+    * @param  desc_pos Cartesian pose
+    * @param  exaxis Extended axis position
+    * @param  tool Tool number
+    * @param  workPiece Workpiece number
+    * @param  joint_pos Joint position
+    * @return Error code
+    */
+    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos joint_pos)
+    
+Inverse Kinematics Solution Including Extended Axis Position Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void  TestInverseKinExaxis(Robot robot)
+    {
+        DescPose desc=new DescPose(99.957, -0.002, 29.994, -176.569, -6.757, -167.462);
+        ExaxisPos exaxis=new ExaxisPos(100.0, 0.0, 0.0, 0.0);
+        JointPos jointPos =new JointPos();
+        DescPose offsetPos =new DescPose();
+        ROBOT_STATE_PKG pkg=robot.GetRobotRealTimeState();
+        int toolnum = pkg.tool;
+        int workPcsNum = pkg.user;
+        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, jointPos);
+        System.out.printf("GetInverseKinExaxis joint is %f, %f, %f, %f, %f, %f\n", jointPos.J1, jointPos.J2, jointPos.J3, jointPos.J4, jointPos.J5, jointPos.J6);
+        robot.ExtAxisMove(exaxis, 100, -1);
+        robot.MoveJ(jointPos, desc, toolnum, workPcsNum, 100.0, 100.0, 100.0, exaxis, -1, 0, offsetPos);
+        robot.CloseRPC();
+        robot.Sleep(9999999);
+    }
+
 Check if inverse kinematics has solution  
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java  

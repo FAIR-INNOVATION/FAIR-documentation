@@ -407,8 +407,56 @@ Inverse kinematics solution (reference position)
     */    
     int GetInverseKinRef(int posMode, DescPose desc_pos, JointPos joint_pos_ref, ref JointPos joint_pos); 
 
-Get whether the inverse kinematics has a solution
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Inverse Kinematics Solution, Cartesian Space Includes Extended Axis Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Inverse kinematics solution, Cartesian space includes extended axis position
+    * @param [in] type 0-Absolute pose (base coordinate system), 1-Incremental pose (base coordinate system), 2-Incremental pose (tool coordinate system)
+    * @param [in] desc_pos Cartesian pose
+    * @param [in] exaxis Extended axis position
+    * @param [in] tool Tool number
+    * @param [in] workPiece Workpiece number
+    * @param [out] joint_pos Joint position
+    * @return Error code
+    */
+    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, ref JointPos joint_pos);
+
+Example Code for Inverse Kinematics Solution Including Extended Axis Position
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    public void TestInverseKinExaxis()
+    {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        
+
+        DescPose desc = new DescPose(99.957f, -0.002f, 29.994f, -176.569f, -6.757f, -167.462f);
+        ExaxisPos exaxis = new ExaxisPos(100.0f, 0.0f, 0.0f, 0.0f);
+        JointPos jointPos = new JointPos(0,0,0,0,0,0);
+        DescPose offsetPos = new DescPose(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        int rtn;
+        robot.GetRobotRealTimeState(ref pkg);
+        int toolnum = pkg.tool;
+        int workPcsNum = pkg.user;
+
+        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, ref jointPos);
+        Console.WriteLine($"GetInverseKinExaxis joint is {jointPos.jPos[0]}, {jointPos.jPos[1]}, {jointPos.jPos[2]}, {jointPos.jPos[3]}, {jointPos.jPos[4]}, {jointPos.jPos[5]}");
+
+        robot.ExtAxisMove(exaxis, 100, -1);
+
+        int blendMode = 0;
+        int velAccMode = 0;
+        float oacc = 100.0f;
+        byte flag = 0;
+        robot.MoveJ(jointPos, desc, toolnum, workPcsNum, (float)100.0, (float)100.0, (float)100.0, exaxis, -1, 0, offsetPos);
+    }
+
+Example Code for Inverse Kinematics Solution Including Extended Axis Position
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 

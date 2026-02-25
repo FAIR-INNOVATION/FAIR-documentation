@@ -351,125 +351,144 @@ Waiting control box digital, analog input signal code example
     print(f"WaitDI over; rtn is: {rtn}")
     robot.CloseRPC()
 
-Setting whether the output is reset after the control box DO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Control Box DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetOutputResetCtlBoxDO(resetFlag)``"
-    "Description", "Sets whether or not the output is reset after a control box DO stop/pause"
-    "Mandatory parameters", "- ``resetFlag``: 0-no reset; 1-reset"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``SetOutputResetCtlBoxDO(resetFlag,reloadFlag)``"
+    "Description", "Set whether control box DO output resets after stop/pause"
+    "Required Parameters", "
+    - ``resetFlag``：0-Do not reset; 1-Reset
+    - ``reloadFlag``：Whether to reload after pause resume, 0-Do not load; 1-Load"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
 
-Setting whether the output is reset after the control box AO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Control Box AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetOutputResetCtlBoxDO(resetFlag)``"
-    "Description", "Sets whether the outputs are reset after a control box AO stop/pause"
-    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``SetOutputResetCtlBoxAO(resetFlag,reloadFlag)``"
+    "Description", "Set whether control box AO output resets after stop/pause"
+    "Required Parameters", "
+    - ``resetFlag``：0-Do not reset; 1-Reset
+    - ``reloadFlag``：Whether to reload after pause resume, 0-Do not load; 1-Load"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
 
-Sets whether the output is reset after the end tool DO stops/pause.
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether End Tool DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetOutputResetAxleDO(resetFlag)``"
-    "Description", "Sets whether the output is reset after the end tool DO stops/pauses"
-    "Mandatory parameter", "- ``resetFlag``: 0 - no reset; 1 - reset"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``SetOutputResetAxleDO(resetFlag,reloadFlag)``"
+    "Description", "Set whether end tool DO output resets after stop/pause"
+    "Required Parameters", "
+    - ``resetFlag``：0-Do not reset; 1-Reset
+    - ``reloadFlag``：Whether to reload after pause resume, 0-Do not load; 1-Load"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
 
-Set whether the output is reset after the end tool AO stops/pauses
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether End Tool AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetOutputResetAxleAO(resetFlag)``"
-    "Description", "Sets whether the output is reset after the end tool AO stops/pauses"
-    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``SetOutputResetAxleAO(resetFlag,reloadFlag)``"
+    "Description", "Set whether end tool AO output resets after stop/pause"
+    "Required Parameters", "
+    - ``resetFlag``：0-Do not reset; 1-Reset
+    - ``reloadFlag``：Whether to reload after pause resume, 0-Do not load; 1-Load"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
 
-Sets whether the outputs are reset after an extended DO stop/pause.
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Extended DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype", "``SetOutputResetExtDO (resetFlag)``"
-    "Description", "Sets whether the output is reset after an extended DO stop/pause"
-    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``SetOutputResetExtDO (resetFlag,reloadFlag)``"
+    "Description", "Set whether extended DO output resets after stop/pause"
+    "Required Parameters", "
+    - ``resetFlag``：0-Do not reset; 1-Reset
+    - ``reloadFlag``：Whether to reload after pause resume, 0-Do not load; 1-Load"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
 
-Sets whether the output is reset after the expansion AO stops/pause.
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Extended AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetOutputResetExtAO (resetFlag)``"
-    "Description", "Sets whether the output is reset after an extended AO stop/pause"
-    "Mandatory parameter", "- ``resetFlag``: 0-no reset; 1-reset"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``SetOutputResetExtAO (resetFlag,reloadFlag)``"
+    "Description", "Set whether extended AO output resets after stop/pause"
+    "Required Parameters", "
+    - ``resetFlag``：0-Do not reset; 1-Reset
+    - ``reloadFlag``：Whether to reload after pause resume, 0-Do not load; 1-Load"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
 
-Sets whether the output is reset after the SmartTool is stopped/paused.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether SmartTool Output Resets After Stop/Pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetOutputResetSmartToolDO(resetFlag)``"
-    "Description", "Sets whether the output is reset after a SmartTool stop/pause"
-    "Mandatory parameter", "- ``resetFlag``: to reset or not to reset, 0 - no reset, 1 - reset"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
+    "Prototype", "``SetOutputResetSmartToolDO(resetFlag,reloadFlag)``"
+    "Description", "Set whether SmartTool output resets after stop/pause"
+    "Required Parameters", "
+    - ``resetFlag``：0-Do not reset; 1-Reset
+    - ``reloadFlag``：Whether to reload after pause resume, 0-Do not load; 1-Load"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode "
 
-Set the LUA program to stop/pause after the output reset code example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Code Example for Setting Output Reset After Lua Program Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 
     from fairino import Robot
     import time
-    # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
     for i in range(16):
         robot.SetDO(i, 1, 0, 0)
-        time.sleep(0.3)
-    resetFlag = 1
-    robot.SetOutputResetCtlBoxDO(resetFlag)    
-    robot.SetOutputResetCtlBoxAO(resetFlag)    
-    robot.SetOutputResetAxleDO(resetFlag)      
-    robot.SetOutputResetAxleAO(resetFlag)      
-    robot.SetOutputResetExtDO(resetFlag)       
-    robot.SetOutputResetExtAO(resetFlag)       
-    robot.SetOutputResetSmartToolDO(resetFlag) 
-    robot.ProgramLoad("/fruser/test0610.lua")
+        time.sleep(0.2)
+    resetFlag = 0
+    resumeReloadFlag = 0
+    rtn = robot.SetOutputResetCtlBoxDO(resetFlag, resumeReloadFlag)
+    robot.SetOutputResetCtlBoxAO(resetFlag, resumeReloadFlag)
+    robot.SetOutputResetAxleDO(resetFlag, resumeReloadFlag)
+    robot.SetOutputResetAxleAO(resetFlag, resumeReloadFlag)
+    robot.SetOutputResetExtDO(resetFlag, resumeReloadFlag)
+    robot.SetOutputResetExtAO(resetFlag, resumeReloadFlag)
+    robot.SetOutputResetSmartToolDO(resetFlag, resumeReloadFlag)
+    robot.ProgramLoad("/fruser/test.lua")
     robot.ProgramRun()
+    time.sleep(2)
+    robot.PauseMotion()
+    time.sleep(2)
+    robot.ResumeMotion()
+    time.sleep(2)
     robot.CloseRPC()
+    return 0

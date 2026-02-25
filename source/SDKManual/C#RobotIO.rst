@@ -361,111 +361,129 @@ Wait for the control box digital, analog input signal code example
         robot.WaitToolAI(0, 0, 50, 1000, 1);
         Console.WriteLine("WaitToolAI over; rtn is: " + rtn);
     }
-    
-Set whether or not the output is reset after the control box DO stops/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Set Whether Control Box DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Set whether the output is reset after the control box DO stop/pause.
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return Error code.
-    */
-    int SetOutputResetCtlBoxDO(int resetFlag).
+    /**
+    * @brief Set whether control box DO output resets after stop/pause
+    * @param [in] resetFlag 0-Do not reset; 1-Reset
+    * @param [in] reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetCtlBoxDO(int resetFlag, int reloadFlag);
 
-Set whether the output is reset after the control box AO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Control Box AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Sets whether outputs are reset after control box AO stop/pause.
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return Error code
-    */
-    int SetOutputResetCtlBoxAO(int resetFlag).
+    /**
+    * @brief Set whether control box AO output resets after stop/pause
+    * @param [in] resetFlag 0-Do not reset; 1-Reset
+    * @param [in] reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetCtlBoxAO(int resetFlag, int reloadFlag);
 
-Set whether the output is reset after the end tool DO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether End Tool DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Sets whether the output is reset after the end tool DO stops/pauses.
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return Error code.
-    */
-    int SetOutputResetAxleDO(int resetFlag).
+    /**
+    * @brief Set whether end tool DO output resets after stop/pause
+    * @param [in] resetFlag 0-Do not reset; 1-Reset
+    * @param [in] reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetAxleDO(int resetFlag, int reloadFlag);
 
-Sets whether the output is reset after the end tool AO stops/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether End Tool AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Sets whether output is reset after end tool AO stop/pause.
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return Error code.
-    */
-    int SetOutputResetAxleAO(int resetFlag).
+    /**
+    * @brief Set whether end tool AO output resets after stop/pause
+    * @param [in] resetFlag 0-Do not reset; 1-Reset
+    * @param [in] reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetAxleAO(int resetFlag, int reloadFlag);
 
-Sets whether the output is reset after an extended DO stop/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Extended DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Sets whether the output is reset after an extended DO stop/pause.
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return Error code.
-    */
-    int SetOutputResetExtDO(int resetFlag).
+    /**
+    * @brief Set whether extended DO output resets after stop/pause
+    * @param [in] resetFlag 0-Do not reset; 1-Reset
+    * @param [in] reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetExtDO(int resetFlag, int reloadFlag);
 
-Set whether the output is reset after the extended AO stops/pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Extended AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Sets whether the output is reset after an extended AO stop/pause.
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return ErrorCode
-    */
-    int SetOutputResetExtAO(int resetFlag).
+    /**
+    * @brief Set whether extended AO output resets after stop/pause
+    * @param [in] resetFlag 0-Do not reset; 1-Reset
+    * @param [in] reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetExtAO(int resetFlag, int reloadFlag);
 
-Set whether or not the output is reset after the SmartTool is stopped/paused
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether SmartTool Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Sets whether the output is reset after a SmartTool stop/pause.
-    * @param [in] resetFlag 0-no reset; 1-reset
-    * @return Error code.
-    */
-    int SetOutputResetSmartToolDO(int resetFlag).
+    /**
+    * @brief Set whether SmartTool output resets after stop/pause
+    * @param [in] resetFlag 0-Do not reset; 1-Reset
+    * @param [in] reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetSmartToolDO(int resetFlag, int reloadFlag);
 
-Setting the output reset after stopping/pausing the LUA program Code Example
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code Example for Setting Output Reset After Lua Program Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    private void button17_Click(object sender, EventArgs e)
+    public void TestDOReset()
     {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+
         for (int i = 0; i < 16; i++)
         {
             robot.SetDO(i, 1, 0, 0);
-            Thread.Sleep(300);
+            Thread.Sleep(200);
         }
+
         int resetFlag = 1;
-        int rtn = robot.SetOutputResetCtlBoxDO(resetFlag);
-        robot.SetOutputResetCtlBoxAO(resetFlag);
-        robot.SetOutputResetAxleDO(resetFlag);
-        robot.SetOutputResetAxleAO(resetFlag);
-        robot.SetOutputResetExtDO(resetFlag);
-        robot.SetOutputResetExtAO(resetFlag);
-        robot.SetOutputResetSmartToolDO(resetFlag);
-        robot.ProgramLoad("/fruser/Text1.lua");
+        int resumeReloadFlag = 1;
+        int rtn = robot.SetOutputResetCtlBoxDO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetCtlBoxAO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetAxleDO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetAxleAO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetExtDO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetExtAO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetSmartToolDO(resetFlag, resumeReloadFlag);
+
+        robot.ProgramLoad("/fruser/test.lua");
         robot.ProgramRun();
+
+        Thread.Sleep(2000);
+        robot.PauseMotion();
+        Thread.Sleep(2000);
+        robot.ResumeMotion();
+        Thread.Sleep(2000);
     }

@@ -841,56 +841,54 @@ Joint Torque Control Code Example with Overspeed Protection
         error = robot.ServoJTEnd(); // End servo motion
     }
 
-Cartesian space servo mode movement
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Servo Mode Motion
++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  Cartesian space servo mode movement
-    * @param  [in]  mode  0-absolute movement (base coordinate), 1-incremental movement (base coordinate), 2-incremental movement (tool coordinate)
-    * @param  [in]  desc_pose  Target cartesian pose or pose increment
-    * @param  [in]  pos_gain  Pose increment proportional coefficient, only effective in incremental movement, range [0~1]
-    * @param  [in]  acc  Acceleration percentage, range [0~100], not currently available, default 0
-    * @param  [in]  vel  Speed percentage, range [0~100], not currently available, default 0
-    * @param  [in]  cmdT  Command cycle in s, recommended range [0.001~0.0016]
-    * @param  [in]  filterT Filter time in s, not currently available, default 0
-    * @param  [in]  gain  Target position proportional amplifier, not currently available, default 0
-    * @return  Error code
+    * @brief Cartesian space servo mode motion
+    * @param mode 0-Absolute motion (base coordinate system), 1-Incremental motion (base coordinate system), 2-Incremental motion (tool coordinate system)
+    * @param desc_pose Target Cartesian pose or pose increment
+    * @param exaxis Extended axis position
+    * @param pos_gain Pose increment proportionality coefficient, only effective in incremental motion, range [0~1]
+    * @param acc Acceleration percentage, range [0~100], temporarily not available, default 0
+    * @param vel Velocity percentage, range [0~100], temporarily not available, default 0
+    * @param cmdT Command transmission period, unit s, recommended range [0.001~0.016]
+    * @param filterT Filter time, unit s, temporarily not available, default 0
+    * @param gain Proportional amplifier for target position, temporarily not available, default 0
+    * @return Error code
     */
-    int ServoCart(int mode, DescPose desc_pose, Object[] pos_gain, double acc, double vel, double cmdT, double filterT, double gain);
+    public int ServoCart(int mode, DescPose desc_pose, ExaxisPos exaxis, double[] pos_gain, double acc, double vel, double cmdT, double filterT, double gain)
 
-Cartesian space servo mode movement code example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Cartesian Space Servo Mode Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static int TestServoCart(Robot robot)
+    public static void TestServoCart1(Robot robot)
     {
-        DescPose desc_pos_dt=new DescPose(0,0,0,0,0,0);
-
-        desc_pos_dt.tran.z = -0.5;
-        Object[] pos_gain = { 0.0,0.0,1.0,0.0,0.0,0.0 };
-        int mode = 2;
+        DescPose desc_pos_dt = new DescPose(83.00800, 50.525000 , 29.246 , 179.629 , -7.138 , -166.975 );
+        ExaxisPos exaxis = new ExaxisPos( 100.0, 0.0, 0.0, 0.0 );
+        double[] pos_gain = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+        int mode = 0;
         double vel = 0.0;
         double acc = 0.0;
-        double cmdT = 0.008;
+        double cmdT = 0.001;
         double filterT = 0.0;
         double gain = 0.0;
         int flag = 0;
-        int count = 100;
-
+        int count = 5000;
         robot.SetSpeed(20);
-
         while (count>0)
         {
-            robot.ServoCart(mode, desc_pos_dt, pos_gain, acc, vel, cmdT, filterT, gain);
+            int rtn = robot.ServoCart(mode, desc_pos_dt, exaxis, pos_gain, acc, vel, cmdT, filterT, gain);
+            System.out.printf("ServoCart rtn is %d\n", rtn);
             count -= 1;
-            double time=cmdT*1000;
-            robot.WaitMs((int)time);
+            desc_pos_dt.tran.x += 0.01;
+            exaxis.axis1 += 0.01;
         }
-
-        return 0;
+        robot.CloseRPC();
     }
 
 Spline movement start

@@ -365,114 +365,124 @@ Wait for digital/analog input signal example
         return 0;
     }
 
-Set whether control box DO resets after stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Control Box DO Output Resets After Stop/Pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Set whether control box DO resets after stop/pause 
-    * @param [in] resetFlag  0-no reset; 1-reset
-    * @return Error code 
-    */ 
-    int SetOutputResetCtlBoxDO(int resetFlag);
+    /**
+    * @brief Set whether control box DO output resets after stop/pause
+    * @param resetFlag 0-Do not reset; 1-Reset
+    * @param reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetCtlBoxDO(int resetFlag, int reloadFlag)
 
-Set whether control box AO resets after stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Control Box AO Output Resets After Stop/Pause
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Set whether control box AO resets after stop/pause 
-    * @param [in] resetFlag  0-no reset; 1-reset
-    * @return Error code 
-    */ 
-    int SetOutputResetCtlBoxAO(int resetFlag);
+    /**
+    * @brief Set whether control box AO output resets after stop/pause
+    * @param resetFlag 0-Do not reset; 1-Reset
+    * @param reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetCtlBoxAO(int resetFlag, int reloadFlag)
 
-Set whether end tool DO resets after stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether End Tool DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Set whether end tool DO resets after stop/pause
-    * @param [in] resetFlag  0-no reset; 1-reset
-    * @return Error code 
-    */ 
-    int SetOutputResetAxleDO(int resetFlag);
+    /**
+    * @brief Set whether end tool DO output resets after stop/pause
+    * @param resetFlag 0-Do not reset; 1-Reset
+    * @param reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetAxleDO(int resetFlag, int reloadFlag)
 
-Set whether end tool AO resets after stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether End Tool AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Set whether end tool AO resets after stop/pause 
-    * @param [in] resetFlag  0-no reset; 1-reset
-    * @return Error code 
-    */ 
-    int SetOutputResetAxleAO(int resetFlag);
+    /**
+    * @brief Set whether end tool AO output resets after stop/pause
+    * @param resetFlag 0-Do not reset; 1-Reset
+    * @param reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetAxleAO(int resetFlag, int reloadFlag)
     
-Set whether extended DO resets after stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Whether Extended DO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Set whether extended DO resets after stop/pause
-    * @param [in] resetFlag  0-no reset; 1-reset
-    * @return Error code 
-    */ 
-    int SetOutputResetExtDO(int resetFlag);
+    /**
+    * @brief Set whether extended DO output resets after stop/pause
+    * @param resetFlag 0-Do not reset; 1-Reset
+    * @param reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetExtDO(int resetFlag, int reloadFlag)
     
-Set whether extended AO resets after stop/pause
+Set Whether Extended AO Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set whether extended AO output resets after stop/pause
+    * @param resetFlag 0-Do not reset; 1-Reset
+    * @param reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetExtAO(int resetFlag, int reloadFlag)
+
+Set Whether SmartTool Output Resets After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set whether SmartTool output resets after stop/pause
+    * @param resetFlag 0-Do not reset; 1-Reset
+    * @param reloadFlag Whether to reload after pause resume, 0-Do not load; 1-Load
+    * @return Error code
+    */
+    public int SetOutputResetSmartToolDO(int resetFlag, int reloadFlag)
+
+Code Example for Setting Output Reset After Lua Program Stop/Pause
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Set whether extended AO resets after stop/pause
-    * @param [in] resetFlag  0-no reset; 1-reset
-    * @return Error code 
-    */ 
-    int SetOutputResetExtAO(int resetFlag);
-
-Set whether SmartTool resets after stop/pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /** 
-    * @brief Set whether SmartTool resets after stop/pause
-    * @param [in] resetFlag  0-no reset; 1-reset
-    * @return Error code 
-    */ 
-    int SetOutputResetSmartToolDO(int resetFlag)
-
-LUA program output reset setting example
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    public static int TestDOReset(Robot robot)
+    public static void TestDOReset(Robot robot)
     {
-        int rtn=-1;
         for (int i = 0; i < 16; i++)
         {
             robot.SetDO(i, 1, 0, 0);
-            robot.Sleep(300);
+            robot.Sleep(200);
         }
-
         int resetFlag = 1;
-        rtn = robot.SetOutputResetCtlBoxDO(resetFlag);
-        robot.SetOutputResetCtlBoxAO(resetFlag);
-        robot.SetOutputResetAxleDO(resetFlag);
-        robot.SetOutputResetAxleAO(resetFlag);
-        robot.SetOutputResetExtDO(resetFlag);
-        robot.SetOutputResetExtAO(resetFlag);
-        robot.SetOutputResetSmartToolDO(resetFlag);
-
+        int resumeReloadFlag = 1;
+        int rtn = robot.SetOutputResetCtlBoxDO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetCtlBoxAO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetAxleDO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetAxleAO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetExtDO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetExtAO(resetFlag, resumeReloadFlag);
+        robot.SetOutputResetSmartToolDO(resetFlag, resumeReloadFlag);
         robot.ProgramLoad("/fruser/test.lua");
         robot.ProgramRun();
-        return 0;
+        robot.Sleep(2000);
+        robot.PauseMotion();
+        robot.Sleep(2000);
+        robot.ResumeMotion();
+        robot.Sleep(2000);
+        robot.CloseRPC();
     }

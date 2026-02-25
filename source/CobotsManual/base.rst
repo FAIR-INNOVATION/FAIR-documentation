@@ -1059,6 +1059,41 @@ Click "Initial - Base - I/O setup" on the left menu bar, click the "Output reset
 
 .. centered:: Figure 6.5‑9 Output reset configuration
 
+Pause/Resume DO Reset State Configurable Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++++
+This function optimizes the existing output reset function by adding configurable options in the I/O settings. It can be set to two types: Hold or Reset, where Reset can be further divided into Restore to Pre-reset State and Do Not Restore to Pre-reset State. Users can set different configuration options according to actual needs.
+
+Operation Process
++++++++++++++++++++++++++++++++
+**Step1**: Click sequentially on "Initial Setup" - "I/O Settings" - "Output Reset" instruction. Set the output state after stop/pause for DO or AO according to actual usage needs. The state can be set to "Hold" or "Reset". Only when set to "Reset", can "Restore to Pre-reset State" be further set.
+
+**Step2**: Set the state to "Hold". When clicking pause during Lua program execution, then clicking resume, the DO/AO output state remains unchanged throughout and stays triggered. When clicking stop during Lua program execution, the DO/AO output state remains unchanged. Parameter settings are as shown in the figure below.
+
+.. image:: base/030.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑10 State Set to "Hold"
+
+**Step3**: Set the state to "Reset" and "Restore to Pre-reset State" to "No". When clicking pause during Lua program execution, the DO/AO output state will be reset. When clicking resume, the DO/AO output state remains reset. When clicking stop during Lua program execution, the DO/AO output state will be reset. Parameter settings are as shown in the figure below.
+
+.. image:: base/096.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑11 State Set to "Reset" + "No"
+
+**Step4**: Set the state to "Reset" and "Restore to Pre-reset State" to "Yes". When clicking pause during Lua program execution, the DO/AO output state will be reset. When clicking resume, the DO/AO output state will be reloaded. When clicking stop during Lua program execution, the DO/AO output state will be reset. Parameter settings are as shown in the figure below.
+
+.. image:: base/097.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.5‑12 State Set to "Reset" + "Yes"
+
 Joint origin
 ------------------------
 

@@ -375,108 +375,115 @@ Code Example for Waiting for Control Box Digital and Analog Input Signals
     return 0;
     }
 
-Set Control Box DO Output Reset on Stop/Pause
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-
-.. code-block:: c++
-    :linenos:
-
-    /**
-    @brief Set whether to reset control box DO output on stop/pause
-    @param [in] resetFlag 0-no reset; 1-reset
-    @return Error code
-    */
-    errno_t SetOutputResetCtlBoxDO(int resetFlag);
-
-Set Control Box AO Output Reset on Stop/Pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C++SDK-v2.1.5.0
-
-.. code-block:: c++
-    :linenos:
-
-    /**
-    @brief Set whether to reset control box AO output on stop/pause
-    @param [in] resetFlag 0-no reset; 1-reset
-    @return Error code
-    */
-    errno_t SetOutputResetCtlBoxAO(int resetFlag);
-
-Set End Tool DO Output Reset on Stop/Pause
+Set Whether to Reset Control Box DO Output After Stop/Pause
 ++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    @brief Set whether to reset end tool DO output on stop/pause
-    @param [in] resetFlag 0-no reset; 1-reset
-    @return Error code
+    * @brief Set whether to reset control box DO output after stop/pause
+    * @param [in] resetFlag 0-do not reset; 1-reset
+    * @param [in] reloadFlag Whether to reload after pause recovery, 0-do not load; 1-load
+    * @return Error code
     */
-    errno_t SetOutputResetAxleDO(int resetFlag);
+    errno_t SetOutputResetCtlBoxDO(int resetFlag, int reloadFlag = 0);
 
-Set End Tool AO Output Reset on Stop/Pause
+Set Whether to Reset Control Box AO Output After Stop/Pause
 ++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    @brief Set whether to reset end tool AO output on stop/pause
-    @param [in] resetFlag 0-no reset; 1-reset
-    @return Error code
+    * @brief Set whether to reset control box AO output after stop/pause
+    * @param [in] resetFlag  0-do not reset; 1-reset
+    * @param [in] reloadFlag Whether to reload after pause recovery, 0-do not load; 1-load
+    * @return Error code
     */
-    errno_t SetOutputResetAxleAO(int resetFlag);
+    errno_t SetOutputResetCtlBoxAO(int resetFlag, int reloadFlag = 0);
 
-Set Extended DO Output Reset on Stop/Pause
+Set Whether to Reset End Tool DO Output After Stop/Pause
 ++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    @brief Set whether to reset extended DO output on stop/pause
-    @param [in] resetFlag 0-no reset; 1-reset
-    @return Error code
+    * @brief Set whether to reset end tool DO output after stop/pause
+    * @param [in] resetFlag  0-do not reset; 1-reset
+    * @param [in] reloadFlag Whether to reload after pause recovery, 0-do not load; 1-load
+    * @return Error code
     */
-    errno_t SetOutputResetExtDO(int resetFlag);
+    errno_t SetOutputResetAxleDO(int resetFlag, int reloadFlag = 0);
 
-Set Extended AO Output Reset on Stop/Pause
+Set Whether to Reset End Tool AO Output After Stop/Pause
 ++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    @brief Set whether to reset extended AO output on stop/pause
-    @param [in] resetFlag 0-no reset; 1-reset
-    @return Error code
+    * @brief Set whether to reset end tool AO output after stop/pause
+    * @param [in] resetFlag  0-do not reset; 1-reset
+    * @param [in] reloadFlag Whether to reload after pause recovery, 0-do not load; 1-load
+    * @return  Error code
     */
-    errno_t SetOutputResetExtAO(int resetFlag);
+    errno_t SetOutputResetAxleAO(int resetFlag, int reloadFlag = 0);
 
-Set SmartTool Output Reset on Stop/Pause
+Set Whether to Reset Extension DO Output After Stop/Pause
 ++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-
+    
 .. code-block:: c++
     :linenos:
 
     /**
-    @brief Set whether to reset SmartTool output on stop/pause
-    @param [in] resetFlag 0-no reset; 1-reset
-    @return Error code
+    * @brief Set whether to reset extension DO output after stop/pause
+    * @param [in] resetFlag  0-do not reset; 1-reset
+    * @param [in] reloadFlag Whether to reload after pause recovery, 0-do not load; 1-load
+    * @return  Error code
     */
-    errno_t SetOutputResetSmartToolDO(int resetFlag);
+    errno_t SetOutputResetExtDO(int resetFlag, int reloadFlag = 0);
 
-Code Example for Setting LUA Program Output Reset on Stop/Pause
+Set Whether to Reset Extension AO Output After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set whether to reset extension AO output after stop/pause
+    * @param [in] resetFlag  0-do not reset; 1-reset
+    * @param [in] reloadFlag Whether to reload after pause recovery, 0-do not load; 1-load
+    * @return  Error code
+    */
+    errno_t SetOutputResetExtAO(int resetFlag, int reloadFlag = 0);
+
+Set Whether to Reset SmartTool Output After Stop/Pause
+++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: C++SDK-v2.1.5.0
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set whether to reset SmartTool output after stop/pause
+    * @param [in] resetFlag  0-do not reset; 1-reset
+    * @param [in] reloadFlag Whether to reload after pause recovery, 0-do not load; 1-load
+    * @return  Error code
+    */
+    errno_t SetOutputResetSmartToolDO(int resetFlag, int reloadFlag = 0);
+
+Example Code for Setting LUA Program Output Reset After Stop/Pause
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
-
+    
 .. code-block:: c++
     :linenos:
 
@@ -485,28 +492,34 @@ Code Example for Setting LUA Program Output Reset on Stop/Pause
     ROBOT_STATE_PKG pkg = {};
     FRRobot robot;
     robot.LoggerInit();
-    robot.SetLoggerLevel(1);
+    robot.SetLoggerLevel(3);
     int rtn = robot.RPC("192.168.58.2");
     if (rtn != 0)
     {
-    return -1;
+        return -1;
     }
     robot.SetReConnectParam(true, 30000, 500);
     for (int i = 0; i < 16; i++)
     {
-    robot.SetDO(i, 1, 0, 0);
-    robot.Sleep(300);
+        robot.SetDO(i, 1, 0, 0);
+        robot.Sleep(200);
     }
-    int resetFlag = 1;
-    rtn = robot.SetOutputResetCtlBoxDO(resetFlag);
-    robot.SetOutputResetCtlBoxAO(resetFlag);
-    robot.SetOutputResetAxleDO(resetFlag);
-    robot.SetOutputResetAxleAO(resetFlag);
-    robot.SetOutputResetExtDO(resetFlag);
-    robot.SetOutputResetExtAO(resetFlag);
-    robot.SetOutputResetSmartToolDO(resetFlag);
+    int resetFlag = 0;
+    int resumeReloadFlag = 0;
+    rtn = robot.SetOutputResetCtlBoxDO(resetFlag, resumeReloadFlag);
+    robot.SetOutputResetCtlBoxAO(resetFlag, resumeReloadFlag);
+    robot.SetOutputResetAxleDO(resetFlag, resumeReloadFlag);
+    robot.SetOutputResetAxleAO(resetFlag, resumeReloadFlag);
+    robot.SetOutputResetExtDO(resetFlag, resumeReloadFlag);
+    robot.SetOutputResetExtAO(resetFlag, resumeReloadFlag);
+    robot.SetOutputResetSmartToolDO(resetFlag, resumeReloadFlag);
     robot.ProgramLoad("/fruser/test.lua");
     robot.ProgramRun();
+    robot.Sleep(2000);
+    robot.PauseMotion();
+    robot.Sleep(2000);
+    robot.ResumeMotion();
+    robot.Sleep(2000);
     robot.CloseRPC();
     return 0;
     }
