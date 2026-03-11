@@ -1365,6 +1365,78 @@ There are two software setting items for digital output: "Control Box DO Output 
      - Invalid
      - Valid
 
+Integrated Mini Control Box (DO Output Load Specifications)
+********************************************************************************************
+
+Background
+""""""""""""""""""""""""""""
+When the wide-voltage control box supplies power to a specific 6.5W solenoid valve, after running for some time (total IO trigger time approximately 3-5 minutes), the 24V circuit on the IO terminal block fluctuates, causing the robot to trigger an emergency stop alarm.
+
+Problem Description
+"""""""""""""""""""""""""""""""""""""
+
+1) Verification tests with a 7W solenoid valve showed the DO output transistor temperature reaching 158.1℃;
+2) Prolonged operation at this temperature poses a risk of short circuit burnout, which could trigger the 24V current-limiting chip protection;
+3) The current-limiting chip supplies power to DO outputs and force-guided relays, etc. When force-guided relays disconnect, the main body loses power, resulting in an emergency stop.
+
+Root Cause
+"""""""""""""""""""""""""""""""""""""
+The digital output (DO) of the wide-voltage control box uses a push-pull circuit design. The lower transistor (PNP transistor) operates in the linear region and is not fully saturated, causing the voltage drop across the transistor to increase with the load.
+
+Temporary Measure
+"""""""""""""""""""""""""""""""""""""
+Control DO outputs using relay isolation, i.e., by connecting an external low-power relay (approx. 40mA) to control high-power loads like solenoid valves.
+
+Permanent Solution
+"""""""""""""""""""""""""""""""""""""
+Replace the PNP transistor in the DO output push-pull circuit with a PNP Darlington transistor. This modification ensures the lower transistor in the push-pull output operates in the saturation region. Specific load parameters are shown in the table below.
+
+User Manual Update Content
+"""""""""""""""""""""""""""""""""""""
+The DO load specifications for AC narrow-voltage / DC control boxes have been added. The following content is appended at the end of section "3.5.6. General Specifications for All Digital I/O" in the user manual.
+
+The electrical specifications for digital DO loads are shown in the table below.
+
+.. centered:: Table 3.3-7 Electrical Specifications for Single-Channel Digital DO Load
+
+.. list-table::
+   :widths: 30 20 20 30
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type**
+     - **DO Output Type**
+     - **Power Supply Type**
+     - **Maximum Single-Channel DO Load**
+
+   * - DC/AC Narrow-Voltage Control Box
+     - NPN Output
+     - External 24V Power Supply
+     - | Channels 1-4: 400mA
+       | Channels 5-8: 250mA
+       | Channels 9-16: 125mA
+
+   * - DC/AC Narrow-Voltage Control Box
+     - NPN Output
+     - Internal 24V Power Supply
+     - | Channels 1-4: 300mA
+       | Channels 5-8: 190mA
+       | Channels 9-16: 90mA
+
+   * - AC Wide-Voltage Control Box
+     - NPN/PNP Output
+     - External 24V Power Supply
+     - | Channels 1-2: 200mA
+       | Channels 3-8: 100mA
+       | Channels 9-16: 60mA
+
+   * - AC Wide-Voltage Control Box
+     - NPN/PNP Output
+     - Internal 24V Power Supply
+     - | Channels 1-2: 200mA
+       | Channels 3-8: 100mA
+       | Channels 9-16: 60mA
+
 Inspection maintenance plan
 ++++++++++++++++++++++++++++++++++
 
