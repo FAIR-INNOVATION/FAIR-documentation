@@ -1226,7 +1226,7 @@ The digital output of DC control box and AC narrow voltage control box only supp
    * - AC Narrow Voltage Control Box
      - NPN Output
 
-   * - AC Narrow Voltage Control Box
+   * - AC Wide Voltage Control Box
      - NPN Output/PNP Output
 
 Wiring Diagram of Digital Output of Control Box
