@@ -2419,6 +2419,48 @@ The electrical specifications of digital I/O are shown in table below Digital I/
      - | -
      - Type
 
+The electrical specifications for digital DO loads are shown in the table below.
+
+.. centered:: Table 3.5-3 Electrical Specifications for Single-Channel Digital DO Load
+
+.. list-table::
+   :widths: 30 20 20 30
+   :header-rows: 0
+   :align: center
+
+   * - **Control Box Type**
+     - **DO Output Type**
+     - **Power Supply Type**
+     - **Maximum Single-Channel DO Load**
+
+   * - DC/AC Narrow-Voltage Control Box
+     - NPN Output
+     - External 24V Power Supply
+     - | Channels 1-4: 400mA
+       | Channels 5-8: 250mA
+       | Channels 9-16: 125mA
+
+   * - DC/AC Narrow-Voltage Control Box
+     - NPN Output
+     - Internal 24V Power Supply
+     - | Channels 1-4: 300mA
+       | Channels 5-8: 190mA
+       | Channels 9-16: 90mA
+
+   * - AC Wide-Voltage Control Box
+     - NPN/PNP Output
+     - External 24V Power Supply
+     - | Channels 1-2: 200mA
+       | Channels 3-8: 100mA
+       | Channels 9-16: 60mA
+
+   * - AC Wide-Voltage Control Box
+     - NPN/PNP Output
+     - Internal 24V Power Supply
+     - | Channels 1-2: 200mA
+       | Channels 3-8: 100mA
+       | Channels 9-16: 60mA
+
 Safety I/O
 ~~~~~~~~~~~~~~~
 
