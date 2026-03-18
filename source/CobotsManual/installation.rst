@@ -2755,7 +2755,7 @@ Validity and Responsibility
 
 The information in this manual does not cover the design, installation, or operation of a complete robot application, nor does it account for all peripheral devices that may affect the safety of the system. The design and installation of the complete system must comply with the safety requirements established by the standards and regulations of the country where the robot is installed.
 
-FaRo’s integrators are responsible for ensuring compliance with relevant national laws and regulations, guaranteeing that the complete robot application poses no significant hazards. This includes but is not limited to:
+FAIRINO integrators are responsible for ensuring compliance with relevant national laws and regulations, guaranteeing that the complete robot application poses no significant hazards. This includes but is not limited to:
 
 - Conducting a risk assessment for the complete robot system
 - Connecting additional mechanical and safety devices as defined in the risk assessment
