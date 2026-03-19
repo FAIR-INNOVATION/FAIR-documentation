@@ -254,9 +254,9 @@ Code example
     :linenos:
     :emphasize-lines: 4
 
-    import frrpc
+    from fairino import Robot
     # A connection is established with the robot controller. A successful connection returns a robot object
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     rcs = robot.FT_GetForceTorqueRCS()  #Query data in the sensor coordinate system
     print(rcs)
 
