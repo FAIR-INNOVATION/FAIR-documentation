@@ -228,9 +228,9 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     rcs = robot.FT_GetForceTorqueRCS() #Query data in sensor coordinate system
     print(rcs)
 
@@ -252,9 +252,9 @@ Code example
 .. code-block:: python
     :linenos:
 
-    import frrpc
+    from fairino import Robot
     # Establish a connection with the robot controller and return a robot object if the connection is successful
-    robot = frrpc.RPC('192.168.58.2')
+    robot = Robot.RPC('192.168.58.2')
     origin = robot.FT_GetForceTorqueOrigin() #Query sensor raw data
     print(origin)
 
