@@ -308,5 +308,5 @@ Robot software
 ---------------------------------
     :download:`FAIRINO-CobotSoftware-QX-V3.8.4.2-20250909.zip <https://drive.google.com/file/d/1Uint6nToyStO-aKuXtOZxhGAXIboNgX6/view?usp=sharing>`
     
-    :download:`FAIRINO-CobotSoftware-LA-V3.8.4.2-20250909.zip <https://drive.google.com/file/d/18-_iI5WtjX7Smb0ajhMIR627xFkiciad/view?usp=sharing>`
+    :download:`FAIRINO-CobotSoftware-LA-V3.8.4.3-20260324.zip <https://drive.google.com/file/d/1x2OKG0Sj_1FavIHZPzgi9UG6tE3Uk-wB/view?usp=drive_link>`
 
