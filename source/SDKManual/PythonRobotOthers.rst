@@ -440,3 +440,221 @@ Robot MCU log generation
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
+
+Set Robot to Stop Running When Port Communication is Disconnected
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetRobotStopOnComDisc(portID, enable, confirmTime)``"
+    "Description", "Set robot to stop running when port communication is disconnected"
+    "Required Parameters", "
+    - ``portID``: Port number 0-8080; 1-8083; 2-20002; 3-20004
+    - ``enable``: 0-disable; 1-enable
+    - ``confirmTime``: Communication disconnection confirmation duration (ms)[0-5000]"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+           
+Get Robot Stop on Communication Disconnection Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetRobotStopOnComDisc(portID)``"
+    "Description", "Get robot stop on communication disconnection parameters"
+    "Required Parameters", "
+    - ``portID``: Port number 0-8080; 1-8083; 2-20002; 3-20004
+    - ``enable``: 0-disable; 1-enable
+    - ``confirmTime``: Communication disconnection confirmation duration (ms)[0-5000]"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+Robot Stop on Communication Disconnection Parameter Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from time import sleep
+    import time
+    from fairino import Robot
+    # Establish connection with robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    def test_robot_stop_on_com_disc(self):
+        # Initialize parameters
+        enable = False
+        confirm_time = 0
+
+        # Set robot stop on communication disconnection
+        rtn = robot.SetRobotStopOnComDisc(0, True, 330)
+        print(f"SetRobotStopOnComDisc index0: {rtn}")
+
+        rtn = robot.SetRobotStopOnComDisc(1, True, 550)
+        print(f"SetRobotStopOnComDisc index1: {rtn}")
+
+        rtn = robot.SetRobotStopOnComDisc(2, True, 110)
+        print(f"SetRobotStopOnComDisc index2: {rtn}")
+
+        rtn = robot.SetRobotStopOnComDisc(3, True, 220)
+        print(f"SetRobotStopOnComDisc index3: {rtn}")
+
+        # Get robot stop on communication disconnection settings
+        rtn, enable, confirm_time = robot.GetRobotStopOnComDisc(0)
+        print(f"GetRobotStopOnComDisc 8080 rtn {rtn}; enable is {enable}; confirm time is {confirm_time}")
+
+        rtn, enable, confirm_time = robot.GetRobotStopOnComDisc(1)
+        print(f"GetRobotStopOnComDisc 80803 rtn {rtn}; enable is {enable}; confirm time is {confirm_time}")
+
+        rtn, enable, confirm_time = robot.GetRobotStopOnComDisc(2)
+        print(f"GetRobotStopOnComDisc 20002 rtn {rtn}; enable is {enable}; confirm time is {confirm_time}")
+
+        rtn, enable, confirm_time = robot.GetRobotStopOnComDisc(3)
+        print(f"GetRobotStopOnComDisc 20004 rtn {rtn}; enable is {enable}; confirm time is {confirm_time}")
+
+        # Close RPC connection
+        robot.CloseRPC()
+        return 0
+
+    test_robot_stop_on_com_disc(robot)
+
+Send UDP Instruction Frame
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SendUDPFrame(frame)``"
+    "Description", "Send UDP instruction frame"
+    "Required Parameters", "
+    - ``frame``: UDP data to send, transparent transmission, no encapsulation"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+UDP Communication-Based SDK Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from time import sleep
+    import time
+    from fairino import Robot
+
+    # Establish connection with robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    def TestSendUDPFrame(self):
+        # Set callback
+        def callback(src_type, count, cmd_id, data_len, content):
+            print("Received reply: cmd_id={} count={} data_len={} content={}".format(cmd_id, count, data_len, content))
+            return 0
+        robot.SetUDPCmdRpyCallback(callback)
+
+        rtn = robot.SendUDPFrame("/f/bIII20III303III7IIIMode(0)III/b/f")
+        print(f"SendUDPFrame Mode(0) rtn is {rtn}")
+        time.sleep(1)
+
+        rtn = robot.SendUDPFrame("/f/bIII21III303III7IIIMode(1)III/b/f")
+        print(f"SendUDPFrame Mode(1) rtn is {rtn}")
+        time.sleep(1)
+
+        rtn = robot.SendUDPFrame(
+            "/f/bIII49III201III184IIIMoveJ(-15.625, -82.680, 101.654, -110.950, -88.290, 0.017, -383.012, -2.325, 242.655, -178.024, 1.710, 74.416, 0, 0, 100, 100, 100, 0.000, 0.000, 0.000, 0.000, -1, 0, 0, 0, 0, 0, 0, 0)III/b/f")
+        print(f"SendUDPFrame MoveJ(-15.625) rtn is {rtn}")
+        time.sleep(1)
+
+        rtn = robot.SendUDPFrame(
+            "/f/bIII48III203III199IIIMoveL(-75.622, -82.680, 101.654, -110.950, -88.290, 0.017, -193.537, 330.525, 242.657, -178.024, 1.710, 14.420, 0, 0, 100, 100, 100, -1, 0, 0.000, 0.000, 0.000, 0.000, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0)III/b/f")
+        print(f"SendUDPFrame MoveL(-75.622) rtn is {rtn}")
+        time.sleep(1)
+
+        rtn = robot.SendUDPFrame("/f/bIII4III905III20IIIGetSoftwareVersion()III/b/f")
+        print(f"SendUDPFrame GetSoftwareVersion() rtn is {rtn}")
+
+        time.sleep(1)
+
+        # Send UDP frame data validation test
+        rtn = robot.SendUDPFrame("/f/bIII20III303III7IIIMode(0)III/b/f")
+        print(f"SendUDPFrame rtn is {rtn}")
+
+        rtn = robot.SendUDPFrame("III20III303III7IIIMode(0)III/b/f")
+        print(f"SendUDPFrame rtn is {rtn}")
+
+        rtn = robot.SendUDPFrame("/f/bIII20III303III7IIIMode(0)")
+        print(f"SendUDPFrame rtn is {rtn}")
+
+        rtn = robot.SendUDPFrame("/f/bIII20III303III6IIIMode(0)III/b/f")
+        print(f"SendUDPFrame rtn is {rtn}")
+
+        rtn = robot.SendUDPFrame("/f/b|||20|||303|||7|||Mode(0)|||/b/f")
+        print(f"SendUDPFrame rtn is {rtn}")
+
+        rtn = robot.SendUDPFrame("/f/bII20II303II7IIMode(0)II/b/f")
+        print(f"SendUDPFrame rtn is {rtn}")
+
+        robot.CloseRPC()
+        time.sleep(1)
+
+    TestSendUDPFrame(robot)
+    
+Set User-Defined Robot End-Effector LED Color
++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetUserLEDColor(r, g, b)``"
+    "Description", "Set user-defined robot end-effector LED color"
+    "Required Parameters", "
+    - ``r``: End red LED control; 0-off; 1-on
+    - ``g``: End green LED control; 0-off; 1-on
+    - ``b``: End blue LED control; 0-off; 1-on
+    - "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+SDK Code Example for Setting User-Defined Robot End-Effector LED Color
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from time import sleep
+    import time
+    from fairino import Robot
+
+    # Establish connection with robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+
+    def testled(self):
+        # Set user LED color
+        # Parameter order: R, G, B (Red, Green, Blue)
+
+        # White (all lights on)
+        robot.SetUserLEDColor(True, True, True)
+        time.sleep(1)
+
+        # Turn off all lights
+        robot.SetUserLEDColor(False, False, False)
+        time.sleep(1)
+
+        # Red (red light only)
+        robot.SetUserLEDColor(True, False, False)
+        time.sleep(1)
+
+        # Green (green light only)
+        robot.SetUserLEDColor(False, True, False)
+        time.sleep(1)
+
+        # Blue (blue light only)
+        robot.SetUserLEDColor(False, False, True)
+
+        # Close connection
+        robot.CloseRPC()
+
+    testled(robot)

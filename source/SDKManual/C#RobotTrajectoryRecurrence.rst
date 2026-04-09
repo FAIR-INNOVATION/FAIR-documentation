@@ -428,3 +428,59 @@ Trajectory reproduction (trajectory forward-looking) code example
         rtn = robot.MoveTrajectoryLA();
         Console.WriteLine($"MoveTrajectoryLA rtn is {rtn}");
     }
+
+Move to TPD Trajectory Recording Start Point
+++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Move to TPD trajectory recording start point
+    * @param [in] name Trajectory file name
+    * @param [in] moveType Motion type; 0-PTP; 1-LIN
+    * @param [in] ovl Speed scaling percentage, range [0~100]
+    * @return Error code
+    */
+    public int MoveToTPDStart(string name, int moveType, double ovl)
+
+SDK Code Example for Moving to TPD Trajectory Recording Start Point
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    void testTPDmove()
+    {
+        string name = "tpd2025";
+        int type = 1;
+        int period_ms = 4;
+        int rtn = 0;
+        UInt16 di_choose = 0;
+        UInt16 do_choose = 0;
+
+        robot.SetTPDParam(type, name, period_ms, di_choose, do_choose);
+
+        robot.Mode(1);
+        Thread.Sleep(3000);
+        robot.DragTeachSwitch(1);
+        robot.SetTPDStart(type, name, period_ms, di_choose, do_choose);
+        Thread.Sleep(3000);
+        robot.SetWebTPDStop();
+        robot.DragTeachSwitch(0);
+
+        Thread.Sleep(1000);
+        float ovl = 100.0f;
+        byte blend = 0;
+        DescPose start_pose = new DescPose();
+        rtn = robot.LoadTPD(name);
+        Console.WriteLine($"LoadTPD rtn is:{rtn}\n");
+
+        robot.GetTPDStartPose(name, ref start_pose);
+        Console.WriteLine($"start pose, xyz is: %f %f %f. rpy is: {start_pose.tran.x},{start_pose.tran.y}, {start_pose.tran.z}, {start_pose.rpy.rx}, {start_pose.rpy.ry}, {start_pose.rpy.rz}");
+
+        rtn = robot.MoveToTPDStart(name, 0, 100.0);
+
+        rtn = robot.MoveTPD(name, blend, ovl);
+        Thread.Sleep(5000*5);
+
+        robot.SetTPDDelete(name);
+    }

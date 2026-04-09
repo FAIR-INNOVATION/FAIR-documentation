@@ -363,7 +363,7 @@ Wait for the control box digital, analog input signal code example
     }
 
 Set Whether Control Box DO Output Resets After Stop/Pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -376,7 +376,7 @@ Set Whether Control Box DO Output Resets After Stop/Pause
     public int SetOutputResetCtlBoxDO(int resetFlag, int reloadFlag);
 
 Set Whether Control Box AO Output Resets After Stop/Pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -454,7 +454,7 @@ Set Whether SmartTool Output Resets After Stop/Pause
     public int SetOutputResetSmartToolDO(int resetFlag, int reloadFlag);
 
 Code Example for Setting Output Reset After Lua Program Stop/Pause
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
@@ -486,4 +486,341 @@ Code Example for Setting Output Reset After Lua Program Stop/Pause
         Thread.Sleep(2000);
         robot.ResumeMotion();
         Thread.Sleep(2000);
+    }
+
+Set Configurable CI Port Functions of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set configurable CI port functions of the control box
+    * @param [in] config CI0-CI7 function codes;
+    * 0-None;1-Arc start success;2-Welder ready;3-Conveyor detection;4-Pause;5-Resume;6-Start;7-Stop;
+    8-Pause/Resume;9-Start/Stop;10-Pedal drag;11-Move to home position;12-Manual/Auto switch;
+    13-Wire search success;14-Motion interrupt;15-Start main program;16-Start rewind;17-Start confirmation;
+    18-Photoelectric detection signal X;19-Photoelectric detection signal Y;20-External emergency stop input signal 1;21-External emergency stop input signal 2;
+    22-Level 1 reduction mode;23-Level 2 reduction mode;24-Level 3 reduction mode (Stop);25-Resume welding;26-Terminate welding;
+    27-Assist drag enable;28-Assist drag disable;29-Assist drag enable/disable;30-Clear all errors;
+    31-Manual/Auto switch (high/low level);32-Enable;33-Disable;34-Enable/Disable (rising/falling edge);35-Fixed-point tracking start/end
+    * @return Error code
+    */
+    public int SetDIConfig(int[] config)
+
+Get Configurable CI Port Functions of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get configurable CI port functions of the control box
+    * @param [in] config CI0-CI7 function codes;
+    * 0-None;1-Arc start success;2-Welder ready;3-Conveyor detection;4-Pause;5-Resume;6-Start;7-Stop;
+    8-Pause/Resume;9-Start/Stop;10-Pedal drag;11-Move to home position;12-Manual/Auto switch;
+    13-Wire search success;14-Motion interrupt;15-Start main program;16-Start rewind;17-Start confirmation;
+    18-Photoelectric detection signal X;19-Photoelectric detection signal Y;20-External emergency stop input signal 1;21-External emergency stop input signal 2;
+    22-Level 1 reduction mode;23-Level 2 reduction mode;24-Level 3 reduction mode (Stop);25-Resume welding;26-Terminate welding;
+    27-Assist drag enable;28-Assist drag disable;29-Assist drag enable/disable;30-Clear all errors;
+    31-Manual/Auto switch (high/low level);32-Enable;33-Disable;34-Enable/Disable (rising/falling edge);35-Fixed-point tracking start/end
+    * @return Error code
+    */
+    public int GetDIConfig(out int[] config)
+
+Set Configurable CO Port Functions of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set configurable CO port functions of the control box
+    * @param [out] config CO0-CO7 function codes;
+    * 0-None;1-Robot error;2-Robot in motion;3-Spray start/stop;4-Spray gun cleaning;5-Gas supply signal;6-Arc start signal;7-Jog wire feed;
+    8-Reverse wire feed;9-JOB input port 1;10-JOB input port 2;11-JOB input port 3;12-Conveyor start/stop control;13-Robot paused;14-Reached home position;
+    15-Reached interference area;16-Wire search start/stop control;17-Robot start completed;18-Program start/stop;19-Auto/Manual mode;20-Emergency stop output signal 1-Safety;
+    21-Emergency stop output signal 2-Safety;22-Lua script program running/stopped;23-Safety status output-Safety;24-Protective stop status output-Safety;
+    25-Robot in motion-Safety;26-Robot reduced mode-Safety;27-Robot non-reduced mode-Safety;28-Robot non-stopped;29-Robot error-Instruction point error;
+    30-Robot error-Driver error;31-Robot error-Soft limit exceeded error;32-Robot error-Collision error;33-Robot error-Active slave count error;
+    34-Robot error-Slave error;35-Robot error-IO error;36-Robot error-Gripper error;37-Robot error-File error;38-Robot error-Singular pose error;
+    39-Robot error-Driver communication error;40-Robot error-Parameter error;41-Robot error-External axis soft limit exceeded error;42-Robot warning-Warning;
+    43-Robot warning-Safety door warning;44-Robot warning-Motion warning;45-Robot warning-Interference area warning;46-Robot warning-Safety wall warning;
+    47-Enable status;48-Auto lift during disconnection;49-Cube 1 interference warning;50-Cube 2 interference warning;51-Cube 3 interference warning;52-Cube 4 interference warning;
+    * @return Error code
+    */
+    public int SetDOConfig(int[] config)
+
+Get Configurable CO Port Functions of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get configurable CO port functions of the control box
+    * @param [out] config CO0-CO7 function codes;
+    * 0-None;1-Robot error;2-Robot in motion;3-Spray start/stop;4-Spray gun cleaning;5-Gas supply signal;6-Arc start signal;7-Jog wire feed;
+    8-Reverse wire feed;9-JOB input port 1;10-JOB input port 2;11-JOB input port 3;12-Conveyor start/stop control;13-Robot paused;14-Reached home position;
+    15-Reached interference area;16-Wire search start/stop control;17-Robot start completed;18-Program start/stop;19-Auto/Manual mode;20-Emergency stop output signal 1-Safety;
+    21-Emergency stop output signal 2-Safety;22-Lua script program running/stopped;23-Safety status output-Safety;24-Protective stop status output-Safety;
+    25-Robot in motion-Safety;26-Robot reduced mode-Safety;27-Robot non-reduced mode-Safety;28-Robot non-stopped;29-Robot error-Instruction point error;
+    30-Robot error-Driver error;31-Robot error-Soft limit exceeded error;32-Robot error-Collision error;33-Robot error-Active slave count error;
+    34-Robot error-Slave error;35-Robot error-IO error;36-Robot error-Gripper error;37-Robot error-File error;38-Robot error-Singular pose error;
+    39-Robot error-Driver communication error;40-Robot error-Parameter error;41-Robot error-External axis soft limit exceeded error;42-Robot warning-Warning;
+    43-Robot warning-Safety door warning;44-Robot warning-Motion warning;45-Robot warning-Interference area warning;46-Robot warning-Safety wall warning;
+    47-Enable status;48-Auto lift during disconnection;49-Cube 1 interference warning;50-Cube 2 interference warning;51-Cube 3 interference warning;52-Cube 4 interference warning;
+    * @return Error code
+    */
+    public int GetDOConfig(out int[] config)
+
+Set Configurable End-CI Port Functions of the End-Effector
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set configurable End-CI port functions of the end-effector
+    * @param [in] config End CI0-CI1 function codes;
+    * 0-None;1-Drag teaching tool switch;2-Point recording signal;3-Manual/Auto switch (pulse signal);4-TPD recording start/stop;5-Pause motion;
+    6-Resume motion;7-Start;8-Stop;9-Pause/Resume;10-Start/Stop;11-Force sensor assist drag enable;12-Force sensor assist drag disable;
+    13-Force sensor assist drag enable/disable;14-Laser detection signal X;15-Laser detection signal Y;16-PTP motion to home position;17-Motion interrupt, stop current motion based on signal;
+    18-Start main program;19-Start rewind;20-Start confirmation;21-Resume welding;22-Terminate welding;23-Clear error;24-Manual/Auto switch (high/low level);
+    25-Enable;26-Disable;27-Enable/Disable;28-Laser servo tracking start/stop signal;
+    * @return Error code
+    */
+    public int SetToolDIConfig(int[] config)
+
+Get Configurable End-CI Port Functions of the End-Effector
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get configurable End-CI port functions of the end-effector
+    * @param [out] config End CI0-CI1 function codes;
+    * 0-None;1-Drag teaching tool switch;2-Point recording signal;3-Manual/Auto switch (pulse signal);4-TPD recording start/stop;5-Pause motion;
+    6-Resume motion;7-Start;8-Stop;9-Pause/Resume;10-Start/Stop;11-Force sensor assist drag enable;12-Force sensor assist drag disable;
+    13-Force sensor assist drag enable/disable;14-Laser detection signal X;15-Laser detection signal Y;16-PTP motion to home position;17-Motion interrupt, stop current motion based on signal;
+    18-Start main program;19-Start rewind;20-Start confirmation;21-Resume welding;22-Terminate welding;23-Clear error;24-Manual/Auto switch (high/low level);
+    25-Enable;26-Disable;27-Enable/Disable;28-Laser servo tracking start/stop signal;
+    * @return Error code
+    */
+    public int GetToolDIConfig(out int[] config)
+    
+Set Configurable CI Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set configurable CI active state of the control box
+    * @param [in] config CI0-CI7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int SetDIConfigLevel(int[] config)
+        
+Get Configurable CI Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get configurable CI active state of the control box
+    * @param [out] config CI0-CI7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int GetDIConfigLevel(out int[] config)
+        
+Set Configurable CO Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set configurable CO active state of the control box
+    * @param [in] config CO0-CO7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int SetDOConfigLevel(int[] config)
+
+Get Configurable CO Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get configurable CO active state of the control box
+    * @param [out] config CO0-CO7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int GetDOConfigLevel(out int[] config)
+    
+Set Configurable CI Active State of the End-Effector
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set configurable CI active state of the end-effector
+    * @param [in] config CI0-CI1 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int SetToolDIConfigLevel(int[] config)
+    
+Get Configurable CI Active State of the End-Effector
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get configurable CI active state of the end-effector
+    * @param [out] config CI0-CI1 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int GetToolDIConfigLevel(out int[] config)
+    
+Set Standard DI Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set standard DI active state of the control box
+    * @param [in] config DI0-DI7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int SetStandardDILevel(int[] config)
+    
+Get Standard DI Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get standard DI active state of the control box
+    * @param [out] config DI0-DI7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int GetStandardDILevel(out int[] config)
+
+Set Standard DO Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set standard DO active state of the control box
+    * @param [in] config DO0-DO7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int SetStandardDOLevel(int[] config)
+    
+Get Standard DO Active State of the Control Box
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get standard DO active state of the control box
+    * @param [out] config DO0-DO7 port active state; 0-active high; 1-active low
+    * @return Error code
+    */
+    public int GetStandardDOLevel(out int[] config)
+        
+Robot IO Configuration Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    public void TestIOConfig()
+    {
+        int rtn = 0;
+
+        // ---------- Test configurable CI port functions ----------
+        int[] setDIConfig = new int[] { 3, 9, 1, 4, 5, 6, 7, 8 };
+        rtn = robot.SetDIConfig(setDIConfig);
+        Console.WriteLine($"SetDIConfig rtn is {rtn}");
+
+        // Use out parameter to receive the obtained configuration array
+        int[] getDIConfig;
+        rtn = robot.GetDIConfig(out getDIConfig);  
+        Console.WriteLine($"GetDIConfig rtn is {rtn}, value is {string.Join(" ", getDIConfig)}");
+
+        // ---------- Test configurable CO port functions ----------
+        int[] setDOConfig = new int[] { 9, 10, 11, 12, 13, 14, 15, 16 };
+        rtn = robot.SetDOConfig(setDOConfig);
+        Console.WriteLine($"SetDOConfig rtn is {rtn}");
+
+        int[] getDOConfig;
+        rtn = robot.GetDOConfig(out getDOConfig);
+        Console.WriteLine($"GetDOConfig rtn is {rtn}, value is {string.Join(" ", getDOConfig)}");
+
+        // ---------- Test configurable End-CI port functions of the end-effector ----------
+        int[] setToolDIConfig = new int[] { 17, 18 };
+        rtn = robot.SetToolDIConfig(setToolDIConfig);
+        Console.WriteLine($"SetToolDIConfig rtn is {rtn}");
+
+        int[] getToolDIConfig;
+        rtn = robot.GetToolDIConfig(out getToolDIConfig);
+        Console.WriteLine($"GetToolDIConfig rtn is {rtn}, value is {string.Join(" ", getToolDIConfig)}");
+
+        // ---------- Test configurable CI active state of the control box ----------
+        int[] setDIConfigLevel = new int[] { 1, 1, 1, 1, 0, 0, 0, 0 };
+        rtn = robot.SetDIConfigLevel(setDIConfigLevel);
+        Console.WriteLine($"SetDIConfigLevel rtn is {rtn}");
+
+        int[] getDIConfigLevel;
+        rtn = robot.GetDIConfigLevel(out getDIConfigLevel);
+        Console.WriteLine($"GetDIConfigLevel rtn is {rtn}, value is {string.Join(" ", getDIConfigLevel)}");
+
+        // ---------- Test configurable CO active state of the control box ----------
+        int[] setDOConfigLevel = new int[] { 0, 0, 0, 0, 1, 1, 1, 1 };
+        rtn = robot.SetDIConfigLevel(setDOConfigLevel);
+        Console.WriteLine($"SetDOConfigLevel rtn is {rtn}");
+
+        int[] getDOConfigLevel;
+        rtn = robot.GetDOConfigLevel(out getDOConfigLevel);
+        Console.WriteLine($"GetDOConfigLevel rtn is {rtn}, value is {string.Join(" ", getDOConfigLevel)}");
+
+        // ---------- Test configurable CI active state of the end-effector ----------
+        int[] setToolDIConfigLevel = new int[] { 1, 0 };
+        rtn = robot.SetToolDIConfigLevel(setToolDIConfigLevel);
+        Console.WriteLine($"SetToolDIConfigLevel rtn is {rtn}");
+
+        int[] getToolDIConfigLevel;
+        rtn = robot.GetToolDIConfigLevel(out getToolDIConfigLevel);
+        Console.WriteLine($"GetToolDIConfigLevel rtn is {rtn}, value is {string.Join(" ", getToolDIConfigLevel)}");
+
+        // ---------- Test standard DI active state of the control box ----------
+        int[] setStandardDILevel = new int[] { 1, 1, 1, 1, 0, 0, 0, 0 };
+        rtn = robot.SetStandardDILevel(setStandardDILevel);
+        Console.WriteLine($"SetStandardDILevel rtn is {rtn}");
+
+        int[] getStandardDILevel;
+        rtn = robot.GetStandardDILevel(out getStandardDILevel);
+        Console.WriteLine($"GetStandardDILevel rtn is {rtn}, value is {string.Join(" ", getStandardDILevel)}");
+
+        // ---------- Test standard DO active state of the control box ----------
+        int[] setStandardDOLevel = new int[] { 0, 0, 0, 0, 1, 1, 1, 1 };
+        rtn = robot.SetStandardDOLevel(setStandardDOLevel);
+        Console.WriteLine($"SetStandardDOLevel rtn is {rtn}");
+
+        int[] getStandardDOLevel;
+        rtn = robot.GetStandardDOLevel(out getStandardDOLevel);
+        Console.WriteLine($"GetStandardDOLevel rtn is {rtn}, value is {string.Join(" ", getStandardDOLevel)}");
+
     }

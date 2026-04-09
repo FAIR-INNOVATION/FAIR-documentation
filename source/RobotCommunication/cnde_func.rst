@@ -264,3 +264,157 @@ Acquire that version information of the robot soft firmware
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The client sends an command to get the software firmware version information to the robot through CNDE, and the command content is empty. After receiving the request, the robot will feed back a message, including the robot model, robot software version, robot firmware version, robot hardware version and other related information.
+
+End-Effector Transparent Transmission Function Periodic Data Acquisition (CNDE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CNDE Configuration Description
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+After the end-effector transparent transmission function is enabled, the "axle_gen_com_data" option and period can be configured in CNDE to obtain the periodic data of the peripheral read by the end-effector. The feedback data frame is defined as follows.
+
+.. centered:: Table 3-8  End-Effector Transparent Transmission Function Periodic Data CNDE Feedback Protocol Definition
+
+.. list-table::
+   :widths: 30 30 40
+   :header-rows: 0
+   :align: center
+   :class: sheet-center
+
+   * - **Byte 1**
+     - **Byte 2**
+     - **Byte 3-130**
+
+   * - ErrorCode
+     - Len
+     - Data
+
+   * - 0 - Communication normal
+     - Length of periodic data
+     - Data frame buffer
+
+   * - 1 - Communication abnormality between end-effector and robot
+     - Length cleared when error code is non-zero
+     - Buffer cleared when error code is non-zero
+
+   * - 2 - End-effector 485 communication abnormality
+     - 
+     - 
+
+Taking the DIO Health Care Moxibustion Head peripheral periodic data configuration as an example, the code shows the configuration to obtain the end-effector periodic transparent transmission data with an acquisition period of 50ms.
+
+End-Effector Transparent Transmission CNDE Configuration Code Example:
+
+.. code-block:: 
+    :linenos:
+
+    tring outputCfg = "axle_gen_com_data";    //Obtain end-effector transparent transmission periodic data
+    byte[] sendBuffer = new byte[] { };
+    byte[] cfgBuffer = Encoding.UTF8.GetBytes(outputCfg);
+    CNDEPkg pkg  = new CNDEPkg();
+    pkg.type = 1;  //Output configuration
+    pkg.len = (ushort)(2 + outputCfg.Length);
+    pkg.data.Clear();
+    UInt16 period = 50;   //50ms update
+    byte[] periodBt = new byte[2] {0, 0};
+    Int16ToByte(period, ref periodBt);
+    pkg.data.AddRange(periodBt);  //Communication period
+    pkg.data.AddRange(cfgBuffer); 
+    pkg.ToBytes(ref sendBuffer);
+
+CNDE-Based DIO Health Care Moxibustion Head Periodic Data Unpacking Code Example:
+  
+.. code-block:: 
+    :linenos:
+
+    if (pkg.type == 4)
+    {
+        int size = Marshal.SizeOf(putDate);
+        IntPtr structPtr = Marshal.AllocHGlobal(size);
+        Marshal.Copy(pkg.data.ToArray(), 0, structPtr, size);
+        putDate = (OUTPKG)Marshal.PtrToStructure(structPtr, typeof(OUTPKG));
+
+        int errorcode = putDate.axle_gen_com_data[0];
+        int datalen = putDate.axle_gen_com_data[1];
+        // Filter out abnormal packets
+        if ((errorcode != 0) || (datalen == 0) ||
+        (putDate.axle_gen_com_data[2] != 0xAB) || 
+        (putDate.axle_gen_com_data[3] != 0xBA))
+        {
+            Console.WriteLine($"rcv data is error");
+            continue;
+        }
+        // Package according to DIO Health Care Moxibustion Head protocol
+        int curTem = putDate.axle_gen_com_data[6];
+        int targetTem = putDate.axle_gen_com_data[7];
+        int genData1 = putDate.axle_gen_com_data[8] << 8 | putDate.axle_gen_com_data[9];
+        int genData2 = putDate.axle_gen_com_data[10] << 8 | putDate.axle_gen_com_data[11];
+        int genData3 = putDate.axle_gen_com_data[12] << 8 | putDate.axle_gen_com_data[13];
+        int genData4 = putDate.axle_gen_com_data[14] << 8 | putDate.axle_gen_com_data[15];
+        int genData5 = putDate.axle_gen_com_data[16] << 8 | putDate.axle_gen_com_data[17];
+        int genData6 = putDate.axle_gen_com_data[18] << 8 | putDate.axle_gen_com_data[19];
+
+        Console.WriteLine($"the data is errorcode {errorcode};  datalen  {datalen}  curTem  {curTem}; targetTem  {targetTem}  genData1  {genData1}  genData2  {genData2}  genData3  {genData3}  genData4  {genData4}  genData5  {genData5}  genData6  {genData6}  ");
+        udpClient.Client.ReceiveTimeout = 100;
+        Marshal.FreeHGlobal(structPtr);
+    }
+
+End-Effector Transparent Transmission Function-Based DIO Health Care Moxibustion Head Non-Periodic Data Communication Code Example:
+  
+.. code-block:: 
+    :linenos:
+
+    void testAxleGenCom()
+    {
+        int[] led_on = new int[6] { 0xAB, 0xBA, 0x12, 0x01, 0x01, 0x79 };
+        int[] led_off = new int[6] { 0xAB, 0xBA, 0x12, 0x01, 0x00, 0x78 };
+        int[] version = new int[5]{ 0xAB, 0xBA, 0x11, 0x00, 0x76 };
+        int[] state = new int[6] { 0xAB, 0xBA, 0x1B,0x01, 0xAA, 0x2B };
+        int[] cycleState = new int[6] { 0xAB, 0xBA, 0x12, 0x01, 0x00, 0x78 };
+
+        int[] rcvdata = new int[16];
+        int ret = 0;
+        int cnt = 1;
+
+        JointPos p1Joint = new JointPos(88.708, -86.178, 140.989, -141.825, -89.162, -49.879);
+        DescPose p1Desc = new DescPose(188.007, -377.850, 260.207, 178.715, 2.823, -131.466);
+
+        JointPos p2Joint = new JointPos(112.131, -75.554, 126.989, -139.027, -88.044, -26.477);
+        DescPose p2Desc = new DescPose(368.003, -377.848, 260.211, 178.715, 2.823, -131.465);
+
+        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+
+        //Enable end-effector transparent transmission function
+        robot.SetAxleGenComEnable(1);
+        robot.SetAxleLuaEnable(1);
+
+        while(cnt<=10)
+        { 
+            //Read version number
+            ret = robot.SndRcvAxleGenComCmdData(5, version, 10, ref rcvdata);
+            Console.WriteLine($" hard version : {rcvdata[4]},hard code:{rcvdata[5]}, soft version:{rcvdata[6]} {rcvdata[7]}, soft code:{rcvdata[8]}");
+            if (ret != 0)
+            {
+                break;
+            }
+            Thread.Sleep(1000);
+            //Read moxibustion head presence status
+            ret = robot.SndRcvAxleGenComCmdData(6, state, 6, ref rcvdata);
+            Console.WriteLine($" state : {rcvdata[4]}");
+            Thread.Sleep(1000);
+            //Turn on moxibustion head laser
+            ret = robot.SndRcvAxleGenComCmdData(6, led_on, 6, ref rcvdata);
+            Console.WriteLine($"led on rcv data is: {rcvdata[0]},{rcvdata[1]}, {rcvdata[2]}, {rcvdata[3]}, {rcvdata[4]}, {rcvdata[5]}");
+            robot.MoveJ(p1Joint, p1Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+            Thread.Sleep(4000);
+            //Turn off moxibustion head laser
+            ret = robot.SndRcvAxleGenComCmdData(6, led_off, 6, ref rcvdata);
+            Console.WriteLine($"led off rcv data is: {rcvdata[0]},{rcvdata[1]}, {rcvdata[2]}, {rcvdata[3]}, {rcvdata[4]}, {rcvdata[5]}");
+            robot.MoveJ(p2Joint, p2Desc, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+            Thread.Sleep(1000);
+            Console.WriteLine($"***********************complate No. {cnt}  SDK test*****************************");
+            cnt++;
+        }
+
+    }

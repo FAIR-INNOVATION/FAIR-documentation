@@ -427,3 +427,66 @@ Trajectory playback (lookahead) code example
         robot.CloseRPC();  
         return 0;  
     }  
+
+Move to TPD Trajectory Recording Start Point
+++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Move to TPD trajectory recording start point
+    * @param name Trajectory file name
+    * @param moveType Motion type; 0-PTP; 1-LIN
+    * @param ovl Speed scaling percentage, range [0~100]
+    * @return Error code
+    */
+    public int MoveToTPDStart(string name, int moveType, double ovl)
+
+SDK Code Example for Moving to TPD Trajectory Recording Start Point
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void testTPDmove (Robot robot)
+    {
+        int rtn = 0;
+        int type = 1;
+        String name = "tpd2025";
+        int period_ms = 4;
+        int di_choose = 0;
+        int do_choose = 0;
+
+        robot.SetTPDParam(type, name, period_ms, di_choose, do_choose);
+
+        robot.Mode(1);
+        robot.Sleep(1000);
+        robot.DragTeachSwitch(1);
+        robot.SetTPDStart(type, name, period_ms, di_choose, do_choose);
+        robot.Sleep(3000);
+        robot.SetWebTPDStop();
+        robot.DragTeachSwitch(0);
+
+        robot.Sleep(1000);
+        double ovl = 100.0;
+        int blend = 0;
+        DescPose start_pose = new DescPose();
+        rtn = robot.LoadTPD(name);
+        System.out.printf("LoadTPD rtn is: %d\n", rtn);
+
+        robot.GetTPDStartPose(name, start_pose);
+        System.out.printf("start pose, xyz is: %f %f %f. rpy is: %f %f %f \n", start_pose.tran.x, start_pose.tran.y, start_pose.tran.z, start_pose.rpy.rx, start_pose.rpy.ry, start_pose.rpy.rz);
+        //robot.MoveCart(&start_pose, 0, 0, 100, 100, ovl, -1, -1);
+        //robot.Sleep(1000);
+
+        rtn = robot.MoveToTPDStart(name, 0, 100);
+        System.out.printf("MoveToTPDStart rtn is: %d\n", rtn);
+
+        rtn = robot.MoveTPD(name, blend, ovl);
+        System.out.printf("MoveTPD rtn is: %d\n", rtn);
+
+        robot.Sleep(5000);
+
+        robot.SetTPDDelete(name);
+
+        return ;
+    }

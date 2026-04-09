@@ -368,11 +368,13 @@ Setting the welder control mode
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetWeldMachineCtrlMode(mode)``"
-    "Description", "Set welder control mode"
-    "Mandatory parameters", "- ``mode``: welder control mode; 0 - unitary"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode" 
+    "Prototype", "``SetWeldMachineCtrlMode(mode, ioType)``"
+    "Description", "Set welding machine control mode"
+    "Required Parameters", "
+    - ``ioType``: Control type; 0-Control box IO; 1-Digital communication protocol (UDP); 2-Digital communication protocol (ModbusTCP)
+    - ``mode``: Welding machine control mode; 0-One-knob mode"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
 
 Welding Start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

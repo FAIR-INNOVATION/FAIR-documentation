@@ -328,12 +328,13 @@ Set welder control mode
 .. code-block:: Java  
     :linenos:  
 
-    /**  
-    * @brief Set welder control mode  
-    * @param [in] mode Welder control mode: 0-Unified  
-    * @return Error code  
-    */  
-    int SetWeldMachineCtrlMode(int mode);  
+    /**
+    * @brief Set welding machine control mode
+    * @param mode Welding machine control mode; 0-DC one-knob mode; 1-Pulse one-knob mode; 2-JOB mode; 3-Local control mode; 4-Separate mode; 5-CC/CV mode; 6-TIG; 7-CMT
+    * @param ioType Control type; 0-Control box IO; 1-Digital communication protocol (UDP); 2-Digital communication protocol (ModbusTCP)
+    * @return Error code
+    */
+    public int SetWeldMachineCtrlMode(int mode, int ioType)
 
 Welding start  
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

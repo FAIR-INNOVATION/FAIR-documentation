@@ -1,3 +1,52 @@
+Version V3.9.4
+-----------------
+
+Date: 2026-04-08
+
+- **Optimized Robot Trajectory Teaching and Replay TPD Function**: 
+    Path: Teaching Program -> Program Programming -> TPD Instruction.
+  
+    Description: 1. Automatically generate initial point Lua instructions 2. Fool-proof design for the start button.
+
+- **Optimized Webapp Data Backup Function**: 
+  
+    Description: Improved and optimized the data backup function.
+
+- **Optimized FR3WML Soft Limits and Packaging Posture**: 
+  
+    Description: Set the soft limit range for joint 3 to ±163°.
+
+- **Optimized DH Full Parameter Compensation Function and Rapid Verification**: 
+  
+    Description: Compensated the full parameter model.
+ 
+- **Added PTP Motion Impedance Control Function**: 
+  
+    Description: Improved safety during human-robot interaction.
+
+- **Added Communication Protocol Function for Moxibustion Head End-Effector Device**: 
+    Path: Initial Settings -> Peripherals -> End-Effector Transparent Transmission.
+  
+    Description: Added new end-effector device communication protocol adaptation.
+
+- **Added German Software Version Language Pack Adaptation**: 
+  
+    Description: Added German language switching.
+
+- **Added Safety Speed Setting to Take Effect on Servo Motion Instructions**: 
+    Path: Initial Settings -> Safety -> Safety Speed.
+  
+    Description: Added safety strategy option to stop and report error with disable after overspeed.
+
+- **Added LA Adaptation for TP-LINK AX3000 Wireless Router**: 
+  
+    Description: Resolved the issue of being unable to directly access the webApp wirelessly after power failure and restart.
+    
+- **Added Fixed-Point Swing Function**: 
+    Path: Teaching Program -> Program Programming -> Weave Instruction.
+  
+    Description: Perform fixed-point swing function in conjunction with an external laser sensor.
+
 Version V3.9.3
 -----------------
 

@@ -166,6 +166,11 @@ Multilingual settings function
      - it
      - True
 
+   * - German
+     - Deutsch
+     - de
+     - True
+
 1.On the login screen (or during the initial activation screen, settings can also be made), select the language at the top right corner.
 
 .. image:: teaching_pendant_software/062.png

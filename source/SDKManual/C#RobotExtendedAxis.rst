@@ -351,28 +351,28 @@ UDP extended axis communication parameter configuration
     */
     int ExtDevSetUDPComParam(std::string ip, int port, int period, int lossPkgTime, int lossPkgNum, int disconnectTime, int reconnectEnable, int reconnectPeriod, int reconnectNum, int selfConnect);
 
-Get UDP extended axis communication parameter configuration
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get UDP Extension Axis Communication Parameter Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C#SDK-v1.0.7
 
 .. code-block:: C#
     :linenos:
 
     /**
-    * @brief Get UDP extended axis communication parameters
+    * @brief Get UDP extension axis communication parameters
     * @param [out] ip PLC IP address
-    * @param [out] port Port number
-    * @param [out] period   Communication cycle (ms, default is 2, do not modify this parameter)
-    * @param [out] lossPkgTime  Packet loss detection time (ms)
-    * @param [out] lossPkgNum   Number of packet losses
-    * @param [out] disconnectTime   Communication disconnection confirmation time
-    * @param [out] reconnectEnable  Automatic reconnection after disconnection 0-disabled 1-enabled
-    * @param [out] reconnectPeriod  Reconnection period (ms)
-    * @param [out] reconnectNum Number of reconnection attempts
+    * @param [out] port	Port number
+    * @param [out] period	Communication period (ms, default is 2, do not modify this parameter)
+    * @param [out] lossPkgTime	Packet loss detection time (ms)
+    * @param [out] lossPkgNum	Number of packet losses
+    * @param [out] disconnectTime	Communication disconnection confirmation duration
+    * @param [out] reconnectEnable	Automatic reconnection enable after communication disconnection 0-disable 1-enable
+    * @param [out] reconnectPeriod	Reconnection interval (ms)
+    * @param [out] reconnectNum	Number of reconnection attempts
+    * @param [out] selfConnect	Whether to automatically reconnect after control box restart; 0-no reconnection; 1-reconnect
     * @return Error code
     */
-    int ExtDevGetUDPComParam(std::string& ip, int& port, int& period, int& lossPkgTime, int& lossPkgNum, int& disconnectTime, int& reconnectEnable, int& reconnectPeriod, int& reconnectNum);
-
+    public int ExtDevGetUDPComParam(ref string ip, ref int port, ref int period, ref int lossPkgTime, ref int lossPkgNum, ref int disconnectTime, ref int reconnectEnable, ref int reconnectPeriod, ref int reconnectNum, ref int selfConnect)
 
 Load UDP communication
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1471,9 +1471,15 @@ Code example for setting up the extended axis to move synchronously with the rob
         Thread.Sleep(8000);
     }
 
+UDP Extension Axis Positioning Completion Time Setting
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+.. code-block:: c#
+    :linenos:
 
-
-
-
-
+    /**
+    * @brief UDP extension axis positioning completion time setting
+    * @param [in] time Positioning completion time [ms]
+    * @return Error code
+    */
+    public int SetExAxisCmdDoneTime(double time)

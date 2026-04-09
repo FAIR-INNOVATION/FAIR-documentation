@@ -100,19 +100,11 @@ This optimization adds IP reset operations for the controller and the physical t
 - 2. Use the physical teach pendant's F1 custom key function configured for IP reset (press and hold for 10 seconds) to reset the IP addresses of the controller's Network Card 0, Network Card 1, and the physical teach pendant;
 - 3. Use the physical teach pendant's F2 and F4 key combination, press and hold simultaneously for 10 seconds, to reset the IP address of the physical teach pendant device when it is not logged in.
 
-The network port diagrams for the Standard Controller Box and the Mini Controller Box are shown below.
-
-.. image:: teach_pendant/009.png
-   :width: 5in
-   :align: center
-
-.. centered:: Figure 16.3‑1 Standard Controller Box Network Port Diagram
-
 .. image:: teach_pendant/010.png
    :width: 5in
    :align: center
 
-.. centered:: Figure 16.3‑2 Mini Controller Box Network Port Diagram
+.. centered:: Figure 16.3‑1 Mini Controller Box Network Port Diagram
 
 Webrecovery Interface IP Reset
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,7 +115,7 @@ Access the webrecovery interface using port 8050, for example, log in with the d
    :width: 5in
    :align: center
 
-.. centered:: Figure 16.3‑3 Webrecovery Interface IP Reset Function
+.. centered:: Figure 16.3‑2 Webrecovery Interface IP Reset Function
 
 After the secondary confirmation, a prompt will indicate that a restart is required to take effect. After restarting, the controller's Network Card 0 IP will be restored to the default 192.168.57.2, and Network Card 1 IP will be restored to the default 192.168.58.2.
 
@@ -136,7 +128,7 @@ To use the physical teach pendant's F1 key custom function, you must first log i
    :width: 6in
    :align: center
 
-.. centered:: Figure 16.3‑4 Physical Teach Pendant F1 Key Custom IP Reset
+.. centered:: Figure 16.3‑3 Physical Teach Pendant F1 Key Custom IP Reset
 
 This function only takes effect when the physical teach pendant is logged into the webapp. After pressing and holding the F1 key for 10 seconds, a prompt will indicate that a restart is required to take effect. After restarting, the controller's Network Card 0 IP will be restored to the default 192.168.57.2, Network Card 1 IP will be restored to the default 192.168.58.2, and the physical teach pendant IP will be restored to the default 192.168.58.77.
 
@@ -149,7 +141,7 @@ The physical teach pendant device provides an IP reset function, which can be pe
    :width: 6in
    :align: center
 
-.. centered:: Figure 16.3‑5 Physical Teach Pendant F2 and F4 Key Combination IP Reset
+.. centered:: Figure 16.3‑4 Physical Teach Pendant F2 and F4 Key Combination IP Reset
 
 Teach Pendant Key Customization Function
 ----------------------------------------------------------------------------------

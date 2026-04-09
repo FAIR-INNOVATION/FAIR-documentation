@@ -481,3 +481,197 @@ Robot MCU log generation
     * @return error code
     */
     Errno RobotMCULogCollect();
+
+Set Robot to Stop Running When Port Communication is Disconnected
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set robot to stop running when port communication is disconnected
+    * @param [in] portID Port number 0-8080; 1-8083; 2-20002; 3-20004
+    * @param [in] enable 0-disable; 1-enable
+    * @param [in] confirmTime Communication disconnection confirmation duration (ms)[0-5000]
+    * @return Error code
+    */
+    errno_t SetRobotStopOnComDisc(int portID, bool enable, int confirmTime);
+        
+Get Robot Stop on Communication Disconnection Parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get robot stop on communication disconnection parameters
+    * @param [in] portID Port number 0-8080; 1-8083; 2-20002; 3-20004
+    * @param [out] enable 0-disable; 1-enable
+    * @param [out] confirmTime Communication disconnection confirmation duration (ms)[0-5000]
+    * @return Error code
+    */
+    errno_t GetRobotStopOnComDisc(int portID, bool &enable, int &confirmTime);
+
+Robot Stop on Communication Disconnection Parameter Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestRobotStopOnComDisc()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        bool enable = false;
+        int confirmTime = 0;
+        rtn = robot.SetRobotStopOnComDisc(0, true, 330);
+        rtn = robot.SetRobotStopOnComDisc(1, true, 550);
+        rtn = robot.SetRobotStopOnComDisc(2, true, 110);
+        rtn = robot.SetRobotStopOnComDisc(3, true, 220);
+        printf("SetRobotStopOnComDisc %d\n", rtn);
+        robot.GetRobotStopOnComDisc(0, enable, confirmTime);
+        printf("GetRobotStopOnComDisc 8080 rtn %d; enable is %d; confirm time is %d\n", rtn, enable, confirmTime);
+        robot.GetRobotStopOnComDisc(1, enable, confirmTime);
+        printf("GetRobotStopOnComDisc 80803 rtn %d; enable is %d; confirm time is %d\n", rtn, enable, confirmTime);
+        robot.GetRobotStopOnComDisc(2, enable, confirmTime);
+        printf("GetRobotStopOnComDisc 20002 rtn %d; enable is %d; confirm time is %d\n", rtn, enable, confirmTime);
+        robot.GetRobotStopOnComDisc(3, enable, confirmTime);
+        printf("GetRobotStopOnComDisc 20004 rtn %d; enable is %d; confirm time is %d\n", rtn, enable, confirmTime);
+        robot.CloseRPC();
+        robot.Sleep(1000);
+        return 0;
+    }
+
+Send UDP Instruction Frame
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Send UDP instruction frame
+    * @param [in] frame Data frame string to send, e.g., /f/bIII20III303III7IIIMode(0)III/b/f
+    * @return Error code
+    */
+    errno_t SendUDPFrame(std::string frame);
+
+Set Callback Function for Execution Results of Instructions Sent by SDK via UDP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set callback function for execution results of instructions sent by SDK via UDP
+    * @param [in] CallBack Callback function; comType-instruction result communication reply type 0-TCP, 1-UDP; count-instruction reply frame count; cmdID-instruction ID; contentLen-data length; content-data content
+    * @return Error code
+    */
+    errno_t SetCmdRpyCallback(void (*CallBack)(int comType, int count, int cmdID, int contentLen, std::string content));
+
+UDP Instruction Sending Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestSendUDPFrame()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.SetCmdRpyCallback(UDPFrameCallBack);
+        printf("SetCmdRpyCallback rtn is %d\n", rtn);
+        rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        rtn = robot.SendUDPFrame("/f/bIII20III303III7IIIMode(0)III/b/f");
+        printf("SendUDPFrame Mode(0) rtn is %d\n", rtn);
+        robot.Sleep(1000);
+        rtn = robot.SendUDPFrame("/f/bIII21III303III7IIIMode(1)III/b/f");
+        printf("SendUDPFrame Mode(1) rtn is %d\n", rtn);
+        robot.Sleep(1000);
+        rtn = robot.SendUDPFrame("/f/bIII49III201III184IIIMoveJ(-15.625, -82.680, 101.654, -110.950, -88.290, 0.017, -383.012, -2.325, 242.655, -178.024, 1.710, 74.416, 0, 0, 100, 100, 100, 0.000, 0.000, 0.000, 0.000, -1, 0, 0, 0, 0, 0, 0, 0)III/b/f");
+        printf("SendUDPFrame MoveJ(-15.625 rtn is %d\n", rtn);
+        robot.Sleep(1000);
+        rtn = robot.SendUDPFrame("/f/bIII48III203III199IIIMoveL(-75.622, -82.680, 101.654, -110.950, -88.290, 0.017, -193.537, 330.525, 242.657, -178.024, 1.710, 14.420, 0, 0, 100, 100, 100, -1, 0, 0.000, 0.000, 0.000, 0.000, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0)III/b/f");
+        printf("SendUDPFrame MoveL(-75.622 rtn is %d\n", rtn);
+        robot.Sleep(1000);
+        rtn = robot.SendUDPFrame("/f/bIII4III905III20IIIGetSoftwareVersion()III/b/f");
+        printf("SendUDPFrame GetSoftwareVersion() rtn is %d\n", rtn);
+        robot.Sleep(1000);
+        rtn = robot.SendUDPFrame("/f/bIII20III303III7IIIMode(0)III/b/f");
+        printf("SendUDPFrame rtn is %d\n", rtn);
+        rtn = robot.SendUDPFrame("III20III303III7IIIMode(0)III/b/f");
+        printf("SendUDPFrame rtn is %d\n", rtn);
+        rtn = robot.SendUDPFrame("/f/bIII20III303III7IIIMode(0)");
+        printf("SendUDPFrame rtn is %d\n", rtn);
+        rtn = robot.SendUDPFrame("/f/bIII20III303III6IIIMode(0)III/b/f");
+        printf("SendUDPFrame rtn is %d\n", rtn);
+        rtn = robot.SendUDPFrame("/f/b|||20|||303|||7|||Mode(0)|||/b/f");
+        printf("SendUDPFrame rtn is %d\n", rtn);
+        rtn = robot.SendUDPFrame("/f/bII20II303II7IIMode(0)II/b/f");
+        printf("SendUDPFrame rtn is %d\n", rtn);
+        robot.CloseRPC();
+        robot.Sleep(1000);
+        return 0;
+    }
+    
+Set User-Defined Robot End-Effector LED Color
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set user-defined robot end-effector LED color
+    * @param [in] r End red LED control; 0-off; 1-on
+    * @param [in] g End green LED control; 0-off; 1-on
+    * @param [in] b End blue LED control; 0-off; 1-on
+    * @return Error code
+    */
+    errno_t SetUserLEDColor(bool r, bool g, bool b);
+        
+Code Example for Setting User-Defined Robot End-Effector LED Color
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestUserLedColor()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return 0;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.SetUserLEDColor(true, true, true);
+        robot.Sleep(1000);
+        robot.SetUserLEDColor(false, false, false);
+        robot.Sleep(1000);
+        robot.SetUserLEDColor(true, false, false);
+        robot.Sleep(1000);
+        robot.SetUserLEDColor(false, true, false);
+        robot.Sleep(1000);
+        robot.SetUserLEDColor(false, false, true);
+        robot.Sleep(1000);
+        robot.CloseRPC();
+        robot.Sleep(1000);
+        return 0;
+    }

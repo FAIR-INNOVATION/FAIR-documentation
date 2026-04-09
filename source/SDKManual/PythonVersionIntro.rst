@@ -12,7 +12,49 @@ Version Update Description
    * - **Version**
      - **Date**
      - **Update Description**
-   
+
+   * - V3.9.4
+     - 2026-03-25
+     - | 1.ServoJTStart() interface adds communication type selection parameter, supporting XMLRPC/UDP communication;
+       | 2.ServoJTEnd() interface adds communication type selection parameter, supporting XMLRPC/UDP communication;
+       | 3.ServoJT() interface adds communication type selection parameter, supporting XMLRPC/UDP communication;
+       | 4.ServoMoveStart() interface adds communication type selection parameter, supporting XMLRPC/UDP communication;
+       | 5.ServoMoveEnd() interface adds communication type selection parameter, supporting XMLRPC/UDP communication;
+       | 6.ServoJ() interface adds communication type selection parameter, supporting XMLRPC/UDP communication;
+       | 7.SetWeldMachineCtrlMode() interface adds control mode selection parameter;
+       | 8.ExtDevGetUDPComParam() interface adds ability to obtain UDP communication parameter: whether to automatically reconnect after control box restart;
+       | 9.Adds SetAxleGenComEnable() interface to enable end-effector general transparent transmission function;
+       | 10.Adds SndRcvAxleGenComCmdData() interface for end-effector to send non-periodic data and wait for response;
+       | 11.Adds SetRobotStopOnComDisc() interface to stop robot operation when port communication is disconnected;
+       | 12.Adds GetRobotStopOnComDisc() interface to obtain parameters for stopping robot operation when port communication is disconnected;
+       | 13.Adds SetDIConfig() interface to set configurable CI port functions of the control box;
+       | 14.Adds GetDIConfig() interface to obtain configurable CI port functions of the control box;
+       | 15.Adds SetDOConfig() interface to set configurable CO port functions of the control box;
+       | 16.Adds GetDOConfig() interface to obtain configurable CO port functions of the control box;
+       | 17.Adds SetToolDIConfig() interface to set configurable End-CI port functions of the end-effector;
+       | 18.Adds GetToolDIConfig() interface to obtain configurable End-CI port functions of the end-effector;
+       | 19.Adds SetDIConfigLevel() interface to set the active state of configurable CI ports of the control box;
+       | 20.Adds GetDIConfigLevel() interface to obtain the active state of configurable CI ports of the control box;
+       | 21.Adds SetDOConfigLevel() interface to set the active state of configurable CO ports of the control box;
+       | 22.Adds GetDOConfigLevel() interface to obtain the active state of configurable CO ports of the control box;
+       | 23.Adds SetToolDIConfigLevel() interface to set the active state of configurable CI ports of the end-effector;
+       | 24.Adds GetToolDIConfigLevel() interface to obtain the active state of configurable CI ports of the end-effector;
+       | 25.Adds SetStandardDILevel() interface to set the active state of standard DI ports of the control box;
+       | 26.Adds GetStandardDILevel() interface to obtain the active state of standard DI ports of the control box;
+       | 27.Adds SetStandardDOLevel() interface to set the active state of standard DO ports of the control box;
+       | 28.Adds GetStandardDOLevel() interface to obtain the active state of standard DO ports of the control box;
+       | 29.Adds SetExAxisCmdDoneTimeUDP() interface for setting extension axis positioning completion time;
+       | 30.Adds SendUDPFrameUDP() interface for sending instruction frames;
+       | 31.Adds SetUDPCmdRpyCallback() interface to set callback function for execution results of instructions sent by SDK via UDP;
+       | 32.Adds SetVelReducePara() interface for setting safety speed parameters;
+       | 33.Adds OriginPointWeaveStart() interface for starting fixed-point swing;
+       | 34.Adds OriginPointWeaveEnd() interface for ending fixed-point swing;
+       | 35.Adds SetUserLEDColor() interface for setting user-defined robot end-effector LED color;
+       | 36.Adds MoveToTPDStart() interface for moving to the starting point of TPD trajectory recording;
+       | 37.Adds OpenLuaDownload() interface for downloading open protocol Lua files;
+       | 38.Adds OpenLuaDelete() interface for deleting open protocol Lua files;
+       | 39.Adds AllOpenLuaDelete() interface for deleting open protocol Lua files;   
+
    * - V3.9.3
      - 2026-02-11
      - | 1.ServoCart() interface added extended axis parameters

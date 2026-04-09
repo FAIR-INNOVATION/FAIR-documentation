@@ -360,27 +360,28 @@ UDP Extended Axis Communication Parameter Configuration
     */
     errno_t ExtDevSetUDPComParam(std::string ip, int port, int period, int lossPkgTime, int lossPkgNum, int disconnectTime, int reconnectEnable, int reconnectPeriod, int reconnectNum, int selfConnect = 1);
         
-Get UDP Extended Axis Communication Parameter Configuration
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get UDP Extension Axis Communication Parameter Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Get UDP extended axis communication parameters
+    * @brief Get UDP extension axis communication parameters
     * @param [out] ip PLC IP address
     * @param [out] port Port number
-    * @param [out] period Communication cycle (ms, default is 2, do not modify this parameter)
+    * @param [out] period Communication period (ms, default is 2, do not modify this parameter)
     * @param [out] lossPkgTime Packet loss detection time (ms)
-    * @param [out] lossPkgNum Packet loss count
+    * @param [out] lossPkgNum Number of packet losses
     * @param [out] disconnectTime Communication disconnection confirmation duration
-    * @param [out] reconnectEnable Communication disconnection auto-reconnect enable, 0-disable, 1-enable
-    * @param [out] reconnectPeriod Reconnect cycle interval (ms)
-    * @param [out] reconnectNum Reconnect count
+    * @param [out] reconnectEnable Automatic reconnection enable after communication disconnection 0-disable 1-enable
+    * @param [out] reconnectPeriod Reconnection interval (ms)
+    * @param [out] reconnectNum Number of reconnection attempts
+    * @param [out] selfStart Whether to automatically reconnect after control box restart; 0-no reconnection; 1-reconnect
     * @return Error code
     */
-    errno_t ExtDevGetUDPComParam(std::string& ip, int& port, int& period, int& lossPkgTime, int& lossPkgNum, int& disconnectTime, int& reconnectEnable, int& reconnectPeriod, int& reconnectNum);
+    errno_t ExtDevGetUDPComParam(std::string& ip, int& port, int& period, int& lossPkgTime, int& lossPkgNum, int& disconnectTime, int& reconnectEnable, int& reconnectPeriod, int& reconnectNum, int& selfConnect);
         
 Load UDP Communication
 ++++++++++++++++++++++++++++++++++
@@ -1541,3 +1542,16 @@ Mobile Device Code Example
       robot.CloseRPC();
       return 0;
     }
+
+UDP Extension Axis Positioning Completion Time Setting
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief UDP extension axis positioning completion time setting
+    * @param [in] time Positioning completion time [ms]
+    * @return Error code
+    */
+    errno_t SetExAxisCmdDoneTime(double time);

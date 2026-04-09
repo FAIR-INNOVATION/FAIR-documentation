@@ -310,11 +310,20 @@ Get UDP Extended Axis Communication Parameter Configuration
     :linenos:
 
     /**
-    * @brief Get UDP extended axis communication parameters
-    * @param [out] param Communication parameters
+    * @brief Get UDP extension axis communication parameters
+    * @param [out] ip PLC IP address
+    * @param [out] port Port number
+    * @param [out] period Communication period (ms, default is 2, do not modify this parameter)
+    * @param [out] lossPkgTime Packet loss detection time (ms)
+    * @param [out] lossPkgNum Number of packet losses
+    * @param [out] disconnectTime Communication disconnection confirmation duration
+    * @param [out] reconnectEnable Automatic reconnection enable after communication disconnection 0-disable 1-enable
+    * @param [out] reconnectPeriod Reconnection interval (ms)
+    * @param [out] reconnectNum Number of reconnection attempts
+    * @param [out] selfConnect Whether to automatically reconnect after control box restart; 0-no reconnection; 1-reconnect
     * @return Error code
     */
-    int ExtDevGetUDPComParam(UDPComParam param);       
+    public int ExtDevGetUDPComParam(ref string ip, ref int port, ref int period, ref int lossPkgTime, ref int lossPkgNum, ref int disconnectTime, ref int reconnectEnable, ref int reconnectPeriod, ref int reconnectNum, ref int selfConnect)      
 
 Load UDP Communication
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1333,3 +1342,15 @@ Movable Device Code Example
         robot.TractorStop();//Stop the device
         robot.TractorMoveC(300, -90, 20);
     }
+
+UDP Extension Axis Positioning Completion Time Setting
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief UDP extension axis positioning completion time setting
+    * @param time Positioning completion time [ms]
+    * @return Error code
+    */
+    public int SetExAxisCmdDoneTime(double time)

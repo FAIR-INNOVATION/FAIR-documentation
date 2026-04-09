@@ -1076,6 +1076,65 @@ When programming, first use the PTP instruction to reach the starting point of t
 
 .. centered:: Figure 9.5-27 TPD command interface
 
+Robot Trajectory Teaching and Replay TPD Function
+*******************************************************************************
+
+Overview
+""""""""""""""""""""
+The robot trajectory teaching and replay TPD function allows the robot to accurately remember and repeat complex taught trajectories, thereby achieving high-quality and high-efficiency automated production in industrial manufacturing, and replacing humans in completing high-risk tasks in hazardous environments.
+
+Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""
+**Step1**: TPD recording parameter setting. Click "TPD" in the status bar at the bottom of the interface to enter the TPD function item to configure trajectory recording parameters, set the trajectory file name, pose type, and sampling period, and configure DI and DO. During the TPD trajectory recording process, triggering DI will output the corresponding DO when replaying the TPD.
+
+.. image:: coding/549.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.5-27-1 TPD Parameter Setting
+
+**Step2**: Switch to drag mode. In manual mode, there are two ways to switch to drag teaching mode: one is to long press the end button, and the other is to use the interface drag mode switch button. In the TPD recording function, it is recommended to switch the robot to drag teaching mode from the interface.
+
+.. image:: coding/550.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.5-27-2 Robot Drag Mode Setting
+
+**Step3**: Start recording. Click the "Start Recording" button to start trajectory recording, and drag the robot for motion teaching. In addition, there is a "TPD Recording Start/Stop" function configuration item in the end DI configuration. By configuring this function, users can trigger the "Start Recording" trajectory function through external signals. It should be noted that to start recording the trajectory through an external signal, the TPD trajectory information must first be configured on the page.
+
+**Step4**: Stop recording. After completing the motion teaching, click the "Stop Recording" button to stop trajectory recording, and then exit the drag teaching mode by using the drag teaching switch button. Similar to Step 3, after configuring the "TPD Recording Start/Stop" function, the stop recording can be triggered through an external signal.
+
+**Step5**: TPD trajectory editing. Click "TPD" in the status bar at the bottom of the interface to enter the TPD trajectory editing function. First, select the trajectory to be edited, click the "Get" button, and Start-index and End-index will display the start sequence number and end sequence number of the trajectory. Adjust them by dragging the slider or manually entering values; then click the "Replay" button, and the robot will simulate the motion on the interface (the actual robot does not move); finally, click the "Finish" button to complete the editing of the TPD trajectory.
+
+.. image:: coding/551.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.5-27-3 TPD Trajectory Editing
+
+**Step6**: Write the trajectory teaching and replay TPD program. Click "Teaching Program" - "Trajectory Replay" - "Trajectory Load", select the trajectory to be replayed, and then click the "Add" button. Click "Trajectory Replay", select the same trajectory, set the corresponding parameters according to the interface prompts, and then click the "Add" button.
+
+.. image:: coding/552.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-27-4 TPD Trajectory Load Setting
+
+.. image:: coding/553.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-27-5 TPD Trajectory Replay Setting
+
+**Step7**: Generate the Lua program and run it. According to the typical Lua program generated in Step 6, run the program to perform trajectory teaching and replay.
+
+.. image:: coding/554.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.5-27-6 Typical Program for TPD Trajectory Replay
+
 Offset command
 ++++++++++++++++
 
@@ -6107,6 +6166,232 @@ Click "Apply" to generate LUA program.
 
 .. note:: Before configuring parameters in "Weld" or "Weave" interfaces, confirm the communication method between control box and welder (analog: "Controller I/O"; digital: "Digital Communication Protocol").
 
+Swing Dwell Time Gradient Function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Overview
+***********************************
+
+For the triangle wave swing, vertical L-shaped triangle wave swing, sine wave swing, and vertical L-shaped sine wave swing, where the swing amplitude and dwell time are inconsistent at the start and end of the swing, this function gradually changes the swing amplitude and dwell time from the start set value to the end set value.
+
+For the triangle wave swing and sine wave swing, where the swing amplitude, dwell time, and forward speed are inconsistent at the start and end of the swing, this function gradually changes the swing amplitude, dwell time, and forward speed from the start set value to the end set value.
+
+Operation Procedure
+***********************************
+
+**Step1**: Swing parameter setting. Click "Teaching Program" - "Program Programming" - "Swing" button, select the initial swing number and set the swing parameters, then select the end swing number and set the swing parameters. Note: Only the swing amplitude, left dwell time, and right dwell time can be inconsistent between the initial and end swing parameters; all other parameters must be consistent.
+   
+.. image:: coding/545.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-14 Swing Parameter Setting
+
+**Step2**: Gradient mode setting. Click "Swing Gradient Start" to set the corresponding gradient mode: For triangle wave swing, vertical L-shaped triangle wave swing, sine wave swing, and vertical L-shaped sine wave swing, the gradient mode can be set to "Swing"; For triangle wave swing and sine wave swing, the gradient mode can also be set to "Swing + Forward Speed", and additional settings for the start speed and end speed during the swing are required.
+   
+.. image:: coding/546.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-15 "Swing" Gradient Mode Setting
+   
+.. image:: coding/547.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-16 "Swing + Forward Speed" Gradient Mode Setting
+
+**Step3**: Writing the swing gradient program. Click "Start Swing", select the start swing number and add it; then click "Swing Gradient Start", set the end swing number and gradient mode, and add it; then click "Swing Gradient End" and "Stop Swing" in sequence and add them; finally, manually add the swing start point position and end point position in the Lua program to generate a typical Lua program.
+   
+.. image:: coding/548.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-17 Typical Program for Swing Dwell Time Gradient
+
+Fixed-Point Swing Function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Overview
+***********************************
+
+For triangle wave swing, vertical L-shaped triangle wave swing, circular swing - clockwise, circular swing - counterclockwise, sine wave swing, vertical L-shaped sine wave swing, and vertical welding triangle swing, a fixed-point swing function is added: the robot end-effector only swings without moving forward. Note: This function requires the tool center point (TCP) to be calibrated first.
+
+Operation Procedure
+***********************************
+
+**Step1**: Swing parameter setting. Click "Teaching Program" - "Program Programming" - "Swing" button, edit the swing number to set swing parameters. Note: If the actual fixed-point swing time needs to be consistent with the set fixed-point swing time, the dwell time cannot be set.
+   
+.. image:: coding/558.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-18 Swing Parameter Setting
+ 
+**Step2**: Fixed-point swing parameter setting. Click "Teaching Program" - "Program Programming" - "Swing" - "Fixed-Point Swing Start" button, set the swing reference and swing time parameters, click "Add", then click the "Fixed-Point Swing End" button and click "Add". The swing reference can be selected from two types: "Tool Coordinate System" and "Reference Point". When "Tool Coordinate System" is selected as the swing reference, the X direction of the current point's tool coordinate system is used as the forward direction, and the Y direction of the current point's tool coordinate system is used as the swing direction. When "Reference Point" is selected as the swing reference, the line between the current point and the reference point is used as the forward direction, and the swing direction is determined by the swing algorithm. Note: The reference point and the current position must have the same tool coordinate system and workpiece coordinate system. The two swing references are shown in the figures respectively.
+   
+.. image:: coding/559.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-19 Swing Reference as "Tool Coordinate System"
+   
+.. image:: coding/560.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-20 Swing Reference as "Reference Point"
+
+**Step3**: Write the fixed-point swing program. The Lua programs generated for the two swing references are shown in the figures respectively. Running the Lua program enables the fixed-point swing function.
+   
+.. image:: coding/561.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-21 Fixed-Point Swing Program with Swing Reference as "Tool Coordinate System"
+   
+.. image:: coding/562.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-22 Fixed-Point Swing Program with Swing Reference as "Reference Point"
+
+Laser Fixed-Point Swing Function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Overview
+***********************************
+
+The laser fixed-point swing function is a combination of the robot's fixed-point swing function and the laser tracking function: based on the original robot fixed-point swing, the swing position can be adjusted through the laser tracking function, and it can be adapted to extension axis motion. This function is only effective for "triangle wave swing" and "sine wave swing" types.
+
+Laser + Fixed-Point Swing Function Operation Procedure
+****************************************************************************
+
+**Step1**: Configure laser communication. Refer to the corresponding chapter in the user manual for specific operation steps.
+
+**Step2**: Calibrate the robot tool coordinate system and laser coordinate system. Refer to the corresponding chapter in the user manual for specific operation steps.
+
+**Step3**: Adjust the position of the workpiece and the laser beam. The schematic is shown in the figure below, where the black rectangle is the workpiece and the red line segment is the laser beam. The laser beam should be perpendicular to the edge of the workpiece to be tracked to ensure good tracking performance.
+   
+.. image:: coding/563.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-23 Workpiece and Laser Beam Schematic
+
+**Step4**: Swing parameter setting. Click the "Teaching Program" - "Program Programming" - "Swing" button, edit the swing number to set swing parameters. Note: (1) The laser + fixed-point swing function is only effective for "triangle wave swing" and "sine wave swing" types; (2) If the actual fixed-point swing time needs to be consistent with the set fixed-point swing time, the left and right dwell times cannot be set; (3) To ensure laser tracking performance, the left and right dwell times must be consistent.
+   
+.. image:: coding/564.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.29-24 Swing Parameter Setting
+
+**Step5**: Fixed-point swing parameter setting. Click the "Teaching Program" - "Program Programming" - "Swing" - "Fixed-Point Swing Start" button, set the swing reference and swing time parameters, click "Add", then click the "Fixed-Point Swing End" button and click "Add". The swing reference can be selected from two types: "Tool Coordinate System" and "Reference Point". When "Tool Coordinate System" is selected as the swing reference, the X direction of the current point's tool coordinate system is used as the forward direction, and the Y direction of the current point's tool coordinate system is used as the swing direction. When "Reference Point" is selected as the swing reference, the line between the current point and the reference point is used as the forward direction, and the swing direction is determined by the swing algorithm. Note: The reference point and the current position must have the same tool coordinate system and workpiece coordinate system.
+   
+.. image:: coding/559.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-25 Swing Reference as "Tool Coordinate System"
+   
+.. image:: coding/560.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-26 Swing Reference as "Reference Point"
+
+**Step6**: Add laser tracking instruction. Click "Teaching Program" - "Program Programming" - "Laser Tracking" button in sequence, then click "Start Tracking" and select the laser coordinate system calibrated in Step 2 (this manual uses toolcoord5 as an example), and finally click "Stop Tracking".
+   
+.. image:: coding/565.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.29-27 Laser Tracking Setting
+
+**Step7**: Write the Lua program for laser + fixed-point swing. Adjust the instruction order generated in Step 5 and Step 6. The Lua programs generated for the two fixed-point swing references are shown in the figures below respectively. The program running time is only related to the set time of the fixed-point swing and is independent of the interface speed. Run the Lua program to realize the laser + fixed-point swing function.
+   
+.. image:: coding/566.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-28 Laser + Fixed-Point Swing Program 1
+   
+.. image:: coding/567.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-29 Laser + Fixed-Point Swing Program 2
+
+Laser + Extension Axis + Fixed-Point Swing Function Operation Procedure
+****************************************************************************************
+
+**Step1**: Configure laser communication. Refer to the corresponding chapter in the user manual for specific operation steps.
+
+**Step2**: Configure extension axis communication. Refer to the corresponding chapter in the user manual for specific operation steps.
+
+**Step3**: Calibrate the robot tool coordinate system and laser coordinate system. Refer to the corresponding chapter in the user manual for specific operation steps.
+
+**Step4**: Adjust the position of the workpiece and the laser beam. The schematic is shown in the figure below, where the black rectangle is the workpiece and the red line segment is the laser beam. The laser beam should be perpendicular to the edge of the workpiece to be tracked to ensure good tracking performance.
+   
+.. image:: coding/563.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-30 Relative Position of Workpiece and Laser Beam Schematic
+
+**Step5**: Swing parameter setting. Click the "Teaching Program" - "Program Programming" - "Swing" button, edit the swing number to set swing parameters. Note: (1) The laser + extension axis + fixed-point swing function is only effective for "triangle wave swing" and "sine wave swing" types; (2) If the actual fixed-point swing time needs to be consistent with the set fixed-point swing time, the left and right dwell times cannot be set; (3) To ensure laser tracking performance, the left and right dwell times must be consistent.
+   
+.. image:: coding/564.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.29-31 Swing Parameter Setting
+
+**Step6**: Fixed-point swing parameter setting. Click the "Teaching Program" - "Program Programming" - "Swing" - "Fixed-Point Swing Start" button, set the swing reference and swing time parameters, click "Add", then click the "Fixed-Point Swing End" button and click "Add". The swing reference can be selected from two types: "Tool Coordinate System" and "Reference Point". When "Tool Coordinate System" is selected as the swing reference, the X direction of the current point's tool coordinate system is used as the forward direction, and the Y direction of the current point's tool coordinate system is used as the swing direction. When "Reference Point" is selected as the swing reference, the line between the current point and the reference point is used as the forward direction, and the swing direction is determined by the swing algorithm. Note: The reference point and the current position must have the same tool coordinate system and workpiece coordinate system.
+   
+.. image:: coding/559.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-32 Swing Reference as "Tool Coordinate System"
+   
+.. image:: coding/560.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 9.29-33 Swing Reference as "Reference Point"
+
+**Step7**: Add extension axis motion instruction. Click "Teaching Program" - "Program Programming" - "Extension Axis" button in sequence, then click "Motion Instruction", select "Asynchronous" as the motion mode, select the start point and end point of the motion, and click the "Add" button.
+   
+.. image:: coding/568.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-34 Add Extension Axis Motion
+
+**Step8**: Add laser tracking instruction. Click "Teaching Program" - "Program Programming" - "Laser Tracking" button in sequence, then click "Start Tracking" and select the laser coordinate system calibrated in Step 3 (this manual uses toolcoord5 as an example), and finally click "Stop Tracking".
+   
+.. image:: coding/565.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.29-35 Laser Tracking Setting
+
+**Step9**: Write the Lua program for laser + extension axis + fixed-point swing. Adjust the instruction order generated in Step 5, Step 6 and Step 7. The Lua programs generated for the two fixed-point swing references are shown in Figure 3-7 and Figure 3-8 respectively. The program running time is only related to the set time of the fixed-point swing and is independent of the interface speed. Run the Lua program to realize the laser + extension axis + fixed-point swing function.
+   
+.. image:: coding/569.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-36 Laser + Extension Axis + Fixed-Point Swing Program 1
+   
+.. image:: coding/570.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.29-37 Laser + Extension Axis + Fixed-Point Swing Program 2
+
 Robot ModbusRTU Communication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -7856,6 +8141,43 @@ Specific Functions and Recommended Values of Parameters:
 - Maximum Linear Acceleration: Limits the acceleration generated by external forces in the translational direction. Recommended value is 500mm/s².
 - Maximum Angular Velocity: Limits the angular velocity generated by external forces in the rotational direction. Recommended value is 90°/s.
 - Maximum Angular Acceleration: Limits the angular acceleration generated by external forces in the rotational direction. Recommended value is 180°/s².
+
+Impedance Control Setting and Function Start/Stop in Joint Space
+*****************************************************************************************
+
+**Step1**: Log in to the web interface, click sequentially "Initial Settings" → "Basic" → "Joints" → "Collision Level" to enter the robot collision level setting module, and set a reasonable collision coefficient.
+
+.. image:: coding/555.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-6 Robot Collision Coefficient Setting Module
+
+**Step2**: Click sequentially "Teaching Program" → "Program Programming" → "Force Control Set", and add the "Impedance" instruction. The "Impedance" instruction enables the robot to achieve impedance control along the running trajectory.
+
+.. image:: coding/556.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-7 Adding Force Control Instruction
+
+**Step3**: In the force control instruction module, select "Joint Space" from the space selection drop-down box, and set appropriate force threshold, mass coefficient, damping coefficient, stiffness coefficient, maximum speed, and maximum acceleration in the text boxes. Click "Enable" in the instruction type, then click "Add" to add the impedance control enable instruction; click "Disable" in the instruction type, then click "Add" to add the impedance control disable instruction.
+
+.. image:: coding/557.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.34-8 Impedance Control Instruction
+
+Specific Parameter Functions and Recommended Values:
+
+- Space Selection: Set the operating space for impedance control to joint space;
+- Force Threshold: The minimum trigger force for impedance control. The threshold range for J1-J3 is 10–50 Nm, and for rotational directions, the threshold range is 1–10 Nm;
+- Mass Coefficient: Increasing the mass coefficient results in slower offset, while decreasing it causes the robot to offset too quickly. The setting range for J1-J3 is [0.01-1], with a recommended value of 0.04; for J4-J6, the setting range is [0.001-1], with a recommended value of 0.01;
+- Damping Coefficient: Increasing the damping coefficient results in slower offset, while decreasing it causes the robot to offset too quickly and may produce oscillation. The setting range for J1-J3 is [0.1-2], with a recommended value of 0.1; for J4-J6, the setting range is [0.008-1.5], with a recommended value of 0.08;
+- Stiffness Coefficient: Increasing the stiffness coefficient results in slower offset. The recommended value is 0;
+- Maximum Speed: Limits the joint rotation speed generated by external forces. The recommended value is 50°/s;
+- Maximum Acceleration: Limits the joint rotation acceleration generated by external forces. The recommended value is 50°/s².
 
 Custom Weaving Welding Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

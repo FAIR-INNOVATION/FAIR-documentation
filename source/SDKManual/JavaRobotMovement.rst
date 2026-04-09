@@ -656,29 +656,31 @@ Spiral movement code example
         return 0;
     }
 
-Servo movement start
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Servo Motion Start
++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Servo movement start, used with ServoJ, ServoCart commands
-    * @return Error code 
-    */ 
-    int ServoMoveStart();
+    /**
+    * @brief Start servo motion, used with ServoJ and ServoCart commands
+    * @param comType Command sending type; 0-xmlrpc; 1-UDP (corresponding to robot port 20007)
+    * @return Error code
+    */
+    public int ServoMoveStart (int comType)
 
-Servo movement end
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Servo Motion End
++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    /** 
-    * @brief Servo movement end, used with ServoJ, ServoCart commands
-    * @return Error code 
-    */ 
-    int ServoMoveEnd();
+    /**
+    * @brief End servo motion, used with ServoJ and ServoCart commands
+    * @param comType Command sending type; 0-xmlrpc; 1-UDP (corresponding to robot port 20007)
+    * @return Error code
+    */
+    public int ServoMoveEnd (int comType)
 
-Joint space servo mode movement
+Joint Space Servo Mode Motion
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionchanged:: Java SDK-v1.0.6-3.8.3
 
@@ -686,18 +688,92 @@ Joint space servo mode movement
     :linenos:
 
     /**
-    * @brief  Joint space servo mode movement
-    * @param  [in] joint_pos  Target joint position in deg
-    * @param  [in] axisPos  External axis position in mm
-    * @param  [in] acc  Acceleration percentage, range [0~100], not currently available, default 0
-    * @param  [in] vel  Speed percentage, range [0~100], not currently available, default 0
-    * @param  [in] cmdT  Command cycle in s, recommended range [0.001~0.0016]
-    * @param  [in] filterT Filter time in s, not currently available, default 0
-    * @param  [in] gain  Target position proportional amplifier, not currently available, default 0
-    * @param  [in] id  servoJ command ID, default 0
-    * @return  Error code
+    * @brief Joint space servo mode motion
+    * @param joint_pos Target joint position, unit deg
+    * @param axisPos External axis position, unit mm
+    * @param acc Acceleration percentage, range [0~100], temporarily not open, default is 0
+    * @param vel Velocity percentage, range [0~100], temporarily not open, default is 0
+    * @param cmdT Command sending period, unit s, recommended range [0.001~0.0016]
+    * @param filterT Filter time, unit s, temporarily not open, default is 0
+    * @param gain Proportional amplifier for target position, temporarily not open, default is 0
+    * @param id ServoJ command ID, default is 0
+    * @param comType Command sending type; 0-xmlrpc; 1-UDP (corresponding to robot port 20007)
+    * @return Error code
     */
-    int ServoJ(JointPos joint_pos, ExaxisPos axisPos, double acc, double vel, double cmdT, double filterT, double gain, int id);
+    public int ServoJ(JointPos joint_pos, ExaxisPos axisPos, float acc, float vel, float cmdT, float filterT, float gain, int id, int comType)
+
+UDP Communication-Based ServoJ, ServoMoveStart, ServoMoveEnd SDK Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestServoJ(Robot robot)
+    {
+        robot.udpCmdClient.SetUDPCmdRpyCallback((srcType, count, cmdID, dataLen, content) -> {
+            System.out.println("\n[Received UDP reply from robot]");
+            System.out.println("srcType: " + srcType);
+            System.out.println("count: " + count);
+            System.out.println("cmdID: " + cmdID);
+            System.out.println("dataLen: " + dataLen);
+            System.out.println("content: " + content);
+            return 0;
+        });
+        int rtn=-1;
+
+        JointPos j=new JointPos(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos=new ExaxisPos(0, 0, 0, 0);
+
+        double vel = 0.0;
+        double acc = 0.0;
+        double cmdT = 0.016;
+        double filterT = 0.0;
+        double gain = 0.0;
+        int flag = 0;
+        int count = 300;
+        double dt = 0.1;
+        int cmdID = 0;
+        int comType = 1;
+        int ret = robot.GetActualJointPosDegree(j);
+        if (ret == 0)
+        {
+            robot.ServoMoveStart(comType);
+            count = 300;
+            while (count>0)
+            {
+                robot.ServoJ(j, epos, acc, vel, cmdT, filterT, gain, cmdID, comType);
+                j.J1 += dt;
+                j.J2 += dt;
+                j.J4 += dt;
+                j.J5 += dt;
+                j.J6 += dt;
+                epos.axis1 += dt;
+                count -= 1;
+                robot.Sleep(10);
+            }
+            robot.ServoMoveEnd(comType);
+
+            robot.Sleep(1000);
+            robot.ServoMoveStart(comType);
+            count = 300;
+            while (count>0)
+            {
+                robot.ServoJ(j, epos, acc, vel, cmdT, filterT, gain, cmdID, comType);
+                j.J1 -= dt;
+                j.J2 -= dt;
+                j.J4 -= dt;
+                j.J5 -= dt;
+                j.J6 -= dt;
+                epos.axis1 -= dt;
+                count -= 1;
+                robot.Sleep(10);
+            }
+            robot.ServoMoveEnd(comType);
+        }
+        else
+        {
+            System.out.println("GetActualJointPosDegree errcode:"+ ret);
+        }
+    }
 
 Joint space servo mode movement example program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -735,47 +811,46 @@ Joint space servo mode movement example program
         }
     }
 
-Joint torque control start
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Joint Torque Control Start
++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  Joint torque control start
-    * @return  Error code
-    */
-    int ServoJTStart()
-
-Joint torque control
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java
-    :linenos:
-
-    /**
-    * @brief Joint Torque Control
-    * @param torque Torque for joints j1~j6, unit: Nm
-    * @param interval Command cycle, unit: s, range: [0.001~0.008]
-    * @param checkFlag Detection strategy 
-    *                  0-No restrictions; 
-    *                  1-Power limit; 
-    *                  2-Velocity limit; 
-    *                  3-Both power and velocity limits
-    * @param jPowerLimit Maximum joint power limit for each joint (W)
-    * @param jVelLimit Maximum joint velocity for each joint (°/s)
+    * @brief Start joint torque control
+    * @param comType Command sending type; 0-xmlrpc; 1-UDP (corresponding to robot port 20007)
     * @return Error code
     */
-    public int ServoJT(double[] torque, double interval, int checkFlag, double[] jPowerLimit, double[] jVelLimit)
+    public int ServoJTStart (int comType)
 
-Joint torque control end
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Joint Torque Control
++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  Joint torque control end
-    * @return  Error code
+    * @brief Joint torque control
+    * @param torque j1~j6 joint torque, unit Nm
+    * @param interval Command period, unit s, range [0.001~0.008]
+    * @param checkFlag Detection strategy 0-no restriction; 1-power limitation; 2-velocity limitation; 3-both power and velocity limitation
+    * @param jPowerLimit Joint maximum power limit (W)
+    * @param jVelLimit Joint maximum velocity (°/s)
+    * @param comType Command sending type; 0-xmlrpc; 1-UDP (corresponding to robot port 20007)
+    * @return Error code
     */
-    int ServoJTEnd()
+    public int ServoJT(double[] torque, double interval, int checkFlag, double[] jPowerLimit, double[] jVelLimit, int comType)
+
+Joint Torque Control End
++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief End joint torque control
+    * @param comType Command sending type; 0-xmlrpc; 1-UDP (corresponding to robot port 20007)
+    * @return Error code
+    */
+    public int ServoJTEnd (int comType)
 
 Joint space servo mode movement example program
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -803,6 +878,70 @@ Joint space servo mode movement example program
 
         robot.CloseRPC();
         return 0;
+    }
+
+UDP Communication-Based ServoJT, ServoJTStart, ServoJTEnd SDK Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void ServoJTWithSafety(Robot robot)
+    {
+        robot.udpCmdClient.SetUDPCmdRpyCallback((srcType, count, cmdID, dataLen, content) -> {
+            System.out.println("\n[Received UDP reply from robot]");
+            System.out.println("srcType: " + srcType);
+            System.out.println("count: " + count);
+            System.out.println("cmdID: " + cmdID);
+            System.out.println("dataLen: " + dataLen);
+            System.out.println("content: " + content);
+            return 0;
+        });
+        while (true) {
+            robot.ResetAllError();
+            robot.Sleep(500);
+            List<Number> torques;
+            torques=robot.GetJointTorques(1);
+            robot.ServoJTStart(1); //   #servoJT start
+            ROBOT_STATE_PKG pkg=new ROBOT_STATE_PKG();
+            robot.DragTeachSwitch(1);
+            int checkFlag = 3;//-1,3
+            double[] jPowerLimit = { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 };
+            double[] jVelLimit = { 50, 50, 50, 50, 50, 50};//180.1,-1
+            int count = 800000;
+            int error = 0;
+            int comType = 1;
+
+            double[] tor=new double[]{(double)torques.get(1),(double)torques.get(2),(double)torques.get(3),(double)torques.get(4),(double)torques.get(5),(double)torques.get(6)};
+
+            while (true) {
+                tor[0] = 0.08;//  #Increase axis 1 torque by 0.01 Nm each time, 100 movements
+                error = robot.ServoJT(tor, 0.01, checkFlag, jPowerLimit, jVelLimit, comType);  //# Joint space servo mode motion
+                System.out.printf("ServoJT rtn is %d\n", error);
+                count = count - 1;
+                robot.Sleep(1);
+                pkg = robot.GetRobotRealTimeState();
+                System.out.printf("maincode %d, subcode %d\n", pkg.main_code, pkg.sub_code);
+                if (pkg.jt_cur_pos[0] > 30)
+                    break;
+            }
+
+            tor = new double[]{(double) torques.get(1), (double) torques.get(2), (double) torques.get(3), (double) torques.get(4), (double) torques.get(5), (double) torques.get(6)};
+            while (true) {
+                tor[0] = -0.08;//  #Decrease axis 1 torque by 0.01 Nm each time, 100 movements
+                error = robot.ServoJT(tor, 0.01, checkFlag, jPowerLimit, jVelLimit, 1);  //# Joint space servo mode motion
+                System.out.printf("ServoJT rtn is %d\n", error);
+                count = count - 1;
+                robot.Sleep(1);
+                pkg = robot.GetRobotRealTimeState();
+                System.out.printf("maincode %d, subcode %d\n", pkg.main_code, pkg.sub_code);
+                if (pkg.jt_cur_pos[0] < 0)
+                    break;
+            }
+
+            robot.DragTeachSwitch(0);
+
+            error = robot.ServoJTEnd(1);  //#End servo motion
+        }
     }
 
 Joint Torque Control Code Example with Overspeed Protection
@@ -1690,4 +1829,117 @@ Stationary Air Motion Code Example
         System.out.printf("LaserSensorRecordandReplay rtn is %d\n", rtn);
         robot.CloseRPC();
         robot.Sleep(9999999);
+    }
+
+Fixed-Point Swing Start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Start fixed-point swing
+    * @param [in] weaveNum Swing number [0-7]
+    * @param [in] mode 0-Tool coordinate system; 1-Reference point
+    * @param [in] refPoint Reference point Cartesian coordinates [x,y,z,a,b,c]
+    * @param [in] weaveTime Swing time [s]
+    * @return Error code
+    */
+    public int OriginPointWeaveStart(int weaveNum, int mode, DescPose refPoint, double weaveTime)
+    
+Fixed-Point Swing End
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief End fixed-point swing
+    * @return Error code
+    */
+    public int OriginPointWeaveEnd();
+        
+Fixed-Point Swing SDK Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestOriginPointWeave(Robot robot) {
+        JointPos j = new JointPos(39.886, -98.580, -124.032, -47.393, 90.000, 40.842);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+
+        DescPose refPoint = new DescPose(400.021, 300.022, 299.996, 179.997, -0.003, -90.956);
+        robot.MoveJ(j, 1, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+        
+        robot.OriginPointWeaveStart(0, 0, refPoint, 3);
+        robot.MoveStationary();
+        robot.OriginPointWeaveEnd();
+
+        robot.Sleep(2000);
+
+        robot.MoveJ(j, 1, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+        robot.OriginPointWeaveStart(0, 1, refPoint, 3);
+        robot.MoveStationary();
+        robot.OriginPointWeaveEnd();
+
+        robot.Sleep(1000);
+        return 0;
+    }
+
+Fixed-Point Swing (Including Laser and Extension Axis) SDK Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestOriginPointWeave(Robot robot) {
+        JointPos j = new JointPos(39.886, -98.580, -124.032, -47.393, 90.000, 40.842);
+        ExaxisPos epos1 = new ExaxisPos(0, 0, 0, 0);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos2 = new ExaxisPos(5, 0, 0, 0);
+        DescPose refPoint = new DescPose(400.021, 300.022, 299.996, 179.997, -0.003, -90.956);
+
+        int rtn = 0;
+        robot.LaserTrackingSensorConfig("192.168.58.20", 5020);
+        robot.LaserTrackingSensorSamplePeriod(20);
+        robot.LoadPosSensorDriver(101);
+
+        // Load UDP driver
+        robot.ExtDevLoadUDPDriver();
+
+        // Set extension axis command completion time
+        rtn = robot.SetExAxisCmdDoneTime(5000.0);
+        System.out.println("SetExAxisCmdDoneTime rtn is " + rtn);
+        // Enable extension axes 1 and 2
+        rtn = robot.ExtAxisServoOn(1, 1);
+        System.out.println("ExtAxisServoOn axis id 1 rtn is " + rtn);
+        rtn = robot.ExtAxisServoOn(2, 1);
+        System.out.println("ExtAxisServoOn axis id 2 rtn is " + rtn);
+        robot.Sleep(2000);
+
+        // Set extension axis homing
+        robot.ExtAxisSetHoming(1, 0, 10, 2);
+        robot.LaserTrackingLaserOnOff(1,0);
+
+
+        // 1---Without extension axis
+        robot.LaserTrackingTrackOnOff(1, 4);
+        robot.Sleep(200);
+        // Start fixed-point swing
+        robot.OriginPointWeaveStart(0, 0, refPoint, 10);
+        robot.MoveStationary();   // Execute stationary motion (assuming this method exists)
+        robot.OriginPointWeaveEnd();
+        robot.LaserTrackingTrackOnOff(0, 4);
+
+        robot.Sleep(2000);         // Wait 2 seconds
+
+        // 2----With extension axis
+        robot.ExtAxisMove(epos1, 100, -1);
+        robot.LaserTrackingTrackOnOff(1, 4);
+        // Start fixed-point swing
+        robot.OriginPointWeaveStart(0, 0, refPoint, 20);
+        robot.ExtAxisMove(epos2, 100, -1);
+        robot.OriginPointWeaveEnd();
+        robot.LaserTrackingTrackOnOff(0, 4);
+
+        robot.Sleep(1000);
+        return 0;
     }

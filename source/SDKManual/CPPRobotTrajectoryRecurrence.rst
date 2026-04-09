@@ -97,6 +97,69 @@ Get TPD Start Pose
      */     
     errno_t  GetTPDStartPose(char name[30], DescPose *desc_pose);
 
+Move to TPD Trajectory Recording Start Point
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Move to TPD trajectory recording start point
+    * @param [in] name Trajectory file name
+    * @param [in] moveType Motion type; 0-PTP; 1-LIN
+    * @param [in] ovl Speed scaling percentage, range [0~100]
+    * @return Error code
+    */
+    errno_t MoveToTPDStart(char name[30], uint8_t moveType, float ovl);
+    
+Robot TPD Trajectory Recording Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    int TestTPD(void)
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+        return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    int type = 1;
+    char name[30] = "tpd2025";
+    int period_ms = 4;
+    uint16_t di_choose = 0;
+    uint16_t do_choose = 0;
+    robot.SetTPDParam(type, name, period_ms, di_choose, do_choose);
+    robot.Mode(1);
+    robot.Sleep(1000);
+    robot.DragTeachSwitch(1);
+    robot.SetTPDStart(type, name, period_ms, di_choose, do_choose);
+    robot.Sleep(3000);
+    robot.SetWebTPDStop();
+    robot.DragTeachSwitch(0);
+    robot.Sleep(1000);
+    float ovl = 100.0;
+    uint8_t blend = 0;
+    DescPose start_pose = {};
+    rtn = robot.LoadTPD(name);
+    printf("LoadTPD rtn is: %d\n", rtn);
+    robot.GetTPDStartPose(name, &start_pose);
+    printf("start pose, xyz is: %f %f %f. rpy is: %f %f %f \n", start_pose.tran.x, start_pose.tran.y, start_pose.tran.z, start_pose.rpy.rx, start_pose.rpy.ry, start_pose.rpy.rz);
+    rtn = robot.MoveToTPDStart(name, 0, 100);
+    printf("MoveToTPDStart rtn is: %d\n", rtn);
+    rtn = robot.MoveTPD(name, blend, ovl);
+    printf("MoveTPD rtn is: %d\n", rtn);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    robot.SetTPDDelete(name);
+    robot.CloseRPC();
+    return 0;
+    }
+
 Robot TPD Trajectory Recording Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 

@@ -249,3 +249,63 @@ Joint torque power detection code example
         robot.CloseRPC();  
         return 0;  
     }  
+
+Set Safety Speed Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set safety speed parameters
+    * @param enable 0-off; 1-enabled in manual mode; 2-enabled in all modes (automatic speed limiting not supported)
+    * @param maxTCPVel Maximum TCP speed limit; [0-1000] mm/s
+    * @param strategy Strategy after overspeed; 0-stop with alarm; 1-automatic speed limiting; 2-stop with alarm and disable
+    * @return Error code
+    */
+    public int SetVelReducePara(int enable, double maxTCPVel, int strategy)
+        
+SDK Code Example for Setting Safety Speed Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestSetVelReducePara(Robot robot) {
+        int rtn = 0;
+
+        JointPos j1 = new JointPos(0, -90, 90, 0, 0, 0);
+        JointPos j2 = new JointPos(90, -90, 90, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+
+        robot.SetSpeed(80);
+        rtn = robot.SetVelReducePara(2, 30, 1);
+        System.out.printf("SetVelReducePara param error rtn is %d\n", rtn);
+
+        rtn = robot.SetVelReducePara(0, 30, 1);
+        System.out.printf("SetVelReducePara disable reduce vel rtn is %d\n", rtn);
+        robot.MoveJ(j1, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+        robot.MoveJ(j2, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+
+        rtn = robot.SetVelReducePara(1, 30, 1);
+        System.out.printf("SetVelReducePara reduce vel rtn is %d\n", rtn);
+        robot.MoveJ(j1, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+        robot.MoveJ(j2, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+
+        rtn = robot.SetVelReducePara(2, 30, 2);
+        System.out.printf("SetVelReducePara disable robot rtn is %d\n", rtn);
+        robot.MoveJ(j1, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+        robot.MoveJ(j2, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+
+        robot.Sleep(2000);
+        robot.ResetAllError();
+        robot.RobotEnable(1);
+        robot.Sleep(1000);
+
+        rtn = robot.SetVelReducePara(2, 30, 0);
+        System.out.printf("SetVelReducePara report error rtn is %d\n", rtn);
+        robot.MoveJ(j1, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+        robot.MoveJ(j2, 0, 0, 100, 100, 100.0, epos, -1.0, 0, offset_pos);
+
+        robot.Sleep(1000);
+        return 0;
+    }

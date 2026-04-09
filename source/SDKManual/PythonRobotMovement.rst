@@ -329,50 +329,127 @@ code example
     robot.CloseRPC()
     return 0
 
-Start of servo motion
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Servo Motion Start
+++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoMoveStart()``"
-    "Description", "Servo motion start, used with ServoJ, ServoCart commands"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``ServoMoveStart(cmdType=0)``"
+    "Description", "Start servo motion, used with ServoJ and ServoCart commands"
+    "Required Parameters", "- ``cmdType``: Command transmission type, 0=XML-RPC, 1=UDP transparent transmission"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
 
-End of servo motion
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ServoMoveEnd()``"
-    "Description", "End of servo motion, used with ServoJ, ServoCart commands"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Joint space servo mode motion
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Servo Motion End
+++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoJ(joint_pos, axisPos, acc = 0.0, vel = 0.0, cmdT = 0.008, filterT = 0.0, gain = 0.0, id=0)``"
+    "Prototype", "``ServoMoveEnd(cmdType=0)``"
+    "Description", "End servo motion, used with ServoJ and ServoCart commands"
+    "Required Parameters", "- ``cmdType``: Command transmission type, 0=XML-RPC, 1=UDP transparent transmission"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+Joint Space Servo Mode Motion
++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoJ(joint_pos, axisPos, acc = 0.0, vel = 0.0, cmdT = 0.008, filterT = 0.0, gain = 0.0, id=0, cmdType=0)``"
     "Description", "Joint space servo mode motion"
-    "Mandatory parameters", "- ``joint_pos``: target joint position in [°];
-    - ``axisPos``: external axis position in mm;"
-    "Default parameter", "- ``acc``: acceleration, range [0~100], not open yet, default 0.0.
-    - ``vel``: velocity, range [0~100], not open, default 0.0.
-    - ``cmdT``: command send cycle, unit s, recommended range [0.001~0.0016], default is 0.008.
-    - ``filterT``: filter time in [s], not open, default is 0.0; ``filterT``: filter time in [s], not open, default is 0.0.
-    - ``gain``: proportional amplifier for target position, not open yet, default 0.0;
-    - ``id``: servoJ command ID, default 0."
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Required Parameters", "- ``joint_pos``: Target joint position, unit [°];
+    - ``axisPos``: External axis position, unit mm;"
+    "Default Parameters", "- ``acc``: Acceleration, range [0~100], temporarily not open, default is 0.0;
+    - ``vel``: Velocity, range [0~100], temporarily not open, default is 0.0;
+    - ``cmdT``: Command sending period, unit s, recommended range [0.001~0.0016], default is 0.008;
+    - ``filterT``: Filter time, unit [s], temporarily not open, default is 0.0;
+    - ``gain``: Proportional amplifier for target position, temporarily not open, default is 0.0;
+    - ``id``: ServoJ command ID, default is 0;
+    - ``cmdType``: Command transmission type, 0=XML-RPC, 1=UDP transparent transmission;"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+UDP Communication-Based ServoJ, ServoMoveStart, ServoMoveEnd SDK Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from time import sleep
+    import time
+    from fairino import Robot
+
+    # Establish connection with robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    def TestServoJUDP(self):
+        # Set callback
+        def callback(src_type, count, cmd_id, data_len, content):
+            print("Callback function: cmd_id={} count={} data_len={} content={}".format(cmd_id, count, data_len, content))
+            return 0
+
+        robot.SetUDPCmdRpyCallback(callback)
+        # # Initialize joint position and external axis position
+        j= [105, -108, 74, -66, -88.893, -1.621]
+        offset_pos = [0, 0, 0, 0, 0, 0]
+        epos = [0, 0, 0, 0]
+        # # Move to initial position
+        result=robot.MoveJ(joint_pos=j, tool=0, user=0, vel=100, acc=100, ovl=100,exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+        print("MoveJ return result: {}".format(result))
+        vel = 0.0
+        acc = 0.0
+        cmdT = 0.016
+        filterT = 0.0
+        gain = 0.0
+        flag = 0
+        dt = 0.1
+        cmdID = 0
+
+        # Get current joint position
+        ret, j = robot.GetActualJointPosDegree(flag)
+        if ret != 0:
+            print(f"GetActualJointPosDegree errcode:{ret}")
+        while 1:
+            count = 300
+            result = robot.ServoMoveStart(cmdType=1)
+            print("ServoMoveStart return result: {}".format(result))
+            while count > 0:
+                result = robot.ServoJ(joint_pos=j, axisPos=epos, acc=acc, vel=vel, cmdT=cmdT,filterT=filterT, gain=gain, id=cmdID, cmdType=1)
+                j[0] += dt
+                j[1] += dt
+                j[2] += dt
+                j[3] += dt
+                j[4] += dt
+                j[5] += dt
+                count -= 1
+                time.sleep(0.01)
+            result = robot.ServoMoveEnd(cmdType=1)
+            print("ServoMoveEnd return result: {}".format(result))
+
+            count = 300
+            result = robot.ServoMoveStart(cmdType=1)
+            print("ServoMoveStart return result: {}".format(result))
+            while count > 0:
+                result = robot.ServoJ(joint_pos=j, axisPos=epos, acc=acc, vel=vel, cmdT=cmdT,filterT=filterT, gain=gain, id=cmdID, cmdType=1)
+                j[0] -= dt
+                j[1] -= dt
+                j[2] -= dt
+                j[3] -= dt
+                j[4] -= dt
+                j[5] -= dt
+                count -= 1
+                time.sleep(0.01)
+            result = robot.ServoMoveEnd(cmdType=1)
+            print("ServoMoveEnd return result: {}".format(result))
+        robot.CloseRPC()
+        return 0
+    TestServoJUDP(robot)
 
 Example of joint space servo mode motion code
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -415,48 +492,138 @@ Example of joint space servo mode motion code
         print(f"GetActualJointPosDegree errcode:{ret}")
     robot.CloseRPC()
 
-Joint torque control begins
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Joint Torque Control Start
++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoJTStart()``"
-    "Description", "Joint torque control begins"
-    "Mandatory parameters", "NULL"
-    "Default_parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
-
-Joint torque control
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. csv-table:: 
-    :stub-columns: 1
-    :widths: 10 30
-
-    "Prototype", "``ServoJT(torque, interval, checkFlag=0, jPowerLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], jVelLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0])``"
-    "Description", "Joint Torque Control"
-    "Required Parameters", "- ``torque``: Torque for joints j1~j6, unit: Nm
-                            - ``interval``: Command cycle, unit: s, range: [0.001~0.008]
-                            - ``checkFlag``: Detection strategy 0-No restrictions; 1-Power limit; 2-Velocity limit; 3-Both power and velocity limits, default: 0
-                            - ``jPowerLimit``: Default parameter jPowerLimit Maximum joint power limit (W), default: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-                            - ``jVelLimit``: Maximum joint velocity (°/s), default: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+    "Prototype", "``ServoJTStart(cmdType=0)``"
+    "Description", "Start joint torque control"
+    "Required Parameters", "- ``cmdType``: Command transmission type, 0=XML-RPC, 1=UDP transparent transmission"
     "Default Parameters", "None"
-    "Return Value", "Error code Success-0 Failure- errcode"
+    "Return Value", "Error code Success-0 Failure-errcode"
 
-Joint torque control is completed
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Joint Torque Control
++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``ServoJTEnd()``"
-    "Description", "Joint torque control is completed"
-    "Mandatory parameters", "NULL"
-    "Default_parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode"
+    "Prototype", "``ServoJT(torque, interval, checkFlag=0, jPowerLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],jVelLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], cmdType=0)``"
+    "Description", "Joint torque control"
+    "Required Parameters", "- ``torque``: j1~j6 joint torque, unit Nm
+                - ``interval``: Command period, unit s, range [0.001~0.008]
+                - ``checkFlag``: Detection strategy 0-no restriction; 1-power limitation; 2-velocity limitation; 3-both power and velocity limitation, default 0
+                - ``jPowerLimit``: Joint maximum power limit (W), default [0.0,0.0,0.0,0.0,0.0,0.0]
+                - ``jVelLimit``: Joint maximum velocity (°/s), default [0.0,0.0,0.0,0.0,0.0,0.0]
+                - ``cmdType``: Command transmission type, 0=XML-RPC, 1=UDP transparent transmission"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+Joint Torque Control End
++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoJTEnd(cmdType=0)``"
+    "Description", "End joint torque control"
+    "Required Parameters", "- ``cmdType``: Command transmission type, 0=XML-RPC, 1=UDP transparent transmission"
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+UDP Communication-Based ServoJT, ServoJTStart, ServoJTEnd SDK Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:
+
+    from time import sleep
+    import time
+    from fairino import Robot
+
+    # Establish connection with robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    def TestServoJTUDP(self):
+        # Set callback
+        def callback(src_type, count, cmd_id, data_len, content):
+            print("Callback function: cmd_id={} count={} data_len={} content={}".format(cmd_id, count, data_len, content))
+            return 0
+
+        robot.SetUDPCmdRpyCallback(callback)
+        while True:
+            # Initialize joint position and external axis position
+            j = [0, -90, 90, 0, 0, 0]
+            epos = [0, 0, 0, 0]
+            offset_pos = [0, 0, 0, 0, 0, 0]
+
+            # Move to initial position
+            robot.MoveJ(joint_pos=j, tool=0, user=0, vel=100, acc=100, ovl=100,
+                        exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+            time.sleep(3)
+            # Enable drag teaching
+            result=robot.DragTeachSwitch(1)
+            print("DragTeachSwitch return result: {}".format(result))
+            torques = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+            # Get joint torques
+            ret, torques = robot.GetJointTorques(flag=1)
+            if ret != 0:
+                print(f"GetJointTorques errcode:{ret}")
+
+            count = 100
+            result = robot.ServoJTStart(cmdType=1)
+            print("ServoJTStart return result: {}".format(result))
+            # Forward torque control
+            while True:
+                torques[0] = 0.03
+                result = robot.ServoJT(
+                    torque=torques,
+                    interval=0.001,
+                    checkFlag=0,
+                    jPowerLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                    jVelLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                    cmdType=1
+                )
+                print("Return result: {}".format(result))
+                time.sleep(1)
+
+                ret, pkg = robot.GetRobotRealTimeState()
+                if pkg.jt_cur_pos[0] > 30:
+                    break
+
+            # Reverse torque control
+            while True:
+                torques[0] = -0.03
+                result = robot.ServoJT(
+                        torque=torques,
+                        interval=0.001,
+                        checkFlag=0,
+                        jPowerLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                        jVelLimit=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                        cmdType=1
+                    )
+                print("Return result: {}".format(result))
+                time.sleep(1)
+
+                ret, pkg = robot.GetRobotRealTimeState()
+                if pkg.jt_cur_pos[0] < 0:
+                    break
+
+            # End torque control and disable drag teaching
+            result = robot.ServoJTEnd(cmdType=1)
+            print("ServoJTEnd return result: {}".format(result))
+            result = robot.DragTeachSwitch(0)
+            print("DragTeachSwitch return result: {}".format(result))
+
+        robot.CloseRPC()
+        return 0
+    TestServoJTUDP(robot)
 
 Sample code for joint torque control
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1359,3 +1526,154 @@ Stationary Air Motion Code Example
     robot.CloseRPC()
     return 0
 
+Fixed-Point Swing Start
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``OriginPointWeaveStart(weaveNum, mode, refPoint, weaveTime)``"
+    "Description", "Start fixed-point swing"
+    "Required Parameters", "
+    - ``weaveNum``: Swing number [0-7]
+    - ``mode``: 0-Tool coordinate system; 1-Reference point
+    - ``refPoint``: Reference point Cartesian coordinates [x,y,z,a,b,c]
+    - ``weaveTime``: Swing time [s]
+    - "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure-errcode"
+
+Fixed-Point Swing End
++++++++++++++++++++++++++++++++++
+    
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``OriginPointWeaveEnd()``"
+    "Description", "End fixed-point swing"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code Success-0 Failure-errcode"
+
+Fixed-Point Swing SDK Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos: 
+
+    from time import sleep
+    import time
+    from fairino import Robot
+
+    # Establish connection with robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    def TestOriginPointWeave(self):
+        time.sleep(2)
+        # Initialize joint position, external axis and offset
+        j = [39.886, -98.580, -124.032, -47.393, 90.000, 40.842]
+        epos = [0, 0, 0, 0]
+        offset_pos = [0, 0, 0, 0, 0, 0]
+
+        # Reference point position [x, y, z, rx, ry, rz]
+        refPoint = [400.021, 300.022, 299.996, 179.997, -0.003, -90.956]
+
+        # Move to starting position
+        robot.MoveJ(joint_pos=j, tool=1, user=0, vel=100, acc=100, ovl=100,
+                    exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+        # First swing: absolute coordinate system (tool=0), mode 0
+        robot.OriginPointWeaveStart(0, 0, refPoint, 3)
+        robot.MoveStationary()
+        robot.OriginPointWeaveEnd()
+
+        time.sleep(2)
+
+        # Move to starting position again
+        robot.MoveJ(joint_pos=j, tool=1, user=0, vel=100, acc=100, ovl=100,
+                    exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+        # Second swing: absolute coordinate system (tool=0), mode 1
+        robot.OriginPointWeaveStart(0, 1, refPoint, 3)
+        robot.MoveStationary()
+        robot.OriginPointWeaveEnd()
+
+        # Close connection
+        robot.CloseRPC()
+        time.sleep(1)
+
+    TestOriginPointWeave(robot)
+
+Fixed-Point Swing (Including Laser and Extension Axis) SDK Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos: 
+
+    from time import sleep
+    import time
+    from fairino import Robot
+
+    # Establish connection with robot controller
+    robot = Robot.RPC('192.168.58.2')
+
+    def TestOriginPointWeave(self):
+        time.sleep(2)
+        # Initialize joint position, external axis and offset
+        j = [39.886, -98.580, -124.032, -47.393, 90.000, 40.842]
+        epos1 = [0, 0, 0, 0]
+        offset_pos = [0, 0, 0, 0, 0, 0]
+        epos2 = [5, 0.000, 0.000, 0.000]
+        # Reference point position [x, y, z, rx, ry, rz]
+        refPoint = [400.021, 300.022, 299.996, 179.997, -0.003, -90.956]
+
+        rtn = 0
+        robot.LaserTrackingSensorConfig("192.168.58.20", 5020)
+        robot.LaserTrackingSensorSamplePeriod(20)
+        robot.LoadPosSensorDriver(101)
+
+        # Load UDP driver
+        robot.ExtDevLoadUDPDriver()
+
+        # Set extension axis command completion time
+        rtn = robot.SetExAxisCmdDoneTime(5000.0)
+        print(f"SetExAxisCmdDoneTime rtn is {rtn}")
+
+        # Enable extension axes 1 and 2
+        rtn = robot.ExtAxisServoOn(1, 1)
+        print(f"ExtAxisServoOn axis id 1 rtn is {rtn}")
+        rtn = robot.ExtAxisServoOn(2, 1)
+        print(f"ExtAxisServoOn axis id 2 rtn is {rtn}")
+        time.sleep(2)
+
+        # Set extension axis homing
+        robot.ExtAxisSetHoming(1, 0, 10, 2)
+        robot.LaserTrackingLaserOnOff(1)
+
+        # 1---Without extension axis
+        robot.LaserTrackingTrackOnOff(1, 4)
+        time.sleep(0.2)
+        # Start fixed-point swing
+        robot.OriginPointWeaveStart(0, 0, refPoint, 10)
+        robot.MoveStationary()  # Execute stationary motion (assuming this method exists)
+        robot.OriginPointWeaveEnd()
+        robot.LaserTrackingTrackOnOff(0, 4)
+
+        time.sleep(2)  # Wait 2 seconds
+
+        # 2----With extension axis
+        robot.ExtAxisMove(epos1, 100, -1)
+        robot.LaserTrackingTrackOnOff(1, 4)
+        # Start fixed-point swing
+        robot.OriginPointWeaveStart(0, 0, refPoint, 20)
+        robot.ExtAxisMove(epos2, 100, -1)
+        robot.OriginPointWeaveEnd()
+        robot.LaserTrackingTrackOnOff(0, 4)
+
+        # Close connection
+        robot.CloseRPC()
+        time.sleep(1)
+
+    TestOriginPointWeave(robot)

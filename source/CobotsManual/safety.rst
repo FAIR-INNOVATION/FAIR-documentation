@@ -55,6 +55,31 @@ Click "Initial" -> "Safety" in the menu bar, and then click the "Safe speed" sub
 
 .. centered:: Figure 7.2-1 Safe manual speed configuration
 
+Safety Speed Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++++++
+
+The robot safety speed function is designed for human-robot collaboration or dynamic environments. It actively limits the robot's operating speed to keep kinetic energy and impact force within safe thresholds, thereby preventing injury to personnel in the event of accidental contact and effectively protecting equipment and workpieces from collision damage.
+
+Operation Procedure
++++++++++++++++++++++++++++++
+
+**Step1**: Click "Initial Settings" - "Safety" - "Safety Speed" button to set the safety speed parameters. The configuration mainly includes three parts: "Function Enable", "Speed Limit", and "Mode After Overspeed".
+
+Among them, "Function Enable" offers three options: "Disable", "Enable in Manual Mode", and "Enable in All Modes";
+
+Set the speed limit in "Speed Limit". When the robot's linear speed reaches this limit, it will be handled according to the parameters set in "Mode After Overspeed". "Mode After Overspeed" offers three modes: "Stop with Alarm", "Automatic Speed Limiting", and "Disable After Stop with Alarm". Automatic speed limiting is only available when "Enable in Manual Mode" is selected.
+
+After setting the required parameters, no further operations are needed. The robot's motion will be handled according to the set parameters. The parameter settings are shown in the figure.
+
+.. image:: safety/056.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.2-2 Safety Speed Parameter Setting
+   
 I/O safety
 --------------
 
