@@ -43,6 +43,11 @@ When the robot has high running precision requirements, be sure to add pins to p
      - ≥10Nm
      - φ5mm
 
+   * - FR5-C
+     - 4 pieces of M6
+     - ≥10Nm
+     - φ5mm
+   
    * - FR5
      - 4 pieces of M8
      - ≥20Nm

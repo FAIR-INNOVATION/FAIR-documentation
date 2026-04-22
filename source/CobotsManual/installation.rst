@@ -92,41 +92,47 @@ Nameplate information
 
 .. centered:: Figure 3.1-5 FR5 model collaborative robot
 
+.. figure:: installation/128.png
+	:align: center
+	:width: 6in
+
+.. centered:: Figure 3.1-6 FR5-C Model Collaborative Robot
+
 .. figure:: installation/126.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-6 FR5-WML model collaborative robot
+.. centered:: Figure 3.1-7 FR5-WML model collaborative robot
 
 .. figure:: installation/004.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-7 FR10 model collaborative robot
+.. centered:: Figure 3.1-8 FR10 model collaborative robot
 
 .. figure:: installation/005.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-8 FR16 model collaborative robot
+.. centered:: Figure 3.1-9 FR16 model collaborative robot
 
 .. figure:: installation/006.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-9 FR20 model collaborative robot
+.. centered:: Figure 3.1-10 FR20 model collaborative robot
 
 .. figure:: installation/007.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-10 FR30 model collaborative robot
+.. centered:: Figure 3.1-11 FR30 model collaborative robot
 
 .. figure:: installation/125.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.1-11 FR30L model collaborative robot
+.. centered:: Figure 3.1-12 FR30L model collaborative robot
 
 Effectiveness and responsibility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -270,6 +276,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.16
      - 0.10
 
+   * - **FR5-C**
+     - 0.51
+     - 0.63
+     - 0.60
+     - 0.33
+     - 0.16
+     - 0.10
+
    * - **FR10**
      - 0.64
      - 0.70
@@ -349,6 +363,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 90
 
    * - **FR5**
+     - 420
+     - 500
+     - 480
+     - 310
+     - 150
+     - 120
+
+   * - **FR5-C**
      - 420
      - 500
      - 480
@@ -455,6 +477,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.19
      - 0.12
 
+   * - **FR5-C**
+     - 0.54
+     - 0.65
+     - 0.63
+     - 0.35
+     - 0.19
+     - 0.12
+
    * - **FR10**
      - 0.66
      - 0.73
@@ -534,6 +564,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 110
 
    * - **FR5**
+     - 450
+     - 520
+     - 510
+     - 330
+     - 180
+     - 140
+
+   * - **FR5-C**
      - 450
      - 520
      - 510
@@ -627,6 +665,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 0.21
      - 0.15
 
+   * - **FR5-C**
+     - 0.56
+     - 0.68
+     - 0.65
+     - 0.38
+     - 0.21
+     - 0.15
+
    * - **FR10**
      - 0.69
      - 0.75
@@ -706,6 +752,14 @@ Joint 1, joint 6 testing robot levels, the rotating shaft is perpendicular to th
      - 120
 
    * - **FR5**
+     - 460
+     - 540
+     - 520
+     - 350
+     - 190
+     - 160
+
+   * - **FR5-C**
      - 460
      - 540
      - 520
@@ -1769,8 +1823,8 @@ Robot arm installation
 .. note:: 
 	You can purchase accurate bases as attachments. Figure 3.4-2、3.4-5、3.4-8、3.4-11 show the position of the sales hole and the location of the screw.
 
-Installation requirements for FR3/FR3-WMS/FR3-WML/FR3-C robot
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Installation requirements for FR3/FR3-WMS/FR3-WML/FR3-C/FR5-C robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 When installing the robot on the mounting base, use four M6 bolts with a strength of not less than 8.8 to fix the robot on the mounting base. The bolts must be tightened with a torque of not less than 10Nm.Suggest using two on the mounting base φ 5mm pin hole matched with pins for robot positioning to improve robot installation accuracy and prevent robot movement due to collisions and other factors.When the robot has high operating accuracy requirements, please be sure to add pins to position the robot.
 
@@ -1778,7 +1832,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.4-2 FR3/FR3-WMS/FR3-WML/FR3-C model collaborative robot installation size
+.. centered:: Figure 3.4-2 FR3/FR3-WMS/FR3-WML/FR3-C/FR5-C model collaborative robot installation size
 
 .. important:: 
   According to different application scenarios, we recommend several robot installation bases as follows
@@ -1789,7 +1843,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
     :align: center
     :width: 3in
 
-  .. centered:: Figure 3.4-3 FR3/FR3-WMS/FR3-WML/FR3-C model collaborative robot low requirement mounting base
+  .. centered:: Figure 3.4-3 FR3/FR3-WMS/FR3-WML/FR3-C/FR5-C model collaborative robot low requirement mounting base
   
   (II)For situations where the motion speed is fast, the running speed is high, and the accuracy requirements are high, it is recommended to install the robot on the following base and fix it on a solid ground.
 
@@ -1797,7 +1851,7 @@ When installing the robot on the mounting base, use four M6 bolts with a strengt
     :align: center
     :width: 3in
 
-  .. centered:: Figure 3.4-4 FR3/FR3-WMS/FR3-WML/FR3-C Model Collaborative Robot High Demand Mounting Base
+  .. centered:: Figure 3.4-4 FR3/FR3-WMS/FR3-WML/FR3-C/FR5-C Model Collaborative Robot High Demand Mounting Base
 
 Installation requirements for FR5 robot
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -1888,7 +1942,7 @@ There are four M6 thread holes in the robot tool, which can be used to connect t
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.4-13 FR3/FR3-WMS/FR3-WML/FR3-C/FR5/FR10/FR16 model robot end flange drawing
+.. centered:: Figure 3.4-13 FR3/FR3-WMS/FR3-WML/FR3-C/FR5/FR5-C/FR10/FR16 model robot end flange drawing
 
 .. figure:: installation/031.png
 	:align: center
@@ -2057,6 +2111,17 @@ The FR5-WML model collaborative robot has a maximum payload capacity of 7kg and 
 
 .. centered:: Figure 3.4-20 FR5-WML Model Collaborative Robot Payload Curve
 
+FR5-C Model Collaborative Robot Load Curve
+*************************************************
+
+The FR5-C model collaborative robot has a maximum payload of 5kg and a rated payload of 4kg. The load curve is shown in the figure as "Full Performance".
+
+.. figure:: installation/130.png
+	:align: center
+	:width: 5in
+
+.. centered:: Figure 3.4-21 FR5-C Model Collaborative Robot Load Curve
+
 FR10 Model Collaborative Robot Load Curve
 *******************************************
 
@@ -2074,7 +2139,7 @@ The maximum load that the FR10 collaborative robot can carry is 14kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-21 FR10 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-22 FR10 Model Collaborative Robot Load Curve
   
 FR16 Model Collaborative Robot Load Curve
 **********************************************
@@ -2093,7 +2158,7 @@ The maximum load that the FR16 collaborative robot can carry is 20kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-22 FR16 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-23 FR16 Model Collaborative Robot Load Curve
 
 FR20 Model Collaborative Robot Load Curve
 *************************************************
@@ -2112,7 +2177,7 @@ The maximum load that the FR20 collaborative robot can carry is 25kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-23 FR20 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-24 FR20 Model Collaborative Robot Load Curve
 
 FR30 Model Collaborative Robot Load Curve
 *************************************************
@@ -2131,7 +2196,7 @@ The maximum load that the FR30 collaborative robot can carry is 35kg, and the ra
 	:align: center
 	:width: 5in
 
-.. centered:: Figure 3.4-24 FR30 Model Collaborative Robot Load Curve
+.. centered:: Figure 3.4-25 FR30 Model Collaborative Robot Load Curve
 
 Control connection
 ------------------------
@@ -2932,84 +2997,71 @@ Connector: M12-A Type-12P-Female (with M12-A Type-12P-Male plug). Complies with 
 	:width: 2in
 
 .. list-table::
-   :widths: 10 15 15 20 40 
+   :widths: 10 15 20 40 
    :header-rows: 0
    :align: center
 
    * - **Pin**
-     - **Color**
      - **Definition**
      - **Description**
      - **Remarks**
 
    * - 1
-     - Blue
      - AGND
      - Analog Ground
      - Analog reference ground
 
    * - 2
-     - Brown
      - 0V
      - 24V Power Negative
      - Control power negative
 
    * - 3
-     - Red
      - 485-A
      - RS485 Communication A
      - Reserved for expansion
 
    * - 4
-     - Gray
      - 485-B
      - RS485 Communication B
      - Reserved for expansion
 
    * - 5
-     - Black
      - DI0/DO0
      - Digital Input/Output 0
      - Configurable as input or output (mutually exclusive)
 
    * - 6
-     - Yellow
      - DI1/DO1
      - Digital Input/Output 1
      - Configurable as input or output (mutually exclusive)
 
    * - 7
-     - Pink
      - DI2/DO2
      - Digital Input/Output 2
      - Configurable as input or output (mutually exclusive)
 
    * - 8
-     - Dark Green
      - AI0/AO0
      - Analog Input/Output 0
      - Configurable as input or output (mutually exclusive)
 
    * - 9
-     - White
      - AI1/AO1
      - Analog Input/Output 1
      - Configurable as input or output (mutually exclusive)
 
    * - 10
-     - Purple
      - 24V
      - 24V Power Positive
      - Control power positive
 
    * - 11
-     - Orange
      - DI3/DO3
      - Digital Input/Output 3
      - Configurable as input or output (mutually exclusive)
 
    * - 12
-     - Light Green
      - DI4/DO4
      - Digital Input/Output 4
      - Configurable as input or output (mutually exclusive)
