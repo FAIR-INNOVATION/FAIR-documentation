@@ -361,101 +361,294 @@ Robot State Feedback Structure Type
     :linenos:
 
     /**
-    * @brief Robot state feedback structure type
+    * @brief  Robot status feedback structure type
     */
-    public class ROBOT_STATE_PKG
-    {
-      public short frame_head = 0;            // Frame header 0x5A5A
-      public byte frame_cnt = 0;              // Frame count
-      public short data_len = 0;              // Data length
-      public int program_state = 0;          // Program running state, 1-stop; 2-run; 3-pause
-      public int robot_state = 0;            // Robot motion state, 1-stop; 2-run; 3-pause; 4-drag
-      public int main_code = 0;               // Main error code
-      public int sub_code = 0;                // Sub error code
-      public int robot_mode = 0;             // Robot mode, 0-auto mode; 1-manual mode
-      public double[] jt_cur_pos = new double[6];                  // Joint current position
-      public double[] tl_cur_pos = new double[6];                  // Tool current pose
-      public double[] flange_cur_pos = new double[6];              // End flange current pose
-      public double[] actual_qd = new double[6];                   // Robot current joint velocity
-      public double[] actual_qdd = new double[6];                  // Robot current joint acceleration
-      public double[] target_TCP_CmpSpeed = new double[2];         // Robot TCP composite command velocity
-      public double[] target_TCP_Speed = new double[6];            // Robot TCP command velocity
-      public double[] actual_TCP_CmpSpeed = new double[2];         // Robot TCP composite actual velocity
-      public double[] actual_TCP_Speed = new double[6];            // Robot TCP actual velocity
-      public double[] jt_cur_tor = new double[6];                  // Current torque
-      public int tool = 0;                        // Tool number
-      public int user = 0;                        // Workpiece number
-      public int cl_dgt_output_h = 0;            // Digital output 15-8
-      public int cl_dgt_output_l = 0;            // Digital output 7-0
-      public int tl_dgt_output_l = 0;            // Tool digital output 7-0 (only bit0-bit1 valid)
-      public int cl_dgt_input_h = 0;             // Digital input 15-8
-      public int cl_dgt_input_l = 0;             // Digital input 7-0
-      public int tl_dgt_input_l = 0;             // Tool digital input 7-0 (only bit0-bit1 valid)
-      public short[] cl_analog_input = new short[2];          // Control box analog input
-      public short tl_anglog_input = 0;                       // Tool analog input
-      public double[] ft_sensor_raw_data = new double[6];     // Force/torque sensor raw data
-      public double[] ft_sensor_data = new double[6];         // Reference coordinate system force/torque sensor data
-      public int ft_sensor_active = 0;           // Force/torque sensor activation state, 0-reset, 1-active
-      public int EmergencyStop = 0;              // Emergency stop flag
-      public int motion_done = 0;                 // In-position signal
-      public int gripper_motiondone = 0;         // Gripper motion completion signal
-      public int mc_queue_len = 0;                // Motion queue length
-      public int collisionState = 0;             // Collision detection, 1-collision; 0-no collision
-      public int trajectory_pnum = 0;             // Trajectory point number
-      public int safety_stop0_state = 0;  /* Safety stop signal SI0 */
-      public int safety_stop1_state = 0;  /* Safety stop signal SI1 */
-      public int gripper_fault_id = 0;    /* Error gripper number */
-      public short gripper_fault = 0;      /* Gripper fault */
-      public short gripper_active = 0;     /* Gripper activation state */
-      public int gripper_position = 0;    /* Gripper position */
-      public int gripper_speed = 0;       /* Gripper speed */
-      public int gripper_current = 0;     /* Gripper current */
-      public int gripper_tmp = 0;          /* Gripper temperature */
-      public int gripper_voltage = 0;      /* Gripper voltage */
-      public ROBOT_AUX_STATE auxState = new ROBOT_AUX_STATE(); /* 485 extended axis status */
-      public EXT_AXIS_STATUS extAxisStatus0 = new EXT_AXIS_STATUS();
-      public EXT_AXIS_STATUS extAxisStatus1 = new EXT_AXIS_STATUS();
-      public EXT_AXIS_STATUS extAxisStatus2 = new EXT_AXIS_STATUS();
-      public EXT_AXIS_STATUS extAxisStatus3 = new EXT_AXIS_STATUS();
-      public short[] extDIState = new short[8];        // Extended DI input
-      public short[] extDOState = new short[8];        // Extended DO output
-      public short[] extAIState = new short[4];        // Extended AI input
-      public short[] extAOState = new short[4];        // Extended AO output
-      public int rbtEnableState = 0;       // Robot enable state
-      public double[] jointDriverTorque = new double[6];       // Joint driver current torque
-      public double[] jointDriverTemperature = new double[6];  // Joint driver current temperature
-      public ROBOT_TIME robotTime = new ROBOT_TIME();
-      public int softwareUpgradeState = 0;   // Robot software upgrade state 0-idle or uploading upgrade package; 1~100: upgrade completion percentage; -1: upgrade software failed; -2: verification failed; -3: version verification failed; -4: decompression failed; -5: user configuration upgrade failed; -6: peripheral configuration upgrade failed; -7: extended axis configuration upgrade failed; -8: robot configuration upgrade failed; -9: DH parameter configuration upgrade failed
-      public int endLuaErrCode;              // End LUA running state
+    public class ROBOT_STATE_PKG {
+        public int frame_head;                      // Frame header
+        public int frame_cnt;                       // Frame count
+        public int data_len;                        // Data length
+        public int program_state;                   // Program status - 1-stopped; 2-running; 3-paused
+        public int robot_state;                     // Robot motion status - 1-stopped; 2-running; 3-paused; 4-dragging
+        public int main_code;                       // Main fault code
+        public int sub_code;                        // Sub fault code
+        public int robot_mode;                      // Robot mode - 1-manual mode; 0-automatic mode
+        public double[] jt_cur_pos = new double[6]; // Current joint positions of 6 axes, unit deg
+        public double[] tl_cur_pos = new double[6]; // Current tool position - [x,y,z,rx,ry,rz]
+        public double[] flange_cur_pos = new double[6]; // Current end flange position - [x,y,z,rx,ry,rz]
+        public double[] actual_qd = new double[6];  // Current velocities of 6 joints, unit deg/s
+        public double[] actual_qdd = new double[6]; // Current accelerations of 6 joints, unit deg/s^2
+        public double[] target_TCP_CmpSpeed = new double[2]; // TCP composite command speed - [position mm/s, orientation deg/s]
+        public double[] target_TCP_Speed = new double[6]; // TCP command speed - [vx,vy,vz,wx,wy,wz]
+        public double[] actual_TCP_CmpSpeed = new double[2]; // TCP composite actual speed - [position mm/s, orientation deg/s]
+        public double[] actual_TCP_Speed = new double[6]; // TCP actual speed - [vx,vy,vz,wx,wy,wz]
+        public double[] jt_cur_tor = new double[6]; // Current joint torque
+        public int tool;                            // Tool ID
+        public int user;                            // Workpiece ID
+        public int cl_dgt_output_h;                 // Control cabinet digital output high byte
+        public int cl_dgt_output_l;                 // Control cabinet digital output low byte
+        public int tl_dgt_output_l;                 // Tool digital output low byte
+        public int cl_dgt_input_h;                  // Control cabinet digital input high byte
+        public int cl_dgt_input_l;                  // Control cabinet digital input low byte
+        public int tl_dgt_input_l;                  // Tool digital input low byte
+        public int[] cl_analog_input = new int[2];  // Control cabinet analog input
+        public int tl_anglog_input;                 // Tool analog input
+        public double[] ft_sensor_raw_data = new double[6]; // Force sensor raw data
+        public double[] ft_sensor_data = new double[6]; // Force sensor data
+        public int ft_sensor_active;                // Force sensor activation status
+        public int EmergencyStop;                   // Emergency stop status
+        public int motion_done;                     // Motion completed
+        public int gripper_motiondone;              // Gripper motion completed
+        public int mc_queue_len;                    // Motion queue length
+        public int collisionState;                  // Collision status
+        public int trajectory_pnum;                 // Trajectory point sequence number
+        public int safety_stop0_state;              // Safety stop 0 status
+        public int safety_stop1_state;              // Safety stop 1 status
+        public int gripper_fault_id;                // Gripper fault ID
+        public int gripper_fault;                   // Gripper fault
+        public int gripper_active;                  // Gripper activation
+        public int gripper_position;                // Gripper position
+        public int gripper_speed;                   // Gripper speed
+        public int gripper_current;                 // Gripper current
+        public int gripper_temp;                    // Gripper temperature
+        public int gripper_voltage;                 // Gripper voltage
+        public AuxState aux_state = new AuxState(); // Internal auxiliary axis status
+        public EXT_AXIS_STATUS[] extAxisStatus = new EXT_AXIS_STATUS[4]; // Extension axis status array
+        public short[] extDIState = new short[8];   // Extended I/O
+        public short[] extDOState = new short[8];   // Extended I/O
+        public short[] extAIState = new short[4];   // Extended I/O
+        public short[] extAOState = new short[4];   // Extended I/O
+        public int rbtEnableState;                  // Robot enable status
+        public double[] jointDriverTorque = new double[6]; // Joint driver torque
+        public double[] jointDriverTemperature = new double[6]; // Joint driver temperature
+        public ROBOT_TIME robotTime = new ROBOT_TIME(); // Robot time object
+        public int softwareUpgradeState;            // Software upgrade status
+        public int endLuaErrCode;                   // End Lua error code
+        public int[] cl_analog_output = new int[2]; // Control cabinet analog output
+        public int tl_analog_output;                // Tool analog output
+        public float gripperRotNum;                 // Rotating gripper rotation count
+        public int gripperRotSpeed;                 // Rotating gripper speed
+        public int gripperRotTorque;                // Rotating gripper torque
+        public WELDING_BREAKOFF_STATE weldingBreakOffState = new WELDING_BREAKOFF_STATE(); // Welding interruption status
+        public double[] jt_tgt_tor = new double[6]; // Target joint torque
+        public int smartToolState;                  // Smart tool status
+        public float wideVoltageCtrlBoxTemp;        // Wide voltage control box temperature
+        public int wideVoltageCtrlBoxFanCurrent;    // Wide voltage control box fan current
+        public double[] toolCoord = new double[6];  // Tool coordinate system
+        public double[] wobjCoord = new double[6];  // Workpiece coordinate system
+        public double[] extoolCoord = new double[6]; // External tool coordinate system
+        public double[] exAxisCoord = new double[6]; // Extension axis coordinate system
+        public double load;                         // Payload
+        public double[] loadCog = new double[3];    // Load center of gravity
+        public double[] lastServoTarget = new double[6]; // Last servo J target position
+        public int servoJCmdNum;                    // Servo J command count
+        public double[] targetJointPos = new double[6]; // Target joint position
+        public double[] targetJointVel = new double[6]; // Target joint velocity
+        public double[] targetJointAcc = new double[6]; // Target joint acceleration
+        public double[] targetJointCurrent = new double[6]; // Target joint current
+        public double[] actualJointCurrent = new double[6]; // Actual joint current
+        public double[] actualTCPForce = new double[6]; // Actual TCP force
+        public double[] targetTCPPos = new double[6]; // Target TCP position
+        public int[] collisionLevel = new int[6];   // Collision level
+        public double speedScaleManual;              // Manual speed scale
+        public double speedScaleAuto;                // Automatic speed scale
+        public int luaLineNum;                       // Lua line number
+        public int abnomalStop;                      // Abnormal stop
+        public String currentLuaFileName;            // Current Lua file name
+        public int programTotalLine;                 // Total program lines
+        public int[] safetyBoxSingal = new int[6];   // Safety box signal
+        public double weldVoltage;                   // Welding voltage
+        public double weldCurrent;                   // Welding current
+        public double weldTrackVel;                  // Welding tracking speed
+        public int tpdException;                     // TPD exception
+        public int alarmRebootRobot;                 // Alarm reboot robot
+        public int modbusMasterConnect;              // Modbus master connection
+        public int modbusSlaveConnect;               // Modbus slave connection
+        public int btnBoxStopSignal;                 // Button box stop signal
+        public int dragAlarm;                        // Drag alarm
+        public int safetyDoorAlarm;                  // Safety door alarm
+        public int safetyPlaneAlarm;                 // Safety plane alarm
+        public int motonAlarm;                       // Motion alarm
+        public int interfaceAlarm;                   // Interference alarm
+        public int udpCmdState;                      // UDP command status
+        public int weldReadyState;                   // Welding ready status
+        public int alarmCheckEmergStopBtn;           // Alarm check emergency stop button
+        public int tsTmCmdComError;                  // Command communication error
+        public int tsTmStateComError;                // Status communication error
+        public int ctrlBoxError;                     // Control box error
+        public int safetyDataState;                  // Safety data status
+        public int forceSensorErrState;              // Force sensor error status
+        public int[] ctrlOpenLuaErrCode = new int[4]; // Control open Lua error code
+        public int strangePosFlag;                   // Singular position flag
+        public int alarm;                            // Alarm
+        public int driverAlarm;                      // Driver alarm
+        public int aliveSlaveNumError;               // Alive slave count error
+        public int[] slaveComError = new int[8];     // Slave communication error
+        public int cmdPointError;                    // Command point error
+        public int IOError;                          // IO error
+        public int gripperError;                     // Gripper error
+        public int fileError;                        // File error
+        public int paraError;                        // Parameter error
+        public int exaxisOutLimitError;              // Extension axis soft limit exceeded error
+        public int[] driverComError = new int[6];    // Driver communication error
+        public int driverError;                      // Driver error
+        public int outSoftLimitError;                // Soft limit exceeded error
+        public byte[] axleGenComData = new byte[130]; // General axis communication data
+        public int check_sum;                        // Checksum
+        public int socketConnTimeout;                // Socket connection timeout
+        public int socketReadTimeout;                // Socket read timeout
+        public int tsWebStateComErr;                 // TS Web state communication error
+    }
 
-      public int[] cl_analog_output = new int[2];  // Control box analog output
-      public int tl_analog_output;              // Tool analog output
-      public float gripperRotNum;               // Rotary gripper current rotation number
-      public int gripperRotSpeed;                // Rotary gripper current rotation speed percentage
-      public int gripperRotTorque;	            // Rotary gripper current rotation torque percentage
+Robot Status Feedback Configuration Result Class
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
 
-      public WELDING_BREAKOFF_STATE weldingBreakOffstate = new WELDING_BREAKOFF_STATE(); // Welding breakoff state
+    /**
+    * Robot status feedback configuration result class, containing status list and period
+    */
+    public static class StateConfigResult {
+      public final List<RobotState> stateList;
+      public final int period;
+    }
 
-      public double[] jt_tgt_tor = new double[6];    // Joint command torque
-      public int smartToolState;         // SmartTool handle button state
+Robot Status Feedback Configuration Enumeration Type
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
 
-      public float wideVoltageCtrlBoxTemp;        // Wide voltage control box temperature
-      public int wideVoltageCtrlBoxFanVel;   // Wide voltage control box fan speed (mA)
-
-      public double[] toolCoord=new double[6];           // Tool coordinate system
-      public double[] wobjCoord=new double[6];		   // Work object coordinate system
-      public double[] extoolCoord=new double[6];		   // External tool coordinate system
-      public double[] exAxisCoord=new double[6];		   // Extended axis coordinate system
-      public double load;                   // Payload mass
-      public double[] loadCog=new double[3];             // Payload center of gravity
-
-      public double[] lastServoTarget = new double[6];      // Last servo target position in the queue
-      public int servoJCmdNum;                            // Servo command count
-
-      public short check_sum = 0;          /* Checksum */
-
-      public ROBOT_STATE_PKG()
-      {
-
-      }
+    /**
+    * Robot status enumeration type
+    * Used for real-time status feedback configuration
+    */
+    public enum RobotState {
+        ProgramState,
+        RobotState,
+        MainCode,
+        SubCode,
+        RobotMode,
+        JointCurPos,
+        ToolCurPos,
+        FlangeCurPos,
+        ActualJointVel,
+        ActualJointAcc,
+        TargetTCPCmpSpeed,
+        TargetTCPSpeed,
+        ActualTCPCmpSpeed,
+        ActualTCPSpeed,
+        ActualJointTorque,
+        Tool,
+        User,
+        ClDgtOutputH,
+        ClDgtOutputL,
+        TlDgtOutputL,
+        ClDgtInputH,
+        ClDgtInputL,
+        TlDgtInputL,
+        ClAnalogInput,
+        TlAnglogInput,
+        FtSensorRawData,
+        FtSensorData,
+        FtSensorActive,
+        EmergencyStop,
+        MotionDone,
+        GripperMotiondone,
+        McQueueLen,
+        CollisionState,
+        TrajectoryPnum,
+        SafetyStop0State,
+        SafetyStop1State,
+        GripperFaultId,
+        GripperFault,
+        GripperActive,
+        GripperPosition,
+        GripperSpeed,
+        GripperCurrent,
+        GripperTemp,
+        GripperVoltage,
+        AuxState,
+        ExtAxisStatus,
+        ExtDIState,
+        ExtDOState,
+        ExtAIState,
+        ExtAOState,
+        RbtEnableState,
+        JointDriverTorque,
+        JointDriverTemperature,
+        RobotTime,
+        SoftwareUpgradeState,
+        EndLuaErrCode,
+        ClAnalogOutput,
+        TlAnalogOutput,
+        GripperRotNum,
+        GripperRotSpeed,
+        GripperRotTorque,
+        WeldingBreakOffState,
+        TargetJointTorque,
+        SmartToolState,
+        WideVoltageCtrlBoxTemp,
+        WideVoltageCtrlBoxFanCurrent,
+        ToolCoord,
+        WobjCoord,
+        ExtoolCoord,
+        ExAxisCoord,
+        Load,
+        LoadCog,
+        LastServoTarget,
+        ServoJCmdNum,
+        TargetJointPos,
+        TargetJointVel,
+        TargetJointAcc,
+        TargetJointCurrent,
+        ActualJointCurrent,
+        ActualTCPForce,
+        TargetTCPPos,
+        CollisionLevel,
+        SpeedScaleManual,
+        SpeedScaleAuto,
+        LuaLineNum,
+        AbnomalStop,
+        CurrentLuaFileName,
+        ProgramTotalLine,
+        SafetyBoxSingal,
+        WeldVoltage,
+        WeldCurrent,
+        WeldTrackVel,
+        TpdException,
+        AlarmRebootRobot,
+        ModbusMasterConnect,
+        ModbusSlaveConnect,
+        BtnBoxStopSignal,
+        DragAlarm,
+        SafetyDoorAlarm,
+        SafetyPlaneAlarm,
+        MotonAlarm,
+        InterfaceAlarm,
+        UdpCmdState,
+        WeldReadyState,
+        AlarmCheckEmergStopBtn,
+        TsTmCmdComError,
+        TsTmStateComError,
+        SocketConnTimeout,
+        SocketReadTimeout,
+        TsWebStateComErr,
+        CtrlBoxError,
+        SafetyDataState,
+        ForceSensorErrState,
+        CtrlOpenLuaErrCode,
+        StrangePosFlag,
+        Alarm,
+        DriverAlarm,
+        AliveSlaveNumError,
+        SlaveComError,
+        CmdPointError,
+        IOError,
+        GripperError,
+        FileError,
+        ParaError,
+        ExaxisOutLimitError,
+        DriverComError,
+        DriverError,
+        OutSoftLimitError,
+        AxleGenComData;
     }

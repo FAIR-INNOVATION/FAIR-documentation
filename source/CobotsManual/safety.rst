@@ -42,6 +42,64 @@ Operation Procedure
 
 .. centered:: Figure 7.1-3 Manually Clearing a Safety Stop Trigger Operation
 
+Safety Speed Movement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+After the robot triggers a safety stop, the user can click a button in the webapp, configure a CI input of the control box, or configure an End DI input of the end-effector tool to control the robot to enter the safety speed movement state. In the safety speed movement state, the robot can be jogged at a safe speed, or switched to drag mode to be dragged, helping the user to troubleshoot.
+
+In the robot webapp, click "Initial Settings", "Safety", "Safety Stop" in sequence, find "Safety Speed Movement" on this page, and set it to enabled.
+
+.. image:: safety/057.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.1-4 Enable Safety Speed Movement
+
+When a safety stop is triggered at this time, the upper right corner of the robot webapp will display a "Safety Stop Triggered" warning and show the "Enter Safety Speed Movement" button.
+
+.. image:: safety/058.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.1-5 Enter Safety Speed Movement Popup
+
+Click the "Enter" button, and the robot will automatically stop the Lua program and switch to manual mode. At the same time, the "Enter Safety Speed Movement" button will be updated to display "Entered". At this point, the robot can be controlled to enter drag mode via the end-effector button, button box, webapp, etc., to drag the robot, or it can be jogged via the webapp or the teach pendant.
+
+.. image:: safety/059.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.1-6 Enter Safety Speed Movement
+
+When the robot is in safety speed movement and is being jogged in Cartesian space, the maximum movement speed of the robot is the set safety speed. If the current global speed setting of the robot is higher than the safety speed, the robot's jog speed will automatically be reduced to the safety speed. The safety speed is set under "Initial Settings", "Safety", "Safety Speed".
+
+After the robot has safely stopped, in addition to controlling the robot to enter safety speed via the upper right corner of the webapp, it can also be entered via control box CI input or end-effector CI input. In the webapp, click "Initial Settings", "Basic", "I/O Settings", "DI" in sequence. Configure a certain port CI of the control box or the end-effector tool End DI as "Enter Safety Speed Movement". After a safety stop is triggered, simply trigger the input signal of the configured port to enter safety speed movement.
+
+.. image:: safety/060.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.1-7 Enter Safety Speed Movement via Button
+
+Safety Stop in Auto Mode Only
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When the robot enables the safety stop mode (CR certification, functional safety) and is used with a teach pendant with a three-position enabling device, "Safety Stop in Auto Mode Only" can be enabled. When the robot's safety stop signal is triggered, the robot can be switched to manual mode on the teach pendant, and then jogged in manual mode or switched to drag mode to be dragged, helping the user to troubleshoot.
+
+In the robot webapp, click "Initial Settings", "Safety", "Safety Stop" in sequence, find "Safety Stop in Auto Mode Only" on this page, and set it to enabled.
+
+.. image:: safety/061.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.1-8 Enable Safety Stop in Auto Mode Only
+
+If the robot does not have the safety stop mode enabled (CR certification, functional safety), or if a teach pendant is not being used, the "Safety Stop in Auto Mode Only" function cannot be enabled. In this case, the webapp will display an error message: "Safety Stop in Auto Mode Only requires the teach pendant's three-position enabling device to be turned on". Additionally, when the safety stop mode or the teach pendant is disabled, the "Safety Stop in Auto Mode Only" function will also be automatically turned off.
+
+.. image:: safety/062.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 7.1-9 Error When Enabling Safety Stop in Auto Mode Only
+
 Safe speed
 --------------
 

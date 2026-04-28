@@ -33,5 +33,6 @@ This document is the C# version of the secondary development interface document.
     C#RobotForceControl
     C#RobotExtendedAxis
     C#RobotWelding
+    C#RobotCnde
     C#RobotOther
     C#Appendix

@@ -175,17 +175,17 @@ Get the current joint torque
     */
     int GetJointTorques(byte flag, float[] torques). 
 
-Get system time
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get System Time
+++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /**
-    * @brief Get the system time.
-    * @param [out] t_ms unit ms
-    * @return Error code.
-    */
-    int GetSystemClock(ref double t_ms).
+    /**
+    * @brief  Get system time
+    * @param  [out] t_ms Unit ms, can be converted according to UTC time. When the robot is in a fault state, GetSystemClock returns 0 and returns an error code.
+    * @return  Error code
+    */
+    public int GetSystemClock(ref double t_ms)
 
 Queries if the robot movement is complete
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -268,17 +268,17 @@ Get robot joint driver torque(Nm).
     */
     int GetJointDriverTorque(double torque[]).
 
-Get robot real-time status structure
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the Latest Frame of Robot Real-Time Status Data (Internal Mechanism Changed)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    /** 
-    * @brief Get the robot realtime state structure.
-    * @param [out] pkg Robot real-time status structure. 
-    * @return Error code 
-    */
-    int GetRobotRealTimeState(ref ROBOT_STATE_PKG pkg);
+    /**
+    * @brief Get the latest frame of robot real-time status data (internal thread continuously updates, this interface directly returns cached data)
+    * @param [out] pkg Reference parameter for receiving robot status data (ROBOT_STATE_PKG structure)
+    * @return Returns 0 on success; returns a negative error code on failure (e.g., network communication error)
+    */
+    public int GetRobotRealTimeState(ref ROBOT_STATE_PKG pkg)
 
 Sample Robot Status Query Code
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

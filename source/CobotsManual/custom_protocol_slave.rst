@@ -23,24 +23,36 @@ The required card models and software versions are as follows:
    :align: center
 
    * - **Protocol Type**
-     - **Card Model**
+     - **Board Model**
      - **Robot Software Version**
 
    * - CC-Link IEF Basic
-     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EIP/CC/PN-RJ-V10
-     - V3.8.0+
+     - FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
+     - V3.8.4 and above
+
+   * - CC-Link IEF Basic
+     - FRJ-PCIeN-EC-RJ-V10 Board
+     - V3.9.5 and above
 
    * - Profinet
-     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EIP/CC/PN-RJ-V10
-     - V3.8.0+
+     - FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
+     - V3.8.4 and above
+
+   * - Profinet
+     - FRJ-PCIeN-EC-RJ-V10 Board
+     - V3.9.5 and above
 
    * - Ethernet/IP
-     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EIP/CC/PN-RJ-V10
-     - V3.8.0+
+     - FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
+     - V3.8.4 and above
+
+   * - Ethernet/IP
+     - FRJ-PCIeN-EC-RJ-V10 Board
+     - V3.9.5 and above
 
    * - EtherCAT
-     - FRH-PCIeN-EC/EIP/CC/PN-RJ-V10, FRJ-PCIeN-EC-RJ-V10
-     - V3.8.4.1+
+     - FRJ-PCIeN-EC-RJ-V10 Board
+     - V3.9.5 and above
 
 FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board hardware environment setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -135,12 +147,10 @@ FRJ-PCIeN Board Hardware Setup
     5: Siemens PLC (Profinet port);
     6: Inovance PLC (Ethernet/IP port);
 
-3. Firmware upgrade is required when switching protocols on FRJ-PCIeN board. For upgrade:
-   - Set PC IP to "192.168.0.xxx"
-   - Open "Gateway Toolset" software
-   - Select PC network adapter
-   - Click "Start" (bottom right)
-   - Click "Search" (top right) to find board devices
+FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board Firmware Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+When switching protocols on the board, a firmware upgrade is required. During the firmware upgrade, the IP address of the board and the IP address of the laptop PC must be configured on the same network segment. Then, open the "Gateway Tool Set" software -> select the PC network card device to be connected -> click the "Start" button in the lower right corner -> click the "Search" button in the upper right corner to search for the board device.
 
 .. image:: custom_protocol_slave/045.png
    :width: 6in
@@ -148,7 +158,7 @@ FRJ-PCIeN Board Hardware Setup
 
 .. centered:: Figure 17.2-11 Connecting Board Device
 
-4. Click "Upgrade" (bottom left)
+Click "Upgrade" (bottom left)
    - Select board device
    - Click "..." (top right) to choose protocol firmware
    - Click "Upgrade" and wait for completion
@@ -186,9 +196,10 @@ When configured for Ethernet/IP, controller changes board IP to "192.168.0.112".
 
 When switching to Profinet, if slave device name matches master, master will automatically configure slave IP.
 
-5. FRJ-PCIeN-EC-RJ-V10 Board Firmware Upgrade
+FRJ-PCIeN-EC-RJ-V10 Board Firmware Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Enter the URL 192.169.58.2 to access the robot interface. Click "Initial Settings" -> "Peripherals" -> "Board Communication" interface to obtain the firmware version number of the FRJ-PCIeN-EC-RJ-V10 board. Select the bin file to be upgraded, click Upload, wait for the firmware upgrade to succeed, and then restart the control box.
+Enter the robot interface via the URL 192.169.58.2, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the firmware version number of the FRJ-PCIeN-EC-RJ-V10 board. Select the bin file to be upgraded, click Upload, wait for the firmware upgrade to complete, and then restart the control box.
 
 .. image:: custom_protocol_slave/064.png
    :width: 6in
@@ -196,7 +207,7 @@ Enter the URL 192.169.58.2 to access the robot interface. Click "Initial Setting
 
 .. centered:: Figure 17.2-13 Board Firmware Upgrade
 
-.. note:: 1. Only V3.9.2 and later versions support EtherCAT protocol firmware upgrade; 2. Upgrading the EtherCAT protocol firmware requires unloading any currently running open protocols.
+.. note:: To upgrade the firmware of the FRJ-PCIeN-EC-RJ-V10 board, the running open protocol must be unloaded first.
 
 Software environment setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -714,6 +725,9 @@ Example generated program:
 Board Communication Cycle Configuration
 ---------------------------------------------------------
 
+FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 The communication cycle of the board can be configured via the host computer. Currently, only PN protocol firmware is provided, with future compatibility for EIP, CC-Link IE Basic, and EtherCAT protocols.
 
 (1) Directly connect the PC (Windows 11 system) network port to the board's network port. Open Device Assistant v1.1.0, double-click "Ethernet," and click the "Refresh" button in the upper left corner to scan for currently connected board devices.
@@ -737,6 +751,17 @@ The communication cycle of the board can be configured via the host computer. Cu
 .. image:: custom_protocol_slave/063.png
    :width: 6in
    :align: center
+
+FRJ-PCIeN-EC-RJ-V10 Board
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Enter the robot interface via the URL 192.169.58.2, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the board communication cycle. Enter the required communication cycle (1~100 ms), click the "Configure" button, wait for the configuration to complete, and then restart the control box.
+
+.. image:: custom_protocol_slave/064.png
+   :width: 6in
+   :align: center
+
+.. note:: To configure the communication cycle of the FRJ-PCIeN-EC-RJ-V10 board, the running open protocol must be unloaded first.
 
 Appendice
 -------------------

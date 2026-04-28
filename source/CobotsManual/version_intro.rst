@@ -1,3 +1,50 @@
+Version V3.9.5
+-----------------
+
+Date: 2026-04-24
+
+- **Optimized Controller Functions**: 
+    Path: General Settings -> Network Settings; Teaching Program -> Program Programming.
+  
+    Description: 1. Added validation error when ETH0 and ETH1 are configured with the same IP address; 2. Optimized the color display of the currently running line number in the program.
+
+- **Optimized FR30 Speed**: 
+  
+    Description: Improved operating speed.
+
+- **Optimized Arc Swing Function**: 
+    Path: Teaching Program -> Program Programming -> Arc Instruction.
+  
+    Description: Enables swing motion.
+
+- **Optimized SetTrajectoryJSpeed Debugging for Smooth Operation**: 
+  
+    Description: During command speed adjustment, the robot speed does not drop to zero when switching speeds.
+
+- **Optimized Lua Program Instruction Editing Mode Operation in Program Programming Module**: 
+    Path: Teaching Program -> Program Programming.
+  
+    Description: Optimized so that instruction content can be accurately matched and displayed.
+
+- **Added FRJ-PCIeN-EC-RJ-V20 Board Protocol Adaptation (PN/Ecat/EIP/cclink)**: 
+    Path: Initial Settings -> Peripherals -> Board Communication.
+  
+    Description: 1. Supports online firmware upgrade/acquisition; 2. Supports configurable communication cycle; 3. Supports obtaining bus connection status.
+
+- **Added Controller Instructions**: 
+    Path: Teaching Program -> Program Programming; Initial Settings -> Safety -> Safety Stop.
+  
+    Description: 1. Added workpiece coordinate system offset type option to motion instructions; 2. Added safety stop function; 3. Added DO and AO read instructions for control box, end-effector, and extended I/O.
+
+- **Added DO Signal Configuration Function After Control Box Emergency Stop**: 
+    Path: Initial Settings -> Basic -> DO.
+  
+    Description: Added DO signal configuration function after control box emergency stop.
+
+- **Added Portuguese Software Version Language Pack Adaptation**: 
+  
+    Description: Added Portuguese language switching.
+    
 Version V3.9.4
 -----------------
 

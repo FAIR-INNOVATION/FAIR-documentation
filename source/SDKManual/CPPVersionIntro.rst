@@ -13,6 +13,19 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V3.9.5
+     - 2026-04-24
+     - | 1.SetTrajectoryJSpeed() interface adds two modes: speed reduction mode and direct switching;
+       | 2.FieldBusSlaveWriteAO() interface changes the written value type to double, where AO0~AO15 are integer type and AO16~AO31 are floating-point type;
+       | 3.FieldBusSlaveReadAI() interface changes the read value type to double, where AI0~AI15 are integer type and AI16~AI31 are floating-point type;
+       | 4.Updated robot status feedback structure type;
+       | 5.Added robot status feedback configuration enumeration type;
+       | 6.Added SetRobotRealtimeStateConfig() interface to configure robot CNDE status feedback;
+       | 7.Added AddRobotRealtimeState() interface to add a robot state to CNDE status configuration;
+       | 8.Added DeleteRobotRealtimeState() interface to delete a robot state from CNDE status configuration;
+       | 9.Added SetRobotRealtimeStatePeriod() interface to set the CNDE status feedback period;
+       | 10.Added GetRobotRealtimeStateConfig() interface to get all current CNDE status feedback state sets and period.
+
    * - V3.9.4
      - 2026-03-25
      - | 1.ServoJTStart() interface adds communication type selection parameter, supporting XMLRPC/UDP communication;

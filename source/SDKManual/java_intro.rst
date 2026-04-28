@@ -36,5 +36,6 @@ This document is the Java version of the secondary development interface documen
     JavaRobotForceControl
     JavaRobotExtendedAxis
     JavaRobotWeld
+    JavaRobotCnde
     JavaRobotOthers
     JavaAppendix

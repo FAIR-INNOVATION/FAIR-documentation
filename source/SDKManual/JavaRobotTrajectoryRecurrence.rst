@@ -195,12 +195,13 @@ Set trajectory playback speed
 .. code-block:: Java  
     :linenos:  
 
-    /**  
+    /*
     * @brief  Set trajectory playback speed  
-    * @param  [in] ovl Speed percentage  
-    * @return  Error code  
-    */  
-    public int SetTrajectoryJSpeed(double ovl)  
+    * @param  ovl Speed percentage
+    * @param  mode Mode; 0-decruise mode; 1-direct switching
+    * @return  Error code
+    */
+    public int SetTrajectoryJSpeed(double ovl, int mode)
 
 Set force/torque during trajectory playback  
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -368,6 +369,59 @@ Robot trajectory J file playback code example
 
         return 0;  
     }  
+
+Code example for setting the speed during robot trajectory execution
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: Java
+    :linenos:
+
+    public int TestSetTrajectoryJSpeed(Robot robot) {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        int rtn;
+
+        robot.SetReconnectParam(true, 30000, 500);
+        rtn = robot.TrajectoryJUpLoad("D://zUP/trajHelix_aima_1.txt");
+        System.out.printf("Upload TrajectoryJ A %d%n", rtn);
+        String trajFileName = "/fruser/traj/trajHelix_aima_1.txt";
+        rtn = robot.LoadTrajectoryJ(trajFileName, 100, 1);
+        System.out.printf("LoadTrajectoryJ %s, rtn is: %d%n", trajFileName, rtn);
+        DescPose trajStartPose = new DescPose();
+        rtn = robot.GetTrajectoryStartPose(trajFileName, trajStartPose);
+        System.out.printf("GetTrajectoryStartPose is: %d%n", rtn);
+        System.out.printf("desc_pos:%f,%f,%f,%f,%f,%f%n", trajStartPose.tran.x, trajStartPose.tran.y, trajStartPose.tran.z, trajStartPose.rpy.rx, trajStartPose.rpy.ry, trajStartPose.rpy.rz);
+        robot.Sleep(1000);
+        robot.SetSpeed(50);
+        robot.MoveCart(trajStartPose, 0, 0, 100, 100, 100, -1, -1);
+        rtn = robot.GetTrajectoryPointNum(0);
+        pkg = robot.GetRobotRealTimeState();
+        int trajNum = pkg.trajectory_pnum;
+        System.out.printf("GetTrajectoryPointNum rtn is: %d, traj num is: %d%n", rtn, trajNum);
+
+        rtn = robot.MoveTrajectoryJ();
+        System.out.printf("MoveTrajectoryJ rtn is: %d%n", rtn);
+
+        robot.Sleep(1000);
+
+        pkg = robot.GetRobotRealTimeState();
+        int trajspeedMode = 1;
+        while (pkg.motion_done == 0)
+        {
+            pkg = robot.GetRobotRealTimeState();
+
+            rtn = robot.SetTrajectoryJSpeed(10.0, trajspeedMode);
+            System.out.printf("SetTrajectoryJSpeed is: %d%n", rtn);
+
+            robot.Sleep(1000);
+
+            rtn = robot.SetTrajectoryJSpeed(80.0, trajspeedMode);
+            System.out.printf("SetTrajectoryJSpeed is: %d%n", rtn);
+
+            robot.Sleep(1000);
+        }
+
+        return 0;
+    }
 
 Trajectory preprocessing (lookahead)  
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++

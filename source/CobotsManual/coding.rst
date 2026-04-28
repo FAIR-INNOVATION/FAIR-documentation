@@ -431,7 +431,7 @@ You can choose the point to be reached, and the smooth transition time setting c
 
 Point-to-Point Relative Motion
 ******************************************
-The robot moves a relative distance from its current position. On the PTP command addition page, select the point name as "CurrentPos". Choose the offset coordinate system as either the base coordinate system or the tool coordinate system according to the situation, and input the offset value. This means the robot will perform a certain offset motion along the set coordinate system based on its current position. ("CurrentPos" is a system point and does not require teaching.)
+The robot moves a relative distance from the current position. In the PTP instruction addition page, select the point name as "CurrentPos", choose the offset coordinate system as base coordinate system, tool coordinate system, or workpiece coordinate system as needed, and enter the offset value. The robot will then perform an offset motion along the set coordinate system based on its current position. ("CurrentPos" is a system point that does not require teaching)
 
 .. image:: coding/515.png
    :width: 6in
@@ -462,7 +462,7 @@ The function of this command is similar to the "PTP" command, but the path of th
 
 Linear Relative Motion
 ******************************************
-The robot moves a relative distance along a straight line from its current position. On the LIN command addition page, select the point name as "CurrentPos". Choose the offset coordinate system as either the base coordinate system or the tool coordinate system according to the situation, and input the offset value. This means the robot will perform a certain offset motion along the set coordinate system based on its current position. ("CurrentPos" is a system point and does not require teaching.)
+The robot moves a relative distance linearly from the current position. In the LIN instruction addition page, select the point name as "CurrentPos", choose the offset coordinate system as base coordinate system, tool coordinate system, or workpiece coordinate system as needed, and enter the offset value. The robot will then perform an offset motion along the set coordinate system based on its current position. ("CurrentPos" is a system point that does not require teaching)
 
 .. image:: coding/517.png
    :width: 6in
@@ -652,7 +652,7 @@ Click the "Arc" icon to enter the Arc command editing interface.
 
 The "Arc" command is an arc motion, which includes three points. The first point is the starting point of the arc, the second point is the middle transition point of the arc, and the third point is the end point.
 
-Both the transition point and the end point can be set to offset, and you can choose to base coordinate system offset Shift and offset based on tool coordinates, and pop up x, y, z, rx, ry, rz offset settings, and the end point can set a smooth transition radius to achieve continuous motion effect.
+Both transition points and end points can be set with or without offset. Options include offset based on the base coordinate system, tool coordinate system, or workpiece coordinate system. The offset values for x, y, z, rx, ry, rz can be set. For the end point, a smooth transition radius can be set to achieve continuous motion.
 
 .. important::
    For circular motion, you need to add PTP or Lin command to move to the starting point first.
@@ -793,8 +793,7 @@ Open the circle command addition page, select "Same Offset" for Offset Type, and
 
 Select P3 for the middle point 2 of the circle, and select Base Coordinate Offset for Offset.
 
-.. note:: 
-   Note: you can select Tool Coordinate Offset according to the actual work situation.
+.. note:: You can choose "Tool Coordinate Offset" or "Workpiece Coordinate Offset" according to your actual working conditions.
 
 Enter the offset dx as 10mm, and then click the Add button and the Apply button at the bottom of the page.
 
@@ -824,8 +823,7 @@ Switch the robot to the automatic mode, and start the program under the conditio
 
 Open the circle command adding page, select "Different Offsets" for Offset Type, and also select the starting point motion mode and starting point as "P1", and the middle point 1 of the full circle as "P2", and select "Base coordinate offset" for "Offset".
 
-.. note:: 
-   Note: you can select "Tool coordinate offset" according to the actual work situation.
+.. note:: You can choose "Tool Coordinate Offset" or "Workpiece Coordinate Offset" according to your actual working conditions.
 
 Enter the offset dy as 10mm.
 
@@ -837,8 +835,7 @@ Enter the offset dy as 10mm.
 
 Select P3 for the middle point 2 of the circle, and select Base Coordinate Offset for Offset
 
-.. note:: 
-   Note: you can select Tool Coordinate Offset according to the actual work situation.
+.. note:: You can choose "Tool Coordinate Offset" or "Workpiece Coordinate Offset" according to your actual working conditions.
 
 Enter the offset dx as 10mm, and then click the Add button and the Apply button at the bottom of the page.
 
@@ -869,8 +866,9 @@ Spiral command
 
 Click the "Spiral" icon to enter the Spiral command editing interface.
 
-The "Spiral" command is a spiral motion, which includes three points, which form a circle. On the third point setting page, there are several parameters including the number of spiral turns, attitude correction angle, radius increment and rotation axis direction increment. Setting, the number of helix circles is the number of motion circles of the helix, the attitude correction angle is the attitude at the end of the helix and the attitude of the first point of the helix, the radius increment is the increment of the radius of each circle, and the direction of the rotation axis is increased. The amount is the increment in the direction of the screw axis. set up
-Whether to offset, the offset takes effect on the trajectory of the entire helix.
+The "Spiral" command is a spiral motion, which includes three points, which form a circle. On the third point setting page, there are several parameters including the number of spiral turns, attitude correction angle, radius increment and rotation axis direction increment. Setting, the number of helix circles is the number of motion circles of the helix, the attitude correction angle is the attitude at the end of the helix and the attitude of the first point of the helix, the radius increment is the increment of the radius of each circle, and the direction of the rotation axis is increased. The amount is the increment in the direction of the screw axis. 
+
+Whether to offset, you can choose "Offset Based on Base Coordinates", "Offset Based on Tool Coordinates", or "Offset Based on Workpiece Coordinates". This offset is applied to the entire spiral trajectory.
 
 .. image:: coding/059.png
    :width: 6in
@@ -1457,7 +1455,7 @@ IO command
 
 Click the "IO" icon to enter the IO command editing interface.
 
-The "IO" command is divided into two parts: setting IO (SetDO/SPLCSetDO) and getting IO (GetDI/SPLCGetDI).
+The "IO" instruction is divided into three parts: setting IO (SetDO/SPLCSetDO), getting DI (GetDI/SPLCGetDI), and getting DO (GetDO).
 
 "SetDO/SPLCSetDO" This command can set the specified output DO state, including 16 digital outputs of the control box and 2 digital outputs of the tool. The state option "False" is closed, "True" is open, and whether to block the option selects "blocked". "Indicates that the DO state is set after the movement stops, and selecting the "non-blocking" option means that the DO state is set during the last movement. Selecting "Break" for the smooth trajectory option means setting the DO state after the smooth transition radius ends, and selecting "Serious" means setting the DO state during the smooth transition radius movement. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
@@ -1475,12 +1473,20 @@ In the "GetDI/SPLCGetDI" command, select the value of the port number you want t
 
 .. centered:: Figure 9.6-2 GetDI command interface
 
+In the "GetDO" instruction, select the desired port number value. The blocking option selects "Blocking" to get the DO status after the motion stops, and selects "Non-blocking" to get the DO status during the previous motion. After selection, click the "Add" and "Apply" buttons.
+
+.. image:: coding/571.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.6-2-2 GetDO Instruction Interface
+
 AI command
 ++++++++++++++++
 
 Click the "AI" icon to enter the AI command editing interface.
 
-In this instruction, it is divided into two functions: setting analog output (SetAO/SPLCSetAO) and obtaining analog input (GetAI/SPLCGetAI).
+This instruction is divided into three functional parts: setting analog output (SetAO/SPLCSetAO), getting analog input (GetAI/SPLCGetAI), and getting analog output (GetAO).
 
 "SetAO/SPLCSetAO" select the analog output that needs to be set, input the value that needs to be set, the range is 0-10, whether to block or not select "block" means to set the AO state after the movement stops, select "non-block" means to set the AO state after the last movement Set the AO state in the process. When this instruction is added in the auxiliary thread, whether the application thread needs to select yes, and other places use this instruction to select no. Click "Add", "Apply".
 
@@ -1497,6 +1503,14 @@ In this instruction, it is divided into two functions: setting analog output (Se
    :align: center
 
 .. centered:: Figure 9.6-4 GetAI command interface
+
+"GetAO" selects the analog input to be obtained. The blocking option selects "Blocking" to get the AI status after the motion stops, and selects "Non-blocking" to get the AI status during the previous motion. Click "Add" and "Apply".
+
+.. image:: coding/572.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.6-4-2 GetAO Instruction Interface
 
 Vir-IO command
 ++++++++++++++++
@@ -6267,7 +6281,10 @@ The laser fixed-point swing function is a combination of the robot's fixed-point
 Laser + Fixed-Point Swing Function Operation Procedure
 ****************************************************************************
 
-**Step1**: Configure laser communication. Refer to the corresponding chapter in the user manual for specific operation steps.
+**Step1**: Configure laser communication. Refer to the corresponding chapter in the user manual for specific operation steps. When applying to scenarios such as actual welding, pay attention to the following:
+
+   - (1) The line laser sensor must be equipped with protective devices to avoid the influence of strong light and welding spatter;
+   - (2) The line laser data acquisition recognition point should maintain a certain distance from the welding point to reduce the impact of strong light on laser data acquisition quality during welding.
 
 **Step2**: Calibrate the robot tool coordinate system and laser coordinate system. Refer to the corresponding chapter in the user manual for specific operation steps.
 
@@ -6326,7 +6343,10 @@ Laser + Fixed-Point Swing Function Operation Procedure
 Laser + Extension Axis + Fixed-Point Swing Function Operation Procedure
 ****************************************************************************************
 
-**Step1**: Configure laser communication. Refer to the corresponding chapter in the user manual for specific operation steps.
+**Step1**: Configure laser communication. Refer to the corresponding chapter in the user manual for specific operation steps. When applying to scenarios such as actual welding, pay attention to the following:
+
+   - (1) The line laser sensor must be equipped with protective devices to avoid the influence of strong light and welding spatter;
+   - (2) The line laser data acquisition recognition point should maintain a certain distance from the welding point to reduce the impact of strong light on laser data acquisition quality during welding.
 
 **Step2**: Configure extension axis communication. Refer to the corresponding chapter in the user manual for specific operation steps.
 

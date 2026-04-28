@@ -36,6 +36,7 @@ This manual is the secondary development interface document of C++.
     CPPRobotForceControl
     CPPRobotExtendedAxis
     CPPRobotWelding
+    CPPRobotCnde
     CPPRobotOthers
     CPPAppendix
         

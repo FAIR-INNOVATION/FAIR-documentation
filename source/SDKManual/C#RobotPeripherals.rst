@@ -1117,13 +1117,13 @@ Write Slave AO
     :linenos:
 
     /**
-    * @brief  Write Slave AO
-    * @param  AOIndex  AO number
-    * @param  wirteNum  Number to write
-    * @param  status Value to write, max 8
-    * @return  Error code
+    * @brief  Write slave station AO
+    * @param [in] AOIndex AO number
+    * @param [in] writeNum Number of values to write
+    * @param [in] status Array of values to write (maximum 8), AO0~AO15 are integer type, AO16~AO31 are floating point type
+    * @return Error code
     */
-    public int FieldBusSlaveWriteAO(int AOIndex, int wirteNum, int[] status)
+    public int FieldBusSlaveWriteAO(int AOIndex, int writeNum, double[] status)
 
 Read Slave DI
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1201,7 +1201,7 @@ Slave Mode Related Interface Command Code Example
     
         int type = 0, version = 0, connState = 0;
         int[] ctrl = new int[8];
-        int[] ctrlAO = new int[8];
+        double[] ctrlAO = new double[8];
         int[] DI = new int[8];
         double[] AI = new double[8];
         if (rtn != 0)
@@ -1209,7 +1209,7 @@ Slave Mode Related Interface Command Code Example
             return;
         }
         // Upload and load open protocol file
-        robot.OpenLuaUpload("E://zup/CtrlDev_field.lua");
+        robot.OpenLuaUpload("E://temp/CtrlDev_field.lua");
         Thread.Sleep(2000);
         robot.SetCtrlOpenLUAName(3, "CtrlDev_field.lua");
         robot.UnloadCtrlOpenLUA(3);

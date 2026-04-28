@@ -288,11 +288,11 @@ Ontology & Dimensional Drawings
 FAIRINO SimMachine
 -----------------------
 
-    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1LrLXn2-ZZ7U_xr9wJbOi9bEkIgrADDCd/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1oB2bK8pBs0nNksefMo0MHqVrorM6eolk/view?usp=drive_link>`
     
-    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1bI1a0SchyKqW_CrazZIszCSSvfNqBB_E/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1xDxoOIRB4ljUNUrML6z3w6k2l-UQKqkM/view?usp=drive_link>`
 
-    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1soPuHNmdXhjnlKY48PSUP2Qind7v4QQk/view?usp=sharing>`
+    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1_GNzIhe2O8FXQQspJH57UV1R3YHMJXk9/view?usp=drive_link>`
 
 Palletizer frcap
 ---------------------------------
@@ -338,7 +338,7 @@ Communication Command Protocol
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-QX-V3.9.4-20260408.zip <https://drive.google.com/file/d/16UvnZWLZt_az4jyGxW_T40lo2MxTx2fc/view?usp=drive_link>`
+    :download:`FAIRINO-CobotSoftware-QX-V3.9.5-20260424.zip <https://drive.google.com/file/d/1xtTtUP2qfxrOs3x-PpUhLsxfJSwumsMQ/view?usp=drive_link>`
     
-    :download:`FAIRINO-CobotSoftware-LA-V3.9.4-20260408.zip <https://drive.google.com/file/d/1C8CFtdEeeyujgpSO1N-rS5DNfqlptywR/view?usp=drive_link>`
+    :download:`FAIRINO-CobotSoftware-LA-V3.9.5-20260424.zip <https://drive.google.com/file/d/1IzjZvtQiZGZRMniva63X0KnbUPgcAsNw/view?usp=drive_link>`
     

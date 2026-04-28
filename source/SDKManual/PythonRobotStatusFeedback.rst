@@ -4,6 +4,241 @@ Data structure description
 .. toctree::
     :maxdepth: 5
 
+Robot Status Feedback Structure Type
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+    :linenos:
+    
+    class ROBOT_AUX_STATE(Structure):
+        _pack_ = 1
+        _fields_ = [
+            ("servoId", c_uint8),         # Servo driver ID number
+            ("servoErrCode", c_int),     # Servo driver fault code
+            ("servoState", c_int),       # Servo driver status
+            ("servoPos", c_double),      # Servo current position
+            ("servoVel", c_float),       # Servo current speed
+            ("servoTorque", c_float),    # Servo current torque
+        ]
+
+    class EXT_AXIS_STATUS(Structure):
+        _pack_ = 1
+        _fields_ = [
+            ("pos", c_double),        # Extension axis position
+            ("vel", c_double),        # Extension axis speed
+            ("errorCode", c_int),     # Extension axis fault code
+            ("ready", c_uint8),        # Servo ready
+            ("inPos", c_uint8),        # Servo in position
+            ("alarm", c_uint8),        # Servo alarm
+            ("flerr", c_uint8),        # Following error
+            ("nlimit", c_uint8),       # Negative limit reached
+            ("pLimit", c_uint8),       # Positive limit reached
+            ("mdbsOffLine", c_uint8),  # Driver 485 bus offline
+            ("mdbsTimeout", c_uint8),  # Control card to control box 485 communication timeout
+            ("homingStatus", c_uint8), # Extension axis homing status
+        ]
+
+    class WELDING_BREAKOFF_STATE(Structure):
+        _pack_ = 1
+        _fields_ = [
+            ("breakOffState", c_uint8),        # Welding interruption status
+            ("weldArcState", c_uint8),        # Welding arc interruption status
+        ]
+
+    # ==================== Complete Robot State Structure ====================
+    class RobotStatePkg(Structure):
+        """
+        Robot status feedback data packet
+        """
+        _pack_ = 1
+        _fields_ = [
+            # Frame header information
+            ("frame_head", c_uint16),           # Frame header, preset to 0x5A5A
+            ("frame_cnt", c_uint8),             # Frame count, cyclic count 0-255
+            ("data_len", c_uint16),             # Length of data content
+            ("program_state", c_uint8),         # Program running status, 1-stopped; 2-running; 3-paused
+            ("robot_state", c_uint8),             # Robot motion status, 1-stopped; 2-running; 3-paused; 4-dragging
+            ("main_code", c_int),               # Main fault code
+            ("sub_code", c_int),                # Sub fault code
+            ("robot_mode", c_uint8),            # Robot mode, 1-manual mode; 0-automatic mode
+
+            # Joint positions and velocities
+            ("jt_cur_pos", c_double * 6),       # Current joint positions of 6 axes, unit deg
+            ("tl_cur_pos", c_double * 6),       # Current tool position [x,y,z,rx,ry,rz]
+            ("flange_cur_pos", c_double * 6),   # Current end flange position [x,y,z,rx,ry,rz]
+            ("actual_qd", c_double * 6),        # Current velocities of 6 joints, unit deg/s
+            ("actual_qdd", c_double * 6),       # Current accelerations of 6 joints, unit deg/s^2
+            ("target_TCP_CmpSpeed", c_double * 2),  # TCP composite command speed [position mm/s, orientation deg/s]
+            ("target_TCP_Speed", c_double * 6), # TCP command speed [x,y,z,rx,ry,rz]
+            ("actual_TCP_CmpSpeed", c_double * 2),  # TCP composite actual speed [position mm/s, orientation deg/s]
+            ("actual_TCP_Speed", c_double * 6), # TCP actual speed [x,y,z,rx,ry,rz]
+            ("jt_cur_tor", c_double * 6),       # Current torques of 6 axes, unit N·m
+
+            # Tool and user coordinate systems
+            ("tool", c_int),                    # Applied tool coordinate system number
+            ("user", c_int),                    # Applied workpiece coordinate system number
+
+            # Digital I/O
+            ("cl_dgt_output_h", c_uint8),       # Control box digital IO output 15-8
+            ("cl_dgt_output_l", c_uint8),       # Control box digital IO output 7-0
+            ("tl_dgt_output_l", c_uint8),       # Tool digital IO output 7-0, only bit0-bit1 valid
+            ("cl_dgt_input_h", c_uint8),        # Control box digital IO input 15-8
+            ("cl_dgt_input_l", c_uint8),        # Control box digital IO input 7-0
+            ("tl_dgt_input_l", c_uint8),        # Tool digital IO input 7-0, only bit0-bit1 valid
+
+            # Analog I/O
+            ("cl_analog_input", c_uint16 * 2),  # Control box analog input [0],[1]
+            ("tl_anglog_input", c_uint16),      # Tool analog input
+
+            # Force/torque sensor
+            ("ft_sensor_raw_data", c_double * 6),   # Force/torque sensor raw data
+            ("ft_sensor_data", c_double * 6),      # Force/torque sensor data
+            ("ft_sensor_active", c_uint8),          # Force/torque sensor activation status
+
+            # Status signals
+            ("EmergencyStop", c_uint8),         # Emergency stop flag, 0-not pressed, 1-pressed
+            ("motion_done", c_int),             # Motion completion signal, 1-completed, 0-not completed
+            ("gripper_motiondone", c_uint8),    # Gripper motion completion signal, 1-completed, 0-not completed
+            ("mc_queue_len", c_int),            # Motion command queue length
+            ("collisionState", c_uint8),        # Collision detection, 1-collision, 0-no collision
+            ("trajectory_pnum", c_int),         # Trajectory point number
+            ("safety_stop0_state", c_uint8),    # Safety stop signal SI0
+            ("safety_stop1_state", c_uint8),    # Safety stop signal SI1
+
+            # Gripper information
+            ("gripper_fault_id", c_uint8),      # Faulty gripper number
+            ("gripper_fault", c_uint16),        # Gripper fault
+            ("gripper_active", c_uint16),      # Gripper activation status
+            ("gripper_position", c_uint8),      # Gripper position
+            ("gripper_speed", c_int8),          # Gripper speed
+            ("gripper_current", c_int8),        # Gripper current
+            ("gripper_temp", c_int),            # Gripper temperature
+            ("gripper_voltage", c_int),         # Gripper voltage
+
+            # Extension axis status
+            ("aux_axis_state", ROBOT_AUX_STATE * 25),    # 485 extension axis status (25)
+            ("extAxisStatus", EXT_AXIS_STATUS * 4), # UDP extension axis status (4)
+
+            # Extension I/O status
+            ("extDIState", c_uint16 * 8),       # Extension DI input
+            ("extDOState", c_uint16 * 8),       # Extension DO output
+            ("extAIState", c_uint16 * 4),        # Extension AI input
+            ("extAOState", c_uint16 * 4),        # Extension AO output
+
+            # Robot and joint status
+            ("rbtEnableState", c_int),                  # Robot enable status
+            ("jointDriverTorque", c_double * 6),        # Robot joint driver torque
+            ("jointDriverTemperature", c_double * 6),   # Robot joint driver temperature
+
+            # Robot time
+            #("robotTime", c_int * 7),             # Robot system time [year,month,day,hour,min,sec,ms]
+            ("year", ctypes.c_uint16),  # Year
+            ("mouth", ctypes.c_uint8),  # Month
+            ("day", ctypes.c_uint8),   # Day
+            ("hour", ctypes.c_uint8),   # Hour
+            ("minute", ctypes.c_uint8), # Minute
+            ("second", ctypes.c_uint8), # Second
+            ("millisecond", ctypes.c_uint16), # Millisecond
+
+            ("softwareUpgradeState", c_int),      # Robot software upgrade status
+            ("endLuaErrCode", c_uint16),          # End Lua running status
+
+            # Analog output
+            ("cl_analog_output", c_uint16 * 2), # Control box analog output [0],[1]
+            ("tl_analog_output", c_uint16),       # Tool analog output
+
+            # Rotating gripper
+            ("gripperRotNum", c_float),         # Current rotation count of rotating gripper
+            ("gripperRotSpeed", c_uint8),       # Current rotation speed percentage of rotating gripper
+            ("gripperRotTorque", c_uint8),      # Current rotation torque percentage of rotating gripper
+
+            # Welding interruption status - using structure
+            ("weldingBreakOffState", WELDING_BREAKOFF_STATE),  # Welding interruption status
+
+            # Target joint torque
+            ("jt_tgt_tor", c_double * 6),       # Joint command torque
+
+            ("smartToolState", c_int),          # SmartTool handle button status
+            ("wideVoltageCtrlBoxTemp", c_float),        # Wide voltage control box temperature
+            ("wideVoltageCtrlBoxFanCurrent", c_uint16), # Wide voltage control box fan current (mA)
+
+            # Coordinate system values
+            ("toolCoord", c_double * 6),        # Current tool coordinate system values; x,y,z,rx,ry,rz
+            ("wobjCoord", c_double * 6),        # Current workpiece coordinate system values; x,y,z,rx,ry,rz
+            ("extoolCoord", c_double * 6),      # Current external tool coordinate system values; x,y,z,rx,ry,rz
+            ("exAxisCoord", c_double * 6),      # Current extension axis coordinate system values; x,y,z,rx,ry,rz
+
+            # Load
+            ("load", c_double),                 # Load mass
+            ("loadCog", c_double * 3),            # Load center of gravity
+
+            # Servo commands
+            ("lastServoTarget", c_double * 6),  # Last ServoJ target position in the queue
+            ("servoJCmdNum", c_int),            # ServoJ command count
+
+            # Target joint data
+            ("targetJointPos", c_double * 6),   # 6 joints command position, unit °
+            ("targetJointVel", c_double * 6),   # 6 joints command velocity, unit °/s
+            ("targetJointAcc", c_double * 6),   # 6 joints command acceleration, unit °/s2
+            ("targetJointCurrent", c_double * 6), # 6 joints command current, unit A
+            ("actualJointCurrent", c_double * 6), # 6 joints current current, unit A
+            ("actualTCPForce", c_double * 6),   # Robot end-effector torque Nm; x,y,z,rx,ry,rz
+            ("targetTCPPos", c_double * 6),     # Robot TCP command position mm; x,y,z,rx,ry,rz
+
+            ("collisionLevel", c_uint8 * 6),    # Robot collision level
+            ("speedScaleManual", c_double),     # Manual mode global speed percentage
+            ("speedScaleAuto", c_double),       # Automatic mode global speed percentage
+            ("luaLineNum", c_int),              # Current Lua program running line number
+            ("abnomalStop", c_uint8),           # 0-no abnormality; 1-abnormality present
+            ("currentLuaFileName", c_uint8 * 256),  # Name of currently running Lua program
+            ("programTotalLine", c_uint8),      # Total lines of Lua program
+            ("safetyBoxSingal", c_uint8 * 6),   # Robot button box button status
+
+            # Welding data
+            ("weldVoltage", c_double),          # Welding voltage V
+            ("weldCurrent", c_double),          # Welding current
+            ("weldTrackVel", c_double),         # Seam tracking speed mm/s
+
+            ("tpdException", c_uint8),            # TPD trajectory load count exceeded, 0-not exceeded, 1-exceeded
+            ("alarmRebootRobot", c_uint8),      # Warning, 1-release emergency stop button and power cycle the control box, 2-joint communication abnormality, power cycle the control box
+            ("modbusMasterConnect", c_uint8),   # bit0-bit7 correspond to ModbusTCP master 0-7 connection status
+            ("modbusSlaveConnect", c_uint8),    # ModbusTCP slave connection status
+            ("btnBoxStopSignal", c_uint8),      # Button box emergency stop signal
+            ("dragAlarm", c_uint8),             # Drag warning
+            ("safetyDoorAlarm", c_uint8),       # Safety door warning
+            ("safetyPlaneAlarm", c_uint8),      # Entering safety wall warning
+            ("motonAlarm", c_uint8),            # Motion warning
+            ("interfaceAlarm", c_uint8),        # Entering interference area warning
+            ("udpCmdState", c_int),             # Port 20007 UDP communication connection status
+            ("weldReadyState", c_uint8),        # Welder ready status
+            ("alarmCheckEmergStopBtn", c_uint8),    # 0-normal; 1-communication abnormality, check if emergency stop button is released
+            ("tsTmCmdComError", c_uint8),       # 0-normal; 1-torque command communication failure
+            ("tsTmStateComError", c_uint8),     # 0-normal; 1-torque status communication failure
+            ("ctrlBoxError", c_int),            # Control box error
+            ("safetyDataState", c_uint8),       # Safety data status flag
+            ("forceSensorErrState", c_uint8),   # Force sensor connection timeout fault
+            ("ctrlOpenLuaErrCode", c_uint8 * 4),  # 4 controller peripheral protocol error codes
+            ("strangePosFlag", c_uint8),        # Currently in singular posture flag
+            ("alarm", c_uint8),                 # Warning
+            ("driverAlarm", c_uint8),           # Driver alarm axis number
+            ("aliveSlaveNumError", c_uint8),    # Active slave count error
+            ("slaveComError", c_uint8 * 8),     # Slave error status
+            ("cmdPointError", c_uint8),         # Command point error
+            ("IOError", c_uint8),               # IO error
+            ("gripperError", c_uint8),          # Gripper error
+            ("fileError", c_uint8),             # File error
+            ("paraError", c_uint8),             # Parameter error
+            ("exaxisOutLimitError", c_uint8),   # External axis soft limit exceeded error
+            ("driverComError", c_uint8 * 6),    # Driver communication fault
+            ("driverError", c_uint8),           # Driver communication fault axis number
+            ("outSoftLimitError", c_uint8),     # Soft limit exceeded fault
+            ("axleGenComData", c_uint8 * 130),   # Axle general communication non-periodic data
+            ("socketConnTimeout", c_uint8),     # Socket connection timeout
+            ("socketReadTimeout", c_uint8),     # Socket read timeout
+            ("tsWebStateComErr", c_uint8),      # TS_WEB status communication error
+            ("check_sum", c_uint16)          # Checksum
+        ]
+
 Controller status feedback data packet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. versionadded:: python SDK-v2.1.7
@@ -363,3 +598,146 @@ code example
     print("lastServoTarget4:", robot.robot_state_pkg.lastServoTarget[4])
     print("lastServoTarget5:", robot.robot_state_pkg.lastServoTarget[5])
     print("servoJCmdNum:", robot.robot_state_pkg.servoJCmdNum)
+
+Robot Status Feedback Configuration List Enumeration Type
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+    :linenos:
+
+    # ==================== RobotState Configuration List Enumeration ====================
+    class RobotState(enum.Enum):
+        """CNDE status type enumeration"""
+        FrameHead = 0
+        FrameCnt = 1
+        DataLen = 2
+        ProgramState = 3
+        RobotState = 4
+        MainCode = 5
+        SubCode = 6
+        RobotMode = 7
+        JointCurPos = 8
+        ToolCurPos = 9
+        FlangeCurPos = 10
+        ActualJointVel = 11
+        ActualJointAcc = 12
+        TargetTCPCmpSpeed = 13
+        TargetTCPSpeed = 14
+        ActualTCPCmpSpeed = 15
+        ActualTCPSpeed = 16
+        ActualJointTorque = 17
+        Tool = 18
+        User = 19
+        ClDgtOutputH = 20
+        ClDgtOutputL = 21
+        TlDgtOutputL = 22
+        ClDgtInputH = 23
+        ClDgtInputL = 24
+        TlDgtInputL = 25
+        ClAnalogInput = 26
+        TlAnglogInput = 27
+        FtSensorRawData = 28
+        FtSensorData = 29
+        FtSensorActive = 30
+        EmergencyStop = 31
+        MotionDone = 32
+        GripperMotiondone = 33
+        McQueueLen = 34
+        CollisionState = 35
+        TrajectoryPnum = 36
+        SafetyStop0State = 37
+        SafetyStop1State = 38
+        GripperFaultId = 39
+        GripperFault = 40
+        GripperActive = 41
+        GripperPosition = 42
+        GripperSpeed = 43
+        GripperCurrent = 44
+        GripperTemp = 45
+        GripperVoltage = 46
+        AuxState = 47
+        ExtAxisStatus = 48
+        ExtDIState = 49
+        ExtDOState = 50
+        ExtAIState = 51
+        ExtAOState = 52
+        RbtEnableState = 53
+        JointDriverTorque = 54
+        JointDriverTemperature = 55
+        RobotTime = 56
+        SoftwareUpgradeState = 57
+        EndLuaErrCode = 58
+        ClAnalogOutput = 59
+        TlAnalogOutput = 60
+        GripperRotNum = 61
+        GripperRotSpeed = 62
+        GripperRotTorque = 63
+        WeldingBreakOffState = 64
+        TargetJointTorque = 65
+        SmartToolState = 66
+        WideVoltageCtrlBoxTemp = 67
+        WideVoltageCtrlBoxFanCurrent = 68
+        ToolCoord = 69
+        WobjCoord = 70
+        ExtoolCoord = 71
+        ExAxisCoord = 72
+        Load = 73
+        LoadCog = 74
+        LastServoTarget = 75
+        ServoJCmdNum = 76
+        TargetJointPos = 77
+        TargetJointVel = 78
+        TargetJointAcc = 79
+        TargetJointCurrent = 80
+        ActualJointCurrent = 81
+        ActualTCPForce = 82
+        TargetTCPPos = 83
+        CollisionLevel = 84
+        SpeedScaleManual = 85
+        SpeedScaleAuto = 86
+        LuaLineNum = 87
+        AbnomalStop = 88
+        CurrentLuaFileName = 89
+        ProgramTotalLine = 90
+        SafetyBoxSingal = 91
+        WeldVoltage = 92
+        WeldCurrent = 93
+        WeldTrackVel = 94
+        TpdException = 95
+        AlarmRebootRobot = 96
+        ModbusMasterConnect = 97
+        ModbusSlaveConnect = 98
+        BtnBoxStopSignal = 99
+        DragAlarm = 100
+        SafetyDoorAlarm = 101
+        SafetyPlaneAlarm = 102
+        MotonAlarm = 103
+        InterfaceAlarm = 104
+        UdpCmdState = 105
+        WeldReadyState = 106
+        AlarmCheckEmergStopBtn = 107
+        TsTmCmdComError = 108
+        TsTmStateComError = 109
+        CtrlBoxError = 110
+        SafetyDataState = 111
+        ForceSensorErrState = 112
+        CtrlOpenLuaErrCode = 113
+        StrangePosFlag = 114
+        Alarm = 115
+        DriverAlarm = 116
+        AliveSlaveNumError = 117
+        SlaveComError = 118
+        CmdPointError = 119
+        IOError = 120
+        GripperError = 121
+        FileError = 122
+        ParaError = 123
+        ExaxisOutLimitError = 124
+        DriverComError = 125
+        DriverError = 126
+        OutSoftLimitError = 127
+        AxleGenComData = 128
+        SocketConnTimeout = 129
+        SocketReadTimeout = 130
+        TsWebStateComErr = 131
+        CheckSum = 132

@@ -988,14 +988,14 @@ Write Slave AO
 .. code-block:: Java
     :linenos:
 
-    /**
+    /*
     * @brief  Write Slave AO
-    * @param  AOIndex  AO number
-    * @param  wirteNum  Number to write
-    * @param  status Value to write, max 8
+    * @param  AOIndex AO number
+    * @param  writeNum Number of values to write
+    * @param  status Array of values to write (up to 8 values), AO0~AO15 are integer, AO16~AO31 are floating point
     * @return  Error code
     */
-    public int FieldBusSlaveWriteAO(int AOIndex, int wirteNum, int[] status)
+    public int FieldBusSlaveWriteAO(int AOIndex, int writeNum, double[] status)
 
 Read Slave DI
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

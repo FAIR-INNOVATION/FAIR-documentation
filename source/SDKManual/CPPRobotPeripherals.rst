@@ -1225,7 +1225,7 @@ Write Slave AO
     * @param  [in] status[8] Value to Write, maximum 8
     * @return  Error Code
     */
-    errno_t FieldBusSlaveWriteAO(uint8_t AOIndex, uint8_t writeNum, int status[8]);
+    errno_t FieldBusSlaveWriteAO(uint8_t AOIndex, uint8_t writeNum, double status[8]);
 
 Read Slave DI
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1255,7 +1255,7 @@ Read Slave AI
     * @param  [out] status[8] Value Read, maximum 8
     * @return  Error Code
     */
-    errno_t FieldBusSlaveReadAI(uint8_t AIIndex, uint8_t readNum, int status[8]);
+    errno_t FieldBusSlaveReadAI(uint8_t AIIndex, uint8_t readNum, double status[8]);
 
 Wait for Extended DI Input
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1300,9 +1300,9 @@ Slave Mode Related Interface Command Code Example
         FRRobot robot;
         uint8_t type = 0, version = 0, connState = 0;
         uint8_t ctrl[8];
-        int ctrlAO[8];
+        double ctrlAO[8];
         static uint8_t DI[8];
-        static int AI[8];
+        static double AI[8];
 
         robot.LoggerInit();
         robot.SetLoggerLevel(1);

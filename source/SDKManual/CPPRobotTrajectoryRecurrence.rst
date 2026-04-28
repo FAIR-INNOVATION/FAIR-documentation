@@ -256,17 +256,72 @@ Get Trajectory Point Number
      */     
     errno_t  GetTrajectoryPointNum(int *pnum);
 
-Set Trajectory Running Speed
+Set Speed During Trajectory Execution
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
     /**
-     * @brief  Set trajectory running speed
-     * @param  [in] ovl Speed percentage
-     * @return  Error code
-     */     
-    errno_t  SetTrajectoryJSpeed(float ovl);
+    * @brief Set speed during trajectory execution
+    * @param [in] ovl Speed percentage [0-100.0]
+    * @param [in] mode Mode; 0-speed reduction mode; 1-direct switching
+    * @return Error code
+    */
+    errno_t SetTrajectoryJSpeed(float ovl, int mode = 0);
+
+Code Example for Setting Robot Speed During Trajectory Execution
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestSetTrajectoryJSpeed() 
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        robot.SetReConnectParam(true, 30000, 500);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        
+        rtn = robot.TrajectoryJUpLoad("D://zUP/trajHelix_aima_1.txt");
+        printf("Upload TrajectoryJ A %d\n", rtn);
+        char traj_file_name[90] = "/fruser/traj/trajHelix_aima_1.txt";
+        rtn = robot.LoadTrajectoryJ(traj_file_name, 100, 1);
+        printf("LoadTrajectoryJ %s, rtn is: %d\n", traj_file_name, rtn);
+        DescPose traj_start_pose;
+        memset(&traj_start_pose, 0, sizeof(DescPose));
+        rtn = robot.GetTrajectoryStartPose(traj_file_name, &traj_start_pose);
+        printf("GetTrajectoryStartPose is: %d\n", rtn);
+        printf("desc_pos:%f,%f,%f,%f,%f,%f\n", traj_start_pose.tran.x, traj_start_pose.tran.y, traj_start_pose.tran.z, traj_start_pose.rpy.rx, traj_start_pose.rpy.ry, traj_start_pose.rpy.rz);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        robot.SetSpeed(50);
+        robot.MoveCart(&traj_start_pose, 0, 0, 100, 100, 100, -1, -1);
+        int traj_num = 0;
+        rtn = robot.GetTrajectoryPointNum(&traj_num);
+        printf("GetTrajectoryStartPose rtn is: %d, traj num is: %d\n", rtn, traj_num);
+        rtn = robot.MoveTrajectoryJ();
+        printf("MoveTrajectoryJ rtn is: %d\n", rtn);
+        robot.Sleep(1000);
+        robot.GetRobotRealTimeState(&pkg);
+        int trajspeedMode = 1;
+        while (pkg.motion_done == 0)
+        {
+            robot.GetRobotRealTimeState(&pkg);
+            rtn = robot.SetTrajectoryJSpeed(10.0, trajspeedMode);
+            printf("SetTrajectoryJSpeed is: %d\n", rtn);
+            robot.Sleep(1000);
+            rtn = robot.SetTrajectoryJSpeed(80.0, trajspeedMode);
+            printf("SetTrajectoryJSpeed is: %d\n", rtn);
+            robot.Sleep(1000);
+        }
+        robot.CloseRPC();
+        robot.Sleep(1000000);
+        return 0;
+    }
 
 Set Trajectory Running Force and Torque
 ++++++++++++++++++++++++++++++++++++++++++++
