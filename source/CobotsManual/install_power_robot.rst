@@ -276,3 +276,123 @@ Power Off
    :align: center
 
 .. centered:: Figure 1.5-1 Turn off the power button
+
+Control Box Button Battery
+----------------------------------------------------------------
+
+Common Causes of Time Loss
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This device uses an external button battery as a backup power source for the real-time clock (RTC), used to maintain time counting when the main power is disconnected.
+
+If time loss occurs (i.e., incorrect date displayed after powering on again), it is usually caused by one or more of the following reasons:
+
+.. list-table::
+   :widths: 40 40 60
+   :header-rows: 0
+   :align: center
+
+   * - **Cause Category**
+     - **Specific Description**
+     - **Troubleshooting Suggestions**
+
+   * - Button battery depleted
+     - The device has not been powered on for more than 3 months, causing the battery energy to be naturally consumed.
+     - Measure the battery voltage with a multimeter (remove it for measurement). If the voltage is below 2.5V, it needs to be recharged.
+
+   * - Battery damaged
+     - The battery has reached the end of its service life.
+     - Check if the battery shows signs of leakage or bulging. If so, replace the battery. Battery model: MS621FE-FL11E, 3V/5.5mAH, rechargeable.
+
+   * - Poor battery terminal contact
+     - Battery terminals are oxidized, deformed, or the device has been shaken causing the battery to momentarily detach from the contacts.
+     - Check if the battery is securely inserted into the terminals, clean the contacts, reinstall the battery and ensure it is firmly clamped.
+
+   * - Battery not installed or installed backwards
+     - The user has not installed the backup battery, or the positive and negative terminals are reversed during installation.
+     - | Confirm that the battery is installed with the correct polarity (positive terminal facing up).
+       .. image:: installation/131.png
+          :width: 2in
+          :align: center
+
+   * - Battery charging circuit failure
+     - The rechargeable button battery is unable to store charge properly.
+     - Requires inspection of the charging circuit by professional maintenance personnel.
+
+.. warning:: The button battery used in this device is model [MS621FE-FL11E, 3V/5.5mAH, rechargeable]. Please ensure the correct handling method according to the model. Do not install non-rechargeable batteries.
+
+Time Anomaly Identification and Manual Calibration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1) Anomaly Identification Method
+   
+After re-energizing the robot, first check the current time displayed on the device page. Compare it with the computer's system time:
+
+- If they are consistent, the time is normal and no further action is required.
+
+.. image:: installation/132.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 1.6-1 System Time Anomaly
+
+- If they are inconsistent (e.g., incorrect date, significant deviation in hour/minute/second), it is determined as a time anomaly. Please continue with the calibration steps below.
+  
+2) Calibration Steps
+
+If a time anomaly has been confirmed, follow the steps below to synchronize the system time:
+
+- Open the browser to enter the WebApp, and navigate to: "System Settings -> General Settings -> Time" interface.
+
+.. image:: installation/133.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 1.6-2 System Time Update Interface
+
+- Click the "Update" button on the interface, and the system will automatically complete the time synchronization. After synchronization, return to the robot page, and the time should be restored to normal.
+
+Button Battery Charging and Maintenance Precautions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1) Charging Conditions
+
+- After the device main power is connected (220V AC), the charging circuit is automatically activated.
+- The ambient temperature should be within the range of 0℃ to 45℃. High temperatures will reduce charging efficiency and shorten battery life.
+
+2) Charging Time
+
+- A fully discharged battery takes approximately [5 hours] to fully charge. Time-keeping function works normally during this period.
+
+3) Prohibited Actions
+
+- Do not use an external charger to directly charge the button battery inside the device.
+- Do not install a non-rechargeable battery into the device, as this may cause danger.
+
+Battery Replacement and Disposal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Replacement Cycle
+
+- Typically can be used for more than [5 years]. Replace if time is frequently lost.
+
+2) Replacement Steps
+
+- Disconnect the device main power.
+- Open the top cover.
+- Remove the old battery, noting the polarity direction.
+- Solder a new qualified battery of the same model (positive terminal facing up).
+- Close the cover, re-energize, and calibrate the current time.
+
+3) Disposal
+
+- Do not throw the battery into fire or expose it to water.
+- Recycle waste batteries according to local regulations (button batteries typically contain lithium or heavy metals).
+
+Technical Support
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the problem persists after following the above steps, please contact our technical support team and provide the following information:
+
+- Device model and serial number.
+- The battery model used (please check the markings on the battery surface).
+- Fault phenomenon (e.g., time lost immediately after power failure / lost after sitting overnight).

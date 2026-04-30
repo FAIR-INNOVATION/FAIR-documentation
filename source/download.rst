@@ -179,6 +179,18 @@ Robot Certification:
      - ✅
      - :download:`download <_static/_doc/NRTL Collaborative Robot certification.pdf>`
 
+   * - **Collaborative Robot RCM Registration Certificate**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`Download <_static/_doc/Collaborative Robot RCM Registration Certificate.pdf>`
+
    * - **Cleaning Robot CLASS3 Certificate**
      - ✅
      - ✅
