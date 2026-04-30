@@ -189,7 +189,7 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - :download:`Download <_static/_doc/Collaborative Robot RCM Registration Certificate.pdf>`
+     - :download:`download <_static/_doc/Collaborative Robot RCM Registration Certificate.pdf>`
 
    * - **Cleaning Robot CLASS3 Certificate**
      - ✅
