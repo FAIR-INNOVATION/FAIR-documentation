@@ -287,6 +287,8 @@ Ontology & Dimensional Drawings
 
     :download:`Button Box STEP Models <_static/_doc/Button Box.zip>`
 
+    :download:`CNC Workstation STEP Model <_static/_doc/CNC Workstation.zip>`
+    
     :download:`Palletizing Station STEP Models <_static/_doc/Palletizing.zip>`
 
     :download:`Sorting Workstation STEP Models <_static/_doc/Sorting.zip>`

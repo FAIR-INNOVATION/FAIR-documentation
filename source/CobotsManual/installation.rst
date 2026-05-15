@@ -2263,19 +2263,19 @@ The external wiring of this series of robotic arm control systems is connected u
 Controller I/O panel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the I/O in the control box to control various devices, including the stop button of pneumatic relay, PLC, and tight limit device. Figure 3.5-2 shows the electrical interface group of the control box. Figure 3.5-3 shows the electrical interface group that is easy to manufacture control box.
+You can use the I/O inside the control box to control various devices, including pneumatic relays, PLCs, and limit switches and stop buttons. Figure 3.5-2 shows the electrical interface group of the control box, and Figure 3.5-3 shows the electrical interface group of the integrated mini control box (mini BOX).
 
 .. figure:: installation/038.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.5-2 Control box electrical interface schematic diagram
+.. centered:: Figure 3.5-2 Schematic Diagram of Control Box Electrical Interface
 
 .. figure:: installation/039.png
 	:align: center
 	:width: 6in
 
-.. centered:: Figure 3.5-3 Easy to manufacture control box electrical interface schematic diagram
+.. centered:: Figure 3.5-3 Schematic Diagram of Integrated Mini Control Box (mini BOX) Electrical Interface
 
 RJ45 network interface group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2336,21 +2336,35 @@ This section stipulates the electrical specifications of the following control b
 
 Robots must be installed in accordance with electrical specifications.
 
-By configured the "Power Communication" interface, you can use the internal or external 24V power supply to power the digital I/O. The above two terminals (EX24V and EXON) in the interface are 24V and ground with external power supply, and the two terminals (24V and GND) below are 24V and land of internal power supply. The default configuration uses internal power, as shown in figure below.
+By configuring the "Power Communication" interface, you can use an internal or external 24V power supply to power the digital I/O. In this interface, the upper two terminals (ex24V and exon) are the 24V and ground of the external power supply, and the lower two terminals (24V and GND) are the 24V and ground of the internal power supply. The default configuration uses the internal power supply, as shown in the following figures for the control box and integrated mini control box (mini BOX).
 
 .. figure:: installation/044.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 3.5-8 Power communication schematic diagram 01
+.. centered:: Control Box
 
-If the load power is large, you can connect the external power supply as shown in figure below.
+.. figure:: installation/134.png
+	:align: center
+	:width: 3in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
+.. centered:: Figure 3.5-8 Power Communication Schematic 01
+
+If the load power is high, connect an external power supply as shown in the figure below. For the AC wide voltage integrated mini control box (mini BOX), the external power supply and internal power supply share a common 0V connection.
 
 .. figure:: installation/045.png
 	:align: center
 	:width: 3in
 
-.. centered:: Figure 3.5-9 Power communication schematic diagram 02
+.. centered:: Control Box
+
+.. figure:: installation/135.png
+	:align: center
+	:width: 3in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
+.. centered:: Figure 3.5-9 Power Communication Schematic 02
 
 The electrical specifications of internal and external power are shown in table below Internal and external electrical specifications:
 
@@ -2589,6 +2603,13 @@ When the robot leaves the factory, it has the default configuration. It can be o
 	:align: center
 	:width: 3in
 
+.. centered:: Control Box
+
+.. figure:: installation/136.png
+	:align: center
+	:width: 3in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-10 Safety protection schematic diagram 01
 
 **Connect the emergency stop button**
@@ -2598,6 +2619,13 @@ In most applications, one or more additional emergency stop buttons need to be u
 	:align: center
 	:width: 3in
 
+.. centered:: Control Box
+
+.. figure:: installation/137.png
+	:align: center
+	:width: 3in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-11 Safety protection schematic diagram 02
 
 **Connect the security stop button**
@@ -2607,6 +2635,13 @@ An example of a safe stop device is the door switch that the robot stops when th
 	:align: center
 	:width: 3in
 
+.. centered:: Control Box
+
+.. figure:: installation/138.png
+	:align: center
+	:width: 3in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-12 Safety protection schematic diagram 03
 
 Universal digital amount I/O
@@ -2624,6 +2659,13 @@ This example demonstrates how to connect the digital quantity output to control 
 	:align: center
 	:width: 3in
 
+.. centered:: Control Box
+
+.. figure:: installation/139.png
+	:align: center
+	:width: 6in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-13 Great digital quantity output schematic diagram 01
 
 Digital input from the button
@@ -2635,6 +2677,13 @@ The following example demonstrates how to connect the simple button to the digit
 	:align: center
 	:width: 3in
 
+.. centered:: Control Box
+
+.. figure:: installation/140.png
+	:align: center
+	:width: 6in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-14 Great digital quantity output schematic diagram 02
 
 Interact with other devices or PLC
@@ -2646,6 +2695,13 @@ The following example demonstrates how to interact with other devices or PLC dig
 	:align: center
 	:width: 6in
 
+.. centered:: Control Box
+
+.. figure:: installation/141.png
+	:align: center
+	:width: 6in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-15 Interactive diagram with other devices or PLC
 
 Simulation I/O
@@ -2788,6 +2844,13 @@ The following example is to demonstrate the use of analog output control conveyo
 	:align: center
 	:width: 3in
 
+.. centered:: Control Box
+
+.. figure:: installation/142.png
+	:align: center
+	:width: 6in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-16 Simulation output schematic diagram
 
 **Use analog input**
@@ -2798,6 +2861,13 @@ The following example is to demonstrate the simulation input connection simulati
 	:align: center
 	:width: 3in
 
+.. centered:: Control Box
+
+.. figure:: installation/143.png
+	:align: center
+	:width: 6in
+
+.. centered:: Integrated Mini Control Box (mini BOX)
 .. centered:: Figure 3.5-17 Simulation input schematic diagram
 
 FR3MT&3C Optional Modules
