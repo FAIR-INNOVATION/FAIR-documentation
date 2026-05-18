@@ -1,7 +1,7 @@
-Version V3.9.0
+Version V3.9.0.1
 -----------------
 
-Date: 2025-11-27
+Date: 2026-04-29
 
 - **DARU DFC Force Control Polishing Head Application**:
     Path: Initial Setup -> Peripherals -> Polishing -> DARU DFC Force Control Polishing Head.
@@ -49,6 +49,9 @@ Date: 2025-11-27
 
 - **New FR5C Robot Model Configuration**:
     Description: The LA version software adds FR5C robot model configuration functionality.
+
+- **Added SetTrajectoryJSpeed debugging**:
+    Description: Added non-stuttering functionality for SetTrajectoryJSpeed debugging.
 
 Version V3.8.7
 -----------------
