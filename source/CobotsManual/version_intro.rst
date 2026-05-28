@@ -1,3 +1,28 @@
+Version V3.9.6
+-----------------
+
+Date: 2026-05-26
+
+- **Optimized Matrix Movement Function**: 
+    Path: Auxiliary Application -> Process Package -> Matrix Movement.
+  
+    Description: Optimized the matrix movement instruction set function.
+
+- **Optimized DI Deceleration Function**: 
+    Path: Initial Settings -> Basic -> I/O Settings.
+  
+    Description: 1. When DI signal is triggered, the speed adjustment process is smooth without impact or stuttering; 2. The robot end path remains unchanged before and after speed adjustment; 3. No error or pause when DI triggers speed adjustment; 4. Immediate execution without error when DI triggers stop.
+
+- **Added Robot Laser Welder Communication Adaptation Function**: 
+    Path: Initial Settings -> Peripherals -> Welding Machine.
+  
+    Description: 1. WebAPP adds laser welder related settings, debugging, and Lua program generation instructions; 2. Added laser welder related parameters; 3. PLC develops adaptation programs.
+    
+- **Added FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board EIP/CClink-IE Protocol Adaptation**: 
+    Path: Initial Settings -> Peripherals -> Board Communication.
+  
+    Description: 1. Supports configurable communication cycle; 2. Supports obtaining bus connection status; 3. Compatible with EIP and CC protocols.
+
 Version V3.9.5
 -----------------
 

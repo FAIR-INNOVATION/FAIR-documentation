@@ -10,7 +10,7 @@ Overview
 Industrial Bus Protocol Integration for Robot Motion Control
 -----------------------------------------------------------------
 
-To facilitate PLC-based robot motion control through various industrial bus protocols (CC-Link IEF Basic, Profinet, Ethernet/IP, and EtherCAT), the integrated mini control cabinet has been equipped with FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 cards, FRJ-PCIeN-EIP/CC/PN-RJ-V10 cards, and FRJ-PCIeN-EC-RJ-V10 cards.
+To facilitate PLC-based robot motion control through various industrial bus protocols (CC-Link IEF Basic, Profinet, Ethernet/IP, and EtherCAT), the integrated mini control cabinet has been equipped with FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 cards, FRJ-PCIeN-EIP/CC/PN-RJ-V10 cards, and FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 cards.
 
 Environment Configuration
 --------------------------
@@ -31,7 +31,7 @@ The required card models and software versions are as follows:
      - V3.8.4 and above
 
    * - CC-Link IEF Basic
-     - FRJ-PCIeN-EC-RJ-V10 Board
+     - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
      - V3.9.5 and above
 
    * - Profinet
@@ -39,7 +39,7 @@ The required card models and software versions are as follows:
      - V3.8.4 and above
 
    * - Profinet
-     - FRJ-PCIeN-EC-RJ-V10 Board
+     - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
      - V3.9.5 and above
 
    * - Ethernet/IP
@@ -47,11 +47,11 @@ The required card models and software versions are as follows:
      - V3.8.4 and above
 
    * - Ethernet/IP
-     - FRJ-PCIeN-EC-RJ-V10 Board
+     - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
      - V3.9.5 and above
 
    * - EtherCAT
-     - FRJ-PCIeN-EC-RJ-V10 Board
+     - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
      - V3.9.5 and above
 
 FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board hardware environment setup
@@ -195,19 +195,6 @@ When configured for CC-Link IEF Basic, controller changes board IP to "192.168.0
 When configured for Ethernet/IP, controller changes board IP to "192.168.0.112".
 
 When switching to Profinet, if slave device name matches master, master will automatically configure slave IP.
-
-FRJ-PCIeN-EC-RJ-V10 Board Firmware Upgrade
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Enter the robot interface via the URL 192.169.58.2, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the firmware version number of the FRJ-PCIeN-EC-RJ-V10 board. Select the bin file to be upgraded, click Upload, wait for the firmware upgrade to complete, and then restart the control box.
-
-.. image:: custom_protocol_slave/064.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 17.2-13 Board Firmware Upgrade
-
-.. note:: To upgrade the firmware of the FRJ-PCIeN-EC-RJ-V10 board, the running open protocol must be unloaded first.
 
 Software environment setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -722,8 +709,8 @@ Example generated program:
 
 :download:`Appendix 1: Slave Mode Address Mapping Table <../_static/_doc/Control box slave mode address comparison table.xlsx>`
 
-Board Communication Cycle Configuration
----------------------------------------------------------
+Board Firmware Upgrade and Communication Cycle Configuration
+---------------------------------------------------------------------
 
 FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -752,16 +739,26 @@ The communication cycle of the board can be configured via the host computer. Cu
    :width: 6in
    :align: center
 
-FRJ-PCIeN-EC-RJ-V10 Board
+FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Enter the robot interface via the URL 192.169.58.2, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the board communication cycle. Enter the required communication cycle (1~100 ms), click the "Configure" button, wait for the configuration to complete, and then restart the control box.
+This board supports online upgrading. The steps are as follows:
+
+(1) Enter the URL 192.168.58.2 to access the robot interface, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the firmware version number of the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board. Select the bin file to be upgraded, click Upload, wait for the firmware upgrade to succeed, and then restart the control box.
 
 .. image:: custom_protocol_slave/064.png
    :width: 6in
    :align: center
 
-.. note:: To configure the communication cycle of the FRJ-PCIeN-EC-RJ-V10 board, the running open protocol must be unloaded first.
+.. note:: To upgrade the firmware of the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board, the running open protocol must be unloaded first.
+
+(2) Enter the URL 192.168.58.2 to access the robot interface, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the board communication cycle. Enter the desired communication cycle (1~100 ms), click the "Configure" button, wait for the configuration to succeed, and then restart the control box.
+
+.. image:: custom_protocol_slave/064.png
+   :width: 6in
+   :align: center
+
+.. note:: To configure the communication cycle of the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board, the running open protocol must be unloaded first.
 
 Appendice
 -------------------

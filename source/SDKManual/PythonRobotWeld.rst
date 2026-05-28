@@ -1619,3 +1619,271 @@ Custom swing parameter code example
     robot.MoveL(desc_pos=desc_p2, tool=3, user=0, vel=100, ovl=10, speedPercent=100)
     robot.WeaveEnd(0)
     robot.CloseRPC()
+
+Laser Welding Machine Parameter Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingParam(self, num, scanSpeed, scanWidth, peakPower, dutyCycle, Freq, io_type=1)``"
+    "Description", "Write configuration parameters of one of the 10 process groups of the laser welding machine and configure them to the welder"
+    "Required Parameters", "
+    - ``io_type``: Communication type 0-IO 1-UDP
+    - ``Num``: Group number to set (1~10)
+    - ``scanSpeed``: Scanning speed
+    - ``scanWidth``: Scanning width
+    - ``peakPower``: Peak power
+    - ``dutyCycle``: Duty cycle
+    - ``Freq``: Frequency
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Start/Stop Laser Welding
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingStartEnd(self, status, io_type=1, max_waittime=10000)``"
+    "Description", "Start/stop laser welding machine"
+    "Required Parameters", "
+    - ``io_type``: Communication type 0-IO 1-UDP
+    - ``status``: Control word 0-laser off 1-laser on
+    - ``max_waittime``: Maximum wait time
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Enable/Disable Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingEnable(self, status, io_type=1)``"
+    "Description", "Enable/disable laser welding machine"
+    "Required Parameters", "
+    - ``io_type``: Communication type 0-IO 1-UDP
+    - ``status``: 0-disable 1-enable
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Laser Welding Machine Fault Reset
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ResetLaserWeldingErr(self,status, io_type=1)``"
+    "Description", "Laser welding machine fault reset"
+    "Required Parameters", "
+    - ``io_type``: Communication type 0-IO 1-UDP
+    - ``status``: Control word 0-invalid 1-fault reset
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Get Laser Welding Machine Running Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetLaserWeldingRunningState(self, io_type=1)``"
+    "Description", "Get laser welding machine running status"
+    "Required Parameters", "
+    - ``io_type``: Communication type 0-IO 1-UDP
+    - ``status``: Control word 0-stopped 1-running
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Get Laser Welding Machine Fault Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetLaserWeldingErrState(self, io_type=1)``"
+    "Description", "Get laser welding machine fault status"
+    "Required Parameters", "
+    - ``io_type``: Communication type 0-IO 1-UDP
+    - ``status``: 0-no fault 1-fault present
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Get Laser Welding Machine Configuration Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetLaserWeldingParamTarget(self, num)``"
+    "Description", "Get configuration parameters of one of the 10 process groups of the laser welding machine"
+    "Required Parameters", "
+    - ``Num``: Group number to set (1~10)
+    - ``scanSpeed``: Scanning speed
+    - ``scanWidth``: Scanning width
+    - ``peakPower``: Peak power
+    - ``dutyCycle``: Duty cycle
+    - ``Freq``: Frequency
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Get Currently Active Configuration Parameters of Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetLaserWeldingParamActual(self, io_type=1)``"
+    "Description", "Get currently active configuration parameters of the laser welding machine"
+    "Required Parameters", "
+    - ``io_type``: Communication type 0-IO 1-UDP
+    - ``scanSpeed``: Scanning speed
+    - ``scanWidth``: Scanning width
+    - ``peakPower``: Peak power
+    - ``dutyCycle``: Duty cycle
+    - ``Freq``: Frequency
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Configure Extended IO Enable DO Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingEnableExtDoNum(self, ctrlModeDONum)``"
+    "Description", "Configure extended IO enable DO port for laser welding machine"
+    "Required Parameters", "
+    - ``ctrlModeDONum``: Extended DO port number for laser welding machine enable
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Configure Extended IO Start DO Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingStartExtDoNum(self, ctrlModeDONum)``"
+    "Description", "Configure extended IO start DO port for laser welding machine"
+    "Required Parameters", "
+    - ``ctrlModeDONum``: Extended DO port number for laser welding machine start/stop
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Configure Extended IO Fault Reset DO Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingErrResetExtDoNum(self, ctrlModeDONum)``"
+    "Description", "Configure extended IO fault reset DO port for laser welding machine"
+    "Required Parameters", "
+    - ``ctrlModeDONum``: Extended DO port number for laser welding machine fault reset
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Configure Extended IO Running Status (Laser On Status) DI Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingRunningStateExtDiNum(self, diNum)``"
+    "Description", "Configure extended IO running status (laser on status) DI port for laser welding machine"
+    "Required Parameters", "
+    - ``diNum``: Extended DI port number for laser welding machine running status (laser on status)
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Configure Extended IO Fault Status DI Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetLaserWeldingErrStateExtDiNum(self, diNum)``"
+    "Description", "Configure extended IO fault status DI port for laser welding machine"
+    "Required Parameters", "
+    - ``diNum``: Extended DI port number for laser welding machine fault status
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code Success-0 Failure- errcode"
+
+Laser Welding Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos: 
+
+    from time import sleep
+    from fairino import Robot
+    import time
+
+    # Establish connection with the robot controller, return a robot object upon successful connection
+    robot = Robot.RPC('192.168.58.2')
+
+    def testLsaerWeld():
+        robot.ExtDevLoadUDPDriver()
+        time.sleep(1)
+
+        robot.SetLaserWeldingParam(num = 3, scanSpeed = 2000, scanWidth = 3, peakPower = 1500, dutyCycle = 100, Freq = 1000, io_type=1)
+        robot.SetLaserWeldingStartExtDoNum(ctrlModeDONum=1)
+
+        robot.Mode(0)
+        time.sleep(1)
+
+        desc_pos1 = [-303.721, -206.960, 297.105, 152.209, 19.857, 109.166]
+        desc_pos2 = [-301.575, -254.888, 284.786, 155.919, 26.946, 111.629]
+        desc_safe = [-344.386, -280.830, 435.073, 173.835, 15.333, 124.931]
+        jointPos1 = [9.827, -99.740, 120.088, -78.900, -77.241, -17.904]
+        jointPos2 = [15.251, -96.456, 120.138, -84.664, -68.542, -17.843]
+        jointSafe = [19.142, -98.078, 101.493, -83.078, -77.070, -17.794]
+
+        error = robot.MoveL(desc_pos=desc_pos1,joint_pos=jointPos1, tool=1, user=0, vel=100, ovl= 2, acc=100)
+        print("MoveL return:", error)
+        robot.SetLaserWeldingStartEnd(1, io_type=1, max_waittime=10000)
+
+        error = robot.MoveL(desc_pos=desc_pos2, joint_pos=jointPos2, tool=1, user=0, vel=100, ovl= 2, acc=100)
+        print("MoveL return:", error)
+        robot.SetLaserWeldingStartEnd(0, io_type=1, max_waittime=10000)
+
+        error = robot.MoveL(desc_pos=desc_safe, joint_pos=jointSafe, tool=1, user=0, vel=100, ovl= 2, acc=100)
+        print("MoveL return:", error)
+
+        robot.Mode(1)
+        time.sleep(1)
+
+        # Close connection
+        robot.CloseRPC()
+        time.sleep(1)
+
+    # Call test function
+    testLsaerWeld()

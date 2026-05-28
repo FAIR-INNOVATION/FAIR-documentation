@@ -641,3 +641,202 @@ When two identical tracking motion targets are taught consecutively (may include
 .. centered:: Figure 15.3‑16 A Typical Conveyor Blocking Tracking Picking Motion Program
 
 When two identical tracking motion targets are taught consecutively (may include offset distance), and gripper motion is inserted in between, the robot will continuously track the conveyor at this target position until the gripper motion is completed, achieving blocking tracking picking.
+
+Matrix Movement Instruction Optimization Function
+------------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the process of automated machining of CNC equipment and palletizing operations, matrix movement instructions are widely used in multiple key process stages, including blank loading, finished product unloading, workpiece flipping, and secondary clamping. By teaching three matrix points in the matrix movement recipe to determine the matrix position, and configuring the matrix rows, columns, layers, and motion path, the matrix recipe can be quickly switched on the instruction interface for deployment and operation.
+
+Matrix Movement Recipe Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**: Enter the "Auxiliary Applications -> Process Packages -> Matrix Movement" interface to perform recipe addition, editing, renaming, and deletion operations;
+
+.. figure:: process/049.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑1 Matrix Recipe Interface
+
+.. note:: 
+   .. image:: process/050.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Add Button**
+   
+   Function: Add a new matrix recipe
+
+.. note:: 
+   .. image:: process/051.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Edit Button**
+   
+   Function: Edit matrix recipe parameters
+
+.. note:: 
+   .. image:: process/052.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Rename Button**
+   
+   Function: Rename the matrix recipe
+
+.. note:: 
+   .. image:: process/053.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Delete Button**
+   
+   Function: Delete the matrix recipe
+
+**Step2**: Add a new matrix recipe. Click the "Add" button to pop up the "Add Matrix" modal window. Enter the matrix name (special characters are prohibited, only numbers, common Chinese characters, and underscores "_" are allowed). Then enter the recipe details interface to input the number of rows, layers, columns, layer height, motion configuration, and transition point offsets X, Y, Z, and teach three matrix path points. Click the "Configure" button to confirm the configuration.
+
+.. figure:: process/054.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑2 Add Matrix Popup Modal Window
+
+.. figure:: process/055.png
+   :align: center
+   :width: 4in
+
+.. figure:: process/056.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑3 First Path Point Teaching
+
+.. figure:: process/057.png
+   :align: center
+   :width: 4in
+
+.. figure:: process/058.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑4 Second Path Point Teaching
+
+.. figure:: process/059.png
+   :align: center
+   :width: 4in
+
+.. figure:: process/060.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑5 Third Path Point Teaching
+
+The motion paths are divided into the "head-to-tail" method and the "zigzag" method. The descriptions are as follows:
+
+**Head-to-Tail Method**: Complete the first row from left to right, return to the left starting point, then complete the second row from left to right, return to the left starting point again, complete the third row from left to right, and so on until full coverage is achieved.
+
+.. figure:: process/061.png
+   :align: center
+   :width: 1in
+
+.. centered:: Figure 15.4‑6 Head-to-Tail Method
+
+**Zigzag Method**: Complete the first row from left to right, move vertically downward, then complete the second row from right to left. Move vertically downward again, then complete the third row from left to right, continuing until the area is fully covered.
+
+.. figure:: process/062.png
+   :align: center
+   :width: 1in
+
+.. centered:: Figure 15.4‑7 Zigzag Method
+
+**Step3**: Recipe editing, renaming, and deletion. Click the "Edit" button to retrieve the data of the currently selected matrix recipe. Modify parameters or re-teach path points as needed. When renaming is required, click the "Rename" button, enter the new name, and click the "Rename" button again to complete. Click the "Delete" button, a secondary confirmation will ask whether to delete the matrix recipe; click the "Delete" button again to confirm deletion. As shown below:
+
+.. figure:: process/063.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑8 Matrix Recipe Rename
+
+.. figure:: process/064.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑9 Matrix Recipe Deletion Prompt
+
+Matrix Movement Instruction Addition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Step1**: After entering the "Teaching Program -> Program Programming -> Palletizing Instructions -> Matrix Movement" interface, check if any recipes exist. If no recipe has been created, a prompt message will be displayed. Below the prompt text, you can click the "Configure" button to quickly enter the "Auxiliary Applications -> Process Packages -> Matrix Movement" interface. As shown below:
+
+.. figure:: process/065.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑10 Matrix Movement Instruction No Recipe Interface
+
+When a recipe exists, the matrix movement instruction interface is displayed. The current instruction types are:
+
+- **Matrix Movement**: Set the robot to move to the transition point for loading/unloading operations;
+- **Matrix Operation Count**: Count the row, column, and layer after the robot completes loading/unloading;
+- **Configure Start Count**: Set the row, column, and layer from which the robot starts loading/unloading;
+- **Get Matrix Count**: Get the row, column, and layer at which the robot has completed loading/unloading.
+
+.. figure:: process/066.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑11 Matrix Movement Instruction Recipe Exists Interface
+
+**Step2**: Add the "Matrix Movement" instruction. Create a new program named "matrix", select recipe "matrix1", movement direction "Down", and enter speed 100. The robot moves from the safety point to the transition point and then to the pick-up point. Click the "Add" button to apply it to the program. As shown below:
+
+.. figure:: process/067.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑12 Matrix Movement Instruction Move Down
+
+**Step3**: Add the "Matrix Operation Count" instruction. Select recipe "matrix1", click the "Add" button to apply it to the program. As shown below:
+
+.. figure:: process/068.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑13 Matrix Operation Count Instruction
+
+**Step4**: Add the "Matrix Movement" instruction. Select recipe "matrix1", movement direction "Up", and enter speed 100. The robot moves from the pick-up point to the transition point and then back to the safety point. Click the "Add" button to apply it to the program. As shown below:
+
+.. figure:: process/069.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑14 Matrix Movement Instruction Move Up
+
+**Step5**: Add a while instruction for continuous looping. Click the "Save" button to save the program, switch to automatic mode, and run the program. The robot will continuously perform matrix movement loading/unloading operations. As shown below:
+
+.. figure:: process/070.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑15 Matrix Movement Instruction Execution
+
+**Step6**: Add the "Configure Start Count" instruction. Select recipe "matrix1", enter row 1, column 1, layer 1. Click the "Add" button to apply it to the program. As shown below:
+
+.. note:: The entered row, column, and layer numbers are incremented by 1 to represent the actual row, column, and layer. That is, entering row 1, column 1, layer 1 means the robot actually starts from row 2, column 2, layer 2 at the specified position.
+
+.. figure:: process/071.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑16 Configure Start Count Instruction
+
+**Step7**: When the matrix changes, enter the "Auxiliary Applications -> Process Packages -> Matrix Movement" interface, select the matrix recipe "matrix1", click the edit button to modify parameters, and then click the configure button to complete the matrix modification. At this point, return to the program programming interface, open the "matrix" program, and run it directly to perform the new matrix scenario operation.
+
+.. figure:: process/072.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 15.4‑17 Modify Matrix Recipe

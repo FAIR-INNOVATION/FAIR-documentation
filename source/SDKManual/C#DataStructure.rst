@@ -373,7 +373,7 @@ Robot Status Feedback Structure Type
         public byte socketConnTimeout;     // Socket connection timeout flag
         public byte socketReadTimeout;     // Socket read timeout flag
         public byte tsWebStateComErr;      // ts_web_state_com_err
-
+        public byte exaxisCoordID;         // Extension axis coordinate system number
         public UInt16 check_sum;         /* Checksum */                 
 
         // Constructor: initialize all array fields

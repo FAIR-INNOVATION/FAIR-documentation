@@ -461,6 +461,31 @@ UDP Extended Axis Parameter Configuration
     */
     errno_t ExtAxisParamConfig(int axisID, int axisType, int axisDirection, double axisMax, double axisMin, double axisVel, double axisAcc, double axisLead, long encResolution, double axisOffect, int axisCompany, int axisModel, int axisEncType);
 
+UDP Extension Axis Parameter Acquisition
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief UDP extension axis parameter acquisition
+    * @param [in] axisID Extension axis number [1-4]
+    * @param [out] axisType Extension axis type 0-linear; 1-rotary
+    * @param [out] axisDirection Extension axis direction 0-positive; 1-negative
+    * @param [out] axisMax Extension axis maximum position mm
+    * @param [out] axisMin Extension axis minimum position mm
+    * @param [out] axisVel Speed mm/s
+    * @param [out] axisAcc Acceleration mm/s2
+    * @param [out] axisLead Lead mm
+    * @param [out] encResolution Encoder resolution
+    * @param [out] axisOffect Weld start point extension axis offset
+    * @param [out] axisCompany Driver manufacturer 1-Hecuan; 2-Inovance; 3-Panasonic
+    * @param [out] axisModel Driver model 1-Hecuan-SV-XD3EA040L-E, 2-Hecuan-SV-X2EA150A-A, 1-Inovance-SV620PT5R4I, 1-Panasonic-MADLN15SG, 2-Panasonic-MSDLN25SG, 3-Panasonic-MCDLN35SG
+    * @param [out] axisEncType Encoder type 0-incremental; 1-absolute
+    * @return Error code
+    */
+    errno_t ExtAxisGetParamConfig(int axisID, int& axisType, int& axisDirection, double& axisMax, double& axisMin, double& axisVel, double& axisAcc, double& axisLead, int& encResolution, double& axisOffect, int& axisCompany, int& axisModel, int& axisEncType);
+
 Set Extended Axis Installation Position
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.4.0
@@ -569,56 +594,78 @@ UDP Extended Axis Configuration and Jog Code Example
 
     int TestUDPAxis(void)
     {
-      ROBOT_STATE_PKG pkg = {};
-      FRRobot robot;
-      robot.LoggerInit();
-      robot.SetLoggerLevel(1);
-      int rtn = robot.RPC("192.168.58.2");
-      if (rtn != 0)
-      {
-        return -1;
-      }
-      robot.SetReConnectParam(true, 30000, 500);
-      rtn = robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 200, 1, 100, 5, 1);
-      cout << "ExtDevSetUDPComParam rtn is " << rtn << endl;
-      string ip = ""; int port = 0; int period = 0; int lossPkgTime = 0; int lossPkgNum = 0; int disconnectTime = 0; int reconnectEnable = 0; int reconnectPeriod = 0; int reconnectNum = 0;
-      rtn = robot.ExtDevGetUDPComParam(ip, port, period, lossPkgTime, lossPkgNum, disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum);
-      string patam = "\nip " + ip + "\nport " + to_string(port) + "\nperiod " + to_string(period) + "\nlossPkgTime " + to_string(lossPkgTime) + "\nlossPkgNum " + to_string(lossPkgNum) + "\ndisConntime " + to_string(disconnectTime) + "\nreconnecable " + to_string(reconnectEnable) + "\nreconnperiod " + to_string(reconnectPeriod) + "\nreconnnun " + to_string(reconnectNum);
-      cout << "ExtDevGetUDPComParam rtn is " << rtn << patam << endl;
-      robot.ExtDevLoadUDPDriver();
-      rtn = robot.ExtAxisServoOn(1, 1);
-      cout << "ExtAxisServoOn axis id 1 rtn is " << rtn << endl;
-      rtn = robot.ExtAxisServoOn(2, 1);
-      cout << "ExtAxisServoOn axis id 2 rtn is " << rtn << endl;
-      robot.Sleep(2000);
-      robot.ExtAxisSetHoming(1, 0, 10, 2);
-      robot.Sleep(2000);
-      rtn = robot.ExtAxisSetHoming(2, 0, 10, 2);
-      cout << "ExtAxisSetHoming rtnn is " << rtn << endl;
-      robot.Sleep(4000);
-      rtn = robot.SetRobotPosToAxis(1);
-      cout << "SetRobotPosToAxis rtn is " << rtn << endl;
-      rtn = robot.SetAxisDHParaConfig(10, 20, 0, 0, 0, 0, 0, 0, 0);
-      cout << "SetAxisDHParaConfig rtn is " << rtn << endl;
-      rtn = robot.ExtAxisParamConfig(1, 1, 1, 1000, -1000, 1000, 1000, 1.905, 262144, 200, 1, 0, 0);
-      cout << "ExtAxisParamConfig axis 1 rtn is " << rtn << endl;
-      rtn = robot.ExtAxisParamConfig(2, 1, 1, 1000, -1000, 1000, 1000, 4.444, 262144, 200, 1, 0, 0);
-      cout << "ExtAxisParamConfig axis 1 rtn is " << rtn << endl;
-      robot.Sleep(1000 * 3);
-      robot.ExtAxisStartJog(1, 0, 10, 10, 30);
-      robot.Sleep(1000 * 1);
-      robot.ExtAxisStopJog(1);
-      robot.Sleep(1000 * 3);
-      robot.ExtAxisServoOn(1, 0);
-      robot.Sleep(1000 * 3);
-      robot.ExtAxisStartJog(2, 0, 10, 10, 30);
-      robot.Sleep(1000 * 1);
-      robot.ExtAxisStopJog(2);
-      robot.Sleep(1000 * 3);
-      robot.ExtAxisServoOn(2, 0);
-      robot.ExtDevUnloadUDPDriver();
-      robot.CloseRPC();
-      return 0;
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        rtn = robot.ExtDevSetUDPComParam("192.168.58.88", 2021, 2, 100, 3, 200, 1, 100, 5, 1);
+        cout << "ExtDevSetUDPComParam rtn is " << rtn << endl;
+        string ip = ""; int port = 0; int period = 0; int lossPkgTime = 0; int lossPkgNum = 0; int disconnectTime = 0; int reconnectEnable = 0; int reconnectPeriod = 0; int reconnectNum = 0; int selfConnect = 0;
+        rtn = robot.ExtDevGetUDPComParam(ip, port, period, lossPkgTime, lossPkgNum, disconnectTime, reconnectEnable, reconnectPeriod, reconnectNum, selfConnect);
+        string patam = "\nip " + ip + "\nport " + to_string(port) + "\nperiod  " + to_string(period) + "\nlossPkgTime " + to_string(lossPkgTime) + "\nlossPkgNum  " + to_string(lossPkgNum) + "\ndisConntime  " +
+            to_string(disconnectTime) + "\nreconnecable  " + to_string(reconnectEnable) + "\nreconnperiod  " + to_string(reconnectPeriod) + "\nreconnnun  " + to_string(reconnectNum) + "\nselfConnect  " + to_string(selfConnect);
+        cout << "ExtDevGetUDPComParam rtn is " << rtn << patam << endl;
+        robot.ExtDevLoadUDPDriver();
+        rtn = robot.SetExAxisCmdDoneTime(5000.0);
+        cout << "SetExAxisCmdDoneTime rtn is " << rtn << endl;
+        rtn = robot.ExtAxisServoOn(1, 1);
+        cout << "ExtAxisServoOn axis id 1 rtn is " << rtn << endl;
+        rtn = robot.ExtAxisServoOn(2, 1);
+        cout << "ExtAxisServoOn axis id 2 rtn is " << rtn << endl;
+        robot.Sleep(2000);
+        robot.ExtAxisSetHoming(1, 0, 10, 2);
+        robot.Sleep(2000);
+        rtn = robot.ExtAxisSetHoming(2, 0, 10, 2);
+        cout << "ExtAxisSetHoming rtnn is  " << rtn << endl;
+        robot.Sleep(4000);
+        rtn = robot.SetRobotPosToAxis(1);
+        cout << "SetRobotPosToAxis rtn is " << rtn << endl;
+        rtn = robot.SetAxisDHParaConfig(10, 20, 0, 0, 0, 0, 0, 0, 0);
+        cout << "SetAxisDHParaConfig rtn is " << rtn << endl;
+        int axisType = -1;
+        int axisDirection = -1;
+        double axisMax = -1;
+        double axisMin = -1;
+        double axisVel = -1;
+        double axisAcc = -1;
+        double axisLead = -1;
+        int encResolution = -1;
+        double axisOffect = -1;
+        int axisCompany = -1;
+        int axisModel = -1;
+        int axisEncType = -1;
+        rtn = robot.ExtAxisParamConfig(1, 1, 1, 1000, -1000, 1000, 1000, 1.905, 262144, 200, 1, 0, 0);
+        cout << "ExtAxisParamConfig axis 1 rtn is " << rtn << endl;
+        rtn = robot.ExtAxisGetParamConfig(1, axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc, axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType);
+        printf("axis id 1 ExtAxisGetParamConfig : axisType %d, axisDirection %d, axisMax %lf, axisMin %lf, axisVel %lf, axisAcc %lf, axisLead%lf, encResolution %d, axisOffect %f, axisCompany %d, axisModel %d, axisEncType %d\n",
+            axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc, axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType);
+            rtn = robot.ExtAxisParamConfig(2, 1, 1, 1000, -1000, 1000, 1000, 4.444, 262144, 200, 1, 0, 0);
+        cout << "ExtAxisParamConfig axis 2 rtn is " << rtn << endl;
+        rtn = robot.ExtAxisGetParamConfig(2, axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc, axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType);
+        printf("axis id 2 ExtAxisGetParamConfig : axisType %d, axisDirection %d, axisMax %lf, axisMin %lf, axisVel %lf, axisAcc %lf, axisLead%lf, encResolution %d, axisOffect %f, axisCompany %d, axisModel %d, axisEncType %d\n",
+            axisType, axisDirection, axisMax, axisMin, axisVel, axisAcc, axisLead, encResolution, axisOffect, axisCompany, axisModel, axisEncType);
+        robot.Sleep(1000 * 3);
+        robot.ExtAxisStartJog(1, 0, 10, 10, 30);
+        robot.Sleep(1000 * 1);
+        robot.ExtAxisStopJog(1);
+        robot.Sleep(1000 * 3);
+        robot.ExtAxisServoOn(1, 0);
+        robot.Sleep(1000 * 3);
+        robot.ExtAxisStartJog(2, 0, 10, 10, 30);
+        robot.Sleep(1000 * 1);
+        robot.ExtAxisStopJog(2);
+        robot.Sleep(1000 * 3);
+        robot.ExtAxisServoOn(2, 0);
+        robot.Sleep(1000 * 1);
+        robot.ExtDevUnloadUDPDriver();
+        robot.CloseRPC();
+        return 0;
     }
 
 Set Extended Axis Coordinate System Reference Point - Four-Point Method

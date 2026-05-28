@@ -2126,6 +2126,185 @@ Take the "testWeld" program as an example. Switch the robot to automatic mode, c
 .. warning::
    The collaborative robot welding interruption recovery function can only be used for linear welds or circular arc welds. When using a while (1) loop for welding, nested multi-layer while loops are not supported, and conditional judgment statements containing local variables cannot be included. If using stitch welding function, please pay attention to adding the interface for feedback stitch welding information.
 
+Robot Laser Welding Machine Communication Adaptation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Background
+++++++++++++++++++++++++++++++++++++++++++++
+
+This user manual only explains using the currently adapted laser welding machine REDSABERE 1500 as an example. The robot performs welding control through the "Digital Communication Protocol". Essentially, the robot communicates with the PLC via UDP. The robot transmits control data to the PLC through UDP communication, and the PLC further controls the laser welding machine via Modbus RTU. At the same time, the PLC collects actual laser welding process parameters and control signals and feeds them back to the robot. The content of the robot's UDP communication protocol is provided in Appendix I.
+
+PLC Configuration
+++++++++++++++++++++++++++++++++++++++++++++
+
+.. list-table:: 
+   :widths: 25 25 25 25
+   :header-rows: 1
+
+   * - Brand
+     - Model
+     - Software
+     - IP Address
+   * - Inovance
+     - EASY521-0808TN
+     - AutoShopV4.11.0.1
+     - 192.168.58.88
+			
+Program Download: Open the test program. The default PLC IP address is "192.168.1.88". Change the PLC IP address to "192.168.58.88".
+
+Click the test button to establish communication with the current PLC, as shown in the figure below;
+
+.. figure:: robot_peripherals/293.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-37 PLC Communication Connection
+
+After successfully connecting to the current PLC, modify the IP address as shown below;
+
+.. figure:: robot_peripherals/294.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-38 PLC IP Address Modification
+
+Change to 192.168.58.88, and change the default gateway to 192.168.58.1, as shown below;
+
+.. figure:: robot_peripherals/295.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-39 PLC Gateway Address Modification
+
+Change the local IP address of the computer to the 58 network segment, then click the test button again to verify whether the communication is successful, as shown below;
+
+.. figure:: robot_peripherals/296.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-40 PLC Connection Test
+
+Click the download button to download the program, as shown below.
+
+.. figure:: robot_peripherals/297.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-41 PLC Program Download
+
+Laser Welding Machine Parameter Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The collaborative robot controls the welding process through the "Digital Communication Protocol". When using the "Digital Communication Protocol", the communication parameters must be configured first.
+
+"Digital Communication Protocol" Configuration
+*************************************************************************************
+
+As shown in the figure below, open the WebApp and click sequentially: "Initial Settings", "Peripherals", "Welding Machine", "Laser Welding", "Digital Communication Protocol (UDP)", "UDP Communication Configuration".
+
+.. figure:: robot_peripherals/298.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-42 Communication Protocol Configuration
+
+The meanings of the parameters are as follows:
+
+- **IP Address**: IP address of the PLC for UDP communication;
+- **Port Number**: UDP communication port number of the PLC;
+- **Communication Period**: The period of UDP communication between the robot and the PLC, default is 2ms;
+- **Packet Loss Detection Period, Packet Loss Count**: When the number of packet losses within the packet loss detection period exceeds the set value, the robot reports a "UDP communication packet loss anomaly" error and automatically cuts off the communication;
+- **Communication Interruption Confirmation Time**: If the robot does not receive a complete PLC feedback data packet within this time, it reports a "UDP communication interruption" error alarm and cuts off UDP communication;
+- **Automatic Reconnection upon Communication Interruption**: Whether the robot automatically tries to reconnect after detecting a UDP communication interruption;
+- **Reconnection Period, Reconnection Count**: When automatic reconnection upon communication interruption is enabled and a UDP communication interruption is detected, the robot attempts to reconnect at the set period. If the connection is still not successful after the maximum set number of reconnection attempts, the robot reports a "UDP communication interruption" error alarm and cuts off UDP communication.
+
+After configuring the above parameters, click the "Configure" and "Load" buttons accordingly.
+
+Welding Function IO Configuration
+*************************************************************************************
+
+As shown below, select the DI input port for the welding machine status signal and the DO output port for the welding machine control signal. Currently, the REDSABERE 1500 laser welding machine only supports the welding start (laser emission) signal; other signals are not yet adapted. After selecting the ports, click the "Configure" button to configure.
+
+.. figure:: robot_peripherals/299.png
+   :align: center
+   :width: 4in 
+
+.. centered:: Figure 8.6-43 Configure Welding Function IO
+
+The meanings of AUX-DI signals are as follows:
+
+- **Welder Ready**: When the welding machine is ready for welding operations, it outputs this signal to the robot; when the welding machine is faulty or not ready for other reasons, this signal is not sent to the robot, and the top right corner of the robot WebApp will show "Welder not ready". The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+- **Welder Running Status**: When the welding machine enters the running state, it outputs this signal to the robot. The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+- **Welder Fault Status**: When the welding machine has a fault, it inputs this signal to the robot. The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+
+The meanings of AUX-DO signals are as follows:
+
+- **Welder Enable**: The DO output port for the robot to control the welding machine enable. When the robot program executes the welding machine enable command, the corresponding DO output port for welder enable automatically becomes active. The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+- **Welding Start (Laser Emission)**: The DO output port for the robot to control welding start (laser emission). When the robot program executes the welding start (laser emission) command, the corresponding DO output port for welding start (laser emission) automatically becomes active. When modifying the DO output port, the corresponding control port in the PLC program must also be modified; currently, the PLC defaults to DO1.
+- **Gas Detection**: The DO output port for the robot to control the welding machine gas supply. When the robot executes the welding gas supply command, the corresponding DO output port for gas supply automatically becomes active. The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+- **Welder Fault Reset**: The DO output port for the robot to control the welding machine fault reset. When the robot program executes the welding machine fault reset command, the corresponding DO output port for welder fault reset automatically becomes active. The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+- **Forward Wire Feed**: The DO output port for the robot to control the forward wire feed of the welding machine. When the robot executes the forward wire feed command, the corresponding DO output port for forward wire feed automatically becomes active. The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+- **Reverse Wire Feed**: The DO output port for the robot to control the reverse wire feed of the welding machine. When the robot executes the reverse wire feed command, the corresponding DO output port for reverse wire feed automatically becomes active. The REDSABERE 1500 laser welding machine does not support this signal and it has not been adapted yet.
+
+Welding Process Parameter Configuration
+*************************************************************************************
+
+As shown below, find the "Welding Process Parameters" section on the welding configuration page. The collaborative robot provides 10 groups of welding process parameters from 0 to 10. Process number 0 indicates not using the welding process curve, while process numbers 1-10 use the welding process curve.
+
+.. figure:: robot_peripherals/300.png
+   :align: center
+   :width: 4in 
+
+.. centered:: Figure 8.6-44 Welding Process Parameter Configuration
+
+When using the welding process curve, take welding process number 1 as an example. Input "Scanning Speed (mm/s)", "Scanning Width (mm)", "Peak Power (W)", "Duty Cycle (%)", and "Frequency (Hz)" in sequence.
+
+The scanning speed of the REDSABERE 1500 laser welding machine is limited by the scanning width. The constraint relationship is: 10 ≤ Scanning Speed / (Scanning Width × 2) ≤ 500. Values outside this range will automatically be changed to the limit values. When the scanning width is set to 0, no scanning occurs (i.e., point light source). Otherwise, an error will be reported, and the web interface will display "Welding machine communication abnormality". Once the configuration is correct, the error will automatically disappear. As shown below.
+
+.. figure:: robot_peripherals/301.png
+   :align: center
+   :width: 3in 
+
+.. centered:: Figure 8.6-45 Welding Machine Communication Abnormality
+
+Welding Machine Debugging
+*************************************************************************************
+
+As shown below, find "Welding Machine Debugging" on the welding machine configuration page. Currently, the REDSABERE 1500 laser welding machine only supports debugging of the laser emission stop and laser emission start functions. Other buttons such as "Timeout Time" and "Enable" have not been adapted yet.
+
+.. figure:: robot_peripherals/302.png
+   :align: center
+   :width: 4in 
+
+.. centered:: Figure 8.6-46 Welding Machine Debugging
+
+Welding Program Writing
+++++++++++++++++++++++++++++++++++++++++++++
+
+Welding function instructions are integrated into the teaching program. As shown below, click "Teaching Program", "Program Programming" to create a new user program "testWeld.lua".
+
+.. figure:: robot_peripherals/303.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-47 Create "testWeld.lua" Program
+
+As shown below, select "Welding Instructions" and click "Laser Welding".
+
+.. figure:: robot_peripherals/304.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-48 Laser Welding Related Instructions
+
+As shown below, the default control type for laser welding instructions is "Digital Communication Protocol (UDP)". You can sequentially add instructions for setting welding process parameters (Lua program), getting welding process parameters (Lua program), laser emission start, and laser emission stop. After adding the Lua instructions, click the "Apply" button to generate the laser welding Lua program. Click the "Save" button, switch to automatic mode, and run the program.
+
+.. figure:: robot_peripherals/305.png
+   :align: center
+   :width: 6in 
+
+.. centered:: Figure 8.6-49 Generate Welding Program
+
 Attachment 1: Robot UDP Communication Protocol
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2412,80 +2591,80 @@ Robot Controller -> PLC
    * - 44
      - D242
      - INT
-     -
-     - 4# Motor Control Word
-
+     - 
+     - Scanning speed (laser welding machine)
+  
    * - 45
      - D243
      - DINT
-     -
-     - 4# Target Position Input
+     - 
+     - Scanning width (laser welding machine)
 
    * - 46
      - D244
      - DINT
-     -
-     - 4# Target Position Input
+     - 
+     - Peak power (laser welding machine)
 
    * - 47
      - D245
      - INT
-     -
-     - 4# Homing Control Word
+     - 
+     - Duty cycle (laser welding machine)
 
    * - 48
      - D246
      - DINT
-     -
-     - 4# Homing High Speed Input
+     - 
+     - Scanning frequency (laser welding machine)
 
    * - 49
      - D247
      - DINT
-     -
-     - 4# Homing High Speed Input
+     - 
+     - Scanning frequency (laser welding machine)
 
    * - 50
      - D248
      - DINT
-     -
-     - 4# Homing Low Speed Input
+     - 
+     - Laser welding machine reserved
 
    * - 51
      - D249
      - DINT
-     -
-     - 4# Homing Low Speed Input
+     - 
+     - Laser welding machine reserved
 
    * - 52
      - D250
      - DINT
-     -
-     - 4# Position Offset (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 53
      - D251
      - DINT
-     -
-     - 4# Position Offset (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 54
      - D252
      - DINT
-     -
-     - 4# Speed Offset (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 55
      - D253
      - DINT
-     -
-     - 4# Speed Offset (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 56
      - D254
      - INT
-     -
-     - Reserved
+     - 
+     - Laser welding machine reserved
 
    * - 57
      - D255
@@ -2714,14 +2893,14 @@ PLC -> Robot Controller
    * - 15
      - D113
      - DINT
-     -
-     - 1# Real-time Torque (Reserved)
+     - 
+     - 1# Real-time torque (reserved) Transmit the motor torque to the host computer after multiplying the output value after the reduction ratio by 100
 
    * - 16
      - D114
      - DINT
-     -
-     - 1# Real-time Torque (Reserved)
+     - 
+     - 1# Real-time torque (reserved) Transmit the motor torque to the host computer after multiplying the output value after the reduction ratio by 100
 
    * - 17
      - D115
@@ -2906,92 +3085,92 @@ PLC -> Robot Controller
    * - 47
      - D145
      - INT
-     -
-     - 4# Motor Status Word
+     - 
+     - Scanning speed (laser welding machine)
 
    * - 48
      - D146
      - DINT
-     -
-     - 4# Current Position
+     - 
+     - Scanning width (laser welding machine)
 
    * - 49
      - D147
      - DINT
-     -
-     - 4# Current Position
+     - 
+     - Peak power (laser welding machine)
 
    * - 50
      - D148
      - INT
-     -
-     - 4# Homing Status Word
+     - 
+     - Duty cycle (laser welding machine)
 
    * - 51
      - D149
      - DINT
-     -
-     - 4# Homing High Speed Feedback
+     - 
+     - Scanning frequency (laser welding machine)
 
    * - 52
      - D150
      - DINT
-     -
-     - 4# Homing High Speed Feedback
+     - 
+     - Scanning frequency (laser welding machine)
 
    * - 53
      - D151
      - DINT
-     -
-     - 4# Homing Low Speed Feedback
+     - 
+     - Laser welding machine reserved
 
    * - 54
      - D152
      - DINT
-     -
-     - 4# Homing Low Speed Feedback
+     - 
+     - Laser welding machine reserved
 
    * - 55
      - D153
      - DINT
-     -
-     - 4# Fault Code
+     - 
+     - Laser welding machine reserved
 
    * - 56
      - D154
      - DINT
-     -
-     - 4# Following Deviation (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 57
      - D155
      - DINT
-     -
-     - 4# Following Deviation (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 58
      - D156
      - DINT
-     -
-     - 4# Speed Feedback (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 59
      - D157
      - DINT
-     -
-     - 4# Speed Feedback (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 60
      - D158
      - DINT
-     -
-     - Real-time Torque (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 61
      - D159
      - DINT
-     -
-     - Real-time Torque (Reserved)
+     - 
+     - Laser welding machine reserved
 
    * - 62
      - D160
@@ -3121,7 +3300,7 @@ In the Open Protocol Configuration, click the "Upload" button to upload the comp
    :align: center
    :width: 4in
 
-.. centered:: Chart 8.6‑37 Controller Peripheral Open Protocol Upload and Configuration
+.. centered:: Chart 8.6‑50 Controller Peripheral Open Protocol Upload and Configuration
 
 In the configured protocol list, click the "Load" button. The running status indicator lights up, indicating that the open protocol has been loaded successfully.
 
@@ -3129,7 +3308,7 @@ In the configured protocol list, click the "Load" button. The running status ind
    :align: center
    :width: 4in
 
-.. centered:: Chart 8.6-38 Controller Peripheral Open Protocol Loading and Running Indication
+.. centered:: Chart 8.6-51 Controller Peripheral Open Protocol Loading and Running Indication
 
 Welder Open Protocol
 ++++++++++++++++++++++++++++++++++++++++++

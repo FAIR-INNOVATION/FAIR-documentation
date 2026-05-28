@@ -13,6 +13,29 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V3.9.6
+     - 2026-05-26
+     - | 1.Updated robot status feedback structure, added extension axis coordinate system number status;
+       | 2.Updated robot status feedback configuration enumeration type, added extension axis coordinate system number configuration enumeration;
+       | 3.Added ExtAxisGetParamConfig() interface to get UDP extension axis parameter configuration;
+       | 4.Added ServoJV() interface for robot joint space velocity servo mode motion;
+       | 5.Added ServoMITStart() interface for robot joint MIT control start;
+       | 6.Added ServoMITEnd() interface for robot joint MIT control end;
+       | 7.Added ServoMIT() interface for robot joint MIT control;
+       | 8.Added SetLaserWeldingParam() interface for robot laser welding parameter configuration;
+       | 9.Added SetLaserWeldingStartEnd() interface to set robot laser welding start/stop;
+       | 10.Added SetLaserWeldingEnable() interface to set laser welding machine enable/disable;
+       | 11.Added ResetLaserWeldingErr() interface to set laser welding machine fault reset;
+       | 12.Added GetLaserWeldingRunningState() interface to get laser welding machine running status;
+       | 13.Added GetLaserWeldingErrState() interface to get laser welding machine fault status;
+       | 14.Added GetLaserWeldingParamTarget() interface to get laser welding configuration parameters;
+       | 15.Added GetLaserWeldingParamActual() interface to get the currently active configuration parameters of the laser welding machine;
+       | 16.Added SetLaserWeldingEnableExtDoNum() interface to configure the extended IO enable DO port of the laser welding machine;
+       | 17.Added SetLaserWeldingStartExtDoNum() interface to configure the extended IO start DO port of the laser welding machine;
+       | 18.Added SetLaserWeldingErrResetExtDoNum() interface to configure the extended IO fault reset DO port of the laser welding machine;
+       | 19.Added SetLaserWeldingRunningStateExtDiNum() interface to configure the extended IO running status (laser on status) DI port of the laser welding machine;
+       | 20.Added SetLaserWeldingErrStateExtDiNum() interface to configure the extended IO fault status DI port of the laser welding machine.
+   
    * - V3.9.5
      - 2026-04-24
      - | 1.SetTrajectoryJSpeed() interface adds two modes: speed reduction mode and direct switching;

@@ -1482,3 +1482,242 @@ Custom Weaving Parameters Code Example
 
        robot.CloseRPC();
    }
+
+Laser Welding Machine Parameter Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Laser welding machine parameter configuration
+    * @param  io_type Communication type 0-IO 1-UDP
+    * @param  num Group number to set (1~10)
+    * @param  scanSpeed Scanning speed
+    * @param  scanWidth Scanning width
+    * @param  peakPower Peak power
+    * @param  dutyCycle Duty cycle
+    * @param  freq Frequency
+    * @return Error code
+    */
+    public int SetLaserWeldingParam(int io_type, int num, int scanSpeed, int scanWidth, int peakPower, int dutyCycle, int freq);
+
+Start/Stop Laser Welding
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Start/stop laser welding
+    * @param io_type Communication type 0-IO 1-UDP
+    * @param status Control word 0-laser off 1-laser on
+    * @param max_waittime Maximum wait time in milliseconds, default 10000
+    * @return Error code
+    */
+    public int SetLaserWeldingStartEnd(int io_type, int status, int max_waittime)
+
+Enable/Disable Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Enable/disable laser welding machine
+    * @param io_type Communication type 0-IO 1-UDP
+    * @param status 0-disable 1-enable
+    * @return Error code
+    */
+    public int SetLaserWeldingEnable(int io_type, int status)
+
+Laser Welding Machine Fault Reset
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Laser welding machine fault reset
+    * @param io_type Communication type 0-IO 1-UDP
+    * @param status Control word 0-invalid 1-fault reset
+    * @return Error code
+    */
+    public int ResetLaserWeldingErr(int io_type, int status)
+
+Get Laser Welding Machine Running Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get laser welding machine running status
+    * @param io_type Communication type 0-IO 1-UDP
+    * @param  status Control word 0-stopped 1-running
+    * @return Error code
+    */
+    public int GetLaserWeldingRunningState(int io_type, int[] status)
+
+Get Laser Welding Machine Fault Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get laser welding machine fault status
+    * @param io_type Communication type 0-IO 1-UDP
+    * @param  status 0-no fault 1-fault present
+    * @return Error code
+    */
+    public int GetLaserWeldingErrState(int io_type, int[] status)
+
+Get Laser Welding Machine Configuration Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get configuration parameters of one of the 10 process groups of the laser welding machine
+    * @param num Group number to set (1~10)
+    * @param params Output parameter array: [scanSpeed, scanWidth, peakPower, dutyCycle, freq]
+    * @return Error code
+    */
+    public int GetLaserWeldingParamTarget(int num, int[] params)
+
+Get Currently Active Configuration Parameters of Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get currently active configuration parameters of the laser welding machine
+    * @param io_type Communication type 0-IO 1-UDP
+    * @param params Output parameter array: [scanSpeed, scanWidth, peakPower, dutyCycle, freq]
+    * @return Error code
+    */
+    public int GetLaserWeldingParamActual(int io_type, int[] params)
+
+Configure Extended IO Enable DO Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Configure extended IO enable DO port for laser welding machine
+    * @param ctrlModeDONum Extended DO port number for laser welding machine enable
+    * @return Error code
+    */
+    public int SetLaserWeldingEnableExtDoNum(int ctrlModeDONum)
+
+Configure Extended IO Start DO Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Configure extended IO start DO port for laser welding machine
+    * @param ctrlModeDONum Extended DO port number for laser welding machine start/stop
+    * @return Error code
+    */
+    public int SetLaserWeldingStartExtDoNum(int ctrlModeDONum)
+
+Configure Extended IO Fault Reset DO Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Configure extended IO fault reset DO port for laser welding machine
+    * @param ctrlModeDONum Extended DO port number for laser welding machine fault reset
+    * @return Error code
+    */
+    public int SetLaserWeldingErrResetExtDoNum(int ctrlModeDONum)
+
+Configure Extended IO Running Status (Laser On Status) DI Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Configure extended IO running status (laser on status) DI port for laser welding machine
+    * @param diNum Extended DI port number for laser welding machine running status (laser on status)
+    * @return Error code, 0 indicates success, non-zero indicates failure
+    */
+    public int SetLaserWeldingRunningStateExtDiNum(int diNum);
+
+Configure Extended IO Fault Status DI Port for Laser Welding Machine
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Configure extended IO fault status DI port for laser welding machine
+    * @param diNum Extended DI port number for laser welding machine fault status
+    * @return Error code, 0 indicates success, non-zero indicates failure
+    */
+    public int SetLaserWeldingErrStateExtDiNum(int diNum);
+
+Laser Welding Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int testLsaerWeld(Robot robot) {
+        int rtn = -1;
+        rtn = robot.ExtDevLoadUDPDriver();
+        if (rtn != 0) {
+            System.out.println("Failed to load UDP driver, error code: " + rtn);
+        }
+        robot.Sleep(1000);
+        rtn = robot.SetLaserWeldingParam(1, 3, 2000, 3, 1500, 100, 1000);
+        if (rtn != 0) {
+            System.out.println("SetLaserWeldingParam failed, error code: " + rtn);
+        } else {
+            System.out.println("SetLaserWeldingParam success");
+        }
+        rtn = robot.SetLaserWeldingStartExtDoNum(1);
+        if (rtn != 0) {
+            System.out.println("SetLaserWeldingStartExtDoNum failed, error code: " + rtn);
+        }
+        rtn = robot.Mode(0);
+        if (rtn != 0) {
+            System.out.println("Set mode 0 failed, error code: " + rtn);
+        }
+        robot.Sleep(1000);
+        DescPose desc_pos1 = new DescPose(-303.721, -206.960, 297.105, 152.209, 19.857, 109.166);
+        DescPose desc_pos2 = new DescPose(-301.575, -254.888, 284.786, 155.919, 26.946, 111.629);
+        DescPose desc_safe = new DescPose(-344.386, -280.830, 435.073, 173.835, 15.333, 124.931);
+
+        JointPos jointPos1 = new JointPos(9.827, -99.740, 120.088, -78.900, -77.241, -17.904);
+        JointPos jointPos2 = new JointPos(15.251, -96.456, 120.138, -84.664, -68.542, -17.843);
+        JointPos jointSafe = new JointPos(19.142, -98.078, 101.493, -83.078, -77.070, -17.794);
+
+        ExaxisPos exaxis = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+        DescPose offset = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        int error = robot.MoveL(desc_pos1, 0, 0, 100, 100, 100, -1, 0, exaxis, 0, 0, offset, -1, 0,0,0);
+        System.out.println("MoveL to pos1 return: " + error);
+        rtn = robot.SetLaserWeldingStartEnd(1, 1, 10000);
+        if (rtn != 0) {
+            System.out.println("SetLaserWeldingStartEnd (start) failed, error code: " + rtn);
+        } else {
+            System.out.println("Laser started");
+        }
+        rtn = robot.MoveL(desc_pos2, 0, 0, 30, 100, 100, -1, 0, exaxis, 0, 0, offset, -1, 0,0, 0);
+        System.out.println("MoveL to pos2 return: " + rtn);
+        rtn = robot.SetLaserWeldingStartEnd(1, 0, 10000);
+        if (rtn != 0) {
+            System.out.println("SetLaserWeldingStartEnd (stop) failed, error code: " + rtn);
+        } else {
+            System.out.println("Laser stopped");
+        }
+        robot.Sleep(500);
+        rtn = robot.MoveL(desc_safe, 0, 0, 100, 100, 100, -1, 0, exaxis, 0, 0, offset, -1, 0,0,0);
+        System.out.println("MoveL to safe_pos return: " + rtn);
+        rtn = robot.Mode(1);
+        if (rtn != 0) {
+            System.out.println("Set mode 1 failed, error code: " + rtn);
+        }
+        robot.Sleep(1000);
+        robot.CloseRPC();
+        robot.Sleep(1000);
+
+        System.out.println("Test completed");
+
+        return 0;
+    }

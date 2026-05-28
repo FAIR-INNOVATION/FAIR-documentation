@@ -311,6 +311,7 @@ If time loss occurs (i.e., incorrect date displayed after powering on again), it
    * - Battery not installed or installed backwards
      - The user has not installed the backup battery, or the positive and negative terminals are reversed during installation.
      - | Confirm that the battery is installed with the correct polarity (positive terminal facing up).
+       
        .. image:: installation/131.png
           :width: 2in
           :align: center

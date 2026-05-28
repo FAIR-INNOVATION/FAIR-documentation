@@ -173,3 +173,6 @@ Error Code Comparison Table
     "202","Interfere configuration file check failed","Please check the Interfere configuration file"
     "203","End 485 communication abnormality","Please check the end 485 communication"
     "204","Command queue is full","Please check the command sending frequency"
+    "205","End protocol already configured","Please disable the end protocol first"
+    "206","Adapted protocol already configured","Please clear the currently adapted device first"
+    "207","Automatic mode safety stop requires teach pendant three-position enable","Please check the teach pendant"

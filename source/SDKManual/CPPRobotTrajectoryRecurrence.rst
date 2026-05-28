@@ -257,7 +257,7 @@ Get Trajectory Point Number
     errno_t  GetTrajectoryPointNum(int *pnum);
 
 Set Speed During Trajectory Execution
-++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
