@@ -261,6 +261,20 @@ Ontology & Dimensional Drawings
 
     :download:`FR30 Drawings <_static/_doc/FR30 Drawings.zip>`
 
+Zero position identification model
+---------------------------------------
+    :download:`FR3 <_static/_doc/FR3-V6.0-SW Model.zip>`
+    
+    :download:`FR5 <_static/_doc/FR5-V6.0-SW Model.zip>`
+
+    :download:`FR10 <_static/_doc/FR10-V6.0-SW Model.zip>`
+
+    :download:`FR16 <_static/_doc/FR16-V6.0-SW Model.zip>`
+
+    :download:`FR20 <_static/_doc/FR20-V6.0-SW Model.zip>`
+
+    :download:`FR30 <_static/_doc/FR30-V6.0-SW Model.zip>`
+
 2D CAD Files
 ---------------------------------
     :download:`FRCobots-V6.0 DWG Format <_static/_doc/FRCobots-V6.0 DWG Models.zip>`

@@ -12,8 +12,9 @@ Setting the default job program to load automatically on boot
 
     "Prototype", "``LoadDefaultProgConfig(flag,program_name)``"
     "Description", "Sets the default job program to be automatically loaded on boot"
-    "Required parameters","- ``flag``: 1-automatically load the default program on power-up, 0-don't automatically load the default program
-    - ``program_name``: the name of the job program and its path, e.g. “/fruser/movej.lua”, where /fruser/ is the fixed path for QX, and /usr/local/etc/controller/lua/ is the fixed path for LA"
+    "Required parameters","
+    - ``flag``: 1-automatically load the default program on power-up, 0-don't automatically load the default program
+    - ``program_name``: the name of the job program and its path, e.g. “movej.lua”"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -25,7 +26,7 @@ Load the specified job program
 
     "Prototype", "``ProgramLoad(program_name)``"
     "Description", "Load the specified job program."
-    "Mandatory parameters", "- ``program_name``: name of the job program and path, e.g. “/fruser/movej.lua”, where /fruser/ is the fixed path for QX, and /usr/local/etc/controller/lua/ is the fixed path for LA"
+    "Mandatory parameters", "- ``program_name``: name of the job program and path, e.g. “movej.lua”"
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
@@ -125,7 +126,7 @@ Robot LUA program operation code example
     import time
     # Establish a connection with the robot controller and return a robot object if the connection is successful
     robot = Robot.RPC('192.168.58.2')
-    program_name = "/fruser/test0610.lua"
+    program_name = "test0610.lua"
     loaded_name = ""
     state = 0
     line = 0
