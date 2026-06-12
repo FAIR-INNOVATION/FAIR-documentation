@@ -1,5 +1,5 @@
-Custom protocol slave commands
-================================================
+Robot Slave Mode
+===============================================================
 
 .. toctree:: 
    :maxdepth: 6
@@ -7,15 +7,16 @@ Custom protocol slave commands
 Overview
 -------------------
 
-Industrial Bus Protocol Integration for Robot Motion Control
------------------------------------------------------------------
+To facilitate PLC control of robot motion through different industrial bus protocols (CC-Link, Profinet, Ethernet/IP, EtherCAT), FRJ-PCIeN-EIP/CC/PN-RJ-V10 board and FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board devices are added to the integrated mini control box. The robot slave mode is developed to achieve the following functions:
 
-To facilitate PLC-based robot motion control through various industrial bus protocols (CC-Link IEF Basic, Profinet, Ethernet/IP, and EtherCAT), the integrated mini control cabinet has been equipped with FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 cards, FRJ-PCIeN-EIP/CC/PN-RJ-V10 cards, and FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 cards.
+- 1. The master device sends input signals to the robot slave to control the robot to perform corresponding actions, for example: controlling the output of the robot control box DO, controlling robot motion, etc.;
+
+- 2. The master device reads the value of the corresponding address to obtain the corresponding robot real-time status data, for example: robot joint data, TCP position, whether the robot has moved to the target position, etc.
 
 Environment Configuration
 --------------------------
 
-The required card models and software versions are as follows:
+The board model and software version are described as follows:
 
 .. list-table:: 
    :widths: 20 50 30
@@ -32,7 +33,7 @@ The required card models and software versions are as follows:
 
    * - CC-Link IEF Basic
      - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
-     - V3.9.5 and above
+     - V3.9.6 and above
 
    * - Profinet
      - FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
@@ -40,7 +41,7 @@ The required card models and software versions are as follows:
 
    * - Profinet
      - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
-     - V3.9.5 and above
+     - V3.9.6 and above
 
    * - Ethernet/IP
      - FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
@@ -48,273 +49,280 @@ The required card models and software versions are as follows:
 
    * - Ethernet/IP
      - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
-     - V3.9.5 and above
+     - V3.9.6 and above
 
    * - EtherCAT
      - FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
-     - V3.9.5 and above
+     - V3.9.6 and above
 
-FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board hardware environment setup
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Board Installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Install the FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board into the integrated mini control box as shown.
+(1) Check materials: The appearance of the FRJ-PCIeN board and the accompanying sheet metal parts is shown below.
 
-.. image:: custom_protocol_slave/001.png
+.. image:: remote_mode/001.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-1 FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board installation
+.. centered:: Figure 19.2-1 Installation Sheet Metal (Front)
 
-.. image:: custom_protocol_slave/002.png
+.. image:: remote_mode/002.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-2 FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 board network port
+.. centered:: Figure 19.2-2 Installation Sheet Metal (Back)
 
-2. The robot control box and PLC wiring is shown below.
-
-.. image:: custom_protocol_slave/003.png
+.. image:: remote_mode/003.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-3 Control Box & Mitsubishi PLC Wiring Diagrams
+.. centered:: Figure 19.2-3 FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 Board
 
-.. image:: custom_protocol_slave/004.png
+.. image:: remote_mode/004.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-4 Control Box & Siemens PLC Wiring Diagrams
+.. centered:: Figure 19.2-4 FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
 
-.. image:: custom_protocol_slave/005.png
+(2) Install the board into the integrated mini control box as shown in the figure.
+
+.. image:: remote_mode/005.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-5 Control Box & Omron PLC Wiring Diagrams
+.. centered:: Figure 19.2-5 Sheet Metal Installation Diagram
 
-.. image:: custom_protocol_slave/006.png
+.. image:: remote_mode/008.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 17.2-6 Control Box & Omron PLC Wiring Diagrams
+.. centered:: Figure 19.2-6 Core Motherboard Installation Diagram
+
+.. image:: remote_mode/009.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 19.2-7 RJ45 Network Port Expansion Card Installation Diagram
+
+.. note:: Note: All screws must be tightened.
+
+(3) The wiring between the robot control box and the PLC is shown in the figure below.
+
+.. image:: remote_mode/010.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 19.2-8 Control Box & Mitsubishi PLC Wiring Diagram    
+
+.. image:: remote_mode/011.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 19.2-9 Control Box & Siemens PLC Wiring Diagram
+
+.. image:: remote_mode/012.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 19.2-10 Control Box & Inovance PLC Wiring Diagram
+
+.. image:: remote_mode/013.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 19.2-11 Control Box & Inovance PLC Wiring Diagram
 
 .. note:: 
-      1: Robot control box (board input network port);
-      2: Switch;
-      3: PC;
-      4: Mitsubishi PLC (CC-Link IEF Basic network port);
-      5: Siemens PLC (Profinet network port);
-      6: Omron PLC (Ethernet/IP network port);
-      7: Omron PLC (EtherCAT network port);
-
-.. important:: When the protocol is switched to EtherCAT bus, the board's network port needs to be distinguished as EtherCAT_IN and EtherCAT_OUT. At this time, the PLC's EtherCAT network port is directly connected to the board's EtherCAT_IN through a network cable.
-
-FRJ-PCIeN Board Hardware Setup
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Install the board into the integrated mini control box as shown.
-
-.. image:: custom_protocol_slave/044.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 17.2-7 FRJ-PCIeN Board Ethernet Port
-
-2. Wiring between robot control box and PLC is shown below.
-
-.. image:: custom_protocol_slave/003.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 17.2-8 Control Box & Mitsubishi PLC Wiring Diagram
-
-.. image:: custom_protocol_slave/004.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 17.2-9 Control Box & Siemens PLC Wiring Diagram
-
-.. image:: custom_protocol_slave/005.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 17.2-10 Control Box & Inovance PLC Wiring Diagram
-
-.. note:: 
-    1: Robot control box (board Ethernet port);
+    1: Robot control box (board network port);
     2: Switch;
     3: Laptop PC;
-    4: Mitsubishi PLC (CC-Link IEF Basic port);
-    5: Siemens PLC (Profinet port);
-    6: Inovance PLC (Ethernet/IP port);
+    4: Mitsubishi PLC (CC-Link IEF Basic network port);
+    5: Siemens PLC (Profinet network port);
+    6: Inovance PLC (Ethernet/IP);
+    7: Inovance PLC (EtherCAT network port);
+        
+PLC Environment Setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board Firmware Upgrade
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The test environment built to implement the slave commands of each protocol is shown in the following table, including the PLC model, firmware version and test software used in each protocol.
 
-When switching protocols on the board, a firmware upgrade is required. During the firmware upgrade, the IP address of the board and the IP address of the laptop PC must be configured on the same network segment. Then, open the "Gateway Tool Set" software -> select the PC network card device to be connected -> click the "Start" button in the lower right corner -> click the "Search" button in the upper right corner to search for the board device.
-
-.. image:: custom_protocol_slave/045.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 17.2-11 Connecting Board Device
-
-Click "Upgrade" (bottom left)
-   - Select board device
-   - Click "..." (top right) to choose protocol firmware
-   - Click "Upgrade" and wait for completion
-
-.. image:: custom_protocol_slave/046.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 17.2-12 Board Protocol Switching
-
-.. note:: IP address changes after protocol switching as shown below.
-
-.. centered:: Table 17.2-1 Board IP Addresses
+.. centered:: Table 2-1 Test Environment
 
 .. list-table:: 
-   :widths: 20 80
+   :widths: 20 40 40
    :header-rows: 1
    :align: center
 
-   * - **Protocol**
-     - **IP Address**
+   * - Protocol
+     - Profinet
+     - CC-link
 
-   * - CC-Link IEF Basic
-     - 192.168.0.113
+   * - Brand
+     - Siemens
+     - Mitsubishi
 
-   * - Ethernet/IP
-     - 192.168.0.112
+   * - Model
+     - CPU 1515-2 PN
+     - FX5S-30TR/DS
 
-   * - Profinet
-     - 192.168.0.2
+   * - Firmware
+     - 6ES75152AM020AB0
+     - 30MR/ES V1.3
 
-When configured for CC-Link IEF Basic, controller changes board IP to "192.168.0.113".
+   * - Software
+     - TIA Portal V17
+     - GXWorks3V1.097B
 
-When configured for Ethernet/IP, controller changes board IP to "192.168.0.112".
+   * - Board IP Address
+     - Configurable
+     - Configurable
 
-When switching to Profinet, if slave device name matches master, master will automatically configure slave IP.
+   * - PLC IP Address
+     - No need to be on the same subnet
+     - Same subnet
+		
+.. list-table:: 
+   :widths: 20 40 40
+   :header-rows: 1
+   :align: center
 
-Software environment setup
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   * - Protocol
+     - Ethernet/IP
+     - EtherCAT
 
-1. Browser IP input 192.168.58.2, account for admin, password for 123, click ‘Login’, enter the robot control box Web interface.
+   * - Brand
+     - Inovance
+     - Inovance
 
-.. image:: teaching_pendant_software/001.png
+   * - Model
+     - Easy521-0808TN
+     - Easy521-0808TN
+
+   * - Firmware
+     - /
+     - /
+
+   * - Software
+     - AutoShop 4.11.0.1
+     - AutoShop 4.11.0.1
+
+   * - Board IP Address
+     - Configurable
+     - Configurable
+
+   * - PLC IP Address
+     - Same subnet
+     - Same subnet
+		
+Inovance Ethernet/IP
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(1) Import EDS File
+
+Open Inovance programming software AutoShop, create a new PLC project, and select "EtherNet/IP Devices" in the toolbox on the right.
+
+Left-click "EtherNet/IP", then right-click to pop up the "Import EDS" dialog box. Left-click to confirm and find the folder containing the board EDS file. After successful import, the board name will appear under the "EtherNet/IP Devices" directory. Close the project and reopen it to complete the EDS file import.
+
+.. image:: custom_protocol_slave/001.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-14 Web Login Interface
+.. image:: custom_protocol_slave/002.png
+   :width: 6in
+   :align: center
 
-2. Click System Settings -> About Interface, click the Software Upgrade button, select the software.tar.gz file, and upload the upgrade package.
+(2) EtherNet/IP Parameter Settings
+
+Double-click the slave under "EtherNet/IP" in the left toolbar to pop up the parameter setting window:
+
+.. image:: custom_protocol_slave/003.png
+   :width: 6in
+   :align: center
+
+Fill in the board IP address:
+
+.. image:: custom_protocol_slave/004.png
+   :width: 6in
+   :align: center
+
+Click to select "Connection" to set the data input and output byte size:
+
+.. image:: custom_protocol_slave/005.png
+   :width: 6in
+   :align: center
+
+Click "Edit Connection" to enter the pop-up window, change both input and output bytes to 256:
+
+.. image:: custom_protocol_slave/006.png
+   :width: 6in
+   :align: center
+
+Click to select "Data Set", set the input and output data type to "INT", and the bit length to "2048":
+
+.. image:: custom_protocol_slave/007.png
+   :width: 6in
+   :align: center
 
 .. image:: custom_protocol_slave/008.png
-   :width: 4in
+   :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-15 Upgrade software
+.. image:: custom_protocol_slave/009.png
+   :width: 6in
+   :align: center
 
-.. note:: QX control box web version needs 3.8.0 and above, LA control box web version needs 3.8.0 and above.
-
-3. Click the extension button in the upper right corner and switch from 'Local Mode' to 'Remote Mode'.
+After successfully setting the "Data Set" parameters, click to select "EtherNet/IP I/O Mapping" and enter D0 and D200 respectively. D0 and D200 correspond to the start addresses of the receive and send arrays on the PLC side.
 
 .. image:: custom_protocol_slave/010.png
-   :width: 4in
+   :width: 6in
    :align: center
-
-.. centered:: Figure 17.2-16 Switch remote mode
-
-4. Select the controller slave protocol and whether the auto-start function is required, then click the "Set" button. Note: To switch between different protocols, you need to click the "Uninstall" button first before configuring other protocols.
 
 .. image:: custom_protocol_slave/011.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.2-17 Configure the communication protocol
+(3) Program Download
 
-.. note:: Switching different protocols requires restarting the control box before configuring the protocols.
-
-PLC Environment construction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The test environment built to implement the slave commands for each protocol is shown in the table below, which includes the PLC model, firmware version and test software used in each protocol.
-
-.. list-table:: 
-   :widths: 100 100 100 100 100
-   :header-rows: 1
-   :align: center
-
-   * - Protocol
-     - Brand
-     - Type
-     - Firmware
-     - Software
-  
-   * - Profinet
-     - Siemens
-     - CPU 1515-2 PN
-     - 6ES75152AM020AB0
-     - TIA Portal V17
-  
-   * - CC-Link IEF Basic
-     - Mitsubishi
-     - FX5S-30TR/DS
-     - 30MR/ES V1.3
-     - GX Works3 V1.097B
-  
-   * - Ethernet/IP
-     - Omron
-     - MX102-1100
-     - V1.3
-     - Sysmac Studio V1.50
-  
-   * - EtherCAT
-     - Omron
-     - MX102-1100
-     - V1.3
-     - Sysmac Studio V1.50
+Open the test program, modify the PLC IP address to be on the same subnet as the board, and run the program after downloading.
 
 Siemens Profinet
-++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. GSD file (XML file) importing
+(1) Import GSD File (XML File)
 
-Open Siemens programming software TIA Portal V17, create a new PLC project, select ‘Devices and Networks’, and select ‘Hardware Catalogue’ on the right side to add PLC module by double clicking 6ES7 515-2AM02-0AB0 to add PLC module.
+Open Siemens programming software TIA Portal V17, create a new PLC project, select "Devices & Networks", and double-click 6ES7 515-2AM02-0AB0 in the "Hardware Catalog" on the right to add the PLC module.
 
 .. image:: custom_protocol_slave/012.png
    :width: 6in
    :align: center
 
-In the TIA PORTAL software, select Options-> Manage Generic Station Description File (GSD) in the menu bar to install or remove a GSD file that has already been installed.
+In the TIA PORTAL software menu bar, select "Options" -> "Manage general station description files (GSD)" to install or delete installed GSD files.
 
 .. image:: custom_protocol_slave/013.png
    :width: 6in
    :align: center
 
-As an example, to install the Herschel GSD file, select ‘Manage Generic Station Description File (GSD)’ as above, and the ‘Manage Generic Station Description File’ window will appear.
+To install GSD files, select "Manage general station description files (GSD)" as above, and the "Manage general station description files" window appears.
 
-Select the folder where you want to install the GSD file from the ‘Source Path’, select one or more files to install from the list of displayed GSD files, and click the ‘Install’ button. Click the Install button as shown in the following figure.
+Select the folder containing the GSD files to be installed from the "Source path", select one or more files to install from the displayed list of GSD files, and click the "Install" button. As shown in the figure below.
 
 .. image:: custom_protocol_slave/014.png
    :width: 6in
    :align: center
 
-After successful installation, you can find the device with the installed GSD file in the hardware catalogue, other field devices, as shown in the figure below.
+After successful installation, the device with the installed GSD file can be found under "Other field devices" in the hardware catalog, as shown in the figure below.
 
 .. image:: custom_protocol_slave/015.png
-   :width: 4in
+   :width: 6in
    :align: center
 
-2. Executable programme
-
-Open the project ‘QNXtest’.
+Assign IO: Look for modules in the directory and drag Input and Output.
 
 .. image:: custom_protocol_slave/016.png
    :width: 6in
    :align: center
 
-Compiler: Double-click on the left side of the project tree to enter ‘Devices and Networks’, right-click on the ‘PLC_1’ module, select Compile from the drop-down menu, and then select ‘Hardware and Software (Changes Only)’ from the stand-alone menu. Hardware and Software (Changes Only)’. After the compilation is completed, it will prompt ‘Compilation complete’ at the bottom of the software view.
+Compile the program: Double-click to enter "Devices & Networks" in the left project tree, right-click the "PLC_1" module, select "Compile" from the drop-down menu, and click "Hardware and software (only changes)". After compilation is complete, "Compilation completed" will be displayed at the bottom of the software view:
 
 .. image:: custom_protocol_slave/017.png
    :width: 6in
@@ -324,13 +332,13 @@ Compiler: Double-click on the left side of the project tree to enter ‘Devices 
    :width: 6in
    :align: center
 
-Download the programme to the device: Double click on the left side of the project tree to enter the ‘Device and Network’, right click on the ‘PLC_1’ module, and select ‘Download to Device’ from the drop-down menu. ‘Download to Device’, “Hardware and Software (change only)”.
+Download the program to the device: Double-click to enter "Devices & Networks" in the left project tree, right-click the "PLC_1" module, select "Download to device" from the drop-down menu, and click "Hardware and software (only changes)":
 
 .. image:: custom_protocol_slave/019.png
    :width: 6in
    :align: center
 
-Search and download devices: After the pop-up window, configure the PG/PC interface type as shown in the following figure, click Start Search, select the device that needs to download the programme, and click Download.
+Search and download the device: After the pop-up window, configure the PG/PC interface type as shown below, click "Start search", select the device to which the program needs to be downloaded, and click "Download":
 
 .. image:: custom_protocol_slave/020.png
    :width: 6in
@@ -340,247 +348,147 @@ Search and download devices: After the pop-up window, configure the PG/PC interf
    :width: 6in
    :align: center
 
-Mitsubishi CC-Link IEF Basic
-++++++++++++++++++++++++++++++++++
+Mitsubishi CC-link
++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. CC-Link IEF Basic Setup
+(1) CC-Link IEF Basic Settings
 
-Enable CC-Link IEF Basic: Select ‘Ethernet Port’ in the left menu bar, set the ip address of PLC and make sure it is in the same network segment as the address of Huexun card. Click ‘CC-Link IEF Basic’ and select ‘Use’.
+Enable CC-link: Select "Ethernet Port" in the left navigation menu bar, set the PLC IP address to ensure it is on the same subnet as the Jiyuan board address. Click "Use CC-link IEF Basic" and select "Use":
 
 .. image:: custom_protocol_slave/022.png
    :width: 6in
    :align: center
 
-CC-Link IEF Basic Network Configuration Settings: Also in CC-Link IEF Basic Settings, select ‘Network Configuration Settings’, and choose Hueyoson CIFX Digital I/O module. Drag and drop the module to the bottom left of the view to complete the hardware configuration.
+CC-Link Network Configuration Settings: Also in CC-Link IEF Basic settings, select "Network Configuration Settings" and choose the CC-Link IEF Basic general module. Drag it to the lower left of the view to complete the hardware configuration:
 
 .. image:: custom_protocol_slave/023.png
    :width: 6in
    :align: center
-
-CC-Link IEF Basic Refresh Settings: Also in CC-Link IEF Basic Settings, click Refresh Settings to customise the transmission settings: 256 bytes receive, 256 bytes transmit.
-
+   
 .. image:: custom_protocol_slave/024.png
    :width: 6in
    :align: center
 
-2. Program Download
-
-After opening the test programme, click ‘Online’->‘Write to Programmable Controller’ to enter the download interface.
+Set the slave station points and IP address:
 
 .. image:: custom_protocol_slave/025.png
    :width: 6in
    :align: center
-
-After opening the download interface, click ‘Parameter+Programme’ on the top left, then click ‘Execute’ on the bottom right corner to download, wait for the download to complete.
-
+   
 .. image:: custom_protocol_slave/026.png
    :width: 6in
    :align: center
 
-Inovance EtherCAT Configuration
-++++++++++++++++++++++++++++++++++
-
-1. XML File Import
-
-Open Inovance AutoShop programming software and create a new PLC project. Select "EtherCAT Devices" from the right toolbox:
-
-.. image:: custom_protocol_slave/052.png
-   :width: 6in
-   :align: center
-
-Right-click after selecting "EtherCAT Devices" to open the "Import Device XML" dialog. Locate the folder containing the card's XML file. After successful import, the card name will appear under "EtherCAT Devices". Close and reopen the project to complete the import process.
-
-.. image:: custom_protocol_slave/053.png
-   :width: 6in
-   :align: center
-
-2. Variable Mapping
-
-Double-click the variable table in the left toolbar. Create:
-- 256-byte input array (Soft element address: D0)
-- 256-byte output array (Soft element address: D200)
-
-.. image:: custom_protocol_slave/054.png
-   :width: 6in
-   :align: center
-
-Under "EtherCAT" in the left toolbar, double-click "Xone-PCIe-ECATs". In the dialog, click "I/O Mapping", then bind variable addresses by selecting from the variable table. Repeat sequentially for other addresses.
-
-.. image:: custom_protocol_slave/055.png
-   :width: 6in
-   :align: center
-
-3. Program Download
-
-Open the test program and change PLC IP from default "192.168.1.88" to "192.168.0.88":
-
-.. image:: custom_protocol_slave/056.png
-   :width: 6in
-   :align: center
-
-Click "Modify IP/Device Name" and update both IP and gateway to "192.168.0.88":
-
-.. image:: custom_protocol_slave/057.png
-   :width: 6in
-   :align: center
-
-Confirm modification by clicking "Yes" in the popup dialog when clicking "Modify IP".
-
-.. image:: custom_protocol_slave/058.png
-   :width: 6in
-   :align: center
-
-After successful communication, download the PLC program.
-
-.. image:: custom_protocol_slave/059.png
-   :width: 6in
-   :align: center
-
-HMI setting (CC-Link IEF Basic emulation)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. After logging into the HMI interface, enable ‘Enable Task’ to establish the communication connection between PLC and controller.
-
+CC-Link Refresh Settings: Also in CC-Link IEF Basic settings, click "Refresh Settings" and customize the transmission settings: 256 bytes receive, 256 bytes send.
+   
 .. image:: custom_protocol_slave/027.png
    :width: 6in
    :align: center
 
-2. Click ‘01_MC_EnableRobot’ interface and then click ‘EnableRobot’ to enable the robot, and click ‘Reset’ to reset if there is any error during the process.
+(2) Program Download
 
+After opening the test program, click "Online" -> "Write to Programmable Controller" to enter the download interface.
+   
 .. image:: custom_protocol_slave/028.png
    :width: 6in
    :align: center
 
-3. Click ‘02_MC_ToolData’ to enter the tool information interface, enter the parameters on the left and click WriteToolData to write the tool information; on the right, click ReadToolData to read the existing tool information.
+After opening the download interface, click "Parameter + Program" in the upper left, then click "Execute" in the lower right to download, and wait for the download to complete.
    
 .. image:: custom_protocol_slave/029.png
    :width: 6in
    :align: center
 
-4. Click ‘03_MC_FrameData’ to enter the interface of workpiece information. On the left side, after inputting parameters, click WriteFrameData to write workpiece information; on the right side, click ReadFrameData to read existing workpiece information.
+Inovance EtherCAT
+++++++++++++++++++++++++++++++++++++++++++++++
+
+(1) Import XML File
+
+Open Inovance programming software AutoShop, create a new PLC project, and select "EtherCATDevices" in the toolbox on the right:
    
 .. image:: custom_protocol_slave/030.png
    :width: 6in
    :align: center
 
-5. Click ‘04_MC_LoadData’ to enter the load information interface, enter the parameters on the left and click WriteLoadData to write load information; on the right, click ReadLoadData to read the existing load information.
+Left-click "EtherCATDevices", then right-click to pop up the "Import Device XML" dialog box. Left-click to confirm and find the folder containing the board XML file.
+
+After successful import, the board name will appear under the "EtherCAT Devices" directory. Close the project and reopen it to complete the XML file import process.
    
 .. image:: custom_protocol_slave/031.png
    :width: 6in
    :align: center
 
-6. Click ‘05_MC_RobotReferenceDynamics’ to enter the interface of Maximum Velocity and Maximum Acceleration of Robot, enter the parameters on the left side and then click WriteRobotRefD to write the information of Maximum Velocity and Maximum Acceleration; click ReadRobotRefD on the right side to read the information of Maximum Velocity and Maximum Acceleration. On the right side, click ReadRobotRefD to read the max speed and max acceleration information.
+(2) Add EtherCAT Slave
+
+Right toolbar → "EtherCAT Devices" → "Other Devices" → "JIYuan" → "Xone-PCIe-ECATs". Double-click "Xone-PCIe-ECATs" to add the EtherCAT slave. You can now see that the slave has been successfully added under the EtherCAT master in the left project tree.
    
 .. image:: custom_protocol_slave/032.png
    :width: 6in
    :align: center
-
-7. Click ‘06_MC_Robot DefaultDynamics’ to enter the interface of robot default speed and default acceleration, enter the parameters on the left side and click WriteRobotDefD to write the default speed and default acceleration information; on the right side, click ReadRobotDefD to read the default speed and default acceleration information. on the left side, and then click WriteRobotDefD to write the default speed and default acceleration information; on the right side, click ReadRobotDefD to read the information.
    
 .. image:: custom_protocol_slave/033.png
    :width: 6in
    :align: center
 
-8. Click ‘07_MC_RobotSwLimits’ to enter the coordinate limit interface. On the left side, input the maximum limit and minimum limit parameter values and click WriteRobotSwLimits to write the limit parameter information; on the right side, click ReadRobotSwLimits to read the existing limit parameter information. parameter information.
+(3) Add PDO
    
 .. image:: custom_protocol_slave/034.png
    :width: 6in
    :align: center
-
-9. Click ‘08_MC_ReadActualPosition’ to enter the read actual position interface, click ReadPosition to read the existing position information.
    
 .. image:: custom_protocol_slave/035.png
    :width: 6in
    :align: center
 
-10. Click ‘09_MC_MoveLinearAbsolute’ to enter the Linear Motion interface, input the coordinate parameter and click MoveLinearAbsolute to make the robot move linearly at the target position.
+(4) EtherCAT Address Mapping
+
+Double-click the variable table in the left toolbar to create a new input array of 256 bytes with soft element address D0. Create a new output array of 256 bytes with soft element address D200.
    
 .. image:: custom_protocol_slave/036.png
    :width: 6in
    :align: center
 
-11. Click ‘10_MC_MoveAxesAbsolute’ to enter the interface of axis coordinate movement, input the coordinate parameter and click MoveAxesAbsolute to make the robot move to the target position with the input axis coordinate as the end point.
+Under "EtherCAT" in the left toolbar, double-click "Xone-PCIe-ECATs". In the pop-up dialog box, click "I/O Function Mapping", click the box to bind the variable address. In the pop-up dialog box, click "Variable Table", select the corresponding input/output, click "OK". Bind other addresses in order using the same procedure.
    
 .. image:: custom_protocol_slave/037.png
    :width: 6in
    :align: center
 
-12. Click ‘11_MC_MoveDirectAbsolute’ to enter the direct motion interface, input the coordinate parameter and click MoveDirectAbsolute to make the robot move directly to the target position with the input parameter as the end point.
+(5) Program Download
+
+Open the test program, change the PLC IP address to be on the same subnet as the board, and run the program after downloading.
+
+Robot Slave Mode Related Operation Instructions
+--------------------------------------------------------------------------------------
+
+Load Slave Mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(1) Open WebApp, go to Initial Settings -> Peripherals -> Board Communication -> Manual Configuration.
    
 .. image:: custom_protocol_slave/038.png
    :width: 6in
    :align: center
 
-13. Click ‘12_MC_Groups’ to enter the direct motion interface, in which, clicking GroupInterrupt can interrupt the movement of the robot in the process of movement, and clicking GroupContinue can make the robot continue to move to the target position. Click GroupStop to stop (end) the ongoing position movement. If an alarm or error is triggered during the process, click GroupReset to reset the robot to the error.
+First, configure the board IP address. If left blank, the board will start with the default IP: 192.168.0.100. Currently, IP configuration is only applicable to EIP and CC-link protocols; for the PN protocol, the IP is assigned by the PLC master scanning the slave device.
+
+.. note:: After changing the IP address on the page, you need to load the slave mode for it to take effect.
+   
+Next, select the required mapping functions for DI, DO, and AO (see appendix). The meaning of each parameter is as follows:
+
+- DI is for robot control: The robot slave receives external signal input and executes the mapped function;
+- DO is for robot status output: The robot slave feeds back status signals to the master;
+- AO is for robot status feedback: The robot slave feeds back status data to the master. AO0~AO15 are signed integers (int16), and AO16~AO31 are single-precision floating-point numbers (float).
+
+(2) Click the "Configure" button to generate the open protocol lua file.
    
 .. image:: custom_protocol_slave/039.png
    :width: 6in
    :align: center
 
-14. Click ‘13_MC_PositionConversion’ to enter the position conversion interface, XtoJ1 can be converted from Cartesian position to joint angle, and J1toX can be converted from joint angle to Cartesian position.
-   
-.. image:: custom_protocol_slave/040.png
-   :width: 6in
-   :align: center
+.. note:: The open protocol lua file supports downloading and can be imported on the automatic configuration interface.
 
-15. Click ‘14_MC_GroupJog’ to enter the interface of robot jogging, after the configuration is finished, drop down the axes to select the axis you need to jog, and then select the rotation direction of the axis. Click JogMove to move. MC_ChangeSpeedOverride on the right side can adjust the moving speed of the robot arm.
-   
-.. image:: custom_protocol_slave/041.png
-   :width: 6in
-   :align: center
-
-HMI setting (Profinet emulation)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. After opening the programme, click on ‘HMI_1[ktp700 Basic PN]’ in the project tree, and then click on ‘Online’→‘Simulation’→‘Start’ in the menu bar. Click ‘Online’→‘Simulation’→‘Start’ in the menu bar. Wait for the software to compile and simulate.
-
-2. The function after emulation is the same as the content of the Velcro screen (CC-Link IEF Basic). You can refer to the above content to set up.
-   
-.. image:: custom_protocol_slave/042.png
-   :width: 6in
-   :align: center   
-
-.. image:: custom_protocol_slave/043.png
-   :width: 6in
-   :align: center
-
-Robot Slave Mode Operation Manual
----------------------------------------------------------
-
-Loading Slave Mode
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Step 1**: Open the WebApp, navigate to Initial Setup -> Peripherals -> Board Communication -> Manual Configuration.
-
-.. image:: custom_protocol_slave/047.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 17.3-1 Board Communication Manual Configuration
-
-First, configure the IP address of the FRJ-PCIeN board. If left blank, the board will use the default IP: 192.168.0.100 for startup configuration. Currently, IP configuration only applies to EIP and CC-Link IEF Basic protocols. For PN protocol, the IP is assigned by the PLC master station scanning slave devices.
-
-.. note:: After changing the IP address on the page, you need to load the slave mode for the changes to take effect.
-
-Select the required mapping functions for DI, DO, and AO (see Appendix 1). The parameters are defined as follows:
-
-- DI (Robot Control): The robot slave accepts external input signals and executes the mapped functions.
-  
-- DO (Robot Status Output): The robot slave feeds back status signals to the master station.
-  
-- AO (Robot Status Feedback): The robot slave feeds back status data to the master station. AO0~AO15 are signed integers (int16), and AO16~AO31 are single-precision floating-point numbers (float).
-
-**Step 2**: Click the "Configure" button to generate the open protocol Lua file.
-
-.. image:: custom_protocol_slave/048.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 17.3-2 Device Operation and Status
-
-.. note:: The open protocol Lua file supports download and can be imported in the auto-configuration interface.
-
-Example generated program:
+An example of the generated program is as follows:
 
 .. code-block:: console
    :linenos:
@@ -591,6 +499,7 @@ Example generated program:
    local DOState = {0, 0, 0, 0, 0, 0, 0, 0}
    local AOState = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
    -- Launch the board communication process
+   SetFieldBusIP("192.168.0.99")
    LoadFieldBusSlave()
    sleep_ms(8000)
    while(1) do
@@ -640,7 +549,7 @@ Example generated program:
       sleep_ms(10) 
 
       -- Set the DI status
-      -- Configure the DI function and update it in real-time
+      -- Configue the DI function and update it in real-time
       ctrlDI[1],ctrlDI[2],ctrlDI[3],ctrlDI[4],ctrlDI[5],ctrlDI[6] = GetFieldBusDIState()
       funcDI[1] = ctrlDI[1] 
       funcDI[2] = ctrlDI[2] 
@@ -667,187 +576,92 @@ Example generated program:
       sleep_ms(10)
    end
 
-**Step 3**: Click the "Load" button to load the robot slave mode.
-
-.. image:: custom_protocol_slave/049.png
+(3) Click the "Load" button to load the robot slave mode.
+   
+.. image:: custom_protocol_slave/040.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 17.3-3 Loading Slave Mode
+.. note:: After the robot slave mode is successfully loaded, it supports automatic startup when powered on. If you need to use the remote mode, please unload the slave mode first.
 
-.. note:: After successfully loading the robot slave mode, the auto-start function is supported. To use remote mode, unload the slave mode first.
+(4) Click the board status bar button on the right to monitor DI, DO, AI, and AO interaction information. The parameters are introduced as follows:
 
-**Step 4**: Click the status bar button on the right to monitor DI, DO, AI, and AO interaction information. The parameters are as follows:
+- CtrlDO: Control box DO/CO signal input value sent by the external master;
+- DI: External master control signal input value;
+- Aux_DI: Communication board extended DI;
+- DO: Robot slave feedback signal output value;
+- Aux_DO: Communication board extended DO;
+- AI: External master input value;
+- AI0~AI15: int16 type;
+- AI16~AI31: float type;
+- AO: Robot slave output value;
+- AO0~AO15: int16 type;
+- AO16~AO31: float type.
 
-- CtrlDO: Input signal value from the master device controlling the robot control box DO.
-  
-- DI: Input signal value from the external master control.
-  
-- DO: Output signal value fed back by the robot slave.
-  
-- AI: Input value from the external master. AI0~AI15 are int16 type, and AI16~AI31 are float type.
-  
-- AO: Output value from the robot slave. AO0~AO15 are int16 type, and AO16~AO31 are float type.
-
-.. image:: custom_protocol_slave/050.png
-   :width: 6in
+.. note:: For detailed information on DI, DO, AI, and AO parameters, please refer to "RD36-Robot Slave Mode Address Comparison Table-V1.0-20260605".
+   
+.. image:: custom_protocol_slave/041.png
+   :width: 4in
    :align: center
 
-.. centered:: Figure 17.3-4 DI, DO, AI, AO Interaction Information
-
-**Step 5**:After loading is complete, you can use the Teach Program -> Communication Command -> Board Card to generate Lua commands for the board. This allows you to:
-
-1) Set Slave DO (Digital Output) and AO (Analog Output).
-2) Read Slave DI (Digital Input) and AI (Analog Input).
-3) Wait for Slave DI and AI signals.
-
-.. image:: custom_protocol_slave/051.png
+(5) After loading is complete, you can generate board lua instructions through Teach Program -> Communication Instructions -> Board to set slave DO, AO, get slave DI, AI, and wait for slave DI, AI.
+   
+.. image:: custom_protocol_slave/042.png
    :width: 6in
    :align: center
-
-.. centered:: Figure 17.3-5 Board Lua Commands
-
-:download:`Appendix 1: Slave Mode Address Mapping Table <../_static/_doc/Control box slave mode address comparison table.xlsx>`
 
 Board Firmware Upgrade and Communication Cycle Configuration
----------------------------------------------------------------------
+--------------------------------------------------------------------------
 
 FRJ-PCIeN-EIP/CC/PN-RJ-V10 Board
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When switching protocols, the board requires a firmware upgrade. Use the host computer to upgrade the FRJ-PCIeN-EIP/CC/PN-RJ-V10 board firmware. The steps are as follows:
 
-The communication cycle of the board can be configured via the host computer. Currently, only PN protocol firmware is provided, with future compatibility for EIP, CC-Link IE Basic, and EtherCAT protocols.
+(1) Open WinPcap_4_1_3.exe and install the network card driver package.
 
-(1) Directly connect the PC (Windows 11 system) network port to the board's network port. Open Device Assistant v1.1.0, double-click "Ethernet," and click the "Refresh" button in the upper left corner to scan for currently connected board devices.
-
-.. image:: custom_protocol_slave/060.png
+(2) Directly connect the PC (Win11 system) network port to the board network port. Open Device Assistant v1.1.0.exe, double-click "Ethernet", and click the "Refresh" button in the upper left corner to scan the currently connected board device.
+   
+.. image:: custom_protocol_slave/043.png
+   :width: 6in
+   :align: center
+      
+.. image:: custom_protocol_slave/044.png
    :width: 6in
    :align: center
 
-.. image:: custom_protocol_slave/061.png
+(3) Double-click the scanned board device to enter the firmware update interface. Configure the PC and the obtained board IP to be on the same subnet. Click the "..." button on the right side of the "Firmware Update" menu bar to upload the firmware to be upgraded. Click the "Update" button, and a "Upgrade successful" message will appear in the text box in the lower left corner.
+      
+.. image:: custom_protocol_slave/045.png
    :width: 6in
    :align: center
 
-(2) In the firmware update interface, upload the new version of PN firmware and click the "Update" button. A prompt reading "Upgrade Successful" will appear in the lower left corner when printed.
-
-.. image:: custom_protocol_slave/062.png
-   :width: 6in
-   :align: center
-
-(3) Enter the desired communication cycle (supports 1~100ms) and click the "Set" button. A prompt reading "Cycle Setting Successful" will appear in the lower left corner when printed.
-
-.. image:: custom_protocol_slave/063.png
+(4) After a successful board upgrade, a reset operation will be performed. Wait for the board reset to complete (5s), enter the required communication cycle (supports 1~100ms), click the "Set" button, and after the "Cycle setting successful" message appears in the lower left corner, restart the control box.
+      
+.. image:: custom_protocol_slave/046.png
    :width: 6in
    :align: center
 
 FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 Board
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This board supports online upgrading. The steps are as follows:
+When switching protocols, the board requires a firmware upgrade. Log in to the robot interface to upgrade the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board firmware. The steps are as follows:
 
-(1) Enter the URL 192.168.58.2 to access the robot interface, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the firmware version number of the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board. Select the bin file to be upgraded, click Upload, wait for the firmware upgrade to succeed, and then restart the control box.
-
-.. image:: custom_protocol_slave/064.png
+(1) Enter the URL 192.168.58.2 to access the robot interface. Click the "Initial Settings" -> "Peripherals" -> "Board Communication" interface to obtain the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board firmware version number. Select the bin file to be upgraded, click "Upload", wait for the firmware upgrade to succeed, and then restart the control box.
+      
+.. image:: custom_protocol_slave/047.png
    :width: 6in
    :align: center
 
-.. note:: To upgrade the firmware of the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board, the running open protocol must be unloaded first.
+.. note:: To upgrade the firmware of the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board, you need to unload the running open protocol.
 
-(2) Enter the URL 192.168.58.2 to access the robot interface, then click "Initial Settings" -> "Peripherals" -> "Board Communication" to obtain the board communication cycle. Enter the desired communication cycle (1~100 ms), click the "Configure" button, wait for the configuration to succeed, and then restart the control box.
-
-.. image:: custom_protocol_slave/064.png
+(2) Enter the URL 192.168.58.2 to access the robot interface. Click the "Initial Settings" -> "Peripherals" -> "Board Communication" interface to obtain the board communication cycle. Enter the required communication cycle (1~100ms), click the "Configure" button, wait for the configuration to succeed, and then restart the control box.
+      
+.. image:: custom_protocol_slave/048.png
    :width: 6in
    :align: center
 
-.. note:: To configure the communication cycle of the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board, the running open protocol must be unloaded first.
+.. note:: To configure the communication cycle for the FRJ-PCIeN-EC/PN/EIP/CC-RJ-V20 board, you need to unload the running open protocol.
+   
+:download:`Board communication firmware and configuration files <../_static/_doc/Board communication firmware and configuration files.zip>`
 
-Appendice
--------------------
-
-Instruction List
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. list-table:: 
-   :widths: 20 80
-   :header-rows: 1
-   :align: center
-
-   * - Command code
-     - Command description
-
-   * - 0x1000
-     - Robot enablement
-
-   * - 0x1001
-     - Reset all error
-
-   * - 0x1002
-     - Robot stops moving
-
-   * - 0x1003
-     - Read actual position
-
-   * - 0x1004
-     - Set robot speed
-
-   * - 0x1005
-     - Resume robot motion
-
-   * - 0x1006
-     - Robot pauses motion
-
-   * - 0x1007
-     - Calculate the Cartesian position from the joint position
-
-   * - 0x1008
-     - Calculate joint position from Cartesian position
-
-   * - 0x2000
-     - Write tool information
-
-   * - 0x2001
-     - Read tool information
-
-   * - 0x2002
-     - Write workpiece information
-
-   * - 0x2003
-     - Read workpiece information
-
-   * - 0x2004
-     - Write load information
-
-   * - 0x2005
-     - Read load information
-
-   * - 0x2006
-     - Write reference dynamic information
-
-   * - 0x2007
-     - Read reference dynamic information
-
-   * - 0x2008
-     - Write default dynamic information
-
-   * - 0x2009
-     - Read default dynamic information
-
-   * - 0x2010
-     - Write soft limit information
-
-   * - 0x2011
-     - Read soft limit information
-
-   * - 0x3000
-     - MoveAxes (based on joint angle)
-
-   * - 0x3001
-     - MoveLinear
-
-   * - 0x3002
-     - MoveDirect (based on Cartesian coordinate system)
-
-   * - 0x3003
-     - jog motion
-
-   * - 0x3004
-     - jog stop
+:download:`Summary of PLC test programs for each protocol <../_static/_doc/Summary of PLC Test Programs for Each Protocol.zip>`   

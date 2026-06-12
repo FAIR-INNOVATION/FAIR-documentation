@@ -43,6 +43,7 @@ Manual
     process
     system
     teach_pendant
+    remote_mode
     custom_protocol_slave
     appendix
     term
