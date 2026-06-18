@@ -240,7 +240,36 @@ Component certification:
    * - **Core board certification**
      - PETREL
      - :download:`download <_static/_doc/Parts-Core Board Certification.pdf>`
-  
+
+Gripper Certification Certificates:
+
+.. list-table::
+   :widths: 35 35 30
+   :header-rows: 0
+   :class: sheet-center
+
+   * - **Certification Certificate**
+     - **Product Type**
+     - **Download**
+   * - **Electric 2-Finger Gripper CE-EMC Certificate**
+     - FE-MG2-3-E
+     - :download:`Download <_static/_doc/FE-MG2-3-E Electric 2-Finger Gripper CE-EMC Certificate-V1.0.pdf>`
+   * - **Electric 2-Finger Gripper ROHS Certificate**
+     - FE-MG2-3-E
+     - :download:`Download <_static/_doc/FE-MG2-3-E Electric 2-Finger Gripper ROHS Certificate-V1.0.pdf>`
+   * - **Electric Vacuum Actuator CE-EMC Certificate**
+     - FE-MS1-1-E
+     - :download:`Download <_static/_doc/FE-MS1-1-E Electric Vacuum Actuator CE-EMC Certificate-V1.0.pdf>`
+   * - **Electric Vacuum Actuator ROHS Certificate**
+     - FE-MS1-1-E
+     - :download:`Download <_static/_doc/FE-MS1-1-E Electric Vacuum Actuator ROHS Certificate-V1.0.pdf>`
+   * - **Pneumatic Vacuum Suction Cup CE-EMC Certificate**
+     - FE-MS1-2-P
+     - :download:`Download <_static/_doc/FE-MS1-2-P Pneumatic Vacuum Suction Cup CE-EMC Certificate-V1.0.pdf>`
+   * - **Pneumatic Vacuum Suction Cup ROHS Certificate**
+     - FE-MS1-2-P
+     - :download:`Download <_static/_doc/FE-MS1-2-P Pneumatic Vacuum Suction Cup ROHS Certificate-V1.0.pdf>`  
+
 Secondary Development
 ---------------------------------
     :download:`FAIRINO ROS1 <https://github.com/FAIR-INNOVATION/frcobot_ros/archive/refs/heads/master.zip>`
