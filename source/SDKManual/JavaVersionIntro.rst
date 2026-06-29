@@ -13,6 +13,25 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V3.9.7
+     - 2026-06-25
+     - | 1. PhotoelectricSensorTCPCalibration() parameters can now adapt to filenames without a path;
+       | 2. LoadTrajectoryJ() parameters can now adapt to filenames without a path;
+       | 3. LoadTrajectoryLA() parameters can now adapt to filenames without a path;
+       | 4. LoadDefaultProgConfig() parameters can now adapt to filenames without a path;
+       | 5. ProgramLoad() parameters can now adapt to filenames without a path;
+       | 6. Added dexterous hand enable status parameter to SetAxleLuaEnableDeviceType() interface;
+       | 7. Added dexterous hand enable status parameter to GetAxleLuaEnableDeviceType() interface;
+       | 8. Modified the interfaces for getting currently configured end-effector device enable types and gripper action control;
+       | 9. Added dexterous hand enable and function codes;
+       | 10. Added SetDexterousHandsMove() interface for controlling dexterous hand motion;
+       | 11. Added SetDexterousHandsAct() interface for controlling dexterous hand reset and activation;
+       | 12. Added ClearDexterousHandsError() interface for clearing dexterous hand errors;
+       | 13. Added SetDexterousHandsFunc() interface for setting enabled dexterous hand action control functions;
+       | 14. Added GetDexterousHandsFunc() interface for getting enabled dexterous hand action control functions;
+       | 15. Added interfaces for setting and getting the weave end return to cycle zero point parameters;
+       | 16. Added SetWeaveOffsetRT() interface for setting real-time weave offset, and SetSpeedInstant() interface for real-time speed setting.
+
    * - V3.9.6
      - 2026-05-26
      - | 1.Updated robot status feedback structure, added extension axis coordinate system number status;

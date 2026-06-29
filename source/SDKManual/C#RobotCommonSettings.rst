@@ -1215,9 +1215,8 @@ Get the feedforward coefficients of the velocities of each axis
     */
     public int GetVelFeedForwardRatio(ref double radio[6]);
 
-Robot velocity feedforward coefficient code example
+Code example for setting robot velocity feedforward
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.9  Web-3.8.7
     
 .. code-block:: c#
     :linenos:
@@ -1314,7 +1313,7 @@ Photoelectric Sensor TCP Calibration
 
     /**
     * @brief Photoelectric Sensor TCP Calibration
-    * @param [in] luaPath Automatic calibration Lua program path: For QX version robots - "/fruser/FR_CalibrateTheToolTcp.lua"; For LA version robots - "/usr/local/etc/controller/lua/FR_CalibrateTheToolTcp.lua"
+    * @param [in] luaPath Automatic calibration Lua program path: "FR_CalibrateTheToolTcp.lua"; 
     * @param [in] offsetX Teaching point offset (x, y, z) in mm
     * @param [out] TCP Calibrated tool coordinate system (x, y, z, rx, ry, rz)
     * @return Error code
@@ -1332,8 +1331,21 @@ Photoelectric Sensor TCP Calibration Code Example
         ROBOT_STATE_PKG pkg =new ROBOT_STATE_PKG();
         DescTran offset = new DescTran( 10.0, 10.0, 3.0 );
         DescPose TCP = new DescPose();
-        int rtn = robot.PhotoelectricSensorTCPCalibration("/fruser/FR_CalibrateTheToolTcp.lua", offset, out TCP);
+        int rtn = robot.PhotoelectricSensorTCPCalibration("FR_CalibrateTheToolTcp.lua", offset, out TCP);
         Console.WriteLine($"PhotoelectricSensorTCPCalibration : {rtn}");
         Console.WriteLine($"Tool TCP Coordinate: X={TCP.tran.x:F3}, Y={TCP.tran.y:F3}, Z={TCP.tran.z:F3}");
         Console.WriteLine($"Tool RPY Orientation: RX={TCP.rpy.rx:F3}, RY={TCP.rpy.ry:F3}, RZ={TCP.rpy.rz:F3}");
     }
+
+Set Global Speed Instantly
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set global speed instantly
+    * @param [in] vel Speed percentage, range [0~100]
+    * @return Error code
+    */
+    public int SetWeaveOffsetRT(DescPose offset)

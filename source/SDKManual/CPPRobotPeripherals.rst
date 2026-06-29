@@ -832,83 +832,94 @@ Get End LUA Execution Enable Status
     */
     errno_t GetAxleLuaEnableStatus(int status[]);
 
-Set End LUA End Device Enable Type
-++++++++++++++++++++++++++++++++++
+Set the enabled device types for the end-effector LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Set end LUA end device enable type
-    * @param forceSensorEnable Force sensor enable status, 0-Disable; 1-Enable
-    * @param gripperEnable Gripper enable status, 0-Disable; 1-Enable
-    * @param IOEnable IO device enable status, 0-Disable; 1-Enable
+    * @brief Set the enabled device types for the end-effector LUA
+    * @param forceSensorEnable Force sensor enable status, 0-disabled; 1-enabled
+    * @param gripperEnable Gripper enable status, 0-disabled; 1-enabled
+    * @param IOEnable IO device enable status, 0-disabled; 1-enabled
+    * @param dexhandEnable Dexterous hand enable status, 0-disabled; 1-enabled
     * @return  Error code
     */
-    errno_t SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable);
+    errno_t SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable, int dexhandEnable);
 
-Get End LUA End Device Enable Type
-++++++++++++++++++++++++++++++++++
+Get the enabled device types for the end-effector LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
         
     /**
-    * @brief Get end LUA end device enable type
-    * @param enable enable[0]:forceSensorEnable Force sensor enable status, 0-Disable; 1-Enable
-    * @param enable enable[1]:gripperEnable Gripper enable status, 0-Disable; 1-Enable
-    * @param enable enable[2]:IOEnable IO device enable status, 0-Disable; 1-Enable
-    * @return  Error code
+    * @brief Get the enabled device types for the end-effector LUA
+    * @param enable enable[0]:forceSensorEnable Force sensor enable status, 0-disabled; 1-enabled
+    * @param enable enable[1]:gripperEnable Gripper enable status, 0-disabled; 1-enabled
+    * @param enable enable[2]:IOEnable IO device enable status, 0-disabled; 1-enabled
+    * @param enable enable[3]:dexhandEnable Dexterous hand enable status, 0-disabled; 1-enabled
+    * @return Error code
     */
-    errno_t GetAxleLuaEnableDeviceType(int* forceSensorEnable, int* gripperEnable, int* IOEnable);
+    errno_t GetAxleLuaEnableDeviceType(int* forceSensorEnable, int* gripperEnable, int* IOEnable, int* dexhandEnable);
 
-Get Currently Configured End Devices
-+++++++++++++++++++++++++++++++++++++++
+Get the currently configured end-effector devices
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Get currently configured end devices
-    * @param forceSensorEnable Force sensor enable device number 0-Not enabled; 1-Enabled
-    * @param gripperEnable Gripper enable device number, 0-Disable; 1-Enable
-    * @param IODeviceEnable IO device enable device number, 0-Disable; 1-Enable
-    * @return  Error code
+    * @brief Get the currently configured end-effector devices
+    * @param [out] forceSensorEnable Force sensor enabled device number, 0-disabled; 1-enabled
+    * @param [out] gripperEnable Gripper enabled device number, 0-disabled; 1-enabled
+    * @param [out] IODeviceEnable IO device enabled device number, 0-disabled; 1-enabled
+    * @param [out] decHandEnable Dexterous hand enabled device number, 0-disabled; 1-enabled
+    * @return Error code
     */
-    errno_t GetAxleLuaEnableDevice(int forceSensorEnable[], int gripperEnable[], int IODeviceEnable[]);
+    errno_t GetAxleLuaEnableDevice(int forceSensorEnable[], int gripperEnable[], int IODeviceEnable[], int decHandEnable[]);
 
-Set Enable Gripper Action Control Function
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Set the enabled gripper action control functions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Set enable gripper action control function
+    * @brief Set the enabled gripper action control functions
     * @param id Gripper device number
-    * @param func func[0]-Gripper enable; func[1]-Gripper initialization; 2-Position setting; 3-Speed setting; 4-Torque setting; 6-Read gripper status; 7-Read initialization status; 8-Read fault code; 9-Read position; 10-Read speed; 11-Read torque
+    * @param func func[0]-gripper enable; func[1]-gripper initialization; func[2]-position setting; func[3]-speed setting; func[4]-torque setting; func[6]-read gripper status;
+        func[7]-read initialization status; func[8]-read fault code; func[9]-read position; func[10]-read speed; func[11]-read torque; func[12]-set rotation count for rotary gripper;
+        func[13]-set rotation speed for rotary gripper; func[14]-set rotation torque for rotary gripper; func[15]-read rotary gripper status; func[16]-read rotary gripper initialization status;
+        func[17]-read rotary gripper rotation count; func[18]-read rotary gripper speed; func[19]-read rotary gripper torque; func[20]-multi-axis synchronous motion setting; func[21]-fault clear command;
+        func[22]-single-axis running status; func[23]-all-axis running status;
     * @return  Error code
     */
-    errno_t SetAxleLuaGripperFunc(int id, int func[]);
+    errno_t SetAxleLuaGripperFunc(int id, int func[32]);
 
-Get Enable Gripper Action Control Function
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Get the enabled gripper action control functions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0
 
 .. code-block:: c++
     :linenos:
 
     /**
-    * @brief Get enable gripper action control function
+    * @brief Get the enabled gripper action control functions
     * @param id Gripper device number
-    * @param func func[0]-Gripper enable; func[1]-Gripper initialization; 2-Position setting; 3-Speed setting; 4-Torque setting; 6-Read gripper status; 7-Read initialization status; 8-Read fault code; 9-Read position; 10-Read speed; 11-Read torque
+    * @param func func[0]-gripper enable; func[1]-gripper initialization; func[2]-position setting; func[3]-speed setting; func[4]-torque setting; func[6]-read gripper status;
+        func[7]-read initialization status; func[8]-read fault code; func[9]-read position; func[10]-read speed; func[11]-read torque; func[12]-set rotation count for rotary gripper;
+        func[13]-set rotation speed for rotary gripper; func[14]-set rotation torque for rotary gripper; func[15]-read rotary gripper status; func[16]-read rotary gripper initialization status;
+        func[17]-read rotary gripper rotation count; func[18]-read rotary gripper speed; func[19]-read rotary gripper torque; func[20]-multi-axis synchronous motion setting; func[21]-fault clear command;
+        func[22]-single-axis running status; func[23]-all-axis running status;
     * @return  Error code
     */
-    errno_t GetAxleLuaGripperFunc(int id, int func[]);
+    errno_t GetAxleLuaGripperFunc(int id, int func[32]);
 
 Robot Ethercat Slave File Write
 ++++++++++++++++++++++++++++++++++
@@ -961,69 +972,73 @@ Robot End LUA File Operation Code Example
 
     int TestAxleLua(void)
     {
-      ROBOT_STATE_PKG pkg = {};
-      FRRobot robot;
-      robot.LoggerInit();
-      robot.SetLoggerLevel(1);
-      int rtn = robot.RPC("192.168.58.2");
-      if (rtn != 0)
-      {
-        return -1;
-      }
-      robot.SetReConnectParam(true, 30000, 500);
-      robot.AxleLuaUpload("D://zUP/AXLE_LUA_End_DaHuan.lua");
-      AxleComParam param(7, 8, 1, 0, 5, 3, 1);
-      robot.SetAxleCommunicationParam(param);
-      AxleComParam getParam;
-      robot.GetAxleCommunicationParam(&getParam);
-      printf("GetAxleCommunicationParam param is %d %d %d %d %d %d %d\n", getParam.baudRate, getParam.dataBit, getParam.stopBit, getParam.verify, getParam.timeout, getParam.timeoutTimes, getParam.period);
-      robot.SetAxleLuaEnable(1);
-      int luaEnableStatus = 0;
-      robot.GetAxleLuaEnableStatus(&luaEnableStatus);
-      robot.SetAxleLuaEnableDeviceType(0, 1, 0);
-      int forceEnable = 0;
-      int gripperEnable = 0;
-      int ioEnable = 0;
-      robot.GetAxleLuaEnableDeviceType(&forceEnable, &gripperEnable, &ioEnable);
-      printf("GetAxleLuaEnableDeviceType param is %d %d %d\n", forceEnable, gripperEnable, ioEnable);
-      int func[16] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-      robot.SetAxleLuaGripperFunc(1, func);
-      int getFunc[16] = { 0 };
-      robot.GetAxleLuaGripperFunc(1, getFunc);
-      int getforceEnable[16] = { 0 };
-      int getgripperEnable[16] = { 0 };
-      int getioEnable[16] = { 0 };
-      robot.GetAxleLuaEnableDevice(getforceEnable, getgripperEnable, getioEnable);
-      printf("\ngetforceEnable status : ");
-      for (int i = 0; i < 16; i++)
-      {
-        printf("%d,", getforceEnable[i]);
-      }
-      printf("\ngetgripperEnable status : ");
-      for (int i = 0; i < 16; i++)
-      {
-        printf("%d,", getgripperEnable[i]);
-      }
-      printf("\ngetioEnable status : ");
-      for (int i = 0; i < 16; i++)
-      {
-        printf("%d,", getioEnable[i]);
-      }
-      printf("\n");
-      robot.ActGripper(1, 0);
-      robot.Sleep(2000);
-      robot.ActGripper(1, 1);
-      robot.Sleep(2000);
-      robot.MoveGripper(1, 90, 10, 100, 50000, 0, 0, 0, 0, 0);
-      int pos = 0;
-      while (true)
-      {
-        robot.GetRobotRealTimeState(&pkg);
-        printf("gripper pos is %u\n", pkg.gripper_position);
-        robot.Sleep(100);
-      }
-      robot.CloseRPC();
-      return 0;
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.AxleLuaUpload("D://zUP/AXLE_LUA_End_DaHuan.lua");
+        AxleComParam param(7, 8, 1, 0, 5, 3, 1);
+        robot.SetAxleCommunicationParam(param);
+        AxleComParam getParam;
+        robot.GetAxleCommunicationParam(&getParam);
+        printf("GetAxleCommunicationParam param is %d %d %d %d %d %d %d\n", getParam.baudRate, getParam.dataBit, getParam.stopBit, getParam.verify, getParam.timeout, getParam.timeoutTimes, getParam.period);
+        robot.SetAxleLuaEnable(1);
+        int luaEnableStatus = 0;
+        robot.GetAxleLuaEnableStatus(&luaEnableStatus);
+        robot.SetAxleLuaEnableDeviceType(0, 1, 0, 0);
+        int forceEnable = 0;
+        int gripperEnable = 0;
+        int ioEnable = 0;
+        int dexhandEnable = 0;
+        robot.GetAxleLuaEnableDeviceType(&forceEnable, &gripperEnable, &ioEnable, &dexhandEnable);
+        printf("GetAxleLuaEnableDeviceType param is %d %d %d %d\n", forceEnable, gripperEnable, ioEnable, dexhandEnable);
+        int func[32] = { 0,1,1,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+        rtn = robot.SetAxleLuaGripperFunc(2, func);
+        printf("SetAxleLuaGripperFunc rtn is %d\n", rtn);
+        int getFunc[32] = { 0 };
+        rtn = robot.GetAxleLuaGripperFunc(2, getFunc);
+        printf("GetAxleLuaGripperFunc rtn is %d\n", rtn);
+        int getforceEnable[16] = { 0 };
+        int getgripperEnable[16] = { 0 };
+        int getioEnable[16] = { 0 };
+        int dexhandEnable1[16] = { 0 };
+        robot.GetAxleLuaEnableDevice(getforceEnable, getgripperEnable, getioEnable, dexhandEnable1);
+        printf("\ngetforceEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getforceEnable[i]);
+        }
+        printf("\ngetgripperEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getgripperEnable[i]);
+        }
+        printf("\ngetioEnable status : ");
+        for (int i = 0; i < 16; i++)
+        {
+            printf("%d,", getioEnable[i]);
+        }
+        printf("\n");
+        robot.ActGripper(2, 0);
+        robot.Sleep(2000);
+        robot.ActGripper(2, 1);
+        robot.Sleep(2000);
+        robot.MoveGripper(2, 1, 10, 100, 50000, 0, 0, 0, 0, 0);
+        int pos = 0;
+        while (true)
+        {
+            robot.GetRobotRealTimeState(&pkg);
+            printf("gripper pos is %u\n", pkg.gripper_position);
+            robot.Sleep(100);
+        }
+        robot.CloseRPC();
+        return 0;
     }
 
 Get SmartTool Button Status
@@ -2038,3 +2053,188 @@ Code Example for Controller Peripheral Open Protocol Upload, Download, and Delet
         robot.Sleep(1000);
         return 0;
     }
+
+Control Dexterous Hand Motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Control dexterous hand motion
+    * @param [in] idstart Starting slave station number
+    * @param [in] slaveNum Number of slaves
+    * @param [in] pos Position array, length 16, range (-360~360)
+    * @param [in] speed Speed percentage array, length 16, range [0~100]
+    * @param [in] force Torque percentage array, length 16, range [0~100]
+    * @param [in] max_time Maximum wait time, range [0~30000], unit ms
+    * @return Error code, 0 on success
+    */
+    errno_t SetDexterousHandsMove(int idstart, int slaveNum, double pos[16], int speed[16], int force[16], int max_time);
+        
+Control Dexterous Hand Reset and Activation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Control dexterous hand reset and activation
+    * @param [in] id Slave station number
+    * @param [in] act 0-reset 1-activate
+    * @return Error code, 0 on success
+    */
+    errno_t SetDexterousHandsAct(int id, int act);
+            
+Clear Dexterous Hand Error
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Clear dexterous hand error
+    * @return Error code, 0 on success
+    */
+    errno_t ClearDexterousHandsError();
+                
+Set Enabled Dexterous Hand Action Control Functions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Set enabled dexterous hand action control functions
+    * @param [in] id Dexterous hand device number
+    * @param [in] func 0-grip trigger, 1-gripper initialization, 2-position setting, 3-speed setting, 4-torque setting, 6-read gripper status, 7-read initialization status, 8-read fault code, 9-read position, 10-read speed, 11-read torque, 12-rotation count setting, 13-rotation speed setting, 14-rotation torque setting, 15-read rotary gripper status, 16-read rotary initialization status, 17-read rotation count, 18-read rotation speed, 19-read rotation torque, 20-multi-axis synchronous motion setting, 21-fault clear command, 22-single-axis running status, 23-all-axis running status
+    * @return Error code
+    */
+    errno_t SetDexterousHandsFunc(int id, int func[32]);
+                    
+Get Enabled Dexterous Hand Action Control Functions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get enabled dexterous hand action control functions
+    * @param [in] id Dexterous hand device number
+    * @param [out] func 0-grip trigger, 1-gripper initialization, 2-position setting, 3-speed setting, 4-torque setting, 6-read gripper status, 7-read initialization status, 8-read fault code, 9-read position, 10-read speed, 11-read torque, 12-rotation count setting, 13-rotation speed setting, 14-rotation torque setting, 15-read rotary gripper status, 16-read rotary initialization status, 17-read rotation count, 18-read rotation speed, 19-read rotation torque, 20-multi-axis synchronous motion setting, 21-fault clear command, 22-single-axis running status, 23-all-axis running status
+    * @return Error code
+    */
+    errno_t GetDexterousHandsFunc(int id, int func[32]);
+                        
+End-Effector Dexterous Hand Configuration and Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestDexterousHands()
+    {
+    ROBOT_STATE_PKG pkg = {};
+    FRRobot robot;
+    robot.LoggerInit();
+    robot.SetLoggerLevel(1);
+    int rtn = robot.RPC("192.168.58.2");
+    if (rtn != 0)
+    {
+        return -1;
+    }
+    robot.SetReConnectParam(true, 30000, 500);
+    int id = 1;        // Slave station number
+    int slaveNum = 4;     // Control 4 fingers
+    int max_time = 8000;   // Maximum wait time 8 seconds
+    int speed[16] = {0};   // Speed array, all 0 means use default speed
+    int force[16] = {0};   // Torque array
+    // Initialize torque array: first 4 fingers set to 50%, the rest 0 (values sent via Move command)
+    for (int i = 0; i < 16; i++)
+    {
+        force[i] = (i < 4) ? 50 : 0;
+    }
+    // Helper function: set position array (only first 4 fingers are effective)
+    double pos[16] = {0.0};
+    JointPos j1(-91.876, -85.920, 109.279, -86.239, -96.664, -28.563);
+    JointPos j2(-40.954, -85.920, 109.279, -86.239, -96.664, -28.563);
+    ExaxisPos epos(0, 0, 0, 0);
+    DescPose offset_pos(0, 0, 0, 0, 0, 0);
+    printf("===== Dexterous Hand Full Function Test Started =====\n");
+    // 1. Clear error
+    int ret = robot.ClearDexterousHandsError();
+    printf("ClearDexterousHandsError rtn %d\n", ret);
+    // ========== 2. Set function switches ==========
+    int setFunc[32] = {0};
+    setFunc[2] = 1;  // Enable position setting function
+    setFunc[4] = 1;  // Enable torque setting function
+    setFunc[9] = 1;  // Read position
+    setFunc[10] = 1;  // Read torque
+    setFunc[11] = 1;  // Read status
+    setFunc[22] = 1;  // Single-axis motion status
+    ret = robot.SetDexterousHandsFunc(id, setFunc);
+    printf("SetDexterousHandsFunc(enable + init + position/torque functions enabled) rtn %d\n", ret);
+    // ========== 3. Read function status (verify settings took effect) ==========
+    int getFunc[32] = {0}; // GetDexterousHandsFunc returns 32 integers
+    ret = robot.GetDexterousHandsFunc(id, getFunc);
+    printf("GetDexterousHandsFunc rtn %d\n", ret);
+    if (ret == 0)
+    {
+        // Print all 32 values
+        printf("All 32 values returned by GetDexterousHandsFunc:");
+        for (int i = 0; i < 32; i++)
+        {
+        printf(" [%d]={%d}", i, getFunc[i]);
+        if ((i + 1) % 8 == 0)
+        {
+            printf("\n");
+        } 
+        else if (i < 31)
+        {
+            printf(", ");
+        }
+        }
+    }
+    // ========== 4. Activate dexterous hand ==========
+    ret = robot.SetDexterousHandsAct(id, 1);
+    printf("SetDexterousHandsAct(activate) rtn %d\n", ret);
+    if (ret != 0)
+    {
+        printf("Activation failed, test aborted");
+        return -1;
+    }
+    // ========== 5. Initial move to 20° (send position and torque values via Move command) ==========
+    memset(pos, 0, sizeof(pos));
+    pos[0] = 20;
+    pos[1] = 20;
+    pos[2] = 20;
+    pos[3] = 20;
+    ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+    printf("Initial move to 20° -> %d\n", ret);
+    robot.Sleep(5000);
+    // ========== 6. Reciprocating motion 10 times (10° ↔ 50°) ==========
+    printf("Starting 10 reciprocating motions...");
+    for (int iteration = 1; iteration <= 10; iteration++)
+    {
+        robot.MoveJ(&j1, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        memset(pos, 0, sizeof(pos));
+        pos[0] = 10;
+        pos[1] = 10;
+        pos[2] = 10;
+        pos[3] = 10;
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+        printf("Move to 10° -> %d\n", ret);
+        robot.Sleep(1000);
+        robot.MoveJ(&j2, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        memset(pos, 0, sizeof(pos));
+        pos[0] = 50;
+        pos[1] = 50;
+        pos[2] = 50;
+        pos[3] = 50;
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+        printf("Move to 50° -> %d\n", ret);
+        robot.Sleep(1000);
+    }
+    printf("Test completed (function switch set/read + activation + 10 reciprocating motions).");
+    return 0;
+    }    

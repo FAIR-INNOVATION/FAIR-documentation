@@ -397,14 +397,14 @@ Robot State Feedback Structure Type
         public int ft_sensor_active;                // Force sensor activation status
         public int EmergencyStop;                   // Emergency stop status
         public int motion_done;                     // Motion completed
-        public int gripper_motiondone;              // Gripper motion completed
+        public int gripper_motiondone;              // Gripper motion complete signal, 0-not complete, 1-complete (no object detected), 2-motion complete (object detected)
         public int mc_queue_len;                    // Motion queue length
         public int collisionState;                  // Collision status
         public int trajectory_pnum;                 // Trajectory point sequence number
         public int safety_stop0_state;              // Safety stop 0 status
         public int safety_stop1_state;              // Safety stop 1 status
         public int gripper_fault_id;                // Gripper fault ID
-        public int gripper_fault;                   // Gripper fault
+        public int gripper_fault;                   // Gripper fault 0-no fault 1-485 timeout 2-command error 3-workpiece dropped Other-gripper fault code
         public int gripper_active;                  // Gripper activation
         public int gripper_position;                // Gripper position
         public int gripper_speed;                   // Gripper speed
@@ -554,14 +554,14 @@ Robot Status Feedback Configuration Enumeration Type
         FtSensorActive,         // Force torque sensor activation status, 0-reset, 1-active
         EmergencyStop,          // Emergency stop flag, 0-emergency stop not pressed, 1-emergency stop pressed
         MotionDone,             // Motion done signal, 1-done, 0-not done
-        GripperMotiondone,      // Gripper motion complete signal, 1-complete, 0-not complete
+        GripperMotiondone,      // Gripper motion complete signal, 0-not complete, 1-complete (no object detected), 2-motion complete (object detected)
         McQueueLen,             // Motion command queue length
         CollisionState,         // Collision detection, 1-collision, 0-no collision
         TrajectoryPnum,         // Trajectory point number
         SafetyStop0State,       // Safety stop signal SI0
         SafetyStop1State,       // Safety stop signal SI1
         GripperFaultId,         // Fault gripper number
-        GripperFault,           // Gripper fault
+        GripperFault,           // Gripper fault 0-no fault 1-485 timeout 2-command error 3-workpiece dropped Other-gripper fault code
         GripperActive,          // Gripper activation status
         GripperPosition,        // Gripper position
         GripperSpeed,           // Gripper speed

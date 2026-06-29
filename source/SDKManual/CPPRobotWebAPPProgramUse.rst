@@ -12,8 +12,7 @@ Set Default Program to Load Automatically on Startup
     /**
     * @brief  Set default program to load automatically on startup
     * @param  [in] flag  0-Do not load default program on startup, 1-Load default program on startup
-    * @param  [in] program_name Program name and path, e.g. "/fruser/movej.lua", where "/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA.
-    * @return  Error code
+    * @param  [in] program_name Program name and path, e.g. "movej.lua"
     */
     errno_t  LoadDefaultProgConfig(uint8_t flag, char program_name[64]);
 
@@ -24,7 +23,7 @@ Load Specified Program
 
     /**
     * @brief  Load specified program
-    * @param  [in] program_name Program name and path, e.g. "/fruser/movej.lua", where "/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA.
+    * @param  [in] program_name Program name and path, e.g. "movej.lua"
     * @return  Error code
     */
     errno_t  ProgramLoad(char program_name[64]);
@@ -36,7 +35,7 @@ Get Loaded Program Name
 
     /**
     * @brief  Get loaded program name
-    * @param  [out] program_name Program name and path, e.g. "/fruser/movej.lua", where "/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA.
+    * @param  [out] program_name Program name and path, e.g. "movej.lua"
     * @return  Error code
     */
     errno_t  GetLoadedProgram(char program_name[64]);  
@@ -126,7 +125,7 @@ Robot LUA Program Operation Code Example
         return -1;
       }
       robot.SetReConnectParam(true, 30000, 500);
-      char program_name[64] = "/fruser/test.lua";
+      char program_name[64] = "test.lua";
       char loaded_name[64] = "";
       uint8_t state;
       int line;

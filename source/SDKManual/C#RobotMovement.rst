@@ -51,88 +51,37 @@ Sample Robot Tap Control Code
  
     private void btnJOG_Click(object sender, EventArgs e)
     {
-        Robot robot = new Robot();
-        robot.RPC("192.168.58.2"); 
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(0, i + 1, 0, 20.0f, 20.0f, 30.0f);
+            Thread.Sleep(1000);
+            robot.ImmStopJOG();
+            Thread.Sleep(1000);
+        }
 
-        robot.SetSpeed(35);
-        robot.StartJOG(0, 1, 0, 15, 20.0f, 30.0f);  
-        robot.StopJOG(1);  
-        //robot.ImmStopJOG(); 
-        robot.StartJOG(0, 2, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(0, 3, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(0, 4, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(0, 5, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(0, 6, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(2, i + 1, 0, 20.0f, 20.0f, 30.0f);
+            Thread.Sleep(1000);
+            robot.ImmStopJOG();
+            Thread.Sleep(1000);
+        }
 
-        robot.StartJOG(2, 1, 0, 15, 20.0f, 30.0f);   
-        Thread.Sleep(1000);
-        robot.StopJOG(3);  
-        //robot.ImmStopJOG(); 
-        robot.StartJOG(2, 2, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(2, 3, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(2, 4, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(2, 5, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(2, 6, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(4, i + 1, 0, 20.0f, 20.0f, 30.0f);
+            Thread.Sleep(1000);
+            robot.StopJOG(5);
+            Thread.Sleep(1000);
+        }
 
-        robot.StartJOG(4, 1, 0, 15, 20.0f, 30.0f);  
-        Thread.Sleep(1000);
-        robot.StopJOG(5); 
-        //robot.ImmStopJOG(); 
-        robot.StartJOG(4, 2, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(4, 3, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(4, 4, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(4, 5, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(4, 6, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-
-        robot.StartJOG(8, 1, 0, 15, 20.0f, 30.0f);  
-        Thread.Sleep(1000);
-        robot.StopJOG(9);  
-        //robot.ImmStopJOG();  
-        robot.StartJOG(8, 2, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(8, 3, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(8, 4, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(8, 5, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
-        robot.StartJOG(8, 6, 1, 15, 20.0f, 30.0f);
-        Thread.Sleep(1000);
-        robot.ImmStopJOG();
+        for (int i = 0; i < 6; i++)
+        {
+            robot.StartJOG(8, i + 1, 0, 20.0f, 20.0f, 30.0f);
+            Thread.Sleep(1000);
+            robot.StopJOG(9);
+            Thread.Sleep(1000);
+        }
     }
  
 Joint space motion
@@ -601,67 +550,6 @@ Cartesian Space Full Circle Motion (Overload Function 1, No Joint Position Input
     * @return  Error code
     */
     public int Circle(DescPose desc_pos_p, int ptool, int puser, double pvel, double pacc, ExaxisPos epos_p, DescPose desc_pos_t, int ttool, int tuser, double tvel, double tacc, ExaxisPos epos_t, double ovl, int offset_flag, DescPose offset_pos, double oacc, double blendR, int config, int velAccParamMode)
-
-Sample Code for Whole Circle Motion in Cartesian Space
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. versionadded:: C#SDK-V1.1.4  Web-3.8.3
-    
-.. code-block:: c#
-    :linenos:
- 
-    private void btnMovetest_Click(object sender, EventArgs e)
-    {
-        int rtn = 0;
-        DescPose middescPoseCir1 = new DescPose(-435.414, -342.926, 309.205, -171.382, -4.513, 171.520);
-        JointPos midjointPosCir1 = new JointPos(26.804, -79.866, 106.642, -125.433, -85.562, -54.721);
-        DescPose enddescPoseCir1 = new DescPose(-524.862, -217.402, 308.459, -171.425, -4.810, 156.088);
-        JointPos endjointPosCir1 = new JointPos(11.399, -78.055, 104.603, -125.421, -85.770, -54.721);
-
-        DescPose middescPoseCir2 = new DescPose(-482.691, -587.899, 318.594, -171.001, -4.999, -172.996);
-        JointPos midjointPosCir2 = new JointPos(42.314, -53.600, 67.296, -112.969, -85.533, -54.721);
-        DescPose enddescPoseCir2 = new DescPose(-403.942, -489.061, 317.038, -163.189, -10.425, -175.627);
-        JointPos endjointPosCir2 = new JointPos(39.959, -70.616, 96.679, -134.243, -82.276, -54.721);
-
-        DescPose middescPoseMoveC = new DescPose(-435.414, -342.926, 309.205, -171.382, -4.513, 171.520);
-        JointPos midjointPosMoveC = new JointPos(26.804, -79.866, 106.642, -125.433, -85.562, -54.721);
-        DescPose enddescPoseMoveC = new DescPose(-524.862, -217.402, 308.459, -171.425, -4.810, 156.088);
-        JointPos endjointPosmoveC = new JointPos(11.399, -78.055, 104.603, -125.421, -85.770, -54.721);
-
-        DescPose middescPoseCir3 = new DescPose(-435.414, -342.926, 309.205, -171.382, -4.513, 171.520);
-        JointPos midjointPosCir3 = new JointPos(26.804, -79.866, 106.642, -125.433, -85.562, -54.721);
-        DescPose enddescPoseCir3 = new DescPose(-569.505, -405.378, 357.596, -172.862, -10.939, 171.108);
-        JointPos endjointPosCir3 = new JointPos(27.138, -63.750, 78.586, -117.861, -90.588, -54.721);
-
-        DescPose middescPoseCir4 = new DescPose(-482.691, -587.899, 318.594, -171.001, -4.999, -172.996);
-        JointPos midjointPosCir4 = new JointPos(42.314, -53.600, 67.296, -112.969, -85.533, -54.721);
-        DescPose enddescPoseCir4 = new DescPose(-569.505, -405.378, 357.596, -172.862, -10.939, 171.108);
-        JointPos endjointPosCir4 = new JointPos(27.138, -63.750, 78.586, -117.861, -90.588, -54.721);
-
-        DescPose startdescPose = new DescPose(-569.505, -405.378, 357.596, -172.862, -10.939, 171.108);
-        JointPos startjointPos = new JointPos(27.138, -63.750, 78.586, -117.861, -90.588, -54.721);
-
-        DescPose linedescPose = new DescPose(-403.942, -489.061, 317.038, -163.189, -10.425, -175.627);
-        JointPos linejointPos = new JointPos(39.959, -70.616, 96.679, -134.243, -82.276, -54.721);
-
-
-        ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
-        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
-
-
-        robot.MoveJ(startjointPos, startdescPose, 3, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
-        rtn = robot.Circle(midjointPosCir1, middescPoseCir1, 3, 0, 100, 100, exaxisPos, endjointPosCir1, enddescPoseCir1, 3, 0, 100, 100, exaxisPos, 100, -1, offdese, 100, 20);
-        Console.WriteLine("Circle1" + rtn);
-        rtn = robot.Circle(midjointPosCir2, middescPoseCir2, 3, 0, 100, 100, exaxisPos, endjointPosCir2, enddescPoseCir2, 3, 0, 100, 100, exaxisPos, 100, -1, offdese, 100, 20);
-        Console.WriteLine("Circle2" + rtn);
-
-        robot.MoveC(midjointPosMoveC, middescPoseMoveC, 3, 0, 100, 100, exaxisPos, 0, offdese, endjointPosmoveC, enddescPoseMoveC, 3, 0, 100, 100, exaxisPos, 0, offdese, 100, 20);
-        rtn = robot.Circle(midjointPosCir3, middescPoseCir3, 3, 0, 100, 100, exaxisPos, endjointPosCir3, enddescPoseCir3, 3, 0, 100, 100, exaxisPos, 100, -1, offdese, 100, 20);
-        Console.WriteLine("Circle3" + rtn);
-        rtn = robot.MoveL(linejointPos, linedescPose, 3, 0, 100, 100, 100, -1, 0, exaxisPos, 0, 0, offdese);
-        Console.WriteLine("MoveL " + rtn);
-        rtn = robot.Circle(midjointPosCir4, middescPoseCir4, 3, 0, 100, 100, exaxisPos, endjointPosCir4, enddescPoseCir4, 3, 0, 100, 100, exaxisPos, 100, -1, offdese, 100, 20);
-        Console.WriteLine("Circle4" + rtn);
-    }
  
 Sample code for basic robot motion instructions
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1130,51 +1018,65 @@ Joint Torque Control Code Example with Overspeed Protection
 
     public int ServoJTWithSafety()
     {
-        robot.ResetAllError();
-        Thread.Sleep(500);
-
-        double[] torques = new double[6] { 0, 0, 0, 0, 0, 0 };
-        robot.GetJointTorques(1, torques);
-
-        robot.ServoJTStart();
-        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
-        robot.DragTeachSwitch(1);
-
-        int checkFlag = 0;
-        double[] jPowerLimit = new double[6] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
-        //double[] jPowerLimit = new double[6] { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 };
-        // double[] jVelLimit = new double[6] { 10.0, 10.0, 10.0, 10.0, 10.0, 10.0 };
-        double[] jVelLimit = new double[6] {50, 50, 50, 50, 50, 50 };
-        int count = 80000;
-        int errorNum = 0;
-        int error = 0;
-        while (count > 0)
+        while (true)
         {
-            
-            torques[2] = torques[2] + 0.01; 
-            error = robot.ServoJT(torques, 0.008, checkFlag, jPowerLimit, jVelLimit); 
+            robot.ResetAllError();
+            Thread.Sleep(500);
 
-            Console.WriteLine($"ServoJT rtn is {error}");
-            count = count - 1;
-            Thread.Sleep(1);
-                
-            robot.GetRobotRealTimeState(ref pkg);
-            Console.WriteLine($"maincode {pkg.main_code}, subcode {pkg.sub_code}");
-            if (error != 0)
+            JointPos j = new JointPos(7.053, -89.699, 156.141, -72.751, 7.829, 1.889);
+            ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+            DescPose offset_pos = new DescPose(-151.288, -321.186, 221.989, 89.140, 4.361, -0.795);
+            robot.MoveJ(j, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+
+            double[] torques = new double[6] { 0, 0, 0, 0, 0, 0 };
+            robot.GetJointTorques(1, torques);
+
+            robot.ServoJTStart(0);
+            ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+            robot.DragTeachSwitch(1);
+
+            int checkFlag = 0;
+            double[] jPowerLimit = new double[6] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
+            double[] jVelLimit = new double[6] { 50, 50, 50, 50, 50, 50 };
+            int error = 0;
+            while (true)
             {
-                errorNum++;
-                if (errorNum > 5)
+
+                torques[0] = 0.1;
+                error = robot.ServoJT(torques, 0.008, checkFlag, jPowerLimit, jVelLimit, 0);
+
+                Console.WriteLine($"ServoJT rtn is {error}");
+                Thread.Sleep(1);
+
+                robot.GetRobotRealTimeState(ref pkg);
+                Console.WriteLine($"maincode {pkg.main_code}, subcode {pkg.sub_code}");
+                if (pkg.jt_cur_pos[0] > 30)
                 {
                     break;
                 }
-
             }
-        }
-        robot.DragTeachSwitch(0);
-        error = robot.ServoJTEnd();
 
-        return 0;
-    } 
+            while (true)
+            {
+
+                torques[0] = -0.1;
+                error = robot.ServoJT(torques, 0.008, checkFlag, jPowerLimit, jVelLimit, 0);
+
+                Console.WriteLine($"ServoJT rtn is {error}");
+                Thread.Sleep(1);
+
+                robot.GetRobotRealTimeState(ref pkg);
+                Console.WriteLine($"maincode {pkg.main_code}, subcode {pkg.sub_code}");
+                if (pkg.jt_cur_pos[0] < 0)
+                {
+                    break;
+                }
+            }
+
+            robot.DragTeachSwitch(0);
+            error = robot.ServoJTEnd(0);
+        }
+    }
 
 Servo mode motion in Cartesian space
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1763,17 +1665,17 @@ FIR filtering code example
         ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
         DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
 
-        rtn = robot.PtpFIRPlanningStart(1000,1000);
+        rtn = robot.PtpFIRPlanningStart(1000, 1000);
         Console.WriteLine("PtpFIRPlanningStart rtn is " + rtn);
-        robot.MoveJ( startjointPos,  startdescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
-        robot.MoveJ( endjointPos,  enddescPose, 0, 0, 100, 100, 100,  exaxisPos, -1, 0,  offdese);
+        robot.MoveJ(startjointPos, startdescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
+        robot.MoveJ(endjointPos, enddescPose, 0, 0, 100, 100, 100, exaxisPos, -1, 0, offdese);
         robot.PtpFIRPlanningEnd();
         Console.WriteLine("PtpFIRPlanningEnd rtn is " + rtn);
 
         robot.LinArcFIRPlanningStart(1000, 1000, 1000, 1000);
         Console.WriteLine("LinArcFIRPlanningStart rtn is " + rtn);
-        robot.MoveL( startjointPos,  startdescPose, 0, 0, 100, 100, 100, -1,  exaxisPos, 0, 0,  offdese, 1, 1);
-        robot.MoveC( midjointPos,  middescPose, 0, 0, 100, 100,  exaxisPos, 0,  offdese,  endjointPos,  enddescPose, 0, 0, 100, 100,  exaxisPos, 0,  offdese, 100, -1);
+        robot.MoveL(startjointPos, startdescPose, 0, 0, 20, 100, 100, -1,0, exaxisPos, 0, 0, offdese, 1, 50);
+        robot.MoveC(midjointPos, middescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, endjointPos, enddescPose, 0, 0, 100, 100, exaxisPos, 0, offdese, 100, -1, 100, 0);
         robot.LinArcFIRPlanningEnd();
         Console.WriteLine("LinArcFIRPlanningEnd rtn is " + rtn);
     }

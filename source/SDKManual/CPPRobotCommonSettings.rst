@@ -1448,7 +1448,7 @@ Photoelectric Sensor TCP Calibration
 
     /**
     * @brief Photoelectric Sensor TCP Calibration
-    * @param [in] luaPath Automatic calibration Lua program path: For QX version robots - "/fruser/FR_CalibrateTheToolTcp.lua"; For LA version robots - "/usr/local/etc/controller/lua/FR_CalibrateTheToolTcp.lua"
+    * @param [in] luaPath Automatic calibration Lua program path: "FR_CalibrateTheToolTcp.lua"
     * @param [in] offsetX Teaching point offset (x, y, z) in mm
     * @param [out] TCP Calibrated tool coordinate system (x, y, z, rx, ry, rz)
     * @return Error code
@@ -1475,9 +1475,22 @@ Photoelectric Sensor TCP Calibration Code Example
         robot.SetReConnectParam(true, 30000, 500);
         DescTran offset = { 10.0, 10.0, 3.0 };
         DescPose TCP = {};
-        rtn = robot.PhotoelectricSensorTCPCalibration("/fruser/FR_CalibrateTheToolTcp.lua", offset, TCP);
+        rtn = robot.PhotoelectricSensorTCPCalibration("FR_CalibrateTheToolTcp.lua", offset, TCP);
         printf("PhotoelectricSensorTCPCalibration rtn is  %d %f %f %f %f %f %f \n", rtn, TCP.tran.x, TCP.tran.y, TCP.tran.z, TCP.rpy.rx, TCP.rpy.ry, TCP.rpy.rz);
         robot.CloseRPC();
         robot.Sleep(9999999);
         return 0;
     }
+
+Set Global Speed Instantly
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set global speed instantly
+    * @param [in] vel Speed percentage, range [0~100]
+    * @return Error code
+    */
+    errno_t SetSpeedInstant(int vel);

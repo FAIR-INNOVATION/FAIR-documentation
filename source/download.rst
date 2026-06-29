@@ -345,11 +345,11 @@ Zero position identification model
 FAIRINO SimMachine
 -----------------------
 
-    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1JYLiyXKENXtHr2RCXI9gYwQB_vsmmZL5/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1z_cdP1EcANeu586qdqtZL9T0JZCSGR2B/view?usp=sharing>`
     
-    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1Y8o3_dx-vQHERNur1jzEFYbd8f3Tabb7/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1Ozh6SmqUSl981QEPHvcKMD69P7ijEzyw/view?usp=drive_link>`
 
-    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/126d7s0798R59zN4-MPtiMxOiCr-yT_Tz/view?usp=drive_link>`
+    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1DcCFdUDi0utnrHm6es2SBK7P2fWekigP/view?usp=sharing>`
 
 Palletizer frcap
 ---------------------------------
@@ -395,7 +395,7 @@ Communication Command Protocol
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-QX-V3.9.6-20260526.zip <https://drive.google.com/file/d/17CB1RH5D0uM4jFeeGD-F1ISS1921zpm8/view?usp=drive_link>`
+    :download:`FAIRINO-CobotSoftware-QX-V3.9.7-20260626.zip <https://drive.google.com/file/d/1Q0YoHm1P8mC9gJLre6hrsqkTt3P_b7Qb/view?usp=drive_link>`
     
-    :download:`FAIRINO-CobotSoftware-LA-V3.9.6-20260526.zip <https://drive.google.com/file/d/1v3gLOO9nPnbv4Vy5_pVmrnn0KmOBtQgL/view?usp=drive_link>`
+    :download:`FAIRINO-CobotSoftware-LA-V3.9.7-20260626.zip <https://drive.google.com/file/d/1eGNiswkke5T0qOvFzPbMY8mPYh6LZ8a5/view?usp=drive_link>`
     

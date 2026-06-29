@@ -1,3 +1,45 @@
+Version V3.9.7
+-----------------
+
+Date: 2026-06-25
+
+- **Optimized Japanese language pack for the software**:
+
+    Description: Optimized the translation content of the Japanese language pack.
+
+- **Optimized path parameters for robot LUA programs**:
+
+    Description: File input now only requires the name; the path is no longer needed.
+
+- **Optimized the weaving function for new spline linear-arc transitions**:
+    Path: Auxiliary Apps -> Process Package -> Welding Expert Library -> New Spline Weave Welding.
+
+    Description: Adapted the weaving function for the new spline linear-arc transition feature.
+
+- **Optimized the joint soft limit protection function**:
+    Path: Initial Setup -> Basic -> Joints -> Soft Limits.
+
+    Description: Optimized the stiffness and damping coefficients for each joint's soft limits.
+
+- **Added print function for robot LUA programs**:
+    Path: Teach Pendant Program -> Print Function.
+
+    Description: Enables real-time viewing of custom print information from LUA programs.
+
+- **Added end-effector Lua adapter for three-finger dexterous hand**:
+    Path: Initial Setup -> Peripherals -> Suction Cup.
+
+    Description: 1. Added adapter for end-effector suction cup and dexterous hand; 2. Optimized the existing end-effector Lua open protocol.
+
+- **Added gripper drop detection error reporting function**:
+    Path: Initial Setup -> Peripherals -> Gripper.
+
+    Description: Added error reporting for workpiece drop from gripper; motion stops after the error is reported.
+
+- **Added 24V short-circuit protection trigger feedback function for the wide-voltage control box DO module**:
+
+    Description: Added short-circuit protection and error prompt.
+
 Version V3.9.6
 -----------------
 

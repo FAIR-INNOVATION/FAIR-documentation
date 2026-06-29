@@ -205,14 +205,14 @@ feedback packet of robot controller state
       uint8_t ft_sensor_active;  // Force/torque sensor activation status, 0-reset, 1-activated 
       uint8_t EmergencyStop;   // Emergency stop flag, 0-emergency stop not pressed, 1-emergency stop pressed 
       int   motion_done;    // Motion completion signal, 1-completed, 0-not completed 
-      uint8_t gripper_motiondone; // Gripper motion completion signal, 1-completed, 0-not completed 
+      uint8_t gripper_motiondone; // Gripper motion complete signal, 0-not complete, 1-complete (no object detected), 2-motion complete (object detected)
       int   mc_queue_len;    // Motion command queue length 
       uint8_t collisionState;   // Collision detection, 1-collision, 0-no collision 
       int   trajectory_pnum;  // Trajectory point number 
       uint8_t safety_stop0_state; // Safety stop signal SI0 
       uint8_t safety_stop1_state; // Safety stop signal SI1 
       uint8_t gripper_fault_id;  // Faulty gripper number 
-      uint16_t gripper_fault;   // Gripper fault 
+      uint16_t gripper_fault;   // Gripper fault 0-no fault 1-485 timeout 2-command error 3-workpiece dropped Other-gripper fault code
       uint16_t gripper_active;   // Gripper activation status 
       uint8_t gripper_position;  // Gripper position 
       int8_t  gripper_speed;   // Gripper speed 
@@ -346,14 +346,14 @@ Robot Status Feedback Configuration Enumeration Type
         FtSensorActive = 30,        // Force/torque sensor activation status, 0-reset, 1-activated
         EmergencyStop = 31,         // Emergency stop flag, 0-emergency stop not pressed, 1-emergency stop pressed
         MotionDone = 32,            // Motion completion signal, 1-completed, 0-not completed
-        GripperMotiondone = 33,     // Gripper motion completion signal, 1-completed, 0-not completed
+        GripperMotiondone = 33,     // Gripper motion complete signal, 0-not complete, 1-complete (no object detected), 2-motion complete (object detected)
         McQueueLen = 34,            // Motion command queue length
         CollisionState = 35,        // Collision detection, 1-collision, 0-no collision
         TrajectoryPnum = 36,        // Trajectory point number
         SafetyStop0State = 37,      // Safety stop signal SI0
         SafetyStop1State = 38,      // Safety stop signal SI1
         GripperFaultId = 39,        // Faulty gripper number
-        GripperFault = 40,          // Gripper fault
+        GripperFault = 40,          // Gripper fault 0-no fault 1-485 timeout 2-command error 3-workpiece dropped Other-gripper fault code
         GripperActive = 41,         // Gripper activation status
         GripperPosition = 42,       // Gripper position
         GripperSpeed = 43,          // Gripper speed

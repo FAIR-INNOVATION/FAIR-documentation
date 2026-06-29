@@ -1268,4 +1268,4 @@ Enable torque compensation function and compensation coefficient
     * @param [in] torqueCoeff J1-J6 torque compensation coefficient [0-1]
     * @return Error code
     */
-    errno_t SerCoderCompenParams(int status, double torqueCoeff[6]);
+    errno_t SetCoderCompenParams(int status, double torqueCoeff[6]);

@@ -12,7 +12,7 @@ Set the default job program to be automatically loaded upon startup
     / * *
     * @brief set the default job program to be automatically loaded upon startup
     * @param [in] flag 0- Default programs are not automatically loaded upon startup, 1- Default programs are automatically loaded upon startup
-    * @param [in] program_name job program name and path, such as "/fruser/movej.lua", where "/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA.
+    * @param [in] program_name job program name and path, such as "movej.lua"
     * @return error code
     * /
     int LoadDefaultProgConfig(byte flag, string program_name);
@@ -24,7 +24,7 @@ Load the specified job program
 
     / * *
     * @brief Load the specified job program
-    * @param [in] program_name job program name and path, such as "/fruser/movej.lua", where "/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA.
+    * @param [in] program_name job program name and path, such as "movej.lua"
     * @return error code
     * /
     int ProgramLoad(string program_name);
@@ -36,7 +36,7 @@ Get the name of the loaded job program
 
     / * *
     * @brief Get the name of the loaded job program
-    * @param [out] program_name job program name and path, such as "/fruser/movej.lua", where "/fruser/" is the fixed path for QX, and "/usr/local/etc/controller/lua/" is the fixed path for LA.
+    * @param [out] program_name job program name and path, such as "movej.lua"
     * @return error code
     * /
     int GetLoadedProgram(ref string program_name);
@@ -116,7 +116,7 @@ Example of robot LUA program operation code
 
     private void btnWebApp_Click(object sender, EventArgs e)
     {
-        string program_name = "/fruser/Text1.lua";
+        string program_name = "Text1.lua";
         string loaded_name = "";
         byte state=0;
         int line=0;

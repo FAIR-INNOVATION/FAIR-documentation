@@ -1078,4 +1078,4 @@ Enable Torque Compensation Function and Compensation Coefficients
     * @param  torqueCoeff J1-J6 Torque compensation coefficients [0-1]
     * @return Error code
     */
-    public int SerCoderCompenParams(int status, double[] torqueCoeff)
+    public int SetCoderCompenParams(int status, double[] torqueCoeff)

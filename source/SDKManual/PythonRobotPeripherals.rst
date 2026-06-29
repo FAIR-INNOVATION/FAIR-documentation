@@ -809,24 +809,26 @@ Get end LUA execution enable status
     "Return Value", "- errorcode Success-0 Failure- errcode 
     - ``enable``: 0-don't enable; 1-enable"
 
-Setting the end LUA end device enable type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set the enabled device types for the end-effector LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype", "``SetAxleLuaEnableDeviceType(forceSensorEnable, gripperEnable, IOEnable)``"
-    "Description", "Set end LUA end device enable type"
-    "Mandatory parameters","- ``forceSensorEnable``: force sensor enable status, 0 - not enabled; 1 - enabled
-    - ``gripperEnable``: gripper enable status, 0 - not enabled; 1 - enabled
-    - ``IOEnable``: IO device enable status, 0-not enabled; 1-enabled"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
+    "Prototype", "``SetAxleLuaEnableDeviceType(self, forceSensorEnable, gripperEnable, IOEnable, dexhandEnable)``"
+    "Description", "Set the enabled device types for the end-effector LUA"
+    "Required Parameters", "
+    - ``forceSensorEnable``: Force sensor enable status, 0-disabled; 1-enabled
+    - ``gripperEnable``: Gripper enable status, 0-disabled; 1-enabled
+    - ``IOEnable``: IO device enable status, 0-disabled; 1-enabled
+    - ``dexhandEnable``: Dexterous hand enable status, 0-disabled; 1-enabled"
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
 
-Get End LUA End Device Enablement Type
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the enabled device types for the end-effector LUA
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -834,16 +836,17 @@ Get End LUA End Device Enablement Type
     :widths: 10 30
 
     "Prototype", "``GetAxleLuaEnableDeviceType()``"
-    "Description", "Get End LUA End Device Enablement Type"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode 
-    - ``forceSensorEnable``: force sensor enable status, 0 - not enabled; 1 - enabled
-    - ``gripperEnable``: gripper enable status, 0 - not enabled; 1 - enabled
-    - ``IOEnable``: IO device enable status, 0-not enabled; 1-enabled"
+    "Description", "Get the enabled device types for the end-effector LUA"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code, 0-success; non-zero-error
+    - ``forceSensorEnable``: Force sensor enable status, 0-disabled; 1-enabled
+    - ``gripperEnable``: Gripper enable status, 0-disabled; 1-enabled
+    - ``IOEnable``: IO device enable status, 0-disabled; 1-enabled
+    - ``dexhandEnable``: Dexterous hand enable status, 0-disabled; 1-enabled"
 
-Get the currently configured end device
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the currently configured end-effector devices
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -851,16 +854,17 @@ Get the currently configured end device
     :widths: 10 30
 
     "Prototype", "``GetAxleLuaEnableDevice()``"
-    "Description", "Get the currently configured end device"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode 
-    - ``forceSensorEnable[8]``: force sensor enable state, 0 - not enabled; 1 - enabled
-    - ``gripperEnable[8]``: gripper enable status, 0 - not enabled; 1 - enabled
-    - ``IOEnable[8]``: IO device enable status, 0-not enabled; 1-enabled"
+    "Description", "Get the currently configured end-effector devices"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "- Error code, 0-success; non-zero-error
+    - ``forceSensorEnable[8]``: Force sensor enable status, 0-disabled; 1-enabled
+    - ``gripperEnable[8]``: Gripper enable status, 0-disabled; 1-enabled
+    - ``IOEnable[8]``: IO device enable status, 0-disabled; 1-enabled
+    - ``dexhandEnable``: Dexterous hand enable status, 0-disabled; 1-enabled"
 
-Setting to enable the jaw movement control function
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set the enabled gripper action control functions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -868,14 +872,15 @@ Setting to enable the jaw movement control function
     :widths: 10 30
 
     "Prototype", "``SetAxleLuaGripperFunc(id, func)``"
-    "Description", "Set to enable the jaw motion control function"
-    "Mandatory parameters", "- ``id``: gripper device number
-    - ``func``: 0-jaw enable; 1-jaw initialization; 2-position setting; 3-speed setting; 4-torque setting; 6-reading the jaw status; 7-reading the initialization status; 8-reading the fault code; 9-reading the position; 10-reading the speed; 11-reading the torque,12-15 reserved"
-    "Default parameters", "NULL"
-    "Return Value", "Error Code Success-0 Failure- errcode "
+    "Description", "Set the enabled gripper action control functions"
+    "Required Parameters", "
+    - ``id``: Gripper device number
+    - ``func``: 0-gripper enable; 1-gripper initialization; 2-position setting; 3-speed setting; 4-torque setting; 6-read gripper status; 7-read initialization status; 8-read fault code; 9-read position; 10-read speed; 11-read torque; 12-set rotation count for rotary gripper; 13-set rotation speed for rotary gripper; 14-set rotation torque for rotary gripper; 15-read rotary gripper status; 16-read rotary gripper initialization status; 17-read rotary gripper rotation count; 18-read rotary gripper speed; 19-read rotary gripper torque; 20-multi-axis synchronous motion setting; 21-fault clear command; 22-single-axis running status; 23-all-axis running status;"
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
 
-Getting to Enable Jaw Motion Control
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get the enabled gripper action control functions
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.0.5
 
 .. csv-table:: 
@@ -883,11 +888,11 @@ Getting to Enable Jaw Motion Control
     :widths: 10 30
 
     "Prototype", "``GetAxleLuaGripperFunc(id)``"
-    "Description", "Get the Enable Jaw Motion Control function"
-    "Mandatory parameter", "- ``id``: gripper device number"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode 
-    - ``func``: 0-jaw enable; 1-jaw initialization; 2-position setting; 3-speed setting; 4-torque setting; 6-reading the jaw status; 7-reading the initialization status; 8-reading the fault code; 9-reading the position; 10-reading the speed; 11-reading the torque,12-15 reserved"
+    "Description", "Get the enabled gripper action control functions"
+    "Required Parameters", "- ``id``: Gripper device number"
+    "Default Parameters", "None"
+    "Return Value", "- Error code, 0-success; non-zero-error
+    - ``func``: 0-gripper enable; 1-gripper initialization; 2-position setting; 3-speed setting; 4-torque setting; 6-read gripper status; 7-read initialization status; 8-read fault code; 9-read position; 10-read speed; 11-read torque; 12-set rotation count for rotary gripper; 13-set rotation speed for rotary gripper; 14-set rotation torque for rotary gripper; 15-read rotary gripper status; 16-read rotary gripper initialization status; 17-read rotary gripper rotation count; 18-read rotary gripper speed; 19-read rotary gripper torque; 20-multi-axis synchronous motion setting; 21-fault clear command; 22-single-axis running status; 23-all-axis running status;"
 
 The Ethercat slave file is written by the robot
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1847,3 +1852,177 @@ Open Protocol Lua File Operation SDK Code Example
 
     # Call test function
     TestCtrlOpenLuaOperate(robot)
+
+Control Dexterous Hand Motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetDexterousHandsMove(self, idstart, slaveNum, pos, speed, force, max_time)``"
+    "Description", "Control dexterous hand motion"
+    "Required Parameters", "
+    - ``idstart``: Starting slave station number;
+    - ``slaveNum``: Number of slaves;
+    - ``pos[16]``: Position (-360~360);
+    - ``speed[16]``: Speed percentage, range [0~100];
+    - ``force[16]``: Torque percentage, range [0~100];
+    - ``max_time``: Maximum wait time, range [0~30000], unit ms;"
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
+        
+Control Dexterous Hand Reset and Activation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetDexterousHandsAct(self, id, act)``"
+    "Description", "Control dexterous hand reset and activation"
+    "Required Parameters", "
+    - ``id``: Slave station number;
+    - ``act``: 0-reset 1-activate"
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
+        
+Clear Dexterous Hand Error
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ClearDexterousHandsError(self)``"
+    "Description", "Clear dexterous hand error"
+    "Required Parameters", "None"
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
+    
+Set Enabled Dexterous Hand Action Control Functions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``SetDexterousHandsFunc(self, id, func)``"
+    "Description", "Set enabled dexterous hand action control functions"
+    "Required Parameters", "
+    - ``id``: Dexterous hand slave station number;
+    - ``func``: Function array, 32 elements
+        0-grip trigger, 1-gripper initialization, 2-position setting, 3-speed setting, 4-torque setting,
+        6-read gripper status, 7-read initialization status, 8-read fault code, 9-read position, 10-read speed,
+        11-read torque, 12-rotation count setting, 13-rotation speed setting, 14-rotation torque setting,
+        15-read rotary gripper status, 16-read rotary initialization status, 17-read rotation count, 18-read rotation speed,
+        19-read rotation torque, 20-multi-axis synchronous motion setting, 21-fault clear command, 22-single-axis running status,
+        23-all-axis running status"
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
+    
+Get Enabled Dexterous Hand Action Control Functions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetDexterousHandsFunc(self, id)``"
+    "Description", "Get enabled dexterous hand action control functions"
+    "Required Parameters", "
+    - ``id``: Dexterous hand slave station number;
+    - ``func``: Function array, 32 elements
+        0-grip trigger, 1-gripper initialization, 2-position setting, 3-speed setting, 4-torque setting,
+        6-read gripper status, 7-read initialization status, 8-read fault code, 9-read position, 10-read speed,
+        11-read torque, 12-rotation count setting, 13-rotation speed setting, 14-rotation torque setting,
+        15-read rotary gripper status, 16-read rotary initialization status, 17-read rotation count, 18-read rotation speed,
+        19-read rotation torque, 20-multi-axis synchronous motion setting, 21-fault clear command, 22-single-axis running status,
+        23-all-axis running status"
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
+
+End-Effector Dexterous Hand Configuration and Motion Code Example  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:  
+     
+    from fairino import Robot
+    import time
+    robot = Robot.RPC('192.168.58.2')
+
+    def main(self):
+
+        id = 1                 
+        slaveNum = 4         
+        max_time = 8000      
+        speed = [0] * 16     
+        force = [0] * 16     
+
+        for i in range(16):
+            force[i] = 50 if i < 4 else 0
+
+        def set_positions(v1, v2, v3, v4):
+            pos = [0.0] * 16
+            pos[0] = v1
+            pos[1] = v2
+            pos[2] = v3
+            pos[3] = v4
+            return pos
+
+        j1 = [-53.426,-85.916,109.280,-86.236,-96.663,-28.560]
+        j2 = [-91.877,-85.917,109.281,-86.236,-96.663,-28.560]
+        epos = [0, 0, 0, 0]
+        offset_pos = [0, 0, 0, 0, 0, 0]
+
+        ret = robot.ClearDexterousHandsError()
+        print(f"ClearDexterousHandsError -> {ret}")
+
+        setFunc = [0] * 32
+        setFunc[2] = 1   
+        setFunc[4] = 1   
+        setFunc[9] = 1   
+        setFunc[10] = 1  
+        setFunc[11] = 1  
+        setFunc[22] = 1  
+
+        ret = robot.SetDexterousHandsFunc(id, setFunc)
+        print(f"SetDexterousHandsFunc(enable + init + position/torque functions enabled) -> {ret}")
+
+        ret, getFunc = robot.GetDexterousHandsFunc(id)
+        print(f"GetDexterousHandsFunc -> {ret}")
+        if ret == 0:
+            print("GetDexterousHandsFunc :")
+            for i in range(len(getFunc)):
+                print(f"  [{i}]={getFunc[i]}", end="")
+                if (i + 1) % 8 == 0:
+                    print()  
+                elif i < len(getFunc) - 1:
+                    print(", ", end="")
+            if len(getFunc) % 8 != 0:
+
+        ret = robot.SetDexterousHandsAct(id, 1)
+        print(f"SetDexterousHandsAct() -> {ret}")
+        if ret != 0:
+            return
+            pos = set_positions(20, 20, 20, 20)
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time)
+        print(f"ret: {ret}")
+        time.sleep(5)
+
+        for iteration in range(1, 11):
+            robot.MoveJ(joint_pos=j1, tool=1, user=0, vel=100, acc=100, ovl=100,
+                        exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+            pos = set_positions(10, 10, 10, 10)
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time)
+            time.sleep(1)
+
+            robot.MoveJ(joint_pos=j2, tool=1, user=0, vel=100, acc=100, ovl=100,
+                        exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+            pos = set_positions(50, 50, 50, 50)
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time)
+            time.sleep(1)
+
+    main(robot)    

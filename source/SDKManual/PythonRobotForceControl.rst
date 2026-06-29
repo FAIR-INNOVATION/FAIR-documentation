@@ -1102,7 +1102,7 @@ Enable Torque Compensation Function and Compensation Coefficients
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SerCoderCompenParams(status, torqueCoeff)``"
+    "Prototype", "``SetCoderCompenParams(status, torqueCoeff)``"
     "Description", "Enable Torque Compensation Function and Compensation Coefficients"
     "Required Parameters", "- ``status``：Switch, 0-Disable; 1-Enable
     - ``torqueCoeff``：J1-J6 Torque compensation coefficients [0-1]"

@@ -286,6 +286,111 @@ Posture Adaptive Combined with Extended Axis and Laser Tracking Welding Teaching
      - LTTrackOff
      - #Laser tracking off
 
+New Spline Linear Arc Transition Weaving Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The new spline linear arc transition combined with weaving function is a combination of the robot's new spline linear arc transition function and weaving function, enabling the robot to perform "triangular wave weaving", "vertical L-shaped triangular wave weaving", "vertical welding triangular weaving", "sine wave weaving", and "vertical L-shaped sine wave weaving" types of weaving motions during the new spline linear arc transition process.
+
+Operation Procedure
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Calibrate the robot tool coordinate system via WebApp. For detailed operation steps of this function, please refer to the corresponding chapter of the user manual.
+
+**Step2**: Teach no fewer than 4 points via WebApp. Note that the spacing between points should be evenly distributed for best results.
+
+**Step3**: Set weaving parameters. On the WebApp main interface, click "Teach Program" -> "Program Programming" to enter the "Motion Instruction" area.
+
+.. figure:: process/073.png
+   :align: center
+   :width: 4in
+   
+.. centered:: Figure 15.1‑23 "Motion Instruction" Area
+  
+In the "Motion Instruction" area, click the "Weave" button to enter the "Weave" configuration interface. In the "Instruction Editing" area, select the process number from the "Select Number" dropdown, click "Edit" to enter the weaving process parameter configuration. After configuration, click "Configure" to save the process number.
+
+.. figure:: process/074.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Figure 15.1‑24 Setting Weaving Process Parameters
+ 
+.. note:: The new spline linear arc transition combined with weaving function currently applies to "triangular wave weaving", "vertical L-shaped triangular wave weaving", "vertical welding triangular weaving", "sine wave weaving", and "vertical L-shaped sine wave weaving" types. Select "Include" in the "Weave Wait Time" dropdown and "Continue moving during wait time" in the "Weave Position Wait" dropdown.
+
+**Step4**: Add weaving motion instructions. In the "Instruction Type" area of the "Weave" configuration interface, click "Start Weave" -> "Add" -> "Stop Weave" -> "Add" -> "Apply" to complete the weaving motion settings.
+
+.. figure:: process/075.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Figure 15.1‑25 Weaving Motion Settings
+  
+**Step5**: Add a new spline linear arc transition instruction. In the "Motion Instruction" area, click the "N-Spline" button to enter the "N-Spline" configuration interface. In the "Instruction Type" area, click the "Multi-point trajectory start" button, select "Arc transition point" from the "Control Mode" dropdown, enter parameters in the "Global average transition time" field, and click "Add" to complete the new spline motion mode configuration.
+
+.. figure:: process/076.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Figure 15.1‑26 Configuring New Spline Motion Mode
+
+.. note:: "Global average transition time" applies to the "Arc transition point" control mode. Other modes can remain default. It is recommended to adjust the value upward as much as possible.
+
+Adjustment methods:
+
+1. Divide the total motion time by (number of points - 1) to obtain the global average transition time parameter, with time units in milliseconds.
+2. Set based on the runtime of the two points with the farthest distance during the complete motion. If observation is inconvenient or there is no requirement for smooth pose transition, you can set the default to 10000 milliseconds or adjust upward.
+
+**Step6**: Add motion points. In the "Instruction Type" area of the "N-Spline" configuration interface, click "Set Point" -> "SPL". Select the motion point from the "Point Name" dropdown, enter the instruction motion speed ratio in the "Debug Speed" field, enter the smoothing radius parameter in the "Smooth Transition Radius" field, select the motion status of the point from the "Is Last Point" dropdown, and click "Add" to complete the configuration of a single motion point.
+
+.. figure:: process/077.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Figure 15.1‑27 Configuring Motion Points
+ 
+.. note:: Repeat Step 6 to complete the configuration of all motion points, and select "Yes" from the "Is Last Point" dropdown in the configuration of the final point.
+
+**Step7**: Complete the new spline linear arc transition instruction. In the "Instruction Type" area of the "N-Spline" configuration interface, click the "Multi-point trajectory end" button, then click "Add" -> "Apply" to complete the overall new spline linear arc transition instruction configuration.
+
+.. figure:: process/078.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Figure 15.1‑28 Configuring New Spline Motion End
+  
+**Step8**: Write the LUA program for the new spline linear arc transition + weaving function. Adjust the instruction order generated from Step 4 to Step 7. Run the LUA program to implement the new spline linear arc transition + weaving function.
+
+.. figure:: process/079.png
+   :align: center
+   :width: 4in
+   
+.. centered:: Figure 15.1‑29 New Spline Linear Arc Transition + Weaving Function LUA Program
+ 
+.. note:: Before the starting motion point of the new spline linear arc transition, you can add PTP motion to ensure the robot reaches the starting motion point.
+
+New Spline Linear Arc Transition + Weaving Center Return Strategy Setting
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+On the WebApp main interface, click "Auxiliary Application" -> "Process Package" -> "Welding Expert Database" to enter the "Welding Expert Database" area.
+
+.. figure:: process/080.png
+   :align: center
+   :width: 6in
+   
+.. centered:: Figure 15.1‑30 New Spline Weave Welding Instruction
+
+In the "Welding Expert Database" area, click the "New Spline Weave Welding" button to enter the "New Spline Weave Welding" configuration interface. In the "Weave Welding Parameters" area, select either "No center return" or "Extended trajectory center return" from the "Weave Center Return Type" dropdown, as shown in Figure 3-2. After selection, click the "Configure" button to complete the weave center return strategy setting.
+
+.. figure:: process/081.png
+   :align: center
+   :width: 4in
+   
+.. centered:: Figure 15.1‑31 New Spline Linear Arc Transition Weave Center Return Type
+
+.. note:: In the "Weave Center Return Type" dropdown, when "No center return" is selected, the new spline arc transition weaving motion stops after reaching the final point; when "Extended trajectory center return" is selected, the new spline arc transition weaving motion continues after reaching the final point to ensure the motion stops at the completion of a full weave cycle.
+
 Palletizing System Configuration
 ---------------------------------------------
 

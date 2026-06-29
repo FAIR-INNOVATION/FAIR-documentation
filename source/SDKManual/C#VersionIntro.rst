@@ -13,6 +13,36 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V3.9.7
+     - 2026-06-25
+     - | 1. Added gripper workpiece drop alarm error, main fault code 8, sub fault code 3.
+       | 2. Updated robot status feedback structure: added object detection status to gripper motion complete signal; added to gripper faults: 2-command error, 3-workpiece drop, others-gripper fault code +3;
+       | 3. Updated code examples for output reset after LUA program stop/pause; optimized load lua file interface to require only the lua file name, path no longer needed.
+       | 4. Updated photoelectric sensor TCP calibration code examples; optimized load file interface to require only the lua file name, path no longer needed.
+       | 5. Updated code examples for setting speed during trajectory execution; optimized load trajectory J file interface to require only the trajectory J file name, path no longer needed.
+       | 6. Updated robot trajectory J file replay code examples; optimized load trajectory J file interface to require only the trajectory J file name, path no longer needed.
+       | 7. Updated trajectory replay (trajectory look-ahead) code examples; optimized load trajectory J file interface to require only the trajectory J file name, path no longer needed.
+       | 8. LoadDefaultProgConfig() interface job program name parameter now requires only the lua file name, path no longer needed.
+       | 9. ProgramLoad() interface job program name parameter now requires only the lua file name, path no longer needed.
+       | 10. GetLoadedProgram() interface job program name parameter now requires only the lua file name, path no longer needed.
+       | 11. Updated robot LUA program operation code examples; optimized load file interface to require only the lua file name, path no longer needed.
+       | 12. Added dexterous hand enable status parameter to SetAxleLuaEnableDeviceType() interface;
+       | 13. Added dexterous hand enable status parameter to GetAxleLuaEnableDeviceType() interface;
+       | 14. Added dexterous hand enabled device number status parameter to GetAxleLuaEnableDevice() interface;
+       | 15. Expanded gripper function code array to 32 in SetAxleLuaGripperFunc() interface, added rotary gripper control, etc.;
+       | 16. Expanded gripper function code array to 32 in GetAxleLuaGripperFunc() interface, added rotary gripper status, etc.;
+       | 17. Fixed interface name error in SetCoderCompenParams();
+       | 18. Added SetDexterousHandsMove() interface for controlling dexterous hand motion.
+       | 19. Added SetDexterousHandsAct() interface for controlling dexterous hand reset and activation.
+       | 20. Added ClearDexterousHandsError() interface for clearing dexterous hand errors.
+       | 21. Added SetDexterousHandsFunc() interface for setting enabled dexterous hand action control functions.
+       | 22. Added GetDexterousHandsFunc() interface for getting enabled dexterous hand action control functions.
+       | 23. Added FT_LinInsertion() linear insertion interface and force sensor rotational insertion code examples.
+       | 24. Added FT_FindSurface(), FT_CalCenterStart(), FT_CalCenterEnd() surface positioning related interfaces and code examples.
+       | 25. Added SetWeaveBackCenterConfig(), GetWeaveBackCenterConfig() for setting and getting the weave end return to cycle zero point parameters.
+       | 26. Added SetWeaveOffsetRT() interface for setting real-time weave offset;
+       | 27. Added SetSpeedInstant() interface for real-time speed setting;
+
    * - V3.9.6
      - 2026-05-26
      - | 1.Updated robot status feedback structure, added extension axis coordinate system number status;

@@ -723,70 +723,82 @@ Get end LUA execution enable status
     */
     int GetAxleLuaEnableStatus(int[] status)
 
-Set end LUA end device enable type
+Set the enabled device types for the end-effector LUA
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief Set end LUA end device enable type
-    * @param forceSensorEnable Force sensor enable status, 0-disable; 1-enable
-    * @param gripperEnable Gripper enable status, 0-disable; 1-enable
-    * @param IOEnable IO device enable status, 0-disable; 1-enable
+    * @brief Set the enabled device types for the end-effector LUA
+    * @param forceSensorEnable Force sensor enable status, 0-disabled; 1-enabled
+    * @param gripperEnable Gripper enable status, 0-disabled; 1-enabled
+    * @param IOEnable IO device enable status, 0-disabled; 1-enabled
+    * @param dexhandEnable Dexterous hand enable status, 0-disabled; 1-enabled
     * @return  Error code
     */
-    public int SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable)
+    public int SetAxleLuaEnableDeviceType(int forceSensorEnable, int gripperEnable, int IOEnable, int dexhandEnable)
 
-Get end LUA end device enable type
+Get the enabled device types for the end-effector LUA
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Get end LUA end device enable type
-     * @param enable enable[0]:forceSensorEnable Force sensor enable status, 0-disable; 1-enable
-     * @param enable enable[1]:gripperEnable Gripper enable status, 0-disable; 1-enable
-     * @param enable enable[2]:IOEnable IO device enable status, 0-disable; 1-enable
+     * @brief Get the enabled device types for the end-effector LUA
+     * @param enable enable[0]:forceSensorEnable Force sensor enable status, 0-disabled; 1-enabled
+     * @param enable enable[1]:gripperEnable Gripper enable status, 0-disabled; 1-enabled
+     * @param enable enable[2]:IOEnable IO device enable status, 0-disabled; 1-enabled
+     * @param enable enable[3]:dexhandEnable Dexterous hand enable status, 0-disabled; 1-enabled
      * @return  Error code
      */
     public int GetAxleLuaEnableDeviceType(int[] enable)
 
-Get currently configured end devices
+Get the currently configured end-effector devices
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Get currently configured end devices
-     * @param forceSensorEnable Force sensor enable device number 0-disabled; 1-enabled
-     * @param gripperEnable Gripper enable device number, 0-disabled; 1-enabled
-     * @param IODeviceEnable IO device enable device number, 0-disabled; 1-enabled
+     * @brief Get the currently configured end-effector devices
+     * @param forceSensorEnable Force sensor enabled device number, 0-disabled; 1-enabled
+     * @param gripperEnable Gripper enabled device number, 0-disabled; 1-enabled
+     * @param IODeviceEnable IO device enabled device number, 0-disabled; 1-enabled
+     * @param dexhandEnable Dexterous hand enable status, 0-disabled; 1-enabled
      * @return  Error code
      */
-    public int GetAxleLuaEnableDevice(int[] forceSensorEnable, int[] gripperEnable, int[] IODeviceEnable)
+    public int GetAxleLuaEnableDevice(int[] forceSensorEnable, int[] gripperEnable, int[] IODeviceEnable, int[] dexhandEnable)
 
-Set enable gripper action control function
+
+Set the enabled gripper action control functions
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Set enable gripper action control function
+     * @brief Set the enabled gripper action control functions
      * @param id Gripper device number
-     * @param func func[0]-gripper enable; func[1]-gripper initialization; 2-position set; 3-speed set; 4-torque set; 6-read gripper status; 7-read initialization status; 8-read error code; 9-read position; 10-read speed; 11-read torque
+     * @param func func[0]-gripper enable; func[1]-gripper initialization; func[2]-position setting; func[3]-speed setting; func[4]-torque setting; func[6]-read gripper status;
+        func[7]-read initialization status; func[8]-read fault code; func[9]-read position; func[10]-read speed; func[11]-read torque; func[12]-set rotation count for rotary gripper;
+        func[13]-set rotation speed for rotary gripper; func[14]-set rotation torque for rotary gripper; func[15]-read rotary gripper status; func[16]-read rotary gripper initialization status;
+        func[17]-read rotary gripper rotation count; func[18]-read rotary gripper speed; func[19]-read rotary gripper torque; func[20]-multi-axis synchronous motion setting; func[21]-fault clear command;
+        func[22]-single-axis running status; func[23]-all-axis running status;
      * @return  Error code
      */
     public int SetAxleLuaGripperFunc(int id, int[] func)
 
-Get enable gripper action control function
+Get the enabled gripper action control functions
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-     * @brief Get enable gripper action control function
+     * @brief Get the enabled gripper action control functions
      * @param id Gripper device number
-     * @param func func[0]-gripper enable; func[1]-gripper initialization; 2-position set; 3-speed set; 4-torque set; 6-read gripper status; 7-read initialization status; 8-read error code; 9-read position; 10-read speed; 11-read torque
+     * @param func func[0]-gripper enable; func[1]-gripper initialization; func[2]-position setting; func[3]-speed setting; func[4]-torque setting; func[6]-read gripper status;
+        func[7]-read initialization status; func[8]-read fault code; func[9]-read position; func[10]-read speed; func[11]-read torque; func[12]-set rotation count for rotary gripper;
+        func[13]-set rotation speed for rotary gripper; func[14]-set rotation torque for rotary gripper; func[15]-read rotary gripper status; func[16]-read rotary gripper initialization status;
+        func[17]-read rotary gripper rotation count; func[18]-read rotary gripper speed; func[19]-read rotary gripper torque; func[20]-multi-axis synchronous motion setting; func[21]-fault clear command;
+        func[22]-single-axis running status; func[23]-all-axis running status;
      * @return  Error code
      */
     public int GetAxleLuaGripperFunc(int id, int[] func)
@@ -1803,3 +1815,154 @@ Code Example for Controller Peripheral Open Protocol Upload, Download, and Delet
         robot.Sleep(1000);
         return 0;
     }
+
+Control Dexterous Hand Motion
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Control dexterous hand motion
+    * @param idstart Starting slave station number
+    * @param slaveNum Number of slaves
+    * @param pos Position array, length 16, range (-360~360)
+    * @param speed Speed percentage array, length 16, range [0~100]
+    * @param force Torque percentage array, length 16, range [0~100]
+    * @param max_time Maximum wait time, range [0~30000], unit ms
+    * @return Error code
+    */
+    public int SetDexterousHandsMove(int idstart, int slaveNum, double[] pos, int[] speed, int[] force, int max_time) 
+        
+Control Dexterous Hand Reset and Activation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Control dexterous hand reset and activation
+    * @param id Slave station number
+    * @param act 0-reset 1-activate
+    * @return Error code
+    */
+    public int SetDexterousHandsAct(int id, int act)
+            
+Clear Dexterous Hand Error
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Clear dexterous hand error
+    * @return Error code
+    */
+    public int ClearDexterousHandsError()
+                
+Set Enabled Dexterous Hand Action Control Functions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set enabled dexterous hand action control functions
+    * @param id Dexterous hand slave station number
+    * @param func Function array, length 32, Bit0-grip trigger, Bit1-gripper initialization, Bit2-position setting, Bit3-speed setting, Bit4-torque setting, Bit6-read gripper status, Bit7-read initialization status, Bit8-read fault code, Bit9-read position, Bit10-read speed, Bit11-read torque, Bit12-rotation count setting, Bit13-rotation speed setting, Bit14-rotation torque setting, Bit15-read rotary gripper status, Bit16-read rotary initialization status, Bit17-read rotation count, Bit18-read rotation speed, Bit19-read rotation torque, Bit20-multi-axis synchronous motion setting, Bit21-fault clear command, Bit22-single-axis running status, Bit23-all-axis running status
+    * @return Error code
+    */
+    public int SetDexterousHandsFunc(int id, int[] func)
+                    
+Get Enabled Dexterous Hand Action Control Functions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get enabled dexterous hand action control functions
+    * @param id Dexterous hand device number
+    * @param func Output parameter array, length 32, Bit0-grip trigger, Bit1-gripper initialization, Bit2-position setting, Bit3-speed setting, Bit4-torque setting, Bit6-read gripper status, Bit7-read initialization status, Bit8-read fault code, Bit9-read position, Bit10-read speed, Bit11-read torque, Bit12-rotation count setting, Bit13-rotation speed setting, Bit14-rotation torque setting, Bit15-read rotary gripper status, Bit16-read rotary initialization status, Bit17-read rotation count, Bit18-read rotation speed, Bit19-read rotation torque, Bit20-multi-axis synchronous motion setting, Bit21-fault clear command, Bit22-single-axis running status, Bit23-all-axis running status
+    * @return Error code
+    */
+    public int GetDexterousHandsFunc(int id, int[] func)
+                    
+End-Effector Dexterous Hand Configuration and Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    public static int TestDexterousHands(Robot robot) {
+        int id = 1;
+        int slaveNum = 4;
+        int max_time = 8000;
+        int[] speed = new int[16]; 
+        int[] force = new int[16]; 
+
+        robot.LoggerInit(FrLogType.DIRECT, FrLogLevel.INFO, "D://log", 10, 10);
+        for (int i = 0; i < 16; i++) {
+            force[i] = (i < 4) ? 50 : 0;
+        }
+
+        final double[] pos = new double[16];
+
+        JointPos j1 = new JointPos(-91.876, -85.920, 109.279, -86.239, -96.664, -28.563);
+        JointPos j2 = new JointPos(-40.954, -85.920, 109.279, -86.239, -96.664, -28.563);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+
+        int ret = robot.ClearDexterousHandsError();
+        System.out.println("ClearDexterousHandsError -> " + ret);
+
+        int[] setFunc = new int[32];
+        setFunc[2] = 1;
+        setFunc[4] = 1;
+        setFunc[9] = 1;
+        setFunc[10] = 1;
+        setFunc[11] = 1;
+        setFunc[22] = 1;
+
+        ret = robot.SetDexterousHandsFunc(id, setFunc);
+
+        int[] getFunc = new int[32];
+        ret = robot.GetDexterousHandsFunc(id, getFunc);
+        System.out.println("GetDexterousHandsFunc -> " + ret);
+        if (ret == 0) {
+            for (int i = 0; i < getFunc.length; i++) {
+                System.out.print("  [" + i + "]=" + getFunc[i]);
+                if ((i + 1) % 8 == 0) {
+                    System.out.println();
+                } else if (i < getFunc.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            if (getFunc.length % 8 != 0) {
+                System.out.println();
+            }
+        }
+
+        ret = robot.SetDexterousHandsAct(id, 1);
+        if (ret != 0) {
+            return ret;
+        }
+
+        setPositions(pos, 20, 20, 20, 20);
+        ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+        robot.Sleep(5000);
+        
+        for (int iteration = 1; iteration <= 10; iteration++) {
+            robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+
+            setPositions(pos, 10, 10, 10, 10);
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+            robot.Sleep(1000);
+
+            robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+            setPositions(pos, 50, 50, 50, 50);
+            ret = robot.SetDexterousHandsMove(id, slaveNum, pos, speed, force, max_time);
+            robot.Sleep(1000);
+        }
+        return 0;
+    }    

@@ -1721,3 +1721,223 @@ Laser Welding Code Example
 
         return 0;
     }
+
+Set Weave End Return to Cycle Zero Point
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set whether to return to the cycle zero point at the end of weaving
+    * @param flag Whether to return to cycle zero point at weave end; 0-do not return; 1-return to cycle zero point
+    * @return Error code
+    */
+    public int SetWeaveBackCenterConfig(int flag)
+        
+Get Weave End Return to Cycle Zero Point Parameters
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get the weave end return to cycle zero point parameters
+    * @param flag Whether to return to cycle zero point at weave end; 0-do not return; 1-return to cycle zero point
+    * @return Error code
+    */
+    public int GetWeaveBackCenterConfig(int[] flag)
+            
+Weave End Return to Cycle Zero Point Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestSplineWeave(Robot robot)
+    {
+        JointPos j1 = new JointPos(9.000, -66.067, 67.706, -103.217, -90.151, 100.669);
+        JointPos j2 = new JointPos(-4.660, -107.973, 103.734, -76.214, -89.999, 90.886);
+        JointPos j3 = new JointPos(-36.762, -77.380, 91.364, -127.159, -90.024, 54.833);
+        JointPos j4 = new JointPos(-62.875, -89.460, 86.437, -77.030, -90.012, 31.539);
+        DescPose desc_pos1 = new DescPose(-654.129, -235.344, 246.543, 6.010, -11.535, -176.787);
+        DescPose desc_pos2 = new DescPose(-273.710, -100.871, 280.935, 5.692, 9.522, 179.512);
+        DescPose desc_pos3 = new DescPose(-566.093, 311.278, 215.008, -10.453, -17.486, -174.209);
+        DescPose desc_pos4 = new DescPose(-246.558, 328.240, 292.173, 13.912, 4.437, -179.067);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        int tool = 2;
+        int user = 0;
+        float vel = 100.0f;
+        float acc = 100.0f;
+        float ovl = 20.0f;
+        float oacc = 100.0f;
+        float blendT = 0.0f;
+        float blendR = 0.0f;
+        int flag = 0;
+        int search = 0;
+        int blendMode = 0;
+        int velAccMode = 0;
+
+        robot.WeaveEnd(0);
+        robot.SetSpeed(1);
+
+        robot.SetWeaveBackCenterConfig(1);
+        int[] weaveBackConfig = new int[1];
+        robot.GetWeaveBackCenterConfig(weaveBackConfig);
+        System.out.printf("GetWeaveBackCenterConfig:  %d \n", weaveBackConfig[0]);
+
+        robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, 100.0f, epos, blendT, flag, offset_pos);
+
+        robot.WeaveStart(0);
+        robot.NewSplineStart(0, 6000);
+        robot.NewSplinePoint(j1, desc_pos1, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(j2, desc_pos2, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(j3, desc_pos3, tool, user, vel, acc, ovl, -1, 0);
+        robot.NewSplinePoint(j4, desc_pos4, tool, user, vel, acc, ovl, -1, 1);
+        robot.NewSplineEnd();
+        robot.WeaveEnd(0);
+    }
+                
+Real-time Speed Setting (Command Frame, Low Latency)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set speed (command frame, low latency)
+    * @param vel Speed percentage, range [0~100]
+    * @return Error code
+    */
+    public int SetSpeedInstant(int vel)
+                    
+Set Real-Time Weave Offset
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Set real-time weave offset
+    * @param [in] offset Real-time offset [mm, °]
+    * @return Error code
+    */
+    public int SetWeaveOffsetRT(DescPose offset)
+                        
+Weave Speed and Offset Test Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: Java
+    :linenos:
+
+    public static void TestWeaveSpeedAndOffset(Robot robot) {
+    if (robot == null) {
+        System.out.println("ERROR: connect fail");
+        return;
+    }
+    int rtn;
+    ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+     ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+     DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+
+     JointPos j1 = new JointPos(5.027, -84.331, -75.139, -103.690, 86.379, 20.794);
+     DescPose d1 = new DescPose(324.752, -83.339, 366.314, -172.321, -0.936, -106.047);
+
+     JointPos j2 = new JointPos(-35.335, -117.598, -57.174, -95.234, 90.001, -19.560);
+     DescPose d2 = new DescPose(324.999, -355.439, 260.000, 179.995, 0.003, -105.775);
+
+     JointPos j3 = new JointPos(59.787, -117.594, -57.183, -95.222, 90.006, 75.562);
+     DescPose d3 = new DescPose(324.998, 355.441, 260.002, 179.995, 0.003, -105.775);
+
+     System.out.println("\nStep 1: MoveJ to start point");
+     rtn = robot.MoveJ(j1, d1, 1, 0, 100, 100, 50, epos, -1, 0, offset_pos);
+     System.out.println("  MoveJ(j1) rtn=" + rtn);
+     try {
+         Thread.sleep(500);
+     } catch (InterruptedException e) {
+         Thread.currentThread().interrupt();
+     }
+
+     System.out.println("\nStep 2: MoveJ to weave entry point");
+     rtn = robot.MoveJ(j2, d2, 1, 0, 100, 100, 50, epos, -1, 0, offset_pos);
+     System.out.println("  MoveJ(j2) rtn=" + rtn);
+     try {
+         Thread.sleep(500);
+     } catch (InterruptedException e) {
+         Thread.currentThread().interrupt();
+     }
+
+     System.out.println("\nStep 3: WeaveStart + MoveL in background thread");
+     robot.WeaveStart(0);
+
+     final boolean[] weaveRunning = {true};
+     final int[] threadRtn = {0};
+     Thread weaveThread = new Thread(new Runnable() {
+         @Override
+         public void run() {
+             threadRtn[0] = robot.MoveL(j3, d3, 1, 0, 100, 100, 5, -1, 0, epos, 0, 0, offset_pos, 5, 0, 0, 10);
+             System.out.println("  MoveL(weave) thread finished, rtn=" + threadRtn[0]);
+             weaveRunning[0] = false;
+         }
+     });
+     weaveThread.setDaemon(true);
+     weaveThread.start();
+     try {
+         Thread.sleep(500);
+     } catch (InterruptedException e) {
+         Thread.currentThread().interrupt();
+     }
+
+     System.out.println("\nStep 4: SetSpeed test during weaving");
+     int[] speedValues = { 20, 50, 80, 30, 60, 10 };
+     for (int speed : speedValues) {
+         if (!weaveRunning[0]) break;
+         rtn = robot.SetSpeedInstant(speed);
+         pkg = robot.GetRobotRealTimeState();
+         System.out.println("  SetSpeed(" + speed + ") -> rtn=" + rtn + ", TCP_CmpSpeed=" + pkg.target_TCP_CmpSpeed);
+         try {
+             Thread.sleep(5000);
+         } catch (InterruptedException e) {
+             Thread.currentThread().interrupt();
+         }
+     }
+
+     try {
+         Thread.sleep(5000);
+     } catch (InterruptedException e) {
+         Thread.currentThread().interrupt();
+     }
+
+     System.out.println("\nStep 5: SetWeaveOffsetRT test (50 iterations, delta=0.1)");
+     double accumOffset = 0.0;
+     for (int i = 0; i < 50 && weaveRunning[0]; i++) {
+         accumOffset += 0.1;
+         DescPose weaveOffset = new DescPose(0, 0, accumOffset, 0, 0, 0);
+         rtn = robot.SetWeaveOffsetRT(weaveOffset);
+         pkg = robot.GetRobotRealTimeState();
+         System.out.printf("  [%d/50] SetWeaveOffsetRT(x=%.1f) -> rtn=%d, TCP_pos=(%.2f,%.2f,%.2f)\n",
+             i + 1, accumOffset, rtn,
+             pkg.tl_cur_pos[0], pkg.tl_cur_pos[1], pkg.tl_cur_pos[2]);
+         try {
+             Thread.sleep(100);
+         } catch (InterruptedException e) {
+             Thread.currentThread().interrupt();
+         }
+     }
+
+     System.out.println("\nStep 6: Wait for weave MoveL, then WeaveEnd");
+      try {
+          weaveThread.join();
+      } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+      }
+      robot.WeaveEnd(0);
+      try {
+          Thread.sleep(500);
+      } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+      }
+
+      System.out.println("\nStep 7: MoveL back to start");
+      rtn = robot.MoveL(j1, d1, 1, 0, 100, 100, 50, -1, 0, epos, 0, 0, offset_pos, 50, 0, 0, 10);
+      System.out.println("  MoveL(back) rtn=" + rtn);
+
+      pkg = robot.GetRobotRealTimeState();
+      System.out.println("\n  Final robot state: main_code=" + pkg.main_code + ", sub_code=" + pkg.sub_code);
+    }

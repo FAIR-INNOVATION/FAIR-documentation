@@ -221,14 +221,14 @@ Robot Status Feedback Structure Type
 
         public byte EmergencyStop;          // Emergency stop flag, 0-not pressed, 1-pressed
         public int motion_done;             // Motion completion signal, 1-completed, 0-not completed
-        public byte gripper_motiondone;     // Gripper motion completion signal, 1-completed, 0-not completed
+        public byte gripper_motiondone;     // Gripper motion complete signal, 0-not complete, 1-complete (no object detected), 2-motion complete (object detected)
         public int mc_queue_len;            // Motion command queue length
         public byte collisionState;         // Collision detection, 1-collision, 0-no collision
         public int trajectory_pnum;         // Trajectory point number
         public byte safety_stop0_state;     // Safety stop signal SI0
         public byte safety_stop1_state;     // Safety stop signal SI1
         public byte gripper_fault_id;       // Faulty gripper number
-        public UInt16 gripper_fault;     /* Gripper fault */
+        public UInt16 gripper_fault;     /* Gripper fault 0-no fault 1-485 timeout 2-command error 3-workpiece dropped Other-gripper fault code */
         public UInt16 gripper_active;    /* Gripper activation status */
         public byte gripper_position;       // Gripper position
         public byte gripper_speed;       /* Gripper speed */

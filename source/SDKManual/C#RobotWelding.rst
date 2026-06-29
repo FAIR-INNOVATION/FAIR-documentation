@@ -1056,7 +1056,7 @@ Arc tracking welder current feedback conversion parameters
     * @param [in] currentHigh AI channel upper limit corresponds to the welder current value, default value 100V, range [0-200V].
     * @return Error code
     */
-    int ArcWeldTraceCurrentPara(float AILow, float AIHigh, float currentLow, float currentHigh);
+    public int ArcWeldTraceCurrentPara(double AILow, double AIHigh, double currentLow, double currentHigh)
 
 Arc Trace Welder Voltage Feedback Conversion Parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1073,7 +1073,7 @@ Arc Trace Welder Voltage Feedback Conversion Parameters
     * @param [in] voltageHigh AI channel upper limit corresponds to the welder voltage value, default value 100V, range [0-200V] * @param [in] voltageHigh AI channel upper limit corresponds to the welder voltage value, default value 100V, range [0-200V
     * @return Error code
     */
-    int ArcWeldTraceVoltagePara(float AILow, float AIHigh, float voltageLow, float voltageHigh);
+    public int ArcWeldTraceVoltagePara(double AILow, double AIHigh, double voltageLow, double voltageHigh)
 
 Arc Trace Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1082,17 +1082,16 @@ Arc Trace Code Example
 .. code-block:: c#
    :linenos:
 
-   private void btnweld_Click(object sender, EventArgs e)
+   private void button8_Click(object sender, EventArgs e)
    {
-      DescPose safetydescPose = new DescPose(-504.043, 275.181, 40.908, -28.002, -42.025, -14.044);
-      JointPos safetyjointPos = new JointPos(-39.078, -76.732, 87.227, -99.47, -94.301, 18.714);
-      DescPose startdescPose = new DescPose(-473.86, 257.879, -20.849, -37.317, -42.021, 2.543);
-      JointPos startjointPos = new JointPos(-43.487, -76.526, 95.568, -104.445, -89.356, 3.72);
+      DescPose startdescPose = new DescPose(441.901, 416.508, -51.979, -179.234, 0.718, -115.305);
+      JointPos startjointPos = new JointPos(-146.22, -60.551, 104.859, -135.317, -90.289, 59.088);
 
+      DescPose enddescPose = new DescPose(441.901, 615.317, -51.979, -179.234, 0.718, -115.305);
+      JointPos endjointPos = new JointPos(-133.22, -44.193, 74.934, -121.661, -90.509, 72.087);
 
-
-      DescPose enddescPose = new DescPose(-499.844, 141.225, 7.72, -34.856, -40.17, 13.13);
-      JointPos endjointPos = new JointPos(-31.305, -82.998, 99.401, -104.426, -89.35, 3.696);
+      DescPose safetydescPose = new DescPose(441.901, 416.508, -51.979, -179.234, 0.718, -115.305);
+      JointPos safetyjointPos = new JointPos(-146.22, -60.551, 104.859, -135.317, -90.289, 59.088);
 
       ExaxisPos exaxisPos = new ExaxisPos(0, 0, 0, 0);
       DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
@@ -1100,27 +1099,28 @@ Arc Trace Code Example
 
       robot.WeldingSetCurrentRelation(0, 495, 1, 10, 0);
       robot.WeldingSetVoltageRelation(10, 45, 1, 10, 1);
-      robot.WeldingSetVoltage(0, 25, 1, 0);// ----设置电压
-      robot.WeldingSetCurrent(0, 260, 0, 0);// ----设置电流
+      robot.WeldingSetVoltage(0, 25, 1, 0); 
+      robot.WeldingSetCurrent(0, 260, 0, 0); 
 
       int rtn = robot.ArcWeldTraceAIChannelCurrent(4);
       Console.WriteLine("ArcWeldTraceAIChannelCurrent rtn is " + rtn);
       rtn = robot.ArcWeldTraceAIChannelVoltage(5);
       Console.WriteLine("ArcWeldTraceAIChannelVoltage rtn is " + rtn);
-      rtn = robot.ArcWeldTraceCurrentPara((float)0, (float)5, (float)0, (float)500);
+      rtn = robot.ArcWeldTraceCurrentPara((double)0, (double)5, (double)0, (double)500);
       Console.WriteLine("ArcWeldTraceCurrentPara rtn is " + rtn);
-      rtn = robot.ArcWeldTraceVoltagePara((float)1.018, (float)10, (float)0, (float)50);
+      rtn = robot.ArcWeldTraceVoltagePara((double)1.018, (double)10, (double)0, (double)50);
       Console.WriteLine("ArcWeldTraceVoltagePara rtn is " + rtn);
 
       robot.MoveJ(startjointPos, startdescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
       robot.ArcWeldTraceControl(1, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
       robot.ARCStart(0, 0, 10000);
       robot.WeaveStart(0);
-      // robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, exaxisPos, 0, 0, offdese);
+         robot.MoveL(endjointPos, enddescPose, 1, 0, 100, 100, 2, -1, 0,exaxisPos, 0, 0, offdese);
       robot.ARCEnd(0, 0, 10000);
       robot.WeaveEnd(0);
       robot.ArcWeldTraceControl(0, 0, 1, 0.08, 5, 5, 300, 1, 0.06, 4, 4, 300, 1, 0, 4, 1, 10, 0, 0);
       robot.MoveJ(safetyjointPos, safetydescPose, 1, 0, 20, 100, 100, exaxisPos, -1, 0, offdese);
+
    }
 
 Start of wire position finding
@@ -1784,4 +1784,83 @@ Laser Welding Code Example
         Console.WriteLine("Test completed");
 
         return ;
+    }
+
+Set Weave End Return to Cycle Zero Point
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Set whether to return to the cycle zero point at the end of weaving
+    * @param [in] flag Whether to return to cycle zero point at weave end; 0-do not return; 1-return to cycle zero point
+    * @return  Error code
+    */
+    public int SetWeavebackCenterConfig(int flag) 
+           
+Get Weave End Return to Cycle Zero Point Parameters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Get the weave end return to cycle zero point parameters
+    * @param [out] flag Whether to return to cycle zero point at weave end; 0-do not return; 1-return to cycle zero point
+    * @return  Error code
+    */
+    public int GetWeavebackCenterConfig(ref int flag)
+           
+Weave End Return to Cycle Zero Point Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    public void TestSplineWeave()
+    {
+        int rtn;
+
+        // Weave return to center configuration
+        robot.SetWeavebackCenterConfig(1);
+        int weaveBackConfig = 0;
+        robot.GetWeavebackCenterConfig(ref weaveBackConfig);
+        Console.WriteLine("GetWeavebackCenterConfig: {0}", weaveBackConfig);
+
+        JointPos j1 = new JointPos(9.000, -66.067, 67.706, -103.217, -90.151, 100.669);
+        JointPos j2 = new JointPos(-4.660, -107.973, 103.734, -76.214, -89.999, 90.886);
+        JointPos j3 = new JointPos(-36.762, -77.380, 91.364, -127.159, -90.024, 54.833);
+        JointPos j4 = new JointPos(-62.875, -89.460, 86.437, -77.030, -90.012, 31.539);
+        DescPose desc_pos1 = new DescPose(-654.129, -235.344, 246.543, 6.010, -11.535, -176.787);
+        DescPose desc_pos2 = new DescPose(-273.710, -100.871, 280.935, 5.692, 9.522, 179.512);
+        DescPose desc_pos3 = new DescPose(-566.093, 311.278, 215.008, -10.453, -17.486, -174.209);
+        DescPose desc_pos4 = new DescPose(-246.558, 328.240, 292.173, 13.912, 4.437, -179.067);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        int tool = 2;
+        int user = 0;
+        float vel = 100.0f;
+        float acc = 100.0f;
+        float ovl = 20.0f;
+        float blendT = 0.0f;
+        float blendR = 0.0f;
+        byte flag = 0;
+
+        robot.SetSpeed(1);
+
+        // Move to starting point j1
+        rtn = robot.MoveJ(j1, desc_pos1, tool, user, vel, acc, 100.0f, epos, blendT, flag, offset_pos);
+        Console.WriteLine("MoveJ to j1 rtn: {0}", rtn);
+
+        // Weave + spline curve motion
+        robot.WeaveStart(0);
+        robot.NewSplineStart(0, 6000);
+        robot.NewSplinePoint(j1, desc_pos1, tool, user, vel, acc, ovl, -1.0f, 0);
+        robot.NewSplinePoint(j2, desc_pos2, tool, user, vel, acc, ovl, -1.0f, 0);
+        robot.NewSplinePoint(j3, desc_pos3, tool, user, vel, acc, ovl, -1.0f, 0);
+        robot.NewSplinePoint(j4, desc_pos4, tool, user, vel, acc, ovl, -1.0f, 1);
+        robot.NewSplineEnd();
+
+        Console.WriteLine("TestSplineWeave completed");
     }

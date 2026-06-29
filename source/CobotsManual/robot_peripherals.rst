@@ -464,6 +464,122 @@ Rotary Gripper
 
 .. note:: The rotation turns are absolute rotation turns. The maximum forward rotation turns are 90, and the maximum reverse rotation turns are 90. A reset operation is required after rotation.
 
+Gripper Workpiece Drop Detection Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configuration Instructions
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Users can modify the end open protocol to read the gripper's drop alarm register value and feed it back to the robot. When the gripper sets this fault, the robot will simultaneously trigger the "Gripper Workpiece Drop Alarm" fault.
+
+Taking the Junduo gripper as an example, the following is an example of adding gripper drop detection to the end open protocol. This code reads bit 1 of the gripper's 0x07D0 register. When this bit is set to 1, the workpiece drop flag is triggered, and GripState is assigned a value of 3 and passed to the robot, triggering the "Gripper Workpiece Drop Alarm" fault.
+
+If you encounter any issues during writing, please contact our company for technical support.
+
+.. centered:: Example of Adding Junduo Gripper Drop Detection Logic to the End Open Protocol
+
+.. code-block:: console
+    :linenos:  
+
+    ……
+    local T5 = {0x01,0x03,0x07,0xD0,0x00,0x01,0x84,0x87}
+    ……
+    if (Rcmd3 == 7) then
+    T5[7], T5[8] = CrcValue(T5[1], T5[2], T5[3], T5[4], T5[5], T5[6])
+    EndTxGripData(T5[1], T5[2], T5[3], T5[4], T5[5], T5[6], T5[7], T5[8])
+    DelayMs(10)
+    a, Rxd1, Rxd2, Rxd3, Rxd4, Rxd5, Rxd6, Rxd7 = EndRxGripData()
+    RxdCrcH, RxdCrcL = CrcValue(Rxd1, Rxd2, Rxd3, Rxd4, Rxd5)
+    if ((a == 8) and (Rxd1 == Rcmd2) and (Rxd2 == 0x03) and (Rxd3 == 0x02) and (Rxd6 == RxdCrcH) and (Rxd7 == RxdCrcL)) then
+    local Fall = ((Rxd5 & 0x02) >> 1)
+    Rxd5 = ((Rxd5 & 0xC0) >> 6)
+    if(Fall == 0)then
+    if (Rxd5 == 0x00) then
+    GripState = 0x00
+    elseif (Rxd5 == 0x03) then
+    GripState = 0x01
+    elseif ((Rxd5 == 0x01) or (Rxd5 == 0x02)) then
+    GripState = 0x02
+    end
+    else
+    GripState = 0x03
+    end
+    GripStateBack(GripState)
+    end
+    end
+
+Based on the end protocol with the drop detection logic added, go to "Initial Settings" -> "Peripherals" -> "Gripper" to upload, update, and apply the end LUA open protocol.
+
+.. figure:: robot_peripherals/316.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.2‑13 Gripper End Protocol Upload
+
+After restarting the robot, the gripper can be used normally. If a workpiece drop occurs during gripper use, the robot will report "Gripper workpiece dropped, please reset and reactivate the gripper", and the robot will simultaneously stop the current motion and the currently running LUA program.
+
+The main and sub fault codes of ports 8083 and 20004 will change to 8-3, with the corresponding gripper error code being 3. For other gripper error codes uploaded by the gripper itself, the controller will add 3 to the original error code.
+
+.. figure:: robot_peripherals/317.png
+   :align: center
+   :width: 3in
+
+.. centered:: Figure 8.2‑14 "Gripper Workpiece Dropped" Fault
+ 
+It should be noted that after clearing this fault, the user needs to manually send the "Gripper Reset" and "Gripper Activate" commands to clear the drop flag in the gripper's register. This can be done through page buttons or LUA commands; otherwise, the fault will still be reported on the next run.
+
+.. figure:: robot_peripherals/318.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.2‑15 Resetting and Activating the Gripper via the Page
+
+.. figure:: robot_peripherals/319.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.2‑16 Resetting and Activating the Gripper via LUA Commands
+
+In addition, the Junduo gripper provides a drop detection threshold register at address 0x1399, which needs to be modified by writing with the 0x10 command. The modification range is 0~1000. The end protocol provided in this document can change the value of this register. The first write after each protocol run writes this value (0x14, modifiable as needed). An example is shown in 2-2 below. For detailed usage, please consult the Junduo gripper manufacturer for further information.
+
+.. centered:: Example of Adding Junduo Gripper Drop Threshold Modification to the End Open Protocol
+
+.. code-block:: console
+    :linenos:  
+
+    ……
+    local T10 = {0x01,0x10,0x13,0x99,0x00,0x01,0x02,0x00,0x14,0x00,0x00}
+    ……
+    if Set == 0 then
+    T10[10],T10[11]= CrcValue(T10[1],T10[2],T10[3],T10[4],T10[5],T10[6],T10[7],T10[8],T10[9])
+    EndTxGripData(T10[1],T10[2],T10[3],T10[4],T10[5],T10[6],T10[7],T10[8],T10[9],T10[10],T10[11])
+    DelayMs(35)
+    a,Rxd1, Rxd2, Rxd3, Rxd4, Rxd5,Rxd6,Rxd7,Rxd8 = EndRxGripData()
+    Set=1
+    end
+
+Appendix 1: Motion Controller Errors and Handling Methods
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. centered:: Motion Controller Error Code Table
+
+.. list-table:: 
+   :widths: 15 40 100
+   :header-rows: 1
+
+   * - Main Fault Code
+     - Sub Fault Code
+     - Description
+   * - 8-End Device Error
+     - 1
+     - Gripper motion timeout error, resettable
+   * - 8-End Device Error
+     - 2
+     - End 485 communication timeout, resettable
+   * - 8-End Device Error
+     - 3
+     - Gripper workpiece drop alarm, resettable. After clearing the fault, please reset and reactivate the gripper
+
 Force Sensor
 -------------------------
 
@@ -7022,3 +7138,117 @@ Lua Script Written for DIO Health Care Moxibustion Head as an Example
     --***
     LuaGc()
     end
+
+Dexterous Hand Function
+---------------------------------------------------------------------
+
+Overview
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The end LUA open protocol adds the following functions:
+
+1. The end LUA open protocol adapts to the dexterous hand to achieve synchronous joint movement of the dexterous hand.
+2. Added multi-slave synchronous command issuance function for simultaneous response of multiple slave motors.
+
+Environment Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+End Firmware Version: FR_END_FV201013_MAIN_U1_T01_20260407
+
+Robot Software Version: V3.9.7 and above
+
+Dexterous Hand Related Operation Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dexterous Hand Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Open WebApp, go to Initial Settings -> Peripherals -> Dexterous Hand -> Protocol Management interface, upload the Dexterous Hand Lua file, select the uploaded file and click the "Apply" button. After the upgrade success prompt, restart the control box.
+
+.. figure:: robot_peripherals/306.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑1 Protocol Management
+
+2. Open WebApp, go to Initial Settings -> Peripherals -> Dexterous Hand -> Communication Parameters interface, configure the communication parameters, including baud rate, data bits, stop bits, etc., and click the "Configure" button after completion.
+
+.. figure:: robot_peripherals/307.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑2 Communication Parameter Configuration
+
+Detailed end communication parameters are as follows:
+
+- **Baud Rate**: Supports 1-9600, 2-14400, 3-19200, 4-38400, 5-56000, 6-67600, 7-115200, 8-128000; the end Rs485 driver chip is low-speed 485, baud rate cannot exceed 200k;
+- **Data Bits**: Supports (8, 9), currently 8 is commonly used;
+- **Stop Bits**: 1-1, 2-0.5, 3-2, 4-1.5, currently 1 is commonly used;
+- **Parity**: 0-None, 1-Odd, 2-Even, currently 0 is commonly used;
+- **Timeout Time**: 1~1000ms, this value needs to be set reasonably in combination with peripherals;
+- **Timeout Retries**: 1~10, mainly for timeout retransmission to reduce occasional anomalies and improve user experience;
+- **Periodic Command Interval**: 1~1000ms, mainly for the time interval between each periodic command issuance;
+
+3. Open WebApp, go to Initial Settings -> Peripherals -> Dexterous Hand -> End Protocol Enable interface, enable the end protocol, start the dexterous hand device, and configure the corresponding function codes for the dexterous hand.
+
+.. figure:: robot_peripherals/308.png
+   :align: center
+   :width: 6in
+
+.. figure:: robot_peripherals/309.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑3 Dexterous Hand Corresponding Function Codes
+
+4. The currently defined function codes of the end LUA open protocol are shown in the following figures.
+
+.. figure:: robot_peripherals/310.png
+   :align: center
+   :width: 6in
+
+.. figure:: robot_peripherals/311.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑4 Open Protocol Function Codes
+
+.. note:: The dexterous hand must support reading the running status related function codes to facilitate querying the motion status.
+  
+Dexterous Hand Motion Control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Open WebApp, go to Teach Program -> Program Programming interface, and open the dexterous hand peripheral instructions.
+
+.. figure:: robot_peripherals/312.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.19‑5 Dexterous Hand Peripheral Instructions
+   
+2. Click Activate, select the corresponding dexterous hand start address, and add the corresponding activation instruction.
+
+.. figure:: robot_peripherals/313.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑6 Dexterous Hand Activation Instruction
+
+3. Click Control, fill in the position, speed, and torque data required for single slave motion of the dexterous hand, fill in the maximum timeout time, and add the corresponding control instruction.
+
+.. figure:: robot_peripherals/314.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑7 Dexterous Hand Control Instruction
+
+Dexterous Hand Data Monitoring
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Open WebApp, go to Initial Settings -> Peripherals -> Dexterous Hand -> End Protocol Enable interface, and enable status monitoring. After issuing control instructions, real-time feedback data of the dexterous hand's single slave position, speed, and torque can be obtained in the Dexterous interface on the right.
+
+.. figure:: robot_peripherals/315.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.19‑8 Dexterous Hand Real-time Feedback Data    

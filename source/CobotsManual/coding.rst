@@ -8558,3 +8558,134 @@ The following is a typical LUA program for positioner-based intersecting line we
    :align: center
 
 .. centered:: Figure 9.37‑18 Positioner - Intersecting Line Welding Example Program
+
+Robot LUA Program PrintMsg() Print Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The robot LUA program has built-in print instructions that can output specified information to the WebApp print window. This function supports printing of values, strings, tables, booleans, etc., and is equipped with auxiliary capabilities such as print log storage, content search, and log download, facilitating debugging and data tracing.
+
+Print Instruction Editing and Adding
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click the "Print" button on the "Logic Instructions" page to open the PrintMsg() print instruction editing page. First, set the print text and data type respectively.
+
+.. image:: coding/573.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑1 Print Instruction Editing Page   
+
+- **Text**: Fill in a custom description string to indicate the meaning of the printed content, e.g., "robot current pos :", "recv socket value :", etc.
+- **Type**: Divided into "Variable" and "Function" categories, select as needed.
+- **Variable**: Print custom variable values, supporting numeric, string, table, boolean, and other variable types.
+- **Function**: Print the return value of the specified instruction function. After selecting this type, you can choose the target function from the function list below, such as GetActualTCPPose() for getting robot TCP position, GetDI() for reading controller DI input status, GetActualJointPosDegree() for getting current robot joint angles, etc.
+
+Take printing the robot's current joint position as an example: enter the print text "robot current joint pos :", select Function as the data type, and choose the function GetActualJointPosDegree(), then click Add and Apply in sequence. The system will automatically generate the corresponding print instruction in the LUA program:
+
+.. code-block:: console
+    :linenos:
+
+    PrintMsg("robot current joint pos :",GetActualJointPosDegree())
+
+.. image:: coding/574.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑2 Adding a Print Instruction   
+
+You can also switch the program panel to the editable page, enter the instruction name PrintMsg(), and enter the content to be printed in the parameters, separating multiple print contents with commas.
+
+.. image:: coding/575.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑3 Writing Custom Print Information  
+
+Viewing Print Information and Basic Operations
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click the print display button to bring up the print information pop-up window. Switch the robot to automatic mode and run the program, and the printed content will be output in real-time in the window. Each message contains four pieces of information: timestamp, LUA program name, code line number, and printed content.
+
+.. image:: coding/576.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑4 Print Content Display Box  
+
+Clear Print Content
+*******************************************************************
+
+Click the "Clear" button at the top of the print window to clear all displayed content in the window with one click.
+
+.. image:: coding/577.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑5 Clearing Print Content  
+
+Print Content Search
+*******************************************************************
+
+Enter the target keyword in the search input box and click Find. The window will only display print records containing the keyword, hiding the rest. After clearing the search box and clicking Find again, all print information will be restored.
+
+.. image:: coding/578.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑6 Print Content Search  
+
+Print Log Configuration and Management
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Print Log Storage Parameter Configuration
+*******************************************************************
+
+In the webapp, click "System Settings" and "Maintenance Mode" in sequence to enter maintenance mode. Find the "Log Management" and "Print Log" modules to configure enabling/disabling the print log storage function, set the number of saved files, and the maximum number of print entries per log file. After enabling print log storage, all print data will be automatically written to log files.
+
+.. image:: coding/579.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑7 Print Log Storage Parameter Configuration 
+
+When the robot device restarts the system or the number of entries in a single log file reaches the set limit, a new log file is automatically created and log rotation is triggered. When the total number of log files exceeds the maximum storage limit, the system will automatically delete the oldest log files.
+
+Print Log Download
+*******************************************************************
+
+Click the download button at the top of the print window to download all printed content in the current window to the local computer.
+
+.. image:: coding/580.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑8 Print Log Download 
+
+In addition to directly downloading print logs, print logs are also included when downloading controller logs and full data source files.
+
+Print Instruction Code Examples
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Printing Robot Received Target Position
+*******************************************************************
+
+The following is a program where the robot reads the target Cartesian x, y, z positions from a ModbusTCP slave and controls the robot to move to the target position. In the program, each time the target position is read, the PrintMsg() instruction is used to print the target position.
+
+.. image:: coding/581.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑9 Example of Printing Robot Target Running Position 
+
+Printing Robot Real-Time Position and Control Box DI Data
+*******************************************************************
+
+The following is a program for non-blocking robot motion that prints the robot position and control box DI values in real-time during motion.
+
+.. note:: Note: When calling the PrintMsg() print instruction in a loop, you need to use the sleep_ms() instruction to set the loop sleep interval to avoid an infinite loop.
+
+.. image:: coding/582.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.39‑10 Example of Printing Current Position and DI During Robot Motion   

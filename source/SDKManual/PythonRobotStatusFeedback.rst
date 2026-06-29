@@ -98,7 +98,7 @@ Robot Status Feedback Structure Type
             # Status signals
             ("EmergencyStop", c_uint8),         # Emergency stop flag, 0-not pressed, 1-pressed
             ("motion_done", c_int),             # Motion completion signal, 1-completed, 0-not completed
-            ("gripper_motiondone", c_uint8),    # Gripper motion completion signal, 1-completed, 0-not completed
+            ("gripper_motiondone", c_uint8),    # Gripper motion complete signal, 0-not complete, 1-complete (no object detected), 2-motion complete (object detected)
             ("mc_queue_len", c_int),            # Motion command queue length
             ("collisionState", c_uint8),        # Collision detection, 1-collision, 0-no collision
             ("trajectory_pnum", c_int),         # Trajectory point number
@@ -107,7 +107,7 @@ Robot Status Feedback Structure Type
 
             # Gripper information
             ("gripper_fault_id", c_uint8),      # Faulty gripper number
-            ("gripper_fault", c_uint16),        # Gripper fault
+            ("gripper_fault", c_uint16),        # Gripper fault 0-no fault 1-485 timeout 2-command error 3-workpiece dropped Other-gripper fault code
             ("gripper_active", c_uint16),      # Gripper activation status
             ("gripper_position", c_uint8),      # Gripper position
             ("gripper_speed", c_int8),          # Gripper speed
@@ -280,14 +280,14 @@ Controller status feedback data packet
     "ft_sensor_active", "torque sensor active status, 0-reset, 1-active"
     "EmergencyStop", "Emergency stop sign, 0 - emergency stop not pressed, 1 - emergency stop pressed"
     "motion_done", "motion_in_place signal,1-in place, 0-not in place"
-    "gripper_motiondone", "Gripper motion done signal,1-done, 0-not done "
+    "gripper_motiondone", "Gripper motion complete signal, 0-not complete, 1-complete (no object detected), 2-motion complete (object detected)"
     "mc_queue_len", "motion command queue length"
     "collisionState", "Collision detection, 1-collision, 0-no collision "
     "trajectory_pnum", "trajectory point number"
     "safety_stop0_state", "safety stop signal SI0"
     "safety_stop1_state", "safety stop signal SI1"
     "gripper_fault_id", "error_claw_number"
-    "gripper_fault", "gripper_fault"
+    "gripper_fault", "Gripper fault 0-no fault 1-485 timeout 2-command error 3-workpiece dropped Other-gripper fault code"
     "gripper_active", "gripper_jaw_activity_status, 0-unactivated, 1-activated"
     "gripper_position", "Gripper position (percentage)"
     "gripper_speed", "Gripper speed (percentage)"
