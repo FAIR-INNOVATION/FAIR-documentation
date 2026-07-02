@@ -4,9 +4,13 @@
 
 Brochure
 --------------
-    :download:`FAIRINO Product Catalogue <_static/_doc/FAIRINO Product Catalogue.pdf>`
+    :download:`FAIRINO Company Profile <_static/_doc/FAIRINO Company Profile.pdf>`
 
     :download:`FAIRINO Accessories Ecosystem <_static/_doc/FAIRINO Accessories Ecosystem.pdf>`
+
+    :download:`FAIRINO Welding Brochure <_static/_doc/FAIRINO Welding Brochure.pdf>`
+
+    :download:`FAIRINO Humanoid Robot <_static/_doc/FAIRINO Humanoid Robot.pdf>`
 
 Qualification Certification
 ---------------------------------
