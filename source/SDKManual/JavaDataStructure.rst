@@ -498,6 +498,7 @@ Robot State Feedback Structure Type
         public int socketReadTimeout;                // Socket read timeout
         public int tsWebStateComErr;                 // TS Web state communication error
         public int exaxisCoordID;                  //Extended axis coordinate system ID
+        public int programRunState                //LUA program running status 0-program not running; 1-program running (including program paused)
     }
 
 Robot Status Feedback Configuration Result Class
@@ -654,4 +655,5 @@ Robot Status Feedback Configuration Enumeration Type
         SocketReadTimeout,      // socket read timeout, bit0-bit4 correspond to socketID 1-4
         TsWebStateComErr,       // web-torque communication failure: 0-normal, 1-failure
         ExaxisCoordID           // Extended axis coordinate system ID
+        programRunState         //LUA program running status 0-program not running; 1-program running (including program paused)
     };

@@ -209,7 +209,7 @@ Set the external tool coordinate system
  
      /**
      * @brief Set the external tool coordinate system. 
-     * @param [in] id Coordinate system number, range [0~14]. 
+     * @param [in] id Coordinate system number, 20-39 correspond to external tool coordinate systems 0-19. 
      * @param [in] etcp Tool center point relative to end-flange center position. 
      * @param [in] etool To be determined. 
      * @return Error code 
@@ -223,7 +223,7 @@ Setting up a list of external tool coordinate systems
  
      /**
      * @brief Set the list of external tool coordinate systems.
-     * @param [in] id Coordinate system number, range [0~14]. 
+     * @param [in] id Coordinate system number, 20-39 correspond to external tool coordinate systems 0-19. 
      * @param [in] etcp tool center point relative to end-flange center position
      * @param [in] etool pending
      * @return Error code

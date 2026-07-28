@@ -13,6 +13,24 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V3.9.8
+     - 2026-07-27
+     - | 1. Updated the robot status feedback structure to include the current robot LUA program running status: 0 - program not running; 1 - program running (including program paused);
+       | 2. Updated parameter descriptions for SetExToolCoord() and SetExToolList() interfaces for setting external tool coordinate system and tool coordinate system list. The external tool coordinate system numbers have been updated to 20-39. Updated the code examples for external tool coordinate system operations.
+       | 3. Added the ability to retrieve tool type, installation position, tool ID, and load number parameters to the GetToolCoordWithID() interface for getting tool coordinate system parameters.
+       | 4. Added the ability to retrieve reference coordinate system parameters to the GetWObjCoordWithID() interface for getting workpiece coordinate system parameters.
+       | 5. Added the ability to retrieve the robot end-mounted workpiece coordinate system pose parameters to the GetExToolCoordWithID() interface for getting external tool coordinate system parameters.
+       | 6. Added the ability to retrieve extended axis number and calibration flag parameters to the GetExAxisCoordWithID() interface for getting extended axis coordinate system parameters.
+       | 7. Added robot joint safety speed parameter settings to the SetVelReducePara() interface for setting robot safety speed.
+       | 8. Added a welding machine control mode acquisition example to the welding parameter configuration code example.
+       | 9. Added code examples for getting extended DI and extended DO function configurations to the extended IO welding signal configuration code example.
+       | 10. Added a new code example for setting robot joint safety speed;
+       | 11. Added a new interface WaitStationaryMotionDone() for waiting for in-place idle motion to complete;
+       | 12. Added a new interface SetStationaryTrackPara() for configuring conveyor belt in-place tracking parameters, along with a conveyor belt in-place tracking code example;
+       | 13. Added new interfaces WorkPieceTrsfStart() and WorkPieceTrsfEnd() for starting and ending workpiece coordinate system transformation, along with a workpiece coordinate system transformation code example.
+       | 14. Added GetWeldMachineCtrlMode() interface for getting the welding machine control mode.
+       | 15. Added GetExtDIConfig() and GetExtDOConfig() interfaces for getting extended DI function and extended DO function configurations.
+       
    * - V3.9.7
      - 2026-06-25
      - | 1. Updated robot status feedback structure: added object detection status to gripper motion complete signal; added to gripper faults: 2-command error, 3-workpiece drop, others-gripper fault code +3;

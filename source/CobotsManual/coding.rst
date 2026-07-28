@@ -183,54 +183,117 @@ The icons on the top right are described as follows:
       :height: 0.75in
       :align: left
 
-   name: **Programming add/edit**
+   Name: **Program Programming Add/Edit**
    
-   effect: Add/edit the contents of the current program command
-
-.. note:: 
-   .. image:: coding/241.png
-      :height: 0.75in
-      :align: left
-
-   name: **Robot Model**
-   
-   effect: Return to the robot 3D model interface
-
-.. note:: 
-   .. image:: coding/242.png
-      :height: 0.75in
-      :align: left
-
-   name: **NewDofile subroutine**
-   
-   effect: When there is a NewDofile instruction in the current program command, click to enter and select the subroutine name to view the subroutine content.
-
-.. note:: 
-   .. image:: coding/243.png
-      :height: 0.75in
-      :align: left
-
-   name: **Modbus TCP Settings**
-   
-   effect: Configure Modbus TCP communication parameters
-
-.. note:: 
-   .. image:: coding/244.png
-      :height: 0.75in
-      :align: left
-
-   name: **Current program backup**
-   
-   effect: Record the changes made to the current program
+   Function: Add/edit the content of the current program command
 
 .. note:: 
    .. image:: coding/245.png
       :height: 0.75in
       :align: left
 
-   name: **Local teaching point**
+   Name: **Local Teach Point**
    
-   effect: Applies only to the teaching points of the current program
+   Function: Teach points that apply only to the current program
+
+.. note:: 
+   .. image:: coding/242.png
+      :height: 0.75in
+      :align: left
+
+   Name: **NewDofile Subroutine Interface**
+   
+   Function: When the current program command contains a NewDofile instruction, click to enter and select the subroutine name to view the subroutine content.
+
+.. note:: 
+   .. image:: coding/244.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Current Teach Program Backup**
+   
+   Function: Records the modifications made to the current program
+
+.. note:: 
+   .. image:: coding/602.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Print Log**
+   
+   Function: Outputs specified information to the WebApp print window for convenient debugging and data tracing
+
+.. note:: 
+   .. image:: coding/241.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Robot Model**
+   
+   Function: Return to the robot 3D model interface
+
+.. note:: 
+   .. image:: coding/596.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Socket Network Debugging**
+   
+   Function: Network communication debugging interface
+
+.. note:: 
+   .. image:: coding/243.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Modbus TCP Settings**
+   
+   Function: Configure Modbus TCP communication parameters
+
+.. note:: 
+   .. image:: coding/597.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Modbus RTU Settings**
+   
+   Function: Configure Modbus RTU communication parameters
+
+.. note:: 
+   .. image:: coding/598.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Background Program Management**
+   
+   Function: Configure background program interface
+
+.. note:: 
+   .. image:: coding/599.png
+      :height: 0.75in
+      :align: left
+
+   Name: **User Variable Management**
+   
+   Function: Configure user variable interface
+
+.. note:: 
+   .. image:: coding/600.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Teach Points**
+   
+   Function: Configure teach point interface
+
+.. note:: 
+   .. image:: coding/601.png
+      :height: 0.75in
+      :align: left
+
+   Name: **Main Program Configuration**
+   
+   Function: Configure the main program
 
 Program command
 ~~~~~~~~~~~~~~~~~~
@@ -1426,6 +1489,98 @@ Select the workpiece coordinate system to be automatically converted, and click 
 
 .. centered:: Figure 9.5-33 WPTrsf command interface
 
+Workpiece Transformation and Safety Speed Function
+**************************************************************
+
+Overview
+""""""""""""""""""""""""""""""""""""
+
+The workpiece transformation function refers to migrating the PTP\LIN\ARC\CIR motion trajectories under the current workpiece coordinate system to run under the target workpiece coordinate system.
+
+The safety speed function refers to the open configuration of speed limits in the robot's Cartesian\joint space, enabling speed protection in both the workspace and joint space.
+
+Workpiece Transformation Function Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Calibrate the robot's workpiece coordinate system through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step2**: Teach points. Teach PTP\LIN\ARC\CIR motion points and write LUA programs through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step3**: Configure the workpiece coordinate system transformation. On the WebApp main interface, click "Teach Program" - "Program Programming" to enter the "Motion Instruction" area.
+
+.. image:: coding/583.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.5-33-1 "Motion Instruction" Area
+
+In the "Motion Instruction" area, click the "Workpiece Transformation" button to enter the "WPTrsf" instruction configuration interface.
+
+.. image:: coding/584.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-33-2 WPTrsf Instruction Configuration
+
+In the "WPTrsf" instruction configuration interface -> "Instruction Edit" configuration area, select the target workpiece coordinate system number from the "Select Workpiece Coordinate System" dropdown menu, then click the "Add" - "Apply" button to complete the workpiece transformation function configuration.
+
+**Step4**: Write the LUA program for the workpiece transformation function. Adjust the instruction order generated from Step 2 to Step 3, and run the LUA program to implement the workpiece transformation function.
+
+.. image:: coding/585.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.5-33-3 LUA Program for Workpiece Transformation Function
+
+Safety Speed Function Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+On the WebApp main interface, click "Initial Setup" - "Safety" - "Safety Speed" to enter the "Safety Speed" configuration area.
+
+.. image:: coding/586.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.5-33-4 Safety Speed Instruction Configuration
+
+In the "Safety Speed" configuration area -> "Function Enable" dropdown menu, you can select "Disable", "Manual Mode Enable", and "All Modes Enable" options.
+
+"Manual Mode Enable" means that the function is enabled when switching to manual mode in WebApp; "All Modes Enable" means that the function is enabled when switching to manual mode, automatic mode, and drag mode in WebApp.
+
+In the "Safety Speed" configuration area shown below, you can set speed protection in the robot's Cartesian and joint spaces respectively in the input fields for "TCP Limit Speed", "J1 Limit Speed", "J2 Limit Speed", "J3 Limit Speed", "J4 Limit Speed", "J5 Limit Speed", and "J6 Limit Speed".
+
+It is worth noting that during robot motion, the above speed protections are triggered based on the minimum value among them.
+
+In the "Safety Speed" configuration area -> "Post-Overspeed Mode" dropdown menu, you can select "Stop and Alarm", "Auto Speed Limit", and "Disable After Stop and Alarm" options, as shown in the table below.
+
+.. centered:: Table 9.5-4 "Post-Overspeed Mode" Selection Under Different "Function Enable" Options
+
+.. list-table::
+   :widths: 25 25 25 25
+   :header-rows: 0
+   :align: center
+
+   * - \
+     - **Stop and Alarm**
+     - **Auto Speed Limit**
+     - **Disable After Stop and Alarm**
+
+   * - **Manual Mode Enable**
+     - Supported
+     - Supported
+     - Supported
+
+   * - **All Modes Enable**
+     - Supported
+     - Not Supported
+     - Supported
+			
+"Stop and Alarm": When both the joint command and feedback speeds exceed the safety speed, WebApp displays an overspeed warning;
+
+"Auto Speed Limit": When both the joint command and feedback speeds exceed the safety speed, the speed will be automatically reduced to within the safety speed;
+
+"Disable After Stop and Alarm": When both the joint command and feedback speeds exceed the safety speed, WebApp displays an overspeed warning and all joints of the robot are disabled.
+
 Tool conversion command
 ++++++++++++++++++++++++++++++
 
@@ -1722,6 +1877,71 @@ This command includes four commands: position real-time detection, IO real-time 
    :align: center
 
 .. centered:: Figure 9.7-5 Conveyor command interface
+
+Conveyor Belt In-Place Tracking Motion Function
+***********************************************************************
+
+Overview
+"""""""""""""""""""""""""""""""""""
+
+This function enables the robot to identify and synchronously track objects moving on a conveyor belt, and then achieve a "relative stationary" motion between the robot and the object without stopping the conveyor belt.
+
+Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Click "Auxiliary Apps" - "Process Package" - "Conveyor Tracking" to configure the conveyor tracking parameters, including "I/O Configuration", "Parameter Configuration", "Pick Point Compensation" (only required for the "Tracking Pick" function), and "Reference Point Configuration". In the "Reference Point Configuration", the position of "Start Point a" is the object position when the conveyor belt motion starts; the position of "End Point b" is the object position when the conveyor belt motion ends. For detailed operation steps, refer to the corresponding sections.
+
+**Step 2**: Tracking motion uses the workpiece coordinate system as the conveyor coordinate system, so the workpiece coordinate system needs to be set. Click "Initial Setup" - "Basic", select "Workpiece Coordinate System", click to select a workpiece coordinate system other than "wobjcoord0" for calibration. Refer to the corresponding sections for the calibration method.
+
+**Step 3**: Click "Teach Program" - "Program Programming" - "Conveyor" to enter the conveyor function configuration page.
+
+**Step 4**: Click the "Tracking Enable" button, select "Tracking Motion" as the working mode, and click the "Add" button.
+
+.. image:: coding/590.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.7-5-1 Tracking Enable Settings
+
+**Step 5**: Click the "I/O Real-time Detection" button, set the maximum waiting time, and click the "Add" button.
+
+.. image:: coding/591.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.7-5-2 I/O Real-time Detection Settings
+
+**Step 6**: Click the "Position Real-time Detection" button, select "Tracking Motion" as the working mode, and click the "Add" button.
+
+.. image:: coding/592.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.7-5-3 Position Real-time Detection Settings
+
+**Step 7**: Click the "In-Place Tracking Motion" button. There are three working modes: "Time", "Distance", and "Time + Distance". In the "Time" mode, the motion time needs to be set. The time is calculated from the start of conveyor tracking, and tracking motion stops after the set time is reached. In the "Distance" mode, the motion distance needs to be set. The distance is calculated from the start of conveyor tracking, and tracking motion stops after the set distance is reached. In the "Time + Distance" mode, both motion time and motion distance need to be set. The calculation starts from conveyor tracking enable, and tracking motion stops when either the set time or distance condition is met. Note: For the safety of the motion environment, the maximum tracking position of these three motion modes will not exceed the position of "End Point b" during conveyor calibration. Click the "Add" button.
+
+.. image:: coding/593.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.7-5-4 In-Place Tracking Motion Parameter Settings
+
+**Step 8**: Click the "Tracking Disable" button and click the "Add" button.
+
+.. image:: coding/594.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.7-5-5 Tracking Disable Settings
+
+**Step 9**: The generated LUA program for conveyor in-place tracking motion is shown in the figure. Run the program to achieve conveyor in-place tracking motion.
+
+.. image:: coding/595.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.7-5-6 Conveyor In-Place Tracking Motion LUA Program
 
 Polish command
 ++++++++++++++++
@@ -8689,3 +8909,75 @@ The following is a program for non-blocking robot motion that prints the robot p
    :align: center
 
 .. centered:: Figure 9.39‑10 Example of Printing Current Position and DI During Robot Motion   
+
+Large LUA Program and Subroutine Web Loading Function Optimization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Background
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Currently, the robot cannot handle large LUA programs (200k+ lines). When uploading a large LUA program, the web page cannot load or use it.
+
+At the same time, when importing programs, the current import logic does not perform program parsing and validation. After importing, the program must be manually opened and saved for validation. When using a large number of subroutine calls simultaneously, each must be manually opened one by one, which is time-consuming and greatly reduces work efficiency.
+
+Overview
+++++++++++++++++++++++++++++++++++++++++++++++
+
+This optimization targets imported programs. The backend automatically parses and saves them. After subsequent subroutines are uploaded, they can be called directly without manual opening and saving.
+
+For large LUA programs, when the web frontend imports a large LUA program (a native LUA program that does not require secondary parsing), it is named with the RAW prefix, such as RAW_test.lua. This type of program indicates that the program consists entirely of native LUA statements and does not contain application business information. It can be directly placed into the LUA interpreter for execution. The controller only needs to perform syntax validation on it, without parsing line by line. This significantly reduces file import parsing time. At the same time, the frontend no longer performs animation rendering for large LUA programs; programs are displayed in plain text format, and dynamic highlighting and runtime line numbers are no longer shown, improving frontend data rendering efficiency. For specific statements that need parsing, refer to Section 1.4.
+
+After importing a program, the Web should display a progress bar prompt, and a success prompt after import is completed.
+
+For large LUA programs, it is recommended to use subroutines together with the `RAW_` method to improve operational efficiency.
+
+Large LUA Program Operation Procedure
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step 1**: Name the large LUA program with the `RAW_` prefix, e.g., RAW_test200000.lua.
+
+**Step 2**: Open the web page, click "Teach Program" -> "Program Programming" in sequence, select the "Import" command, and choose RAW_test200000.lua in the "Import" file selection.
+
+.. image:: coding/587.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.40‑1 `RAW_` File Import    
+
+**Step 3**: Wait for the import to complete. When the import is finished, operations such as import, parsing, saving, and rendering have already been completed, and the file can be run directly.
+
+.. image:: coding/588.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.40‑2 Import Waiting Prompt   
+
+Subroutine Operation Procedure
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step 1**: Open the web page, click "Teach Program" -> "Program Programming" in sequence, select the "Import" command, and batch select the main program and subroutines in the "Import" file selection.
+
+**Step 2**: Wait for all programs to be imported successfully, switch the robot to automatic mode, and the main program can be run directly.
+
+Precautions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+`RAW_` files only perform syntax validation and do not parse and generate the file content line by line. They contain point information, IO operations, and other custom integrated LUA functions for customer convenience. Such functions need to be combined with user-defined data for secondary generation into directly runnable LUA functions and cannot be used in `RAW_` files.
+
+.. image:: coding/589.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.40‑3 Import LUA Program Flowchart 
+
+For writing `RAW_` files, refer to the FRLua Programming Script User Manual. The following LUA functions require parsing and are not applicable to `RAW_` files.
+
+laserPTP(), EXT_AXIS_PTP(), SPTP(), NewSP(), SplinePTP(), laserLin(), SLIN(), Lin(), laserARC(), ARC() 
+laserCircle(), Circle(), TCPComputeCircleCenter(), unifCircle(), NewSpiral(), Spiral(), SCIRC() 
+ModbusSlaveWriteDO(), ModbusSlaveWriteDI(), ModbusSlaveWriteAO(), ModbusSlaveWriteAI(), ModbusSlaveReadDO(), ModbusSlaveReadDI(), ModbusSlaveReadAO(), ModbusSlaveReadAI(), ModbusSlaveWaitDI(), ModbusSlaveWaitAI()
+ModbusMasterWriteDO(), ModbusMasterWriteAO(), ModbusMasterReadDO(), ModbusMasterReadDI(), ModbusMasterReadAO(), ModbusMasterReadAI(), ModbusMasterWaitDI(), ModbusMasterWaitAI()
+ModbusSlaveWriteDO_RTU(), ModbusSlaveWriteDI_RTU(), ModbusSlaveWriteAO_RTU(), ModbusSlaveWriteAI_RTU(), ModbusSlaveReadDO_RTU(), ModbusSlaveReadDI_RTU(), ModbusSlaveReadAO_RTU(), ModbusSlaveReadAI_RTU(), ModbusSlaveWaitDI_RTU(), ModbusSlaveWaitAI_RTU()
+ModbusMasterWriteDO_RTU(), ModbusMasterWriteAO_RTU(), ModbusMasterReadDO_RTU(), ModbusMasterReadDI_RTU(), ModbusMasterReadAO_RTU(), ModbusMasterReadAI_RTU(), ModbusMasterWaitDI_RTU(), ModbusMasterWaitAI_RTU(), SetAO(), SetAuxAO(), SetToolAO(), WaitAI()
+FieldBusSlaveWaitAI(), WaitToolAI(), WaitAuxAI(), SPLCSetAO(), SPLCSetToolAO(), SetToolList(), SetWObjList(), SetExToolList(), PostureAdjustOn(), RegisterVar(), SetSysVarValue(), GetSysVarValue(), MultilayerOffsetTrsfToBase(), GetSegWeldDisDir(), DMP()
+LTSearchStart(), PointTableSwitch(), GetSegmentWeldPoint(), LaserRecordPoint(), GetIntersectionThrough3Point(), GetIntersectionThrough4Point(), GetUserVal(), SetUserVal(), MoveToIntersectLineStart(), MoveIntersectLine(), OriginPointWeaveStart()
+MatrixMoveStart(), MatrixMoveEnd(), MatrixSetCountPlus(), MatrixGetCount(), MatrixSetStartCount().   

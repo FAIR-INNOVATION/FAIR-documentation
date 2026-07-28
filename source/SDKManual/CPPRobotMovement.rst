@@ -1833,6 +1833,17 @@ Stationary Air Motion Code Example
         return 0;
     }
 
+Wait for In-Place Idle Motion to Complete
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Wait for in-place idle motion to complete
+    * @return Error code
+    */
+    errno_t WaitStationaryMotionDone();
+
 Fixed-Point Swing Start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
@@ -2120,3 +2131,86 @@ Robot Joint MIT Control Code Example
         robot.Sleep(1000000);
         return 0;
     }
+
+Workpiece Coordinate System Point Transformation Start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: V3.9.8
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Start workpiece coordinate system point transformation
+    * @param [in] workpieceID Workpiece number [0-14]
+    * @return Error code, 0 on success
+    */
+    errno_t WorkPieceTrsfStart(int workpieceID);
+    
+Workpiece Coordinate System Point Transformation End
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: V3.9.8
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief End workpiece coordinate system point transformation
+    * @return Error code, 0 on success
+    */
+    errno_t WorkPieceTrsfEnd();
+    
+Workpiece Coordinate System Transformation Motion Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. versionadded:: V3.9.8
+
+.. code-block:: c++
+    :linenos:
+
+    int TestWorkPieceTrsf()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        robot.SetReConnectParam(true, 30000, 500);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return 0;
+        }
+        JointPos j1(-11.188, -64.165, -107.299, -76.706, 89.590, 92.983);
+        DescPose desc1(225.986, 190.694, 394.238, -6.230, -23.797, -98.972);
+        JointPos j2(-38.148, -97.408, -133.704, -30.999, 89.584, 92.986);
+        DescPose desc2(52.741, 262.917, 30.824, -5.696, -9.864, -126.092);
+        JointPos j3(-25.561, -123.131, -85.736, -94.911, 89.582, 93.006);
+        DescPose desc3(70.455, 88.410, 45.299, -4.101, 31.775, -113.199);
+        JointPos j4(-8.013, -125.881, -79.196, -84.440, 89.564, 93.005);
+        DescPose desc4(209.453, -73.895, 56.416, -4.727, 17.523, -95.906);
+        JointPos j5(-2.722, -94.518, -119.965, -54.518, 89.563, 93.005);
+        DescPose desc5(274.800, 81.106, 102.977, -5.467, -2.980, -90.711);
+        JointPos j6(-2.671, -56.234, -138.914, -25.099, 95.355, 92.967);
+        DescPose desc6(300.392, 177.281, 300.926, -1.909, -51.894, -89.703);
+        JointPos j7(-1.229, -121.184, -63.201, -122.331, 93.045, 93.019);
+        DescPose desc7(296.856, -31.294, 215.698, -0.589, 34.594, -88.954);
+        ExaxisPos exaxis = {0.0, 0.0, 0.0, 0.0};
+        DescPose offset(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        int tool = 1;
+        int workpiece = 1;
+        double blend = 5.0;
+        robot.MoveJ(&j1, &desc1, tool, workpiece, 100, 100, 100, &exaxis, -1, 0, &offset);
+        robot.MoveJ(&j2, &desc2, tool, workpiece, 100, 100, 100, &exaxis, blend, 0, &offset);
+        robot.MoveL(&j3, &desc3, tool, workpiece, 10, 100, 100, blend, 0, &exaxis, 0, 1, &offset);
+        robot.MoveC(&j4, &desc4, tool, workpiece, 100, 100, &exaxis, 0, &offset, &j5, &desc5, tool, workpiece, 100, 100, &exaxis, 0, &offset, 10, blend);
+        robot.Circle(&j6, &desc6, tool, workpiece, 100, 100, &exaxis, &j7, &desc7, tool, workpiece, 100, 100, &exaxis, 10, 0, &offset, 100.0, blend);
+        rtn = robot.WorkPieceTrsfStart(2);
+        printf("WorkPieceTrsfStart rtn is %d\n", rtn);
+        robot.MoveJ(&j1, &desc1, tool, workpiece, 100, 100, 100, &exaxis, -1, 0, &offset);
+        robot.MoveJ(&j2, &desc2, tool, workpiece, 100, 100, 100, &exaxis, blend, 0, &offset);
+        robot.MoveL(&j3, &desc3, tool, workpiece, 10, 100, 100, blend, 0, &exaxis, 0, 1, &offset);
+        robot.MoveC(&j4, &desc4, tool, workpiece, 100, 100, &exaxis, 0, &offset, &j5, &desc5, tool, workpiece, 100, 100, &exaxis, 0, &offset, 10, blend);
+        robot.Circle(&j6, &desc6, tool, workpiece, 100, 100, &exaxis, &j7, &desc7, tool, workpiece, 100, 100, &exaxis, 10, 0, &offset, 100.0, blend);    
+        rtn = robot.WorkPieceTrsfEnd();
+        printf("WorkPieceTrsfEnd rtn is %d\n", rtn);
+        robot.CloseRPC();
+        robot.Sleep(2000);
+    }    

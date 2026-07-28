@@ -254,81 +254,62 @@ Set Safety Speed Parameters
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``SetVelReducePara(enable, maxTCPVel, strategy)``"
+    "Prototype", "``SetVelReducePara(enable, maxTCPVel, strategy, maxJointVel=[45.0, 45.0, 45.0, 45.0, 45.0, 45.0])``"
     "Description", "Set safety speed parameters"
     "Required Parameters", "
-    - ``enable``: 0-off; 1-enabled in manual mode; 2-enabled in all modes (automatic speed limiting not supported)
+    - ``enable``: 0-off; 1-manual mode enable; 2-all modes enable (auto speed limit not supported)
     - ``maxTCPVel``: Maximum TCP speed limit; [0-1000] mm/s
-    - ``strategy``: Strategy after overspeed; 0-stop with alarm; 1-automatic speed limiting; 2-stop with alarm and disable
+    - ``strategy``: Post-overspeed strategy; 0-stop and alarm; 1-auto speed limit; 2-stop and alarm with disable
+    - ``maxJointVel``: Maximum speed for 6 joints (°/s), default [45.0, 45.0, 45.0, 45.0, 45.0, 45.0]
     "
     "Default Parameters", "None"
-    "Return Value", "- Error code Success-0 Failure-errcode"
+    "Return Value", "- Error code, 0-success; non-zero-error"
 
 SDK Code Example for Setting Safety Speed Parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos: 
 
-    from time import sleep
-    import time
     from fairino import Robot
+    import time
 
-    # Establish connection with robot controller
-    robot = Robot.RPC('192.168.58.2')
 
-    def TestSetVelReducePara(self):
-        # Initialize joint position, external axis and offset
-        j1 = [0, -90, 90, 0, 0, 0]
-        j2 = [90, -90, 90, 0, 0, 0]
-        epos = [0, 0, 0, 0]
-        offset_pos = [0, 0, 0, 0, 0, 0]
+    def main():
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5)  
 
-        # Set base speed
-        robot.SetSpeed(80)
+        j1 = [10.220, -11.121, -118.086, -46.739, 82.036, 131.503]
+        j2 = [89.782, -11.122, -118.086, -46.740, 82.036, 131.504]
 
-        # Test parameter error case (mode=2 invalid?)
-        rtn = robot.SetVelReducePara(2, 30, 1)
-        print(f"SetVelReducePara param error rtn is {rtn}")
+        epos = [0.0, 0.0, 0.0, 0.0]
+        offset_pos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
-        # Disable speed reduction function (mode=0, action=1 indicates disable)
-        rtn = robot.SetVelReducePara(0, 30, 1)
-        print(f"SetVelReducePara disable reduce vel rtn is {rtn}")
-        robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
-                    exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
-        robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
+        robot.SetSpeed(20)
+
+        maxJointVel = [100.0, 100.0, 100.0, 100.0, 100.0, 100.0]
+
+        rtn = robot.SetVelReducePara(0, 200, 0, maxJointVel)
+        robot.MoveJ(joint_pos=j2, tool=1, user=2, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
 
-        # Enable speed reduction function (mode=1, action=1)
-        rtn = robot.SetVelReducePara(1, 30, 1)
-        print(f"SetVelReducePara reduce vel rtn is {rtn}")
-        robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
+        rtn = robot.SetVelReducePara(2, 200, 0, maxJointVel)
+        print(f"SetVelReduceParaA param error rtn is {rtn}")
+
+        robot.MoveJ(joint_pos=j1, tool=1, user=2, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
-        robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
+        robot.MoveJ(joint_pos=j2, tool=1, user=2, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
 
-        # Test action=2 (may indicate emergency stop or disable robot)
-        rtn = robot.SetVelReducePara(2, 30, 2)
-        print(f"SetVelReducePara disable robot rtn is {rtn}")
-        robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
+        maxJointVel = [20.0, 20.0, 20.0, 20.0, 20.0, 20.0]
+        rtn = robot.SetVelReducePara(2, 200, 0, maxJointVel)
+        print(f"SetVelReduceParaB reduce vel rtn is {rtn}")
+
+        robot.MoveJ(joint_pos=j1, tool=1, user=2, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
-        robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
+        robot.MoveJ(joint_pos=j2, tool=1, user=2, vel=100, acc=100, ovl=100,
                     exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
 
-        # Wait, reset errors and re-enable robot
-        time.sleep(2)
-        robot.ResetAllError()
-        robot.RobotEnable(1)
-        time.sleep(1)
-
-        # Test action=0 (may indicate only report error, no action)
-        rtn = robot.SetVelReducePara(2, 30, 0)
-        print(f"SetVelReducePara report error rtn is {rtn}")
-        robot.MoveJ(joint_pos=j1, tool=0, user=0, vel=100, acc=100, ovl=100,
-                    exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
-        robot.MoveJ(joint_pos=j2, tool=0, user=0, vel=100, acc=100, ovl=100,
-                    exaxis_pos=epos, blendT=-1, offset_flag=0, offset_pos=offset_pos)
-
-        # Close connection
         robot.CloseRPC()
 
-    TestSetVelReducePara(robot)
+    if __name__ == "__main__":
+        main()

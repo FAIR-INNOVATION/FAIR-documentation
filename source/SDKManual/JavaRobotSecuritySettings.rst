@@ -260,9 +260,10 @@ Set Safety Speed Parameters
     * @param enable 0-off; 1-enabled in manual mode; 2-enabled in all modes (automatic speed limiting not supported)
     * @param maxTCPVel Maximum TCP speed limit; [0-1000] mm/s
     * @param strategy Strategy after overspeed; 0-stop with alarm; 1-automatic speed limiting; 2-stop with alarm and disable
+    * @param maxJointVel Maximum speed for 6 joints (°/s), default 45°/s
     * @return Error code
     */
-    public int SetVelReducePara(int enable, double maxTCPVel, int strategy)
+    public int SetVelReducePara(int enable, double maxTCPVel, int strategy, double[] maxJointVel)
         
 SDK Code Example for Setting Safety Speed Parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -309,3 +310,33 @@ SDK Code Example for Setting Safety Speed Parameters
         robot.Sleep(1000);
         return 0;
     }
+
+Code Example for Setting Robot Joint Safety Speed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static int TestSetJointVelReducePara(Robot robot) {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+
+        JointPos j1 = new JointPos(10.220, -11.121, -118.086, -46.739, 82.036, 131.503);
+        JointPos j2 = new JointPos(89.782, -11.122, -118.086, -46.740, 82.036, 131.504);
+        ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+        DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        robot.SetSpeed(20);
+
+        double[] maxJointVelA = {100.0, 100.0, 100.0, 100.0, 100.0, 100.0};
+        int rtn = robot.SetVelReducePara(2, 200, 0, maxJointVelA);
+        System.out.printf("SetVelReducePara param error rtn is %d\n", rtn);
+        robot.MoveJ(j1, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
+        robot.MoveJ(j2, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
+
+        double[] maxJointVelB = {20.0, 20.0, 20.0, 20.0, 20.0, 20.0};
+        rtn = robot.SetVelReducePara(2, 200, 0, maxJointVelB);
+        System.out.printf("SetVelReducePara reduce vel rtn is %d\n", rtn);
+        robot.MoveJ(j1, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
+        robot.MoveJ(j2, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
+
+        robot.Sleep(2000);
+        return 0;
+    }    

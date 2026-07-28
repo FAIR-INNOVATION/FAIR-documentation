@@ -249,9 +249,10 @@ Set Safety Speed Parameters
     * @param [in] enable 0-off; 1-enabled in manual mode; 2-enabled in all modes (automatic speed limiting not supported)
     * @param [in] maxTCPVel Maximum TCP speed limit; [0-1000] mm/s
     * @param [in] strategy Strategy after overspeed; 0-stop with alarm; 1-automatic speed limiting; 2-stop with alarm and disable
+    * @param [in] maxJointVel Maximum speed for 6 joints (°/s), default 45°/s
     * @return Error code
     */
-    public int SetVelReducePara(int enable, double maxTCPVel, int strategy)
+    public int SetVelReducePara(int enable, double maxTCPVel, int strategy, double[] maxJointVel = null)
     
 SDK Code Example for Setting Safety Speed Parameters
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -261,46 +262,27 @@ SDK Code Example for Setting Safety Speed Parameters
     public int TestSetVelReducePara()
     {
         int rtn = 0;
-        JointPos j1 = new JointPos(0, -90, 90, 0, 0, 0);
-        JointPos j2 = new JointPos(90, -90, 90, 0, 0, 0);
+        JointPos j1 = new JointPos(10.220, -11.121, -118.086, -46.739, 82.036, 131.503);
+        JointPos j2 = new JointPos(89.782, -11.122, -118.086, -46.740, 82.036, 131.504);
         ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
         DescPose offset_pos = new DescPose(0, 0, 0, 0, 0, 0);
+        double[] maxJointVel = new double[] { 100.0, 100.0, 100.0, 100.0, 100.0, 100.0 };
 
-        robot.SetSpeed(80);
+        robot.SetSpeed(20);
+        rtn = robot.SetVelReducePara(0, 200, 0, maxJointVel);
+        robot.MoveJ(j2, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
 
-        // Test parameter error
-        rtn = robot.SetVelReducePara(2, 30, 1);
-        Console.WriteLine($"SetVelReducePara param error rtn is {rtn}");
+        // 1st
+        rtn = robot.SetVelReducePara(2, 200, 0, maxJointVel);
+        Console.WriteLine($"SetVelReduceParaA param error rtn is {rtn}");
+        robot.MoveJ(j1, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
+        robot.MoveJ(j2, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
 
-        // Disable speed reduction
-        rtn = robot.SetVelReducePara(0, 30, 1);
-        Console.WriteLine($"SetVelReducePara disable reduce vel rtn is {rtn}");
-        robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-        robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-
-        // Enable speed reduction (manual mode)
-        rtn = robot.SetVelReducePara(1, 30, 1);
-        Console.WriteLine($"SetVelReducePara reduce vel rtn is {rtn}");
-        robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-        robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-
-        // Enabled in all modes, strategy: stop with alarm and disable
-        rtn = robot.SetVelReducePara(2, 30, 2);
-        Console.WriteLine($"SetVelReducePara disable robot rtn is {rtn}");
-        robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-        robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-
-        Thread.Sleep(2000);
-        robot.ResetAllError();
-        robot.RobotEnable(1);
-        Thread.Sleep(1000);
-
-        // Enabled in all modes, strategy: stop with alarm (normal parameters)
-        rtn = robot.SetVelReducePara(2, 30, 0);
-        Console.WriteLine($"SetVelReducePara report error rtn is {rtn}");
-        robot.MoveJ(j1, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-        robot.MoveJ(j2, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
-
-        Thread.Sleep(1000);
-        return 0;
+        // 2rd
+        maxJointVel = new double[] { 20.0, 20.0, 20.0, 20.0, 20.0, 20.0 };
+        rtn = robot.SetVelReducePara(2, 200, 0, maxJointVel);
+        Console.WriteLine($"SetVelReduceParaB reduce vel rtn is {rtn}");
+        robot.MoveJ(j1, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
+        robot.MoveJ(j2, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
+        return 0; 
     }

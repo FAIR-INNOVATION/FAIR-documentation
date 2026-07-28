@@ -300,12 +300,13 @@ Set Safety Speed Parameters
 
     /**
     * @brief Set safety speed parameters
-    * @param [in] enable 0-off; 1-enabled in manual mode; 2-enabled in all modes
+    * @param [in] enable 0-off; 1-manual mode enable; 2-all modes enable
     * @param [in] maxTCPVel Maximum TCP speed limit; [0-1000] mm/s
-    * @param [in] strategy Strategy after overspeed; 0-stop with alarm; 1-automatic speed limiting; 2-stop with alarm and disable
+    * @param [in] strategy Post-overspeed strategy; 0-stop and alarm; 1-auto speed limit; 2-stop and alarm with disable
+    * @param [in] maxJointVel Maximum speed for 6 joints (°/s), default 45°/s
     * @return Error code
     */
-    errno_t SetVelReducePara(int enable, double maxTCPVel, int strategy);
+    errno_t SetVelReducePara(int enable, double maxTCPVel, int strategy, std::vector<double> maxJointVel = {45.0, 45.0, 45.0, 45.0, 45.0, 45.0});
         
 SDK Code Example for Setting Safety Speed Parameters
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -354,5 +355,44 @@ SDK Code Example for Setting Safety Speed Parameters
         robot.MoveJ(&j2, 0, 0, 100, 100, 100, &epos, -1, 0, &offset_pos);
         robot.CloseRPC();
         robot.Sleep(1000);
+        return 0;
+    }
+
+Code Example for Setting Robot Joint Safety Speed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:    
+
+    int TestSetJointVelReducePara()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        JointPos j1(10.220, -11.121, -118.086, -46.739, 82.036, 131.503);
+        JointPos j2(89.782, -11.122, -118.086, -46.740, 82.036, 131.504);
+        ExaxisPos epos(0, 0, 0, 0);
+        DescPose offset_pos(0, 0, 0, 0, 0, 0);
+        robot.SetSpeed(20);
+
+        std::vector<double> maxJointVelA = {100.0, 100.0, 100.0, 100.0, 100.0, 100.0 };
+        rtn = robot.SetVelReducePara(2, 200, 0, maxJointVelA);
+        printf("SetVelReducePara param error rtn is %d\n", rtn);
+        robot.MoveJ(&j1, 1, 2, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.MoveJ(&j2, 1, 2, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        std::vector<double> maxJointVelB = { 20.0, 20.0, 20.0, 20.0, 20.0, 20.0 };
+        rtn = robot.SetVelReducePara(2, 200, 0, maxJointVelB);
+        printf("SetVelReducePara reduce vel rtn is %d\n", rtn);
+        robot.MoveJ(&j1, 1, 2, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.MoveJ(&j2, 1, 2, 100, 100, 100, &epos, -1, 0, &offset_pos);
+        robot.Sleep(2000);
+        robot.CloseRPC();
         return 0;
     }

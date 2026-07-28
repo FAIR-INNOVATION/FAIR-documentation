@@ -2287,3 +2287,95 @@ Joint MIT Control Motion Code Example
         }
         return 0;
     }
+
+Workpiece Coordinate System Point Transformation Start
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Start workpiece coordinate system point transformation
+    * @param  [in] workpieceID Workpiece number [0-14]
+    * @return  Error code, 0 on success
+    */
+    public int WorkPieceTrsfStart(int workpieceID)
+    
+Workpiece Coordinate System Point Transformation End
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  End workpiece coordinate system point transformation
+    * @return  Error code, 0 on success
+    */
+    public int WorkPieceTrsfEnd()
+        
+Workpiece Coordinate System Point Transformation Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    public int TestWorkPieceTrsf()
+    {
+
+        // ---- Point definitions ----
+        JointPos j1 = new JointPos(-11.188, -64.165, -107.299, -76.706, 89.590, 92.983);
+        DescPose d1 = new DescPose(225.986, 190.694, 394.238, -6.230, -23.797, -98.972);
+        JointPos j2 = new JointPos(-38.148, -97.408, -133.704, -30.999, 89.584, 92.986);
+        DescPose d2 = new DescPose(52.741, 262.917, 30.824, -5.696, -9.864, -126.092);
+        JointPos j3 = new JointPos(-25.561, -123.131, -85.736, -94.911, 89.582, 93.006);
+        DescPose d3 = new DescPose(70.455, 88.410, 45.299, -4.101, 31.775, -113.199);
+        JointPos j4 = new JointPos(-8.013, -125.881, -79.196, -84.440, 89.564, 93.005);
+        DescPose d4 = new DescPose(209.453, -73.895, 56.416, -4.727, 17.523, -95.906);
+        JointPos j5 = new JointPos(-2.722, -94.518, -119.965, -54.518, 89.563, 93.005);
+        DescPose d5 = new DescPose(274.800, 81.106, 102.977, -5.467, -2.980, -90.711);
+        JointPos j6 = new JointPos(-2.671, -56.234, -138.914, -25.099, 95.355, 92.967);
+        DescPose d6 = new DescPose(300.392, 177.281, 300.926, -1.909, -51.894, -89.703);
+        JointPos j7 = new JointPos(-1.229, -121.184, -63.201, -122.331, 93.045, 93.019);
+        DescPose d7 = new DescPose(296.856, -31.294, 215.698, -0.589, 34.594, -88.954);
+
+        ExaxisPos ex = new ExaxisPos(0, 0, 0, 0);
+        DescPose zeroOff = new DescPose(0, 0, 0, 0, 0, 0);
+
+        int tool = 1;
+        int workpiece = 1;
+        float blend = 5.0f;
+
+        // ===== Coordinate System 1 =====
+        // Home
+        robot.MoveJ(j1, d1, tool, workpiece, 100, 100, 100, ex, -1, 0, zeroOff);
+        // PTP
+        robot.MoveJ(j2, d2, tool, workpiece, 100, 100, 100, ex, blend, 0, zeroOff);
+        // LIN
+        robot.MoveL(j3, d3, tool, workpiece, 10, 100, 100, blend, 0, ex, 0, 1, zeroOff, 0, 90);
+        // ARC
+        robot.MoveC(j4, d4, tool, workpiece, 100, 100, ex, 0, zeroOff,
+                    j5, d5, tool, workpiece, 100, 100, ex, 0, zeroOff,
+                    10, blend, 100, 0);
+        // CIR
+        robot.Circle(j6, d6, tool, workpiece, 100, 100, ex,
+                        j7, d7, tool, workpiece, 100, 100, ex,
+                        10, 0, zeroOff, 100.0, blend, 0);
+
+        // ===== WorkPieceTrsfStart(2) =====
+        int rtn = robot.WorkPieceTrsfStart(2);
+        Console.WriteLine("  WorkPieceTrsfStart(2) rtn={0}", rtn);
+
+        // ===== Coordinate System 2 (after transformation) =====
+        robot.MoveJ(j1, d1, tool, workpiece, 100, 100, 100, ex, -1, 0, zeroOff);
+        robot.MoveJ(j2, d2, tool, workpiece, 100, 100, 100, ex, blend, 0, zeroOff);
+        robot.MoveL(j3, d3, tool, workpiece, 10, 100, 100, blend, 0, ex, 0, 1, zeroOff, 0, 90);
+        robot.MoveC(j4, d4, tool, workpiece, 100, 100, ex, 0, zeroOff,
+                    j5, d5, tool, workpiece, 100, 100, ex, 0, zeroOff,
+                    10, blend, 100, 0);
+        robot.Circle(j6, d6, tool, workpiece, 100, 100, ex,
+                        j7, d7, tool, workpiece, 100, 100, ex,
+                        10, 0, zeroOff, 100.0, blend, 0);
+
+        // ===== WorkPieceTrsfEnd =====
+        rtn = robot.WorkPieceTrsfEnd();
+        Console.WriteLine("  WorkPieceTrsfEnd() rtn={0}", rtn);
+
+        return rtn;
+    }    

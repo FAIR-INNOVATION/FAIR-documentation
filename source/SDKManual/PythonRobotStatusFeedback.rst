@@ -237,6 +237,7 @@ Robot Status Feedback Structure Type
             ("socketReadTimeout", c_uint8),     # Socket read timeout
             ("tsWebStateComErr", c_uint8),      # TS_WEB status communication error
             ("exaxisCoordID", c_uint8),         # External extended axis ID
+            ("programRunState", c_uint8),         # LUA program running status 0-program not running; 1-program running (including program paused)
             ("check_sum", c_uint16)          # Checksum
         ]
 
@@ -742,4 +743,5 @@ Robot Status Feedback Configuration List Enumeration Type
         SocketReadTimeout = 130
         TsWebStateComErr = 131
         exaxisCoordID = 132
-        CheckSum = 133
+        programRunState = 133
+        check_sum = 134

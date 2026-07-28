@@ -1,3 +1,38 @@
+Version V3.9.8
+-----------------
+
+Date: 2026-07-27
+
+- **Optimized conveyor belt tracking motion**:
+    Path: Teach Program -> Conveyor Commands.
+
+    Description: 1. Optimized IO trigger point and program initial point settings; 2. Optimized multiple triggering of IO signals during motion.
+
+- **Optimized web loading for large LUA programs and subroutines**:
+    Path: Teach Program -> Import Program.
+
+    Description: Upload large LUA program files (over 50MB) for loading and execution.
+
+- **Optimized setting/getting robot tool, workpiece coordinate systems, and load commands**:
+    Path: Initial Setup -> Tools, Workpiece Coordinate Systems, Load.
+
+    Description: Coordinate systems and load parameters can be normally set and retrieved via port 8080 command interface, SDK, and WebApp.
+
+- **Added SmartTool related features**:
+    Path: Initial Setup -> Peripherals -> Welding Handle.
+
+    Description: 1. Reset IO button memory after clearing or creating a new program; 2. Added process number selection for the 3 arc start-related instruction generations, and removed the timeout limit for arc start; 3. Added global point clear function with sequence number reset after clearing; 4. Removed the restriction on repeated configuration of PTP, LIN, and ARC.
+
+- **Added support for five-finger dexterous hand**:
+    Path: Initial Setup -> Peripherals -> Dexterous Hand.
+
+    Description: Added end-effector Lua adapter for five-finger dexterous hand.
+
+- **Added FR3-WML joint impedance drag adaptation**:
+    Path: Auxiliary Apps -> Tool Applications -> Drag Lock.
+
+    Description: Adjusted six-axis force and joint impedance hybrid drag parameters for FR3-WML to enable drag functionality.
+
 Version V3.9.7
 -----------------
 

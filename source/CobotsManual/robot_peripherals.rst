@@ -640,6 +640,8 @@ Automatic Generation of End Lua Protocol
 
 This newly added feature allows for automatic generation of the end Lua protocol through web page configuration for protocols related to embedded SmartTool welding handle peripherals (currently only four protocols support automatic generation: End_SmartTool_V1.3.lua, End_SM_JD_V1.3.lua, End_SM_GZCX_V1.3.lua, End_SM_XJC_V1.3.lua). The generated protocol is uploaded and applied to the end without requiring the user to write it. Users configure the A, B, C, D, E, and IO keys of the SmartTool welding handle according to their needs. After configuration is complete, the robot must be disabled, and then click "Apply." At this point, the page will prompt "Enter boot and apply open protocol?" Clicking Confirm will cause the robot to enter boot state and automatically upload the automatically generated end Lua protocol. After restarting the robot, the SmartTool can be used according to the configured keys.
 
+Starting from version V3.9.8, the SmartTool based on the end-effector protocol supports configuring different buttons with the same function. Additionally, the selection of weave number and welding process number has been added. The weave number defaults to 0. If "Weave Start" is configured, the weave number can be selected. The IO button settings are consistent with the Weave Start settings. The maximum time for arc start and arc end can be configured up to 10000ms.
+
 .. figure:: robot_peripherals/284.png
    :align: center
    :width: 6in
@@ -684,6 +686,22 @@ The SmartTool based on the open protocol adds an anti-mistouch mode. Click "Init
    :width: 6in
 
 .. centered:: Figure 8.3‑2-8 SmartTool "Anti-Mistouch Mode" Function
+
+SmartTool IO Button Memory Clear Function
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The SmartTool based on the open protocol has added an IO button memory clear function. When the user presses an IO button once, it will be memorized to generate paired instructions. If the "Clear Program" or "New Program" function is pressed, the IO button memory will be cleared, and the next IO button press will regenerate the instruction.
+
+Global Point Clear Function
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+A global point clear function has been added. Open WebApp, click "Teach Program" and "Teach Points" in sequence, select "System Mode", and click "Clear All" to clear all user-saved points. At this time, the instruction point sequence numbers generated and saved by SmartTool will be reset, starting from 1.
+
+.. figure:: robot_peripherals/320.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑2-9 Global Point Clear Function
 
 Example of Lua End Peripheral Protocol for Welding Handle
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1123,7 +1141,9 @@ A-E Key Functions:
 
 .. centered:: Figure 8.4‑2-2 Input Actual Physical Speed
 
-After successful configuration, a related motion command is added to the teaching program. When configuring the ARC motion command, you must first configure a PTP or LIN command.
+After successful configuration, a related motion command is added to the teaching program. 
+
+.. note:: Note: When configuring the ARC motion instruction, the PTP/LIN instruction must be configured first to ensure the steps for adding instructions are followed properly.
 
 - **DO Output:** When selecting "DO Output," a drop-down menu appears, allowing you to select DO0⁓DO7 options.
 
@@ -1137,7 +1157,7 @@ IO Key Functions:
 
 -  **IO Signal Configuration**: The dropdown menu allows selection of DO0⁓DO7 options, CO0⁓CO7 options, End-DO0, End-DO1, and extended IO (Aux-DO0⁓Aux-DO127);
 
--  **Combined Command**: After selecting "IO Signal", under specific conditions, the "Welder Selection" and "Point Speed" configuration items are displayed, generating different program commands.
+-  **Combined Command**: After selecting "IO Signal", under specific conditions, the "Welder Selection" and "Point Speed" configuration items are displayed, generating different program commands.Additionally, the selection of welding process number has been added. Furthermore, the maximum time for arc start and arc end can be configured up to 10000ms. The weave number defaults to 0. If "Weave Start" is configured, the weave number can be selected. The IO button settings are consistent with the Weave Start settings.
 
 .. important::
    -  When the IO signal is configured as DO0~DO7 or CO0~CO7 (without "Arc Start" configured), the program adds SetDO; "Welder Selection" and "Point Speed" are hidden at this time.
@@ -1148,6 +1168,7 @@ IO Key Functions:
    -  When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or extended IO (with "Welder Arc Start" configured), and "Welder Selection" is "Welding", the first press adds ARCStart, the second adds ARCEnd, the third adds ArcStart, the fourth adds ARCStart, alternating and repeating the above operations; "Welder Selection" and "Point Speed" are hidden at this time.
    -  When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or extended IO (with "Welder Arc Start" configured), and "Welder Selection" is "LIN+Welding", the first press adds LIN and ARCStart, the second adds LIN and ARCEnd, the third adds LIN and ARCStart, the fourth adds LIN and ARCEnd, alternating and repeating the above operations; "Welder Selection" and "Point Speed" are displayed at this time.
    -  When the IO signal is configured as CO0~CO7 (with "Arc Start" configured) or extended IO (with "Welder Arc Start" configured), and "Welder Selection" is "LIN+Welding+Weaving", the first press adds LIN, ARCStart, and WeaveStart, the second adds LIN, ARCEnd, and WeaveEnd, the third adds LIN, ARCStart, and WeaveStart, the fourth adds LIN, ARCEnd, and WeaveEnd, alternating and repeating the above operations; "Welder Selection" and "Point Speed" are hidden at this time.
+   -  When the "Clear Program" or "New Program" function is pressed, the IO button memory will be cleared, and the next IO button press will regenerate the instruction.
   
 .. image:: robot_peripherals/031.png
    :width: 4in
@@ -6392,28 +6413,28 @@ Using the drag button, adjust the robot end effector to face horizontally downwa
 
 .. centered:: Figure 8.14‑13 Force/Torque Sensor Auto Zeroing
 
-Six-Axis Force and Joint Impedance Hybrid Dragging
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Six-Axis Force and Joint Impedance Hybrid Drag
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. Assisted Dragging
+Assisted Drag
+********************************************************
 
-**Step1**: Under the "Application" -> "Tool App" menu, click "Drag Lock" to enter the drag lock function interface.
+**Step 1**: Under the menu bar of "Auxiliary Apps" -> "Tool Applications", click "Drag Lock" to enter the drag lock function interface.
 
-**Step2**: In the "Six-Axis Force and Joint Impedance Hybrid Dragging" section, set the Control Status to "On", the Impedance Enable Status to "Off", set the Drag Gain, the End Linear Speed to 1000 mm/s, the Angular Speed Limit to 100 °/s, then click the "Apply" button to enable the function. The specific configuration is shown in Figure 4.
-
-**Step3**: Switch the robot mode to drag mode to drag the robot. The specific effect is: dragging the robot end effector feels easy and provides a good experience; dragging the robot joints feels heavy.
+**Step 2**: In the "Six-Axis Force and Joint Impedance Hybrid Drag" section, set the control status to "On", set the impedance enable status to "Off", set the drag gain, set the end linear velocity to 1000mm/s, set the angular velocity limit to 100°/s, and then click the "Apply" button to enable the function. The specific configuration is shown in the figure below.
 
 .. figure:: robot_peripherals/241.png
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.14‑14 Configuration Parameters for Six-Axis Force Assisted Dragging
+.. centered:: Figure 8.14‑14 Configuration Parameters for Six-Axis Force Assisted Drag
 
-2. Joint Impedance Control
+Joint Impedance Control
+********************************************************
 
-The role of impedance control is to limit the drag force and drag position. Its default status is "Off".
+The function of impedance control is to limit the drag force and drag position. Its default status is "Off".
 
-The specific operation is shown in Figure 5. Set the Impedance Enable Status to "On", then set the Damping Coefficient and Stiffness Coefficient as shown in Figure 5. The function of the Stiffness Coefficient is currently not available.
+For specific operations, see the figure below. Set the impedance enable status to "On", and then set the damping coefficient and stiffness coefficient as shown. The stiffness coefficient function is not yet available.
 
 .. figure:: robot_peripherals/242.png
    :align: center
@@ -6424,18 +6445,23 @@ The specific operation is shown in Figure 5. Set the Impedance Enable Status to 
 Specific functions of the parameters:
 
 - **Control Status**: After enabling, this function can be used in drag mode.
+  
+- **Impedance Enable**: After enabling, stiffness parameters and damping parameters need to be configured. Its function is to limit the drag force and drag position.
+  
+- **Drag Gain**: It is recommended to set the parameters between [0-5]. When set to 0, the robot cannot be dragged. When set to 1, the drag effect is not improved. When greater than 1, the drag is light and the dragging experience is good. The larger the parameter, the easier the dragging.
+  
+- **Stiffness Gain**: When set to 0, it restores the robot to the initial position before dragging after dragging.
+  
+- **Damping Gain**: Its function is to limit the drag force. The parameter range for axes 1-3 is [0-0.5], for axes 4-5 is [0-0.1]; for axis 6 is [0-0.05].
+  
+- **End Linear Velocity**: 1000mm/s. When the end linear velocity limit is exceeded, the robot switches to manual mode and prompts TCP overspeed.
+  
+- **Angular Velocity Limit**: 100°/s. When the angular velocity limit is exceeded, the robot switches to manual mode and prompts TCP overspeed.
 
-- **Impedance Enable**: After enabling, stiffness and damping parameters need to be configured. Its role is to limit the drag force and drag position.
+.. note::
+  1. For the FR3WML robot, the recommended parameter settings are as follows: drag gain [0.15, 0.15, 0.15, 0.15, 0.15, 0.2], damping gain after enabling impedance [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
 
-- **Drag Gain**: Recommended parameter range [0-5]. Setting the parameter to 0 makes the robot undraggable. Setting to 1 shows no improvement in dragging effect. Setting greater than 1 makes dragging light and provides a good experience. The larger the parameter, the easier the dragging.
-
-- **Stiffness Gain**: Set to 0. Its role is to return to the initial position before dragging after dragging.
-
-- **Damping Gain**: Its role is to limit the drag force. Parameter range for axes 1-3 is [0-0.5], for axes 4-5 is [0-0.1]; for axis 6 it is [0-0.05].
-
-- **End Linear Speed**: 1000 mm/s. When the end linear speed limit is exceeded, the robot switches mode to manual mode and prompts TCP overspeed.
-
-- **Angular Speed Limit**: 100 °/s. When the angular speed limit is exceeded, the robot switches mode to manual mode and prompts TCP overspeed.
+  2. When all drag gain parameters are set to 0, the drag resistance is strong and it is difficult to drag; when all drag gain parameters are set to 5, the drag feel is light; the larger the parameter, the easier the dragging.
 
 Extended Axis with Laser Point Tracking Function
 --------------------------------------------------------------------------------------------------
@@ -7212,6 +7238,20 @@ Detailed end communication parameters are as follows:
    :width: 6in
 
 .. centered:: Figure 8.19‑4 Open Protocol Function Codes
+
+The dexterous hand action control commands are 0x31-0x36, described as follows:
+
+- ① 0x31 is the dexterous hand initialization function code. The specific implementation is determined by the actual condition of the dexterous hand.
+- ② 0x32-0x34 are function codes for sending dexterous hand control parameters, corresponding to position control parameters, speed control parameters, and torque control parameters respectively, used to set the motion target values for each joint.
+- ③ 0x35 is the grip motion trigger function code. Dexterous hand motion control generally has two modes: one where motion is executed immediately after writing to the position register; the other where motion starts only after writing a specific value to the action trigger register after writing to the position register. Whether to enable this trigger function is determined by the actual condition of the dexterous hand.
+- ④ 0x36 is the multi-axis synchronous motion function code. Whether multi-axis synchronous motion is supported is determined by the actual condition of the dexterous hand. If supported, it is used to achieve coordinated planning of multiple finger joints in time, starting simultaneously and reaching their respective target positions/speeds at the same time. If not supported, each axis is controlled sequentially through single-axis control commands to achieve a similar coordinated effect.
+
+The dexterous hand status query commands are 0xA0-0xA6, described as follows:
+
+- ⑤ 0xA0 is the function code for reading single-axis running status, used to query the current motion status and grip status information of a specified joint.
+- ⑥ 0xA2 is the function code for reading initialization status, used to query the initialization completion status and system readiness of the dexterous hand. The specific implementation is determined by the actual condition of the dexterous hand.
+- ⑦ 0xA3-0xA5 are function codes for reading dexterous hand real-time status parameters, corresponding to the current actual position, current actual speed, and current actual torque respectively, used for closed-loop control and status monitoring.
+- ⑧ 0xA6 is the function code for reading dexterous hand alarm information, used to obtain the underlying fault codes and alarm status of the dexterous hand, facilitating abnormal diagnosis and protection handling.
 
 .. note:: The dexterous hand must support reading the running status related function codes to facilitate querying the motion status.
   

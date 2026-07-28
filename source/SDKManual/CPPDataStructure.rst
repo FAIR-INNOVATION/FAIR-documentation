@@ -305,6 +305,7 @@ feedback packet of robot controller state
       uint8_t socketReadTimeout;   // Socket read timeout, bit0-bit4: socketID 1-4
       uint8_t tsWebStateComErr;   // Web-torque communication failure; 0-normal; 1-failed
       uint8_t exaxisCoordID;     //Extended axis coordinate system ID
+      uint8_t programRunState    //LUA program running status 0-program not running; 1-program running (including program paused)
       uint16_t check_sum;     // Checksum
     }ROBOT_STATE_PKG;
 
@@ -446,4 +447,5 @@ Robot Status Feedback Configuration Enumeration Type
         SocketReadTimeout = 130,    // Socket read timeout, bit0-bit4 correspond to socketID 1-4
         TsWebStateComErr = 131,     // Web-torque communication failure: 0-normal, 1-failed
         ExaxisCoordID = 132          //Extended axis coordinate system ID
+        programRunState = 133       //LUA program running status 0-program not running; 1-program running (including program paused)
     };

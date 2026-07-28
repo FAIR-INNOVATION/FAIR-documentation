@@ -374,6 +374,7 @@ Robot Status Feedback Structure Type
         public byte socketReadTimeout;     // Socket read timeout flag
         public byte tsWebStateComErr;      // ts_web_state_com_err
         public byte exaxisCoordID;         // Extension axis coordinate system number
+        public byte programRunState        //LUA program running status 0-program not running; 1-program running (including program paused)
         public UInt16 check_sum;         /* Checksum */                 
 
         // Constructor: initialize all array fields
