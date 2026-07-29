@@ -349,11 +349,11 @@ Zero position identification model
 FAIRINO SimMachine
 -----------------------
 
-    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1z_cdP1EcANeu586qdqtZL9T0JZCSGR2B/view?usp=sharing>`
+    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1yxeTtPKpDIaGBwX9cgytzTFudb7GbUHH/view?usp=sharing>`
     
-    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1Ozh6SmqUSl981QEPHvcKMD69P7ijEzyw/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1YFNlUoPJYurfRga1N3RVKST76MVstiu6/view?usp=sharing>`
 
-    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1DcCFdUDi0utnrHm6es2SBK7P2fWekigP/view?usp=sharing>`
+    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1kvMm1XJ9qSfCpUrTtbuBPYZtNNchuLdQ/view?usp=drive_link>`
 
 Palletizer frcap
 ---------------------------------

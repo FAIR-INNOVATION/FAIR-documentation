@@ -604,6 +604,7 @@ Get Extended Axis Coordinate System by ID
     - ``axisCoordNum``: Extended axis number (optional) bit0-bit3 correspond to extended axis 1-extended axis 4; e.g., value 3 corresponds to extended axes [1,2]
     - ``calibFlag``: Calibration flag (optional) 0-not calibrated; 1-calibrated
     "
+
 Get the load mass and centroid according to the number
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.6

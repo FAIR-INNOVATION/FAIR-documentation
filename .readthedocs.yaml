@@ -10,12 +10,12 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
-  apt_packages:
-    - git-lfs
-  jobs:
-    pre_build:
-      - git lfs install
-      - git lfs pull
+  # apt_packages:
+  #   - git-lfs
+  # jobs:
+  #   pre_build:
+  #     - git lfs install
+  #     - git lfs pull
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
