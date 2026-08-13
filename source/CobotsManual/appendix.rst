@@ -163,130 +163,312 @@ Appendix 1: Motion controller errors and handling methods
    "13-Parameter Setting Error", "16", "Conveyor encoder channel error, resettable"
    "13-Parameter Setting Error", "17", "Conveyor workpiece axis number error, resettable"
 
-Appendix 2: Servo driver fault code table
---------------------------------------------------
+Appendix 2: Wide Voltage Control Box Fault Table
+---------------------------------------------------------------------------------
 
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| Fault code |                                 Fault name                                  |                                                  Processing method                                                   |
-+============+=============================================================================+======================================================================================================================+
-| 1          | Software overcurrent fault                                                  || 1. Check whether the joint load or resistance becomes larger or abnormal;                                           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 2          | Overvoltage fault                                                           | Reduce the speed or acceleration of the robot.                                                                       |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 3          | Under voltage fault                                                         || 1. Check whether the 48V power supply voltage output of the control box is abnormal;                                |
-|            |                                                                             || 2. Check the drive plate and joint housing for short circuit;                                                       |
-|            |                                                                             || 3. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 4          | Overheating fault                                                           | Reduce the load or speed of the robot.                                                                               |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 5          | Overload fault                                                              | Reduce the load or speed of the robot.                                                                               |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 6          | Overspeed fault                                                             || 1. Check whether the magnetic braiding assembly and the motor shaft fixing jackscrew are loose;                     |
-|            |                                                                             || 2. Re-perform encoder zero calibration;                                                                             |
-|            |                                                                             || 3. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 7          | Parameter abnormal fault                                                    | Repair or replace the drive plate.                                                                                   |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 8          | Runaway fault                                                               || 1. Check whether the magnetic braiding assembly and the motor shaft fixing jackscrew are loose;                     |
-|            |                                                                             || 2. Re-perform encoder zero calibration;                                                                             |
-|            |                                                                             || 3. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 9          | Position error fault                                                        || 1. Check whether the joint load or resistance becomes larger or abnormal;                                           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 10         | Position overflow fault                                                     || 1. Check whether the hard limit is loose;                                                                           |
-|            |                                                                             || 2. Re-perform robot zero calibration.                                                                               |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 11         | Hardware overcurrent fault                                                  | Repair or replace the drive plate.                                                                                   |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 12         | Drive inhibit fault                                                         | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 13         | Motor locked rotor fault                                                    || 1. Check whether the brake electromagnet is engaged;                                                                |
-|            |                                                                             || 2. Check whether the hard limit is hit;                                                                             |
-|            |                                                                             || 3. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 14         | Power supply failure                                                        | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 15         | STO fault                                                                   | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 16         | Phase current AD zero setting fault                                         | Repair or replace the drive plate.                                                                                   |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 17         | EEPROM fault                                                                | Repair or replace the drive plate.                                                                                   |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 18         | Hall fault                                                                  || 1. Check whether the hall harness is inserted firmly and whether there is short circuit or open circuit;            |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the joint.                                               |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 19         | Encoder failed                                                              | Repair or replace the magnetic braid assembly.                                                                       |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 20         | Encoder zero setting fault                                                  || 1. Re-perform encoder zero calibration;                                                                             |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 21         | Encoder Z-phase signal loss fault                                           | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 22         | Encoder count fault                                                         | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 23         | Encoder multi turn data overflow fault                                      | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 24         | External clock fault                                                        | Repair or replace the drive plate.                                                                                   |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 25         | UVW phase sequence fault                                                    | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 26         | FPGA fault                                                                  | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 27         | Zero return fault                                                           | The robot is NOT enabled.                                                                                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 28         | Magnetic encoder fault                                                      || 1. Check whether the magnetic braiding assembly and the motor shaft fixing jackscrew are loose;                     |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 29         | Motor power line disconnection fault                                        || 1. Check whether the power line of the motor is firmly inserted, and whether there is short circuit or open circuit;|
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 30         | EtherCAT fault                                                              || 1. Check whether the network cable is firmly plugged, and whether there is short circuit or open circuit;           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board                                          |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 31         | EtherCAT_SM_DOG fault                                                       || 1. Check whether the network cable is firmly plugged, and whether there is short circuit or open circuit;           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 32         | EtherCAT_FATALSYNC failure                                                  || 1. Check whether the network cable is firmly plugged, and whether there is short circuit or open circuit;           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 33         | EtherCAT_SYNC fault                                                         || 1. Check whether the network cable is firmly plugged, and whether there is short circuit or open circuit;           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 34         | EtherCAT_RFT failure                                                        || 1. Check whether the network cable is firmly plugged, and whether there is short circuit or open circuit;           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 35         | Drive shaft address fault                                                   || 1. Re-configure the drive axis address;                                                                             |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 36         | Robot zero calibration fault                                                || 1. Re-perform robot zero calibration;                                                                               |
-|            |                                                                             || 2. First use JLINK to erase FLASH, then download the program again and zero;                                        |
-|            |                                                                             || 3. If the fault is still not eliminated, repair or replace the drive board.                                         |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 37         | Encoder communication failure                                               || 1. Check whether the encoder harness is inserted firmly and whether there is short circuit or open circuit;         |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 40         | Magnetic encoder module failure - zero calibration failure                  || 1. Re-zero the magnetic braiding assembly;                                                                          |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 41         | Magnetic encoder module fault - multi turn fault                            || 1. Check whether the magnetic braiding assembly and the motor shaft fixing jackscrew are loose;                     |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 42         | Magnetic encoder module failure - multi turn small magnetic encoder failure || 1. Check whether the multi turn small magnetic braiding chip is abnormal;                                           |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 43         | Magnetic encoder module failure - multi turn large magnetic encoder failure || 1. Check whether the multi turn magnetic braiding chip is abnorma;                                                  |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 44         | Magnetic braiding module fault - single turn magnetic braiding fault        || 1. Check whether the single turn magnetic braiding chip is abnormal;                                                |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
-| 45         | Magnetic encoder module failure - optical encoder failure                   || 1. Check whether the optical coding disc is polluted or not stuck;                                                  |
-|            |                                                                             || 2. If the fault is still not eliminated, repair or replace the magnetic editor assembly.                            |
-+------------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
+.. list-table::
+   :widths: 20 40 80
+   :header-rows: 0
+   :align: center
 
-Appendix 3: End plate 485 upgrade
+   * - **Fault Code**
+     - **Fault Name**
+     - **Troubleshooting Method**
+
+   * - 3
+     - Auxiliary MCU Offline
+     - | 1. Re-flash the auxiliary MCU firmware
+       | 2. Repair the auxiliary MCU or replace the control box  
+
+   * - 4
+     - Main and Auxiliary MCU Emergency Stop Input Mismatch
+     - | 1. Check the emergency stop wiring harness of the button box or replace the button box assembly
+       | 2. Check the two emergency stop shorting wiring harnesses on the control box terminals  
+       | 3. If the fault persists, repair or replace the control box 
+
+   * - 5
+     - Main and Auxiliary MCU Safety Input Mismatch
+     - | 1. Check the two safety shorting wiring harnesses on the control box terminals
+       | 2. If the fault persists, repair or replace the control box
+
+   * - 6
+     - Main and Auxiliary MCU 3-Position Enable and Emergency Stop Input Mismatch
+     - | 1. Check the 3-position enable switch on the teach pendant and the teach pendant wiring harness
+       | 2. Replace the teach pendant assembly
+       | 3. Check whether the Web is in teach pendant mode and whether the teach pendant is connected
+       | 4. If the fault persists, repair or replace the control box
+
+   * - 7
+     - Main STO Input/Output Mismatch
+     - | 1. Check whether the control box heavy-load connector and STO wiring harness are securely plugged in
+       | 2. Check whether the drive supports the STO function
+       | 3. For wide-voltage certified control box + non-certified robot configuration, check whether functional safety mode is enabled
+       | 4. The wide-voltage certified control box in certification mode enables STO fault detection; the non-certified robot does not support functional safety mode
+       | 5. If the fault persists, repair or replace the control box
+
+   * - 8
+     - Auxiliary STO Input/Output Mismatch
+     - | 1. Check whether the control box heavy-load connector and STO wiring harness are securely plugged in
+       | 2. Check whether the drive supports the STO function
+       | 3. For wide-voltage certified control box + non-certified robot configuration, check whether functional safety mode is enabled
+       | 4. The wide-voltage certified control box in certification mode enables STO fault detection; the non-certified robot does not support functional safety mode
+       | 5. If the fault persists, repair or replace the control box
+
+   * - 9
+     - Main MCU Detects 48V Relay Input/Output Mismatch
+     - | 1. Check the input and feedback of the forced-guided relay in the control box
+       | 2. Check whether the 48V relay in the control box is stuck
+       | 3. Check whether the 48V relay feedback circuit in the control box is functioning properly
+       | 4. If the fault persists, repair or replace the control box
+
+   * - 10
+     - Auxiliary MCU Detects 48V Relay Input/Output Mismatch
+     - | 1. Check the input and feedback of the forced-guided relay in the control box
+       | 2. Check whether the 48V relay in the control box is stuck
+       | 3. Check whether the 48V relay feedback circuit in the control box is functioning properly
+       | 4. If the fault persists, repair or replace the control box
+
+   * - \
+     - Control Box Power Off, No 48V Output
+     - | 1. Check the 24V short-circuit protection chip related circuit and check for any short circuits on the 24V
+       | 2. Check the emergency stop input & safety input terminal shorting wiring harnesses
+       | 3. Check whether the 24V power supply daughter board in the control box outputs 24V
+       | 4. If the fault persists, repair or replace the control box
+Appendix 3: Servo Drive Fault Code Table
+---------------------------
+
+.. list-table::
+   :widths: 20 40 80
+   :header-rows: 0
+   :align: center
+
+   * - **Fault Code**
+     - **Fault Name**
+     - **Troubleshooting Method**
+
+   * - 1
+     - Software overcurrent fault
+     - | 1. Check whether the joint load or resistance has increased or is abnormal.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 2
+     - Overvoltage fault
+     - Reduce robot operating speed or acceleration.
+
+   * - 3
+     - Undervoltage fault
+     - | 1. Check whether the 48V power supply output from the control box is abnormal.
+       | 2. Check for short circuits between the drive board and the joint housing.
+       | 3. If the fault persists, repair or replace the drive board.
+
+   * - 4
+     - Overtemperature fault
+     - Reduce robot load or reduce robot operating speed.
+
+   * - 5
+     - Overload fault
+     - Reduce robot load or reduce robot operating speed.
+
+   * - 6
+     - Overspeed fault
+     - | 1. Check whether the set screw securing the magnetic encoder assembly to the motor shaft is loose.
+       | 2. Re-perform encoder zeroing.
+       | 3. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 7
+     - Parameter abnormal fault
+     - Repair or replace the drive board.
+
+   * - 8
+     - Runaway fault
+     - | 1. Check whether the set screw securing the magnetic encoder assembly to the motor shaft is loose.
+       | 2. Re-perform encoder zeroing.
+       | 3. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 9
+     - Position error fault
+     - | 1. Check whether the joint load or resistance has increased or is abnormal.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 10
+     - Position overflow fault
+     - | 1. Check whether the hard limit stop is loose.
+       | 2. Re-perform robot zeroing.
+
+   * - 11
+     - Hardware overcurrent fault
+     - Repair or replace the drive board.
+
+   * - 12
+     - Drive inhibit fault
+     - Not enabled.
+
+   * - 13
+     - Motor stall fault
+     - | 1. Check whether the brake solenoid is engaged.
+       | 2. Check whether the hard limit stop has been hit.
+       | 3. If the fault persists, repair or replace the drive board.
+
+   * - 14
+     - Power supply fault
+     - Not enabled.
+
+   * - 15
+     - STO fault
+     - Not enabled.
+
+   * - 16
+     - Phase current AD zeroing fault
+     - Repair or replace the drive board.
+
+   * - 17
+     - EEPROM fault
+     - Repair or replace the drive board.
+
+   * - 18
+     - Hall sensor fault
+     - | 1. Check whether the Hall sensor harness is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the joint.
+
+   * - 19
+     - Encoder fault
+     - Repair or replace the magnetic encoder assembly.
+
+   * - 20
+     - Encoder zeroing fault
+     - | 1. Re-perform encoder zeroing.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 21
+     - Encoder Z-phase signal loss fault
+     - Not enabled.
+
+   * - 22
+     - Encoder count fault
+     - Not enabled.
+
+   * - 23
+     - Encoder multi-turn data overflow fault
+     - Not enabled.
+
+   * - 24
+     - External clock fault
+     - Repair or replace the drive board.
+
+   * - 25
+     - UVW phase sequence fault
+     - Not enabled.
+
+   * - 26
+     - FPGA fault
+     - Not enabled.
+
+   * - 27
+     - Homing fault
+     - Not enabled.
+
+   * - 28
+     - Magnetic encoder fault
+     - | 1. Check whether the set screw securing the magnetic encoder assembly to the motor shaft is loose.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 29
+     - Motor power cable disconnection fault
+     - | 1. Check whether the motor power cable is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 30
+     - EtherCAT fault
+     - | 1. Check whether the Ethernet cable is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 31
+     - EtherCAT_SM_DOG fault
+     - | 1. Check whether the Ethernet cable is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 32
+     - EtherCAT_FATALSYNC fault
+     - | 1. Check whether the Ethernet cable is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 33
+     - EtherCAT_SYNC fault
+     - | 1. Check whether the Ethernet cable is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 34
+     - EtherCAT_RFT fault
+     - | 1. Check whether the Ethernet cable is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 35
+     - Drive axis address fault
+     - | 1. Re-configure the drive axis address.
+       | 2. If the fault persists, repair or replace the drive board.
+
+   * - 36
+     - Robot zeroing fault
+     - | 1. Re-perform robot zeroing.
+       | 2. First use JLINK to erase the FLASH, then re-download the program and perform zeroing.
+       | 3. If the fault persists, repair or replace the drive board.
+
+   * - 37
+     - Encoder communication fault
+     - | 1. Check whether the encoder cable is securely connected, and check for short circuits or open circuits.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 40
+     - Magnetic encoder module fault - zeroing fault
+     - | 1. Re-perform magnetic encoder assembly zeroing.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 41
+     - Magnetic encoder module fault - multi-turn fault
+     - | 1. Check whether the set screw securing the magnetic encoder assembly to the motor shaft is loose.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 42
+     - Magnetic encoder module fault - multi-turn small magnetic encoder fault
+     - | 1. Check whether the multi-turn small magnetic encoder chip is abnormal.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 43
+     - Magnetic encoder module fault - multi-turn large magnetic encoder fault
+     - | 1. Check whether the multi-turn large magnetic encoder chip is abnormal.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 44
+     - Magnetic encoder module fault - single-turn magnetic encoder fault
+     - | 1. Check whether the single-turn magnetic encoder chip is abnormal.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 45
+     - Magnetic encoder module fault - optical encoder fault
+     - | 1. Check whether the optical encoder disc is contaminated or not securely adhered.
+       | 2. If the fault persists, repair or replace the magnetic encoder assembly.
+
+   * - 46
+     - Robot type setting abnormal fault
+     - | 1. Without powering off, check the firmware version number of the faulty drive.
+       | 2. Re-configure the robot type.
+       | 3. If the fault persists, repair or replace the drive board.
+
+   * - 47
+     - Brake voltage detection fault
+     - | 1. Check whether the brake wiring is abnormal.
+       | 2. Check whether the brake circuit is abnormal.
+
+   * - 50
+     - Position command abnormal fault
+     - | 1. Check whether the position command sent by the host computer (controller) is abnormal (or if the position command changes abruptly).
+
+   * - 51
+     - Magnetic encoder module fault - optical encoder fault
+     - | 1. Check whether the torque sensor wiring is abnormal.
+       | 2. If the fault persists, repair or replace the torque sensor.
+       
+Appendix 4: End plate 485 upgrade
 -----------------------------------------
 
 During field use, it is possible to update the firmware to meet the new requirements. A new upgrade file (XX_XX_MAIN. bin) will be provided to upgrade the terminal board through the 485 interface (USB to 485 module is required). The upgrade steps are as follows:
@@ -343,7 +525,7 @@ During field use, it is possible to update the firmware to meet the new requirem
 
 .. centered:: Figure 18.3-6 Querying Firmware Version Information
 
-Appendix 4: Control Box 485 Upgrade
+Appendix 5: Control Box 485 Upgrade
 ----------------------------------------
 
 There is a "power communication" interface on the robot control box board, and USB&485 tools A and B are respectively connected to the "485-A" and "485-B" of its interface.
@@ -356,7 +538,7 @@ The upgrade process is the same as that of the terminal board, and the software 
 
 .. centered:: Figure 18.4-1 Power Communication Interface
 
-Appendix 5: List of Spare Parts and Vulnerable Parts
+Appendix 6: List of Spare Parts and Vulnerable Parts
 -------------------------------------------------------------
 
 +----------------------------+----------------+-------------------+
