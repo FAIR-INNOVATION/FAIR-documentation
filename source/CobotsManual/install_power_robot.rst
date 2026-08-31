@@ -108,6 +108,30 @@ The wiring panel of the collaborative robot is shown in the following figure:
 
 The button box interface is the control port of the teach pendant by default, and the IP address is 192.168.58.2. Use a network cable to connect the button box interface and the computer. The computer IP address is set to 192.168.58.10 or the same network segment. Open the Google browser and enter 192.168.58.2 You can access the teach pendant page.
 
+Control Box Mounting Screw Hole Information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: installation/149.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 1.2-2 Control Box External Dimensions - Mounting Hole Dimensions 1
+
+.. image:: installation/150.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 1.2-3 Control Box External Dimensions - Mounting Hole Dimensions 2
+
+.. note:: 
+  1. The marked holes are available mounting holes;
+  2. There are 16 mounting holes in total, distributed on the left and right sides of the control box, 8 on each side;
+  3. The screw specification for the mounting holes is M3, with a pitch of 0.5mm;
+  4. The depth to which the screws are inserted into the sheet metal shell of the control box is ≤5mm;
+  5. Recommended mounting torque is 0.6Nm, maximum mounting torque is 0.84Nm.
+
+:download:`Control Box External Dimensions - Mounting Hole Dimensions <../_static/_doc/Control box outer dimensions - mounting hole dimensions.zip>`
+
 Know the button box and end LED
 ---------------------------------
 

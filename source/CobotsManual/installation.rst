@@ -1365,6 +1365,139 @@ There are two software setting items for digital output: "Control Box DO Output 
      - Invalid
      - Valid
 
+DC Control Box Power Supply Connection Safety Manual
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Terminal Definition and Identification
+************************************************************************************
+The DC control box front panel is equipped with a 3-pin power input terminal, corresponding to power positive (+V), power negative (-V), and protective earth (PE). To prevent equipment damage due to incorrect wiring, please strictly refer to the table below:
+
+.. list-table::
+   :widths: 15 10 35 35
+   :header-rows: 0
+   :align: center
+
+   * - **Terminal Marking** 
+     - **Color Standard**
+     - **Function Definition**
+     - **Strictly Prohibited**
+
+   * - 	.. figure:: installation/144.png
+          :align: center
+          :width: 2in
+     - Red
+     - DC power positive input, only for 30-60VDC positive cable
+     - Short circuit with PE or -V is strictly prohibited
+
+   * - 	.. figure:: installation/145.png
+          :align: center
+          :width: 2in
+     - Black
+     - DC power negative input, only for 30-60VDC negative cable, forming the power supply loop
+     - Connecting to chassis or PE is strictly prohibited
+
+   * - 	.. figure:: installation/146.png
+          :align: center
+          :width: 2in
+     - Yellow (Yellow-Green)
+     - Protective earth terminal (chassis safety ground)
+     - Using as power negative or positive is strictly prohibited
+
+.. warning::
+  Critical Risk Warning: This device does not have built-in reverse polarity protection, misconnection protection, or overvoltage protection circuits. Any of the following improper operations will instantly damage the internal mainboard and power components, causing permanent and irreversible burnout of the device:
+  
+  1. Reverse polarity connection (+V and -V cables swapped);
+  2. +V or -V mistakenly connected to the PE terminal;
+  3. Negative terminal mistakenly grounded (-V shorted to PE);
+  4. Connecting to AC power (110V/220V/380V) or DC voltage outside the 30~60Vdc range.
+
+Pre-Wiring Safety Preparation
+*************************************************************************
+
+Before wiring, operators must complete the following preparations:
+
+Power-Off Confirmation
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Completely cut off the front-end power supply and hang a safety warning sign. Use a multimeter to check the power input terminals to confirm there is no voltage or residual electricity, and never perform wiring with power on.
+
+Equipment Inspection
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Check that the device terminals are not damaged, oxidized, or loose, and that the device body is not damp, water-damaged, or physically damaged, ensuring the device is in good condition.
+
+Power Supply Confirmation
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Confirm that the front-end power output type is 30-60VDC regulated DC power. Connecting to AC 110V/220V/380V power, DC power below 30VDC or above 60VDC is strictly prohibited.
+
+Cable Selection
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+It is recommended to use copper flexible wires of 4mm² (AWG11) or larger. The length of a single power supply cable should not exceed 2 meters. Do not use cables with insufficient wire gauge, damaged insulation, or aging.
+
+Wire Terminal Selection
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The ends of the cables must be crimped with pre-insulated cold-pressed terminals (recommended model: DBV5.5-10 spade terminal). Inserting bare copper wires directly into the terminal holes is strictly prohibited.
+
+Tool Calibration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Prepare a qualified multimeter, insulated screwdriver, and crimping pliers. Calibrate the multimeter in advance to ensure its voltage detection function is working properly, enabling accurate voltage measurement and polarity identification.
+
+Standard Wiring Procedure
+************************************************************************************
+
+Crimping Wire Terminals
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Use crimping pliers to crimp cold-pressed terminals (recommended DBV5.5-10) onto one end of each of the three color-coded cables: red (+V), black (-V), and yellow-green (PE). Ensure the crimp is firm and the copper core is not exposed. Using cables of the same color or with unclear color identification is strictly prohibited.
+
+Inserting and Securing the Terminal Plug
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Insert the crimped terminals into the corresponding holes of the detachable terminal plug provided with the device (pay attention to the insertion direction, with the flat side of the terminal facing the spring clip):
+Red cable → insert into +V hole;
+Black cable → insert into -V hole;
+Yellow-green cable → insert into PE hole.
+Use a flat-blade insulated screwdriver to tighten the wire clamping screw above each hole clockwise.
+
+.. figure:: installation/147.png
+  :align: center
+  :width: 4in
+
+.. centered:: Cable harness with cold-pressed terminals inserted into the green plug
+
+Pull Force Verification
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+After each cable is tightened, pull the cable firmly by hand to confirm that the terminal is not loose and the wire core has not slipped out. If loose, re-crimp the terminal and tighten again.
+
+Inserting into the Control Box
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Insert the wired plug into the DC control box power input according to the keyed guide slot direction. Ensure the plug is fully seated.
+
+.. figure:: installation/148.png
+  :align: center
+  :width: 3in
+
+.. centered:: Cable harness plug inserted into the DC control box power input
+
+Final Insulation Verification Before Power-On
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+With the power not yet connected, use a multimeter to measure the impedance between +V and -V at the plug end to confirm there is no short circuit; measure the impedance between +V/-V and PE to confirm they are in an open and isolated state.
+
+Power-On Startup and Abnormal Handling
+************************************************************************************
+
+- Normal Startup: Close the front-end power switch and observe the control box panel indicator light. Normal condition is that the indicator light remains on, with no abnormal sounds or odors.
+- Abnormal Condition (Immediately power off!): If there is severe screeching, smoke, sparks, odors, or the front-end power ammeter instantly peaks to overload, immediately disconnect the main power and do not power on again. Please contact technical support after the device has completely cooled down. Do not attempt to disassemble the device for inspection.
+
+.. warning:: Final Warning: Powering on indicates that you have fully understood and complied with the above wiring specifications. If any identification is unclear, please immediately contact technical support. Do not rely on experience for wiring!
+
 Inspection maintenance plan
 ++++++++++++++++++++++++++++++++++
 
