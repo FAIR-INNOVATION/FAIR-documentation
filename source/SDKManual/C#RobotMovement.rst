@@ -883,6 +883,115 @@ Joint Torque Control Start
     */
     public int ServoJTStart (int comType = 0)
 
+Joint Space Servo Mode Motion (Supports Multiple Points Input at Once)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Joint space servo mode motion (supports multiple points input at once)
+    * @param [in] joint_pos Target joint position set (supports up to 10 groups), unit deg
+    * @param [in] axisPos External axis position, unit mm
+    * @param [in] acc Acceleration percentage, range [0~100], not open yet, default 0
+    * @param [in] vel Speed percentage, range [0~100], not open yet, default 0
+    * @param [in] cmdT Command send cycle, unit s, recommended range [0.001~0.0016]
+    * @param [in] filterT Filter time, unit s, not open yet, default 0
+    * @param [in] gain Target position proportional amplifier, not open yet, default 0
+    * @param [out] servoJCmdCount ServoJ command point count [0-10000]
+    * @param [in] id ServoJ command ID, default 0
+    * @param [in] comType Command send type; 0-xmlrpc; 1-UDP (corresponds to robot port 20007)
+    * @return Error code
+    */
+    public int ServoJ(List<JointPos> joint_pos, ExaxisPos axisPos, float acc, float vel, float cmdT, float filterT, float gain, ref int servoJCmdCount, int id = 0, int comType = 0)
+    
+Joint Space Servo Mode Motion (Supports Multiple Points Input at Once) Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
+
+    public void TestServoJPath()
+    {
+        // Read the ServoJ path file, taking columns 2~7 of each line as 6 joint positions
+        string filePath = "D://zUP/ServoJPath.txt";
+        List<JointPos> allJointData = new List<JointPos>();
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] cols = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                if (cols.Length < 7)
+                    continue;
+                JointPos pose = new JointPos(0, 0, 0, 0, 0, 0);
+                pose.jPos[0] = double.Parse(cols[1]);
+                pose.jPos[1] = double.Parse(cols[2]);
+                pose.jPos[2] = double.Parse(cols[3]);
+                pose.jPos[3] = double.Parse(cols[4]);
+                pose.jPos[4] = double.Parse(cols[5]);
+                pose.jPos[5] = double.Parse(cols[6]);
+                allJointData.Add(pose);
+            }
+        }
+        Console.WriteLine($"Total {allJointData.Count} joint position sets read");
+        if (allJointData.Count == 0)
+            return;
+
+        // Build a back-and-forth path: forward order + reverse order
+        List<JointPos> backForthPath = new List<JointPos>(allJointData);
+        for (int i = allJointData.Count - 2; i >= 0; i--)
+        {
+            backForthPath.Add(allJointData[i]);
+        }
+
+        ExaxisPos epos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+        DescPose offsetPos = new DescPose(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        robot.MoveJ(allJointData[0], 0, 0, 100, 100, 100, epos, -1, 0, offsetPos);
+
+        robot.Sleep(1000);
+
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        while (true)
+        {
+            robot.ResetAllError();
+            robot.MoveJ(allJointData[0], 0, 0, 100, 100, 100, epos, -1, 0, offsetPos);
+            int moveCount = 0;
+            while (moveCount < backForthPath.Count - 10)
+            {
+                robot.GetRobotRealTimeState(ref pkg);
+
+                int singleServoJCount = 50 - pkg.mc_queue_len;
+                if (singleServoJCount <= 0)
+                {
+                    robot.Sleep(100);
+                    continue;
+                }
+                if (singleServoJCount > 10)
+                {
+                    singleServoJCount = 10;
+                }
+
+                List<JointPos> jointPos = new List<JointPos>();
+                for (int j = 0; j < singleServoJCount; j++)
+                {
+                    jointPos.Add(backForthPath[moveCount]);
+                    moveCount++;
+                }
+
+                Console.WriteLine($"Sending {singleServoJCount} waypoints, moveCount={moveCount}");
+
+                ExaxisPos axisPos = new ExaxisPos(0.0, 0.0, 0.0, 0.0);
+                int servoJCmdCount = 0;
+                int rtn = robot.ServoJ(jointPos, axisPos, 100.0f, 100.0f, 0.008f, 0.008f, 1.0f, ref servoJCmdCount);
+                if (rtn != 0)
+                {
+                    Console.WriteLine($"ServoJ failed: {rtn}");
+                    break;
+                }
+            }
+            robot.Sleep(4000);
+        }
+    }    
+
 Joint Torque Control
 ++++++++++++++++++++++++++++++++++
 .. code-block:: c#

@@ -286,3 +286,64 @@ SDK Code Example for Setting Safety Speed Parameters
         robot.MoveJ(j2, 1, 2, 100, 100, 100, epos, -1, 0, offset_pos);
         return 0; 
     }
+    
+Get Safety Configuration Parameter Checksum
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:  
+
+    /**
+    * @brief  Get safety configuration parameter checksum
+    * @param  [out] status Verification status, 0-valid, 1-verifying, 2-verification failed
+    * @param  [out] checksum Checksum, 8-digit hexadecimal
+    * @return  Error code
+    */
+    public int GetSafetyParamsCheckSum(ref int status, ref uint checksum)
+        
+Safety Operation Password Verification
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:  
+
+    /**
+    * @brief  Safety operation password verification
+    * @param  [in] status Verification, 0-enable, 1-disable
+    * @param  [in] password Password
+    * @return  Error code
+    */
+    public int SafetyOPPasswordCheck(int status, string password)
+            
+Code Example for Getting Safety Configuration Parameter Checksum and Safety Operation Password Verification
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:  
+
+    public void TestSafetyParamsCheckSum()
+    {
+        int status = 0;
+        uint checksum = 0;
+
+        int error = robot.GetSafetyParamsCheckSum(ref status, ref checksum);
+        Console.WriteLine("GetSafetyParamsCheckSum: error={0}, status={1}, hex_code={2:X8}", error, status, checksum);
+        Thread.Sleep(3000);
+
+        error = robot.SafetyOPPasswordCheck(0, "12345678");
+        Console.WriteLine("SafetyOPPasswordCheck: error={0}", error);
+
+        if (error == 0)
+        {
+            error = robot.SetAnticollision(0, new double[] { 2.0, 2.0, 2.0, 2.0, 2.0, 2.0 }, 1);
+            Console.WriteLine("SetAnticollision: error={0}", error);
+
+            error = robot.SetCollisionStrategy(0, 1000, 150, 0, new int[] { 10, 10, 10, 10, 10, 10 });
+            Console.WriteLine("SetCollisionStrategy: error={0}", error);
+        }
+
+        Thread.Sleep(1000);
+
+        error = robot.GetSafetyParamsCheckSum(ref status, ref checksum);
+        Console.WriteLine("GetSafetyParamsCheckSum(again): error={0}, status={1}, hex_code={2:X8}", error, status, checksum);
+    }    

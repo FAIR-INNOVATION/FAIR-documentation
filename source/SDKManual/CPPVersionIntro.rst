@@ -13,6 +13,21 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V3.9.9
+     - 2026-09-01
+     - | 1. Modified the GetGripperMotionDone() interface parameter description for getting gripper status, updated the definition of gripper status;
+       | 2. Modified GetInverseKinExaxis(), the inverse kinematics solution interface that includes extended axis positions, added joint configuration parameters with a default value of -1 referencing the current joint configuration;
+       | 3. Modified FT_SpiralSearch(), FT_LinInsertion(), and FT_FindSurface() force control interfaces to add handling strategy parameters for when no force/torque is detected;
+       | 4. Modified SetDIConfig(), GetDIConfig(), SetDOConfig(), GetDOConfig() robot control box CIO function configuration interface parameter descriptions, updated newly added function names and function codes;
+       | 5. Modified robot basic control code examples, added manual high-speed mode switching code examples;
+       | 6. Added ServoJ() joint space servo mode motion (multi-point input) command and code examples;
+       | 7. Added GetSafetyParamsCheckSum() command for getting the safety configuration parameter checksum, SafetyOPPasswordCheck() safety operation password verification command, and code examples;
+       | 8. Added GripperWaitMotionDone() command for waiting for gripper motion to complete and code examples;
+       | 9. Added SetRobotTime() command for synchronizing system time to the robot and code examples;
+       | 10. Added SetSafetyDIConfig() safety dual-channel CI function configuration, SetSafetyDOConfig() safety dual-channel CO function configuration, and code examples;
+       | 11. Added HiSpeedManualSwitch() command for switching to manual high-speed mode;
+       | 12. Added code examples for superimposing weave during laser sensor trajectory replay;
+
    * - V3.9.8
      - 2026-07-27
      - | 1. Updated the robot status feedback structure to include the current robot LUA program running status: 0 - program not running; 1 - program running (including program paused);

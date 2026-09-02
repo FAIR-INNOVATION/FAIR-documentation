@@ -510,9 +510,10 @@ Spiral Search
     * @param  [in] ft  Force/torque threshold, fx, fy, fz, tx, ty, tz, range [0~100]
     * @param  [in] max_t_ms  Maximum search time in ms
     * @param  [in] max_vel  Maximum linear velocity in mm/s
+    * @param  [in] strategy Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion
     * @return  Error code
     */   
-    errno_t  FT_SpiralSearch(int rcs, float dr, float ft, float max_t_ms, float max_vel);  
+    errno_t  FT_SpiralSearch(int rcs, float dr, float ft, float max_t_ms, float max_vel, int strategy = 0);  
 
 Rotary Insertion
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -612,9 +613,10 @@ Linear Insertion
     * @param  [in] lin_a  Linear acceleration in mm/s^2, not currently used
     * @param  [in] max_dis  Maximum insertion distance in mm
     * @param  [in] linorn  Insertion direction, 0-Negative direction, 1-Positive direction
+    * @param  [in] strategy Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion
     * @return  Error code
     */   
-    errno_t  FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, uint8_t linorn);    
+    errno_t  FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, uint8_t linorn, int strategy=0);    
 
 Spiral Search, Linear Insertion and Other Instruction Code Examples
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -725,10 +727,11 @@ Surface Localization
     * @param  [in] lin_v  Search linear velocity in mm/s
     * @param  [in] lin_a  Search linear acceleration in mm/s^2, not currently used, default is 0
     * @param  [in] max_dis  Maximum search distance in mm
-    * @param  [in] ft  Action termination force/torque threshold, fx, fy, fz, tx, ty, tz  
+    * @param  [in] ft  Action termination force/torque threshold, fx, fy, fz, tx, ty, tz 
+    * @param  [in] strategy Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion 
     * @return  Error code
     */   
-    errno_t  FT_FindSurface(int rcs, uint8_t dir, uint8_t axis, float lin_v, float lin_a, float max_dis, float ft);   
+    errno_t  FT_FindSurface(int rcs, uint8_t dir, uint8_t axis, float lin_v, float lin_a, float max_dis, float ft, int stragety = 0);   
 
 Calculate Middle Plane Position - Start
 +++++++++++++++++++++++++++++++++++++++++++++

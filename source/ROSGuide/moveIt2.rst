@@ -283,8 +283,440 @@ Then click on the Joints tab to change the robot's target position by changing t
     :width: 6in
     :align: center
 
-Fairino_hardware Plugin (custom robot moveit configuration package)
+Gazebo Simulation Environment Mass-Production Robot Adaptation Function Package
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Introduction
+------------------------------------------------------------
+
+This project provides simulation function packages for FR series mass-produced 6-DOF collaborative robots in the Gazebo Classic simulation environment, implemented based on the ROS2 Humble and ros2_control architecture. Each robot corresponds to an independent ROS2 function package, using the standard ros2_control GazeboSystem hardware interface, supporting joint control and joint state feedback. The default workspace name in this manual is FR_Gazebo_ws; if customized, please replace it accordingly.
+
+Supported Robot Models (11 Function Packages)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Table 1-1 Supported Models and Function Package Correspondence
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+   :align: center
+
+   * - **Model** 
+     - **Function Package**
+
+   * - FR3
+     - fr3v6_ros2_control
+
+   * - FR5
+     - fr5v6_ros2_control
+
+   * - FR10
+     - fr10v6_ros2_control
+
+   * - FR16
+     - fr16v6_ros2_control
+
+   * - FR20
+     - fr20v6_ros2_control
+
+   * - FR30
+     - fr30v6_ros2_control
+
+   * - FR3C
+     - fr3c_ros2_control
+
+   * - FR5C
+     - fr5c_ros2_control
+
+   * - FR5WML
+     - fr5l_ros2_control
+
+   * - FR3WML
+     - fr3wml_ros2_control
+
+   * - FR3WMS
+     - fr3wms_ros2_control
+
+Core Features
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Unified Joint Naming: All models have 6 rotational joints, named j1 ~ j6, in the order of base → shoulder → elbow → wrist1 → wrist2 → wrist3.
+- Unified Control Interface: trajectory_msgs/msg/JointTrajectory commands (position control) are sent via the /joint_trajectory_controller/joint_trajectory topic.
+- Joint State Feedback: Joint angles are fed back in real-time via the joint_states topic under each model's namespace.
+- Demo Scripts: Each function package includes a *_demo.py script that automatically waits for the controller to be ready and then demonstrates the motion of each joint.
+
+.. image:: img/039.png
+    :width: 6in
+    :align: center
+
+.. centered:: Figure 1-1 Robot Loading Effect in Gazebo Simulation Environment
+
+Environment Requirements
+------------------------------
+
+Operating System
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Ubuntu 22.04 LTS (ROS 2 Humble officially supported version).
+
+Software Dependencies
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Table 2-1 Software Dependency List
+
+.. list-table::
+   :widths: 30 30 40
+   :header-rows: 0
+   :align: center
+
+   * - **Software/Component** 
+     - **Version/Description**
+     - **Installation Path**
+
+   * - ROS 2
+     - Humble
+     - /opt/ros/humble
+
+   * - Gazebo
+     - Gazebo Classic 11 (gzserver / gzclient)
+     - Installed with gazebo_ros
+
+   * - ros2_control Source Workspace
+     - Includes ros2_control, gazebo_ros2_control, ros2_controllers, controller_manager, joint_trajectory_controller, joint_state_broadcaster, etc.
+     - ~/ros2_control_ws
+
+   * - Python 3
+     - For running launch and demo scripts
+     - System built-in
+		
+.. note:: The gazebo_ros2_control, joint_trajectory_controller, joint_state_broadcaster and other packages required by this project come from the source-compiled ~/ros2_control_ws workspace (ros-controls repository). Before launching/compiling, this workspace must be sourced; otherwise, "controller/plugin not found" errors will occur. It is also recommended to use the default build type to avoid plugin loading issues caused by debug symbols.
+
+Function Package Installation and Compilation Steps
 ------------------------------------------------------------------------------------------
+
+Preparatory Step: Confirm ros2_control Workspace
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Confirm that ~/ros2_control_ws exists and has been compiled (contains the ros-controls repository). If it already exists, proceed directly to Section 3.2. If it needs to be set up, execute the following commands:
+
+.. centered:: Code 3-1 Setting Up the ros2_control Workspace
+    
+.. code-block:: console
+
+    # 1. Create the workspace and pull ros-controls source code
+    mkdir -p ~/ros2_control_ws/src
+    cd ~/ros2_control_ws/src
+    git clone https://github.com/ros-controls/ros2_control -b humble
+
+    # 2. Build (ROS 2 Humble must be sourced first)
+    source /opt/ros/humble/setup.bash
+    cd ~/ros2_control_ws
+    rosdep install --from-paths src --ignore-src -r -y
+    colcon build
+    source ~/ros2_control_ws/install/setup.bash
+
+Cloning the Repository
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+First, clone the Gazebo adaptation function packages locally, including fr3c_ros2_control, fr3v6_ros2_control, fr3wml_ros2_control, fr3wms_ros2_control, fr5c_ros2_control, fr5l_ros2_control, fr5v6_ros2_control, fr10v6_ros2_control, fr16v6_ros2_control, fr20v6_ros2_control, fr30v6_ros2_control. Create the FR_Gazebo_ws/src folder and clone the above function packages into the src directory.
+
+.. image:: img/040.png
+    :width: 6in
+    :align: center
+
+.. centered:: Figure 3-1 Robot Adaptation Function Packages in the src Directory
+
+Compiling the Workspace
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+All function packages in this project are file-type packages (only install URDF/launch/config/meshes).
+
+.. centered:: Code 3-2 Compiling the FR_Gazebo_ws Workspace
+    
+.. code-block:: console
+
+    # 1. Load the environments in order (order must not be reversed)
+    source /opt/ros/humble/setup.bash
+    source ~/ros2_control_ws/install/setup.bash
+
+    # 2. Enter the workspace and build
+    cd ~/FR_Gazebo_ws
+    colcon build
+
+    # 3. After compilation, load the workspace environment
+    source ~/FR_Gazebo_ws/install/setup.bash
+
+Verifying the Compilation Result
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+After successful compilation, all 11 function packages should appear in the install/ directory:
+
+Code 3-3 Verifying the Compilation Result
+    
+.. code-block:: console
+
+    ls ~/FR_Gazebo_ws/install
+    # Should see: fr3v6_ros2_control  fr5v6_ros2_control  fr10v6_ros2_control  ... 11 in total
+
+.. image:: img/041.png
+    :width: 6in
+    :align: center
+
+.. centered:: Figure 3-2 Successful Compilation Terminal Output
+
+Usage Instructions
+------------------------------------------------------------------------------------------
+
+Starting the Simulation (Using FR5 as an Example)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. centered:: Code 4-1 Starting FR5 Simulation
+    
+.. code-block:: console
+
+    # 1. Load the environments in order
+    cd ~/FR_Gazebo_ws
+    source /opt/ros/humble/setup.bash
+    source ~/ros2_control_ws/install/setup.bash
+    source ~/FR_Gazebo_ws/install/setup.bash
+
+    # 2. Launch (the launch file will automatically start gzserver/gzclient, spawn the robot, and load the controllers. If you need to clean up old processes, refer to the note at the end of Section 4.2)
+    ros2 launch fr5v6_ros2_control spawn_fr5v6.launch.py
+    
+During startup, the launch file will automatically poll and wait for controller_manager to be ready before loading the controllers. Seeing the following log indicates readiness. If "Successfully loaded" is not displayed after waiting for more than 3 minutes, refer to Section 5.2 to troubleshoot the environment sourcing order:
+
+.. centered:: Code 4-2 Controller Loading Success Log
+    
+.. code-block:: console
+
+    Successfully loaded controller joint_trajectory_controller into state active
+
+.. image:: img/042.png
+    :width: 6in
+    :align: center
+
+.. centered:: Figure 4-1 Controller Loading Success Terminal Log
+
+.. image:: img/043.png
+    :width: 6in
+    :align: center
+
+.. centered:: Figure 4-2 Robot Initial Pose in Gazebo Interface
+
+All Models Launch Command Reference
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The operation process is the same for all models, only the function package name, launch file name, and namespace differ:
+
+Table 4-1 All Models Launch Command Reference
+
+.. list-table::
+   :widths: 20 40 20 20
+   :header-rows: 0
+   :align: center
+
+   * - **Model** 
+     - **Launch Command**
+     - **Namespace**
+     - **Joint State Topic**
+
+   * - FR3 
+     - ros2 launch fr3v6_ros2_control spawn_fr3v6.launch.py
+     - fr3v6
+     - /fr3v6/joint_states
+
+   * - FR5 
+     - ros2 launch fr5v6_ros2_control spawn_fr5v6.launch.py
+     - fr5v6
+     - /fr5v6/joint_states
+
+   * - FR10 
+     - ros2 launch fr10v6_ros2_control spawn_fr10v6.launch.py
+     - fr10v6
+     - /fr10v6/joint_states
+
+   * - FR16 
+     - ros2 launch fr16v6_ros2_control spawn_fr16v6.launch.py
+     - fr16v6
+     - /fr16v6/joint_states   * - FR20 
+     - ros2 launch fr20v6_ros2_control spawn_fr20v6.launch.py
+     - fr20v6
+     - /fr20v6/joint_states
+
+   * - FR30 
+     - ros2 launch fr30v6_ros2_control spawn_fr30v6.launch.py
+     - fr30v6
+     - /fr30v6/joint_states
+
+   * - FR3C 
+     - ros2 launch fr3c_ros2_control spawn_fr3c.launch.py
+     - fr3c
+     - /fr3c/joint_states
+
+   * - FR3WML 
+     - ros2 launch fr3wml_ros2_control spawn_FR3WML.launch.py
+     - fr3wml
+     - /fr3wml/joint_states
+
+   * - FR3WMS 
+     - ros2 launch fr3wms_ros2_control spawn_FR3WMS.launch.py
+     - fr3wms
+     - /fr3wms/joint_states
+
+   * - FR5C 
+     - ros2 launch fr5c_ros2_control spawn_fr5c.launch.py
+     - fr5c
+     - /fr5c/joint_states
+
+   * - FR5WML 
+     - ros2 launch fr5l_ros2_control spawn_fr5l.launch.py
+     - fr5l
+     - /fr5l/joint_states
+			
+.. note:: Only one model can be launched at a time. To switch, you must first close the current Gazebo process (pkill -9 gzserver; pkill -9 gzclient); otherwise, the new instance will fail due to port conflicts.
+
+Manual Control (Sending Target Joints)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Once the controller is ready, send the target joints (6 joint angles in radians) to /joint_trajectory_controller/joint_trajectory:
+
+.. centered:: Code 4-3 Manually Sending Joint Trajectory Commands
+    
+.. code-block:: console
+
+    # Move to target joints [1.57, -0.78, -1.57, -1.2, 1.57, 1.3] (unit: radians)
+    ros2 topic pub --once /joint_trajectory_controller/joint_trajectory \
+    trajectory_msgs/msg/JointTrajectory \
+    "{joint_names: [j1,j2,j3,j4,j5,j6],
+        points: [{positions: [1.57, -0.78, -1.57, -1.2, 1.57, 1.3],
+                time_from_start: {sec: 2, nanosec: 0}}]}"
+
+    # Return to zero position
+    ros2 topic pub --once /joint_trajectory_controller/joint_trajectory \
+    trajectory_msgs/msg/JointTrajectory \
+    "{joint_names: [j1,j2,j3,j4,j5,j6],
+        points: [{positions: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                time_from_start: {sec: 2, nanosec: 0}}]}"
+
+.. note:: The angle conversion formula is: radians = degrees × π / 180. Common values: 90° ≈ 1.5708, −90° ≈ −1.5708, 100° ≈ 1.7453.
+
+Running the Demo Scripts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Each function package includes a demo script that automatically waits for controller_manager to be ready and then performs a reciprocating motion of 0→±90° for each joint:
+
+.. centered:: Code 4-4 Running the Demo Script
+    
+.. code-block:: console
+
+    # Using FR5 as an example (replace the package name in the script path for other models)
+    python3 ~/FR_Gazebo_ws/src/fr5v6_ros2_control/scripts/fr5v6_demo.py
+
+Table 4-2 All Models Demo Script Path Reference
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 0
+   :align: center
+
+   * - **Model** 
+     - **Demo Script Path**
+
+   * - FR3
+     - ~/FR_Gazebo_ws/src/fr3v6_ros2_control/scripts/fr3v6_demo.py
+
+   * - FR5
+     - ~/FR_Gazebo_ws/src/fr5v6_ros2_control/scripts/fr5v6_demo.py
+
+   * - FR10
+     - ~/FR_Gazebo_ws/src/fr10v6_ros2_control/scripts/fr10v6_demo.py
+
+   * - FR16
+     - ~/FR_Gazebo_ws/src/fr16v6_ros2_control/scripts/fr16v6_demo.py
+
+   * - FR20
+     - ~/FR_Gazebo_ws/src/fr20v6_ros2_control/scripts/fr20v6_demo.py
+
+   * - FR30
+     - ~/FR_Gazebo_ws/src/fr30v6_ros2_control/scripts/fr30v6_demo.py
+
+   * - FR3C
+     - ~/FR_Gazebo_ws/src/fr3c_ros2_control/scripts/fr3c_demo.py
+
+   * - FR3WML
+     - ~/FR_Gazebo_ws/src/fr3wml_ros2_control/scripts/fr3wml_demo.py
+
+   * - FR3WMS
+     - ~/FR_Gazebo_ws/src/fr3wms_ros2_control/scripts/fr3wms_demo.py
+
+   * - FR5C
+     - ~/FR_Gazebo_ws/src/fr5c_ros2_control/scripts/fr5c_demo.py
+
+   * - FR5WML
+     - ~/FR_Gazebo_ws/src/fr5l_ros2_control/scripts/fr5l_demo.py
+
+.. image:: img/044.png
+    :width: 6in
+    :align: center
+
+.. centered:: Figure 4-3 Robot Motion Pose During Demo Script Execution
+
+Monitoring Joint States
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. centered:: Code 4-5 Monitoring Joint States
+    
+.. code-block:: console
+        
+    # View joint angles in real-time
+    ros2 topic echo /joint_states
+
+.. image:: img/045.png
+    :width: 6in
+    :align: center
+
+.. centered:: Figure 4-4 Real-time Joint State Output
+
+Frequently Asked Questions
+------------------------------------------------------------------------------------------
+
+Port Conflict / Gazebo Won't Open on Launch
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Cause: The previous Gazebo process did not exit, occupying the port.
+- Solution: Clean up the residual processes before launching: pkill -9 gzserver; pkill -9 gzclient
+
+Stuck at "Waiting for controller_manager..." for over 2 minutes
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Cause: controller_manager is not ready, often because ~/ros2_control_ws/install/setup.bash has not been sourced, or because mesh loading is too slow.
+- Solution: Press Ctrl+C to exit first; confirm that the three environments have been sourced in order (ros2 → ros2_control_ws → FR_Gazebo_ws).
+
+Robot Does Not Move When Sending Commands Manually
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Cause: Most likely a timing issue; the command was sent before the controller fully entered the active state, and was discarded.
+- Solution: Confirm that the terminal prints "Successfully loaded controller joint_trajectory_controller into state active" before sending control commands; or directly use the demo script in Section 4.4.
+
+Error: joint_trajectory_controller/gazebo_ros2_control plugin not found
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Cause: ros2_control related dependencies are not loaded.
+- Solution: Confirm that ~/ros2_control_ws/install/setup.bash has been sourced; and confirm that the loading order in ~/.bashrc or the current terminal is ROS → ros2_control_ws → this workspace.
+
+Missing Components / Incomplete Joints After Loading the Robot
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- Cause: The mesh files referenced in the URDF are missing.
+- Solution: Confirm that the meshes/ directory of the corresponding function package exists and is complete.
+
+Can Two Models Be Launched Simultaneously?
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+- No. Multiple simulation instances will contend for the same Gazebo port; only one model should be launched at a time.
+
+Fairino_hardware Plugin (custom robot moveit configuration package)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Fairino_hardware plugin for the connection between moveit and the robot's intermediate layer, through the fairino_hardware plugin move_group will be sent to moveit_control, and then forwarded to ros2_control, ros2_control and then through the fairino_hardware plugin to drive the actual robot movement, and fairino_hardware plugin will also accept the actual robot feedback data, so as to realize the rviz2 simulation interface robot model and the actual robot synchronization.
 
 Hardware plug-in drives the actual robot motion, and fairino_hardware plug-in also accepts the feedback data from the actual robot, thus realizing the synchronization between the robot model of the rviz2 simulation interface and the actual robot, and thus realizing the function of the user driving the actual robot motion through the rviz2 interface.
@@ -292,7 +724,7 @@ Hardware plug-in drives the actual robot motion, and fairino_hardware plug-in al
 And thanks to the implementation of the fairino_hardware plug-in, the Fairino robot can access the ros2_control control framework, making the Fairino robot compatible with third-party packages based on ros2_control.
 
 Fairino_hardware Plugin Compilation
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+------------------------------------------------------------------------------------------
 Compile the fairino_hardware plugin package in the official ros2_ws package, compile the fairino_hardware plugin package through the previous section, then you will see the .so file libfairino_hardware.so generated by the plugin under “ros2_ws/install/fairino_hardware/lib/”, which means the plugin is compiled successfully.
 
 Then you will see the .so file libfairino_hardware.so generated by the plug-in under “ros2_ws/install/fairino_hardware/lib/”, which indicates that the plug-in has been compiled.
@@ -302,7 +734,7 @@ It should be noted that you need to make the naming of each joint of the robot b
 The naming of the six joints of the robot by this fairino_hardware plug-in from the base coordinate position to the end of the robot are j1, j2, j3, j4, j5 and j6 respectively, so you need to name the joints of the robot as j1, j2, j3, j4, j5 and j6 when the robot is configured by moveit2. moveit2 configuration of the robot need to robot joints named j1, j2, j3, j4, j5, j6.
 
 Fairino_hardware Plugin Usage
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+------------------------------------------------------------------------------------------
 Compile the fairino_hardware plugin package in the official ros2_ws package, compile the fairino_hardware plugin package through the previous section, then you will see the .so file libfairino_hardware.so generated by the plugin under “ros2_ws/install/fairino_hardware/lib/”, which means the plugin is compiled successfully.
 
 Then you will see the .so file libfairino_hardware.so generated by the plug-in under “ros2_ws/install/fairino_hardware/lib/”, which indicates that the plug-in has been compiled successfully.
@@ -318,7 +750,7 @@ where “fairino_hardware/FairinoHardwareInterface” is the name of the plug-in
     :align: center
 
 Running Plug-ins
-""""""""""""""""""""""""""""""""""
+------------------------------------------------------------------------------------------
 Open the terminal, then go to the ros2_ws workspace and source workspace, the purpose is to add the fairino_hardware plugin, you can also load the path to the “~/.bashrc” file, but it is not recommended.
 
 .. code-block:: shell
@@ -338,7 +770,7 @@ Then go back to the home directory and go to the test_fa_ws workspace and the so
     ros2 launch fairino5_v6_robot_moveit_config demo.launch.py
 
 Running Result
-""""""""""""""""""""""""""""""""""
+------------------------------------------------------------------------------------------
 After the demo.launch.py file is launched, the rviz2 interface is shown below.
 
 .. image:: img/fairino_harware_024.png

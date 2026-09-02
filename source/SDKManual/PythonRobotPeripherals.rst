@@ -72,11 +72,11 @@ Getting the jaw movement status
     :widths: 10 30
 
     "Prototype", "``GetGripperMotionDone()``"
-    "Description", "Get the state of the jaw motion"
+    "Description", "Get the state of the jaw motion(only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)"
     "Mandatory parameters", "NULL"
     "Default parameters", "NULL"
     "Return Value", "- errorcode Success-0 Failure- errcode 
-    - ``[fault,status]``: status of gripper movement, fault:0-no error, 1-with error; status:0-movement not completed, 1-movement completed"
+    - ``[fault,status]``: status of gripper movement, fault:0-no error, other-with error; status:0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected"
 
 Obtain the activated status of the gripper
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

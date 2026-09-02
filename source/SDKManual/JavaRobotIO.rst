@@ -503,6 +503,7 @@ Set Configurable CI Port Functions of the Control Box
     22-Level 1 reduction mode;23-Level 2 reduction mode;24-Level 3 reduction mode (Stop);25-Resume welding;26-Terminate welding;
     27-Assist drag enable;28-Assist drag disable;29-Assist drag enable/disable;30-Clear all errors;
     31-Manual/Auto switch (high/low level);32-Enable;33-Disable;34-Enable/Disable (rising/falling edge);35-Fixed-point tracking start/end
+    36-Enter safety speed motion;37-Current loop drag lock;38-Force sensor assisted lock
     * @return Error code
     */
     public int SetDIConfig(int[] config)
@@ -523,6 +524,11 @@ Get Configurable CI Port Functions of the Control Box
     22-Level 1 reduction mode;23-Level 2 reduction mode;24-Level 3 reduction mode (Stop);25-Resume welding;26-Terminate welding;
     27-Assist drag enable;28-Assist drag disable;29-Assist drag enable/disable;30-Clear all errors;
     31-Manual/Auto switch (high/low level);32-Enable;33-Disable;34-Enable/Disable (rising/falling edge);35-Fixed-point tracking start/end
+    36-Enter safety speed motion;37-Current loop drag lock;38-Force sensor assisted lock
+    201-External emergency stop input signal 1-dual channel; 202-External emergency stop input signal 2-dual channel; 203-Level 1 reduced mode-dual channel;
+    204-Level 2 reduced mode-dual channel; 205-Level 3 reduced mode-dual channel; 206-Normal stop-dual channel; 207-Safety wall 1-dual channel; 208-Safety wall 2-dual channel;
+    209-Safety wall 3-dual channel; 210-Safety wall 4-dual channel; 211-Safety wall 5-dual channel; 212-Safety wall 6-dual channel; 213-Safety wall 7-dual channel;
+    214-Safety wall 8-dual channel; 215-Safety stop reset-dual channel;
     * @return Error code
     */
     public int GetDIConfig(int[] config)
@@ -569,6 +575,8 @@ Get Configurable CO Port Functions of the Control Box
     39-Robot error-Driver communication error;40-Robot error-Parameter error;41-Robot error-External axis soft limit exceeded error;42-Robot warning-Warning;
     43-Robot warning-Safety door warning;44-Robot warning-Motion warning;45-Robot warning-Interference area warning;46-Robot warning-Safety wall warning;
     47-Enable status;48-Auto lift during disconnection;49-Cube 1 interference warning;50-Cube 2 interference warning;51-Cube 3 interference warning;52-Cube 4 interference warning;
+    201-Emergency stop output signal 1-dual channel; 202-Emergency stop output signal 2-dual channel; 203-Safety status output-dual channel; 204-Protective stop status output-dual channel; 205-Robot in motion-dual channel;
+	206-Robot reduced mode-dual channel; 207-Robot non-reduced mode-dual channel;
     * @return Error code
     */
     public int GetDOConfig(int[] config)

@@ -452,13 +452,14 @@ Helix Exploration
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``FT_SpiralSearch(rcs, ft, dr=0.7, max_t_ms=60000, max_vel=5)``"
+    "Prototype", "``FT_SpiralSearch(rcs, ft, dr=0.7, max_t_ms=60000, max_vel=5, strategy=0)``"
     "Description", "Helix Explorations"
     "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system
     - ``ft``: force or moment threshold (0 to 100) in N or Nm;"
     "Default parameters","- ``dr``: radius feed per revolution in mm Default 0.7.
     - ``max_t_ms``: maximum time to explore, in ms default 60000.
-    - ``max_vel``: maximum value of linear velocity in mm/s Default 5"
+    - ``max_vel``: maximum value of linear velocity in mm/s Default 5;
+    - ``strategy``：strategy Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion;"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
 Rotational Insertion
@@ -541,14 +542,15 @@ Linear insertion
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype", "``FT_LinInsertion(rcs, ft, disMax, linorn, lin_v=1.0, lin_a=1.0)``"
+    "prototype", "``FT_LinInsertion(rcs, ft, disMax, linorn, lin_v=1.0, lin_a=1.0, strategy=0)``"
     "Description", "Linear Insertion"
     "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
     - ``ft``: force or moment threshold (0 to 100) in N or Nm.
     - ``disMax``: maximum insertion distance in mm.
     - ``linorn``: insertion direction: 0-negative direction, 1-positive direction"
     "Default parameters","- ``lin_v``: linear velocity in mm/s Default 1.
-    - ``lin_a``: linear acceleration in mm/s^2, not used yet Default 1"
+    - ``lin_a``: linear acceleration in mm/s^2, not used yet Default 1;
+    - ``strategy``：Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion;"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
 Examples of instruction code for spiral exploration, straight line insertion, etc
@@ -632,7 +634,7 @@ Surface positioning
     :stub-columns: 1
     :widths: 10 30
 
-    "prototype", "``FT_FindSurface (rcs, dir, axis, disMax, ft, lin_v=3.0, lin_a=0.0)``"
+    "prototype", "``FT_FindSurface (rcs, dir, axis, disMax, ft, lin_v=3.0, lin_a=0.0, stragety = 0)``"
     "Description", "Surface Positioning"
     "Mandatory parameters", "- ``rcs``: reference coordinate system, 0 - tool coordinate system, 1 - base coordinate system;
     - ``dir``: direction of movement, 1-positive, 2-negative;
@@ -640,7 +642,8 @@ Surface positioning
     - ``disMax``: large exploration distance in mm.
     - ``ft``: action termination force threshold in N;"
     "Default Parameters", "- ``lin_v``: explore linear velocity in mm/s default 3.
-    - ``lin_a``: explore linear acceleration in mm/s^2 default 0;"
+    - ``lin_a``: explore linear acceleration in mm/s^2 default 0;
+    - ``strategy``：Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion;"
     "Return Value", "Error Code Success-0 Failure- errcode"
 
 Calculation of the center plane position begins

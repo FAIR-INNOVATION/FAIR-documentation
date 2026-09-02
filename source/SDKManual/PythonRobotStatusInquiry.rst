@@ -380,13 +380,14 @@ Inverse Kinematics Solution, Cartesian Space Includes Extended Axis Position
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``GetInverseKinExaxis(type, desc_pos, exaxis, tool, workPiece)``"
+    "Prototype", "``GetInverseKinExaxis(type, desc_pos, exaxis, tool, workPiece, config = -1)``"
     "Description", "Inverse kinematics solution, Cartesian space includes extended axis position"
     "Required Parameters", "- ``type``: 0-Absolute pose (base coordinate system), 1-Incremental pose (base coordinate system), 2-Incremental pose (tool coordinate system)
     - ``desc_pos``: Cartesian pose
     - ``exaxis``: Extended axis position
     - ``tool``: Tool number
-    - ``workPiece``: Workpiece number"
+    - ``workPiece``: Workpiece number
+    - ``config -1``: automatic solution, 0-7 correspond to eight sets of solutions"
     "Default Parameters", "None"
     "Return Value", "- Error code Success-0 Failure- errcode
     - ``joint_pos``: Joint position"

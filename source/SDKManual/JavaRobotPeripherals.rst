@@ -74,8 +74,8 @@ Get gripper motion status
     :linenos:
 
     /**
-    * @brief  Get gripper motion status
-    * @return List[0]:Error code; List[1] : fault  0-no error, 1-error; List[2]: staus  0-motion not completed, 1-motion completed
+    * @brief  Get gripper motion status(only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)
+    * @return List[0]:Error code; List[1] : fault  0-no error, other-error; List[2]: staus  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
     */
     List<Integer> GetGripperMotionDone(); 
 

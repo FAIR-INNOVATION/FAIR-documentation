@@ -403,9 +403,10 @@ Inverse Kinematics Solution, Cartesian Space Including Extended Axis Position
     * @param [in] tool Tool number
     * @param [in] workPiece Workpiece number
     * @param [out] joint_pos Joint position
+    * @param [in] config Joint space configuration, [-1] - solve based on the current joint position reference, [0~7] - solve according to specific joint space configuration
     * @return Error code
     */
-    errno_t GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos& joint_pos);
+    errno_t GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos& joint_pos, int config = -1);
 
 Example Code for Inverse Kinematics Solution Including Extended Axis Position
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

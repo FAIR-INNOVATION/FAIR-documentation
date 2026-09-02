@@ -187,41 +187,48 @@ Basic Robot Control Example
 
     int TestRobotCtrl(void)
     {
-            ROBOT_STATE_PKG pkg = {};
-            FRRobot robot;
-            robot.LoggerInit();
-            robot.SetLoggerLevel(1);
-            int rtn = robot.RPC("192.168.58.2");
-            robot.SetReConnectParam(true, 30000, 500);
-            char ip[64] = "";
-            char version[64] = "";
-            uint8_t state;
-            robot.GetSDKVersion(version);
-            printf("SDK version:%s\n", version);
-            robot.GetControllerIP(ip);
-            printf("controller ip:%s\n", ip);
-            robot.Mode(1);
-            robot.Sleep(1000);
-            robot.DragTeachSwitch(1);
-            robot.Sleep(1000);
-            robot.IsInDragTeach(&state);
-            printf("drag state :%u\n", state);
-            robot.Sleep(3000);
-            robot.DragTeachSwitch(0);
-            robot.Sleep(1000);
-            robot.IsInDragTeach(&state);
-            printf("drag state :%u\n", state);
-            robot.Sleep(3000);
-            robot.RobotEnable(0);
-            robot.Sleep(3000);
-            robot.RobotEnable(1);
-            robot.Mode(0);
-            robot.Sleep(1000);
-            robot.Mode(1);
-            robot.Sleep(3000);
-            robot.ShutDownRobotOS();
-            robot.CloseRPC();
-            return 0;
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        robot.SetReConnectParam(true, 30000, 500);
+        int rtn = robot.RPC("192.168.57.2");
+        
+        char ip[64] = "";
+        char version[64] = "";
+        uint8_t state;
+        robot.GetSDKVersion(version);
+        printf("SDK version:%s\n", version);
+        robot.GetControllerIP(ip);
+        printf("controller ip:%s\n", ip);
+        robot.Mode(1);
+        robot.Sleep(1000);
+        robot.DragTeachSwitch(1);
+        robot.Sleep(1000);
+        robot.IsInDragTeach(&state);
+        printf("drag state :%u\n", state);
+        robot.Sleep(3000);
+        robot.DragTeachSwitch(0);
+        robot.Sleep(1000);
+        robot.IsInDragTeach(&state);
+        printf("drag state :%u\n", state);
+        robot.Sleep(3000);
+        robot.RobotEnable(0);
+        robot.Sleep(3000);
+        robot.RobotEnable(1);
+        robot.Mode(0);
+        robot.Sleep(2000);
+        robot.Mode(1);
+        robot.Sleep(1000);
+        rtn = robot.HiSpeedManualSwitch(1);
+        printf("change high speed mode %d\n", rtn);
+        robot.Sleep(3000);
+        rtn = robot.HiSpeedManualSwitch(0);
+        printf("change low speed mode %d\n", rtn);
+        robot.Sleep(3000);
+        robot.ShutDownRobotOS();
+        robot.CloseRPC();
+        return 0;
     }
 
 Get Robot Software Version Example

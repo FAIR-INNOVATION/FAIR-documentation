@@ -182,6 +182,14 @@ Code example
         robot.Mode(0);
         Thread.Sleep(1000);
         robot.Mode(1);
+        
+        rtn = robot.HiSpeedManualSwitch(1);
+        Console.WriteLine($"change high speed mode {rtn}");
+        Thread.Sleep(10000);
+
+        rtn = robot.HiSpeedManualSwitch(0);
+        Console.WriteLine($"change low speed mode {rtn}");
+        Thread.Sleep(1000);
     }
 
 Initialize log parameters
@@ -297,4 +305,14 @@ Code example
         Console.WriteLine($"Firm end Version is: {ver[18]}");
     }
 
+Switch to Manual High-Speed Mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c#
+    :linenos:
 
+    /**
+    * @brief Switch to manual high-speed mode
+    * @param [in] state 0-exit manual high-speed; 1-enter manual high-speed
+    * @return Error code
+    */
+    public int HiSpeedManualSwitch(int state)

@@ -1,3 +1,41 @@
+Version V3.9.9
+-----------------
+
+Date: 2026-09-01
+
+- **Optimized force-controlled assembly process package**:
+    Path: Teach Program -> Force Control Commands.
+
+    Description: Improved process usability and reliability.
+
+- **Optimized IGH master station dynamic slave configuration**:
+
+    Description: Improved multi-model compatibility and maintenance convenience.
+
+- **Added multi-model joint impedance drag function extension**:
+    Path: Auxiliary Apps -> Drag Lock.
+
+    Description: Added drag function support for FR3-WML, FR3-WMS, FR3-C, and FR5-C models.
+
+- **Added safety configuration verification function**:
+    Path: Initial Setup -> Safety.
+
+    Description: Safety page refactoring, safety configuration password verification, configuration legality verification, and safety report PDF generation.
+
+- **Added complete adaptation for Kaiwei six-axis force sensor**:
+    Path: Initial Setup -> Peripherals -> Force Sensor.
+
+    Description: Added KWL force sensor adaptation.
+
+- **Added laser scanning replay support with weaving function**:
+    Path: Program Programming -> Laser Recording -> Laser Tracking Replay Command.
+
+    Description: Improved laser welding process adaptability and weld quality.
+
+- **Added IGH protocol stack physical link health diagnosis**:
+
+    Description: Added read function and interface display for rapid bus issue localization.
+
 Version V3.9.8
 -----------------
 

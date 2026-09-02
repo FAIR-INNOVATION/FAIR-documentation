@@ -476,6 +476,24 @@ Rotational Insertion
     */
     public int FT_RotInsertion(int rcs, double angVelRot, double ft, double max_angle, int orn, double max_angAcc, int rotorn, int strategy)
 
+Spiral Search
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief  Spiral search
+    * @param  [in] rcs Reference coordinate system, 0-tool coordinate system, 1-base coordinate system
+    * @param  [in] dr Radius feed per revolution
+    * @param  [in] ft Force/torque threshold, fx,fy,fz,tx,ty,tz, range [0~100]
+    * @param  [in] max_t_ms Maximum search time, unit ms
+    * @param  [in] max_vel Maximum linear velocity, unit mm/s
+    * @param  [in] strategy Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion
+    * @return  Error code
+    */
+    public int FT_SpiralSearch(int rcs, float dr, float ft, float max_t_ms, float max_vel, int strategy = 0)
+
 Linear Insertion
 +++++++++++++++++++++++++++++++++++++++++++++
     
@@ -490,9 +508,10 @@ Linear Insertion
     * @param  [in] lin_a Linear acceleration, unit mm/s^2, not used temporarily
     * @param  [in] max_dis Maximum insertion distance, unit mm
     * @param  [in] linorn  Insertion direction, 0-negative direction, 1-positive direction
+    * @param  [in] strategy Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion
     * @return  Error code
     */
-    public int FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, byte linorn)
+    public int FT_LinInsertion(int rcs, float ft, float lin_v, float lin_a, float max_dis, byte linorn, int strategy=0)
 
 Force Sensor Rotational Insertion Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1031,9 +1050,10 @@ Surface Positioning
     * @param  [in] lin_a Search linear acceleration, unit mm/s^2, not used temporarily, default 0
     * @param  [in] max_dis Maximum search distance, unit mm
     * @param  [in] ft  Motion termination force/torque threshold, fx,fy,fz,tx,ty,tz
+    * @param  [in] strategy Handling strategy when no force/torque is detected, 0-error; 1-warning, continue motion
     * @return  Error code
     */
-    public int FT_FindSurface(int rcs, byte dir, byte axis, float lin_v, float lin_a, float max_dis, float ft)
+    public int FT_FindSurface(int rcs, byte dir, byte axis, float lin_v, float lin_a, float max_dis, float ft, int stragety = 0)
 
 Calculate Mid-Plane Position Start
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -76,9 +76,9 @@ Get Gripper Motion Status
     :linenos:
 
     /**
-     * @brief  Get gripper motion status
-     * @param  [out] fault  0-no error, 1-error
-     * @param  [out] staus  0-motion not completed, 1-motion completed
+     * @brief  Get gripper motion status (only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)
+     * @param  [out] fault  0-no error, other-error exists
+     * @param  [out] status  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
      * @return  Error code
      */
     errno_t  GetGripperMotionDone(uint16_t *fault, uint8_t *status);

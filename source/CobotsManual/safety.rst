@@ -4,715 +4,434 @@ Safety
 .. toctree:: 
    :maxdepth: 6
 
-Stop mode
---------------
+Background
+------------------------------------------------
+As a key execution unit in the development of industrial intelligent manufacturing, the safety performance of industrial robots has become a core element in the full lifecycle management of equipment. Currently, the industry generally requires that safety function-related parameters be固化 and tamper-proof, and that a complete and traceable verification mechanism be established to meet stringent safety compliance audit requirements.
+System integrators and end users in Europe have further put forward clear requirements for transparency and verifiability of safety configurations in actual project acceptance. Specifically, after safety function debugging is completed, the system should be able to automatically generate a safety configuration report containing a complete checksum, and this checksum must be displayed in real-time on the device's web management interface. This mechanism is designed to ensure that any modifications to safety parameters can be effectively identified and recorded, thus providing a reliable basis for equipment safety status assessment, on-site acceptance, and subsequent operation and maintenance.
+In view of this, the safety architecture design of this device not only complies with relevant international safety standards but also has built-in safety configuration export and checksum real-time display functions, to assist operators and safety managers in conveniently and reliably completing configuration confirmation and compliance certification work.
 
-Click "Initial" -> "Safety" in the menu bar, and then click the "Stop mode" submenu to enter the configuration interface, set the safety stop mode and safety stop policy parameters function.
+Safety Configuration Checksum
+------------------------------------------------
+
+Open the web page. The safety checksum is located in the upper right corner of the page, represented by an 8-digit hexadecimal number. The safety checksum is unique; when safety configuration parameters change, the safety checksum changes accordingly.
 
 .. image:: safety/001.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.1-1 Safe Stop Configuration
+.. centered:: Figure 7.1-1 Safety Configuration Checksum Display
 
-Configurable Dual-Channel Safety Stop + Reduced Mode
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Click on the safety checksum to display the set of safety configuration parameters represented by the current safety checksum.
 
-Overview
-++++++++++++++++++++++++++++++++++++
-
-When the safety stop trigger mode is set to "Dual-Channel", both channels must be cleared and the warning must be manually cleared on the operation interface before the robot can be reset. Additionally, a reduced mode option is added to the strategy configuration. When this strategy is selected by the user, the robot will enter reduced mode motion.
-
-Operation Procedure
-++++++++++++++++++++++++++++++++++++
-
-**Step1**: Click the "Initial Setup" -> "Safety" -> "Safety Stop" button. The trigger mode can be selected as either "Default" or "Dual-Channel". The difference between the two is: In "Default" mode, the interface error is automatically cleared after triggering and recovery. In "Dual-Channel" mode, the interface error must be cleared manually after triggering and recovery. The "Safety Stop Strategy" can be selected as "Stop", "Pause", "Level 1 Reduced Mode", or "Level 2 Reduced Mode". Detailed explanations are as follows: When "Stop" is selected, the robot will stop its current motion. When "Pause" is selected, the robot will pause its current motion and will resume after recovery and error clearing. When "Level 1 Reduced Mode" is selected, the robot will enter level 1 reduced mode motion. When "Level 2 Reduced Mode" is selected, the robot will enter level 2 reduced mode motion.
-
-.. image:: safety/048.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.1-2 Safety Stop Strategy Settings
-
-**Step2**: Since when the trigger mode is selected as "Default", the interface error can be automatically cleared after triggering and recovery, it does not require much introduction. Therefore, the main focus is on the operation when the trigger mode is selected as "Dual-Channel": After triggering and recovery, you must manually click the "Clear" operation in the upper right corner before the robot can be reset.
-
-.. image:: safety/049.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.1-3 Manually Clearing a Safety Stop Trigger Operation
-
-Safety Speed Movement
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-After the robot triggers a safety stop, the user can click a button in the webapp, configure a CI input of the control box, or configure an End DI input of the end-effector tool to control the robot to enter the safety speed movement state. In the safety speed movement state, the robot can be jogged at a safe speed, or switched to drag mode to be dragged, helping the user to troubleshoot.
-
-In the robot webapp, click "Initial Settings", "Safety", "Safety Stop" in sequence, find "Safety Speed Movement" on this page, and set it to enabled.
-
-.. image:: safety/057.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.1-4 Enable Safety Speed Movement
-
-When a safety stop is triggered at this time, the upper right corner of the robot webapp will display a "Safety Stop Triggered" warning and show the "Enter Safety Speed Movement" button.
-
-.. image:: safety/058.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.1-5 Enter Safety Speed Movement Popup
-
-Click the "Enter" button, and the robot will automatically stop the Lua program and switch to manual mode. At the same time, the "Enter Safety Speed Movement" button will be updated to display "Entered". At this point, the robot can be controlled to enter drag mode via the end-effector button, button box, webapp, etc., to drag the robot, or it can be jogged via the webapp or the teach pendant.
-
-.. image:: safety/059.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.1-6 Enter Safety Speed Movement
-
-When the robot is in safety speed movement and is being jogged in Cartesian space, the maximum movement speed of the robot is the set safety speed. If the current global speed setting of the robot is higher than the safety speed, the robot's jog speed will automatically be reduced to the safety speed. The safety speed is set under "Initial Settings", "Safety", "Safety Speed".
-
-After the robot has safely stopped, in addition to controlling the robot to enter safety speed via the upper right corner of the webapp, it can also be entered via control box CI input or end-effector CI input. In the webapp, click "Initial Settings", "Basic", "I/O Settings", "DI" in sequence. Configure a certain port CI of the control box or the end-effector tool End DI as "Enter Safety Speed Movement". After a safety stop is triggered, simply trigger the input signal of the configured port to enter safety speed movement.
-
-.. image:: safety/060.png
+.. image:: safety/002.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 7.1-7 Enter Safety Speed Movement via Button
+.. centered:: Figure 7.1-2 Safety Configuration Parameters
 
-Safety Stop in Auto Mode Only
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-When the robot enables the safety stop mode (CR certification, functional safety) and is used with a teach pendant with a three-position enabling device, "Safety Stop in Auto Mode Only" can be enabled. When the robot's safety stop signal is triggered, the robot can be switched to manual mode on the teach pendant, and then jogged in manual mode or switched to drag mode to be dragged, helping the user to troubleshoot.
-
-In the robot webapp, click "Initial Settings", "Safety", "Safety Stop" in sequence, find "Safety Stop in Auto Mode Only" on this page, and set it to enabled.
-
-.. image:: safety/061.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.1-8 Enable Safety Stop in Auto Mode Only
-
-If the robot does not have the safety stop mode enabled (CR certification, functional safety), or if a teach pendant is not being used, the "Safety Stop in Auto Mode Only" function cannot be enabled. In this case, the webapp will display an error message: "Safety Stop in Auto Mode Only requires the teach pendant's three-position enabling device to be turned on". Additionally, when the safety stop mode or the teach pendant is disabled, the "Safety Stop in Auto Mode Only" function will also be automatically turned off.
-
-.. image:: safety/062.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 7.1-9 Error When Enabling Safety Stop in Auto Mode Only
-
-Safe speed
---------------
-
-Click "Initial" -> "Safety" in the menu bar, and then click the "Safe speed" submenu to enter the configuration interface, set the safe speed.
-
-.. note:: TCP manual speed is less than 250mm/s.
-
-.. image:: safety/002.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.2-1 Safe manual speed configuration
-
-Safety Speed Function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Overview
-+++++++++++++++++++++++++++++
-
-The robot safety speed function is designed for human-robot collaboration or dynamic environments. It actively limits the robot's operating speed to keep kinetic energy and impact force within safe thresholds, thereby preventing injury to personnel in the event of accidental contact and effectively protecting equipment and workpieces from collision damage.
-
-Operation Procedure
-+++++++++++++++++++++++++++++
-
-**Step1**: Click "Initial Settings" - "Safety" - "Safety Speed" button to set the safety speed parameters. The configuration mainly includes three parts: "Function Enable", "Speed Limit", and "Mode After Overspeed".
-
-Among them, "Function Enable" offers three options: "Disable", "Enable in Manual Mode", and "Enable in All Modes";
-
-Set the speed limit in "Speed Limit". When the robot's linear speed reaches this limit, it will be handled according to the parameters set in "Mode After Overspeed". "Mode After Overspeed" offers three modes: "Stop with Alarm", "Automatic Speed Limiting", and "Disable After Stop with Alarm". Automatic speed limiting is only available when "Enable in Manual Mode" is selected.
-
-After setting the required parameters, no further operations are needed. The robot's motion will be handled according to the set parameters. The parameter settings are shown in the figure.
-
-.. image:: safety/056.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.2-2 Safety Speed Parameter Setting
-   
-I/O safety
---------------
-
-Click "Initial" -> "Safety" in the menu bar, and then click the "I/O safety" submenu to enter the configuration interface.
-
-The HMI provides the setting of the safety status of 16 digital inputs and 16 digital outputs, which can be set to valid or invalid status. When the controller determines that it is in a safe state, the 16 digital inputs and 16 digital outputs are set to a safe state.
+Safety configuration parameters support exporting PDF reports. Click Download to preview the PDF report, and it also supports export. Click the Save button to download the PDF report.
 
 .. image:: safety/003.png
-   :width: 4in
+   :width: 6in
    :align: center
 
-.. centered:: Figure 7.3-1 DIO safety status configuration
+.. centered:: Figure 7.1-3 Safety Configuration Report PDF Preview
 
-On Linux:
-   The I/O safety function is provided in "DIO Safety". The safety function is dual-channel DI or DO. When a safety DI signal is detected or the safety status flag is triggered, DO is output.
+Safety Configuration Parameter Management
+------------------------------------------------
+
+All robot-related safety configuration parameters are maintained uniformly on the web page under "Initial Setup" -> "Safety". Modifying safety configuration parameters requires first entering the "Safety Configuration Password" for verification. Only after successful verification can safety parameter configuration modifications be made.
 
 .. image:: safety/004.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.3-2 DIO safety function configuration
+.. centered:: Figure 7.2-1 Safety Configuration Password Verification
 
-Emergency stop
----------------------
+After modifying the safety configuration parameters, click "Apply". A second confirmation of the modified safety configuration parameters is required. Click "Confirm" to apply the parameters. After the parameters are successfully applied, the safety configuration checksum will be updated accordingly.
 
-Click "Initial" -> "Safety" in the menu bar, and then click the "Emergency stop" submenu to enter the configuration interface.
-
-Emergency stop types 0, 1a, 1b, 2 can be set, stop time limit can be set, and stop distance limit can be set.
-
- - Send the control box board through the controller, and the emergency stop type 0 control box board directly cuts off the power;
-
- - Emergency stop type 1a is to cut off the power supply of the main body after deceleration stop;
-
- - Emergency stop type 1b is to not cut off the power supply of the main body after deceleration stop, and the main body is disabled;
-
-- Emergency stop type 2 indicates pressing the emergency stop button, the robot decelerates to stop and maintains enable status. After releasing the emergency stop, the robot should be able to operate normally.
-  
 .. image:: safety/005.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.4-1 Emergency stop configuration
-
-Safety Stop Recovery Optional Auto Enable Function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Overview
-+++++++++++++++++++++
-
-After the robot experiences a Category 1b emergency stop, it provides two modes for the user to choose from: Manual Enable and Auto Enable. When Manual Enable is selected, the user needs to change the robot's operation mode to Automatic after releasing the emergency stop button and manually click the enable button to enable the robot. When Auto Enable is selected, the robot will enable automatically after the user releases the emergency stop button.
-
-Operation Process
-+++++++++++++++++++++++++++
-
-**Step1**: Click the "Initial Setup" -> "Safety" -> "Emergency Stop" button. Select "Category 1b" for "Stop Type", and set the "Stop Time Limit" and "Stop Distance Limit" parameters as needed. The "Enable Strategy After E-stop Reset" can be set to "Manual Enable" or "Auto Enable", as shown in Figure 2-1.
-
-.. image:: safety/046.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.4-2 Enable Strategy Setting
-
-**Step2**: When "Auto Enable" is selected, the robot will enable automatically after the user releases the emergency stop button. When "Manual Enable" is selected, the user must manually click the enable button in Automatic mode after releasing the emergency stop button to enable the robot, as shown in Figure 2-2.
-
-.. image:: safety/047.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 7.4-3 Manual Enable Operation
+.. centered:: Figure 7.2-2 Safety Configuration Parameters Second Confirmation
 
-Protective stop
----------------------
+Safety Configuration Password Management
+------------------------------------------------
 
-Click "Initial" -> "Safety" in the menu bar, and then click the "Protective stop" submenu to enter the configuration interface.
-
-Protective stop type 0, 1, 2. Protective stop type 0: the control box board directly cuts off the power. Protective stop type 1: the control box board first notifies the controller to control the robot to stop and then the controller feeds back to cut off the power of the control box board. Protective stop type 2: the control box board notifies the controller to control the robot to stop.
+The safety configuration password can be changed in "System Settings" -> "Maintenance Mode" -> "Safety Parameter Configuration". The default password is 12345678. Changing the password requires verification of the old password. The new and old passwords cannot be the same. The password length is a minimum of 1 character and a maximum of 8 characters, and is case-sensitive for letters and symbols.
 
 .. image:: safety/006.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.5-1 Protective shutdown configuration
+.. centered:: Figure 7.3-1 Safety Configuration Password Management
 
-.. important::
-   The safety data status flag and control box carrier board fault feedback are obtained through the Web terminal and the controller status feedback. When the flag bit is 1, the safety data status is abnormal in the WebAPP alarm status. After the control box carrier board fault is obtained, the specific error information is displayed in the WebAPP alarm status according to the error code.
+If you forget the old password, please contact the relevant technical personnel of FAIRINO.
+
+Safety Configuration Parameters
+--------------------------------------------------------------------------------------------------
+
+Robot Safety Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Robot Speed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click the menu bar "Initial Setup" -> "Safety", and click the "Robot Speed" submenu to enter the configuration interface.
+
+Robot speed is used to limit the robot's maximum linear velocity, linear acceleration, and joint angular acceleration.
 
 .. image:: safety/007.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.5-2 WebAPP alarm status 
+.. centered:: Figure 7.4-1 Robot Speed
+ 
+Stop Deceleration Planning
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Interference zone configuration
-------------------------------------------------
+Click the menu bar "Initial Setup" -> "Safety", and click the "Stop Deceleration Planning" submenu to enter the configuration interface.
 
-In the menu bar of "Initial" -> "Safety", click "Interference Zone" to enter the interference area configuration function interface. Click on the "Shaft interference" card to enter the interface, then toggle the "Feature Enabled" slider.
+- Free Stop: When entering stop, the angular velocity of each axis decelerates and stops according to the set stop deceleration percentage multiplied by the joint maximum acceleration;
+- Synchronized Stop: When entering stop, the TCP pose velocity decelerates and stops according to the set stop deceleration percentage multiplied by the pose maximum acceleration;
 
-First of all, we need to configure the interference mode and the operation of entering the interference area. The interference mode is divided into "Shaft interference" and "cube interference". When enabled, the activation sign will be displayed. First, enter the interference zone motion configuration "continue motion" or "stop".
+Stop deceleration is a percentage of acceleration.
 
-.. image:: safety/025.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 7.6‑1 Interference zone configuration
-
-Next, set the configuration of dragging into the interference area. Users can set the strategy after entering the interference area in drag mode according to their needs, without restricting dragging, impedance callback and switching back to manual mode.
-
-.. image:: safety/026.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 7.6‑2 Interference area drag configuration
-
-To select Shaft interference, you need to configure the parameters of Shaft interference. The detection method is divided into two types: "command position" and "feedback position". The interference area mode is divided into two types: "interference within the range" and "interference outside the range". Next Set the range of each joint and whether each joint range is enabled, you can enter the value, or you can record the current position of the robot through the "Robot Teaching" button, and finally click Apply.
-
-.. image:: safety/027.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 7.6‑3 Shaft interference configuration
-
-To choose cube interference, you need to configure the parameters of cube interference. The detection method is divided into two types: "command position" and "feedback position". The interference area mode is divided into "interference within range" and "interference outside range". The system is divided into "base coordinates" and "workpiece coordinates", which can be selected and set according to actual use. Next, set the range setting. The range setting is divided into two methods. First, look at the first method "two-point method", which is composed of two diagonal vertices of the cube. We can record the position through input or robot teaching. Finally click Apply.
-
-.. image:: safety/028.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 7.6‑4 Cube Interferometric Configuration
-
-Next, look at the second method "center point + side length", that is, the center point of the cube and the side length of the cube form an interference area, and we can record the position through input or robot teaching. Finally click Apply.
-
-.. image:: safety/029.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 7.6‑5 Cube Interferometric Configuration
-
-Safety Callback Function for Force Sensor-Assisted Dragging into Shaft interference Zone
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Overview
-+++++++++++++++++++++++++
-
-The safety callback function for force sensor-assisted dragging into Shaft interference zones automatically switches the robot to dragging mode with impedance callback effect when entering an interference zone during force sensor-assisted dragging, and reverts to force sensor-assisted dragging when exiting. This satisfies various user scenarios during force sensor-assisted operations.
-
-Operation Procedure
-++++++++++++++++++++++++
-
-Joint Limit Ring
-********************************
-
-**Step1**: Log into the web interface, toggle the "Joint Limit Ring" switch, and the joint limit rings will appear on robot joints as shown below.
-
-.. image:: safety/030.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑6 Joint Limit Ring on Web Interface
-
-**Step2**: The white marker on the ring indicates actual joint angle; the gap represents soft limit positions (gap size varies with limit settings); rings remain stationary relative to joints during motion.
-
-Shaft interference Configuration
-********************************
-
-**Step1**: Configure and activate Shaft interference. Navigate to: "Initial" → "Safety" → "Interference Zone" → "Single", select "Shaft interference" and toggle "Enable".
-
-**Step2**: Set "Motion Strategy" to "Continue Motion", select "Dragging Strategy" as "Impedance Callback" and configure parameters (e.g., recommended value "5" for callback force intensity).
-
-.. image:: safety/031.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑7 Shaft interference Configuration
-
-**Step3**: Set interference ranges. Choose "Feedback Position" detection mode, select "Inside Range" or "Outside Range" interference mode, then enable ranges for each axis.
-
-.. image:: safety/032.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑8 Interference Range Configuration
-
-**Step4**: In "Inside Range" mode, green indicates free movement zones and yellow shows interference zones on the web interface.
-
-.. image:: safety/033.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑9 Limit Ring Display (Inside Range)
-
-**Step5**: In "Outside Range" mode, the color scheme reverses while maintaining the same display logic.
-
-.. image:: safety/034.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑10 Limit Ring Display (Outside Range)
-
-Entering Shaft interference Zone with Force Sensor Assistance
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**Step1**: Enable force sensor assistance at: "Auxiliary Applications"→"Tool App"→"Drag Lock", then activate interference zone options.
-
-.. image:: safety/035.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑11 Force Sensor Drag Configuration
-
-**Step2**: During force-assisted dragging, the system automatically switches to current-loop dragging with impedance callback when entering interference zones, then reverts upon exit.
-
-Cuboid Interference Configuration
-++++++++++++++++++++++++++++++++++
-
-**Step1**: Configure cuboid interference at: "Initial" → "Safety" → "Interference Zone" → "Single". Click on the "Cube Interference" card to enter the interface, and turn on the "Feature Enabled" slider.
-
-**Step2**: Set "Motion Strategy" to "Continue Motion" and "Dragging Strategy" to "Unrestricted Dragging".
-
-.. image:: safety/036.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑12 Cuboid Interference Settings
-
-**Step3**: Configure parameters including "Base Coordinate" reference and "Two-Point" or "Center+Edge Length" teaching methods.
-
-**Step4**: Virtual cuboids appear on the web interface (40% opacity yellow/green for normal state, 90% when triggered).
-
-.. image:: safety/037.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑13 Two-Point Teaching Method
-
-.. image:: safety/038.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑14 Web interface virtual wall display
-
-**Step5**：The teaching method for selecting the interference zone of the cube is "center point + side length." Teach the robot a point, set the side lengths along the X, Y, and Z axes with the taught point as the center, as shown in the figure below. After clicking "Apply," a virtual cube will appear on the web interface.
-
-.. image:: safety/039.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑15 "Center point + side length" to set cube interference zone
-
-**Step6**：Set the "interference zone mode" to "interference within range." When the robot end is outside the cubic range, the virtual cube on the web interface appears as yellow with 40% transparency. When the robot end is within the cubic range, the cube turns yellow with 90% transparency, and an "Entering interference zone" warning appears, as shown in the figure below.
-
-.. image:: safety/040.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑16 "In-range interference" mode when entering the cubic interference zone
-
-**Step7**：Set the "Interference Zone Mode" to "Interference Outside the Range". When the robot end is within the cube range, the virtual cube on the web interface is displayed as 40% transparency green. When the robot end is outside the cube range, the cube appears as 90% transparency green, and an "Entering Interference Zone" warning is displayed, as shown in the figure below.
-
-.. image:: safety/041.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑17 "Out-of-Range Interference" mode cube interference zone display
-
-Safety plane
-++++++++++++++++++++++++++++++++++++++++++
-**Step1**: Configure up to 8 safety walls at: "Initial"→"Safety"→"Safety plane". Enabled walls appear as 40% orange translucent objects.
-
-.. image:: safety/042.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑18 Safety Wall Setup
-
-.. image:: safety/043.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑19 Web interface virtual wall display
-
-**Step2**: Walls turn 90% opaque orange with warnings when breached.
-
-.. image:: safety/044.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑20 Triggered Safety Wall
-
-Cube Interference Function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Overview
-+++++++++++++++++++++++++++++++
-
-The cube interference function supports defining and activating multiple independent cube interference zones simultaneously. The position and dimensions of each interference zone in three-dimensional space can be independently configured. Furthermore, each interference zone is equipped with an individual CO (Controller Output) trigger signal output, capable of outputting corresponding trigger signals based on the robot's real-time position.
-
-Operation Procedure
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**Step1**: Enable the cube interference function and perform basic configuration. Sequentially click the commands "Initial Settings" -> "Safety" -> "Interference Zone" -> "Cube Interference". Use the slider switches to control whether each cube interference zone is enabled, and perform the basic configuration.
-
-Among these settings, the motion strategy upon entering the interference zone can be selected as "Continue Motion" or "Stop". When "Continue Motion" is selected, the robot will display a warning but continue moving upon entering the interference zone. When "Stop" is selected, the robot will display a warning and stop moving upon entering the interference zone. The drag strategy upon entering the interference zone can be selected as "Unrestricted Dragging," "Impedance Callback," or "Switch Back to Manual Mode".
-
-.. image:: safety/050.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑21 Cube Enable Control and Basic Configuration
-
-**Step2**: Configure the cube interference zones. Different configuration parameters can be set for each interference zone ID. It is important to note:
-
-(1) The detection method must be selected based on actual functional requirements as "Command Position" or "Feedback Position".
-
-(2) When the interference zone mode is selected as "Interference Outside Range," it is only effective for a single interference zone.
-
-.. image:: safety/051.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑22 Cube Interference Zone Configuration
-
-**Step3**: Set the interference zone range. The range can be set by choosing the "Two-Point Method" or "Center Point + Side Lengths" method to generate the cube interference zone. The "Two-Point Method" generates the zone by specifying two opposite vertices of the cube. The "Center Point + Side Lengths" method generates the zone by specifying the center point and three side lengths of the cube.
-
-.. image:: safety/052.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑23 Generating Interference Zone via "Two-Point Method"
-
-.. image:: safety/053.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑24 Generating Interference Zone via "Center Point + Side Lengths"
-
-**Step4**: Configure CO signals. Sequentially click the commands "Initial Settings" -> "Basic" -> "I/O Settings" -> "DO" to configure the corresponding CO output for each cube.
-
-.. image:: safety/054.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑25 CO Output Configuration
-
-**Step5**: Each cube interference zone will be displayed on the robot interface according to its set ID number. When the robot's end-effector center point enters an interference zone, the interface will display an "Entered Interference Zone" warning, and the corresponding CO interface will output a signal.
-
-.. image:: safety/055.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.6‑26 Multi-Cube Interference Zone Interface Display
-
-Reduction Mode
------------------------
-
-Click on the "Initial" -> "Safety" in the menu bar, then select the "Reduction Mode" submenu to enter the configuration interface, and choose the "Level 1/2 reduction Mode" to configure joint speed and end TCP speed.
-
-.. image:: safety/045.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.7-1 Reduction Mode
-
-Safety plane
----------------------------------
-
-Click "Initial" -> "Safety" in the menu bar, and then click the "Safety plane" submenu to enter the configuration interface.
-
--  **Safety Plane Configuration**:Click the enable button to enable the corresponding security plane. When the security plane is not configured with a security range, an error will be prompted. Click the drop-down box, select the security plane you want to set, and automatically bring out the security distance (you can not set it, the default value is 0), and then click the "Setting" button to set it successfully.
-  
 .. image:: safety/008.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.8-1 Safety Plane Configuration
-
--  **SSafety Plane Reference Point Configuration**:After selecting a security plane, four reference points can be set. The first three points are plane reference points, which are used to confirm the plane of the safety wall set. The fourth point is the safety range reference point, which is used to confirm the safety range of the set safety wall.
-
-.. important::
-   If the reference point is set successfully, the green light will be on. Otherwise, the yellow light is on. It turns green until the reference point is set successfully. When the four reference points are all set successfully, the safety range can be calculated, and the safety range parameter point status will return to the default after the calculation is successful.
-
-.. image:: safety/009.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.8-2 Safe range reference point setting
-
--  Apply effects: The successfully configured security plane is enabled. Drag the robot, if the TCP at the end of the robot is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
-
-.. image:: safety/010.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 7.8-3 The effect picture after the security range is set successfully
+.. centered:: Figure 7.4-2 Robot Stop Deceleration Planning
 
-Daemon
----------------------------------
+Safety Stop
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Click "Initial" -> "Safety" in the menu bar, and then click the "Daemon" submenu to enter the configuration interface.
+Click the menu bar "Initial Setup" -> "Safety", and click "Safety Stop" to enter the configuration interface to set the safety stop mode and safety stop strategy parameters.
 
-The user clicks the "function enabled" button to open or close the setting of the daemon. Select "Unexpected Situation" and "Background Program", and click the "Settings" button to configure the parameters of the unexpected situation handling logic.
+When the safety stop trigger mode is set to "Dual Channel", both channels must be cleared and the warning must be manually cleared on the operation interface before the robot can be reset. In addition, a reduced mode option is added to the strategy configuration. When the user selects this strategy, the robot will enter reduced mode motion.
 
-Enable the security background program and set the unexpected scene and background program. When the user starts to run the program and the unexpected situation matches the set unexpected situation, the robot will execute the corresponding background program to play a role of security protection.
+**Step1**: Click "Initial Setup" -> "Safety" -> "Safety Stop". The trigger mode can be selected as "Default" or "Dual Channel". The difference between the two is: in "Default" mode, the interface error is automatically cleared after triggering and recovery; in "Dual Channel" mode, the interface error must be manually cleared after triggering and recovery. "Safety Stop Strategy" can be selected as "Stop", "Pause", "Level 1 Reduced Mode", and "Level 2 Reduced Mode". The detailed descriptions are as follows: When "Stop" is selected, the robot will stop the current motion; when "Pause" is selected, the robot will pause the current motion, and after recovery and error clearing, it will resume the pause; when "Level 1 Reduced Mode" is selected, the robot will enter Level 1 reduced mode motion; when "Level 2 Reduced Mode" is selected, the robot will enter Level 2 reduced mode motion.
+
+.. image:: safety/009.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-3 Robot Stop Deceleration Planning
+
+**Step2**: When the trigger mode is set to "Default", the interface error can be automatically cleared after trigger recovery. When the trigger mode is set to "Dual Channel", the operation is: after trigger recovery, manually click the "Clear" operation in the upper right corner to reset the robot.
+
+Safety Speed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click the menu bar "Initial Setup" -> "Safety", and click "Safety Speed" to enter the configuration interface to set the safety speed. The TCP manual speed range is 1-1500mm/s.
+
+The robot safety speed function is used in human-robot collaboration or dynamic environments to actively limit the robot's operating speed, controlling kinetic energy and impact force within safety thresholds, thereby preventing personnel injury in accidental contact and effectively protecting equipment and workpieces from collision damage.
+
+**Step1**: Click "Initial Setup" -> "Safety" -> "Safety Speed" to set the safety speed parameters, mainly including three parts: "Function Enable", "Speed Limit", and "Post-Overspeed Mode".
+
+Among them, Function Enable can be selected as "Disable", "Manual Mode Enable", and "All Modes Enable";
+
+In Speed Limit, set the speed limit. When the robot's linear speed reaches this limit, it will be processed according to the parameters set in "Post-Overspeed Mode". "Post-Overspeed Mode" can be selected as "Stop and Alarm", "Auto Speed Limit", and "Disable After Stop and Alarm". Auto speed limit is only available in "Manual Mode Enable".
+
+After setting the required parameters, no further operation is needed. The robot's motion will be processed according to the set parameters. The parameter settings are shown in the figure.
+
+.. image:: safety/010.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-4 Safety Speed Parameter Settings
+
+Emergency Stop
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click the menu bar "Initial Setup" -> "Safety", and click "Emergency Stop" to enter the configuration interface.
+
+Emergency stop types 0, 1a, 1b, 2 can be set, stop time limit can be set, and stop distance limit can be set.
+
+Through the controller sending to the control box board, emergency stop type 0 directly cuts off power to the control box board;
+
+- Emergency stop type 1a: after deceleration stop, cuts off power to the robot body;
+- Emergency stop type 1b: after deceleration stop, does not cut off power to the robot body, but disables the robot body;
+- Emergency stop type 2: when emergency stop is pressed, the robot decelerates to a stop and remains enabled. After releasing the emergency stop, the robot should be able to operate normally.
 
 .. image:: safety/011.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.9-1 Daemon
+.. centered:: Figure 7.4-5 Emergency Stop Settings
 
-Direction limit (Only used in Linux systems)
----------------------------------------------
+Protective Stop
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Click "Initial" -> "Safety" in the menu bar, and then click the "Direction limit" submenu to enter the configuration interface.
+Click the menu bar "Initial Setup" -> "Safety", and click the "Protective Stop" submenu to enter the configuration interface.
 
-Tool direction limit is a protective function that acts on the Cartesian space of the robot tool end to limit the range of motion of the robot end posture, including function enablement settings, reference tool direction settings, and maximum offset angle settings. The maximum offset angle defines the maximum angle limit between the Z axis of the Cartesian coordinate system of the tool end and the reference tool direction, which can usually be understood as a conical space.
+Protective stop types 0, 1, 2. Protective stop type 0 directly cuts off power to the control box board. Protective stop type 1: the control box board first notifies the controller to control the robot to stop, then the controller feeds back to the control box board to cut off power. Protective stop type 2: the control box board notifies the controller to control the robot to stop.
 
 .. image:: safety/012.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.10-1 Direction limit
+.. centered:: Figure 7.4-6 Protective Stop Configuration
 
-Robot limit (Only used in Linux systems)
----------------------------------------------
+Auto Enable on Power-On
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Click "Initial" -> "Safety" in the menu bar, and then click the "Robot limit" submenu to enter the configuration interface.
-
-Robot limits include momentum and power, where the momentum limit is used to limit the robot's maximum momentum, and the power limit is used to limit the mechanical work done by the robot.
+Click the menu bar "Initial Setup" -> "Safety", and click the "Robot Enable" submenu to enter the configuration interface. You can choose whether the robot automatically enables on power-on or not.
 
 .. image:: safety/013.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.13-1 Robot limit
+.. centered:: Figure 7.4-7 Auto Enable on Power-On
 
-Power detection (Only used in QX systems)
----------------------------------------------
+Tool Orientation Limit (Only used in LA system)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Click "Initial" -> "Safety" in the menu bar, and then click the "Power detection" submenu to enter the configuration interface.
+Click the menu bar "Initial Setup" -> "Safety", and click the "Tool Orientation Limit" submenu to enter the configuration interface.
 
-When acting directly on the current loop of the robot (only with the command servoJT), it is used to limit the work done by the robot. When it is detected that the integral of the robot speed and torque exceeds the limit, power protection is performed.
+The tool orientation limit is a protective function acting on the robot's tool end Cartesian space to limit the robot's end posture motion range, including function enable setting, reference tool direction setting, and maximum deviation angle setting. The maximum deviation angle defines the maximum angular limit between the Z-axis of the tool end Cartesian coordinate system and the reference tool direction, which can usually be understood as a conical space.
 
 .. image:: safety/014.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.12-1 Power detection
+.. centered:: Figure 7.4-8 Tool Orientation Limit
 
-Motion Configuration
----------------------------------------------
+Robot Limits (Only used in LA system)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-T-Shaped Velocity Optimization + Blending Smoothing Function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Click the menu bar "Initial Setup" -> "Safety", and click the "Robot Limits" submenu to enter the configuration interface.
 
-Overview
-++++++++++++++++++++++
-
-Performing blending between two trajectory segments can avoid frequent start-stop issues caused by complete stops, thereby improving the robot's motion efficiency.
-
-This function mainly applies to blending between PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC, and ARC-LIN commands. Blending between other commands is not effective.
-
-Operation Process
-++++++++++++++++++++++
-
-Since the operation methods for each command are similar, this manual uses PTP-PTP blending as an example to explain the operation method. This function can be implemented in two ways: using Lua commands or using the motion configuration switch.
-
-Using Lua Commands
-*****************************
-
-**Step 1**: Select the teaching points for the PTP function. This manual uses "A0" to "A5" as the names of the teaching points.
-
-**Step 2**: Click "Teaching Program" -> "Program Programming," select the "Point-to-Point" command under "Motion Commands," choose the teaching point in the "Command Edit" section, set the debugging speed, select "Acceleration Smoothing Mode" for motion protection, and set the "Smooth Transition" parameter at the points where smoothing is required.
-
-.. image:: safety/020.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 7.13-1 Blending Command Settings for Acceleration Smoothing PTP
-
-**Step 3**: Generate and run the Lua program to implement PTP-PTP blending. This method only applies the optimized T-shaped velocity to commands between `AccSmoothStart()` and `AccSmoothEnd()`, while using the original T-shaped velocity for other commands.
-
-.. image:: safety/021.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.13-2 Typical Program for PTP-PTP Blending Using Lua Commands
-
-Using Motion Configuration Switch
-***********************************
-
-**Step 1**: Click "Initial" -> "Safety" -> "Motion Configuration," and turn on the "Acceleration Smoothing Mode" switch.
-
-.. image:: safety/022.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 7.13-3 Acceleration Smoothing Mode Configuration Switch Settings
-
-**Step 2**: Select the teaching points for the PTP-PTP function. This manual uses "A0" to "A5" as the names of the teaching points.
-
-**Step 3**: Click "Teaching Program" -> "Coding," select the "Point-to-Point" command under "Motion Commands," choose the teaching point in the "Command Edit" section, set the debugging speed, select "None" for motion protection, and set the "Smooth Transition" parameter at the points where smoothing is required.
-
-.. image:: safety/023.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 7.13-4 Blending Command Settings for Regular PTP
-
-**Step 4**: Generate and run the Lua program to implement PTP-PTP blending. The typical program is the same as a regular PTP program. This method applies the optimized T-shaped velocity to all commands.
-
-.. image:: safety/024.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.13-5 Typical Program for PTP-PTP Blending Using Configuration Switch
-
-FIR Adaptive Parameter Function + FIR Pause/Resume Function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Overview
-++++++++++++++++++++++
-
-The robot's time-optimal mode parameter adaptive configuration function eliminates the need to manually debug and configure parameters. This function adaptively configures the parameters of the time-optimal mode based on the robot's current operating state, improving debugging efficiency.
-
-Operation Process
-++++++++++++++++++++++
-
-The usage of basic robot motion commands (PTP, LIN, and ARC) is similar. This example uses the time-optimal mode PTP motion command as the primary example.
-
-**Step 1**: On the robot's web control interface, navigate to "Initial" -> "Safety" -> "Motion Configuration" to enter the "Motion Configuration" interface.
+Robot limits include momentum and power, where the momentum limit is used to limit the robot's maximum momentum, and the power limit is used to limit the mechanical work done by the robot.
 
 .. image:: safety/015.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-9 Robot Limits
+
+Joints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Joint Soft Limits
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Under the menu bar "Initial Setup" -> "Safety" -> "Joints", click "Joint Soft Limits" to enter the soft limit interface.
+
+There may be other equipment within the robot's travel range. The limit angles can perform soft limiting on the robot, preventing the robot from moving beyond certain coordinate values and avoiding collisions. Triggering a soft limit causes the robot to stop automatically, with no stopping distance.
+
+Administrators can use default values or enter angle values. By entering angle values, the positive and negative angles of the robot's joints can be limited separately. When the entered value exceeds the robot joint soft limit angle values listed in the robot basic parameters table in Section 2.1-Basic Parameters, the limit angle will be adjusted to the maximum settable value. When the robot reports a joint command out-of-limit error, it is necessary to enter drag mode and drag the robot joint back within the limit angle.
+
+The joint soft limit protection function is an active protection mechanism that monitors the motion state of the robotic arm joints in real time and dynamically restricts the operator from exceeding the set soft limit range during drag teaching. This function makes soft limits meaningful even in drag teaching, thereby enhancing human-robot collaboration safety.
+
+- **Step1**: Log in to the web interface and click "Initial Setup" -> "Safety" -> "Joints" -> "Joint Soft Limits" in sequence to enter the robot soft limit setting module.
+- **Step2**: Based on the robot's actual working range, reasonably set the soft limits for each joint. At this time, check whether the current angular position of each robot joint is within the preset soft limit range. If yes, click "Apply" to send the preset soft limits. If not, move each joint within the preset range; otherwise, an over-limit prompt will appear when clicking "Apply", as shown in the figure below. At this time, you can jog or drag the over-limit joint in the direction toward the soft limit range to clear the error.
+- **Step3**: After the soft limit range is successfully set, select "Enable" for "Joint Soft Limit Protection" to activate this function, as shown in the figure below. In drag mode, the set soft limits will take effect, and resistance will be felt when dragging near the soft limits.
+- **Step4**: To disable the joint soft limit protection function, click "Joint Soft Limit Protection" to turn it off.
+
+.. image:: safety/016.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-10 Joint Soft Limits
+
+Collision Level
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Under the menu bar "Initial Setup" -> "Safety" -> "Joints", click "Collision Level" to enter the collision level interface.
+Collision levels are divided into levels 1 to 10. Levels 1 to 3 are more sensitive, and the robot needs to run at the recommended speed. You can also choose custom percentage settings, with 100% corresponding to level 10. As shown in the figure below:
+
+.. image:: safety/017.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 7.13-6 Motion Configuration Interface
+.. centered:: Figure 7.4-11 Collision Level Diagram
 
-**Step 2**: In the "Motion Configuration" interface, click the "Time-Optimal Mode" switch to enter the "Time-Optimal Mode" interface.
+Collision strategies are "Stop on Collision", "Pause on Collision", and "Continue Motion". To avoid extrusion force between the robot and objects after collision, strategies "Gravity Torque Mode", "Oscillation Response Mode", and "Collision Rebound Mode" have been added. When triggered, all three strategies will switch from automatic or manual mode to drag mode, and then back to manual mode. The gravity torque mode will move away from the collision point based on the magnitude and direction of the collision force; the oscillation response mode will return to the collision position after moving away from it; the collision rebound mode will accelerate away from the collision point according to the set parameters.
 
-.. image:: safety/016.png
-   :width: 3in
-   :align: center
-
-.. centered:: Figure 7.13-7 Time-Optimal Mode Interface
-
-.. note:: In the "Parameter Configuration" section of the "Time-Optimal Mode" interface, the "Adjustment Coefficient" can be set from -100 to 100, representing a scaling ratio to control the time-optimal degree of motion commands. The default value is 1.
-
-**Step 3**: Determine the teaching points for the PTP motion. This example uses "A0" to "A5" as the names of the teaching points.
-
-**Step 4**: On the robot's web control interface, navigate to "Teaching Program" -> "Program Programming" to enter the "Motion Commands" interface.
-
-.. image:: safety/017.png
-   :width: 2in
-   :align: center
-
-.. centered:: Figure 7.13-8 Motion Commands Interface
-
-**Step 5**: In the "Motion Commands" interface, click "Point-to-Point" to enter the "PTP" command editing interface. Select the teaching point from the "Point Name" dropdown, set the desired speed ratio in the "Debugging Speed" section, choose "Stop" in the "At This Point" section, select "No" in the "Offset" dropdown, and choose "None" in the "Motion Protection" section. Then, click "Add."
+In the "Collision Strategy" section, click the drop-down box to select "Collision Rebound Mode", and set the safety time to 1000ms, safety distance to 150mm, safety speed to 150mm/s, and safety factor for each joint to 5. The specific interface is shown in the figure below.
 
 .. image:: safety/018.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 7.13-9 PTP Motion Command Editing Interface
+.. centered:: Figure 7.4-12 Collision Strategy: Collision Rebound Mode
 
-**Step 6**: In the "PTP" motion command editing interface, click "Apply" to automatically generate the corresponding Lua program.
+Meaning of each parameter:
+
+- Safety Time: Indicates the duration in drag mode after switching from automatic mode to drag mode, range [1000-2000]ms;
+- Safety Distance: Indicates the position where the robot moves away from the collision point after collision, range [150-200]mm;
+- Safety Speed: Indicates the maximum TCP speed at which the robot moves away from the collision point after collision. Exceeding this speed limit will constrain the rebound force, range [50-250]mm/s;
+- Safety Factor: Indicates the decay rate of the rebound force. The smaller the coefficient, the faster the decay and the faster the rebound speed; the larger the coefficient, the slower the decay. Range [1-10], dimensionless.
+- Before the robot enters drag mode, torque detection is required. This function is designed to prevent abnormal phenomena such as lifting or dropping after the robot enters drag mode due to incorrect load parameters or installation mode settings by the operator. If the joint torque is detected to exceed the allowable range, the controller will immediately report an error and prohibit the robot from entering drag mode.
+
+Steps to enable the linear rack and pinion rail collision detection function:
+
+- Step1: Ensure that both the rail and robot installation methods are front-mounted. Before enabling the linear rack and pinion rail collision detection function, check whether the installation method is front-mounted. Specifically, first ensure that the rail and robot installation methods are front-mounted. Then, click "Initial Setup" -> "Basic" -> "Installation" in sequence to enter the free installation page. If both "Base Rotation" and "Base Tilt" are 0, the software is set to front-mounted; otherwise, they must be changed to 0. If they are not 0, the interface will prompt an error.
+- Step2: Enable the linear rack and pinion rail collision detection function and set parameters. Click "Initial Setup" -> "Safety" -> "Joints" -> "Collision Level" in sequence to enter the collision level setting page. After clicking the "Linear Rack and Pinion Rail Collision Detection" function slider, set the gear radius and slider mass. The gear radius can be calculated from the lead and reduction ratio. The slider mass does not include the robot and its end load. There are 11 rail level options, where Level 1 is the easiest to trigger collision and Level 10 is the most difficult. When the controller is first powered on and before the adaptation program is executed, the collision level should first be set to "Off".
 
 .. image:: safety/019.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.13-10 Typical Time-Optimal Mode PTP Motion Lua Program
+.. centered:: Figure 7.4-13 Linear Rack and Pinion Rail Collision Detection Function
+
+- Step3: Execute the "Rail_Adaptation_Program.lua" program to adapt to the current rail. After each controller restart, the "Rail_Adaptation_Program.lua" program must be executed (to prevent changes in robot type and other factors from affecting the rail's dynamic characteristics). Before executing the program, ensure that the rail collision level is set to "Off". In automatic mode, run the LUA program at 100% interface speed. After one loop of the program is completed, the adaptation is complete and execution can be stopped.
+
+.. image:: safety/020.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-14 Execute "Rail_Adaptation_Program.lua" to Adapt to the Current Rail
+
+- Step4: Reasonably set the rail collision level and execute tasks. Users can reasonably set the rail collision level based on the motor driver performance and task running speed. If the rail and robot operate asynchronously, collision with the robot or rail can trigger an "8-axis collision fault, resettable". At this time, the rail stops running, as shown in Figure 2-9. If the rail and robot operate synchronously, collision with the robot can trigger an alarm, causing the rail to stop running, while the robot reacts according to the set collision strategy.
+
+Reduced Mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click the menu bar "Initial Setup" -> "Safety", and click the "Reduced Mode" submenu to enter the configuration interface. Select "Level 1/Level 2 Mode" to configure joint speed and end TCP speed.
+
+.. image:: safety/021.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-15 Reduced Mode
+
+I/O
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Click the menu bar "Initial Setup" -> "Safety", and click the "I/O" submenu to enter the configuration interface.
+
+HMI provides the ability to set the safety state for 16 digital inputs and 16 digital outputs, which can be set to valid or invalid states. When the controller determines that it is in a safety state, the 16 digital inputs and 16 digital outputs are set to the safety state.
+
+.. image:: safety/022.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-16 I/O Safety State Configuration
+
+Under the LA system:
+
+"I/O Safety" provides DIO safety functions. The safety function is dual-channel DI or DO. When a safety DI signal or safety state flag is triggered, the DO is output.
+
+.. image:: safety/023.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-17 I/O Safety Function Configuration
+
+Hardware
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ServoJT Power Detection (Only used in QX system)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Click the menu bar "Initial Setup" -> "Safety", and click the "Power Detection" submenu to enter the configuration interface.
+
+When directly acting on the robot's current loop (servoJT only), it is used to limit the work done by the robot. When the integral of robot speed and torque is detected to exceed the limit, power protection is activated.
+
+.. image:: safety/024.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-18 ServoJT Power Detection
+
+Planes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Safety Wall
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Click the menu bar "Initial Setup" -> "Safety", and click the "Safety Wall Configuration" submenu to enter the configuration interface.
+
+- Safety Wall Configuration: Click the Enable button to enable the corresponding safety wall. When a safety wall has not been configured with a safety range, an error will be prompted. Click the configuration button in the upper right corner, select the safety wall you want to set, automatically bring up the safety distance (optional, default is 0), and then click the "Set" button to set successfully.
+- Safety Wall Reference Point Configuration: After selecting a safety wall, four reference points can be set. The first three points are plane reference points, used to confirm the plane of the set safety wall. The fourth point is the safety range reference point, used to confirm the safety range of the set safety wall.
+
+If the reference points are set successfully, a green light will be displayed. Otherwise, a yellow light will be displayed until the reference points are successfully set and turn green. When all four reference points are successfully set, the safety range can be calculated. After successful calculation, the safety range parameter point status returns to default.
+
+.. image:: safety/025.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-19 Safety Range Reference Point Settings
+
+- Application Effect: Enable the successfully configured safety wall. Drag the robot. If the robot's end TCP is within the set safety range, the system is normal. If it is outside the set safety range, an error will be prompted.
+
+.. image:: safety/026.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-20 Effect After Successful Safety Range Settings
+
+Interference Zone
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Under the menu bar "Initial Setup" -> "Safety" -> "Interference Zone", click the "Single" submenu item to enter the interference zone configuration interface.
+
+We need to configure the interference method and the operation upon entering the interference zone. Interference methods are divided into "Axis Interference" and "Cuboid Interference".
+
+.. image:: safety/027.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-21 Interference Zone Methods
+
+Click the interference zone icon, use the switch to control whether it is enabled, and click the configuration button in the upper right corner for parameter configuration.
+
+.. image:: safety/028.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-22 Interference Zone Configuration
+
+First, configure the interference zone motion as "Continue Motion" or "Stop". Next, set the drag configuration upon entering the interference zone. Users can set the strategy after entering the interference zone in drag mode according to their needs: no drag restriction, impedance return, or switch back to manual mode.
+
+When selecting Axis Interference, the axis interference parameters need to be configured. The detection method can be "Command Position" or "Feedback Position". The interference zone mode can be "Interference Within Range" or "Interference Outside Range". Next, set the range for each joint and whether the range for each joint is enabled. You can enter values, or use the "Refresh" icon after "Min" and "Max" to record the current robot position, and finally click Configure.
+
+.. image:: safety/029.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-23 Axis Interference Configuration
+
+When selecting Cuboid Interference, the cuboid interference parameters need to be configured. The detection method can be "Command Position" or "Feedback Position". The interference zone mode can be "Interference Within Range" or "Interference Outside Range". The reference coordinate system can be "Base Coordinate" or "Workpiece Coordinate", selected according to actual usage. Next, set the range. There are two methods for range setting. The first method is the "Two-Point Method", which uses two diagonal vertices of the cuboid. Positions can be entered or recorded through robot teaching. Finally, click Apply.
+
+.. image:: safety/030.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-24 Cuboid Interference Configuration
+
+The second method is the "Center Point + Side Length" method, where the center point of the cuboid and the side length of the cuboid form the interference zone. Positions can be entered or recorded through robot teaching. Finally, click Apply.
+
+.. image:: safety/031.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-25 Cuboid Interference Configuration
+
+Appendix: Gripper Wait Blocking Instruction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click "Teach Program" -> "Peripheral Instructions" -> "Gripper" to add a wait for gripper motion to complete instruction, which can block until the clamping action is completed to obtain the actual physical position of the gripper.
+
+.. image:: safety/032.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-26 Gripper Motion Complete Wait Instruction
+ 
+- Gripper Status: Motion not completed, motion completed with no object detected, motion completed with object detected;
+- Timeout Time: Unit ms, -1 means wait forever.
+- Timeout Strategy: You can choose to stop with error or continue running.
+- Gripper Type: You can choose parallel gripper or rotary gripper.
 
 .. note:: 
-   The typical time-optimal mode PTP motion Lua program is the same as a regular PTP motion Lua program, except that the "Time-Optimal Mode" function is enabled in Step 2.
+   Note: The wait for gripper motion complete instruction is only applicable to custom protocols; adapted devices currently do not support it.
 
-   When the "Time-Optimal Mode" function switch is enabled, all basic robot motion commands (PTP, LIN, and ARC) operate in time-optimal mode. Disabling the switch restores the commands to their basic state.
-   The "Acceleration Smoothing Mode" function switch cannot be enabled simultaneously in this interface.
+   You can also directly use GetGripperMotionDone() for judgment. Input parameter gripper type: 0 for parallel gripper, 1 for rotary gripper. The return values are gripper error and gripper status. Gripper error 0 means no error, other values mean there is an error. Gripper status 0 means motion not completed, 1 means motion completed with no object detected, 2 means motion completed with object detected. Example programs for waiting for gripper motion completion and getting gripper position are as follows:
+
+.. image:: safety/033.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-27 Gripper Motion Example Program

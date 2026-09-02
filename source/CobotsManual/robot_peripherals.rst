@@ -654,6 +654,16 @@ Starting from version V3.9.8, the SmartTool based on the end-effector protocol s
 
 .. centered:: Figure 8.3‑2-5 Page Prompt "Enter boot and apply open protocol?"
 
+Additionally, when using IO buttons, the user needs to select the communication type of the current welding machine, including: Controller I/O, Digital Communication Protocol (UDP), Digital Communication Protocol (Modbus TCP). For Controller I/O and Digital Communication Protocol (UDP), the corresponding DO must be configured with the arc start function before welding-related instructions can be generated. For Digital Communication Protocol (Modbus TCP), the instruction must be configured as welding before welding-related instructions can be generated; otherwise, only instructions for setting DO output will be generated.
+
+.. note:: It should be noted that when selecting Digital Communication Protocol (UDP) or Digital Communication Protocol (Modbus TCP) for welding machine communication, the welding instruction configuration requires that the communication connection be established properly.
+
+.. figure:: robot_peripherals/321.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.3‑2-6 Selecting Welding Machine Control Type and Instruction Type
+
 SmartTool Program Generation Template Import
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -663,7 +673,7 @@ If the SmartTool key is configured with the program generation function, based o
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.3‑2-6 SmartTool Program Generation Template Import
+.. centered:: Figure 8.3‑2-7 SmartTool Program Generation Template Import
 
 SmartTool Motion Instruction Point Configuration
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -674,7 +684,7 @@ When configuring the "PTP," "LIN," and "ARC" instructions in SmartTool, you can 
    :align: center
    :width: 4in
 
-.. centered:: Figure 8.3‑2-7 SmartTool Motion Instruction Point "Global Teaching Points" and "Local Teaching Points" Configuration
+.. centered:: Figure 8.3‑2-8 SmartTool Motion Instruction Point "Global Teaching Points" and "Local Teaching Points" Configuration
 
 SmartTool Anti-Mistouch Mode
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -685,7 +695,7 @@ The SmartTool based on the open protocol adds an anti-mistouch mode. Click "Init
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.3‑2-8 SmartTool "Anti-Mistouch Mode" Function
+.. centered:: Figure 8.3‑2-9 SmartTool "Anti-Mistouch Mode" Function
 
 SmartTool IO Button Memory Clear Function
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -701,7 +711,7 @@ A global point clear function has been added. Open WebApp, click "Teach Program"
    :align: center
    :width: 6in
 
-.. centered:: Figure 8.3‑2-9 Global Point Clear Function
+.. centered:: Figure 8.3‑2-10 Global Point Clear Function
 
 Example of Lua End Peripheral Protocol for Welding Handle
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1098,6 +1108,51 @@ Click the "Custom Protocol" card to enter the interface, enable the force sensor
 
 .. centered:: Figure 8.3‑12 Enable Force Sensor
 
+Kaiwei Force Sensor Adaptation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++++++++++++++++++++++
+A new Kaiwei force sensor has been added to the device adaptation list, with the sensor model KWL-SFTE75B.
+
+Kaiwei Force Sensor Adaptation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(1) Go to Initial Setup -> Peripherals -> Force Sensor, and select the adapted device.
+
+.. figure:: robot_peripherals/322.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑13 Adapted Devices
+
+(2) In the adapted devices list, select the manufacturer KWL, select the type KWL-SFTE75B, choose the mounting position, and click Configure.
+
+.. figure:: robot_peripherals/323.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑13 Configure Manufacturer
+
+(3) Select the corresponding mounting position number, click Reset, then Activate. When Act_State in the FT toolbar shows 1, the sensor is ready for normal use.
+
+.. figure:: robot_peripherals/324.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.3‑14 Activate and Reset Operations
+
+Device Usage Instructions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(1) In the FT toolbar, Fx, Fy, Fz, Tx, Ty, Tz represent the six-axis force data, with units in N and N·m.
+
+.. figure:: robot_peripherals/325.png
+   :align: center
+   :width: 4in
+
+.. centered:: Figure 8.3‑15 Six-Axis Force Data in FT Toolbar
+
 Welding Pendant
 -------------------------------------------------------------
 
@@ -1157,7 +1212,10 @@ IO Key Functions:
 
 -  **IO Signal Configuration**: The dropdown menu allows selection of DO0⁓DO7 options, CO0⁓CO7 options, End-DO0, End-DO1, and extended IO (Aux-DO0⁓Aux-DO127);
 
--  **Combined Command**: After selecting "IO Signal", under specific conditions, the "Welder Selection" and "Point Speed" configuration items are displayed, generating different program commands.Additionally, the selection of welding process number has been added. Furthermore, the maximum time for arc start and arc end can be configured up to 10000ms. The weave number defaults to 0. If "Weave Start" is configured, the weave number can be selected. The IO button settings are consistent with the Weave Start settings.
+-  **Combined Instructions**: After selecting "IO Signal", the "Welding Machine Selection" and "Point Speed" configuration items are displayed under specific conditions to generate different program instructions.
+
+  - The user needs to select the communication type of the current welding machine, including: Controller I/O, Digital Communication Protocol (UDP), Digital Communication Protocol (Modbus TCP). For Controller I/O and Digital Communication Protocol (UDP), the corresponding DO must be configured with the arc start function before welding-related instructions can be generated. For Digital Communication Protocol (Modbus TCP), the instruction must be configured as welding before welding-related instructions can be generated; otherwise, only instructions for setting DO output will be generated. It should be noted that when selecting Digital Communication Protocol (UDP) or Digital Communication Protocol (Modbus TCP) for welding machine communication, the welding instruction configuration requires that the communication connection be established properly.
+  - Additionally, the selection of welding process number has been added. Furthermore, the maximum time for arc start and arc end can be configured up to 10000ms. The weave number defaults to 0. If "Weave Start" is configured, the weave number can be selected. The IO button settings are consistent with the Weave Start settings.
 
 .. important::
    -  When the IO signal is configured as DO0~DO7 or CO0~CO7 (without "Arc Start" configured), the program adds SetDO; "Welder Selection" and "Point Speed" are hidden at this time.
@@ -6459,7 +6517,15 @@ Specific functions of the parameters:
 - **Angular Velocity Limit**: 100°/s. When the angular velocity limit is exceeded, the robot switches to manual mode and prompts TCP overspeed.
 
 .. note::
-  1. For the FR3WML robot, the recommended parameter settings are as follows: drag gain [0.15, 0.15, 0.15, 0.15, 0.15, 0.2], damping gain after enabling impedance [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
+  1. Drag parameter settings
+
+  (1) For the FR3WML robot, the recommended parameter settings are as follows: drag gain [1.5, 1.5, 1.5, 1.5, 1.5, 2], damping gain after enabling impedance [0.1, 0.1, 0.1, 0.05, 0.05, 0.05];
+
+  (2) For the FR3WMS robot, the recommended parameter settings are as follows: drag gain [2, 2, 2, 2, 2, 2], damping gain after enabling impedance [0.1, 0.1, 0.1, 0.05, 0.05, 0.05];
+
+  (3) For the FR3C robot, the recommended parameter settings are as follows: drag gain [2, 2, 2, 2, 2, 2], damping gain after enabling impedance [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
+
+  (4) For the FR5C robot, the recommended parameter settings are as follows: drag gain [2, 2, 2, 2, 2, 2], damping gain after enabling impedance [0.1, 0.1, 0.1, 0.05, 0.05, 0.05].
 
   2. When all drag gain parameters are set to 0, the drag resistance is strong and it is difficult to drag; when all drag gain parameters are set to 5, the drag feel is light; the larger the parameter, the easier the dragging.
 

@@ -2271,6 +2271,218 @@ Realize the adjustable function of laser tracking and reproduction speed, so tha
 
 .. centered:: Figure 9.8-4 LT-Rec command interface
 
+Laser Scanning Trajectory Replay with Superimposed Weave
+****************************************************************************************************************
+
+Overview
+""""""""""""""""""""""""""""""""""""""""""""""""
+The laser scanning trajectory replay with superimposed weave function refers to the robot superimposing triangular wave / vertical L-shaped triangular wave / clockwise circular wave / counterclockwise circular wave / sine wave / vertical L-shaped sine wave / vertical welding triangular wave weaving motion on the basis of replaying the laser scanning trajectory. It supports both regular weaving and fixed-point weaving modes, and can be adapted to extended axis motion, as shown in Table 1-1.
+
+.. centered:: Table 9.8-1 Laser Scanning Trajectory Replay with Superimposed Weave Modes
+
+.. list-table::
+   :widths: 40 30 30
+   :header-rows: 0
+   :align: center
+
+   * - **Trajectory Replay**
+     - **Regular Weave**
+     - **Fixed-Point Weave**
+
+   * - Robot
+     - Yes
+     - Yes
+
+   * - Extended Axis
+     - No
+     - Yes
+
+Laser Scanning Trajectory Replay with Superimposed Regular Weave
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Configure the line laser sensor peripheral through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 2**: Calibrate the tool coordinate system through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 3**: Calibrate the sensor coordinate system through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 4**: Teach motion points through WebApp. Teach the motion points for the laser scanning trajectory replay of the target workpiece, and write the basic LUA program for the corresponding robot LIN and other motion commands. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 5**: Configure the weave parameter number through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 6**: Laser recording command. On the WebApp main interface, click "Teach Program" -> "Program Programming" to enter the "Welding Commands" area.
+
+.. image:: coding/609.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-4-1 "Welding Commands" Area
+ 
+**Step 7**: Start laser recording. In the "Welding Commands" area, click the "Laser Recording" button to enter the "LT-Rec" command configuration area.
+
+In the "Command Type" configuration area, click the "Weld Data Recording" button, select the "Start Recording" option from the "Function Selection" dropdown menu; set the delay recording time in the "Delay Time" input box.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the start laser recording operation.
+
+.. image:: coding/610.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-2 Start Laser Recording
+
+**Step 8**: Stop laser recording. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Weld Data Recording" button, select the "Stop Recording" option from the "Function Selection" dropdown menu; set the delay recording time in the "Delay Time" input box.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the stop laser recording operation.
+
+.. image:: coding/611.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-3 Stop Laser Recording
+
+**Step 9**: Move to weld point. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Move to Weld Point" button, select "PTP" or "LIN" motion mode from the "Motion Mode" dropdown menu; set the command speed in the "Speed" input box; click the "Start" or "End" button to select the target motion point.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the operation.
+
+.. image:: coding/612.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-4 Move to Weld Point
+
+**Step 10**: Laser trajectory replay. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Weld Data Recording" button, select the "Trajectory Replay" option from the "Function Selection" dropdown menu; set the delay recording time in the "Delay Time" input box; set the command speed in the "Speed" input box.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the laser trajectory replay operation.
+
+.. image:: coding/613.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-5 Laser Trajectory Replay
+
+**Step 11**: Superimpose regular weave. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Laser Tracking Replay" button, select the "Regular Weave" option from the "Superimpose Weave" dropdown menu; select the configured weave parameter number from the "Select Number" dropdown menu from Step 5.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the superimpose regular weave operation.
+
+.. image:: coding/614.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-6 Superimpose Regular Weave
+
+**Step 12**: Write the LUA program for laser scanning trajectory replay + regular weave. Adjust the LUA command order generated from Step 4 to Step 11, and run the LUA program to implement the laser scanning trajectory replay with superimposed regular weave function.
+
+.. image:: coding/615.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-7 LUA Program for Laser Scanning Trajectory Replay with Superimposed Regular Weave
+
+Laser Scanning Trajectory Replay with Superimposed Fixed-Point Weave
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step 1**: Configure the line laser sensor peripheral through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 2**: Configure the extended axis peripheral through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 3**: Calibrate the tool coordinate system through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 4**: Calibrate the sensor coordinate system through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 5**: Teach motion points through WebApp. Teach the motion points for the laser scanning trajectory replay of the target workpiece, and write the basic LUA program for the corresponding robot LIN and extended axis asynchronous motion commands. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 6**: Configure the weave parameter number through WebApp. For detailed operation steps of this function, please refer to the corresponding sections of the user manual.
+
+**Step 7**: Laser recording command. On the WebApp main interface, click "Teach Program" -> "Program Programming" to enter the "Welding Commands" area.
+
+.. image:: coding/616.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 9.8-4-8 "Welding Commands" Area
+
+**Step 8**: Start laser recording. In the "Welding Commands" area, click the "Laser Recording" button to enter the "LT-Rec" command configuration area.
+
+In the "Command Type" configuration area, click the "Weld Data Recording" button, select the "Start Recording" option from the "Function Selection" dropdown menu; set the delay recording time in the "Delay Time" input box.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the start laser recording operation.
+
+.. image:: coding/617.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-9 Start Laser Recording
+ 
+**Step 9**: Stop laser recording. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Weld Data Recording" button, select the "Stop Recording" option from the "Function Selection" dropdown menu; set the delay recording time in the "Delay Time" input box.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the stop laser recording operation.
+
+.. image:: coding/618.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-10 Stop Laser Recording
+  
+**Step 10**: Move to weld point. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Move to Weld Point" button, select "PTP" or "LIN" motion mode from the "Motion Mode" dropdown menu; set the command speed in the "Speed" input box; click the "Start" or "End" button to select the target motion point.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the operation.
+
+.. image:: coding/619.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-11 Move to Weld Point
+  
+**Step 11**: Laser trajectory replay. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Weld Data Recording" button, select the "Trajectory Replay" option from the "Function Selection" dropdown menu; set the delay recording time in the "Delay Time" input box; set the command speed in the "Speed" input box.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the laser trajectory replay operation.
+
+.. image:: coding/620.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-12 Laser Trajectory Replay
+  
+**Step 12**: Superimpose fixed-point weave. In the "LT-Rec" command configuration area, in the "Command Type" configuration area, click the "Laser Tracking Replay" button, select the "Fixed-Point Weave" option from the "Superimpose Weave" dropdown menu; select the configured weave parameter number from the "Select Number" dropdown menu from Step 6.
+
+Select the "Reference Point" option from the "Weave Reference" dropdown menu; select the reference point from the "Reference Point" dropdown menu.
+
+In the "LT-Rec" command configuration area, click the "Add" button. The "Program Preview" display box will show the pre-generated LUA program. Click "Apply" to complete the superimpose regular weave operation.
+
+.. image:: coding/621.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-13 Weave Reference as Reference Point with Superimposed Fixed-Point Weave
+
+.. note:: Note: When the "Reference Point" option is selected in the "Weave Reference" dropdown menu, the robot's forward direction is the direction of the line connecting the current point and the reference point, and the current point and the reference point must be in the same tool and workpiece coordinate systems.
+
+When the "Tool Coordinate System" option is selected in the "Weave Reference" dropdown menu, the robot's forward direction is the X-axis direction of the current tool coordinate system.
+
+.. image:: coding/622.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.8-4-14 Weave Reference as Tool Coordinate System with Superimposed Fixed-Point Weave
+ 
+**Step 13**: Write the LUA program for laser scanning trajectory replay + fixed-point weave. Adjust the LUA command order generated from Step 5 to Step 13, and run the LUA program to implement the laser scanning trajectory replay with superimposed fixed-point weave function.
+
+.. note:: Note: Compared to the LUA program, the laser scanning trajectory replay with superimposed fixed-point weave LUA program does not include the MoveLTR() command, and the last parameter (weave time) of the default generated OriginPointWeaveStartt() command must be modified to any non-negative integer value greater than 0. During robot operation, the controller will automatically convert this parameter to the actual replay trajectory runtime.
+
+.. image:: coding/623.png
+   :width: 6in
+   :align: center
+
+.. centered:: (a) Weave Reference as Reference Point
+
+.. image:: coding/624.png
+   :width: 6in
+   :align: center
+
+.. centered:: (b) Weave Reference as Tool Coordinate System
+
+.. centered:: Figure 9.8-4-15 LUA Program for Laser Scanning Trajectory Replay with Superimposed Fixed-Point Weave
+
 W-Search command
 ++++++++++++++++
 
@@ -2799,36 +3011,86 @@ The command includes nine commands: FT_Guard (collision detection), FT_Control (
 
 .. centered:: Figure 9.9-1 F/T command interface
 
-Force Control Rotation Insertion Optimization Function
-***************************************************************
+Force-Controlled Assembly Process Package Optimization
+***********************************************************************
 
 Overview
-""""""""""""""""""""""""""""""""""
-The force control rotation insertion function is typically used for undertaking rotation insertion actions. Before running the action, the robot end-effector needs to be moved to a fully aligned taught hole position. According to the application scenario, set corresponding motion parameters and an external force detection failure handling strategy. After completion, if the detected external force does not reach the set threshold, the user can independently choose to stop the entire program (function configured as "Error", interface displays red error) or choose to continue motion (function configured as "Warning", interface displays yellow warning).
+""""""""""""""""""""""""""""""""""""
+Force-controlled helical insertion and linear insertion functions are generally used for assembly hole-searching and insertion operations, while the surface positioning function is generally used to locate surfaces in Cartesian space. Based on the application scenario, set the corresponding motion parameters and the handling strategy for when no external force is detected. When the external force detected after completion does not reach the set threshold, the user can choose to stop the entire program (configured as "Error", with a red error displayed on the interface), or choose to continue motion (configured as "Warning", with a yellow warning displayed on the interface).
 
-Operation Process
-""""""""""""""""""""""""""""""""""""""""
-**Step1**: Click sequentially on "Teach Program" -> "Program Programming" -> "Force Control Set" -> "Rot" instruction. Set corresponding motion parameters according to the actual application scenario. The external force detection failure handling strategy can be set to "Error" or "Warning". When configured as "Error", if the robot detects that the external force is always less than the set threshold and the set rotation angle has been reached, an error will be reported on the interface and subsequent program execution will stop. When configured as "Warning", if the robot detects that the external force is always less than the set threshold and the set rotation angle has been reached, a warning will be displayed on the interface and subsequent program execution will continue.
+Force-Controlled Helical Insertion Optimization Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+**Step1**: Click "Teach Program" -> "Program Programming" -> "Force Control Set" -> "Rot" command in sequence. Set the corresponding motion parameters according to the actual application scenario. The handling strategy for when no external force is detected can be set to "Error" or "Warning". When configured as "Error", if the robot detects that the external force has always been below the set threshold and the set rotation angle has been reached, an error will be reported on the interface and the execution of subsequent programs will stop. When configured as "Warning", if the robot detects that the external force has always been below the set threshold and the set rotation angle has been reached, a warning will be displayed on the interface and the execution of subsequent programs will continue.
 
 .. image:: coding/531.png
    :width: 3in
    :align: center
 
-.. centered:: Figure 9.9-2 Force Control Rotation Insertion Parameter Configuration
+.. centered:: Figure 9.9-2 Force-Controlled Rotational Insertion Parameter Configuration
 
-**Step2**: The force control rotation insertion function needs to be combined with the "FT_Control" function for motion, with the same motion parameters set. Typical Lua programs with the external force detection failure handling strategy set to "Error" and "Warning" are shown in the figures below respectively.
+**Step2**: The force-controlled rotational insertion function must be used together with the "FT_Control" function for motion. Set the same motion parameters. Typical LUA programs with the no-external-force handling strategy set to "Error" or "Warning" are shown in the figures respectively.
 
 .. image:: coding/532.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.9-3 Typical Lua Program Configured as "Error"
+.. centered:: Figure 9.9-3 Typical LUA Program Configured as "Error"
 
 .. image:: coding/533.png
    :width: 6in
    :align: center
 
-.. centered:: Figure 9.9-4 Typical Lua Program Configured as "Warning"
+.. centered:: Figure 9.9-4 Typical LUA Program Configured as "Warning"
+
+Force-Controlled Linear Insertion Optimization Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Click "Teach Program" -> "Program Programming" -> "Force Control Set" -> "Lin" command in sequence. Set the corresponding motion parameters according to the actual application scenario. The handling strategy for when no external force is detected can be set to "Error" or "Warning". When configured as "Error", if the robot detects that the external force has always been below the set threshold and the set insertion distance has been reached, an error will be reported on the interface and the execution of subsequent programs will stop. When configured as "Warning", if the robot detects that the external force has always been below the set threshold and the set insertion distance has been reached, a warning will be displayed on the interface and the execution of subsequent programs will continue. As shown in Figure 3-1.
+
+.. image:: coding/603.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.9-5 Force-Controlled Linear Insertion Parameter Configuration
+
+**Step2**: The force-controlled linear insertion function must be used together with the "FT_Control" function for motion. Set the same motion parameters. Typical LUA programs with the no-external-force handling strategy set to "Error" or "Warning" are shown in Figure 3-2 and Figure 3-3 respectively.
+
+.. image:: coding/604.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.9-6 Typical LUA Program Configured as "Error"
+
+.. image:: coding/605.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.9-6 Typical LUA Program Configured as "Warning"
+
+Force-Controlled Surface Positioning Optimization Operation Procedure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Step1**: Click "Teach Program" -> "Program Programming" -> "Force Control Set" -> "FindSurface" command in sequence. Set the corresponding motion parameters according to the actual application scenario. The handling strategy for when no external force is detected can be set to "Error" or "Warning". When configured as "Error", if the robot detects that the external force has always been below the set threshold and the set search distance has been reached, an error will be reported on the interface and the execution of subsequent programs will stop. When configured as "Warning", if the robot detects that the external force has always been below the set threshold and the set search distance has been reached, a warning will be displayed on the interface and the execution of subsequent programs will continue. As shown in Figure 4-1.
+
+.. image:: coding/606.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.9-7 Force-Controlled Surface Positioning Parameter Configuration
+
+**Step2**: The force-controlled surface positioning function must be used together with the "FT_Control" function for motion. Set the same motion parameters. Typical LUA programs with the no-external-force handling strategy set to "Error" or "Warning" are shown in Figure 4-2 and Figure 4-3 respectively.
+
+.. image:: coding/607.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.9-8 Typical LUA Program Configured as "Error"
+
+.. image:: coding/608.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.9-9 Typical LUA Program Configured as "Warning"
 
 Torque command
 ++++++++++++++++

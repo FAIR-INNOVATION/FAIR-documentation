@@ -387,9 +387,10 @@ Inverse Kinematics Solution, Cartesian Space Includes Extended Axis Position
     * @param  tool Tool number
     * @param  workPiece Workpiece number
     * @param  joint_pos Joint position
+    * @param  config -1: automatic solution, 0-7 correspond to eight sets of solutions
     * @return Error code
     */
-    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos joint_pos)
+    public int GetInverseKinExaxis(int type, DescPose desc_pos, ExaxisPos exaxis, int tool, int workPiece, JointPos joint_pos, int config)
     
 Inverse Kinematics Solution Including Extended Axis Position Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -402,15 +403,16 @@ Inverse Kinematics Solution Including Extended Axis Position Code Example
         ExaxisPos exaxis=new ExaxisPos(100.0, 0.0, 0.0, 0.0);
         JointPos jointPos =new JointPos();
         DescPose offsetPos =new DescPose();
+
         ROBOT_STATE_PKG pkg=robot.GetRobotRealTimeState();
         int toolnum = pkg.tool;
         int workPcsNum = pkg.user;
-        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, jointPos);
+        robot.GetInverseKinExaxis(0, desc, exaxis, toolnum, workPcsNum, jointPos, 0);
         System.out.printf("GetInverseKinExaxis joint is %f, %f, %f, %f, %f, %f\n", jointPos.J1, jointPos.J2, jointPos.J3, jointPos.J4, jointPos.J5, jointPos.J6);
+
         robot.ExtAxisMove(exaxis, 100, -1);
         robot.MoveJ(jointPos, desc, toolnum, workPcsNum, 100.0, 100.0, 100.0, exaxis, -1, 0, offsetPos);
-        robot.CloseRPC();
-        robot.Sleep(9999999);
+
     }
 
 Check if inverse kinematics has solution  

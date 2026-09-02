@@ -13,6 +13,26 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V3.9.9
+     - 2026-09-01
+     - | 1. Updated the GetGripperMotionDone() interface for getting gripper motion status, updated the definition and usage scope of gripper status output parameters;
+       | 2. Modified GetInverseKinExaxis(), the inverse kinematics solution interface that includes extended axis positions, added joint configuration parameters with a default value of -1 referencing the current joint configuration;
+       | 3. Modified FT_SpiralSearch(), FT_LinInsertion(), and FT_FindSurface() force control interfaces to add handling strategy parameters for when no force/torque is detected;
+       | 4. Modified SetDIConfig(), GetDIConfig(), SetDOConfig(), GetDOConfig() robot control box CIO;
+       | 5. Updated function configuration interface parameter descriptions, updated newly added function names and function codes; added the GetSafetyParamsCheckSum() interface for getting the safety configuration parameter checksum;
+       | 6. Modified robot basic control code examples, added manual high-speed mode switching code examples;
+       | 7. Added the safety operation password verification interface SafetyOPPasswordCheck();
+       | 8. Added the GripperWaitMotionDone() interface for waiting for gripper motion status, supporting timeout and strategy settings (only applicable to the end-effector open protocol);
+       | 9. Added the SetRobottime() interface for synchronizing system time to the robot;
+       | 10. Added the ServoJ() interface for joint space servo mode motion, supporting multiple points input at once;
+       | 11. Added laser recording replay + regular weave code examples;
+       | 12. Added laser recording replay + extended axis asynchronous motion + fixed-point weave code examples;
+       | 13. Added the FT_SpiralSearch() spiral search interface;
+       | 14. Added the HiSpeedManualSwitch() interface for switching to manual high-speed mode;
+       | 15. Added the SetSafetyDIConfig() interface for safety dual-channel CI function configuration;
+       | 16. Added the SetSafetyDOConfig() interface for safety dual-channel CO function configuration;
+       | 17. Added safety dual-channel CI/CO function configuration set-read-clear verification examples.
+
    * - V3.9.8
      - 2026-07-27
      - | 1. Updated the robot status feedback structure to include the current robot LUA program running status: 0 - program not running; 1 - program running (including program paused);
