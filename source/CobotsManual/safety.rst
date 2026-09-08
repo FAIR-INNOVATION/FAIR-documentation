@@ -408,30 +408,3 @@ The second method is the "Center Point + Side Length" method, where the center p
    :align: center
 
 .. centered:: Figure 7.4-25 Cuboid Interference Configuration
-
-Appendix: Gripper Wait Blocking Instruction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Click "Teach Program" -> "Peripheral Instructions" -> "Gripper" to add a wait for gripper motion to complete instruction, which can block until the clamping action is completed to obtain the actual physical position of the gripper.
-
-.. image:: safety/032.png
-   :width: 4in
-   :align: center
-
-.. centered:: Figure 7.4-26 Gripper Motion Complete Wait Instruction
- 
-- Gripper Status: Motion not completed, motion completed with no object detected, motion completed with object detected;
-- Timeout Time: Unit ms, -1 means wait forever.
-- Timeout Strategy: You can choose to stop with error or continue running.
-- Gripper Type: You can choose parallel gripper or rotary gripper.
-
-.. note:: 
-   Note: The wait for gripper motion complete instruction is only applicable to custom protocols; adapted devices currently do not support it.
-
-   You can also directly use GetGripperMotionDone() for judgment. Input parameter gripper type: 0 for parallel gripper, 1 for rotary gripper. The return values are gripper error and gripper status. Gripper error 0 means no error, other values mean there is an error. Gripper status 0 means motion not completed, 1 means motion completed with no object detected, 2 means motion completed with object detected. Example programs for waiting for gripper motion completion and getting gripper position are as follows:
-
-.. image:: safety/033.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 7.4-27 Gripper Motion Example Program

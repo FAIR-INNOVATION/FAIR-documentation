@@ -122,6 +122,19 @@ Shut Down Robot OS
     */
     errno_t ShutDownRobotOS();
 
+Switch to Manual High-Speed Mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Switch to manual high-speed mode
+    * @param [in] state 0-exit manual high-speed; 1-enter manual high-speed
+    * @return Error code
+    */
+    errno_t HiSpeedManualSwitch(int state);    
+
 Set Reconnection Parameters
 ++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: C++SDK-v2.1.5.0

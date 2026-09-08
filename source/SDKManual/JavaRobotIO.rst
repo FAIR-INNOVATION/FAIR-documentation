@@ -616,7 +616,102 @@ Get Configurable End-CI Port Functions of the End-Effector
     * @return Error code
     */
     public int GetToolDIConfig(int[] config)
+
+Safety Dual-Channel CI Function Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Safety dual-channel CI function configuration
+    * @param [in] ID Dual-channel ID; [0-3]
+    * @param [in] config Function configuration; 0-no configuration; 201-External emergency stop input signal 1; 202-External emergency stop input signal 2; 203-Level 1 reduced mode; 204-Level 2 reduced mode; 205-Level 3 reduced mode;
+                        206-Normal stop; 207-Safety wall 1; 208-Safety wall 2; 209-Safety wall 3; 210-Safety wall 4; 211-Safety wall 5; 212-Safety wall 6; 213-Safety wall 7;
+                        214-Safety wall 8; 215-Safety stop reset;
+    * @return Error code
+    */
+    public int SetSafetyDIConfig(int ID, int config)
+        
+Safety Dual-Channel CO Function Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Safety dual-channel CO function configuration
+    * @param [in] ID Dual-channel ID; [0-3]
+    * @param [in] config Function configuration; 0-no configuration; 201-Emergency stop output signal 1; 202-Emergency stop output signal 2; 203-Safety status output; 204-Protective stop status output; 205-Robot in motion;
+                        206-Robot reduced mode; 207-Robot non-reduced mode;
+    * @return Error code
+    */
+    public int SetSafetyDOConfig(int ID, int config)
+            
+Safety Dual-Channel CI/CO Function Configuration Set-Read-Clear Verification
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: Java
+    :linenos:
+    
+    public static int TestSafetyIOConfig(Robot robot)
+    {
+        int[] getDIConfig = new int[8];
+        int rtn = robot.SetSafetyDIConfig(0, 201);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDIConfig(1, 202);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDIConfig(2, 203);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDIConfig(3, 204);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.GetDIConfig(getDIConfig);
+        System.out.printf("GetDIConfig rtn is %d, value is %d %d %d %d %d %d %d %d \n", rtn,
+            getDIConfig[0], getDIConfig[1], getDIConfig[2], getDIConfig[3], getDIConfig[4], getDIConfig[5], getDIConfig[6], getDIConfig[7]);
+
+        rtn = robot.SetSafetyDIConfig(0, 0);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDIConfig(1, 0);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDIConfig(2, 0);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDIConfig(3, 0);
+        System.out.printf("SetSafetyDIConfig rtn is %d\n", rtn);
+        rtn = robot.GetDIConfig(getDIConfig);
+        System.out.printf("GetDIConfig rtn is %d, value is %d %d %d %d %d %d %d %d \n", rtn,
+            getDIConfig[0], getDIConfig[1], getDIConfig[2], getDIConfig[3], getDIConfig[4], getDIConfig[5], getDIConfig[6], getDIConfig[7]);
+
+
+        int[] getDOConfig = new int[8];
+        rtn = robot.SetSafetyDOConfig(0, 204);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDOConfig(1, 205);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDOConfig(2, 206);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDOConfig(3, 207);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.GetDOConfig(getDOConfig);
+        System.out.printf("GetDOConfig rtn is %d, value is %d %d %d %d %d %d %d %d \n", rtn,
+            getDOConfig[0], getDOConfig[1], getDOConfig[2], getDOConfig[3], getDOConfig[4], getDOConfig[5], getDOConfig[6], getDOConfig[7]);
+
+        rtn = robot.SetSafetyDOConfig(0, 0);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDOConfig(1, 0);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDOConfig(2, 0);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.SetSafetyDOConfig(3, 0);
+        System.out.printf("SetSafetyDOConfig rtn is %d\n", rtn);
+        rtn = robot.GetDOConfig(getDOConfig);
+        System.out.printf("GetDOConfig rtn is %d, value is %d %d %d %d %d %d %d %d \n", rtn,
+            getDOConfig[0], getDOConfig[1], getDOConfig[2], getDOConfig[3], getDOConfig[4], getDOConfig[5], getDOConfig[6], getDOConfig[7]);
+
+        robot.Sleep(2000);
+        robot.Sleep(1000);
+        return 0;
+    }
+
 Set Configurable CI Active State of the Control Box
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     

@@ -170,6 +170,85 @@ Get system time
     */  
     List<Number> GetSystemClock();  
 
+Synchronize System Time to Robot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get the current host system time and send it to the robot to synchronize the system time (due to QNX system limitations, synchronization accuracy is at the minute level)
+    * @return Error code
+    */
+    public int SetRobottime()
+
+Synchronize System Time to Robot Code Example
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void testSetAndGetRobotTime(Robot robot) 
+    {
+        // 1. Get time before setting
+        List<Number> resultBefore = robot.GetSystemClock();
+        int retBefore = (int) resultBefore.get(0);
+        
+        if (retBefore == 0) {
+            double t_ms = (double) resultBefore.get(1);
+            System.out.println("system clock : " + t_ms);
+            
+            // Convert millisecond timestamp to DateTime (UTC time)
+            java.time.Instant instant = java.time.Instant.ofEpochMilli((long) t_ms);
+            java.time.LocalDateTime utcTime = java.time.LocalDateTime.ofInstant(instant, java.time.ZoneOffset.UTC);
+            System.out.println("BEFORE UTC Time   : " + 
+                utcTime.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        } else {
+            System.out.println("GetSystemClock failed, ret:" + retBefore);
+        }
+
+        // 2. Set robot time
+        int retSet = robot.SetRobotTime();
+        if (retSet != 0) {
+            System.out.println("SetRobotTime failed, ret:" + retSet);
+            return;
+        }
+
+        // 3. Get time after setting
+        List<Number> resultAfter = robot.GetSystemClock();
+        int retAfter = (int) resultAfter.get(0);
+        
+        if (retAfter == 0) {
+            double t_ms_after = (double) resultAfter.get(1);
+            System.out.println("system clock after: " + t_ms_after);
+            
+            // Convert to UTC time
+            java.time.Instant instantAfter = java.time.Instant.ofEpochMilli((long) t_ms_after);
+            java.time.LocalDateTime robotTimeAfter = java.time.LocalDateTime.ofInstant(instantAfter, java.time.ZoneOffset.UTC);
+
+            // Get current PC time (as expected value)
+            java.time.LocalDateTime pcTimeBefore = java.time.LocalDateTime.now(java.time.ZoneOffset.UTC);
+
+            // Truncate to minute level for comparison (due to QNX system limitations, synchronization accuracy is at the minute level)
+            java.time.LocalDateTime pcMinute = pcTimeBefore.withSecond(0).withNano(0);
+            java.time.LocalDateTime robotMinute = robotTimeAfter.withSecond(0).withNano(0);
+
+            // Compare consistency
+            boolean isConsistent = pcMinute.equals(robotMinute);
+            if (isConsistent) {
+                System.out.println("Consistent     | PC time: " + 
+                    pcMinute.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + 
+                    "  | Robot time: " + 
+                    robotMinute.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            } else {
+                System.out.println("[Inconsistent | PC time: " + 
+                    pcMinute.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + 
+                    "  | Robot time: " + 
+                    robotMinute.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            }
+        } else {
+            System.out.println("GetSystemClock failed, ret:" + retAfter);
+        }
+    }
+
 Check if robot motion is completed  
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
 .. code-block:: Java  

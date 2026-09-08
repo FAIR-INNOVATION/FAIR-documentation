@@ -110,7 +110,7 @@ The login interface is shown in figure below.
 Multilingual settings function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The system currently comes with eight languages: Chinese (汉语), Chinese (汉语繁體), English (English), French (français), Japanese (日本語) , Russian (Русский) and Italian (italiano).
+- The system currently comes with 11 languages: Simplified Chinese, Traditional Chinese, English, French, Korean, Japanese, Russian, Italian, German, Portuguese, and Polish.
 
 - The language pack name must be: [Language code].json, for example: es.json, the language code is the ISO 639-1 standard.
 
@@ -169,6 +169,16 @@ Multilingual settings function
    * - German
      - Deutsch
      - de
+     - True
+
+   * - Portuguese
+     - Português
+     - pt
+     - True
+
+   * - Polish
+     - Polski
+     - pl
      - True
 
 1.On the login screen (or during the initial activation screen, settings can also be made), select the language at the top right corner.

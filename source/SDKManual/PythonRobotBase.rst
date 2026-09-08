@@ -127,6 +127,21 @@ Shut down the robot operating system
     "Default parameters", "NULL"
     "Return Value", "Error Code Success-0 Failure- errcode "
 
+Switch to Manual High-Speed Mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``HiSpeedManualSwitch(self, state)``"
+    "Description", "Switch to manual high-speed mode"
+    "Required Parameters", "
+    - ``state``：0-exit manual high-speed; 1-enter manual high-speed
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error"
+
 Initialize the log parameters
 +++++++++++++++++++++++++++++++++++++++++++++
 .. versionadded:: python SDK-v2.1.1

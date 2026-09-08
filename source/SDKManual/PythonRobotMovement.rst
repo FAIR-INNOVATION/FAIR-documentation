@@ -2008,3 +2008,139 @@ Workpiece Coordinate System Point Transformation Code Example
 
     if __name__ == "__main__":
         main()    
+
+Joint Space Servo Mode Motion (Supports Multiple Points Input at Once)    
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos: 
+    
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``ServoJMultiPos(self, joint_pos, axisPos, acc=0.0, vel=0.0, cmdT=0.008, filterT=0.0, gain=0.0, id=0, cmdType=0)``"
+    "Description", "Joint space servo mode motion (supports multiple points input at once)"
+    "Required Parameters", "
+    - ``joint_pos``: Target joint position set (supports up to 10 groups), unit deg, a 2D list where each element contains 6 joint positions
+    - ``axisPos``: External axis position, unit mm, 4 elements
+    - ``acc``: Acceleration percentage, range [0~100], not open yet, default 0.0
+    - ``vel``: Speed percentage, range [0~100], not open yet, default 0.0
+    - ``cmdT``: Command send cycle, unit s, recommended range [0.001~0.0016], default 0.008
+    - ``filterT``: Filter time, unit s, not open yet, default 0.0
+    - ``gain``: Target position proportional amplifier, not open yet, default 0.0
+    - ``id``: ServoJ command ID, default 0
+    - ``cmdType``: Command transmission type, 0=XML-RPC, 1=UDP passthrough
+    "
+    "Default Parameters", "None"
+    "Return Value", "Error code, 0-success; non-zero-error
+    - ``servoJCmdCount``: ServoJ command point count [0-10000] (only returned via XML-RPC)"   
+        
+Joint Space Servo Mode Motion (Multiple Points Input) Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: python
+    :linenos:     
+
+    from fairino import Robot
+    import time
+
+    def main():
+        # Establish connection with the robot controller
+        robot = Robot.RPC('192.168.58.2')
+        time.sleep(0.5)  # Wait for connection and data reception
+
+        # ========== Read joint trajectory file ==========
+        file_path = "C://Users/lenovo/Desktop/ServoJPath.txt"
+        all_joint_data = []
+
+        try:
+            with open(file_path, 'r') as fin:
+                for line in fin:
+                    parts = line.strip().split()
+                    if len(parts) >= 6:
+                        # Skip the first column (index column), take columns 2~7 (indices 1~6)
+                        one_pose = [float(parts[i]) for i in range(1, 7)]
+                        all_joint_data.append(one_pose)
+        except FileNotFoundError:
+            print("Unable to open file ServoJPath.txt")
+            return
+
+        print(f"Total {len(all_joint_data)} joint position sets read")
+
+        # ========== Build a back-and-forth path (forward + reverse, remove duplicate endpoint) ==========
+        back_forth_path = all_joint_data.copy()
+        # Starting from the second last, append in reverse order (removing duplicate endpoint)
+        for i in range(len(all_joint_data) - 2, -1, -1):
+            back_forth_path.append(all_joint_data[i])
+
+        print(f"Total points in back-and-forth path: {len(back_forth_path)}")
+
+        epos = [0.0, 0.0, 0.0, 0.0]
+        offset_pos = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+        # Move to start position
+        robot.MoveJ(joint_pos=all_joint_data[0], tool=0, user=0,
+                    vel=100, acc=100, ovl=100, exaxis_pos=epos,
+                    blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+        time.sleep(1)
+
+        # ========== Main loop ==========
+        while True:
+            # Reset all errors
+            robot.ResetAllError()
+
+            # Move to start position
+            robot.MoveJ(joint_pos=all_joint_data[0], tool=0, user=0,
+                        vel=100, acc=100, ovl=100, exaxis_pos=epos,
+                        blendT=-1, offset_flag=0, offset_pos=offset_pos)
+
+            move_count = 0
+            total_points = len(back_forth_path)
+
+            while move_count < total_points - 10:
+                # Get robot real-time state
+                rtn, pkg = robot.GetRobotRealTimeState()
+
+                # Calculate the number of ServoJ commands that can be sent at once
+                single_servo_j_count = 50 - pkg.mc_queue_len
+                if single_servo_j_count <= 0:
+                    time.sleep(0.1)
+                    continue
+
+                if single_servo_j_count > 10:
+                    single_servo_j_count = 10
+
+                # Build the list of joint positions to send this time (2D list, each element contains 6 joint angles)
+                joint_pos_list = []
+                for j in range(single_servo_j_count):
+                    if move_count < total_points:
+                        joint_pos_list.append(back_forth_path[move_count])
+                        move_count += 1
+                    else:
+                        break
+
+                # Send multi-point ServoJ command
+                axis_pos = [0.0, 0.0, 0.0, 0.0]
+                # Note parameter order: joint_pos, axisPos, acc, vel, cmdT, filterT, gain, id, cmdType
+                # acc=100.0 corresponds to C++ 100.0, vel=100.0 corresponds to C++ 100.0
+                rtn, servo_j_cmd_count = robot.ServoJMultiPos(joint_pos_list, axis_pos,
+                                                            acc=100.0, vel=100.0,
+                                                            cmdT=0.008, filterT=0.008,
+                                                            gain=1.0, id=0, cmdType=0)
+                if rtn != 0:
+                    print(f"ServoJMultiPos execution failed, error code: {rtn}")
+                    break
+
+                # Print debug information
+                print(f"Sending {len(joint_pos_list)} waypoints, ServoJ command count: {servo_j_cmd_count}")
+
+            time.sleep(4)
+
+        # Close connection (normally this will not be reached)
+        robot.CloseRPC()
+
+
+    if __name__ == "__main__":
+        main()        

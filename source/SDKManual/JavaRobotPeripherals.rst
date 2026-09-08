@@ -79,6 +79,52 @@ Get gripper motion status
     */
     List<Integer> GetGripperMotionDone(); 
 
+Wait for Gripper Motion Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief  Wait for gripper motion status
+    * @param  [in]  status  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
+    * @param  [in] timeout Timeout (ms), -1 for infinite wait
+    * @param  [in] strategy  0-stop with error, 1-continue running
+    * @param  [in] type  0-parallel gripper, 1-rotary gripper
+    * @return  Error code
+    */
+    public int GripperWaitMotionDone(int status, int timeout, int strategy, int type)
+
+Wait for Gripper Motion Status Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestGripperWaitMotionDone(Robot robot)
+    {
+        int rtn;
+
+        // Gripper open
+        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
+        System.out.println("MoveGripper(open) ret=" + rtn);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Gripper close
+        rtn = robot.MoveGripper(1, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
+        System.out.println("MoveGripper(close) ret=" + rtn);
+
+        // Wait for motion completed with no object detected, timeout 30s, stop with error
+        rtn = robot.GripperWaitMotionDone(2, 30000, 0, 0);
+        System.out.println("GripperWaitMotionDone(wait completed with no object detected) ret=" + rtn);
+
+        // Gripper open
+        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
+        System.out.println("MoveGripper(open) ret=" + rtn);
+    }
+
 Get gripper activation status
 +++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -1664,6 +1710,150 @@ Laser Positioning and Real-time Tracking Code Example
        }
        robot.CloseRPC();
    }
+
+Laser Recording Replay + Normal Weave Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestLaserReproduceNormalWeave(Robot robot)
+    {
+        JointPos startjointPos = new JointPos(68.930, -70.217, -121.821, -75.522, 91.216, 137.289);
+        DescPose startdescPose = new DescPose(216.097, 304.517, 34.164, -3.871, 0.792, 132.864);
+        JointPos endjointPos = new JointPos(58.092, -78.843, -115.569, -73.420, 91.662, 126.457);
+        DescPose enddescPose = new DescPose(296.276, 307.453, 34.803, -3.868, 0.783, 132.864);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos exaxis0Pos = new ExaxisPos(0, 174.957, 0, 0);
+        ExaxisPos exaxis1Pos = new ExaxisPos(0, 105.003, 0, 0);
+
+        robot.Sleep(1000);
+
+        // MoveL to start position (Exaxis 0,174.957,0,0)
+        int rtn = robot.MoveL(startjointPos, startdescPose, 5, 0, 100, 100, 100, -1, 0, exaxis0Pos, 0, 0, offdese, 100, 0, 0, 10);
+        System.out.printf("MoveL start: %d\n", rtn);
+
+        // Start laser record
+        rtn = robot.LaserSensorRecord1(2, 10);
+        System.out.printf("LaserSensorRecord start: %d\n", rtn);
+
+        // MoveL to end position
+        rtn = robot.MoveL(endjointPos, enddescPose, 5, 0, 100, 100, 100, -1, 0, exaxis0Pos, 0, 0, offdese, 100, 0, 0, 10);
+        System.out.printf("MoveL end: %d\n", rtn);
+
+        // Stop laser record
+        rtn = robot.LaserSensorRecord1(0, 10);
+        System.out.printf("LaserSensorRecord stop: %d\n", rtn);
+
+        // MoveL return to start position
+        rtn = robot.MoveL(startjointPos, startdescPose, 5, 0, 100, 100, 100, -1, 0, exaxis0Pos, 0, 0, offdese, 100, 0, 0, 10);
+        System.out.printf("MoveL back: %d\n", rtn);
+
+        // LIN move to laser record weld start point
+        rtn = robot.MoveToLaserRecordStart(1, 30);
+        System.out.printf("MoveToLaserRecordStart: %d\n", rtn);
+
+        // Start normal weave
+        rtn = robot.WeaveStart(0);
+        System.out.printf("WeaveStart: %d\n", rtn);
+
+        // Start record replay
+        rtn = robot.LaserSensorRecord1(3, 10);
+        System.out.printf("LaserSensorRecord replay: %d\n", rtn);
+
+        // Laser track replay motion
+        rtn = robot.MoveLTR();
+        System.out.printf("MoveLTR: %d\n", rtn);
+
+        robot.Sleep(3000);
+
+        // Stop record replay
+        rtn = robot.LaserSensorRecord1(0, 10);
+        System.out.printf("LaserSensorRecord stop: %d\n", rtn);
+
+        // Stop normal weave
+        rtn = robot.WeaveEnd(0);
+        System.out.printf("WeaveEnd: %d\n", rtn);
+
+        robot.Sleep(1000);
+    }
+    
+Laser Recording Replay + Extended Axis Asynchronous Motion + Fixed-Point Weave Code Example
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestLaserRecordReplayExaxisWithWave(Robot robot)
+    {
+        JointPos startjointPos = new JointPos(105.600, -65.393, -93.638, -79.687, 79.175, 134.046);
+        DescPose startdescPose = new DescPose(42.376, 533.597, 362.564, -34.957, -0.564, 169.063);
+        JointPos endjointPos = new JointPos(105.600, -65.393, -93.638, -79.687, 79.175, 134.046);
+        DescPose enddescPose = new DescPose(42.376, 533.597, 362.564, -34.957, -0.564, 169.063);
+        DescPose offdese = new DescPose(0, 0, 0, 0, 0, 0);
+        ExaxisPos exaxis0Pos = new ExaxisPos(0, 134.296, 0, 0);
+        ExaxisPos exaxis1Pos = new ExaxisPos(0, 74.335, 0, 0);
+        // MoveJ to safe point (Exaxis 0,174.957,0,0)
+        int rtn = robot.MoveJ(startjointPos, startdescPose, 5, 0, 100, 100, 50, exaxis0Pos, -1, 0, offdese);
+        System.out.printf("MoveJ start: %d\n", rtn);
+
+        // Exaxis async move to start position 105.003
+        rtn = robot.ExtAxisMove(exaxis1Pos, 50, -1);
+        System.out.printf("ExtAxisMove 105.003: %d\n", rtn);
+
+        robot.Sleep(3000);
+
+        // MoveL to start point
+        rtn = robot.MoveL(endjointPos, enddescPose, 5, 0, 100, 100, 50, -1, 0, exaxis1Pos, 0, 0, offdese, 100, 0, 0, 10);
+        System.out.printf("MoveL end: %d\n", rtn);
+
+        // Start laser record
+        rtn = robot.LaserSensorRecord1(2, 10);
+        System.out.printf("LaserSensorRecord start: %d\n", rtn);
+
+        // Exaxis move to 174.957 during recording
+        rtn = robot.ExtAxisMove(exaxis0Pos, 50, -1);
+        System.out.printf("ExtAxisMove 174.957: %d\n", rtn);
+
+        robot.Sleep(3000);
+
+        // Stop laser record
+        rtn = robot.LaserSensorRecord1(0, 10);
+        System.out.printf("LaserSensorRecord stop: %d\n", rtn);
+
+        // Exaxis move back to 105.003, MoveL return to start point
+        rtn = robot.ExtAxisMove(exaxis1Pos, 50, -1);
+        System.out.printf("ExtAxisMove back: %d\n", rtn);
+
+        // MoveL to start point
+        rtn = robot.MoveL(endjointPos, enddescPose, 5, 0, 100, 100, 50, -1, 0, exaxis1Pos, 0, 0, offdese, 100, 0, 0, 10);
+        System.out.printf("MoveL back: %d\n", rtn);
+
+        // PTP move to laser record weld start point
+        rtn = robot.MoveToLaserRecordStart(0, 30);
+        System.out.printf("MoveToLaserRecordStart: %d\n", rtn);
+
+        // Start replay
+        rtn = robot.LaserSensorRecord1(3, 10);
+        System.out.printf("LaserSensorRecord replay: %d\n", rtn);
+
+        // Start fixed-point weave
+        DescPose refPoint = new DescPose(49.381, 533.608, 362.556, -34.961, -0.564, 169.062);
+        rtn = robot.OriginPointWeaveStart(0, 1, refPoint, 5);
+        System.out.printf("OriginPointWeaveStart: %d\n", rtn);
+
+        // Exaxis move to 174.957 during weaving
+        rtn = robot.ExtAxisMove(exaxis0Pos, 50, -1);
+        System.out.printf("ExtAxisMove replay: %d\n", rtn);
+
+        // Stop weave
+        rtn = robot.OriginPointWeaveEnd();
+        System.out.printf("OriginPointWeaveEnd: %d\n", rtn);
+
+        // Stop replay
+        rtn = robot.LaserSensorRecord1(0, 10);
+        System.out.printf("LaserSensorRecord stop: %d\n", rtn);
+
+        robot.Sleep(1000);
+    }
 
 Extended Axis and Robot Synchronized Laser Tracking Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
