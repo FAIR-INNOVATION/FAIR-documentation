@@ -79,11 +79,11 @@ Loading and Unloading Cap
 
       .. raw:: html
 
-         <div style="font-size:16px;color:#888;margin-bottom:10px;">Updated 2026-07-31</div>
+         <div style="font-size:16px;color:#888;margin-bottom:10px;">Updated 2026-09-07</div>
 
       .. raw:: html
 
-         <div style="font-size:16px;color:#888;margin-bottom:10px;">Version Support >= 3.9.8</div>
+         <div style="font-size:16px;color:#888;margin-bottom:10px;">Version Support >= 3.9.9</div>
 
       .. raw:: html
 
@@ -96,8 +96,8 @@ Loading and Unloading Cap
          .. raw:: html
 
             <span class="badge-official" style="background:rgba(22,163,74,0.1);color:#16a34a;font-size:16px;padding:2px 8px;border-radius:4px;">Official</span>
-            <span class="badge-official" style="color:#2563eb;font-size:16px;padding:2px 8px;border-radius:4px;margin-left:8px;">v1.0.0</span>
+            <span class="badge-official" style="color:#2563eb;font-size:16px;padding:2px 8px;border-radius:4px;margin-left:8px;">v1.1.0</span>
             <div style="display:flex;gap:8px;margin-left:auto;">
-               <a href="_static/_doc/Loading and Unloading Cap Software User Manual-V1.0.0.pdf" class="sd-btn sd-btn-outline-primary sd-btn-sm" style="border:1px solid #e5e5e5;border-radius:8px;padding:5px 12px;font-size:16px;color:#1a1a1a;background:#fff;text-decoration:none;">User Manual</a>
-               <a href="_static/_doc/TendingCap-v1.0.0.plugin" class="sd-btn sd-btn-primary sd-btn-sm" download style="border-radius:8px;padding:5px 12px;font-size:16px;background:#1a1a1a;color:#fff;border:1px solid #1a1a1a;text-decoration:none;">Download</a>
+               <a href="_static/_doc/Loading and Unloading Cap Software User Manual-V1.1.0.pdf" class="sd-btn sd-btn-outline-primary sd-btn-sm" style="border:1px solid #e5e5e5;border-radius:8px;padding:5px 12px;font-size:16px;color:#1a1a1a;background:#fff;text-decoration:none;">User Manual</a>
+               <a href="_static/_doc/TendingCap-v1.1.0.plugin" class="sd-btn sd-btn-primary sd-btn-sm" download style="border-radius:8px;padding:5px 12px;font-size:16px;background:#1a1a1a;color:#fff;border:1px solid #1a1a1a;text-decoration:none;">Download</a>
             </div>
