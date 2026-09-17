@@ -112,6 +112,11 @@ body {
 .sheet-center {
     text-align: center;
 }
+table.sheet-center {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
 .rst-content table.no-padding td {
     padding: 8px 0px !important;
 }
