@@ -521,7 +521,7 @@ Get 8 Sets of Inverse Kinematics Solutions for the Robot
     - ``jPos``: Output 8 sets of joint angles, a two-dimensional list, each set contains 6 joint values, 48 values in total"
 
 Code Example for Getting 8 Sets of Inverse Kinematics Solutions for the Robot
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: python
     :linenos:
 

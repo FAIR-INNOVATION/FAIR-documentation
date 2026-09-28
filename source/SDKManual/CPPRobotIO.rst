@@ -862,7 +862,7 @@ Robot IO Configuration Code Example
         return 0;
     }
 
-    Safety Dual-Channel CI Function Configuration
+Safety Dual-Channel CI Function Configuration
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 .. code-block:: c++

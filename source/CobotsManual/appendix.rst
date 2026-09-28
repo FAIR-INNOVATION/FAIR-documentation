@@ -234,8 +234,9 @@ Appendix 2: Wide Voltage Control Box Fault Table
        | 2. Check the emergency stop input & safety input terminal shorting wiring harnesses
        | 3. Check whether the 24V power supply daughter board in the control box outputs 24V
        | 4. If the fault persists, repair or replace the control box
+
 Appendix 3: Servo Drive Fault Code Table
----------------------------
+-------------------------------------------
 
 .. list-table::
    :widths: 20 40 80
