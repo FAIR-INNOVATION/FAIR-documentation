@@ -349,11 +349,11 @@ Zero position identification model
 FAIRINO SimMachine
 -----------------------
 
-    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1XL_jLjyJkUjiVr5tAAFwYxpru-fN9jtR/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1sy82Q8MZV-NB8tH4jXQlGMRvsGJ9iiGm/view?usp=drive_link>`
     
-    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/143PtR2eQj9tIgff_sCAVMdZrRZvnZ_ro/view?usp=drive_link>`
+    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1cNQxX0jxsvwNod8uQxhdecXm9NYDJfy2/view?usp=sharing>`
 
-    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1uQ2szpMk8ImHjkVKqfqDbiiDXOVjdsYD/view?usp=sharing>`
+    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1E-fR7cyrV31J9E6pH7S234DMSBSE4t2h/view?usp=drive_link>`
 
  
 CPP SDK
