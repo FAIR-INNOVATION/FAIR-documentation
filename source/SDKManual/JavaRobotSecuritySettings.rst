@@ -410,3 +410,70 @@ Get Safety Configuration Parameter Checksum and Safety Operation Password Verifi
         System.out.println(String.format("GetSafetyParamsCheckSum(again): error=%d, status=%d, hex_code=%08X", 
             error, status[0], checksum[0]));
     }    
+
+Set mTLS Encryption Enablement and Certificate Path    
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    //mTLS master switch: default false; set false before RPC initialization to force plaintext mode
+    public bool EnableMtls = false;
+
+    /**
+    * @brief Set the TLS encryption certificate path
+    * @param [in] certPath  Certificate path; if empty, the default is the certificate in the directory where the executable file is located; certificate names: ca.crt; client.crt; client.key
+    * @return Error code
+    */
+    public MtlsLink(String certDir)
+
+Code Example for Setting the TLS Encryption Certificate Path
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestSendModeTcp(Robot robot)
+    {
+        String program_name = "mtls.lua";
+        String[] loaded_name = {""};
+        int[] state = {0};
+        int[] line = {0};
+
+        System.out.println("========== Mode Command TCP 8080 Channel Verification ==========");
+        System.out.println(robot.IsEncryptEnabled() ? "[Status] mTLS enabled" : "[Status] Plaintext mode (control)");
+
+        robot.SetTcpFrameListener(frame ->
+                System.out.println("[TCP response] " + frame));
+
+        String mode0 = "/f/bIII52III236III7IIIMode(0)III/b/f";
+        String mode1 = "/f/bIII52III236III7IIIMode(1)III/b/f";
+
+        System.out.println("[Send] " + mode0);
+        robot.SendTCPFrame(mode0);
+        robot.Sleep(1000);
+        System.out.println("[Send] " + mode1);
+        robot.SendTCPFrame(mode1);
+        robot.Sleep(1000);
+        System.out.println("[Send] " + mode0);
+        robot.SendTCPFrame(mode0);
+
+        robot.Mode(0);
+        robot.LoadDefaultProgConfig(0, program_name);
+        robot.ProgramLoad(program_name);
+
+        robot.SetSpeedInstant(50);
+
+        robot.ProgramRun();
+        robot.Sleep(5000);
+        robot.PauseMotion();
+        robot.GetProgramState(state);
+        System.out.println("program state:" + state[0]);
+        java.util.List<Integer> lineRtn = robot.GetCurrentLine();
+        System.out.println("current line:" + lineRtn.get(1));
+        robot.GetLoadedProgram(loaded_name);
+        System.out.println("program name:" + loaded_name[0]);
+
+        robot.ResumeMotion();
+        robot.Sleep(2000);
+        robot.PauseMotion();
+        robot.Sleep(2000);
+    }    

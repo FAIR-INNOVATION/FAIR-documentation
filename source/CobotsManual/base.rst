@@ -43,6 +43,20 @@ Tool coordinates can be modified, cleared, renamed and applied. In the drop-down
    
 .. centered:: Figure 6.2‑1 Set tool coordinates
 
+Click the import button after "Tool Model" to pop up the import tool model dialog, select the required tool model file (only .stl and .dae format files are supported), and after confirming the import, the tool model is displayed at the end of the 3D model robot. Click the tool model switch button in the 3D scene operation bar to control display and hiding.
+
+.. image:: base/108.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.2-1-3 Tool model import
+
+.. image:: base/109.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.2-1-3 Tool model loading
+  
 Click "Modify" to reset the tool coordinate system of the number according to the prompt. Tool calibration methods are divided into four-point method and six-point method. The four-point method only calibrates the tool TCP, that is, the position of the center point of the tool. Its posture defaults to be consistent with the end posture. The six-point method adds two points to the four-point method. , used to calibrate the attitude of the tool, here we take the six-point method as an example to explain.
 
 .. image:: base/002.png
@@ -977,6 +991,21 @@ The output configurable functions are shown in the following table:
    * - 47
      - Robot Enabled
      - Robot enable status
+   * - 48
+     - JOB input port 4
+     - JOB input port 4 signal
+   * - 49
+     - JOB input port 5
+     - JOB input port 5 signal
+   * - 50
+     - JOB input port 6
+     - JOB input port 6 signal
+   * - 51
+     - JOB input port 7
+     - JOB input port 7 signal
+   * - 52
+     - JOB input port 8
+     - JOB input port 8 signal  
 
 Control box DO high and low effective configurable function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

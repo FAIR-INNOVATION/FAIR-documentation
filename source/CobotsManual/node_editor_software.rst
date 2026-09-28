@@ -22,6 +22,12 @@ Node graph programming is programming software developed for robots. Its main fu
 
 .. centered:: Figure 11.1-1 Node graph programming interface
 
+.. image:: node_editor_software/136.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 11.1-2 Workspace sorting
+   
 Toolbar
 ~~~~~~~~~~
 
@@ -40,7 +46,7 @@ Use the toolbar at the top left of the Node Graph Programming page.
 
    name:**Open**
    
-   effect:Open user program file, choose to load or delete files in the pop-up box
+   effect: Open user program files, choose to load or delete files in the pop-up dialog, and support sorting by letter (A~Z or Z~A) or by most recent modification time
 
 .. note:: 
    .. image:: coding/010.png

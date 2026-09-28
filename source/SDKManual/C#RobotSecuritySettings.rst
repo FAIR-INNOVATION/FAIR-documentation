@@ -290,7 +290,7 @@ SDK Code Example for Setting Safety Speed Parameters
 Get Safety Configuration Parameter Checksum
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
-.. code-block:: c++
+.. code-block:: c#
     :linenos:  
 
     /**
@@ -300,7 +300,49 @@ Get Safety Configuration Parameter Checksum
     * @return  Error code
     */
     public int GetSafetyParamsCheckSum(ref int status, ref uint checksum)
+
+Set mTLS Encryption Enablement and Certificate Path
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:  
+
+    //mTLS master switch: default false; set false before RPC initialization to force plaintext mode
+    public bool EnableMtls { get; set; } = false;
+
+    //mTLS certificate directory: default null = certs/ in the same directory as the SDK dll; must be set before RPC()
+    public string MtlsCertDir { get; set; }
         
+Code Example for Setting mTLS Encryption Enablement and Certificate Path
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c#
+    :linenos:  
+
+    public Form1()
+    {
+        InitializeComponent();
+        robot = new Robot();//Instantiate the robot object
+        string path = "D://log/";
+        robot.LoggerInit(FrLogType.BUFFER, FrLogLevel.INFO, path, 5, 5);
+        robot.SetLoggerLevel(FrLogLevel.INFO);
+
+        // View the final CNDE configuration
+        List<RobotState> finalStates;
+        int finalPeriod;
+        robot.GetRobotRealtimeStateConfig(out finalStates, out finalPeriod);
+        Console.WriteLine($"Final configuration state count: {finalStates.Count}");
+        foreach (var s in finalStates) Console.WriteLine($"  {s}");
+        Console.WriteLine($"Final period: {finalPeriod} ms");
+        robot.SetReconnectParam(true, 1000, 500);//Reconnection parameters
+            
+        robot.EnableMtls = true;
+        robot.MtlsCertDir = @"D:\C#SDK\MTLS-certs";   // If no certificate path is set, the default is <directory of libfairino.dll>\certs
+        rrpc = robot.RPC("192.168.58.2"); //Establish a connection with the control box
+                                            //Port 20004 receive timeout
+                                            //robot.SetReceivePortTimeout(40);
+    }
+
 Safety Operation Password Verification
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     

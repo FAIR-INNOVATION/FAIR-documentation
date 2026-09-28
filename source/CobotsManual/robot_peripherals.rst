@@ -2027,6 +2027,17 @@ When not using the welding process curve, i.e., selecting welding process parame
 
 .. centered:: Figure 8.6-11 Not Using Welding Process Curve
 
+Welder JOB Process Number
+*********************************************************************************************************
+
+Select the extended AO signal and process number, and enter the waiting time. When the process number is configured as non-negative 1, when the welding handle I/O selects extended DO and the signal configured for the extended DO is "welder arc start", the welder arc start will select the corresponding process.
+
+.. figure:: robot_peripherals/326.png
+   :align: center
+   :width: 6in
+
+.. centered:: Figure 8.6-11-1 Welder JOB process number
+
 Setting the Relationship Diagram Between Welding Current/Voltage and Analog Output
 ***************************************************************************************************************************
 

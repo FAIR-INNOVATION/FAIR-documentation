@@ -372,7 +372,7 @@ Setting the welder control mode
     "Description", "Set welding machine control mode"
     "Required Parameters", "
     - ``ioType``: Control type; 0-Control box IO; 1-Digital communication protocol (UDP); 2-Digital communication protocol (ModbusTCP)
-    - ``mode``: Welding machine control mode; 0-One-knob mode"
+    - ``mode``: Welder control mode; welder control mode; 0-DC synergic mode; 1-Pulse synergic mode; 2-JOB mode; 3-Local control mode; 4-Separate mode; 5-CC/CV mode; 6-TIG; 7-CMT, 8-Panasonic-Pulse mode, 9-Panasonic-No-pulse mode"
     "Default Parameters", "None"
     "Return Value", "Error code Success-0 Failure-errcode"
 

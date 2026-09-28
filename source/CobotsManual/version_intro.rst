@@ -1,3 +1,46 @@
+Version V4.0.0
+-----------------
+
+Date: 2026-09-23
+
+- **Optimized speed reduction mode**: 
+
+    Description: Optimized the global speed after exiting reduction mode.
+
+- **Optimized Hilscher board remote mode communication**: 
+    Path: Remote Mode -> Firmware Upgrade.
+
+    Description: Improved communication real-time performance and stability.
+
+- **Optimized current loop load identification issue**: 
+    Path: Initial Settings -> Load -> Identification Motion.
+
+    Description: The load identification for large models is hidden. The function for small models (FR3-FR16 and corresponding models) works normally. The standard load identification deviation for small models is about 30%.
+
+- **Added real-time speed adjustment function based on physical speed during welding**: 
+
+    Description: Real-time adjustment of the robot motion speed.
+
+- **Added WebApp program file opening and tool model interaction function + welding JOB extension function**: 
+    Path: Teaching Program -> Force Control Instruction.
+
+    Description: 1. Open program function files are sorted by A-Z or time for easy searching; 2. Tool models are bound to tools for associated loading; 3. CO is extended from 3 JOB signal functions to 8, supporting 256 processes; 4. Welder UDP communication adds JOB process number configuration.
+
+- **Added current loop drag lock model adaptation**: 
+    Path: Auxiliary Application -> Tool Application -> Drag Lock.
+
+    Description: Extended to four new models: FR20, FR30, FR3WML, FR3WMS.
+
+- **Added network security function**: 
+    Path: Initial Settings -> Safety -> Network Security.
+
+    Description: 1. When accessing webApp via browser, the communication protocol automatically switches to HTTPS; 2. Client adds command protocol certificate function; 3. Integrity verification is added at software startup.
+
+- **Added safety log export function**: 
+    Path: Initial Settings -> Safety -> Safety Log.
+
+    Description: Added safety log export and delete functions.
+
 Version V3.9.9
 -----------------
 

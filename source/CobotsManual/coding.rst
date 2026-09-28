@@ -66,7 +66,7 @@ Modify the program tree using the toolbar at the bottom of the program tree.
 
    name: **Open**
    
-   effect: Open user program file
+   effect: Open user program files, and support sorting by letter (A~Z or Z~A) or by most recent modification time.
 
 .. note:: 
    .. image:: coding/007.png
@@ -294,6 +294,12 @@ The icons on the top right are described as follows:
    Name: **Main Program Configuration**
    
    Function: Configure the main program
+
+.. image:: coding/625.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.3-1 Program name sorting
 
 Program command
 ~~~~~~~~~~~~~~~~~~

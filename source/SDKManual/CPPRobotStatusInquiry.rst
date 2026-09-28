@@ -556,6 +556,74 @@ Check If Inverse Kinematics Has Solution
     */   
     errno_t  GetInverseKinHasSolution(int type, DescPose *desc_pos, JointPos *joint_pos_ref, uint8_t *result);
 
+Get 8 Sets of Inverse Kinematics Solutions for the Robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get 8 sets of inverse kinematics solutions for the robot
+    * @param [in] tcfPose Cartesian pose
+    * @param [in] tool Tool coordinate system
+    * @param [in] workpiece Workpiece coordinate system
+    * @param [in] exPos Extension axis position
+    * @param [out] jointPos Output 8 sets of joint angles
+    * @return Error code
+    */
+    errno_t TCFToAllJoint(DescPose tcfPose, int tool, int workpiece, ExaxisPos exPos, std::vector<JointPos>& jointPos);
+
+Code Example for Getting 8 Sets of Inverse Kinematics Solutions for the Robot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: c++
+    :linenos:
+
+    int TestTCFToAllJoint()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        robot.SetReConnectParam(true, 30000, 500);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        DescPose curTcp(0, 0, 0, 0, 0, 0);
+        rtn = robot.GetActualTCPPose(1, &curTcp);
+        if (rtn != 0)
+        {
+            return rtn;
+        }
+        std::cout << std::fixed << std::setprecision(3);
+        std::cout << "cur TCF: x=" << curTcp.tran.x << ", y=" << curTcp.tran.y << ", z=" << curTcp.tran.z << ", "
+            << "a=" << curTcp.rpy.rx << ", b=" << curTcp.rpy.ry << ", c=" << curTcp.rpy.rz << std::endl;
+        ExaxisPos exPos(0, 0, 0, 0);
+        std::vector<JointPos> allJoints(8, JointPos(0, 0, 0, 0, 0, 0));
+        rtn = robot.TCFToAllJoint(curTcp, 0, 0, exPos, allJoints);
+        if (rtn != 0)
+        {
+            return rtn;
+        }
+        for (int i = 0; i < 8; i++)
+        {
+            JointPos joint = allJoints[i];
+            std::cout << "JOINT" << (i + 1) << ": "
+                << "j1=" << joint.jPos[0] << ", j2=" << joint.jPos[1] << ", j3=" << joint.jPos[2] << ", "
+                << "j4=" << joint.jPos[3] << ", j5=" << joint.jPos[4] << ", j6=" << joint.jPos[5] << std::endl;
+            DescPose pos(0, 0, 0, 0, 0, 0);
+            rtn = robot.GetForwardKin(&joint, &pos);
+            if (rtn != 0)
+            {
+                continue;
+            }
+            std::cout << "POS" << (i + 1) << ": "
+                << "x=" << pos.tran.x << ", y=" << pos.tran.y << ", z=" << pos.tran.z << ", "
+                << "a=" << pos.rpy.rx << ", b=" << pos.rpy.ry << ", c=" << pos.rpy.rz << std::endl;
+        }
+        return 0;
+    }
+
 Forward Kinematics Calculation
 ++++++++++++++++++++++++++++++++++++
 .. code-block:: c++

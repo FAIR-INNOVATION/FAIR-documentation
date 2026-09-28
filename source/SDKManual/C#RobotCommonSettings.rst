@@ -1337,15 +1337,40 @@ Photoelectric Sensor TCP Calibration Code Example
         Console.WriteLine($"Tool RPY Orientation: RX={TCP.rpy.rx:F3}, RY={TCP.rpy.ry:F3}, RZ={TCP.rpy.rz:F3}");
     }
 
-Set Global Speed Instantly
+Set Speed in Real Time
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief Set global speed instantly
+    * @brief Set speed (command frame, low latency)
     * @param [in] vel Speed percentage, range [0~100]
     * @return Error code
     */
     public int SetWeaveOffsetRT(DescPose offset)
+
+Set Physical Speed in Real Time
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Set physical speed in real time
+    * @param [in] speed Physical speed value, mm/s
+    * @return  Error code
+    */
+    public int SetPhySpeedInstant(double speed)  
+
+Code Example for Setting Physical Speed in Real Time
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    void SetPhySpeedInstantInput(double speed)
+    {
+        int rtn = robot.SetPhySpeedInstant(speed);
+        Console.WriteLine($"SetPhySpeedInstant({speed}) : {rtn}");
+    }

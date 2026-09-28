@@ -573,3 +573,127 @@ SDK Code Example for Setting User-Defined Robot End-Effector LED Color
         robot.Sleep(1000);
         robot.SetUserLEDColor(false, false, true);
     }
+
+Send Custom Command Frame via TCP 8080
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Send a custom command frame via TCP 8080 (automatically through the encrypted channel in mTLS mode)
+    * @param frame Complete command frame, e.g. "/f/bIII52III236III7IIIMode(0)III/b/f"
+    * @return Error code
+    */
+    public int SendTCPFrame(string frame)
+
+Code Example for Sending a Custom Command Frame via TCP 8080    
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    public void TestServoJTcp()
+    {
+        Func<double[], string> fmtArr = a =>
+        {
+            string[] s = new string[a.Length];
+            for (int i = 0; i < a.Length; i++)
+                s[i] = a[i].ToString("F3");
+            return string.Join(",", s);
+        };
+
+        int tcpRcvCnt = 0;
+        robot.OnTcpFrameReceived += frame =>
+        {
+            tcpRcvCnt++;
+            Console.WriteLine($"[TCP rpy #{tcpRcvCnt}] {DateTime.Now:HH:mm:ss.fff} {frame}");
+        };
+
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+
+        float vel = 0.0f;
+        float acc = 0.0f;
+        float cmdT = 0.008f;
+        float filterT = 0.0f;
+        float gain = 0.0f;
+        byte flag = 0;
+        int count = 500;
+        float dt = 0.1f;
+        int cmdID = 0;
+        int frameCount = 0;   
+
+        while (true)
+        {
+            JointPos j = new JointPos(0, -90, 90, 0, 0, 0);
+            ExaxisPos epos = new ExaxisPos(0, 0, 0, 0);
+            DescPose offset_pos = new DescPose(0, -90, 90, 0, 0, 0);
+            robot.MoveJ(j, 0, 0, 100, 100, 100, epos, -1, 0, offset_pos);
+            int ret = robot.GetActualJointPosDegree(flag, ref j);
+            if (ret == 0)
+            {
+                count = 500;
+                cmdID += 1;
+
+                {
+                    string s = "ServoMoveStart()";
+                    FRAME f = new FRAME
+                    {
+                        count = frameCount++,
+                        cmdID = 689,
+                        content = s,
+                        contentLen = s.Length,
+                        head = "/f/b",
+                        tail = "/b/f"
+                    };
+                    robot.SendTCPFrame(FrameHandle.PackFrame(f));
+                }
+
+                while (count > 0)
+                {
+                    {
+                        string jointStr = fmtArr(j.jPos);
+                        string axisStr = fmtArr(epos.ePos);
+                        string s = $"ServoJ({jointStr},{axisStr},{acc:F3},{vel:F3},{cmdT:F3},{filterT:F3},{gain:F3},{cmdID})";
+                        FRAME f = new FRAME
+                        {
+                            count = frameCount++,
+                            cmdID = 376,
+                            content = s,
+                            contentLen = s.Length,
+                            head = "/f/b",
+                            tail = "/b/f"
+                        };
+                        robot.SendTCPFrame(FrameHandle.PackFrame(f));
+                    }
+
+                    j.jPos[0] += dt;
+                    j.jPos[3] += dt;
+                    j.jPos[4] += dt;
+                    j.jPos[5] += dt;
+                    epos.ePos[0] += dt;
+                    count -= 1;
+                    Thread.Sleep(1);
+                    robot.GetRobotRealTimeState(ref pkg);
+                    Console.WriteLine($"Servoj command count: {pkg.servoJCmdNum}");
+                    Console.WriteLine($"Servoj Count {pkg.servoJCmdNum}; last pos is {pkg.lastServoTarget[0]} {pkg.lastServoTarget[1]} {pkg.lastServoTarget[2]} {pkg.lastServoTarget[3]} {pkg.lastServoTarget[4]} {pkg.lastServoTarget[5]}");
+                }
+
+                {
+                    string s = "ServoMoveEnd()";
+                    FRAME f = new FRAME
+                    {
+                        count = frameCount++,
+                        cmdID = 690,
+                        content = s,
+                        contentLen = s.Length,
+                        head = "/f/b",
+                        tail = "/b/f"
+                    };
+                    robot.SendTCPFrame(FrameHandle.PackFrame(f));
+                }
+
+                Thread.Sleep(1000);
+            }
+        }
+    }    

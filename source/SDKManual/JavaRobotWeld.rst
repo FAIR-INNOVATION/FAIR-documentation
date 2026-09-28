@@ -353,17 +353,17 @@ Get welding interruption recovery parameters
     */  
     List<Number> WeldingGetReWeldAfterBreakOffParam();  
 
-Set welder control mode extension DO port  
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. code-block:: Java  
-    :linenos:  
+Set Welder Control Mode
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
 
-    /**  
-    * @brief Set welder control mode extension DO port  
-    * @param [in] DONum Welder control mode DO port (0-127)  
-    * @return Error code  
-    */  
-    int SetWeldMachineCtrlModeExtDoNum(int DONum);  
+    /**
+    * @brief Set the welder control mode extension DO port
+    * @param DONum Welder control mode DO port (0-127)
+    * @return Error code
+    */
+    public int SetWeldMachineCtrlModeExtDoNum(int DONum)
 
 Set welder control mode  
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

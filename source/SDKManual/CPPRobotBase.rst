@@ -10,9 +10,10 @@ Instantiate Robot
     :linenos:
 
     /**
-    * @brief  Robot interface class constructor
+    * @brief Robot interface class constructor
+    * @param [in] _TLSEnable Enable encryption for the robot SDK integrated command protocol communication; disabled by default
     */
-    FRRobot();
+    FRRobot(bool _TLSEnable = false);
 
 Establish Communication with Controller
 ++++++++++++++++++++++++++++++++++++++++++++++

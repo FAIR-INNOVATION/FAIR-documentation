@@ -56,18 +56,351 @@ After modifying the safety configuration parameters, click "Apply". A second con
 
 .. centered:: Figure 7.2-2 Safety Configuration Parameters Second Confirmation
 
-Safety Configuration Password Management
-------------------------------------------------
+Cybersecurity Functions
+------------------------------------------------------------------------
 
-The safety configuration password can be changed in "System Settings" -> "Maintenance Mode" -> "Safety Parameter Configuration". The default password is 12345678. Changing the password requires verification of the old password. The new and old passwords cannot be the same. The password length is a minimum of 1 character and a maximum of 8 characters, and is case-sensitive for letters and symbols.
+Security Password Management
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Security Password Modification
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The default security password is "12345678". The security password can be modified on the "Safety" page. Click the "Modify Security Password" button to open the security password modification window. Enter the old password and the new password respectively to complete the security password modification.
 
 .. image:: safety/006.png
    :width: 4in
    :align: center
 
-.. centered:: Figure 7.3-1 Safety Configuration Password Management
+.. centered:: Figure 7.3-1 Security Password Modification Button
 
-If you forget the old password, please contact the relevant technical personnel of FAIRINO.
+.. image:: safety/047.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-2 Security Password Modification Window
+
+The new and old security passwords must not be the same. The security password must be at least 8 characters long and must contain uppercase and lowercase letters, digits, and special characters.
+
+.. image:: safety/048.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-3 Security Password Complexity Verification
+
+Security Password Protection
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The robot security password input unlock has an anti-brute-force function. If an incorrect password is entered 5 consecutive times and the interval between each attempt is less than 1 minute, the security password input will be locked for 1 minute. During this 1 minute, the password cannot be entered to unlock, and a countdown is displayed in the WebApp.
+
+.. image:: safety/049.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-4 Security Password Anti-Brute-Force Lockout
+
+Cybersecurity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The robot cybersecurity functions include encrypted communication of command protocols, default disabling of non-encrypted communication ports, software upgrades, integrity verification during startup, etc., which are used for identity authentication, anti-eavesdropping and anti-tampering, resisting network attacks, and ensuring controllable and secure communication.
+
+Network Security Environment Information
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Users must meet the following environmental requirements to ensure that the collaborative robot network security functions are effective; if the environment does not meet the requirements, the collaborative robot's security protection capability may be reduced, and security risks may exist.
+
+Physical Security Environment
+*******************************************************************************
+
+① The robot controller and any switches it passes through must be installed in a control cabinet equipped with a locking device. Unauthorized personnel are strictly prohibited from opening the cabinet door. Without authorization, it is forbidden to touch the controller's Ethernet ports and safety I/O ports or any other interfaces.
+
+② The robot controller Ethernet port is only used to connect to an industrial computer. It is forbidden to connect a personal computer directly or to connect to the controller network port through a switch. Unauthorized personnel are prohibited from touching the industrial computer that has a network connection with the robot. Set a login password for the industrial computer.
+
+③ The robot teach pendant and button box should both be placed in a safe working area. Unauthorized personnel are prohibited from entering this area.
+
+Robot Security Configuration
+*******************************************************************************
+
+① Set WebApp login accounts with corresponding permissions for personnel with different permissions, especially permissions for software/firmware upgrades and security parameter configuration;
+
+② Change the robot WebApp administrator login password and security configuration password; keep the passwords properly to avoid leakage;
+
+③ When using command protocol communication, enable encryption, and keep properly any network communication encryption certificates downloaded from the robot. Leakage of certificates is strictly prohibited.
+
+④ Keep non-encrypted communication ports disabled by default; do not enable them unless necessary.
+
+Network Security Function Version Requirements
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Robot software version V4.0.0 and above supports network security functions. Robot software lower than this version number does not support network security functions.
+
+WebApp Communication Encryption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Robot WebApp communication uses TLS 1.2 HTTPS encrypted communication. When using the WebApp, a certificate must be installed (if the certificate is not installed, the browser will display an insecure connection). The specific steps are as follows:
+
+① Enter the robot IP address in the browser, such as 192.168.58.2, and press Enter to access the robot WebApp page. At this time, the browser will display an insecure connection prompt.
+
+.. image:: safety/050.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-5 Insecure Connection Displayed
+
+② Click "Not secure" on the left side of the IP address input box to open the connection details window.
+
+.. image:: safety/051.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-6 Connection Details Window Opened
+
+③ In the window, click "Certificate details" to open the certificate details window. Select "Details" in the upper tab and click the "Export" button to download the certificate. The downloaded certificate name is usually the robot IP address. You need to rename the file and add the extension ".crt", for example, change "192.168.58.2" to "192.168.58.2.crt".
+
+.. image:: safety/052.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-7 Certificate Details Window
+
+.. image:: safety/053.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-8 Certificate File Name
+
+④ Double-click the certificate file to open the certificate installation window, and click "Install Certificate".
+
+.. image:: safety/054.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-9 Certificate Installation Window
+
+⑤ In the certificate installation wizard that pops up, select the storage location as Local Machine, and click Next.
+
+.. image:: safety/055.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-10 Select Storage Location as Local Machine
+
+⑥ In the certificate wizard window, select "Place all certificates in the following store", click the "Browse" button, and select "Trusted Root Certification Authorities". Click Next.
+
+.. image:: safety/056.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-11 Select Trusted Root Certification Authorities
+
+⑦ Click "Finish".
+
+.. image:: safety/057.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-12 WebApp Certificate Installation Complete
+
+Restart the browser and log in to the WebApp, and it will display as a normal secure connection.
+
+.. image:: safety/058.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-13 Secure Connection Displayed After Installing WebApp Certificate
+
+Command Protocol Encryption
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The robot 8080-TCP and 20007-UDP command protocols can be configured to communicate via TLS 1.2 mutual authentication encryption. Users download the root certificate, client certificate, and client private key from the robot. Each robot has its own separate root certificate, and client certificates and private keys downloaded from different robots cannot be mixed. A single robot supports only one set of client certificate and private key.
+
+In the robot WebApp, click "Initial Setup", "Safety", "Cybersecurity" in sequence, enter the security password to unlock, and find "Command Protocol Certificate" in "Cybersecurity".
+
+.. image:: safety/059.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-14 Command Protocol Certificate Configuration Page
+
+Click the "No certificate yet, please create first" button, and enter the number of valid days for the command protocol certificate starting from the current day. Click the "Create" button. After the certificate is successfully created, the client certificate name, serial number, and expiration time calculated based on the valid days will be displayed.
+
+.. image:: safety/060.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.3-15 Command Protocol Certificate Validity Period Configuration
+
+.. image:: safety/061.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-16 Command Protocol Certificate Information
+
+Click the download button on the right to download the "client_certs.tar.gz" archive. The archive contains three files: "ca.crt": root certificate; "client.crt": client certificate; "client.key": client key.
+
+Click "Enable" and click the "Apply" button. In the robot safety configuration confirmation window that pops up, confirm the enablement of command protocol certificate encryption, and click the "Confirm" button again to enable command protocol encryption.
+
+.. image:: safety/062.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-17 Command Protocol Certificate Enablement Confirmation
+
+.. image:: safety/063.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-18 Command Protocol Certificate Encryption Enabled
+
+Click the "Delete" button on the right side of the certificate information box to disable the certificate corresponding to that serial number. Before deleting the certificate, the command protocol encryption must first be set to disabled.
+
+Non-Encrypted Network Communication Function Enablement Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Some non-encrypted network communication functions of the robot can be configured to be enabled or disabled, and are disabled by default.
+
+.. note:: Note: The robot communication port disabling function only takes effect when "Functional Safety" is enabled. In non-"Functional Safety" mode, all robot network communication functions are enabled!
+
+In the robot WebApp, click "Initial Settings", "Safety", and "Network Security" in sequence, then find "Communication Ports". The functions of each port are described as follows:
+
+.. image:: safety/064.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-19 Communication Port Enablement Configuration
+
+- **Control via SDK**: Control the robot through the XMLRPC communication port in the robot SDK. When not enabled, the robot cannot be controlled via XMLRPC.
+- **Control via ModbusTCP**: When the robot acts as a ModbusTCP slave, the robot DO output, program start/stop, manual/auto switching, reduced mode, etc. can be controlled through "Function Digital Input (Coil)". After disabling "Control via ModbusTCP", the above control functions through "Function Digital Input (Coil)" are all disabled.
+- **Control via ModbusRTU**: When the robot acts as a ModbusRTU slave, the robot DO output, program start/stop, manual/auto switching, reduced mode, etc. can be controlled through "Function Digital Input (Coil)". After disabling "Control via ModbusRTU", the above control functions through "Function Digital Input (Coil)" are all disabled.
+- **Control via CNDE**: The robot CNDE input can be configured for robot DO output, AO output, running speed, and other controls. After disabling "Control via CNDE", the CNDE client cannot control the above functions.
+- **Button Box IP Reset Function**: The robot button box V2.0 has an IP reset button. Disabling the "Button Box IP Reset Function" will prevent the robot IP from being reset through the button box.
+
+Enter the security password on the safety configuration page and unlock it, set the communication ports to be enabled to "On", click "Apply", confirm the enabled functions in the safety configuration confirmation window that pops up, and click the "Confirm" button.
+
+.. image:: safety/065.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-20 Communication Port Enablement Confirmation
+
+.. image:: safety/066.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-21 Communication Ports Enabled
+
+Robot Software Integrity Verification
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Robot software upgrade and software startup will perform integrity verification of the software package to prevent the robot software package from being tampered with.
+
+Robot software upgrade integrity verification: During robot software upgrade, the integrity of the software package to be upgraded will be verified. If the software package is incomplete, an error message will be reported during the upgrade and the upgrade will be stopped.
+
+.. image:: safety/067.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-22 Software Upgrade Integrity Verification Failure Error
+
+Robot software startup integrity verification: During robot software startup, the integrity of the software package in the current system will be verified. If the software package is complete, the robot software will start normally; otherwise, the robot software will not start, and an error prompt will be displayed in the WebApp.
+
+.. image:: safety/068.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-23 Integrity Verification Failure Error During Software Startup
+
+Cybersecurity Residual Risk Statement
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. centered:: Table 2-1 Cybersecurity Residual Risks and User Compensatory Measures
+
+.. list-table::
+   :widths: 10 20 25 45
+   :header-rows: 0
+   :align: center
+
+   * - **No.**
+     - **Residual Risk**
+     - **Mitigation Measures Taken**
+     - **User Compensatory Measures**
+
+   * - 1
+     - Robot SDK - XMLRPC communication protocol is transmitted in plaintext
+     - | ① SDK control robot function is disabled by default;
+       | ② The SDK inherently integrates 8080-TCP and 20007-UDP command protocols, and the command protocols have TLS 1.2 encryption; if the command protocol encryption handshake fails, the SDK cannot connect to the robot normally.
+     - | ① SDK communication between the host computer and the robot shall only be deployed in a trusted isolated network environment; connection to untrusted networks is not allowed; physical protection shall be provided for network links and network ports to prevent unauthorized access;
+       | ② The SDK integrates 20007-UDP command protocol communication and provides the SendUDPFrame() interface for sending custom command frames. At the same time, 20007-UDP command protocol communication has DTLS encryption. Sensitive information must be sent to the robot through this interface;
+       | ③ When not necessary, disable the SDK control robot function in the WebApp "Safety" and "Cybersecurity" modules;
+
+   * - 2
+     - Robot 20005 - TCP / 20006 - UDP configurable data exchange CNDE communication is transmitted in plaintext
+     - | ① CNDE control robot function is disabled by default;
+     - | ① CNDE communication between the host computer and the robot shall only be deployed in a trusted isolated network environment; connection to untrusted networks is not allowed; physical protection shall be provided for network links and network ports to prevent unauthorized access;
+       | ② When not necessary, disable the CNDE control robot function in the WebApp "Safety" and "Cybersecurity" modules;
+
+   * - 3
+     - Robot ModbusTCP communication is transmitted in plaintext
+     - | ① ModbusTCP control robot function is disabled by default;
+     - | ① ModbusTCP communication between the host computer and the robot shall only be deployed in a trusted isolated network environment; connection to untrusted networks is not allowed; physical protection shall be provided for network links and network ports to prevent unauthorized access;
+       | ② When not necessary, disable the ModbusTCP control robot function in the WebApp "Safety" and "Cybersecurity" modules;
+
+   * - 4
+     - Robot ModbusRTU communication is transmitted in plaintext
+     - | ① ModbusRTU control robot function is disabled by default;
+     - | ① ModbusRTU communication between the host computer and the robot shall only be deployed in a trusted isolated network environment; connection to untrusted networks is not allowed; physical protection shall be provided for network links and network ports to prevent unauthorized access;
+       | ② When not necessary, disable the ModbusRTU control robot function in the WebApp "Safety" and "Cybersecurity" modules;
+
+   * - 5
+     - Attackers may use the default WebApp administrator login account and password to modify robot safety configuration parameters
+     - No
+     - | ① Users must modify the robot WebApp default administrator login password and keep the password properly;
+       | ② Users must set corresponding WebApp login accounts and passwords for personnel with different safety configuration permissions and keep the passwords properly;
+
+   * - 6
+     - Attackers may use the default WebApp login account and password to modify the robot software/firmware version
+     - No
+     - | ① Users must modify the robot WebApp default administrator login password and keep the password properly;
+       | ② Users must set corresponding WebApp login accounts and passwords for personnel with different software/firmware upgrade permissions and keep the passwords properly;
+
+   * - 7
+     - Attackers may use the default security password to modify safety configuration parameters
+     - No
+     - | ① Users must modify the robot security password and are prohibited from using the default security password;
+
+   * - 8
+     - Attackers may physically damage the robot LAN1 / LAN2 Ethernet ports, causing the robot Ethernet communication to fail
+     - None
+     - | ① Users must install the robot control box in a control cabinet with a locking device and prohibit unauthorized personnel from touching the robot control box;
+
+   * - 9
+     - Attackers may physically damage the robot RS-485 communication port, causing the robot extended axis control and ModbusRTU communication to fail
+     - None
+     - | ① Users must install the robot control box in a control cabinet with a locking device and prohibit unauthorized personnel from touching the robot control box;
+
+   * - 10
+     - Attackers may physically damage the emergency stop button on the robot button box, causing the robot emergency stop button to fail
+     - None
+     - | ① Users must place the robot button box in a safe working area and prohibit unauthorized personnel from entering the area;
+
+   * - 11
+     - Attackers may physically damage the emergency stop button on the robot teach pendant, causing the robot emergency stop button to fail
+     - None
+     - | ① Users must place the robot teach pendant in a safe working area and prohibit unauthorized personnel from entering the area;
+
+Permission Management
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. centered:: Table 3-1 Permission Details
+
+.. image:: safety/069.png
+   :width: 6in
+   :align: center
+
+.. image:: safety/070.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-24 Setting Role Permissions
 
 Safety Configuration Parameters
 --------------------------------------------------------------------------------------------------
@@ -408,3 +741,560 @@ The second method is the "Center Point + Side Length" method, where the center p
    :align: center
 
 .. centered:: Figure 7.4-25 Cuboid Interference Configuration
+
+Safety Log Storage Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Background
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The CE certification for FR series robots requires that all safety operation-related logs of the equipment be recorded and maintained separately. It also explicitly requires that the log storage include at least the last intervention evidence for each intervention type, that the tracking log data records for each intervention be kept for at least 5 years, and that the logs be protected against tampering.
+
+Safety Log Management
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Safety log management is maintained on the web page under "Initial Setup" -> "Safety". The "Safety Configuration Password" must be entered for verification first, and safety log management can only be performed after successful verification.
+
+.. image:: safety/044.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-26 Safety Log Management
+
+Safety logs are managed uniformly. To prevent an excessive log volume caused by abnormal operations, the current log storage volume can be seen intuitively on the page. Safety logs only retain the most recent 5 years, and each year's logs are stored uniformly in separate files according to log type. Click Export to export all logs.
+
+Log types are divided into the following three categories:
+
+.. centered:: Table 1-2 Safety Log Classification
+
+.. list-table::
+   :widths: 30 30 40
+   :header-rows: 0
+   :align: center
+
+   * - **Log Category**
+     - **Log File Name**
+     - **Description**
+
+   * - Parameter Modification
+     - safetylog_params_2026.log
+     - Robot safety configuration parameter modification, robot safety password modification
+
+   * - Software/Firmware Version
+     - safetylog_version_2026.log
+     - Software/firmware version upgrade
+
+   * - Log Operation
+     - safetylog_operate_2026.log
+     - Safety log deletion, export
+
+Since safety logs must be kept for 5 years and cannot be deleted, to prevent abnormal writes from causing storage memory anomalies that affect system operation, safety logs adopt a tiered rate-limiting strategy based on used capacity. Before writing, the current used log space is checked, and the write frequency is dynamically adjusted.
+
+.. centered:: Table 1-3 Safety Log Rate-Limiting Strategy
+
+.. list-table::
+   :widths: 20 30 20 30
+   :header-rows: 0
+   :align: center
+
+   * - **Stage**
+     - **Used Capacity**
+     - **Write Frequency**
+     - **Description**
+
+   * - 1
+     - <500M
+     - Unlimited
+     - Normal use (about 200M for 5 years)
+
+   * - 2
+     - 500M-1G
+     - 1 second/entry
+     - Slight rate limiting, no impact on experience
+
+   * - 3
+     - 1G-2.5G
+     - 5 seconds/entry
+     - Obvious anomaly, proactive speed reduction
+
+   * - 4
+     - 2.5G-4G
+     - 30 seconds/entry
+     - Severe anomaly, extreme delay time
+
+   * - 5
+     - >4G
+     - Stop writing
+     - Quota exhausted, no further log writing
+
+In normal use, at a write volume of 1000 entries per day, the estimated usage over 5 years is within 200M. Therefore, when the memory exceeds 1G, there is clearly an abnormal situation. After exceeding 1G, the controller will proactively report a warning. It is necessary to proactively export and back up logs and recommend timely log cleanup.
+
+.. image:: safety/045.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-27 Safety Log Abnormality Warning
+
+The log export time depends on the total log size. Theoretically, the total log volume over 5 years will not exceed 200M. When logs exceed 1G, the download time exceeds 1 minute, and at the upper limit of 4G, the download time is about 5 minutes. After export, log cleanup can be performed. To ensure that abnormal evidence is not cleaned up, the current log deletion function only deletes logs from years other than the current year.
+
+.. image:: safety/046.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.4-28 Safety Log Deletion
+
+Functional Safety Functions
+----------------------------------------------------------------
+
+Functional Safety Description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This device is equipped with a safety-related control system used to automatically execute safety actions (such as emergency stop, guard door interlocking, etc.) when a hazardous situation is detected. These safety functions have been designed and verified in accordance with EN ISO 13849-1 / EN IEC 62061 standards and are an important part of achieving CE compliance.
+
+To ensure that the safety functions remain effective, please note:
+
+- Do not bypass or shield any safety device (such as removing interlock switches, short-circuiting safety circuits, blocking light curtains, etc.), otherwise it may cause serious personal injury.
+- Do not modify safety-related components or software programs without authorization. Any modification, parameter change, or software update to the safety control system must be performed by the manufacturer or its authorized personnel, and a risk assessment must be carried out again.
+- Network security: Do not connect the safety control system of this device to an unauthorized network; unauthorized digital access may cause the safety functions to fail.
+- Maintenance and faults: If any safety device operates abnormally or fails, stop the machine immediately and contact the manufacturer or authorized service personnel. Only trained and authorized personnel may perform maintenance.
+
+This device is conformity assessed in accordance with the EU Machinery Regulation (EU) 2023/1230. Safety function components are listed in the technical documentation for reference. The following is the specific list of safety functions.
+
+.. centered:: Table 1-1  Safety Function List
+
+.. list-table::
+   :widths: 20 20 10 40 10
+   :header-rows: 0
+   :align: center
+
+   * - **SF ID**
+     - **Function Name**
+     - **Level**
+     - **Description**
+     - **MTTFd***
+
+   * - SF01
+     - E-STOP on TPU-Teach Pendant Emergency Stop
+     - PL d
+     - | Execution monitoring of the emergency stop
+       | Includes trigger logic for different trigger sources:
+       | 1. In any mode, when the teach pendant emergency stop switch is triggered, it is converted to a control box emergency stop signal, and Cat.0 or Cat.1 stop action is executed according to the configured type, with interlocked position holding function
+       | 2. In any mode, when the control box safety DI is triggered, it is converted to a control box emergency stop signal, and Cat.0 or Cat.1 stop action is executed according to the configured type, with interlocked position holding function
+       | [Trigger event]: Emergency stop signal triggered
+       | [Robot response]:
+       | If the stop type is 0, the body power is cut off, the joints execute a safe brake, and position holding is monitored
+       | If the stop type is 1, deceleration stop is performed, the body power is cut off, the joints execute a safe brake, and position holding is monitored	
+     - 202.0512143
+
+   * - SF02
+     - Safeguard Stop
+     - PL d
+     - | Execution monitoring of the safeguard stop
+       | In any mode, the safety stop function is triggered according to the control box safety stop signal. According to the configured safety stop level, the corresponding Cat.0, Cat.1, Cat.2 stop functions and the corresponding interlocked position holding function detection (Cat.0, Cat.1) or standstill detection + stopping distance + stopping time detection (Cat.2) are executed.
+       | [Trigger event]: Safety stop signal triggered;
+       | [Robot response]:
+       | If the stop type is 0, the body power is cut off, the joints execute a safe brake, and position holding is monitored;
+       | If the stop type is 1, deceleration stop is performed, the body power is cut off, the joints execute a safe brake, and position holding is monitored;
+       | If the stop type is 2, deceleration stop is performed, the body power is maintained, the joints do not execute a safe brake and remain enabled, and standstill detection + stopping distance + stopping time detection are performed;	
+     - 191.3170862
+
+   * - SF03
+     - Joint Position Limit
+     - PL d
+     - | Monitoring of the joint position limit
+       | [Joint soft limits can be set for each joint. The safety board detects the joint position in real time. If the limit is exceeded, a Cat.2 stop action is executed, with interlocked standstill detection + stopping distance + stopping time detection.
+       | [Trigger event]: The joint moves outside the limit position range;
+       | [Robot response]: Fault alarm - soft limit exceeded, Cat.2 stop action is executed, with interlocked standstill detection + stopping distance + stopping time detection;
+     - 158.5302637
+
+   * - SF04
+     - Joint Speed Limit
+     - PL d
+     - | Monitoring of the joint speed limit	
+       | A joint speed limit can be set for each joint. According to the corresponding safety speed of the controller, the safety circuit detects whether the real-time speed of each robot joint exceeds the limit. If the limit is exceeded, a Cat.1 stop with interlocked position holding monitoring, or a Cat.2 stop with interlocked standstill detection + stopping distance + stopping time detection is performed.
+       | [Trigger event]: The joint speed exceeds the set value;
+       | [Robot response]: Fault alarm - speed exceeded. Optionally perform a Cat.1 stop with interlocked position holding monitoring, or by default perform a Cat.2 stop with interlocked standstill detection + stopping distance + stopping time detection;	
+     - 158.5302637
+          
+   * - SF05
+     - Joint Torque Limit
+     - PL d
+     - | Monitoring of the joint torque limit
+       | A joint torque limit can be set for each joint. According to the corresponding safety torque of the controller, the safety circuit detects whether the real-time torque of each robot joint exceeds the limit. If the limit is exceeded, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
+       | [Trigger event]: The joint torque exceeds the set torque value
+       | [Robot response]: Fault alarm - joint x torque exceeded, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
+     - 67.48193213
+     	          
+   * - SF06
+     - | TCP Pose Limit (safety plane, tool direction)
+       | (Dynamic Limit can be adjusted dynamically; stop type not required)
+       | (Corresponding limits are dynamically adjusted through configurable IO, dual circuit)
+     - PL d
+     - | Monitoring of the TCP pose limit
+       | The TCP limit range and corresponding DI (up to 8 can be set) are set in advance on the corresponding controller page. When the DI is turned on, the corresponding limit is activated. When the TCP exceeds the limit range, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
+       | [Trigger event]: The TCP pose exceeds the set range
+       | [Robot response]: Fault alarm - safety plane/tool direction exceeded, Cat.2 stop action is executed, with interlocked standstill detection + stopping distance + stopping time detection	
+     - 70.07272665
+          	          
+   * - SF07
+     - manual mode, reduced-speed
+     - PL d
+     - | Monitoring of reduced-speed manual mode
+       | When the controller mode is in manual reduced-speed mode, it detects whether the TCP speed is ≤250mm/s. If the speed is exceeded, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring.
+       | [Trigger event]: The TCP speed exceeds the set speed
+       | [Robot response]: Fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring.	
+     - 70.07272665
+             	          
+   * - SF08
+     - TCP Force Limit
+     - PL d
+     - | Monitoring of the TCP force limit  
+       | The controller can configure the TCP force limit. The safety circuit monitors the robot TCP force in real time. If the TCP force exceeds the limit value, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
+       | [Trigger event]: The TCP force exceeds the set limit
+       | [Robot response]: Fault alarm - joint x collision fault, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection	
+     - 124.720124  
+             	          
+   * - SF09
+     - Momentum Limit
+     - PL d
+     - | Monitoring of the momentum limit
+       | The controller can configure the robot momentum limit. The safety circuit monitors the robot momentum in real time. If the robot momentum exceeds the limit value, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
+       | [Trigger event]: The momentum exceeds the set momentum limit
+       | [Robot response]: Fault alarm - momentum exceeded, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection	
+     - 67.48193213
+                	          
+   * - SF10
+     - Power Limit
+     - PL d
+     - | Monitoring of the power limit    
+       | The controller can configure the robot power limit. The safety circuit monitors the robot power in real time. If the robot power exceeds the limit value, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
+       | [Trigger event]: The power exceeds the set power limit
+       | [Robot response]: Fault alarm - power exceeded, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
+     - 67.48193213
+                	          
+   * - SF11
+     - System Emergency Stop Output
+     - PL d
+     - | Monitoring of the System Emergency Stop Output
+       | When the emergency stop signal is triggered, the controller outputs an emergency stop signal DO.
+       | [Trigger event]: Emergency stop signal triggered
+       | [Robot response]:
+       | Emergency stop type 0: System emergency stop signal output
+       | Emergency stop type 1: System emergency stop signal output	
+     - 191.3170862
+                   	          
+   * - SF12
+     - Robot Moving State Output
+     - PL d
+     - | Monitoring of the Robot Moving State Output
+       | When the robot is in the moving state, the controller outputs a motion signal DO
+       | [Trigger event]: The robot is in the moving state
+       | [Robot response]: Robot moving signal output	
+     - 68.7283255
+                	          
+   * - SF13
+     - Robot Not Stopping State Output
+     - PL d
+     - | Monitoring of the Robot Not Stopping State Output
+       | When the robot is in the not stopping state, the controller outputs a not stopping signal DO
+       | [Trigger event]: The robot is in the not stopping state
+       | [Robot response]: Robot not stopping signal output	
+     - 68.7283255
+
+   * - SF14
+     - Reduced Mode State Output
+     - PL d
+     - | Monitoring of the Reduced Mode State Output
+       | When the robot is in the reduced state, the controller outputs a reduced signal DO
+       | [Trigger event]: The robot is in reduced mode
+       | [Robot response]: Reduced mode signal output	
+     - 68.7283255
+    
+   * - SF15
+     - Not Reduced Mode State Output
+     - PL d
+     - | Monitoring of the Not Reduced Mode State Output
+       | When the robot is in the not reduced state, the controller outputs a not reduced signal DO
+       | [Trigger event]: The robot is in not reduced mode
+       | [Robot response]: Not reduced mode signal output	
+     - 68.7283255
+    
+   * - SF16
+     - 3P enabling function
+     - PL d
+     - | 3P enabling function
+       | When the 3-position enabling switch is in position 1 or 3, the robot executes a Cat.2 stop, with interlocked standstill detection + stopping distance + stopping time detection
+       | When the 3-position enabling switch is in position 2, the robot is enabled, with interlocked activation of manual reduced-speed mode and manual reduced-speed detection
+       | [Trigger event]: In physical teach pendant mode, the 3-position enabling button is pressed to the middle position (position 2)
+       | [Robot response]: Joints are enabled, joint safe brakes are released, the robot enters manual reduced-speed mode, with interlocked activation of manual reduced-speed mode and manual reduced-speed detection	
+     - 68.7283255
+         
+   * - SF17
+     - monitored-standstill (after Cat.2 stop)
+     - PL d
+     - | Monitored standstill
+       | After the Cat.2 stop is completed, the safety circuit detects joint position changes according to the robot command and actual position. If the deviation exceeds the limit, a Cat.0 or Cat.1 stop is executed
+       | [Trigger event]: When standstill and not running, the robot position changes abnormally
+       | [Robot response]: The robot position change range exceeds the set value, and a Cat.0 or Cat.1 stop action is executed	
+     - 60.05290188
+            
+   * - SF18
+     - stopping time limiting (after Cat.2 stop)
+     - PL d
+     - | Monitoring of stopping time limit
+       | After the Cat.2 stop signal is triggered, the safety circuit detects the stopping time according to the robot stop completion signal time. If the deviation exceeds the limit, a Cat.0 or Cat.1 stop is executed
+       | [Trigger event]: When the robot triggers a stop
+       | [Robot response]: When the robot triggers a stop, if the stopping time exceeds the set time, a Cat.0 or Cat.1 stop action is executed	
+     - 60.05290188 
+            
+   * - SF19
+     - stopping distance limiting (after Cat.2 stop)
+     - PL d
+     - | Monitoring of stopping distance limit
+       | When the Cat.2 stop signal is triggered, the robot position is recorded. The safety circuit obtains the stopping distance by subtracting the recorded position from the real-time actual position of the robot. If the deviation exceeds the limit, a Cat.0 or Cat.1 stop is executed
+       | [Trigger event]: When the robot triggers a stop
+       | [Robot response]: When the robot triggers a stop, if the stopping distance exceeds the set stopping distance, a Cat.0 or Cat.1 stop action is executed	
+     - 60.05290188
+                  
+   * - SF20
+     - hold-to-run control
+     - PL d
+     - | Hold-to-run control
+       | When the 3-position enabling switch enters the middle position and the controller is in manual mode, after the end button is pressed, the robot enters the dragging state
+       | When the 3-position enabling switch enters the middle position and the controller is in manual mode, after the end button is released, the robot enters a Cat.2 stop, with interlocked standstill detection + stopping distance + stopping time detection
+       | [Trigger event]: The 3-position enabling switch enters the middle position, the controller is in manual mode, and the end button is pressed
+       | [Robot response]: The robot enters the dragging state
+       | [Trigger event]: The 3-position enabling switch enters the middle position, the controller is in manual mode, and the end button is released
+       | [Robot response]: The robot enters a Cat.2 stop, with interlocked standstill detection + stopping distance + stopping time detection
+     - 68.7283255
+                      
+   * - SF21
+     - start/restart interlock
+     - PL d
+     - | Start/restart interlock
+       | On start/restart/mode switching, the Cat.2 safety stop state is triggered. After the stop is executed, the controller cannot move, with interlocked standstill detection. The stop state must be reset by resetting the safety stop through DI before further operations can be performed
+       | [Trigger event]: Controller start/restart/mode switching
+       | [Robot response]: Interlock triggered, entering Cat.2 safety stop	
+     - 191.3170862
+                      
+   * - SF22
+     - reset safety
+     - PL d
+     - | Reset safety
+       | When in the safety stop triggered state, first perform error/fault reset through DI. After the error/fault reset passes, perform stop state reset again through DI, and then the robot can exit the stop state
+       | [Trigger event]: Safety stop state reset DI triggered
+       | [Robot response]: The robot exits the safety stop	
+     - 191.3170862
+                         
+   * - SF23
+     - normal stop
+     - PL d
+     - | Normal stop
+       | During robot motion, a normal stop is triggered through a DI signal. According to the configured safety stop type, a Cat.0 or Cat.1 stop action is executed
+       | [Trigger event]: Stop motion triggered
+       | [Robot response]: The robot executes a Cat.0 or Cat.1 stop action, with interlocked position holding monitoring	
+     - 191.3170862
+                         
+   * - SF24
+     - mode activation
+     - PL a
+     - | Mode activation
+       | The controller mode can enter different modes through the software interface mode switch and the end button switch, including manual reduced-speed/manual high-speed/automatic/dragging
+       | [Trigger event]: Software interface switch toggled
+       | [Robot response]: The robot can switch between manual reduced-speed/manual high-speed/automatic modes, with interlocked manual reduced-speed monitoring/manual high-speed monitoring + manual high-speed time monitoring/manual reduced-speed monitoring/joint speed monitoring
+       | [Trigger event]: End dragging switch toggled
+       | [Robot response]: The robot can switch between manual reduced-speed/dragging modes, with interlocked manual reduced-speed monitoring/dragging speed monitoring/standstill monitoring	
+     - /
+                             
+   * - SF25
+     - Position Holding Monitoring
+     - PL d
+     - | Monitoring of the Position Holding
+       | When the controller changes from the enabled state to the disabled state, the position is recorded during brake engagement, and it continuously detects whether the difference between the robot joint position and the recorded position exceeds the limit threshold. If the threshold is exceeded, a Cat.0 operation is executed
+       | [Trigger event]: During brake engagement, the robot joint position change exceeds the threshold
+       | [Robot response]: Cat.0 operation is executed	
+     - 60.05290188
+                                
+   * - SF26
+     - single-point-of-control (local/remote control mode)
+     - PL a
+     - | single-point-of-control
+       | The controller local mode and remote control mode are mutually exclusive. The mode is switched manually on the controller interface, and only one of them can be selected for control
+       | [Trigger event]: Manually switch the control mode on the controller interface
+       | [Robot response]: The controller can only select one mode at a time, shielding the operation of the other control source	
+     - /
+                                   
+   * - SF27
+     - external control enable
+     - PL a
+     - | external control enable
+       | The controller has a remote control mode. Entering and exiting the remote mode are both performed manually and locally on the controller interface. In this mode, other local control functions are shielded
+       | [Trigger event]: Switch the remote control mode on the local interface
+       | [Robot response]: The controller enters remote mode, shielding the operation of the local control source	
+     - /
+                                   
+   * - SF28
+     - manual mode, high-speed
+     - PL d
+     - | Monitoring of high-speed manual mode
+       | Click the manual high-speed switch button on the manual reduced-speed page. The controller can switch from manual reduced-speed to manual high-speed mode. The safety circuit detects whether the TCP speed is ≤1000mm/s. If the speed is exceeded, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
+       | [Trigger event]: In high-speed mode, the TCP speed exceeds the set limit
+       | [Robot response]: Deceleration stop is performed, fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring	
+     - 60.05290188
+
+   * - SF29
+     - manual mode, high-speed time limitation
+     - PL d
+     - | Monitoring of high-speed manual mode time limitation
+       | When the controller mode is in manual high-speed mode and the 3-position switch exits the middle position, the safety circuit detects the duration. If it exceeds 5 min, the control box lowers the manual high-speed global speed to 25% (TCP speed 250mm/s), with interlocked corresponding speed monitoring (TCP speed ≤250mm/s)
+       | [Trigger event]: In manual high-speed mode, the 3P switch is released for more than 5 min
+       | [Robot response]: The control box lowers the manual high-speed speed to 250mm/s, with interlocked 250mm/s monitoring	
+     - 49.81517752
+   
+   * - SF30
+     - hand-guided control
+     - PL d
+     - | Monitoring of hand-guided control
+       | When the 3-position switch is in the middle position and the end dragging button is pressed, the controller mode enters dragging mode. The safety circuit detects whether the TCP speed is ≤250mm/s (configurable speed limit), each joint speed is ≤45°/s (monitored through SF04, configurable speed limit, configurable Cat.0/Cat.1), each joint position limit (monitored through SF03, configurable range, Cat.2), and TCP pose limit (monitored through SF06, configurable range, Cat.2). If the speed is exceeded, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
+       | [Trigger event]: The TCP speed exceeds the dragging limit speed (default 250mm/s, adjustable)
+       | [Robot response]: Deceleration stop is performed, fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
+     - 49.81517752 	
+   
+   * - SF31
+     - Speed and separation monitoring (SSM)
+     - PL d
+     - | Speed and separation monitoring
+       | When the controller mode is in automatic mode, the photoelectric switch/distance sensing switch externally connected through the control box DI detects the relative position of the machine and personnel. When the corresponding distance DI receives a signal, the control box performs a safety response. According to the corresponding distance, it enters level 1 reduction (configurable speed, default 200mm/s), level 2 reduction (configurable speed, default 100mm/s), or level 3 reduction (stop motion). At the same time, the safety circuit enters speed and separation monitoring. If the speed after entering reduction exceeds the speed corresponding to the corresponding reduction level, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
+       | [Trigger event]: The TCP speed exceeds the set speed
+       | [Robot response]: Deceleration stop is performed, fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring	
+     - 60.05290188
+
+.. note:: Note: ***MTTFd**: Mean Time to Dangerous Failure (unit: years).
+
+Joint Speed Limit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+After functional safety is enabled, this function monitors the robot's joint feedback speed. When the motion speed exceeds the set value, a safety stop is executed.
+
+The joint limit speed range is 1-180°/s, and the default is 45°/s.
+
+.. image:: safety/034.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-1 Joint speed limit monitoring
+
+.. note:: Note: When disabled, the function does not take effect; after being enabled, the function takes effect and monitoring begins.
+
+Manual Mode - Reduced Speed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, this function monitors the robot's feedback TCP speed in manual reduced-speed mode. When the motion speed exceeds the set value, a safety stop is executed.
+
+The TCP limit speed range is 1-1000mm/s, and the default is 250mm/s.
+
+.. image:: safety/035.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-2 Manual mode - reduced-speed monitoring
+
+Manual Mode - High Speed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, this function monitors the robot's feedback TCP speed in manual high-speed mode (using the TCP speed corresponding to the interface global speed as the limit). When the motion speed exceeds the set value, a safety stop is executed. After a speed exceeding 250mm/s is set, the disable time in manual high-speed mode is monitored. When the disable time exceeds the set value, the manual speed is reduced to 250mm/s.
+
+The speed timeout range is 1-1000min, and the default is 5min.
+
+.. image:: safety/036.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-3 Manual mode - high-speed monitoring
+
+Dragging Speed Monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, this function monitors the robot's feedback TCP speed in dragging mode. When the dragging speed exceeds the set value, a safety stop is executed.
+
+The TCP limit speed range is 1-1000mm/s, and the default is 250mm/s.
+
+.. image:: safety/037.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-4 Dragging speed monitoring
+
+Position Holding Monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, this function is used to monitor the robot position after it is disabled. When the change amount of each joint exceeds the set value, a safety stop is executed.
+
+The TCP limit speed range is 1-1000mm/s.
+
+.. image:: safety/038.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-5 Position holding monitoring
+
+Manual High-Speed Mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, on the manual reduced-speed interface, click the "Enter Manual High Speed" button to enter manual high-speed mode. In this mode, the speed of JOG motion and command motion is not reduced.
+
+.. image:: safety/039.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-6 Manual high-speed mode
+
+Normal Stop
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, on the safety CI page, the "Normal Stop" digital input option can be selected. When the corresponding CI is triggered, the robot stops according to the configured protective stop level.
+
+.. image:: safety/040.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-7 Normal stop
+
+Safety Wall
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, on the safety CI page, the digital input options "Safety Wall 1" to "Safety Wall 8" can be selected. When the corresponding CI is triggered, the robot activates the corresponding safety wall monitoring. If it enters the safety wall limit range, the robot stops according to the configured protective stop level.
+
+.. image:: safety/041.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-8 Safety wall
+
+Reset Safety Stop State
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After functional safety is enabled, on the safety CI page, the "Reset Safety Stop State" digital input option can be selected. When the corresponding CI is triggered, the robot clears the safety stop error code, and the controller can perform operations.
+
+.. image:: safety/042.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-8 Reset safety stop state
+
+Joint Torque Limit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Joint torque limit is a safety monitoring function. After it is enabled, the system monitors the torque of each joint in real time. When the actual torque of any joint exceeds the set torque limit percentage, the robot immediately stops running, and the interface prompts a joint torque limit exceeded fault.
+
+The setting percentage range is 1%-100%, and the default is 100%;
+
+.. image:: safety/043.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.5-9 Joint torque limit percentage
+
+Corresponding fault handling suggestions:
+
+1. If the limit exceeded fault is still frequently triggered under the 100% limit, it indicates that the current working condition is close to the robot's performance limit. It is recommended to first reduce the running speed or reduce the load/inertia.
+2. If the fault still occurs after adjustment, it indicates that the task requirements may exceed the physical capability of the robot, and the operation plan needs to be re-evaluated.

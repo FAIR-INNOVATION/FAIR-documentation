@@ -561,8 +561,8 @@ Create various 3D virtual coordinate systems in the 3D virtual area of the WebAP
    
    explain: The workpiece coordinate system is closed by default, and it can be displayed manually. The process is consistent with the tool coordinate system.
 
-3D virtual trajectory and import tool model
-++++++++++++++++++++++++++++++++++++++++++++++++
+3D Virtual Trajectory and Tool Model
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. note:: 
    .. image:: teaching_pendant_software/020.png
@@ -570,9 +570,9 @@ Create various 3D virtual coordinate systems in the 3D virtual area of the WebAP
       :height: 0.75in
       :align: left
 
-   name:**Trajectory drawing**
+   Name: **Trajectory Drawing**
    
-   explain: Click the button to turn on the trajectory drawing function. When running the teaching program, the robot 3D model will depict the trajectory of the robot's movement.
+   Description: Click the button to open the trajectory drawing function. When the teaching program is running, the robot 3D model will draw the trajectory path of the robot motion.
 
 .. note:: 
    .. image:: teaching_pendant_software/029.png
@@ -580,10 +580,10 @@ Create various 3D virtual coordinate systems in the 3D virtual area of the WebAP
       :height: 0.75in
       :align: left
 
-   name:**Import tool model**
+   Name: **Tool Model**
    
-   explain: Click the button to pop up the import tool model modal window. After the uploaded file is successfully imported, the tool model can be displayed at the end of the robot. Currently supported tool model file formats are STL and DAE.
-
+   Description: Click the button to turn the tool model on/off.
+   
 Robot body operation bar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

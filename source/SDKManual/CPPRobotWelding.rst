@@ -393,7 +393,7 @@ Set Welder Control Mode
 
     /**
     * @brief Set welding machine control mode
-    * @param [in] mode Welding machine control mode; 0-DC one-knob mode; 1-Pulse one-knob mode; 2-JOB mode; 3-Local control mode; 4-Separate mode; 5-CC/CV mode; 6-TIG; 7-CMT
+    * @param [in] mode Welding machine control mode; 0-DC one-knob mode; 1-Pulse one-knob mode; 2-JOB mode; 3-Local control mode; 4-Separate mode; 5-CC/CV mode; 6-TIG; 7-CMT; 8-Panasonic-Pulse mode, 9-Panasonic-No-pulse mode
     * @param [in] ioType Control type; 0-Control box IO; 1-Digital communication protocol (UDP); 2-Digital communication protocol (ModbusTCP)
     * @return Error code
     */

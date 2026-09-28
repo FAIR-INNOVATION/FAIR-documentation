@@ -150,6 +150,39 @@ A degree-of-freedom locking function has been added for drag teaching. When the 
 
 .. centered:: Figure 14.5‑1 Drag Teaching Lock Configuration
 
+FR3-WML/FR3-WMS/FR20/FR30 Drag Lock Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This function adjusts the current loop drag lock function parameters according to the dynamic characteristics of new models, so that during dragging the end effector always remains stable and stationary on a certain degree of freedom and does not move with the applied external force. The current loop drag lock function is extended to the FR3WMS/FR3-WML/FR20/FR30 models.
+
+In drag mode, the end pose is restricted. When the external force dragging direction is not on the restricted degree of freedom, the robot end can be dragged normally; otherwise, its motion is restricted.
+
+Drag Lock
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Before setting the drag lock function, check the robot installation method, load, and coordinate system settings to ensure that in normal drag mode, the robotic arm does not show obvious upward or downward displacement without external force.
+
+Under the menu bar of "Auxiliary Application" -> "Tool Application", click "Drag Lock" to enter the drag teaching lock configuration function interface. In the "Current Loop Drag Lock" menu bar, when the drag teaching function switch is set to enabled and Apply is clicked, each degree of freedom parameter takes effect when the user drags the robot, locking the corresponding degree of freedom.
+
+Explanation of the configuration items in the "Current Loop Drag Lock" menu bar:
+
+(1) Degree of freedom parameter settings: When the parameters are set to X:10, Y:0, Z:10, RX:10, RY:10, RZ:10, dragging the robot in drag mode can restrict the robot to move only in the Y direction. If it is necessary to keep the robot posture unchanged during dragging and only move in the X, Y, Z directions, set X, Y, Z to 0 and RX, RY, RZ to 10. As the parameter decreases, the restriction force on that degree of freedom becomes smaller. The maximum value is 10, with the maximum restriction force; the minimum is 0, with no restriction force.
+
+(2) Drag teaching switch: Enable the drag lock function in drag mode.
+
+.. image:: application/050.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 14.5-1-2 Drag teaching lock configuration
+
+Parameter settings must meet the following restrictions:
+
+(1) Parameter settings are limited to the range 0~10. For some models (such as FR20 and FR30), parameter settings are limited to the range 0~5. Therefore, if a value outside the range 0~10 is input, it will be changed to the nearest 0 or 10. For example, if the parameter is set to 15, it will become 10.
+
 Normal Collision Protection Triggering Under Force Sensor Assisted Dragging
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

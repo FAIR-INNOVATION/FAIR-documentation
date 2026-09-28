@@ -13,6 +13,14 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V4.0.0
+     - 2026-09-23
+     - | 1. Modified the Robot() interface for establishing an RPC connection to instantiate the robot, and added TLS encryption enablement parameter configuration for the integrated command protocol communication in the SDK. Before use, Python dependency libraries must be installed first; the installation commands are: pip install python3-dtls, pip install python-mbedtls;
+       | 2. Modified the parameter description of the SetWeldMachineCtrlMode() interface for setting the welder control mode, and added the pulse and no-pulse modes for Panasonic welders;
+       | 3. Added the SendTCPFrame() command for sending custom command frames via TCP 8080, including a code example;
+       | 4. Added the TCFToAllJoint() command for obtaining 8 sets of inverse kinematics solutions for the robot, including a code example;
+       | 5. Added the SetPhySpeedInstant() command for setting the physical speed in real time, including a code example.
+
    * - V3.9.9
      - 2026-09-01
      - | 1. Updated the GetGripperMotionDone() interface for getting gripper motion status, updated the definition and usage scope of gripper status output parameters;

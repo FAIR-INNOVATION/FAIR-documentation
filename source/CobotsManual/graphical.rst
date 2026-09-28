@@ -21,7 +21,7 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
 
 **Operation bar**
 
-1) **Load**: responsible for reloading the workspace;
+1) **Load**: Responsible for reloading the workspace, and supports sorting by letter (A~Z or Z~A) or by most recent modification time;
 
 2) **Import**: responsible for importing related graphical programming programs;
 
@@ -44,6 +44,12 @@ The page is divided into three areas: "operation bar", "toolbox toolbar" and "wo
 4) Basic motion instructions: PTP, LIN, ARC, etc. Instructions are classified according to application scenarios: gluing, welding, conveyor belts, etc. You can easily find the required code blocks during use.
 
 **Workspace**: Graphical code blocks can be edited and displayed in the code editing area.
+
+.. image:: graphical/151.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 10.1-2 Workspace file sorting
 
 Logic Graphical Programming Commands
 ----------------------------------------

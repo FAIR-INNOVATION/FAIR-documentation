@@ -13,6 +13,15 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V4.0.0
+     - 2026-09-23
+     - | 1. Modified the parameter description of the SetWeldMachineCtrlMode() interface for setting the welder control mode, and added the pulse and no-pulse modes for Panasonic welders;
+       | 2. Added SendTCPFrame() to send custom command frames via TCP8080, including a code example;
+       | 3. Added TCFToAllJoint() to obtain 8 sets of inverse kinematics solutions for the robot, including a code example;
+       | 4. Added SetPhySpeedInstant() to set the physical speed in real time, including a code example;
+       | 5. Added MtlsLink() to set the TLS communication encryption certificate path for the integrated command protocol in the SDK, including a code example;
+       | 6. Added mTLS encryption for the integrated command protocol (TCP-8080, UDP-20007) communication in the SDK, and added configuration parameters for encryption enabling and encryption certificate path setting.
+
    * - V3.9.9
      - 2026-09-01
      - | 1. Updated the GetGripperMotionDone() interface for getting gripper motion status, updated the definition and usage scope of gripper status output parameters;

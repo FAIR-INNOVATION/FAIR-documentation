@@ -4,19 +4,37 @@ Robotics Basics
 .. toctree::
     :maxdepth: 5
 
-Instantiated Robot
+Instantiate the Robot
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. csv-table:: 
     :stub-columns: 1
     :widths: 10 30
 
-    "Prototype", "``RPC(ip)``"
-    "Description", "Instantiating a robot object"
-    "Required parameter", "- ``ip``:The IP address of the robot, with a default factory IP of “192.168.58.2”"
-    "Optional parameter", "NULL"
-    "Return value", "- Success: Returns a robot object
-    - Failed: The created object will be destroyed"
+    "Prototype", "``RPC(self, ip, tls_enable, tls_cert_path)``"
+    "Description", "Instantiate a robot object"
+    "Required parameters", "
+    - ``ip``: IP address of the robot; the default factory IP is `192.168.58.2`
+    - ``tls_enable``: Whether to enable encrypted communication (mTLS + DTLS); default False
+    - ``tls_cert_path``: Certificate folder path; the directory must contain: ca.crt / client.crt / client.key; required when tls_enable=True
+    "
+    "Default parameters", "None"
+    "Return value", "- Success: returns a robot object
+    - Failure: the created object will be destroyed"
+
+Code Example for Instantiation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    from fairino import Robot
+    import time
+
+    robot = Robot.RPC(
+        '192.168.58.2',
+        tls_enable=True,
+        tls_cert_path=r"E:\certs"
+    )
 
 Close the RPC connection
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -247,6 +247,19 @@ Update Lua File for Point Table
     */
     errno_t PointTableUpdateLua(const std::string &pointTableName, const std::string &luaFileName);
 
+Switch and Apply the Point Table
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Switch and apply the point table
+    * @param [in] pointTableName Name of the point table to switch to, pointTable1.db
+    * @return Error code
+    */
+    errno_t PointTableSwitch(const std::string pointTableName);
+
 Robot Point Table Operation Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -675,3 +688,74 @@ Code Example for Setting User-Defined Robot End-Effector LED Color
         robot.Sleep(1000);
         return 0;
     }
+
+Send Custom Command Frame via TCP8080
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Send a custom command frame via TCP8080 (automatically through the encrypted channel in mTLS mode)
+    * @param [in] frame Complete command frame, e.g. "/f/bIII52III236III7IIIMode(0)III/b/f"
+    * @return Error code
+    */
+    errno_t SendTCPFrame(std::string frame);
+                
+Code Example for Sending a Custom Command Frame via TCP8080
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestSendModeTcp()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot(true);
+        int rtn = 0;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        rtn = robot.SetCmdRpyCallback(UDPFrameCallBack);
+        printf("SetCmdRpyCallback rtn is %d\n", rtn);
+        robot.MtlsLink("");
+        robot.SetReConnectParam(true, 300000, 50);
+        rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        std::string program_name = "tls.lua";
+        unsigned char state = 0;
+        int line = 0;
+        std::string mode0 = "/f/bIII52III236III7IIIMode(0)III/b/f";
+        std::string mode1 = "/f/bIII52III236III7IIIMode(1)III/b/f";
+        printf("[SEND] %s\n", mode0.c_str());
+        robot.SendTCPFrame(mode0);
+        robot.Sleep(1000);
+        printf("[SEND] %s\n", mode1.c_str());
+        robot.SendTCPFrame(mode1);
+        robot.Sleep(1000);
+        printf("[SEND] %s\n", mode0.c_str());
+        robot.SendTCPFrame(mode0);
+        robot.Mode(0);
+        robot.LoadDefaultProgConfig(0, (char*)program_name.c_str());
+        robot.ProgramLoad((char*)program_name.c_str());
+        robot.SetSpeedInstant(50);
+        robot.ProgramRun();
+        robot.Sleep(5000);
+        robot.PauseMotion();
+        robot.GetProgramState(&state);
+        printf("program state:%u\n\n", state);
+        robot.GetCurrentLine(&line);
+        printf("current line:%d\n\n", line);
+        char loaded_name[256] = "";
+        robot.GetLoadedProgram(loaded_name);
+        printf("program name:%s\n\n", loaded_name);
+        robot.ResumeMotion();
+        robot.Sleep(2000);
+        robot.PauseMotion();
+        robot.Sleep(2000);
+        robot.CloseRPC();
+        robot.Sleep(1000);
+        return 0;
+    }    

@@ -13,6 +13,16 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V4.0.0
+     - 2026-09-23
+     - | 1. Modified the FRRobot() robot instantiation interface to add TLS encryption enablement parameter configuration for the integrated command protocol communication in the SDK;
+       | 2. Modified the parameter description of the SetWeldMachineCtrlMode() interface for setting the welder control mode, and added the pulse and no-pulse modes for Panasonic welders;
+       | 3. Added the SendTCPFrame() command for sending custom command frames via TCP 8080, including a code example;
+       | 4. Added the TCFToAllJoint() command for obtaining 8 sets of inverse kinematics solutions for the robot, including a code example;
+       | 5. Added the SetPhySpeedInstant() command for setting the physical speed in real time, including a code example;
+       | 6. Added the MtlsLink() command for setting the TLS communication encryption certificate path for the integrated command protocol in the SDK, including a code example;
+       | 7. Added descriptions for some SDK error codes.
+
    * - V3.9.9
      - 2026-09-01
      - | 1. Modified the GetGripperMotionDone() interface parameter description for getting gripper status, updated the definition of gripper status;

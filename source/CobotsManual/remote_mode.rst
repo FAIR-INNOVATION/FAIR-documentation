@@ -478,6 +478,36 @@ Robot Remote Mode Operation Instructions
 
 .. note:: To switch between different protocols, you must first click the "Uninstall" button before configuring another protocol.
 
+Board Firmware Upgrade
+----------------------------------------------------------------------------
+
+FRH-PCIeN-EC/EIP/CC/PN-RJ-V10 Board
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(1) Select the firmware package to be upgraded, named BoardFirm_xxx.tar.gz, click the "Upgrade" button, and wait for the upgrade;
+
+.. image:: remote_mode/056.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 18.3-1 Firmware Upgrade Package
+
+(2) After the upgrade is complete, restart the control box;
+
+.. image:: remote_mode/057.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 18.3-2 Upgrade Complete
+   
+(3) Restart the control box. If the warning message shown in the figure appears, it indicates that this firmware upgrade has failed. After clearing the warning, re-execute the upgrade operation.
+
+.. image:: remote_mode/058.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 18.3-3 Firmware Upgrade Failed
+
 Appendix
 -------------------
 
