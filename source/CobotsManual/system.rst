@@ -244,7 +244,7 @@ There are six functions by default, administrators have no function restrictions
 
 .. centered:: Table 15.2-1 Permission details
 
-.. image:: system/007.png
+.. image:: safety/069.png
    :width: 6in
    :align: center
 
@@ -266,11 +266,7 @@ There are six functions by default, administrators have no function restrictions
 
 -  **Set function permissions**: Click the "Settings" icon in the table operation bar to set the permissions of the current function. After setting, click the "Save" button below to confirm the settings.
 
-.. image:: system/010.png
-   :width: 6in
-   :align: center
-
-.. image:: system/011.png
+.. image:: safety/070.png
    :width: 6in
    :align: center
 

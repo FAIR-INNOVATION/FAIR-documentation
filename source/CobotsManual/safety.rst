@@ -387,21 +387,6 @@ Cybersecurity Residual Risk Statement
      - None
      - | ① Users must place the robot teach pendant in a safe working area and prohibit unauthorized personnel from entering the area;
 
-Permission Management
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. centered:: Table 3-1 Permission Details
-
-.. image:: safety/069.png
-   :width: 6in
-   :align: center
-
-.. image:: safety/070.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 7.3-24 Setting Role Permissions
-
 Safety Configuration Parameters
 --------------------------------------------------------------------------------------------------
 

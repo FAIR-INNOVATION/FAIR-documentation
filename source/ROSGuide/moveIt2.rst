@@ -538,7 +538,9 @@ Table 4-1 All Models Launch Command Reference
    * - FR16 
      - ros2 launch fr16v6_ros2_control spawn_fr16v6.launch.py
      - fr16v6
-     - /fr16v6/joint_states   * - FR20 
+     - /fr16v6/joint_states   
+     
+   * - FR20 
      - ros2 launch fr20v6_ros2_control spawn_fr20v6.launch.py
      - fr20v6
      - /fr20v6/joint_states
