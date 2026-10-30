@@ -4203,20 +4203,121 @@ A maximum of 8 programs can be executed at the same time as background logic, an
 
 When the power is cut off, the background logic program will be automatically loaded and run according to the set state the next time the power is turned on.
 
+Background Command Interface
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The left side of the interface is mainly the area for adding program commands. Click the icon above each keyword to enter the detailed interface for adding program commands on the right side.
+
+.. image:: coding/253.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-1 Background program interface
+
+Logic Command Interface
+********************************************************************************
+
+The usage of logic commands is consistent with that of foreground programs, including judgment, variables, and printing.
+
+Control Command Interface
+********************************************************************************
+
+Operation Control Commands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Used to control foreground programs, including run command, pause command, resume command, and stop command;
+
+.. image:: coding/626.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-2 Background program control commands
+
+DelayMS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+DelayMS is a delay command dedicated to background programs, and its waiting time unit is milliseconds.
+
+.. image:: coding/627.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-3 DelayMS command
+
+Background DIO
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+This part of commands is used to control the control box IO in background programs, including setting DO, getting DI, and reading DO status. To ensure the cyclic execution of background programs, it is recommended to use non-blocking mode in background program commands.
+
+.. image:: coding/628.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-4 Background DIO command interface
+
+Background AIO
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+This part of commands is used to control analog AO and AI signals in background programs, including setting AO, getting AI, and reading AO status. To ensure the cyclic execution of background programs, it is recommended to use non-blocking mode in background program commands.
+
+.. image:: coding/629.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-5 Background AIO command interface
+
+Background Extended IO
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+This part of commands is used to control extended IO signals in background programs, including setting or reading AuxDO, AuxAO, AuxDI, and AuxAI. To ensure the cyclic execution of background programs, it is recommended to use non-blocking mode in background program commands, or apply threads in command options.
+
+.. image:: coding/630.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-6 Background extended IO command interface
+
+Communication Command Interface
+********************************************************************************
+
+Modbus Commands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The usage of this part of commands is consistent with that of foreground programs. Based on the bus function of the ModbusTCP/RTU protocol, users can read and write coils, discrete inputs, and registers through related commands.
+
+.. image:: coding/631.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-7 Background Modbus command interface
+
+Board Commands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The usage of this part of commands is consistent with that of foreground programs. After establishing communication with the board, the slave DO, AO, DI, and AI can be set or obtained through background board commands.
+
+.. image:: coding/632.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-8 Board commands
+
+Socket Commands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The usage of this part of commands is consistent with that of foreground programs. In background programs, only Socket send and receive commands can be used. Please note when using: Socket send and receive commands have blocking characteristics: if called in a background program, they will block the execution of other commands in the same program and also affect the operation of foreground programs on the same Socket data. It is recommended to use Socket commands separately in the same foreground or background program to avoid affecting other commands.
+
+.. image:: coding/633.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.19-1-9 Background socket commands
+
 Save the robot background program
 ************************************
 
 Backgrounder creation, editing, and saving can only be used in the Backgrounder interface.
 
 **Step1**:Open the robot background program interface. Open the teaching page, click "Program", and then click "Coding". Select the command background program in the upper left corner to enter the background program interface.
-
-.. note:: The background program only contains logic judgment, assignment instructions, front-end control instructions, I/O interface instructions and Modbus communication instructions.
-
-.. image:: coding/253.png
-   :width: 6in
-   :align: center
-
-.. centered:: Figure 9.19-1 The robot background program interface
 
 **Step2**:In manual mode, open the background teach program file. Click "New" to create a new teaching program file, edit the program, and click "Save" to save the file. 
 
@@ -9249,3 +9350,81 @@ ModbusMasterWriteDO_RTU(), ModbusMasterWriteAO_RTU(), ModbusMasterReadDO_RTU(), 
 FieldBusSlaveWaitAI(), WaitToolAI(), WaitAuxAI(), SPLCSetAO(), SPLCSetToolAO(), SetToolList(), SetWObjList(), SetExToolList(), PostureAdjustOn(), RegisterVar(), SetSysVarValue(), GetSysVarValue(), MultilayerOffsetTrsfToBase(), GetSegWeldDisDir(), DMP()
 LTSearchStart(), PointTableSwitch(), GetSegmentWeldPoint(), LaserRecordPoint(), GetIntersectionThrough3Point(), GetIntersectionThrough4Point(), GetUserVal(), SetUserVal(), MoveToIntersectLineStart(), MoveIntersectLine(), OriginPointWeaveStart()
 MatrixMoveStart(), MatrixMoveEnd(), MatrixSetCountPlus(), MatrixGetCount(), MatrixSetStartCount().   
+
+Lua Program Single-Step Debugging Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Background
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The existing platform of FR series robots already has complete Lua program execution capability, and the entire chain runs stably. However, the execution process is a black box for users—the program runs to the end, and any problems in the middle can only be addressed through logs or trial and error.
+
+This work adds single-step debugging capability without changing the existing framework, allowing users to observe program execution step by step, view running status, and locate problems.
+
+Single-Step Debugging Function Introduction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The entry of the single-step debugging function is maintained on the web page "Initial Settings" -> "Teaching Program" -> "Program Programming". The debugging function entry button is located behind the name of the opened program. The single-step debugging function can only be performed in manual mode, and the robot is prohibited from being dragged during debugging.
+
+.. image:: coding/634.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.41-1 Single-step debugging function entry
+
+After clicking "Enable Single-Step Debugging", you can enter lua program debugging. The program will pause at the entry point and wait for the next command. The single-step debugging function provides three commands:
+
+Single-step debugging (step_over): Execute the current line "as a whole" and then stop at the next line, without entering the function called by the current line. If a breakpoint is set inside the called function, or an exception/stop statement is encountered, the program will still pause inside the function instead of jumping directly to the next line.
+
+.. image:: coding/635.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.41-2 Single-step run command
+
+- **Continue**: Resume the program from the current position and pause only when the next breakpoint is encountered, the program ends, or an exception occurs.
+
+.. image:: coding/636.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.41-3 Continue run command
+
+- **Exit**: Exit the single-step debugging function.
+
+.. image:: coding/637.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.41-4 Exit command
+
+Single-Step Debugging Information Panel
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The "Single-Step Debugging" panel is used to feed back the underlying running status in real time when the program is executed line by line. Operators can use this panel to monitor the program execution trajectory, current running environment, and memory data, and accurately locate logic errors or exceptions.
+
+- Status: Displays the current program execution situation. Including idle, running, paused, and ended.
+- Line number: Displays the number of the code line to be executed currently.
+- Pause reason: Explains why the program stops here. Including entry, single-step, and continue.
+- Stack information: Displays the current call stack trajectory of the program.
+- Local variables: Displays in real time all variables in the scope of the current code line and their current values. In LUA, only variables defined as local can directly print their names.
+- Stack error information: When the program crashes or is interrupted due to runtime errors (such as division by zero, null pointer reference, array out of bounds), this area will display the specific error code and error description.
+
+.. image:: coding/638.png
+   :width: 3in
+   :align: center
+
+.. centered:: Figure 9.41-5 Single-step debugging information panel
+
+Breakpoint Management
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Breakpoints belong to the program itself, not to a debugging session. Each Lua file maintains its own breakpoint information, and breakpoints are still saved after refreshing or restarting the device.
+
+Users can click the code line number on the front end to set or cancel breakpoints. Multiple breakpoints can exist at the same time, and breakpoints can be set before and during debugging. Breakpoints take effect immediately during debugging.
+
+.. image:: coding/639.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 9.41-6 Breakpoint management

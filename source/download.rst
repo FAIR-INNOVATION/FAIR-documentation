@@ -349,11 +349,11 @@ Zero position identification model
 FAIRINO SimMachine
 -----------------------
 
-    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1W4PghC1JL9iliANkH1kvKSqR8Vz13AUZ/view?usp=sharing>`
+    :download:`FAIRINO SimMachine VMware <https://drive.google.com/file/d/1CERwDjmn7dhzK0KRU-f74kx3QM_OgBy9/view?usp=sharing>`
     
-    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1gABuEa3zuVqBsw6FyfYmnaIXTvRLHeqZ/view?usp=sharing>`
+    :download:`FAIRINO SimMachine Docker <https://drive.google.com/file/d/1QoZmDMkkvW2RZ-vP1-XLslbvCBBx_jC_/view?usp=sharing>`
 
-    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1fpwdAMfZ_fstpUPNcpq-RZgy_eyAKcJ0/view?usp=sharing>`
+    :download:`FAIRINO_SimMachine_Software <https://drive.google.com/file/d/1JZQaczBwI4_pd_IZEj03R9jgmjT2dpIv/view?usp=sharing>`
 
  
 CPP SDK
@@ -396,7 +396,7 @@ Communication Command Protocol
 
 Robot software
 ---------------------------------
-    :download:`FAIRINO-CobotSoftware-QX-V4.0.0.1-20261009.zip <https://drive.google.com/file/d/1MmXItnTRCqeVdtjN_i02fUMhWy3cjKig/view?usp=drive_link>`
+    :download:`FAIRINO-CobotSoftware-QX-V4.0.1-20261027.zip <https://drive.google.com/file/d/1AJA_rwCVs0chzrP_ZpGSsuz9DNN2Dil2/view?usp=sharing>`
     
-    :download:`FAIRINO-CobotSoftware-LA-V4.0.0.1-20261009.zip <https://drive.google.com/file/d/11F0foktMsKqUqF98DtJv61u0eF-b42_C/view?usp=drive_link>`
+    :download:`FAIRINO-CobotSoftware-LA-V4.0.1-20261027.zip <https://drive.google.com/file/d/1NJM-U9XaBXYIHLtOpMNE5pr4fEZ07FPK/view?usp=sharing>`
     

@@ -5,34 +5,38 @@ Robot Peripheral Devices
     :maxdepth: 5
 
 Configure Gripper
-++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  Configure gripper
-    * @param  [in] company  Gripper manufacturer (to be determined)
-    * @param  [in] device  Device number (currently unused, default 0)
-    * @param  [in] softvesion  Software version (currently unused, default 0)
-    * @param  [in] bus  Device bus location at end (currently unused, default 0)
-    * @return  Error code
-    */
-    errno_t  SetGripperConfig(int company, int device, int softvesion, int bus);
+	/**
+	 * @brief  Configure gripper
+	 * @param  [in] company  Gripper manufacturer, 1-ROBOTIQ, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing, 6-Junduo, 7-Meituan, 8-Zengguang
+	 * @param  [in] device  Device number, ROBOTIQ (0-2F-85; 1-2F-140; 2-Vacuum gripper; 3-Three-finger gripper; 4-Hand-E),
+								   Huiling (0-Z-EFG-RNM; 1-Z-EFG-100; 2-Z-EFG-20P; 3-Z-EFG-50), Tianji (0-TEG-110), Dahuan (0-PGI-140),
+								   Zhixing (0-CTPM2F20), Junduo (0-RG, 1-REG), Meituan (0-MT-ACTUATOR), Zengguang (0-RM-GB-11-40-2-ITG)
+	 * @param  [in] softvesion  Software version number, not used for now, default 0
+	 * @param  [in] bus Device mounted at the end-effector bus position, not used for now, default 0
+	 * @return  Error code
+	 */
+	errno_t SetGripperConfig(int company, int device, int softvesion, int bus);
 
 Get Gripper Configuration
-++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    /**
-    * @brief  Get gripper configuration
-    * @param  [in] company  Gripper manufacturer (to be determined)
-    * @param  [in] device  Device number (currently unused, default 0)
-    * @param  [in] softvesion  Software version (currently unused, default 0)
-    * @param  [in] bus  Device bus location at end (currently unused, default 0)
-    * @return  Error code
-    */
-    errno_t  GetGripperConfig(int *company, int *device, int *softvesion, int *bus);
+	/**
+	 *@brief  Get gripper configuration
+	 *@param  [out] company  Gripper manufacturer, 1-Robotiq, 2-Huiling, 3-Tianji, 4-Dahuan, 5-Zhixing, 6-Junduo, 7-Meituan, 8-Zengguang
+	 *@param  [out] device  Device number, ROBOTIQ (0-2F-85; 1-2F-140; 2-Vacuum gripper; 3-Three-finger gripper; 4-Hand-E),
+								   Huiling (0-Z-EFG-RNM; 1-Z-EFG-100; 2-Z-EFG-20P; 3-Z-EFG-50), Tianji (0-TEG-110), Dahuan (0-PGI-140),
+								   Zhixing (0-CTPM2F20), Junduo (0-RG, 1-REG), Meituan (0-MT-ACTUATOR), Zengguang (0-RM-GB-11-40-2-ITG)
+	 *@param  [out] softvesion  Software version number, not used for now, default 0
+	 *@param  [out] bus Device mounted at the end-effector bus position, not used for now, default 0
+	 *@return  Error code
+	 */
+	errno_t GetGripperConfig(int *company, int *device, int *softvesion, int *bus);
 
 Activate Gripper
 ++++++++++++++++++++++++++
@@ -76,12 +80,12 @@ Get Gripper Motion Status
     :linenos:
 
     /**
-     * @brief  Get gripper motion status (only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)
-     * @param  [out] fault  0-no error, other-error exists
-     * @param  [out] status  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
-     * @return  Error code
-     */
-    errno_t  GetGripperMotionDone(uint16_t *fault, uint8_t *status);
+    * @brief Get the gripper motion status (since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified)
+    * @param [out] fault 0-No error, other-Error
+    * @param [out] status 0-Motion not completed, 1-Motion completed but no object detected; 2-Motion completed and object detected; 3-Motion completed and object dropped detected;
+    * @return Error code
+    */
+    errno_t GetGripperMotionDone(int& fault,int& status);
 
 Get Gripper Activation Status
 ++++++++++++++++++++++++++++++++++++++
@@ -347,46 +351,60 @@ Wait for Gripper Motion Status
     :linenos:
 
     /**
-    * @brief Wait for gripper motion status (only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)
-    * @param [in] status 0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
-    * @param [in] timeout Timeout (ms), -1 for infinite wait
-    * @param [in] strategy 0-stop with error, 1-continue running
-    * @param [in] type 0-parallel gripper, 1-rotary gripper
+    * @brief Wait for the gripper motion status (since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified)
+    * @param [in] staus 0-Motion not completed, 1-Motion completed but no object detected; 2-Motion completed and object detected; 3-Motion completed and object dropped detected
+    * @param [in] timeout Timeout (ms), -1 means wait forever
+    * @param [in] strategy 0-Stop and report error, 1-Continue running
+    * @param [in] type 0-Parallel gripper, 1-Rotary gripper
     * @return Error code
     */
-    errno_t GripperWaitMotionDone(int status, int timeout, int strategy, int type);
+    errno_t GripperWaitMotionDone(int staus, int timeout, int strategy, int type);
     
 Wait for Gripper Motion Status Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c++
     :linenos:
 
-    int TestGripperWaitMotionDone()
+    int TestGetGripperMotionDone()
     {
-    ROBOT_STATE_PKG pkg = {};
-    FRRobot robot;
-    robot.LoggerInit();
-    robot.SetLoggerLevel(1);
-    robot.SetReConnectParam(true, 30000, 500);
-    int rtn = robot.RPC("192.168.58.2");
-    if (rtn != 0)
-    {
-        return -1;
-    }
-    for (int i = 0; i < 10; i++)
-    {
-        rtn = robot.MoveGripper(1, 0, 10, 100, 30000, 0, 0, 0, 0, 0);
-        printf("MoveGripper(Open) ret=%d\n", rtn);
-        rtn = robot.GripperWaitMotionDone(1, 10000, 0, 0);
-        printf("GripperWaitMotionDone(Wait for motion completed without object detection) ret=%d\n", rtn);
-        rtn = robot.MoveGripper(1, 90, 10, 100, 30000, 0, 0, 0, 0, 0);
-        printf("MoveGripper(Close) ret=%d\n", rtn);
-        rtn = robot.GripperWaitMotionDone(1, 10000, 0, 0);
-        printf("GripperWaitMotionDone(Wait for motion completed without object detection) ret=%d\n", rtn);
-    }
-    robot.Sleep(1000);
-    robot.CloseRPC();
-    robot.Sleep(1000);
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        robot.SetReConnectParam(true, 30000, 500);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        uint8_t status = 0;
+        uint16_t fault = 0;
+        // Gripper open
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
+        printf("MoveGripper(open) ret=%d\n", rtn);
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        robot.GetRobotRealTimeState(&pkg);
+        printf(" gripper_motiondone %d)\n", pkg.gripper_motiondone);
+        // Gripper close
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
+        printf("MoveGripper(close) ret=%d\n", rtn);
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        robot.GetRobotRealTimeState(&pkg);
+        printf(" gripper_motiondone %d)\n", pkg.gripper_motiondone);
+        // Wait for motion completion without object detection, timeout 5s, stop and report error
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0);
+        printf("GripperWaitMotionDone(wait for completion, no object detected) ret=%d\n", rtn);
+        while (true)
+        {
+            robot.GetGripperMotionDone(&fault, &status);
+            printf("motion status:%d,%d\n", fault, status);
+            robot.GetRobotRealTimeState(&pkg);
+            printf(" error code %d,%d\n", pkg.main_code, pkg.sub_code);
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        }
+        robot.CloseRPC();
+        robot.Sleep(1000);
+        return 0;
     }
 
 Conveyor Start/Stop

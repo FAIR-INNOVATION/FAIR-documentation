@@ -417,6 +417,53 @@ Joint Full Parameter Configuration Upgrade
     * @return Error code
     */
     errno_t JointAllParamUpgrade(std::string path);
+
+Get Joint All Parameters Upgrade Progress Percentage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get joint all parameters upgrade progress percentage
+    * @param [out] progress Upgrade progress percentage [0-100], -1: upgrade failed
+    * @return Error code
+    */
+    errno_t GetJointAllParamUpgradeProgress(int& progress);
+    
+Code Example for Joint All Parameters Upgrade and Querying Upgrade Progress
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c++
+    :linenos:
+
+    int TestJointAllParamUpgrade()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.RobotEnable(0);
+        robot.Sleep(200);
+        rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/FR3WMS/jointallparameters.db");
+        printf("robot JointAllParamUpgrade rtn is %d\n", rtn);
+        
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            robot.GetJointAllParamUpgradeProgress(upgradeProgress);
+            printf("robot joint all param upgrade progress : %d\n", upgradeProgress);
+            robot.Sleep(200);
+        }
+        robot.CloseRPC();
+        return 0;
+    }    
     
 Robot Slave Firmware Upgrade Code Example
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -757,5 +804,64 @@ Code Example for Sending a Custom Command Frame via TCP8080
         robot.Sleep(2000);
         robot.CloseRPC();
         robot.Sleep(1000);
+        return 0;
+    }    
+
+Data Backup Package Upload Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Data backup package upload upgrade
+    * @param [in] filePath Upload data backup package file path; D://zUP/fr_user_data.tar.gz
+    * @return Error code
+    */
+    errno_t DataPackageUpgrade(std::string filePath);
+    
+Get Data Backup Package Upgrade Progress Percentage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    /**
+    * @brief Get data backup package upgrade progress percentage
+    * @param [out] progress Upgrade progress percentage [0-100], -1: upgrade failed
+    * @return Error code
+    */
+    errno_t GetDataPackageUpgradeProgress(int& progress);
+        
+Code Example for Data Backup Package Upload Upgrade and Querying Upgrade Progress
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+.. code-block:: c++
+    :linenos:
+
+    int TestDataPackageUpgrade()
+    {
+        ROBOT_STATE_PKG pkg = {};
+        FRRobot robot;
+        robot.LoggerInit();
+        robot.SetLoggerLevel(1);
+        int rtn = robot.RPC("192.168.58.2");
+        if (rtn != 0)
+        {
+            return -1;
+        }
+        robot.SetReConnectParam(true, 30000, 500);
+        robot.Sleep(200);
+        rtn = robot.DataPackageUpgrade("D://zUP/upgrade/FR5/fr_user_data.tar.gz");
+        printf("robot DataPackageUpgrade rtn is %d\n", rtn);
+        
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            robot.GetDataPackageUpgradeProgress(upgradeProgress);
+            printf("robot data package upgrade progress : %d\n", upgradeProgress);
+            robot.Sleep(200);
+        }
+        robot.CloseRPC();
         return 0;
     }    

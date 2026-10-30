@@ -607,6 +607,60 @@ Click "Teach Program" -> "Peripheral Instructions" -> "Gripper" to add a wait fo
 
 .. centered:: Figure 8.2-18 Gripper Motion Example Program
 
+End-Effector Adapted Gripper Status Query
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This update adds gripper running status and position query functions, making it convenient for users to obtain the gripper motion completion status in teaching programs, and to monitor the gripper position, speed, torque, and motion status in real time through WebApp.
+
+Environment Configuration
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- End-effector firmware version: FR_END_FV201014_MAIN_U1_T01_20260626
+- Robot software version: V4.0.1 and above
+
+Gripper Command Update Description
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Get Gripper Motion Completion Status
+*********************************************************************************
+
+Open WebApp, go to Teaching Program -> Program Programming interface, and open Peripheral Command - Gripper. Generate the Get Gripper Motion Completion Status command. This command is only used to query the current motion completion status of the gripper.
+
+.. image:: safety/073.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 8.2-19 Get gripper motion completion status
+
+Get Gripper Current Position
+*********************************************************************************
+
+Open WebApp, go to Teaching Program -> Program Programming interface, and open Peripheral Command - Gripper. Generate the Get Gripper Current Position command. This command is only used to query the current actual position of the gripper.
+
+.. image:: safety/074.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 8.2-20 Get gripper current position
+
+Gripper Data Monitoring
+*********************************************************************************
+
+Open WebApp, go to Initial Settings -> Peripheral -> Gripper -> interface, and enable status monitoring. After issuing control commands, on the right Gripper interface, you can obtain real-time feedback data of gripper position, speed, and torque, as well as the gripper motion status.
+
+Gripper motion status code definitions: 0-Moving; 1-Motion completed, no object detected; 2-Motion in place, object detected; 3-Workpiece dropped.
+
+.. image:: safety/075.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 8.2-21 Gripper motion status codes
+
+.. note:: Note: When the workpiece drops, the WebApp page will give an alarm prompt, and the SDK can read the corresponding fault code. Fault handling must be performed in the following order: clear alarm → reset gripper → reactivate gripper, after which motion commands can continue to be issued.
+
 Force Sensor
 -------------------------
 

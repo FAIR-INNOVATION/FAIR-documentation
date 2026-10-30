@@ -697,3 +697,92 @@ Code Example for Sending a Custom Command Frame via TCP 8080
             }
         }
     }    
+
+Data Backup Package Upload Upgrade  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Data backup package upload upgrade
+    * @param [in] filePath Upload data backup package file path; D://zUP/fr_user_data.tar.gz
+    * @return Error code
+    */
+    public int DataPackageUpgrade(string filePath)
+    
+Get Data Backup Package Upgrade Progress Percentage  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get data backup package upgrade progress percentage
+    * @param [out] progress Upgrade progress percentage [0-100], -1: upgrade failed
+    * @return Error code
+    */
+    public int GetDataPackageUpgradeProgress(ref int progress)
+    
+Get Joint All Parameters Upgrade Progress Percentage  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    /**
+    * @brief Get joint all parameters upgrade progress percentage
+    * @param [out] progress Upgrade progress percentage [0-100], -1: upgrade failed
+    * @return Error code
+    */
+    public int GetJointAllParamUpgradeProgress(ref int progress)
+        
+Code Example for Data Backup Package Upload Upgrade and Querying Upgrade Progress  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+
+    public void TestDataPackageUpgrade()
+    {
+        int rtn = robot.DataPackageUpgrade("D://zUP/upgrade/FR5/fr_user_data.tar.gz");
+        Console.WriteLine($"robot DataPackageUpgrade rtn is {rtn}");
+
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            int ret = robot.GetDataPackageUpgradeProgress(ref upgradeProgress);
+            Console.WriteLine($"robot data package upgrade progress : {upgradeProgress}, rtn : {ret}");
+            if (ret != 0 || upgradeProgress == -1)
+            {
+                break;
+            }
+            Thread.Sleep(200);
+        }
+    }
+            
+Code Example for Joint All Parameters Upgrade and Querying Upgrade Progress  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. code-block:: c#
+    :linenos:
+    
+    public void TestJointAllParamUpgrade()
+    {
+        robot.RobotEnable(0);
+        Thread.Sleep(200);
+        int rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/FR5/jointallparameters.db");
+        Console.WriteLine($"robot JointAllParamUpgrade rtn is {rtn}");
+
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            int ret = robot.GetJointAllParamUpgradeProgress(ref upgradeProgress);
+            Console.WriteLine($"robot joint all param upgrade progress : {upgradeProgress}, rtn : {ret}");
+            if (ret != 0 || upgradeProgress == -1)
+            {
+                break;
+            }
+            Thread.Sleep(200);
+        }
+    }    

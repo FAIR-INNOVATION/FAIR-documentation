@@ -345,6 +345,42 @@ Joint Complete Parameter Configuration Upgrade
     */
     public int JointAllParamUpgrade(String path)
 
+Get Joint All Parameters Upgrade Progress Percentage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get joint all parameters upgrade progress percentage
+    * @return List[0]: Error code; List[1]: Upgrade progress percentage [0-100], -1: upgrade failed
+    */
+    public List<Integer> GetJointAllParamUpgradeProgress()
+
+Code Example for Joint All Parameters Upgrade and Querying Upgrade Progress
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestJointAllParamUpgrade(Robot robot)
+    {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        int rtn = 0;
+
+        robot.RobotEnable(0);
+        robot.Sleep(200);
+
+        rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/FR3WMS/jointallparameters.db");
+        System.out.println("robot JointAllParamUpgrade rtn is " + rtn);
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            List<Integer> state = robot.GetJointAllParamUpgradeProgress();
+            upgradeProgress = state.get(1);
+            System.out.println("robot joint all param upgrade progress : " + upgradeProgress);
+            robot.Sleep(200);
+        }
+    }    
+
 Robot Slave Firmware Upgrade Code Example
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
@@ -615,4 +651,51 @@ Code Example for Sending a Custom Command Frame via TCP8080
         robot.Sleep(2000);
 
         System.out.println("========== TCP verification finished (see responses above) ==========");
+    }    
+
+Data Backup Package Upload Upgrade
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Data backup package upload upgrade
+    * @param [in] filePath Upload data backup package file path; D://zUP/fr_user_data.tar.gz
+    * @return Error code
+    */
+    public int DataPackageUpgrade(String filePath)
+
+Get Data Backup Package Upgrade Progress Percentage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    /**
+    * @brief Get data backup package upgrade progress percentage
+    * @return List[0]: Error code; List[1]: Upgrade progress percentage [0-100], -1: upgrade failed
+    */
+    public List<Integer> GetDataPackageUpgradeProgress()
+
+Code Example for Data Backup Package Upload Upgrade and Querying Upgrade Progress
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: Java
+    :linenos:
+
+    public static void TestDataPackageUpgrade(Robot robot)
+    {
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
+        int rtn = 0;
+        robot.Sleep(200);
+
+        rtn = robot.DataPackageUpgrade("D://zUP/upgrade/FR3WMS/fr_user_data.tar.gz");
+        System.out.println("robot DataPackageUpgrade rtn is " + rtn);
+
+        int upgradeProgress = 0;
+        while (upgradeProgress < 100)
+        {
+            List<Integer> state = robot.GetDataPackageUpgradeProgress();
+            upgradeProgress = state.get(1);
+            System.out.println("robot data package upgrade progress : " + upgradeProgress);
+            robot.Sleep(200);
+        }
     }    

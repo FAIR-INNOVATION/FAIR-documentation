@@ -72,11 +72,11 @@ Getting the jaw movement status
     :widths: 10 30
 
     "Prototype", "``GetGripperMotionDone()``"
-    "Description", "Get the state of the jaw motion(only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)"
-    "Mandatory parameters", "NULL"
-    "Default parameters", "NULL"
-    "Return Value", "- errorcode Success-0 Failure- errcode 
-    - ``[fault,status]``: status of gripper movement, fault:0-no error, other-with error; status:0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected"
+    "Description", "Get the gripper motion status (since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified)"
+    "Required parameters", "None"
+    "Default parameters", "None"
+    "Return value", "- Error code Success-0  Failure- errcode 
+    - ``[fault,status]``: Gripper motion status, fault: 0-No error, other-Error; status: 0-Motion not completed, 1-Motion completed but no object detected, 2-Motion completed and object detected, 3-Motion completed and object dropped detected"
 
 Obtain the activated status of the gripper
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2139,7 +2139,7 @@ Wait for Gripper Motion Status
     "Prototype", "``GripperWaitMotionDone(self, status, timeout, strategy, type)``"
     "Description", "Wait for gripper motion status"
     "Required Parameters", "
-    - ``status``：0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
+    - ``status``：0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected 3-Motion completed and object dropped detected
     - ``timeout``：Timeout (ms), -1 for infinite wait
     - ``strategy``：0-stop with error, 1-continue running
     - ``type``：0-parallel gripper, 1-rotary gripper
@@ -2155,39 +2155,46 @@ Wait for Gripper Motion Status Code Example
     from fairino import Robot
     import time
 
-
     def main():
         # Establish connection with the robot controller
         robot = Robot.RPC('192.168.58.2')
         time.sleep(0.5)  # Wait for connection and data reception
 
-        print("========== Gripper Wait Motion Complete Test ==========")
+        print("========== Gripper Motion Done Test ==========")
 
-        # ========== Gripper open ==========
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0)
+        # Open the gripper
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0)
         print(f"MoveGripper(open) ret={rtn}")
-        time.sleep(4)
+        time.sleep(2)
+        rtn, pkg = robot.GetRobotRealTimeState()
+        print(f"gripper_motiondone {pkg.gripper_motiondone}")
 
-        # ========== Gripper close ==========
-        rtn = robot.MoveGripper(1, 90, 100, 100, 30000, 0, 0, 0, 0, 0)
+        # Close the gripper
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0)
         print(f"MoveGripper(close) ret={rtn}")
+        time.sleep(2)
+        rtn, pkg = robot.GetRobotRealTimeState()
+        print(f"gripper_motiondone {pkg.gripper_motiondone}")
 
-        # ========== Wait for motion completed (no object detected, timeout 30s, stop with error) ==========
-        rtn = robot.GripperWaitMotionDone(1, 30000, 0, 0)
-        print(f"GripperWaitMotionDone(wait completed with no object detected) ret={rtn}")
+        # Wait for motion done, no object detected, timeout 5s, stop with error
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0)
+        print(f"GripperWaitMotionDone(no object detected) ret={rtn}")
 
-        # ========== Gripper open ==========
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0)
-        print(f"MoveGripper(open) ret={rtn}")
+        # Loop and query gripper motion status
+        while True:
+            rtn, status = robot.GetGripperMotionDone()
+            print(f"motion status:{status[0]},{status[1]}\n")
 
-        print("========== Test Complete ==========")
+            rtn, pkg = robot.GetRobotRealTimeState()
+            print(f"error code {pkg.main_code},{pkg.sub_code}")
 
-        # Close connection
+            time.sleep(0.5)
+
+        # Close connection (never reached due to infinite loop)
         robot.CloseRPC()
 
-
     if __name__ == "__main__":
-        main()    
+        main() 
 
 Laser Recording Replay + Extended Axis Asynchronous Motion + Fixed-Point Weave Code Example    
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

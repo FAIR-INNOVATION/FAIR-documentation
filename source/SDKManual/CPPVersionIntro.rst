@@ -13,6 +13,13 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V4.0.1
+     - 2026-10-27
+     - | 1. Modified the parameter descriptions of the GetGripperMotionDone() command for getting the gripper motion status and the GripperWaitMotionDone() command for waiting for gripper motion completion; the gripper motion status parameter adds the motion completed and object dropped detected status;
+       | 2. Modified the ServoMoveStart() servo motion start command, adding filtering time and gain parameter settings;
+       | 3. Added the DataPackageUpgrade() and GetDataPackageUpgradeProgress() commands for robot data backup package upload upgrade and obtaining the upgrade progress percentage, including code examples;
+       | 4. Added the GetJointAllParamUpgradeProgress() command for obtaining the robot joint all parameters upgrade progress percentage, including a code example;
+
    * - V4.0.0
      - 2026-09-23
      - | 1. Modified the FRRobot() robot instantiation interface to add TLS encryption enablement parameter configuration for the integrated command protocol communication in the SDK;

@@ -273,6 +273,9 @@ In the robot WebApp, click "Initial Settings", "Safety", and "Network Security" 
 - **Control via ModbusRTU**: When the robot acts as a ModbusRTU slave, the robot DO output, program start/stop, manual/auto switching, reduced mode, etc. can be controlled through "Function Digital Input (Coil)". After disabling "Control via ModbusRTU", the above control functions through "Function Digital Input (Coil)" are all disabled.
 - **Control via CNDE**: The robot CNDE input can be configured for robot DO output, AO output, running speed, and other controls. After disabling "Control via CNDE", the CNDE client cannot control the above functions.
 - **Button Box IP Reset Function**: The robot button box V2.0 has an IP reset button. Disabling the "Button Box IP Reset Function" will prevent the robot IP from being reset through the button box.
+- **Control via port 8082**: The robot port 8082 is the upload port for LUA files and TPD trajectory recording files. Through this port, the content and name of the current motion LUA file can be modified. When the configuration is not enabled, the robot will not respond to the client's file modification requests.
+- **Control via NTP**: The LA version control box has an NTP time synchronization service. Disabling this function prohibits the robot from performing NTP time synchronization.
+- **Control via DHCP**: When turned off, the robot disables the DHCP service.
 
 Enter the security password on the safety configuration page and unlock it, set the communication ports to be enabled to "On", click "Apply", confirm the enabled functions in the safety configuration confirmation window that pops up, and click the "Confirm" button.
 
@@ -287,6 +290,20 @@ Enter the security password on the safety configuration page and unlock it, set 
    :align: center
 
 .. centered:: Figure 7.3-21 Communication Ports Enabled
+
+Robot PTP Time Synchronization Service Enablement Configuration
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The robot PTP time synchronization service can be configured as disabled, software time synchronization, or hardware time synchronization, and the robot control box network ports Eth0 and Eth1 for the PTP time synchronization service can be set. The "Logging" and "Synchronization Accuracy Detection" functions are not yet available.
+
+.. image:: safety/076.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.3-21-1 Robot PTP time synchronization service configuration
+
+Robot Control Box Physical Tamper Protection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The robot control box has a physical tamper-evident label. Users need to regularly check whether the tamper-evident label on the robot control box is normal.
 
 Robot Software Integrity Verification
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -427,6 +444,34 @@ Safety Stop
 
 Click the menu bar "Initial Setup" -> "Safety", and click "Safety Stop" to enter the configuration interface to set the safety stop mode and safety stop strategy parameters.
 
+Safety Stop Mode
+**********************************************************************
+
+When the safety stop mode is selected as "CR Certification", this mode mainly meets the safety requirements of the domestic robot certification system (CR Certification) and is suitable for domestic project acceptance or market access scenarios. CR Certification is an authoritative certification for Chinese robot products launched under the guidance of multiple national ministries and commissions, focusing on assessing the safety and reliability of robots.
+
+In this mode, the system's safety stop function is configured and verified according to the industry specifications for domestic collaborative robots. In collaborative robot industry practice, such core safety functions are usually designed and evaluated with reference to a higher functional safety level to ensure absolute safety during human-robot collaboration.
+
+.. image:: safety/071.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-2-1 CR certification mode
+
+Functional Safety is an internationally accepted engineering methodology, whose core goal is to ensure that the system can reliably enter a safe state when a fault occurs. For collaborative robots, functional safety is usually assessed according to ISO 13849-1 (Safety-related parts of control systems for machinery safety) & 10218, etc., to determine the performance level of safety-related control systems.
+
+When the "Functional Safety" mode is selected, the implementation and verification of the safety stop function follow the international functional safety standard system. This mode is suitable for product export (such as compliance with the Machinery Directive in EU CE certification) or scenarios where customers have clear international standard basis for intrinsic safety.
+
+.. note:: Note that after the functional safety mode is successfully configured, the control box needs to be restarted for the parameter changes of the safety control system to take effect.
+
+.. image:: safety/072.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.4-2-2 Functional safety mode
+
+Trigger Method
+**********************************************************************
+
 When the safety stop trigger mode is set to "Dual Channel", both channels must be cleared and the warning must be manually cleared on the operation interface before the robot can be reset. In addition, a reduced mode option is added to the strategy configuration. When the user selects this strategy, the robot will enter reduced mode motion.
 
 **Step1**: Click "Initial Setup" -> "Safety" -> "Safety Stop". The trigger mode can be selected as "Default" or "Dual Channel". The difference between the two is: in "Default" mode, the interface error is automatically cleared after triggering and recovery; in "Dual Channel" mode, the interface error must be manually cleared after triggering and recovery. "Safety Stop Strategy" can be selected as "Stop", "Pause", "Level 1 Reduced Mode", and "Level 2 Reduced Mode". The detailed descriptions are as follows: When "Stop" is selected, the robot will stop the current motion; when "Pause" is selected, the robot will pause the current motion, and after recovery and error clearing, it will resume the pause; when "Level 1 Reduced Mode" is selected, the robot will enter Level 1 reduced mode motion; when "Level 2 Reduced Mode" is selected, the robot will enter Level 2 reduced mode motion.
@@ -473,6 +518,8 @@ Through the controller sending to the control box board, emergency stop type 0 d
 - Emergency stop type 1b: after deceleration stop, does not cut off power to the robot body, but disables the robot body;
 - Emergency stop type 2: when emergency stop is pressed, the robot decelerates to a stop and remains enabled. After releasing the emergency stop, the robot should be able to operate normally.
 
+.. note:: Note: Emergency stop shutdown is only supported by wide-voltage hardware.
+
 .. image:: safety/011.png
    :width: 4in
    :align: center
@@ -484,7 +531,11 @@ Protective Stop
 
 Click the menu bar "Initial Setup" -> "Safety", and click the "Protective Stop" submenu to enter the configuration interface.
 
-Protective stop types 0, 1, 2. Protective stop type 0 directly cuts off power to the control box board. Protective stop type 1: the control box board first notifies the controller to control the robot to stop, then the controller feeds back to the control box board to cut off power. Protective stop type 2: the control box board notifies the controller to control the robot to stop.
+There are three types of protective stop: 0, 1, and 2. In any mode, the safety stop function is triggered according to the control box safety stop signal, and the corresponding Cat.0, Cat.1, or Cat.2 stop function is executed according to the configured safety stop level. For protective stop type 0, the control box board cuts off power directly. For protective stop type 1, the control box board first notifies the controller to stop the robot, and then the controller feeds back to the control box board to cut off power. For protective stop type 2, the control box board notifies the controller to stop the robot.
+
+- If the stop type is 0, the body power is cut off, and the joints execute a safe brake;
+- If the stop type is 1, deceleration stop is performed, the body power is cut off, and the joints execute a safe brake;
+- If the stop type is 2, deceleration stop is performed, the body power is maintained, and the joints do not execute a safe brake;
 
 .. image:: safety/012.png
    :width: 4in
@@ -645,7 +696,7 @@ ServoJT Power Detection (Only used in QX system)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Click the menu bar "Initial Setup" -> "Safety", and click the "Power Detection" submenu to enter the configuration interface.
 
-When directly acting on the robot's current loop (servoJT only), it is used to limit the work done by the robot. When the integral of robot speed and torque is detected to exceed the limit, power protection is activated.
+When it acts directly on the robot's current loop (only with the servoJT command), it is used to limit the robot's maximum power. When it is detected that the robot power exceeds the limit value, power protection is performed.
 
 .. image:: safety/024.png
    :width: 4in
@@ -869,7 +920,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | [Robot response]:
        | If the stop type is 0, the body power is cut off, the joints execute a safe brake, and position holding is monitored
        | If the stop type is 1, deceleration stop is performed, the body power is cut off, the joints execute a safe brake, and position holding is monitored	
-     - 202.0512143
+     - 202.051
 
    * - SF02
      - Safeguard Stop
@@ -881,7 +932,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | If the stop type is 0, the body power is cut off, the joints execute a safe brake, and position holding is monitored;
        | If the stop type is 1, deceleration stop is performed, the body power is cut off, the joints execute a safe brake, and position holding is monitored;
        | If the stop type is 2, deceleration stop is performed, the body power is maintained, the joints do not execute a safe brake and remain enabled, and standstill detection + stopping distance + stopping time detection are performed;	
-     - 191.3170862
+     - 191.317
 
    * - SF03
      - Joint Position Limit
@@ -890,7 +941,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | [Joint soft limits can be set for each joint. The safety board detects the joint position in real time. If the limit is exceeded, a Cat.2 stop action is executed, with interlocked standstill detection + stopping distance + stopping time detection.
        | [Trigger event]: The joint moves outside the limit position range;
        | [Robot response]: Fault alarm - soft limit exceeded, Cat.2 stop action is executed, with interlocked standstill detection + stopping distance + stopping time detection;
-     - 158.5302637
+     - 158.530
 
    * - SF04
      - Joint Speed Limit
@@ -899,7 +950,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | A joint speed limit can be set for each joint. According to the corresponding safety speed of the controller, the safety circuit detects whether the real-time speed of each robot joint exceeds the limit. If the limit is exceeded, a Cat.1 stop with interlocked position holding monitoring, or a Cat.2 stop with interlocked standstill detection + stopping distance + stopping time detection is performed.
        | [Trigger event]: The joint speed exceeds the set value;
        | [Robot response]: Fault alarm - speed exceeded. Optionally perform a Cat.1 stop with interlocked position holding monitoring, or by default perform a Cat.2 stop with interlocked standstill detection + stopping distance + stopping time detection;	
-     - 158.5302637
+     - 158.530
           
    * - SF05
      - Joint Torque Limit
@@ -908,7 +959,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | A joint torque limit can be set for each joint. According to the corresponding safety torque of the controller, the safety circuit detects whether the real-time torque of each robot joint exceeds the limit. If the limit is exceeded, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
        | [Trigger event]: The joint torque exceeds the set torque value
        | [Robot response]: Fault alarm - joint x torque exceeded, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
-     - 67.48193213
+     - 62.808
      	          
    * - SF06
      - | TCP Pose Limit (safety plane, tool direction)
@@ -919,7 +970,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | The TCP limit range and corresponding DI (up to 8 can be set) are set in advance on the corresponding controller page. When the DI is turned on, the corresponding limit is activated. When the TCP exceeds the limit range, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
        | [Trigger event]: The TCP pose exceeds the set range
        | [Robot response]: Fault alarm - safety plane/tool direction exceeded, Cat.2 stop action is executed, with interlocked standstill detection + stopping distance + stopping time detection	
-     - 70.07272665
+     - 70.072
           	          
    * - SF07
      - manual mode, reduced-speed
@@ -928,7 +979,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the controller mode is in manual reduced-speed mode, it detects whether the TCP speed is ≤250mm/s. If the speed is exceeded, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring.
        | [Trigger event]: The TCP speed exceeds the set speed
        | [Robot response]: Fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring.	
-     - 70.07272665
+     - 70.072
              	          
    * - SF08
      - TCP Force Limit
@@ -937,7 +988,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | The controller can configure the TCP force limit. The safety circuit monitors the robot TCP force in real time. If the TCP force exceeds the limit value, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
        | [Trigger event]: The TCP force exceeds the set limit
        | [Robot response]: Fault alarm - joint x collision fault, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection	
-     - 124.720124  
+     - 62.808
              	          
    * - SF09
      - Momentum Limit
@@ -946,7 +997,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | The controller can configure the robot momentum limit. The safety circuit monitors the robot momentum in real time. If the robot momentum exceeds the limit value, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
        | [Trigger event]: The momentum exceeds the set momentum limit
        | [Robot response]: Fault alarm - momentum exceeded, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection	
-     - 67.48193213
+     - 62.808
                 	          
    * - SF10
      - Power Limit
@@ -955,7 +1006,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | The controller can configure the robot power limit. The safety circuit monitors the robot power in real time. If the robot power exceeds the limit value, a Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
        | [Trigger event]: The power exceeds the set power limit
        | [Robot response]: Fault alarm - power exceeded, Cat.2 stop is performed, with interlocked standstill detection + stopping distance + stopping time detection
-     - 67.48193213
+     - 62.808
                 	          
    * - SF11
      - System Emergency Stop Output
@@ -966,7 +1017,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | [Robot response]:
        | Emergency stop type 0: System emergency stop signal output
        | Emergency stop type 1: System emergency stop signal output	
-     - 191.3170862
+     - 191.317
                    	          
    * - SF12
      - Robot Moving State Output
@@ -975,7 +1026,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the robot is in the moving state, the controller outputs a motion signal DO
        | [Trigger event]: The robot is in the moving state
        | [Robot response]: Robot moving signal output	
-     - 68.7283255
+     - 68.728
                 	          
    * - SF13
      - Robot Not Stopping State Output
@@ -984,7 +1035,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the robot is in the not stopping state, the controller outputs a not stopping signal DO
        | [Trigger event]: The robot is in the not stopping state
        | [Robot response]: Robot not stopping signal output	
-     - 68.7283255
+     - 68.728
 
    * - SF14
      - Reduced Mode State Output
@@ -993,7 +1044,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the robot is in the reduced state, the controller outputs a reduced signal DO
        | [Trigger event]: The robot is in reduced mode
        | [Robot response]: Reduced mode signal output	
-     - 68.7283255
+     - 68.728
     
    * - SF15
      - Not Reduced Mode State Output
@@ -1002,7 +1053,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the robot is in the not reduced state, the controller outputs a not reduced signal DO
        | [Trigger event]: The robot is in not reduced mode
        | [Robot response]: Not reduced mode signal output	
-     - 68.7283255
+     - 68.728
     
    * - SF16
      - 3P enabling function
@@ -1012,7 +1063,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the 3-position enabling switch is in position 2, the robot is enabled, with interlocked activation of manual reduced-speed mode and manual reduced-speed detection
        | [Trigger event]: In physical teach pendant mode, the 3-position enabling button is pressed to the middle position (position 2)
        | [Robot response]: Joints are enabled, joint safe brakes are released, the robot enters manual reduced-speed mode, with interlocked activation of manual reduced-speed mode and manual reduced-speed detection	
-     - 68.7283255
+     - 68.728
          
    * - SF17
      - monitored-standstill (after Cat.2 stop)
@@ -1021,7 +1072,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | After the Cat.2 stop is completed, the safety circuit detects joint position changes according to the robot command and actual position. If the deviation exceeds the limit, a Cat.0 or Cat.1 stop is executed
        | [Trigger event]: When standstill and not running, the robot position changes abnormally
        | [Robot response]: The robot position change range exceeds the set value, and a Cat.0 or Cat.1 stop action is executed	
-     - 60.05290188
+     - 47.515
             
    * - SF18
      - stopping time limiting (after Cat.2 stop)
@@ -1030,7 +1081,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | After the Cat.2 stop signal is triggered, the safety circuit detects the stopping time according to the robot stop completion signal time. If the deviation exceeds the limit, a Cat.0 or Cat.1 stop is executed
        | [Trigger event]: When the robot triggers a stop
        | [Robot response]: When the robot triggers a stop, if the stopping time exceeds the set time, a Cat.0 or Cat.1 stop action is executed	
-     - 60.05290188 
+     - 47.515
             
    * - SF19
      - stopping distance limiting (after Cat.2 stop)
@@ -1039,7 +1090,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the Cat.2 stop signal is triggered, the robot position is recorded. The safety circuit obtains the stopping distance by subtracting the recorded position from the real-time actual position of the robot. If the deviation exceeds the limit, a Cat.0 or Cat.1 stop is executed
        | [Trigger event]: When the robot triggers a stop
        | [Robot response]: When the robot triggers a stop, if the stopping distance exceeds the set stopping distance, a Cat.0 or Cat.1 stop action is executed	
-     - 60.05290188
+     - 47.515
                   
    * - SF20
      - hold-to-run control
@@ -1051,7 +1102,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | [Robot response]: The robot enters the dragging state
        | [Trigger event]: The 3-position enabling switch enters the middle position, the controller is in manual mode, and the end button is released
        | [Robot response]: The robot enters a Cat.2 stop, with interlocked standstill detection + stopping distance + stopping time detection
-     - 68.7283255
+     - 68.699
                       
    * - SF21
      - start/restart interlock
@@ -1060,7 +1111,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | On start/restart/mode switching, the Cat.2 safety stop state is triggered. After the stop is executed, the controller cannot move, with interlocked standstill detection. The stop state must be reset by resetting the safety stop through DI before further operations can be performed
        | [Trigger event]: Controller start/restart/mode switching
        | [Robot response]: Interlock triggered, entering Cat.2 safety stop	
-     - 191.3170862
+     - 191.317
                       
    * - SF22
      - reset safety
@@ -1069,7 +1120,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When in the safety stop triggered state, first perform error/fault reset through DI. After the error/fault reset passes, perform stop state reset again through DI, and then the robot can exit the stop state
        | [Trigger event]: Safety stop state reset DI triggered
        | [Robot response]: The robot exits the safety stop	
-     - 191.3170862
+     - 191.317
                          
    * - SF23
      - normal stop
@@ -1078,18 +1129,18 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | During robot motion, a normal stop is triggered through a DI signal. According to the configured safety stop type, a Cat.0 or Cat.1 stop action is executed
        | [Trigger event]: Stop motion triggered
        | [Robot response]: The robot executes a Cat.0 or Cat.1 stop action, with interlocked position holding monitoring	
-     - 191.3170862
+     - 191.317
                          
    * - SF24
      - mode activation
-     - PL a
+     - PL d
      - | Mode activation
        | The controller mode can enter different modes through the software interface mode switch and the end button switch, including manual reduced-speed/manual high-speed/automatic/dragging
        | [Trigger event]: Software interface switch toggled
        | [Robot response]: The robot can switch between manual reduced-speed/manual high-speed/automatic modes, with interlocked manual reduced-speed monitoring/manual high-speed monitoring + manual high-speed time monitoring/manual reduced-speed monitoring/joint speed monitoring
        | [Trigger event]: End dragging switch toggled
        | [Robot response]: The robot can switch between manual reduced-speed/dragging modes, with interlocked manual reduced-speed monitoring/dragging speed monitoring/standstill monitoring	
-     - /
+     - 191.317
                              
    * - SF25
      - Position Holding Monitoring
@@ -1098,7 +1149,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the controller changes from the enabled state to the disabled state, the position is recorded during brake engagement, and it continuously detects whether the difference between the robot joint position and the recorded position exceeds the limit threshold. If the threshold is exceeded, a Cat.0 operation is executed
        | [Trigger event]: During brake engagement, the robot joint position change exceeds the threshold
        | [Robot response]: Cat.0 operation is executed	
-     - 60.05290188
+     - 47.515
                                 
    * - SF26
      - single-point-of-control (local/remote control mode)
@@ -1107,7 +1158,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | The controller local mode and remote control mode are mutually exclusive. The mode is switched manually on the controller interface, and only one of them can be selected for control
        | [Trigger event]: Manually switch the control mode on the controller interface
        | [Robot response]: The controller can only select one mode at a time, shielding the operation of the other control source	
-     - /
+     - 10.6
                                    
    * - SF27
      - external control enable
@@ -1116,7 +1167,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | The controller has a remote control mode. Entering and exiting the remote mode are both performed manually and locally on the controller interface. In this mode, other local control functions are shielded
        | [Trigger event]: Switch the remote control mode on the local interface
        | [Robot response]: The controller enters remote mode, shielding the operation of the local control source	
-     - /
+     - 10.6
                                    
    * - SF28
      - manual mode, high-speed
@@ -1125,7 +1176,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | Click the manual high-speed switch button on the manual reduced-speed page. The controller can switch from manual reduced-speed to manual high-speed mode. The safety circuit detects whether the TCP speed is ≤1000mm/s. If the speed is exceeded, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
        | [Trigger event]: In high-speed mode, the TCP speed exceeds the set limit
        | [Robot response]: Deceleration stop is performed, fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring	
-     - 60.05290188
+     - 47.515
 
    * - SF29
      - manual mode, high-speed time limitation
@@ -1134,7 +1185,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the controller mode is in manual high-speed mode and the 3-position switch exits the middle position, the safety circuit detects the duration. If it exceeds 5 min, the control box lowers the manual high-speed global speed to 25% (TCP speed 250mm/s), with interlocked corresponding speed monitoring (TCP speed ≤250mm/s)
        | [Trigger event]: In manual high-speed mode, the 3P switch is released for more than 5 min
        | [Robot response]: The control box lowers the manual high-speed speed to 250mm/s, with interlocked 250mm/s monitoring	
-     - 49.81517752
+     - 68.728
    
    * - SF30
      - hand-guided control
@@ -1143,7 +1194,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the 3-position switch is in the middle position and the end dragging button is pressed, the controller mode enters dragging mode. The safety circuit detects whether the TCP speed is ≤250mm/s (configurable speed limit), each joint speed is ≤45°/s (monitored through SF04, configurable speed limit, configurable Cat.0/Cat.1), each joint position limit (monitored through SF03, configurable range, Cat.2), and TCP pose limit (monitored through SF06, configurable range, Cat.2). If the speed is exceeded, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
        | [Trigger event]: The TCP speed exceeds the dragging limit speed (default 250mm/s, adjustable)
        | [Robot response]: Deceleration stop is performed, fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
-     - 49.81517752 	
+     - 68.699
    
    * - SF31
      - Speed and separation monitoring (SSM)
@@ -1152,7 +1203,7 @@ This device is conformity assessed in accordance with the EU Machinery Regulatio
        | When the controller mode is in automatic mode, the photoelectric switch/distance sensing switch externally connected through the control box DI detects the relative position of the machine and personnel. When the corresponding distance DI receives a signal, the control box performs a safety response. According to the corresponding distance, it enters level 1 reduction (configurable speed, default 200mm/s), level 2 reduction (configurable speed, default 100mm/s), or level 3 reduction (stop motion). At the same time, the safety circuit enters speed and separation monitoring. If the speed after entering reduction exceeds the speed corresponding to the corresponding reduction level, a Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring
        | [Trigger event]: The TCP speed exceeds the set speed
        | [Robot response]: Deceleration stop is performed, fault alarm - TCP overspeed, Cat.0 or Cat.1 stop action is executed, with interlocked position holding monitoring	
-     - 60.05290188
+     - 47.515
 
 .. note:: Note: ***MTTFd**: Mean Time to Dangerous Failure (unit: years).
 

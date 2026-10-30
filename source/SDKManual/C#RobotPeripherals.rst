@@ -68,28 +68,28 @@ Control gripper
     */
     int MoveGripper(int index, int pos, int vel, int force, int max_time, byte block, int type, double rotNum, int rotVel, int rotTorque);
 
-Get gripper motion status
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get Gripper Motion Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Get gripper motion status(only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)
-    * @param  [out] fault  0-no error, other-error
-    * @param  [out] staus  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
+    * @brief  Get the gripper motion status (since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified)
+    * @param  [out] fault  0-No error, other-Error
+    * @param  [out] staus  0-Motion not completed, 1-Motion completed but no object detected, 2-Motion completed and object detected, 3-Motion completed and object dropped detected
     * @return  Error code
     */
     int GetGripperMotionDone(ref int fault, ref int status); 
 
-Get gripper activation status
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get Gripper Activation Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
     /**
-    * @brief  Get gripper activation status
-    * @param  [out] fault  0-no error, 1-error
-    * @param  [out] status  bit0~bit15 corresponds to gripper numbers 0~15, bit=0 is not activated, bit=1 is activated
+    * @brief  Get the gripper activation status
+    * @param  [out] fault  0-No error, 1-Error
+    * @param  [out] status  bit0~bit15 correspond to gripper numbers 0~15; bit=0 means not activated, bit=1 means activated
     * @return  Error code
     */
     int GetGripperActivateStatus(ref int fault, ref int status);
@@ -100,46 +100,54 @@ Wait for Gripper Motion Status
     :linenos:
 
     /**
-    * @brief  Wait for gripper motion status (only defined for the end-effector open protocol; for adapted devices, the status definition is passed through to each gripper manufacturer)
-    * @param  [in] status  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
-    * @param  [in] timeout Timeout (ms), -1 for infinite wait
-    * @param  [in] strategy  0-stop with error, 1-continue running
-    * @param  [in] type  0-parallel gripper, 1-rotary gripper
+    * @brief  Wait for the gripper motion status (since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified)
+    * @param  [in]  staus  0-Motion not completed, 1-Motion completed but no object detected, 2-Motion completed and object detected, 3-Motion completed and object dropped detected
+    * @param  [in] timeout Timeout (ms), -1 means wait forever
+    * @param  [in] strategy  0-Stop and report error, 1-Continue running
+    * @param  [in] type  0-Parallel gripper, 1-Rotary gripper
     * @return  Error code
     */
-    public int GripperWaitMotionDone(int status, int timeout, int strategy, int type) 
+    public int GripperWaitMotionDone(int staus, int timeout, int strategy, int type) 
     
-Wait for Gripper Motion Status Code Example
+Code Example for Waiting for Gripper Motion Status
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: c#
     :linenos:
 
-    public void TestGripperWaitMotionDone()
+    public void TestGetGripperMotionDone()
     {
         int rtn;
+        int status = 0;
+        int fault = 0;
         ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
 
-
-        // Gripper open
-        rtn = robot.MoveGripper(1, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
-        Console.WriteLine("MoveGripper(open) ret={0}", rtn);
+        // Open the gripper
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
+        Console.WriteLine("MoveGripper(Open) ret={0}", rtn);
         Thread.Sleep(2000);
         robot.GetRobotRealTimeState(ref pkg);
         Console.WriteLine(" gripper_motiondone {0})", pkg.gripper_motiondone);
-        // Gripper close
-        rtn = robot.MoveGripper(1, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
-        Console.WriteLine("MoveGripper(close) ret={0}", rtn);
+        // Close the gripper
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
+        Console.WriteLine("MoveGripper(Close) ret={0}", rtn);
         Thread.Sleep(2000);
         robot.GetRobotRealTimeState(ref pkg);
         Console.WriteLine(" gripper_motiondone {0}", pkg.gripper_motiondone);
-        // Wait for motion completed with no object detected, timeout 30s, stop with error
-        rtn = robot.GripperWaitMotionDone(2, -1, 0, 0);
-        Console.WriteLine("GripperWaitMotionDone(wait completed with no object detected) ret={0}", rtn);
+        // Wait for motion completion with no object detected, timeout 5s, stop and report error
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0);
+        Console.WriteLine("GripperWaitMotionDone(wait for completion with no object detected) ret={0}", rtn);
 
-        // Gripper open
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
-        Console.WriteLine("MoveGripper(open) ret={0}", rtn);
-    }    
+        while (true)
+        {
+
+            robot.GetGripperMotionDone(ref fault, ref status);
+            Console.WriteLine("motion status:{0},{1}\n", fault, status);
+            robot.GetRobotRealTimeState(ref pkg);
+            Console.WriteLine(" error code {0},{1}", pkg.main_code, pkg.sub_code);
+            Thread.Sleep(500);
+
+        }
+    }
 
 Get Gripper Position
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

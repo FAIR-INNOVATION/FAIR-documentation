@@ -13,6 +13,17 @@ Version Update Description
      - **Date**
      - **Update Description**
 
+   * - V4.0.1
+     - 2026-10-27
+     - | 1. Modified the comments of the GetGripperMotionDone() interface for getting the gripper motion status. Since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified, and status adds 3 = motion completed and object dropped detected;
+       | 2. Modified the comments of the GripperWaitMotionDone() interface for waiting for the gripper motion status. Since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified, and status adds 3 = motion completed and object dropped detected;
+       | 3. Modified the parameter description of the ServoMoveStart() interface for starting servo motion, adding the filtertime filtering time and gain position loop gain array parameters, used together with ServoJ and ServoCart commands, and supplemented the corresponding code example;
+       | 4. Added the DataPackageUpgrade() data backup package upload upgrade interface and code example;
+       | 5. Added the GetDataPackageUpgradeProgress() interface for getting the data backup package upgrade progress percentage;
+       | 6. Added the GetJointAllParamUpgradeProgress() interface for getting the joint all parameters upgrade progress percentage;
+       | 7. Added a code example for data backup package upload upgrade and querying the upgrade progress;
+       | 8. Added a code example for joint all parameters upgrade and querying the joint all parameters upgrade progress.
+       
    * - V4.0.0
      - 2026-09-23
      - | 1. Modified the parameter description of the SetWeldMachineCtrlMode() interface for setting the welder control mode, and added the pulse and no-pulse modes for Panasonic welders;

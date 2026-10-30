@@ -992,20 +992,29 @@ The output configurable functions are shown in the following table:
      - Robot Enabled
      - Robot enable status
    * - 48
+     - Auto lift during wire break
+     - Auto lift status during wire break
+   * - 49
      - JOB input port 4
      - JOB input port 4 signal
-   * - 49
+   * - 50
      - JOB input port 5
      - JOB input port 5 signal
-   * - 50
+   * - 51
      - JOB input port 6
      - JOB input port 6 signal
-   * - 51
+   * - 52
      - JOB input port 7
      - JOB input port 7 signal
-   * - 52
+   * - 53
      - JOB input port 8
-     - JOB input port 8 signal  
+     - JOB input port 8 signal
+   * - 59
+     - Robot in position
+     - Outputs a status signal when the robot servo is enabled and there is no fault or alarm
+   * - 200
+     - Occupied
+     - The function is occupied
 
 Control box DO high and low effective configurable function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1504,6 +1513,18 @@ Open Posture Compliance Admittance Parameters
 Motion Configuration
 ---------------------------------------------
 
+Click "Initial Settings" -> "Basic" in the menu bar, and click the "Motion Configuration" submenu to enter the configuration interface.
+
+Acceleration Smoothing Mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The "Acceleration Smoothing Mode" function mainly performs blending between PTP-PTP, LIN-LIN, ARC-ARC, LIN-ARC, and ARC-LIN commands; blending between other commands does not take effect.
+
+.. image:: base/110.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 6.11-4 Acceleration smoothing mode
+
 T-curve Speed Optimization + Blending Smoothing Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1569,6 +1590,19 @@ Using Motion Configuration Switch Method
 
 .. centered:: Figure 7.13-5 Typical Program for PTP-PTP Blending Using the Configuration Switch
 
+Time-Optimal Mode (Automatic Configuration)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The "Time-Optimal Mode" is implemented without the need to debug and configure its parameters. This function adaptively completes the parameter configuration of the time-optimal mode according to the current working state of the robot, improving debugging efficiency.
+
+.. note:: Note: The time-optimal mode and the acceleration smoothing mode are mutually exclusive.
+
+.. image:: base/111.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.13-6-1 Time-optimal mode (automatic configuration)
+
 FIR Adaptive Parameter Function + FIR Pause/Resume Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1631,3 +1665,134 @@ The usage of the robot's basic motion commands PTP, LIN, and ARC is similar. Thi
 
    When the "Time-Optimal Mode" function switch is enabled, the robot's basic motion commands PTP, LIN, and ARC are all in time-optimal mode. Turning off the "Time-Optimal Mode" function switch in this interface will restore the basic motion commands PTP, LIN, and ARC to their normal state.
    The "Acceleration Smoothing Mode" function switch cannot be enabled simultaneously with the time-optimal mode in this interface.
+
+Servo Motion Filtering Time and Position Gain
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+++++++++++++++++++++++++++++++++++++
+
+The purpose of the servo motion filtering time and position gain functions is to improve the smoothness and accuracy of the robot servo motion trajectory. For example, the filtering time parameter can smooth a T-type-like servo motion speed curve into an S-type-like servo motion speed curve; the position gain parameter can adjust the responsiveness of the joint position feedback to the command in servo motion.
+
+Cartesian/Joint Space Servo Global Filtering Time Function Operation Flow
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Motion configuration settings. On the WebApp main interface, click "Initial Settings" -> "Basic" -> "Motion Configuration" to enter the "Motion Configuration" command area.
+
+.. image:: base/112.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.13-11 "Motion Configuration" command area
+
+**Step2**: Motion filtering settings. In the "Motion Configuration" command area, click the "Motion Filtering" drop-down box to enter the "Parameter Configuration" configuration area, set the "Filtering Time" parameter, and click the "Apply" button to complete the global servo motion filtering function setting.
+
+.. note:: Note: When both the global and command filtering time parameters exist, the servo motion filtering time is the sum of the two.
+
+.. image:: base/113.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.13-12 "Motion Filtering" configuration area
+
+.. note:: Note: The global servo motion filtering time parameter range is 0~200 ms. When the default is 0, it indicates that the global servo motion filtering function is disabled.
+
+Cartesian Space Servo Command Motion Function Operation Flow
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Servo motion command. On the WebApp main interface, click "Teaching Program" -> "Program Programming" to enter the "Motion Command" command area.
+
+.. image:: base/114.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 7.13-13 "Motion Command" command area
+
+**Step2**: Servo motion start. In the "Motion Command" command area, click the "Servo Motion" button to enter the "servoMotion" command configuration area.
+
+In the "Command Editing" interface of the "servoMotion" command configuration area, click the "Servo Motion Start" button, set the "Filtering Time" and "Position Gain" parameters, and click the "Add" button. The pre-generated LUA program will be displayed in the "Program Preview" display box.
+
+.. image:: base/115.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.13-14 Servo motion start
+
+.. note:: Note: The "Filtering Time" parameter range is 0~200 ms; the "Position Gain" parameter range is -1~100. When the default is -1, it indicates that it is consistent with the built-in setting of the current full-parameter version.
+
+**Step3**: Cartesian space servo motion. In the "Command Editing" interface of the "servoMotion" command configuration area, click the "Cartesian Space Motion" button, and select the motion mode in the "Motion Mode" drop-down box.
+
+Set the "Cartesian Pose", "Scale Coefficient", "Acceleration", "Speed", "Command Period", "Filtering Time", and "Scale Amplification" parameters, and click the "Add" button. The pre-generated LUA program will be displayed in the "Program Preview" display box.
+
+.. image:: base/116.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.13-15 Cartesian space motion
+
+.. note:: Note: The "Filtering Time" parameter in the figure remains at the default value.
+
+**Step4**: Servo motion end. In the "Command Editing" interface of the "servoMotion" command configuration area, click the "Servo Motion End" button, and click the "Add" button. The pre-generated LUA program will be displayed in the "Program Preview" display box.
+
+.. image:: base/117.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.13-16 Servo motion end
+
+**Step5**: Cartesian space servo motion LUA program. Click the "Apply" button to automatically generate the LUA program.
+
+.. image:: base/118.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.13-17 Cartesian space servo motion LUA program
+
+Joint Space Servo Command Motion Function Operation Flow
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Step1**: Servo motion command. In the "Motion Command" command area, click the "Servo Motion" button to enter the "servoMotion" command configuration area.
+
+.. image:: base/119.png
+   :width: 2in
+   :align: center
+
+.. centered:: Figure 7.13-18 "Motion Command" command area
+
+**Step2**: Servo motion start. In the "Motion Command" command area, click the "Servo Motion" button to enter the "servoMotion" command configuration area.
+
+In the "Command Editing" interface of the "servoMotion" command configuration area, click the "Servo Motion Start" button, set the "Filtering Time" and "Position Gain" parameters, and click the "Add" button. The pre-generated LUA program will be displayed in the "Program Preview" display box.
+
+.. image:: base/120.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.13-19 Servo motion start
+
+.. note:: Note: The "Filtering Time" parameter range is 0~200 ms; the "Position Gain" parameter range is -1~100. When the default is -1, it indicates that it is consistent with the built-in setting of the current full-parameter version.
+
+**Step3**: Joint space servo motion. In the "Command Editing" interface of the "servoMotion" command configuration area, click the "Joint Space Motion" button.
+
+Set the "Joint Position", "Extension Axis Position", "Acceleration", "Speed", and "Command Period" parameters, and click the "Add" button. The pre-generated LUA program will be displayed in the "Program Preview" display box.
+
+.. image:: base/121.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.13-20 Joint space motion
+
+**Step4**: Servo motion end. In the "Command Editing" interface of the "servoMotion" command configuration area, click the "Servo Motion End" button, and click the "Add" button. The pre-generated LUA program will be displayed in the "Program Preview" display box.
+
+.. image:: base/122.png
+   :width: 6in
+   :align: center
+
+.. centered:: Figure 7.13-21 Servo motion end
+
+**Step5**: Joint space servo motion LUA program. Click the "Apply" button to automatically generate the LUA program.
+
+.. image:: base/123.png
+   :width: 4in
+   :align: center
+
+.. centered:: Figure 7.13-22 Joint space servo motion LUA program

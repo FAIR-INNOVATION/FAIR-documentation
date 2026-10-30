@@ -1,3 +1,46 @@
+Version V4.0.1
+-----------------
+
+Date: 2026-10-27
+
+- **Optimized background program function**: 
+    Path: Teaching Program -> Program Programming -> Background Program.
+
+    Description: 1. Background programs support socket communication, board bus communication, and extended IO interaction; 2. Background programs support the printmsg function; 3. Added DO output configuration for robot in-position.
+
+- **Optimized physical speed display for Lin\Arc\Circle**: 
+
+    Description: In the lin, arc, and circle command speed interfaces, corresponding command modification interfaces, and smarttool configuration interface, added unit conversion to display the current physical speed (cm/min).
+
+- **Optimized Servo commands**: 
+    Path: Teaching Program -> Program Programming -> Servo Motion Command.
+
+    Description: 1. Global filtering settings enable adjustable filtering time during servoj (including servocart) motion; 2. Filtering and position gain parameters of servoj and servocart commands are open and adjustable.
+
+- **Optimized gripper status query function**: 
+    Path: Teaching Program -> Program Programming -> Gripper Command.
+
+    Description: 1. The web interface adds a status monitoring switch for adapted gripper status; 2. Expanded the motion status of adapted grippers, adding detection of gripping object and object dropped status, supporting command query.
+
+- **Added board function**: 
+
+    Description: Added board FieldBusSlaveWaitDI and FieldBusSlaveWaitAI wait timeout main/sub fault code reporting function.
+
+- **Added single-step running debugging function**: 
+    Path: Teaching Program -> Program Programming -> Single-Step Debugging.
+
+    Description: Program teaching lua programs support single-step debugging running in manual mode, and breakpoints can be added for debugging.
+
+- **Added configurable safety stop signal pause/resume strategy function**: 
+    Path: Initial Settings -> Safety -> Safety Stop.
+
+    Description: Added configurable pause/resume strategy, allowing independent selection of manual or automatic resume running.
+
+- **Added PLC automated complete machine factory function**: 
+    Path: Auxiliary Application -> Tool Application -> Data Backup; Initial Settings -> Safety -> Network Security.
+
+    Description: 1. Backup package upload; 2. Query full parameter upgrade progress; 3. Added restore factory settings, WebApp language settings, SN code settings, and button box status acquisition commands; 4. PLC acquires 1ms robot status; 5. DHCP and NTP enable configuration (LA version only), 8082 port enable configuration.
+
 Version V4.0.0
 -----------------
 

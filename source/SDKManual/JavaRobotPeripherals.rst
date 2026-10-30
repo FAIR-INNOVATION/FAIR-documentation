@@ -68,61 +68,72 @@ Control gripper
     */
     int MoveGripper(int index, int pos, int vel, int force, int max_time, int block, int type, double rotNum, int rotVel, int rotTorque); 
 
-Get gripper motion status
-+++++++++++++++++++++++++++++++++++++++++
+Get Gripper Motion Status
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  Get gripper motion status(only defined for the end-effector open protocol; for adapted devices, the obtained motion status is a pass-through value)
-    * @return List[0]:Error code; List[1] : fault  0-no error, other-error; List[2]: staus  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
+    * @brief  Get the gripper motion status (since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified)
+    * @param  [out] fault  0-No error, other-Error
+    * @param  [out] staus  0-Motion not completed, 1-Motion completed but no object detected, 2-Motion completed and object detected, 3-Motion completed and object dropped detected
+    * @return  Error code
     */
-    List<Integer> GetGripperMotionDone(); 
-
+    public List<Integer> GetGripperMotionDone()
+    
 Wait for Gripper Motion Status
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
     /**
-    * @brief  Wait for gripper motion status
-    * @param  [in]  status  0-motion not completed, 1-motion completed with no object detected, 2-motion completed with object detected
-    * @param  [in] timeout Timeout (ms), -1 for infinite wait
-    * @param  [in] strategy  0-stop with error, 1-continue running
-    * @param  [in] type  0-parallel gripper, 1-rotary gripper
+    * @brief  Wait for the gripper motion status (since version 401, the end-effector protocol and the gripper motion status feedback definition of adapted devices are unified)
+    * @param  [in]  staus  0-Motion not completed, 1-Motion completed but no object detected, 2-Motion completed and object detected, 3-Motion completed and object dropped detected
+    * @param  [in] timeout Timeout (ms), -1 means wait forever
+    * @param  [in] strategy  0-Stop and report error, 1-Continue running
+    * @param  [in] type  0-Parallel gripper, 1-Rotary gripper
     * @return  Error code
     */
-    public int GripperWaitMotionDone(int status, int timeout, int strategy, int type)
+    public int GripperWaitMotionDone(int staus, int timeout, int strategy, int type)
 
-Wait for Gripper Motion Status Code Example
+Code Example for Waiting for Gripper Motion Status
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .. code-block:: Java
     :linenos:
 
-    public static void TestGripperWaitMotionDone(Robot robot)
+    public void TestGetGripperMotionDone()
     {
         int rtn;
+        int status = 0;
+        int fault = 0;
+        ROBOT_STATE_PKG pkg = new ROBOT_STATE_PKG();
 
-        // Gripper open
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
-        System.out.println("MoveGripper(open) ret=" + rtn);
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        // Open the gripper
+        rtn = robot.MoveGripper(2, 50, 50, 100, 30000, 0, 0, 0, 0, 0);
+        System.out.println("MoveGripper(Open) ret=" + rtn);
+        robot.Sleep(2000);
+        pkg = robot.GetRobotRealTimeState();
+        System.out.println(" gripper_motiondone " + pkg.gripper_motiondone);
+        // Close the gripper
+        rtn = robot.MoveGripper(2, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
+        System.out.println("MoveGripper(Close) ret=" + rtn);
+        robot.Sleep(2000);
+        pkg = robot.GetRobotRealTimeState();
+        System.out.println(" gripper_motiondone " + pkg.gripper_motiondone);
+        // Wait for motion completion with no object detected, timeout 5s, stop and report error
+        rtn = robot.GripperWaitMotionDone(2, 5000, 0, 0);
+        System.out.println("GripperWaitMotionDone(wait for completion with no object detected) ret=" + rtn);
+
+        while (true)
+        {
+            List<Integer> result = robot.GetGripperMotionDone();
+            fault = result.get(1);
+            status = result.get(2);
+            System.out.println("motion status:" + fault + "," + status);
+            pkg = robot.GetRobotRealTimeState();
+            System.out.println(" error code " + pkg.main_code + "," + pkg.sub_code);
+            robot.Sleep(500);
         }
-
-        // Gripper close
-        rtn = robot.MoveGripper(1, 90, 100, 100, 30000, 0, 0, 0, 0, 0);
-        System.out.println("MoveGripper(close) ret=" + rtn);
-
-        // Wait for motion completed with no object detected, timeout 30s, stop with error
-        rtn = robot.GripperWaitMotionDone(2, 30000, 0, 0);
-        System.out.println("GripperWaitMotionDone(wait completed with no object detected) ret=" + rtn);
-
-        // Gripper open
-        rtn = robot.MoveGripper(1, 0, 100, 100, 30000, 0, 0, 0, 0, 0);
-        System.out.println("MoveGripper(open) ret=" + rtn);
     }
 
 Get gripper activation status

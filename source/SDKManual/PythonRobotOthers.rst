@@ -762,3 +762,91 @@ Code Example for Sending a Custom Command Frame via TCP8080
 
     if __name__ == "__main__":
         main()    
+
+Data Backup Package Upload Upgrade
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``DataPackageUpgrade(self, filePath)``"
+    "Description", "Data backup package upload upgrade"
+    "Required parameters", "
+    - ``filePath``: Upload data backup package file path; D://zUP/fr_user_data.tar.gz"
+    "Default parameters", "None"
+    "Return value", "Error code Success-0  Failure- errcode"
+
+Get Data Backup Package Upgrade Progress Percentage    
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetDataPackageUpgradeProgress(self)``"
+    "Description", "Get data backup package upgrade progress percentage"
+    "Required parameters", "
+    - ``progress``: Upgrade progress percentage [0-100], -1: upgrade failed"
+    "Default parameters", "None"
+    "Return value", "Error code Success-0  Failure- errcode"
+
+Get Joint All Parameters Upgrade Progress Percentage    
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. csv-table:: 
+    :stub-columns: 1
+    :widths: 10 30
+
+    "Prototype", "``GetJointAllParamUpgradeProgress(self)``"
+    "Description", "Get joint all parameters upgrade progress percentage"
+    "Required parameters", "
+    - ``progress``: Upgrade progress percentage [0-100], -1: upgrade failed"
+    "Default parameters", "None"
+    "Return value", "Error code Success-0  Failure- errcode"
+
+Code Example for Data Backup Package Upload Upgrade and Querying Upgrade Progress
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    def test_data_package_upgrade(robot):
+    """Data package upgrade test"""
+    print("\n========== Data Package Upgrade Test ==========")
+
+    time.sleep(0.2)  # 200ms
+
+    # Data package upgrade
+    rtn = robot.DataPackageUpgrade("D://zUP/upgrade/FR5/fr_user_data.tar.gz")
+    print(f"robot DataPackageUpgrade rtn is {rtn}")
+
+    # Poll upgrade progress until 100%
+    upgradeProgress = 0
+    while upgradeProgress < 100:
+        rtn, upgradeProgress = robot.GetDataPackageUpgradeProgress()
+        print(f"robot data package upgrade progress : {upgradeProgress}")
+        time.sleep(0.2)  # 200ms
+        
+Code Example for Joint All Parameters Upgrade and Querying Upgrade Progress
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. code-block:: python
+    :linenos:
+
+    def test_joint_all_param_upgrade(robot):
+    """Joint all parameters upgrade test"""
+    print("\n========== Joint All Param Upgrade Test ==========")
+
+    # Disable robot before upgrading parameters
+    robot.RobotEnable(0)
+    time.sleep(0.2)  # 200ms
+
+    # Joint all parameters upgrade
+    rtn = robot.JointAllParamUpgrade("D://zUP/upgrade/FR3WMS/jointallparameters.db")
+    print(f"robot JointAllParamUpgrade rtn is {rtn}")
+
+    # Poll upgrade progress until 100%
+    upgradeProgress = 0
+    while upgradeProgress < 100:
+        rtn, upgradeProgress = robot.GetJointAllParamUpgradeProgress()
+        print(f"robot joint all param upgrade progress : {upgradeProgress}")
+        time.sleep(0.2)  # 200ms        
