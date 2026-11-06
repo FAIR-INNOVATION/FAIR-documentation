@@ -212,7 +212,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
      - **alpha [rad]**
      - **Dynamics**
      - **Mass [kg]**
-     - **Center of Mass[m]**
+     - **Center of Mass[mm]**
 
    * - Joint1
      - 0
@@ -283,7 +283,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
      - **alpha [rad]**
      - **Dynamics**
      - **Mass [kg]**
-     - **Center of Mass[m]**
+     - **Center of Mass[mm]**
 
    * - Joint1
      - 0
@@ -354,7 +354,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
      - **alpha [rad]**
      - **Dynamics**
      - **Mass [kg]**
-     - **Center of Mass[m]**
+     - **Center of Mass[mm]**
 
    * - Joint1
      - 0
@@ -589,7 +589,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
    * - Joint3
      - 0
      - 0
-     - -8160
+     - -816
      - 0
      - Link3
      - 4.61
@@ -776,7 +776,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - **alpha [rad]**
       - **Dynamics**
       - **Mass [kg]**
-      - **Center of Mass[m]**
+      - **Center of Mass[mm]**
 
     * - Joint1
       - 0
@@ -846,7 +846,7 @@ The Denavit–Hartenberg parameters of FR series collaborative robots are shown 
       - **alpha [rad]**
       - **Dynamics**
       - **Mass [kg]**
-      - **Center of Mass[m]**
+      - **Center of Mass[mm]**
 
     * - Joint1
       - 0
