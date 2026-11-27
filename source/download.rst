@@ -111,6 +111,18 @@ Robot Certification:
      - ✅
      - :download:`download <_static/_doc/CE-EMC Test Certification.pdf>`
 
+   * - **CE-MR Certificate**
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - ✅
+     - :download:`download <_static/_doc/CE-MR Certificate.pdf>`
+
    * - **CE-MD Certificate**
      - ✅
      - ✅
