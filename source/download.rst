@@ -109,7 +109,7 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - :download:`download <_static/_doc/CE-EMC certification.pdf>`
+     - :download:`download <_static/_doc/CE-EMC Test Certification.pdf>`
 
    * - **CE-MD Certificate**
      - ✅
@@ -133,7 +133,7 @@ Robot Certification:
      - ✅
      - ✅
      - ✅
-     - :download:`download <_static/_doc/Functional safety certification.zip>`
+     - :download:`download <_static/_doc/Functional safety certification.pdf>`
 
    * - **KCs Certificate**
      - ✅
